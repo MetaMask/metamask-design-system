@@ -32,12 +32,14 @@ function flattenStyles(
 describe('Card', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
-  it('renders children', () => {
-    const { getByText } = render(
+  it('renders children', async () => {
+    const { getByText } = await render(
       <Card>
         <Text>Card content</Text>
       </Card>,
@@ -45,8 +47,8 @@ describe('Card', () => {
     expect(getByText('Card content')).toBeDefined();
   });
 
-  it('renders as a View when onPress is not provided', () => {
-    const { getByTestId } = render(
+  it('renders as a View when onPress is not provided', async () => {
+    const { getByTestId } = await render(
       <Card testID="card">
         <Text>Content</Text>
       </Card>,
@@ -55,8 +57,8 @@ describe('Card', () => {
     expect(card.type).toBe('View');
   });
 
-  it('renders as accessible when onPress is provided', () => {
-    const { getByTestId } = render(
+  it('renders as accessible when onPress is provided', async () => {
+    const { getByTestId } = await render(
       <Card testID="card" onPress={jest.fn()}>
         <Text>Content</Text>
       </Card>,
@@ -66,19 +68,19 @@ describe('Card', () => {
     expect(card.props.accessible).toBe(true);
   });
 
-  it('fires onPress when pressed', () => {
+  it('fires onPress when pressed', async () => {
     const onPressMock = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Card testID="card" onPress={onPressMock}>
         <Text>Content</Text>
       </Card>,
     );
-    fireEvent.press(getByTestId('card'));
+    await fireEvent.press(getByTestId('card'));
     expect(onPressMock).toHaveBeenCalledTimes(1);
   });
 
-  it('applies default card styles', () => {
-    const { getByTestId } = render(
+  it('applies default card styles', async () => {
+    const { getByTestId } = await render(
       <Card testID="card">
         <Text>Content</Text>
       </Card>,
@@ -90,8 +92,8 @@ describe('Card', () => {
     );
   });
 
-  it('applies twClassName', () => {
-    const { getByTestId } = render(
+  it('applies twClassName', async () => {
+    const { getByTestId } = await render(
       <Card testID="card" twClassName="p-8 rounded-lg">
         <Text>Content</Text>
       </Card>,
@@ -106,8 +108,8 @@ describe('Card', () => {
     );
   });
 
-  it('merges custom style prop', () => {
-    const { getByTestId } = render(
+  it('merges custom style prop', async () => {
+    const { getByTestId } = await render(
       <Card testID="card" style={{ margin: 8 }}>
         <Text>Content</Text>
       </Card>,
@@ -120,8 +122,8 @@ describe('Card', () => {
     expect(styles[1]).toStrictEqual({ margin: 8 });
   });
 
-  it('passes testID to root element via ViewProps', () => {
-    const { getByTestId } = render(
+  it('passes testID to root element via ViewProps', async () => {
+    const { getByTestId } = await render(
       <Card testID="my-card">
         <Text>Content</Text>
       </Card>,
@@ -129,8 +131,8 @@ describe('Card', () => {
     expect(getByTestId('my-card')).toBeDefined();
   });
 
-  it('passes accessibilityLabel via ViewProps', () => {
-    const { getByTestId } = render(
+  it('passes accessibilityLabel via ViewProps', async () => {
+    const { getByTestId } = await render(
       <Card testID="card" accessibilityLabel="My card">
         <Text>Content</Text>
       </Card>,
@@ -139,9 +141,9 @@ describe('Card', () => {
     expect(card.props.accessibilityLabel).toBe('My card');
   });
 
-  it('accepts touchableOpacityProps without breaking onPress', () => {
+  it('accepts touchableOpacityProps without breaking onPress', async () => {
     const onPressMock = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Card
         testID="card"
         onPress={onPressMock}
@@ -150,7 +152,7 @@ describe('Card', () => {
         <Text>Content</Text>
       </Card>,
     );
-    fireEvent.press(getByTestId('card'));
+    await fireEvent.press(getByTestId('card'));
     expect(onPressMock).toHaveBeenCalledTimes(1);
   });
 });

@@ -13,8 +13,8 @@ import { ListItemVerticalAlignment } from './ListItem.types';
 
 describe('ListItem', () => {
   describe('Rendering', () => {
-    it('renders children', () => {
-      const { getByTestId } = render(
+    it('renders children', async () => {
+      const { getByTestId } = await render(
         <ListItem testID="list-item">
           <View testID="child" />
         </ListItem>,
@@ -23,8 +23,8 @@ describe('ListItem', () => {
       expect(getByTestId('child')).toBeDefined();
     });
 
-    it('renders topAccessory when provided', () => {
-      const { getByTestId } = render(
+    it('renders topAccessory when provided', async () => {
+      const { getByTestId } = await render(
         <ListItem topAccessory={<View testID="top-accessory" />}>
           <View />
         </ListItem>,
@@ -32,8 +32,8 @@ describe('ListItem', () => {
       expect(getByTestId('top-accessory')).toBeDefined();
     });
 
-    it('does not render topAccessory when not provided', () => {
-      const { queryByTestId } = render(
+    it('does not render topAccessory when not provided', async () => {
+      const { queryByTestId } = await render(
         <ListItem>
           <View />
         </ListItem>,
@@ -41,8 +41,8 @@ describe('ListItem', () => {
       expect(queryByTestId('top-accessory')).toBeNull();
     });
 
-    it('renders bottomAccessory when provided', () => {
-      const { getByTestId } = render(
+    it('renders bottomAccessory when provided', async () => {
+      const { getByTestId } = await render(
         <ListItem bottomAccessory={<View testID="bottom-accessory" />}>
           <View />
         </ListItem>,
@@ -50,8 +50,8 @@ describe('ListItem', () => {
       expect(getByTestId('bottom-accessory')).toBeDefined();
     });
 
-    it('does not render bottomAccessory when not provided', () => {
-      const { queryByTestId } = render(
+    it('does not render bottomAccessory when not provided', async () => {
+      const { queryByTestId } = await render(
         <ListItem>
           <View />
         </ListItem>,
@@ -59,21 +59,21 @@ describe('ListItem', () => {
       expect(queryByTestId('bottom-accessory')).toBeNull();
     });
 
-    it('renders without error for each verticalAlignment value', () => {
-      Object.values(ListItemVerticalAlignment).forEach((alignment) => {
-        const { getByTestId } = render(
+    it('renders without error for each verticalAlignment value', async () => {
+      for (const alignment of Object.values(ListItemVerticalAlignment)) {
+        const { getByTestId } = await render(
           <ListItem verticalAlignment={alignment} testID="list-item">
             <View />
           </ListItem>,
         );
         expect(getByTestId('list-item')).toBeDefined();
-      });
+      }
     });
   });
 
   describe('Gap', () => {
-    it('renders one gap spacer for two children', () => {
-      const { getAllByTestId } = render(
+    it('renders one gap spacer for two children', async () => {
+      const { getAllByTestId } = await render(
         <ListItem>
           <View />
           <View />
@@ -82,8 +82,8 @@ describe('ListItem', () => {
       expect(getAllByTestId(TESTID_LISTITEM_GAP)).toHaveLength(1);
     });
 
-    it('renders N-1 gap spacers for N children', () => {
-      const { getAllByTestId } = render(
+    it('renders N-1 gap spacers for N children', async () => {
+      const { getAllByTestId } = await render(
         <ListItem>
           <View />
           <View />
@@ -93,8 +93,8 @@ describe('ListItem', () => {
       expect(getAllByTestId(TESTID_LISTITEM_GAP)).toHaveLength(2);
     });
 
-    it('does not render a gap spacer with a single child', () => {
-      const { queryByTestId } = render(
+    it('does not render a gap spacer with a single child', async () => {
+      const { queryByTestId } = await render(
         <ListItem>
           <View />
         </ListItem>,
@@ -102,8 +102,8 @@ describe('ListItem', () => {
       expect(queryByTestId(TESTID_LISTITEM_GAP)).toBeNull();
     });
 
-    it('applies the default gap of 16 to all spacers', () => {
-      const { getAllByTestId } = render(
+    it('applies the default gap of 16 to all spacers', async () => {
+      const { getAllByTestId } = await render(
         <ListItem>
           <View />
           <View />
@@ -115,9 +115,9 @@ describe('ListItem', () => {
       });
     });
 
-    it('applies a custom gap to all spacers', () => {
+    it('applies a custom gap to all spacers', async () => {
       const givenGap = 20;
-      const { getAllByTestId } = render(
+      const { getAllByTestId } = await render(
         <ListItem gap={givenGap}>
           <View />
           <View />
@@ -131,9 +131,9 @@ describe('ListItem', () => {
   });
 
   describe('Accessories gap', () => {
-    it('applies topAccessoryGap as marginBottom on topAccessory wrapper', () => {
+    it('applies topAccessoryGap as marginBottom on topAccessory wrapper', async () => {
       const givenTopAccessoryGap = 20;
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <ListItem
           topAccessory={<View />}
           topAccessoryGap={givenTopAccessoryGap}
@@ -147,9 +147,9 @@ describe('ListItem', () => {
       ).toBe(givenTopAccessoryGap);
     });
 
-    it('applies bottomAccessoryGap as marginTop on bottomAccessory wrapper', () => {
+    it('applies bottomAccessoryGap as marginTop on bottomAccessory wrapper', async () => {
       const givenBottomAccessoryGap = 20;
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <ListItem
           bottomAccessory={<View />}
           bottomAccessoryGap={givenBottomAccessoryGap}
@@ -165,8 +165,8 @@ describe('ListItem', () => {
   });
 
   describe('Props', () => {
-    it('passes testID to root element via ViewProps', () => {
-      const { getByTestId } = render(
+    it('passes testID to root element via ViewProps', async () => {
+      const { getByTestId } = await render(
         <ListItem testID="root-item">
           <View />
         </ListItem>,
@@ -174,8 +174,8 @@ describe('ListItem', () => {
       expect(getByTestId('root-item')).toBeDefined();
     });
 
-    it('passes accessibilityLabel via ViewProps', () => {
-      const { getByTestId } = render(
+    it('passes accessibilityLabel via ViewProps', async () => {
+      const { getByTestId } = await render(
         <ListItem testID="list-item" accessibilityLabel="Custom label">
           <View />
         </ListItem>,
@@ -185,8 +185,8 @@ describe('ListItem', () => {
       );
     });
 
-    it('merges custom style prop with base styles', () => {
-      const { getByTestId } = render(
+    it('merges custom style prop with base styles', async () => {
+      const { getByTestId } = await render(
         <ListItem testID="list-item" style={{ marginTop: 8 }}>
           <View />
         </ListItem>,

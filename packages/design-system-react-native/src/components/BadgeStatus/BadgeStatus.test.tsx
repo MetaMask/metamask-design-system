@@ -13,7 +13,7 @@ import {
 } from './BadgeStatus.constants';
 
 describe('BadgeStatus', () => {
-  it('renders with default props and status Active', () => {
+  it('renders with default props and status Active', async () => {
     let expectedOuter;
     let expectedInner;
     const TestComponent = () => {
@@ -31,13 +31,13 @@ describe('BadgeStatus', () => {
       return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const badge = getByTestId('badge');
     expect(badge.props.style[0]).toStrictEqual(expectedOuter);
     expect(badge.props.children.props.style[0]).toStrictEqual(expectedInner);
   });
 
-  it('renders without border when hasBorder is false', () => {
+  it('renders without border when hasBorder is false', async () => {
     let expectedOuter;
     const TestComponent = () => {
       const tw = useTailwind();
@@ -51,12 +51,12 @@ describe('BadgeStatus', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const badge = getByTestId('badge');
     expect(badge.props.style[0]).toStrictEqual(expectedOuter);
   });
 
-  it('applies custom style to the outer container', () => {
+  it('applies custom style to the outer container', async () => {
     const customStyle = { margin: 10 };
     const TestComponent = () => {
       return (
@@ -68,13 +68,13 @@ describe('BadgeStatus', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const badge = getByTestId('badge');
     // The outer container style is an array; the second element should equal customStyle.
     expect(badge.props.style[1]).toStrictEqual(customStyle);
   });
 
-  it('forwards additional props to the outer container', () => {
+  it('forwards additional props to the outer container', async () => {
     const extraProp = { accessibilityLabel: 'status-badge' };
     const TestComponent = () => {
       return (
@@ -86,12 +86,12 @@ describe('BadgeStatus', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const badge = getByTestId('badge');
     expect(badge.props.accessibilityLabel).toBe('status-badge');
   });
 
-  it('renders with custom size and status Inactive', () => {
+  it('renders with custom size and status Inactive', async () => {
     let expectedInner;
     const customSize = BadgeStatusSize.Lg; // For example, '10'
     const TestComponent = () => {
@@ -110,12 +110,12 @@ describe('BadgeStatus', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const badge = getByTestId('badge');
     expect(badge.props.children.props.style[0]).toStrictEqual(expectedInner);
   });
 
-  it('uses default size and hasBorder when not provided', () => {
+  it('uses default size and hasBorder when not provided', async () => {
     let expectedOuter;
     let expectedInner;
     const TestComponent = () => {
@@ -133,7 +133,7 @@ describe('BadgeStatus', () => {
       return <BadgeStatus status={BadgeStatusStatus.Active} testID="badge" />;
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const badge = getByTestId('badge');
     expect(badge.props.style[0]).toStrictEqual(expectedOuter);
     expect(badge.props.children.props.style[0]).toStrictEqual(expectedInner);

@@ -19,8 +19,10 @@ const END_BUTTON_TEST_ID = 'header-root-end-button';
 describe('HeaderRoot', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   beforeEach(() => {
@@ -28,22 +30,22 @@ describe('HeaderRoot', () => {
   });
 
   describe('rendering', () => {
-    it('renders container with testID when provided', () => {
-      const { getByTestId } = render(
+    it('renders container with testID when provided', async () => {
+      const { getByTestId } = await render(
         <HeaderRoot title="Title" testID={CONTAINER_TEST_ID} />,
       );
 
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders title in left section when title provided and no children', () => {
-      const { getByText } = render(<HeaderRoot title="Test Title" />);
+    it('renders title in left section when title provided and no children', async () => {
+      const { getByText } = await render(<HeaderRoot title="Test Title" />);
 
       expect(getByText('Test Title')).toBeOnTheScreen();
     });
 
-    it('renders title when title is a React node', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('renders title when title is a React node', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <HeaderRoot
           title={<Text testID="header-root-title-node">Node Title</Text>}
           titleProps={{ testID: 'header-root-title-string-props' }}
@@ -54,8 +56,8 @@ describe('HeaderRoot', () => {
       expect(queryByTestId('header-root-title-string-props')).toBeNull();
     });
 
-    it('renders title with testID when provided via titleProps', () => {
-      const { getByTestId } = render(
+    it('renders title with testID when provided via titleProps', async () => {
+      const { getByTestId } = await render(
         <HeaderRoot
           title="Test Title"
           titleProps={{ testID: 'header-root-title' }}
@@ -65,8 +67,8 @@ describe('HeaderRoot', () => {
       expect(getByTestId('header-root-title')).toBeOnTheScreen();
     });
 
-    it('renders titleAccessory in title row when no children', () => {
-      const { getByTestId, getByText } = render(
+    it('renders titleAccessory in title row when no children', async () => {
+      const { getByTestId, getByText } = await render(
         <HeaderRoot
           title="Title"
           titleAccessory={<Text testID={LEFT_CHILDREN_TEST_ID}>Accessory</Text>}
@@ -77,8 +79,8 @@ describe('HeaderRoot', () => {
       expect(getByTestId(LEFT_CHILDREN_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders children in left section when children provided', () => {
-      const { getByTestId, queryByText } = render(
+    it('renders children in left section when children provided', async () => {
+      const { getByTestId, queryByText } = await render(
         <HeaderRoot title="Ignored Title" testID={CONTAINER_TEST_ID}>
           <Text testID={LEFT_CHILDREN_TEST_ID}>Custom Content</Text>
         </HeaderRoot>,
@@ -89,8 +91,8 @@ describe('HeaderRoot', () => {
       expect(queryByText('Ignored Title')).not.toBeOnTheScreen();
     });
 
-    it('prioritizes children over title when both provided', () => {
-      const { getByText, queryByText } = render(
+    it('prioritizes children over title when both provided', async () => {
+      const { getByText, queryByText } = await render(
         <HeaderRoot title="Title Text">
           <Text>Children Text</Text>
         </HeaderRoot>,
@@ -100,24 +102,24 @@ describe('HeaderRoot', () => {
       expect(queryByText('Title Text')).not.toBeOnTheScreen();
     });
 
-    it('renders title row when children is null', () => {
-      const { getByText } = render(
+    it('renders title row when children is null', async () => {
+      const { getByText } = await render(
         <HeaderRoot title="Title When Children Null">{null}</HeaderRoot>,
       );
 
       expect(getByText('Title When Children Null')).toBeOnTheScreen();
     });
 
-    it('renders title row when children is false from conditional rendering', () => {
-      const { getByText } = render(
+    it('renders title row when children is false from conditional rendering', async () => {
+      const { getByText } = await render(
         <HeaderRoot title="Settings">{false}</HeaderRoot>,
       );
 
       expect(getByText('Settings')).toBeOnTheScreen();
     });
 
-    it('renders nothing in left section when no children and no title or titleAccessory', () => {
-      const { getByTestId, queryByText } = render(
+    it('renders nothing in left section when no children and no title or titleAccessory', async () => {
+      const { getByTestId, queryByText } = await render(
         <HeaderRoot testID={CONTAINER_TEST_ID} />,
       );
 
@@ -125,8 +127,8 @@ describe('HeaderRoot', () => {
       expect(queryByText('Title')).not.toBeOnTheScreen();
     });
 
-    it('does not render title row when title is false from conditional expression', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('does not render title row when title is false from conditional expression', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <HeaderRoot
           testID={CONTAINER_TEST_ID}
           title={false}
@@ -140,8 +142,8 @@ describe('HeaderRoot', () => {
       expect(queryByTestId(LEFT_CHILDREN_TEST_ID)).toBeNull();
     });
 
-    it('does not render title row when titleAccessory is false from conditional expression', () => {
-      const { getByText, queryByTestId } = render(
+    it('does not render title row when titleAccessory is false from conditional expression', async () => {
+      const { getByText, queryByTestId } = await render(
         <HeaderRoot
           title="Visible"
           titleAccessory={false}
@@ -155,8 +157,8 @@ describe('HeaderRoot', () => {
   });
 
   describe('end section', () => {
-    it('renders endAccessory when provided', () => {
-      const { getByTestId } = render(
+    it('renders endAccessory when provided', async () => {
+      const { getByTestId } = await render(
         <HeaderRoot
           title="Title"
           endAccessory={<Text testID={END_ACCESSORY_TEST_ID}>End Content</Text>}
@@ -166,9 +168,9 @@ describe('HeaderRoot', () => {
       expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders single ButtonIcon when endButtonIconProps has one item', () => {
+    it('renders single ButtonIcon when endButtonIconProps has one item', async () => {
       const onPressMock = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderRoot
           title="Title"
           endButtonIconProps={[
@@ -184,9 +186,9 @@ describe('HeaderRoot', () => {
       expect(getByTestId(END_BUTTON_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('calls onPress when end ButtonIcon is pressed', () => {
+    it('calls onPress when end ButtonIcon is pressed', async () => {
       const onPressMock = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderRoot
           title="Title"
           endButtonIconProps={[
@@ -199,13 +201,13 @@ describe('HeaderRoot', () => {
         />,
       );
 
-      fireEvent.press(getByTestId(END_BUTTON_TEST_ID));
+      await fireEvent.press(getByTestId(END_BUTTON_TEST_ID));
 
       expect(onPressMock).toHaveBeenCalledTimes(1);
     });
 
-    it('renders multiple ButtonIcons when endButtonIconProps has multiple items', () => {
-      const { getByTestId } = render(
+    it('renders multiple ButtonIcons when endButtonIconProps has multiple items', async () => {
+      const { getByTestId } = await render(
         <HeaderRoot
           title="Title"
           endButtonIconProps={[
@@ -227,23 +229,23 @@ describe('HeaderRoot', () => {
       expect(getByTestId('end-button-search')).toBeOnTheScreen();
     });
 
-    it('does not render end section when no endAccessory and no endButtonIconProps', () => {
-      const { queryByTestId } = render(<HeaderRoot title="Title" />);
+    it('does not render end section when no endAccessory and no endButtonIconProps', async () => {
+      const { queryByTestId } = await render(<HeaderRoot title="Title" />);
 
       expect(queryByTestId(END_ACCESSORY_TEST_ID)).toBeNull();
       expect(queryByTestId(END_BUTTON_TEST_ID)).toBeNull();
     });
 
-    it('does not render end ButtonIcons when endButtonIconProps is empty array', () => {
-      const { queryByTestId } = render(
+    it('does not render end ButtonIcons when endButtonIconProps is empty array', async () => {
+      const { queryByTestId } = await render(
         <HeaderRoot title="Title" endButtonIconProps={[]} />,
       );
 
       expect(queryByTestId(END_BUTTON_TEST_ID)).toBeNull();
     });
 
-    it('prioritizes endAccessory over endButtonIconProps', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('prioritizes endAccessory over endButtonIconProps', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <HeaderRoot
           title="Title"
           endAccessory={<Text testID={END_ACCESSORY_TEST_ID}>Custom End</Text>}
@@ -272,8 +274,8 @@ describe('HeaderRoot', () => {
       });
     });
 
-    it('applies marginTop style when includesTopInset is true', () => {
-      const { getByTestId } = render(
+    it('applies marginTop style when includesTopInset is true', async () => {
+      const { getByTestId } = await render(
         <HeaderRoot
           title="Title"
           testID={CONTAINER_TEST_ID}
@@ -284,8 +286,8 @@ describe('HeaderRoot', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle({ marginTop: 50 });
     });
 
-    it('does not apply marginTop when includesTopInset is false', () => {
-      const { getByTestId } = render(
+    it('does not apply marginTop when includesTopInset is false', async () => {
+      const { getByTestId } = await render(
         <HeaderRoot title="Title" testID={CONTAINER_TEST_ID} />,
       );
 
@@ -294,9 +296,9 @@ describe('HeaderRoot', () => {
   });
 
   describe('style and twClassName', () => {
-    it('applies custom style to container', () => {
+    it('applies custom style to container', async () => {
       const customStyle = { backgroundColor: 'red' };
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderRoot
           title="Title"
           testID={CONTAINER_TEST_ID}
@@ -307,8 +309,8 @@ describe('HeaderRoot', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle(customStyle);
     });
 
-    it('merges twClassName with base styles', () => {
-      const { getByTestId } = render(
+    it('merges twClassName with base styles', async () => {
+      const { getByTestId } = await render(
         <HeaderRoot
           title="Title"
           testID={CONTAINER_TEST_ID}
@@ -324,8 +326,8 @@ describe('HeaderRoot', () => {
   });
 
   describe('titleProps', () => {
-    it('spreads titleProps to title Text when title is set', () => {
-      const { getByTestId } = render(
+    it('spreads titleProps to title Text when title is set', async () => {
+      const { getByTestId } = await render(
         <HeaderRoot
           title="Title"
           titleProps={{

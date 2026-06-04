@@ -14,14 +14,14 @@ describe('HeaderBase', () => {
   });
 
   describe('rendering', () => {
-    it('renders string title as Text component', () => {
-      const { getByText } = render(<HeaderBase>Test Title</HeaderBase>);
+    it('renders string title as Text component', async () => {
+      const { getByText } = await render(<HeaderBase>Test Title</HeaderBase>);
 
       expect(getByText('Test Title')).toBeOnTheScreen();
     });
 
-    it('renders custom children when ReactNode is passed', () => {
-      const { getByTestId } = render(
+    it('renders custom children when ReactNode is passed', async () => {
+      const { getByTestId } = await render(
         <HeaderBase>
           <Text testID="custom-content">Custom Content</Text>
         </HeaderBase>,
@@ -32,16 +32,16 @@ describe('HeaderBase', () => {
   });
 
   describe('root props', () => {
-    it('applies testID to the root container via ViewProps', () => {
-      const { getByTestId } = render(
+    it('applies testID to the root container via ViewProps', async () => {
+      const { getByTestId } = await render(
         <HeaderBase testID="my-header">Title</HeaderBase>,
       );
 
       expect(getByTestId('my-header')).toBeOnTheScreen();
     });
 
-    it('passes through accessibilityLabel via ViewProps', () => {
-      const { getByLabelText } = render(
+    it('passes through accessibilityLabel via ViewProps', async () => {
+      const { getByLabelText } = await render(
         <HeaderBase accessibilityLabel="Page header">Title</HeaderBase>,
       );
 
@@ -50,16 +50,16 @@ describe('HeaderBase', () => {
   });
 
   describe('textProps', () => {
-    it('spreads textProps to the title Text when children is a string', () => {
-      const { getByTestId } = render(
+    it('spreads textProps to the title Text when children is a string', async () => {
+      const { getByTestId } = await render(
         <HeaderBase textProps={{ testID: 'header-title' }}>Title</HeaderBase>,
       );
 
       expect(getByTestId('header-title')).toBeOnTheScreen();
     });
 
-    it('does not apply textProps when children is a ReactNode', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('does not apply textProps when children is a ReactNode', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <HeaderBase textProps={{ testID: 'header-title' }}>
           <Text testID="custom-content">Custom Content</Text>
         </HeaderBase>,
@@ -71,8 +71,8 @@ describe('HeaderBase', () => {
   });
 
   describe('childrenWrapperProps', () => {
-    it('passes childrenWrapperProps to the title wrapper View', () => {
-      const { getByTestId } = render(
+    it('passes childrenWrapperProps to the title wrapper View', async () => {
+      const { getByTestId } = await render(
         <HeaderBase childrenWrapperProps={{ testID: 'title-wrapper' }}>
           Title
         </HeaderBase>,
@@ -83,8 +83,8 @@ describe('HeaderBase', () => {
   });
 
   describe('startAccessory', () => {
-    it('renders custom start accessory content', () => {
-      const { getByTestId } = render(
+    it('renders custom start accessory content', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           startAccessory={<Text testID="start-content">Start</Text>}
           startAccessoryWrapperProps={{ testID: 'start-wrapper' }}
@@ -97,8 +97,8 @@ describe('HeaderBase', () => {
       expect(getByTestId('start-content')).toBeOnTheScreen();
     });
 
-    it('does not render start accessory wrapper when startAccessory is not provided', () => {
-      const { queryByTestId } = render(
+    it('does not render start accessory wrapper when startAccessory is not provided', async () => {
+      const { queryByTestId } = await render(
         <HeaderBase startAccessoryWrapperProps={{ testID: 'start-wrapper' }}>
           Title
         </HeaderBase>,
@@ -107,8 +107,8 @@ describe('HeaderBase', () => {
       expect(queryByTestId('start-wrapper')).toBeNull();
     });
 
-    it('passes startAccessoryWrapperProps to start accessory wrapper', () => {
-      const { getByTestId } = render(
+    it('passes startAccessoryWrapperProps to start accessory wrapper', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           startAccessory={<Text testID="start-content">Start</Text>}
           startAccessoryWrapperProps={{ testID: 'custom-start-wrapper' }}
@@ -122,8 +122,8 @@ describe('HeaderBase', () => {
   });
 
   describe('endAccessory', () => {
-    it('renders custom end accessory content', () => {
-      const { getByTestId } = render(
+    it('renders custom end accessory content', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           endAccessory={<Text testID="end-content">End</Text>}
           endAccessoryWrapperProps={{ testID: 'end-wrapper' }}
@@ -136,8 +136,8 @@ describe('HeaderBase', () => {
       expect(getByTestId('end-content')).toBeOnTheScreen();
     });
 
-    it('does not render end accessory wrapper when endAccessory is not provided', () => {
-      const { queryByTestId } = render(
+    it('does not render end accessory wrapper when endAccessory is not provided', async () => {
+      const { queryByTestId } = await render(
         <HeaderBase endAccessoryWrapperProps={{ testID: 'end-wrapper' }}>
           Title
         </HeaderBase>,
@@ -146,8 +146,8 @@ describe('HeaderBase', () => {
       expect(queryByTestId('end-wrapper')).toBeNull();
     });
 
-    it('passes endAccessoryWrapperProps to end accessory wrapper', () => {
-      const { getByTestId } = render(
+    it('passes endAccessoryWrapperProps to end accessory wrapper', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           endAccessory={<Text testID="end-content">End</Text>}
           endAccessoryWrapperProps={{ testID: 'custom-end-wrapper' }}
@@ -161,8 +161,8 @@ describe('HeaderBase', () => {
   });
 
   describe('startButtonIconProps', () => {
-    it('renders ButtonIcon when startButtonIconProps is provided', () => {
-      const { getByTestId } = render(
+    it('renders ButtonIcon when startButtonIconProps is provided', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           startButtonIconProps={{
             iconName: IconName.ArrowLeft,
@@ -177,9 +177,9 @@ describe('HeaderBase', () => {
       expect(getByTestId('start-wrapper')).toBeOnTheScreen();
     });
 
-    it('calls onPress handler when start ButtonIcon is pressed', () => {
+    it('calls onPress handler when start ButtonIcon is pressed', async () => {
       const onPressMock = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderBase
           startButtonIconProps={{
             iconName: IconName.ArrowLeft,
@@ -191,13 +191,13 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      fireEvent.press(getByTestId('start-button'));
+      await fireEvent.press(getByTestId('start-button'));
 
       expect(onPressMock).toHaveBeenCalledTimes(1);
     });
 
-    it('prioritizes startAccessory over startButtonIconProps', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('prioritizes startAccessory over startButtonIconProps', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <HeaderBase
           startAccessory={<Text testID="start-content">Custom Start</Text>}
           startButtonIconProps={{
@@ -216,8 +216,8 @@ describe('HeaderBase', () => {
   });
 
   describe('endButtonIconProps', () => {
-    it('renders single ButtonIcon when one item is provided in array', () => {
-      const { getByTestId } = render(
+    it('renders single ButtonIcon when one item is provided in array', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           endButtonIconProps={[
             {
@@ -236,9 +236,9 @@ describe('HeaderBase', () => {
       expect(getByTestId('end-close-button')).toBeOnTheScreen();
     });
 
-    it('calls onPress handler when end ButtonIcon is pressed', () => {
+    it('calls onPress handler when end ButtonIcon is pressed', async () => {
       const onPressMock = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderBase
           endButtonIconProps={[
             {
@@ -252,13 +252,13 @@ describe('HeaderBase', () => {
         </HeaderBase>,
       );
 
-      fireEvent.press(getByTestId('end-close-button'));
+      await fireEvent.press(getByTestId('end-close-button'));
 
       expect(onPressMock).toHaveBeenCalledTimes(1);
     });
 
-    it('renders multiple ButtonIcons when multiple items are provided', () => {
-      const { getByTestId } = render(
+    it('renders multiple ButtonIcons when multiple items are provided', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           endButtonIconProps={[
             {
@@ -281,8 +281,8 @@ describe('HeaderBase', () => {
       expect(getByTestId('end-close-button')).toBeOnTheScreen();
     });
 
-    it('does not render ButtonIcons when endButtonIconProps is empty array', () => {
-      const { queryByTestId } = render(
+    it('does not render ButtonIcons when endButtonIconProps is empty array', async () => {
+      const { queryByTestId } = await render(
         <HeaderBase
           endButtonIconProps={[]}
           endAccessoryWrapperProps={{ testID: 'end-wrapper' }}
@@ -294,8 +294,8 @@ describe('HeaderBase', () => {
       expect(queryByTestId('end-wrapper')).toBeNull();
     });
 
-    it('prioritizes endAccessory over endButtonIconProps', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('prioritizes endAccessory over endButtonIconProps', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <HeaderBase
           endAccessory={<Text testID="end-content">Custom End</Text>}
           endButtonIconProps={[
@@ -316,8 +316,8 @@ describe('HeaderBase', () => {
   });
 
   describe('accessory wrapper rendering for centering', () => {
-    it('renders both accessory wrappers when only start accessory is provided', () => {
-      const { getByTestId } = render(
+    it('renders both accessory wrappers when only start accessory is provided', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           startAccessory={<Text testID="start-content">Start</Text>}
           startAccessoryWrapperProps={{ testID: 'start-wrapper' }}
@@ -331,8 +331,8 @@ describe('HeaderBase', () => {
       expect(getByTestId('end-wrapper')).toBeOnTheScreen();
     });
 
-    it('renders both accessory wrappers when only end accessory is provided', () => {
-      const { getByTestId } = render(
+    it('renders both accessory wrappers when only end accessory is provided', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           endAccessory={<Text testID="end-content">End</Text>}
           startAccessoryWrapperProps={{ testID: 'start-wrapper' }}
@@ -346,8 +346,8 @@ describe('HeaderBase', () => {
       expect(getByTestId('end-wrapper')).toBeOnTheScreen();
     });
 
-    it('renders both accessory wrappers when both accessories are provided', () => {
-      const { getByTestId } = render(
+    it('renders both accessory wrappers when both accessories are provided', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           startAccessory={<Text testID="start-content">Start</Text>}
           endAccessory={<Text testID="end-content">End</Text>}
@@ -366,8 +366,8 @@ describe('HeaderBase', () => {
   });
 
   describe('twClassName', () => {
-    it('merges twClassName with default styles', () => {
-      const { getByTestId } = render(
+    it('merges twClassName with default styles', async () => {
+      const { getByTestId } = await render(
         <HeaderBase testID="header" twClassName="bg-info-default px-4">
           Title
         </HeaderBase>,
@@ -378,8 +378,8 @@ describe('HeaderBase', () => {
   });
 
   describe('includesTopInset', () => {
-    it('applies top inset margin when includesTopInset is true', () => {
-      const { getByTestId } = render(
+    it('applies top inset margin when includesTopInset is true', async () => {
+      const { getByTestId } = await render(
         <HeaderBase testID="header" includesTopInset>
           Title
         </HeaderBase>,
@@ -390,8 +390,8 @@ describe('HeaderBase', () => {
   });
 
   describe('layout measurement for centering', () => {
-    it('measures start accessory width via onLayout', () => {
-      const { getByTestId } = render(
+    it('measures start accessory width via onLayout', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           startAccessory={<Text testID="start-content">Start</Text>}
           startAccessoryWrapperProps={{ testID: 'start-wrapper' }}
@@ -404,7 +404,7 @@ describe('HeaderBase', () => {
       const startWrapper = getByTestId('start-wrapper');
       const layoutView = startWrapper.props.children;
 
-      act(() => {
+      await act(() => {
         layoutView.props.onLayout({
           nativeEvent: { layout: { width: 40, height: 40 } },
         });
@@ -413,8 +413,8 @@ describe('HeaderBase', () => {
       expect(getByTestId('start-wrapper')).toBeOnTheScreen();
     });
 
-    it('measures end accessory width via onLayout', () => {
-      const { getByTestId } = render(
+    it('measures end accessory width via onLayout', async () => {
+      const { getByTestId } = await render(
         <HeaderBase
           endAccessory={<Text testID="end-content">End</Text>}
           startAccessoryWrapperProps={{ testID: 'start-wrapper' }}
@@ -427,7 +427,7 @@ describe('HeaderBase', () => {
       const endWrapper = getByTestId('end-wrapper');
       const layoutView = endWrapper.props.children;
 
-      act(() => {
+      await act(() => {
         layoutView.props.onLayout({
           nativeEvent: { layout: { width: 40, height: 40 } },
         });

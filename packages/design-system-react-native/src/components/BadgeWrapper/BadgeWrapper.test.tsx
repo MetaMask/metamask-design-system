@@ -22,7 +22,7 @@ const roundPositions = (pos: {
   return result;
 };
 describe('BadgeWrapper', () => {
-  it('computes the top right final positions correctly on circular anchor', () => {
+  it('computes the top right final positions correctly on circular anchor', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Using props:
@@ -61,7 +61,7 @@ describe('BadgeWrapper', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
@@ -70,7 +70,7 @@ describe('BadgeWrapper', () => {
     const badgeContainer = children[1];
 
     // Simulate layout events:
-    act(() => {
+    await act(() => {
       anchorContainer.props.onLayout({
         nativeEvent: { layout: { width: 100, height: 50 } },
       });
@@ -96,7 +96,7 @@ describe('BadgeWrapper', () => {
     expect(actualPositionsRounded).toStrictEqual(expectedPositionsRounded);
   });
 
-  it('computes the top right final positions correctly on rectangular anchor', () => {
+  it('computes the top right final positions correctly on rectangular anchor', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Using default props:
@@ -136,7 +136,7 @@ describe('BadgeWrapper', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
@@ -145,7 +145,7 @@ describe('BadgeWrapper', () => {
     const badgeContainer = children[1];
 
     // Simulate layout events:
-    act(() => {
+    await act(() => {
       anchorContainer.props.onLayout({
         nativeEvent: { layout: { width: 100, height: 50 } },
       });
@@ -171,7 +171,7 @@ describe('BadgeWrapper', () => {
     expect(actualPositionsRounded).toStrictEqual(expectedPositionsRounded);
   });
 
-  it('computes the bottom right final positions correctly on circular anchor', () => {
+  it('computes the bottom right final positions correctly on circular anchor', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Using props:
@@ -210,7 +210,7 @@ describe('BadgeWrapper', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
@@ -219,7 +219,7 @@ describe('BadgeWrapper', () => {
     const badgeContainer = children[1];
 
     // Simulate layout events:
-    act(() => {
+    await act(() => {
       anchorContainer.props.onLayout({
         nativeEvent: { layout: { width: 100, height: 50 } },
       });
@@ -245,7 +245,7 @@ describe('BadgeWrapper', () => {
     expect(actualPositionsRounded).toStrictEqual(expectedPositionsRounded);
   });
 
-  it('computes the bottom right final positions correctly on rectangular anchor', () => {
+  it('computes the bottom right final positions correctly on rectangular anchor', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Using default props:
@@ -285,7 +285,7 @@ describe('BadgeWrapper', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
@@ -294,7 +294,7 @@ describe('BadgeWrapper', () => {
     const badgeContainer = children[1];
 
     // Simulate layout events:
-    act(() => {
+    await act(() => {
       anchorContainer.props.onLayout({
         nativeEvent: { layout: { width: 100, height: 50 } },
       });
@@ -320,7 +320,7 @@ describe('BadgeWrapper', () => {
     expect(actualPositionsRounded).toStrictEqual(expectedPositionsRounded);
   });
 
-  it('computes the bottom left final positions correctly on circular anchor', () => {
+  it('computes the bottom left final positions correctly on circular anchor', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Using props:
@@ -359,7 +359,7 @@ describe('BadgeWrapper', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
@@ -368,7 +368,7 @@ describe('BadgeWrapper', () => {
     const badgeContainer = children[1];
 
     // Simulate layout events:
-    act(() => {
+    await act(() => {
       anchorContainer.props.onLayout({
         nativeEvent: { layout: { width: 100, height: 50 } },
       });
@@ -394,7 +394,7 @@ describe('BadgeWrapper', () => {
     expect(actualPositionsRounded).toStrictEqual(expectedPositionsRounded);
   });
 
-  it('computes the bottom left final positions correctly on rectangular anchor', () => {
+  it('computes the bottom left final positions correctly on rectangular anchor', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Using default props:
@@ -434,7 +434,7 @@ describe('BadgeWrapper', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
@@ -443,7 +443,7 @@ describe('BadgeWrapper', () => {
     const badgeContainer = children[1];
 
     // Simulate layout events:
-    act(() => {
+    await act(() => {
       anchorContainer.props.onLayout({
         nativeEvent: { layout: { width: 100, height: 50 } },
       });
@@ -469,7 +469,7 @@ describe('BadgeWrapper', () => {
     expect(actualPositionsRounded).toStrictEqual(expectedPositionsRounded);
   });
 
-  it('computes the top left final positions correctly on circular anchor', () => {
+  it('computes the top left final positions correctly on circular anchor', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Using props:
@@ -508,7 +508,7 @@ describe('BadgeWrapper', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
@@ -517,7 +517,7 @@ describe('BadgeWrapper', () => {
     const badgeContainer = children[1];
 
     // Simulate layout events:
-    act(() => {
+    await act(() => {
       anchorContainer.props.onLayout({
         nativeEvent: { layout: { width: 100, height: 50 } },
       });
@@ -543,7 +543,7 @@ describe('BadgeWrapper', () => {
     expect(actualPositionsRounded).toStrictEqual(expectedPositionsRounded);
   });
 
-  it('computes the top left final positions correctly on rectangular anchor', () => {
+  it('computes the top left final positions correctly on rectangular anchor', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Using default props:
@@ -583,7 +583,7 @@ describe('BadgeWrapper', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
 
     // Initially get the wrapper and its children.
     let wrapper = getByTestId('wrapper');
@@ -592,7 +592,7 @@ describe('BadgeWrapper', () => {
     const badgeContainer = children[1];
 
     // Simulate layout events:
-    act(() => {
+    await act(() => {
       anchorContainer.props.onLayout({
         nativeEvent: { layout: { width: 100, height: 50 } },
       });
@@ -618,7 +618,7 @@ describe('BadgeWrapper', () => {
     expect(actualPositionsRounded).toStrictEqual(expectedPositionsRounded);
   });
 
-  it('uses customPosition if provided, ignoring layout events', () => {
+  it('uses customPosition if provided, ignoring layout events', async () => {
     const customPosition = { top: 5, left: 10 };
     const TestComponent = () => {
       const tw = useTailwind();
@@ -639,7 +639,7 @@ describe('BadgeWrapper', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const expectedBadgeStyle = JSON.parse(
       getByTestId('expectedBadgeStyle').props.children,
     );
@@ -649,7 +649,7 @@ describe('BadgeWrapper', () => {
     expect(badgeContainer.props.style[1]).toStrictEqual(expectedBadgeStyle[1]);
   });
 
-  it('applies additional container style and forwards extra props', () => {
+  it('applies additional container style and forwards extra props', async () => {
     // Since BadgeWrapper renders:
     // <View style={[tw`relative self-start`, style]} {...props}>
     // The default style from tw`relative self-start` is merged with custom style.
@@ -666,7 +666,7 @@ describe('BadgeWrapper', () => {
         <Text>Anchor</Text>
       </BadgeWrapper>
     );
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const wrapper = getByTestId('wrapper');
     // Flatten the style to compare:
     const flattenedStyle = StyleSheet.flatten(wrapper.props.style);

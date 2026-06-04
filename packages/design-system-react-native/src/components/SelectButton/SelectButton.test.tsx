@@ -21,13 +21,15 @@ const noopPress = () => undefined;
 describe('SelectButton', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   describe('when rendering the label', () => {
-    it('renders placeholder when value prop is omitted', () => {
-      const { getByText } = render(
+    it('renders placeholder when value prop is omitted', async () => {
+      const { getByText } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -38,8 +40,8 @@ describe('SelectButton', () => {
       expect(getByText('Select')).toHaveTextContent('Select');
     });
 
-    it('renders value when value is set', () => {
-      const { getByText, queryByText } = render(
+    it('renders value when value is set', async () => {
+      const { getByText, queryByText } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -52,8 +54,8 @@ describe('SelectButton', () => {
       expect(queryByText('Select')).toBeNull();
     });
 
-    it('renders placeholder when value is null', () => {
-      const { getByText } = render(
+    it('renders placeholder when value is null', async () => {
+      const { getByText } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -65,8 +67,8 @@ describe('SelectButton', () => {
       expect(getByText('Select')).toHaveTextContent('Select');
     });
 
-    it('exposes testID on the root pressable', () => {
-      const { getByTestId } = render(
+    it('exposes testID on the root pressable', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID="custom-select-button"
           onPress={noopPress}
@@ -77,8 +79,8 @@ describe('SelectButton', () => {
       expect(getByTestId('custom-select-button')).toBeOnTheScreen();
     });
 
-    it('renders startAccessory before the label', () => {
-      const { getByTestId } = render(
+    it('renders startAccessory before the label', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -116,8 +118,8 @@ describe('SelectButton', () => {
 
     it.each(cases)(
       'maps endArrowDirection $endArrowDirection to trailing icon $iconName',
-      ({ endArrowDirection, iconName }) => {
-        const { getByTestId } = render(
+      async ({ endArrowDirection, iconName }) => {
+        const { getByTestId } = await render(
           <SelectButton
             testID={ROOT_TEST_ID}
             onPress={noopPress}
@@ -133,8 +135,8 @@ describe('SelectButton', () => {
   });
 
   describe('when endArrowDirection is omitted', () => {
-    it('defaults the trailing icon to ArrowDown', () => {
-      const { getByTestId } = render(
+    it('defaults the trailing icon to ArrowDown', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -153,8 +155,8 @@ describe('SelectButton', () => {
   });
 
   describe('when hideEndArrow is true', () => {
-    it('does not render a trailing icon', () => {
-      const { queryByTestId } = render(
+    it('does not render a trailing icon', async () => {
+      const { queryByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -167,8 +169,8 @@ describe('SelectButton', () => {
       expect(queryByTestId('end-arrow')).toBeNull();
     });
 
-    it('still renders endAccessory when provided', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('still renders endAccessory when provided', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -185,8 +187,8 @@ describe('SelectButton', () => {
   });
 
   describe('when endAccessory is used', () => {
-    it('renders when endArrowDirection is omitted', () => {
-      const { getByTestId } = render(
+    it('renders when endArrowDirection is omitted', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -198,8 +200,8 @@ describe('SelectButton', () => {
       expect(getByTestId('end-accessory')).toBeOnTheScreen();
     });
 
-    it('is ignored when endArrowDirection is set', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('is ignored when endArrowDirection is set', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -221,8 +223,8 @@ describe('SelectButton', () => {
   });
 
   describe('when using variant', () => {
-    it('uses muted background for primary variant', () => {
-      const { getByTestId } = render(
+    it('uses muted background for primary variant', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -234,8 +236,8 @@ describe('SelectButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-muted`);
     });
 
-    it('uses transparent background for secondary variant', () => {
-      const { getByTestId } = render(
+    it('uses transparent background for secondary variant', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -247,8 +249,8 @@ describe('SelectButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
     });
 
-    it('uses transparent background for tertiary variant', () => {
-      const { getByTestId } = render(
+    it('uses transparent background for tertiary variant', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -260,8 +262,8 @@ describe('SelectButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
     });
 
-    it('tertiary variant applies alternative color to string label text', () => {
-      const { getByText } = render(
+    it('tertiary variant applies alternative color to string label text', async () => {
+      const { getByText } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -275,8 +277,8 @@ describe('SelectButton', () => {
       );
     });
 
-    it('tertiary variant applies alternative color to trailing arrow icon', () => {
-      const { getByTestId } = render(
+    it('tertiary variant applies alternative color to trailing arrow icon', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -297,8 +299,8 @@ describe('SelectButton', () => {
   });
 
   describe('when rendering root pressable styles', () => {
-    it('uses default primary container radius and background', () => {
-      const { getByTestId } = render(
+    it('uses default primary container radius and background', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -311,8 +313,8 @@ describe('SelectButton', () => {
       expect(root).toHaveStyle(tw`bg-muted`);
     });
 
-    it('applies disabled opacity when isDisabled is true', () => {
-      const { getByTestId } = render(
+    it('applies disabled opacity when isDisabled is true', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -324,8 +326,8 @@ describe('SelectButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`opacity-50`);
     });
 
-    it('does not apply disabled opacity when isDisabled is false', () => {
-      const { getByTestId } = render(
+    it('does not apply disabled opacity when isDisabled is false', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -336,8 +338,8 @@ describe('SelectButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).not.toHaveStyle(tw`opacity-50`);
     });
 
-    it('merges twClassName onto the root', () => {
-      const { getByTestId } = render(
+    it('merges twClassName onto the root', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -349,9 +351,9 @@ describe('SelectButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
     });
 
-    it('merges twClassName when it is a function for primary variant', () => {
+    it('merges twClassName when it is a function for primary variant', async () => {
       const twClassName = jest.fn(() => 'mt-2');
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -365,9 +367,9 @@ describe('SelectButton', () => {
       expect(twClassName).toHaveBeenCalled();
     });
 
-    it('merges twClassName when it is a function for secondary variant', () => {
+    it('merges twClassName when it is a function for secondary variant', async () => {
       const twClassName = jest.fn(() => 'mt-3');
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -381,9 +383,9 @@ describe('SelectButton', () => {
       expect(twClassName).toHaveBeenCalled();
     });
 
-    it('merges twClassName when it is a function for tertiary variant', () => {
+    it('merges twClassName when it is a function for tertiary variant', async () => {
       const twClassName = jest.fn(() => 'mt-5');
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -397,10 +399,10 @@ describe('SelectButton', () => {
       expect(twClassName).toHaveBeenCalled();
     });
 
-    it('merges the style prop after tailwind styles', () => {
+    it('merges the style prop after tailwind styles', async () => {
       const customStyle = { marginBottom: 20 };
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -414,10 +416,10 @@ describe('SelectButton', () => {
   });
 
   describe('when the root receives a press', () => {
-    it('invokes onPress', () => {
+    it('invokes onPress', async () => {
       const onPress = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={onPress}
@@ -425,13 +427,13 @@ describe('SelectButton', () => {
         />,
       );
 
-      fireEvent.press(getByTestId(ROOT_TEST_ID));
+      expect(await fireEvent.press(getByTestId(ROOT_TEST_ID))).toBeUndefined();
 
       expect(onPress).toHaveBeenCalledTimes(1);
     });
 
-    it('applies secondary variant pressed background on pressIn', () => {
-      const { getByTestId } = render(
+    it('applies secondary variant pressed background on pressIn', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -441,12 +443,12 @@ describe('SelectButton', () => {
       );
 
       const root = getByTestId(ROOT_TEST_ID);
-      fireEvent(root, 'pressIn');
+      await fireEvent(root, 'pressIn');
       expect(root).toHaveStyle(tw`bg-pressed`);
     });
 
-    it('applies primary variant pressed background on pressIn', () => {
-      const { getByTestId } = render(
+    it('applies primary variant pressed background on pressIn', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -455,34 +457,30 @@ describe('SelectButton', () => {
       );
 
       const root = getByTestId(ROOT_TEST_ID);
-      fireEvent(root, 'pressIn');
+      await fireEvent(root, 'pressIn');
       expect(root).toHaveStyle(tw`bg-muted-pressed`);
     });
 
-    it('does not throw when onPress is omitted', () => {
-      const { getByTestId } = render(
+    it('does not throw when onPress is omitted', async () => {
+      const { getByTestId } = await render(
         <SelectButton testID={ROOT_TEST_ID} placeholder="Label" />,
       );
 
-      expect(() => {
-        fireEvent.press(getByTestId(ROOT_TEST_ID));
-      }).not.toThrow();
+      expect(await fireEvent.press(getByTestId(ROOT_TEST_ID))).toBeUndefined();
     });
 
-    it('does not throw when isDisabled is true and onPress is omitted', () => {
-      const { getByTestId } = render(
+    it('does not throw when isDisabled is true and onPress is omitted', async () => {
+      const { getByTestId } = await render(
         <SelectButton testID={ROOT_TEST_ID} isDisabled placeholder="Label" />,
       );
 
-      expect(() => {
-        fireEvent.press(getByTestId(ROOT_TEST_ID));
-      }).not.toThrow();
+      expect(await fireEvent.press(getByTestId(ROOT_TEST_ID))).toBeUndefined();
     });
 
-    it('does not invoke onPress when isDisabled is true', () => {
+    it('does not invoke onPress when isDisabled is true', async () => {
       const onPress = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={onPress}
@@ -491,15 +489,15 @@ describe('SelectButton', () => {
         />,
       );
 
-      fireEvent.press(getByTestId(ROOT_TEST_ID));
+      await fireEvent.press(getByTestId(ROOT_TEST_ID));
 
       expect(onPress).not.toHaveBeenCalled();
     });
   });
 
   describe('when disabled', () => {
-    it('disables the root pressable', () => {
-      const { getByTestId } = render(
+    it('disables the root pressable', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -513,10 +511,10 @@ describe('SelectButton', () => {
   });
 
   describe('when forwarding pressable props', () => {
-    it('forwards hitSlop to the root', () => {
+    it('forwards hitSlop to the root', async () => {
       const hitSlop = { top: 4, bottom: 4, left: 4, right: 4 };
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -530,8 +528,8 @@ describe('SelectButton', () => {
   });
 
   describe('when endArrowDirectionIconProps is provided', () => {
-    it('applies size to the trailing icon', () => {
-      const { getByTestId } = render(
+    it('applies size to the trailing icon', async () => {
+      const { getByTestId } = await render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}

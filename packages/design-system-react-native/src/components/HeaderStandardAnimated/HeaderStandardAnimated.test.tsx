@@ -57,8 +57,8 @@ describe('HeaderStandardAnimated', () => {
   });
 
   describe('smoke', () => {
-    it('renders title and optional subtitle', () => {
-      const { getByText } = render(
+    it('renders title and optional subtitle', async () => {
+      const { getByText } = await render(
         <HeaderStandardAnimated
           {...defaultProps}
           title="Test Title"
@@ -70,8 +70,8 @@ describe('HeaderStandardAnimated', () => {
       expect(getByText('Sub')).toBeOnTheScreen();
     });
 
-    it('forwards testID and titleProps.testID', () => {
-      const { getByTestId } = render(
+    it('forwards testID and titleProps.testID', async () => {
+      const { getByTestId } = await render(
         <HeaderStandardAnimated
           {...defaultProps}
           title="T"
@@ -84,8 +84,8 @@ describe('HeaderStandardAnimated', () => {
       expect(getByTestId(TITLE_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('omits center title when title is not provided', () => {
-      const { queryByText } = render(
+    it('omits center title when title is not provided', async () => {
+      const { queryByText } = await render(
         <HeaderStandardAnimated {...defaultProps} />,
       );
 
@@ -94,16 +94,16 @@ describe('HeaderStandardAnimated', () => {
   });
 
   describe('scroll-linked center animation', () => {
-    it('registers useAnimatedStyle for the center block', () => {
-      render(<HeaderStandardAnimated {...defaultProps} title="X" />);
+    it('registers useAnimatedStyle for the center block', async () => {
+      await render(<HeaderStandardAnimated {...defaultProps} title="X" />);
 
       expect(getUseAnimatedStyleMock()).toHaveBeenCalled();
     });
 
-    it('sets full opacity when scrolled past measured title section', () => {
+    it('sets full opacity when scrolled past measured title section', async () => {
       const scrollY = createMockSharedValue(150);
       const titleSectionHeight = createMockSharedValue(100);
-      render(
+      await render(
         <HeaderStandardAnimated
           scrollY={scrollY}
           titleSectionHeight={titleSectionHeight}
@@ -123,10 +123,10 @@ describe('HeaderStandardAnimated', () => {
       expect(style.transform).toStrictEqual([{ translateY: 0 }]);
     });
 
-    it('hides center styles when scroll is within title section', () => {
+    it('hides center styles when scroll is within title section', async () => {
       const scrollY = createMockSharedValue(30);
       const titleSectionHeight = createMockSharedValue(100);
-      render(
+      await render(
         <HeaderStandardAnimated
           scrollY={scrollY}
           titleSectionHeight={titleSectionHeight}

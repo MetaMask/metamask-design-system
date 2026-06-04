@@ -8,8 +8,8 @@ import { ButtonTertiary } from './ButtonTertiary';
 describe('ButtonTertiary', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    const { result } = renderHook(() => useTailwind());
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
     tw = result.current;
   });
 
@@ -58,8 +58,8 @@ describe('ButtonTertiary', () => {
     return 'border border-alternative';
   };
 
-  it('renders default background', () => {
-    const { getByTestId } = render(
+  it('renders default background', async () => {
+    const { getByTestId } = await render(
       <ButtonTertiary size={ButtonBaseSize.Lg} testID="button-tertiary">
         Press me
       </ButtonTertiary>,
@@ -70,8 +70,8 @@ describe('ButtonTertiary', () => {
     expect(btn).toBeDefined();
   });
 
-  it('renders danger background', () => {
-    const { getByTestId } = render(
+  it('renders danger background', async () => {
+    const { getByTestId } = await render(
       <ButtonTertiary isDanger testID="button-tertiary">
         Danger
       </ButtonTertiary>,
@@ -82,8 +82,8 @@ describe('ButtonTertiary', () => {
     expect(btn).toBeDefined();
   });
 
-  it('renders inverse background', () => {
-    const { getByTestId } = render(
+  it('renders inverse background', async () => {
+    const { getByTestId } = await render(
       <ButtonTertiary isInverse testID="button-tertiary">
         Inverse
       </ButtonTertiary>,
@@ -94,8 +94,8 @@ describe('ButtonTertiary', () => {
     expect(btn).toBeDefined();
   });
 
-  it('renders inverse+danger fallback background', () => {
-    const { getByTestId } = render(
+  it('renders inverse+danger fallback background', async () => {
+    const { getByTestId } = await render(
       <ButtonTertiary isInverse isDanger testID="button-tertiary">
         Both
       </ButtonTertiary>,
@@ -106,8 +106,8 @@ describe('ButtonTertiary', () => {
     expect(btn).toBeDefined();
   });
 
-  it('renders danger+loading background', () => {
-    const { getByTestId } = render(
+  it('renders danger+loading background', async () => {
+    const { getByTestId } = await render(
       <ButtonTertiary isDanger isLoading testID="button-tertiary">
         Hi
       </ButtonTertiary>,
@@ -118,8 +118,8 @@ describe('ButtonTertiary', () => {
     expect(btn).toBeDefined();
   });
 
-  it('renders inverse+loading background', () => {
-    const { getByTestId } = render(
+  it('renders inverse+loading background', async () => {
+    const { getByTestId } = await render(
       <ButtonTertiary isInverse isLoading testID="button-tertiary">
         Hi
       </ButtonTertiary>,
@@ -130,8 +130,8 @@ describe('ButtonTertiary', () => {
     expect(btn).toBeDefined();
   });
 
-  it('renders inverse+danger+loading background', () => {
-    const { getByTestId } = render(
+  it('renders inverse+danger+loading background', async () => {
+    const { getByTestId } = await render(
       <ButtonTertiary isInverse isDanger isLoading testID="button-tertiary">
         Hi
       </ButtonTertiary>,
@@ -142,10 +142,10 @@ describe('ButtonTertiary', () => {
     expect(btn).toBeDefined();
   });
 
-  it('handles function-based twClassName', () => {
+  it('handles function-based twClassName', async () => {
     const dynamicClassName = createDynamicClassName();
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ButtonTertiary twClassName={dynamicClassName} testID="button-tertiary">
         Dynamic Class
       </ButtonTertiary>,

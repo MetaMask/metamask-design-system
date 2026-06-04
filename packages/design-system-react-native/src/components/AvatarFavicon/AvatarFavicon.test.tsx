@@ -7,8 +7,8 @@ const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
 
 describe('AvatarFavicon Component', () => {
-  it('renders with default props', () => {
-    const { getByTestId } = render(
+  it('renders with default props', async () => {
+    const { getByTestId } = await render(
       <AvatarFavicon
         src={remoteImageSrc}
         testID="avatar-base"
@@ -27,10 +27,10 @@ describe('AvatarFavicon Component', () => {
     expect(imageOrSvg.props.resizeMode).toBe('contain');
   });
 
-  it('updates fallback text on image error when fallbackText is provided', () => {
+  it('updates fallback text on image error when fallbackText is provided', async () => {
     const onImageErrorMock = jest.fn();
     const fallback = 'Fallback Text';
-    const { getByTestId, getByText } = render(
+    const { getByTestId, getByText } = await render(
       <AvatarFavicon
         src={remoteImageSrc}
         fallbackText={fallback}
@@ -46,7 +46,7 @@ describe('AvatarFavicon Component', () => {
     const imageOrSvg = getByTestId('image-or-svg');
     const errorEvent = { nativeEvent: { error: 'image error' } };
 
-    fireEvent(imageOrSvg, 'onImageError', errorEvent);
+    await fireEvent(imageOrSvg, 'onImageError', errorEvent);
 
     expect(onImageErrorMock).toHaveBeenCalledTimes(1);
     expect(onImageErrorMock).toHaveBeenCalledWith(errorEvent);
@@ -54,10 +54,10 @@ describe('AvatarFavicon Component', () => {
     expect(getByText(fallback)).toHaveTextContent(fallback);
   });
 
-  it('updates fallback text on svg error when fallbackText is provided', () => {
+  it('updates fallback text on svg error when fallbackText is provided', async () => {
     const onSvgErrorMock = jest.fn();
     const fallback = 'Fallback Text';
-    const { getByTestId, getByText } = render(
+    const { getByTestId, getByText } = await render(
       <AvatarFavicon
         src={remoteSvgSrc}
         fallbackText={fallback}
@@ -73,17 +73,17 @@ describe('AvatarFavicon Component', () => {
     const imageOrSvg = getByTestId('image-or-svg');
     const errorEvent = { some: 'svg error' };
 
-    fireEvent(imageOrSvg, 'onSvgError', errorEvent);
+    await fireEvent(imageOrSvg, 'onSvgError', errorEvent);
 
     expect(onSvgErrorMock).toHaveBeenCalledTimes(1);
     expect(onSvgErrorMock).toHaveBeenCalledWith(errorEvent);
     expect(getByText(fallback)).toHaveTextContent(fallback);
   });
 
-  it('computes backupFallbackText from name when fallbackText is not provided', () => {
+  it('computes backupFallbackText from name when fallbackText is not provided', async () => {
     // If no fallbackText is provided but name is, fallbackText should become
     // the first character of the name upon error
-    const { getByTestId, getByText } = render(
+    const { getByTestId, getByText } = await render(
       <AvatarFavicon
         src={remoteImageSrc}
         name="Example"
@@ -98,36 +98,36 @@ describe('AvatarFavicon Component', () => {
     const imageOrSvg = getByTestId('image-or-svg');
     const errorEvent = { nativeEvent: { error: 'image error' } };
 
-    fireEvent(imageOrSvg, 'onImageError', errorEvent);
+    await fireEvent(imageOrSvg, 'onImageError', errorEvent);
 
     expect(getByText('E')).toHaveTextContent('E');
   });
 
   describe('when src is NOT provided', () => {
-    it('renders the first letter of name as fallback', () => {
-      const { getByText } = render(<AvatarFavicon name="Example" />);
+    it('renders the first letter of name as fallback', async () => {
+      const { getByText } = await render(<AvatarFavicon name="Example" />);
 
       expect(getByText('E')).toHaveTextContent('E');
     });
 
-    it('uses explicit fallbackText over name initial', () => {
-      const { getByText } = render(
+    it('uses explicit fallbackText over name initial', async () => {
+      const { getByText } = await render(
         <AvatarFavicon name="Example" fallbackText="FB" />,
       );
 
       expect(getByText('FB')).toHaveTextContent('FB');
     });
 
-    it('renders "?" when no name or fallbackText is provided', () => {
-      const { getByText } = render(<AvatarFavicon />);
+    it('renders "?" when no name or fallbackText is provided', async () => {
+      const { getByText } = await render(<AvatarFavicon />);
 
       expect(getByText('?')).toHaveTextContent('?');
     });
   });
 
-  it('passes additional AvatarBase props correctly', () => {
+  it('passes additional AvatarBase props correctly', async () => {
     const customStyle = { margin: 10 };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <AvatarFavicon
         src={remoteImageSrc}
         style={customStyle}

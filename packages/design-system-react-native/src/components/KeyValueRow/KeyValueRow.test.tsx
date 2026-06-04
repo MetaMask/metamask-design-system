@@ -16,13 +16,15 @@ import { KeyValueRow } from './KeyValueRow';
 describe('KeyValueRow', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   describe('when keyLabel and value are strings', () => {
-    it('renders key and value text', () => {
-      render(
+    it('renders key and value text', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Label"
           value="Value text"
@@ -36,8 +38,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when keyLabel is a ReactNode', () => {
-    it('renders keyLabel', () => {
-      render(
+    it('renders keyLabel', async () => {
+      await render(
         <KeyValueRow
           keyLabel={<Text>Custom key node</Text>}
           value="Value"
@@ -51,8 +53,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when value is a ReactNode', () => {
-    it('renders value', () => {
-      render(
+    it('renders value', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value={<Text>Custom value node</Text>}
@@ -66,16 +68,18 @@ describe('KeyValueRow', () => {
   });
 
   describe('when asserting root layout styles', () => {
-    it('applies default summary row layout on root', () => {
-      render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
+    it('applies default summary row layout on root', async () => {
+      await render(
+        <KeyValueRow keyLabel="K" value="V" testID="key-value-row" />,
+      );
 
       expect(screen.getByTestId('key-value-row')).toHaveStyle(
         tw`h-10 flex-row items-center gap-4`,
       );
     });
 
-    it('applies resolved h-12 when variant is Input', () => {
-      render(
+    it('applies resolved h-12 when variant is Input', async () => {
+      await render(
         <KeyValueRow
           keyLabel="K"
           value="V"
@@ -87,8 +91,8 @@ describe('KeyValueRow', () => {
       expect(screen.getByTestId('key-value-row')).toHaveStyle(tw`h-12`);
     });
 
-    it('applies resolved h-10 when variant is Summary', () => {
-      render(
+    it('applies resolved h-10 when variant is Summary', async () => {
+      await render(
         <KeyValueRow
           keyLabel="K"
           value="V"
@@ -102,8 +106,10 @@ describe('KeyValueRow', () => {
   });
 
   describe('when key and value use default string text props', () => {
-    it('applies single-line defaults to key Text', () => {
-      render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
+    it('applies single-line defaults to key Text', async () => {
+      await render(
+        <KeyValueRow keyLabel="K" value="V" testID="key-value-row" />,
+      );
 
       const keyText = screen.getByText('K');
 
@@ -113,8 +119,10 @@ describe('KeyValueRow', () => {
       });
     });
 
-    it('applies single-line defaults to value Text', () => {
-      render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
+    it('applies single-line defaults to value Text', async () => {
+      await render(
+        <KeyValueRow keyLabel="K" value="V" testID="key-value-row" />,
+      );
 
       const valueText = screen.getByText('V');
 
@@ -126,8 +134,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when keyStartAccessory is set', () => {
-    it('renders keyStartAccessory in key row', () => {
-      render(
+    it('renders keyStartAccessory in key row', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -141,8 +149,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when keyEndAccessory is set', () => {
-    it('renders keyEndAccessory in key row', () => {
-      render(
+    it('renders keyEndAccessory in key row', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -156,8 +164,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when valueStartAccessory is set', () => {
-    it('renders valueStartAccessory in value row', () => {
-      render(
+    it('renders valueStartAccessory in value row', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -171,8 +179,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when valueEndAccessory is set', () => {
-    it('renders valueEndAccessory in value row', () => {
-      render(
+    it('renders valueEndAccessory in value row', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -186,8 +194,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when keyEndButtonIconProps is provided without iconName', () => {
-    it('renders keyEndAccessory', () => {
-      render(
+    it('renders keyEndAccessory', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -200,8 +208,8 @@ describe('KeyValueRow', () => {
       expect(screen.getByTestId('key-end-fallback')).toBeOnTheScreen();
     });
 
-    it('does not render ButtonIcon', () => {
-      render(
+    it('does not render ButtonIcon', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -216,10 +224,10 @@ describe('KeyValueRow', () => {
   });
 
   describe('when keyEndButtonIconProps has iconName', () => {
-    it('renders ButtonIcon and invokes onPress when pressed', () => {
+    it('renders ButtonIcon and invokes onPress when pressed', async () => {
       const onPress = jest.fn();
 
-      render(
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -235,13 +243,13 @@ describe('KeyValueRow', () => {
 
       expect(buttonIcon).toBeOnTheScreen();
 
-      fireEvent.press(buttonIcon);
+      await fireEvent.press(buttonIcon);
 
       expect(onPress).toHaveBeenCalledTimes(1);
     });
 
-    it('uses keyEndButtonIconProps instead of keyEndAccessory', () => {
-      render(
+    it('uses keyEndButtonIconProps instead of keyEndAccessory', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -260,8 +268,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when keyEndButtonIconProps is not provided', () => {
-    it('renders keyEndAccessory', () => {
-      render(
+    it('renders keyEndAccessory', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -273,8 +281,8 @@ describe('KeyValueRow', () => {
       expect(screen.getByTestId('key-end-only')).toBeOnTheScreen();
     });
 
-    it('does not render ButtonIcon', () => {
-      render(
+    it('does not render ButtonIcon', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -288,10 +296,10 @@ describe('KeyValueRow', () => {
   });
 
   describe('when valueEndButtonIconProps has iconName', () => {
-    it('renders ButtonIcon and invokes onPress when pressed', () => {
+    it('renders ButtonIcon and invokes onPress when pressed', async () => {
       const onPress = jest.fn();
 
-      render(
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -307,13 +315,13 @@ describe('KeyValueRow', () => {
 
       expect(buttonIcon).toBeOnTheScreen();
 
-      fireEvent.press(buttonIcon);
+      await fireEvent.press(buttonIcon);
 
       expect(onPress).toHaveBeenCalledTimes(1);
     });
 
-    it('uses valueEndButtonIconProps instead of valueEndAccessory', () => {
-      render(
+    it('uses valueEndButtonIconProps instead of valueEndAccessory', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -332,8 +340,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when valueEndButtonIconProps is not provided', () => {
-    it('renders valueEndAccessory', () => {
-      render(
+    it('renders valueEndAccessory', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -345,8 +353,8 @@ describe('KeyValueRow', () => {
       expect(screen.getByTestId('value-end-only')).toBeOnTheScreen();
     });
 
-    it('does not render ButtonIcon', () => {
-      render(
+    it('does not render ButtonIcon', async () => {
+      await render(
         <KeyValueRow
           keyLabel="Key"
           value="Value"
@@ -360,8 +368,8 @@ describe('KeyValueRow', () => {
   });
 
   describe('when twClassName is provided', () => {
-    it('merges resolved styles for summary variant', () => {
-      render(
+    it('merges resolved styles for summary variant', async () => {
+      await render(
         <KeyValueRow
           keyLabel="K"
           value="V"
@@ -376,8 +384,8 @@ describe('KeyValueRow', () => {
       expect(root).toHaveStyle(tw`h-10`);
     });
 
-    it('merges resolved styles for input variant', () => {
-      render(
+    it('merges resolved styles for input variant', async () => {
+      await render(
         <KeyValueRow
           keyLabel="K"
           value="V"

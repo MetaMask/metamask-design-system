@@ -21,8 +21,10 @@ const defaultTitleAvatar = <Text testID={TITLE_AVATAR_TEST_ID} />;
 describe('TitleSubpage', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   beforeEach(() => {
@@ -30,24 +32,24 @@ describe('TitleSubpage', () => {
   });
 
   describe('rendering', () => {
-    it('renders string title', () => {
-      const { getByText } = render(
+    it('renders string title', async () => {
+      const { getByText } = await render(
         <TitleSubpage titleAvatar={defaultTitleAvatar} title="Section" />,
       );
 
       expect(getByText('Section')).toBeOnTheScreen();
     });
 
-    it('renders titleAvatar in the identity row', () => {
-      const { getByTestId } = render(
+    it('renders titleAvatar in the identity row', async () => {
+      const { getByTestId } = await render(
         <TitleSubpage titleAvatar={defaultTitleAvatar} title="Section" />,
       );
 
       expect(getByTestId(TITLE_AVATAR_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('passes titleAvatar through as startAccessory without a fixed-size overflow wrapper', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('passes titleAvatar through as startAccessory without a fixed-size overflow wrapper', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <TitleSubpage titleAvatar={defaultTitleAvatar} title="Section" />,
       );
 
@@ -55,8 +57,8 @@ describe('TitleSubpage', () => {
       expect(queryByTestId(TITLE_AVATAR_SLOT_TEST_ID)).not.toBeOnTheScreen();
     });
 
-    it('forwards identityRowProps testID to identity BoxRow', () => {
-      const { getByTestId } = render(
+    it('forwards identityRowProps testID to identity BoxRow', async () => {
+      const { getByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Section"
@@ -67,8 +69,8 @@ describe('TitleSubpage', () => {
       expect(getByTestId(IDENTITY_ROW_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders string amount when provided', () => {
-      const { getByText } = render(
+    it('renders string amount when provided', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -80,8 +82,8 @@ describe('TitleSubpage', () => {
       expect(getByText('$4.42')).toBeOnTheScreen();
     });
 
-    it('renders React node amount', () => {
-      const { getByTestId } = render(
+    it('renders React node amount', async () => {
+      const { getByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Total"
@@ -92,8 +94,8 @@ describe('TitleSubpage', () => {
       expect(getByTestId('title-subpage-amount-node')).toBeOnTheScreen();
     });
 
-    it('renders container with testID when provided', () => {
-      const { getByTestId } = render(
+    it('renders container with testID when provided', async () => {
+      const { getByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Test"
@@ -104,8 +106,8 @@ describe('TitleSubpage', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards amountProps testID to amount Text when amount is a string', () => {
-      const { getByTestId } = render(
+    it('forwards amountProps testID to amount Text when amount is a string', async () => {
+      const { getByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -119,8 +121,8 @@ describe('TitleSubpage', () => {
   });
 
   describe('when title is provided', () => {
-    it('renders title and amount', () => {
-      const { getByText } = render(
+    it('renders title and amount', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title={<Text>Custom Top</Text>}
@@ -132,8 +134,8 @@ describe('TitleSubpage', () => {
       expect(getByText('$4.42')).toBeOnTheScreen();
     });
 
-    it('renders title and titleEndAccessory', () => {
-      const { getByText } = render(
+    it('renders title and titleEndAccessory', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Step 1"
@@ -146,8 +148,8 @@ describe('TitleSubpage', () => {
       expect(getByText('Title extra')).toBeOnTheScreen();
     });
 
-    it('forwards titleProps testID to title row Text when title is a string', () => {
-      const { getByTestId } = render(
+    it('forwards titleProps testID to title row Text when title is a string', async () => {
+      const { getByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Step 1"
@@ -161,9 +163,9 @@ describe('TitleSubpage', () => {
   });
 
   describe('when title is false', () => {
-    it('does not render title node', () => {
+    it('does not render title node', async () => {
       const showTitle = false;
-      const { getByText, queryByTestId } = render(
+      const { getByText, queryByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title={
@@ -181,9 +183,9 @@ describe('TitleSubpage', () => {
       expect(queryByTestId('title-subpage-title-slot')).not.toBeOnTheScreen();
     });
 
-    it('does not render title row or titleEndAccessory', () => {
+    it('does not render title row or titleEndAccessory', async () => {
       const showTitle = false;
-      const { getByText, queryByTestId, queryByText } = render(
+      const { getByText, queryByTestId, queryByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title={
@@ -205,9 +207,9 @@ describe('TitleSubpage', () => {
   });
 
   describe('when titleEndAccessory is false', () => {
-    it('does not render titleEndAccessory', () => {
+    it('does not render titleEndAccessory', async () => {
       const showTitleEndAccessory = false;
-      const { getByText, queryByTestId } = render(
+      const { getByText, queryByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Hi"
@@ -231,8 +233,8 @@ describe('TitleSubpage', () => {
   });
 
   describe('when subtitle is provided', () => {
-    it('renders string subtitle between title and amount', () => {
-      const { getByText } = render(
+    it('renders string subtitle between title and amount', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -246,8 +248,8 @@ describe('TitleSubpage', () => {
       expect(getByText('$4.42')).toBeOnTheScreen();
     });
 
-    it('renders subtitle and subtitleEndAccessory', () => {
-      const { getByText } = render(
+    it('renders subtitle and subtitleEndAccessory', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -261,8 +263,8 @@ describe('TitleSubpage', () => {
       expect(getByText('Sub extra')).toBeOnTheScreen();
     });
 
-    it('forwards subtitleProps testID to subtitle row Text when subtitle is a string', () => {
-      const { getByTestId } = render(
+    it('forwards subtitleProps testID to subtitle row Text when subtitle is a string', async () => {
+      const { getByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -277,9 +279,9 @@ describe('TitleSubpage', () => {
   });
 
   describe('when subtitle is false', () => {
-    it('does not render subtitle row or subtitleEndAccessory', () => {
+    it('does not render subtitle row or subtitleEndAccessory', async () => {
       const showSubtitle = false;
-      const { getByText, queryByTestId, queryByText } = render(
+      const { getByText, queryByTestId, queryByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -305,9 +307,9 @@ describe('TitleSubpage', () => {
   });
 
   describe('when amount is false', () => {
-    it('does not render amount node', () => {
+    it('does not render amount node', async () => {
       const showAmount = false;
-      const { getByText, queryByTestId } = render(
+      const { getByText, queryByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -327,8 +329,8 @@ describe('TitleSubpage', () => {
   });
 
   describe('when bottomLabel is provided', () => {
-    it('renders bottomLabel text', () => {
-      const { getByText } = render(
+    it('renders bottomLabel text', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -340,8 +342,8 @@ describe('TitleSubpage', () => {
       expect(getByText('0.002 ETH')).toBeOnTheScreen();
     });
 
-    it('renders bottomLabel and bottomLabelEndAccessory', () => {
-      const { getByText } = render(
+    it('renders bottomLabel and bottomLabelEndAccessory', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -355,8 +357,8 @@ describe('TitleSubpage', () => {
       expect(getByText('Fee info')).toBeOnTheScreen();
     });
 
-    it('forwards bottomLabelProps testID to bottom label Text', () => {
-      const { getByTestId } = render(
+    it('forwards bottomLabelProps testID to bottom label Text', async () => {
+      const { getByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -371,8 +373,8 @@ describe('TitleSubpage', () => {
   });
 
   describe('when bottomAccessory is provided', () => {
-    it('renders bottomAccessory when bottomLabel is omitted', () => {
-      const { getByText } = render(
+    it('renders bottomAccessory when bottomLabel is omitted', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -386,8 +388,8 @@ describe('TitleSubpage', () => {
   });
 
   describe('when bottomLabel and bottomAccessory are both provided', () => {
-    it('renders only bottomLabel', () => {
-      const { getByText, queryByText } = render(
+    it('renders only bottomLabel', async () => {
+      const { getByText, queryByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -403,8 +405,8 @@ describe('TitleSubpage', () => {
   });
 
   describe('when bottomLabel is omitted and bottomLabelEndAccessory is provided', () => {
-    it('does not render bottomLabelEndAccessory without bottomLabel', () => {
-      const { queryByText } = render(
+    it('does not render bottomLabelEndAccessory without bottomLabel', async () => {
+      const { queryByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -417,8 +419,8 @@ describe('TitleSubpage', () => {
       expect(queryByText('Only accessory')).not.toBeOnTheScreen();
     });
 
-    it('renders bottomAccessory', () => {
-      const { getByText } = render(
+    it('renders bottomAccessory', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -433,8 +435,8 @@ describe('TitleSubpage', () => {
   });
 
   describe('when amountEndAccessory is provided', () => {
-    it('renders amount and amountEndAccessory', () => {
-      const { getByText } = render(
+    it('renders amount and amountEndAccessory', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -447,8 +449,8 @@ describe('TitleSubpage', () => {
       expect(getByText('Info')).toBeOnTheScreen();
     });
 
-    it('does not render amount row when amount is an empty string', () => {
-      const { getByText, queryByText } = render(
+    it('does not render amount row when amount is an empty string', async () => {
+      const { getByText, queryByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -463,9 +465,9 @@ describe('TitleSubpage', () => {
   });
 
   describe('when amountEndAccessory is false', () => {
-    it('does not render amountEndAccessory', () => {
+    it('does not render amountEndAccessory', async () => {
       const showAmountEndAccessory = false;
-      const { getByText, queryByTestId } = render(
+      const { getByText, queryByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Send"
@@ -489,8 +491,8 @@ describe('TitleSubpage', () => {
   });
 
   describe('when title, amountEndAccessory, and bottomLabel are provided', () => {
-    it('renders all slots', () => {
-      const { getByText } = render(
+    it('renders all slots', async () => {
+      const { getByText } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title={<Text>Send</Text>}
@@ -508,9 +510,9 @@ describe('TitleSubpage', () => {
   });
 
   describe('style and twClassName', () => {
-    it('applies custom style to root container', () => {
+    it('applies custom style to root container', async () => {
       const customStyle = { opacity: 0.5 };
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Test"
@@ -522,8 +524,8 @@ describe('TitleSubpage', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle(customStyle);
     });
 
-    it('merges twClassName with base styles', () => {
-      const { getByTestId } = render(
+    it('merges twClassName with base styles', async () => {
+      const { getByTestId } = await render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}
           title="Test"

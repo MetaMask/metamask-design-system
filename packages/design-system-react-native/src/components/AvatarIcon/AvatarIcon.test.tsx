@@ -17,8 +17,8 @@ import {
 } from './AvatarIcon.constants';
 
 describe('AvatarIcon', () => {
-  it('applies default container style and default icon props', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('applies default container style and default icon props', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
 
     const bgClass =
@@ -31,7 +31,7 @@ describe('AvatarIcon', () => {
       MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral],
     ).color;
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <AvatarIcon
         iconName={IconName.Add}
         iconProps={{ testID: 'icon' }}
@@ -46,8 +46,8 @@ describe('AvatarIcon', () => {
     expect(container.props.accessibilityRole).toBe('image');
   });
 
-  it('applies custom twClassName and style props', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('applies custom twClassName and style props', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
 
     const bgClass =
@@ -61,7 +61,7 @@ describe('AvatarIcon', () => {
     ).color;
     const customStyle = { margin: 10 };
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <AvatarIcon
         iconName={IconName.Add}
         iconProps={{ testID: 'icon' }}
@@ -82,8 +82,8 @@ describe('AvatarIcon', () => {
 
   it.each(Object.values(AvatarIconSeverity))(
     'applies correct background and icon color for severity %s',
-    (severity) => {
-      const { result } = renderHook(() => useTailwind());
+    async (severity) => {
+      const { result } = await renderHook(() => useTailwind());
       const tw = result.current;
 
       const bgClass = TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity];
@@ -93,7 +93,7 @@ describe('AvatarIcon', () => {
         MAP_AVATARICON_SEVERITY_ICONCOLOR[severity],
       ).color;
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarIcon
           iconName={IconName.Add}
           iconProps={{ testID: 'icon' }}
@@ -111,14 +111,14 @@ describe('AvatarIcon', () => {
 
   it.each(Object.values(AvatarIconSize))(
     'applies correct icon size for size %s',
-    (size) => {
-      const { result } = renderHook(() => useTailwind());
+    async (size) => {
+      const { result } = await renderHook(() => useTailwind());
       const tw = result.current;
 
       const iconSize = MAP_AVATARICON_SIZE_ICONSIZE[size];
       const expectedStyle = tw.style(TWCLASSMAP_ICON_SIZE_DIMENSION[iconSize]);
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarIcon
           iconName={IconName.Add}
           iconProps={{ testID: 'icon' }}

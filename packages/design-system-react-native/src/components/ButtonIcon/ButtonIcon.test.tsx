@@ -11,8 +11,8 @@ import { ButtonIcon } from './ButtonIcon';
 import { TWCLASSMAP_BUTTONICON_SIZE_DIMENSION } from './ButtonIcon.constants';
 
 describe('ButtonIcon', () => {
-  it('renders default state correctly', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('renders default state correctly', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
     const expected = tw.style(
       'items-center justify-center',
@@ -20,7 +20,7 @@ describe('ButtonIcon', () => {
       'rounded-lg bg-transparent opacity-100',
     );
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ButtonIcon
         iconName={IconName.Close}
         iconProps={{ testID: 'icon' }}
@@ -34,8 +34,8 @@ describe('ButtonIcon', () => {
     expect(icon.props.name).toStrictEqual(IconName.Close);
   });
 
-  it('applies isDisabled state', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('applies isDisabled state', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
     const expected = tw.style(
       'items-center justify-center',
@@ -43,7 +43,7 @@ describe('ButtonIcon', () => {
       'rounded-lg bg-transparent opacity-50',
     );
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ButtonIcon
         iconName={IconName.Close}
         iconProps={{ testID: 'icon' }}
@@ -56,8 +56,8 @@ describe('ButtonIcon', () => {
     expect(btn.props.accessibilityState.disabled).toBe(true);
   });
 
-  it('applies Floating variant', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('applies Floating variant', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
     const expected = tw.style(
       'items-center justify-center',
@@ -65,7 +65,7 @@ describe('ButtonIcon', () => {
       'rounded-full bg-icon-default opacity-100',
     );
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ButtonIcon
         iconName={IconName.Close}
         variant={ButtonIconVariant.Floating}
@@ -76,8 +76,8 @@ describe('ButtonIcon', () => {
     expect(btn.props.style[0]).toStrictEqual(expected);
   });
 
-  it('applies Filled variant', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('applies Filled variant', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
     const expected = tw.style(
       'items-center justify-center',
@@ -85,7 +85,7 @@ describe('ButtonIcon', () => {
       'rounded-full bg-muted opacity-100',
     );
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ButtonIcon
         iconName={IconName.Close}
         variant={ButtonIconVariant.Filled}
@@ -96,8 +96,8 @@ describe('ButtonIcon', () => {
     expect(btn.props.style[0]).toStrictEqual(expected);
   });
 
-  it('applies Filled variant pressed state', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('applies Filled variant pressed state', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
     const expected = tw.style(
       'items-center justify-center',
@@ -105,7 +105,7 @@ describe('ButtonIcon', () => {
       'rounded-full bg-muted-pressed opacity-100',
     );
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ButtonIcon
         iconName={IconName.Close}
         variant={ButtonIconVariant.Filled}
@@ -113,12 +113,12 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    fireEvent(btn, 'pressIn');
+    await fireEvent(btn, 'pressIn');
     expect(btn.props.style[0]).toStrictEqual(expected);
   });
 
-  it('forwards style and twClassName', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('forwards style and twClassName', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
     const expected = tw.style(
       'items-center justify-center',
@@ -127,7 +127,7 @@ describe('ButtonIcon', () => {
       'text-primary-default',
     );
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ButtonIcon
         iconName={IconName.Close}
         iconProps={{ testID: 'icon' }}
@@ -141,10 +141,10 @@ describe('ButtonIcon', () => {
     expect(btn.props.style[1]).toStrictEqual({ margin: 5 });
   });
 
-  it('calls onPressIn and onPressOut handlers', () => {
+  it('calls onPressIn and onPressOut handlers', async () => {
     const onPressIn = jest.fn();
     const onPressOut = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ButtonIcon
         iconName={IconName.Close}
         iconProps={{ testID: 'icon' }}
@@ -154,9 +154,9 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    fireEvent(btn, 'pressIn');
+    await fireEvent(btn, 'pressIn');
     expect(onPressIn).toHaveBeenCalledTimes(1);
-    fireEvent(btn, 'pressOut');
+    await fireEvent(btn, 'pressOut');
     expect(onPressOut).toHaveBeenCalledTimes(1);
   });
 });

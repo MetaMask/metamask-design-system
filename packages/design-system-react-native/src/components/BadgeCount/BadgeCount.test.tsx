@@ -12,7 +12,7 @@ import {
 } from './BadgeCount.constants';
 
 describe('BadgeCount', () => {
-  it('renders with default props and count less than max', () => {
+  it('renders with default props and count less than max', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
@@ -38,7 +38,7 @@ describe('BadgeCount', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const expectedOuter = JSON.parse(
       getByTestId('expectedOuter').props.children,
     );
@@ -59,7 +59,7 @@ describe('BadgeCount', () => {
     );
   });
 
-  it('renders with count greater than max (overflow)', () => {
+  it('renders with count greater than max (overflow)', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
@@ -77,7 +77,7 @@ describe('BadgeCount', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const expectedOuter = JSON.parse(
       getByTestId('expectedOuter').props.children,
     );
@@ -88,7 +88,7 @@ describe('BadgeCount', () => {
     expect(textElement.props.children).toBe('99+');
   });
 
-  it('applies custom textProps overrides', () => {
+  it('applies custom textProps overrides', async () => {
     const customTextProps = {
       color: TextColor.PrimaryDefault,
       fontWeight: FontWeight.Bold,
@@ -123,7 +123,7 @@ describe('BadgeCount', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const expectedOuter = JSON.parse(
       getByTestId('expectedOuter').props.children,
     );
@@ -143,7 +143,7 @@ describe('BadgeCount', () => {
     expect(textElement.props.twClassName).toBe('leading-0 custom');
   });
 
-  it('applies additional container style and forwards extra props', () => {
+  it('applies additional container style and forwards extra props', async () => {
     const customStyle = { margin: 10 };
     const extraProp = { accessibilityLabel: 'badge' };
     const TestComponent = () => (
@@ -154,7 +154,7 @@ describe('BadgeCount', () => {
         {...extraProp}
       />
     );
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const container = getByTestId('badge-count');
     // The container style is an array; customStyle should be included.
     expect(container.props.style).toStrictEqual(
@@ -163,7 +163,7 @@ describe('BadgeCount', () => {
     expect(container.props.accessibilityLabel).toBe('badge');
   });
 
-  it('renders with custom size Lg', () => {
+  it('renders with custom size Lg', async () => {
     const customSize = BadgeCountSize.Lg;
     const TestComponent = () => {
       const tw = useTailwind();
@@ -189,7 +189,7 @@ describe('BadgeCount', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const expectedOuter = JSON.parse(
       getByTestId('expectedOuter').props.children,
     );

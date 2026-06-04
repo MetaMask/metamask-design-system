@@ -11,19 +11,19 @@ import * as MaskiconUtilities from './Maskicon.utilities';
 describe('Maskicon Component (React Native)', () => {
   afterEach(cleanup);
 
-  it('renders successfully with address prop', () => {
+  it('renders successfully with address prop', async () => {
     const address = '0x1234567890abcdef1234567890abcdef12345678';
-    const component = render(<Maskicon address={address} />);
+    const component = await render(<Maskicon address={address} />);
 
     expect(component.root).toBeDefined();
   });
 
-  it('handles component unmount during async operation', () => {
+  it('handles component unmount during async operation', async () => {
     const address = '0x1234567890abcdef1234567890abcdef12345678';
-    const { unmount } = render(<Maskicon address={address} />);
+    const { unmount } = await render(<Maskicon address={address} />);
 
     // Unmount immediately to trigger cleanup before async operation completes
-    unmount();
+    await unmount();
 
     // This test ensures the cleanup function sets cancelled = true
     // and covers the branch where !cancelled evaluates to false

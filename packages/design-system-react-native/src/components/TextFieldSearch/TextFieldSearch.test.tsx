@@ -12,16 +12,16 @@ describe('TextFieldSearch', () => {
     mockOnPressClearButton.mockClear();
   });
 
-  it('renders on screen', () => {
-    render(
+  it('renders on screen', async () => {
+    await render(
       <TextFieldSearch value="" onPressClearButton={mockOnPressClearButton} />,
     );
 
     expect(screen.getByTestId('textfieldsearch')).toBeOnTheScreen();
   });
 
-  it('calls onPressClearButton when clear button is pressed and value exists', () => {
-    render(
+  it('calls onPressClearButton when clear button is pressed and value exists', async () => {
+    await render(
       <TextFieldSearch
         value="search text"
         onPressClearButton={mockOnPressClearButton}
@@ -29,13 +29,13 @@ describe('TextFieldSearch', () => {
       />,
     );
 
-    fireEvent.press(screen.getByTestId('clear-button'));
+    await fireEvent.press(screen.getByTestId('clear-button'));
 
     expect(mockOnPressClearButton).toHaveBeenCalledTimes(1);
   });
 
-  it('does not render clear button when value is empty', () => {
-    render(
+  it('does not render clear button when value is empty', async () => {
+    await render(
       <TextFieldSearch
         value=""
         onPressClearButton={mockOnPressClearButton}
@@ -46,8 +46,8 @@ describe('TextFieldSearch', () => {
     expect(screen.queryByTestId('clear-button')).toBeNull();
   });
 
-  it('uses startAccessory when provided', () => {
-    render(
+  it('uses startAccessory when provided', async () => {
+    await render(
       <TextFieldSearch
         value=""
         onPressClearButton={mockOnPressClearButton}
@@ -58,8 +58,8 @@ describe('TextFieldSearch', () => {
     expect(screen.getByTestId('custom-start')).toBeOnTheScreen();
   });
 
-  it('uses endAccessory when provided instead of clear button', () => {
-    render(
+  it('uses endAccessory when provided instead of clear button', async () => {
+    await render(
       <TextFieldSearch
         value="search text"
         onPressClearButton={mockOnPressClearButton}

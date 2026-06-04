@@ -15,8 +15,8 @@ import {
 import { AvatarBaseSize, AvatarBaseShape } from '.';
 
 describe('AvatarBase', () => {
-  it('renders children when no fallbackText is provided', () => {
-    const { getByText } = render(
+  it('renders children when no fallbackText is provided', async () => {
+    const { getByText } = await render(
       <AvatarBase>
         <Text testID="child">Hello</Text>
       </AvatarBase>,
@@ -24,11 +24,11 @@ describe('AvatarBase', () => {
     expect(getByText('Hello')).toBeDefined();
   });
 
-  it('renders fallbackText with correct Text props and twClassName', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('renders fallbackText with correct Text props and twClassName', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
     const fallback = 'XYZ';
-    const { getByTestId, getByText } = render(
+    const { getByTestId, getByText } = await render(
       <AvatarBase
         fallbackText={fallback}
         fallbackTextProps={{
@@ -54,10 +54,14 @@ describe('AvatarBase', () => {
   });
 
   describe('container style without border', () => {
-    const { result } = renderHook(() => useTailwind());
-    const tw = result.current;
+    let tw: ReturnType<typeof useTailwind>;
 
-    it('applies correct style for Circle Xs', () => {
+    beforeAll(async () => {
+      const { result } = await renderHook(() => useTailwind());
+      tw = result.current;
+    });
+
+    it('applies correct style for Circle Xs', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Xs;
       const shapeClass = 'rounded-full';
@@ -70,14 +74,14 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Circle Sm', () => {
+    it('applies correct style for Circle Sm', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Sm;
       const shapeClass = 'rounded-full';
@@ -90,14 +94,14 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Circle Md', () => {
+    it('applies correct style for Circle Md', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Md;
       const shapeClass = 'rounded-full';
@@ -110,14 +114,14 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Circle Lg', () => {
+    it('applies correct style for Circle Lg', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Lg;
       const shapeClass = 'rounded-full';
@@ -130,14 +134,14 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Circle Xl', () => {
+    it('applies correct style for Circle Xl', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Xl;
       const shapeClass = 'rounded-full';
@@ -150,14 +154,14 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Xs', () => {
+    it('applies correct style for Square Xs', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Xs;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -170,14 +174,14 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Sm', () => {
+    it('applies correct style for Square Sm', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Sm;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -190,14 +194,14 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Md', () => {
+    it('applies correct style for Square Md', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Md;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -210,14 +214,14 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Lg', () => {
+    it('applies correct style for Square Lg', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Lg;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -230,14 +234,14 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Xl', () => {
+    it('applies correct style for Square Xl', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Xl;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -250,7 +254,7 @@ describe('AvatarBase', () => {
         shapeClass,
         dimensionClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
@@ -259,10 +263,14 @@ describe('AvatarBase', () => {
   });
 
   describe('container style with border', () => {
-    const { result } = renderHook(() => useTailwind());
-    const tw = result.current;
+    let tw: ReturnType<typeof useTailwind>;
 
-    it('applies correct style for Circle Xs with border', () => {
+    beforeAll(async () => {
+      const { result } = await renderHook(() => useTailwind());
+      tw = result.current;
+    });
+
+    it('applies correct style for Circle Xs with border', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Xs;
       const shapeClass = 'rounded-full';
@@ -278,14 +286,14 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Circle Sm with border', () => {
+    it('applies correct style for Circle Sm with border', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Sm;
       const shapeClass = 'rounded-full';
@@ -301,14 +309,14 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Circle Md with border', () => {
+    it('applies correct style for Circle Md with border', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Md;
       const shapeClass = 'rounded-full';
@@ -324,14 +332,14 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Circle Lg with border', () => {
+    it('applies correct style for Circle Lg with border', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Lg;
       const shapeClass = 'rounded-full';
@@ -347,14 +355,14 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Circle Xl with border', () => {
+    it('applies correct style for Circle Xl with border', async () => {
       const shape = AvatarBaseShape.Circle;
       const size = AvatarBaseSize.Xl;
       const shapeClass = 'rounded-full';
@@ -370,14 +378,14 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Xs with border', () => {
+    it('applies correct style for Square Xs with border', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Xs;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -393,14 +401,14 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Sm with border', () => {
+    it('applies correct style for Square Sm with border', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Sm;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -416,14 +424,14 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Md with border', () => {
+    it('applies correct style for Square Md with border', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Md;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -439,14 +447,14 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Lg with border', () => {
+    it('applies correct style for Square Lg with border', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Lg;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -462,14 +470,14 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
       expect(avatar.props.style[0]).toStrictEqual(expectedStyle);
     });
 
-    it('applies correct style for Square Xl with border', () => {
+    it('applies correct style for Square Xl with border', async () => {
       const shape = AvatarBaseShape.Square;
       const size = AvatarBaseSize.Xl;
       const shapeClass = TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size];
@@ -485,7 +493,7 @@ describe('AvatarBase', () => {
         dimensionClass,
         borderClass,
       );
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <AvatarBase shape={shape} size={size} hasBorder testID="avatar" />,
       );
       const avatar = getByTestId('avatar');
@@ -493,8 +501,8 @@ describe('AvatarBase', () => {
     });
   });
 
-  it('applies custom twClassName and style, forwards extra View props', () => {
-    const { result } = renderHook(() => useTailwind());
+  it('applies custom twClassName and style, forwards extra View props', async () => {
+    const { result } = await renderHook(() => useTailwind());
     const tw = result.current;
 
     const expectedStyle = tw.style(
@@ -508,7 +516,7 @@ describe('AvatarBase', () => {
     );
 
     const customStyle = { margin: 42 };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <AvatarBase
         twClassName="bg-default"
         style={customStyle}

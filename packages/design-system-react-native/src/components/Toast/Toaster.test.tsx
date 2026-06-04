@@ -61,13 +61,13 @@ describe('Toaster', () => {
     jest.useRealTimers();
   });
 
-  it('renders null with default state', () => {
-    const { toJSON } = render(<Toaster ref={toasterRef} />);
+  it('renders null with default state', async () => {
+    const { toJSON } = await render(<Toaster ref={toasterRef} />);
     expect(toJSON()).toBeNull();
   });
 
   it('accepts testID on the root element via ViewProps', async () => {
-    render(<Toaster ref={toasterRef} testID="custom-toast" />);
+    await render(<Toaster ref={toasterRef} testID="custom-toast" />);
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
       title: 'Test Label',
@@ -76,7 +76,7 @@ describe('Toaster', () => {
   });
 
   it('displays toast text when showToast is called', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
       title: 'Test Label',
@@ -85,7 +85,7 @@ describe('Toaster', () => {
   });
 
   it('displays toast with description when provided', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       description: 'Test description',
       hasNoTimeout: true,
@@ -96,7 +96,7 @@ describe('Toaster', () => {
   });
 
   it('hides toast when closeToast is called', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
 
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
@@ -111,7 +111,7 @@ describe('Toaster', () => {
   });
 
   it('does not render a severity icon by default', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
       title: 'Default toast',
@@ -120,7 +120,7 @@ describe('Toaster', () => {
   });
 
   it('does not render a severity icon when severity is default', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
       severity: ToastSeverity.Default,
@@ -130,7 +130,7 @@ describe('Toaster', () => {
   });
 
   it('renders the configured severity icon when provided', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
       severity: ToastSeverity.Success,
@@ -140,7 +140,7 @@ describe('Toaster', () => {
   });
 
   it('renders startAccessory instead of the severity icon when provided', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
       startAccessory: <RNText testID="custom-accessory">Custom</RNText>,
@@ -152,7 +152,7 @@ describe('Toaster', () => {
 
   it('renders an action button when actionButtonLabel and actionButtonOnPress are provided', async () => {
     const onActionPress = jest.fn();
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       actionButtonLabel: 'Click here',
       hasNoTimeout: true,
@@ -163,14 +163,14 @@ describe('Toaster', () => {
     expect(actionButton).toBeDefined();
 
     await act(async () => {
-      fireEvent.press(actionButton);
+      await fireEvent.press(actionButton);
     });
     expect(onActionPress).toHaveBeenCalled();
   });
 
   it('calls onClose and hides the toast when the close button is pressed on an action toast', async () => {
     const onClose = jest.fn();
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       actionButtonLabel: 'Retry',
       actionButtonOnPress: jest.fn(),
@@ -181,7 +181,7 @@ describe('Toaster', () => {
 
     const closeBtn = screen.getByTestId('button-icon');
     await act(async () => {
-      fireEvent.press(closeBtn);
+      await fireEvent.press(closeBtn);
     });
 
     expect(onClose).toHaveBeenCalled();
@@ -189,7 +189,7 @@ describe('Toaster', () => {
   });
 
   it('replaces existing toast when showToast called rapidly', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
 
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
@@ -209,14 +209,14 @@ describe('Toaster', () => {
   });
 
   it('triggers onLayout and animates with hasNoTimeout true', async () => {
-    render(<Toaster ref={toasterRef} testID="toast-root" />);
+    await render(<Toaster ref={toasterRef} testID="toast-root" />);
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
       title: 'Layout toast',
     });
     const toastElement = screen.getByTestId('toast-root');
     await act(async () => {
-      fireEvent(toastElement, 'layout', {
+      await fireEvent(toastElement, 'layout', {
         nativeEvent: { layout: { height: 100, width: 300, x: 0, y: 0 } },
       });
     });
@@ -224,7 +224,7 @@ describe('Toaster', () => {
   });
 
   it('triggers onLayout and animates with hasNoTimeout false', async () => {
-    render(<Toaster ref={toasterRef} testID="toast-root" />);
+    await render(<Toaster ref={toasterRef} testID="toast-root" />);
     await showToastAndWait(toasterRef, {
       hasNoTimeout: false,
       title: 'Auto-dismiss toast',
@@ -232,7 +232,7 @@ describe('Toaster', () => {
     const toastElement = screen.getByTestId('toast-root');
     expect(toastElement).toBeDefined();
     await act(async () => {
-      fireEvent(toastElement, 'layout', {
+      await fireEvent(toastElement, 'layout', {
         nativeEvent: { layout: { height: 100, width: 300, x: 0, y: 0 } },
       });
     });
@@ -242,14 +242,14 @@ describe('Toaster', () => {
   });
 
   it('defaults hasNoTimeout to false when omitted', async () => {
-    render(<Toaster ref={toasterRef} testID="toast-root" />);
+    await render(<Toaster ref={toasterRef} testID="toast-root" />);
     await showToastAndWait(toasterRef, {
       title: 'Default auto-dismiss toast',
     });
     const toastElement = screen.getByTestId('toast-root');
     expect(toastElement).toBeDefined();
     await act(async () => {
-      fireEvent(toastElement, 'layout', {
+      await fireEvent(toastElement, 'layout', {
         nativeEvent: { layout: { height: 100, width: 300, x: 0, y: 0 } },
       });
     });
@@ -261,9 +261,10 @@ describe('Toaster', () => {
   });
 
   it('preserves per-toast twClassName while applying Toaster twClassName', async () => {
-    const tw = renderHook(() => useTailwind()).result.current;
+    const { result } = await renderHook(() => useTailwind());
+    const tw = result.current;
 
-    render(<Toaster ref={toasterRef} twClassName="mx-2" />);
+    await render(<Toaster ref={toasterRef} twClassName="mx-2" />);
     await showToastAndWait(toasterRef, {
       testID: 'toast-surface',
       title: 'Styled toast',
@@ -276,7 +277,7 @@ describe('Toaster', () => {
 
   it('calls onClose and hides the toast when the close button is pressed', async () => {
     const onClose = jest.fn();
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
       closeButtonProps: {
         accessibilityLabel: 'Dismiss toast',
@@ -289,7 +290,7 @@ describe('Toaster', () => {
 
     const closeBtn = screen.getByTestId('dismiss-toast-button');
     await act(async () => {
-      fireEvent.press(closeBtn);
+      await fireEvent.press(closeBtn);
     });
 
     expect(onClose).toHaveBeenCalled();
@@ -297,7 +298,7 @@ describe('Toaster', () => {
   });
 
   it('cancels animation when replacing toast with hasNoTimeout false', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
 
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
@@ -315,7 +316,7 @@ describe('Toaster', () => {
   });
 
   it('cancels animation when replacing toast even with hasNoTimeout true', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
 
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
@@ -334,7 +335,7 @@ describe('Toaster', () => {
   });
 
   it('clears pending replacement timer when showToast is called again rapidly', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
 
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
@@ -357,7 +358,7 @@ describe('Toaster', () => {
   });
 
   it('clears pending replacement timer when closeToast is called', async () => {
-    render(<Toaster ref={toasterRef} />);
+    await render(<Toaster ref={toasterRef} />);
 
     await showToastAndWait(toasterRef, {
       hasNoTimeout: true,
@@ -386,7 +387,7 @@ describe('specs for `toast` API', () => {
   });
 
   it('calling `toast(...)` displays a toast once <Toaster /> is mounted', async () => {
-    render(<Toaster />);
+    await render(<Toaster />);
 
     await act(async () => {
       toast({
@@ -400,7 +401,7 @@ describe('specs for `toast` API', () => {
   });
 
   it('method `toast.dismiss` also dismisses the current toast', async () => {
-    render(<Toaster />);
+    await render(<Toaster />);
 
     await act(async () => {
       toast({
@@ -432,9 +433,9 @@ describe('specs for `toast` API', () => {
     );
   });
 
-  it('unregisters the global ref when <Toaster /> unmounts', () => {
-    const { unmount } = render(<Toaster />);
-    unmount();
+  it('unregisters the global ref when <Toaster /> unmounts', async () => {
+    const { unmount } = await render(<Toaster />);
+    await unmount();
 
     expect(() =>
       toast({
@@ -445,7 +446,7 @@ describe('specs for `toast` API', () => {
   });
 
   it('calling `toast(...)` replaces the existing toast on rapid successive calls', async () => {
-    render(<Toaster />);
+    await render(<Toaster />);
 
     await act(async () => {
       toast({
@@ -470,10 +471,10 @@ describe('specs for `toast` API', () => {
   });
 
   it('last mounted <Toaster /> wins and earlier unmount does not clear it', async () => {
-    const first = render(<Toaster />);
-    render(<Toaster />);
+    const first = await render(<Toaster />);
+    await render(<Toaster />);
 
-    first.unmount();
+    await first.unmount();
 
     await act(async () => {
       toast({
@@ -488,7 +489,7 @@ describe('specs for `toast` API', () => {
 
   it('forwarded ref and imperative toast API both drive the same instance', async () => {
     const ref = createRef<ToasterRef>();
-    render(<Toaster ref={ref} />);
+    await render(<Toaster ref={ref} />);
 
     await act(async () => {
       toast({
@@ -517,7 +518,7 @@ describe('specs for `toast` API', () => {
       return null;
     };
 
-    render(
+    await render(
       <>
         <MountEffectCaller />
         <Toaster />

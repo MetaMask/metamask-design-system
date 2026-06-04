@@ -6,8 +6,8 @@ import { BadgeNetwork } from './BadgeNetwork';
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 
 describe('BadgeNetwork', () => {
-  it('renders without error', () => {
-    const { getByTestId } = render(
+  it('renders without error', async () => {
+    const { getByTestId } = await render(
       <BadgeNetwork
         src={remoteImageSrc}
         testID="badge-network-root"

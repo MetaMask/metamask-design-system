@@ -16,8 +16,10 @@ const BOTTOM_LABEL_ROW_WRAPPER_TEST_ID = 'title-standard-bottom-label-row';
 describe('TitleStandard', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   beforeEach(() => {
@@ -25,14 +27,14 @@ describe('TitleStandard', () => {
   });
 
   describe('rendering', () => {
-    it('renders string title', () => {
-      const { getByText } = render(<TitleStandard title="$4.42" />);
+    it('renders string title', async () => {
+      const { getByText } = await render(<TitleStandard title="$4.42" />);
 
       expect(getByText('$4.42')).toBeOnTheScreen();
     });
 
-    it('renders React node title', () => {
-      const { getByTestId } = render(
+    it('renders React node title', async () => {
+      const { getByTestId } = await render(
         <TitleStandard
           title={<Text testID="title-standard-title-node">Custom title</Text>}
         />,
@@ -41,24 +43,24 @@ describe('TitleStandard', () => {
       expect(getByTestId('title-standard-title-node')).toBeOnTheScreen();
     });
 
-    it('renders container with testID when provided', () => {
-      const { getByTestId } = render(
+    it('renders container with testID when provided', async () => {
+      const { getByTestId } = await render(
         <TitleStandard title="Test" testID={CONTAINER_TEST_ID} />,
       );
 
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards titleProps testID to title Text when title is a string', () => {
-      const { getByTestId } = render(
+    it('forwards titleProps testID to title Text when title is a string', async () => {
+      const { getByTestId } = await render(
         <TitleStandard title="$4.42" titleProps={{ testID: TITLE_TEST_ID }} />,
       );
 
       expect(getByTestId(TITLE_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards titleWrapperProps testID to the title BoxRow container', () => {
-      const { getByTestId } = render(
+    it('forwards titleWrapperProps testID to the title BoxRow container', async () => {
+      const { getByTestId } = await render(
         <TitleStandard
           title="$4.42"
           titleWrapperProps={{ testID: TITLE_ROW_WRAPPER_TEST_ID }}
@@ -70,8 +72,8 @@ describe('TitleStandard', () => {
   });
 
   describe('when topAccessory is provided', () => {
-    it('renders topAccessory and title', () => {
-      const { getByText } = render(
+    it('renders topAccessory and title', async () => {
+      const { getByText } = await render(
         <TitleStandard title="$4.42" topAccessory={<Text>Custom Top</Text>} />,
       );
 
@@ -81,9 +83,9 @@ describe('TitleStandard', () => {
   });
 
   describe('when topAccessory is false', () => {
-    it('does not render topAccessory node', () => {
+    it('does not render topAccessory node', async () => {
       const showTop = false;
-      const { getByText, queryByTestId } = render(
+      const { getByText, queryByTestId } = await render(
         <TitleStandard
           title="$4.42"
           topAccessory={
@@ -98,16 +100,16 @@ describe('TitleStandard', () => {
   });
 
   describe('when bottomLabel is provided', () => {
-    it('renders bottomLabel text', () => {
-      const { getByText } = render(
+    it('renders bottomLabel text', async () => {
+      const { getByText } = await render(
         <TitleStandard title="$4.42" bottomLabel="0.002 ETH" />,
       );
 
       expect(getByText('0.002 ETH')).toBeOnTheScreen();
     });
 
-    it('forwards bottomLabelProps testID to bottom label Text', () => {
-      const { getByTestId } = render(
+    it('forwards bottomLabelProps testID to bottom label Text', async () => {
+      const { getByTestId } = await render(
         <TitleStandard
           title="$4.42"
           bottomLabel="0.002 ETH"
@@ -118,8 +120,8 @@ describe('TitleStandard', () => {
       expect(getByTestId(BOTTOM_LABEL_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards bottomLabelWrapperProps testID to the bottom label BoxRow container', () => {
-      const { getByTestId } = render(
+    it('forwards bottomLabelWrapperProps testID to the bottom label BoxRow container', async () => {
+      const { getByTestId } = await render(
         <TitleStandard
           title="$4.42"
           bottomLabel="0.002 ETH"
@@ -132,8 +134,8 @@ describe('TitleStandard', () => {
       expect(getByTestId(BOTTOM_LABEL_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders bottomLabel and bottomLabelEndAccessory', () => {
-      const { getByText } = render(
+    it('renders bottomLabel and bottomLabelEndAccessory', async () => {
+      const { getByText } = await render(
         <TitleStandard
           title="$4.42"
           bottomLabel="0.002 ETH"
@@ -145,8 +147,8 @@ describe('TitleStandard', () => {
       expect(getByText('Extra')).toBeOnTheScreen();
     });
 
-    it('does not render bottomLabelEndAccessory when it is false', () => {
-      const { getByText } = render(
+    it('does not render bottomLabelEndAccessory when it is false', async () => {
+      const { getByText } = await render(
         <TitleStandard
           title="$4.42"
           bottomLabel="0.002 ETH"
@@ -159,8 +161,8 @@ describe('TitleStandard', () => {
   });
 
   describe('when bottomAccessory is provided', () => {
-    it('renders bottomAccessory when bottomLabel is omitted', () => {
-      const { getByText } = render(
+    it('renders bottomAccessory when bottomLabel is omitted', async () => {
+      const { getByText } = await render(
         <TitleStandard
           title="$4.42"
           bottomAccessory={<Text>Custom Bottom</Text>}
@@ -170,8 +172,8 @@ describe('TitleStandard', () => {
       expect(getByText('Custom Bottom')).toBeOnTheScreen();
     });
 
-    it('renders bottomAccessory when bottomLabel is false', () => {
-      const { getByText } = render(
+    it('renders bottomAccessory when bottomLabel is false', async () => {
+      const { getByText } = await render(
         <TitleStandard
           title="$4.42"
           bottomLabel={false}
@@ -184,8 +186,8 @@ describe('TitleStandard', () => {
   });
 
   describe('when bottomLabel and bottomAccessory are both provided', () => {
-    it('renders only bottomLabel', () => {
-      const { getByText, queryByText } = render(
+    it('renders only bottomLabel', async () => {
+      const { getByText, queryByText } = await render(
         <TitleStandard
           title="$4.42"
           bottomLabel="Label Priority"
@@ -199,8 +201,8 @@ describe('TitleStandard', () => {
   });
 
   describe('when bottomLabelEndAccessory is provided without bottomLabel', () => {
-    it('does not render bottomLabelEndAccessory', () => {
-      const { getByText, queryByTestId } = render(
+    it('does not render bottomLabelEndAccessory', async () => {
+      const { getByText, queryByTestId } = await render(
         <TitleStandard
           title="$4.42"
           bottomAccessory={<Text>Custom Bottom</Text>}
@@ -216,8 +218,8 @@ describe('TitleStandard', () => {
   });
 
   describe('when titleEndAccessory is provided', () => {
-    it('renders title and titleEndAccessory', () => {
-      const { getByText } = render(
+    it('renders title and titleEndAccessory', async () => {
+      const { getByText } = await render(
         <TitleStandard title="$4.42" titleEndAccessory={<Text>Info</Text>} />,
       );
 
@@ -227,8 +229,8 @@ describe('TitleStandard', () => {
   });
 
   describe('when titleEndAccessory is false', () => {
-    it('renders title only', () => {
-      const { getByText } = render(
+    it('renders title only', async () => {
+      const { getByText } = await render(
         <TitleStandard title="$4.42" titleEndAccessory={false} />,
       );
 
@@ -237,8 +239,8 @@ describe('TitleStandard', () => {
   });
 
   describe('when topAccessory, titleEndAccessory, and bottomLabel are provided', () => {
-    it('renders all slots', () => {
-      const { getByText } = render(
+    it('renders all slots', async () => {
+      const { getByText } = await render(
         <TitleStandard
           topAccessory={<Text>Send</Text>}
           title="$4.42"
@@ -255,9 +257,9 @@ describe('TitleStandard', () => {
   });
 
   describe('style and twClassName', () => {
-    it('applies custom style to root container', () => {
+    it('applies custom style to root container', async () => {
       const customStyle = { opacity: 0.5 };
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <TitleStandard
           title="Test"
           testID={CONTAINER_TEST_ID}
@@ -268,8 +270,8 @@ describe('TitleStandard', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle(customStyle);
     });
 
-    it('merges twClassName with base styles', () => {
-      const { getByTestId } = render(
+    it('merges twClassName with base styles', async () => {
+      const { getByTestId } = await render(
         <TitleStandard
           title="Test"
           testID={CONTAINER_TEST_ID}

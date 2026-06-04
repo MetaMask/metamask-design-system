@@ -15,8 +15,10 @@ const TITLE_TEXT_TEST_ID = 'section-header-title-text';
 describe('SectionHeader', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   beforeEach(() => {
@@ -24,14 +26,14 @@ describe('SectionHeader', () => {
   });
 
   describe('rendering', () => {
-    it('renders string title', () => {
-      const { getByText } = render(<SectionHeader title="Assets" />);
+    it('renders string title', async () => {
+      const { getByText } = await render(<SectionHeader title="Assets" />);
 
       expect(getByText('Assets')).toBeOnTheScreen();
     });
 
-    it('renders React node title', () => {
-      const { getByTestId } = render(
+    it('renders React node title', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title={<Text testID="section-header-title-node">Custom</Text>}
         />,
@@ -40,16 +42,16 @@ describe('SectionHeader', () => {
       expect(getByTestId('section-header-title-node')).toBeOnTheScreen();
     });
 
-    it('forwards testID to outer BoxRow', () => {
-      const { getByTestId } = render(
+    it('forwards testID to outer BoxRow', async () => {
+      const { getByTestId } = await render(
         <SectionHeader title="Test" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards titleProps testID to title Text when title is a string', () => {
-      const { getByTestId } = render(
+    it('forwards titleProps testID to title Text when title is a string', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title="Section"
           titleProps={{ testID: TITLE_TEXT_TEST_ID }}
@@ -59,8 +61,8 @@ describe('SectionHeader', () => {
       expect(getByTestId(TITLE_TEXT_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards titleWrapperProps to inner BoxRow', () => {
-      const { getByTestId } = render(
+    it('forwards titleWrapperProps to inner BoxRow', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title="Section"
           titleWrapperProps={{ testID: TITLE_ROW_TEST_ID }}
@@ -70,8 +72,8 @@ describe('SectionHeader', () => {
       expect(getByTestId(TITLE_ROW_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders titleAccessory in the inner row', () => {
-      const { getByTestId } = render(
+    it('renders titleAccessory in the inner row', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title="Section"
           titleAccessory={<Text testID="section-header-title-acc">Info</Text>}
@@ -82,8 +84,8 @@ describe('SectionHeader', () => {
     });
 
     describe('when title is an empty string', () => {
-      it('omits inner title row', () => {
-        const { queryByTestId } = render(
+      it('omits inner title row', async () => {
+        const { queryByTestId } = await render(
           <SectionHeader
             title=""
             titleWrapperProps={{ testID: TITLE_ROW_TEST_ID }}
@@ -96,8 +98,8 @@ describe('SectionHeader', () => {
   });
 
   describe('startIconName and startAccessory', () => {
-    it('prefers start icon over startAccessory when startIconName is set', () => {
-      const { queryByTestId } = render(
+    it('prefers start icon over startAccessory when startIconName is set', async () => {
+      const { queryByTestId } = await render(
         <SectionHeader
           title="Section"
           startIconName={IconName.Add}
@@ -108,8 +110,8 @@ describe('SectionHeader', () => {
       expect(queryByTestId('section-header-start-acc')).toBeNull();
     });
 
-    it('renders startAccessory when no start icon is resolved', () => {
-      const { getByTestId } = render(
+    it('renders startAccessory when no start icon is resolved', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title="Section"
           startAccessory={<Text testID="section-header-start-acc">X</Text>}
@@ -119,8 +121,8 @@ describe('SectionHeader', () => {
       expect(getByTestId('section-header-start-acc')).toBeOnTheScreen();
     });
 
-    it('resolves start icon from startIconProps.name when startIconName is omitted', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('resolves start icon from startIconProps.name when startIconName is omitted', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <SectionHeader
           title="Section"
           testID={ROOT_TEST_ID}
@@ -133,8 +135,8 @@ describe('SectionHeader', () => {
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('uses startIconName over startIconProps.name when both are set', () => {
-      const { getByTestId } = render(
+    it('uses startIconName over startIconProps.name when both are set', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title="Section"
           startIconName={IconName.Add}
@@ -152,8 +154,8 @@ describe('SectionHeader', () => {
   });
 
   describe('endIconName and endAccessory', () => {
-    it('prefers end icon over endAccessory when endIconName is set', () => {
-      const { queryByTestId } = render(
+    it('prefers end icon over endAccessory when endIconName is set', async () => {
+      const { queryByTestId } = await render(
         <SectionHeader
           title="Section"
           endIconName={IconName.Close}
@@ -164,8 +166,8 @@ describe('SectionHeader', () => {
       expect(queryByTestId('section-header-end-acc')).toBeNull();
     });
 
-    it('renders endAccessory when no end icon is resolved', () => {
-      const { getByTestId } = render(
+    it('renders endAccessory when no end icon is resolved', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title="Section"
           endAccessory={<Text testID="section-header-end-acc">X</Text>}
@@ -175,8 +177,8 @@ describe('SectionHeader', () => {
       expect(getByTestId('section-header-end-acc')).toBeOnTheScreen();
     });
 
-    it('resolves end icon from endIconProps.name when endIconName is omitted', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('resolves end icon from endIconProps.name when endIconName is omitted', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <SectionHeader
           title="Section"
           testID={ROOT_TEST_ID}
@@ -189,8 +191,8 @@ describe('SectionHeader', () => {
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('uses endIconName over endIconProps.name when both are set', () => {
-      const { getByTestId } = render(
+    it('uses endIconName over endIconProps.name when both are set', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title="Section"
           endIconName={IconName.Add}
@@ -208,16 +210,16 @@ describe('SectionHeader', () => {
   });
 
   describe('root layout', () => {
-    it('applies gap-1 to outer row', () => {
-      const { getByTestId } = render(
+    it('applies gap-1 to outer row', async () => {
+      const { getByTestId } = await render(
         <SectionHeader title="Section" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`gap-1`);
     });
 
-    it('applies gap-1 to inner title row', () => {
-      const { getByTestId } = render(
+    it('applies gap-1 to inner title row', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title="Section"
           titleWrapperProps={{ testID: TITLE_ROW_TEST_ID }}
@@ -227,8 +229,8 @@ describe('SectionHeader', () => {
       expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`gap-1`);
     });
 
-    it('merges twClassName into outer row styles', () => {
-      const { getByTestId } = render(
+    it('merges twClassName into outer row styles', async () => {
+      const { getByTestId } = await render(
         <SectionHeader
           title="Section"
           testID={ROOT_TEST_ID}

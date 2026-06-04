@@ -14,8 +14,8 @@ describe('ButtonSemantic', () => {
   });
 
   describe('Rendering', () => {
-    it('renders with Success severity', () => {
-      const { getByText } = render(
+    it('renders with Success severity', async () => {
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
@@ -27,8 +27,8 @@ describe('ButtonSemantic', () => {
       expect(getByText('Success Button')).toBeDefined();
     });
 
-    it('renders with Danger severity', () => {
-      const { getByText } = render(
+    it('renders with Danger severity', async () => {
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Danger}
           onPress={mockOnPress}
@@ -42,8 +42,8 @@ describe('ButtonSemantic', () => {
 
     it.each([ButtonBaseSize.Sm, ButtonBaseSize.Md, ButtonBaseSize.Lg])(
       'renders with %s size',
-      (size) => {
-        const { getByText } = render(
+      async (size) => {
+        const { getByText } = await render(
           <ButtonSemantic
             severity={ButtonSemanticSeverity.Success}
             size={size}
@@ -57,8 +57,8 @@ describe('ButtonSemantic', () => {
       },
     );
 
-    it('uses large size by default', () => {
-      const { getByText } = render(
+    it('uses large size by default', async () => {
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
@@ -72,8 +72,8 @@ describe('ButtonSemantic', () => {
   });
 
   describe('Interaction', () => {
-    it('calls onPress handler when pressed', () => {
-      const { getByText } = render(
+    it('calls onPress handler when pressed', async () => {
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
@@ -82,13 +82,13 @@ describe('ButtonSemantic', () => {
         </ButtonSemantic>,
       );
 
-      fireEvent.press(getByText('Clickable Button'));
+      await fireEvent.press(getByText('Clickable Button'));
 
       expect(mockOnPress).toHaveBeenCalledTimes(1);
     });
 
-    it('does not call onPress when disabled', () => {
-      const { getByText } = render(
+    it('does not call onPress when disabled', async () => {
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
@@ -98,15 +98,15 @@ describe('ButtonSemantic', () => {
         </ButtonSemantic>,
       );
 
-      fireEvent.press(getByText('Disabled Button'));
+      await fireEvent.press(getByText('Disabled Button'));
 
       expect(mockOnPress).not.toHaveBeenCalled();
     });
   });
 
   describe('States', () => {
-    it('renders in loading state with custom loading text', () => {
-      const { getByText } = render(
+    it('renders in loading state with custom loading text', async () => {
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
@@ -120,8 +120,8 @@ describe('ButtonSemantic', () => {
       expect(getByText('Processing...')).toBeDefined();
     });
 
-    it('renders in loading state without custom loading text', () => {
-      const { getByText } = render(
+    it('renders in loading state without custom loading text', async () => {
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
@@ -134,8 +134,8 @@ describe('ButtonSemantic', () => {
       expect(getByText('Submit')).toBeDefined();
     });
 
-    it('renders in disabled state', () => {
-      const { getByText } = render(
+    it('renders in disabled state', async () => {
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Danger}
           onPress={mockOnPress}
@@ -152,8 +152,8 @@ describe('ButtonSemantic', () => {
   describe('Severity Variants', () => {
     it.each([ButtonSemanticSeverity.Success, ButtonSemanticSeverity.Danger])(
       'handles %s severity correctly',
-      (severity) => {
-        const { getByText } = render(
+      async (severity) => {
+        const { getByText } = await render(
           <ButtonSemantic severity={severity} onPress={mockOnPress}>
             Button
           </ButtonSemantic>,
@@ -161,15 +161,15 @@ describe('ButtonSemantic', () => {
 
         expect(getByText('Button')).toBeDefined();
 
-        fireEvent.press(getByText('Button'));
+        await fireEvent.press(getByText('Button'));
         expect(mockOnPress).toHaveBeenCalledTimes(1);
       },
     );
 
-    it('handles invalid severity by falling back to Success styling', () => {
+    it('handles invalid severity by falling back to Success styling', async () => {
       const invalidSeverity = 'invalid' as ButtonSemanticSeverity;
 
-      const { getByText } = render(
+      const { getByText } = await render(
         <ButtonSemantic severity={invalidSeverity} onPress={mockOnPress}>
           Fallback Button
         </ButtonSemantic>,
@@ -177,14 +177,14 @@ describe('ButtonSemantic', () => {
 
       expect(getByText('Fallback Button')).toBeDefined();
 
-      fireEvent.press(getByText('Fallback Button'));
+      await fireEvent.press(getByText('Fallback Button'));
       expect(mockOnPress).toHaveBeenCalledTimes(1);
     });
 
-    it('handles invalid severity in loading state by falling back to Success styling', () => {
+    it('handles invalid severity in loading state by falling back to Success styling', async () => {
       const invalidSeverity = 'invalid' as ButtonSemanticSeverity;
 
-      const { getByText } = render(
+      const { getByText } = await render(
         <ButtonSemantic
           severity={invalidSeverity}
           onPress={mockOnPress}
@@ -200,8 +200,8 @@ describe('ButtonSemantic', () => {
   });
 
   describe('Props Forwarding', () => {
-    it('passes testID to the root element via props', () => {
-      const { getByTestId } = render(
+    it('passes testID to the root element via props', async () => {
+      const { getByTestId } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
@@ -214,8 +214,8 @@ describe('ButtonSemantic', () => {
       expect(getByTestId('semantic-button')).toBeDefined();
     });
 
-    it('passes accessibilityLabel via props', () => {
-      const { getByLabelText } = render(
+    it('passes accessibilityLabel via props', async () => {
+      const { getByLabelText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
@@ -228,8 +228,8 @@ describe('ButtonSemantic', () => {
       expect(getByLabelText('Confirm transaction')).toBeDefined();
     });
 
-    it('applies custom style prop', () => {
-      const { getByText } = render(
+    it('applies custom style prop', async () => {
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
@@ -242,10 +242,10 @@ describe('ButtonSemantic', () => {
       expect(getByText('Styled Button')).toBeDefined();
     });
 
-    it('accepts twClassName as a function', () => {
+    it('accepts twClassName as a function', async () => {
       const twClassNameFn = jest.fn((_pressed: boolean) => 'mt-4');
 
-      const { getByText } = render(
+      const { getByText } = await render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}

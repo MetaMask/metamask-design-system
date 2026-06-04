@@ -19,14 +19,14 @@ const noopPress = () => undefined;
 describe('SegmentButton', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    const { result } = renderHook(() => useTailwind());
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
     tw = result.current;
   });
 
   describe('when rendering children', () => {
-    it('renders string children as label text', () => {
-      const { getByText } = render(
+    it('renders string children as label text', async () => {
+      const { getByText } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -37,8 +37,8 @@ describe('SegmentButton', () => {
       expect(getByText('Label')).toHaveTextContent('Label');
     });
 
-    it('renders JSX children as label text', () => {
-      const { getByText } = render(
+    it('renders JSX children as label text', async () => {
+      const { getByText } = await render(
         <SegmentButton testID={ROOT_TEST_ID} onPress={noopPress}>
           Child label
         </SegmentButton>,
@@ -48,8 +48,8 @@ describe('SegmentButton', () => {
     });
   });
 
-  it('exposes testID on the root pressable', () => {
-    const { getByTestId } = render(
+  it('exposes testID on the root pressable', async () => {
+    const { getByTestId } = await render(
       <SegmentButton
         testID="custom-segment"
         onPress={noopPress}
@@ -61,8 +61,8 @@ describe('SegmentButton', () => {
   });
 
   describe('container and label appearance by variant', () => {
-    it('uses icon default background when primary variant is selected', () => {
-      const { getByTestId } = render(
+    it('uses icon default background when primary variant is selected', async () => {
+      const { getByTestId } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -75,8 +75,8 @@ describe('SegmentButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-icon-default`);
     });
 
-    it('uses transparent background when primary variant is unselected', () => {
-      const { getByTestId } = render(
+    it('uses transparent background when primary variant is unselected', async () => {
+      const { getByTestId } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -89,8 +89,8 @@ describe('SegmentButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
     });
 
-    it('uses muted background when secondary variant is selected', () => {
-      const { getByTestId } = render(
+    it('uses muted background when secondary variant is selected', async () => {
+      const { getByTestId } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -103,8 +103,8 @@ describe('SegmentButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-muted`);
     });
 
-    it('uses transparent background when secondary variant is unselected', () => {
-      const { getByTestId } = render(
+    it('uses transparent background when secondary variant is unselected', async () => {
+      const { getByTestId } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -117,8 +117,8 @@ describe('SegmentButton', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-transparent`);
     });
 
-    it('applies alternative text color when primary variant is unselected', () => {
-      const { getByText } = render(
+    it('applies alternative text color when primary variant is unselected', async () => {
+      const { getByText } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -133,8 +133,8 @@ describe('SegmentButton', () => {
       );
     });
 
-    it('applies alternative text color when secondary variant is unselected', () => {
-      const { getByText } = render(
+    it('applies alternative text color when secondary variant is unselected', async () => {
+      const { getByText } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -149,8 +149,8 @@ describe('SegmentButton', () => {
       );
     });
 
-    it('applies alternative icon color to start icon when primary variant is unselected', () => {
-      const { getByTestId } = render(
+    it('applies alternative icon color to start icon when primary variant is unselected', async () => {
+      const { getByTestId } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -170,8 +170,8 @@ describe('SegmentButton', () => {
       );
     });
 
-    it('applies alternative icon color to start icon when secondary variant is unselected', () => {
-      const { getByTestId } = render(
+    it('applies alternative icon color to start icon when secondary variant is unselected', async () => {
+      const { getByTestId } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -191,8 +191,8 @@ describe('SegmentButton', () => {
       );
     });
 
-    it('applies alternative icon color to end icon when primary variant is unselected', () => {
-      const { getByTestId } = render(
+    it('applies alternative icon color to end icon when primary variant is unselected', async () => {
+      const { getByTestId } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -214,8 +214,8 @@ describe('SegmentButton', () => {
   });
 
   describe('when disabled', () => {
-    it('applies reduced opacity to the root', () => {
-      const { getByTestId } = render(
+    it('applies reduced opacity to the root', async () => {
+      const { getByTestId } = await render(
         <SegmentButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
@@ -228,11 +228,11 @@ describe('SegmentButton', () => {
     });
   });
 
-  it('calls twClassName with pressed state when primary variant is selected', () => {
+  it('calls twClassName with pressed state when primary variant is selected', async () => {
     const twClassName = jest.fn((pressed: boolean) =>
       pressed ? 'opacity-80' : 'opacity-100',
     );
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -244,17 +244,17 @@ describe('SegmentButton', () => {
     );
 
     const root = getByTestId(ROOT_TEST_ID);
-    fireEvent(root, 'pressIn');
+    await fireEvent(root, 'pressIn');
     expect(twClassName).toHaveBeenCalledWith(true);
-    fireEvent(root, 'pressOut');
+    await fireEvent(root, 'pressOut');
     expect(twClassName).toHaveBeenCalledWith(false);
   });
 
-  it('calls twClassName with pressed state when secondary variant is selected', () => {
+  it('calls twClassName with pressed state when secondary variant is selected', async () => {
     const twClassName = jest.fn((pressed: boolean) =>
       pressed ? 'opacity-75' : 'opacity-100',
     );
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -266,15 +266,15 @@ describe('SegmentButton', () => {
     );
 
     const root = getByTestId(ROOT_TEST_ID);
-    fireEvent(root, 'pressIn');
+    await fireEvent(root, 'pressIn');
     expect(twClassName).toHaveBeenCalledWith(true);
-    fireEvent(root, 'pressOut');
+    await fireEvent(root, 'pressOut');
     expect(twClassName).toHaveBeenCalledWith(false);
   });
 
-  it('merges function twClassName for primary unselected container', () => {
+  it('merges function twClassName for primary unselected container', async () => {
     const twClassName = jest.fn(() => 'mt-1');
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -289,9 +289,9 @@ describe('SegmentButton', () => {
     expect(twClassName).toHaveBeenCalled();
   });
 
-  it('merges function twClassName for secondary unselected container', () => {
+  it('merges function twClassName for secondary unselected container', async () => {
     const twClassName = jest.fn(() => 'mt-2');
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -306,8 +306,8 @@ describe('SegmentButton', () => {
     expect(twClassName).toHaveBeenCalled();
   });
 
-  it('uses pressed background when primary selected receives pressIn', () => {
-    const { getByTestId } = render(
+  it('uses pressed background when primary selected receives pressIn', async () => {
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -318,12 +318,12 @@ describe('SegmentButton', () => {
     );
 
     const root = getByTestId(ROOT_TEST_ID);
-    fireEvent(root, 'pressIn');
+    await fireEvent(root, 'pressIn');
     expect(root).toHaveStyle(tw`bg-icon-default-pressed`);
   });
 
-  it('uses pressed background when primary unselected receives pressIn', () => {
-    const { getByTestId } = render(
+  it('uses pressed background when primary unselected receives pressIn', async () => {
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -334,12 +334,12 @@ describe('SegmentButton', () => {
     );
 
     const root = getByTestId(ROOT_TEST_ID);
-    fireEvent(root, 'pressIn');
+    await fireEvent(root, 'pressIn');
     expect(root).toHaveStyle(tw`bg-pressed`);
   });
 
-  it('uses pressed background when secondary unselected receives pressIn', () => {
-    const { getByTestId } = render(
+  it('uses pressed background when secondary unselected receives pressIn', async () => {
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -350,12 +350,12 @@ describe('SegmentButton', () => {
     );
 
     const root = getByTestId(ROOT_TEST_ID);
-    fireEvent(root, 'pressIn');
+    await fireEvent(root, 'pressIn');
     expect(root).toHaveStyle(tw`bg-pressed`);
   });
 
-  it('uses pressed background on root when primary selected is loading', () => {
-    const { getByTestId } = render(
+  it('uses pressed background on root when primary selected is loading', async () => {
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -369,8 +369,8 @@ describe('SegmentButton', () => {
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-icon-default-pressed`);
   });
 
-  it('uses pressed loading container when primary unselected is loading', () => {
-    const { getByTestId } = render(
+  it('uses pressed loading container when primary unselected is loading', async () => {
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -384,8 +384,8 @@ describe('SegmentButton', () => {
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-pressed`);
   });
 
-  it('uses pressed loading container when secondary unselected is loading', () => {
-    const { getByTestId } = render(
+  it('uses pressed loading container when secondary unselected is loading', async () => {
+    const { getByTestId } = await render(
       <SegmentButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
@@ -400,8 +400,8 @@ describe('SegmentButton', () => {
   });
 
   describe('when used inside SegmentGroup', () => {
-    it('derives selected visual from group value instead of isSelected', () => {
-      const { getByTestId } = render(
+    it('derives selected visual from group value instead of isSelected', async () => {
+      const { getByTestId } = await render(
         <SegmentGroup value="b" onChange={noopPress} testID="group">
           <SegmentButton
             value="a"

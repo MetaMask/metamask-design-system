@@ -19,13 +19,13 @@ const noopPress = () => undefined;
 describe('SegmentGroup', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    const { result } = renderHook(() => useTailwind());
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
     tw = result.current;
   });
 
-  it('renders children', () => {
-    const { getByText } = render(
+  it('renders children', async () => {
+    const { getByText } = await render(
       <SegmentGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
         <SegmentButton value="a" onPress={noopPress}>
           A
@@ -36,8 +36,8 @@ describe('SegmentGroup', () => {
     expect(getByText('A')).toBeOnTheScreen();
   });
 
-  it('merges default row layout into contentContainerStyle', () => {
-    const { getByTestId } = render(
+  it('merges default row layout into contentContainerStyle', async () => {
+    const { getByTestId } = await render(
       <SegmentGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
         <SegmentButton value="a" onPress={noopPress}>
           A
@@ -56,8 +56,8 @@ describe('SegmentGroup', () => {
     ).toStrictEqual(StyleSheet.flatten(expectedContent));
   });
 
-  it('merges twClassName into contentContainerStyle after defaults', () => {
-    const { getByTestId } = render(
+  it('merges twClassName into contentContainerStyle after defaults', async () => {
+    const { getByTestId } = await render(
       <SegmentGroup
         value="a"
         onChange={noopPress}
@@ -81,8 +81,8 @@ describe('SegmentGroup', () => {
     ).toStrictEqual(StyleSheet.flatten(expectedContent));
   });
 
-  it('applies group variant to child segments that omit variant', () => {
-    const { getByTestId } = render(
+  it('applies group variant to child segments that omit variant', async () => {
+    const { getByTestId } = await render(
       <SegmentGroup
         value="a"
         onChange={noopPress}
@@ -98,8 +98,8 @@ describe('SegmentGroup', () => {
     expect(getByTestId('seg-a')).toHaveStyle(tw`bg-muted`);
   });
 
-  it('exposes tablist role on the container', () => {
-    const { getByTestId } = render(
+  it('exposes tablist role on the container', async () => {
+    const { getByTestId } = await render(
       <SegmentGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
         <SegmentButton value="a" onPress={noopPress}>
           A
@@ -113,10 +113,10 @@ describe('SegmentGroup', () => {
     );
   });
 
-  it('calls onChange when a different segment is pressed', () => {
+  it('calls onChange when a different segment is pressed', async () => {
     const onChange = jest.fn();
 
-    const { getByText } = render(
+    const { getByText } = await render(
       <SegmentGroup value="a" onChange={onChange} testID={GROUP_TEST_ID}>
         <SegmentButton value="a" onPress={noopPress}>
           A
@@ -127,16 +127,16 @@ describe('SegmentGroup', () => {
       </SegmentGroup>,
     );
 
-    fireEvent.press(getByText('B'));
+    await fireEvent.press(getByText('B'));
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith('b');
   });
 
-  it('does not call onChange when the active segment is pressed again', () => {
+  it('does not call onChange when the active segment is pressed again', async () => {
     const onChange = jest.fn();
 
-    const { getByText } = render(
+    const { getByText } = await render(
       <SegmentGroup value="a" onChange={onChange} testID={GROUP_TEST_ID}>
         <SegmentButton value="a" onPress={noopPress}>
           A
@@ -147,13 +147,13 @@ describe('SegmentGroup', () => {
       </SegmentGroup>,
     );
 
-    fireEvent.press(getByText('A'));
+    await fireEvent.press(getByText('A'));
 
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('reflects selection from value for participating SegmentButtons', () => {
-    const { getByTestId } = render(
+  it('reflects selection from value for participating SegmentButtons', async () => {
+    const { getByTestId } = await render(
       <SegmentGroup value="b" onChange={noopPress} testID={GROUP_TEST_ID}>
         <SegmentButton value="a" testID="seg-a" onPress={noopPress}>
           A
@@ -168,10 +168,10 @@ describe('SegmentGroup', () => {
     expect(getByTestId('seg-b')).toHaveStyle(tw`bg-icon-default`);
   });
 
-  it('allows non-segment children without affecting selection', () => {
+  it('allows non-segment children without affecting selection', async () => {
     const onChange = jest.fn();
 
-    const { getByText, getByTestId } = render(
+    const { getByText, getByTestId } = await render(
       <SegmentGroup value="a" onChange={onChange} testID={GROUP_TEST_ID}>
         <SegmentButton value="a" onPress={noopPress}>
           A
@@ -187,7 +187,7 @@ describe('SegmentGroup', () => {
       </SegmentGroup>,
     );
 
-    fireEvent.press(getByText('More'));
+    await fireEvent.press(getByText('More'));
 
     expect(onChange).not.toHaveBeenCalled();
     expect(getByTestId(GROUP_TEST_ID)).toBeOnTheScreen();
@@ -208,12 +208,12 @@ describe('SegmentGroup', () => {
     );
   };
 
-  it('updates selection when parent state changes after onChange', () => {
-    const { getByText, getByTestId } = render(<ControlledFixture />);
+  it('updates selection when parent state changes after onChange', async () => {
+    const { getByText, getByTestId } = await render(<ControlledFixture />);
 
     expect(getByTestId('seg-a')).toHaveStyle(tw`bg-icon-default`);
 
-    fireEvent.press(getByText('B'));
+    await fireEvent.press(getByText('B'));
 
     expect(getByTestId('seg-b')).toHaveStyle(tw`bg-icon-default`);
     expect(getByTestId('seg-a')).toHaveStyle(tw`bg-transparent`);

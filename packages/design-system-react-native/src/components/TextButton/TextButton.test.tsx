@@ -10,32 +10,34 @@ const noopPress = () => undefined;
 describe('TextButton', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
-  it('renders label', () => {
-    const { getByText } = render(
+  it('renders label', async () => {
+    const { getByText } = await render(
       <TextButton onPress={noopPress}>Hi</TextButton>,
     );
     expect(getByText('Hi')).toBeOnTheScreen();
   });
 
-  it('fires onPress when pressed', () => {
+  it('fires onPress when pressed', async () => {
     const onPress = jest.fn();
-    const { getByText } = render(
+    const { getByText } = await render(
       <TextButton onPress={onPress}>Tap</TextButton>,
     );
-    fireEvent.press(getByText('Tap'));
+    await fireEvent.press(getByText('Tap'));
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
-  it('carries fontSize matching variant BodyLg', () => {
+  it('carries fontSize matching variant BodyLg', async () => {
     // eslint-disable-next-line tailwindcss/no-custom-classname
     const twStyles = tw`text-${TextVariant.BodyLg}` as { fontSize?: number };
     const { fontSize = 0 } = twStyles;
 
-    const { getByText } = render(
+    const { getByText } = await render(
       <TextButton variant={TextVariant.BodyLg} onPress={noopPress}>
         Big
       </TextButton>,
@@ -43,23 +45,23 @@ describe('TextButton', () => {
     expect(getByText('Big')).toHaveStyle({ fontSize });
   });
 
-  it('uses primary default text color when idle', () => {
-    const { getByText } = render(
+  it('uses primary default text color when idle', async () => {
+    const { getByText } = await render(
       <TextButton onPress={noopPress}>Label</TextButton>,
     );
     expect(getByText('Label')).toHaveStyle(tw`text-primary-default`);
   });
 
-  it('uses primary pressed text color while pressed', () => {
-    const { getByTestId } = render(
+  it('uses primary pressed text color while pressed', async () => {
+    const { getByTestId } = await render(
       <TextButton testID="btn" onPress={noopPress}>
         Label
       </TextButton>,
     );
     const node = getByTestId('btn');
-    fireEvent(node, 'pressIn');
+    await fireEvent(node, 'pressIn');
     expect(node).toHaveStyle(tw`text-primary-default-pressed`);
-    fireEvent(node, 'pressOut');
+    await fireEvent(node, 'pressOut');
     expect(node).toHaveStyle(tw`text-primary-default`);
   });
 });

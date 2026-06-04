@@ -14,8 +14,10 @@ import { Checkbox } from './Checkbox';
 describe('Checkbox', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   beforeEach(() => {
@@ -50,17 +52,17 @@ describe('Checkbox', () => {
     return [];
   }
 
-  it('renders label when provided', () => {
+  it('renders label when provided', async () => {
     const fn = jest.fn();
-    const { getByText } = render(
+    const { getByText } = await render(
       <Checkbox label="Accept" isSelected={false} onChange={fn} />,
     );
     expect(getByText('Accept')).toBeDefined();
   });
 
-  it('ignores presses when disabled', () => {
+  it('ignores presses when disabled', async () => {
     const onChange = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Checkbox
         isDisabled
         onChange={onChange}
@@ -69,14 +71,14 @@ describe('Checkbox', () => {
       />,
     );
     const pressable = getByTestId('chk');
-    fireEvent.press(pressable);
+    await fireEvent.press(pressable);
     expect(onChange).not.toHaveBeenCalled();
     expect(pressable.props.accessibilityState.disabled).toBe(true);
   });
 
-  it('applies invalid border styles', () => {
+  it('applies invalid border styles', async () => {
     const fn = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Checkbox
         isInvalid
         checkboxContainerProps={{ testID: 'inner' }}
@@ -95,9 +97,9 @@ describe('Checkbox', () => {
     );
   });
 
-  it('applies selected container styles', () => {
+  it('applies selected container styles', async () => {
     const fn = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Checkbox
         isSelected
         onChange={fn}
@@ -115,9 +117,9 @@ describe('Checkbox', () => {
     );
   });
 
-  it('sets accessibility props and merges style', () => {
+  it('sets accessibility props and merges style', async () => {
     const fn = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Checkbox
         label="Accept"
         isSelected
@@ -140,14 +142,14 @@ describe('Checkbox', () => {
     );
   });
 
-  it('invokes a user-provided style function correctly', () => {
+  it('invokes a user-provided style function correctly', async () => {
     const fn = jest.fn();
     const styleFn: PressableProps['style'] = (
       _state: PressableStateCallbackType,
     ): StyleProp<ViewStyle> => ({
       margin: 4,
     });
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Checkbox
         label="Accept"
         isSelected
@@ -163,9 +165,9 @@ describe('Checkbox', () => {
     );
   });
 
-  it('omits accessibilityLabel when label is a React element', () => {
+  it('omits accessibilityLabel when label is a React element', async () => {
     const fn = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Checkbox
         label={<Text>Accept</Text>}
         testID="chk"
@@ -176,19 +178,19 @@ describe('Checkbox', () => {
     expect(getByTestId('chk').props.accessibilityLabel).toBeUndefined();
   });
 
-  it('exposes toggle method via ref', () => {
+  it('exposes toggle method via ref', async () => {
     const ref = createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
-    render(<Checkbox ref={ref} onChange={onChange} isSelected={false} />);
+    await render(<Checkbox ref={ref} onChange={onChange} isSelected={false} />);
     expect(ref.current).not.toBeNull();
     ref.current?.toggle();
     expect(onChange).toHaveBeenCalledWith(true);
   });
 
-  it('does not toggle when disabled via ref', () => {
+  it('does not toggle when disabled via ref', async () => {
     const ref = createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
-    render(
+    await render(
       <Checkbox ref={ref} onChange={onChange} isDisabled isSelected={false} />,
     );
     ref.current?.toggle();

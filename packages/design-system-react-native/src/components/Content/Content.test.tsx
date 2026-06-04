@@ -16,21 +16,23 @@ const ROOT_TEST_ID = 'content-root';
 describe('Content', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   describe('title', () => {
-    it('renders string title on screen', () => {
-      const { getByText } = render(
+    it('renders string title on screen', async () => {
+      const { getByText } = await render(
         <Content title="Label" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByText('Label')).toBeOnTheScreen();
     });
 
-    it('renders default title text styles', () => {
-      const { getByText } = render(
+    it('renders default title text styles', async () => {
+      const { getByText } = await render(
         <Content title="Title" testID={ROOT_TEST_ID} />,
       );
 
@@ -45,8 +47,8 @@ describe('Content', () => {
       expect(getByText('Title')).toHaveStyle(tw.style('text-default'));
     });
 
-    it('renders custom title node on screen', () => {
-      const { getByText } = render(
+    it('renders custom title node on screen', async () => {
+      const { getByText } = await render(
         <Content
           title={<Text testID="custom-title">Custom node</Text>}
           testID={ROOT_TEST_ID}
@@ -56,8 +58,8 @@ describe('Content', () => {
       expect(getByText('Custom node')).toBeOnTheScreen();
     });
 
-    it('omits title row when title is undefined', () => {
-      const { getByText, queryByText } = render(
+    it('omits title row when title is undefined', async () => {
+      const { getByText, queryByText } = await render(
         <Content value="100" testID={ROOT_TEST_ID} />,
       );
 
@@ -67,8 +69,8 @@ describe('Content', () => {
   });
 
   describe('titleProps', () => {
-    it('merges titleProps over default title text styles', () => {
-      const { getByText } = render(
+    it('merges titleProps over default title text styles', async () => {
+      const { getByText } = await render(
         <Content
           title="Custom"
           titleProps={{
@@ -84,16 +86,16 @@ describe('Content', () => {
   });
 
   describe('description', () => {
-    it('renders string description on screen', () => {
-      const { getByText } = render(
+    it('renders string description on screen', async () => {
+      const { getByText } = await render(
         <Content title="Title" description="Secondary" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByText('Secondary')).toBeOnTheScreen();
     });
 
-    it('renders default description text styles', () => {
-      const { getByText } = render(
+    it('renders default description text styles', async () => {
+      const { getByText } = await render(
         <Content title="Title" description="Desc" testID={ROOT_TEST_ID} />,
       );
 
@@ -108,8 +110,8 @@ describe('Content', () => {
       expect(getByText('Desc')).toHaveStyle(tw.style('text-alternative'));
     });
 
-    it('renders description without title', () => {
-      const { getByText } = render(
+    it('renders description without title', async () => {
+      const { getByText } = await render(
         <Content description="Only description" testID={ROOT_TEST_ID} />,
       );
 
@@ -118,8 +120,8 @@ describe('Content', () => {
   });
 
   describe('descriptionProps', () => {
-    it('merges descriptionProps over default description text styles', () => {
-      const { getByText } = render(
+    it('merges descriptionProps over default description text styles', async () => {
+      const { getByText } = await render(
         <Content
           title="Title"
           description="Desc"
@@ -133,16 +135,16 @@ describe('Content', () => {
   });
 
   describe('value', () => {
-    it('renders string value on screen', () => {
-      const { getByText } = render(
+    it('renders string value on screen', async () => {
+      const { getByText } = await render(
         <Content title="Label" value="100" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByText('100')).toBeOnTheScreen();
     });
 
-    it('renders custom value node on screen', () => {
-      const { getByText } = render(
+    it('renders custom value node on screen', async () => {
+      const { getByText } = await render(
         <Content
           title="Label"
           value={<Text testID="custom-value">Custom value</Text>}
@@ -155,8 +157,8 @@ describe('Content', () => {
   });
 
   describe('valueProps', () => {
-    it('merges valueProps over default value text styles', () => {
-      const { getByText } = render(
+    it('merges valueProps over default value text styles', async () => {
+      const { getByText } = await render(
         <Content
           title="Label"
           value="100"
@@ -170,8 +172,8 @@ describe('Content', () => {
   });
 
   describe('subvalue', () => {
-    it('renders string subvalue on screen', () => {
-      const { getByText } = render(
+    it('renders string subvalue on screen', async () => {
+      const { getByText } = await render(
         <Content
           title="Label"
           value="100"
@@ -183,16 +185,16 @@ describe('Content', () => {
       expect(getByText('Balance')).toBeOnTheScreen();
     });
 
-    it('renders subvalue without value', () => {
-      const { getByText } = render(
+    it('renders subvalue without value', async () => {
+      const { getByText } = await render(
         <Content subvalue="Fee only" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByText('Fee only')).toBeOnTheScreen();
     });
 
-    it('renders custom subvalue node on screen', () => {
-      const { getByTestId } = render(
+    it('renders custom subvalue node on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           value="100"
@@ -206,8 +208,8 @@ describe('Content', () => {
   });
 
   describe('subvalueProps', () => {
-    it('merges subvalueProps over default subvalue text styles', () => {
-      const { getByText } = render(
+    it('merges subvalueProps over default subvalue text styles', async () => {
+      const { getByText } = await render(
         <Content
           title="Label"
           value="100"
@@ -222,8 +224,8 @@ describe('Content', () => {
   });
 
   describe('avatar', () => {
-    it('renders avatar slot content on screen', () => {
-      const { getByTestId, getByText } = render(
+    it('renders avatar slot content on screen', async () => {
+      const { getByTestId, getByText } = await render(
         <Content
           testID={ROOT_TEST_ID}
           avatar={<Text testID="avatar-icon">S</Text>}
@@ -237,8 +239,8 @@ describe('Content', () => {
   });
 
   describe('titleStartAccessory', () => {
-    it('renders titleStartAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders titleStartAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           testID={ROOT_TEST_ID}
           title="Label"
@@ -251,8 +253,8 @@ describe('Content', () => {
   });
 
   describe('titleEndAccessory', () => {
-    it('renders titleEndAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders titleEndAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           testID={ROOT_TEST_ID}
           title="Label"
@@ -265,8 +267,8 @@ describe('Content', () => {
   });
 
   describe('descriptionStartAccessory', () => {
-    it('renders descriptionStartAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders descriptionStartAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           testID={ROOT_TEST_ID}
           title="Label"
@@ -280,8 +282,8 @@ describe('Content', () => {
   });
 
   describe('descriptionEndAccessory', () => {
-    it('renders descriptionEndAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders descriptionEndAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           testID={ROOT_TEST_ID}
           title="Label"
@@ -295,8 +297,8 @@ describe('Content', () => {
   });
 
   describe('valueStartAccessory', () => {
-    it('renders valueStartAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders valueStartAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           testID={ROOT_TEST_ID}
           title="Label"
@@ -310,8 +312,8 @@ describe('Content', () => {
   });
 
   describe('valueEndAccessory', () => {
-    it('renders valueEndAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders valueEndAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           testID={ROOT_TEST_ID}
           title="Label"
@@ -325,8 +327,8 @@ describe('Content', () => {
   });
 
   describe('subvalueStartAccessory', () => {
-    it('renders subvalueStartAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders subvalueStartAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           testID={ROOT_TEST_ID}
           title="Label"
@@ -341,8 +343,8 @@ describe('Content', () => {
   });
 
   describe('subvalueEndAccessory', () => {
-    it('renders subvalueEndAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders subvalueEndAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           testID={ROOT_TEST_ID}
           title="Label"
@@ -357,8 +359,8 @@ describe('Content', () => {
   });
 
   describe('startAccessory', () => {
-    it('renders startAccessory on the content row', () => {
-      const { getByTestId } = render(
+    it('renders startAccessory on the content row', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           startAccessory={<Text testID="start-accessory">S</Text>}
@@ -368,8 +370,8 @@ describe('Content', () => {
       expect(getByTestId('start-accessory')).toBeOnTheScreen();
     });
 
-    it('renders startAccessory with avatar on the content row', () => {
-      const { getByTestId } = render(
+    it('renders startAccessory with avatar on the content row', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           startAccessory={<Text testID="start-accessory">S</Text>}
@@ -383,8 +385,8 @@ describe('Content', () => {
   });
 
   describe('endAccessory', () => {
-    it('renders endAccessory on the content row', () => {
-      const { getByTestId } = render(
+    it('renders endAccessory on the content row', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           endAccessory={<Text testID="end-accessory">E</Text>}
@@ -396,8 +398,8 @@ describe('Content', () => {
   });
 
   describe('topAccessory', () => {
-    it('renders topAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders topAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           topAccessory={<View testID="top-accessory" />}
@@ -407,8 +409,8 @@ describe('Content', () => {
       expect(getByTestId('top-accessory')).toBeOnTheScreen();
     });
 
-    it('uses BoxColumn root when topAccessory is provided', () => {
-      const { getByTestId } = render(
+    it('uses BoxColumn root when topAccessory is provided', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           topAccessory={<View testID="top-accessory" />}
@@ -421,8 +423,8 @@ describe('Content', () => {
       );
     });
 
-    it('applies twClassName on column shell root', () => {
-      const { getByTestId } = render(
+    it('applies twClassName on column shell root', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           topAccessory={<View testID="top-accessory" />}
@@ -436,8 +438,8 @@ describe('Content', () => {
   });
 
   describe('bottomAccessory', () => {
-    it('renders bottomAccessory on screen', () => {
-      const { getByTestId } = render(
+    it('renders bottomAccessory on screen', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           bottomAccessory={<View testID="bottom-accessory" />}
@@ -447,8 +449,8 @@ describe('Content', () => {
       expect(getByTestId('bottom-accessory')).toBeOnTheScreen();
     });
 
-    it('uses BoxColumn root when only bottomAccessory is provided', () => {
-      const { getByTestId } = render(
+    it('uses BoxColumn root when only bottomAccessory is provided', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           bottomAccessory={<View testID="bottom-accessory" />}
@@ -463,8 +465,8 @@ describe('Content', () => {
   });
 
   describe('verticalAlignment', () => {
-    it('applies center alignment on flat BoxRow root by default', () => {
-      const { getByTestId } = render(
+    it('applies center alignment on flat BoxRow root by default', async () => {
+      const { getByTestId } = await render(
         <Content title="Label" testID={ROOT_TEST_ID} />,
       );
 
@@ -473,8 +475,8 @@ describe('Content', () => {
       );
     });
 
-    it('applies top alignment on flat BoxRow root when verticalAlignment is Top', () => {
-      const { getByTestId } = render(
+    it('applies top alignment on flat BoxRow root when verticalAlignment is Top', async () => {
+      const { getByTestId } = await render(
         <Content
           title="Label"
           verticalAlignment={ContentVerticalAlignment.Top}
@@ -489,8 +491,8 @@ describe('Content', () => {
   });
 
   describe('twClassName', () => {
-    it('applies twClassName on flat BoxRow root', () => {
-      const { getByTestId } = render(
+    it('applies twClassName on flat BoxRow root', async () => {
+      const { getByTestId } = await render(
         <Content title="Label" twClassName="mt-2" testID={ROOT_TEST_ID} />,
       );
 
@@ -499,8 +501,8 @@ describe('Content', () => {
   });
 
   describe('root layout', () => {
-    it('passes testID to flat BoxRow root', () => {
-      const { getByTestId } = render(
+    it('passes testID to flat BoxRow root', async () => {
+      const { getByTestId } = await render(
         <Content title="Label" testID={ROOT_TEST_ID} />,
       );
 

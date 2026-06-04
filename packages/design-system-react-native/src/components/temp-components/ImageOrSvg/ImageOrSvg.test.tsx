@@ -22,8 +22,8 @@ beforeEach(() => {
 });
 
 describe('ImageOrSvg Component', () => {
-  it('renders a local bitmap image (src as number) as <Image>', () => {
-    const { getByTestId } = render(
+  it('renders a local bitmap image (src as number) as <Image>', async () => {
+    const { getByTestId } = await render(
       <ImageOrSvg src={1} imageProps={{ testID: 'localImage' }} />,
     );
     const element = getByTestId('localImage');
@@ -37,7 +37,7 @@ describe('ImageOrSvg Component', () => {
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
 
     const remoteSrc = { uri: 'https://example.com/photo.png' };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ImageOrSvg src={remoteSrc} imageProps={{ testID: 'remoteImage' }} />,
     );
 
@@ -54,7 +54,7 @@ describe('ImageOrSvg Component', () => {
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
 
     const remoteSrc = { uri: 'https://example.com/photo.png' };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ImageOrSvg src={remoteSrc} imageProps={{ testID: 'noHeaderImage' }} />,
     );
 
@@ -68,7 +68,7 @@ describe('ImageOrSvg Component', () => {
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
 
     const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ImageOrSvg src={remoteSvgSrc} svgProps={{ testID: 'remoteSvg' }} />,
     );
 
@@ -85,7 +85,7 @@ describe('ImageOrSvg Component', () => {
     const dataSvgUri =
       'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==';
     const remoteDataSrc = { uri: dataSvgUri };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ImageOrSvg src={remoteDataSrc} svgProps={{ testID: 'dataSvg' }} />,
     );
 
@@ -95,8 +95,8 @@ describe('ImageOrSvg Component', () => {
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
-  it('renders a local SVG component correctly', () => {
-    const { getByTestId } = render(
+  it('renders a local SVG component correctly', async () => {
+    const { getByTestId } = await render(
       <ImageOrSvg
         src={DummyLocalSvg}
         svgProps={{ testID: 'localSvgRendered' }} // use testID here
@@ -113,7 +113,7 @@ describe('ImageOrSvg Component', () => {
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
     const onImageLoad = jest.fn();
     const remoteSrc = { uri: 'https://example.com/photo.png' };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ImageOrSvg
         src={remoteSrc}
         imageProps={{ testID: 'loadImage' }}
@@ -135,7 +135,7 @@ describe('ImageOrSvg Component', () => {
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
     const onImageError = jest.fn();
     const remoteSrc = { uri: 'https://example.com/photo.png' };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ImageOrSvg
         src={remoteSrc}
         imageProps={{ testID: 'errorImage' }}
@@ -158,7 +158,7 @@ describe('ImageOrSvg Component', () => {
     (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
     const onSvgError = jest.fn();
     const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ImageOrSvg
         src={remoteSvgSrc}
         svgProps={{ testID: 'svgError' }}
@@ -179,7 +179,7 @@ describe('ImageOrSvg Component', () => {
   it('renders <Image> when the HEAD request fails', async () => {
     (global.fetch as jest.Mock).mockRejectedValue(new Error('Network error'));
     const remoteSrc = { uri: 'https://example.com/photo.png' };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ImageOrSvg src={remoteSrc} imageProps={{ testID: 'fetchFail' }} />,
     );
 
@@ -190,7 +190,7 @@ describe('ImageOrSvg Component', () => {
 
   it('renders <Image> when remote src.uri is empty', async () => {
     const remoteSrc = { uri: '' };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ImageOrSvg src={remoteSrc} imageProps={{ testID: 'emptyUri' }} />,
     );
 

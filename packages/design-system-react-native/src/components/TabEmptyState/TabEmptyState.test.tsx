@@ -13,8 +13,8 @@ describe('TabEmptyState', () => {
     jest.clearAllMocks();
   });
 
-  it('renders correctly with basic props', () => {
-    const { getByTestId, getByText } = render(
+  it('renders correctly with basic props', async () => {
+    const { getByTestId, getByText } = await render(
       <TabEmptyState
         testID="tab-empty-state"
         description="No items found"
@@ -28,16 +28,16 @@ describe('TabEmptyState', () => {
     expect(getByText('Add Item')).toBeDefined();
   });
 
-  it('renders description when provided', () => {
-    const { getByText } = render(
+  it('renders description when provided', async () => {
+    const { getByText } = await render(
       <TabEmptyState description="No items found" />,
     );
 
     expect(getByText('No items found')).toBeDefined();
   });
 
-  it('renders icon when provided', () => {
-    const { getByTestId } = render(
+  it('renders icon when provided', async () => {
+    const { getByTestId } = await render(
       <TabEmptyState
         icon={
           <Icon name={IconName.Add} size={IconSize.Xl} testID="test-icon" />
@@ -48,30 +48,32 @@ describe('TabEmptyState', () => {
     expect(getByTestId('test-icon')).toBeDefined();
   });
 
-  it('renders action button when both actionButtonText and onAction are provided', () => {
-    const { getByText } = render(
+  it('renders action button when both actionButtonText and onAction are provided', async () => {
+    const { getByText } = await render(
       <TabEmptyState actionButtonText="Add Item" onAction={mockOnAction} />,
     );
 
     expect(getByText('Add Item')).toBeDefined();
   });
 
-  it('does not render action button when only actionButtonText is provided', () => {
-    const { queryByText } = render(
+  it('does not render action button when only actionButtonText is provided', async () => {
+    const { queryByText } = await render(
       <TabEmptyState actionButtonText="Add Item" />,
     );
 
     expect(queryByText('Add Item')).toBeNull();
   });
 
-  it('does not render action button when only onAction is provided', () => {
-    const { queryByText } = render(<TabEmptyState onAction={mockOnAction} />);
+  it('does not render action button when only onAction is provided', async () => {
+    const { queryByText } = await render(
+      <TabEmptyState onAction={mockOnAction} />,
+    );
 
     expect(queryByText('Add Item')).toBeNull();
   });
 
-  it('renders custom children', () => {
-    const { getByTestId } = render(
+  it('renders custom children', async () => {
+    const { getByTestId } = await render(
       <TabEmptyState>
         <Text testID="custom-child">Custom child content</Text>
       </TabEmptyState>,
@@ -80,23 +82,25 @@ describe('TabEmptyState', () => {
     expect(getByTestId('custom-child')).toBeDefined();
   });
 
-  it('calls onAction when action button is pressed', () => {
-    const { getByText } = render(
+  it('calls onAction when action button is pressed', async () => {
+    const { getByText } = await render(
       <TabEmptyState actionButtonText="Add Item" onAction={mockOnAction} />,
     );
 
-    fireEvent.press(getByText('Add Item'));
+    await fireEvent.press(getByText('Add Item'));
     expect(mockOnAction).toHaveBeenCalledTimes(1);
   });
 
-  it('passes testID to root element via ViewProps', () => {
-    const { getByTestId } = render(<TabEmptyState testID="my-empty-state" />);
+  it('passes testID to root element via ViewProps', async () => {
+    const { getByTestId } = await render(
+      <TabEmptyState testID="my-empty-state" />,
+    );
 
     expect(getByTestId('my-empty-state')).toBeDefined();
   });
 
-  it('passes accessibilityLabel via ViewProps', () => {
-    const { getByTestId } = render(
+  it('passes accessibilityLabel via ViewProps', async () => {
+    const { getByTestId } = await render(
       <TabEmptyState testID="empty-state" accessibilityLabel="Empty state" />,
     );
 
@@ -104,8 +108,8 @@ describe('TabEmptyState', () => {
     expect(element.props.accessibilityLabel).toBe('Empty state');
   });
 
-  it('passes descriptionProps to description Text component', () => {
-    const { getByTestId } = render(
+  it('passes descriptionProps to description Text component', async () => {
+    const { getByTestId } = await render(
       <TabEmptyState
         description="Test description"
         descriptionProps={{ testID: 'custom-description' }}
@@ -115,8 +119,8 @@ describe('TabEmptyState', () => {
     expect(getByTestId('custom-description')).toBeDefined();
   });
 
-  it('passes actionButtonProps to action Button component', () => {
-    const { getByTestId } = render(
+  it('passes actionButtonProps to action Button component', async () => {
+    const { getByTestId } = await render(
       <TabEmptyState
         actionButtonText="Add Item"
         onAction={mockOnAction}

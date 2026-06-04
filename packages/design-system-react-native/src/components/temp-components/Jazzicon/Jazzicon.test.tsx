@@ -39,9 +39,9 @@ describe('Jazzicon Component', () => {
     (generateIconSeed as jest.Mock).mockReturnValue([123, 456, 789]);
   });
 
-  it('should render RNJazzicon with computed seed from address', () => {
+  it('should render RNJazzicon with computed seed from address', async () => {
     const testProps = { address: '0x123456789abcdef', size: 40 };
-    render(<Jazzicon {...testProps} testID="jazzicon-address" />);
+    await render(<Jazzicon {...testProps} testID="jazzicon-address" />);
 
     expect(RNJazzicon).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -55,9 +55,9 @@ describe('Jazzicon Component', () => {
     );
   });
 
-  it('should render RNJazzicon with computed seed from CAIP-10 address', () => {
+  it('should render RNJazzicon with computed seed from CAIP-10 address', async () => {
     const testProps = { address: 'eip155:1:0x123456789abcdef', size: 50 };
-    render(<Jazzicon {...testProps} testID="jazzicon-caip" />);
+    await render(<Jazzicon {...testProps} testID="jazzicon-caip" />);
 
     expect(RNJazzicon).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -71,13 +71,13 @@ describe('Jazzicon Component', () => {
     );
   });
 
-  it('should apply the correct container style', () => {
+  it('should apply the correct container style', async () => {
     const testProps = {
       address: '0x987654321abcdef',
       size: 40,
       containerStyle: { backgroundColor: 'red', padding: 5 },
     };
-    render(<Jazzicon {...testProps} testID="jazzicon-container" />);
+    await render(<Jazzicon {...testProps} testID="jazzicon-container" />);
 
     expect(RNJazzicon).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -93,9 +93,9 @@ describe('Jazzicon Component', () => {
     );
   });
 
-  it('should handle missing address gracefully', () => {
+  it('should handle missing address gracefully', async () => {
     const testProps = { size: 30 };
-    render(<Jazzicon {...testProps} testID="jazzicon-no-address" />);
+    await render(<Jazzicon {...testProps} testID="jazzicon-no-address" />);
 
     expect(RNJazzicon).toHaveBeenCalledWith(
       expect.objectContaining({

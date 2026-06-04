@@ -8,8 +8,8 @@ import { MainActionButton } from './MainActionButton';
 const TEST_ID = 'main-action-button-test';
 
 describe('MainActionButton', () => {
-  it('renders label and icon', () => {
-    const { getByText, getByTestId } = render(
+  it('renders label and icon', async () => {
+    const { getByText, getByTestId } = await render(
       <MainActionButton
         iconName={IconName.Add}
         label="Test Button"
@@ -21,8 +21,8 @@ describe('MainActionButton', () => {
     expect(getByTestId(TEST_ID)).toBeDefined();
   });
 
-  it('is disabled when isDisabled is true', () => {
-    const { getByTestId } = render(
+  it('is disabled when isDisabled is true', async () => {
+    const { getByTestId } = await render(
       <MainActionButton
         iconName={IconName.Add}
         label="Disabled"
@@ -35,9 +35,9 @@ describe('MainActionButton', () => {
     expect(button.props.accessibilityState.disabled).toBe(true);
   });
 
-  it('calls onPress when pressed', () => {
+  it('calls onPress when pressed', async () => {
     const onPress = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <MainActionButton
         iconName={IconName.Add}
         label="Press"
@@ -46,15 +46,15 @@ describe('MainActionButton', () => {
       />,
     );
 
-    fireEvent.press(getByTestId(TEST_ID));
+    await fireEvent.press(getByTestId(TEST_ID));
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
-  it('calls press handlers when enabled', () => {
+  it('calls press handlers when enabled', async () => {
     const onPress = jest.fn();
     const onPressIn = jest.fn();
     const onPressOut = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <MainActionButton
         iconName={IconName.Add}
         label="Enabled"
@@ -66,21 +66,21 @@ describe('MainActionButton', () => {
     );
 
     const button = getByTestId(TEST_ID);
-    fireEvent(button, 'pressIn');
-    fireEvent.press(button);
-    fireEvent(button, 'pressOut');
+    await fireEvent(button, 'pressIn');
+    await fireEvent.press(button);
+    await fireEvent(button, 'pressOut');
 
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(onPressIn).toHaveBeenCalledTimes(1);
     expect(onPressOut).toHaveBeenCalledTimes(1);
   });
 
-  it('does not call press handlers when disabled', () => {
+  it('does not call press handlers when disabled', async () => {
     const onPress = jest.fn();
     const onPressIn = jest.fn();
     const onPressOut = jest.fn();
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <MainActionButton
         iconName={IconName.Add}
         label="Disabled"
@@ -93,26 +93,26 @@ describe('MainActionButton', () => {
     );
 
     const button = getByTestId(TEST_ID);
-    fireEvent.press(button);
-    fireEvent(button, 'pressIn');
-    fireEvent(button, 'pressOut');
+    await fireEvent.press(button);
+    await fireEvent(button, 'pressIn');
+    await fireEvent(button, 'pressOut');
 
     expect(onPress).not.toHaveBeenCalled();
     expect(onPressIn).not.toHaveBeenCalled();
     expect(onPressOut).not.toHaveBeenCalled();
   });
 
-  it('renders custom label text', () => {
+  it('renders custom label text', async () => {
     const customLabel = 'Custom Label';
-    const { getByText } = render(
+    const { getByText } = await render(
       <MainActionButton iconName={IconName.Add} label={customLabel} />,
     );
 
     expect(getByText(customLabel)).toBeDefined();
   });
 
-  it('forwards iconProps and labelProps to child components', () => {
-    const { getByTestId } = render(
+  it('forwards iconProps and labelProps to child components', async () => {
+    const { getByTestId } = await render(
       <MainActionButton
         iconName={IconName.Add}
         label="Child Props"
@@ -125,8 +125,8 @@ describe('MainActionButton', () => {
     expect(getByTestId('main-action-button-label')).toBeDefined();
   });
 
-  it('keeps controlled icon and label values while forwarding child prop objects', () => {
-    const { getByTestId, getByText } = render(
+  it('keeps controlled icon and label values while forwarding child prop objects', async () => {
+    const { getByTestId, getByText } = await render(
       <MainActionButton
         iconName={IconName.Add}
         label="Controlled Label"
@@ -146,9 +146,9 @@ describe('MainActionButton', () => {
     expect(getByText('Controlled Label')).toBeDefined();
   });
 
-  it('merges custom style', () => {
+  it('merges custom style', async () => {
     const customStyle = { marginTop: 8 };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <MainActionButton
         iconName={IconName.Add}
         label="Custom Style"
@@ -160,12 +160,12 @@ describe('MainActionButton', () => {
     expect(getByTestId(TEST_ID).props.style[1]).toStrictEqual(customStyle);
   });
 
-  it('evaluates function style with pressed state', () => {
+  it('evaluates function style with pressed state', async () => {
     const style = jest.fn(({ pressed }: { pressed: boolean }) =>
       pressed ? { marginTop: 8 } : undefined,
     );
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <MainActionButton
         iconName={IconName.Add}
         label="Pressed state"
@@ -178,7 +178,7 @@ describe('MainActionButton', () => {
 
     expect(style).toHaveBeenCalledWith({ pressed: false });
 
-    fireEvent(button, 'pressIn');
+    await fireEvent(button, 'pressIn');
 
     expect(style).toHaveBeenCalledWith({ pressed: true });
     expect(Array.isArray(button.props.style)).toBe(true);

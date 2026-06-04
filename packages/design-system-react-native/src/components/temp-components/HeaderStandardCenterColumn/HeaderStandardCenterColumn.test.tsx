@@ -6,14 +6,16 @@ import { Text, TextVariant } from '../../Text';
 import { HeaderStandardCenterColumn } from './HeaderStandardCenterColumn';
 
 describe('HeaderStandardCenterColumn', () => {
-  it('renders title', () => {
-    const { getByText } = render(<HeaderStandardCenterColumn title="Main" />);
+  it('renders title', async () => {
+    const { getByText } = await render(
+      <HeaderStandardCenterColumn title="Main" />,
+    );
 
     expect(getByText('Main')).toBeDefined();
   });
 
-  it('renders title and string subtitle', () => {
-    const { getByText } = render(
+  it('renders title and string subtitle', async () => {
+    const { getByText } = await render(
       <HeaderStandardCenterColumn title="Main" subtitle="Sub" />,
     );
 
@@ -21,8 +23,8 @@ describe('HeaderStandardCenterColumn', () => {
     expect(getByText('Sub')).toBeDefined();
   });
 
-  it('renders subtitle as a React node', () => {
-    const { getByText } = render(
+  it('renders subtitle as a React node', async () => {
+    const { getByText } = await render(
       <HeaderStandardCenterColumn
         title="Main"
         subtitle={<Text variant={TextVariant.BodySm}>Node</Text>}

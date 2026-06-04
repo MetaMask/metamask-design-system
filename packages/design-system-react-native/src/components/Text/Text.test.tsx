@@ -46,12 +46,12 @@ function buildTextStyleArgs({
 
 describe('Text', () => {
   describe('Text Component', () => {
-    it('renders children correctly', () => {
-      const { getByText } = render(<Text>Hello, World!</Text>);
+    it('renders children correctly', async () => {
+      const { getByText } = await render(<Text>Hello, World!</Text>);
       expect(getByText('Hello, World!')).toBeDefined();
     });
 
-    it('applies default styles when no props are provided', () => {
+    it('applies default styles when no props are provided', async () => {
       let expectedStyles;
 
       const TestComponent = () => {
@@ -60,14 +60,14 @@ describe('Text', () => {
         return <Text testID="text">Hello, World!</Text>;
       };
 
-      const { getByTestId } = render(<TestComponent />);
+      const { getByTestId } = await render(<TestComponent />);
       const textElement = getByTestId('text');
 
       expect(expectedStyles).toBeDefined();
       expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
     });
 
-    it('applies custom styles based on props', () => {
+    it('applies custom styles based on props', async () => {
       let expectedStyles;
       const props = {
         variant: TextVariant.HeadingLg,
@@ -87,7 +87,7 @@ describe('Text', () => {
         );
       };
 
-      const { getByTestId } = render(<TestComponent />);
+      const { getByTestId } = await render(<TestComponent />);
       const textElement = getByTestId('text');
 
       expect(expectedStyles).toBeDefined();
@@ -95,7 +95,7 @@ describe('Text', () => {
     });
 
     Object.values(TextVariant).forEach((variant) => {
-      it(`applies variant ${variant} correctly`, () => {
+      it(`applies variant ${variant} correctly`, async () => {
         let expectedStyles;
 
         const TestComponent = () => {
@@ -113,7 +113,7 @@ describe('Text', () => {
           );
         };
 
-        const { getByTestId } = render(<TestComponent />);
+        const { getByTestId } = await render(<TestComponent />);
         const textElement = getByTestId('text');
 
         expect(expectedStyles).toBeDefined();
@@ -122,7 +122,7 @@ describe('Text', () => {
     });
 
     Object.values(TextColor).forEach((color) => {
-      it(`applies color ${color} correctly`, () => {
+      it(`applies color ${color} correctly`, async () => {
         let expectedStyles;
 
         const TestComponent = () => {
@@ -135,7 +135,7 @@ describe('Text', () => {
           );
         };
 
-        const { getByTestId } = render(<TestComponent />);
+        const { getByTestId } = await render(<TestComponent />);
         const textElement = getByTestId('text');
 
         expect(expectedStyles).toBeDefined();
@@ -144,7 +144,7 @@ describe('Text', () => {
     });
 
     Object.values(FontWeight).forEach((weight) => {
-      it(`applies font weight ${weight} correctly`, () => {
+      it(`applies font weight ${weight} correctly`, async () => {
         let expectedStyles;
 
         const TestComponent = () => {
@@ -159,7 +159,7 @@ describe('Text', () => {
           );
         };
 
-        const { getByTestId } = render(<TestComponent />);
+        const { getByTestId } = await render(<TestComponent />);
         const textElement = getByTestId('text');
 
         expect(expectedStyles).toBeDefined();
@@ -168,7 +168,7 @@ describe('Text', () => {
     });
 
     Object.values(FontStyle).forEach((fontStyle) => {
-      it(`applies font style ${fontStyle} correctly`, () => {
+      it(`applies font style ${fontStyle} correctly`, async () => {
         let expectedStyles;
 
         const TestComponent = () => {
@@ -181,7 +181,7 @@ describe('Text', () => {
           );
         };
 
-        const { getByTestId } = render(<TestComponent />);
+        const { getByTestId } = await render(<TestComponent />);
         const textElement = getByTestId('text');
 
         expect(expectedStyles).toBeDefined();
@@ -189,7 +189,7 @@ describe('Text', () => {
       });
     });
 
-    it('combines custom style prop with generated styles', () => {
+    it('combines custom style prop with generated styles', async () => {
       const customStyle = { margin: 10 };
 
       const TestComponent = () => {
@@ -200,21 +200,21 @@ describe('Text', () => {
         );
       };
 
-      const { getByTestId } = render(<TestComponent />);
+      const { getByTestId } = await render(<TestComponent />);
       const textElement = getByTestId('text');
 
       expect(textElement.props.style).toContainEqual(customStyle);
     });
 
-    it('applies accessibilityRole="text"', () => {
-      const { getByText } = render(<Text>Accessible Text</Text>);
+    it('applies accessibilityRole="text"', async () => {
+      const { getByText } = await render(<Text>Accessible Text</Text>);
       const textElement = getByText('Accessible Text');
       expect(textElement.props.accessibilityRole).toBe('text');
     });
 
-    it('passes additional props to RNText', () => {
+    it('passes additional props to RNText', async () => {
       const onPressMock = jest.fn();
-      const { getByText } = render(
+      const { getByText } = await render(
         <Text onPress={onPressMock}>Pressable Text</Text>,
       );
       const textElement = getByText('Pressable Text');

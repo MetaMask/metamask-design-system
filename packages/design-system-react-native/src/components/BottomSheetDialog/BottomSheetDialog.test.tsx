@@ -1,6 +1,6 @@
 // Third party dependencies
 import { render, act, fireEvent } from '@testing-library/react-native';
-import React, { useRef, useEffect } from 'react';
+import React, { createRef } from 'react';
 import { Platform } from 'react-native';
 
 // External dependencies.
@@ -52,8 +52,8 @@ jest.mock('react-native-reanimated', () => {
 });
 
 describe('BottomSheetDialog', () => {
-  it('renders correctly with children', () => {
-    const { getByText } = render(
+  it('renders correctly with children', async () => {
+    const { getByText } = await render(
       <BottomSheetDialog>
         <Text>Test Child</Text>
       </BottomSheetDialog>,
@@ -61,8 +61,8 @@ describe('BottomSheetDialog', () => {
     expect(getByText('Test Child')).toBeDefined();
   });
 
-  it('renders with a custom testID on the root element', () => {
-    const { getByTestId } = render(
+  it('renders with a custom testID on the root element', async () => {
+    const { getByTestId } = await render(
       <BottomSheetDialog testID="bottom-sheet-dialog">
         <Text>Test Child</Text>
       </BottomSheetDialog>,
@@ -70,111 +70,79 @@ describe('BottomSheetDialog', () => {
     expect(getByTestId('bottom-sheet-dialog')).toBeDefined();
   });
 
-  it('calls onOpen when onOpenDialog ref is called', () => {
+  it('calls onOpen when onOpenDialog ref is called', async () => {
     const onOpenMock = jest.fn();
-    const TestComponent = () => {
-      const ref = useRef<BottomSheetDialogRef>(null);
+    const ref = createRef<BottomSheetDialogRef>();
 
-      useEffect(() => {
-        if (ref.current) {
-          act(() => {
-            ref.current?.onOpenDialog();
-          });
-        }
-      }, []);
+    await render(
+      <BottomSheetDialog ref={ref} onOpen={onOpenMock}>
+        <Text>Test Child</Text>
+      </BottomSheetDialog>,
+    );
 
-      return (
-        <BottomSheetDialog ref={ref} onOpen={onOpenMock}>
-          <Text>Test Child</Text>
-        </BottomSheetDialog>
-      );
-    };
-
-    render(<TestComponent />);
+    await act(async () => {
+      ref.current?.onOpenDialog();
+    });
 
     expect(onOpenMock).toHaveBeenCalled();
   });
 
-  it('calls onOpen callback when onOpenDialog ref is called with callback', () => {
+  it('calls onOpen callback when onOpenDialog ref is called with callback', async () => {
     const onOpenMock = jest.fn();
     const callbackMock = jest.fn();
-    const TestComponent = () => {
-      const ref = useRef<BottomSheetDialogRef>(null);
+    const ref = createRef<BottomSheetDialogRef>();
 
-      useEffect(() => {
-        if (ref.current) {
-          act(() => {
-            ref.current?.onOpenDialog(callbackMock);
-          });
-        }
-      }, []);
+    await render(
+      <BottomSheetDialog ref={ref} onOpen={onOpenMock}>
+        <Text>Test Child</Text>
+      </BottomSheetDialog>,
+    );
 
-      return (
-        <BottomSheetDialog ref={ref} onOpen={onOpenMock}>
-          <Text>Test Child</Text>
-        </BottomSheetDialog>
-      );
-    };
-
-    render(<TestComponent />);
+    await act(async () => {
+      ref.current?.onOpenDialog(callbackMock);
+    });
 
     expect(onOpenMock).toHaveBeenCalled();
     expect(callbackMock).toHaveBeenCalled();
   });
 
-  it('calls onClose when onCloseDialog ref is called', () => {
+  it('calls onClose when onCloseDialog ref is called', async () => {
     const onCloseMock = jest.fn();
-    const TestComponent = () => {
-      const ref = useRef<BottomSheetDialogRef>(null);
+    const ref = createRef<BottomSheetDialogRef>();
 
-      useEffect(() => {
-        if (ref.current) {
-          act(() => {
-            ref.current?.onCloseDialog();
-          });
-        }
-      }, []);
+    await render(
+      <BottomSheetDialog ref={ref} onClose={onCloseMock}>
+        <Text>Test Child</Text>
+      </BottomSheetDialog>,
+    );
 
-      return (
-        <BottomSheetDialog ref={ref} onClose={onCloseMock}>
-          <Text>Test Child</Text>
-        </BottomSheetDialog>
-      );
-    };
-
-    render(<TestComponent />);
+    await act(async () => {
+      ref.current?.onCloseDialog();
+    });
 
     expect(onCloseMock).toHaveBeenCalled();
   });
 
-  it('calls onClose callback when onCloseDialog ref is called with callback', () => {
+  it('calls onClose callback when onCloseDialog ref is called with callback', async () => {
     const onCloseMock = jest.fn();
     const callbackMock = jest.fn();
-    const TestComponent = () => {
-      const ref = useRef<BottomSheetDialogRef>(null);
+    const ref = createRef<BottomSheetDialogRef>();
 
-      useEffect(() => {
-        if (ref.current) {
-          act(() => {
-            ref.current?.onCloseDialog(callbackMock);
-          });
-        }
-      }, []);
+    await render(
+      <BottomSheetDialog ref={ref} onClose={onCloseMock}>
+        <Text>Test Child</Text>
+      </BottomSheetDialog>,
+    );
 
-      return (
-        <BottomSheetDialog ref={ref} onClose={onCloseMock}>
-          <Text>Test Child</Text>
-        </BottomSheetDialog>
-      );
-    };
-
-    render(<TestComponent />);
+    await act(async () => {
+      ref.current?.onCloseDialog(callbackMock);
+    });
 
     expect(onCloseMock).toHaveBeenCalled();
     expect(callbackMock).toHaveBeenCalled();
   });
 
-  it('renders drag handle indicator only when isInteractable is true', () => {
+  it('renders drag handle indicator only when isInteractable is true', async () => {
     const countViews = (json: ReturnType<typeof JSON.parse>): number => {
       if (!json) {
         return 0;
@@ -190,12 +158,12 @@ describe('BottomSheetDialog', () => {
       return count;
     };
 
-    const interactable = render(
+    const interactable = await render(
       <BottomSheetDialog isInteractable>
         <Text>Content</Text>
       </BottomSheetDialog>,
     );
-    const nonInteractable = render(
+    const nonInteractable = await render(
       <BottomSheetDialog isInteractable={false}>
         <Text>Content</Text>
       </BottomSheetDialog>,
@@ -207,8 +175,8 @@ describe('BottomSheetDialog', () => {
     expect(interactableViewCount).toBeGreaterThan(nonInteractableViewCount);
   });
 
-  it('renders in fullscreen mode', () => {
-    const { getByText } = render(
+  it('renders in fullscreen mode', async () => {
+    const { getByText } = await render(
       <BottomSheetDialog isFullscreen>
         <Text>Fullscreen Content</Text>
       </BottomSheetDialog>,
@@ -216,8 +184,8 @@ describe('BottomSheetDialog', () => {
     expect(getByText('Fullscreen Content')).toBeDefined();
   });
 
-  it('renders with keyboard avoiding view disabled', () => {
-    const { getByText } = render(
+  it('renders with keyboard avoiding view disabled', async () => {
+    const { getByText } = await render(
       <BottomSheetDialog keyboardAvoidingViewEnabled={false}>
         <Text>No Keyboard Avoidance</Text>
       </BottomSheetDialog>,
@@ -225,8 +193,8 @@ describe('BottomSheetDialog', () => {
     expect(getByText('No Keyboard Avoidance')).toBeDefined();
   });
 
-  it('renders with custom twClassName', () => {
-    const { getByText } = render(
+  it('renders with custom twClassName', async () => {
+    const { getByText } = await render(
       <BottomSheetDialog twClassName="rounded-t-xl">
         <Text>Styled Content</Text>
       </BottomSheetDialog>,
@@ -234,8 +202,8 @@ describe('BottomSheetDialog', () => {
     expect(getByText('Styled Content')).toBeDefined();
   });
 
-  it('renders with custom style prop', () => {
-    const { getByText } = render(
+  it('renders with custom style prop', async () => {
+    const { getByText } = await render(
       <BottomSheetDialog style={{ marginHorizontal: 16 }}>
         <Text>Custom Style</Text>
       </BottomSheetDialog>,
@@ -243,9 +211,9 @@ describe('BottomSheetDialog', () => {
     expect(getByText('Custom Style')).toBeDefined();
   });
 
-  it('triggers onOpenDialog on first layout event', () => {
+  it('triggers onOpenDialog on first layout event', async () => {
     const onOpenMock = jest.fn();
-    const { getByText } = render(
+    const { getByText } = await render(
       <BottomSheetDialog onOpen={onOpenMock}>
         <Text>Layout Content</Text>
       </BottomSheetDialog>,
@@ -267,8 +235,8 @@ describe('BottomSheetDialog', () => {
     const layoutNode = findLayoutNode(content.parent);
     expect(layoutNode).toBeDefined();
     if (layoutNode) {
-      act(() => {
-        fireEvent(layoutNode, 'layout', {
+      await act(async () => {
+        await fireEvent(layoutNode, 'layout', {
           nativeEvent: { layout: { height: 400, width: 300, x: 0, y: 0 } },
         });
       });
@@ -277,9 +245,9 @@ describe('BottomSheetDialog', () => {
     expect(onOpenMock).toHaveBeenCalled();
   });
 
-  it('does not re-trigger onOpenDialog on subsequent layout events', () => {
+  it('does not re-trigger onOpenDialog on subsequent layout events', async () => {
     const onOpenMock = jest.fn();
-    const { getByText } = render(
+    const { getByText } = await render(
       <BottomSheetDialog onOpen={onOpenMock}>
         <Text>Layout Content</Text>
       </BottomSheetDialog>,
@@ -300,13 +268,13 @@ describe('BottomSheetDialog', () => {
     const layoutNode = findLayoutNode(content.parent);
     expect(layoutNode).toBeDefined();
     if (layoutNode) {
-      act(() => {
-        fireEvent(layoutNode, 'layout', {
+      await act(async () => {
+        await fireEvent(layoutNode, 'layout', {
           nativeEvent: { layout: { height: 400, width: 300, x: 0, y: 0 } },
         });
       });
-      act(() => {
-        fireEvent(layoutNode, 'layout', {
+      await act(async () => {
+        await fireEvent(layoutNode, 'layout', {
           nativeEvent: { layout: { height: 500, width: 300, x: 0, y: 0 } },
         });
       });
@@ -316,8 +284,8 @@ describe('BottomSheetDialog', () => {
     expect(onOpenMock).toHaveBeenCalledTimes(1);
   });
 
-  it('renders without onOpen and onClose callbacks', () => {
-    const { getByText } = render(
+  it('renders without onOpen and onClose callbacks', async () => {
+    const { getByText } = await render(
       <BottomSheetDialog>
         <Text>No Callbacks</Text>
       </BottomSheetDialog>,
@@ -325,34 +293,23 @@ describe('BottomSheetDialog', () => {
     expect(getByText('No Callbacks')).toBeDefined();
   });
 
-  it('exposes onOpenDialog and onCloseDialog via ref', () => {
-    const dialogRef: { current: BottomSheetDialogRef | null } = {
-      current: null,
-    };
-    const TestComponent = () => {
-      const ref = useRef<BottomSheetDialogRef>(null);
+  it('exposes onOpenDialog and onCloseDialog via ref', async () => {
+    const dialogRef = createRef<BottomSheetDialogRef>();
 
-      useEffect(() => {
-        dialogRef.current = ref.current;
-      }, []);
-
-      return (
-        <BottomSheetDialog ref={ref}>
-          <Text>Ref Test</Text>
-        </BottomSheetDialog>
-      );
-    };
-
-    render(<TestComponent />);
+    await render(
+      <BottomSheetDialog ref={dialogRef}>
+        <Text>Ref Test</Text>
+      </BottomSheetDialog>,
+    );
 
     expect(dialogRef.current).not.toBeNull();
     expect(typeof dialogRef.current?.onOpenDialog).toBe('function');
     expect(typeof dialogRef.current?.onCloseDialog).toBe('function');
   });
 
-  it('uses dark theme shadow when theme is dark', () => {
+  it('uses dark theme shadow when theme is dark', async () => {
     mockThemeRef.current = 'dark';
-    const { getByText } = render(
+    const { getByText } = await render(
       <BottomSheetDialog>
         <Text>Dark Theme</Text>
       </BottomSheetDialog>,
@@ -361,10 +318,10 @@ describe('BottomSheetDialog', () => {
     mockThemeRef.current = 'light';
   });
 
-  it('renders on Android platform', () => {
+  it('renders on Android platform', async () => {
     const originalOS = Platform.OS;
     Platform.OS = 'android';
-    const { getByText } = render(
+    const { getByText } = await render(
       <BottomSheetDialog>
         <Text>Android Content</Text>
       </BottomSheetDialog>,

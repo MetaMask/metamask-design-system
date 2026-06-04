@@ -25,8 +25,8 @@ jest.mock('../Icon', () => {
 });
 
 describe('Toast', () => {
-  it('renders title and description', () => {
-    render(
+  it('renders title and description', async () => {
+    await render(
       <Toast
         description="Description of toast"
         onClose={() => undefined}
@@ -38,14 +38,14 @@ describe('Toast', () => {
     expect(screen.getByText('Description of toast')).toBeDefined();
   });
 
-  it('does not render a severity icon by default', () => {
-    render(<Toast onClose={() => undefined} title="Default toast" />);
+  it('does not render a severity icon by default', async () => {
+    await render(<Toast onClose={() => undefined} title="Default toast" />);
 
     expect(screen.queryByTestId('icon-Info')).toBeNull();
   });
 
-  it('does not render a severity icon when severity is default', () => {
-    render(
+  it('does not render a severity icon when severity is default', async () => {
+    await render(
       <Toast
         onClose={() => undefined}
         severity={ToastSeverity.Default}
@@ -56,8 +56,8 @@ describe('Toast', () => {
     expect(screen.queryByTestId('icon-Info')).toBeNull();
   });
 
-  it('renders the success severity icon when severity is provided', () => {
-    render(
+  it('renders the success severity icon when severity is provided', async () => {
+    await render(
       <Toast
         onClose={() => undefined}
         severity={ToastSeverity.Success}
@@ -68,8 +68,8 @@ describe('Toast', () => {
     expect(screen.getByTestId('icon-Confirmation')).toBeDefined();
   });
 
-  it('renders the warning severity icon', () => {
-    render(
+  it('renders the warning severity icon', async () => {
+    await render(
       <Toast
         onClose={() => undefined}
         severity={ToastSeverity.Warning}
@@ -80,8 +80,8 @@ describe('Toast', () => {
     expect(screen.getByTestId('icon-Danger')).toBeDefined();
   });
 
-  it('renders the danger severity icon', () => {
-    render(
+  it('renders the danger severity icon', async () => {
+    await render(
       <Toast
         onClose={() => undefined}
         severity={ToastSeverity.Danger}
@@ -92,8 +92,8 @@ describe('Toast', () => {
     expect(screen.getByTestId('icon-Error')).toBeDefined();
   });
 
-  it('renders startAccessory instead of the severity icon when provided', () => {
-    render(
+  it('renders startAccessory instead of the severity icon when provided', async () => {
+    await render(
       <Toast
         onClose={() => undefined}
         severity={ToastSeverity.Danger}
@@ -106,10 +106,10 @@ describe('Toast', () => {
     expect(screen.queryByTestId('icon-Error')).toBeNull();
   });
 
-  it('renders an action button and calls actionButtonOnPress when pressed', () => {
+  it('renders an action button and calls actionButtonOnPress when pressed', async () => {
     const onActionPress = jest.fn();
 
-    render(
+    await render(
       <Toast
         actionButtonLabel="Action"
         actionButtonOnPress={onActionPress}
@@ -118,20 +118,20 @@ describe('Toast', () => {
       />,
     );
 
-    fireEvent.press(screen.getByText('Action'));
+    await fireEvent.press(screen.getByText('Action'));
     expect(onActionPress).toHaveBeenCalled();
   });
 
-  it('does not render a close button when onClose is not provided', () => {
-    render(<Toast title="Dismiss me" />);
+  it('does not render a close button when onClose is not provided', async () => {
+    await render(<Toast title="Dismiss me" />);
 
     expect(screen.queryByTestId('button-icon')).toBeNull();
   });
 
-  it('calls onClose and applies close button props when the close button is pressed', () => {
+  it('calls onClose and applies close button props when the close button is pressed', async () => {
     const onClose = jest.fn();
 
-    render(
+    await render(
       <Toast
         closeButtonProps={{
           accessibilityLabel: 'Dismiss toast',
@@ -145,14 +145,15 @@ describe('Toast', () => {
     expect(
       screen.getByTestId('dismiss-toast-button').props.accessibilityLabel,
     ).toBe('Dismiss toast');
-    fireEvent.press(screen.getByTestId('dismiss-toast-button'));
+    await fireEvent.press(screen.getByTestId('dismiss-toast-button'));
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('applies twClassName to the toast surface', () => {
-    const tw = renderHook(() => useTailwind()).result.current;
+  it('applies twClassName to the toast surface', async () => {
+    const { result } = await renderHook(() => useTailwind());
+    const tw = result.current;
 
-    render(
+    await render(
       <Toast
         onClose={() => undefined}
         testID="toast-root"

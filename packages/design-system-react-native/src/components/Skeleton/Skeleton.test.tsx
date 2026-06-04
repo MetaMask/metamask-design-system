@@ -15,14 +15,14 @@ describe('Skeleton', () => {
   });
 
   describe('rendering', () => {
-    it('renders with testID from ViewProps', () => {
-      const { getByTestId } = render(<Skeleton testID="skeleton" />);
+    it('renders with testID from ViewProps', async () => {
+      const { getByTestId } = await render(<Skeleton testID="skeleton" />);
 
       expect(getByTestId('skeleton')).toBeDefined();
     });
 
-    it('renders animated background with configurable testID', () => {
-      const { getByTestId } = render(
+    it('renders animated background with configurable testID', async () => {
+      const { getByTestId } = await render(
         <Skeleton
           testID="skeleton"
           animatedViewProps={{ testID: 'skeleton-bg' }}
@@ -35,8 +35,8 @@ describe('Skeleton', () => {
   });
 
   describe('dimensions', () => {
-    it('applies explicit height and width', () => {
-      const { getByTestId } = render(
+    it('applies explicit height and width', async () => {
+      const { getByTestId } = await render(
         <Skeleton testID="skeleton" height={100} width={200} />,
       );
       const skeleton = getByTestId('skeleton');
@@ -46,8 +46,8 @@ describe('Skeleton', () => {
       );
     });
 
-    it('applies string dimensions', () => {
-      const { getByTestId } = render(
+    it('applies string dimensions', async () => {
+      const { getByTestId } = await render(
         <Skeleton testID="skeleton" height="50%" width="100%" />,
       );
       const skeleton = getByTestId('skeleton');
@@ -57,8 +57,8 @@ describe('Skeleton', () => {
       );
     });
 
-    it('applies custom style', () => {
-      const { getByTestId } = render(
+    it('applies custom style', async () => {
+      const { getByTestId } = await render(
         <Skeleton testID="skeleton" style={{ alignSelf: 'flex-start' }} />,
       );
       const skeleton = getByTestId('skeleton');
@@ -70,8 +70,8 @@ describe('Skeleton', () => {
   });
 
   describe('children', () => {
-    it('renders children directly when hideChildren is false', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('renders children directly when hideChildren is false', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <Skeleton testID="skeleton">
           <View testID="child-component" />
         </Skeleton>,
@@ -81,8 +81,8 @@ describe('Skeleton', () => {
       expect(queryByTestId('skeleton')).toBeNull();
     });
 
-    it('hides children when hideChildren is true', () => {
-      const { getByTestId } = render(
+    it('hides children when hideChildren is true', async () => {
+      const { getByTestId } = await render(
         <Skeleton
           testID="skeleton"
           hideChildren
@@ -97,8 +97,8 @@ describe('Skeleton', () => {
       expect(getByTestId('child-component', hidden)).toBeDefined();
     });
 
-    it('disables interactions on hidden children', () => {
-      const { getByTestId } = render(
+    it('disables interactions on hidden children', async () => {
+      const { getByTestId } = await render(
         <Skeleton
           testID="skeleton"
           hideChildren
@@ -117,8 +117,8 @@ describe('Skeleton', () => {
       );
     });
 
-    it('renders skeleton container when hideChildren is true', () => {
-      const { getByTestId } = render(
+    it('renders skeleton container when hideChildren is true', async () => {
+      const { getByTestId } = await render(
         <Skeleton
           testID="skeleton"
           hideChildren
@@ -132,8 +132,8 @@ describe('Skeleton', () => {
       expect(getByTestId('skeleton-bg')).toBeDefined();
     });
 
-    it('preserves internal styles when wrapper props include style', () => {
-      const { getByTestId } = render(
+    it('preserves internal styles when wrapper props include style', async () => {
+      const { getByTestId } = await render(
         <Skeleton
           testID="skeleton"
           hideChildren
@@ -163,8 +163,8 @@ describe('Skeleton', () => {
   });
 
   describe('autoPlay', () => {
-    it('renders skeleton with animation by default', () => {
-      const { getByTestId } = render(
+    it('renders skeleton with animation by default', async () => {
+      const { getByTestId } = await render(
         <Skeleton
           testID="skeleton"
           animatedViewProps={{ testID: 'skeleton-bg' }}
@@ -174,26 +174,28 @@ describe('Skeleton', () => {
       expect(getByTestId('skeleton-bg')).toBeDefined();
     });
 
-    it('renders skeleton when autoPlay is false', () => {
-      const { getByTestId } = render(
+    it('renders skeleton when autoPlay is false', async () => {
+      const { getByTestId } = await render(
         <Skeleton testID="skeleton" autoPlay={false} />,
       );
 
       expect(getByTestId('skeleton')).toBeDefined();
     });
 
-    it('stops animation on unmount', () => {
-      const { unmount, getByTestId } = render(<Skeleton testID="skeleton" />);
+    it('stops animation on unmount', async () => {
+      const { unmount, getByTestId } = await render(
+        <Skeleton testID="skeleton" />,
+      );
 
       expect(getByTestId('skeleton')).toBeDefined();
       jest.advanceTimersByTime(700);
-      unmount();
+      await unmount();
     });
   });
 
   describe('twClassName', () => {
-    it('accepts custom twClassName', () => {
-      const { getByTestId } = render(
+    it('accepts custom twClassName', async () => {
+      const { getByTestId } = await render(
         <Skeleton testID="skeleton" twClassName="bg-info-default" />,
       );
 
@@ -202,8 +204,8 @@ describe('Skeleton', () => {
   });
 
   describe('ViewProps extension', () => {
-    it('passes through accessibilityLabel', () => {
-      const { getByTestId } = render(
+    it('passes through accessibilityLabel', async () => {
+      const { getByTestId } = await render(
         <Skeleton testID="skeleton" accessibilityLabel="Loading content" />,
       );
       const skeleton = getByTestId('skeleton');

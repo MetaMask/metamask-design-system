@@ -5,15 +5,15 @@ import React from 'react';
 import { Button } from './Button';
 
 describe('Button', () => {
-  it('renders primary variant by default when no variant is provided', () => {
-    const { getByTestId } = render(
+  it('renders primary variant by default when no variant is provided', async () => {
+    const { getByTestId } = await render(
       <Button testID="button-default">Default Button</Button>,
     );
     expect(getByTestId('button-default')).not.toBeNull();
   });
 
-  it('renders the correct primary variant', () => {
-    const { getByTestId } = render(
+  it('renders the correct primary variant', async () => {
+    const { getByTestId } = await render(
       <Button variant={ButtonVariant.Primary} testID="button-primary">
         Default Button
       </Button>,
@@ -21,8 +21,8 @@ describe('Button', () => {
     expect(getByTestId('button-primary')).not.toBeNull();
   });
 
-  it('renders the correct secondary variant', () => {
-    const { getByTestId } = render(
+  it('renders the correct secondary variant', async () => {
+    const { getByTestId } = await render(
       <Button variant={ButtonVariant.Secondary} testID="button-secondary">
         Default Button
       </Button>,
@@ -30,8 +30,8 @@ describe('Button', () => {
     expect(getByTestId('button-secondary')).not.toBeNull();
   });
 
-  it('renders the correct tertiary variant', () => {
-    const { getByTestId } = render(
+  it('renders the correct tertiary variant', async () => {
+    const { getByTestId } = await render(
       <Button variant={ButtonVariant.Tertiary} testID="button-tertiary">
         Default Button
       </Button>,
@@ -39,24 +39,24 @@ describe('Button', () => {
     expect(getByTestId('button-tertiary')).not.toBeNull();
   });
 
-  it('throws an error for an invalid variant', () => {
+  it('throws an error for an invalid variant', async () => {
     const consoleErrorMock = jest
       .spyOn(console, 'error')
       .mockImplementation(jest.fn()); // Use jest.fn() instead of empty arrow function
 
-    expect(() =>
+    await expect(
       render(
         <Button variant={'InvalidVariant' as ButtonVariant}>
           Invalid Button
         </Button>,
       ),
-    ).toThrow('Invalid Button Variant');
+    ).rejects.toThrow('Invalid Button Variant');
 
     consoleErrorMock.mockRestore(); // Restore console.error after the test
   });
 
-  it('renders ButtonPrimary, ButtonSecondary, and ButtonTertiary', () => {
-    const { getByText } = render(
+  it('renders ButtonPrimary, ButtonSecondary, and ButtonTertiary', async () => {
+    const { getByText } = await render(
       <>
         <Button variant={ButtonVariant.Primary}>Primary</Button>
         <Button variant={ButtonVariant.Secondary}>Secondary</Button>
@@ -69,8 +69,8 @@ describe('Button', () => {
     expect(getByText('Tertiary')).toBeDefined();
   });
 
-  it('passes accessibility props to button variants', () => {
-    const { getByTestId } = render(
+  it('passes accessibility props to button variants', async () => {
+    const { getByTestId } = await render(
       <Button
         variant={ButtonVariant.Primary}
         testID="primary-btn"

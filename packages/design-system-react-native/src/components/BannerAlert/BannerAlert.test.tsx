@@ -29,8 +29,8 @@ describe('BannerAlert', () => {
     });
   });
 
-  it('uses info severity styles by default', () => {
-    render(
+  it('uses info severity styles by default', async () => {
+    await render(
       <BannerAlert title="Default info" iconProps={{ testID: ICON_TEST_ID }} />,
     );
 
@@ -70,8 +70,10 @@ describe('BannerAlert', () => {
     },
   ])(
     'applies expected icon and background for $severity severity',
-    ({ severity, iconName, iconColor, backgroundColor }) => {
-      render(<BannerAlert severity={severity} title={`${severity} banner`} />);
+    async ({ severity, iconName, iconColor, backgroundColor }) => {
+      await render(
+        <BannerAlert severity={severity} title={`${severity} banner`} />,
+      );
 
       const props = mockBannerBase.mock.calls[0][0];
       expect(props.backgroundColor).toBe(backgroundColor);
@@ -80,9 +82,9 @@ describe('BannerAlert', () => {
     },
   );
 
-  it('applies border styling and passes style prop', () => {
+  it('applies border styling and passes style prop', async () => {
     const customStyle = { marginTop: 8 };
-    render(
+    await render(
       <BannerAlert
         severity={BannerAlertSeverity.Info}
         title="Custom styling"

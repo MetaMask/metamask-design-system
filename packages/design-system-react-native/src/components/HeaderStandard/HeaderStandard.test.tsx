@@ -23,14 +23,14 @@ describe('HeaderStandard', () => {
   });
 
   describe('title and subtitle', () => {
-    it('renders with title', () => {
-      const { getByText } = render(<HeaderStandard title="Test Title" />);
+    it('renders with title', async () => {
+      const { getByText } = await render(<HeaderStandard title="Test Title" />);
 
       expect(getByText('Test Title')).toBeOnTheScreen();
     });
 
-    it('renders title with testID when provided via titleProps', () => {
-      const { getByTestId } = render(
+    it('renders title with testID when provided via titleProps', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Test Title"
           titleProps={{ testID: TITLE_TEST_ID }}
@@ -40,16 +40,16 @@ describe('HeaderStandard', () => {
       expect(getByTestId(TITLE_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders container with testID when provided', () => {
-      const { getByTestId } = render(
+    it('renders container with testID when provided', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard title="Test Title" testID={CONTAINER_TEST_ID} />,
       );
 
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders custom children instead of title', () => {
-      const { getByText, queryByText } = render(
+    it('renders custom children instead of title', async () => {
+      const { getByText, queryByText } = await render(
         <HeaderStandard title="Ignored Title">
           <Text>Custom Content</Text>
         </HeaderStandard>,
@@ -59,8 +59,8 @@ describe('HeaderStandard', () => {
       expect(queryByText('Ignored Title')).not.toBeOnTheScreen();
     });
 
-    it('renders children when both title and children provided', () => {
-      const { getByText, queryByText } = render(
+    it('renders children when both title and children provided', async () => {
+      const { getByText, queryByText } = await render(
         <HeaderStandard title="Title Text">
           <Text>Children Text</Text>
         </HeaderStandard>,
@@ -70,22 +70,24 @@ describe('HeaderStandard', () => {
       expect(queryByText('Title Text')).not.toBeOnTheScreen();
     });
 
-    it('renders subtitle when provided', () => {
-      const { getByText } = render(
+    it('renders subtitle when provided', async () => {
+      const { getByText } = await render(
         <HeaderStandard title="Test Title" subtitle="Test Subtitle" />,
       );
 
       expect(getByText('Test Subtitle')).toBeOnTheScreen();
     });
 
-    it('does not render subtitle when not provided', () => {
-      const { queryByText } = render(<HeaderStandard title="Test Title" />);
+    it('does not render subtitle when not provided', async () => {
+      const { queryByText } = await render(
+        <HeaderStandard title="Test Title" />,
+      );
 
       expect(queryByText('Test Subtitle')).not.toBeOnTheScreen();
     });
 
-    it('renders subtitle with testID when provided via subtitleProps', () => {
-      const { getByTestId } = render(
+    it('renders subtitle with testID when provided via subtitleProps', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Test Title"
           subtitle="Test Subtitle"
@@ -96,8 +98,8 @@ describe('HeaderStandard', () => {
       expect(getByTestId('subtitle-test-id')).toBeOnTheScreen();
     });
 
-    it('renders both title and subtitle together', () => {
-      const { getByText } = render(
+    it('renders both title and subtitle together', async () => {
+      const { getByText } = await render(
         <HeaderStandard title="Main Title" subtitle="Supporting Text" />,
       );
 
@@ -105,9 +107,9 @@ describe('HeaderStandard', () => {
       expect(getByText('Supporting Text')).toBeOnTheScreen();
     });
 
-    it('renders title when passed as React node', () => {
+    it('renders title when passed as React node', async () => {
       const TITLE_NODE_TEST_ID = 'custom-title-node';
-      const { getByTestId, getByText } = render(
+      const { getByTestId, getByText } = await render(
         <HeaderStandard
           title={<Text testID={TITLE_NODE_TEST_ID}>Custom Title Node</Text>}
         />,
@@ -117,9 +119,9 @@ describe('HeaderStandard', () => {
       expect(getByText('Custom Title Node')).toBeOnTheScreen();
     });
 
-    it('renders subtitle when passed as React node', () => {
+    it('renders subtitle when passed as React node', async () => {
       const SUBTITLE_NODE_TEST_ID = 'custom-subtitle-node';
-      const { getByTestId, getByText } = render(
+      const { getByTestId, getByText } = await render(
         <HeaderStandard
           title="Page Title"
           subtitle={
@@ -132,10 +134,10 @@ describe('HeaderStandard', () => {
       expect(getByText('Custom Subtitle Node')).toBeOnTheScreen();
     });
 
-    it('renders both title and subtitle as React nodes', () => {
+    it('renders both title and subtitle as React nodes', async () => {
       const TITLE_NODE_TEST_ID = 'title-node';
       const SUBTITLE_NODE_TEST_ID = 'subtitle-node';
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard
           title={<Text testID={TITLE_NODE_TEST_ID}>Node Title</Text>}
           subtitle={<Text testID={SUBTITLE_NODE_TEST_ID}>Node Subtitle</Text>}
@@ -146,8 +148,8 @@ describe('HeaderStandard', () => {
       expect(getByTestId(SUBTITLE_NODE_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders no title row when title and children are omitted', () => {
-      const { getByTestId, queryAllByText } = render(
+    it('renders no title row when title and children are omitted', async () => {
+      const { getByTestId, queryAllByText } = await render(
         <HeaderStandard testID={CONTAINER_TEST_ID} />,
       );
 
@@ -155,8 +157,8 @@ describe('HeaderStandard', () => {
       expect(queryAllByText(/.+/u)).toHaveLength(0);
     });
 
-    it('does not render subtitle row when subtitle is an empty string', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('does not render subtitle row when subtitle is an empty string', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <HeaderStandard
           title="Only Title"
           titleProps={{ testID: TITLE_TEST_ID }}
@@ -171,8 +173,8 @@ describe('HeaderStandard', () => {
   });
 
   describe('back button', () => {
-    it('renders back button when onBack provided', () => {
-      const { getByTestId } = render(
+    it('renders back button when onBack provided', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           onBack={jest.fn()}
@@ -183,27 +185,27 @@ describe('HeaderStandard', () => {
       expect(getByTestId(BACK_BUTTON_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders back button when only onBack is provided', () => {
-      const { getByTestId } = render(
+    it('renders back button when only onBack is provided', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard title="Title" onBack={jest.fn()} />,
       );
 
       expect(getByTestId('button-icon')).toBeOnTheScreen();
     });
 
-    it('calls onBack when only onBack is provided', () => {
+    it('calls onBack when only onBack is provided', async () => {
       const onBack = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard title="Title" onBack={onBack} />,
       );
 
-      fireEvent.press(getByTestId('button-icon'));
+      await fireEvent.press(getByTestId('button-icon'));
 
       expect(onBack).toHaveBeenCalledTimes(1);
     });
 
-    it('renders back button when backButtonProps provided', () => {
-      const { getByTestId } = render(
+    it('renders back button when backButtonProps provided', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           backButtonProps={{ onPress: jest.fn(), testID: BACK_BUTTON_TEST_ID }}
@@ -213,9 +215,9 @@ describe('HeaderStandard', () => {
       expect(getByTestId(BACK_BUTTON_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('calls onBack when back button pressed', () => {
+    it('calls onBack when back button pressed', async () => {
       const onBack = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           onBack={onBack}
@@ -223,29 +225,29 @@ describe('HeaderStandard', () => {
         />,
       );
 
-      fireEvent.press(getByTestId(BACK_BUTTON_TEST_ID));
+      await fireEvent.press(getByTestId(BACK_BUTTON_TEST_ID));
 
       expect(onBack).toHaveBeenCalledTimes(1);
     });
 
-    it('calls backButtonProps.onPress when back button pressed', () => {
+    it('calls backButtonProps.onPress when back button pressed', async () => {
       const onPress = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           backButtonProps={{ onPress, testID: BACK_BUTTON_TEST_ID }}
         />,
       );
 
-      fireEvent.press(getByTestId(BACK_BUTTON_TEST_ID));
+      await fireEvent.press(getByTestId(BACK_BUTTON_TEST_ID));
 
       expect(onPress).toHaveBeenCalledTimes(1);
     });
 
-    it('uses backButtonProps.onPress over onBack when both provided', () => {
+    it('uses backButtonProps.onPress over onBack when both provided', async () => {
       const onBack = jest.fn();
       const onPress = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           onBack={onBack}
@@ -253,14 +255,14 @@ describe('HeaderStandard', () => {
         />,
       );
 
-      fireEvent.press(getByTestId(BACK_BUTTON_TEST_ID));
+      await fireEvent.press(getByTestId(BACK_BUTTON_TEST_ID));
 
       expect(onPress).toHaveBeenCalledTimes(1);
       expect(onBack).not.toHaveBeenCalled();
     });
 
-    it('does not render start accessory when no back button props provided', () => {
-      const { queryByTestId } = render(
+    it('does not render start accessory when no back button props provided', async () => {
+      const { queryByTestId } = await render(
         <HeaderStandard
           title="Title"
           startAccessoryWrapperProps={{ testID: START_ACCESSORY_TEST_ID }}
@@ -270,9 +272,9 @@ describe('HeaderStandard', () => {
       expect(queryByTestId(START_ACCESSORY_TEST_ID)).not.toBeOnTheScreen();
     });
 
-    it('renders startButtonIconProps when provided', () => {
+    it('renders startButtonIconProps when provided', async () => {
       const onPress = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           startButtonIconProps={{
@@ -286,10 +288,10 @@ describe('HeaderStandard', () => {
       expect(getByTestId('custom-start-button')).toBeOnTheScreen();
     });
 
-    it('startButtonIconProps takes priority over onBack', () => {
+    it('startButtonIconProps takes priority over onBack', async () => {
       const onBack = jest.fn();
       const onPress = jest.fn();
-      const { getByTestId, queryByTestId } = render(
+      const { getByTestId, queryByTestId } = await render(
         <HeaderStandard
           title="Title"
           onBack={onBack}
@@ -308,8 +310,8 @@ describe('HeaderStandard', () => {
   });
 
   describe('close button', () => {
-    it('renders close button when onClose provided', () => {
-      const { getByTestId } = render(
+    it('renders close button when onClose provided', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           onClose={jest.fn()}
@@ -320,27 +322,27 @@ describe('HeaderStandard', () => {
       expect(getByTestId(CLOSE_BUTTON_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders close button when only onClose is provided', () => {
-      const { getByTestId } = render(
+    it('renders close button when only onClose is provided', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard title="Title" onClose={jest.fn()} />,
       );
 
       expect(getByTestId('button-icon')).toBeOnTheScreen();
     });
 
-    it('calls onClose when only onClose is provided', () => {
+    it('calls onClose when only onClose is provided', async () => {
       const onClose = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard title="Title" onClose={onClose} />,
       );
 
-      fireEvent.press(getByTestId('button-icon'));
+      await fireEvent.press(getByTestId('button-icon'));
 
       expect(onClose).toHaveBeenCalledTimes(1);
     });
 
-    it('renders close button when closeButtonProps provided', () => {
-      const { getByTestId } = render(
+    it('renders close button when closeButtonProps provided', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           closeButtonProps={{
@@ -353,9 +355,9 @@ describe('HeaderStandard', () => {
       expect(getByTestId(CLOSE_BUTTON_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('calls onClose when close button pressed', () => {
+    it('calls onClose when close button pressed', async () => {
       const onClose = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           onClose={onClose}
@@ -363,29 +365,29 @@ describe('HeaderStandard', () => {
         />,
       );
 
-      fireEvent.press(getByTestId(CLOSE_BUTTON_TEST_ID));
+      await fireEvent.press(getByTestId(CLOSE_BUTTON_TEST_ID));
 
       expect(onClose).toHaveBeenCalledTimes(1);
     });
 
-    it('calls closeButtonProps.onPress when close button pressed', () => {
+    it('calls closeButtonProps.onPress when close button pressed', async () => {
       const onPress = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           closeButtonProps={{ onPress, testID: CLOSE_BUTTON_TEST_ID }}
         />,
       );
 
-      fireEvent.press(getByTestId(CLOSE_BUTTON_TEST_ID));
+      await fireEvent.press(getByTestId(CLOSE_BUTTON_TEST_ID));
 
       expect(onPress).toHaveBeenCalledTimes(1);
     });
 
-    it('uses closeButtonProps.onPress over onClose when both provided', () => {
+    it('uses closeButtonProps.onPress over onClose when both provided', async () => {
       const onClose = jest.fn();
       const onPress = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           onClose={onClose}
@@ -393,14 +395,14 @@ describe('HeaderStandard', () => {
         />,
       );
 
-      fireEvent.press(getByTestId(CLOSE_BUTTON_TEST_ID));
+      await fireEvent.press(getByTestId(CLOSE_BUTTON_TEST_ID));
 
       expect(onPress).toHaveBeenCalledTimes(1);
       expect(onClose).not.toHaveBeenCalled();
     });
 
-    it('does not render end accessory when no close button props provided', () => {
-      const { queryByTestId } = render(
+    it('does not render end accessory when no close button props provided', async () => {
+      const { queryByTestId } = await render(
         <HeaderStandard
           title="Title"
           endAccessoryWrapperProps={{ testID: END_ACCESSORY_TEST_ID }}
@@ -410,9 +412,9 @@ describe('HeaderStandard', () => {
       expect(queryByTestId(END_ACCESSORY_TEST_ID)).not.toBeOnTheScreen();
     });
 
-    it('renders endButtonIconProps when onClose and closeButtonProps are omitted', () => {
+    it('renders endButtonIconProps when onClose and closeButtonProps are omitted', async () => {
       const onPress = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           endButtonIconProps={[
@@ -430,8 +432,8 @@ describe('HeaderStandard', () => {
       expect(getByTestId('header-end-search')).toBeOnTheScreen();
     });
 
-    it('does not render end accessory when endButtonIconProps is an empty array', () => {
-      const { queryByTestId } = render(
+    it('does not render end accessory when endButtonIconProps is an empty array', async () => {
+      const { queryByTestId } = await render(
         <HeaderStandard
           title="Title"
           endButtonIconProps={[]}
@@ -444,8 +446,8 @@ describe('HeaderStandard', () => {
   });
 
   describe('props forwarding', () => {
-    it('renders start accessory when onBack is provided', () => {
-      const { getByTestId } = render(
+    it('renders start accessory when onBack is provided', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           onBack={jest.fn()}
@@ -457,8 +459,8 @@ describe('HeaderStandard', () => {
       expect(getByTestId(START_ACCESSORY_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards endButtonIconProps and adds close button', () => {
-      const { getByTestId } = render(
+    it('forwards endButtonIconProps and adds close button', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           endButtonIconProps={[
@@ -474,16 +476,16 @@ describe('HeaderStandard', () => {
       expect(getByTestId(CLOSE_BUTTON_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('accepts custom testID', () => {
-      const { getByTestId } = render(
+    it('accepts custom testID', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard title="Title" testID="custom-header" />,
       );
 
       expect(getByTestId('custom-header')).toBeOnTheScreen();
     });
 
-    it('applies default horizontal padding and custom twClassName on the root', () => {
-      const { getByTestId } = render(
+    it('applies default horizontal padding and custom twClassName on the root', async () => {
+      const { getByTestId } = await render(
         <HeaderStandard
           title="Title"
           testID={CONTAINER_TEST_ID}

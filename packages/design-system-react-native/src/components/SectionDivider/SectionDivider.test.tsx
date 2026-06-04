@@ -11,21 +11,27 @@ const ROOT_TEST_ID = 'section-divider';
 describe('SectionDivider', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   describe('when rendered with defaults', () => {
-    it('applies default border and vertical margin tokens', () => {
-      const { getByTestId } = render(<SectionDivider testID={ROOT_TEST_ID} />);
+    it('applies default border and vertical margin tokens', async () => {
+      const { getByTestId } = await render(
+        <SectionDivider testID={ROOT_TEST_ID} />,
+      );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
         tw`my-5 border-t border-muted`,
       );
     });
 
-    it('applies full-width stretch to the root', () => {
-      const { getByTestId } = render(<SectionDivider testID={ROOT_TEST_ID} />);
+    it('applies full-width stretch to the root', async () => {
+      const { getByTestId } = await render(
+        <SectionDivider testID={ROOT_TEST_ID} />,
+      );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({
         alignSelf: 'stretch',
@@ -34,8 +40,8 @@ describe('SectionDivider', () => {
   });
 
   describe('when marginVertical is 0', () => {
-    it('applies my-0 instead of default my-5', () => {
-      const { getByTestId } = render(
+    it('applies my-0 instead of default my-5', async () => {
+      const { getByTestId } = await render(
         <SectionDivider testID={ROOT_TEST_ID} marginVertical={0} />,
       );
 
@@ -44,8 +50,8 @@ describe('SectionDivider', () => {
   });
 
   describe('when borderWidth is 0', () => {
-    it('keeps zero border width instead of defaulting to 1', () => {
-      const { getByTestId } = render(
+    it('keeps zero border width instead of defaulting to 1', async () => {
+      const { getByTestId } = await render(
         <SectionDivider testID={ROOT_TEST_ID} borderWidth={0} />,
       );
 
@@ -54,8 +60,8 @@ describe('SectionDivider', () => {
   });
 
   describe('when borderWidth is greater than 1', () => {
-    it('maps the width to a border-t-* class', () => {
-      const { getByTestId } = render(
+    it('maps the width to a border-t-* class', async () => {
+      const { getByTestId } = await render(
         <SectionDivider testID={ROOT_TEST_ID} borderWidth={2} />,
       );
 
@@ -64,8 +70,8 @@ describe('SectionDivider', () => {
   });
 
   describe('when borderColor is overridden', () => {
-    it('applies the given border color token', () => {
-      const { getByTestId } = render(
+    it('applies the given border color token', async () => {
+      const { getByTestId } = await render(
         <SectionDivider
           testID={ROOT_TEST_ID}
           borderColor={BoxBorderColor.BorderDefault}
@@ -77,16 +83,16 @@ describe('SectionDivider', () => {
   });
 
   describe('when twClassName is provided', () => {
-    it('merges twClassName into resolved styles', () => {
-      const { getByTestId } = render(
+    it('merges twClassName into resolved styles', async () => {
+      const { getByTestId } = await render(
         <SectionDivider testID={ROOT_TEST_ID} twClassName="opacity-50" />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`opacity-50`);
     });
 
-    it('lets twClassName override default self-stretch', () => {
-      const { getByTestId } = render(
+    it('lets twClassName override default self-stretch', async () => {
+      const { getByTestId } = await render(
         <SectionDivider testID={ROOT_TEST_ID} twClassName="self-center" />,
       );
 
@@ -97,8 +103,8 @@ describe('SectionDivider', () => {
   });
 
   describe('when style is provided', () => {
-    it('lets caller style override default stretch', () => {
-      const { getByTestId } = render(
+    it('lets caller style override default stretch', async () => {
+      const { getByTestId } = await render(
         <SectionDivider
           testID={ROOT_TEST_ID}
           style={{ alignSelf: 'flex-start' }}
@@ -112,10 +118,10 @@ describe('SectionDivider', () => {
   });
 
   describe('ref forwarding', () => {
-    it('exposes the underlying view on ref', () => {
+    it('exposes the underlying view on ref', async () => {
       const ref = createRef<View>();
 
-      render(<SectionDivider ref={ref} testID={ROOT_TEST_ID} />);
+      await render(<SectionDivider ref={ref} testID={ROOT_TEST_ID} />);
 
       expect(ref.current).not.toBeNull();
     });

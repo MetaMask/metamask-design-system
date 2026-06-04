@@ -9,15 +9,15 @@ import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
 
 describe('Icon', () => {
   describe('Icon Component', () => {
-    it('renders the specified icon', () => {
-      const { getByTestId } = render(
+    it('renders the specified icon', async () => {
+      const { getByTestId } = await render(
         <Icon name={IconName.Add} testID="icon" />,
       );
       const iconElement = getByTestId('icon');
       expect(iconElement.props.name).toBe(IconName.Add);
     });
 
-    it('applies default size and color', () => {
+    it('applies default size and color', async () => {
       let expectedStyles;
 
       const TestComponent = () => {
@@ -29,7 +29,7 @@ describe('Icon', () => {
         return <Icon name={IconName.Add} testID="icon" />;
       };
 
-      const { getByTestId } = render(<TestComponent />);
+      const { getByTestId } = await render(<TestComponent />);
       const iconElement = getByTestId('icon');
 
       expect(expectedStyles).toBeDefined();
@@ -37,7 +37,7 @@ describe('Icon', () => {
     });
 
     Object.values(IconSize).forEach((size) => {
-      it(`applies size ${size} correctly`, () => {
+      it(`applies size ${size} correctly`, async () => {
         let expectedStyles;
 
         const TestComponent = () => {
@@ -49,7 +49,7 @@ describe('Icon', () => {
           return <Icon name={IconName.Add} testID="icon" size={size} />;
         };
 
-        const { getByTestId } = render(<TestComponent />);
+        const { getByTestId } = await render(<TestComponent />);
         const textElement = getByTestId('icon');
 
         expect(expectedStyles).toBeDefined();
@@ -58,7 +58,7 @@ describe('Icon', () => {
     });
 
     Object.values(IconColor).forEach((color) => {
-      it(`applies color ${color} correctly`, () => {
+      it(`applies color ${color} correctly`, async () => {
         let expectedStyles;
 
         const TestComponent = () => {
@@ -70,7 +70,7 @@ describe('Icon', () => {
           return <Icon name={IconName.Add} testID="icon" color={color} />;
         };
 
-        const { getByTestId } = render(<TestComponent />);
+        const { getByTestId } = await render(<TestComponent />);
         const textElement = getByTestId('icon');
 
         expect(expectedStyles).toBeDefined();
@@ -78,7 +78,7 @@ describe('Icon', () => {
       });
     });
 
-    it('applies custom styles based on props', () => {
+    it('applies custom styles based on props', async () => {
       let expectedStyles;
       const props = {
         size: IconSize.Lg,
@@ -94,7 +94,7 @@ describe('Icon', () => {
         return <Icon name={IconName.Add} testID="icon" {...props} />;
       };
 
-      const { getByTestId } = render(<TestComponent />);
+      const { getByTestId } = await render(<TestComponent />);
       const textElement = getByTestId('icon');
 
       expect(expectedStyles).toBeDefined();

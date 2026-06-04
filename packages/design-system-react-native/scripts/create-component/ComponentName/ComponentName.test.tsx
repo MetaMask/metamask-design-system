@@ -8,13 +8,13 @@ import { ComponentName } from './ComponentName';
 describe('ComponentName', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    const { result } = renderHook(() => useTailwind());
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
     tw = result.current;
   });
 
-  it('renders children correctly', () => {
-    const { getByText } = render(
+  it('renders children correctly', async () => {
+    const { getByText } = await render(
       <ComponentName>
         <Text>Hello, World!</Text>
       </ComponentName>,
@@ -23,8 +23,8 @@ describe('ComponentName', () => {
     expect(getByText('Hello, World!')).toBeOnTheScreen();
   });
 
-  it('applies the correct styles', () => {
-    const { getByTestId } = render(
+  it('applies the correct styles', async () => {
+    const { getByTestId } = await render(
       <ComponentName twClassName="bg-default" testID="component-name">
         <Text>Styled Content</Text>
       </ComponentName>,
@@ -33,8 +33,8 @@ describe('ComponentName', () => {
     expect(getByTestId('component-name')).toHaveStyle(tw`bg-default`);
   });
 
-  it('accepts testID prop', () => {
-    const { getByTestId } = render(
+  it('accepts testID prop', async () => {
+    const { getByTestId } = await render(
       <ComponentName testID="component-name">
         <Text>Test Content</Text>
       </ComponentName>,

@@ -5,8 +5,8 @@ import { BottomSheetHeader } from './BottomSheetHeader';
 
 describe('BottomSheetHeader', () => {
   describe('rendering', () => {
-    it('renders correctly with default props', () => {
-      const { getByTestId } = render(
+    it('renders correctly with default props', async () => {
+      const { getByTestId } = await render(
         <BottomSheetHeader testID="header">Header Title</BottomSheetHeader>,
       );
       expect(getByTestId('header')).toBeOnTheScreen();
@@ -14,15 +14,15 @@ describe('BottomSheetHeader', () => {
   });
 
   describe('testID', () => {
-    it('applies testID to the root container via ViewProps', () => {
-      const { getByTestId } = render(
+    it('applies testID to the root container via ViewProps', async () => {
+      const { getByTestId } = await render(
         <BottomSheetHeader testID="my-header">Title</BottomSheetHeader>,
       );
       expect(getByTestId('my-header')).toBeOnTheScreen();
     });
 
-    it('passes through accessibilityLabel via ViewProps', () => {
-      const { getByLabelText } = render(
+    it('passes through accessibilityLabel via ViewProps', async () => {
+      const { getByLabelText } = await render(
         <BottomSheetHeader accessibilityLabel="Sheet header">
           Title
         </BottomSheetHeader>,
@@ -32,8 +32,8 @@ describe('BottomSheetHeader', () => {
   });
 
   describe('onBack', () => {
-    it('renders back button when onBack is provided', () => {
-      const { getByTestId } = render(
+    it('renders back button when onBack is provided', async () => {
+      const { getByTestId } = await render(
         <BottomSheetHeader
           onBack={() => null}
           backButtonProps={{ testID: 'back-button' }}
@@ -44,9 +44,9 @@ describe('BottomSheetHeader', () => {
       expect(getByTestId('back-button')).toBeOnTheScreen();
     });
 
-    it('calls onBack when back button is pressed', () => {
+    it('calls onBack when back button is pressed', async () => {
       const onBack = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <BottomSheetHeader
           onBack={onBack}
           backButtonProps={{ testID: 'back-button' }}
@@ -55,12 +55,12 @@ describe('BottomSheetHeader', () => {
         </BottomSheetHeader>,
       );
 
-      fireEvent.press(getByTestId('back-button'));
+      await fireEvent.press(getByTestId('back-button'));
       expect(onBack).toHaveBeenCalledTimes(1);
     });
 
-    it('does not render back button when onBack is not provided', () => {
-      const { queryByTestId } = render(
+    it('does not render back button when onBack is not provided', async () => {
+      const { queryByTestId } = await render(
         <BottomSheetHeader backButtonProps={{ testID: 'back-button' }}>
           Header Title
         </BottomSheetHeader>,
@@ -70,8 +70,8 @@ describe('BottomSheetHeader', () => {
   });
 
   describe('onClose', () => {
-    it('renders close button when onClose is provided', () => {
-      const { getByTestId } = render(
+    it('renders close button when onClose is provided', async () => {
+      const { getByTestId } = await render(
         <BottomSheetHeader
           onClose={() => null}
           closeButtonProps={{ testID: 'close-button' }}
@@ -82,9 +82,9 @@ describe('BottomSheetHeader', () => {
       expect(getByTestId('close-button')).toBeOnTheScreen();
     });
 
-    it('calls onClose when close button is pressed', () => {
+    it('calls onClose when close button is pressed', async () => {
       const onClose = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <BottomSheetHeader
           onClose={onClose}
           closeButtonProps={{ testID: 'close-button' }}
@@ -93,12 +93,12 @@ describe('BottomSheetHeader', () => {
         </BottomSheetHeader>,
       );
 
-      fireEvent.press(getByTestId('close-button'));
+      await fireEvent.press(getByTestId('close-button'));
       expect(onClose).toHaveBeenCalledTimes(1);
     });
 
-    it('does not render close button when onClose is not provided', () => {
-      const { queryByTestId } = render(
+    it('does not render close button when onClose is not provided', async () => {
+      const { queryByTestId } = await render(
         <BottomSheetHeader closeButtonProps={{ testID: 'close-button' }}>
           Header Title
         </BottomSheetHeader>,
@@ -108,10 +108,10 @@ describe('BottomSheetHeader', () => {
   });
 
   describe('backButtonProps and closeButtonProps', () => {
-    it('renders both buttons with configurable testIDs and accessibility labels', () => {
+    it('renders both buttons with configurable testIDs and accessibility labels', async () => {
       const onBack = jest.fn();
       const onClose = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <BottomSheetHeader
           testID="header"
           onBack={onBack}
@@ -143,8 +143,8 @@ describe('BottomSheetHeader', () => {
   });
 
   describe('twClassName', () => {
-    it('accepts twClassName for custom styling', () => {
-      const { getByTestId } = render(
+    it('accepts twClassName for custom styling', async () => {
+      const { getByTestId } = await render(
         <BottomSheetHeader testID="header" twClassName="pb-2">
           Title
         </BottomSheetHeader>,
@@ -154,8 +154,8 @@ describe('BottomSheetHeader', () => {
   });
 
   describe('style', () => {
-    it('accepts custom style prop', () => {
-      const { getByTestId } = render(
+    it('accepts custom style prop', async () => {
+      const { getByTestId } = await render(
         <BottomSheetHeader testID="header" style={{ marginBottom: 8 }}>
           Title
         </BottomSheetHeader>,

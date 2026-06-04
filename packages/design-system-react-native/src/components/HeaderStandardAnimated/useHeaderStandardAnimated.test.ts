@@ -14,8 +14,8 @@ describe('useHeaderStandardAnimated', () => {
   });
 
   describe('return value', () => {
-    it('returns scrollY, titleSectionHeightSv, setTitleSectionHeight, and onScroll', () => {
-      const { result } = renderHook(() => useHeaderStandardAnimated());
+    it('returns scrollY, titleSectionHeightSv, setTitleSectionHeight, and onScroll', async () => {
+      const { result } = await renderHook(() => useHeaderStandardAnimated());
 
       expect(result.current).toHaveProperty('scrollY');
       expect(result.current).toHaveProperty('titleSectionHeightSv');
@@ -25,39 +25,39 @@ describe('useHeaderStandardAnimated', () => {
       expect(typeof result.current.onScroll).toBe('function');
     });
 
-    it('initializes scrollY with value 0', () => {
-      const { result } = renderHook(() => useHeaderStandardAnimated());
+    it('initializes scrollY with value 0', async () => {
+      const { result } = await renderHook(() => useHeaderStandardAnimated());
 
       expect(result.current.scrollY.value).toBe(0);
     });
 
-    it('initializes titleSectionHeightSv with value 0', () => {
-      const { result } = renderHook(() => useHeaderStandardAnimated());
+    it('initializes titleSectionHeightSv with value 0', async () => {
+      const { result } = await renderHook(() => useHeaderStandardAnimated());
 
       expect(result.current.titleSectionHeightSv.value).toBe(0);
     });
   });
 
   describe('setTitleSectionHeight', () => {
-    it('updates titleSectionHeightSv.value when called', () => {
-      const { result } = renderHook(() => useHeaderStandardAnimated());
+    it('updates titleSectionHeightSv.value when called', async () => {
+      const { result } = await renderHook(() => useHeaderStandardAnimated());
 
-      act(() => {
+      await act(() => {
         result.current.setTitleSectionHeight(120);
       });
 
       expect(result.current.titleSectionHeightSv.value).toBe(120);
     });
 
-    it('updates titleSectionHeightSv.value on multiple calls', () => {
-      const { result } = renderHook(() => useHeaderStandardAnimated());
+    it('updates titleSectionHeightSv.value on multiple calls', async () => {
+      const { result } = await renderHook(() => useHeaderStandardAnimated());
 
-      act(() => {
+      await act(() => {
         result.current.setTitleSectionHeight(50);
       });
       expect(result.current.titleSectionHeightSv.value).toBe(50);
 
-      act(() => {
+      await act(() => {
         result.current.setTitleSectionHeight(200);
       });
       expect(result.current.titleSectionHeightSv.value).toBe(200);

@@ -10,20 +10,22 @@ const ROOT_TEST_ID = 'box-column-root';
 describe('BoxColumn', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   describe('when children is a string', () => {
-    it('renders text content', () => {
-      const { getByText } = render(<BoxColumn>Sample label</BoxColumn>);
+    it('renders text content', async () => {
+      const { getByText } = await render(<BoxColumn>Sample label</BoxColumn>);
       expect(getByText('Sample label')).toBeOnTheScreen();
     });
   });
 
   describe('when children is not a string', () => {
-    it('renders child components', () => {
-      const { getByText } = render(
+    it('renders child components', async () => {
+      const { getByText } = await render(
         <BoxColumn>
           <Text>Nested content</Text>
         </BoxColumn>,
@@ -33,8 +35,8 @@ describe('BoxColumn', () => {
   });
 
   describe('when topAccessory is provided', () => {
-    it('renders topAccessory before text', () => {
-      const { getByTestId, getByText } = render(
+    it('renders topAccessory before text', async () => {
+      const { getByTestId, getByText } = await render(
         <BoxColumn
           testID={ROOT_TEST_ID}
           topAccessory={<Text testID="top-icon">T</Text>}
@@ -48,8 +50,8 @@ describe('BoxColumn', () => {
   });
 
   describe('when bottomAccessory is provided', () => {
-    it('renders bottomAccessory after text', () => {
-      const { getByTestId, getByText } = render(
+    it('renders bottomAccessory after text', async () => {
+      const { getByTestId, getByText } = await render(
         <BoxColumn
           testID={ROOT_TEST_ID}
           bottomAccessory={<Text testID="bottom-badge">Badge</Text>}
@@ -63,8 +65,8 @@ describe('BoxColumn', () => {
   });
 
   describe('when both accessories are provided', () => {
-    it('renders topAccessory, text, then bottomAccessory', () => {
-      const { getByTestId, getByText } = render(
+    it('renders topAccessory, text, then bottomAccessory', async () => {
+      const { getByTestId, getByText } = await render(
         <BoxColumn
           testID={ROOT_TEST_ID}
           topAccessory={<Text testID="top">T</Text>}
@@ -80,8 +82,8 @@ describe('BoxColumn', () => {
   });
 
   describe('root layout', () => {
-    it('applies flex column to root', () => {
-      const { getByTestId } = render(
+    it('applies flex column to root', async () => {
+      const { getByTestId } = await render(
         <BoxColumn testID={ROOT_TEST_ID}>Content</BoxColumn>,
       );
       const root = getByTestId(ROOT_TEST_ID);
@@ -90,8 +92,8 @@ describe('BoxColumn', () => {
   });
 
   describe('twClassName', () => {
-    it('merges twClassName with root styles', () => {
-      const { getByTestId } = render(
+    it('merges twClassName with root styles', async () => {
+      const { getByTestId } = await render(
         <BoxColumn testID={ROOT_TEST_ID} twClassName="p-2">
           Content
         </BoxColumn>,
@@ -102,8 +104,8 @@ describe('BoxColumn', () => {
   });
 
   describe('ViewProps extension', () => {
-    it('passes testID to root Box', () => {
-      const { getByTestId } = render(
+    it('passes testID to root Box', async () => {
+      const { getByTestId } = await render(
         <BoxColumn testID={ROOT_TEST_ID}>Content</BoxColumn>,
       );
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();

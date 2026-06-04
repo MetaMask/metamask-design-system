@@ -9,8 +9,8 @@ import { ButtonHero } from './ButtonHero';
 describe('ButtonHero', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    const { result } = renderHook(() => useTailwind());
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
     tw = result.current;
   });
 
@@ -51,32 +51,32 @@ describe('ButtonHero', () => {
       ]),
     );
   }
-  it('renders children correctly', () => {
-    const { getByText } = render(<ButtonHero>Button Hero</ButtonHero>);
+  it('renders children correctly', async () => {
+    const { getByText } = await render(<ButtonHero>Button Hero</ButtonHero>);
     expect(getByText('Button Hero')).toBeDefined();
   });
 
-  it('renders as a button with correct accessibility role', () => {
-    const { getByRole } = render(<ButtonHero>Click me</ButtonHero>);
+  it('renders as a button with correct accessibility role', async () => {
+    const { getByRole } = await render(<ButtonHero>Click me</ButtonHero>);
     const button = getByRole('button');
     expect(button).toBeDefined();
   });
 
-  it('handles press events', () => {
+  it('handles press events', async () => {
     const handlePress = jest.fn();
-    const { getByRole } = render(
+    const { getByRole } = await render(
       <ButtonHero onPress={handlePress}>Click me</ButtonHero>,
     );
 
     const button = getByRole('button');
-    fireEvent.press(button);
+    await fireEvent.press(button);
 
     expect(handlePress).toHaveBeenCalledTimes(1);
   });
 
-  it('handles disabled state correctly', () => {
+  it('handles disabled state correctly', async () => {
     const handlePress = jest.fn();
-    const { getByRole } = render(
+    const { getByRole } = await render(
       <ButtonHero isDisabled onPress={handlePress}>
         Disabled Button
       </ButtonHero>,
@@ -86,8 +86,8 @@ describe('ButtonHero', () => {
     expect(button.props.accessibilityState).toMatchObject({ disabled: true });
   });
 
-  it('handles loading state correctly', () => {
-    const { getByRole, getByTestId } = render(
+  it('handles loading state correctly', async () => {
+    const { getByRole, getByTestId } = await render(
       <ButtonHero
         isLoading
         loadingText="Loading..."
@@ -106,8 +106,8 @@ describe('ButtonHero', () => {
     expect(getByTestId('spinner-container')).toBeDefined();
   });
 
-  it('displays loading text when provided', () => {
-    const { getByText } = render(
+  it('displays loading text when provided', async () => {
+    const { getByText } = await render(
       <ButtonHero isLoading loadingText="Please wait...">
         Submit
       </ButtonHero>,
@@ -116,8 +116,8 @@ describe('ButtonHero', () => {
     expect(getByText('Please wait...')).toBeDefined();
   });
 
-  it('uses light theme primary background color', () => {
-    const { getByTestId } = render(
+  it('uses light theme primary background color', async () => {
+    const { getByTestId } = await render(
       <ButtonHero testID="button-hero">Hero Button</ButtonHero>,
     );
     const btn = getByTestId('button-hero');
@@ -125,8 +125,8 @@ describe('ButtonHero', () => {
     expect(btn).toBeDefined();
   });
 
-  it('passes accessibility props correctly', () => {
-    const { getByTestId } = render(
+  it('passes accessibility props correctly', async () => {
+    const { getByTestId } = await render(
       <ButtonHero
         testID="hero-btn"
         accessibilityLabel="Primary action"
@@ -142,8 +142,8 @@ describe('ButtonHero', () => {
     expect(btn.props.accessibilityRole).toBe('button');
   });
 
-  it('supports isFullWidth prop', () => {
-    const { getByRole } = render(
+  it('supports isFullWidth prop', async () => {
+    const { getByRole } = await render(
       <ButtonHero isFullWidth testID="full-width-btn">
         Full Width
       </ButtonHero>,
@@ -153,8 +153,8 @@ describe('ButtonHero', () => {
     expect(button).toBeDefined();
   });
 
-  it('renders start icon when startIconName is provided', () => {
-    const { getByTestId } = render(
+  it('renders start icon when startIconName is provided', async () => {
+    const { getByTestId } = await render(
       <ButtonHero
         startIconName={IconName.Add}
         startIconProps={{ testID: 'start-icon' }}
@@ -166,8 +166,8 @@ describe('ButtonHero', () => {
     expect(getByTestId('start-icon')).toBeDefined();
   });
 
-  it('renders end icon when endIconName is provided', () => {
-    const { getByTestId } = render(
+  it('renders end icon when endIconName is provided', async () => {
+    const { getByTestId } = await render(
       <ButtonHero
         endIconName={IconName.ArrowRight}
         endIconProps={{ testID: 'end-icon' }}

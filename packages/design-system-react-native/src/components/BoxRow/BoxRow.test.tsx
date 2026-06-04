@@ -10,20 +10,22 @@ const ROOT_TEST_ID = 'text-with-accessories';
 describe('BoxRow', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   describe('when children is a string', () => {
-    it('renders text content', () => {
-      const { getByText } = render(<BoxRow>Sample label</BoxRow>);
+    it('renders text content', async () => {
+      const { getByText } = await render(<BoxRow>Sample label</BoxRow>);
       expect(getByText('Sample label')).toBeOnTheScreen();
     });
   });
 
   describe('when children is not a string', () => {
-    it('renders child components', () => {
-      const { getByText } = render(
+    it('renders child components', async () => {
+      const { getByText } = await render(
         <BoxRow>
           <Text>Nested content</Text>
         </BoxRow>,
@@ -33,8 +35,8 @@ describe('BoxRow', () => {
   });
 
   describe('when startAccessory is provided', () => {
-    it('renders startAccessory before text', () => {
-      const { getByTestId, getByText } = render(
+    it('renders startAccessory before text', async () => {
+      const { getByTestId, getByText } = await render(
         <BoxRow
           testID={ROOT_TEST_ID}
           startAccessory={<Text testID="start-icon">S</Text>}
@@ -48,8 +50,8 @@ describe('BoxRow', () => {
   });
 
   describe('when endAccessory is provided', () => {
-    it('renders endAccessory after text', () => {
-      const { getByTestId, getByText } = render(
+    it('renders endAccessory after text', async () => {
+      const { getByTestId, getByText } = await render(
         <BoxRow
           testID={ROOT_TEST_ID}
           endAccessory={<Text testID="end-badge">Badge</Text>}
@@ -63,8 +65,8 @@ describe('BoxRow', () => {
   });
 
   describe('when both accessories are provided', () => {
-    it('renders startAccessory, text, then endAccessory', () => {
-      const { getByTestId, getByText } = render(
+    it('renders startAccessory, text, then endAccessory', async () => {
+      const { getByTestId, getByText } = await render(
         <BoxRow
           testID={ROOT_TEST_ID}
           startAccessory={<Text testID="start">S</Text>}
@@ -80,8 +82,8 @@ describe('BoxRow', () => {
   });
 
   describe('root layout', () => {
-    it('applies default flex row, center align, and gap to root', () => {
-      const { getByTestId } = render(
+    it('applies default flex row, center align, and gap to root', async () => {
+      const { getByTestId } = await render(
         <BoxRow testID={ROOT_TEST_ID}>Content</BoxRow>,
       );
       const root = getByTestId(ROOT_TEST_ID);
@@ -90,8 +92,8 @@ describe('BoxRow', () => {
   });
 
   describe('twClassName', () => {
-    it('merges twClassName with root styles', () => {
-      const { getByTestId } = render(
+    it('merges twClassName with root styles', async () => {
+      const { getByTestId } = await render(
         <BoxRow testID={ROOT_TEST_ID} twClassName="gap-0 p-2">
           Content
         </BoxRow>,
@@ -102,8 +104,8 @@ describe('BoxRow', () => {
   });
 
   describe('ViewProps extension', () => {
-    it('passes testID to root Box', () => {
-      const { getByTestId } = render(
+    it('passes testID to root Box', async () => {
+      const { getByTestId } = await render(
         <BoxRow testID={ROOT_TEST_ID}>Content</BoxRow>,
       );
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();

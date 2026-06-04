@@ -1,3 +1,3 @@
 const React = require('react');
 
-module.exports = (props) => React.createElement('svg', props, 'SVG Mock');
+module.exports = (props) => React.createElement('Svg', props);

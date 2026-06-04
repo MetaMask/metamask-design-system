@@ -8,7 +8,7 @@ import { Text } from '../Text';
 import { BadgeIcon } from './BadgeIcon';
 
 describe('BadgeIcon', () => {
-  it('renders with provided iconName and iconProps', () => {
+  it('renders with provided iconName and iconProps', async () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Compute expected container style using an empty twClassName.
@@ -25,7 +25,7 @@ describe('BadgeIcon', () => {
       );
     };
 
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const expectedContainer = JSON.parse(
       getByTestId('expectedContainer').props.children,
     );
@@ -39,7 +39,7 @@ describe('BadgeIcon', () => {
     expect(icon.props.size).toStrictEqual(IconSize.Xs);
   });
 
-  it('applies custom container style and forwards extra props', () => {
+  it('applies custom container style and forwards extra props', async () => {
     const customStyle = { margin: 10 };
     const extraProp = { accessibilityLabel: 'badge-icon' };
     const TestComponent = () => {
@@ -52,7 +52,7 @@ describe('BadgeIcon', () => {
         />
       );
     };
-    const { getByTestId } = render(<TestComponent />);
+    const { getByTestId } = await render(<TestComponent />);
     const badgeIcon = getByTestId('badge-icon');
     expect(badgeIcon.props.style[1]).toStrictEqual(customStyle);
     expect(badgeIcon.props.accessibilityLabel).toBe('badge-icon');

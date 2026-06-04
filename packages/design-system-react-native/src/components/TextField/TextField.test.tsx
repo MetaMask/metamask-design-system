@@ -10,29 +10,31 @@ const ROOT_TEST_ID = 'textfield';
 describe('TextField', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   describe('rendering', () => {
-    it('renders with default props', () => {
-      const { getByTestId } = render(
+    it('renders with default props', async () => {
+      const { getByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} placeholder="Enter text" />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('passes testID to the root element', () => {
-      const { getByTestId } = render(
+    it('passes testID to the root element', async () => {
+      const { getByTestId } = await render(
         <TextField value="" testID="custom-test-id" />,
       );
 
       expect(getByTestId('custom-test-id')).toBeOnTheScreen();
     });
 
-    it('renders custom inputElement when provided', () => {
-      const { getByTestId } = render(
+    it('renders custom inputElement when provided', async () => {
+      const { getByTestId } = await render(
         <TextField
           value=""
           testID={ROOT_TEST_ID}
@@ -43,8 +45,8 @@ describe('TextField', () => {
       expect(getByTestId('custom-input')).toBeOnTheScreen();
     });
 
-    it('forwards inputProps to the inner Input', () => {
-      const { getByPlaceholderText } = render(
+    it('forwards inputProps to the inner Input', async () => {
+      const { getByPlaceholderText } = await render(
         <TextField
           value=""
           placeholder="forwarded-placeholder"
@@ -60,8 +62,8 @@ describe('TextField', () => {
   });
 
   describe('single-line input', () => {
-    it('sets numberOfLines to 1 on the inner input', () => {
-      const { getByPlaceholderText } = render(
+    it('sets numberOfLines to 1 on the inner input', async () => {
+      const { getByPlaceholderText } = await render(
         <TextField
           value=""
           placeholder="single-line"
@@ -78,8 +80,8 @@ describe('TextField', () => {
       );
     });
 
-    it('sets multiline to false on the inner input', () => {
-      const { getByPlaceholderText } = render(
+    it('sets multiline to false on the inner input', async () => {
+      const { getByPlaceholderText } = await render(
         <TextField
           value=""
           placeholder="single-line"
@@ -98,9 +100,9 @@ describe('TextField', () => {
   });
 
   describe('onChangeText', () => {
-    it('notifies when the text changes', () => {
+    it('notifies when the text changes', async () => {
       const onChangeText = jest.fn();
-      const { getByPlaceholderText } = render(
+      const { getByPlaceholderText } = await render(
         <TextField
           value="a"
           onChangeText={onChangeText}
@@ -108,7 +110,7 @@ describe('TextField', () => {
         />,
       );
 
-      fireEvent.changeText(getByPlaceholderText('change-me'), 'ab');
+      await fireEvent.changeText(getByPlaceholderText('change-me'), 'ab');
 
       expect(onChangeText).toHaveBeenCalledTimes(1);
       expect(onChangeText).toHaveBeenCalledWith('ab');
@@ -116,8 +118,8 @@ describe('TextField', () => {
   });
 
   describe('Input props', () => {
-    it('forwards secureTextEntry to the inner Input', () => {
-      const { getByPlaceholderText } = render(
+    it('forwards secureTextEntry to the inner Input', async () => {
+      const { getByPlaceholderText } = await render(
         <TextField
           value=""
           placeholder="secure"
@@ -131,8 +133,8 @@ describe('TextField', () => {
       );
     });
 
-    it('forwards isReadOnly to the inner Input', () => {
-      const { getByPlaceholderText } = render(
+    it('forwards isReadOnly to the inner Input', async () => {
+      const { getByPlaceholderText } = await render(
         <TextField value="" placeholder="readonly-test" isReadOnly />,
       );
 
@@ -144,9 +146,9 @@ describe('TextField', () => {
   });
 
   describe('ref', () => {
-    it('exposes the root View ref via forwardRef', () => {
+    it('exposes the root View ref via forwardRef', async () => {
       const ref = createRef<View>();
-      render(
+      await render(
         <TextField
           value=""
           ref={ref}
@@ -159,17 +161,19 @@ describe('TextField', () => {
       expect(ref.current).toBeInstanceOf(View);
     });
 
-    it('exposes the inner TextInput via inputRef', () => {
+    it('exposes the inner TextInput via inputRef', async () => {
       const inputRef = createRef<TextInput>();
-      render(<TextField value="" inputRef={inputRef} placeholder="ref-test" />);
+      await render(
+        <TextField value="" inputRef={inputRef} placeholder="ref-test" />,
+      );
 
       expect(inputRef.current).not.toBeNull();
       expect(inputRef.current).toBeInstanceOf(TextInput);
     });
 
-    it('allows calling focus() via inputRef', () => {
+    it('allows calling focus() via inputRef', async () => {
       const inputRef = createRef<TextInput>();
-      render(
+      await render(
         <TextField value="" inputRef={inputRef} placeholder="ref-focus" />,
       );
 
@@ -178,24 +182,24 @@ describe('TextField', () => {
   });
 
   describe('container styles', () => {
-    it('applies fixed 48px row height', () => {
-      const { getByTestId } = render(
+    it('applies fixed 48px row height', async () => {
+      const { getByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`h-12`);
     });
 
-    it('shows error border when isError is true', () => {
-      const { getByTestId } = render(
+    it('shows error border when isError is true', async () => {
+      const { getByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} isError />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-error-default`);
     });
 
-    it('keeps error border when focused and isError', () => {
-      const { getByTestId, getByPlaceholderText } = render(
+    it('keeps error border when focused and isError', async () => {
+      const { getByTestId, getByPlaceholderText } = await render(
         <TextField
           value=""
           testID={ROOT_TEST_ID}
@@ -204,29 +208,29 @@ describe('TextField', () => {
         />,
       );
 
-      fireEvent(getByPlaceholderText('error-focus'), 'focus');
+      await fireEvent(getByPlaceholderText('error-focus'), 'focus');
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-error-default`);
     });
 
-    it('applies opacity when isDisabled is true', () => {
-      const { getByTestId } = render(
+    it('applies opacity when isDisabled is true', async () => {
+      const { getByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} isDisabled />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`opacity-50`);
     });
 
-    it('omits disabled opacity when isDisabled is false', () => {
-      const { getByTestId } = render(
+    it('omits disabled opacity when isDisabled is false', async () => {
+      const { getByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).not.toHaveStyle(tw`opacity-50`);
     });
 
-    it('uses muted border when disabled even if autoFocus is true', () => {
-      const { getByTestId } = render(
+    it('uses muted border when disabled even if autoFocus is true', async () => {
+      const { getByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} isDisabled autoFocus />,
       );
 
@@ -234,46 +238,46 @@ describe('TextField', () => {
       expect(getByTestId(ROOT_TEST_ID)).not.toHaveStyle(tw`border-default`);
     });
 
-    it('applies focus border when focused', () => {
-      const { getByTestId, getByPlaceholderText } = render(
+    it('applies focus border when focused', async () => {
+      const { getByTestId, getByPlaceholderText } = await render(
         <TextField value="" testID={ROOT_TEST_ID} placeholder="focus-border" />,
       );
 
-      fireEvent(getByPlaceholderText('focus-border'), 'focus');
+      await fireEvent(getByPlaceholderText('focus-border'), 'focus');
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-default`);
     });
 
-    it('reverts to muted resting border after blur', () => {
-      const { getByTestId, getByPlaceholderText } = render(
+    it('reverts to muted resting border after blur', async () => {
+      const { getByTestId, getByPlaceholderText } = await render(
         <TextField value="" testID={ROOT_TEST_ID} placeholder="blur-border" />,
       );
 
-      fireEvent(getByPlaceholderText('blur-border'), 'focus');
-      fireEvent(getByPlaceholderText('blur-border'), 'blur');
+      await fireEvent(getByPlaceholderText('blur-border'), 'focus');
+      await fireEvent(getByPlaceholderText('blur-border'), 'blur');
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-muted`);
     });
 
-    it('starts with focus border when autoFocus is true', () => {
-      const { getByTestId } = render(
+    it('starts with focus border when autoFocus is true', async () => {
+      const { getByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} autoFocus />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-default`);
     });
 
-    it('applies twClassName to the container', () => {
-      const { getByTestId } = render(
+    it('applies twClassName to the container', async () => {
+      const { getByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} twClassName="mt-4" />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
     });
 
-    it('merges custom style prop with container styles', () => {
+    it('merges custom style prop with container styles', async () => {
       const customStyle = { marginBottom: 20 };
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} style={customStyle} />,
       );
 
@@ -282,8 +286,8 @@ describe('TextField', () => {
   });
 
   describe('accessories', () => {
-    it('renders startAccessory when provided', () => {
-      const { getByTestId } = render(
+    it('renders startAccessory when provided', async () => {
+      const { getByTestId } = await render(
         <TextField
           value=""
           testID={ROOT_TEST_ID}
@@ -294,8 +298,8 @@ describe('TextField', () => {
       expect(getByTestId('start-accessory')).toBeOnTheScreen();
     });
 
-    it('renders endAccessory when provided', () => {
-      const { getByTestId } = render(
+    it('renders endAccessory when provided', async () => {
+      const { getByTestId } = await render(
         <TextField
           value=""
           testID={ROOT_TEST_ID}
@@ -306,8 +310,8 @@ describe('TextField', () => {
       expect(getByTestId('end-accessory')).toBeOnTheScreen();
     });
 
-    it('omits accessories when not provided', () => {
-      const { queryByTestId } = render(
+    it('omits accessories when not provided', async () => {
+      const { queryByTestId } = await render(
         <TextField value="" testID={ROOT_TEST_ID} />,
       );
 
@@ -317,32 +321,32 @@ describe('TextField', () => {
   });
 
   describe('focus and blur', () => {
-    it('calls onFocus when input receives focus', () => {
+    it('calls onFocus when input receives focus', async () => {
       const onFocus = jest.fn();
-      const { getByPlaceholderText } = render(
+      const { getByPlaceholderText } = await render(
         <TextField value="" placeholder="focus-test" onFocus={onFocus} />,
       );
 
-      fireEvent(getByPlaceholderText('focus-test'), 'focus');
+      await fireEvent(getByPlaceholderText('focus-test'), 'focus');
 
       expect(onFocus).toHaveBeenCalledTimes(1);
     });
 
-    it('calls onBlur when input loses focus', () => {
+    it('calls onBlur when input loses focus', async () => {
       const onBlur = jest.fn();
-      const { getByPlaceholderText } = render(
+      const { getByPlaceholderText } = await render(
         <TextField value="" placeholder="blur-test" onBlur={onBlur} />,
       );
 
-      fireEvent(getByPlaceholderText('blur-test'), 'focus');
-      fireEvent(getByPlaceholderText('blur-test'), 'blur');
+      await fireEvent(getByPlaceholderText('blur-test'), 'focus');
+      await fireEvent(getByPlaceholderText('blur-test'), 'blur');
 
       expect(onBlur).toHaveBeenCalledTimes(1);
     });
 
-    it('does not call onFocus when disabled', () => {
+    it('does not call onFocus when disabled', async () => {
       const onFocus = jest.fn();
-      const { getByPlaceholderText } = render(
+      const { getByPlaceholderText } = await render(
         <TextField
           value=""
           placeholder="disabled-focus"
@@ -351,14 +355,14 @@ describe('TextField', () => {
         />,
       );
 
-      fireEvent(getByPlaceholderText('disabled-focus'), 'focus');
+      await fireEvent(getByPlaceholderText('disabled-focus'), 'focus');
 
       expect(onFocus).not.toHaveBeenCalled();
     });
 
-    it('does not call onBlur when disabled', () => {
+    it('does not call onBlur when disabled', async () => {
       const onBlur = jest.fn();
-      const { getByPlaceholderText } = render(
+      const { getByPlaceholderText } = await render(
         <TextField
           value=""
           placeholder="disabled-blur"
@@ -367,19 +371,19 @@ describe('TextField', () => {
         />,
       );
 
-      fireEvent(getByPlaceholderText('disabled-blur'), 'focus');
-      fireEvent(getByPlaceholderText('disabled-blur'), 'blur');
+      await fireEvent(getByPlaceholderText('disabled-blur'), 'focus');
+      await fireEvent(getByPlaceholderText('disabled-blur'), 'blur');
 
       expect(onBlur).not.toHaveBeenCalled();
     });
 
-    it('passes event argument to onFocus callback', () => {
+    it('passes event argument to onFocus callback', async () => {
       const onFocus = jest.fn();
-      const { getByPlaceholderText } = render(
+      const { getByPlaceholderText } = await render(
         <TextField value="" placeholder="event-focus" onFocus={onFocus} />,
       );
 
-      fireEvent(getByPlaceholderText('event-focus'), 'focus', {
+      await fireEvent(getByPlaceholderText('event-focus'), 'focus', {
         nativeEvent: {},
       });
 
@@ -388,14 +392,14 @@ describe('TextField', () => {
       );
     });
 
-    it('passes event argument to onBlur callback', () => {
+    it('passes event argument to onBlur callback', async () => {
       const onBlur = jest.fn();
-      const { getByPlaceholderText } = render(
+      const { getByPlaceholderText } = await render(
         <TextField value="" placeholder="event-blur" onBlur={onBlur} />,
       );
 
-      fireEvent(getByPlaceholderText('event-blur'), 'focus');
-      fireEvent(getByPlaceholderText('event-blur'), 'blur', {
+      await fireEvent(getByPlaceholderText('event-blur'), 'focus');
+      await fireEvent(getByPlaceholderText('event-blur'), 'blur', {
         nativeEvent: {},
       });
 
@@ -404,31 +408,31 @@ describe('TextField', () => {
       );
     });
 
-    it('handles focus when onFocus is omitted', () => {
-      const { getByPlaceholderText } = render(
+    it('handles focus when onFocus is omitted', async () => {
+      const { getByPlaceholderText } = await render(
         <TextField value="" placeholder="no-focus-cb" />,
       );
 
-      expect(() => {
-        fireEvent(getByPlaceholderText('no-focus-cb'), 'focus');
-      }).not.toThrow();
+      expect(
+        await fireEvent(getByPlaceholderText('no-focus-cb'), 'focus'),
+      ).toBeUndefined();
     });
 
-    it('handles blur when onBlur is omitted', () => {
-      const { getByPlaceholderText } = render(
+    it('handles blur when onBlur is omitted', async () => {
+      const { getByPlaceholderText } = await render(
         <TextField value="" placeholder="no-blur-cb" />,
       );
 
-      expect(() => {
-        fireEvent(getByPlaceholderText('no-blur-cb'), 'focus');
-        fireEvent(getByPlaceholderText('no-blur-cb'), 'blur');
-      }).not.toThrow();
+      await fireEvent(getByPlaceholderText('no-blur-cb'), 'focus');
+      expect(
+        await fireEvent(getByPlaceholderText('no-blur-cb'), 'blur'),
+      ).toBeUndefined();
     });
   });
 
   describe('disabled state', () => {
-    it('disables the inner Input when isDisabled is true', () => {
-      const { getByPlaceholderText } = render(
+    it('disables the inner Input when isDisabled is true', async () => {
+      const { getByPlaceholderText } = await render(
         <TextField value="" placeholder="disabled-input" isDisabled />,
       );
 

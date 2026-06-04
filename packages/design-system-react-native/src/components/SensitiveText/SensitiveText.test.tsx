@@ -8,8 +8,8 @@ import { TextVariant, TextColor } from '../Text';
 import { SensitiveText } from './SensitiveText';
 
 describe('SensitiveText', () => {
-  it('renders correctly', () => {
-    const { getByTestId } = render(
+  it('renders correctly', async () => {
+    const { getByTestId } = await render(
       <SensitiveText testID="sensitive-text">
         Sensitive Information
       </SensitiveText>,
@@ -17,41 +17,41 @@ describe('SensitiveText', () => {
     expect(getByTestId('sensitive-text')).toBeDefined();
   });
 
-  it('passes testID to the root Text element', () => {
-    const { getByTestId } = render(
+  it('passes testID to the root Text element', async () => {
+    const { getByTestId } = await render(
       <SensitiveText testID="custom-test-id">Content</SensitiveText>,
     );
     expect(getByTestId('custom-test-id')).toBeDefined();
   });
 
-  it('displays the text when isHidden is false', () => {
-    const { getByText } = render(
+  it('displays the text when isHidden is false', async () => {
+    const { getByText } = await render(
       <SensitiveText>Sensitive Information</SensitiveText>,
     );
     expect(getByText('Sensitive Information')).toBeDefined();
   });
 
-  it('hides the text when isHidden is true', () => {
-    const { queryByText, getByText } = render(
+  it('hides the text when isHidden is true', async () => {
+    const { queryByText, getByText } = await render(
       <SensitiveText isHidden>Sensitive Information</SensitiveText>,
     );
     expect(queryByText('Sensitive Information')).toBeNull();
     expect(getByText('••••••')).toBeDefined();
   });
 
-  it('renders the correct number of bullets for each predefined length', () => {
-    Object.entries(SensitiveTextLength).forEach(([key, value]) => {
-      const { getByText } = render(
+  it('renders the correct number of bullets for each predefined length', async () => {
+    for (const [key, value] of Object.entries(SensitiveTextLength)) {
+      const { getByText } = await render(
         <SensitiveText isHidden length={value}>
           {`Hidden (${key})`}
         </SensitiveText>,
       );
       expect(getByText('•'.repeat(Number(value)))).toBeDefined();
-    });
+    }
   });
 
-  it('handles custom length as a string', () => {
-    const { getByText } = render(
+  it('handles custom length as a string', async () => {
+    const { getByText } = await render(
       <SensitiveText isHidden length="15">
         Custom Length
       </SensitiveText>,
@@ -59,9 +59,9 @@ describe('SensitiveText', () => {
     expect(getByText('•••••••••••••••')).toBeDefined();
   });
 
-  it('falls back to Short length for invalid custom length', () => {
+  it('falls back to Short length for invalid custom length', async () => {
     const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
-    const { getByText } = render(
+    const { getByText } = await render(
       <SensitiveText isHidden length="invalid">
         Invalid Length
       </SensitiveText>,
@@ -70,9 +70,9 @@ describe('SensitiveText', () => {
     consoleSpy.mockRestore();
   });
 
-  it('logs a warning for invalid custom length', () => {
+  it('logs a warning for invalid custom length', async () => {
     const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
-    render(
+    await render(
       <SensitiveText isHidden length="abc">
         Warning Test
       </SensitiveText>,
@@ -83,10 +83,10 @@ describe('SensitiveText', () => {
     consoleSpy.mockRestore();
   });
 
-  it('renders empty fallback when length is a non-numeric key of SensitiveTextLength', () => {
+  it('renders empty fallback when length is a non-numeric key of SensitiveTextLength', async () => {
     // Passing a key name like "Short" instead of a value like "6"
     // passes the `in` check but Number("Short") is NaN
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <SensitiveText isHidden length={'Short' as string} testID="nan-test">
         NaN Length
       </SensitiveText>,
@@ -94,9 +94,10 @@ describe('SensitiveText', () => {
     expect(getByTestId('nan-test').children).toStrictEqual([]);
   });
 
-  it('applies the correct text color', () => {
-    const tw = renderHook(() => useTailwind()).result.current;
-    const { getByText } = render(
+  it('applies the correct text color', async () => {
+    const { result } = await renderHook(() => useTailwind());
+    const tw = result.current;
+    const { getByText } = await render(
       <SensitiveText color={TextColor.TextDefault}>
         Sensitive Information
       </SensitiveText>,
@@ -109,8 +110,8 @@ describe('SensitiveText', () => {
     expect(color).toBe(tw.style(TextColor.TextDefault).color);
   });
 
-  it('applies text variant', () => {
-    const { getByText } = render(
+  it('applies text variant', async () => {
+    const { getByText } = await render(
       <SensitiveText variant={TextVariant.HeadingSm}>
         Heading Text
       </SensitiveText>,
@@ -118,8 +119,8 @@ describe('SensitiveText', () => {
     expect(getByText('Heading Text')).toBeDefined();
   });
 
-  it('passes accessibilityLabel to the root element', () => {
-    const { getByLabelText } = render(
+  it('passes accessibilityLabel to the root element', async () => {
+    const { getByLabelText } = await render(
       <SensitiveText accessibilityLabel="balance" isHidden>
         $1,234.56
       </SensitiveText>,

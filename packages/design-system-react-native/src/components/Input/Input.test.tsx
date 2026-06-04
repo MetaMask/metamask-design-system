@@ -15,10 +15,15 @@ import { Input } from './Input';
 const TEST_ID = 'input';
 
 describe('Input', () => {
-  const tw = renderHook(() => useTailwind()).result.current;
+  let tw: ReturnType<typeof useTailwind>;
 
-  it('renders with the correct TextVariant', () => {
-    const { getByTestId } = render(
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+    tw = result.current;
+  });
+
+  it('renders with the correct TextVariant', async () => {
+    const { getByTestId } = await render(
       <Input
         testID={TEST_ID}
         textVariant={TextVariant.HeadingSm}
@@ -34,8 +39,8 @@ describe('Input', () => {
     expect(input).toHaveStyle({ fontSize: expectedFontSize });
   });
 
-  it('renders correct disabled state when isDisabled is true', () => {
-    const { getByTestId } = render(
+  it('renders correct disabled state when isDisabled is true', async () => {
+    const { getByTestId } = await render(
       <Input value="" testID={TEST_ID} isDisabled placeholder="Disabled" />,
     );
 
@@ -53,10 +58,10 @@ describe('Input', () => {
       Platform.OS = originalOS;
     });
 
-    it('applies iOS placeholder lineHeight workaround when placeholder is visible and multiline is false', () => {
+    it('applies iOS placeholder lineHeight workaround when placeholder is visible and multiline is false', async () => {
       Platform.OS = 'ios';
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <Input
           testID={TEST_ID}
           value=""
@@ -70,10 +75,10 @@ describe('Input', () => {
       expect(input).toHaveStyle({ lineHeight: 0 });
     });
 
-    it('does not apply placeholder lineHeight workaround outside iOS', () => {
+    it('does not apply placeholder lineHeight workaround outside iOS', async () => {
       Platform.OS = 'android';
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <Input testID={TEST_ID} value="" placeholder="Disabled" />,
       );
 
@@ -83,8 +88,8 @@ describe('Input', () => {
     });
   });
 
-  it('when multiline is true, does not apply lineHeight zero for visible placeholder', () => {
-    const { getByTestId } = render(
+  it('when multiline is true, does not apply lineHeight zero for visible placeholder', async () => {
+    const { getByTestId } = await render(
       <Input testID={TEST_ID} value="" multiline placeholder="Placeholder" />,
     );
 
@@ -93,8 +98,8 @@ describe('Input', () => {
     expect(input).not.toHaveStyle({ lineHeight: 0 });
   });
 
-  it('when multiline is true, applies BodyMd paragraph lineHeight', () => {
-    const { getByTestId } = render(
+  it('when multiline is true, applies BodyMd paragraph lineHeight', async () => {
+    const { getByTestId } = await render(
       <Input testID={TEST_ID} value="" multiline placeholder="p" />,
     );
 
@@ -105,24 +110,26 @@ describe('Input', () => {
     expect(input).toHaveStyle({ lineHeight: expectedLineHeight });
   });
 
-  it('removes placeholder lineHeight workaround after value changes from empty to non-empty', () => {
-    const { getByTestId, rerender } = render(
+  it('removes placeholder lineHeight workaround after value changes from empty to non-empty', async () => {
+    const { getByTestId, rerender } = await render(
       <Input testID={TEST_ID} value="" placeholder="Transition" />,
     );
 
-    rerender(<Input testID={TEST_ID} value="A" placeholder="Transition" />);
+    await rerender(
+      <Input testID={TEST_ID} value="A" placeholder="Transition" />,
+    );
 
     const input = getByTestId(TEST_ID);
 
     expect(input).not.toHaveStyle({ lineHeight: 0 });
   });
 
-  it('handles multiline placeholder-to-text transitions without persisting lineHeight', () => {
-    const { getByTestId, rerender } = render(
+  it('handles multiline placeholder-to-text transitions without persisting lineHeight', async () => {
+    const { getByTestId, rerender } = await render(
       <Input testID={TEST_ID} value="" placeholder="Multiline" multiline />,
     );
 
-    rerender(
+    await rerender(
       <Input testID={TEST_ID} value="A" placeholder="Multiline" multiline />,
     );
 
@@ -131,8 +138,8 @@ describe('Input', () => {
     expect(input).not.toHaveStyle({ lineHeight: 0 });
   });
 
-  it('does not apply state styles when isStateStylesDisabled is true', () => {
-    const { getByTestId } = render(
+  it('does not apply state styles when isStateStylesDisabled is true', async () => {
+    const { getByTestId } = await render(
       <Input
         value=""
         testID={TEST_ID}
@@ -148,35 +155,35 @@ describe('Input', () => {
     expect(input).not.toHaveStyle({ opacity: 0.5 });
   });
 
-  it('calls onBlur when input loses focus', () => {
+  it('calls onBlur when input loses focus', async () => {
     const onBlur = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Input value="" testID={TEST_ID} onBlur={onBlur} />,
     );
 
     const input = getByTestId(TEST_ID);
 
-    fireEvent(input, 'focus');
-    fireEvent(input, 'blur');
+    await fireEvent(input, 'focus');
+    await fireEvent(input, 'blur');
 
     expect(onBlur).toHaveBeenCalled();
   });
 
-  it('calls onFocus when input receives focus', () => {
+  it('calls onFocus when input receives focus', async () => {
     const onFocus = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Input value="" testID={TEST_ID} onFocus={onFocus} />,
     );
 
     const input = getByTestId(TEST_ID);
 
-    fireEvent(input, 'focus');
+    await fireEvent(input, 'focus');
 
     expect(onFocus).toHaveBeenCalled();
   });
 
-  it('does not apply focused state styles on mount when autoFocus is false', () => {
-    const { getByTestId } = render(<Input value="" testID={TEST_ID} />);
+  it('does not apply focused state styles on mount when autoFocus is false', async () => {
+    const { getByTestId } = await render(<Input value="" testID={TEST_ID} />);
 
     const input = getByTestId(TEST_ID);
 
@@ -184,8 +191,8 @@ describe('Input', () => {
     expect(input).not.toHaveStyle(tw`border-primary-default`);
   });
 
-  it('applies focused state styles on mount when autoFocus is true', () => {
-    const { getByTestId } = render(
+  it('applies focused state styles on mount when autoFocus is true', async () => {
+    const { getByTestId } = await render(
       <Input value="" testID={TEST_ID} autoFocus />,
     );
 
@@ -194,25 +201,25 @@ describe('Input', () => {
     expect(input).toHaveStyle(tw`border-primary-default`);
   });
 
-  it('clears focused state when input becomes disabled', () => {
-    const { getByTestId, rerender } = render(
+  it('clears focused state when input becomes disabled', async () => {
+    const { getByTestId, rerender } = await render(
       <Input value="" testID={TEST_ID} placeholder="Focus me" />,
     );
 
     const input = getByTestId(TEST_ID);
 
-    fireEvent(input, 'focus');
+    await fireEvent(input, 'focus');
     expect(input).toHaveStyle(tw`border-primary-default`);
 
-    rerender(
+    await rerender(
       <Input value="" testID={TEST_ID} isDisabled placeholder="Focus me" />,
     );
 
     expect(input).not.toHaveStyle(tw`border-primary-default`);
   });
 
-  it('uses dark theme placeholder color when ThemeProvider has theme dark', () => {
-    const { getByTestId } = render(
+  it('uses dark theme placeholder color when ThemeProvider has theme dark', async () => {
+    const { getByTestId } = await render(
       <ThemeProvider theme={Theme.Dark}>
         <Input value="" testID={TEST_ID} placeholder="Dark theme" />
       </ThemeProvider>,
@@ -226,43 +233,43 @@ describe('Input', () => {
     );
   });
 
-  it('does not call onBlur when disabled and blur fires', () => {
+  it('does not call onBlur when disabled and blur fires', async () => {
     const onBlur = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Input value="" testID={TEST_ID} isDisabled onBlur={onBlur} />,
     );
 
     const input = getByTestId(TEST_ID);
 
-    fireEvent(input, 'focus');
-    fireEvent(input, 'blur');
+    await fireEvent(input, 'focus');
+    await fireEvent(input, 'blur');
 
     expect(onBlur).not.toHaveBeenCalled();
   });
 
-  it('does not call onFocus when disabled and focus fires', () => {
+  it('does not call onFocus when disabled and focus fires', async () => {
     const onFocus = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Input value="" testID={TEST_ID} isDisabled onFocus={onFocus} />,
     );
 
     const input = getByTestId(TEST_ID);
 
-    fireEvent(input, 'focus');
+    await fireEvent(input, 'focus');
 
     expect(onFocus).not.toHaveBeenCalled();
   });
 
-  it('invokes onBlur with event when not disabled', () => {
+  it('invokes onBlur with event when not disabled', async () => {
     const onBlur = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Input value="" testID={TEST_ID} onBlur={onBlur} />,
     );
 
     const input = getByTestId(TEST_ID);
 
-    fireEvent(input, 'focus');
-    fireEvent(input, 'blur', { nativeEvent: {} });
+    await fireEvent(input, 'focus');
+    await fireEvent(input, 'blur', { nativeEvent: {} });
 
     expect(onBlur).toHaveBeenCalledTimes(1);
     expect(onBlur).toHaveBeenCalledWith(
@@ -270,15 +277,15 @@ describe('Input', () => {
     );
   });
 
-  it('invokes onFocus with event when not disabled', () => {
+  it('invokes onFocus with event when not disabled', async () => {
     const onFocus = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <Input value="" testID={TEST_ID} onFocus={onFocus} />,
     );
 
     const input = getByTestId(TEST_ID);
 
-    fireEvent(input, 'focus', { nativeEvent: {} });
+    await fireEvent(input, 'focus', { nativeEvent: {} });
 
     expect(onFocus).toHaveBeenCalledTimes(1);
     expect(onFocus).toHaveBeenCalledWith(
@@ -286,13 +293,13 @@ describe('Input', () => {
     );
   });
 
-  it('does not throw when focus and blur fire without callbacks', () => {
-    const { getByTestId } = render(<Input value="" testID={TEST_ID} />);
+  it('does not throw when focus and blur fire without callbacks', async () => {
+    const { getByTestId } = await render(<Input value="" testID={TEST_ID} />);
 
     const input = getByTestId(TEST_ID);
 
-    fireEvent(input, 'focus');
-    fireEvent(input, 'blur');
+    await fireEvent(input, 'focus');
+    await fireEvent(input, 'blur');
 
     expect(input).toBeOnTheScreen();
   });

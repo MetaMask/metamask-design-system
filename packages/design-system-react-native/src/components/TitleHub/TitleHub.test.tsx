@@ -18,8 +18,10 @@ const BOTTOM_LABEL_ROW_WRAPPER_TEST_ID = 'title-hub-bottom-label-row-wrapper';
 describe('TitleHub', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   beforeEach(() => {
@@ -27,21 +29,23 @@ describe('TitleHub', () => {
   });
 
   describe('rendering', () => {
-    it('renders string title', () => {
-      const { getByText } = render(<TitleHub title="Section" />);
+    it('renders string title', async () => {
+      const { getByText } = await render(<TitleHub title="Section" />);
 
       expect(getByText('Section')).toBeOnTheScreen();
     });
 
-    it('renders string amount when provided', () => {
-      const { getByText } = render(<TitleHub title="Send" amount="$4.42" />);
+    it('renders string amount when provided', async () => {
+      const { getByText } = await render(
+        <TitleHub title="Send" amount="$4.42" />,
+      );
 
       expect(getByText('Send')).toBeOnTheScreen();
       expect(getByText('$4.42')).toBeOnTheScreen();
     });
 
-    it('renders React node amount', () => {
-      const { getByTestId } = render(
+    it('renders React node amount', async () => {
+      const { getByTestId } = await render(
         <TitleHub
           title="Total"
           amount={<Text testID="title-hub-amount-node">Custom amount</Text>}
@@ -51,16 +55,16 @@ describe('TitleHub', () => {
       expect(getByTestId('title-hub-amount-node')).toBeOnTheScreen();
     });
 
-    it('renders container with testID when provided', () => {
-      const { getByTestId } = render(
+    it('renders container with testID when provided', async () => {
+      const { getByTestId } = await render(
         <TitleHub title="Test" testID={CONTAINER_TEST_ID} />,
       );
 
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards amountProps testID to amount Text when amount is a string', () => {
-      const { getByTestId } = render(
+    it('forwards amountProps testID to amount Text when amount is a string', async () => {
+      const { getByTestId } = await render(
         <TitleHub
           title="Send"
           amount="$4.42"
@@ -73,8 +77,8 @@ describe('TitleHub', () => {
   });
 
   describe('when title is provided', () => {
-    it('renders title and amount', () => {
-      const { getByText } = render(
+    it('renders title and amount', async () => {
+      const { getByText } = await render(
         <TitleHub title={<Text>Custom Top</Text>} amount="$4.42" />,
       );
 
@@ -82,8 +86,8 @@ describe('TitleHub', () => {
       expect(getByText('$4.42')).toBeOnTheScreen();
     });
 
-    it('renders title and titleEndAccessory', () => {
-      const { getByText } = render(
+    it('renders title and titleEndAccessory', async () => {
+      const { getByText } = await render(
         <TitleHub
           title="Step 1"
           amount="$4.42"
@@ -95,8 +99,8 @@ describe('TitleHub', () => {
       expect(getByText('Title extra')).toBeOnTheScreen();
     });
 
-    it('forwards titleProps testID to title row Text when title is a string', () => {
-      const { getByTestId } = render(
+    it('forwards titleProps testID to title row Text when title is a string', async () => {
+      const { getByTestId } = await render(
         <TitleHub
           title="Step 1"
           amount="$4.42"
@@ -109,9 +113,9 @@ describe('TitleHub', () => {
   });
 
   describe('when title is false', () => {
-    it('does not render title node', () => {
+    it('does not render title node', async () => {
       const showTitle = false;
-      const { getByText, queryByTestId } = render(
+      const { getByText, queryByTestId } = await render(
         <TitleHub
           title={
             showTitle ? <Text testID="title-hub-title-slot">Top</Text> : false
@@ -126,8 +130,8 @@ describe('TitleHub', () => {
   });
 
   describe('when titleEndAccessory is false', () => {
-    it('renders title only', () => {
-      const { getByText } = render(
+    it('renders title only', async () => {
+      const { getByText } = await render(
         <TitleHub title="Hi" amount="$4.42" titleEndAccessory={false} />,
       );
 
@@ -137,9 +141,9 @@ describe('TitleHub', () => {
   });
 
   describe('when amount is false', () => {
-    it('does not render amount node', () => {
+    it('does not render amount node', async () => {
       const showAmount = false;
-      const { getByText, queryByTestId } = render(
+      const { getByText, queryByTestId } = await render(
         <TitleHub
           title="Send"
           amount={
@@ -154,16 +158,16 @@ describe('TitleHub', () => {
   });
 
   describe('when bottomLabel is provided', () => {
-    it('renders bottomLabel text', () => {
-      const { getByText } = render(
+    it('renders bottomLabel text', async () => {
+      const { getByText } = await render(
         <TitleHub title="Send" amount="$4.42" bottomLabel="0.002 ETH" />,
       );
 
       expect(getByText('0.002 ETH')).toBeOnTheScreen();
     });
 
-    it('renders bottomLabel and bottomLabelEndAccessory', () => {
-      const { getByText } = render(
+    it('renders bottomLabel and bottomLabelEndAccessory', async () => {
+      const { getByText } = await render(
         <TitleHub
           title="Send"
           amount="$4.42"
@@ -176,8 +180,8 @@ describe('TitleHub', () => {
       expect(getByText('Fee info')).toBeOnTheScreen();
     });
 
-    it('forwards bottomLabelProps testID to bottom label Text', () => {
-      const { getByTestId } = render(
+    it('forwards bottomLabelProps testID to bottom label Text', async () => {
+      const { getByTestId } = await render(
         <TitleHub
           title="Send"
           amount="$4.42"
@@ -191,8 +195,8 @@ describe('TitleHub', () => {
   });
 
   describe('when bottomAccessory is provided', () => {
-    it('renders bottomAccessory when bottomLabel is omitted', () => {
-      const { getByText } = render(
+    it('renders bottomAccessory when bottomLabel is omitted', async () => {
+      const { getByText } = await render(
         <TitleHub
           title="Send"
           amount="$4.42"
@@ -205,8 +209,8 @@ describe('TitleHub', () => {
   });
 
   describe('when bottomLabel and bottomAccessory are both provided', () => {
-    it('renders only bottomLabel', () => {
-      const { getByText, queryByText } = render(
+    it('renders only bottomLabel', async () => {
+      const { getByText, queryByText } = await render(
         <TitleHub
           title="Send"
           amount="$4.42"
@@ -221,8 +225,8 @@ describe('TitleHub', () => {
   });
 
   describe('when bottomLabel is missing but bottomLabelEndAccessory is set', () => {
-    it('does not render the bottom label row; bottomAccessory may render', () => {
-      const { getByText, queryByText } = render(
+    it('does not render the bottom label row; bottomAccessory may render', async () => {
+      const { getByText, queryByText } = await render(
         <TitleHub
           title="Send"
           amount="$4.42"
@@ -237,8 +241,8 @@ describe('TitleHub', () => {
   });
 
   describe('when amountEndAccessory is provided', () => {
-    it('renders amount and amountEndAccessory', () => {
-      const { getByText } = render(
+    it('renders amount and amountEndAccessory', async () => {
+      const { getByText } = await render(
         <TitleHub
           title="Send"
           amount="$4.42"
@@ -250,8 +254,8 @@ describe('TitleHub', () => {
       expect(getByText('Info')).toBeOnTheScreen();
     });
 
-    it('does not render amount row when amount is an empty string', () => {
-      const { queryByText } = render(
+    it('does not render amount row when amount is an empty string', async () => {
+      const { queryByText } = await render(
         <TitleHub
           title="Send"
           amount=""
@@ -262,8 +266,8 @@ describe('TitleHub', () => {
       expect(queryByText('Accessory only')).not.toBeOnTheScreen();
     });
 
-    it('does not render amount row when only amountEndAccessory is set', () => {
-      const { getByText, queryByText } = render(
+    it('does not render amount row when only amountEndAccessory is set', async () => {
+      const { getByText, queryByText } = await render(
         <TitleHub
           title="Send"
           amountEndAccessory={<Text>Orphan accessory</Text>}
@@ -276,8 +280,8 @@ describe('TitleHub', () => {
   });
 
   describe('when amountEndAccessory is false', () => {
-    it('renders amount only', () => {
-      const { getByText } = render(
+    it('renders amount only', async () => {
+      const { getByText } = await render(
         <TitleHub title="Send" amount="$4.42" amountEndAccessory={false} />,
       );
 
@@ -286,8 +290,8 @@ describe('TitleHub', () => {
   });
 
   describe('when title, amountEndAccessory, and bottomLabel are provided', () => {
-    it('renders all slots', () => {
-      const { getByText } = render(
+    it('renders all slots', async () => {
+      const { getByText } = await render(
         <TitleHub
           title={<Text>Send</Text>}
           amount="$4.42"
@@ -304,8 +308,8 @@ describe('TitleHub', () => {
   });
 
   describe('row wrapper props', () => {
-    it('forwards titleWrapperProps to the title BoxRow', () => {
-      const { getByTestId } = render(
+    it('forwards titleWrapperProps to the title BoxRow', async () => {
+      const { getByTestId } = await render(
         <TitleHub
           title="Section"
           titleWrapperProps={{ testID: TITLE_ROW_WRAPPER_TEST_ID }}
@@ -315,8 +319,8 @@ describe('TitleHub', () => {
       expect(getByTestId(TITLE_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards amountWrapperProps to the amount BoxRow', () => {
-      const { getByTestId } = render(
+    it('forwards amountWrapperProps to the amount BoxRow', async () => {
+      const { getByTestId } = await render(
         <TitleHub
           title="Send"
           amount="$4.42"
@@ -327,8 +331,8 @@ describe('TitleHub', () => {
       expect(getByTestId(AMOUNT_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards bottomLabelWrapperProps to the bottom label BoxRow', () => {
-      const { getByTestId } = render(
+    it('forwards bottomLabelWrapperProps to the bottom label BoxRow', async () => {
+      const { getByTestId } = await render(
         <TitleHub
           title="Send"
           amount="$4.42"
@@ -344,9 +348,9 @@ describe('TitleHub', () => {
   });
 
   describe('style and twClassName', () => {
-    it('applies custom style to root container', () => {
+    it('applies custom style to root container', async () => {
       const customStyle = { opacity: 0.5 };
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <TitleHub
           title="Test"
           testID={CONTAINER_TEST_ID}
@@ -357,8 +361,8 @@ describe('TitleHub', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle(customStyle);
     });
 
-    it('merges twClassName with base styles', () => {
-      const { getByTestId } = render(
+    it('merges twClassName with base styles', async () => {
+      const { getByTestId } = await render(
         <TitleHub
           title="Test"
           testID={CONTAINER_TEST_ID}

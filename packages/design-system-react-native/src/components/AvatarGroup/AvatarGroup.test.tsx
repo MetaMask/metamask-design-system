@@ -23,8 +23,8 @@ describe('AvatarGroup', () => {
         ...item,
         testID: 'avatar-account',
       }));
-    it(`renders exactly max avatars for the Account variant and shows overflow counter`, () => {
-      const { getAllByTestId, getByText } = render(
+    it(`renders exactly max avatars for the Account variant and shows overflow counter`, async () => {
+      const { getAllByTestId, getByText } = await render(
         <AvatarGroup
           variant={variant}
           avatarPropsArr={sampleAvatarGroupAccountArr}
@@ -38,10 +38,10 @@ describe('AvatarGroup', () => {
       ).toBeDefined();
     });
 
-    it(`respects custom max and size for Account variant`, () => {
+    it(`respects custom max and size for Account variant`, async () => {
       const customMax = 2;
       const customSize = AvatarGroupSize.Xs;
-      const { getAllByTestId, getByText } = render(
+      const { getAllByTestId, getByText } = await render(
         <AvatarGroup
           variant={variant}
           avatarPropsArr={sampleAvatarGroupAccountArr}
@@ -64,8 +64,8 @@ describe('AvatarGroup', () => {
         ...item,
         testID: 'avatar-favicon',
       }));
-    it(`renders exactly max avatars for the Favicon variant and shows overflow counter`, () => {
-      const { getAllByTestId, getByText } = render(
+    it(`renders exactly max avatars for the Favicon variant and shows overflow counter`, async () => {
+      const { getAllByTestId, getByText } = await render(
         <AvatarGroup
           variant={variant}
           avatarPropsArr={sampleAvatarGroupFaviconArr}
@@ -79,10 +79,10 @@ describe('AvatarGroup', () => {
       ).toBeDefined();
     });
 
-    it(`respects custom max and size for Favicon variant`, () => {
+    it(`respects custom max and size for Favicon variant`, async () => {
       const customMax = 2;
       const customSize = AvatarGroupSize.Xs;
-      const { getAllByTestId, getByText } = render(
+      const { getAllByTestId, getByText } = await render(
         <AvatarGroup
           variant={variant}
           avatarPropsArr={sampleAvatarGroupFaviconArr}
@@ -105,8 +105,8 @@ describe('AvatarGroup', () => {
         ...item,
         testID: 'avatar-network',
       }));
-    it(`renders exactly max avatars for the Network variant and shows overflow counter`, () => {
-      const { getAllByTestId, getByText } = render(
+    it(`renders exactly max avatars for the Network variant and shows overflow counter`, async () => {
+      const { getAllByTestId, getByText } = await render(
         <AvatarGroup
           variant={variant}
           avatarPropsArr={sampleAvatarGroupNetworkArr}
@@ -120,10 +120,10 @@ describe('AvatarGroup', () => {
       ).toBeDefined();
     });
 
-    it(`respects custom max and size for Network variant`, () => {
+    it(`respects custom max and size for Network variant`, async () => {
       const customMax = 2;
       const customSize = AvatarGroupSize.Xs;
-      const { getAllByTestId, getByText } = render(
+      const { getAllByTestId, getByText } = await render(
         <AvatarGroup
           variant={variant}
           avatarPropsArr={sampleAvatarGroupNetworkArr}
@@ -146,8 +146,8 @@ describe('AvatarGroup', () => {
         ...item,
         testID: 'avatar-token',
       }));
-    it(`renders exactly max avatars for the Token variant and shows overflow counter`, () => {
-      const { getAllByTestId, getByText } = render(
+    it(`renders exactly max avatars for the Token variant and shows overflow counter`, async () => {
+      const { getAllByTestId, getByText } = await render(
         <AvatarGroup
           variant={variant}
           avatarPropsArr={sampleAvatarGroupTokenArr}
@@ -161,10 +161,10 @@ describe('AvatarGroup', () => {
       ).toBeDefined();
     });
 
-    it(`respects custom max and size for Token variant`, () => {
+    it(`respects custom max and size for Token variant`, async () => {
       const customMax = 2;
       const customSize = AvatarGroupSize.Xs;
-      const { getAllByTestId, getByText } = render(
+      const { getAllByTestId, getByText } = await render(
         <AvatarGroup
           variant={variant}
           avatarPropsArr={sampleAvatarGroupTokenArr}
@@ -180,8 +180,8 @@ describe('AvatarGroup', () => {
     });
   });
 
-  it('toggles flex direction when isReverse is true', () => {
-    const { getByTestId } = render(
+  it('toggles flex direction when isReverse is true', async () => {
+    const { getByTestId } = await render(
       <AvatarGroup
         variant={AvatarGroupVariant.Favicon}
         avatarPropsArr={SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR}
@@ -195,9 +195,9 @@ describe('AvatarGroup', () => {
     expect(containerStyle.flexDirection).toBe('row-reverse');
   });
 
-  it('forwards twClassName and style props to container', () => {
+  it('forwards twClassName and style props to container', async () => {
     const customStyle = { margin: 10 };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <AvatarGroup
         variant={AvatarGroupVariant.Account}
         avatarPropsArr={SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR}
@@ -212,9 +212,9 @@ describe('AvatarGroup', () => {
     expect(container.props.style[1]).toStrictEqual(customStyle);
   });
 
-  it('does not render overflow when count ≤ max', () => {
+  it('does not render overflow when count ≤ max', async () => {
     const smallArr = SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR.slice(0, 3);
-    const { queryByText } = render(
+    const { queryByText } = await render(
       <AvatarGroup
         variant={AvatarGroupVariant.Account}
         avatarPropsArr={smallArr}
@@ -224,10 +224,10 @@ describe('AvatarGroup', () => {
     expect(queryByText(/\+\d+/u)).toBeNull();
   });
 
-  it('throws an error for an invalid variant', () => {
+  it('throws an error for an invalid variant', async () => {
     const invalidVariant = 'InvalidVariant' as unknown as AvatarGroupVariant;
 
-    expect(() =>
+    await expect(
       render(
         <AvatarGroup
           variant={invalidVariant}
@@ -235,6 +235,6 @@ describe('AvatarGroup', () => {
           testID="avatar-group"
         />,
       ),
-    ).toThrow('Invalid Avatar Variant: InvalidVariant.');
+    ).rejects.toThrow('Invalid Avatar Variant: InvalidVariant.');
   });
 });

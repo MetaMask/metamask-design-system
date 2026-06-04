@@ -58,12 +58,14 @@ function flattenStyles(
 describe('Box', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
-  it('renders children and merges style', () => {
-    const { getByTestId, getByText } = render(
+  it('renders children and merges style', async () => {
+    const { getByTestId, getByText } = await render(
       <Box testID="box" style={{ margin: 4 }}>
         <Text>Hello</Text>
       </Box>,
@@ -75,23 +77,23 @@ describe('Box', () => {
     expect(styles[1]).toStrictEqual({ margin: 4 });
   });
 
-  it('applies default flex class', () => {
-    const { getByTestId } = render(<Box testID="box" />);
+  it('applies default flex class', async () => {
+    const { getByTestId } = await render(<Box testID="box" />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw.style('flex'));
   });
 
-  it('forwards ref to the underlying View', () => {
+  it('forwards ref to the underlying View', async () => {
     const ref = createRef<View>();
 
-    render(<Box ref={ref} testID="box" />);
+    await render(<Box ref={ref} testID="box" />);
 
     expect(ref.current).toBeInstanceOf(View);
   });
 
-  it('applies flexDirection', () => {
-    const { getByTestId } = render(
+  it('applies flexDirection', async () => {
+    const { getByTestId } = await render(
       <Box testID="box" flexDirection={BoxFlexDirection.Row} />,
     );
     const box = getByTestId('box');
@@ -99,8 +101,8 @@ describe('Box', () => {
     expect(styles[0]).toStrictEqual(tw.style('flex', BoxFlexDirection.Row));
   });
 
-  it('applies flexWrap', () => {
-    const { getByTestId } = render(
+  it('applies flexWrap', async () => {
+    const { getByTestId } = await render(
       <Box testID="box" flexWrap={BoxFlexWrap.Wrap} />,
     );
     const box = getByTestId('box');
@@ -108,15 +110,15 @@ describe('Box', () => {
     expect(styles[0]).toStrictEqual(tw.style('flex', BoxFlexWrap.Wrap));
   });
 
-  it('applies gap', () => {
-    const { getByTestId } = render(<Box testID="box" gap={4} />);
+  it('applies gap', async () => {
+    const { getByTestId } = await render(<Box testID="box" gap={4} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_GAP[4]));
   });
 
-  it('applies alignItems', () => {
-    const { getByTestId } = render(
+  it('applies alignItems', async () => {
+    const { getByTestId } = await render(
       <Box testID="box" alignItems={BoxAlignItems.Center} />,
     );
     const box = getByTestId('box');
@@ -124,8 +126,8 @@ describe('Box', () => {
     expect(styles[0]).toStrictEqual(tw.style('flex', BoxAlignItems.Center));
   });
 
-  it('applies justifyContent', () => {
-    const { getByTestId } = render(
+  it('applies justifyContent', async () => {
+    const { getByTestId } = await render(
       <Box testID="box" justifyContent={BoxJustifyContent.Between} />,
     );
     const box = getByTestId('box');
@@ -136,15 +138,15 @@ describe('Box', () => {
   });
 
   // Margin tests
-  it('applies margin', () => {
-    const { getByTestId } = render(<Box testID="box" margin={4} />);
+  it('applies margin', async () => {
+    const { getByTestId } = await render(<Box testID="box" margin={4} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_MARGIN[4]));
   });
 
-  it('applies marginTop', () => {
-    const { getByTestId } = render(<Box testID="box" marginTop={3} />);
+  it('applies marginTop', async () => {
+    const { getByTestId } = await render(<Box testID="box" marginTop={3} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -152,8 +154,8 @@ describe('Box', () => {
     );
   });
 
-  it('applies marginRight', () => {
-    const { getByTestId } = render(<Box testID="box" marginRight={2} />);
+  it('applies marginRight', async () => {
+    const { getByTestId } = await render(<Box testID="box" marginRight={2} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -161,8 +163,8 @@ describe('Box', () => {
     );
   });
 
-  it('applies marginBottom', () => {
-    const { getByTestId } = render(<Box testID="box" marginBottom={5} />);
+  it('applies marginBottom', async () => {
+    const { getByTestId } = await render(<Box testID="box" marginBottom={5} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -170,8 +172,8 @@ describe('Box', () => {
     );
   });
 
-  it('applies marginLeft', () => {
-    const { getByTestId } = render(<Box testID="box" marginLeft={1} />);
+  it('applies marginLeft', async () => {
+    const { getByTestId } = await render(<Box testID="box" marginLeft={1} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -179,8 +181,10 @@ describe('Box', () => {
     );
   });
 
-  it('applies marginHorizontal', () => {
-    const { getByTestId } = render(<Box testID="box" marginHorizontal={6} />);
+  it('applies marginHorizontal', async () => {
+    const { getByTestId } = await render(
+      <Box testID="box" marginHorizontal={6} />,
+    );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -188,8 +192,10 @@ describe('Box', () => {
     );
   });
 
-  it('applies marginVertical', () => {
-    const { getByTestId } = render(<Box testID="box" marginVertical={8} />);
+  it('applies marginVertical', async () => {
+    const { getByTestId } = await render(
+      <Box testID="box" marginVertical={8} />,
+    );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -198,8 +204,8 @@ describe('Box', () => {
   });
 
   // Padding tests
-  it('applies padding', () => {
-    const { getByTestId } = render(<Box testID="box" padding={4} />);
+  it('applies padding', async () => {
+    const { getByTestId } = await render(<Box testID="box" padding={4} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -207,8 +213,8 @@ describe('Box', () => {
     );
   });
 
-  it('applies paddingTop', () => {
-    const { getByTestId } = render(<Box testID="box" paddingTop={3} />);
+  it('applies paddingTop', async () => {
+    const { getByTestId } = await render(<Box testID="box" paddingTop={3} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -216,8 +222,8 @@ describe('Box', () => {
     );
   });
 
-  it('applies paddingRight', () => {
-    const { getByTestId } = render(<Box testID="box" paddingRight={2} />);
+  it('applies paddingRight', async () => {
+    const { getByTestId } = await render(<Box testID="box" paddingRight={2} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -225,8 +231,10 @@ describe('Box', () => {
     );
   });
 
-  it('applies paddingBottom', () => {
-    const { getByTestId } = render(<Box testID="box" paddingBottom={5} />);
+  it('applies paddingBottom', async () => {
+    const { getByTestId } = await render(
+      <Box testID="box" paddingBottom={5} />,
+    );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -234,8 +242,8 @@ describe('Box', () => {
     );
   });
 
-  it('applies paddingLeft', () => {
-    const { getByTestId } = render(<Box testID="box" paddingLeft={1} />);
+  it('applies paddingLeft', async () => {
+    const { getByTestId } = await render(<Box testID="box" paddingLeft={1} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -243,8 +251,10 @@ describe('Box', () => {
     );
   });
 
-  it('applies paddingHorizontal', () => {
-    const { getByTestId } = render(<Box testID="box" paddingHorizontal={6} />);
+  it('applies paddingHorizontal', async () => {
+    const { getByTestId } = await render(
+      <Box testID="box" paddingHorizontal={6} />,
+    );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -252,8 +262,10 @@ describe('Box', () => {
     );
   });
 
-  it('applies paddingVertical', () => {
-    const { getByTestId } = render(<Box testID="box" paddingVertical={8} />);
+  it('applies paddingVertical', async () => {
+    const { getByTestId } = await render(
+      <Box testID="box" paddingVertical={8} />,
+    );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -262,8 +274,8 @@ describe('Box', () => {
   });
 
   // Border tests
-  it('applies borderWidth', () => {
-    const { getByTestId } = render(<Box testID="box" borderWidth={2} />);
+  it('applies borderWidth', async () => {
+    const { getByTestId } = await render(<Box testID="box" borderWidth={2} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -271,8 +283,8 @@ describe('Box', () => {
     );
   });
 
-  it('applies borderColor', () => {
-    const { getByTestId } = render(
+  it('applies borderColor', async () => {
+    const { getByTestId } = await render(
       <Box testID="box" borderColor={BoxBorderColor.PrimaryDefault} />,
     );
     const box = getByTestId('box');
@@ -283,8 +295,8 @@ describe('Box', () => {
   });
 
   // Background color tests
-  it('applies backgroundColor', () => {
-    const { getByTestId } = render(
+  it('applies backgroundColor', async () => {
+    const { getByTestId } = await render(
       <Box testID="box" backgroundColor={BoxBackgroundColor.PrimaryDefault} />,
     );
     const box = getByTestId('box');
@@ -294,8 +306,8 @@ describe('Box', () => {
     );
   });
 
-  it('applies twClassName', () => {
-    const { getByTestId } = render(
+  it('applies twClassName', async () => {
+    const { getByTestId } = await render(
       <Box testID="box" twClassName="bg-primary-default p-4" />,
     );
     const box = getByTestId('box');
@@ -303,8 +315,8 @@ describe('Box', () => {
     expect(styles[0]).toStrictEqual(tw.style('flex', 'bg-primary-default p-4'));
   });
 
-  it('applies all flex props together', () => {
-    const { getByTestId } = render(
+  it('applies all flex props together', async () => {
+    const { getByTestId } = await render(
       <Box
         testID="box"
         flexDirection={BoxFlexDirection.Row}
@@ -331,8 +343,8 @@ describe('Box', () => {
     );
   });
 
-  it('applies all new props together', () => {
-    const { getByTestId } = render(
+  it('applies all new props together', async () => {
+    const { getByTestId } = await render(
       <Box
         testID="box"
         margin={2}
@@ -357,29 +369,33 @@ describe('Box', () => {
     );
   });
 
-  it('handles undefined gap prop', () => {
-    const { getByTestId } = render(<Box testID="box" gap={undefined} />);
+  it('handles undefined gap prop', async () => {
+    const { getByTestId } = await render(<Box testID="box" gap={undefined} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw.style('flex'));
   });
 
-  it('handles undefined margin prop', () => {
-    const { getByTestId } = render(<Box testID="box" margin={undefined} />);
+  it('handles undefined margin prop', async () => {
+    const { getByTestId } = await render(
+      <Box testID="box" margin={undefined} />,
+    );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw.style('flex'));
   });
 
-  it('handles undefined padding prop', () => {
-    const { getByTestId } = render(<Box testID="box" padding={undefined} />);
+  it('handles undefined padding prop', async () => {
+    const { getByTestId } = await render(
+      <Box testID="box" padding={undefined} />,
+    );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw.style('flex'));
   });
 
-  it('handles undefined borderWidth prop', () => {
-    const { getByTestId } = render(
+  it('handles undefined borderWidth prop', async () => {
+    const { getByTestId } = await render(
       <Box testID="box" borderWidth={undefined} />,
     );
     const box = getByTestId('box');
@@ -387,22 +403,22 @@ describe('Box', () => {
     expect(styles[0]).toStrictEqual(tw.style('flex'));
   });
 
-  it('handles zero gap', () => {
-    const { getByTestId } = render(<Box testID="box" gap={0} />);
+  it('handles zero gap', async () => {
+    const { getByTestId } = await render(<Box testID="box" gap={0} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_GAP[0]));
   });
 
-  it('handles zero margin', () => {
-    const { getByTestId } = render(<Box testID="box" margin={0} />);
+  it('handles zero margin', async () => {
+    const { getByTestId } = await render(<Box testID="box" margin={0} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(tw.style('flex', TWCLASSMAP_BOX_MARGIN[0]));
   });
 
-  it('handles zero padding', () => {
-    const { getByTestId } = render(<Box testID="box" padding={0} />);
+  it('handles zero padding', async () => {
+    const { getByTestId } = await render(<Box testID="box" padding={0} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -410,8 +426,8 @@ describe('Box', () => {
     );
   });
 
-  it('handles zero borderWidth', () => {
-    const { getByTestId } = render(<Box testID="box" borderWidth={0} />);
+  it('handles zero borderWidth', async () => {
+    const { getByTestId } = await render(<Box testID="box" borderWidth={0} />);
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
     expect(styles[0]).toStrictEqual(
@@ -419,8 +435,8 @@ describe('Box', () => {
     );
   });
 
-  it('passes through additional ViewProps', () => {
-    const { getByTestId } = render(
+  it('passes through additional ViewProps', async () => {
+    const { getByTestId } = await render(
       <Box testID="box" accessible accessibilityLabel="Test box" />,
     );
     const box = getByTestId('box');

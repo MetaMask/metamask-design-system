@@ -9,20 +9,20 @@ import { ButtonBase } from './ButtonBase';
 describe('ButtonBase', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    const { result } = renderHook(() => useTailwind());
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
     tw = result.current;
   });
 
   describe('rendering', () => {
-    it('displays string children', () => {
-      const { getByText } = render(<ButtonBase>Click me</ButtonBase>);
+    it('displays string children', async () => {
+      const { getByText } = await render(<ButtonBase>Click me</ButtonBase>);
 
       expect(getByText('Click me')).toBeOnTheScreen();
     });
 
-    it('displays element children', () => {
-      const { getByText } = render(
+    it('displays element children', async () => {
+      const { getByText } = await render(
         <ButtonBase>
           <Text>Nested</Text>
         </ButtonBase>,
@@ -33,8 +33,8 @@ describe('ButtonBase', () => {
   });
 
   describe('size', () => {
-    it('applies small height when size is sm', () => {
-      const { getByTestId } = render(
+    it('applies small height when size is sm', async () => {
+      const { getByTestId } = await render(
         <ButtonBase size={ButtonBaseSize.Sm} testID="btn">
           Small
         </ButtonBase>,
@@ -43,8 +43,8 @@ describe('ButtonBase', () => {
       expect(getByTestId('btn')).toHaveStyle(tw`h-8`);
     });
 
-    it('applies medium height when size is md', () => {
-      const { getByTestId } = render(
+    it('applies medium height when size is md', async () => {
+      const { getByTestId } = await render(
         <ButtonBase size={ButtonBaseSize.Md} testID="btn">
           Medium
         </ButtonBase>,
@@ -53,8 +53,8 @@ describe('ButtonBase', () => {
       expect(getByTestId('btn')).toHaveStyle(tw`h-10`);
     });
 
-    it('applies large height by default', () => {
-      const { getByTestId } = render(
+    it('applies large height by default', async () => {
+      const { getByTestId } = await render(
         <ButtonBase testID="btn">Large default</ButtonBase>,
       );
 
@@ -63,8 +63,8 @@ describe('ButtonBase', () => {
   });
 
   describe('twClassName', () => {
-    it('merges static classes onto the button', () => {
-      const { getByTestId } = render(
+    it('merges static classes onto the button', async () => {
+      const { getByTestId } = await render(
         <ButtonBase twClassName="bg-default" testID="btn">
           Custom
         </ButtonBase>,
@@ -75,8 +75,8 @@ describe('ButtonBase', () => {
   });
 
   describe('layout width', () => {
-    it('expands to full width when isFullWidth is true', () => {
-      const { getByTestId } = render(
+    it('expands to full width when isFullWidth is true', async () => {
+      const { getByTestId } = await render(
         <ButtonBase isFullWidth testID="btn">
           Full width
         </ButtonBase>,
@@ -87,62 +87,62 @@ describe('ButtonBase', () => {
   });
 
   describe('interaction', () => {
-    it('invokes onPress when pressed', () => {
+    it('invokes onPress when pressed', async () => {
       const onPress = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <ButtonBase onPress={onPress} testID="btn">
           Press me
         </ButtonBase>,
       );
 
-      fireEvent.press(getByTestId('btn'));
+      await fireEvent.press(getByTestId('btn'));
 
       expect(onPress).toHaveBeenCalledTimes(1);
     });
 
-    it('does not invoke onPress when disabled', () => {
+    it('does not invoke onPress when disabled', async () => {
       const onPress = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <ButtonBase onPress={onPress} isDisabled testID="btn">
           Disabled
         </ButtonBase>,
       );
 
       const btn = getByTestId('btn');
-      fireEvent.press(btn);
+      await fireEvent.press(btn);
 
       expect(onPress).not.toHaveBeenCalled();
       expect(btn).toBeDisabled();
     });
 
-    it('does not invoke onPress when loading', () => {
+    it('does not invoke onPress when loading', async () => {
       const onPress = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <ButtonBase onPress={onPress} isLoading testID="btn">
           Load
         </ButtonBase>,
       );
 
-      fireEvent.press(getByTestId('btn'));
+      await fireEvent.press(getByTestId('btn'));
 
       expect(onPress).not.toHaveBeenCalled();
     });
   });
 
   describe('textProps', () => {
-    it('defaults label to single line with clip ellipsis', () => {
-      const { getByText } = render(<ButtonBase>Label</ButtonBase>);
+    it('defaults label to single line with clip ellipsis', async () => {
+      const { getByText } = await render(<ButtonBase>Label</ButtonBase>);
 
       const label = getByText('Label');
       expect(label.props.numberOfLines).toBe(1);
       expect(label.props.ellipsizeMode).toBe('clip');
     });
 
-    it('allows overriding numberOfLines and ellipsizeMode', () => {
-      const { getByText } = render(
+    it('allows overriding numberOfLines and ellipsizeMode', async () => {
+      const { getByText } = await render(
         <ButtonBase textProps={{ numberOfLines: 2, ellipsizeMode: 'tail' }}>
           Custom text props
         </ButtonBase>,
@@ -155,7 +155,7 @@ describe('ButtonBase', () => {
   });
 
   describe('loading state', () => {
-    it('centers the spinner overlay and disables the control', () => {
+    it('centers the spinner overlay and disables the control', async () => {
       const spinnerExtra =
         'flex-row items-center gap-x-2 absolute inset-0 flex items-center justify-center opacity-100';
       const expectedSpinner = tw.style(
@@ -163,7 +163,7 @@ describe('ButtonBase', () => {
         spinnerExtra,
       );
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <ButtonBase
           testID="btn"
           isLoading
@@ -183,8 +183,8 @@ describe('ButtonBase', () => {
       expect(getByTestId('btn')).toBeDisabled();
     });
 
-    it('merges loadingWrapperProps (testID and twClassName) with default overlay layout', () => {
-      const { getByTestId } = render(
+    it('merges loadingWrapperProps (testID and twClassName) with default overlay layout', async () => {
+      const { getByTestId } = await render(
         <ButtonBase
           isLoading
           loadingWrapperProps={{
@@ -201,10 +201,10 @@ describe('ButtonBase', () => {
       );
     });
 
-    it('renders loadingText in the spinner', () => {
+    it('renders loadingText in the spinner', async () => {
       const text = 'Please wait…';
 
-      const { getByText } = render(
+      const { getByText } = await render(
         <ButtonBase isLoading loadingText={text}>
           X
         </ButtonBase>,
@@ -213,8 +213,8 @@ describe('ButtonBase', () => {
       expect(getByText(text)).toBeOnTheScreen();
     });
 
-    it('forwards spinnerProps to Spinner', () => {
-      const { getByTestId } = render(
+    it('forwards spinnerProps to Spinner', async () => {
+      const { getByTestId } = await render(
         <ButtonBase
           testID="btn"
           isLoading
@@ -233,8 +233,8 @@ describe('ButtonBase', () => {
   });
 
   describe('icons and accessories', () => {
-    it('renders start and end icons when names are provided', () => {
-      const { getByTestId } = render(
+    it('renders start and end icons when names are provided', async () => {
+      const { getByTestId } = await render(
         <ButtonBase
           startIconName={IconName.Add}
           startIconProps={{ testID: 'start' }}
@@ -249,8 +249,8 @@ describe('ButtonBase', () => {
       expect(getByTestId('end')).toBeOnTheScreen();
     });
 
-    it('uses startIconProps.name when startIconName is omitted', () => {
-      const { getByTestId } = render(
+    it('uses startIconProps.name when startIconName is omitted', async () => {
+      const { getByTestId } = await render(
         <ButtonBase
           startIconProps={{ name: IconName.Add, testID: 'start-from-props' }}
         >
@@ -261,8 +261,8 @@ describe('ButtonBase', () => {
       expect(getByTestId('start-from-props')).toBeOnTheScreen();
     });
 
-    it('uses endIconProps.name when endIconName is omitted', () => {
-      const { getByTestId } = render(
+    it('uses endIconProps.name when endIconName is omitted', async () => {
+      const { getByTestId } = await render(
         <ButtonBase
           endIconProps={{ name: IconName.Close, testID: 'end-from-props' }}
         >
@@ -273,8 +273,8 @@ describe('ButtonBase', () => {
       expect(getByTestId('end-from-props')).toBeOnTheScreen();
     });
 
-    it('renders custom accessories when icon names are omitted', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('renders custom accessories when icon names are omitted', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <ButtonBase
           startAccessory={<View testID="sa" />}
           endAccessory={<View testID="ea" />}
@@ -289,8 +289,8 @@ describe('ButtonBase', () => {
       expect(queryByTestId('end')).toBeNull();
     });
 
-    it('displays only the label when no icons or accessories are set', () => {
-      const { getByText, queryByTestId } = render(
+    it('displays only the label when no icons or accessories are set', async () => {
+      const { getByText, queryByTestId } = await render(
         <ButtonBase>No side content</ButtonBase>,
       );
 
@@ -300,8 +300,8 @@ describe('ButtonBase', () => {
   });
 
   describe('when iconClassName and textClassName are set', () => {
-    it('renders icons without extra classes when hooks are omitted', () => {
-      const { getByText } = render(
+    it('renders icons without extra classes when hooks are omitted', async () => {
+      const { getByText } = await render(
         <ButtonBase startIconName={IconName.Add} endIconName={IconName.Close}>
           Plain icons
         </ButtonBase>,
@@ -312,8 +312,8 @@ describe('ButtonBase', () => {
   });
 
   describe('Accessibility', () => {
-    it('sets role button and derives label from string children', () => {
-      const { getByTestId } = render(
+    it('sets role button and derives label from string children', async () => {
+      const { getByTestId } = await render(
         <ButtonBase testID="btn">Default Button</ButtonBase>,
       );
       const btn = getByTestId('btn');
@@ -329,8 +329,8 @@ describe('ButtonBase', () => {
       );
     });
 
-    it('respects custom accessibilityLabel, hint, and role', () => {
-      const { getByTestId } = render(
+    it('respects custom accessibilityLabel, hint, and role', async () => {
+      const { getByTestId } = await render(
         <ButtonBase
           testID="btn"
           accessibilityLabel="Custom Label"
@@ -347,8 +347,8 @@ describe('ButtonBase', () => {
       expect(btn.props.accessibilityRole).toBe('link');
     });
 
-    it('marks disabled state when isDisabled', () => {
-      const { getByTestId } = render(
+    it('marks disabled state when isDisabled', async () => {
+      const { getByTestId } = await render(
         <ButtonBase testID="btn" isDisabled>
           Disabled Button
         </ButtonBase>,
@@ -361,8 +361,8 @@ describe('ButtonBase', () => {
       expect(btn).toBeDisabled();
     });
 
-    it('marks loading state and prefers loadingText as label when provided', () => {
-      const { getByTestId } = render(
+    it('marks loading state and prefers loadingText as label when provided', async () => {
+      const { getByTestId } = await render(
         <ButtonBase testID="btn" isLoading loadingText="Please wait">
           Loading Button
         </ButtonBase>,
@@ -382,8 +382,8 @@ describe('ButtonBase', () => {
       expect(btn).toBeDisabled();
     });
 
-    it('prefers explicit accessibilityLabel over loadingText when loading', () => {
-      const { getByTestId } = render(
+    it('prefers explicit accessibilityLabel over loadingText when loading', async () => {
+      const { getByTestId } = await render(
         <ButtonBase
           testID="btn"
           isLoading
@@ -397,8 +397,8 @@ describe('ButtonBase', () => {
       expect(getByTestId('btn').props.accessibilityLabel).toBe('Announce me');
     });
 
-    it('uses string children as label when loading without loadingText', () => {
-      const { getByTestId } = render(
+    it('uses string children as label when loading without loadingText', async () => {
+      const { getByTestId } = await render(
         <ButtonBase testID="btn" isLoading>
           Button
         </ButtonBase>,
@@ -417,8 +417,8 @@ describe('ButtonBase', () => {
       );
     });
 
-    it('uses custom accessibilityHint instead of the loading hint', () => {
-      const { getByTestId } = render(
+    it('uses custom accessibilityHint instead of the loading hint', async () => {
+      const { getByTestId } = await render(
         <ButtonBase
           testID="btn"
           isLoading
@@ -433,13 +433,13 @@ describe('ButtonBase', () => {
       );
     });
 
-    it('forwards accessibility actions', () => {
+    it('forwards accessibility actions', async () => {
       const mockActionHandler = jest.fn();
       const accessibilityActions = [
         { name: 'longpress', label: 'Long press for options' },
       ];
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <ButtonBase
           testID="btn"
           accessibilityActions={accessibilityActions}
@@ -456,8 +456,8 @@ describe('ButtonBase', () => {
       expect(btn.props.onAccessibilityAction).toBe(mockActionHandler);
     });
 
-    it('leaves accessibilityLabel undefined for complex element children', () => {
-      const { getByTestId } = render(
+    it('leaves accessibilityLabel undefined for complex element children', async () => {
+      const { getByTestId } = await render(
         <ButtonBase testID="btn">
           <View>
             <Text>Complex Content</Text>
@@ -468,8 +468,8 @@ describe('ButtonBase', () => {
       expect(getByTestId('btn').props.accessibilityLabel).toBeUndefined();
     });
 
-    it('uses string children as the accessibility label', () => {
-      const { getByTestId } = render(
+    it('uses string children as the accessibility label', async () => {
+      const { getByTestId } = await render(
         <ButtonBase testID="btn">Simple Text</ButtonBase>,
       );
 

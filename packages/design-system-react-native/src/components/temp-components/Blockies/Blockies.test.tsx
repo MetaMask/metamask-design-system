@@ -28,8 +28,8 @@ describe('Blockies Component', () => {
     (toDataUrl as jest.Mock).mockClear();
   });
 
-  it('renders with default size (32) if size is not provided', () => {
-    const { getByTestId } = render(
+  it('renders with default size (32) if size is not provided', async () => {
+    const { getByTestId } = await render(
       <Blockies address="0x123" testID="blockies" />,
     );
     // toDataUrl should have been called with the address
@@ -40,8 +40,8 @@ describe('Blockies Component', () => {
     expect(image.props.height).toBe(32);
   });
 
-  it('renders with a custom size', () => {
-    const { getByTestId } = render(
+  it('renders with a custom size', async () => {
+    const { getByTestId } = await render(
       <Blockies address="0x123" size={64} testID="blockies" />,
     );
     const image = getByTestId('blockies');
@@ -49,8 +49,8 @@ describe('Blockies Component', () => {
     expect(image.props.height).toBe(64);
   });
 
-  it('passes additional image props correctly', () => {
-    const { getByTestId } = render(
+  it('passes additional image props correctly', async () => {
+    const { getByTestId } = await render(
       <Blockies
         address="0xabc"
         size={40}
@@ -64,13 +64,13 @@ describe('Blockies Component', () => {
     expect(image.props.style).toMatchObject({ margin: 10 });
   });
 
-  it('calls toDataUrl with the correct address', () => {
-    render(<Blockies address="0xabc" testID="blockies" />);
+  it('calls toDataUrl with the correct address', async () => {
+    await render(<Blockies address="0xabc" testID="blockies" />);
     expect(toDataUrl).toHaveBeenCalledWith('0xabc');
   });
 
-  it('extracts account address from CAIP-10 format before calling toDataUrl', () => {
-    render(
+  it('extracts account address from CAIP-10 format before calling toDataUrl', async () => {
+    await render(
       <Blockies
         address="eip155:1:0x1234567890abcdef1234567890abcdef12345678"
         testID="blockies"
@@ -82,8 +82,8 @@ describe('Blockies Component', () => {
     );
   });
 
-  it('handles legacy addresses without CAIP-10 format', () => {
-    render(
+  it('handles legacy addresses without CAIP-10 format', async () => {
+    await render(
       <Blockies
         address="0x9876543210fedcba9876543210fedcba98765432"
         testID="blockies"

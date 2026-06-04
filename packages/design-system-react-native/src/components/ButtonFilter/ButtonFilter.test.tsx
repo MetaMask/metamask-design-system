@@ -12,8 +12,8 @@ describe('ButtonFilter', () => {
     onPress: jest.fn(),
   };
 
-  beforeAll(() => {
-    const { result } = renderHook(() => useTailwind());
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
     tw = result.current;
   });
 
@@ -63,23 +63,27 @@ describe('ButtonFilter', () => {
     );
   }
 
-  it('renders with children prop', () => {
-    const { getByRole, getByText } = render(<ButtonFilter {...defaultProps} />);
+  it('renders with children prop', async () => {
+    const { getByRole, getByText } = await render(
+      <ButtonFilter {...defaultProps} />,
+    );
 
     expect(getByRole('button')).toBeDefined();
     expect(getByText('All')).toBeDefined();
   });
 
-  it('renders correctly in active state', () => {
-    const { getByRole } = render(<ButtonFilter {...defaultProps} isActive />);
+  it('renders correctly in active state', async () => {
+    const { getByRole } = await render(
+      <ButtonFilter {...defaultProps} isActive />,
+    );
     const button = getByRole('button');
 
     expect(button).toBeDefined();
     expectBackground(button.props.style, 'bg-icon-default');
   });
 
-  it('renders correctly in inactive state', () => {
-    const { getByRole } = render(
+  it('renders correctly in inactive state', async () => {
+    const { getByRole } = await render(
       <ButtonFilter {...defaultProps} isActive={false} />,
     );
     const button = getByRole('button');
@@ -88,19 +92,19 @@ describe('ButtonFilter', () => {
     expectBackground(button.props.style, 'bg-background-muted');
   });
 
-  it('calls onPress when pressed', () => {
+  it('calls onPress when pressed', async () => {
     const onPress = jest.fn();
-    const { getByRole } = render(
+    const { getByRole } = await render(
       <ButtonFilter {...defaultProps} onPress={onPress} />,
     );
 
-    fireEvent.press(getByRole('button'));
+    await fireEvent.press(getByRole('button'));
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
-  it('verifies disabled state prevents interaction', () => {
+  it('verifies disabled state prevents interaction', async () => {
     const onPress = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <ButtonFilter
         {...defaultProps}
         testID="filter-button"
@@ -112,12 +116,12 @@ describe('ButtonFilter', () => {
     const button = getByTestId('filter-button');
     expect(button.props.accessibilityState).toMatchObject({ disabled: true });
 
-    fireEvent.press(button);
+    await fireEvent.press(button);
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('supports twClassName and textProps overrides', () => {
-    const { getByRole, getByText } = render(
+  it('supports twClassName and textProps overrides', async () => {
+    const { getByRole, getByText } = await render(
       <ButtonFilter
         {...defaultProps}
         twClassName="bg-error-default"

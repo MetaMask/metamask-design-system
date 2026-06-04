@@ -7,65 +7,67 @@ import { RadioButton } from './RadioButton';
 describe('RadioButton', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
-  it('renders label when provided', () => {
-    const { getByText } = render(<RadioButton label="Option A" />);
+  it('renders label when provided', async () => {
+    const { getByText } = await render(<RadioButton label="Option A" />);
     expect(getByText('Option A')).toBeDefined();
   });
 
-  it('does not render label when not provided', () => {
-    const { queryByText } = render(<RadioButton />);
+  it('does not render label when not provided', async () => {
+    const { queryByText } = await render(<RadioButton />);
     expect(queryByText('Option A')).toBeNull();
   });
 
-  it('fires onPress when pressed', () => {
+  it('fires onPress when pressed', async () => {
     const onPress = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <RadioButton
         onPress={onPress}
         touchableOpacityProps={{ testID: 'radio-touchable' }}
       />,
     );
-    fireEvent.press(getByTestId('radio-touchable'));
+    await fireEvent.press(getByTestId('radio-touchable'));
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
-  it('does not fire onPress when disabled', () => {
+  it('does not fire onPress when disabled', async () => {
     const onPress = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <RadioButton
         onPress={onPress}
         isDisabled
         touchableOpacityProps={{ testID: 'radio-touchable' }}
       />,
     );
-    fireEvent.press(getByTestId('radio-touchable'));
+    await fireEvent.press(getByTestId('radio-touchable'));
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('does not fire onPress when readOnly', () => {
+  it('does not fire onPress when readOnly', async () => {
     const onPress = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <RadioButton
         onPress={onPress}
         isReadOnly
         touchableOpacityProps={{ testID: 'radio-touchable' }}
       />,
     );
-    fireEvent.press(getByTestId('radio-touchable'));
+    await fireEvent.press(getByTestId('radio-touchable'));
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('passes testID to root View via ViewProps', () => {
-    const { getByTestId } = render(<RadioButton testID="radio-root" />);
+  it('passes testID to root View via ViewProps', async () => {
+    const { getByTestId } = await render(<RadioButton testID="radio-root" />);
     expect(getByTestId('radio-root')).toBeDefined();
   });
 
-  it('passes testID to TouchableOpacity via touchableOpacityProps', () => {
-    const { getByTestId } = render(
+  it('passes testID to TouchableOpacity via touchableOpacityProps', async () => {
+    const { getByTestId } = await render(
       <RadioButton
         testID="radio-root"
         touchableOpacityProps={{ testID: 'radio-touchable' }}
@@ -75,8 +77,8 @@ describe('RadioButton', () => {
     expect(getByTestId('radio-touchable')).toBeDefined();
   });
 
-  it('shows inner dot when isChecked is true', () => {
-    const { getByTestId } = render(
+  it('shows inner dot when isChecked is true', async () => {
+    const { getByTestId } = await render(
       <RadioButton
         isChecked
         radioButtonContainerProps={{ testID: 'radio-circle' }}
@@ -86,24 +88,24 @@ describe('RadioButton', () => {
     expect(circle.children.length).toBeGreaterThan(0);
   });
 
-  it('does not show inner dot when isChecked is false', () => {
-    const { getByTestId } = render(
+  it('does not show inner dot when isChecked is false', async () => {
+    const { getByTestId } = await render(
       <RadioButton radioButtonContainerProps={{ testID: 'radio-circle' }} />,
     );
     const circle = getByTestId('radio-circle');
     expect(circle.children).toHaveLength(0);
   });
 
-  it('applies disabled opacity to root', () => {
-    const { getByTestId } = render(
+  it('applies disabled opacity to root', async () => {
+    const { getByTestId } = await render(
       <RadioButton isDisabled testID="radio-root" />,
     );
     const root = getByTestId('radio-root');
     expect(root).toHaveStyle(tw`flex-row items-center opacity-50`);
   });
 
-  it('applies checked border styles', () => {
-    const { getByTestId } = render(
+  it('applies checked border styles', async () => {
+    const { getByTestId } = await render(
       <RadioButton
         isChecked
         radioButtonContainerProps={{ testID: 'radio-circle' }}
@@ -115,8 +117,8 @@ describe('RadioButton', () => {
     );
   });
 
-  it('applies readOnly border and dot styles', () => {
-    const { getByTestId } = render(
+  it('applies readOnly border and dot styles', async () => {
+    const { getByTestId } = await render(
       <RadioButton
         isChecked
         isReadOnly
@@ -129,8 +131,8 @@ describe('RadioButton', () => {
     );
   });
 
-  it('applies danger border styles', () => {
-    const { getByTestId } = render(
+  it('applies danger border styles', async () => {
+    const { getByTestId } = await render(
       <RadioButton
         isChecked
         isDanger
@@ -143,8 +145,8 @@ describe('RadioButton', () => {
     );
   });
 
-  it('sets accessibility props correctly', () => {
-    const { getByTestId } = render(
+  it('sets accessibility props correctly', async () => {
+    const { getByTestId } = await render(
       <RadioButton
         isChecked
         label="Option A"
@@ -160,8 +162,8 @@ describe('RadioButton', () => {
     expect(touchable.props.accessibilityLabel).toBe('Option A');
   });
 
-  it('merges custom style with root', () => {
-    const { getByTestId } = render(
+  it('merges custom style with root', async () => {
+    const { getByTestId } = await render(
       <RadioButton testID="radio-root" style={{ margin: 8 }} />,
     );
     const root = getByTestId('radio-root');

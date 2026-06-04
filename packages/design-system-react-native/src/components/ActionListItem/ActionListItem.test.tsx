@@ -19,15 +19,15 @@ describe('ActionListItem', () => {
   });
 
   describe('Rendering', () => {
-    it('renders with string label', () => {
-      const { getByText } = render(
+    it('renders with string label', async () => {
+      const { getByText } = await render(
         <ActionListItem label="Test Label" onPress={mockOnPress} />,
       );
       expect(getByText('Test Label')).toBeDefined();
     });
 
-    it('renders with string description', () => {
-      const { getByText } = render(
+    it('renders with string description', async () => {
+      const { getByText } = await render(
         <ActionListItem
           label="Test Label"
           description="Test Description"
@@ -37,8 +37,8 @@ describe('ActionListItem', () => {
       expect(getByText('Test Description')).toBeDefined();
     });
 
-    it('renders with React node label', () => {
-      const { getByText } = render(
+    it('renders with React node label', async () => {
+      const { getByText } = await render(
         <ActionListItem
           label={<Text variant={TextVariant.BodyMd}>Custom Label</Text>}
           onPress={mockOnPress}
@@ -47,8 +47,8 @@ describe('ActionListItem', () => {
       expect(getByText('Custom Label')).toBeDefined();
     });
 
-    it('renders with React node description', () => {
-      const { getByText } = render(
+    it('renders with React node description', async () => {
+      const { getByText } = await render(
         <ActionListItem
           label="Test Label"
           description={
@@ -60,16 +60,16 @@ describe('ActionListItem', () => {
       expect(getByText('Custom Description')).toBeDefined();
     });
 
-    it('renders without description when not provided', () => {
-      const { getByText, queryByText } = render(
+    it('renders without description when not provided', async () => {
+      const { getByText, queryByText } = await render(
         <ActionListItem label="Test Label" onPress={mockOnPress} />,
       );
       expect(getByText('Test Label')).toBeDefined();
       expect(queryByText('description')).toBeNull();
     });
 
-    it('renders icon when iconName is provided', () => {
-      const { getByTestId } = render(
+    it('renders icon when iconName is provided', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           label="Test Label"
           iconName={IconName.Setting}
@@ -80,8 +80,8 @@ describe('ActionListItem', () => {
       expect(getByTestId('action-icon')).toBeDefined();
     });
 
-    it('renders start accessory', () => {
-      const { getByTestId } = render(
+    it('renders start accessory', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           label="Test Label"
           startAccessory={
@@ -93,8 +93,8 @@ describe('ActionListItem', () => {
       expect(getByTestId('start-accessory')).toBeDefined();
     });
 
-    it('renders end accessory', () => {
-      const { getByTestId } = render(
+    it('renders end accessory', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           label="Test Label"
           endAccessory={
@@ -106,8 +106,8 @@ describe('ActionListItem', () => {
       expect(getByTestId('end-accessory')).toBeDefined();
     });
 
-    it('prioritizes startAccessory over iconName', () => {
-      const { getByTestId, queryByTestId } = render(
+    it('prioritizes startAccessory over iconName', async () => {
+      const { getByTestId, queryByTestId } = await render(
         <ActionListItem
           label="Test Label"
           iconName={IconName.Setting}
@@ -123,8 +123,8 @@ describe('ActionListItem', () => {
       expect(queryByTestId('icon-from-name')).toBeNull();
     });
 
-    it('applies labelTextProps to string label', () => {
-      const { getByText } = render(
+    it('applies labelTextProps to string label', async () => {
+      const { getByText } = await render(
         <ActionListItem
           label="Test Label"
           labelTextProps={{
@@ -138,8 +138,8 @@ describe('ActionListItem', () => {
       expect(getByText('Test Label')).toBeDefined();
     });
 
-    it('does not apply labelTextProps to ReactNode label', () => {
-      const { getByTestId } = render(
+    it('does not apply labelTextProps to ReactNode label', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           label={
             <Text variant={TextVariant.BodySm} testID="custom-label">
@@ -156,8 +156,8 @@ describe('ActionListItem', () => {
       expect(getByTestId('custom-label')).toBeDefined();
     });
 
-    it('applies descriptionTextProps to string description', () => {
-      const { getByText } = render(
+    it('applies descriptionTextProps to string description', async () => {
+      const { getByText } = await render(
         <ActionListItem
           label="Test Label"
           description="Test Description"
@@ -172,8 +172,8 @@ describe('ActionListItem', () => {
       expect(getByText('Test Description')).toBeDefined();
     });
 
-    it('applies iconProps to icon when iconName is provided', () => {
-      const { getByTestId } = render(
+    it('applies iconProps to icon when iconName is provided', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           label="Test Label"
           iconName={IconName.Setting}
@@ -186,8 +186,8 @@ describe('ActionListItem', () => {
   });
 
   describe('Interactions', () => {
-    it('fires onPress when pressed', () => {
-      const { getByTestId } = render(
+    it('fires onPress when pressed', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           {...SAMPLE_ACTIONLISTITEM_PROPS}
           onPress={mockOnPress}
@@ -195,12 +195,12 @@ describe('ActionListItem', () => {
         />,
       );
 
-      fireEvent.press(getByTestId('action-item'));
+      await fireEvent.press(getByTestId('action-item'));
       expect(mockOnPress).toHaveBeenCalledTimes(1);
     });
 
-    it('does not fire onPress when disabled', () => {
-      const { getByTestId } = render(
+    it('does not fire onPress when disabled', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           {...SAMPLE_ACTIONLISTITEM_PROPS}
           onPress={mockOnPress}
@@ -209,14 +209,14 @@ describe('ActionListItem', () => {
         />,
       );
 
-      fireEvent.press(getByTestId('action-item'));
+      await fireEvent.press(getByTestId('action-item'));
       expect(mockOnPress).not.toHaveBeenCalled();
     });
   });
 
   describe('Props', () => {
-    it('passes testID to root element via ViewProps', () => {
-      const { getByTestId } = render(
+    it('passes testID to root element via ViewProps', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           label="Test Label"
           onPress={mockOnPress}
@@ -226,8 +226,8 @@ describe('ActionListItem', () => {
       expect(getByTestId('root-item')).toBeDefined();
     });
 
-    it('passes accessibilityLabel via ViewProps', () => {
-      const { getByTestId } = render(
+    it('passes accessibilityLabel via ViewProps', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           label="Test Label"
           onPress={mockOnPress}
@@ -241,9 +241,9 @@ describe('ActionListItem', () => {
       );
     });
 
-    it('accepts pressableProps', () => {
+    it('accepts pressableProps', async () => {
       const mockOnPressIn = jest.fn();
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <ActionListItem
           label="Test Label"
           onPress={mockOnPress}
@@ -252,12 +252,12 @@ describe('ActionListItem', () => {
         />,
       );
 
-      fireEvent(getByTestId('action-item'), 'pressIn');
+      await fireEvent(getByTestId('action-item'), 'pressIn');
       expect(mockOnPressIn).toHaveBeenCalledTimes(1);
     });
 
-    it('merges custom style prop', () => {
-      const { getByTestId } = render(
+    it('merges custom style prop', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           label="Test Label"
           onPress={mockOnPress}
@@ -270,15 +270,15 @@ describe('ActionListItem', () => {
   });
 
   describe('Edge Cases', () => {
-    it('handles empty string label', () => {
-      const { getByTestId } = render(
+    it('handles empty string label', async () => {
+      const { getByTestId } = await render(
         <ActionListItem label="" onPress={mockOnPress} testID="action-item" />,
       );
       expect(getByTestId('action-item')).toBeDefined();
     });
 
-    it('handles empty string description', () => {
-      const { getByTestId } = render(
+    it('handles empty string description', async () => {
+      const { getByTestId } = await render(
         <ActionListItem
           label="Test Label"
           description=""
@@ -289,8 +289,8 @@ describe('ActionListItem', () => {
       expect(getByTestId('action-item')).toBeDefined();
     });
 
-    it('handles all props together', () => {
-      const { getByTestId, getByText } = render(
+    it('handles all props together', async () => {
+      const { getByTestId, getByText } = await render(
         <ActionListItem
           label="Complex Label"
           description="Complex Description"

@@ -1,6 +1,6 @@
 import { act, fireEvent, render } from '@testing-library/react-native';
-import React, { useEffect, useRef } from 'react';
-import { BackHandler, Platform, TouchableOpacity, View } from 'react-native';
+import React, { createRef } from 'react';
+import { BackHandler, Platform, View } from 'react-native';
 
 import { BottomSheet } from './BottomSheet';
 import type { BottomSheetRef } from './BottomSheet.types';
@@ -54,6 +54,22 @@ jest.mock('../BottomSheetDialog', () => {
   };
 });
 
+jest.mock('../BottomSheetOverlay/BottomSheetOverlay', () => ({
+  BottomSheetOverlay: ({ onPress }: { onPress?: () => void }) => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { Pressable, View: RNView } = require('react-native');
+    return onPress ? (
+      <Pressable
+        accessibilityRole="button"
+        testID="bottom-sheet-overlay"
+        onPress={onPress}
+      />
+    ) : (
+      <RNView testID="bottom-sheet-overlay" />
+    );
+  },
+}));
+
 const noop = () => undefined;
 
 describe('BottomSheet', () => {
@@ -65,8 +81,8 @@ describe('BottomSheet', () => {
     capturedPanGestureHandlerProps = undefined;
   });
 
-  it('renders with testID on root element', () => {
-    const { getByTestId } = render(
+  it('renders with testID on root element', async () => {
+    const { getByTestId } = await render(
       <BottomSheet testID="bottom-sheet" goBack={noop}>
         <View />
       </BottomSheet>,
@@ -74,8 +90,8 @@ describe('BottomSheet', () => {
     expect(getByTestId('bottom-sheet')).toBeDefined();
   });
 
-  it('renders children', () => {
-    const { getByTestId } = render(
+  it('renders children', async () => {
+    const { getByTestId } = await render(
       <BottomSheet goBack={noop}>
         <View testID="child-content" />
       </BottomSheet>,
@@ -83,11 +99,11 @@ describe('BottomSheet', () => {
     expect(getByTestId('child-content')).toBeDefined();
   });
 
-  it('renders correctly on non-iOS platforms', () => {
+  it('renders correctly on non-iOS platforms', async () => {
     const originalOS = Platform.OS;
     Platform.OS = 'android';
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <BottomSheet testID="bottom-sheet" goBack={noop}>
         <View />
       </BottomSheet>,
@@ -97,75 +113,75 @@ describe('BottomSheet', () => {
     Platform.OS = originalOS;
   });
 
-  it('calls onClose when dialog signals close', () => {
+  it('calls onClose when dialog signals close', async () => {
     const onClose = jest.fn();
-    render(
+    await render(
       <BottomSheet goBack={noop} onClose={onClose}>
         <View />
       </BottomSheet>,
     );
 
-    act(() => {
+    await act(() => {
       capturedDialogOnClose?.();
     });
 
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it('passes hasPendingAction=false to onClose when no post-callback is queued', () => {
+  it('passes hasPendingAction=false to onClose when no post-callback is queued', async () => {
     const onClose = jest.fn();
-    render(
+    await render(
       <BottomSheet goBack={noop} onClose={onClose}>
         <View />
       </BottomSheet>,
     );
 
-    act(() => {
+    await act(() => {
       capturedDialogOnClose?.();
     });
 
     expect(onClose).toHaveBeenCalledWith(false);
   });
 
-  it('calls onOpen when dialog signals open', () => {
+  it('calls onOpen when dialog signals open', async () => {
     const onOpen = jest.fn();
-    render(
+    await render(
       <BottomSheet goBack={noop} onOpen={onOpen}>
         <View />
       </BottomSheet>,
     );
 
-    act(() => {
+    await act(() => {
       capturedDialogOnOpen?.();
     });
 
     expect(onOpen).toHaveBeenCalledTimes(1);
   });
 
-  it('calls goBack when dialog closes', () => {
+  it('calls goBack when dialog closes', async () => {
     const goBack = jest.fn();
-    render(
+    await render(
       <BottomSheet goBack={goBack}>
         <View />
       </BottomSheet>,
     );
 
-    act(() => {
+    await act(() => {
       capturedDialogOnClose?.();
     });
 
     expect(goBack).toHaveBeenCalledTimes(1);
   });
 
-  it('does not call goBack twice on duplicate close signals', () => {
+  it('does not call goBack twice on duplicate close signals', async () => {
     const goBack = jest.fn();
-    render(
+    await render(
       <BottomSheet goBack={goBack}>
         <View />
       </BottomSheet>,
     );
 
-    act(() => {
+    await act(() => {
       capturedDialogOnClose?.();
       capturedDialogOnClose?.();
     });
@@ -174,32 +190,32 @@ describe('BottomSheet', () => {
   });
 
   describe('overlay interaction', () => {
-    it('renders overlay touchable when isInteractable is true', () => {
-      const { UNSAFE_getAllByType } = render(
+    it('renders overlay touchable when isInteractable is true', async () => {
+      const { getByRole } = await render(
         <BottomSheet goBack={noop} isInteractable>
           <View />
         </BottomSheet>,
       );
-      expect(UNSAFE_getAllByType(TouchableOpacity)).toHaveLength(1);
+      expect(getByRole('button')).toBeOnTheScreen();
     });
 
-    it('does not render overlay touchable when isInteractable is false', () => {
-      const { UNSAFE_queryAllByType } = render(
+    it('does not render overlay touchable when isInteractable is false', async () => {
+      const { queryByRole } = await render(
         <BottomSheet goBack={noop} isInteractable={false}>
           <View />
         </BottomSheet>,
       );
-      expect(UNSAFE_queryAllByType(TouchableOpacity)).toHaveLength(0);
+      expect(queryByRole('button')).toBeNull();
     });
 
-    it('calls onCloseDialog when overlay is pressed', () => {
-      const { UNSAFE_getAllByType } = render(
+    it('calls onCloseDialog when overlay is pressed', async () => {
+      const { getByTestId } = await render(
         <BottomSheet goBack={noop} isInteractable>
           <View />
         </BottomSheet>,
       );
 
-      fireEvent.press(UNSAFE_getAllByType(TouchableOpacity)[0]);
+      await fireEvent.press(getByTestId('bottom-sheet-overlay'));
 
       expect(mockCloseDialog).toHaveBeenCalledTimes(1);
     });
@@ -226,36 +242,36 @@ describe('BottomSheet', () => {
       backHandlerCallback = null;
     });
 
-    it('closes the dialog on hardware back press when isInteractable', () => {
-      render(
+    it('closes the dialog on hardware back press when isInteractable', async () => {
+      await render(
         <BottomSheet goBack={noop} isInteractable>
           <View />
         </BottomSheet>,
       );
 
-      act(() => {
+      await act(() => {
         backHandlerCallback?.();
       });
 
       expect(mockCloseDialog).toHaveBeenCalledTimes(1);
     });
 
-    it('does not close the dialog on hardware back press when not isInteractable', () => {
-      render(
+    it('does not close the dialog on hardware back press when not isInteractable', async () => {
+      await render(
         <BottomSheet goBack={noop} isInteractable={false}>
           <View />
         </BottomSheet>,
       );
 
-      act(() => {
+      await act(() => {
         backHandlerCallback?.();
       });
 
       expect(mockCloseDialog).not.toHaveBeenCalled();
     });
 
-    it('returns true from BackHandler to prevent default back navigation', () => {
-      render(
+    it('returns true from BackHandler to prevent default back navigation', async () => {
+      await render(
         <BottomSheet goBack={noop} isInteractable>
           <View />
         </BottomSheet>,
@@ -268,126 +284,99 @@ describe('BottomSheet', () => {
   });
 
   describe('imperative ref', () => {
-    it('exposes onCloseBottomSheet and onOpenBottomSheet', () => {
-      const sheetRef: { current: BottomSheetRef | null } = { current: null };
-      const TestComponent = () => {
-        const innerRef = useRef<BottomSheetRef>(null);
-        useEffect(() => {
-          sheetRef.current = innerRef.current;
-        }, []);
-        return (
-          <BottomSheet ref={innerRef} goBack={noop}>
-            <View />
-          </BottomSheet>
-        );
-      };
+    it('exposes onCloseBottomSheet and onOpenBottomSheet', async () => {
+      const sheetRef = createRef<BottomSheetRef>();
 
-      render(<TestComponent />);
+      await render(
+        <BottomSheet ref={sheetRef} goBack={noop}>
+          <View />
+        </BottomSheet>,
+      );
 
       expect(sheetRef.current).not.toBeNull();
       expect(typeof sheetRef.current?.onCloseBottomSheet).toBe('function');
       expect(typeof sheetRef.current?.onOpenBottomSheet).toBe('function');
     });
 
-    it('onCloseBottomSheet delegates to dialog onCloseDialog', () => {
-      const TestComponent = () => {
-        const innerRef = useRef<BottomSheetRef>(null);
-        useEffect(() => {
-          act(() => {
-            innerRef.current?.onCloseBottomSheet();
-          });
-        }, []);
-        return (
-          <BottomSheet ref={innerRef} goBack={noop}>
-            <View />
-          </BottomSheet>
-        );
-      };
+    it('onCloseBottomSheet delegates to dialog onCloseDialog', async () => {
+      const sheetRef = createRef<BottomSheetRef>();
 
-      render(<TestComponent />);
+      await render(
+        <BottomSheet ref={sheetRef} goBack={noop}>
+          <View />
+        </BottomSheet>,
+      );
+
+      await act(async () => {
+        sheetRef.current?.onCloseBottomSheet();
+      });
 
       expect(mockCloseDialog).toHaveBeenCalledTimes(1);
     });
 
-    it('onOpenBottomSheet delegates to dialog onOpenDialog', () => {
-      const TestComponent = () => {
-        const innerRef = useRef<BottomSheetRef>(null);
-        useEffect(() => {
-          act(() => {
-            innerRef.current?.onOpenBottomSheet();
-          });
-        }, []);
-        return (
-          <BottomSheet ref={innerRef} goBack={noop}>
-            <View />
-          </BottomSheet>
-        );
-      };
+    it('onOpenBottomSheet delegates to dialog onOpenDialog', async () => {
+      const sheetRef = createRef<BottomSheetRef>();
 
-      render(<TestComponent />);
+      await render(
+        <BottomSheet ref={sheetRef} goBack={noop}>
+          <View />
+        </BottomSheet>,
+      );
+
+      await act(async () => {
+        sheetRef.current?.onOpenBottomSheet();
+      });
 
       expect(mockOpenDialog).toHaveBeenCalledTimes(1);
     });
 
-    it('onCloseBottomSheet fires postCallback after close animation', () => {
+    it('onCloseBottomSheet fires postCallback after close animation', async () => {
       const callback = jest.fn();
-      const TestComponent = () => {
-        const innerRef = useRef<BottomSheetRef>(null);
-        useEffect(() => {
-          act(() => {
-            innerRef.current?.onCloseBottomSheet(callback);
-          });
-        }, []);
-        return (
-          <BottomSheet ref={innerRef} goBack={noop}>
-            <View />
-          </BottomSheet>
-        );
-      };
+      const sheetRef = createRef<BottomSheetRef>();
 
-      render(<TestComponent />);
+      await render(
+        <BottomSheet ref={sheetRef} goBack={noop}>
+          <View />
+        </BottomSheet>,
+      );
+
+      await act(async () => {
+        sheetRef.current?.onCloseBottomSheet(callback);
+      });
 
       expect(callback).toHaveBeenCalledTimes(1);
     });
 
-    it('onOpenBottomSheet fires postCallback after open animation', () => {
+    it('onOpenBottomSheet fires postCallback after open animation', async () => {
       const callback = jest.fn();
-      const TestComponent = () => {
-        const innerRef = useRef<BottomSheetRef>(null);
-        useEffect(() => {
-          act(() => {
-            innerRef.current?.onOpenBottomSheet(callback);
-          });
-        }, []);
-        return (
-          <BottomSheet ref={innerRef} goBack={noop}>
-            <View />
-          </BottomSheet>
-        );
-      };
+      const sheetRef = createRef<BottomSheetRef>();
 
-      render(<TestComponent />);
+      await render(
+        <BottomSheet ref={sheetRef} goBack={noop}>
+          <View />
+        </BottomSheet>,
+      );
+
+      await act(async () => {
+        sheetRef.current?.onOpenBottomSheet(callback);
+      });
 
       expect(callback).toHaveBeenCalledTimes(1);
     });
 
-    it('ignores duplicate onCloseBottomSheet calls', () => {
-      const TestComponent = () => {
-        const innerRef = useRef<BottomSheetRef>(null);
-        useEffect(() => {
-          act(() => {
-            innerRef.current?.onCloseBottomSheet();
-            innerRef.current?.onCloseBottomSheet();
-          });
-        }, []);
-        return (
-          <BottomSheet ref={innerRef} goBack={noop}>
-            <View />
-          </BottomSheet>
-        );
-      };
+    it('ignores duplicate onCloseBottomSheet calls', async () => {
+      const sheetRef = createRef<BottomSheetRef>();
 
-      render(<TestComponent />);
+      await render(
+        <BottomSheet ref={sheetRef} goBack={noop}>
+          <View />
+        </BottomSheet>,
+      );
+
+      await act(async () => {
+        sheetRef.current?.onCloseBottomSheet();
+        sheetRef.current?.onCloseBottomSheet();
+      });
 
       expect(mockCloseDialog).toHaveBeenCalledTimes(1);
     });

@@ -10,14 +10,14 @@ import { Tag } from './Tag';
 describe('Tag', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    const { result } = renderHook(() => useTailwind());
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
     tw = result.current;
   });
 
   describe('children', () => {
-    it('renders children correctly', () => {
-      const { getByText } = render(
+    it('renders children correctly', async () => {
+      const { getByText } = await render(
         <Tag>
           <Text>Hello, World!</Text>
         </Tag>,
@@ -26,8 +26,8 @@ describe('Tag', () => {
       expect(getByText('Hello, World!')).toBeOnTheScreen();
     });
 
-    it('renders string children with tag text styling', () => {
-      const { getByText } = render(
+    it('renders string children with tag text styling', async () => {
+      const { getByText } = await render(
         <Tag testID="tag-string-child">From string</Tag>,
       );
 
@@ -36,8 +36,8 @@ describe('Tag', () => {
   });
 
   describe('twClassName', () => {
-    it('applies the correct styles', () => {
-      const { getByTestId } = render(
+    it('applies the correct styles', async () => {
+      const { getByTestId } = await render(
         <Tag twClassName="bg-default" testID="component-name">
           <Text>Styled Content</Text>
         </Tag>,
@@ -48,8 +48,8 @@ describe('Tag', () => {
   });
 
   describe('testID', () => {
-    it('accepts testID prop', () => {
-      const { getByTestId } = render(
+    it('accepts testID prop', async () => {
+      const { getByTestId } = await render(
         <Tag testID="component-name">
           <Text>Test Content</Text>
         </Tag>,
@@ -60,8 +60,8 @@ describe('Tag', () => {
   });
 
   describe('startIconName and startIconProps', () => {
-    it('renders start icon when startIconName is provided', () => {
-      const { getByTestId } = render(
+    it('renders start icon when startIconName is provided', async () => {
+      const { getByTestId } = await render(
         <Tag
           startIconName={IconName.Tag}
           startIconProps={{ testID: 'tag-start-icon' }}
@@ -73,8 +73,8 @@ describe('Tag', () => {
       expect(getByTestId('tag-start-icon')).toBeOnTheScreen();
     });
 
-    it('resolves icon from startIconProps.name when startIconName is omitted', () => {
-      const { getByTestId } = render(
+    it('resolves icon from startIconProps.name when startIconName is omitted', async () => {
+      const { getByTestId } = await render(
         <Tag startIconProps={{ name: IconName.Tag, testID: 'tag-start-icon' }}>
           From props
         </Tag>,
@@ -85,8 +85,8 @@ describe('Tag', () => {
   });
 
   describe('endIconName', () => {
-    it('renders end icon when endIconName is provided', () => {
-      const { getByTestId } = render(
+    it('renders end icon when endIconName is provided', async () => {
+      const { getByTestId } = await render(
         <Tag
           endIconName={IconName.Tag}
           endIconProps={{ testID: 'tag-end-icon' }}
@@ -100,8 +100,8 @@ describe('Tag', () => {
   });
 
   describe('icons omitted', () => {
-    it('does not render icons when no name is provided', () => {
-      const { queryByTestId } = render(
+    it('does not render icons when no name is provided', async () => {
+      const { queryByTestId } = await render(
         <Tag
           startIconProps={{ testID: 'tag-start-icon' }}
           endIconProps={{ testID: 'tag-end-icon' }}
@@ -116,8 +116,8 @@ describe('Tag', () => {
   });
 
   describe('startAccessory', () => {
-    it('renders startAccessory when no start icon', () => {
-      const { getByTestId } = render(
+    it('renders startAccessory when no start icon', async () => {
+      const { getByTestId } = await render(
         <Tag startAccessory={<Text testID="tag-start-accessory">→</Text>}>
           With accessory
         </Tag>,
@@ -128,8 +128,8 @@ describe('Tag', () => {
   });
 
   describe('endAccessory', () => {
-    it('renders endAccessory when no end icon', () => {
-      const { getByTestId } = render(
+    it('renders endAccessory when no end icon', async () => {
+      const { getByTestId } = await render(
         <Tag endAccessory={<Text testID="tag-end-accessory">←</Text>}>
           With end accessory
         </Tag>,

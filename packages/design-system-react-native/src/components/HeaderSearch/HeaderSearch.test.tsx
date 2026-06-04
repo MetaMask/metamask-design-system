@@ -14,8 +14,10 @@ const mockTextFieldSearchProps = {
 describe('HeaderSearch', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   beforeEach(() => {
@@ -23,10 +25,10 @@ describe('HeaderSearch', () => {
   });
 
   describe('when variant is screen', () => {
-    it('renders back button from backButtonProps', () => {
+    it('renders back button from backButtonProps', async () => {
       const onPressBackButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Screen}
           onPressBackButton={onPressBackButton}
@@ -38,10 +40,10 @@ describe('HeaderSearch', () => {
       expect(getByTestId('back-button')).toBeOnTheScreen();
     });
 
-    it('applies testID to root container', () => {
+    it('applies testID to root container', async () => {
       const onPressBackButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Screen}
           onPressBackButton={onPressBackButton}
@@ -53,10 +55,10 @@ describe('HeaderSearch', () => {
       expect(getByTestId('header-search')).toBeOnTheScreen();
     });
 
-    it('invokes onPressBackButton when back button is pressed', () => {
+    it('invokes onPressBackButton when back button is pressed', async () => {
       const onPressBackButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Screen}
           onPressBackButton={onPressBackButton}
@@ -65,15 +67,15 @@ describe('HeaderSearch', () => {
         />,
       );
 
-      fireEvent.press(getByTestId('back-button'));
+      await fireEvent.press(getByTestId('back-button'));
 
       expect(onPressBackButton).toHaveBeenCalledTimes(1);
     });
 
-    it('forwards backButtonProps to ButtonIcon', () => {
+    it('forwards backButtonProps to ButtonIcon', async () => {
       const onPressBackButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Screen}
           onPressBackButton={onPressBackButton}
@@ -85,11 +87,11 @@ describe('HeaderSearch', () => {
       expect(getByTestId('custom-back-button')).toBeOnTheScreen();
     });
 
-    it('does not allow backButtonProps to override onPress', () => {
+    it('does not allow backButtonProps to override onPress', async () => {
       const onPressBackButton = jest.fn();
       const rogueOnPress = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Screen}
           onPressBackButton={onPressBackButton}
@@ -100,16 +102,16 @@ describe('HeaderSearch', () => {
         />,
       );
 
-      fireEvent.press(getByTestId('back-button'));
+      await fireEvent.press(getByTestId('back-button'));
 
       expect(onPressBackButton).toHaveBeenCalledTimes(1);
       expect(rogueOnPress).not.toHaveBeenCalled();
     });
 
-    it('passes textFieldSearchProps through to TextFieldSearch', () => {
+    it('passes textFieldSearchProps through to TextFieldSearch', async () => {
       const onPressBackButton = jest.fn();
 
-      const { getByPlaceholderText } = render(
+      const { getByPlaceholderText } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Screen}
           onPressBackButton={onPressBackButton}
@@ -123,10 +125,10 @@ describe('HeaderSearch', () => {
       expect(getByPlaceholderText('Custom placeholder')).toBeOnTheScreen();
     });
 
-    it('merges textFieldSearchProps.twClassName with flex-1 on TextFieldSearch', () => {
+    it('merges textFieldSearchProps.twClassName with flex-1 on TextFieldSearch', async () => {
       const onPressBackButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Screen}
           onPressBackButton={onPressBackButton}
@@ -145,10 +147,10 @@ describe('HeaderSearch', () => {
   });
 
   describe('when variant is inline', () => {
-    it('renders cancel label', () => {
+    it('renders cancel label', async () => {
       const onPressCancelButton = jest.fn();
 
-      const { getByText } = render(
+      const { getByText } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={onPressCancelButton}
@@ -159,10 +161,10 @@ describe('HeaderSearch', () => {
       expect(getByText('Cancel')).toBeOnTheScreen();
     });
 
-    it('applies testID to root container', () => {
+    it('applies testID to root container', async () => {
       const onPressCancelButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={onPressCancelButton}
@@ -174,10 +176,10 @@ describe('HeaderSearch', () => {
       expect(getByTestId('header-search-inline')).toBeOnTheScreen();
     });
 
-    it('invokes onPressCancelButton when cancel button is pressed', () => {
+    it('invokes onPressCancelButton when cancel button is pressed', async () => {
       const onPressCancelButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={onPressCancelButton}
@@ -186,15 +188,15 @@ describe('HeaderSearch', () => {
         />,
       );
 
-      fireEvent.press(getByTestId('cancel-button'));
+      await fireEvent.press(getByTestId('cancel-button'));
 
       expect(onPressCancelButton).toHaveBeenCalledTimes(1);
     });
 
-    it('forwards cancelButtonProps to Button', () => {
+    it('forwards cancelButtonProps to Button', async () => {
       const onPressCancelButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={onPressCancelButton}
@@ -206,11 +208,11 @@ describe('HeaderSearch', () => {
       expect(getByTestId('custom-cancel-button')).toBeOnTheScreen();
     });
 
-    it('does not allow cancelButtonProps to override onPress', () => {
+    it('does not allow cancelButtonProps to override onPress', async () => {
       const onPressCancelButton = jest.fn();
       const rogueOnPress = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={onPressCancelButton}
@@ -221,16 +223,16 @@ describe('HeaderSearch', () => {
         />,
       );
 
-      fireEvent.press(getByTestId('cancel-button'));
+      await fireEvent.press(getByTestId('cancel-button'));
 
       expect(onPressCancelButton).toHaveBeenCalledTimes(1);
       expect(rogueOnPress).not.toHaveBeenCalled();
     });
 
-    it('passes textFieldSearchProps through to TextFieldSearch', () => {
+    it('passes textFieldSearchProps through to TextFieldSearch', async () => {
       const onPressCancelButton = jest.fn();
 
-      const { getByPlaceholderText } = render(
+      const { getByPlaceholderText } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={onPressCancelButton}
@@ -244,10 +246,10 @@ describe('HeaderSearch', () => {
       expect(getByPlaceholderText('Search inline')).toBeOnTheScreen();
     });
 
-    it('merges textFieldSearchProps.twClassName with flex-1 on TextFieldSearch', () => {
+    it('merges textFieldSearchProps.twClassName with flex-1 on TextFieldSearch', async () => {
       const onPressCancelButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={onPressCancelButton}
@@ -264,10 +266,10 @@ describe('HeaderSearch', () => {
       expect(field).toHaveStyle(tw`mt-1`);
     });
 
-    it('merges cancelButtonProps.textProps.twClassName with text-default', () => {
+    it('merges cancelButtonProps.textProps.twClassName with text-default', async () => {
       const onPressCancelButton = jest.fn();
 
-      const { getByText } = render(
+      const { getByText } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={onPressCancelButton}
@@ -286,10 +288,10 @@ describe('HeaderSearch', () => {
   });
 
   describe('when forwarding Box props', () => {
-    it('merges twClassName into root for screen variant', () => {
+    it('merges twClassName into root for screen variant', async () => {
       const onPressBackButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Screen}
           onPressBackButton={onPressBackButton}
@@ -302,10 +304,10 @@ describe('HeaderSearch', () => {
       expect(getByTestId('container')).toHaveStyle(tw`bg-error-default`);
     });
 
-    it('merges twClassName into root for inline variant', () => {
+    it('merges twClassName into root for inline variant', async () => {
       const onPressCancelButton = jest.fn();
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <HeaderSearch
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={onPressCancelButton}

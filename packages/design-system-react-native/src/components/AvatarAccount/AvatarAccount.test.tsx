@@ -14,7 +14,7 @@ jest.mock('react-native-svg', () => {
   const ReactMock = require('react');
   return {
     SvgXml: (props: { xml: string; testID?: string }) =>
-      ReactMock.createElement('SvgXml', props, props.xml),
+      ReactMock.createElement('SvgXml', props),
   };
 });
 jest.mock('react-native-jazzicon', () => {
@@ -25,7 +25,7 @@ describe('AvatarAccount', () => {
   it('renders Jazzicon by default when no variant is provided', async () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
 
-    const { findByTestId } = render(
+    const { findByTestId } = await render(
       <AvatarAccount
         address={address}
         jazziconProps={{ testID: 'jazzicon' }}
@@ -35,10 +35,10 @@ describe('AvatarAccount', () => {
     expect(jazzicon).toBeDefined();
   });
 
-  it('renders Blockies when variant is blockies', () => {
+  it('renders Blockies when variant is blockies', async () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
 
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <AvatarAccount
         address={address}
         variant={AvatarAccountVariant.Blockies}
@@ -52,7 +52,7 @@ describe('AvatarAccount', () => {
   it('renders Maskicon when variant is maskicon', async () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
 
-    const { findByTestId } = render(
+    const { findByTestId } = await render(
       <AvatarAccount
         address={address}
         variant={AvatarAccountVariant.Maskicon}
@@ -64,9 +64,9 @@ describe('AvatarAccount', () => {
     expect(maskicon).toBeDefined();
   });
 
-  it('respects the default size and shape', () => {
+  it('respects the default size and shape', async () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <AvatarAccount address={address} testID="avatar-account" />,
     );
     const avatarAccount = getByTestId('avatar-account');
@@ -81,7 +81,7 @@ describe('AvatarAccount', () => {
 
   it('overrides the size if provided', async () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
-    const { findByTestId, getByTestId } = render(
+    const { findByTestId, getByTestId } = await render(
       <AvatarAccount
         address={address}
         size={AvatarAccountSize.Xl}
@@ -102,10 +102,10 @@ describe('AvatarAccount', () => {
     );
   });
 
-  it('passes additional props to AvatarBase', () => {
+  it('passes additional props to AvatarBase', async () => {
     const address = SAMPLE_AVATARACCOUNT_ADDRESSES[0];
     const customStyle = { margin: 10 };
-    const { getByTestId } = render(
+    const { getByTestId } = await render(
       <AvatarAccount
         address={address}
         testID="avatar-base"

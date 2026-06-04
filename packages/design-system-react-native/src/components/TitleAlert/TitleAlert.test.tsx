@@ -17,13 +17,15 @@ const DESCRIPTION_TEST_ID = 'title-alert-description';
 describe('TitleAlert', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   describe('rendering', () => {
-    it('renders string title', () => {
-      const { getByText } = render(
+    it('renders string title', async () => {
+      const { getByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Warning}
           title="High price impact"
@@ -33,8 +35,8 @@ describe('TitleAlert', () => {
       expect(getByText('High price impact')).toBeOnTheScreen();
     });
 
-    it('forwards testID to root container', () => {
-      const { getByTestId } = render(
+    it('forwards testID to root container', async () => {
+      const { getByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title="Alert"
@@ -45,8 +47,8 @@ describe('TitleAlert', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards titleProps to title row Text when title is a string', () => {
-      const { getByTestId } = render(
+    it('forwards titleProps to title row Text when title is a string', async () => {
+      const { getByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Error}
           title="Error"
@@ -57,8 +59,8 @@ describe('TitleAlert', () => {
       expect(getByTestId(TITLE_ROW_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards titleWrapperProps to title row BoxRow', () => {
-      const { getByTestId } = render(
+    it('forwards titleWrapperProps to title row BoxRow', async () => {
+      const { getByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Error}
           title="Error"
@@ -69,8 +71,8 @@ describe('TitleAlert', () => {
       expect(getByTestId(TITLE_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('applies titleWrapperProps justifyContent over default center', () => {
-      const { getByTestId } = render(
+    it('applies titleWrapperProps justifyContent over default center', async () => {
+      const { getByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Error}
           title="Error"
@@ -86,8 +88,8 @@ describe('TitleAlert', () => {
       });
     });
 
-    it('renders string description with string title', () => {
-      const { getByText } = render(
+    it('renders string description with string title', async () => {
+      const { getByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Warning}
           title="High price impact"
@@ -99,8 +101,8 @@ describe('TitleAlert', () => {
       expect(getByText('Swap details here.')).toBeOnTheScreen();
     });
 
-    it('forwards descriptionProps to description Text when description is a string', () => {
-      const { getByTestId } = render(
+    it('forwards descriptionProps to description Text when description is a string', async () => {
+      const { getByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title="Title"
@@ -112,8 +114,8 @@ describe('TitleAlert', () => {
       expect(getByTestId(DESCRIPTION_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('merges descriptionProps.style with default centered text', () => {
-      const { getByText } = render(
+    it('merges descriptionProps.style with default centered text', async () => {
+      const { getByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Warning}
           title="T"
@@ -128,8 +130,8 @@ describe('TitleAlert', () => {
       });
     });
 
-    it('applies centered alignment to string description', () => {
-      const { getByText } = render(
+    it('applies centered alignment to string description', async () => {
+      const { getByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Warning}
           title="T"
@@ -142,8 +144,8 @@ describe('TitleAlert', () => {
   });
 
   describe('when title is provided', () => {
-    it('displays titleStartAccessory beside string title', () => {
-      const { getByText } = render(
+    it('displays titleStartAccessory beside string title', async () => {
+      const { getByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Warning}
           title="High price impact"
@@ -155,8 +157,8 @@ describe('TitleAlert', () => {
       expect(getByText('Start')).toBeOnTheScreen();
     });
 
-    it('displays titleEndAccessory beside string title', () => {
-      const { getByText } = render(
+    it('displays titleEndAccessory beside string title', async () => {
+      const { getByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Warning}
           title="High price impact"
@@ -168,8 +170,8 @@ describe('TitleAlert', () => {
       expect(getByText('End')).toBeOnTheScreen();
     });
 
-    it('renders React node as title', () => {
-      const { getByTestId } = render(
+    it('renders React node as title', async () => {
+      const { getByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title={<Text testID="title-alert-node">Node</Text>}
@@ -179,8 +181,8 @@ describe('TitleAlert', () => {
       expect(getByTestId('title-alert-node')).toBeOnTheScreen();
     });
 
-    it('renders React node as description', () => {
-      const { getByTestId } = render(
+    it('renders React node as description', async () => {
+      const { getByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Warning}
           title="T"
@@ -193,8 +195,8 @@ describe('TitleAlert', () => {
   });
 
   describe('when description is not renderable', () => {
-    it('omits description row when description is an empty string', () => {
-      const { queryByTestId, queryByText } = render(
+    it('omits description row when description is an empty string', async () => {
+      const { queryByTestId, queryByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title="T"
@@ -207,8 +209,8 @@ describe('TitleAlert', () => {
       expect(queryByText('T')).toBeOnTheScreen();
     });
 
-    it('renders description when title is false', () => {
-      const { getByText } = render(
+    it('renders description when title is false', async () => {
+      const { getByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title={false}
@@ -221,10 +223,10 @@ describe('TitleAlert', () => {
   });
 
   describe('when title is not renderable', () => {
-    it('omits title row when title is false', () => {
+    it('omits title row when title is false', async () => {
       const showTitle = false;
 
-      const { queryByTestId } = render(
+      const { queryByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title={
@@ -236,8 +238,8 @@ describe('TitleAlert', () => {
       expect(queryByTestId('title-alert-title-slot')).not.toBeOnTheScreen();
     });
 
-    it('omits title row when title is an empty string', () => {
-      const { queryByText } = render(
+    it('omits title row when title is an empty string', async () => {
+      const { queryByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title=""
@@ -250,8 +252,8 @@ describe('TitleAlert', () => {
       expect(queryByText('Orphan end')).not.toBeOnTheScreen();
     });
 
-    it('omits title row when title is false and only accessories are set', () => {
-      const { queryByText } = render(
+    it('omits title row when title is false and only accessories are set', async () => {
+      const { queryByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title={false}
@@ -264,8 +266,8 @@ describe('TitleAlert', () => {
   });
 
   describe('when titleEndAccessory is false', () => {
-    it('renders string title in title row', () => {
-      const { getByText } = render(
+    it('renders string title in title row', async () => {
+      const { getByText } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Warning}
           title="Hi"
@@ -278,10 +280,10 @@ describe('TitleAlert', () => {
   });
 
   describe('style and twClassName', () => {
-    it('applies style to root container', () => {
+    it('applies style to root container', async () => {
       const customStyle = { opacity: 0.5 };
 
-      const { getByTestId } = render(
+      const { getByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title="Test"
@@ -293,8 +295,8 @@ describe('TitleAlert', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle(customStyle);
     });
 
-    it('resolves twClassName on root container', () => {
-      const { getByTestId } = render(
+    it('resolves twClassName on root container', async () => {
+      const { getByTestId } = await render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title="Test"

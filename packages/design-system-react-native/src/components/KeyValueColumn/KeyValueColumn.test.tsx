@@ -21,14 +21,14 @@ const stringTruncationCases = [
 describe('KeyValueColumn', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    const { result } = renderHook(() => useTailwind());
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
     tw = result.current;
   });
 
   describe('when keyLabel and value are strings', () => {
-    it('renders key and value text', () => {
-      render(
+    it('renders key and value text', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Label"
           value="Value text"
@@ -42,8 +42,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when keyLabel is a ReactNode', () => {
-    it('renders keyLabel', () => {
-      render(
+    it('renders keyLabel', async () => {
+      await render(
         <KeyValueColumn
           keyLabel={<Text>Custom key node</Text>}
           value="Value"
@@ -57,8 +57,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when value is a ReactNode', () => {
-    it('renders value', () => {
-      render(
+    it('renders value', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value={<Text>Custom value node</Text>}
@@ -72,8 +72,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('layout', () => {
-    it('applies vertical layout on root', () => {
-      const { getByTestId } = render(
+    it('applies vertical layout on root', async () => {
+      const { getByTestId } = await render(
         <KeyValueColumn keyLabel="K" value="V" testID="key-value-column" />,
       );
 
@@ -84,8 +84,8 @@ describe('KeyValueColumn', () => {
 
     it.each(stringTruncationCases)(
       'applies single-line defaults to $role string',
-      ({ textMatch }) => {
-        render(
+      async ({ textMatch }) => {
+        await render(
           <KeyValueColumn keyLabel="K" value="V" testID="key-value-column" />,
         );
 
@@ -98,8 +98,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when keyStartAccessory is set', () => {
-    it('renders keyStartAccessory in key row', () => {
-      render(
+    it('renders keyStartAccessory in key row', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -113,8 +113,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when keyEndAccessory is set', () => {
-    it('renders keyEndAccessory in key row', () => {
-      render(
+    it('renders keyEndAccessory in key row', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -128,8 +128,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when valueStartAccessory is set', () => {
-    it('renders valueStartAccessory in value row', () => {
-      render(
+    it('renders valueStartAccessory in value row', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -143,8 +143,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when valueEndAccessory is set', () => {
-    it('renders valueEndAccessory in value row', () => {
-      render(
+    it('renders valueEndAccessory in value row', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -158,8 +158,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when keyEndButtonIconProps is provided without iconName', () => {
-    it('renders keyEndAccessory', () => {
-      render(
+    it('renders keyEndAccessory', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -179,10 +179,10 @@ describe('KeyValueColumn', () => {
       jest.clearAllMocks();
     });
 
-    it('renders ButtonIcon as key endAccessory', () => {
+    it('renders ButtonIcon as key endAccessory', async () => {
       const onPress = jest.fn();
 
-      render(
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -196,13 +196,13 @@ describe('KeyValueColumn', () => {
 
       expect(screen.getAllByTestId('button-icon')).toHaveLength(1);
 
-      fireEvent.press(screen.getByTestId('button-icon'));
+      await fireEvent.press(screen.getByTestId('button-icon'));
 
       expect(onPress).toHaveBeenCalledTimes(1);
     });
 
-    it('uses keyEndButtonIconProps instead of keyEndAccessory', () => {
-      render(
+    it('uses keyEndButtonIconProps instead of keyEndAccessory', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -221,8 +221,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when keyEndButtonIconProps is not provided', () => {
-    it('renders keyEndAccessory', () => {
-      render(
+    it('renders keyEndAccessory', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -237,8 +237,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when valueEndButtonIconProps has iconName', () => {
-    it('renders ButtonIcon as value endAccessory', () => {
-      render(
+    it('renders ButtonIcon as value endAccessory', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -253,8 +253,8 @@ describe('KeyValueColumn', () => {
       expect(screen.getAllByTestId('button-icon')).toHaveLength(1);
     });
 
-    it('uses valueEndButtonIconProps instead of valueEndAccessory', () => {
-      render(
+    it('uses valueEndButtonIconProps instead of valueEndAccessory', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -273,8 +273,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('when valueEndButtonIconProps is not provided', () => {
-    it('renders valueEndAccessory', () => {
-      render(
+    it('renders valueEndAccessory', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key"
           value="Value"
@@ -289,8 +289,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('keyTextProps and valueTextProps', () => {
-    it('spreads keyTextProps onto the key string Text', () => {
-      render(
+    it('spreads keyTextProps onto the key string Text', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key label"
           value="Value text"
@@ -318,8 +318,8 @@ describe('KeyValueColumn', () => {
       });
     });
 
-    it('spreads valueTextProps onto the value string Text', () => {
-      render(
+    it('spreads valueTextProps onto the value string Text', async () => {
+      await render(
         <KeyValueColumn
           keyLabel="Key label"
           value="Value text"
@@ -349,8 +349,8 @@ describe('KeyValueColumn', () => {
   });
 
   describe('twClassName', () => {
-    it('merges into root resolved styles', () => {
-      const { getByTestId } = render(
+    it('merges into root resolved styles', async () => {
+      const { getByTestId } = await render(
         <KeyValueColumn
           keyLabel="K"
           value="V"

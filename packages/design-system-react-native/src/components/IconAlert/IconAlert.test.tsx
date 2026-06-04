@@ -15,15 +15,17 @@ type IconAlertSeverityUnion =
 describe('IconAlert', () => {
   let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+  beforeAll(async () => {
+    const { result } = await renderHook(() => useTailwind());
+
+    tw = result.current;
   });
 
   describe('when a severity is provided', () => {
     it.each(Object.values(IconAlertSeverity) as IconAlertSeverityUnion[])(
       'renders %s with the mapped color styles',
-      (severity) => {
-        const { getByTestId } = render(
+      async (severity) => {
+        const { getByTestId } = await render(
           <IconAlert severity={severity} testID="icon-alert" />,
         );
 
@@ -39,8 +41,8 @@ describe('IconAlert', () => {
   });
 
   describe('when size is Lg', () => {
-    it('applies large icon dimensions for Info severity', () => {
-      const { getByTestId } = render(
+    it('applies large icon dimensions for Info severity', async () => {
+      const { getByTestId } = await render(
         <IconAlert
           severity={IconAlertSeverity.Info}
           size={IconSize.Lg}
