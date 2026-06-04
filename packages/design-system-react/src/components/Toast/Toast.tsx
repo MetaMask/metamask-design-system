@@ -84,7 +84,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
         borderWidth={1}
         className={twMerge('rounded-xl', className)}
         closeButtonProps={resolvedCloseButtonProps}
-        onClose={onClose ? () => onClose() : undefined}
+        onClose={onClose}
         startAccessory={renderSeverityAccessory({
           severity,
           startAccessory,
