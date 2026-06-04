@@ -16,6 +16,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Input Component](#input-component)
+  - [TextArea Component](#textarea-component)
   - [Checkbox Component](#checkbox-component)
   - [AvatarBase Component](#avatarbase-component)
   - [AvatarAccount Component](#avataraccount-component)
@@ -34,12 +35,15 @@ This guide provides detailed instructions for migrating your project from one ve
   - [ModalFooter Component](#modalfooter-component)
   - [ModalHeader Component](#modalheader-component)
   - [ModalOverlay Component](#modaloverlay-component)
+  - [Popover Component](#popover-component)
   - [PopoverHeader Component](#popoverheader-component)
   - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
   - [TextField Component](#textfield-component)
+  - [TextFieldSearch Component](#textfieldsearch-component)
+  - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
+  - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -1246,6 +1250,89 @@ import { Input, TextVariant } from '@metamask/design-system-react';
 - No polymorphic `as` prop — the component always renders `<input>`.
 - Extension-only `error` and `disableStateStyles` are not mirrored; use `aria-invalid` and `className` as needed.
 - `TextVariant` imports and member names follow the design system (Pascal-cased members such as `TextVariant.BodyMd`).
+
+### TextArea Component
+
+The extension `textarea` component maps to `TextArea` in the design system. The design system keeps the controlled textarea contract, but removes the extension's `defaultValue` path, renames state props to the shared `is*` convention, and narrows the resize options to the values supported by the design-system component.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration behavior.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                              | Design System Migration                                              |
+| -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import { Textarea } from '../../component-library'`           | `import { TextArea } from '@metamask/design-system-react'`           |
+| `import { TextareaResize } from '../../component-library'`     | `import { TextAreaResize } from '@metamask/design-system-react'`     |
+| `import type { TextareaProps } from '../../component-library'` | `import type { TextAreaProps } from '@metamask/design-system-react'` |
+
+##### Renamed and Removed Props
+
+| Extension Prop / Value                              | Design System Migration                           | Notes                                              |
+| --------------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- |
+| `disabled`                                          | `isDisabled`                                      | renamed                                            |
+| `readOnly`                                          | `isReadOnly`                                      | renamed                                            |
+| `error`                                             | `isError`                                         | renamed                                            |
+| `defaultValue`                                      | removed                                           | use controlled `value` instead                     |
+| `TextareaResize.Initial` / `TextareaResize.Inherit` | removed                                           | use one of the supported resize values below       |
+| `resize` default                                    | `TextareaResize.Vertical` → `TextAreaResize.None` | the design system defaults to no resize affordance |
+
+##### Supported Resize Values
+
+| Extension Value             | Design System Value         | Notes                                                      |
+| --------------------------- | --------------------------- | ---------------------------------------------------------- |
+| `TextareaResize.None`       | `TextAreaResize.None`       | unchanged                                                  |
+| `TextareaResize.Both`       | `TextAreaResize.Both`       | unchanged                                                  |
+| `TextareaResize.Horizontal` | `TextAreaResize.Horizontal` | unchanged                                                  |
+| `TextareaResize.Vertical`   | `TextAreaResize.Vertical`   | unchanged                                                  |
+| `TextareaResize.Initial`    | removed                     | use `TextAreaResize.None` if you want no resize affordance |
+| `TextareaResize.Inherit`    | removed                     | no direct equivalent                                       |
+
+##### Style and Native Props
+
+- The extension's Box-style utility props are removed from the public API.
+- Use `className` for layout and style overrides.
+- Native `<textarea>` props such as `rows`, `cols`, `name`, `id`, `maxLength`, `required`, `onChange`, `onBlur`, `onFocus`, and `onClick` continue to work on the design system component.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Textarea, TextareaResize } from '../../component-library';
+
+<Textarea
+  defaultValue="Notes"
+  disabled={isBusy}
+  readOnly={isLocked}
+  error={hasError}
+  resize={TextareaResize.Vertical}
+  rows={4}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { TextArea, TextAreaResize } from '@metamask/design-system-react';
+
+<TextArea
+  value={notes}
+  isDisabled={isBusy}
+  isReadOnly={isLocked}
+  isError={hasError}
+  resize={TextAreaResize.Vertical}
+  rows={4}
+/>;
+```
+
+#### API Differences
+
+- `TextArea` is controlled-only in the design system; there is no `defaultValue` escape hatch.
+- `resize` now defaults to `TextAreaResize.None`, so call sites that depended on the extension's vertical resize affordance should opt back into `TextAreaResize.Vertical`.
+- `TextareaResize.Initial` and `TextareaResize.Inherit` are no longer available.
+- The component remains a native `<textarea>` with standard HTML attributes and `className`.
 
 ### Checkbox Component
 
@@ -2653,6 +2740,157 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 - `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
 
+### Popover Component
+
+The extension `popover` component maps to `Popover` in the design system. The runtime contract — `referenceElement`, `isOpen`, `position`, `role`, `hasArrow`, `matchWidth`, `flip`, `preventOverflow`, `referenceHidden`, `offset`, `isPortal`, `arrowProps`, `onPressEscKey`, `onClickOutside` — is preserved 1:1, including the `PopoverPosition` and `PopoverRole` value strings. The breaking changes are limited to the surrounding API surface: `@floating-ui/react-dom` is used internally for positioning (consumers do not need to install it), the polymorphic `as` / Box style-utility passthrough is gone, and the legacy SCSS class hooks (`.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`) are replaced by Tailwind utilities and inline styles.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                        | Design System Migration                                                        |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `import { Popover } from '../../component-library'`                      | `import { Popover } from '@metamask/design-system-react'`                      |
+| `import { PopoverPosition, PopoverRole } from '../../component-library'` | `import { PopoverPosition, PopoverRole } from '@metamask/design-system-react'` |
+| `import type { PopoverProps } from '../../component-library'`            | `import type { PopoverProps } from '@metamask/design-system-react'`            |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                                              | Design System API                                                          | Change Type | Notes                                                                                                                                                                                                             |
+| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `referenceElement?: HTMLElement \| null`                                                                   | `referenceElement?: HTMLElement \| null`                                   | unchanged   | reference element for Floating UI positioning                                                                                                                                                                     |
+| `isOpen?: boolean`                                                                                         | `isOpen?: boolean`                                                         | unchanged   | nothing renders when `false`                                                                                                                                                                                      |
+| `position?: PopoverPosition`                                                                               | `position?: PopoverPosition`                                               | unchanged   | same string values; default `PopoverPosition.Auto` still forces `flip` and `preventOverflow` on                                                                                                                   |
+| `role?: PopoverRole`                                                                                       | `role?: PopoverRole`                                                       | unchanged   | same string values; default `PopoverRole.Tooltip`                                                                                                                                                                 |
+| `hasArrow?: boolean`                                                                                       | `hasArrow?: boolean`                                                       | unchanged   | default `false`; the rendered notch rotates with the resolved placement                                                                                                                                           |
+| `arrowProps?: BoxProps<'div'>`                                                                             | `arrowProps?: Omit<ComponentProps<'div'>, 'ref' \| 'style' \| 'children'>` | narrowed    | extension Box style-utility props are no longer accepted; `ref`, `style`, and `children` are reserved for internal use (popper positioning, rotation styles, arrow visual). Pass `className` for one-off styling. |
+| `matchWidth?: boolean`                                                                                     | `matchWidth?: boolean`                                                     | unchanged   | matches the reference's `clientWidth` when `true`                                                                                                                                                                 |
+| `preventOverflow?: boolean`                                                                                | `preventOverflow?: boolean`                                                | unchanged   | forced on when `position === PopoverPosition.Auto`                                                                                                                                                                |
+| `flip?: boolean`                                                                                           | `flip?: boolean`                                                           | unchanged   | forced on when `position === PopoverPosition.Auto`                                                                                                                                                                |
+| `referenceHidden?: boolean`                                                                                | `referenceHidden?: boolean`                                                | unchanged   | default `true`; behavior preserved (hides popover when `data-popper-reference-hidden="true"`) — implemented via Tailwind `data-[]:` variants instead of SCSS                                                      |
+| `offset?: [number, number]`                                                                                | `offset?: [number, number]`                                                | unchanged   | default `[0, 8]`                                                                                                                                                                                                  |
+| `isPortal?: boolean`                                                                                       | `isPortal?: boolean`                                                       | unchanged   | renders into `document.body` via `createPortal`                                                                                                                                                                   |
+| `onPressEscKey?: () => void`                                                                               | `onPressEscKey?: () => void`                                               | unchanged   | Escape-key callback                                                                                                                                                                                               |
+| `onClickOutside?: () => void`                                                                              | `onClickOutside?: () => void`                                              | unchanged   | click-outside callback (ignores clicks on the reference element)                                                                                                                                                  |
+| `as?: React.ElementType` / `PolymorphicComponentPropWithRef`                                               | removed                                                                    | removed     | always renders a `<div>`. Wrap or compose if you need a different element                                                                                                                                         |
+| Box style-utility props (`backgroundColor`, `padding`, `borderRadius`, …)                                  | removed from public API                                                    | removed     | the popover surface uses fixed design tokens (`BoxBackgroundColor.BackgroundDefault`, `BoxBorderColor.BorderMuted`, `padding={4}`, `rounded-lg`, `shadow-md`). Override via `className`                           |
+| `.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`, `.mm-popover--open` SCSS class hooks | removed                                                                    | removed     | the SCSS file is gone; styling is Tailwind + inline styles. Use `className` and `arrowProps.className` for overrides                                                                                              |
+
+##### Default and Behavior Changes
+
+| Concern                                | Extension Behavior                                                                                                                                                                     | Design System Behavior                                                                                                                                                                                                                                                        |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Positioning library                    | `react-popper` declared as a direct dependency of the extension                                                                                                                        | `@floating-ui/react-dom` is used internally by `@metamask/design-system-react` — consumers do not install or import it directly                                                                                                                                               |
+| Surface styling                        | Box props applied inside the component (`backgroundColor.backgroundDefault`, `borderRadius.LG`, `borderColor.borderMuted`, `padding={4}`) plus `mm-popover` SCSS hook for `box-shadow` | Same visual: `BoxBackgroundColor.BackgroundDefault`, `BoxBorderColor.BorderMuted`, `borderWidth={1}`, `padding={4}`, `rounded-lg`, `shadow-md` Tailwind utilities applied internally                                                                                          |
+| Arrow rendering                        | Outer 40×40 invisible container with an `::before` pseudo-element drawing the visible 8×8 notch; rotation via SCSS attribute selectors keyed off `data-popper-placement`               | Same outer container but the visible notch is a real `<Box>` child instead of a pseudo-element. Rotation is computed from the resolved placement and applied as inline `transform`                                                                                            |
+| Reference-hidden visibility            | `.mm-popover--reference-hidden[data-popper-reference-hidden="true"] { visibility: hidden; pointer-events: none; }`                                                                     | Tailwind `data-[popper-reference-hidden=true]:invisible data-[popper-reference-hidden=true]:pointer-events-none` applied when `referenceHidden` is `true`                                                                                                                     |
+| `keydown` listener cleanup             | Registered with `{ capture: true }` but removed without options — listener accumulates across re-renders                                                                               | Registered and removed with matching `{ capture: true }` options (no listener leak)                                                                                                                                                                                           |
+| `PopoverPosition` / `PopoverRole` type | TypeScript `enum` (`enum PopoverPosition { Auto = 'auto', … }`)                                                                                                                        | Const object with derived string-union type ([ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)). All string values unchanged, so `PopoverPosition.Auto`, `PopoverRole.Dialog`, etc. continue to work |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { useState } from 'react';
+import { Popover, PopoverPosition, PopoverRole } from '../../component-library';
+
+const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(
+  null,
+);
+const [isOpen, setIsOpen] = useState(false);
+
+<button ref={(node) => setReferenceElement(node)} onClick={() => setIsOpen(true)}>
+  Open
+</button>
+
+<Popover
+  isOpen={isOpen}
+  referenceElement={referenceElement}
+  position={PopoverPosition.BottomStart}
+  role={PopoverRole.Dialog}
+  hasArrow
+  isPortal
+  onPressEscKey={() => setIsOpen(false)}
+  onClickOutside={() => setIsOpen(false)}
+>
+  Menu contents
+</Popover>;
+```
+
+##### After (Design System)
+
+```tsx
+import { useState } from 'react';
+import {
+  Popover,
+  PopoverPosition,
+  PopoverRole,
+} from '@metamask/design-system-react';
+
+const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(
+  null,
+);
+const [isOpen, setIsOpen] = useState(false);
+
+<button ref={(node) => setReferenceElement(node)} onClick={() => setIsOpen(true)}>
+  Open
+</button>
+
+<Popover
+  isOpen={isOpen}
+  referenceElement={referenceElement}
+  position={PopoverPosition.BottomStart}
+  role={PopoverRole.Dialog}
+  hasArrow
+  isPortal
+  onPressEscKey={() => setIsOpen(false)}
+  onClickOutside={() => setIsOpen(false)}
+>
+  Menu contents
+</Popover>;
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/multichain-address-rows-hovered-list/multichain-hovered-address-rows-hovered-list.tsx`, `ui/components/app/perps/perps-candle-period-selector/perps-candle-period-selector.tsx`, and `ui/pages/bridge/prepare/bridge-cta-info-text.tsx` (verified via fresh grep) — the only change is the import path; the JSX, prop names, and `PopoverPosition` / `PopoverRole` values stay identical.
+
+##### Replacing Box style-utility passthrough
+
+If a call site relied on extension Box style-utility props flowing through `Popover` (e.g. `marginTop`, `padding`, `backgroundColor`), move those to the design system equivalents:
+
+```tsx
+// Before (Extension) — utility props on the Popover root via Box passthrough
+<Popover
+  isOpen={isOpen}
+  referenceElement={referenceElement}
+  padding={6}
+  backgroundColor={BackgroundColor.backgroundAlternative}
+>
+  …
+</Popover>
+
+// After (Design System) — use className for one-off overrides
+<Popover
+  isOpen={isOpen}
+  referenceElement={referenceElement}
+  className="p-6 bg-alternative"
+>
+  …
+</Popover>
+```
+
+##### Replacing legacy SCSS class hooks
+
+If a call site or stylesheet targeted `.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`, or `.mm-popover--open`, replace those selectors with `className` (popover root) or `arrowProps.className` (arrow). The `data-popper-placement` and `data-popper-reference-hidden` data attributes are still present on the popover root for callers that need to key styling off the resolved placement.
+
+#### API Differences
+
+- `Popover` is no longer polymorphic. It always renders a `<div>`. Consumers that used `as="section"` or similar should wrap or compose.
+- `arrowProps` accepts standard `<div>` props instead of extension Box props, with `ref`, `style`, and `children` omitted (reserved for popper positioning, rotation styles, and the arrow visual). Pass `className` (or any other HTML attribute / `data-*` / `aria-*`) directly.
+- `@floating-ui/react-dom` is bundled inside `@metamask/design-system-react`. Consumers should not add it to their own dependencies after migrating.
+- The `PopoverPosition` and `PopoverRole` exports are now const objects with derived string-union types ([ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)). Runtime usage (`PopoverPosition.Auto`, `PopoverRole.Tooltip`) is unchanged. Code that relied on TypeScript `enum`-only behavior (e.g. reverse lookups via `PopoverPosition['auto']`) needs to switch to the string union pattern.
+
 ### PopoverHeader Component
 
 The extension `popover-header` component maps to `PopoverHeader` in the design system. The behavioral contract — a `<header>` with an optional back button on the start, a title in the center, and an optional close button on the end — is preserved. The polymorphic Box surface (`HeaderBaseStyleUtilityProps`), the `mm-popover-header` SCSS class hook, and the implicit `useI18nContext` coupling for the icon-button `aria-label`s are removed.
@@ -2994,11 +3232,154 @@ The `TextField` is now available from the design system. The new component drops
 
 The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven by design tokens) instead of the `mm-text-field` SCSS module. Custom container styles should be passed via `className`; the legacy `mm-text-field--*` classes are no longer applied.
 
+### TextFieldSearch Component
+
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`.
+
+#### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { TextFieldSearch } from '../../component-library'` | `import { TextFieldSearch } from '@metamask/design-system-react'` |
+
+#### Size Enum
+
+The extension exported a dedicated `TextFieldSearchSize` enum with the same values as `TextFieldSize` (`'sm'`, `'md'`, `'lg'`). The design system removes this duplicate and reuses `TextFieldSize` from `TextField` directly. Import `TextFieldSize` instead.
+
+```tsx
+// Before (Extension)
+import { TextFieldSearch, TextFieldSearchSize } from '../../component-library';
+<TextFieldSearch size={TextFieldSearchSize.Lg} />;
+
+// After (Design System)
+import { TextFieldSearch, TextFieldSize } from '@metamask/design-system-react';
+<TextFieldSearch size={TextFieldSize.Lg} />;
+```
+
+#### State Props
+
+`TextFieldSearch` inherits the renamed state props from `TextField`:
+
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+| `readOnly`     | `isReadOnly`       | renamed |
+| `error`        | `isError`          | renamed |
+
+#### Clear Button Aria Label (`useI18nContext` removed)
+
+The extension component pulled the clear-button aria-label from `useI18nContext` (`t('clear')`). The design system has no i18n context, so the clear `ButtonIcon` uses a default `ariaLabel` of `'Clear'` and lets consumers override it via `clearButtonProps`.
+
+```tsx
+// Before (Extension): label resolved via useI18nContext('clear')
+<TextFieldSearch value={value} clearButtonOnClick={handleClear} />
+
+// After (Design System): pass a localized label via clearButtonProps
+<TextFieldSearch
+  value={value}
+  clearButtonOnClick={handleClear}
+  clearButtonProps={{ ariaLabel: t('clear') }}
+/>
+```
+
+#### Removed Props
+
+| Extension Prop                      | Design System Migration                                                                                                     |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`              | Removed. The container is always a `<div>`.                                                                                 |
+| `type`                              | Fixed to `'search'`; not configurable. Use `TextField` if you need a different input type.                                  |
+| `inputProps.marginRight` adjustment | Removed. The container automatically reserves room for the clear button via the existing `TextField` end-accessory padding. |
+
+#### Ref
+
+- `ref` on `TextFieldSearch` targets the root container (`HTMLDivElement`).
+- Use `inputRef` (inherited from `TextField`) to reach the inner `<input>`.
+
+#### Styling
+
+The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className`.
+
+### FormTextField Component
+
+`FormTextField` is now available from the design system. The new component drops the polymorphic `Box` root and the standalone `FormTextFieldSize` enum, switches state props to the `is*` convention, and replaces SCSS (`mm-form-text-field`) with Tailwind utilities. Internally it composes the design-system `Label`, `TextField`, and `HelpText`.
+
+#### Import Path
+
+| Extension Pattern                                             | Design System Migration                                         |
+| ------------------------------------------------------------- | --------------------------------------------------------------- |
+| `import { FormTextField } from '../../component-library'`     | `import { FormTextField } from '@metamask/design-system-react'` |
+| `import { FormTextFieldSize } from '../../component-library'` | `import { TextFieldSize } from '@metamask/design-system-react'` |
+
+#### Size Enum Consolidation
+
+`FormTextFieldSize` is removed. Use `TextFieldSize` (`'sm'`/`'md'`/`'lg'`) directly — the values are unchanged from the extension.
+
+```tsx
+// Before (Extension)
+<FormTextField size={FormTextFieldSize.Md} … />
+
+// After (Design System)
+<FormTextField size={TextFieldSize.Md} … />
+```
+
+#### State Props
+
+| Extension Prop            | Design System Prop | Notes                                     |
+| ------------------------- | ------------------ | ----------------------------------------- |
+| `disabled` / `isDisabled` | `isDisabled`       | Single canonical name                     |
+| `readOnly`                | `isReadOnly`       | renamed                                   |
+| `error`                   | `isError`          | renamed (also drives `HelpText` severity) |
+
+```tsx
+// Before (Extension)
+<FormTextField
+  id="amount"
+  label="Amount"
+  disabled
+  readOnly
+  error
+  helpText="Required"
+  value={value}
+  onChange={onChange}
+/>
+
+// After (Design System)
+<FormTextField
+  id="amount"
+  label="Amount"
+  isDisabled
+  isReadOnly
+  isError
+  helpText="Required"
+  value={value}
+  onChange={onChange}
+/>
+```
+
+#### Removed Props
+
+| Extension Prop          | Design System Migration                                                                                                       |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`  | Removed. The root is always a `<div>`. Wrap with a custom element if you need a different root.                               |
+| `defaultValue`          | Removed. The inner `TextField` is controlled-only — manage state with `value`/`onChange`.                                     |
+| Box style-utility props | Use `className` with Tailwind utilities. The container's `flex flex-col` layout and child spacing are owned by the component. |
+
+#### Refs
+
+- `ref` on `FormTextField` targets the root container (`HTMLDivElement`).
+- Use `inputRef` to reach the inner `<input>`. Object refs and callback refs are both supported.
+
+#### Forwarded sub-component props
+
+- `labelProps`, `helpTextProps`, and `textFieldProps` continue to forward extra props to the rendered `Label`, `HelpText`, and `TextField`. Their `className` is merged with the component defaults (`mb-1` on the label, `mt-1` on the help text).
+
+#### Styling
+
+`FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
+
 ## Version Updates
 
-<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
-
-## From version 0.22.0 to 0.x.0
+## From version 0.22.0 to 0.23.0
 
 ### BannerBase: `onClose` is now the only close-button behavior API
 

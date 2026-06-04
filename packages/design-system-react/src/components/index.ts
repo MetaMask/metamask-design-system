@@ -129,6 +129,9 @@ export type { SensitiveTextProps } from './SensitiveText';
 export { PopoverHeader } from './PopoverHeader';
 export type { PopoverHeaderProps } from './PopoverHeader';
 
+export { Popover, PopoverPosition, PopoverRole } from './Popover';
+export type { PopoverProps } from './Popover';
+
 export { Text } from './Text';
 export {
   TextVariant,
@@ -142,11 +145,20 @@ export {
 } from './Text';
 export type { TextProps } from './Text';
 
+export { TextArea, TextAreaResize } from './TextArea';
+export type { TextAreaProps } from './TextArea';
+
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
 export { TextField, TextFieldSize, TextFieldType } from './TextField';
 export type { TextFieldProps } from './TextField';
+
+export { FormTextField } from './FormTextField';
+export type { FormTextFieldProps } from './FormTextField';
+
+export { TextFieldSearch } from './TextFieldSearch';
+export type { TextFieldSearchProps } from './TextFieldSearch';
 
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
