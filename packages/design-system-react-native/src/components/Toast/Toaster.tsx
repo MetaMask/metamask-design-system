@@ -154,18 +154,18 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
           duration: TOAST_ANIMATION_DURATION,
         });
       } else {
-          translateYProgress.value = withTiming(
-            translateYToValue,
-            { duration: TOAST_ANIMATION_DURATION },
-            () => {
-              translateYProgress.value = withDelay(
-                TOAST_VISIBILITY_DURATION,
-                withTiming(height, { duration: TOAST_ANIMATION_DURATION }, () =>
-                  scheduleOnRN(resetState),
-                ),
-              );
-            },
-          );
+        translateYProgress.value = withTiming(
+          translateYToValue,
+          { duration: TOAST_ANIMATION_DURATION },
+          () => {
+            translateYProgress.value = withDelay(
+              TOAST_VISIBILITY_DURATION,
+              withTiming(height, { duration: TOAST_ANIMATION_DURATION }, () =>
+                scheduleOnRN(resetState),
+              ),
+            );
+          },
+        );
       }
     };
 
