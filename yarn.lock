@@ -3235,8 +3235,9 @@ __metadata:
     react: ">=18.2.0"
     react-native: ">=0.76.0"
     react-native-gesture-handler: ">=2.25.0"
-    react-native-reanimated: ">=3.17.0"
+    react-native-reanimated: ">=4.0.0"
     react-native-safe-area-context: ">=5.0.0"
+    react-native-worklets: ">=0.8.3"
   languageName: unknown
   linkType: soft
 
