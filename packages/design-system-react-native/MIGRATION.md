@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
+- [From version 0.27.0 to 0.28.0](#from-version-0270-to-0280)
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
@@ -54,7 +54,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.x.0 to 0.x.0
+### From version 0.27.0 to 0.28.0
 
 #### TextArea: flattened to the root `TextInput`
 
