@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.23.0 to 0.x.0](#from-version-0230-to-0x0)
+- [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
@@ -53,6 +53,30 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.x.0 to 0.x.0
+
+#### TextArea: flattened to the root `TextInput`
+
+`TextArea` now renders the root `TextInput` directly instead of wrapping it in a separate container with a nested input slot.
+This change is scoped to `TextArea`; `TextField` still supports `inputElement` and `inputRef`.
+
+**What changed:**
+
+- **`inputElement`** is removed.
+- **`inputProps`** is removed. Pass `TextInput` props directly on `TextArea`.
+- **`inputRef`** is removed. Use the component **`ref`** to access the root **`TextInput`**.
+- **`testID`**, **`style`**, and **`twClassName`** now apply to the root **`TextInput`**.
+
+**Migration:**
+
+- Move any custom input replacement out of `TextArea` and compose it around the component instead.
+- Pass native **`TextInput`** props directly to `TextArea`.
+- Update any imperative focus or measurement logic to use the component **`ref`**.
+
+**Impact:**
+
+- Existing call sites that relied on the wrapper `Box`, `inputProps`, or `inputRef` must update to the flattened API.
 
 ### From version 0.26.0 to 0.27.0
 
@@ -3246,7 +3270,6 @@ These props work identically in both versions — no migration needed:
 | `autoFocus`          | `boolean`                | Auto-focus on mount                       |
 | `startAccessory`     | `ReactNode`              | Content before the input                  |
 | `endAccessory`       | `ReactNode`              | Content after the input                   |
-| `inputElement`       | `ReactNode`              | Custom input replacement                  |
 | `ref`                | `Ref<TextInput>`         | Forwarded to inner TextInput              |
 | `numberOfLines`      | Forced to `1`            | Single-line enforced                      |
 | `multiline`          | Forced to `false`        | Single-line enforced                      |

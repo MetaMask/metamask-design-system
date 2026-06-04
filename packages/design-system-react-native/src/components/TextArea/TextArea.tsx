@@ -1,14 +1,13 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { forwardRef, useCallback, useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { TextInput } from 'react-native';
 
-import { Box } from '../Box';
 import { Input } from '../Input';
 import type { InputProps } from '../Input/Input.types';
 
 import type { TextAreaProps } from './TextArea.types';
 
-export const TextArea = forwardRef<View, TextAreaProps>(
+export const TextArea = forwardRef<TextInput, TextAreaProps>(
   (
     {
       value,
@@ -18,12 +17,9 @@ export const TextArea = forwardRef<View, TextAreaProps>(
       onBlur,
       onFocus,
       autoFocus = false,
-      inputProps,
-      inputRef,
       isDisabled = false,
       isError = false,
       textVariant,
-      inputElement,
       style,
       twClassName,
       testID,
@@ -39,11 +35,6 @@ export const TextArea = forwardRef<View, TextAreaProps>(
         setIsFocused(false);
       }
     }, [isDisabled, isReadOnly]);
-
-    const {
-      twClassName: inputTwClassNameFromProps,
-      ...inputRestWithoutTwClassName
-    } = inputProps ?? {};
 
     const onBlurHandler = useCallback(
       (e: Parameters<NonNullable<InputProps['onBlur']>>[0]) => {
@@ -66,11 +57,22 @@ export const TextArea = forwardRef<View, TextAreaProps>(
     );
 
     return (
-      <Box
+      <Input
         ref={ref}
         {...props}
         testID={testID}
-        accessible={false}
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        isReadOnly={isReadOnly}
+        textVariant={textVariant}
+        isDisabled={isDisabled}
+        autoFocus={autoFocus}
+        onBlur={onBlurHandler}
+        onFocus={onFocusHandler}
+        isStateStylesDisabled
+        multiline
+        textAlignVertical="top"
         style={[
           tw.style(
             'rounded-lg',
@@ -88,29 +90,7 @@ export const TextArea = forwardRef<View, TextAreaProps>(
           ),
           style,
         ]}
-      >
-        {inputElement || (
-          <Input
-            {...inputRestWithoutTwClassName}
-            ref={inputRef}
-            value={value}
-            onChangeText={onChangeText}
-            placeholder={placeholder}
-            isReadOnly={isReadOnly}
-            textVariant={textVariant}
-            isDisabled={isDisabled}
-            autoFocus={autoFocus}
-            onBlur={onBlurHandler}
-            onFocus={onFocusHandler}
-            isStateStylesDisabled
-            multiline
-            textAlignVertical="top"
-            twClassName={`min-h-[88px] w-full flex-1 self-stretch bg-transparent border-0 py-1${
-              inputTwClassNameFromProps ? ` ${inputTwClassNameFromProps}` : ''
-            }`}
-          />
-        )}
-      </Box>
+      />
     );
   },
 );
