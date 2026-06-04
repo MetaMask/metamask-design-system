@@ -9,18 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.25.0]
 
-### Uncategorized
+### Added
 
-- docs: remove popper mentions ([#1214](https://github.com/MetaMask/metamask-design-system/pull/1214))
-- feat: `Popover` migration ([#1153](https://github.com/MetaMask/metamask-design-system/pull/1153))
-- refactor: Updated fallback behavior for avatar token, network, and favicon ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
-- feat(rn): flatten TextArea to root TextInput ([#1205](https://github.com/MetaMask/metamask-design-system/pull/1205))
-- chore(storybook-react): upgrade to Storybook 10.4.2, Vite 8, re-enable CI test job ([#1209](https://github.com/MetaMask/metamask-design-system/pull/1209))
-- feat: `TextFieldSearch` migration (extension) ([#1171](https://github.com/MetaMask/metamask-design-system/pull/1171))
-- feat: `FormTextField` migration ([#1197](https://github.com/MetaMask/metamask-design-system/pull/1197))
-- feat: [DSR] Add React TextArea component ([#1036](https://github.com/MetaMask/metamask-design-system/pull/1036))
-- chore: drop Node v18 support ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
-- chore: [DSYS-616] create/update Avatar migration docs ([#1114](https://github.com/MetaMask/metamask-design-system/pull/1114))
+- Added `Popover` for anchored overlays such as menus, tooltips, and dialogs ([#1153](https://github.com/MetaMask/metamask-design-system/pull/1153))
+- Added `TextArea` for controlled multiline text entry ([#1036](https://github.com/MetaMask/metamask-design-system/pull/1036))
+- Added `TextFieldSearch` for controlled search-field flows on top of `TextField` ([#1171](https://github.com/MetaMask/metamask-design-system/pull/1171))
+- Added `FormTextField` for labeled form controls built from `Label`, `TextField`, and `HelpText` ([#1197](https://github.com/MetaMask/metamask-design-system/pull/1197))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; consumers must run Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- Updated avatar fallback handling so `AvatarToken`, `AvatarNetwork`, and `AvatarFavicon` resolve consistently when the requested image is unavailable ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
 
 ## [0.24.0]
 

@@ -9,10 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.0]
 
-### Uncategorized
+### Changed
 
-- chore: drop Node v18 support ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.1.0 to 6.1.1 ([#1178](https://github.com/MetaMask/metamask-design-system/pull/1178))
+- **BREAKING:** Dropped Node.js 18 support for the release line; no Tailwind preset behavior changed, but consumers must run on Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
 
 ## [0.8.0]
 

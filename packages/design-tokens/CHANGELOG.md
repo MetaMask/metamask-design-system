@@ -9,11 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.5.0]
 
-### Uncategorized
+### Changed
 
-- chore: drop Node v18 support ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
-- chore: Align React Native and Expo dependencies with mobile ([#1165](https://github.com/MetaMask/metamask-design-system/pull/1165))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.1.0 to 6.1.1 ([#1178](https://github.com/MetaMask/metamask-design-system/pull/1178))
+- **BREAKING:** Dropped Node.js 18 support for the release line; the emitted token values and CSS output are unchanged, but consumers must run on Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
 
 ## [8.4.0]
 

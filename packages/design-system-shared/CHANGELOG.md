@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.21.0]
 
-### Uncategorized
+### Added
 
-- feat(rn): flatten TextArea to root TextInput ([#1205](https://github.com/MetaMask/metamask-design-system/pull/1205))
-- chore: drop Node v18 support ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
-- feat: [DSRN] Added Content component ([#1192](https://github.com/MetaMask/metamask-design-system/pull/1192))
+- Added `ContentPropsShared` and `ContentVerticalAlignment` so React Native can compose list-style rows and related layout patterns ([#1192](https://github.com/MetaMask/metamask-design-system/pull/1192))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; no public API changes were needed in `@metamask/design-system-shared`, but consumers must run on Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- **BREAKING:** Updated `TextAreaPropsShared` to remove `inputElement` so React Native `TextArea` can render the root `TextInput` directly ([#1205](https://github.com/MetaMask/metamask-design-system/pull/1205))
 
 ## [0.20.0]
 

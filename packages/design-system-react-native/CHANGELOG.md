@@ -9,15 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.28.0]
 
-### Uncategorized
+### Added
 
-- refactor: Added default padding and added isInteractive to SectionHeader ([#1210](https://github.com/MetaMask/metamask-design-system/pull/1210))
-- refactor: Updated fallback behavior for avatar token, network, and favicon ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
-- feat(rn): flatten TextArea to root TextInput ([#1205](https://github.com/MetaMask/metamask-design-system/pull/1205))
-- chore(storybook-react): upgrade to Storybook 10.4.2, Vite 8, re-enable CI test job ([#1209](https://github.com/MetaMask/metamask-design-system/pull/1209))
-- chore: drop Node v18 support ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
-- feat: [DSRN] Added Content component ([#1192](https://github.com/MetaMask/metamask-design-system/pull/1192))
-- chore: [DSYS-616] create/update Avatar migration docs ([#1114](https://github.com/MetaMask/metamask-design-system/pull/1114))
+- Added `Content` for composing scrollable and padded content sections on React Native screens; it is closely related to the upcoming `ListItem` work ([#1192](https://github.com/MetaMask/metamask-design-system/pull/1192))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; consumers must run Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- Added default padding and `isInteractive` support to `SectionHeader` so section rows match the new mobile layout patterns ([#1210](https://github.com/MetaMask/metamask-design-system/pull/1210))
+- **BREAKING:** Flattened `TextArea` so it renders the root `TextInput` directly; pass `TextInput` props on `TextArea`, use the component `ref` for the input, and stop relying on `inputProps` or `inputElement` ([#1205](https://github.com/MetaMask/metamask-design-system/pull/1205))
+- Updated avatar fallback handling so `AvatarToken`, `AvatarNetwork`, and `AvatarFavicon` resolve consistently when the requested image is unavailable ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
 
 ## [0.27.0]
 
