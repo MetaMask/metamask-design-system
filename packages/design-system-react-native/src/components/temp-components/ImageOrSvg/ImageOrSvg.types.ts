@@ -1,5 +1,5 @@
 import type {
-  ImageErrorEventData,
+  ImageErrorEvent,
   ImageLoadEventData,
   NativeSyntheticEvent,
   StyleProp,
@@ -29,9 +29,7 @@ export type ImageOrSvgBaseProps = {
   /**
    * Optional prop to set callback triggered when there is an error rendering the image.
    */
-  onImageError?: (
-    errorEvent: NativeSyntheticEvent<ImageErrorEventData>,
-  ) => void;
+  onImageError?: (errorEvent: ImageErrorEvent) => void;
   /**
    * Optional prop to set callback triggered when there is an error rendering the SVG.
    */

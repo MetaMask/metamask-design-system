@@ -23,7 +23,7 @@ export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
     ref,
   ) => {
     const [finalFallbackText, setFinalFallbackText] = useState<string>('');
-    const backupFallbackText = fallbackText || name?.[0] || '';
+    const backupFallbackText = fallbackText || name?.[0] || '?';
     const altText = name || 'Token logo'; // TBC: Add localization for default text
 
     const onErrorHandler = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -46,8 +46,8 @@ export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
             src={src}
             alt={altText}
             className="size-full object-contain"
-            onError={onErrorHandler}
             {...imageProps}
+            onError={onErrorHandler}
           />
         )}
       </AvatarBase>

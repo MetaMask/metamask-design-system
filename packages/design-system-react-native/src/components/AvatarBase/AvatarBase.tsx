@@ -34,7 +34,7 @@ export const AvatarBase = ({
       {...props}
       style={[
         tw.style(
-          'items-center justify-center overflow-hidden bg-section',
+          'items-center justify-center overflow-hidden bg-alternative',
           shape === AvatarBaseShape.Circle
             ? 'rounded-full'
             : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],

@@ -21,7 +21,7 @@ export const AvatarNetwork = forwardRef<HTMLDivElement, AvatarNetworkProps>(
     ref,
   ) => {
     const [finalFallbackText, setFinalFallbackText] = useState<string>('');
-    const backupFallbackText = fallbackText || name?.[0] || '';
+    const backupFallbackText = fallbackText || name?.[0] || '?';
     const altText = name || 'Network logo'; // TBC: Add localization for default text
 
     const onErrorHandler = (e: React.SyntheticEvent<HTMLImageElement>) => {
