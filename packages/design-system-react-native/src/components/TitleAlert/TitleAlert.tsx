@@ -12,7 +12,7 @@ import { Box } from '../Box';
 import { BoxColumn } from '../BoxColumn';
 import { BoxRow } from '../BoxRow';
 import { IconAlert } from '../IconAlert';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { renderTextOrChildren } from '../utils';
 
 import type { TitleAlertProps } from './TitleAlert.types';
 
@@ -53,17 +53,13 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
       bottomAccessory={
         description ? (
           <Box twClassName="self-stretch">
-            <TextOrChildren
-              textProps={{
-                variant: TextVariant.BodySm,
-                color: TextColor.TextAlternative,
-                fontWeight: FontWeight.Medium,
-                ...descriptionProps,
-                style: [{ textAlign: 'center' }, descriptionProps?.style],
-              }}
-            >
-              {description}
-            </TextOrChildren>
+            {renderTextOrChildren(description, {
+              variant: TextVariant.BodySm,
+              color: TextColor.TextAlternative,
+              fontWeight: FontWeight.Medium,
+              ...descriptionProps,
+              style: [{ textAlign: 'center' }, descriptionProps?.style],
+            })}
           </Box>
         ) : undefined
       }

@@ -8,7 +8,7 @@ import React from 'react';
 
 import { BoxColumn } from '../BoxColumn';
 import { BoxRow } from '../BoxRow';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { renderTextOrChildren } from '../utils';
 
 import { VERTICAL_ALIGNMENT_MAP } from './Content.constants';
 import type { ContentProps } from './Content.types';
@@ -62,16 +62,12 @@ export const Content: React.FC<ContentProps> = ({
               endAccessory={descriptionEndAccessory}
               gap={1}
             >
-              <TextOrChildren
-                textProps={{
-                  variant: TextVariant.BodySm,
-                  fontWeight: FontWeight.Medium,
-                  color: TextColor.TextAlternative,
-                  ...descriptionProps,
-                }}
-              >
-                {description}
-              </TextOrChildren>
+              {renderTextOrChildren(description, {
+                variant: TextVariant.BodySm,
+                fontWeight: FontWeight.Medium,
+                color: TextColor.TextAlternative,
+                ...descriptionProps,
+              })}
             </BoxRow>
           ) : null
         }
@@ -83,16 +79,12 @@ export const Content: React.FC<ContentProps> = ({
             endAccessory={titleEndAccessory}
             gap={1}
           >
-            <TextOrChildren
-              textProps={{
-                variant: TextVariant.BodyMd,
-                fontWeight: FontWeight.Medium,
-                color: TextColor.TextDefault,
-                ...titleProps,
-              }}
-            >
-              {title}
-            </TextOrChildren>
+            {renderTextOrChildren(title, {
+              variant: TextVariant.BodyMd,
+              fontWeight: FontWeight.Medium,
+              color: TextColor.TextDefault,
+              ...titleProps,
+            })}
           </BoxRow>
         ) : null}
       </BoxColumn>
@@ -108,16 +100,12 @@ export const Content: React.FC<ContentProps> = ({
                 endAccessory={subvalueEndAccessory}
                 gap={1}
               >
-                <TextOrChildren
-                  textProps={{
-                    variant: TextVariant.BodySm,
-                    fontWeight: FontWeight.Medium,
-                    color: TextColor.TextAlternative,
-                    ...subvalueProps,
-                  }}
-                >
-                  {subvalue}
-                </TextOrChildren>
+                {renderTextOrChildren(subvalue, {
+                  variant: TextVariant.BodySm,
+                  fontWeight: FontWeight.Medium,
+                  color: TextColor.TextAlternative,
+                  ...subvalueProps,
+                })}
               </BoxRow>
             ) : null
           }
@@ -129,16 +117,12 @@ export const Content: React.FC<ContentProps> = ({
               endAccessory={valueEndAccessory}
               gap={1}
             >
-              <TextOrChildren
-                textProps={{
-                  variant: TextVariant.BodyMd,
-                  fontWeight: FontWeight.Medium,
-                  color: TextColor.TextDefault,
-                  ...valueProps,
-                }}
-              >
-                {value}
-              </TextOrChildren>
+              {renderTextOrChildren(value, {
+                variant: TextVariant.BodyMd,
+                fontWeight: FontWeight.Medium,
+                color: TextColor.TextDefault,
+                ...valueProps,
+              })}
             </BoxRow>
           ) : null}
         </BoxColumn>

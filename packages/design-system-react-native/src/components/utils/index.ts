@@ -1,0 +1,1 @@
+export { renderTextOrChildren } from './renderTextOrChildren';

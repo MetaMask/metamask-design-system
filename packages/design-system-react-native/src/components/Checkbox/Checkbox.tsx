@@ -10,7 +10,7 @@ import type { PressableStateCallbackType } from 'react-native';
 import { Pressable, Animated, Easing } from 'react-native';
 
 import { Icon, IconName, IconColor, IconSize } from '../Icon';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { renderTextOrChildren } from '../utils';
 
 import type { CheckboxProps } from './Checkbox.types';
 
@@ -144,13 +144,12 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
                 />
               </Animated.View>
             </AnimatedView>
-            {label ? (
-              <TextOrChildren
-                textProps={{ ...labelProps, twClassName: 'ml-3' }}
-              >
-                {label}
-              </TextOrChildren>
-            ) : null}
+            {label
+              ? renderTextOrChildren(label, {
+                  ...labelProps,
+                  twClassName: 'ml-3',
+                })
+              : null}
           </>
         )}
       </Pressable>

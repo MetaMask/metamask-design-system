@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // External dependencies.
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import type { ButtonIconProps } from '../ButtonIcon';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { renderTextOrChildren } from '../utils';
 
 import type { HeaderBaseProps } from './HeaderBase.types';
 
@@ -174,15 +174,11 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
 
       {/* Title */}
       <View style={tw.style('flex-1 items-center')} {...childrenWrapperProps}>
-        <TextOrChildren
-          textProps={{
-            variant: TextVariant.HeadingSm,
-            ...textProps,
-            style: [tw.style('text-center'), textProps?.style],
-          }}
-        >
-          {children}
-        </TextOrChildren>
+        {renderTextOrChildren(children, {
+          variant: TextVariant.HeadingSm,
+          ...textProps,
+          style: [tw.style('text-center'), textProps?.style],
+        })}
       </View>
 
       {/* End accessory */}

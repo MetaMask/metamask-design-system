@@ -5,7 +5,7 @@ import {
 import React from 'react';
 
 import { Box } from '../Box';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { renderTextOrChildren } from '../utils';
 
 import type { BoxRowProps } from './BoxRow.types';
 
@@ -25,7 +25,7 @@ export const BoxRow = ({
     {...rest}
   >
     {startAccessory}
-    <TextOrChildren textProps={textProps}>{children}</TextOrChildren>
+    {renderTextOrChildren(children, textProps)}
     {endAccessory}
   </Box>
 );

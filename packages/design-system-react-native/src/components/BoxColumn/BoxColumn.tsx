@@ -2,7 +2,7 @@ import { BoxFlexDirection } from '@metamask/design-system-shared';
 import React from 'react';
 
 import { Box } from '../Box';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { renderTextOrChildren } from '../utils';
 
 import type { BoxColumnProps } from './BoxColumn.types';
 
@@ -20,7 +20,7 @@ export const BoxColumn = ({
     {...rest}
   >
     {topAccessory}
-    <TextOrChildren textProps={textProps}>{children}</TextOrChildren>
+    {renderTextOrChildren(children, textProps)}
     {bottomAccessory}
   </Box>
 );

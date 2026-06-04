@@ -6,7 +6,7 @@ import { BoxAlignItems } from '../../Box';
 import { BoxColumn } from '../../BoxColumn';
 import type { TextProps } from '../../Text';
 import { FontWeight, TextColor, TextVariant } from '../../Text';
-import { TextOrChildren } from '../TextOrChildren';
+import { renderTextOrChildren } from '../../utils';
 
 // Internal dependencies.
 import type { HeaderStandardCenterColumnProps } from './HeaderStandardCenterColumn.types';
@@ -38,11 +38,7 @@ export function HeaderStandardCenterColumn({
         ...titleProps,
       }}
       bottomAccessory={
-        subtitle ? (
-          <TextOrChildren textProps={subtitleTextProps}>
-            {subtitle}
-          </TextOrChildren>
-        ) : undefined
+        subtitle ? renderTextOrChildren(subtitle, subtitleTextProps) : undefined
       }
     >
       {title}
