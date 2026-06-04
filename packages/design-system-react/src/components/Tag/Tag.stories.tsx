@@ -47,21 +47,13 @@ export const Default: Story = {
 
 export const Severity: Story = {
   render: () => (
-    <>
+    <div className="flex flex-col items-start gap-2">
       <Tag severity={TagSeverity.Neutral}>Neutral</Tag>
-      <Tag severity={TagSeverity.Success} className="mt-2">
-        Success
-      </Tag>
-      <Tag severity={TagSeverity.Error} className="mt-2">
-        Error
-      </Tag>
-      <Tag severity={TagSeverity.Warning} className="mt-2">
-        Warning
-      </Tag>
-      <Tag severity={TagSeverity.Info} className="mt-2">
-        Info
-      </Tag>
-    </>
+      <Tag severity={TagSeverity.Success}>Success</Tag>
+      <Tag severity={TagSeverity.Error}>Error</Tag>
+      <Tag severity={TagSeverity.Warning}>Warning</Tag>
+      <Tag severity={TagSeverity.Info}>Info</Tag>
+    </div>
   ),
 };
 
