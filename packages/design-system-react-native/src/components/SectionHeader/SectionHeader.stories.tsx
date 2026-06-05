@@ -8,6 +8,8 @@ import { Icon } from '../Icon';
 import { SectionHeader } from './SectionHeader';
 import type { SectionHeaderProps } from './SectionHeader.types';
 
+const noopPress = () => undefined;
+
 const meta: Meta<typeof SectionHeader> = {
   title: 'Components/SectionHeader',
   component: SectionHeader,
@@ -31,14 +33,12 @@ const meta: Meta<typeof SectionHeader> = {
       description:
         'Optional end icon; when set, renders instead of endAccessory',
     },
+    isInteractive: {
+      control: 'boolean',
+      description:
+        'When true, wraps the header in a Pressable so the full row is tappable',
+    },
   },
-  decorators: [
-    (Story) => (
-      <Box twClassName="w-full bg-background-default p-4">
-        <Story />
-      </Box>
-    ),
-  ],
 };
 
 export default meta;
@@ -48,8 +48,14 @@ type Story = StoryObj<typeof SectionHeader>;
 export const Default: Story = {
   args: {
     title: 'Assets',
+    isInteractive: false,
   },
-  render: (args: SectionHeaderProps) => <SectionHeader {...args} />,
+  render: (args: SectionHeaderProps) => (
+    <SectionHeader
+      {...args}
+      {...(args.isInteractive ? { onPress: noopPress } : {})}
+    />
+  ),
 };
 
 export const StartIconName: Story = {
@@ -96,5 +102,11 @@ export const TitleAccessory: Story = {
         />
       }
     />
+  ),
+};
+
+export const Interactive: Story = {
+  render: () => (
+    <SectionHeader title="Assets" isInteractive onPress={noopPress} />
   ),
 };

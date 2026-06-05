@@ -41,6 +41,12 @@ module.exports = merge(baseConfig, {
     './src/components/ActionListItem/ActionListItem.tsx': {
       branches: 85,
     },
+    // pressed && !isDisabled && 'opacity-70' branch in Pressable style callback is not fully
+    // unit-testable without react-test-renderer internals (see https://github.com/MetaMask/metamask-design-system/issues/1182).
+    // Pressed opacity when enabled/disabled is covered via style callback tests; verified visually via Storybook on device.
+    './src/components/SectionHeader/SectionHeader.tsx': {
+      branches: 85,
+    },
     // Gesture handler callbacks (onStart/onUpdate/onEnd) contain the swipe physics
     // logic. Tests that directly invoked these via the mock only asserted
     // toBeDefined() on the handler reference — no behavioral signal.

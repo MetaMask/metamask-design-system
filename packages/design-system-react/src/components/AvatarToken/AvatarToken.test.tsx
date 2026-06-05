@@ -57,6 +57,13 @@ describe('AvatarToken', () => {
       const fb2 = screen.getByTestId('fb2');
       expect(fb2).toHaveTextContent('Yo');
     });
+
+    it('renders "?" when no name or fallbackText is provided', () => {
+      render(
+        <AvatarToken fallbackTextProps={{ 'data-testid': 'fb-default' }} />,
+      );
+      expect(screen.getByTestId('fb-default')).toHaveTextContent('?');
+    });
   });
 
   describe('when src IS provided', () => {

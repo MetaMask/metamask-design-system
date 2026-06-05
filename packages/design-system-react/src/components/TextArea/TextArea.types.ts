@@ -19,7 +19,7 @@ export type TextAreaProps = Omit<
   | 'readOnly'
   | 'value'
 > &
-  Omit<TextAreaPropsShared, 'inputElement' | 'textVariant'> & {
+  Omit<TextAreaPropsShared, 'textVariant'> & {
     /**
      * Optional prop to control the resize behavior of the textarea.
      * Possible values:
