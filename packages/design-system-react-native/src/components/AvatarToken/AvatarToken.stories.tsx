@@ -56,3 +56,13 @@ export const SampleTokens: Story = {
     </View>
   ),
 };
+
+export const Fallback: Story = {
+  render: () => (
+    <View style={{ flexDirection: 'row', gap: 16 }}>
+      <AvatarToken name="Bitcoin" fallbackText="BTC" />
+      <AvatarToken name="Ethereum" />
+      <AvatarToken />
+    </View>
+  ),
+};

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.0]
+
+### Added
+
+- Added `Popover` for anchored overlays such as menus, tooltips, and dialogs ([#1153](https://github.com/MetaMask/metamask-design-system/pull/1153))
+- Added `TextArea` for controlled multiline text entry ([#1036](https://github.com/MetaMask/metamask-design-system/pull/1036))
+- Added `TextFieldSearch` for controlled search-field flows on top of `TextField` ([#1171](https://github.com/MetaMask/metamask-design-system/pull/1171))
+- Added `FormTextField` for labeled form controls built from `Label`, `TextField`, and `HelpText` ([#1197](https://github.com/MetaMask/metamask-design-system/pull/1197))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; consumers must run Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- Updated avatar fallback handling so `AvatarToken`, `AvatarNetwork`, and `AvatarFavicon` resolve consistently when the requested image is unavailable ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
+
 ## [0.24.0]
 
 ### Added
@@ -333,7 +347,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.24.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.25.0...HEAD
+[0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.24.0...@metamask/design-system-react@0.25.0
 [0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.23.1...@metamask/design-system-react@0.24.0
 [0.23.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.23.0...@metamask/design-system-react@0.23.1
 [0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.22.0...@metamask/design-system-react@0.23.0

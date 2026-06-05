@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-tokens",
-  "version": "8.4.0",
+  "version": "8.5.0",
   "description": "Design tokens to be used throughout MetaMask products",
   "keywords": [
     "MetaMask",
@@ -65,7 +65,7 @@
     "typescript": "~5.2.2"
   },
   "engines": {
-    "node": "^18.18 || >=20"
+    "node": ">=20"
   },
   "publishConfig": {
     "access": "public",

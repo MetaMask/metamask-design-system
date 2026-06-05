@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0]
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; no Tailwind preset behavior changed, but consumers must run on Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+
 ## [0.8.0]
 
 ### Added
@@ -79,7 +85,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.8.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.9.0...HEAD
+[0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.8.0...@metamask/design-system-tailwind-preset@0.9.0
 [0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.7.0...@metamask/design-system-tailwind-preset@0.8.0
 [0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.1...@metamask/design-system-tailwind-preset@0.7.0
 [0.6.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.6.0...@metamask/design-system-tailwind-preset@0.6.1

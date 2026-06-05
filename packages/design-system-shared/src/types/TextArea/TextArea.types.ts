@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react';
-
 import type { InputPropsShared } from '../Input/Input.types';
 
 /**
@@ -17,6 +15,4 @@ export type TextAreaPropsShared = Omit<
    * @default false
    */
   isError?: boolean;
-  /** Replaces the default textarea input implementation. */
-  inputElement?: ReactNode;
 };

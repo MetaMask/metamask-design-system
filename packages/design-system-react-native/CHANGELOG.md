@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.28.0]
+
+### Added
+
+- Added `Content` for composing scrollable and padded content sections on React Native screens; it is closely related to the upcoming `ListItem` work ([#1192](https://github.com/MetaMask/metamask-design-system/pull/1192))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; consumers must run Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- Added default padding and `isInteractive` support to `SectionHeader` so section rows match the new mobile layout patterns ([#1210](https://github.com/MetaMask/metamask-design-system/pull/1210))
+- **BREAKING:** Flattened `TextArea` so it renders the root `TextInput` directly; pass `TextInput` props on `TextArea`, use the component `ref` for the input, and stop relying on `inputProps` or `inputElement` ([#1205](https://github.com/MetaMask/metamask-design-system/pull/1205))
+- Updated avatar fallback handling so `AvatarToken`, `AvatarNetwork`, and `AvatarFavicon` resolve consistently when the requested image is unavailable ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
+
 ## [0.27.0]
 
 ### Added
@@ -468,7 +481,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.27.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.28.0...HEAD
+[0.28.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.27.0...@metamask/design-system-react-native@0.28.0
 [0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.26.0...@metamask/design-system-react-native@0.27.0
 [0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.25.0...@metamask/design-system-react-native@0.26.0
 [0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.24.0...@metamask/design-system-react-native@0.25.0

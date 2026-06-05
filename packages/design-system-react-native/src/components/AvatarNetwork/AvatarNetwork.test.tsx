@@ -30,7 +30,7 @@ describe('AvatarNetwork Component', () => {
   it('updates fallback text on image error when fallbackText is provided', () => {
     const onImageErrorMock = jest.fn();
     const fallback = 'Fallback Text';
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <AvatarNetwork
         src={remoteImageSrc}
         fallbackText={fallback}
@@ -51,14 +51,13 @@ describe('AvatarNetwork Component', () => {
     expect(onImageErrorMock).toHaveBeenCalledTimes(1);
     expect(onImageErrorMock).toHaveBeenCalledWith(errorEvent);
 
-    const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children.props.children).toStrictEqual(fallback);
+    expect(getByText(fallback)).toHaveTextContent(fallback);
   });
 
   it('updates fallback text on svg error when fallbackText is provided', () => {
     const onSvgErrorMock = jest.fn();
     const fallback = 'Fallback Text';
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <AvatarNetwork
         src={remoteSvgSrc}
         fallbackText={fallback}
@@ -78,14 +77,13 @@ describe('AvatarNetwork Component', () => {
 
     expect(onSvgErrorMock).toHaveBeenCalledTimes(1);
     expect(onSvgErrorMock).toHaveBeenCalledWith(errorEvent);
-    const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children.props.children).toStrictEqual(fallback);
+    expect(getByText(fallback)).toHaveTextContent(fallback);
   });
 
   it('computes backupFallbackText from name when fallbackText is not provided', () => {
     // If no fallbackText is provided but name is, fallbackText should become
     // the first character of the name upon error
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <AvatarNetwork
         src={remoteImageSrc}
         name="Example"
@@ -102,8 +100,29 @@ describe('AvatarNetwork Component', () => {
 
     fireEvent(imageOrSvg, 'onImageError', errorEvent);
 
-    const avatarBase = getByTestId('avatar-base');
-    expect(avatarBase.props.children.props.children).toBe('E');
+    expect(getByText('E')).toHaveTextContent('E');
+  });
+
+  describe('when src is NOT provided', () => {
+    it('renders the first letter of name as fallback', () => {
+      const { getByText } = render(<AvatarNetwork name="Example" />);
+
+      expect(getByText('E')).toHaveTextContent('E');
+    });
+
+    it('uses explicit fallbackText over name initial', () => {
+      const { getByText } = render(
+        <AvatarNetwork name="Example" fallbackText="FB" />,
+      );
+
+      expect(getByText('FB')).toHaveTextContent('FB');
+    });
+
+    it('renders "?" when no name or fallbackText is provided', () => {
+      const { getByText } = render(<AvatarNetwork />);
+
+      expect(getByText('?')).toHaveTextContent('?');
+    });
   });
 
   it('passes additional AvatarBase props correctly', () => {

@@ -1,20 +1,12 @@
+import type { ToastPropsShared } from '@metamask/design-system-shared';
+import { ToastSeverity } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
 import type { BannerBaseProps } from '../BannerBase';
 import type { IconProps } from '../Icon/Icon.types';
 
-/**
- * Toast severity variants.
- * `Default` renders no built-in leading icon.
- */
-export const ToastSeverity = {
-  Default: 'default',
-  Success: 'success',
-  Warning: 'warning',
-  Danger: 'danger',
-} as const;
-
-export type ToastSeverity = (typeof ToastSeverity)[keyof typeof ToastSeverity];
+export { ToastSeverity };
+export type { ToastPropsShared };
 
 /**
  * Optional props for the leading severity `Icon`.

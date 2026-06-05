@@ -1,4 +1,5 @@
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
+import { playwright } from '@vitest/browser-playwright';
 // eslint-disable-next-line import-x/no-nodejs-modules
 import path from 'node:path';
 // eslint-disable-next-line import-x/no-nodejs-modules
@@ -28,11 +29,10 @@ export default mergeConfig(
             name: 'storybook',
             browser: {
               enabled: true,
-              provider: 'playwright',
+              provider: playwright(),
               headless: true,
               instances: [{ browser: 'chromium' }],
             },
-            setupFiles: ['./.storybook/vitest.setup.ts'],
           },
         },
       ],

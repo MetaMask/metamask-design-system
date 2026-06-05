@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0]
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; no TWRNC preset behavior changed, but consumers must run on Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+
 ## [0.4.2]
 
 ### Changed
@@ -61,7 +67,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.2...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.5.0...HEAD
+[0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.2...@metamask/design-system-twrnc-preset@0.5.0
 [0.4.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.1...@metamask/design-system-twrnc-preset@0.4.2
 [0.4.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.0...@metamask/design-system-twrnc-preset@0.4.1
 [0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.3.0...@metamask/design-system-twrnc-preset@0.4.0
