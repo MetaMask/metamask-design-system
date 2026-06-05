@@ -3524,6 +3524,7 @@ __metadata:
     "@storybook/addon-docs": "npm:^10.4.2"
     "@storybook/addon-ondevice-actions": "npm:10.4.4"
     "@storybook/addon-ondevice-backgrounds": "npm:10.4.4"
+    "@storybook/addon-ondevice-controls": "patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch"
     "@storybook/addon-ondevice-notes": "npm:10.4.4"
     "@storybook/react": "npm:^10.4.2"
     "@storybook/react-native": "npm:10.4.4"
@@ -4845,6 +4846,54 @@ __metadata:
     react-native: "*"
     storybook: ">=10 || ^10"
   checksum: 10/15f625165e24eb500495ea12e810e5b1ab4ef9fcf492f5e10a72a5b1010f5bf2bccada52f7eac16290996980592591514fa73ac7328c6b9cba903c782602e8c7
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-ondevice-controls@npm:10.4.4":
+  version: 10.4.4
+  resolution: "@storybook/addon-ondevice-controls@npm:10.4.4"
+  dependencies:
+    "@gorhom/portal": "npm:^1.0.14"
+    "@storybook/react-native-theming": "npm:^10.4.4"
+    "@storybook/react-native-ui-common": "npm:^10.4.4"
+    polished: "npm:^4.3.1"
+    react-native-modal-datetime-picker: "npm:^18.0.0"
+    tinycolor2: "npm:^1.6.0"
+  peerDependencies:
+    "@gorhom/bottom-sheet": ">=4"
+    "@react-native-community/datetimepicker": "*"
+    "@react-native-community/slider": "*"
+    react: "*"
+    react-native: "*"
+    storybook: ">=10 || ^10"
+  peerDependenciesMeta:
+    "@gorhom/bottom-sheet":
+      optional: true
+  checksum: 10/0cba7ad5767eae71c93b328aacf0bb8e13076930c660192bdf7c32620cfde4f9fae5957f53fb7f7753519f0ab8ea75aebb6e308564028379bbe6b97e844495c5
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-ondevice-controls@patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch":
+  version: 10.4.4
+  resolution: "@storybook/addon-ondevice-controls@patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch::version=10.4.4&hash=63d90c"
+  dependencies:
+    "@gorhom/portal": "npm:^1.0.14"
+    "@storybook/react-native-theming": "npm:^10.4.4"
+    "@storybook/react-native-ui-common": "npm:^10.4.4"
+    polished: "npm:^4.3.1"
+    react-native-modal-datetime-picker: "npm:^18.0.0"
+    tinycolor2: "npm:^1.6.0"
+  peerDependencies:
+    "@gorhom/bottom-sheet": ">=4"
+    "@react-native-community/datetimepicker": "*"
+    "@react-native-community/slider": "*"
+    react: "*"
+    react-native: "*"
+    storybook: ">=10 || ^10"
+  peerDependenciesMeta:
+    "@gorhom/bottom-sheet":
+      optional: true
+  checksum: 10/be492ea7ffbc628300fd35055588b0cc5a548a63db452956c06fc49151fc0ab73f067bbbd913e7dfe5c6ef3f8e90479ae8f2477e806ad1df60533bcdb0f25f33
   languageName: node
   linkType: hard
 
@@ -14283,7 +14332,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -14538,6 +14587,18 @@ __metadata:
     react-native: ^0.56.0
     react-native-svg: ^6.5.2
   checksum: 10/c49ec82ba047399476915ef3b2c2297962721655ea9e5561beec0d05990dd5bc9dfbb6fd1ce3d637f5596ec5db5c963aa2d90930dbb784a9f956e2656fceaf37
+  languageName: node
+  linkType: hard
+
+"react-native-modal-datetime-picker@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "react-native-modal-datetime-picker@npm:18.0.0"
+  dependencies:
+    prop-types: "npm:^15.7.2"
+  peerDependencies:
+    "@react-native-community/datetimepicker": ">=6.7.0"
+    react-native: ">=0.65.0"
+  checksum: 10/8f065f4ee6572f7cd6731fb049b71653ce73dd7ce564a4cf4f310f6a25a659c388b46f8b51625ea8671c5f139439a0c1824ac0cec787832a36d799982d1e51d9
   languageName: node
   linkType: hard
 
@@ -16141,6 +16202,13 @@ __metadata:
   version: 2.9.0
   resolution: "tinybench@npm:2.9.0"
   checksum: 10/cfa1e1418e91289219501703c4693c70708c91ffb7f040fd318d24aef419fb5a43e0c0160df9471499191968b2451d8da7f8087b08c3133c251c40d24aced06c
+  languageName: node
+  linkType: hard
+
+"tinycolor2@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "tinycolor2@npm:1.6.0"
+  checksum: 10/066c3acf4f82b81c58a0d3ab85f49407efe95ba87afc3c7a16b1d77625193dfbe10dd46c26d0a263c1137361dd5a6a68bff2fb71def5fb9b9aec940fb030bcd4
   languageName: node
   linkType: hard
 
