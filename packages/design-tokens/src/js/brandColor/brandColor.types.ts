@@ -9,15 +9,15 @@ export type BrandColor = {
   grey400: string;
   /** grey/grey500: #686e7d */
   grey500: string;
-  /** grey/grey600: #4b505c */
+  /** grey/grey600: #2b2b30 */
   grey600: string;
-  /** grey/grey700: #31333a */
+  /** grey/grey700: #222226 */
   grey700: string;
-  /** grey/grey800: #232426 */
+  /** grey/grey800: #18181b */
   grey800: string;
-  /** grey/grey900: #121314 */
+  /** grey/grey900: #0d0d0f */
   grey900: string;
-  /** grey/grey1000: #0c0d0f */
+  /** grey/grey1000: #000000 */
   grey1000: string;
   /** grey/grey050: #f3f5f9 */
   grey050: string;
