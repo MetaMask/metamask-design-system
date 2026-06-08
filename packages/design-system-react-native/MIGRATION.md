@@ -2465,7 +2465,10 @@ Shared props match `@metamask/design-system-shared`: `count` (required), optiona
 #### Example (Design System)
 
 ```tsx
-import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react-native';
+import {
+  BadgeCount,
+  BadgeCountSize,
+} from '@metamask/design-system-react-native';
 
 <BadgeCount count={5} max={99} size={BadgeCountSize.Md} />;
 ```
@@ -2474,9 +2477,9 @@ import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react-native
 
 There is no separate legacy **BadgeIcon** component file in the mobile component-library. The closest legacy surface is the **`Badge`** composite’s `BadgeVariant.NotificationsKinds` branch (see [Deprecated aggregate `Badge` component](#deprecated-aggregate-badge-component)), which maps to MMDS **BadgeIcon** (`iconName`).
 
-| Prop       | Type       | Notes                    |
-| ---------- | ---------- | ------------------------ |
-| `iconName` | `IconName` | Required.               |
+| Prop       | Type       | Notes     |
+| ---------- | ---------- | --------- |
+| `iconName` | `IconName` | Required. |
 
 #### Example (Design System)
 
@@ -2492,10 +2495,10 @@ Legacy **BadgeNetwork** lives under `Badge/variants/BadgeNetwork` and extends **
 
 #### Mapping
 
-| Legacy mobile prop | MMDS `BadgeNetwork` |
-| ------------------ | --------------------- |
-| `name`, `fallbackText`, `src`, other `AvatarNetwork` props (except `size` / `shape`) | Same shared semantics; `size` / `shape` are owned by the wrapper. |
-| `isScaled`         | **Removed** from MMDS `BadgeNetwork`. Handle scaling outside or via `AvatarNetwork` if you need a non-badge-sized network avatar. |
+| Legacy mobile prop                                                                   | MMDS `BadgeNetwork`                                                                                                               |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `name`, `fallbackText`, `src`, other `AvatarNetwork` props (except `size` / `shape`) | Same shared semantics; `size` / `shape` are owned by the wrapper.                                                                 |
+| `isScaled`                                                                           | **Removed** from MMDS `BadgeNetwork`. Handle scaling outside or via `AvatarNetwork` if you need a non-badge-sized network avatar. |
 
 #### Before (Mobile)
 
@@ -2519,10 +2522,10 @@ Legacy **BadgeStatus** (`Badge/variants/BadgeStatus`) used `BadgeStatusState` (`
 
 #### Status mapping
 
-| Legacy `BadgeStatusState` | MMDS `BadgeStatusStatus` | Notes |
-| ------------------------- | ------------------------- | ----- |
-| `Active` (`'Active'`)     | `BadgeStatusStatus.Active` (`'active'`) | String value and semantics differ — update call sites. |
-| `Inactive` (`'Inactive'`) | `BadgeStatusStatus.Inactive` (`'inactive'`) | |
+| Legacy `BadgeStatusState` | MMDS `BadgeStatusStatus`                    | Notes                                                  |
+| ------------------------- | ------------------------------------------- | ------------------------------------------------------ |
+| `Active` (`'Active'`)     | `BadgeStatusStatus.Active` (`'active'`)     | String value and semantics differ — update call sites. |
+| `Inactive` (`'Inactive'`) | `BadgeStatusStatus.Inactive` (`'inactive'`) |                                                        |
 
 #### New / different statuses in MMDS
 
@@ -2530,10 +2533,10 @@ MMDS adds `Disconnected`, `New`, and `Attention` — use these for parity with d
 
 #### Removed / changed props
 
-| Legacy mobile        | MMDS                         |
-| -------------------- | ---------------------------- |
-| `state?: BadgeStatusState` | **`status`** (required): `BadgeStatusStatus` |
-| `borderColor`        | Not on shared API; use **`hasBorder`** (boolean) or stylers (`twClassName` / `className` on web) as supported by the component. |
+| Legacy mobile              | MMDS                                                                                                                            |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `state?: BadgeStatusState` | **`status`** (required): `BadgeStatusStatus`                                                                                    |
+| `borderColor`              | Not on shared API; use **`hasBorder`** (boolean) or stylers (`twClassName` / `className` on web) as supported by the component. |
 
 #### Before (Mobile)
 
@@ -2547,7 +2550,10 @@ import { BadgeStatusState } from '../../../component-library/components/Badges/B
 #### After (Design System)
 
 ```tsx
-import { BadgeStatus, BadgeStatusStatus } from '@metamask/design-system-react-native';
+import {
+  BadgeStatus,
+  BadgeStatusStatus,
+} from '@metamask/design-system-react-native';
 
 <BadgeStatus status={BadgeStatusStatus.Active} />;
 ```
@@ -2563,29 +2569,29 @@ Legacy **BadgeWrapper** lives at `app/component-library/components/Badges/BadgeW
 | `Rectangular` (`'Rectangular'`)  | `Rectangular` (`'rectangular'`)        |
 | `Circular` (`'Circular'`)        | `Circular` (`'circular'`)              |
 
-| Legacy `BadgePosition` | MMDS `BadgeWrapperPosition` |
-| ---------------------- | ---------------------------- |
+| Legacy `BadgePosition` | MMDS `BadgeWrapperPosition`                     |
+| ---------------------- | ----------------------------------------------- |
 | `TopRight`             | `BadgeWrapperPosition.TopRight` (`'top-right'`) |
-| `BottomRight`          | `BadgeWrapperPosition.BottomRight` |
-| `BottomLeft`           | `BadgeWrapperPosition.BottomLeft` |
-| `TopLeft`              | `BadgeWrapperPosition.TopLeft` |
+| `BottomRight`          | `BadgeWrapperPosition.BottomRight`              |
+| `BottomLeft`           | `BadgeWrapperPosition.BottomLeft`               |
+| `TopLeft`              | `BadgeWrapperPosition.TopLeft`                  |
 
 #### Prop renames
 
-| Legacy mobile      | MMDS |
-| ---------------- | ---- |
-| `anchorElementShape` | `positionAnchorShape` |
-| `badgeElement`   | `badge` (**required**) |
-| `badgePosition` when it is a **preset enum** | `position` |
-| `badgePosition` when it is a **custom object** `{ top, right, bottom, left }` | `customPosition` |
+| Legacy mobile                                                                 | MMDS                   |
+| ----------------------------------------------------------------------------- | ---------------------- |
+| `anchorElementShape`                                                          | `positionAnchorShape`  |
+| `badgeElement`                                                                | `badge` (**required**) |
+| `badgePosition` when it is a **preset enum**                                  | `position`             |
+| `badgePosition` when it is a **custom object** `{ top, right, bottom, left }` | `customPosition`       |
 
 #### Default changes
 
-| Behavior        | Legacy default | MMDS default |
-| --------------- | -------------- | ------------ |
-| Anchor shape    | `BadgeAnchorElementShape.Circular` | `BadgeWrapperPositionAnchorShape.Circular` (aligned) |
-| Preset position | `BadgePosition.TopRight` | **`BadgeWrapperPosition.BottomRight`** — verify visuals after migrating. |
-| Offset tuning   | Encoded in legacy layout | Use **`positionXOffset`** / **`positionYOffset`** (default `0`) with `position`. |
+| Behavior        | Legacy default                     | MMDS default                                                                     |
+| --------------- | ---------------------------------- | -------------------------------------------------------------------------------- |
+| Anchor shape    | `BadgeAnchorElementShape.Circular` | `BadgeWrapperPositionAnchorShape.Circular` (aligned)                             |
+| Preset position | `BadgePosition.TopRight`           | **`BadgeWrapperPosition.BottomRight`** — verify visuals after migrating.         |
+| Offset tuning   | Encoded in legacy layout           | Use **`positionXOffset`** / **`positionYOffset`** (default `0`) with `position`. |
 
 #### Before (Mobile)
 

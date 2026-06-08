@@ -975,18 +975,18 @@ The API is defined by shared types in `@metamask/design-system-shared` (ADR-0003
 
 #### MMDS API (reference)
 
-| Prop    | Type            | Default / notes                                      |
-| ------- | --------------- | ---------------------------------------------------- |
-| `count` | `number`        | Required.                                            |
-| `max`   | `number`        | Optional. Default `99`. Values above `max` show as `max+`. |
+| Prop    | Type             | Default / notes                                                                       |
+| ------- | ---------------- | ------------------------------------------------------------------------------------- |
+| `count` | `number`         | Required.                                                                             |
+| `max`   | `number`         | Optional. Default `99`. Values above `max` show as `max+`.                            |
 | `size`  | `BadgeCountSize` | Optional. `BadgeCountSize.Md` (`'md'`) or `BadgeCountSize.Lg` (`'lg'`). Default `Md`. |
 
 #### Platform props (React)
 
-| Prop         | Notes                                                                 |
-| ------------ | --------------------------------------------------------------------- |
-| `textProps`  | Optional. Passed to the inner `Text` used for the count.              |
-| `className`  | Tailwind / `twMerge` classes on the root.                            |
+| Prop        | Notes                                                    |
+| ----------- | -------------------------------------------------------- |
+| `textProps` | Optional. Passed to the inner `Text` used for the count. |
+| `className` | Tailwind / `twMerge` classes on the root.                |
 
 #### Example (Design System)
 
@@ -1000,8 +1000,8 @@ import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react';
 
 `BadgeIcon` is **not** in the Extension `component-library` on `main`. Use MMDS directly.
 
-| Prop       | Type       | Notes                                      |
-| ---------- | ---------- | ------------------------------------------ |
+| Prop       | Type       | Notes                                              |
+| ---------- | ---------- | -------------------------------------------------- |
 | `iconName` | `IconName` | Required. Shared icon name from the design system. |
 
 #### Platform props (React)
@@ -1025,11 +1025,11 @@ import { BadgeIcon, IconName } from '@metamask/design-system-react';
 
 #### Shared props (`name`, `fallbackText`, image `src`)
 
-| Prop           | Notes                                                                 |
-| -------------- | --------------------------------------------------------------------- |
-| `name`         | Optional. Used for alt text and initial fallback.                     |
-| `fallbackText` | Optional. Shown when no image; defaults to first letter of `name`.   |
-| `src`          | Image source (string URL in React). Same role as `AvatarNetwork`.     |
+| Prop           | Notes                                                              |
+| -------------- | ------------------------------------------------------------------ |
+| `name`         | Optional. Used for alt text and initial fallback.                  |
+| `fallbackText` | Optional. Shown when no image; defaults to first letter of `name`. |
+| `src`          | Image source (string URL in React). Same role as `AvatarNetwork`.  |
 
 #### Example (Design System)
 
@@ -1045,21 +1045,21 @@ import { BadgeNetwork } from '@metamask/design-system-react';
 
 #### Status values (`BadgeStatusStatus`)
 
-| Value                         | Meaning (MMDS)   |
-| ----------------------------- | ---------------- |
-| `BadgeStatusStatus.Active`    | `'active'`       |
-| `BadgeStatusStatus.Inactive`  | `'inactive'`     |
+| Value                            | Meaning (MMDS)   |
+| -------------------------------- | ---------------- |
+| `BadgeStatusStatus.Active`       | `'active'`       |
+| `BadgeStatusStatus.Inactive`     | `'inactive'`     |
 | `BadgeStatusStatus.Disconnected` | `'disconnected'` |
-| `BadgeStatusStatus.New`       | `'new'`          |
-| `BadgeStatusStatus.Attention` | `'attention'`    |
+| `BadgeStatusStatus.New`          | `'new'`          |
+| `BadgeStatusStatus.Attention`    | `'attention'`    |
 
 #### Other props
 
-| Prop        | Type              | Default      |
-| ----------- | ----------------- | ------------ |
-| `status`    | `BadgeStatusStatus` | Required.  |
-| `hasBorder` | `boolean`         | Default `true`. |
-| `size`      | `BadgeStatusSize` | `Md` (`'md'`) or `Lg` (`'lg'`). Default `Md`. |
+| Prop        | Type                | Default                                       |
+| ----------- | ------------------- | --------------------------------------------- |
+| `status`    | `BadgeStatusStatus` | Required.                                     |
+| `hasBorder` | `boolean`           | Default `true`.                               |
+| `size`      | `BadgeStatusSize`   | `Md` (`'md'`) or `Lg` (`'lg'`). Default `Md`. |
 
 #### Example (Design System)
 
@@ -1079,32 +1079,32 @@ The extension exports `BadgeWrapper`, `BadgeWrapperPosition`, and `BadgeWrapperA
 
 Legacy extension enums use mixed-case **member names** with lowercase string values. MMDS uses **PascalCase** members (ADR-0003 const objects) with the same string values for position and anchor shape.
 
-| Legacy `BadgeWrapperPosition` | MMDS `BadgeWrapperPosition`   |
-| ----------------------------- | ----------------------------- |
-| `topRight`                    | `BadgeWrapperPosition.TopRight` |
+| Legacy `BadgeWrapperPosition` | MMDS `BadgeWrapperPosition`        |
+| ----------------------------- | ---------------------------------- |
+| `topRight`                    | `BadgeWrapperPosition.TopRight`    |
 | `bottomRight`                 | `BadgeWrapperPosition.BottomRight` |
-| `topLeft`                     | `BadgeWrapperPosition.TopLeft` |
-| `bottomLeft`                  | `BadgeWrapperPosition.BottomLeft` |
+| `topLeft`                     | `BadgeWrapperPosition.TopLeft`     |
+| `bottomLeft`                  | `BadgeWrapperPosition.BottomLeft`  |
 
-| Legacy `BadgeWrapperAnchorElementShape` | MMDS `BadgeWrapperPositionAnchorShape` |
-| ---------------------------------------- | ---------------------------------------- |
-| `rectangular`                            | `BadgeWrapperPositionAnchorShape.Rectangular` |
-| `circular`                               | `BadgeWrapperPositionAnchorShape.Circular` |
+| Legacy `BadgeWrapperAnchorElementShape` | MMDS `BadgeWrapperPositionAnchorShape`        |
+| --------------------------------------- | --------------------------------------------- |
+| `rectangular`                           | `BadgeWrapperPositionAnchorShape.Rectangular` |
+| `circular`                              | `BadgeWrapperPositionAnchorShape.Circular`    |
 
 ##### Renamed props
 
-| Extension prop        | MMDS prop              | Notes                                       |
-| --------------------- | ---------------------- | ------------------------------------------- |
-| `anchorElementShape`  | `positionAnchorShape`  | Same semantics; use MMDS const object.      |
-| `positionObj`         | `customPosition`       | Same `{ top, right, bottom, left }` shape.  |
-| `badge` (optional)    | `badge` (**required**) | MMDS requires the badge node.               |
+| Extension prop       | MMDS prop              | Notes                                      |
+| -------------------- | ---------------------- | ------------------------------------------ |
+| `anchorElementShape` | `positionAnchorShape`  | Same semantics; use MMDS const object.     |
+| `positionObj`        | `customPosition`       | Same `{ top, right, bottom, left }` shape. |
+| `badge` (optional)   | `badge` (**required**) | MMDS requires the badge node.              |
 
 ##### Default changes
 
-| Behavior              | Extension default                                              | MMDS default                                              |
-| --------------------- | -------------------------------------------------------------- | --------------------------------------------------------- |
-| Preset position       | `BadgeWrapperPosition.bottomRight`                             | `BadgeWrapperPosition.BottomRight`                        |
-| Anchor shape          | `BadgeWrapperAnchorElementShape.rectangular`                   | `BadgeWrapperPositionAnchorShape.Circular`                |
+| Behavior        | Extension default                            | MMDS default                               |
+| --------------- | -------------------------------------------- | ------------------------------------------ |
+| Preset position | `BadgeWrapperPosition.bottomRight`           | `BadgeWrapperPosition.BottomRight`         |
+| Anchor shape    | `BadgeWrapperAnchorElementShape.rectangular` | `BadgeWrapperPositionAnchorShape.Circular` |
 
 ##### Removed / narrowed surfaces
 
