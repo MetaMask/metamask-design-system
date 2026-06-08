@@ -1,10 +1,8 @@
 // import figma needs to remain as figma otherwise it breaks code connect
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
-import { TagSeverity } from '@metamask/design-system-shared';
+import { IconName, TagSeverity } from '@metamask/design-system-shared';
 import React from 'react';
-
-import { IconName } from '../../types';
 
 import { Tag } from './Tag';
 

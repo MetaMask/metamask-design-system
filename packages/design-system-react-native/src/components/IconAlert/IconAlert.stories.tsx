@@ -1,8 +1,7 @@
-import { IconAlertSeverity } from '@metamask/design-system-shared';
+import { IconAlertSeverity, IconSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { IconSize } from '../../types';
 import {
   Box,
   BoxAlignItems,

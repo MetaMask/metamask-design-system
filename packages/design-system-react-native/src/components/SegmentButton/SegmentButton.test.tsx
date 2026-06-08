@@ -1,4 +1,7 @@
 import {
+  IconColor,
+  IconName,
+  IconSize,
   SegmentButtonVariant,
   TextColor,
 } from '@metamask/design-system-shared';
@@ -6,7 +9,6 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconColor, IconName, IconSize } from '../../types';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 import { SegmentGroup } from '../SegmentGroup/SegmentGroup';
 

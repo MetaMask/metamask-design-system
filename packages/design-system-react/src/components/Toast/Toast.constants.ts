@@ -1,6 +1,8 @@
-import { ToastSeverity } from '@metamask/design-system-shared';
-
-import { IconColor, IconName } from '../../types';
+import {
+  IconColor,
+  IconName,
+  ToastSeverity,
+} from '@metamask/design-system-shared';
 
 export {
   TOAST_ANIMATION_DURATION,
