@@ -207,7 +207,7 @@ module.exports = defineConfig({
       if (isChildWorkspace) {
         workspace.unset('packageManager');
       } else {
-        expectWorkspaceField(workspace, 'packageManager', 'yarn@4.10.3');
+        expectWorkspaceField(workspace, 'packageManager', 'yarn@4.16.0');
       }
 
       // All packages must specify a minimum Node.js version of 20.
