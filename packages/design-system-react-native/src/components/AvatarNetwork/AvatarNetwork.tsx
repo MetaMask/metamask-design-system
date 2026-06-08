@@ -1,8 +1,10 @@
-import { AvatarBaseShape } from '@metamask/design-system-shared';
+import {
+  AvatarBaseShape,
+  AvatarNetworkSize,
+} from '@metamask/design-system-shared';
 import React, { useState } from 'react';
 import type { ImageErrorEvent } from 'react-native';
 
-import { AvatarNetworkSize } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { ImageOrSvg } from '../temp-components/ImageOrSvg';
 
