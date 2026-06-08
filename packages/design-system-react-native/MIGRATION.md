@@ -2334,7 +2334,7 @@ To standardize severity vocabularies across components:
 
 | Before (Error/Default)                    | After (Danger/Neutral)                     | Notes       |
 | ----------------------------------------- | ------------------------------------------ | ----------- |
-| `IconAlertSeverity.Error` (`'error'`)     | `IconAlertSeverity.Danger` (`'danger'`)    | renamed     |
+| `IconAlertSeverity.Danger` (`'error'`)    | `IconAlertSeverity.Danger` (`'danger'`)    | renamed     |
 | `AvatarIconSeverity.Error` (`'error'`)    | `AvatarIconSeverity.Danger` (`'danger'`)   | renamed     |
 | `TagSeverity.Error` (`'error'`)           | `TagSeverity.Danger` (`'danger'`)          | renamed     |
 | `Toast` icon severity `default` (if used) | `AvatarIconSeverity.Neutral` (`'neutral'`) | use Neutral |

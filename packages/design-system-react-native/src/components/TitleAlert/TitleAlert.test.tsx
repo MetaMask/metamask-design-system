@@ -48,7 +48,7 @@ describe('TitleAlert', () => {
     it('forwards titleProps to title row Text when title is a string', () => {
       const { getByTestId } = render(
         <TitleAlert
-          severity={IconAlertSeverity.Error}
+          severity={IconAlertSeverity.Danger}
           title="Error"
           titleProps={{ testID: TITLE_ROW_TEST_ID }}
         />,
@@ -60,7 +60,7 @@ describe('TitleAlert', () => {
     it('forwards titleWrapperProps to title row BoxRow', () => {
       const { getByTestId } = render(
         <TitleAlert
-          severity={IconAlertSeverity.Error}
+          severity={IconAlertSeverity.Danger}
           title="Error"
           titleWrapperProps={{ testID: TITLE_ROW_WRAPPER_TEST_ID }}
         />,
@@ -72,7 +72,7 @@ describe('TitleAlert', () => {
     it('applies titleWrapperProps justifyContent over default center', () => {
       const { getByTestId } = render(
         <TitleAlert
-          severity={IconAlertSeverity.Error}
+          severity={IconAlertSeverity.Danger}
           title="Error"
           titleWrapperProps={{
             testID: TITLE_ROW_WRAPPER_TEST_ID,
