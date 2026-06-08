@@ -4873,7 +4873,7 @@ __metadata:
 
 "@storybook/addon-ondevice-controls@patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch":
   version: 10.4.4
-  resolution: "@storybook/addon-ondevice-controls@patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch::version=10.4.4&hash=16f846"
+  resolution: "@storybook/addon-ondevice-controls@patch:@storybook/addon-ondevice-controls@npm%3A10.4.4#~/.yarn/patches/@storybook-addon-ondevice-controls-npm-10.4.4-6e8c0f15d9.patch::version=10.4.4&hash=63d90c"
   dependencies:
     "@gorhom/portal": "npm:^1.0.14"
     "@storybook/react-native-theming": "npm:^10.4.4"
@@ -4891,7 +4891,7 @@ __metadata:
   peerDependenciesMeta:
     "@gorhom/bottom-sheet":
       optional: true
-  checksum: 10/e0360a59720484e63bfbc93d57e9b1c98f5a3bd201284a0f2a2fc3bfb5e8aced89408a30bad1e8d8dd124f2f6d29a5fac1ced33ee4b730527b288675eff1fe5d
+  checksum: 10/be492ea7ffbc628300fd35055588b0cc5a548a63db452956c06fc49151fc0ab73f067bbbd913e7dfe5c6ef3f8e90479ae8f2477e806ad1df60533bcdb0f25f33
   languageName: node
   linkType: hard
 
