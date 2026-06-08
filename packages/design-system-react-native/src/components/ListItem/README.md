@@ -1,98 +1,219 @@
 # ListItem
 
-ListItem is a wrapper component used to display an individual item within a list. It provides configurable spacing, vertical alignment, and optional accessory slots above and below the row.
+ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.md) in a `Box` or `Pressable` shell (`px-4 py-3`). For row layout without padding or press handling, use [Content](../Content/README.md) directly.
+
+The row root is transparent by default so it inherits the surface behind it. Place list items inside a parent that sets the list background (for example a `Box` or screen section). Interactive rows apply a semi-transparent `bg-pressed` tint on press, which reads correctly over different parent backgrounds without per-row color setup.
 
 ```tsx
 import {
+  Box,
+  BoxBackgroundColor,
   ListItem,
-  ListItemVerticalAlignment,
 } from '@metamask/design-system-react-native';
 
-<ListItem gap={16} verticalAlignment={ListItemVerticalAlignment.Center}>
-  {children}
-</ListItem>;
+<Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+  <ListItem
+    isInteractive
+    title="Network"
+    description="Ethereum Mainnet"
+    value="1.234 ETH"
+    onPress={() => {}}
+  />
+</Box>;
+```
+
+## Background and pressed feedback
+
+ListItem does not apply a default row background. Define the list surface on the parent container and keep rows transparent so press feedback stays consistent across the list.
+
+When `isInteractive` is `true`, the row applies `bg-pressed` while pressed—a general-purpose tint meant to layer over the parent background. In most layouts you do not need to set row background or pressed colors yourself.
+
+Reserve row-level backgrounds for designs that require them (for example a highlighted, warning, or disabled row). If you set a custom idle background on a row, also define how that row should look when pressed so feedback remains visible—for example with a `style` function that responds to `pressed`.
+
+```tsx
+import {
+  Box,
+  BoxBackgroundColor,
+  ListItem,
+} from '@metamask/design-system-react-native';
+
+// Typical: parent owns the surface
+<Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+  <ListItem isInteractive title="Settings" onPress={() => {}} />
+  <ListItem isInteractive title="Security" onPress={() => {}} />
+</Box>;
+
+// Row-specific background (only when the design requires it)
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+
+const tw = useTailwind();
+
+<ListItem
+  isInteractive
+  title="Action required"
+  onPress={() => {}}
+  style={({ pressed }) =>
+    tw.style('bg-warning-muted', pressed && 'bg-warning-muted-pressed')
+  }
+/>;
 ```
 
 ## Props
 
-### `children`
+### `isInteractive`
 
-Content to display inside the list item row. Multiple children are laid out in a horizontal row with a configurable `gap` between them.
+When `true`, the root is a `Pressable` that accepts `onPress` and other `PressableProps`. When `false` (default), the root is a `Box`.
+
+Interactive rows stay transparent at rest and apply `bg-pressed` while pressed. See [Background and pressed feedback](#background-and-pressed-feedback) for how this interacts with parent surfaces and custom row backgrounds.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<ListItem title="Static row" />
+
+<ListItem isInteractive title="Tappable row" onPress={() => {}} />
+```
+
+### `onPress`
+
+Callback fired when the row is pressed. Requires `isInteractive`.
+
+| TYPE                        | REQUIRED | DEFAULT     |
+| --------------------------- | -------- | ----------- |
+| `PressableProps['onPress']` | No       | `undefined` |
+
+```tsx
+<ListItem isInteractive title="Settings" onPress={() => {}} />
+```
+
+### `title`
+
+Primary label on the left. Pass a string for default body styling, or a node for custom content.
+
+Default string styles: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextDefault`.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-<ListItem>
-  <Avatar />
-  <Text variant={TextVariant.BodyMd}>Label</Text>
-  <Icon name={IconName.ArrowRight} />
-</ListItem>
+<ListItem title="Network" />
+
+<ListItem title={<Text variant={TextVariant.HeadingSm}>Custom title</Text>} />
 ```
 
-### `gap`
+### `description`
 
-Horizontal spacing in pixels between each child inside the row.
+Secondary line under the title on the left. Pass a string for default body styling, or a node for custom content.
 
-| TYPE               | REQUIRED | DEFAULT |
-| ------------------ | -------- | ------- |
-| `number \| string` | No       | `16`    |
+Default string styles: `TextVariant.BodySm`, `FontWeight.Medium`, `TextColor.TextAlternative`.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
 
 ```tsx
-<ListItem gap={8}>
-  <Avatar />
-  <Text variant={TextVariant.BodyMd}>Label</Text>
-</ListItem>
+<ListItem title="Network" description="Ethereum Mainnet" />
 ```
 
-### `verticalAlignment`
+### `value`
 
-Vertical alignment of children inside the row.
+Primary value on the right. Pass a string for default body styling, or a node for custom content.
 
-| TYPE                        | REQUIRED | DEFAULT                            |
-| --------------------------- | -------- | ---------------------------------- |
-| `ListItemVerticalAlignment` | No       | `ListItemVerticalAlignment.Center` |
+Default string styles: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextDefault`.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
 
 ```tsx
-<ListItem verticalAlignment={ListItemVerticalAlignment.Top}>
-  <Avatar />
-  <Box>
-    <Text variant={TextVariant.BodyMd}>Title</Text>
-    <Text variant={TextVariant.BodySm}>Description</Text>
-    <Text variant={TextVariant.BodySm}>Extra line</Text>
-  </Box>
-</ListItem>
+<ListItem title="Amount" value="$10.00" />
 ```
 
-Available values:
+### `subvalue`
 
-| Value                              | Description                   |
-| ---------------------------------- | ----------------------------- |
-| `ListItemVerticalAlignment.Top`    | Aligns children to the top    |
-| `ListItemVerticalAlignment.Center` | Aligns children to the center |
-| `ListItemVerticalAlignment.Bottom` | Aligns children to the bottom |
+Secondary line under the value on the right. Pass a string for default body styling, or a node for custom content.
+
+Default string styles: `TextVariant.BodySm`, `FontWeight.Medium`, `TextColor.TextAlternative`.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+<ListItem title="Network" value="1.234 ETH" subvalue="~$2,500" />
+```
+
+### `avatar`
+
+Optional leading visual after `startAccessory` and before the title column. Use large avatars (40×40) in this slot.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+import {
+  AvatarToken,
+  AvatarTokenSize,
+  ListItem,
+} from '@metamask/design-system-react-native';
+
+<ListItem
+  avatar={<AvatarToken name="ETH" src={ethIcon} size={AvatarTokenSize.Lg} />}
+  title="Ethereum"
+  value="0.24 ETH"
+/>;
+```
+
+### `startAccessory`
+
+Optional leading element on the content row, before the avatar (for example a rank or icon). Icons in this slot should be 20×20 (`IconSize.Md`).
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+import { Icon, IconName, ListItem } from '@metamask/design-system-react-native';
+
+<ListItem
+  startAccessory={<Icon name={IconName.Coin} />}
+  title="With start accessory"
+/>;
+```
+
+### `endAccessory`
+
+Optional trailing element on the content row, after the value column (for example a chevron or button).
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+import { Icon, IconName, ListItem } from '@metamask/design-system-react-native';
+
+<ListItem title="Network" endAccessory={<Icon name={IconName.ArrowRight} />} />;
+```
 
 ### `topAccessory`
 
-Optional content rendered above the list item row.
+Optional content above the content row. Setting `topAccessory` or `bottomAccessory` switches the inner layout to a column.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-<ListItem
-  topAccessory={<Text variant={TextVariant.BodySm}>Section Header</Text>}
->
-  <Avatar />
-  <Text variant={TextVariant.BodyMd}>Label</Text>
-</ListItem>
+<ListItem topAccessory={<BannerAlert />} title="Token" value="100" />
 ```
 
 ### `bottomAccessory`
 
-Optional content rendered below the list item row.
+Optional content below the content row. Setting `topAccessory` or `bottomAccessory` switches the inner layout to a column.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -100,67 +221,102 @@ Optional content rendered below the list item row.
 
 ```tsx
 <ListItem
-  bottomAccessory={<Text variant={TextVariant.BodySm}>Section Footer</Text>}
->
-  <Avatar />
-  <Text variant={TextVariant.BodyMd}>Label</Text>
-</ListItem>
+  title="Token"
+  value="100"
+  bottomAccessory={<Text variant={TextVariant.BodySm}>Details</Text>}
+/>
 ```
 
-### `topAccessoryGap`
+### `verticalAlignment`
 
-Gap in pixels between the `topAccessory` and the row.
+Vertical alignment of the content row.
 
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `number` | No       | `0`     |
+Available values:
+
+- `ContentVerticalAlignment.Center` — default; use for one- or two-line rows
+- `ContentVerticalAlignment.Top` — use for taller rows (three+ lines or ~88dp+ height)
+
+| TYPE                       | REQUIRED | DEFAULT                           |
+| -------------------------- | -------- | --------------------------------- |
+| `ContentVerticalAlignment` | No       | `ContentVerticalAlignment.Center` |
 
 ```tsx
+import {
+  ContentVerticalAlignment,
+  ListItem,
+} from '@metamask/design-system-react-native';
+
 <ListItem
-  topAccessory={<Text variant={TextVariant.BodySm}>Header</Text>}
-  topAccessoryGap={8}
->
-  <Avatar />
-  <Text variant={TextVariant.BodyMd}>Label</Text>
-</ListItem>
+  verticalAlignment={ContentVerticalAlignment.Top}
+  avatar={<AvatarToken name="ETH" src={ethIcon} size={AvatarTokenSize.Lg} />}
+  title="Network"
+  description="Secondary line"
+  value="Value"
+/>;
 ```
 
-### `bottomAccessoryGap`
+### `children`
 
-Gap in pixels between the row and the `bottomAccessory`.
+Optional React children rendered below the `Content` block on the padded root.
 
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `number` | No       | `0`     |
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
 
 ```tsx
-<ListItem
-  bottomAccessory={<Text variant={TextVariant.BodySm}>Footer</Text>}
-  bottomAccessoryGap={8}
->
-  <Avatar />
-  <Text variant={TextVariant.BodyMd}>Label</Text>
-</ListItem>
+import { Box, ListItem } from '@metamask/design-system-react-native';
+
+<ListItem title="Summary">
+  <Box twClassName="mt-2 rounded bg-background-muted px-3 py-2">
+    Expanded details
+  </Box>
+</ListItem>;
 ```
+
+### `titleProps`, `descriptionProps`, `valueProps`, `subvalueProps`
+
+Props merged onto the `Text` component when the matching field is a string. Overrides default text styles.
+
+See [Content/README.md](../Content/README.md) for types and examples.
+
+### `titleStartAccessory`, `titleEndAccessory`, `descriptionStartAccessory`, `descriptionEndAccessory`, `valueStartAccessory`, `valueEndAccessory`, `subvalueStartAccessory`, `subvalueEndAccessory`
+
+Optional inline accessories on the same line as the matching text field.
+
+See [Content/README.md](../Content/README.md) for types and examples.
 
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the root element.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Applied on the root `Box` or `Pressable`, merged with default padding (`px-4 py-3`). Prefer layout overrides (padding, radius, borders) over row backgrounds. If you set a row background, pair it with an appropriate pressed treatment—see [Background and pressed feedback](#background-and-pressed-feedback).
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
 ```tsx
-<ListItem twClassName="rounded-lg border border-muted">
-  <Avatar />
-  <Text variant={TextVariant.BodyMd}>Label</Text>
+import { ListItem } from '@metamask/design-system-react-native';
+
+// Override default padding
+<ListItem title="Label" twClassName="px-6 py-4">
+  Custom padding
+</ListItem>
+
+// Add layout chrome without changing row background
+<ListItem title="Label" twClassName="rounded-lg border border-muted">
+  Bordered row
 </ListItem>
 ```
 
 ### `style`
 
-Use the `style` prop to apply React Native styles to the root element. For consistent styling, prefer `twClassName` when possible.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+
+Avoid setting row background colors unless the design requires it. When you do, use a `style` function so idle and pressed states stay paired.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
@@ -168,18 +324,27 @@ Use the `style` prop to apply React Native styles to the root element. For consi
 
 ```tsx
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { ListItem } from '@metamask/design-system-react-native';
 
-export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
+export const HighlightedRow = () => {
   const tw = useTailwind();
 
   return (
-    <ListItem style={tw.style('mt-4', isActive && 'bg-success-default')}>
-      <Avatar />
-      <Text variant={TextVariant.BodyMd}>Label</Text>
-    </ListItem>
+    <ListItem
+      title="Action required"
+      isInteractive
+      onPress={() => {}}
+      style={({ pressed }) =>
+        tw.style('bg-warning-muted', pressed && 'bg-warning-muted-pressed')
+      }
+    />
   );
 };
 ```
+
+## Migration Guide
+
+Migrating from `app/component-library/components/List/ListItem` in MetaMask Mobile? See the [ListItem Migration Guide](../../../MIGRATION.md#listitem-component) for prop mappings, before/after examples, and breaking changes.
 
 ## References
 
