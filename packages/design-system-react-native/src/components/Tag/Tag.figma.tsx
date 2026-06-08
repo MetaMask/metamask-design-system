@@ -28,7 +28,7 @@ figma.connect(
     props: {
       severity: figma.enum('severity', {
         neutral: TagSeverity.Neutral,
-        error: TagSeverity.Error,
+        error: TagSeverity.Danger,
         info: TagSeverity.Info,
         success: TagSeverity.Success,
         warning: TagSeverity.Warning,
