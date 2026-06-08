@@ -58,3 +58,13 @@ export const SampleNetworks: Story = {
     </View>
   ),
 };
+
+export const Fallback: Story = {
+  render: () => (
+    <View style={{ flexDirection: 'row', gap: 16 }}>
+      <AvatarNetwork name="Ethereum" fallbackText="ETH" />
+      <AvatarNetwork name="Arbitrum" />
+      <AvatarNetwork />
+    </View>
+  ),
+};

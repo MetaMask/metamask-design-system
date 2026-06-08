@@ -129,6 +129,9 @@ export type { SensitiveTextProps } from './SensitiveText';
 export { PopoverHeader } from './PopoverHeader';
 export type { PopoverHeaderProps } from './PopoverHeader';
 
+export { Popover, PopoverPosition, PopoverRole } from './Popover';
+export type { PopoverProps } from './Popover';
+
 export { Text } from './Text';
 export {
   TextVariant,
@@ -151,11 +154,23 @@ export type { TextButtonProps } from './TextButton';
 export { TextField, TextFieldSize, TextFieldType } from './TextField';
 export type { TextFieldProps } from './TextField';
 
+export { FormTextField } from './FormTextField';
+export type { FormTextFieldProps } from './FormTextField';
+
+export { TextFieldSearch } from './TextFieldSearch';
+export type { TextFieldSearchProps } from './TextFieldSearch';
+
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
+
+export { Tag, TagSeverity } from './Tag';
+export type { TagProps } from './Tag';
 
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';
 export type { ButtonHeroProps } from './ButtonHero';
 
 export { ButtonFilter } from './ButtonFilter';
 export type { ButtonFilterProps } from './ButtonFilter';
+
+export { Toast, Toaster, toast, ToastSeverity } from './Toast';
+export type { ToastOptions, ToastProps, ToasterProps } from './Toast';

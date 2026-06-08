@@ -125,14 +125,14 @@ export const WithStartAndEndAccessory: Story = {
   },
 };
 
-export const isDisabled: Story = {
+export const IsDisabled: Story = {
   args: {
     children: 'isDisabled',
     isDisabled: true,
   },
 };
 
-export const isFullWidth: Story = {
+export const IsFullWidth: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonSecondary>ButtonSecondary</ButtonSecondary>
@@ -141,7 +141,7 @@ export const isFullWidth: Story = {
   ),
 };
 
-export const isDanger: Story = {
+export const IsDanger: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonSecondary isDanger>ButtonSecondary</ButtonSecondary>
@@ -152,7 +152,7 @@ export const isDanger: Story = {
   ),
 };
 
-export const isInverse: Story = {
+export const IsInverse: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonSecondaryStory isInverse>ButtonSecondary</ButtonSecondaryStory>

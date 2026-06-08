@@ -1,17 +1,13 @@
 // Third party dependencies.
 import type { SectionHeaderPropsShared } from '@metamask/design-system-shared';
-import type { ViewProps } from 'react-native';
+import type { PressableProps, ViewProps } from 'react-native';
 
 // Internal dependencies.
 import type { BoxRowProps } from '../BoxRow/BoxRow.types';
 import type { IconProps } from '../Icon';
 import type { TextProps } from '../Text/Text.types';
 
-/**
- * SectionHeader component props (React Native).
- * Extends {@link SectionHeaderPropsShared} with platform `Text` / `Icon` passthroughs, `twClassName`, and `View` props.
- */
-export type SectionHeaderProps = SectionHeaderPropsShared & {
+type SectionHeaderPropsBase = SectionHeaderPropsShared & {
   /**
    * Optional props merged into {@link BoxRow} `textProps` when `title` is a string.
    */
@@ -26,13 +22,26 @@ export type SectionHeaderProps = SectionHeaderPropsShared & {
   /**
    * Optional prop to pass additional properties to the start icon.
    */
-  startIconProps?: Partial<IconProps>;
+  startIconProps?: Omit<Partial<IconProps>, 'name'>;
   /**
    * Optional prop to pass additional properties to the end icon.
    */
-  endIconProps?: Partial<IconProps>;
+  endIconProps?: Omit<Partial<IconProps>, 'name'>;
   /**
    * Optional Tailwind class name to apply to the outer row.
    */
   twClassName?: string;
-} & Omit<ViewProps, 'children'>;
+};
+
+/**
+ * SectionHeader component props (React Native).
+ * Extends {@link SectionHeaderPropsShared} with platform `Text` / `Icon` passthroughs, `twClassName`, and wrapper props.
+ * When `isInteractive` is `true`, the outer wrapper is a `Pressable`; otherwise it is a {@link BoxRow} with `ViewProps`.
+ */
+export type SectionHeaderProps =
+  | (SectionHeaderPropsBase & {
+      isInteractive?: false;
+    } & Omit<ViewProps, 'children'>)
+  | (SectionHeaderPropsBase & {
+      isInteractive: true;
+    } & Omit<PressableProps, 'children'>);

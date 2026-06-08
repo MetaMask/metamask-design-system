@@ -2,11 +2,14 @@ import base, { createConfig } from '@metamask/eslint-config';
 import jest from '@metamask/eslint-config-jest';
 import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
+// eslint-disable-next-line import-x/no-unresolved -- ESM-only package with non-standard "code" export condition
+import storybook from 'eslint-plugin-storybook';
 import tailwind from 'eslint-plugin-tailwindcss';
 
 const NODE_LTS_VERSION = 22;
 
 const config = createConfig([
+  ...storybook.configs['flat/recommended'],
   ...base,
   {
     ignores: [
@@ -42,10 +45,10 @@ const config = createConfig([
       'apps/storybook-react/postcss.config.js',
       'apps/storybook-react/tailwind.config.js',
       // storybook react native
-      'apps/storybook-react-native/.rnstorybook/index.tsx',
-      'apps/storybook-react-native/.rnstorybook/main.ts',
-      'apps/storybook-react-native/.rnstorybook/preview.tsx',
-      'apps/storybook-react-native/.rnstorybook/storybook.requires.ts',
+      'apps/storybook-react-native/.rnstorybook/*.ts',
+      'apps/storybook-react-native/.rnstorybook/*.tsx',
+      'apps/storybook-react-native/.storybook/*.ts',
+      'apps/storybook-react-native/.storybook/*.tsx',
       'apps/storybook-react-native/tailwind-intellisense.config.js',
     ],
   },

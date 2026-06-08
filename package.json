@@ -1,6 +1,6 @@
 {
   "name": "@metamask/metamask-design-system",
-  "version": "42.0.0",
+  "version": "43.0.0",
   "private": true,
   "description": "The MetaMask Design System monorepo",
   "repository": {
@@ -109,6 +109,7 @@
     "eslint-plugin-n": "^17.10.3",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-promise": "^7.1.0",
+    "eslint-plugin-storybook": "^10.4.2",
     "eslint-plugin-tailwindcss": "^3.18.0",
     "execa": "^5.0.0",
     "jest": "^29.7.0",

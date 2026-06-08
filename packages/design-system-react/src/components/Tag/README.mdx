@@ -1,0 +1,45 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as TagStories from './Tag.stories';
+
+# Tag
+
+A tag is a compact label used to categorize, annotate, or highlight metadata.
+
+**Figma:** [MMDS Components — Tag](https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=12339-1167)
+
+```tsx
+import { Tag } from '@metamask/design-system-react';
+
+<Tag>Tag</Tag>;
+```
+
+<Canvas of={TagStories.Default} />
+
+## Props
+
+### `severity`
+
+Semantic emphasis for background, string child text color, and icons. Uses `TagSeverity` from `@metamask/design-system-shared`.
+
+<Controls of={TagStories.Default} />
+
+### `children`
+
+Main content. String children use `Text` (`BodyXs`, medium weight, severity-based color). Other React nodes render as-is.
+
+### `startIconName` / `endIconName`
+
+Optional `IconName` for icons at the start or end (`IconSize.Xs` by default). Use `startIconProps` / `endIconProps` for overrides (including `name` instead of `startIconName` / `endIconName`).
+
+### `startAccessory` / `endAccessory`
+
+Custom nodes when no start/end icon name is resolved.
+
+### `className`
+
+Optional CSS classes merged onto the tag container via `twMerge`.
+
+### Other `div` props
+
+Standard HTML attributes (`data-testid`, `aria-*`, etc.) are forwarded to the root `Box`.

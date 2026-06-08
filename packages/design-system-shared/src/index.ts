@@ -54,6 +54,12 @@ export { type BannerBasePropsShared } from './types/BannerBase';
 // TextOrChildren types (ADR-0004)
 export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
 
+// Toast types (ADR-0004)
+export {
+  TOAST_ANIMATION_DURATION,
+  TOAST_VISIBILITY_DURATION,
+} from './types/Toast';
+
 // TitleHub types (ADR-0004)
 export { type TitleHubPropsShared } from './types/TitleHub';
 
@@ -235,3 +241,6 @@ export {
 
 // SectionHeader types (ADR-0004)
 export { type SectionHeaderPropsShared } from './types/SectionHeader';
+
+// Toast types (ADR-0003 + ADR-0004)
+export { ToastSeverity, type ToastPropsShared } from './types/Toast';

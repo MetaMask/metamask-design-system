@@ -1,0 +1,366 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as PopoverStories from './Popover.stories';
+
+# Popover
+
+`Popover` is a floating layer that positions itself against a reference element using [`@floating-ui/react-dom`](https://floating-ui.com/docs/react-dom). Use it for tooltips, menus, and other contextual content that needs to anchor to a trigger. Wire `referenceElement`, `isOpen`, and one of `onPressEscKey` / `onClickOutside` to control visibility from the trigger.
+
+```tsx
+import { Popover, PopoverPosition } from '@metamask/design-system-react';
+
+<Popover
+  isOpen={isOpen}
+  referenceElement={referenceElement}
+  position={PopoverPosition.Bottom}
+  onPressEscKey={() => setIsOpen(false)}
+>
+  Popover contents
+</Popover>;
+```
+
+<Canvas of={PopoverStories.Default} />
+
+## Props
+
+### `children`
+
+The contents rendered inside the floating layer. Padding and background come from the design tokens applied to the popover root.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>ReactNode</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>undefined</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### `isOpen`
+
+Controls whether the popover is mounted. When `false`, nothing is rendered. Pair this with a state value driven by your trigger element.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>boolean</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>undefined</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### `referenceElement`
+
+The DOM element the popover anchors to. Capture this from your trigger via `useState` or a callback ref so `Popover` can position itself when it mounts.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>HTMLElement | null</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>undefined</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### `position`
+
+Placement relative to the reference element. `PopoverPosition.Auto` lets `react-popper` pick the best fit and forces `flip` and `preventOverflow` on regardless of those props.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>PopoverPosition</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>PopoverPosition.Auto</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverStories.Position} />
+
+### `role`
+
+ARIA role for the popover root. Use `PopoverRole.Dialog` when the contents are interactive (focusable controls, menus). Use `PopoverRole.Tooltip` for purely informational content.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>PopoverRole</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>PopoverRole.Tooltip</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverStories.Role} />
+
+### `hasArrow`
+
+Renders a small notch pointing at the reference element. Position-aware — the notch rotates automatically with the resolved placement.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>boolean</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>false</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverStories.HasArrow} />
+
+### `arrowProps`
+
+Props forwarded to the arrow element, such as `className` for additional styling and `data-testid` for tests. `ref`, `style`, and `children` are reserved for internal use (popper positioning, rotation styles, and the arrow visual) and cannot be overridden.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>Omit&lt;ComponentProps&lt;'div'&gt;, 'ref' | 'style' | 'children'&gt;</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>undefined</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### `isPortal`
+
+Renders the popover into `document.body` via `createPortal` instead of inline. Use when the popover would otherwise be clipped by an ancestor with `overflow: hidden`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>boolean</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>false</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverStories.IsPortal} />
+
+### `matchWidth`
+
+Sizes the popover to the reference element's `clientWidth`. Common pattern for menu lists anchored to a select-style trigger.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>boolean</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>false</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverStories.MatchWidth} />
+
+### `flip`
+
+Allows the popover to flip to the opposite side when there is not enough space at the requested `position`. Forced on when `position` is `PopoverPosition.Auto`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>boolean</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>false</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### `preventOverflow`
+
+Keeps the popover inside the viewport. Forced on when `position` is `PopoverPosition.Auto`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>boolean</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>false</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### `referenceHidden`
+
+Hides the popover (`visibility: hidden; pointer-events: none`) when the reference element is scrolled out of view. Driven by `react-popper`'s `data-popper-reference-hidden` attribute.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>boolean</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>true</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### `offset`
+
+`[skidding, distance]` offset (in pixels) applied to the popover. The first value shifts along the reference edge, the second shifts perpendicular to it.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>[number, number]</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>[0, 8]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### `onPressEscKey`
+
+Called when the user presses the Escape key while the popover is open. Wire to your `setIsOpen(false)` to close.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>() =&gt; void</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>undefined</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverStories.OnPressEscKey} />
+
+### `onClickOutside`
+
+Called when the user clicks outside the popover and the reference element while the popover is open. Wire to your `setIsOpen(false)` to close.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><code>() =&gt; void</code></td>
+      <td align="left">No</td>
+      <td align="left"><code>undefined</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={PopoverStories.OnClickOutside} />
+
+## Component API
+
+<Controls of={PopoverStories.Default} />
+
+## Migration Guide
+
+Migrating from `ui/components/component-library/popover` in MetaMask Extension? See the [Popover Migration Guide](../../../MIGRATION.md#popover-component) for prop mappings, before/after examples, and breaking changes.
+
+## References
+
+- [@floating-ui/react-dom](https://floating-ui.com/docs/react-dom)
+- [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
