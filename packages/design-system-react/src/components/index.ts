@@ -163,6 +163,9 @@ export type { TextFieldSearchProps } from './TextFieldSearch';
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
 
+export { Tag, TagSeverity } from './Tag';
+export type { TagProps } from './Tag';
+
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';
 export type { ButtonHeroProps } from './ButtonHero';
 
