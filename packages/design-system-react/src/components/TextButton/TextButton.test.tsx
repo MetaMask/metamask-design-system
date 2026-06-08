@@ -50,4 +50,16 @@ describe('TextButton', () => {
 
     expect(screen.getByRole('button')).toHaveClass('font-bold');
   });
+
+  it('renders as child component when asChild is true', () => {
+    render(
+      <TextButton asChild>
+        <a href="https://metamask.io">MetaMask</a>
+      </TextButton>,
+    );
+
+    const link = screen.getByRole('link', { name: 'MetaMask' });
+    expect(link).toHaveAttribute('href', 'https://metamask.io');
+    expect(link).toHaveClass('text-primary-default', 'font-medium');
+  });
 });

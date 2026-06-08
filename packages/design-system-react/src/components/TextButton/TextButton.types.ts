@@ -13,4 +13,11 @@ export type TextButtonProps = TextButtonPropsShared &
      * Called when the user clicks the label. Primary interaction for this control.
      */
     onClick?: ComponentProps<'button'>['onClick'];
+    /**
+     * Optional boolean that determines if the component should merge its props onto its immediate child
+     * instead of rendering a button element.
+     *
+     * @default false
+     */
+    asChild?: boolean;
   };

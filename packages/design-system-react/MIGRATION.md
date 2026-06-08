@@ -494,7 +494,7 @@ The legacy `ButtonLink` (and `Button` with `variant={ButtonVariant.Link}`) is re
 - **`TextButton`** — for inline text-styled links within content flows (the primary replacement)
 - **`Button` with `variant={ButtonVariant.Tertiary}`** — for standalone link-style buttons with icons, full width, `isDanger`, `isLoading`, or other button-like affordances
 
-`TextButton` is a text-only control aligned with the React Native visual API. It renders a web `<button>`, exposes the standard React `onClick` interaction prop, and does not support icons, accessories, disabled state, inverse styling, or anchor composition. Use `Button` with `variant={ButtonVariant.Tertiary}` when those button-like affordances are required.
+`TextButton` is a text-only control aligned with the React Native visual API. It renders a web `<button>` by default, exposes the standard React `onClick` interaction prop, and supports `asChild` for semantic links. It does not support icons, accessories, disabled state, or inverse styling. Use `Button` with `variant={ButtonVariant.Tertiary}` when those button-like affordances are required.
 
 #### Breaking Changes
 
@@ -542,16 +542,17 @@ The legacy `ButtonLink` (and `Button` with `variant={ButtonVariant.Link}`) is re
 | `loading={true}`   | `<Button variant={ButtonVariant.Tertiary} isLoading>...</Button>`              |
 | `iconLoadingProps` | Removed — configure loading on `Button` via `loadingIconProps` / `loadingText` |
 
-##### Polymorphism Removed
+##### Polymorphism Replaced With `asChild`
 
-The extension `ButtonLink` is polymorphic — `as` toggles between `button` and `a`, and an `href` prop auto-switches to `a`. The design system `TextButton` always renders a `<button>` and does not expose `asChild`.
+The extension `ButtonLink` is polymorphic — `as` toggles between `button` and `a`, and an `href` prop auto-switches to `a`. The design system `TextButton` renders a `<button>` by default and uses `asChild` composition for links. Put link props directly on the child anchor.
 
-| Extension Prop           | Design System Migration                                              |
-| ------------------------ | -------------------------------------------------------------------- |
-| `as="a"` / `as="button"` | Removed — always `<button>`                                          |
-| `href="..."`             | Removed — use a semantic `<a>` or tertiary `Button` when appropriate |
-| `externalLink`           | Removed — use a semantic `<a>` with `target` and `rel`               |
-| `target` / `rel`         | Removed — use a semantic `<a>`                                       |
+| Extension Prop   | Design System Migration                                   |
+| ---------------- | --------------------------------------------------------- |
+| `as="button"`    | Removed — omit `asChild` to render the default `<button>` |
+| `as="a"`         | Use `asChild` with a child `<a>`                          |
+| `href="..."`     | Move to the child `<a>`                                   |
+| `externalLink`   | Removed — set `target` and `rel` on the child `<a>`       |
+| `target` / `rel` | Move to the child `<a>`                                   |
 
 ##### `color` Removed — Use `Button` Tertiary
 
@@ -575,7 +576,7 @@ The legacy `ButtonLink` accepted a `color` prop that overrode link coloring. `Te
 #### Prop Changes
 
 - `size` / `TextButtonSize` is replaced by `variant` / `TextVariant`.
-- Removed `isInverse`, `isDisabled`, `asChild`, `textProps`, start/end icons, and accessory slots.
+- Removed `isInverse`, `isDisabled`, `textProps`, start/end icons, and accessory slots.
 
 #### Migration Examples
 
@@ -641,9 +642,13 @@ import { ButtonLink } from '../../component-library';
 After (Design System):
 
 ```tsx
-<a href="https://metamask.io" target="_blank" rel="noopener noreferrer">
-  Visit MetaMask
-</a>
+import { TextButton } from '@metamask/design-system-react';
+
+<TextButton asChild>
+  <a href="https://metamask.io" target="_blank" rel="noopener noreferrer">
+    Visit MetaMask
+  </a>
+</TextButton>;
 ```
 
 ##### Danger link → `Button` Tertiary with `isDanger`
@@ -718,7 +723,7 @@ import { TextButton } from '@metamask/design-system-react';
 
 - `variant` controls typography via `TextVariant`; there is no `TextButtonSize`
 - No `isDanger`, `isLoading`, or `color` props — use `Button` with `variant={ButtonVariant.Tertiary}` when any of these are required
-- Root element is always `<button>`
+- Root element is `<button>` by default; use `asChild` with an `<a>` for semantic links
 - Coloring is locked to primary
 
 ### Box Component

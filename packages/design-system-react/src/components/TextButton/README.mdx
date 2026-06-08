@@ -6,7 +6,7 @@ import * as TextButtonStories from './TextButton.stories';
 
 Use `TextButton` for links placed **inline with text**. It is text-only and is not meant to carry start or end icons. If you need icons with the label, use `Button` with `variant={ButtonVariant.Tertiary}` instead.
 
-Pass `onClick` to handle interaction.
+Pass `onClick` to handle button interactions, or use `asChild` with an anchor for semantic links.
 
 ```tsx
 import { TextButton } from '@metamask/design-system-react';
@@ -44,6 +44,22 @@ Typography variant. Defaults to `TextVariant.BodyMd`.
 
 <Canvas of={TextButtonStories.Variant} />
 
+### `asChild`
+
+When `true`, `TextButton` merges its text-button styling and interaction props onto its immediate child instead of rendering a `button`. Use this for semantic links.
+
+```tsx
+<TextButton asChild>
+  <a href="https://metamask.io">MetaMask</a>
+</TextButton>
+```
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+<Canvas of={TextButtonStories.AsChildLink} />
+
 ### `fontWeight`
 
 TextButton defaults to `FontWeight.Medium`.
@@ -68,12 +84,12 @@ Inline styles for the label. Prefer design-token classes when possible.
 | --------------------- | -------- | ----------- |
 | `React.CSSProperties` | No       | `undefined` |
 
-Other web `button` props and shared [`Text`](../Text/README.mdx) typography props are supported via `TextButtonProps`.
+Other web `button` props and shared [`Text`](../Text/README.mdx) typography props are supported via `TextButtonProps`. When `asChild` is true, pass element-specific props, such as `href`, directly to the child element.
 
 <Canvas of={TextButtonStories.InlineWithText} />
 
 ## Migration
 
-The React `TextButton` API is aligned with the React Native text-only API. Removed props include `size`, `TextButtonSize`, `isInverse`, `isDisabled`, `asChild`, `textProps`, start/end icons, and accessories. Use `variant` with `TextVariant` instead of `size`; use tertiary `Button` for disabled, inverse, icon, or anchor-style patterns.
+The React `TextButton` API is aligned with the React Native text-only API while preserving web composition for links. Removed props include `size`, `TextButtonSize`, `isInverse`, `isDisabled`, `textProps`, start/end icons, and accessories. Use `variant` with `TextVariant` instead of `size`; use `asChild` for semantic links; use tertiary `Button` for disabled, inverse, icon, or standalone button-like patterns.
 
 <Controls of={TextButtonStories.Default} />

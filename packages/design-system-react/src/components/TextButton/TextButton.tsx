@@ -3,6 +3,7 @@ import {
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
+import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
@@ -25,6 +26,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       ellipsis,
       style,
       onClick,
+      asChild,
       type = 'button',
       ...rest
     },
@@ -35,6 +37,16 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       'hover:text-primary-default-hover hover:underline hover:decoration-primary-default-hover hover:decoration-2 hover:underline-offset-4',
       'active:text-primary-default-pressed active:decoration-primary-default-pressed',
       className,
+    );
+
+    const textButtonContent = asChild ? (
+      <Slot ref={ref} onClick={onClick} {...rest}>
+        {children}
+      </Slot>
+    ) : (
+      <button ref={ref} type={type} onClick={onClick} {...rest}>
+        {children}
+      </button>
     );
 
     return (
@@ -52,9 +64,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
         className={mergedClassName}
         style={style}
       >
-        <button ref={ref} type={type} onClick={onClick} {...rest}>
-          {children}
-        </button>
+        {textButtonContent}
       </Text>
     );
   },

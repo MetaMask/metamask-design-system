@@ -56,3 +56,15 @@ export const InlineWithText: Story = {
     </Text>
   ),
 };
+
+export const AsChildLink: Story = {
+  render: () => (
+    <Text>
+      Visit{' '}
+      <TextButton asChild>
+        <a href="https://metamask.io">MetaMask</a>
+      </TextButton>{' '}
+      to learn more.
+    </Text>
+  ),
+};
