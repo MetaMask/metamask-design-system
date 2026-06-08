@@ -24,6 +24,8 @@ Available values:
 - `TagSeverity.Warning`
 - `TagSeverity.Info`
 
+Use `TagSeverity.Danger` for destructive or critical states. Internal color token names are unchanged, so this variant still maps to error-colored tokens.
+
 | TYPE           | REQUIRED | DEFAULT               |
 | -------------- | -------- | --------------------- |
 | `TagSeverity?` | No       | `TagSeverity.Neutral` |

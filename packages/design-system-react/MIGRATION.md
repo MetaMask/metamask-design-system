@@ -853,15 +853,18 @@ The extension `banner-alert` maps directly to `BannerAlert` in the design system
 | `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
 | `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
 
-##### Severity Alignment (React & React Native)
+##### Severity Alignment
 
-To standardize severity vocabularies across components:
+The public severity APIs now use `Danger` instead of `Error` for destructive
+or critical states, and `Neutral` instead of any default-like severity. Internal
+color token names are unchanged, so `Danger` variants may still map to
+`ErrorDefault` or `ErrorMuted` tokens.
 
-| Before (Error/Default)                 | After (Danger/Neutral)                   | Notes     |
-| -------------------------------------- | ---------------------------------------- | --------- |
-| `AvatarIconSeverity.Error` (`'error'`) | `AvatarIconSeverity.Danger` (`'danger'`) | renamed   |
-| `TagSeverity.Error` (`'error'`)        | `TagSeverity.Danger` (`'danger'`)        | renamed   |
-| Any legacy `default`-like severities   | Use `Neutral` (`'neutral'`)              | canonical |
+| Before                                | After                                   | Notes                        |
+| ------------------------------------- | --------------------------------------- | ---------------------------- |
+| `AvatarIconSeverity.Error` (`error`)  | `AvatarIconSeverity.Danger` (`danger`)  | renamed public API value     |
+| `TagSeverity.Error` (`error`)         | `TagSeverity.Danger` (`danger`)         | renamed public API value     |
+| Any legacy default-like severity name | `Neutral` (`neutral`) where appropriate | canonical neutral vocabulary |
 
 #### Migration Example
 
@@ -1586,13 +1589,13 @@ The extension `avatar-icon` used a single `color` prop (text/icon colors). MMDS 
 
 #### Breaking Changes (Extension)
 
-| Extension API                    | MMDS API                                     | Change Type       | Notes                                                                                 |
-| -------------------------------- | -------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------- |
-| `iconName: IconName`             | `iconName: IconName`                         | unchanged         | same icon set                                                                         |
-| `iconProps`                      | `iconProps` (omit `name` from `IconProps`)   | typing tightened  | pass `Icon` overrides without repeating `name`                                        |
-| `color?: TextColor \| IconColor` | `severity?: AvatarIconSeverity`              | **replaced**      | `Neutral`, `Info`, `Success`, `Error`, `Warning` — not a 1:1 list with legacy `Color` |
-| `size` labels `xs`–`xl`          | `AvatarIconSize` (alias of `AvatarBaseSize`) | same string union | default `Md`                                                                          |
-| (no `severity` in extension)     | `AvatarIconSeverity`                         | new               | use instead of ad-hoc `color`                                                         |
+| Extension API                    | MMDS API                                     | Change Type       | Notes                                                                                  |
+| -------------------------------- | -------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------- |
+| `iconName: IconName`             | `iconName: IconName`                         | unchanged         | same icon set                                                                          |
+| `iconProps`                      | `iconProps` (omit `name` from `IconProps`)   | typing tightened  | pass `Icon` overrides without repeating `name`                                         |
+| `color?: TextColor \| IconColor` | `severity?: AvatarIconSeverity`              | **replaced**      | `Neutral`, `Info`, `Success`, `Danger`, `Warning` — not a 1:1 list with legacy `Color` |
+| `size` labels `xs`–`xl`          | `AvatarIconSize` (alias of `AvatarBaseSize`) | same string union | default `Md`                                                                           |
+| (no `severity` in extension)     | `AvatarIconSeverity`                         | new               | use instead of ad-hoc `color`                                                          |
 
 #### Migration Example
 
@@ -1625,7 +1628,7 @@ import {
 <AvatarIcon
   iconName={IconName.Eye}
   size={AvatarIconSize.Md}
-  severity={AvatarIconSeverity.Error}
+  severity={AvatarIconSeverity.Danger}
 />;
 ```
 
