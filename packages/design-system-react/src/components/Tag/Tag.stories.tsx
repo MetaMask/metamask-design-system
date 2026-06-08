@@ -1,8 +1,13 @@
-import { TagSeverity } from '@metamask/design-system-shared';
+import {
+  BoxAlignItems,
+  BoxFlexDirection,
+  TagSeverity,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { IconName } from '../../types';
+import { Box } from '../Box';
 
 import README from './README.mdx';
 import { Tag } from './Tag';
@@ -47,13 +52,17 @@ export const Default: Story = {
 
 export const Severity: Story = {
   render: () => (
-    <div className="flex flex-col items-start gap-2">
+    <Box
+      flexDirection={BoxFlexDirection.Column}
+      alignItems={BoxAlignItems.Start}
+      gap={2}
+    >
       <Tag severity={TagSeverity.Neutral}>Neutral</Tag>
       <Tag severity={TagSeverity.Success}>Success</Tag>
-      <Tag severity={TagSeverity.Error}>Error</Tag>
+      <Tag severity={TagSeverity.Danger}>Danger</Tag>
       <Tag severity={TagSeverity.Warning}>Warning</Tag>
       <Tag severity={TagSeverity.Info}>Info</Tag>
-    </div>
+    </Box>
   ),
 };
 

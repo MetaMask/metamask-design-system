@@ -48,8 +48,8 @@ export const Severity: Story = {
       <Tag severity={TagSeverity.Success} twClassName="mt-2">
         Success
       </Tag>
-      <Tag severity={TagSeverity.Error} twClassName="mt-2">
-        Error
+      <Tag severity={TagSeverity.Danger} twClassName="mt-2">
+        Danger
       </Tag>
       <Tag severity={TagSeverity.Warning} twClassName="mt-2">
         Warning
