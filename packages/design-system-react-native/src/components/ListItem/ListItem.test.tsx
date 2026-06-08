@@ -98,6 +98,19 @@ describe('ListItem', () => {
       expect(onPress).toHaveBeenCalledTimes(1);
     });
 
+    it('defaults accessibilityRole to button', () => {
+      const { getByTestId } = render(
+        <ListItem
+          isInteractive
+          title="Label"
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID).props.accessibilityRole).toBe('button');
+    });
+
     it('applies default padding on root Pressable', () => {
       const { getByTestId } = render(
         <ListItem

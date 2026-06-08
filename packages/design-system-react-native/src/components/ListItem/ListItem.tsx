@@ -39,7 +39,8 @@ export const ListItem: React.FC<ListItemProps> = ({
   subvalueProps,
   subvalueStartAccessory,
   subvalueEndAccessory,
-  ...wrapperRest
+  accessibilityRole,
+  ...props
 }) => {
   const tw = useTailwind();
 
@@ -94,7 +95,11 @@ export const ListItem: React.FC<ListItemProps> = ({
 
   if (isInteractive) {
     return (
-      <Pressable style={getPressableStyle} {...wrapperRest}>
+      <Pressable
+        accessibilityRole={accessibilityRole ?? 'button'}
+        style={getPressableStyle}
+        {...props}
+      >
         {content}
         {children}
       </Pressable>
@@ -102,7 +107,7 @@ export const ListItem: React.FC<ListItemProps> = ({
   }
 
   return (
-    <Box style={wrapperStyle} {...wrapperRest}>
+    <Box style={wrapperStyle} {...props}>
       {content}
       {children}
     </Box>
