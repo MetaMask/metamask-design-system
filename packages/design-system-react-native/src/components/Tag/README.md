@@ -20,7 +20,7 @@ Available values:
 
 - `TagSeverity.Neutral`
 - `TagSeverity.Success`
-- `TagSeverity.Error`
+- `TagSeverity.Danger`
 - `TagSeverity.Warning`
 - `TagSeverity.Info`
 
@@ -33,7 +33,7 @@ import { Tag } from '@metamask/design-system-react-native';
 import { TagSeverity } from '@metamask/design-system-shared';
 
 <Tag severity={TagSeverity.Success}>Success</Tag>
-<Tag severity={TagSeverity.Error}>Error</Tag>
+<Tag severity={TagSeverity.Danger}>Danger</Tag>
 ```
 
 ### `children`

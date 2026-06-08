@@ -853,6 +853,16 @@ The extension `banner-alert` maps directly to `BannerAlert` in the design system
 | `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
 | `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
 
+##### Severity Alignment (React & React Native)
+
+To standardize severity vocabularies across components:
+
+| Before (Error/Default)                 | After (Danger/Neutral)                   | Notes     |
+| -------------------------------------- | ---------------------------------------- | --------- |
+| `AvatarIconSeverity.Error` (`'error'`) | `AvatarIconSeverity.Danger` (`'danger'`) | renamed   |
+| `TagSeverity.Error` (`'error'`)        | `TagSeverity.Danger` (`'danger'`)        | renamed   |
+| Any legacy `default`-like severities   | Use `Neutral` (`'neutral'`)              | canonical |
+
 #### Migration Example
 
 ##### Before (Extension)

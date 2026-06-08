@@ -2328,6 +2328,17 @@ Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with s
 | `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
 | `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
 
+##### Severity Alignment (RN)
+
+To standardize severity vocabularies across components:
+
+| Before (Error/Default)                    | After (Danger/Neutral)                     | Notes       |
+| ----------------------------------------- | ------------------------------------------ | ----------- |
+| `IconAlertSeverity.Error` (`'error'`)     | `IconAlertSeverity.Danger` (`'danger'`)    | renamed     |
+| `AvatarIconSeverity.Error` (`'error'`)    | `AvatarIconSeverity.Danger` (`'danger'`)   | renamed     |
+| `TagSeverity.Error` (`'error'`)           | `TagSeverity.Danger` (`'danger'`)          | renamed     |
+| `Toast` icon severity `default` (if used) | `AvatarIconSeverity.Neutral` (`'neutral'`) | use Neutral |
+
 #### Migration Example
 
 ##### Before (Mobile)
