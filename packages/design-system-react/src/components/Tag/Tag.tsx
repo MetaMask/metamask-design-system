@@ -2,12 +2,12 @@ import {
   BoxAlignItems,
   BoxFlexDirection,
   FontWeight,
+  IconSize,
   TagSeverity,
   TextVariant,
 } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { IconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Box } from '../Box';
 import { Icon } from '../Icon';
