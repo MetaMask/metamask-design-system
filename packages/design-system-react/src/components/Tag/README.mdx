@@ -22,24 +22,280 @@ import { Tag } from '@metamask/design-system-react';
 
 Semantic emphasis for background, string child text color, and icons. Uses `TagSeverity` from `@metamask/design-system-shared`.
 
-<Controls of={TagStories.Default} />
+Available values:
+
+- `TagSeverity.Neutral`
+- `TagSeverity.Success`
+- `TagSeverity.Danger`
+- `TagSeverity.Warning`
+- `TagSeverity.Info`
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TagSeverity</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TagSeverity.Neutral</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TagStories.Severity} />
 
 ### `children`
 
 Main content. String children use `Text` (`BodyXs`, medium weight, severity-based color). Other React nodes render as-is.
 
-### `startIconName` / `endIconName`
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-Optional `IconName` for icons at the start or end (`IconSize.Xs` by default). Use `startIconProps` / `endIconProps` for overrides (including `name` instead of `startIconName` / `endIconName`).
+<Canvas of={TagStories.Default} />
 
-### `startAccessory` / `endAccessory`
+### `startIconName`
 
-Custom nodes when no start/end icon name is resolved.
+Optional `IconName` for an icon at the start of the tag (`IconSize.Xs` by default). When set, it takes precedence over `startAccessory`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TagStories.StartIconName} />
+
+### `startIconProps`
+
+Optional props forwarded to the start `Icon`. You may set `name` here instead of `startIconName`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;IconProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `endIconName`
+
+Optional `IconName` for an icon at the end of the tag (`IconSize.Xs` by default). When set, it takes precedence over `endAccessory`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TagStories.EndIconName} />
+
+### `endIconProps`
+
+Optional props forwarded to the end `Icon`. You may set `name` here instead of `endIconName`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;IconProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `startAccessory`
+
+Custom node at the start of the tag when no start icon is resolved from `startIconName` or `startIconProps.name`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TagStories.StartAccessory} />
+
+### `endAccessory`
+
+Custom node at the end of the tag when no end icon is resolved from `endIconName` or `endIconProps.name`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TagStories.EndAccessory} />
 
 ### `className`
 
-Optional CSS classes merged onto the tag container via `twMerge`.
+Use the `className` prop to add custom CSS classes to the tag container. These classes are merged with the component's default classes using `twMerge`, allowing you to add new styles or override defaults when needed.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Other `div` props
 
 Standard HTML attributes (`data-testid`, `aria-*`, etc.) are forwarded to the root `Box`.
+
+## Component API
+
+<Controls of={TagStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
