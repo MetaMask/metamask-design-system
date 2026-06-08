@@ -2334,6 +2334,20 @@ Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with s
 | `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
 | `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
 
+##### Severity Alignment
+
+The public severity APIs now use `Danger` instead of `Error` for destructive
+or critical states, and `Neutral` instead of any default-like severity. Internal
+color token names are unchanged, so `Danger` variants may still map to
+`ErrorDefault` or `ErrorMuted` tokens.
+
+| Before                                | After                                   | Notes                        |
+| ------------------------------------- | --------------------------------------- | ---------------------------- |
+| `IconAlertSeverity.Error` (`error`)   | `IconAlertSeverity.Danger` (`danger`)   | renamed public API value     |
+| `AvatarIconSeverity.Error` (`error`)  | `AvatarIconSeverity.Danger` (`danger`)  | renamed public API value     |
+| `TagSeverity.Error` (`error`)         | `TagSeverity.Danger` (`danger`)         | renamed public API value     |
+| Any legacy default-like severity name | `Neutral` (`neutral`) where appropriate | canonical neutral vocabulary |
+
 #### Migration Example
 
 ##### Before (Mobile)
