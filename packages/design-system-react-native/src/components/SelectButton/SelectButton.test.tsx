@@ -1,4 +1,7 @@
 import {
+  IconColor,
+  IconName,
+  IconSize,
   SelectButtonEndArrow,
   SelectButtonVariant,
   TextColor,
@@ -8,7 +11,6 @@ import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { IconColor, IconName, IconSize } from '../../types';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
 import { SelectButton } from './SelectButton';

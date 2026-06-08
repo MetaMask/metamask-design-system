@@ -91,7 +91,7 @@ export const Severity: Story = {
         description={SAMPLE_DESCRIPTION}
       />
       <TitleAlert
-        severity={IconAlertSeverity.Error}
+        severity={IconAlertSeverity.Danger}
         title="Error title"
         description={SAMPLE_DESCRIPTION}
       />
@@ -102,7 +102,7 @@ export const Severity: Story = {
 export const Title: Story = {
   render: () => (
     <TitleAlert
-      severity={IconAlertSeverity.Error}
+      severity={IconAlertSeverity.Danger}
       title={<Text>Custom title node</Text>}
       description={SAMPLE_DESCRIPTION}
     />

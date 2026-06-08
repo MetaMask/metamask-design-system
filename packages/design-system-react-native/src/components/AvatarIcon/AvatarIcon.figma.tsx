@@ -33,7 +33,7 @@ figma.connect(
         neutral: AvatarIconSeverity.Neutral,
         info: AvatarIconSeverity.Info,
         success: AvatarIconSeverity.Success,
-        error: AvatarIconSeverity.Error,
+        danger: AvatarIconSeverity.Danger,
         warning: AvatarIconSeverity.Warning,
       }),
     },

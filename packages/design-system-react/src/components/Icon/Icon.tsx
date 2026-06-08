@@ -1,6 +1,6 @@
+import { IconSize, IconColor } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { IconSize, IconColor } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';

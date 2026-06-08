@@ -109,8 +109,11 @@ export {
 // Button types (ADR-0003 + ADR-0004)
 export { ButtonVariant, type ButtonPropsShared } from './types/Button';
 
-// AvatarNetwork types (ADR-0004)
-export { type AvatarNetworkPropsShared } from './types/AvatarNetwork';
+// AvatarNetwork types (ADR-0003 + ADR-0004)
+export {
+  AvatarNetworkSize,
+  type AvatarNetworkPropsShared,
+} from './types/AvatarNetwork';
 
 // AvatarToken types (ADR-0003 + ADR-0004)
 export {
