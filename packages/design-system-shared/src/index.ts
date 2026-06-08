@@ -160,6 +160,9 @@ export {
   type TextPropsShared,
 } from './types/Text';
 
+// TextButton types (ADR-0004)
+export { type TextButtonPropsShared } from './types/TextButton';
+
 // TextField types (ADR-0004)
 export { type TextFieldPropsShared } from './types/TextField';
 

@@ -4,298 +4,76 @@ import * as TextButtonStories from './TextButton.stories';
 
 # TextButton
 
-TextButton is used for text-only button actions or hyperlink without padding or background.
+Use `TextButton` for links placed **inline with text**. It is text-only and is not meant to carry start or end icons. If you need icons with the label, use [`Button`](../Button/README.mdx) with `variant={ButtonVariant.Tertiary}` instead.
+
+Pass `onClick` to handle interaction.
 
 ```tsx
 import { TextButton } from '@metamask/design-system-react';
 
-<TextButton onClick={() => {}}>Text Button</TextButton>;
+<TextButton onClick={() => console.log('Clicked')}>Click me</TextButton>;
 ```
 
 <Canvas of={TextButtonStories.Default} />
 
 ## Props
 
-### `size`
-
-TextButton supports different sizes through the `size` prop.
-
-Available sizes:
-
-- `TextButtonSize.BodyXs`
-- `TextButtonSize.BodySm`
-- `TextButtonSize.BodyMd`
-- `TextButtonSize.BodyLg`
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>TextButtonSize</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>TextButtonSize.BodyMd</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={TextButtonStories.Size} />
-
 ### `children`
 
-The content of the TextButton component.
+Content for the label.
 
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>ReactNode</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| TYPE              | REQUIRED | DEFAULT     |
+| ----------------- | -------- | ----------- |
+| `React.ReactNode` | Yes      | `undefined` |
 
-### `asChild`
+### `onClick`
 
-TextButton can render as different elements using the `asChild` prop. Defaults to rendering as a `button` element.
+Called when the user clicks the label. Primary interaction for this component.
 
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>boolean</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>false</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| TYPE                                  | REQUIRED | DEFAULT     |
+| ------------------------------------- | -------- | ----------- |
+| `ComponentProps<'button'>['onClick']` | No       | `undefined` |
 
-<Canvas of={TextButtonStories.AsChild} />
+### `variant`
 
-### `isInverse`
+Typography variant. Defaults to `TextVariant.BodyMd`.
 
-Use the inverse variant when the button needs to be displayed on a dark background.
+| TYPE          | REQUIRED | DEFAULT              |
+| ------------- | -------- | -------------------- |
+| `TextVariant` | No       | `TextVariant.BodyMd` |
 
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>boolean</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>false</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<Canvas of={TextButtonStories.Variant} />
 
-<Canvas of={TextButtonStories.IsInverse} />
+### `fontWeight`
 
-### `startIconName`
+TextButton defaults to `FontWeight.Medium`.
 
-TextButton can display an icon at the start of the content.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>IconName</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={TextButtonStories.StartIconName} />
-
-### `endIconName`
-
-TextButton can display an icon at the end of the content.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>IconName</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={TextButtonStories.EndIconName} />
-
-### `isDisabled`
-
-TextButton can be disabled.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>boolean</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>false</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={TextButtonStories.IsDisabled} />
-
-### `textVariant`
-
-The text variant for the button content.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>TextVariant</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| TYPE         | REQUIRED | DEFAULT             |
+| ------------ | -------- | ------------------- |
+| `FontWeight` | No       | `FontWeight.Medium` |
 
 ### `className`
 
-Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Additional classes merged into the label.
 
-- Add new styles that don't exist in the default component
-- Override the component's default styles when needed
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>string</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ### `style`
 
-The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+Inline styles for the label. Prefer design-token classes when possible.
 
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>object</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
+| `React.CSSProperties` | No       | `undefined` |
 
-## Component API
+Other web `button` props and shared [`Text`](../Text/README.mdx) typography props are supported via `TextButtonProps`.
+
+<Canvas of={TextButtonStories.InlineWithText} />
+
+## Migration
+
+The React `TextButton` API is aligned with the React Native text-only API. Removed props include `size`, `TextButtonSize`, `isInverse`, `isDisabled`, `asChild`, `textProps`, start/end icons, and accessories. Use `variant` with `TextVariant` instead of `size`; use tertiary `Button` for disabled, inverse, icon, or anchor-style patterns.
 
 <Controls of={TextButtonStories.Default} />
-
-## Migration Guide
-
-Migrating from `ui/components/component-library/button-link` (or `Button` with `variant={ButtonVariant.Link}`) in MetaMask Extension? See the [TextButton Migration Guide](../../../MIGRATION.md#textbutton-component-from-buttonlink) for prop mappings, before/after examples, and guidance on when to reach for `Button` with `variant={ButtonVariant.Tertiary}` instead.
-
-## References
-
-[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

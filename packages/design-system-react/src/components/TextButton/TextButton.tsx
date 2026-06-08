@@ -1,59 +1,61 @@
+import {
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { TextButtonSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
-import { ButtonBase } from '../ButtonBase';
+import { Text } from '../Text';
 
-import { MAP_TEXTBUTTON_SIZE_TEXTVARIANT } from './TextButton.constants';
 import type { TextButtonProps } from './TextButton.types';
 
 export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
   (
     {
+      children,
       className,
-      isInverse,
-      isDisabled,
-      size = TextButtonSize.BodyMd,
-      textProps,
-      ...props
+      variant = TextVariant.BodyMd,
+      fontWeight = FontWeight.Medium,
+      fontFamily,
+      fontStyle,
+      textTransform,
+      textAlign,
+      overflowWrap,
+      ellipsis,
+      style,
+      onClick,
+      type = 'button',
+      ...rest
     },
     ref,
   ) => {
     const mergedClassName = twMerge(
-      // Reset padding, height and animations
-      'h-auto rounded-none bg-transparent px-0',
-      'transform-none transition-none active:scale-100',
-      // Default text button styles
-      !isInverse && 'text-primary-default',
-      // Inverse styles
-      isInverse && 'text-primary-inverse',
-      // Hover/Active states - only applied when interactive
-      !isDisabled && [
-        !isInverse && [
-          'hover:text-primary-default-hover hover:underline hover:decoration-primary-default-hover hover:decoration-2 hover:underline-offset-4',
-          'active:text-primary-default-pressed active:decoration-primary-default-pressed',
-        ],
-        isInverse && [
-          'hover:text-primary-inverse hover:underline hover:decoration-primary-inverse hover:decoration-2 hover:underline-offset-4',
-          'active:text-primary-inverse active:decoration-primary-inverse',
-        ],
-      ],
-      // Disabled styles
-      isDisabled && ['opacity-50', 'cursor-not-allowed'],
+      'inline cursor-pointer appearance-none border-0 bg-transparent p-0 text-primary-default',
+      'hover:text-primary-default-hover hover:underline hover:decoration-primary-default-hover hover:decoration-2 hover:underline-offset-4',
+      'active:text-primary-default-pressed active:decoration-primary-default-pressed',
       className,
     );
 
     return (
-      <ButtonBase
-        ref={ref}
+      <Text
+        asChild
+        variant={variant}
+        fontWeight={fontWeight}
+        fontFamily={fontFamily}
+        fontStyle={fontStyle}
+        textTransform={textTransform}
+        textAlign={textAlign}
+        overflowWrap={overflowWrap}
+        ellipsis={ellipsis}
+        color={TextColor.PrimaryDefault}
         className={mergedClassName}
-        isDisabled={isDisabled}
-        textProps={{
-          variant: MAP_TEXTBUTTON_SIZE_TEXTVARIANT[size],
-          ...textProps,
-        }}
-        {...props}
-      />
+        style={style}
+      >
+        <button ref={ref} type={type} onClick={onClick} {...rest}>
+          {children}
+        </button>
+      </Text>
     );
   },
 );
