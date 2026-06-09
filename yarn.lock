@@ -3250,7 +3250,6 @@ __metadata:
     "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
-    "@metamask/design-tokens": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
     "@metamask/utils": "npm:^11.11.0"
     "@radix-ui/react-slot": "npm:^1.1.0"
