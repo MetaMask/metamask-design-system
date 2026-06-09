@@ -3222,7 +3222,7 @@ __metadata:
     react-native-safe-area-context: "npm:~5.6.0"
     react-native-svg: "npm:15.12.1"
     react-native-svg-transformer: "npm:^1.5.3"
-    react-native-worklets: "npm:0.8.3"
+    react-native-worklets: "patch:react-native-worklets@npm%3A0.8.3#~/.yarn/patches/react-native-worklets-npm-0.8.3-89f34099cb.patch"
     react-test-renderer: "npm:19.1.0"
     ts-jest: "npm:^29.2.5"
     tsx: "npm:^4.20.6"
@@ -3545,7 +3545,7 @@ __metadata:
     react-native-svg: "npm:15.12.1"
     react-native-svg-transformer: "npm:^1.5.3"
     react-native-web: "npm:^0.21.0"
-    react-native-worklets: "npm:0.8.3"
+    react-native-worklets: "patch:react-native-worklets@npm%3A0.8.3#~/.yarn/patches/react-native-worklets-npm-0.8.3-89f34099cb.patch"
     storybook: "npm:10.4.2"
     typescript: "npm:~5.2.2"
     vite: "npm:^8.0.14"
@@ -14697,6 +14697,30 @@ __metadata:
     react: "*"
     react-native: 0.81 - 0.85
   checksum: 10/7b200ec7f0a909e3fc4294721d5dc78e10beb5cb6280a3398dbd7df47db77f8130e605c475768659110b0a7355f4361ea9e85cac40176157d622b4b2060e447a
+  languageName: node
+  linkType: hard
+
+"react-native-worklets@patch:react-native-worklets@npm%3A0.8.3#~/.yarn/patches/react-native-worklets-npm-0.8.3-89f34099cb.patch":
+  version: 0.8.3
+  resolution: "react-native-worklets@patch:react-native-worklets@npm%3A0.8.3#~/.yarn/patches/react-native-worklets-npm-0.8.3-89f34099cb.patch::version=0.8.3&hash=002884"
+  dependencies:
+    "@babel/plugin-transform-arrow-functions": "npm:^7.27.1"
+    "@babel/plugin-transform-class-properties": "npm:^7.27.1"
+    "@babel/plugin-transform-classes": "npm:^7.28.4"
+    "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.27.1"
+    "@babel/plugin-transform-optional-chaining": "npm:^7.27.1"
+    "@babel/plugin-transform-shorthand-properties": "npm:^7.27.1"
+    "@babel/plugin-transform-template-literals": "npm:^7.27.1"
+    "@babel/plugin-transform-unicode-regex": "npm:^7.27.1"
+    "@babel/preset-typescript": "npm:^7.27.1"
+    convert-source-map: "npm:^2.0.0"
+    semver: "npm:^7.7.3"
+  peerDependencies:
+    "@babel/core": "*"
+    "@react-native/metro-config": "*"
+    react: "*"
+    react-native: 0.81 - 0.85
+  checksum: 10/3de3ba269f75968aea32312105a1034996063089bc94e730be42482e939508b70a8f642c14279313fb8ec1b51e02cb80819213ede62a066cdf02e594005f6a84
   languageName: node
   linkType: hard
 

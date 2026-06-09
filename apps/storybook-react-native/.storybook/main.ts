@@ -26,7 +26,7 @@ const config: StorybookConfig = {
       modulesToTranspile: ['react-native-reanimated', 'react-native-worklets'],
       pluginReactOptions: {
         babel: {
-          plugins: ['react-native-worklets/plugin'],
+          plugins: [['react-native-worklets/plugin', { disableSourceMaps: true }]],
         },
       },
     },

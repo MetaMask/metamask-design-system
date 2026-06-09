@@ -76,7 +76,8 @@
     "elliptic@6.5.4": "^6.5.7",
     "fast-xml-parser@^4.3.4": "^4.4.1",
     "send": "^0.19.0",
-    "ws@7.4.6": "^7.5.10"
+    "ws@7.4.6": "^7.5.10",
+    "react-native-worklets@npm:0.8.3": "patch:react-native-worklets@npm%3A0.8.3#~/.yarn/patches/react-native-worklets-npm-0.8.3-89f34099cb.patch"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
