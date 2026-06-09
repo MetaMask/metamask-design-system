@@ -9,9 +9,6 @@ jobs:
   build:
     name: Build Storybook
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: apps/storybook-react
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
@@ -20,13 +17,24 @@ jobs:
           skip-allow-scripts: true
 
       - name: Build required packages
-        working-directory: .
         run: yarn build
 
-      - name: Build Storybook
+      - name: Build React Storybook
+        working-directory: apps/storybook-react
         run: |
           yarn build-storybook
           touch storybook-static/.nojekyll
+
+      - name: Build React Native web Storybook
+        working-directory: apps/storybook-react-native
+        env:
+          NODE_ENV: production
+        run: yarn build-storybook --output-dir rn-storybook-static
+
+      - name: Nest React Native Storybook under /react-native
+        run: |
+          mkdir -p apps/storybook-react/storybook-static/react-native
+          cp -r apps/storybook-react-native/rn-storybook-static/. apps/storybook-react/storybook-static/react-native/
 
       - name: Upload artifact
         id: upload
