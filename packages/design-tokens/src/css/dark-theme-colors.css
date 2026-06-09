@@ -161,3 +161,163 @@
   /* For critical/danger drop shadow color (#ff758433) */
   --color-shadow-error: #ff758433;
 }
+
+/* Dark theme based on system preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]):not(.dark):not(.light) {
+    /* For default neutral surface (#121314) */
+    --color-background-default: var(--brand-colors-grey-grey900);
+    /* For sunken neutral surface below background/default (#000000) */
+    --color-background-alternative: var(--brand-colors-grey-grey1000);
+    /* For section bg usually over background/default (#202123) */
+    --color-background-section: var(--brand-colors-grey-grey800);
+    /* For subsection bg usually over background/section (#2A2C32) */
+    --color-background-subsection: var(--brand-colors-grey-grey700);
+    /* For muted neutral surface (#E0E5FF14) */
+    --color-background-muted: #e0e5ff14;
+    /* Hover state surface for background/default (#1a1b1c) */
+    --color-background-default-hover: #1a1b1c;
+    /* Pressed state surface for background/default (#222424) */
+    --color-background-default-pressed: #222424;
+    /* Hover state surface for background/alternative (#0d0d0e) */
+    --color-background-alternative-hover: #0d0d0e;
+    /* Pressed state surface for background/alternative (#161617) */
+    --color-background-alternative-pressed: #161617;
+    /* Hover state surface for background/muted (#E0E5FF26) */
+    --color-background-muted-hover: #e0e5ff26;
+    /* Pressed state surface for background/muted (#E0E5FF33) */
+    --color-background-muted-pressed: #e0e5ff33;
+    /* General purpose hover state tint (#dadce50a) */
+    --color-background-hover: #dadce50a;
+    /* General purpose pressed state tint (#dadce514) */
+    --color-background-pressed: #dadce514;
+    /* Default color for text (#ffffff) */
+    --color-text-default: var(--brand-colors-grey-grey000);
+    /* Softer color for text (#858b9a) */
+    --color-text-alternative: var(--brand-colors-grey-grey300);
+    /* Muted color for text (Not accessible) (#686e7d) */
+    --color-text-muted: var(--brand-colors-grey-grey600);
+    /* Default color for icons (#ffffff) */
+    --color-icon-default: var(--brand-colors-grey-grey000);
+    /* Hover state surface for icon.default (#f0f0f0) */
+    --color-icon-default-hover: #f0f0f0;
+    /* Pressed state surface for icon.default (#d0d0d0) */
+    --color-icon-default-pressed: #d0d0d0;
+    /* Softer color for icons (#858b9a) */
+    --color-icon-alternative: var(--brand-colors-grey-grey300);
+    /* Muted color for icons (Not accessible) (#686e7d) */
+    --color-icon-muted: var(--brand-colors-grey-grey600);
+    /* For elements placed on top of icon.default fill (#121314) */
+    --color-icon-inverse: var(--brand-colors-grey-grey900);
+    /* Default color for borders (#9ca1af) */
+    --color-border-default: var(--brand-colors-grey-grey400);
+    /* Muted color for borders (#858b9a33) */
+    --color-border-muted: #858b9a33;
+    /* Default color for overlays (scrim) (#00000099) */
+    --color-overlay-default: #00000099;
+    /* Dimmer color for overlays (scrim) (black-80%) */
+    --color-overlay-alternative: #000000cc;
+    /* For elements placed on top of overlay/alternative (#ffffff) */
+    --color-overlay-inverse: var(--brand-colors-grey-grey000);
+    /* For primary semantic elements: interactive, active, selected (#8b99ff) */
+    --color-primary-default: var(--brand-colors-blue-blue300);
+    /* Stronger color for primary semantic elements (#adb6fe) */
+    --color-primary-alternative: var(--brand-colors-blue-blue200);
+    /* Muted color for primary semantic elements (#8b99ff26) */
+    --color-primary-muted: #8b99ff26;
+    /* For elements placed on top of primary/default (#121314) */
+    --color-primary-inverse: var(--brand-colors-grey-grey900);
+    /* Hover state surface for primary/default (#9eaaff) */
+    --color-primary-default-hover: #9eaaff;
+    /* Pressed state surface for primary/default (#c7ceff) */
+    --color-primary-default-pressed: #c7ceff;
+    /* Hover state surface for primary/muted (#8b99ff33) */
+    --color-primary-muted-hover: #8b99ff33;
+    /* Pressed state surface for primary/muted (#8b99ff40) */
+    --color-primary-muted-pressed: #8b99ff40;
+    /* For danger semantic elements: error, critical, destructive (#ff7584) */
+    --color-error-default: var(--brand-colors-red-red300);
+    /* Stronger color for error semantic (#ffa1aa) */
+    --color-error-alternative: var(--brand-colors-red-red200);
+    /* Muted color for error semantic (#ff758426) */
+    --color-error-muted: #ff758426;
+    /* For elements placed on top of error/default (#121314) */
+    --color-error-inverse: var(--brand-colors-grey-grey900);
+    /* Hover state surface for error/default (#ff8a96) */
+    --color-error-default-hover: #ff8a96;
+    /* Pressed state surface for error/default (#ffb2bb) */
+    --color-error-default-pressed: #ffb2bb;
+    /* Hover state surface for error/muted (#ff758433) */
+    --color-error-muted-hover: #ff758433;
+    /* Pressed state surface for error/muted (#ff758440) */
+    --color-error-muted-pressed: #ff758440;
+    /* For warning semantic elements: caution, attention, precaution (#f0b034) */
+    --color-warning-default: var(--brand-colors-yellow-yellow200);
+    /* Muted color option for warning semantic (#f0b03426) */
+    --color-warning-muted: #f0b03426;
+    /* For elements placed on top of warning/default (#121314) */
+    --color-warning-inverse: var(--brand-colors-grey-grey900);
+    /* Hover state surface for warning/default (#f3be59) */
+    --color-warning-default-hover: #f3be59;
+    /* Pressed state surface for warning/default (#f6cd7f) */
+    --color-warning-default-pressed: #f6cd7f;
+    /* Hover state surface for warning/muted (#f0b03433) */
+    --color-warning-muted-hover: #f0b03433;
+    /* Pressed state surface for warning/muted (#f0b03440) */
+    --color-warning-muted-pressed: #f0b03440;
+    /* For positive semantic elements: success, confirm, complete, safe (#baf24a) */
+    --color-success-default: var(--brand-colors-lime-lime100);
+    /* Muted color for positive semantic (#baf24a26) */
+    --color-success-muted: #baf24a26;
+    /* For elements placed on top of success/default (#121314) */
+    --color-success-inverse: var(--brand-colors-grey-grey900);
+    /* Hover state surface for success/default (#c9f570) */
+    --color-success-default-hover: #c9f570;
+    /* Pressed state surface for success/default (#d7f796) */
+    --color-success-default-pressed: #d7f796;
+    /* Hover state surface for success/muted (#baf24a33) */
+    --color-success-muted-hover: #baf24a33;
+    /* Pressed state surface for success/muted (#baf24a40) */
+    --color-success-muted-pressed: #baf24a40;
+    /* For informational read-only elements: info, reminder, hint (#8b99ff) */
+    --color-info-default: var(--brand-colors-blue-blue300);
+    /* Muted color for informational semantic (#8b99ff26) */
+    --color-info-muted: #8b99ff26;
+    /* For elements placed on top of info/default (#121314) */
+    --color-info-inverse: var(--brand-colors-grey-grey900);
+    /* Expressive color in light orange (#ffa680) */
+    --color-accent01-light: var(--brand-colors-orange-orange200);
+    /* Expressive color in orange (#ff5c16) */
+    --color-accent01-normal: var(--brand-colors-orange-orange400);
+    /* Expressive color in dark orange (#661800) */
+    --color-accent01-dark: var(--brand-colors-orange-orange700);
+    /* Expressive color in light purple (#eac2ff) */
+    --color-accent02-light: var(--brand-colors-purple-purple100);
+    /* Expressive color in purple (#d075ff) */
+    --color-accent02-normal: var(--brand-colors-purple-purple300);
+    /* Expressive color in dark purple (#3d065f) */
+    --color-accent02-dark: var(--brand-colors-purple-purple800);
+    /* Expressive color in light lime (#e5ffc3) */
+    --color-accent03-light: var(--brand-colors-lime-lime050);
+    /* Expressive color in lime (#baf24a) */
+    --color-accent03-normal: var(--brand-colors-lime-lime100);
+    /* Expressive color in dark lime (#013330) */
+    --color-accent03-dark: var(--brand-colors-lime-lime700);
+    /* Expressive color in light indigo (#cce7ff) */
+    --color-accent04-light: var(--brand-colors-indigo-indigo100);
+    /* Expressive color in indigo (#89b0ff) */
+    --color-accent04-normal: var(--brand-colors-indigo-indigo200);
+    /* Expressive color in dark indigo (#190066) */
+    --color-accent04-dark: var(--brand-colors-indigo-indigo800);
+    /* For Flask primary accent color (#d27dff) */
+    --color-flask-default: var(--brand-colors-purple-purple300);
+    /* For elements placed on top of flask/default (#121314) */
+    --color-flask-inverse: var(--brand-colors-grey-grey900);
+    /* For neutral drop shadow color (black-40%) */
+    --color-shadow-default: #00000066;
+    /* For primary drop shadow color (#8b99ff33) */
+    --color-shadow-primary: #8b99ff33;
+    /* For critical/danger drop shadow color (#ff758433) */
+    --color-shadow-error: #ff758433;
+  }
+}
