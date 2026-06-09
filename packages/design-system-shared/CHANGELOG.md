@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: Align React TextButton with React Native API ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
+- chore: use shared avatar types ([#1225](https://github.com/MetaMask/metamask-design-system/pull/1225))
+- chore: Align severity API: Error→Danger, Default→Neutral across components ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+- feat: [DSRN] Added ListItem ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
+- feat(react): Toast component with Toaster and imperative toast() API ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+
 ## [0.21.0]
 
 ### Added

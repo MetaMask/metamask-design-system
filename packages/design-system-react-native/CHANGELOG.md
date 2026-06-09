@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: Align React TextButton with React Native API ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
+- chore: use shared avatar types ([#1225](https://github.com/MetaMask/metamask-design-system/pull/1225))
+- chore: points icon imports to shared ([#1223](https://github.com/MetaMask/metamask-design-system/pull/1223))
+- chore: Align severity API: Error→Danger, Default→Neutral across components ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+- chore: [DSYS-616] create/update Badge primitive migration docs ([#1148](https://github.com/MetaMask/metamask-design-system/pull/1148))
+- feat: [DSRN] Added ListItem ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
+- chore: Enable Storybook web for storybook-react-native ([#1134](https://github.com/MetaMask/metamask-design-system/pull/1134))
+- feat(react): Toast component with Toaster and imperative toast() API ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+
 ## [0.28.0]
 
 ### Added
