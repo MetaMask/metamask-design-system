@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added `ListItemPropsShared` and related shared types for cross-platform `ListItem` support ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
-- Added `ToastPropsShared`, `ToastSeverity`, and related shared types for cross-platform `Toast` support ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+- Added `ToastPropsShared`, `ToastSeverity`, and `Toast` animation constants to shared package, consolidating the Toast type definitions used by React and React Native ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
 - Added `TextButtonPropsShared` to align `TextButton` API across React and React Native ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
 - Added `AvatarNetworkSize` as a named export from the shared package ([#1225](https://github.com/MetaMask/metamask-design-system/pull/1225))
 
