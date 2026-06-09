@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.29.0]
+
+### Added
+
+- Added `ListItem` component for list row layouts ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
+
+### Changed
+
+- **BREAKING:** `AvatarIconSeverity.Error`, `IconAlertSeverity.Error`, and `TagSeverity.Error` renamed to `.Danger`; severity vocabulary standardized to use `Danger` for destructive/critical states and `Neutral` for default states ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+  - See [Migration Guide](./MIGRATION.md#from-version-0280-to-0290)
+
 ## [0.28.0]
 
 ### Added
@@ -481,7 +492,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.28.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.29.0...HEAD
+[0.29.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.28.0...@metamask/design-system-react-native@0.29.0
 [0.28.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.27.0...@metamask/design-system-react-native@0.28.0
 [0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.26.0...@metamask/design-system-react-native@0.27.0
 [0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.25.0...@metamask/design-system-react-native@0.26.0

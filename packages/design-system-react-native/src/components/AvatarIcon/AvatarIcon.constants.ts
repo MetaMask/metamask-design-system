@@ -13,7 +13,7 @@ export const TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR: Record<
   [AvatarIconSeverity.Neutral]: 'bg-muted',
   [AvatarIconSeverity.Info]: 'bg-info-muted',
   [AvatarIconSeverity.Success]: 'bg-success-muted',
-  [AvatarIconSeverity.Error]: 'bg-error-muted',
+  [AvatarIconSeverity.Danger]: 'bg-error-muted',
   [AvatarIconSeverity.Warning]: 'bg-warning-muted',
 };
 export const MAP_AVATARICON_SIZE_ICONSIZE: Record<AvatarIconSize, IconSize> = {
@@ -30,6 +30,6 @@ export const MAP_AVATARICON_SEVERITY_ICONCOLOR: Record<
   [AvatarIconSeverity.Neutral]: IconColor.IconAlternative,
   [AvatarIconSeverity.Info]: IconColor.InfoDefault,
   [AvatarIconSeverity.Success]: IconColor.SuccessDefault,
-  [AvatarIconSeverity.Error]: IconColor.ErrorDefault,
+  [AvatarIconSeverity.Danger]: IconColor.ErrorDefault,
   [AvatarIconSeverity.Warning]: IconColor.WarningDefault,
 };

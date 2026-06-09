@@ -1,63 +1,19 @@
-import type { ReactNode } from 'react';
-import type { ViewProps } from 'react-native';
+import type { ListItemPropsShared } from '@metamask/design-system-shared';
+import type { PressableProps } from 'react-native';
 
-/**
- * Vertical alignment options for children inside the ListItem row.
- */
-export const ListItemVerticalAlignment = {
-  Top: 'top',
-  Center: 'center',
-  Bottom: 'bottom',
-} as const;
+import type { BoxProps } from '../Box/Box.types';
+import type { ContentProps } from '../Content/Content.types';
 
-export type ListItemVerticalAlignment =
-  (typeof ListItemVerticalAlignment)[keyof typeof ListItemVerticalAlignment];
+type ListItemPropsBase = ListItemPropsShared & ContentProps;
 
 /**
  * ListItem component props.
  *
- * Extends `ViewProps` so the root View inherits standard React Native
- * props such as `testID` and `accessibilityLabel`.
+ * Wraps {@link Content} in a padded root (`px-4 py-3`). When `isInteractive` is
+ * `false` (default), the root is a `Box`; when `true`, the root is a `Pressable`.
  */
-export type ListItemProps = {
-  /**
-   * Content to display inside the list item row.
-   */
-  children?: ReactNode;
-  /**
-   * Optional content displayed above the list item row.
-   */
-  topAccessory?: ReactNode;
-  /**
-   * Optional content displayed below the list item row.
-   */
-  bottomAccessory?: ReactNode;
-  /**
-   * Gap in pixels between the topAccessory and the row.
-   *
-   * @default 0
-   */
-  topAccessoryGap?: number;
-  /**
-   * Gap in pixels between the row and the bottomAccessory.
-   *
-   * @default 0
-   */
-  bottomAccessoryGap?: number;
-  /**
-   * Horizontal spacing between each child inside the row.
-   *
-   * @default 16
-   */
-  gap?: number | string;
-  /**
-   * Vertical alignment of children inside the row.
-   *
-   * @default ListItemVerticalAlignment.Center
-   */
-  verticalAlignment?: ListItemVerticalAlignment;
-  /**
-   * Optional Tailwind class names to override default styles on the root element.
-   */
-  twClassName?: string;
-} & ViewProps;
+export type ListItemProps =
+  | (ListItemPropsBase & { isInteractive?: false } & Omit<BoxProps, 'children'>)
+  | (ListItemPropsBase & {
+      isInteractive: true;
+    } & Omit<PressableProps, 'children'>);

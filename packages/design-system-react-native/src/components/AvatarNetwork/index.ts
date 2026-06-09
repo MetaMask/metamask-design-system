@@ -1,3 +1,3 @@
-export { AvatarNetworkSize } from '../../types';
+export { AvatarNetworkSize } from '@metamask/design-system-shared';
 export { AvatarNetwork } from './AvatarNetwork';
 export type { AvatarNetworkProps } from './AvatarNetwork.types';

@@ -1,9 +1,12 @@
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
+import {
+  BoxBackgroundColor,
+  IconColor,
+  IconName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconColor, IconName } from '../../types';
 import { BannerBase } from '../BannerBase';
 
 import { BannerAlert } from './BannerAlert';

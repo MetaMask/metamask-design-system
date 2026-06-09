@@ -58,13 +58,13 @@ const Demo = () => {
 };
 ```
 
-`<Toaster />` must be rendered exactly once. On mount it registers the `toast(...)` / `toast.dismiss()` API so it can be called from anywhere in your app.
+`<Toaster />` must be rendered exactly once. It subscribes to the `toast(...)` / `toast.dismiss()` API so it can be called from anywhere in your app, including before `<Toaster />` mounts.
 
 Call `toast.dismiss()` to dismiss the currently visible toast.
 
 Use `closeButtonProps` to access the close button element when you need to set a `data-testid` or override its accessibility label. With the `toast(...)` / `<Toaster />` flow the close button is shown because `<Toaster />` wires `onClose` internally; for direct `<Toast />` rendering, provide `onClose` to render it.
 
-`toast(...)` and `toast.dismiss()` throw a descriptive error if called before `<Toaster />` is mounted.
+If `toast(...)` is called before `<Toaster />` mounts, the latest toast renders after mount. If `toast.dismiss()` is called before mount, it clears the pending toast.
 
 ### `title`
 

@@ -1,197 +1,272 @@
-import { render } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
 
-import { ListItem } from './ListItem';
-import {
-  DEFAULT_LISTITEM_GAP,
-  TESTID_LISTITEM_BOTTOM_ACCESSORY_WRAPPER,
-  TESTID_LISTITEM_GAP,
-  TESTID_LISTITEM_TOP_ACCESSORY_WRAPPER,
-} from './ListItem.constants';
-import { ListItemVerticalAlignment } from './ListItem.types';
+import { ListItem } from '.';
+
+const ROOT_TEST_ID = 'listitem-root';
 
 describe('ListItem', () => {
-  describe('Rendering', () => {
-    it('renders children', () => {
+  let tw: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    tw = renderHook(() => useTailwind()).result.current;
+  });
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe('when isInteractive is false', () => {
+    it('renders title via Content', () => {
+      const { getByText } = render(
+        <ListItem title="Label" testID={ROOT_TEST_ID} />,
+      );
+
+      expect(getByText('Label')).toBeOnTheScreen();
+    });
+
+    it('forwards description to Content', () => {
+      const { getByText } = render(
+        <ListItem
+          title="Title"
+          description="Secondary"
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Secondary')).toBeOnTheScreen();
+    });
+
+    it('applies default padding on root Box', () => {
       const { getByTestId } = render(
-        <ListItem testID="list-item">
-          <View testID="child" />
-        </ListItem>,
+        <ListItem title="Label" testID={ROOT_TEST_ID} />,
       );
-      expect(getByTestId('list-item')).toBeDefined();
-      expect(getByTestId('child')).toBeDefined();
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw.style('px-4 py-3'));
     });
 
-    it('renders topAccessory when provided', () => {
-      const { getByTestId } = render(
-        <ListItem topAccessory={<View testID="top-accessory" />}>
-          <View />
-        </ListItem>,
-      );
-      expect(getByTestId('top-accessory')).toBeDefined();
-    });
-
-    it('does not render topAccessory when not provided', () => {
-      const { queryByTestId } = render(
-        <ListItem>
-          <View />
-        </ListItem>,
-      );
-      expect(queryByTestId('top-accessory')).toBeNull();
-    });
-
-    it('renders bottomAccessory when provided', () => {
-      const { getByTestId } = render(
-        <ListItem bottomAccessory={<View testID="bottom-accessory" />}>
-          <View />
-        </ListItem>,
-      );
-      expect(getByTestId('bottom-accessory')).toBeDefined();
-    });
-
-    it('does not render bottomAccessory when not provided', () => {
-      const { queryByTestId } = render(
-        <ListItem>
-          <View />
-        </ListItem>,
-      );
-      expect(queryByTestId('bottom-accessory')).toBeNull();
-    });
-
-    it('renders without error for each verticalAlignment value', () => {
-      Object.values(ListItemVerticalAlignment).forEach((alignment) => {
+    describe('when style is provided', () => {
+      it('merges user style with base padding', () => {
         const { getByTestId } = render(
-          <ListItem verticalAlignment={alignment} testID="list-item">
-            <View />
-          </ListItem>,
+          <ListItem
+            title="Label"
+            style={{ marginTop: 8 }}
+            testID={ROOT_TEST_ID}
+          />,
         );
-        expect(getByTestId('list-item')).toBeDefined();
+
+        expect(getByTestId(ROOT_TEST_ID)).toHaveStyle([
+          tw.style('px-4 py-3'),
+          { marginTop: 8 },
+        ]);
+      });
+    });
+
+    describe('when twClassName is provided', () => {
+      it('merges twClassName into root padding', () => {
+        const { getByTestId } = render(
+          <ListItem
+            title="Label"
+            twClassName="rounded-lg"
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+          tw.style('px-4 py-3', 'rounded-lg'),
+        );
       });
     });
   });
 
-  describe('Gap', () => {
-    it('renders one gap spacer for two children', () => {
-      const { getAllByTestId } = render(
-        <ListItem>
-          <View />
-          <View />
-        </ListItem>,
-      );
-      expect(getAllByTestId(TESTID_LISTITEM_GAP)).toHaveLength(1);
-    });
-
-    it('renders N-1 gap spacers for N children', () => {
-      const { getAllByTestId } = render(
-        <ListItem>
-          <View />
-          <View />
-          <View />
-        </ListItem>,
-      );
-      expect(getAllByTestId(TESTID_LISTITEM_GAP)).toHaveLength(2);
-    });
-
-    it('does not render a gap spacer with a single child', () => {
-      const { queryByTestId } = render(
-        <ListItem>
-          <View />
-        </ListItem>,
-      );
-      expect(queryByTestId(TESTID_LISTITEM_GAP)).toBeNull();
-    });
-
-    it('applies the default gap of 16 to all spacers', () => {
-      const { getAllByTestId } = render(
-        <ListItem>
-          <View />
-          <View />
-          <View />
-        </ListItem>,
-      );
-      getAllByTestId(TESTID_LISTITEM_GAP).forEach((spacer) => {
-        expect(spacer.props.style.width).toBe(DEFAULT_LISTITEM_GAP);
-      });
-    });
-
-    it('applies a custom gap to all spacers', () => {
-      const givenGap = 20;
-      const { getAllByTestId } = render(
-        <ListItem gap={givenGap}>
-          <View />
-          <View />
-          <View />
-        </ListItem>,
-      );
-      getAllByTestId(TESTID_LISTITEM_GAP).forEach((spacer) => {
-        expect(spacer.props.style.width).toBe(givenGap);
-      });
-    });
-  });
-
-  describe('Accessories gap', () => {
-    it('applies topAccessoryGap as marginBottom on topAccessory wrapper', () => {
-      const givenTopAccessoryGap = 20;
+  describe('when isInteractive is true', () => {
+    it('fires onPress when pressed', () => {
+      const onPress = jest.fn();
       const { getByTestId } = render(
         <ListItem
-          topAccessory={<View />}
-          topAccessoryGap={givenTopAccessoryGap}
-        >
-          <View />
-        </ListItem>,
+          isInteractive
+          title="Label"
+          onPress={onPress}
+          testID={ROOT_TEST_ID}
+        />,
       );
-      expect(
-        getByTestId(TESTID_LISTITEM_TOP_ACCESSORY_WRAPPER).props.style
-          .marginBottom,
-      ).toBe(givenTopAccessoryGap);
+
+      fireEvent.press(getByTestId(ROOT_TEST_ID));
+
+      expect(onPress).toHaveBeenCalledTimes(1);
     });
 
-    it('applies bottomAccessoryGap as marginTop on bottomAccessory wrapper', () => {
-      const givenBottomAccessoryGap = 20;
+    it('defaults accessibilityRole to button', () => {
       const { getByTestId } = render(
         <ListItem
-          bottomAccessory={<View />}
-          bottomAccessoryGap={givenBottomAccessoryGap}
-        >
-          <View />
-        </ListItem>,
+          isInteractive
+          title="Label"
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+        />,
       );
-      expect(
-        getByTestId(TESTID_LISTITEM_BOTTOM_ACCESSORY_WRAPPER).props.style
-          .marginTop,
-      ).toBe(givenBottomAccessoryGap);
+
+      expect(getByTestId(ROOT_TEST_ID).props.accessibilityRole).toBe('button');
+    });
+
+    it('applies default padding on root Pressable', () => {
+      const { getByTestId } = render(
+        <ListItem
+          isInteractive
+          title="Label"
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+        tw.style('w-full px-4 py-3'),
+      );
+    });
+
+    it('renders Content inside Pressable', () => {
+      const { getByText, getByTestId } = render(
+        <ListItem
+          isInteractive
+          title="Tappable row"
+          onPress={jest.fn()}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
+      expect(getByText('Tappable row')).toBeOnTheScreen();
+    });
+
+    describe('when style is not provided', () => {
+      it('applies bg-pressed when testOnly_pressed is true', () => {
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive
+            title="Label"
+            onPress={jest.fn()}
+            testOnly_pressed
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+          tw.style('w-full px-4 py-3', 'bg-pressed'),
+        );
+      });
+
+      it('omits bg-pressed at rest', () => {
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive
+            title="Label"
+            onPress={jest.fn()}
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+          tw.style('w-full px-4 py-3'),
+        );
+      });
+    });
+
+    describe('when style is a plain object', () => {
+      it('merges user style with base pressable style', () => {
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive
+            title="Label"
+            onPress={jest.fn()}
+            style={{ marginTop: 8 }}
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(getByTestId(ROOT_TEST_ID)).toHaveStyle([
+          tw.style('w-full px-4 py-3'),
+          { marginTop: 8 },
+        ]);
+      });
+    });
+
+    describe('when style is a function', () => {
+      it('merges user function style for pressed state', () => {
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive
+            title="Label"
+            onPress={jest.fn()}
+            testOnly_pressed
+            style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ opacity: 0.5 });
+      });
+
+      it('merges user function style at rest', () => {
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive
+            title="Label"
+            onPress={jest.fn()}
+            style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ opacity: 1 });
+      });
+    });
+
+    describe('when twClassName is provided', () => {
+      it('merges twClassName into pressable style', () => {
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive
+            title="Label"
+            onPress={jest.fn()}
+            twClassName="rounded-lg"
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+          tw.style('w-full px-4 py-3', 'rounded-lg'),
+        );
+      });
     });
   });
 
-  describe('Props', () => {
-    it('passes testID to root element via ViewProps', () => {
-      const { getByTestId } = render(
-        <ListItem testID="root-item">
-          <View />
+  describe('when children are provided', () => {
+    it('renders children below Content', () => {
+      const { getByText, getByTestId } = render(
+        <ListItem title="Label">
+          <Text testID="below-content">Below</Text>
         </ListItem>,
       );
-      expect(getByTestId('root-item')).toBeDefined();
-    });
 
-    it('passes accessibilityLabel via ViewProps', () => {
-      const { getByTestId } = render(
-        <ListItem testID="list-item" accessibilityLabel="Custom label">
-          <View />
-        </ListItem>,
-      );
-      expect(getByTestId('list-item').props.accessibilityLabel).toBe(
-        'Custom label',
-      );
+      expect(getByText('Label')).toBeOnTheScreen();
+      expect(getByTestId('below-content')).toBeOnTheScreen();
     });
+  });
 
-    it('merges custom style prop with base styles', () => {
+  describe('when Content accessories are provided', () => {
+    it('renders startAccessory and endAccessory', () => {
       const { getByTestId } = render(
-        <ListItem testID="list-item" style={{ marginTop: 8 }}>
-          <View />
-        </ListItem>,
+        <ListItem
+          title="Label"
+          startAccessory={<Text testID="start">S</Text>}
+          endAccessory={<Text testID="end">E</Text>}
+        />,
       );
-      expect(getByTestId('list-item')).toBeDefined();
+
+      expect(getByTestId('start')).toBeOnTheScreen();
+      expect(getByTestId('end')).toBeOnTheScreen();
     });
   });
 });

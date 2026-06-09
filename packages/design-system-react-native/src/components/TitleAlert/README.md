@@ -26,7 +26,7 @@ Available severities:
 - `IconAlertSeverity.Info`
 - `IconAlertSeverity.Success`
 - `IconAlertSeverity.Warning`
-- `IconAlertSeverity.Error`
+- `IconAlertSeverity.Danger`
 
 | TYPE                | REQUIRED | DEFAULT |
 | ------------------- | -------- | ------- |
@@ -38,7 +38,7 @@ import {
   IconAlertSeverity,
 } from '@metamask/design-system-react-native';
 
-<TitleAlert severity={IconAlertSeverity.Error} title="Something went wrong" />;
+<TitleAlert severity={IconAlertSeverity.Danger} title="Something went wrong" />;
 ```
 
 ### `title`
