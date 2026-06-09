@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
 - [From version 0.27.0 to 0.28.0](#from-version-0270-to-0280)
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
@@ -59,6 +60,45 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.28.0 to 0.29.0
+
+#### Severity vocabulary: `Error` renamed to `Danger` across `AvatarIconSeverity`, `IconAlertSeverity`, and `TagSeverity`
+
+The public severity API for `AvatarIcon`, `IconAlert`, and `Tag` now uses `Danger` instead of `Error` for destructive or critical states, and `Neutral` as the canonical name for default-like states.
+
+**What changed:**
+
+- `AvatarIconSeverity.Error` (`'error'`) → `AvatarIconSeverity.Danger` (`'danger'`)
+- `IconAlertSeverity.Error` (`'error'`) → `IconAlertSeverity.Danger` (`'danger'`)
+- `TagSeverity.Error` (`'error'`) → `TagSeverity.Danger` (`'danger'`)
+
+**Migration:**
+
+```tsx
+// Before (0.28.0)
+import {
+  AvatarIcon,
+  AvatarIconSeverity,
+  IconAlert,
+  IconAlertSeverity,
+  Tag,
+  TagSeverity,
+} from '@metamask/design-system-react-native';
+
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Error} />
+<IconAlert severity={IconAlertSeverity.Error} />
+<Tag severity={TagSeverity.Error}>High risk</Tag>
+
+// After (0.29.0)
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Danger} />
+<IconAlert severity={IconAlertSeverity.Danger} />
+<Tag severity={TagSeverity.Danger}>High risk</Tag>
+```
+
+**Impact:**
+
+- Any call site using `.Error` on these three severity const objects must change to `.Danger`. The rendered color is unchanged — `Danger` still maps to the error color tokens.
 
 ### From version 0.27.0 to 0.28.0
 

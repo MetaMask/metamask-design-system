@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.25.0 to 0.26.0](#from-version-0250-to-0260)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -3574,6 +3575,68 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.25.0 to 0.26.0
+
+#### TextButton: `size`/`TextButtonSize` replaced by `variant`/`TextVariant`
+
+`TextButton` has been rewritten as a text-only control backed by `Text`, aligning its API with the React Native `TextButton`. The old `ButtonBase`-backed implementation and several props are removed.
+
+**What changed:**
+
+- `size` and `TextButtonSize` are removed. Use `variant` with `TextVariant` values instead.
+- `isInverse` is removed. Use `Button` with `variant={ButtonVariant.Tertiary}` for inverse or danger-styled actions.
+- `isDisabled` is removed. `TextButton` no longer manages a disabled state directly.
+- `textProps` is removed. Props that were forwarded to the inner `Text` can now be passed directly.
+- Start icon, end icon, and accessory slot props are removed. Compose icons outside `TextButton` as needed.
+- `asChild` is added for semantic link composition (for example wrapping an `<a>` element).
+
+**Migration:**
+
+```tsx
+// Before (0.25.0)
+import { TextButton, TextButtonSize } from '@metamask/design-system-react';
+
+<TextButton size={TextButtonSize.BodySm} isInverse>Learn more</TextButton>
+
+// After (0.26.0)
+import { TextButton } from '@metamask/design-system-react';
+import { TextVariant } from '@metamask/design-system-shared';
+
+<TextButton variant={TextVariant.BodySm}>Learn more</TextButton>
+
+// For semantic link usage
+<TextButton asChild><a href="/learn-more">Learn more</a></TextButton>
+```
+
+**Impact:**
+
+- Any call site using `size`, `isInverse`, `isDisabled`, `textProps`, or icon/accessory props must update.
+- `TextButtonSize` is no longer exported from `@metamask/design-system-react`.
+
+#### Severity vocabulary: `AvatarIconSeverity.Error` → `AvatarIconSeverity.Danger`
+
+The public severity API for `AvatarIcon` now uses `Danger` instead of `Error` for destructive or critical states.
+
+**What changed:**
+
+- `AvatarIconSeverity.Error` (`'error'`) is renamed to `AvatarIconSeverity.Danger` (`'danger'`).
+
+**Migration:**
+
+```tsx
+// Before (0.25.0)
+import { AvatarIcon, AvatarIconSeverity } from '@metamask/design-system-react';
+
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Error} />
+
+// After (0.26.0)
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Danger} />
+```
+
+**Impact:**
+
+- Any call site using `AvatarIconSeverity.Error` must change to `AvatarIconSeverity.Danger`. The rendered color is unchanged — `Danger` still maps to the error color tokens.
 
 ## From version 0.22.0 to 0.23.0
 

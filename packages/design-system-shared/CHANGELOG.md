@@ -9,13 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.22.0]
 
-### Uncategorized
+### Added
 
-- chore: Align React TextButton with React Native API ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
-- chore: use shared avatar types ([#1225](https://github.com/MetaMask/metamask-design-system/pull/1225))
-- chore: Align severity API: Error→Danger, Default→Neutral across components ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
-- feat: [DSRN] Added ListItem ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
-- feat(react): Toast component with Toaster and imperative toast() API ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+- Added `ListItemPropsShared` and related shared types for cross-platform `ListItem` support ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
+- Added `ToastPropsShared`, `ToastSeverity`, and related shared types for cross-platform `Toast` support ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+- Added `TextButtonPropsShared` to align `TextButton` API across React and React Native ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
+- Added `AvatarNetworkSize` as a named export from the shared package ([#1225](https://github.com/MetaMask/metamask-design-system/pull/1225))
+
+### Changed
+
+- **BREAKING:** `AvatarIconSeverity.Error`, `IconAlertSeverity.Error`, and `TagSeverity.Error` renamed to `.Danger`; severity vocabulary standardized to use `Danger` for destructive/critical states ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
 
 ## [0.21.0]
 

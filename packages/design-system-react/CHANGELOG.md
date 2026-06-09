@@ -9,17 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.26.0]
 
-### Uncategorized
+### Added
 
-- fix: upgrade @testing-library/dom to satisfy @testing-library/react peer requirement
-- chore: Align React TextButton with React Native API ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
-- chore: use shared avatar types ([#1225](https://github.com/MetaMask/metamask-design-system/pull/1225))
-- chore: points icon imports to shared ([#1223](https://github.com/MetaMask/metamask-design-system/pull/1223))
-- chore: Align severity API: Error→Danger, Default→Neutral across components ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
-- chore: [DSYS-616] create/update Badge primitive migration docs ([#1148](https://github.com/MetaMask/metamask-design-system/pull/1148))
-- fix(react): support pre-mount toast calls ([#1217](https://github.com/MetaMask/metamask-design-system/pull/1217))
-- feat: Add Tag component for React ([#1211](https://github.com/MetaMask/metamask-design-system/pull/1211))
-- feat(react): Toast component with Toaster and imperative toast() API ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+- Added `Tag` component for categorization and filtering labels ([#1211](https://github.com/MetaMask/metamask-design-system/pull/1211))
+- Added `Toast` component with `Toaster` provider and imperative `toast()` API for non-blocking notifications ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+
+### Changed
+
+- **BREAKING:** `TextButton` API aligned with React Native — `size`/`TextButtonSize` replaced by `variant`/`TextVariant`; `isInverse`, `isDisabled`, `textProps`, start/end icons, and accessory slots removed; `asChild` added for semantic link composition ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
+  - See [Migration Guide](./MIGRATION.md#from-version-0250-to-0260)
+- **BREAKING:** `AvatarIconSeverity.Error` renamed to `AvatarIconSeverity.Danger`; severity vocabulary standardized to use `Danger` for destructive/critical states and `Neutral` for default states ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+  - See [Migration Guide](./MIGRATION.md#from-version-0250-to-0260)
+
+### Fixed
+
+- Fixed `Toast` to support `toast()` calls made before `Toaster` mounts ([#1217](https://github.com/MetaMask/metamask-design-system/pull/1217))
 
 ## [0.25.0]
 

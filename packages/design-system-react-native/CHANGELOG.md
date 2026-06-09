@@ -9,16 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.29.0]
 
-### Uncategorized
+### Added
 
-- chore: Align React TextButton with React Native API ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
-- chore: use shared avatar types ([#1225](https://github.com/MetaMask/metamask-design-system/pull/1225))
-- chore: points icon imports to shared ([#1223](https://github.com/MetaMask/metamask-design-system/pull/1223))
-- chore: Align severity API: Error→Danger, Default→Neutral across components ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
-- chore: [DSYS-616] create/update Badge primitive migration docs ([#1148](https://github.com/MetaMask/metamask-design-system/pull/1148))
-- feat: [DSRN] Added ListItem ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
-- chore: Enable Storybook web for storybook-react-native ([#1134](https://github.com/MetaMask/metamask-design-system/pull/1134))
-- feat(react): Toast component with Toaster and imperative toast() API ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+- Added `ListItem` component for list row layouts ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
+- Added `Toast` component with `Toaster` provider and imperative `toast()` API for non-blocking notifications ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+
+### Changed
+
+- **BREAKING:** `AvatarIconSeverity.Error`, `IconAlertSeverity.Error`, and `TagSeverity.Error` renamed to `.Danger`; severity vocabulary standardized to use `Danger` for destructive/critical states and `Neutral` for default states ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+  - See [Migration Guide](./MIGRATION.md#from-version-0280-to-0290)
 
 ## [0.28.0]
 
