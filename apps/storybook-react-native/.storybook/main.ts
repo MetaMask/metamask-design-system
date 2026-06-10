@@ -2,7 +2,6 @@ import { createRequire } from 'node:module';
 import path, { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { StorybookConfig } from '@storybook/react-native-web-vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import babel from '@rolldown/plugin-babel';
 
@@ -32,9 +31,7 @@ const config: StorybookConfig = {
     },
   },
   viteFinal: async (viteConfig) => {
-    const filteredPlugins = (viteConfig.plugins ?? []).filter(
-      (plugin) => plugin?.name !== 'vite-tsconfig-paths',
-    );
+    const filteredPlugins = viteConfig.plugins ?? [];
 
     // Apply the worklets Babel plugin during Rolldown's dep-optimization phase
     // so it runs on the original source files (before they're pre-bundled into
@@ -67,10 +64,6 @@ const config: StorybookConfig = {
         svgr({
           include: '**/*.svg',
         }),
-        tsconfigPaths({
-          ignoreConfigErrors: true,
-          projects: [path.resolve(repoRoot, 'apps/storybook-react-native/tsconfig.json')],
-        }),
         ...filteredPlugins,
       ],
       assetsInclude: [
@@ -95,6 +88,7 @@ const config: StorybookConfig = {
       },
       resolve: {
         ...viteConfig.resolve,
+        tsconfigPaths: true,
         alias: [
           ...(Array.isArray(viteConfig.resolve?.alias)
             ? viteConfig.resolve.alias

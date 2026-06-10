@@ -57,8 +57,7 @@
     "storybook": "10.4.2",
     "typescript": "~5.2.2",
     "vite": "^8.0.14",
-    "vite-plugin-svgr": "^5.2.0",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-plugin-svgr": "^5.2.0"
   },
   "engines": {
     "node": ">=20"
