@@ -6,11 +6,11 @@
   "main": ".rnstorybook/index.tsx",
   "files": [],
   "scripts": {
-    "android": "yarn prestorybook && expo start --android",
+    "android": "expo start --android",
     "build-storybook": "storybook build",
-    "ios": "yarn prestorybook && expo start --ios",
-    "prestorybook": "sb-rn-get-stories --config-path ./.rnstorybook && rm -f ./.rnstorybook/storybook.requires.js",
-    "start": "yarn prestorybook && expo start",
+    "ios": "expo start --ios",
+    "start": "expo start",
+    "storybook-generate": "sb-rn-get-stories --config-path ./.rnstorybook",
     "storybook:web": "storybook dev -p 6006",
     "web": "expo start --web"
   },
