@@ -33,6 +33,7 @@
     "autoprefixer": "^10.0.0",
     "axe-playwright": "^2.1.0",
     "chromatic": "^15.2.0",
+    "eslint": "^9.39.0",
     "eslint-plugin-storybook": "^10.4.2",
     "playwright": "^1.52.0",
     "postcss": "^8.4.47",
