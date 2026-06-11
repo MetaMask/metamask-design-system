@@ -176,6 +176,12 @@ export type { LabelProps } from './Label';
 export { ListItem } from './ListItem';
 export type { ListItemProps } from './ListItem';
 
+export { ListItemSelect } from './ListItemSelect';
+export type { ListItemSelectProps } from './ListItemSelect';
+
+export { ListItemMultiSelect } from './ListItemMultiSelect';
+export type { ListItemMultiSelectProps } from './ListItemMultiSelect';
+
 export { RadioButton } from './RadioButton';
 export type { RadioButtonProps } from './RadioButton';
 
