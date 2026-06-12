@@ -6,7 +6,7 @@ import type { TextProps } from '../Text/Text.types';
 /**
  * Content component props.
  *
- * Props-only layout for list rows (`title`, `avatar`, accessories, etc.).
+ * Props-only layout for the inner list row (`title`, `avatar`, inline row accessories, etc.).
  */
 export type ContentProps = Omit<BoxProps, 'children'> &
   ContentPropsShared & {
