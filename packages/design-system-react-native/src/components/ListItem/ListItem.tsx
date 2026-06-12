@@ -1,3 +1,4 @@
+import { ContentVerticalAlignment } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { Pressable } from 'react-native';
@@ -8,7 +9,10 @@ import type {
 } from 'react-native';
 
 import { Box } from '../Box';
+import { BoxColumn } from '../BoxColumn';
+import { BoxRow } from '../BoxRow';
 import { Content } from '../Content';
+import { VERTICAL_ALIGNMENT_MAP } from '../Content/Content.constants';
 
 import type { ListItemProps } from './ListItem.types';
 
@@ -66,12 +70,16 @@ export const ListItem: React.FC<ListItemProps> = ({
     return [baseStyle, userStyle];
   };
 
+  const hasColumnShell = Boolean(topAccessory) || Boolean(bottomAccessory);
+  const hasRowAccessories = Boolean(startAccessory) || Boolean(endAccessory);
+  const rowAlignment =
+    VERTICAL_ALIGNMENT_MAP[
+      verticalAlignment ?? ContentVerticalAlignment.Center
+    ];
+
   const content = (
     <Content
-      startAccessory={startAccessory}
-      endAccessory={endAccessory}
-      topAccessory={topAccessory}
-      bottomAccessory={bottomAccessory}
+      twClassName={hasRowAccessories ? 'flex-1 min-w-0' : undefined}
       verticalAlignment={verticalAlignment}
       avatar={avatar}
       title={title}
@@ -93,6 +101,32 @@ export const ListItem: React.FC<ListItemProps> = ({
     />
   );
 
+  const contentRow = hasRowAccessories ? (
+    <BoxRow
+      startAccessory={startAccessory}
+      endAccessory={endAccessory}
+      alignItems={rowAlignment}
+      gap={0}
+      twClassName="min-h-[46px] w-full"
+    >
+      {content}
+    </BoxRow>
+  ) : (
+    content
+  );
+
+  const listContent = hasColumnShell ? (
+    <BoxColumn
+      gap={1}
+      topAccessory={topAccessory}
+      bottomAccessory={bottomAccessory}
+    >
+      {contentRow}
+    </BoxColumn>
+  ) : (
+    contentRow
+  );
+
   if (isInteractive) {
     return (
       <Pressable
@@ -100,7 +134,7 @@ export const ListItem: React.FC<ListItemProps> = ({
         style={getPressableStyle}
         {...props}
       >
-        {content}
+        {listContent}
         {children}
       </Pressable>
     );
@@ -108,7 +142,7 @@ export const ListItem: React.FC<ListItemProps> = ({
 
   return (
     <Box style={wrapperStyle} {...props}>
-      {content}
+      {listContent}
       {children}
     </Box>
   );

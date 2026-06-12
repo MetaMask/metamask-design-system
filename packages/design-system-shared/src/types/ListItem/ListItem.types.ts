@@ -12,4 +12,22 @@ export type ListItemPropsShared = {
    * Optional content rendered below the main Content block inside the padded root.
    */
   children?: ReactNode;
+  /**
+   * Optional node rendered before the content row (e.g. leading icon), before `Content`.
+   */
+  startAccessory?: ReactNode;
+  /**
+   * Optional node rendered after the content row (e.g. chevron), after `Content`.
+   */
+  endAccessory?: ReactNode;
+  /**
+   * Optional content above the content row. When set (with `bottomAccessory` or alone),
+   * the list item uses a column shell with this as `topAccessory`.
+   */
+  topAccessory?: ReactNode;
+  /**
+   * Optional content below the content row. When set (with `topAccessory` or alone),
+   * the list item uses a column shell with this as `bottomAccessory`.
+   */
+  bottomAccessory?: ReactNode;
 };

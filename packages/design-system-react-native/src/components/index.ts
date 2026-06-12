@@ -140,6 +140,9 @@ export type {
 export { HeaderStandard } from './HeaderStandard';
 export type { HeaderStandardProps } from './HeaderStandard';
 
+export { HeaderSubpage } from './HeaderSubpage';
+export type { HeaderSubpageProps } from './HeaderSubpage';
+
 export {
   HeaderStandardAnimated,
   useHeaderStandardAnimated,

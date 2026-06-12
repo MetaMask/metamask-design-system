@@ -1,6 +1,6 @@
 # ListItem
 
-ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.md) in a `Box` or `Pressable` shell (`px-4 py-3`). For row layout without padding or press handling, use [Content](../Content/README.md) directly.
+ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.md) in a `Box` or `Pressable` shell (`px-4 py-3`) and owns row/column shell accessories (`startAccessory`, `endAccessory`, `topAccessory`, `bottomAccessory`). For the inner row layout without padding, press handling, or shell accessories, use [Content](../Content/README.md) directly.
 
 The row root is transparent by default so it inherits the surface behind it. Place list items inside a parent that sets the list background (for example a `Box` or screen section). Interactive rows apply a semi-transparent `bg-pressed` tint on press, which reads correctly over different parent backgrounds without per-row color setup.
 

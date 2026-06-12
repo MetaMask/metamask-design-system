@@ -105,6 +105,18 @@ export const TopAccessory: Story = {
   ),
 };
 
+export const BottomAccessory: Story = {
+  render: (args: ListItemProps) => (
+    <ListItem
+      {...args}
+      bottomAccessory={<Icon name={IconName.Question} />}
+      title="With bottom accessory"
+      description={undefined}
+      value={undefined}
+    />
+  ),
+};
+
 export const Avatar: Story = {
   render: (args: ListItemProps) => (
     <ListItem
