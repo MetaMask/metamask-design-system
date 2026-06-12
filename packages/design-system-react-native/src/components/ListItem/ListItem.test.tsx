@@ -281,29 +281,5 @@ describe('ListItem', () => {
       expect(getByTestId('start-accessory')).toBeOnTheScreen();
       expect(getByTestId('avatar-slot')).toBeOnTheScreen();
     });
-
-    it('nests the accessory row inside column shell layouts', () => {
-      const { getByTestId } = render(
-        <ListItem
-          title="Label"
-          topAccessory={<Text testID="top-accessory">Top</Text>}
-          startAccessory={<Text testID="start-accessory">S</Text>}
-        />,
-      );
-
-      expect(getByTestId('top-accessory')).toBeOnTheScreen();
-      expect(getByTestId('start-accessory')).toBeOnTheScreen();
-    });
-
-    it('renders bottomAccessory on screen', () => {
-      const { getByTestId } = render(
-        <ListItem
-          title="Label"
-          bottomAccessory={<Text testID="bottom-accessory">Bottom</Text>}
-        />,
-      );
-
-      expect(getByTestId('bottom-accessory')).toBeOnTheScreen();
-    });
   });
 });

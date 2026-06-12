@@ -1,6 +1,6 @@
 # ListItem
 
-ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.md) in a `Box` or `Pressable` shell (`px-4 py-3`) and owns row/column shell accessories (`startAccessory`, `endAccessory`, `topAccessory`, `bottomAccessory`). For the inner row layout without padding, press handling, or shell accessories, use [Content](../Content/README.md) directly.
+ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.md) in a `Box` or `Pressable` shell (`px-4 py-3`) and owns row shell accessories (`startAccessory`, `endAccessory`). For the inner row layout without padding, press handling, or shell accessories, use [Content](../Content/README.md) directly.
 
 The row root is transparent by default so it inherits the surface behind it. Place list items inside a parent that sets the list background (for example a `Box` or screen section). Interactive rows apply a semi-transparent `bg-pressed` tint on press, which reads correctly over different parent backgrounds without per-row color setup.
 
@@ -197,34 +197,6 @@ Optional trailing element on the content row, after the value column (for exampl
 import { Icon, IconName, ListItem } from '@metamask/design-system-react-native';
 
 <ListItem title="Network" endAccessory={<Icon name={IconName.ArrowRight} />} />;
-```
-
-### `topAccessory`
-
-Optional content above the content row. Setting `topAccessory` or `bottomAccessory` switches the inner layout to a column.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-<ListItem topAccessory={<BannerAlert />} title="Token" value="100" />
-```
-
-### `bottomAccessory`
-
-Optional content below the content row. Setting `topAccessory` or `bottomAccessory` switches the inner layout to a column.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-<ListItem
-  title="Token"
-  value="100"
-  bottomAccessory={<Text variant={TextVariant.BodySm}>Details</Text>}
-/>
 ```
 
 ### `verticalAlignment`

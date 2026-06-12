@@ -9,7 +9,6 @@ import type {
 } from 'react-native';
 
 import { Box } from '../Box';
-import { BoxColumn } from '../BoxColumn';
 import { BoxRow } from '../BoxRow';
 import { Content } from '../Content';
 import { VERTICAL_ALIGNMENT_MAP } from '../Content/Content.constants';
@@ -23,8 +22,6 @@ export const ListItem: React.FC<ListItemProps> = ({
   style,
   startAccessory,
   endAccessory,
-  topAccessory,
-  bottomAccessory,
   verticalAlignment,
   avatar,
   title,
@@ -70,7 +67,6 @@ export const ListItem: React.FC<ListItemProps> = ({
     return [baseStyle, userStyle];
   };
 
-  const hasColumnShell = Boolean(topAccessory) || Boolean(bottomAccessory);
   const hasRowAccessories = Boolean(startAccessory) || Boolean(endAccessory);
   const rowAlignment =
     VERTICAL_ALIGNMENT_MAP[
@@ -101,7 +97,7 @@ export const ListItem: React.FC<ListItemProps> = ({
     />
   );
 
-  const contentRow = hasRowAccessories ? (
+  const listContent = hasRowAccessories ? (
     <BoxRow
       startAccessory={startAccessory}
       endAccessory={endAccessory}
@@ -113,18 +109,6 @@ export const ListItem: React.FC<ListItemProps> = ({
     </BoxRow>
   ) : (
     content
-  );
-
-  const listContent = hasColumnShell ? (
-    <BoxColumn
-      gap={1}
-      topAccessory={topAccessory}
-      bottomAccessory={bottomAccessory}
-    >
-      {contentRow}
-    </BoxColumn>
-  ) : (
-    contentRow
   );
 
   if (isInteractive) {

@@ -2,7 +2,7 @@
 
 Content lays out the inner row for list items: an avatar, title and description on the left, and value and subvalue on the right. Use it when you need the row layout without `ListItem` padding, press handling, or row shell accessories.
 
-The root is a horizontal row (`min-h-[46px]`). For leading/trailing row accessories (`startAccessory`, `endAccessory`) or column shell accessories (`topAccessory`, `bottomAccessory`), use [ListItem](../ListItem/README.md).
+The root is a horizontal row (`min-h-[46px]`). For leading/trailing row accessories (`startAccessory`, `endAccessory`), use [ListItem](../ListItem/README.md).
 
 ```tsx
 import { Content } from '@metamask/design-system-react-native';

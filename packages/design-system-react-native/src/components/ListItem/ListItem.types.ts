@@ -9,7 +9,7 @@ type ListItemPropsBase = ListItemPropsShared & ContentProps;
 /**
  * ListItem component props.
  *
- * Wraps {@link Content} in a padded root (`px-4 py-3`) with optional row/column shell
+ * Wraps {@link Content} in a padded root (`px-4 py-3`) with optional row shell
  * accessories. When `isInteractive` is `false` (default), the root is a `Box`; when `true`,
  * the root is a `Pressable`.
  */

@@ -7,8 +7,6 @@ import type { TextProps } from '../Text/Text.types';
  * Content component props.
  *
  * Props-only layout for the inner list row (`title`, `avatar`, inline row accessories, etc.).
- * Row shell accessories (`startAccessory`, `endAccessory`, `topAccessory`, `bottomAccessory`)
- * belong on {@link ListItem}.
  */
 export type ContentProps = Omit<BoxProps, 'children'> &
   ContentPropsShared & {

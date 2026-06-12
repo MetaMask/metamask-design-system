@@ -89,34 +89,6 @@ export const EndAccessory: Story = {
   ),
 };
 
-export const TopAccessory: Story = {
-  render: (args: ListItemProps) => (
-    <ListItem
-      {...args}
-      topAccessory={
-        <Box twClassName="rounded bg-warning-muted px-2 py-1">
-          <Icon name={IconName.Info} />
-        </Box>
-      }
-      title="With top accessory"
-      description={undefined}
-      value={undefined}
-    />
-  ),
-};
-
-export const BottomAccessory: Story = {
-  render: (args: ListItemProps) => (
-    <ListItem
-      {...args}
-      bottomAccessory={<Icon name={IconName.Question} />}
-      title="With bottom accessory"
-      description={undefined}
-      value={undefined}
-    />
-  ),
-};
-
 export const Avatar: Story = {
   render: (args: ListItemProps) => (
     <ListItem
