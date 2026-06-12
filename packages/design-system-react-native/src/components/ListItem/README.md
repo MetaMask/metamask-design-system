@@ -199,6 +199,22 @@ import { Icon, IconName, ListItem } from '@metamask/design-system-react-native';
 <ListItem title="Network" endAccessory={<Icon name={IconName.ArrowRight} />} />;
 ```
 
+### `accessoryGap`
+
+Gap between `startAccessory` / `endAccessory` and the inner content row. Uses the same spacing scale as `Box` `gap` (`BoxSpacing`); `4` is 16px. Defaults to `0` for tight layouts. Use `accessoryGap={4}` to match the spacing legacy `Content` shell rows used before accessories moved to `ListItem`.
+
+| TYPE         | REQUIRED | DEFAULT |
+| ------------ | -------- | ------- |
+| `BoxSpacing` | No       | `0`     |
+
+```tsx
+<ListItem
+  startAccessory={<Icon name={IconName.Coin} />}
+  accessoryGap={4}
+  title="With spaced start accessory"
+/>
+```
+
 ### `verticalAlignment`
 
 Vertical alignment of the content row.
