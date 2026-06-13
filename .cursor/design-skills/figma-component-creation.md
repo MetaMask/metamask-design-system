@@ -166,6 +166,7 @@ Agent requirements for this step:
       ```
 
 - Mirror variant props from code (`size`, `variant`, `severity`, etc.) as Figma component properties
+- Create variants based on Storybook variants
 - Bind colors, spacing, radii, and borders to **MMDS variables** — no hardcoded hex unless unavoidable
 - After creation: `figma_capture_screenshot` or `figma_take_screenshot` to verify placement and layout
 
