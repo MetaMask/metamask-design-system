@@ -128,30 +128,6 @@ Ready to design.
 
 If any step fails, output ❌ with error and stop.
 
-## MMDS library gate (required for component creation)
-
-When preflight runs as part of `/figma-component-creation`, also verify MMDS tokens are available:
-
-1. Run `user-figma-console` → `figma_get_library_variables` with `libraryFileKey: 1D6tnzXqWgnUC3spaAOELN`
-2. Inspect local collections from Step C
-
-**Pass** if either:
-- Target file is [🦊 MMDS Components](https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN) and collections include `Color / Theme`, `Typography`, or `Variable collection`
-- Target local working file has MMDS library subscribed (`figma_get_library_variables` returns collections)
-
-**Fail** if:
-- Only `material-theme` collection exists locally **and** MMDS library returns 0 collections
-
-```
-❌ MMDS Library — Not subscribed. Components will bind to material-theme, not design system tokens.
-
-Fix (choose one):
-1. Work in MMDS Components file directly (recommended for publishing)
-2. In your local working file: Figma → Assets → Libraries → enable "🦊 MMDS Components", then re-run preflight
-```
-
-Do not create components until this gate passes.
-
 ## Related
 
 - Token binding enforcement: `figma-style-binding.md`
