@@ -19,7 +19,7 @@ import { ButtonIconSize, ButtonIconVariant } from '.';
 
 figma.connect(
   ButtonIcon,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=1%3A2860',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=5226-5609',
   {
     props: {
       size: figma.enum('size', {
@@ -27,8 +27,8 @@ figma.connect(
         Md: ButtonIconSize.Md,
         Lg: ButtonIconSize.Lg,
       }),
-      isDisabled: figma.boolean('isDisabled'),
-      variant: figma.enum('variant', {
+      isDisabled: figma.boolean('disabled'),
+      variant: figma.enum('state', {
         Default: ButtonIconVariant.Default,
         Filled: ButtonIconVariant.Filled,
         Floating: ButtonIconVariant.Floating,
@@ -37,8 +37,8 @@ figma.connect(
     example: ({ size, isDisabled, variant, ...props }) => (
       <ButtonIcon
         size={size}
-        iconName={IconName.Close} // Check the icon name in figma
-        accessibilityLabel="Close" // Describe action. Required accessibility prop
+        iconName={IconName.Close}
+        accessibilityLabel="Close"
         isDisabled={isDisabled}
         variant={variant}
         {...props}
