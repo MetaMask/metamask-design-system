@@ -23,4 +23,4 @@ Edit [figma-design.config.md](./figma-design.config.md) with target Figma file U
 preflight → (optional) reference-interpreter → component-rules + figma-style-binding
 ```
 
-For syncing **existing code components** into the library, use [figma-component-creation](../design-skills/figma-component-creation.md).
+For syncing **existing code components** into the library, use the [figma-component-creation](../skills/figma-component-creation/SKILL.md) skill (`/figma-component-creation`).

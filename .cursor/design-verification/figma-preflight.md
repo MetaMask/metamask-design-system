@@ -137,5 +137,5 @@ If any step fails, output ❌ with error and stop.
 
 - Token binding enforcement: `figma-style-binding.md`
 - Component construction: `component-rules.md`
-- Code → Figma publishing: `@.cursor/design-skills/figma-component-creation.md`
+- Code → Figma publishing: `/figma-component-creation`
 - `@.cursor/rules/figma-integration.md`

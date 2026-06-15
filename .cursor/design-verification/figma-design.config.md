@@ -14,4 +14,4 @@ Session defaults for design-verification preflight. Update per task.
 1. Every visual value must bind to **MMDS** Styles or Variables — never `material-theme/*` or `Schemes/*`.
 2. Prefer creating components in **MMDS Components** directly. A local working file is fine only with the MMDS library subscribed.
 3. Never start designing before the Design Brief is confirmed (when using `reference-interpreter`).
-4. For code → Figma component publishing, use `@.cursor/design-skills/figma-component-creation.md` with Figma Console MCP.
+4. For code → Figma component publishing, use `/figma-component-creation` with Figma Console MCP.

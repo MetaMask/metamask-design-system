@@ -156,4 +156,4 @@ return { auditResults: results };
 ## Related
 
 - `@.cursor/rules/styling.md`
-- `@.cursor/design-skills/figma-component-creation.md` (Prompt 3 — typography and color tokens)
+- `/figma-component-creation` (Prompt 3 — typography and color tokens)

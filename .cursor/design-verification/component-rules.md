@@ -38,7 +38,7 @@ const set = await figma.importComponentSetByKeyAsync('key');
 const instance = set.defaultVariant.createInstance();
 ```
 
-For publishing **new** components from code, use `@.cursor/design-skills/figma-component-creation.md` instead.
+For publishing **new** components from code, use `/figma-component-creation` instead.
 
 ---
 
