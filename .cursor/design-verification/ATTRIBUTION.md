@@ -15,5 +15,5 @@ Adaptations for MetaMask Design System:
 
 - MCP tool names updated for Cursor (`plugin-figma-figma`, `user-figma-console`)
 - Config at `@.cursor/design-verification/figma-design.config.md`
-- Cross-references to `@.cursor/rules/figma-integration.md` and `@.cursor/design-skills/figma-component-creation.md`
+- Cross-references to `@.cursor/rules/figma-integration.md` and `/figma-component-creation`
 - Default Figma file URLs point to MMDS Components
