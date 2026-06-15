@@ -59,23 +59,28 @@ for (const v of variables) {
 const components = {};
 for (const page of figma.root.children) {
   await figma.setCurrentPageAsync(page);
-  const sets = page.findAll(n => n.type === "COMPONENT_SET");
-  const solos = page.findAll(n => n.type === "COMPONENT" && n.parent.type !== "COMPONENT_SET");
+  const sets = page.findAll((n) => n.type === 'COMPONENT_SET');
+  const solos = page.findAll(
+    (n) => n.type === 'COMPONENT' && n.parent.type !== 'COMPONENT_SET',
+  );
   if (sets.length > 0 || solos.length > 0) {
     components[page.name] = {
-      sets: sets.map(c => c.name),
-      solos: solos.map(c => c.name).slice(0, 15),
+      sets: sets.map((c) => c.name),
+      solos: solos.map((c) => c.name).slice(0, 15),
     };
   }
 }
 
 return {
-  textStyles: textStyles.map(s => s.name),
-  paintStyles: paintStyles.map(s => s.name),
-  collections: collections.map(c => c.name),
+  textStyles: textStyles.map((s) => s.name),
+  paintStyles: paintStyles.map((s) => s.name),
+  collections: collections.map((c) => c.name),
   variableCount: variables.length,
   byType: Object.fromEntries(
-    Object.entries(grouped).map(([type, vars]) => [type, vars.map(v => v.name)])
+    Object.entries(grouped).map(([type, vars]) => [
+      type,
+      vars.map((v) => v.name),
+    ]),
   ),
   components,
 };
@@ -91,14 +96,14 @@ Store **names only** in context. Library styles/variables are discovered via `se
 
 After Step C, derive a semantic index from variables grouped by `scopes`:
 
-| Role | Scope | MMDS examples |
-|---|---|---|
+| Role            | Scope                      | MMDS examples                                  |
+| --------------- | -------------------------- | ---------------------------------------------- |
 | Background fill | `FRAME_FILL`, `SHAPE_FILL` | `background/alternative`, `background/default` |
-| Text color | `TEXT_FILL` | `text/muted`, `text/default` |
-| Border / stroke | `STROKE_COLOR` | `border/default` |
-| Gap | `GAP` | `spacing/*` |
-| Padding | `PADDING` | `spacing/*` |
-| Border radius | `CORNER_RADIUS` | `radius/*` |
+| Text color      | `TEXT_FILL`                | `text/muted`, `text/default`                   |
+| Border / stroke | `STROKE_COLOR`             | `border/default`                               |
+| Gap             | `GAP`                      | `spacing/*`                                    |
+| Padding         | `PADDING`                  | `spacing/*`                                    |
+| Border radius   | `CORNER_RADIUS`            | `radius/*`                                     |
 
 ---
 

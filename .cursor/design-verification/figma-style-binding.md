@@ -36,9 +36,9 @@ Import missing MMDS variables: `user-figma-console` → `figma_import_library_va
 Every text node must use `textStyleId`. Individual font properties (`fontSize`, `fontFamily`, etc.) are forbidden.
 
 ```js
-const style = await figma.getStyleByIdAsync("<id>");
+const style = await figma.getStyleByIdAsync('<id>');
 await figma.loadFontAsync(style.fontName);
-await node.setTextStyleIdAsync("<id>");
+await node.setTextStyleIdAsync('<id>');
 ```
 
 If no local style matches, search libraries via `search_design_system`.
@@ -50,9 +50,11 @@ If no local style matches, search libraries via `search_design_system`.
 Every fill/stroke must bind to a COLOR Variable (preferred) or Paint Style.
 
 ```js
-const variable = await figma.variables.getVariableByIdAsync("<id>");
-const fill = { type: "SOLID", color: { r: 0, g: 0, b: 0 } };
-node.fills = [figma.variables.setBoundVariableForPaint(fill, "color", variable)];
+const variable = await figma.variables.getVariableByIdAsync('<id>');
+const fill = { type: 'SOLID', color: { r: 0, g: 0, b: 0 } };
+node.fills = [
+  figma.variables.setBoundVariableForPaint(fill, 'color', variable),
+];
 ```
 
 Never use raw `{ r, g, b }` without a binding.
@@ -64,9 +66,9 @@ Never use raw `{ r, g, b }` without a binding.
 Bind to FLOAT Variables. Set `layoutMode` BEFORE `setBoundVariable`.
 
 ```js
-node.setBoundVariable("paddingTop", spacingVar);
-node.setBoundVariable("itemSpacing", spacingVar);
-node.setBoundVariable("cornerRadius", radiusVar);
+node.setBoundVariable('paddingTop', spacingVar);
+node.setBoundVariable('itemSpacing', spacingVar);
+node.setBoundVariable('cornerRadius', radiusVar);
 ```
 
 Spacing can fall back to raw values only with explicit user confirmation. Color and text cannot.
@@ -75,12 +77,12 @@ Spacing can fall back to raw values only with explicit user confirmation. Color 
 
 ## Forbidden / Required
 
-| Forbidden | Required |
-|---|---|
-| `node.fontSize = 24` | `textStyleId` / `setTextStyleIdAsync` |
-| Unbound `fills` with raw hex | Variable or Style binding |
-| `node.paddingLeft = 16` | `setBoundVariable("paddingLeft", var)` |
-| `node.cornerRadius = 8` | `setBoundVariable("cornerRadius", var)` |
+| Forbidden                      | Required                                      |
+| ------------------------------ | --------------------------------------------- |
+| `node.fontSize = 24`           | `textStyleId` / `setTextStyleIdAsync`         |
+| Unbound `fills` with raw hex   | Variable or Style binding                     |
+| `node.paddingLeft = 16`        | `setBoundVariable("paddingLeft", var)`        |
+| `node.cornerRadius = 8`        | `setBoundVariable("cornerRadius", var)`       |
 | Creating a Button from scratch | `importComponentByKeyAsync` from MMDS library |
 
 ---
@@ -90,36 +92,60 @@ Spacing can fall back to raw values only with explicit user confirmation. Color 
 After every `use_figma` or `figma_execute` call that creates or modifies nodes, audit returned node IDs:
 
 ```javascript
-const nodeIdsToAudit = [/* returned IDs */];
+const nodeIdsToAudit = [
+  /* returned IDs */
+];
 const results = [];
 
 for (const id of nodeIdsToAudit) {
   const node = await figma.getNodeByIdAsync(id);
-  if (!node) { results.push({ id, status: "NOT_FOUND" }); continue; }
+  if (!node) {
+    results.push({ id, status: 'NOT_FOUND' });
+    continue;
+  }
 
   const checks = [];
 
-  if (node.type === "TEXT") {
-    checks.push({ prop: "textStyleId", bound: !!node.textStyleId });
+  if (node.type === 'TEXT') {
+    checks.push({ prop: 'textStyleId', bound: !!node.textStyleId });
   }
 
-  if ("fills" in node && Array.isArray(node.fills) && node.fills.length > 0) {
-    const bound = !!node.fillStyleId || (node.boundVariables?.fills?.length > 0);
-    checks.push({ prop: "fills", bound });
+  if ('fills' in node && Array.isArray(node.fills) && node.fills.length > 0) {
+    const bound = !!node.fillStyleId || node.boundVariables?.fills?.length > 0;
+    checks.push({ prop: 'fills', bound });
   }
 
-  if ("layoutMode" in node && node.layoutMode !== "NONE") {
-    for (const p of ["paddingLeft","paddingRight","paddingTop","paddingBottom","itemSpacing"]) {
-      if (p in node) checks.push({ prop: p, bound: !!(node.boundVariables && p in node.boundVariables) });
+  if ('layoutMode' in node && node.layoutMode !== 'NONE') {
+    for (const p of [
+      'paddingLeft',
+      'paddingRight',
+      'paddingTop',
+      'paddingBottom',
+      'itemSpacing',
+    ]) {
+      if (p in node)
+        checks.push({
+          prop: p,
+          bound: !!(node.boundVariables && p in node.boundVariables),
+        });
     }
   }
 
-  if ("cornerRadius" in node && node.cornerRadius > 0) {
-    checks.push({ prop: "cornerRadius", bound: !!(node.boundVariables && "cornerRadius" in node.boundVariables) });
+  if ('cornerRadius' in node && node.cornerRadius > 0) {
+    checks.push({
+      prop: 'cornerRadius',
+      bound: !!(node.boundVariables && 'cornerRadius' in node.boundVariables),
+    });
   }
 
-  const failed = checks.filter(c => !c.bound);
-  results.push({ id, name: node.name, type: node.type, status: failed.length === 0 ? "PASS" : "FAIL", failed: failed.map(c => c.prop) });
+  const failed = checks.filter((c) => !c.bound);
+  results.push({
+    id,
+    name: node.name,
+    type: node.type,
+    status: failed.length === 0 ? 'PASS' : 'FAIL',
+    failed: failed.map((c) => c.prop),
+  });
 }
 
 return { auditResults: results };

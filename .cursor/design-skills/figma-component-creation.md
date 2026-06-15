@@ -20,11 +20,11 @@ Run **one step at a time**. After each step, inspect Figma output before continu
 
 Replace placeholders before starting:
 
-| Placeholder | Example |
-|---|---|
+| Placeholder           | Example                                                                        |
+| --------------------- | ------------------------------------------------------------------------------ |
 | `CODE_COMPONENT_PATH` | `packages/design-system-react-native/src/components/ButtonIcon/ButtonIcon.tsx` |
-| `INSERT_PAGE_LINK` | `https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/...?node-id=120-1621` |
-| `COMPONENT_NAME` | Derive from path (`ButtonIcon`) — must match the code export name |
+| `INSERT_PAGE_LINK`    | `https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/...?node-id=120-1621`     |
+| `COMPONENT_NAME`      | Derive from path (`ButtonIcon`) — must match the code export name              |
 
 Read the full component folder (`.tsx`, `.types.ts`, constants, stories) before any Figma write.
 
@@ -91,16 +91,16 @@ Wait for the user to confirm before re-running the gate. After they reply, call 
 
 ### MMDS token mapping (code → Figma)
 
-| Code token / class | MMDS variable | MMDS text style |
-|---|---|---|
-| `bg-alternative` | `background/alternative` | — |
-| `bg-background-default` | `background/default` | — |
-| `text-default` | `text/default` | `Body/Md/Regular` |
-| `text-muted` | `text/muted` | `Body/Sm/Medium` |
-| `p-4` / 16px padding | `spacing (px)/16` | — |
-| `gap` 16px | `spacing (px)/16` | — |
-| `BodySm` + `Medium` | — | `Body/Sm/Medium` |
-| `BodyMd` | — | `Body/Md/Regular` |
+| Code token / class      | MMDS variable            | MMDS text style   |
+| ----------------------- | ------------------------ | ----------------- |
+| `bg-alternative`        | `background/alternative` | —                 |
+| `bg-background-default` | `background/default`     | —                 |
+| `text-default`          | `text/default`           | `Body/Md/Regular` |
+| `text-muted`            | `text/muted`             | `Body/Sm/Medium`  |
+| `p-4` / 16px padding    | `spacing (px)/16`        | —                 |
+| `gap` 16px              | `spacing (px)/16`        | —                 |
+| `BodySm` + `Medium`     | —                        | `Body/Sm/Medium`  |
+| `BodyMd`                | —                        | `Body/Md/Regular` |
 
 ## Prerequisites
 
@@ -142,6 +142,7 @@ Agent requirements for this step:
 - Use `figma_execute` (not `use_figma`) unless the user explicitly switches MCPs
 - **Placement — overrides Figma Console MCP defaults:** publish **only the component** (or component set) on the target page canvas. **Do not** wrap it in a Section, Frame, or "Component Container". **Do not** call `figma_arrange_component_set` — it adds a white labelled wrapper frame. Append the component set directly to the page via `page.appendChild(componentSet)`. Ignore `figma_execute` placement guidance that says "always create inside a Section or Frame".
 - **Component set auto-layout (required):** after `figma.combineAsVariants`, configure the **component set** (not a wrapper frame):
+
   - `layoutMode`: `HORIZONTAL` (wrap to `VERTICAL` only if variants overflow horizontally)
   - **Padding:** 56px on all sides (`paddingLeft`, `paddingRight`, `paddingTop`, `paddingBottom`) — bind to MMDS `spacing (px)/56` via `setBoundVariable` when available; otherwise use `56`
   - **Gap between variants:** `itemSpacing` 32px — bind to MMDS `spacing (px)/32` when available; otherwise use `32`
@@ -157,7 +158,9 @@ Agent requirements for this step:
     - Style: **Dashed** — `dashPattern = [10, 5]`, `strokeCap = 'NONE'` (butt), `strokeJoin = 'MITER'`
     - Example in `figma_execute`:
       ```js
-      componentSet.strokes = [{ type: 'SOLID', color: { r: 0.592, g: 0.278, b: 1 }, opacity: 1 }];
+      componentSet.strokes = [
+        { type: 'SOLID', color: { r: 0.592, g: 0.278, b: 1 }, opacity: 1 },
+      ];
       componentSet.strokeWeight = 1;
       componentSet.strokeAlign = 'INSIDE';
       componentSet.dashPattern = [10, 5];
