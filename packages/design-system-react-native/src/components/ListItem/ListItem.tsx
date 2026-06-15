@@ -22,6 +22,7 @@ export const ListItem: React.FC<ListItemProps> = ({
   style,
   startAccessory,
   endAccessory,
+  accessoryGap = 0,
   verticalAlignment,
   avatar,
   title,
@@ -102,7 +103,7 @@ export const ListItem: React.FC<ListItemProps> = ({
       startAccessory={startAccessory}
       endAccessory={endAccessory}
       alignItems={rowAlignment}
-      gap={0}
+      gap={accessoryGap}
       twClassName="min-h-[46px] w-full"
     >
       {content}

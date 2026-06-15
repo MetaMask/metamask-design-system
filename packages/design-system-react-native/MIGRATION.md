@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
 - [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
 - [From version 0.27.0 to 0.28.0](#from-version-0270-to-0280)
 - [From Mobile Component Library](#from-mobile-component-library)
@@ -60,6 +61,47 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.29.0 to 0.30.0
+
+#### `Content` shell accessories removed; row accessories moved to `ListItem`
+
+`Content` is now inner-only (avatar, title/description, value/subvalue, and inline text accessories). Row shell accessories (`startAccessory`, `endAccessory`) live on `ListItem`. Column shell accessories (`topAccessory`, `bottomAccessory`) are removed — compose them manually with `BoxColumn`.
+
+**What changed:**
+
+- `startAccessory` / `endAccessory` removed from `ContentPropsShared` → use `ListItem` instead
+- `topAccessory` / `bottomAccessory` removed from `ContentPropsShared` → wrap with `BoxColumn` instead
+
+**Migration:**
+
+`startAccessory` / `endAccessory` — moved to `ListItem`:
+
+```tsx
+// Before (0.29.0)
+<Content startAccessory={<Icon name={IconName.Token} />} title="Label" />
+
+// After (0.30.0)
+<ListItem startAccessory={<Icon name={IconName.Token} />} title="Label" />
+```
+
+`topAccessory` / `bottomAccessory` — removed; compose manually:
+
+```tsx
+// Before (0.29.0)
+<ListItem topAccessory={<BannerAlert />} title="Token" value="100" />
+
+// After (0.30.0)
+<BoxColumn topAccessory={<BannerAlert />}>
+  <ListItem title="Token" value="100" />
+</BoxColumn>
+```
+
+**Impact:**
+
+- Any call site passing `startAccessory` or `endAccessory` on `Content` must move those props to `ListItem`.
+- Any call site using `topAccessory` or `bottomAccessory` on `Content` or `ListItem` must wrap the row in `BoxColumn` (or an equivalent layout) instead.
+- Legacy `Content` shell rows used 16px spacing (`gap={4}`) between accessories and inner content. `ListItem` defaults to `accessoryGap={0}`; pass `accessoryGap={4}` to restore the previous spacing.
 
 ### From version 0.28.0 to 0.29.0
 
@@ -3880,23 +3922,23 @@ The ListItem component in `@metamask/design-system-react-native` is a near-ident
 
 ##### Import Path
 
-| Mobile Pattern                                                                                  | Design System Migration                                                           |
-| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `import ListItem from '.../component-library/components/List/ListItem'`                         | `import { ListItem } from '@metamask/design-system-react-native'`                 |
-| `import { VerticalAlignment } from '.../component-library/components/List/ListItem'`            | `import { ContentVerticalAlignment } from '@metamask/design-system-react-native'` |
-| `import { ListItemProps } from '.../component-library/components/List/ListItem/ListItem.types'` | `import type { ListItemProps } from '@metamask/design-system-react-native'`       |
+| Mobile Pattern                                                                                  | Design System Migration                                                            |
+| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `import ListItem from '.../component-library/components/List/ListItem'`                         | `import { ListItem } from '@metamask/design-system-react-native'`                  |
+| `import { VerticalAlignment } from '.../component-library/components/List/ListItem'`            | `import { ListItemVerticalAlignment } from '@metamask/design-system-react-native'` |
+| `import { ListItemProps } from '.../component-library/components/List/ListItem/ListItem.types'` | `import type { ListItemProps } from '@metamask/design-system-react-native'`        |
 
 The mobile component uses a **default export**; the design system uses a **named export**.
 
 ##### VerticalAlignment Enum Renamed
 
-The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` from `@metamask/design-system-shared`, re-exported by `@metamask/design-system-react-native`. It is converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
+The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` from `@metamask/design-system-shared`. When using `ListItem`, import `ListItemVerticalAlignment` from `@metamask/design-system-react-native` (a runtime alias for the same const object). `ContentVerticalAlignment` is also exported from the package root for `Content` call sites. It is converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
 
-| Mobile Value                            | Design System Value                            | Notes                      |
-| --------------------------------------- | ---------------------------------------------- | -------------------------- |
-| `VerticalAlignment.Top` (`'Top'`)       | `ContentVerticalAlignment.Top` (`'top'`)       | casing changed             |
-| `VerticalAlignment.Center` (`'Center'`) | `ContentVerticalAlignment.Center` (`'center'`) | casing changed             |
-| `VerticalAlignment.Bottom` (`'Bottom'`) | —                                              | removed; use `Top` instead |
+| Mobile Value                            | Design System Value                             | Notes                      |
+| --------------------------------------- | ----------------------------------------------- | -------------------------- |
+| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | casing changed             |
+| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | casing changed             |
+| `VerticalAlignment.Bottom` (`'Bottom'`) | —                                               | removed; use `Top` instead |
 
 ##### Accessibility Attributes on Root
 
@@ -3986,11 +4028,11 @@ After (Design System):
 
 ```tsx
 import {
-  ContentVerticalAlignment,
   ListItem,
+  ListItemVerticalAlignment,
 } from '@metamask/design-system-react-native';
 
-<ListItem verticalAlignment={ContentVerticalAlignment.Top} gap={8}>
+<ListItem verticalAlignment={ListItemVerticalAlignment.Top} gap={8}>
   <AvatarFavicon />
   <View>
     <Text>Title</Text>
