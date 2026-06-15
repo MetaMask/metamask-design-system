@@ -29,12 +29,12 @@ Before building anything, resolve the component source in this order:
 Never rebuild primitives the DS provides: Button, Input, Checkbox, Toggle, Badge, Tag, Avatar, Icon, Tab, Header, TextField, etc.
 
 ```js
-const comp = await figma.importComponentByKeyAsync("key_from_search");
+const comp = await figma.importComponentByKeyAsync('key_from_search');
 const instance = comp.createInstance();
 parent.appendChild(instance);
 
 // Component sets (variants)
-const set = await figma.importComponentSetByKeyAsync("key");
+const set = await figma.importComponentSetByKeyAsync('key');
 const instance = set.defaultVariant.createInstance();
 ```
 
@@ -50,11 +50,11 @@ Every container must use Auto Layout. Property order matters:
 2. Set `layoutSizingHorizontal` / `layoutSizingVertical` AFTER `appendChild`
 3. Set `layoutMode` BEFORE any `setBoundVariable` call
 
-| Goal | layoutSizingH | layoutSizingV |
-|---|---|---|
-| Hug both | HUG | HUG |
-| Fixed card | FIXED | FIXED |
-| Full-width section | FILL | HUG |
+| Goal               | layoutSizingH | layoutSizingV |
+| ------------------ | ------------- | ------------- |
+| Hug both           | HUG           | HUG           |
+| Fixed card         | FIXED         | FIXED         |
+| Full-width section | FILL          | HUG           |
 
 ---
 
