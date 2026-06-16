@@ -6,6 +6,8 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
+export { mergeTwClassName } from './utils/merge-tw-class-name';
+
 // AvatarBase types (ADR-0003 + ADR-0004)
 export {
   AvatarBaseSize,
@@ -38,6 +40,12 @@ export {
 
 // ListItem types (ADR-0004)
 export { type ListItemPropsShared } from './types/ListItem';
+
+// ListItemSelect types (ADR-0004)
+export { type ListItemSelectPropsShared } from './types/ListItemSelect';
+
+// ListItemMultiSelect types (ADR-0004)
+export { type ListItemMultiSelectPropsShared } from './types/ListItemMultiSelect';
 
 // HelpText types (ADR-0003 + ADR-0004)
 export { HelpTextSeverity, type HelpTextPropsShared } from './types/HelpText';
