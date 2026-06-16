@@ -173,7 +173,7 @@ export type { KeyValueRowProps } from './KeyValueRow';
 export { Label } from './Label';
 export type { LabelProps } from './Label';
 
-export { ListItem } from './ListItem';
+export { ListItem, ListItemVerticalAlignment } from './ListItem';
 export type { ListItemProps } from './ListItem';
 
 export { ListItemSelect } from './ListItemSelect';

@@ -268,5 +268,31 @@ describe('ListItem', () => {
       expect(getByTestId('start')).toBeOnTheScreen();
       expect(getByTestId('end')).toBeOnTheScreen();
     });
+
+    it('renders startAccessory with avatar on the content row', () => {
+      const { getByTestId } = render(
+        <ListItem
+          title="Label"
+          startAccessory={<Text testID="start-accessory">S</Text>}
+          avatar={<Text testID="avatar-slot">A</Text>}
+        />,
+      );
+
+      expect(getByTestId('start-accessory')).toBeOnTheScreen();
+      expect(getByTestId('avatar-slot')).toBeOnTheScreen();
+    });
+
+    it('renders endAccessory with avatar on the content row', () => {
+      const { getByTestId } = render(
+        <ListItem
+          title="Label"
+          endAccessory={<Text testID="end-accessory">E</Text>}
+          avatar={<Text testID="avatar-slot">A</Text>}
+        />,
+      );
+
+      expect(getByTestId('end-accessory')).toBeOnTheScreen();
+      expect(getByTestId('avatar-slot')).toBeOnTheScreen();
+    });
   });
 });

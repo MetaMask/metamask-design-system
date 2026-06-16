@@ -17,26 +17,6 @@ export type ContentVerticalAlignment =
  */
 export type ContentPropsShared = {
   /**
-   * Optional node rendered before the content row (e.g. leading icon), via
-   * `BoxRow.startAccessory` — before `avatar`.
-   */
-  startAccessory?: ReactNode;
-  /**
-   * Optional node rendered after the content row (e.g. chevron), via
-   * `BoxRow.endAccessory` — after the value/subvalue column.
-   */
-  endAccessory?: ReactNode;
-  /**
-   * Optional content above the content row. When set (with `bottomAccessory` or
-   * alone), root is `BoxColumn` with this as `topAccessory`.
-   */
-  topAccessory?: ReactNode;
-  /**
-   * Optional content below the content row. When set (with `topAccessory` or
-   * alone), root is `BoxColumn` with this as `bottomAccessory`.
-   */
-  bottomAccessory?: ReactNode;
-  /**
    * Vertical alignment of the row (avatar, text columns, and value column).
    *
    * Prefer `center` when the row is one or two lines tall—the usual list-item case.

@@ -1,8 +1,8 @@
 # Content
 
-Content lays out the inner row for list items: optional leading and trailing accessories, an avatar, title and description on the left, and value and subvalue on the right. Use it when you need the row layout without `ListItem` padding or press handling.
+Content lays out the inner row for list items: an avatar, title and description on the left, and value and subvalue on the right. Use it when you need the row layout without `ListItem` padding, press handling, or row shell accessories.
 
-Without `topAccessory` or `bottomAccessory`, the root is a horizontal row (`min-h-[46px]`). When either shell accessory is set, the root becomes a column with that row nested inside.
+The root is a horizontal row (`min-h-[46px]`). For leading/trailing row accessories (`startAccessory`, `endAccessory`), use [ListItem](../ListItem/README.md).
 
 ```tsx
 import { Content } from '@metamask/design-system-react-native';
@@ -147,7 +147,7 @@ Props merged onto the `Text` component when `subvalue` is a string. Overrides de
 
 ### `avatar`
 
-Optional leading visual after `startAccessory` and before the title column. Use large avatars (40×40) in this slot.
+Optional leading visual before the title column. Use large avatars (40×40) in this slot.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -165,65 +165,6 @@ import {
   title="Ethereum"
   value="0.24 ETH"
 />;
-```
-
-### `startAccessory`
-
-Optional leading element on the content row, before the avatar (for example a rank or icon). Icons in this slot should be 20×20 (`IconSize.Md`).
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-import { Content, Icon, IconName } from '@metamask/design-system-react-native';
-
-<Content
-  startAccessory={<Icon name={IconName.Token} />}
-  title="With leading icon"
-/>;
-```
-
-### `endAccessory`
-
-Optional trailing element on the content row, after the value column (for example a chevron or button).
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-import { Content, Icon, IconName } from '@metamask/design-system-react-native';
-
-<Content title="Network" endAccessory={<Icon name={IconName.ArrowRight} />} />;
-```
-
-### `topAccessory`
-
-Optional content above the content row. Setting `topAccessory` or `bottomAccessory` switches the root to a column layout.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-<Content topAccessory={<BannerAlert />} title="Token" value="100" />
-```
-
-### `bottomAccessory`
-
-Optional content below the content row. Setting `topAccessory` or `bottomAccessory` switches the root to a column layout.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-<Content
-  title="Token"
-  value="100"
-  bottomAccessory={<Text variant={TextVariant.BodySm}>Details</Text>}
-/>
 ```
 
 ### `titleStartAccessory`
@@ -386,7 +327,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Applied on the outermost node: the flat content `BoxRow`, or the column shell `BoxColumn` when `topAccessory` or `bottomAccessory` is set.
+Applied on the root `Box` row.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -395,22 +336,14 @@ Applied on the outermost node: the flat content `BoxRow`, or the column shell `B
 ```tsx
 import { Content } from '@metamask/design-system-react-native';
 
-// Flat row
-<Content title="Label" twClassName="opacity-80" />
-
-// Column shell
-<Content
-  topAccessory={<BannerAlert />}
-  title="Token"
-  twClassName="gap-3"
-/>
+<Content title="Label" twClassName="opacity-80" />;
 ```
 
 ### `style`
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
-Forwarded to the outermost node (`BoxRow` or column shell `BoxColumn`), same as `twClassName`.
+Forwarded to the root `Box` row, same as `twClassName`.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

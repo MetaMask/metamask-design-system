@@ -1,6 +1,6 @@
 # ListItem
 
-ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.md) in a `Box` or `Pressable` shell (`px-4 py-3`). For row layout without padding or press handling, use [Content](../Content/README.md) directly.
+ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.md) in a `Box` or `Pressable` shell (`px-4 py-3`) and owns row shell accessories (`startAccessory`, `endAccessory`). For the inner row layout without padding, press handling, or shell accessories, use [Content](../Content/README.md) directly.
 
 The row root is transparent by default so it inherits the surface behind it. Place list items inside a parent that sets the list background (for example a `Box` or screen section). Interactive rows apply a semi-transparent `bg-pressed` tint on press, which reads correctly over different parent backgrounds without per-row color setup.
 
@@ -199,31 +199,19 @@ import { Icon, IconName, ListItem } from '@metamask/design-system-react-native';
 <ListItem title="Network" endAccessory={<Icon name={IconName.ArrowRight} />} />;
 ```
 
-### `topAccessory`
+### `accessoryGap`
 
-Optional content above the content row. Setting `topAccessory` or `bottomAccessory` switches the inner layout to a column.
+Gap between `startAccessory` / `endAccessory` and the inner content row. Uses the same spacing scale as `Box` `gap` (`BoxSpacing`); `4` is 16px. Defaults to `0` for tight layouts. Use `accessoryGap={4}` to match the spacing legacy `Content` shell rows used before accessories moved to `ListItem`.
 
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-<ListItem topAccessory={<BannerAlert />} title="Token" value="100" />
-```
-
-### `bottomAccessory`
-
-Optional content below the content row. Setting `topAccessory` or `bottomAccessory` switches the inner layout to a column.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
+| TYPE         | REQUIRED | DEFAULT |
+| ------------ | -------- | ------- |
+| `BoxSpacing` | No       | `0`     |
 
 ```tsx
 <ListItem
-  title="Token"
-  value="100"
-  bottomAccessory={<Text variant={TextVariant.BodySm}>Details</Text>}
+  startAccessory={<Icon name={IconName.Coin} />}
+  accessoryGap={4}
+  title="With spaced start accessory"
 />
 ```
 
@@ -233,21 +221,23 @@ Vertical alignment of the content row.
 
 Available values:
 
-- `ContentVerticalAlignment.Center` — default; use for one- or two-line rows
-- `ContentVerticalAlignment.Top` — use for taller rows (three+ lines or ~88dp+ height)
+- `ListItemVerticalAlignment.Center` — default; use for one- or two-line rows
+- `ListItemVerticalAlignment.Top` — use for taller rows (three+ lines or ~88dp+ height)
 
-| TYPE                       | REQUIRED | DEFAULT                           |
-| -------------------------- | -------- | --------------------------------- |
-| `ContentVerticalAlignment` | No       | `ContentVerticalAlignment.Center` |
+| TYPE                        | REQUIRED | DEFAULT                            |
+| --------------------------- | -------- | ---------------------------------- |
+| `ListItemVerticalAlignment` | No       | `ListItemVerticalAlignment.Center` |
+
+`ListItemVerticalAlignment` is re-exported from `@metamask/design-system-react-native` alongside `ListItem`. It is the same const object as `ContentVerticalAlignment` (also exported from the package root).
 
 ```tsx
 import {
-  ContentVerticalAlignment,
   ListItem,
+  ListItemVerticalAlignment,
 } from '@metamask/design-system-react-native';
 
 <ListItem
-  verticalAlignment={ContentVerticalAlignment.Top}
+  verticalAlignment={ListItemVerticalAlignment.Top}
   avatar={<AvatarToken name="ETH" src={ethIcon} size={AvatarTokenSize.Lg} />}
   title="Network"
   description="Secondary line"

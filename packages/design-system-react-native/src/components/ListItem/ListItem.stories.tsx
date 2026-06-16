@@ -40,6 +40,10 @@ const meta: Meta<ListItemProps> = {
     value: { control: 'text' },
     subvalue: { control: 'text' },
     isInteractive: { control: 'boolean' },
+    accessoryGap: {
+      control: 'select',
+      options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    },
   },
 };
 
@@ -70,6 +74,7 @@ export const StartAccessory: Story = {
     <ListItem
       {...args}
       startAccessory={<Icon name={IconName.Coin} />}
+      accessoryGap={4}
       title="With start accessory"
       description={undefined}
       value={undefined}
@@ -82,6 +87,7 @@ export const EndAccessory: Story = {
     <ListItem
       {...args}
       endAccessory={<Icon name={IconName.ArrowRight} />}
+      accessoryGap={4}
       title="With end accessory"
       description={undefined}
       value={undefined}
@@ -89,19 +95,26 @@ export const EndAccessory: Story = {
   ),
 };
 
-export const TopAccessory: Story = {
+export const AccessoryGap: Story = {
   render: (args: ListItemProps) => (
-    <ListItem
-      {...args}
-      topAccessory={
-        <Box twClassName="rounded bg-warning-muted px-2 py-1">
-          <Icon name={IconName.Info} />
-        </Box>
-      }
-      title="With top accessory"
-      description={undefined}
-      value={undefined}
-    />
+    <>
+      <ListItem
+        {...args}
+        startAccessory={<Icon name={IconName.Coin} />}
+        accessoryGap={0}
+        title="accessoryGap={0}"
+        description={undefined}
+        value={undefined}
+      />
+      <ListItem
+        {...args}
+        startAccessory={<Icon name={IconName.Coin} />}
+        accessoryGap={4}
+        title="accessoryGap={4}"
+        description={undefined}
+        value={undefined}
+      />
+    </>
   ),
 };
 
