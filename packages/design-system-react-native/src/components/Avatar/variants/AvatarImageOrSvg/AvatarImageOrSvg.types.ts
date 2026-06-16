@@ -16,7 +16,7 @@ export type AvatarImageOrSvgProps = Omit<
   | 'positionYOffset'
   | 'customPosition'
 > &
-  Omit<AvatarImageOrSvgPropsShared, 'variant'> & {
+  Omit<AvatarImageOrSvgPropsShared, 'variant' | 'src'> & {
     src: ImageOrSvgSrc | number;
     imageOrSvgProps?: Partial<ImageOrSvgProps>;
   } & Omit<ViewProps, 'children'> & {

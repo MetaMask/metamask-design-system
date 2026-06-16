@@ -1,4 +1,7 @@
-import type { AvatarIconVariantPropsShared } from '@metamask/design-system-shared';
+import type {
+  AvatarIconVariantPropsShared,
+  IconColor,
+} from '@metamask/design-system-shared';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { AvatarBaseProps } from '../../../AvatarBase';
@@ -13,7 +16,8 @@ export type AvatarIconProps = Omit<
   | 'positionYOffset'
   | 'customPosition'
 > &
-  Omit<AvatarIconVariantPropsShared, 'variant'> & {
+  Omit<AvatarIconVariantPropsShared, 'variant' | 'iconColor'> & {
+    iconColor: IconColor;
     iconProps?: Partial<IconProps>;
   } & Omit<ViewProps, 'children'> & {
     twClassName?: string;

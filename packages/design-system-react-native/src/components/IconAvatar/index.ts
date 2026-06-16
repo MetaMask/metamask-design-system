@@ -1,9 +1,5 @@
-export {
-  IconAvatar,
-  IconAvatar as AvatarIcon,
-  AvatarIconSeverity,
-  AvatarIconSize,
-} from './IconAvatar';
+export { IconAvatar, IconAvatar as AvatarIcon } from './IconAvatar';
+export { AvatarIconSeverity, AvatarIconSize } from '@metamask/design-system-shared';
 export type {
   IconAvatarProps,
   IconAvatarProps as AvatarIconProps,

@@ -10,6 +10,11 @@ export type AvatarBaseProps = ComponentProps<'div'> &
      */
     'data-testid'?: string;
     /**
+     * Optional text to display when no children are provided.
+     * If fallbackText is provided, fallbackText takes precedence over children.
+     */
+    fallbackText?: string;
+    /**
      * Optional props to be passed to the Text component when rendering fallback text
      * Only used when fallbackText is provided and no children
      */
