@@ -6,6 +6,8 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
+export { mergeTwClassName } from './utils/merge-tw-class-name';
+
 // AvatarBase types (ADR-0003 + ADR-0004)
 export {
   AvatarBaseSize,

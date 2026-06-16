@@ -1,4 +1,5 @@
 // Third party dependencies.
+import { mergeTwClassName } from '@metamask/design-system-shared';
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -73,7 +74,7 @@ export const HeaderRoot = ({
       gap={4}
       paddingLeft={4}
       paddingRight={2}
-      twClassName={`min-h-14 ${twClassName ?? ''}`.trim()}
+      twClassName={mergeTwClassName('min-h-14', twClassName)}
       style={[includesTopInset && { marginTop: insets.top }, style]}
       testID={testID}
       {...viewProps}
