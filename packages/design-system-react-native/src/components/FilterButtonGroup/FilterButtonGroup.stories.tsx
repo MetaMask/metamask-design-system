@@ -70,7 +70,9 @@ export const Default: Story = {
   args: {
     value: 'all',
   },
-  render: (args: FilterButtonGroupProps) => <ControlledFilterButtonGroup {...args} />,
+  render: (args: FilterButtonGroupProps) => (
+    <ControlledFilterButtonGroup {...args} />
+  ),
 };
 
 export const Variant: Story = {
