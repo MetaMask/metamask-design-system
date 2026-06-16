@@ -10,8 +10,9 @@ A tag is a compact label used to categorize, annotate, or highlight metadata.
 
 ```tsx
 import { Tag } from '@metamask/design-system-react';
+import { TagSeverity } from '@metamask/design-system-shared';
 
-<Tag>Tag</Tag>;
+<Tag severity={TagSeverity.Neutral}>Tag</Tag>;
 ```
 
 <Canvas of={TagStories.Default} />
@@ -30,28 +31,9 @@ Available values:
 - `TagSeverity.Warning`
 - `TagSeverity.Info`
 
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>TagSeverity</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>TagSeverity.Neutral</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+Use `TagSeverity.Danger` for destructive or critical states. Internal color token names are unchanged, so this variant still maps to error-colored tokens.
 
-<Canvas of={TagStories.Severity} />
+<Controls of={TagStories.Default} />
 
 ### `children`
 

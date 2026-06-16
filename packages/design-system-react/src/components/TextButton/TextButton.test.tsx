@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { TextButtonSize } from '../../types';
-import { IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
+import { FontWeight, TextVariant } from '../Text';
 
 import { TextButton } from './TextButton';
 
@@ -14,89 +13,53 @@ describe('TextButton', () => {
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
       'text-primary-default',
-      'px-0',
-      'h-auto',
       'bg-transparent',
-      'rounded-none',
+      'p-0',
+      'border-0',
     );
   });
 
-  it('renders with inverse styles when isInverse is true', () => {
-    render(<TextButton isInverse>Inverse Button</TextButton>);
+  it('fires onClick when clicked', async () => {
+    const onClick = jest.fn();
+    render(<TextButton onClick={onClick}>Tap</TextButton>);
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveClass('text-primary-inverse');
+    await userEvent.click(screen.getByRole('button', { name: 'Tap' }));
+
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('applies the specified text variant', () => {
-    render(
-      <TextButton size={TextButtonSize.BodyLg}>Custom Text Variant</TextButton>,
-    );
+    render(<TextButton variant={TextVariant.BodyLg}>BodyLg</TextButton>);
 
-    const text = screen.getByText('Custom Text Variant');
-    expect(text).toHaveClass(
+    const button = screen.getByRole('button', { name: 'BodyLg' });
+    expect(button).toHaveClass(
       'text-s-body-lg',
       'leading-s-body-lg',
       'tracking-s-body-lg',
     );
   });
 
-  it('applies disabled styles while preserving variant-specific classes', () => {
-    render(<TextButton isDisabled>Disabled Button</TextButton>);
+  it('uses medium font weight by default', () => {
+    render(<TextButton>Medium Button</TextButton>);
 
-    const button = screen.getByRole('button');
-    expect(button).toBeDisabled();
-    expect(button).toHaveClass(
-      'text-primary-default',
-      'opacity-50',
-      'cursor-not-allowed',
-    );
+    expect(screen.getByRole('button')).toHaveClass('font-medium');
   });
 
-  it('renders with icons correctly', () => {
-    render(
-      <TextButton
-        startIconName={IconName.AddSquare}
-        startIconProps={{ 'data-testid': 'start-icon' }}
-        endIconName={IconName.AddSquare}
-        endIconProps={{ 'data-testid': 'end-icon' }}
-      >
-        With Icons
-      </TextButton>,
-    );
+  it('allows overriding font weight', () => {
+    render(<TextButton fontWeight={FontWeight.Bold}>Bold Button</TextButton>);
 
-    const button = screen.getByRole('button');
-    const startIcon = screen.getByTestId('start-icon');
-    const endIcon = screen.getByTestId('end-icon');
-    expect(startIcon).toHaveClass('shrink-0', 'text-inherit');
-    expect(endIcon).toHaveClass('shrink-0', 'text-inherit');
-    expect(button).toHaveClass('gap-x-1');
+    expect(screen.getByRole('button')).toHaveClass('font-bold');
   });
 
   it('renders as child component when asChild is true', () => {
     render(
       <TextButton asChild>
-        <a href="https://metamask.io">Link Button</a>
+        <a href="https://metamask.io">MetaMask</a>
       </TextButton>,
     );
 
-    const link = screen.getByRole('link');
-    expect(link).toBeInTheDocument();
+    const link = screen.getByRole('link', { name: 'MetaMask' });
     expect(link).toHaveAttribute('href', 'https://metamask.io');
-  });
-
-  it('inherits font styles when used inside Text component', () => {
-    render(
-      <Text variant={TextVariant.BodyLg}>
-        Text with{' '}
-        <TextButton textProps={{ className: 'font-inherit' }}>
-          Text Button
-        </TextButton>{' '}
-        inside
-      </Text>,
-    );
-
-    const text = screen.getByText('Text Button');
-    expect(text).toHaveClass('font-inherit');
+    expect(link).toHaveClass('text-primary-default', 'font-medium');
   });
 });

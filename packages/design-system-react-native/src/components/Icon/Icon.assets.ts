@@ -265,6 +265,7 @@ import TranslateSVG from './assets/translate.svg';
 import TrashSVG from './assets/trash.svg';
 import TrendDownSVG from './assets/trend-down.svg';
 import TrendUpSVG from './assets/trend-up.svg';
+import TrophySVG from './assets/trophy.svg';
 import UndoSVG from './assets/undo.svg';
 import UnfoldSVG from './assets/unfold.svg';
 import UnlockedFilledSVG from './assets/unlocked-filled.svg';
@@ -561,6 +562,7 @@ export const assetByIconName: AssetByIconName = {
   Trash: TrashSVG,
   TrendDown: TrendDownSVG,
   TrendUp: TrendUpSVG,
+  Trophy: TrophySVG,
   Undo: UndoSVG,
   Unfold: UnfoldSVG,
   UnlockedFilled: UnlockedFilledSVG,

@@ -1,13 +1,6 @@
-import {
-  BoxAlignItems,
-  BoxFlexDirection,
-  TagSeverity,
-} from '@metamask/design-system-shared';
+import { IconName, TagSeverity } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-import { IconName } from '../../types';
-import { Box } from '../Box';
 
 import README from './README.mdx';
 import { Tag } from './Tag';

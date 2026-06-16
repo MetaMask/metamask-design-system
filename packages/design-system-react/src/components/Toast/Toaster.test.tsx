@@ -43,6 +43,10 @@ describe('Toaster', () => {
   });
 
   afterEach(() => {
+    act(() => {
+      toast.dismiss();
+      jest.runOnlyPendingTimers();
+    });
     jest.clearAllMocks();
     jest.useRealTimers();
   });
@@ -551,8 +555,59 @@ describe('toast() imperative API', () => {
   });
 
   afterEach(() => {
+    act(() => {
+      toast.dismiss();
+      jest.runOnlyPendingTimers();
+    });
     jest.clearAllMocks();
     jest.useRealTimers();
+  });
+
+  it('displays toast called before <Toaster /> mounts', async () => {
+    toast({ hasNoTimeout: true, title: 'Pre-mount toast' });
+
+    render(<Toaster />);
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
+    await act(async () => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('Pre-mount toast')).toBeInTheDocument();
+  });
+
+  it('uses the latest toast when toast() is called multiple times before mount', async () => {
+    toast({ hasNoTimeout: true, title: 'First pre-mount toast' });
+    toast({ hasNoTimeout: true, title: 'Latest pre-mount toast' });
+
+    render(<Toaster />);
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
+    await act(async () => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('Latest pre-mount toast')).toBeInTheDocument();
+    expect(screen.queryByText('First pre-mount toast')).not.toBeInTheDocument();
+  });
+
+  it('clears a pre-mount toast when toast.dismiss() is called before mount', async () => {
+    toast({ hasNoTimeout: true, title: 'Dismissed before mount' });
+    toast.dismiss();
+
+    render(<Toaster />);
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
+
+    expect(
+      screen.queryByText('Dismissed before mount'),
+    ).not.toBeInTheDocument();
   });
 
   it('displays toast after <Toaster /> is mounted', async () => {
@@ -590,25 +645,21 @@ describe('toast() imperative API', () => {
     expect(screen.queryByText('Will be dismissed')).not.toBeInTheDocument();
   });
 
-  it('throws a helpful error when toast() is called before <Toaster /> mounts', () => {
-    expect(() => toast({ hasNoTimeout: true, title: 'No mount' })).toThrow(
-      /toast\(\) called before <Toaster \/> mounted/u,
-    );
-  });
-
-  it('throws a helpful error when toast.dismiss() is called before <Toaster /> mounts', () => {
-    expect(() => toast.dismiss()).toThrow(
-      /toast\.dismiss\(\) called before <Toaster \/> mounted/u,
-    );
-  });
-
-  it('unregisters the global ref when <Toaster /> unmounts', () => {
+  it('keeps the toast store available after <Toaster /> unmounts', async () => {
     const { unmount } = render(<Toaster />);
     unmount();
 
-    expect(() => toast({ hasNoTimeout: true, title: 'After unmount' })).toThrow(
-      /toast\(\) called before <Toaster \/> mounted/u,
-    );
+    toast({ hasNoTimeout: true, title: 'After unmount' });
+    render(<Toaster />);
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
+    await act(async () => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('After unmount')).toBeInTheDocument();
   });
 
   it('registers before sibling passive effects run', async () => {
