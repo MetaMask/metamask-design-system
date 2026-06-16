@@ -2,7 +2,10 @@ import React from 'react';
 
 import { Checkbox } from '../Checkbox';
 import { ListItem } from '../ListItem';
+
 import type { ListItemMultiSelectProps } from './ListItemMultiSelect.types';
+
+const noopChange = () => undefined;
 
 const mergeTwClassName = (base: string, extra?: string) =>
   extra ? `${base} ${extra}` : base;
@@ -24,7 +27,7 @@ export const ListItemMultiSelect = ({
       endAccessory={
         <Checkbox
           isSelected={isSelected}
-          onChange={() => {}}
+          onChange={noopChange}
           label=""
           pointerEvents="none"
         />
