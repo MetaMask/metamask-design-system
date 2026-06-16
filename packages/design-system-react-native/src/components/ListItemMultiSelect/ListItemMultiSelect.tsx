@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Box } from '../Box';
 import { Checkbox } from '../Checkbox';
 import { ListItem } from '../ListItem';
 import type { ListItemMultiSelectProps } from './ListItemMultiSelect.types';
@@ -12,7 +11,7 @@ export const ListItemMultiSelect = ({
   isSelected,
   accessoryGap = 3,
   twClassName,
-  ...rest
+  ...props
 }: ListItemMultiSelectProps) => {
   const resolvedTwClassName = isSelected
     ? mergeTwClassName('bg-background-muted', twClassName)
@@ -23,12 +22,15 @@ export const ListItemMultiSelect = ({
       isInteractive
       twClassName={resolvedTwClassName}
       endAccessory={
-        <Box pointerEvents="none">
-          <Checkbox isSelected={isSelected} onChange={() => {}} label="" />
-        </Box>
+        <Checkbox
+          isSelected={isSelected}
+          onChange={() => {}}
+          label=""
+          pointerEvents="none"
+        />
       }
       accessoryGap={accessoryGap}
-      {...rest}
+      {...props}
     />
   );
 };

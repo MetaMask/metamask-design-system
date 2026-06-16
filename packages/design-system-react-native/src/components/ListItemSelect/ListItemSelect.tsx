@@ -13,7 +13,7 @@ export const ListItemSelect = ({
   endAccessory,
   accessoryGap = 3,
   twClassName,
-  ...rest
+  ...props
 }: ListItemSelectProps) => {
   const showCheck = isSelected && showSelectedIcon;
   const resolvedEndAccessory = showCheck ? (
@@ -36,7 +36,7 @@ export const ListItemSelect = ({
       twClassName={resolvedTwClassName}
       endAccessory={resolvedEndAccessory}
       accessoryGap={accessoryGap}
-      {...rest}
+      {...props}
     />
   );
 };

@@ -1,6 +1,5 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
@@ -49,6 +48,18 @@ describe('ListItemSelect', () => {
         />,
       );
       expect(getByText('Custom')).toBeOnTheScreen();
+    });
+
+    it('does not render check icon when showSelectedIcon is true but row is unselected', () => {
+      const { root } = render(
+        <ListItemSelect
+          title="Label"
+          isSelected={false}
+          showSelectedIcon
+          onPress={() => {}}
+        />,
+      );
+      expect(() => root.findByProps({ name: IconName.Check })).toThrow();
     });
   });
 
@@ -106,6 +117,38 @@ describe('ListItemSelect', () => {
       );
       fireEvent.press(getByTestId(ROOT_TEST_ID));
       expect(onPress).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('when twClassName is provided', () => {
+    it('merges twClassName with muted background when isSelected', () => {
+      const { getByTestId } = render(
+        <ListItemSelect
+          title="Label"
+          isSelected
+          twClassName="rounded-lg"
+          onPress={() => {}}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+        tw.style('bg-background-muted', 'rounded-lg'),
+      );
+    });
+
+    it('passes twClassName through when not selected', () => {
+      const { getByTestId } = render(
+        <ListItemSelect
+          title="Label"
+          isSelected={false}
+          twClassName="rounded-lg"
+          onPress={() => {}}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw.style('rounded-lg'));
     });
   });
 });
