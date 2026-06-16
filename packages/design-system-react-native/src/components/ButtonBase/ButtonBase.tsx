@@ -201,10 +201,11 @@ export const ButtonBase = ({
 
             <BoxRow
               {...restContentWrapper}
-              twClassName={mergeTwClassName(
-                contentWrapperTw,
-                isLoading ? 'opacity-0' : undefined,
-              )}
+              twClassName={
+                isLoading
+                  ? mergeTwClassName('opacity-0', contentWrapperTw)
+                  : contentWrapperTw
+              }
               gap={hasAccessories ? 1 : 0}
               startAccessory={
                 finalStartIconName ? (
