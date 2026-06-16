@@ -52,10 +52,14 @@ describe('FilterButton', () => {
 
   it('exposes testID on the root pressable', () => {
     const { getByTestId } = render(
-      <FilterButton testID="custom-segment" onPress={noopPress} children="A" />,
+      <FilterButton
+        testID="custom-filter-button"
+        onPress={noopPress}
+        children="A"
+      />,
     );
 
-    expect(getByTestId('custom-segment')).toBeOnTheScreen();
+    expect(getByTestId('custom-filter-button')).toBeOnTheScreen();
   });
 
   describe('container and label appearance by variant', () => {
@@ -404,22 +408,22 @@ describe('FilterButton', () => {
           <FilterButton
             value="a"
             children="A"
-            testID="seg-a"
+            testID="filter-a"
             isSelected
             onPress={noopPress}
           />
           <FilterButton
             value="b"
             children="B"
-            testID="seg-b"
+            testID="filter-b"
             isSelected={false}
             onPress={noopPress}
           />
         </FilterButtonGroup>,
       );
 
-      expect(getByTestId('seg-a')).toHaveStyle(tw`bg-transparent`);
-      expect(getByTestId('seg-b')).toHaveStyle(tw`bg-icon-default`);
+      expect(getByTestId('filter-a')).toHaveStyle(tw`bg-transparent`);
+      expect(getByTestId('filter-b')).toHaveStyle(tw`bg-icon-default`);
     });
   });
 });

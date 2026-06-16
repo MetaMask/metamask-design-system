@@ -8,7 +8,9 @@ import { FilterButtonGroupContext } from '.';
 
 describe('FilterButtonGroupContext', () => {
   it('uses displayName for React DevTools', () => {
-    expect(FilterButtonGroupContext.displayName).toBe('FilterButtonGroupContext');
+    expect(FilterButtonGroupContext.displayName).toBe(
+      'FilterButtonGroupContext',
+    );
   });
 
   describe('when read outside a Provider', () => {
@@ -34,7 +36,7 @@ describe('FilterButtonGroupContext', () => {
     it('exposes value and onChange to consumers', () => {
       const onChange = jest.fn();
       const providerValue: FilterButtonGroupContextValue = {
-        value: 'segment-b',
+        value: 'filter-b',
         onChange,
       };
 
@@ -59,7 +61,7 @@ describe('FilterButtonGroupContext', () => {
 
       expect(root.toJSON()).toMatchObject({
         type: 'span',
-        children: ['segment-b'],
+        children: ['filter-b'],
       });
     });
 

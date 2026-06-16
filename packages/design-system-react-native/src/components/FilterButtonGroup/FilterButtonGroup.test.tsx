@@ -81,7 +81,7 @@ describe('FilterButtonGroup', () => {
     ).toStrictEqual(StyleSheet.flatten(expectedContent));
   });
 
-  it('applies group variant to child segments that omit variant', () => {
+  it('applies group variant to child filter buttons that omit variant', () => {
     const { getByTestId } = render(
       <FilterButtonGroup
         value="a"
@@ -89,13 +89,13 @@ describe('FilterButtonGroup', () => {
         testID={GROUP_TEST_ID}
         variant={FilterButtonVariant.Secondary}
       >
-        <FilterButton value="a" testID="seg-a" onPress={noopPress}>
+        <FilterButton value="a" testID="filter-a" onPress={noopPress}>
           A
         </FilterButton>
       </FilterButtonGroup>,
     );
 
-    expect(getByTestId('seg-a')).toHaveStyle(tw`bg-muted`);
+    expect(getByTestId('filter-a')).toHaveStyle(tw`bg-muted`);
   });
 
   it('exposes tablist role on the container', () => {
@@ -113,7 +113,7 @@ describe('FilterButtonGroup', () => {
     );
   });
 
-  it('calls onChange when a different segment is pressed', () => {
+  it('calls onChange when a different filter button is pressed', () => {
     const onChange = jest.fn();
 
     const { getByText } = render(
@@ -133,7 +133,7 @@ describe('FilterButtonGroup', () => {
     expect(onChange).toHaveBeenCalledWith('b');
   });
 
-  it('does not call onChange when the active segment is pressed again', () => {
+  it('does not call onChange when the active filter button is pressed again', () => {
     const onChange = jest.fn();
 
     const { getByText } = render(
@@ -155,20 +155,20 @@ describe('FilterButtonGroup', () => {
   it('reflects selection from value for participating FilterButtons', () => {
     const { getByTestId } = render(
       <FilterButtonGroup value="b" onChange={noopPress} testID={GROUP_TEST_ID}>
-        <FilterButton value="a" testID="seg-a" onPress={noopPress}>
+        <FilterButton value="a" testID="filter-a" onPress={noopPress}>
           A
         </FilterButton>
-        <FilterButton value="b" testID="seg-b" onPress={noopPress}>
+        <FilterButton value="b" testID="filter-b" onPress={noopPress}>
           B
         </FilterButton>
       </FilterButtonGroup>,
     );
 
-    expect(getByTestId('seg-a')).toHaveStyle(tw`bg-transparent`);
-    expect(getByTestId('seg-b')).toHaveStyle(tw`bg-icon-default`);
+    expect(getByTestId('filter-a')).toHaveStyle(tw`bg-transparent`);
+    expect(getByTestId('filter-b')).toHaveStyle(tw`bg-icon-default`);
   });
 
-  it('allows non-segment children without affecting selection', () => {
+  it('allows non-filter-button children without affecting selection', () => {
     const onChange = jest.fn();
 
     const { getByText, getByTestId } = render(
@@ -202,10 +202,10 @@ describe('FilterButtonGroup', () => {
         onChange={setValue}
         testID={GROUP_TEST_ID}
       >
-        <FilterButton value="a" testID="seg-a" onPress={noopPress}>
+        <FilterButton value="a" testID="filter-a" onPress={noopPress}>
           A
         </FilterButton>
-        <FilterButton value="b" testID="seg-b" onPress={noopPress}>
+        <FilterButton value="b" testID="filter-b" onPress={noopPress}>
           B
         </FilterButton>
       </FilterButtonGroup>
@@ -215,11 +215,11 @@ describe('FilterButtonGroup', () => {
   it('updates selection when parent state changes after onChange', () => {
     const { getByText, getByTestId } = render(<ControlledFixture />);
 
-    expect(getByTestId('seg-a')).toHaveStyle(tw`bg-icon-default`);
+    expect(getByTestId('filter-a')).toHaveStyle(tw`bg-icon-default`);
 
     fireEvent.press(getByText('B'));
 
-    expect(getByTestId('seg-b')).toHaveStyle(tw`bg-icon-default`);
-    expect(getByTestId('seg-a')).toHaveStyle(tw`bg-transparent`);
+    expect(getByTestId('filter-b')).toHaveStyle(tw`bg-icon-default`);
+    expect(getByTestId('filter-a')).toHaveStyle(tw`bg-transparent`);
   });
 });

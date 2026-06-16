@@ -14,11 +14,11 @@ export type FilterButtonVariant =
  */
 export type FilterButtonPropsShared = {
   /**
-   * Segment identity when used inside `FilterButtonGroup`. When set and an ancestor `FilterButtonGroup` exists, selection is derived from the group `value` and `isSelected` is ignored.
+   * Filter button identity when used inside `FilterButtonGroup`. When set and an ancestor `FilterButtonGroup` exists, selection is derived from the group `value` and `isSelected` is ignored.
    */
   value?: string;
   /**
-   * When true, the segment uses the "selected" visual for the current `variant`.
+   * When true, the filter button uses the "selected" visual for the current `variant`.
    *
    * @default false
    */

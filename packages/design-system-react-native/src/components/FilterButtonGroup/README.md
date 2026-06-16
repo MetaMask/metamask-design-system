@@ -1,6 +1,6 @@
 # FilterButtonGroup
 
-FilterButtonGroup is a controlled horizontal strip for segment controls: it scrolls when content overflows and coordinates which **`FilterButton`** is selected. Use it when the parent owns a single string **`value`** and updates it from **`onChange`**. You can place other controls (such as **`SelectButton`**) in the same row; they are not wired to group selection unless you connect them yourself.
+FilterButtonGroup is a controlled horizontal strip for filter controls: it scrolls when content overflows and coordinates which **`FilterButton`** is selected. Use it when the parent owns a single string **`value`** and updates it from **`onChange`**. You can place other controls (such as **`SelectButton`**) in the same row; they are not wired to group selection unless you connect them yourself.
 
 ```tsx
 import { useState } from 'react';
@@ -34,7 +34,7 @@ The props contract is **`FilterButtonGroupProps`** from **`@metamask/design-syst
 
 ### `value`
 
-The selected segment id. Must match the **`value`** prop of the active **`FilterButton`**.
+The selected filter value. Must match the **`value`** prop of the active **`FilterButton`**.
 
 | TYPE     | REQUIRED | DEFAULT |
 | -------- | -------- | ------- |
@@ -42,7 +42,7 @@ The selected segment id. Must match the **`value`** prop of the active **`Filter
 
 ### `onChange`
 
-Called with the next segment id when the user selects a participating **`FilterButton`**.
+Called with the next filter value when the user selects a participating **`FilterButton`**.
 
 | TYPE                      | REQUIRED | DEFAULT |
 | ------------------------- | -------- | ------- |
@@ -73,10 +73,10 @@ export const Controlled = () => {
 
 ### `variant`
 
-Default **`FilterButtonVariant`** for child segments that omit their own **`variant`**.
+Default **`FilterButtonVariant`** for child filter buttons that omit their own **`variant`**.
 
-| TYPE                   | REQUIRED | DEFAULT     |
-| ---------------------- | -------- | ----------- |
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
 | `FilterButtonVariant` | No       | `undefined` |
 
 ```tsx
@@ -178,7 +178,7 @@ export const FullWidthStrip = () => {
 
 ### `contentContainerStyle`
 
-Merged after the default content container styles (horizontal row, centered items, gap). Use for extra padding or spacing on the segment row.
+Merged after the default content container styles (horizontal row, centered items, gap). Use for extra padding or spacing on the filter button row.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

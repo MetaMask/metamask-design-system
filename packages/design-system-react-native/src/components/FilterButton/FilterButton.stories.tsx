@@ -46,7 +46,7 @@ type Story = StoryObj<FilterButtonProps>;
 
 export const Default: Story = {
   args: {
-    children: 'Segment',
+    children: 'Filter',
     variant: FilterButtonVariant.Primary,
     isSelected: true,
     isDisabled: false,

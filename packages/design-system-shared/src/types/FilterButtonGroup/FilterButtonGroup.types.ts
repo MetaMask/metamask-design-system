@@ -6,15 +6,15 @@ import type { FilterButtonVariant } from '../FilterButton/FilterButton.types';
  */
 export type FilterButtonGroupPropsShared = {
   /**
-   * Selected segment value; must match a child `FilterButton` `value`.
+   * Selected filter value; must match a child `FilterButton` `value`.
    */
   value: string;
   /**
-   * Called when the user selects a segment (via a participating `FilterButton`).
+   * Called when the user selects a filter button (via a participating `FilterButton`).
    */
   onChange: (value: string) => void;
   /**
-   * Optional default `variant` for segment buttons in this group. Each `FilterButton` may still override with its own `variant` prop.
+   * Optional default `variant` for filter buttons in this group. Each `FilterButton` may still override with its own `variant` prop.
    */
   variant?: FilterButtonVariant;
 };
