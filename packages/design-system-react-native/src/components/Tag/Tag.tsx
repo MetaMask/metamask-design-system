@@ -50,6 +50,7 @@ export const Tag: React.FC<TagProps> = ({
       ]}
     >
       <BoxRow
+        twClassName="gap-0.5"
         textProps={{
           color: textColor,
           variant: TextVariant.BodyXs,
