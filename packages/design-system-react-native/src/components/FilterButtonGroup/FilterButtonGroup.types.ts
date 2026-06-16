@@ -1,10 +1,10 @@
-import type { SegmentGroupPropsShared } from '@metamask/design-system-shared';
+import type { FilterButtonGroupPropsShared } from '@metamask/design-system-shared';
 import type { ScrollViewProps } from 'react-native';
 
 /**
- * SegmentGroup component props.
+ * FilterButtonGroup component props.
  */
-export type SegmentGroupProps = SegmentGroupPropsShared &
+export type FilterButtonGroupProps = FilterButtonGroupPropsShared &
   Omit<ScrollViewProps, 'horizontal' | 'showsHorizontalScrollIndicator'> & {
     /**
      * Optional twrnc classes merged into `contentContainerStyle` after the default row layout.

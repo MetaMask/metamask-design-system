@@ -1,11 +1,11 @@
-import { SegmentGroupContext } from '@metamask/design-system-shared';
+import { FilterButtonGroupContext } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { ScrollView } from 'react-native';
 
-import type { SegmentGroupProps } from './SegmentGroup.types';
+import type { FilterButtonGroupProps } from './FilterButtonGroup.types';
 
-export const SegmentGroup = ({
+export const FilterButtonGroup = ({
   value,
   onChange,
   variant,
@@ -14,7 +14,7 @@ export const SegmentGroup = ({
   style,
   contentContainerStyle,
   ...scrollRest
-}: SegmentGroupProps) => {
+}: FilterButtonGroupProps) => {
   const tw = useTailwind();
 
   const contextValue = useMemo(
@@ -23,7 +23,7 @@ export const SegmentGroup = ({
   );
 
   return (
-    <SegmentGroupContext.Provider value={contextValue}>
+    <FilterButtonGroupContext.Provider value={contextValue}>
       <ScrollView
         {...scrollRest}
         horizontal
@@ -37,8 +37,8 @@ export const SegmentGroup = ({
       >
         {children}
       </ScrollView>
-    </SegmentGroupContext.Provider>
+    </FilterButtonGroupContext.Provider>
   );
 };
 
-SegmentGroup.displayName = 'SegmentGroup';
+FilterButtonGroup.displayName = 'FilterButtonGroup';

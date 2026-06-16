@@ -1,7 +1,7 @@
 import {
   ButtonBaseSize,
-  SegmentButtonVariant,
-  SegmentGroupContext,
+  FilterButtonVariant,
+  FilterButtonGroupContext,
 } from '@metamask/design-system-shared';
 import React, { useContext } from 'react';
 import type { GestureResponderEvent } from 'react-native';
@@ -10,9 +10,9 @@ import { ButtonBase } from '../ButtonBase';
 import { IconColor } from '../Icon';
 import { TextColor } from '../Text';
 
-import type { SegmentButtonProps } from './SegmentButton.types';
+import type { FilterButtonProps } from './FilterButton.types';
 
-export const SegmentButton = ({
+export const FilterButton = ({
   children,
   textProps,
   startIconProps,
@@ -26,26 +26,26 @@ export const SegmentButton = ({
   style,
   onPress,
   ...buttonBaseRest
-}: SegmentButtonProps) => {
-  const segmentGroup = useContext(SegmentGroupContext);
-  const usesGroupSelection = segmentGroup !== null && value !== undefined;
+}: FilterButtonProps) => {
+  const filterButtonGroup = useContext(FilterButtonGroupContext);
+  const usesGroupSelection = filterButtonGroup !== null && value !== undefined;
 
   const effectiveVariant =
-    variant ?? segmentGroup?.variant ?? SegmentButtonVariant.Primary;
+    variant ?? filterButtonGroup?.variant ?? FilterButtonVariant.Primary;
 
   const effectiveIsSelected = usesGroupSelection
-    ? segmentGroup.value === value
+    ? filterButtonGroup.value === value
     : isSelected;
 
   const getTextAndIconClassName = () => {
     if (
-      effectiveVariant === SegmentButtonVariant.Primary &&
+      effectiveVariant === FilterButtonVariant.Primary &&
       effectiveIsSelected
     ) {
       return 'text-primary-inverse';
     }
     if (
-      effectiveVariant === SegmentButtonVariant.Secondary &&
+      effectiveVariant === FilterButtonVariant.Secondary &&
       effectiveIsSelected
     ) {
       return 'text-default';
@@ -56,11 +56,11 @@ export const SegmentButton = ({
   const handlePress = (event: GestureResponderEvent) => {
     if (
       usesGroupSelection &&
-      segmentGroup !== null &&
+      filterButtonGroup !== null &&
       value !== undefined &&
-      segmentGroup.value !== value
+      filterButtonGroup.value !== value
     ) {
-      segmentGroup.onChange(value);
+      filterButtonGroup.onChange(value);
     }
     onPress?.(event);
   };
@@ -86,7 +86,7 @@ export const SegmentButton = ({
       }}
       twClassName={(pressed) => {
         if (
-          effectiveVariant === SegmentButtonVariant.Primary &&
+          effectiveVariant === FilterButtonVariant.Primary &&
           effectiveIsSelected
         ) {
           return `${pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default'} ${
@@ -97,7 +97,7 @@ export const SegmentButton = ({
         }
 
         if (
-          effectiveVariant === SegmentButtonVariant.Secondary &&
+          effectiveVariant === FilterButtonVariant.Secondary &&
           effectiveIsSelected
         ) {
           return `${pressed || isLoading ? 'bg-muted-pressed' : 'bg-muted'} ${
@@ -118,4 +118,4 @@ export const SegmentButton = ({
   );
 };
 
-SegmentButton.displayName = 'SegmentButton';
+FilterButton.displayName = 'FilterButton';

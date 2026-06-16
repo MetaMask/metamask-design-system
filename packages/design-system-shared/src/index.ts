@@ -230,20 +230,20 @@ export {
   type SensitiveTextPropsShared,
 } from './types/SensitiveText';
 
-// SegmentButton types (ADR-0003 + ADR-0004)
+// FilterButton types (ADR-0003 + ADR-0004)
 export {
-  SegmentButtonVariant,
-  type SegmentButtonPropsShared,
-} from './types/SegmentButton';
+  FilterButtonVariant,
+  type FilterButtonPropsShared,
+} from './types/FilterButton';
 
-// SegmentGroup types (ADR-0003 + ADR-0004)
-export { type SegmentGroupPropsShared } from './types/SegmentGroup';
+// FilterButtonGroup types (ADR-0003 + ADR-0004)
+export { type FilterButtonGroupPropsShared } from './types/FilterButtonGroup';
 
-// SegmentGroup context (ADR-0003 + ADR-0004)
+// FilterButtonGroup context (ADR-0003 + ADR-0004)
 export {
-  SegmentGroupContext,
-  type SegmentGroupContextValue,
-} from './contexts/SegmentGroup';
+  FilterButtonGroupContext,
+  type FilterButtonGroupContextValue,
+} from './contexts/FilterButtonGroup';
 
 // SelectButton types (ADR-0003 + ADR-0004)
 export {

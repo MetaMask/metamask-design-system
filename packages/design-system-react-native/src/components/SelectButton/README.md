@@ -1,6 +1,6 @@
 # SelectButton
 
-SelectButton is a compact row for opening a picker or menu: it shows a **`placeholder`** or selected **`value`**, optional leading content, and a trailing chevron (by default **down**) unless you hide it or swap in custom trailing content. Use it next to **`SegmentButton`** rows in a **`SegmentGroup`**, or on its own for filters and dropdown-style actions.
+SelectButton is a compact row for opening a picker or menu: it shows a **`placeholder`** or selected **`value`**, optional leading content, and a trailing chevron (by default **down**) unless you hide it or swap in custom trailing content. Use it next to **`FilterButton`** rows in a **`FilterButtonGroup`**, or on its own for filters and dropdown-style actions.
 
 ```tsx
 import { SelectButton } from '@metamask/design-system-react-native';

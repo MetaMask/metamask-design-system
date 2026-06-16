@@ -1,40 +1,40 @@
-# SegmentGroup
+# FilterButtonGroup
 
-SegmentGroup is a controlled horizontal strip for segment controls: it scrolls when content overflows and coordinates which **`SegmentButton`** is selected. Use it when the parent owns a single string **`value`** and updates it from **`onChange`**. You can place other controls (such as **`SelectButton`**) in the same row; they are not wired to group selection unless you connect them yourself.
+FilterButtonGroup is a controlled horizontal strip for filter controls: it scrolls when content overflows and coordinates which **`FilterButton`** is selected. Use it when the parent owns a single string **`value`** and updates it from **`onChange`**. You can place other controls (such as **`SelectButton`**) in the same row; they are not wired to group selection unless you connect them yourself.
 
 ```tsx
 import { useState } from 'react';
 import {
-  SegmentButton,
-  SegmentGroup,
+  FilterButton,
+  FilterButtonGroup,
 } from '@metamask/design-system-react-native';
 
 export const Example = () => {
   const [value, setValue] = useState('all');
 
   return (
-    <SegmentGroup value={value} onChange={setValue}>
-      <SegmentButton value="all" onPress={() => {}}>
+    <FilterButtonGroup value={value} onChange={setValue}>
+      <FilterButton value="all" onPress={() => {}}>
         All
-      </SegmentButton>
-      <SegmentButton value="tokens" onPress={() => {}}>
+      </FilterButton>
+      <FilterButton value="tokens" onPress={() => {}}>
         Tokens
-      </SegmentButton>
-      <SegmentButton value="nfts" onPress={() => {}}>
+      </FilterButton>
+      <FilterButton value="nfts" onPress={() => {}}>
         NFTs
-      </SegmentButton>
-    </SegmentGroup>
+      </FilterButton>
+    </FilterButtonGroup>
   );
 };
 ```
 
 ## Props
 
-The props contract is **`SegmentGroupProps`** from **`@metamask/design-system-react-native`**. It extends **`ScrollView`** props except **`horizontal`** and **`showsHorizontalScrollIndicator`** (fixed by the component), plus optional **`twClassName`** on the scroll content row.
+The props contract is **`FilterButtonGroupProps`** from **`@metamask/design-system-react-native`**. It extends **`ScrollView`** props except **`horizontal`** and **`showsHorizontalScrollIndicator`** (fixed by the component), plus optional **`twClassName`** on the scroll content row.
 
 ### `value`
 
-The selected segment id. Must match the **`value`** prop of the active **`SegmentButton`**.
+The selected filter value. Must match the **`value`** prop of the active **`FilterButton`**.
 
 | TYPE     | REQUIRED | DEFAULT |
 | -------- | -------- | ------- |
@@ -42,7 +42,7 @@ The selected segment id. Must match the **`value`** prop of the active **`Segmen
 
 ### `onChange`
 
-Called with the next segment id when the user selects a participating **`SegmentButton`**.
+Called with the next filter value when the user selects a participating **`FilterButton`**.
 
 | TYPE                      | REQUIRED | DEFAULT |
 | ------------------------- | -------- | ------- |
@@ -51,58 +51,58 @@ Called with the next segment id when the user selects a participating **`Segment
 ```tsx
 import { useState } from 'react';
 import {
-  SegmentButton,
-  SegmentGroup,
+  FilterButton,
+  FilterButtonGroup,
 } from '@metamask/design-system-react-native';
 
 export const Controlled = () => {
   const [value, setValue] = useState('a');
 
   return (
-    <SegmentGroup value={value} onChange={setValue}>
-      <SegmentButton value="a" onPress={() => {}}>
+    <FilterButtonGroup value={value} onChange={setValue}>
+      <FilterButton value="a" onPress={() => {}}>
         A
-      </SegmentButton>
-      <SegmentButton value="b" onPress={() => {}}>
+      </FilterButton>
+      <FilterButton value="b" onPress={() => {}}>
         B
-      </SegmentButton>
-    </SegmentGroup>
+      </FilterButton>
+    </FilterButtonGroup>
   );
 };
 ```
 
 ### `variant`
 
-Default **`SegmentButtonVariant`** for child segments that omit their own **`variant`**.
+Default **`FilterButtonVariant`** for child filter buttons that omit their own **`variant`**.
 
-| TYPE                   | REQUIRED | DEFAULT     |
-| ---------------------- | -------- | ----------- |
-| `SegmentButtonVariant` | No       | `undefined` |
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
+| `FilterButtonVariant` | No       | `undefined` |
 
 ```tsx
 import { useState } from 'react';
 import {
-  SegmentButton,
-  SegmentButtonVariant,
-  SegmentGroup,
+  FilterButton,
+  FilterButtonVariant,
+  FilterButtonGroup,
 } from '@metamask/design-system-react-native';
 
 export const WithGroupVariant = () => {
   const [value, setValue] = useState('1d');
 
   return (
-    <SegmentGroup
+    <FilterButtonGroup
       value={value}
       onChange={setValue}
-      variant={SegmentButtonVariant.Secondary}
+      variant={FilterButtonVariant.Secondary}
     >
-      <SegmentButton value="1d" onPress={() => {}}>
+      <FilterButton value="1d" onPress={() => {}}>
         1D
-      </SegmentButton>
-      <SegmentButton value="1w" onPress={() => {}}>
+      </FilterButton>
+      <FilterButton value="1w" onPress={() => {}}>
         1W
-      </SegmentButton>
-    </SegmentGroup>
+      </FilterButton>
+    </FilterButtonGroup>
   );
 };
 ```
@@ -121,22 +121,22 @@ Optional Tailwind classes merged into the scroll content row after the default h
 ```tsx
 import { useState } from 'react';
 import {
-  SegmentButton,
-  SegmentGroup,
+  FilterButton,
+  FilterButtonGroup,
 } from '@metamask/design-system-react-native';
 
 export const CustomRowSpacing = () => {
   const [value, setValue] = useState('all');
 
   return (
-    <SegmentGroup value={value} onChange={setValue} twClassName="gap-2">
-      <SegmentButton value="all" onPress={() => {}}>
+    <FilterButtonGroup value={value} onChange={setValue} twClassName="gap-2">
+      <FilterButton value="all" onPress={() => {}}>
         All
-      </SegmentButton>
-      <SegmentButton value="tokens" onPress={() => {}}>
+      </FilterButton>
+      <FilterButton value="tokens" onPress={() => {}}>
         Tokens
-      </SegmentButton>
-    </SegmentGroup>
+      </FilterButton>
+    </FilterButtonGroup>
   );
 };
 ```
@@ -152,33 +152,33 @@ Use the **`style`** prop on the root **`ScrollView`** for viewport layout (for e
 ```tsx
 import { useState } from 'react';
 import {
-  SegmentButton,
-  SegmentGroup,
+  FilterButton,
+  FilterButtonGroup,
 } from '@metamask/design-system-react-native';
 
 export const FullWidthStrip = () => {
   const [value, setValue] = useState('all');
 
   return (
-    <SegmentGroup
+    <FilterButtonGroup
       value={value}
       onChange={setValue}
       style={{ alignSelf: 'stretch' }}
     >
-      <SegmentButton value="all" onPress={() => {}}>
+      <FilterButton value="all" onPress={() => {}}>
         All
-      </SegmentButton>
-      <SegmentButton value="tokens" onPress={() => {}}>
+      </FilterButton>
+      <FilterButton value="tokens" onPress={() => {}}>
         Tokens
-      </SegmentButton>
-    </SegmentGroup>
+      </FilterButton>
+    </FilterButtonGroup>
   );
 };
 ```
 
 ### `contentContainerStyle`
 
-Merged after the default content container styles (horizontal row, centered items, gap). Use for extra padding or spacing on the segment row.
+Merged after the default content container styles (horizontal row, centered items, gap). Use for extra padding or spacing on the filter button row.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
@@ -187,23 +187,23 @@ Merged after the default content container styles (horizontal row, centered item
 ```tsx
 import { useState } from 'react';
 import {
-  SegmentButton,
-  SegmentGroup,
+  FilterButton,
+  FilterButtonGroup,
 } from '@metamask/design-system-react-native';
 
 export const PaddedRow = () => {
   const [value, setValue] = useState('all');
 
   return (
-    <SegmentGroup
+    <FilterButtonGroup
       value={value}
       onChange={setValue}
       contentContainerStyle={{ paddingVertical: 8 }}
     >
-      <SegmentButton value="all" onPress={() => {}}>
+      <FilterButton value="all" onPress={() => {}}>
         All
-      </SegmentButton>
-    </SegmentGroup>
+      </FilterButton>
+    </FilterButtonGroup>
   );
 };
 ```

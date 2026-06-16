@@ -197,11 +197,11 @@ export type { MainActionButtonProps } from './MainActionButton';
 export { SectionDivider } from './SectionDivider';
 export type { SectionDividerProps } from './SectionDivider';
 
-export { SegmentButton, SegmentButtonVariant } from './SegmentButton';
-export type { SegmentButtonProps } from './SegmentButton';
+export { FilterButton, FilterButtonVariant } from './FilterButton';
+export type { FilterButtonProps } from './FilterButton';
 
-export { SegmentGroup } from './SegmentGroup';
-export type { SegmentGroupProps } from './SegmentGroup';
+export { FilterButtonGroup } from './FilterButtonGroup';
+export type { FilterButtonGroupProps } from './FilterButtonGroup';
 
 export {
   SelectButton,
