@@ -1,6 +1,9 @@
-import { IconName, TagSeverity } from '@metamask/design-system-shared';
+import { IconName, IconSize, TagSeverity } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
+import { Icon } from '../Icon';
 
 import README from './README.mdx';
 import { Tag } from './Tag';
@@ -64,13 +67,20 @@ export const StartIconName: Story = {
 };
 
 export const EndIconName: Story = {
-  render: () => <Tag endIconName={IconName.ArrowRight}>Tag</Tag>,
+  render: () => <Tag endIconName={IconName.ArrowDown}>Tag</Tag>,
 };
 
 export const StartAccessory: Story = {
   render: () => (
     <Tag
-      startAccessory={<span data-testid="tag-story-start-accessory">→</span>}
+      startAccessory={
+        <Icon
+          name={IconName.Warning}
+          size={IconSize.Xs}
+          data-testid="tag-story-start-accessory"
+          aria-hidden
+        />
+      }
     >
       Tag
     </Tag>
@@ -79,7 +89,16 @@ export const StartAccessory: Story = {
 
 export const EndAccessory: Story = {
   render: () => (
-    <Tag endAccessory={<span data-testid="tag-story-end-accessory">←</span>}>
+    <Tag
+      endAccessory={
+        <Icon
+          name={IconName.ArrowDown}
+          size={IconSize.Xs}
+          data-testid="tag-story-end-accessory"
+          aria-hidden
+        />
+      }
+    >
       Tag
     </Tag>
   ),
@@ -87,7 +106,7 @@ export const EndAccessory: Story = {
 
 export const StartAndEndIconNames: Story = {
   render: () => (
-    <Tag startIconName={IconName.Warning} endIconName={IconName.ArrowRight}>
+    <Tag startIconName={IconName.Warning} endIconName={IconName.ArrowDown}>
       Tag
     </Tag>
   ),
