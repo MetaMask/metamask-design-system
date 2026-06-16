@@ -11,6 +11,7 @@ export const ListItemSelect = ({
   isSelected,
   showSelectedIcon = false,
   endAccessory,
+  accessoryGap = 3,
   twClassName,
   ...rest
 }: ListItemSelectProps) => {
@@ -34,6 +35,7 @@ export const ListItemSelect = ({
       isInteractive
       twClassName={resolvedTwClassName}
       endAccessory={resolvedEndAccessory}
+      accessoryGap={accessoryGap}
       {...rest}
     />
   );

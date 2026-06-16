@@ -10,6 +10,7 @@ const mergeTwClassName = (base: string, extra?: string) =>
 
 export const ListItemMultiSelect = ({
   isSelected,
+  accessoryGap = 3,
   twClassName,
   ...rest
 }: ListItemMultiSelectProps) => {
@@ -26,6 +27,7 @@ export const ListItemMultiSelect = ({
           <Checkbox isSelected={isSelected} onChange={() => {}} label="" />
         </Box>
       }
+      accessoryGap={accessoryGap}
       {...rest}
     />
   );
