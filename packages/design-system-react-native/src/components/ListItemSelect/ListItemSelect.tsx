@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Icon, IconColor, IconName, IconSize } from '../Icon';
 import { ListItem } from '../ListItem';
+
 import type { ListItemSelectProps } from './ListItemSelect.types';
 
 const mergeTwClassName = (base: string, extra?: string) =>

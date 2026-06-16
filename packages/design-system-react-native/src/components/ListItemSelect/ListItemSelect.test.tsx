@@ -8,6 +8,7 @@ import { IconName } from '../Icon';
 import { ListItemSelect } from './ListItemSelect';
 
 const ROOT_TEST_ID = 'listitem-select-root';
+const noopPress = () => undefined;
 
 describe('ListItemSelect', () => {
   let tw: ReturnType<typeof useTailwind>;
@@ -22,7 +23,7 @@ describe('ListItemSelect', () => {
         <ListItemSelect
           title="Label"
           isSelected={false}
-          onPress={() => {}}
+          onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
@@ -33,9 +34,9 @@ describe('ListItemSelect', () => {
   describe('when isSelected is false', () => {
     it('does not render check icon by default', () => {
       const { root } = render(
-        <ListItemSelect title="Label" isSelected={false} onPress={() => {}} />,
+        <ListItemSelect title="Label" isSelected={false} onPress={noopPress} />,
       );
-      expect(() => root.findByProps({ name: IconName.Check })).toThrow();
+      expect(root.findAllByProps({ name: IconName.Check })).toHaveLength(0);
     });
 
     it('renders custom endAccessory', () => {
@@ -43,7 +44,7 @@ describe('ListItemSelect', () => {
         <ListItemSelect
           title="Label"
           isSelected={false}
-          onPress={() => {}}
+          onPress={noopPress}
           endAccessory={<Text>Custom</Text>}
         />,
       );
@@ -56,10 +57,10 @@ describe('ListItemSelect', () => {
           title="Label"
           isSelected={false}
           showSelectedIcon
-          onPress={() => {}}
+          onPress={noopPress}
         />,
       );
-      expect(() => root.findByProps({ name: IconName.Check })).toThrow();
+      expect(root.findAllByProps({ name: IconName.Check })).toHaveLength(0);
     });
   });
 
@@ -69,7 +70,7 @@ describe('ListItemSelect', () => {
         <ListItemSelect
           title="Label"
           isSelected
-          onPress={() => {}}
+          onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
@@ -84,7 +85,7 @@ describe('ListItemSelect', () => {
           title="Label"
           isSelected
           showSelectedIcon
-          onPress={() => {}}
+          onPress={noopPress}
         />,
       );
       expect(root.findByProps({ name: IconName.Check })).toBeDefined();
@@ -95,12 +96,12 @@ describe('ListItemSelect', () => {
         <ListItemSelect
           title="Label"
           isSelected
-          onPress={() => {}}
+          onPress={noopPress}
           endAccessory={<Text>Custom</Text>}
         />,
       );
       expect(getByText('Custom')).toBeOnTheScreen();
-      expect(() => root.findByProps({ name: IconName.Check })).toThrow();
+      expect(root.findAllByProps({ name: IconName.Check })).toHaveLength(0);
     });
   });
 
@@ -127,7 +128,7 @@ describe('ListItemSelect', () => {
           title="Label"
           isSelected
           twClassName="rounded-lg"
-          onPress={() => {}}
+          onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
@@ -143,7 +144,7 @@ describe('ListItemSelect', () => {
           title="Label"
           isSelected={false}
           twClassName="rounded-lg"
-          onPress={() => {}}
+          onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );

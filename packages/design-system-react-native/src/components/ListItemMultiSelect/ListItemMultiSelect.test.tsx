@@ -7,6 +7,7 @@ import { Checkbox } from '../Checkbox';
 import { ListItemMultiSelect } from './ListItemMultiSelect';
 
 const ROOT_TEST_ID = 'listitem-multiselect-root';
+const noopPress = () => undefined;
 
 describe('ListItemMultiSelect', () => {
   let tw: ReturnType<typeof useTailwind>;
@@ -22,7 +23,7 @@ describe('ListItemMultiSelect', () => {
         <ListItemMultiSelect
           title="Label"
           isSelected={false}
-          onPress={() => {}}
+          onPress={noopPress}
         />,
       );
       expect(getByText('Label')).toBeOnTheScreen();
@@ -35,7 +36,7 @@ describe('ListItemMultiSelect', () => {
         <ListItemMultiSelect
           title="Label"
           isSelected
-          onPress={() => {}}
+          onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
@@ -51,7 +52,7 @@ describe('ListItemMultiSelect', () => {
         <ListItemMultiSelect
           title="Label"
           isSelected={false}
-          onPress={() => {}}
+          onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
@@ -67,7 +68,7 @@ describe('ListItemMultiSelect', () => {
         <ListItemMultiSelect
           title="Label"
           isSelected={false}
-          onPress={() => {}}
+          onPress={noopPress}
         />,
       );
       expect(getByRole('checkbox')).toBeOnTheScreen();
@@ -75,7 +76,7 @@ describe('ListItemMultiSelect', () => {
 
     it('marks checkbox as checked when isSelected is true', () => {
       const { getByRole } = render(
-        <ListItemMultiSelect title="Label" isSelected onPress={() => {}} />,
+        <ListItemMultiSelect title="Label" isSelected onPress={noopPress} />,
       );
       expect(getByRole('checkbox').props.accessibilityState?.checked).toBe(
         true,
@@ -87,7 +88,7 @@ describe('ListItemMultiSelect', () => {
         <ListItemMultiSelect
           title="Label"
           isSelected={false}
-          onPress={() => {}}
+          onPress={noopPress}
         />,
       );
 
@@ -131,7 +132,7 @@ describe('ListItemMultiSelect', () => {
           title="Label"
           isSelected
           twClassName="rounded-lg"
-          onPress={() => {}}
+          onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
@@ -147,7 +148,7 @@ describe('ListItemMultiSelect', () => {
           title="Label"
           isSelected={false}
           twClassName="rounded-lg"
-          onPress={() => {}}
+          onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
