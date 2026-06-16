@@ -1,20 +1,20 @@
 /**
- * SegmentButton visual variant (ADR-0003).
+ * FilterButton visual variant (ADR-0003).
  * Maps to combinations of ButtonPrimary / ButtonSecondary / ButtonTertiary presentation with `isSelected`.
  */
-export const SegmentButtonVariant = {
+export const FilterButtonVariant = {
   Primary: 'primary',
   Secondary: 'secondary',
 } as const;
-export type SegmentButtonVariant =
-  (typeof SegmentButtonVariant)[keyof typeof SegmentButtonVariant];
+export type FilterButtonVariant =
+  (typeof FilterButtonVariant)[keyof typeof FilterButtonVariant];
 
 /**
- * SegmentButton component shared props (ADR-0004).
+ * FilterButton component shared props (ADR-0004).
  */
-export type SegmentButtonPropsShared = {
+export type FilterButtonPropsShared = {
   /**
-   * Segment identity when used inside `SegmentGroup`. When set and an ancestor `SegmentGroup` exists, selection is derived from the group `value` and `isSelected` is ignored.
+   * Segment identity when used inside `FilterButtonGroup`. When set and an ancestor `FilterButtonGroup` exists, selection is derived from the group `value` and `isSelected` is ignored.
    */
   value?: string;
   /**
@@ -28,5 +28,5 @@ export type SegmentButtonPropsShared = {
    *
    * @default primary
    */
-  variant?: SegmentButtonVariant;
+  variant?: FilterButtonVariant;
 };

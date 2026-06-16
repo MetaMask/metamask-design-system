@@ -1,20 +1,20 @@
 import { createElement, useContext } from 'react';
 import { act, create } from 'react-test-renderer';
 
-import { SegmentButtonVariant } from '../../types/SegmentButton/SegmentButton.types';
+import { FilterButtonVariant } from '../../types/FilterButton/FilterButton.types';
 
-import type { SegmentGroupContextValue } from '.';
-import { SegmentGroupContext } from '.';
+import type { FilterButtonGroupContextValue } from '.';
+import { FilterButtonGroupContext } from '.';
 
-describe('SegmentGroupContext', () => {
+describe('FilterButtonGroupContext', () => {
   it('uses displayName for React DevTools', () => {
-    expect(SegmentGroupContext.displayName).toBe('SegmentGroupContext');
+    expect(FilterButtonGroupContext.displayName).toBe('FilterButtonGroupContext');
   });
 
   describe('when read outside a Provider', () => {
     it('yields null to consumers', () => {
       function Consumer() {
-        const value = useContext(SegmentGroupContext);
+        const value = useContext(FilterButtonGroupContext);
         return createElement('span', null, value === null ? 'empty' : 'set');
       }
 
@@ -30,16 +30,16 @@ describe('SegmentGroupContext', () => {
     });
   });
 
-  describe('when provided by SegmentGroupContext.Provider', () => {
+  describe('when provided by FilterButtonGroupContext.Provider', () => {
     it('exposes value and onChange to consumers', () => {
       const onChange = jest.fn();
-      const providerValue: SegmentGroupContextValue = {
+      const providerValue: FilterButtonGroupContextValue = {
         value: 'segment-b',
         onChange,
       };
 
       function Consumer() {
-        const ctx = useContext(SegmentGroupContext);
+        const ctx = useContext(FilterButtonGroupContext);
         if (!ctx) {
           return createElement('span', null, 'missing');
         }
@@ -50,7 +50,7 @@ describe('SegmentGroupContext', () => {
       act(() => {
         root = create(
           createElement(
-            SegmentGroupContext.Provider,
+            FilterButtonGroupContext.Provider,
             { value: providerValue },
             createElement(Consumer),
           ),
@@ -64,18 +64,18 @@ describe('SegmentGroupContext', () => {
     });
 
     it('exposes optional variant when set', () => {
-      const providerValue: SegmentGroupContextValue = {
+      const providerValue: FilterButtonGroupContextValue = {
         value: 'a',
         onChange: jest.fn(),
-        variant: SegmentButtonVariant.Secondary,
+        variant: FilterButtonVariant.Secondary,
       };
 
       function Consumer() {
-        const ctx = useContext(SegmentGroupContext);
+        const ctx = useContext(FilterButtonGroupContext);
         return createElement(
           'span',
           null,
-          ctx?.variant === SegmentButtonVariant.Secondary
+          ctx?.variant === FilterButtonVariant.Secondary
             ? 'secondary'
             : 'other',
         );
@@ -85,7 +85,7 @@ describe('SegmentGroupContext', () => {
       act(() => {
         root = create(
           createElement(
-            SegmentGroupContext.Provider,
+            FilterButtonGroupContext.Provider,
             { value: providerValue },
             createElement(Consumer),
           ),

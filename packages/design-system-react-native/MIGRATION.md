@@ -64,6 +64,73 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ### From version 0.29.0 to 0.30.0
 
+<a id="segmentbutton-and-segmentgroup-renamed-to-filterbutton-and-filterbuttongroup"></a>
+
+#### `SegmentButton` and `SegmentGroup` renamed to `FilterButton` and `FilterButtonGroup`
+
+The segmented filter control components are renamed to align with product naming. Props and behavior are unchanged — only export names change.
+
+**What changed:**
+
+| Before (0.29.0)        | After (0.30.0)           |
+| ---------------------- | ------------------------ |
+| `SegmentButton`        | `FilterButton`           |
+| `SegmentButtonVariant` | `FilterButtonVariant`    |
+| `SegmentButtonProps`   | `FilterButtonProps`      |
+| `SegmentGroup`         | `FilterButtonGroup`      |
+| `SegmentGroupProps`    | `FilterButtonGroupProps` |
+
+**Migration:**
+
+```tsx
+// Before (0.29.0)
+import {
+  SegmentButton,
+  SegmentButtonVariant,
+  SegmentGroup,
+} from '@metamask/design-system-react-native';
+
+<SegmentGroup
+  value={value}
+  onChange={setValue}
+  variant={SegmentButtonVariant.Primary}
+>
+  <SegmentButton value="all" onPress={() => {}}>
+    All
+  </SegmentButton>
+  <SegmentButton value="tokens" onPress={() => {}}>
+    Tokens
+  </SegmentButton>
+</SegmentGroup>;
+
+// After (0.30.0)
+import {
+  FilterButton,
+  FilterButtonVariant,
+  FilterButtonGroup,
+} from '@metamask/design-system-react-native';
+
+<FilterButtonGroup
+  value={value}
+  onChange={setValue}
+  variant={FilterButtonVariant.Primary}
+>
+  <FilterButton value="all" onPress={() => {}}>
+    All
+  </FilterButton>
+  <FilterButton value="tokens" onPress={() => {}}>
+    Tokens
+  </FilterButton>
+</FilterButtonGroup>;
+```
+
+If you import shared types or context directly from `@metamask/design-system-shared`, apply the same renames there (`FilterButtonPropsShared`, `FilterButtonGroupPropsShared`, `FilterButtonGroupContext`, `FilterButtonGroupContextValue`). See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#filterbutton-shared-rename).
+
+**Impact:**
+
+- Any import of `SegmentButton`, `SegmentButtonVariant`, `SegmentGroup`, or related prop/context types must be renamed.
+- `ButtonFilter` is a separate component (active/inactive filter chip) and is not affected by this rename.
+
 #### `Content` shell accessories removed; row accessories moved to `ListItem`
 
 `Content` is now inner-only (avatar, title/description, value/subvalue, and inline text accessories). Row shell accessories (`startAccessory`, `endAccessory`) live on `ListItem`. Column shell accessories (`topAccessory`, `bottomAccessory`) are removed — compose them manually with `BoxColumn`.

@@ -1,4 +1,4 @@
-import { SegmentButtonVariant } from '@metamask/design-system-shared';
+import { FilterButtonVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { ViewProps } from 'react-native';
@@ -6,18 +6,18 @@ import { View } from 'react-native';
 
 import { Icon, IconName, IconSize } from '../Icon';
 
-import { SegmentButton } from './SegmentButton';
-import type { SegmentButtonProps } from './SegmentButton.types';
+import { FilterButton } from './FilterButton';
+import type { FilterButtonProps } from './FilterButton.types';
 
 const noopPress = () => undefined;
 
-const meta: Meta<SegmentButtonProps> = {
-  title: 'Components/SegmentButton',
-  component: SegmentButton,
+const meta: Meta<FilterButtonProps> = {
+  title: 'Components/FilterButton',
+  component: FilterButton,
   argTypes: {
     variant: {
       control: 'select',
-      options: Object.values(SegmentButtonVariant),
+      options: Object.values(FilterButtonVariant),
     },
     isSelected: {
       control: 'boolean',
@@ -30,7 +30,7 @@ const meta: Meta<SegmentButtonProps> = {
 
 export default meta;
 
-const SegmentButtonStoryWrapper: React.FC<ViewProps> = ({
+const FilterButtonStoryWrapper: React.FC<ViewProps> = ({
   children,
   ...props
 }) => {
@@ -42,110 +42,110 @@ const SegmentButtonStoryWrapper: React.FC<ViewProps> = ({
   );
 };
 
-type Story = StoryObj<SegmentButtonProps>;
+type Story = StoryObj<FilterButtonProps>;
 
 export const Default: Story = {
   args: {
     children: 'Segment',
-    variant: SegmentButtonVariant.Primary,
+    variant: FilterButtonVariant.Primary,
     isSelected: true,
     isDisabled: false,
     isLoading: false,
     onPress: noopPress,
   },
-  render: (args: SegmentButtonProps) => (
-    <SegmentButtonStoryWrapper>
-      <SegmentButton {...args} />
-    </SegmentButtonStoryWrapper>
+  render: (args: FilterButtonProps) => (
+    <FilterButtonStoryWrapper>
+      <FilterButton {...args} />
+    </FilterButtonStoryWrapper>
   ),
 };
 
 export const Variant: Story = {
   render: () => (
-    <SegmentButtonStoryWrapper>
-      <SegmentButton
-        variant={SegmentButtonVariant.Primary}
+    <FilterButtonStoryWrapper>
+      <FilterButton
+        variant={FilterButtonVariant.Primary}
         isSelected
         children="Primary selected"
         onPress={noopPress}
       />
-      <SegmentButton
-        variant={SegmentButtonVariant.Primary}
+      <FilterButton
+        variant={FilterButtonVariant.Primary}
         isSelected={false}
         children="Primary unselected"
         onPress={noopPress}
       />
-      <SegmentButton
-        variant={SegmentButtonVariant.Secondary}
+      <FilterButton
+        variant={FilterButtonVariant.Secondary}
         isSelected
         children="Secondary selected"
         onPress={noopPress}
       />
-      <SegmentButton
-        variant={SegmentButtonVariant.Secondary}
+      <FilterButton
+        variant={FilterButtonVariant.Secondary}
         isSelected={false}
         children="Secondary unselected"
         onPress={noopPress}
       />
-    </SegmentButtonStoryWrapper>
+    </FilterButtonStoryWrapper>
   ),
 };
 
 export const IsSelected: Story = {
   render: () => (
-    <SegmentButtonStoryWrapper>
-      <SegmentButton
-        variant={SegmentButtonVariant.Primary}
+    <FilterButtonStoryWrapper>
+      <FilterButton
+        variant={FilterButtonVariant.Primary}
         isSelected
         children="Selected"
         onPress={noopPress}
       />
-      <SegmentButton
-        variant={SegmentButtonVariant.Primary}
+      <FilterButton
+        variant={FilterButtonVariant.Primary}
         isSelected={false}
         children="Unselected"
         onPress={noopPress}
       />
-    </SegmentButtonStoryWrapper>
+    </FilterButtonStoryWrapper>
   ),
 };
 
 export const IsDisabled: Story = {
   render: () => (
-    <SegmentButtonStoryWrapper>
-      <SegmentButton
-        variant={SegmentButtonVariant.Primary}
+    <FilterButtonStoryWrapper>
+      <FilterButton
+        variant={FilterButtonVariant.Primary}
         children="Enabled"
         onPress={noopPress}
       />
-      <SegmentButton
-        variant={SegmentButtonVariant.Primary}
+      <FilterButton
+        variant={FilterButtonVariant.Primary}
         isDisabled
         children="Disabled"
         onPress={noopPress}
       />
-    </SegmentButtonStoryWrapper>
+    </FilterButtonStoryWrapper>
   ),
 };
 
 export const StartAccessory: Story = {
   render: () => (
-    <SegmentButtonStoryWrapper>
-      <SegmentButton
-        variant={SegmentButtonVariant.Secondary}
+    <FilterButtonStoryWrapper>
+      <FilterButton
+        variant={FilterButtonVariant.Secondary}
         isSelected={false}
         startIconName={IconName.Search}
-        startIconProps={{ testID: 'segment-start-icon' }}
+        startIconProps={{ testID: 'filter-button-start-icon' }}
         children="With icon"
         onPress={noopPress}
       />
-      <SegmentButton
-        variant={SegmentButtonVariant.Primary}
+      <FilterButton
+        variant={FilterButtonVariant.Primary}
         isSelected={false}
         startAccessory={<Icon name={IconName.Wallet} size={IconSize.Sm} />}
         children="Custom start"
         onPress={noopPress}
       />
-    </SegmentButtonStoryWrapper>
+    </FilterButtonStoryWrapper>
   ),
 };

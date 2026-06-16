@@ -1,22 +1,22 @@
 import {
   SelectButtonEndArrow,
-  SegmentButtonVariant,
+  FilterButtonVariant,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { SegmentButton } from '../SegmentButton';
+import { FilterButton } from '../FilterButton';
 import { SelectButton } from '../SelectButton';
 
-import { SegmentGroup } from './SegmentGroup';
+import { FilterButtonGroup } from './FilterButtonGroup';
 
-const GROUP_TEST_ID = 'segment-group';
+const GROUP_TEST_ID = 'filter-button-group';
 
 const noopPress = () => undefined;
 
-describe('SegmentGroup', () => {
+describe('FilterButtonGroup', () => {
   let tw: ReturnType<typeof useTailwind>;
 
   beforeAll(() => {
@@ -26,11 +26,11 @@ describe('SegmentGroup', () => {
 
   it('renders children', () => {
     const { getByText } = render(
-      <SegmentGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
-        <SegmentButton value="a" onPress={noopPress}>
+      <FilterButtonGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
+        <FilterButton value="a" onPress={noopPress}>
           A
-        </SegmentButton>
-      </SegmentGroup>,
+        </FilterButton>
+      </FilterButtonGroup>,
     );
 
     expect(getByText('A')).toBeOnTheScreen();
@@ -38,11 +38,11 @@ describe('SegmentGroup', () => {
 
   it('merges default row layout into contentContainerStyle', () => {
     const { getByTestId } = render(
-      <SegmentGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
-        <SegmentButton value="a" onPress={noopPress}>
+      <FilterButtonGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
+        <FilterButton value="a" onPress={noopPress}>
           A
-        </SegmentButton>
-      </SegmentGroup>,
+        </FilterButton>
+      </FilterButtonGroup>,
     );
 
     const scroll = getByTestId(GROUP_TEST_ID);
@@ -58,16 +58,16 @@ describe('SegmentGroup', () => {
 
   it('merges twClassName into contentContainerStyle after defaults', () => {
     const { getByTestId } = render(
-      <SegmentGroup
+      <FilterButtonGroup
         value="a"
         onChange={noopPress}
         testID={GROUP_TEST_ID}
         twClassName="px-4"
       >
-        <SegmentButton value="a" onPress={noopPress}>
+        <FilterButton value="a" onPress={noopPress}>
           A
-        </SegmentButton>
-      </SegmentGroup>,
+        </FilterButton>
+      </FilterButtonGroup>,
     );
 
     const scroll = getByTestId(GROUP_TEST_ID);
@@ -83,16 +83,16 @@ describe('SegmentGroup', () => {
 
   it('applies group variant to child segments that omit variant', () => {
     const { getByTestId } = render(
-      <SegmentGroup
+      <FilterButtonGroup
         value="a"
         onChange={noopPress}
         testID={GROUP_TEST_ID}
-        variant={SegmentButtonVariant.Secondary}
+        variant={FilterButtonVariant.Secondary}
       >
-        <SegmentButton value="a" testID="seg-a" onPress={noopPress}>
+        <FilterButton value="a" testID="seg-a" onPress={noopPress}>
           A
-        </SegmentButton>
-      </SegmentGroup>,
+        </FilterButton>
+      </FilterButtonGroup>,
     );
 
     expect(getByTestId('seg-a')).toHaveStyle(tw`bg-muted`);
@@ -100,11 +100,11 @@ describe('SegmentGroup', () => {
 
   it('exposes tablist role on the container', () => {
     const { getByTestId } = render(
-      <SegmentGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
-        <SegmentButton value="a" onPress={noopPress}>
+      <FilterButtonGroup value="a" onChange={noopPress} testID={GROUP_TEST_ID}>
+        <FilterButton value="a" onPress={noopPress}>
           A
-        </SegmentButton>
-      </SegmentGroup>,
+        </FilterButton>
+      </FilterButtonGroup>,
     );
 
     expect(getByTestId(GROUP_TEST_ID)).toHaveProp(
@@ -117,14 +117,14 @@ describe('SegmentGroup', () => {
     const onChange = jest.fn();
 
     const { getByText } = render(
-      <SegmentGroup value="a" onChange={onChange} testID={GROUP_TEST_ID}>
-        <SegmentButton value="a" onPress={noopPress}>
+      <FilterButtonGroup value="a" onChange={onChange} testID={GROUP_TEST_ID}>
+        <FilterButton value="a" onPress={noopPress}>
           A
-        </SegmentButton>
-        <SegmentButton value="b" onPress={noopPress}>
+        </FilterButton>
+        <FilterButton value="b" onPress={noopPress}>
           B
-        </SegmentButton>
-      </SegmentGroup>,
+        </FilterButton>
+      </FilterButtonGroup>,
     );
 
     fireEvent.press(getByText('B'));
@@ -137,14 +137,14 @@ describe('SegmentGroup', () => {
     const onChange = jest.fn();
 
     const { getByText } = render(
-      <SegmentGroup value="a" onChange={onChange} testID={GROUP_TEST_ID}>
-        <SegmentButton value="a" onPress={noopPress}>
+      <FilterButtonGroup value="a" onChange={onChange} testID={GROUP_TEST_ID}>
+        <FilterButton value="a" onPress={noopPress}>
           A
-        </SegmentButton>
-        <SegmentButton value="b" onPress={noopPress}>
+        </FilterButton>
+        <FilterButton value="b" onPress={noopPress}>
           B
-        </SegmentButton>
-      </SegmentGroup>,
+        </FilterButton>
+      </FilterButtonGroup>,
     );
 
     fireEvent.press(getByText('A'));
@@ -152,16 +152,16 @@ describe('SegmentGroup', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('reflects selection from value for participating SegmentButtons', () => {
+  it('reflects selection from value for participating FilterButtons', () => {
     const { getByTestId } = render(
-      <SegmentGroup value="b" onChange={noopPress} testID={GROUP_TEST_ID}>
-        <SegmentButton value="a" testID="seg-a" onPress={noopPress}>
+      <FilterButtonGroup value="b" onChange={noopPress} testID={GROUP_TEST_ID}>
+        <FilterButton value="a" testID="seg-a" onPress={noopPress}>
           A
-        </SegmentButton>
-        <SegmentButton value="b" testID="seg-b" onPress={noopPress}>
+        </FilterButton>
+        <FilterButton value="b" testID="seg-b" onPress={noopPress}>
           B
-        </SegmentButton>
-      </SegmentGroup>,
+        </FilterButton>
+      </FilterButtonGroup>,
     );
 
     expect(getByTestId('seg-a')).toHaveStyle(tw`bg-transparent`);
@@ -172,19 +172,19 @@ describe('SegmentGroup', () => {
     const onChange = jest.fn();
 
     const { getByText, getByTestId } = render(
-      <SegmentGroup value="a" onChange={onChange} testID={GROUP_TEST_ID}>
-        <SegmentButton value="a" onPress={noopPress}>
+      <FilterButtonGroup value="a" onChange={onChange} testID={GROUP_TEST_ID}>
+        <FilterButton value="a" onPress={noopPress}>
           A
-        </SegmentButton>
-        <SegmentButton value="b" onPress={noopPress}>
+        </FilterButton>
+        <FilterButton value="b" onPress={noopPress}>
           B
-        </SegmentButton>
+        </FilterButton>
         <SelectButton
           endArrowDirection={SelectButtonEndArrow.Down}
           onPress={noopPress}
           placeholder="More"
         />
-      </SegmentGroup>,
+      </FilterButtonGroup>,
     );
 
     fireEvent.press(getByText('More'));
@@ -197,14 +197,18 @@ describe('SegmentGroup', () => {
     const [value, setValue] = useState('a');
 
     return (
-      <SegmentGroup value={value} onChange={setValue} testID={GROUP_TEST_ID}>
-        <SegmentButton value="a" testID="seg-a" onPress={noopPress}>
+      <FilterButtonGroup
+        value={value}
+        onChange={setValue}
+        testID={GROUP_TEST_ID}
+      >
+        <FilterButton value="a" testID="seg-a" onPress={noopPress}>
           A
-        </SegmentButton>
-        <SegmentButton value="b" testID="seg-b" onPress={noopPress}>
+        </FilterButton>
+        <FilterButton value="b" testID="seg-b" onPress={noopPress}>
           B
-        </SegmentButton>
-      </SegmentGroup>
+        </FilterButton>
+      </FilterButtonGroup>
     );
   };
 

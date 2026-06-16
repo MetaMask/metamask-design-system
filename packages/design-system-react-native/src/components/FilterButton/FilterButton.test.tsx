@@ -2,7 +2,7 @@ import {
   IconColor,
   IconName,
   IconSize,
-  SegmentButtonVariant,
+  FilterButtonVariant,
   TextColor,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
@@ -10,15 +10,15 @@ import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
-import { SegmentGroup } from '../SegmentGroup/SegmentGroup';
+import { FilterButtonGroup } from '../FilterButtonGroup/FilterButtonGroup';
 
-import { SegmentButton } from './SegmentButton';
+import { FilterButton } from './FilterButton';
 
-const ROOT_TEST_ID = 'segment-button';
+const ROOT_TEST_ID = 'filter-button';
 
 const noopPress = () => undefined;
 
-describe('SegmentButton', () => {
+describe('FilterButton', () => {
   let tw: ReturnType<typeof useTailwind>;
 
   beforeAll(() => {
@@ -29,7 +29,7 @@ describe('SegmentButton', () => {
   describe('when rendering children', () => {
     it('renders string children as label text', () => {
       const { getByText } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           children="Label"
@@ -41,9 +41,9 @@ describe('SegmentButton', () => {
 
     it('renders JSX children as label text', () => {
       const { getByText } = render(
-        <SegmentButton testID={ROOT_TEST_ID} onPress={noopPress}>
+        <FilterButton testID={ROOT_TEST_ID} onPress={noopPress}>
           Child label
-        </SegmentButton>,
+        </FilterButton>,
       );
 
       expect(getByText('Child label')).toHaveTextContent('Child label');
@@ -52,11 +52,7 @@ describe('SegmentButton', () => {
 
   it('exposes testID on the root pressable', () => {
     const { getByTestId } = render(
-      <SegmentButton
-        testID="custom-segment"
-        onPress={noopPress}
-        children="A"
-      />,
+      <FilterButton testID="custom-segment" onPress={noopPress} children="A" />,
     );
 
     expect(getByTestId('custom-segment')).toBeOnTheScreen();
@@ -65,10 +61,10 @@ describe('SegmentButton', () => {
   describe('container and label appearance by variant', () => {
     it('uses icon default background when primary variant is selected', () => {
       const { getByTestId } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          variant={SegmentButtonVariant.Primary}
+          variant={FilterButtonVariant.Primary}
           isSelected
           children="Label"
         />,
@@ -79,10 +75,10 @@ describe('SegmentButton', () => {
 
     it('uses transparent background when primary variant is unselected', () => {
       const { getByTestId } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          variant={SegmentButtonVariant.Primary}
+          variant={FilterButtonVariant.Primary}
           isSelected={false}
           children="Label"
         />,
@@ -93,10 +89,10 @@ describe('SegmentButton', () => {
 
     it('uses muted background when secondary variant is selected', () => {
       const { getByTestId } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          variant={SegmentButtonVariant.Secondary}
+          variant={FilterButtonVariant.Secondary}
           isSelected
           children="Label"
         />,
@@ -107,10 +103,10 @@ describe('SegmentButton', () => {
 
     it('uses transparent background when secondary variant is unselected', () => {
       const { getByTestId } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          variant={SegmentButtonVariant.Secondary}
+          variant={FilterButtonVariant.Secondary}
           isSelected={false}
           children="Label"
         />,
@@ -121,10 +117,10 @@ describe('SegmentButton', () => {
 
     it('applies alternative text color when primary variant is unselected', () => {
       const { getByText } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          variant={SegmentButtonVariant.Primary}
+          variant={FilterButtonVariant.Primary}
           isSelected={false}
           children="Label"
         />,
@@ -137,10 +133,10 @@ describe('SegmentButton', () => {
 
     it('applies alternative text color when secondary variant is unselected', () => {
       const { getByText } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          variant={SegmentButtonVariant.Secondary}
+          variant={FilterButtonVariant.Secondary}
           isSelected={false}
           children="Label"
         />,
@@ -153,18 +149,18 @@ describe('SegmentButton', () => {
 
     it('applies alternative icon color to start icon when primary variant is unselected', () => {
       const { getByTestId } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          variant={SegmentButtonVariant.Primary}
+          variant={FilterButtonVariant.Primary}
           isSelected={false}
           startIconName={IconName.Search}
-          startIconProps={{ testID: 'segment-icon' }}
+          startIconProps={{ testID: 'filter-button-icon' }}
           children="Label"
         />,
       );
 
-      expect(getByTestId('segment-icon')).toHaveStyle(
+      expect(getByTestId('filter-button-icon')).toHaveStyle(
         tw.style(
           IconColor.IconAlternative,
           TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Sm],
@@ -174,18 +170,18 @@ describe('SegmentButton', () => {
 
     it('applies alternative icon color to start icon when secondary variant is unselected', () => {
       const { getByTestId } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          variant={SegmentButtonVariant.Secondary}
+          variant={FilterButtonVariant.Secondary}
           isSelected={false}
           startIconName={IconName.Search}
-          startIconProps={{ testID: 'segment-icon' }}
+          startIconProps={{ testID: 'filter-button-icon' }}
           children="Label"
         />,
       );
 
-      expect(getByTestId('segment-icon')).toHaveStyle(
+      expect(getByTestId('filter-button-icon')).toHaveStyle(
         tw.style(
           IconColor.IconAlternative,
           TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Sm],
@@ -195,18 +191,18 @@ describe('SegmentButton', () => {
 
     it('applies alternative icon color to end icon when primary variant is unselected', () => {
       const { getByTestId } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
-          variant={SegmentButtonVariant.Primary}
+          variant={FilterButtonVariant.Primary}
           isSelected={false}
           endIconName={IconName.Search}
-          endIconProps={{ testID: 'segment-end-icon' }}
+          endIconProps={{ testID: 'filter-button-end-icon' }}
           children="Label"
         />,
       );
 
-      expect(getByTestId('segment-end-icon')).toHaveStyle(
+      expect(getByTestId('filter-button-end-icon')).toHaveStyle(
         tw.style(
           IconColor.IconAlternative,
           TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Sm],
@@ -218,7 +214,7 @@ describe('SegmentButton', () => {
   describe('when disabled', () => {
     it('applies reduced opacity to the root', () => {
       const { getByTestId } = render(
-        <SegmentButton
+        <FilterButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           isDisabled
@@ -235,10 +231,10 @@ describe('SegmentButton', () => {
       pressed ? 'opacity-80' : 'opacity-100',
     );
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Primary}
+        variant={FilterButtonVariant.Primary}
         isSelected
         twClassName={twClassName}
         children="Label"
@@ -257,10 +253,10 @@ describe('SegmentButton', () => {
       pressed ? 'opacity-75' : 'opacity-100',
     );
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Secondary}
+        variant={FilterButtonVariant.Secondary}
         isSelected
         twClassName={twClassName}
         children="Label"
@@ -277,10 +273,10 @@ describe('SegmentButton', () => {
   it('merges function twClassName for primary unselected container', () => {
     const twClassName = jest.fn(() => 'mt-1');
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Primary}
+        variant={FilterButtonVariant.Primary}
         isSelected={false}
         twClassName={twClassName}
         children="Label"
@@ -294,10 +290,10 @@ describe('SegmentButton', () => {
   it('merges function twClassName for secondary unselected container', () => {
     const twClassName = jest.fn(() => 'mt-2');
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Secondary}
+        variant={FilterButtonVariant.Secondary}
         isSelected={false}
         twClassName={twClassName}
         children="Label"
@@ -310,10 +306,10 @@ describe('SegmentButton', () => {
 
   it('uses pressed background when primary selected receives pressIn', () => {
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Primary}
+        variant={FilterButtonVariant.Primary}
         isSelected
         children="Label"
       />,
@@ -326,10 +322,10 @@ describe('SegmentButton', () => {
 
   it('uses pressed background when primary unselected receives pressIn', () => {
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Primary}
+        variant={FilterButtonVariant.Primary}
         isSelected={false}
         children="Label"
       />,
@@ -342,10 +338,10 @@ describe('SegmentButton', () => {
 
   it('uses pressed background when secondary unselected receives pressIn', () => {
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Secondary}
+        variant={FilterButtonVariant.Secondary}
         isSelected={false}
         children="Label"
       />,
@@ -358,10 +354,10 @@ describe('SegmentButton', () => {
 
   it('uses pressed background on root when primary selected is loading', () => {
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Primary}
+        variant={FilterButtonVariant.Primary}
         isSelected
         isLoading
         children="Label"
@@ -373,10 +369,10 @@ describe('SegmentButton', () => {
 
   it('uses pressed loading container when primary unselected is loading', () => {
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Primary}
+        variant={FilterButtonVariant.Primary}
         isSelected={false}
         isLoading
         children="Label"
@@ -388,10 +384,10 @@ describe('SegmentButton', () => {
 
   it('uses pressed loading container when secondary unselected is loading', () => {
     const { getByTestId } = render(
-      <SegmentButton
+      <FilterButton
         testID={ROOT_TEST_ID}
         onPress={noopPress}
-        variant={SegmentButtonVariant.Secondary}
+        variant={FilterButtonVariant.Secondary}
         isSelected={false}
         isLoading
         children="Label"
@@ -401,25 +397,25 @@ describe('SegmentButton', () => {
     expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-pressed`);
   });
 
-  describe('when used inside SegmentGroup', () => {
+  describe('when used inside FilterButtonGroup', () => {
     it('derives selected visual from group value instead of isSelected', () => {
       const { getByTestId } = render(
-        <SegmentGroup value="b" onChange={noopPress} testID="group">
-          <SegmentButton
+        <FilterButtonGroup value="b" onChange={noopPress} testID="group">
+          <FilterButton
             value="a"
             children="A"
             testID="seg-a"
             isSelected
             onPress={noopPress}
           />
-          <SegmentButton
+          <FilterButton
             value="b"
             children="B"
             testID="seg-b"
             isSelected={false}
             onPress={noopPress}
           />
-        </SegmentGroup>,
+        </FilterButtonGroup>,
       );
 
       expect(getByTestId('seg-a')).toHaveStyle(tw`bg-transparent`);
