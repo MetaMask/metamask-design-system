@@ -1,123 +1,168 @@
+import { ContentVerticalAlignment } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import React from 'react';
 
-import { Box, BoxBackgroundColor } from '../Box';
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
+import { Box } from '../Box';
 import { Icon, IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
 
-import { ListItem } from './ListItem';
 import type { ListItemProps } from './ListItem.types';
-import { ListItemVerticalAlignment } from './ListItem.types';
 
-const SampleChildren = () => (
-  <>
-    <Box twClassName="h-10 w-10 rounded-full bg-primary-default" />
-    <Box twClassName="flex-1">
-      <Text variant={TextVariant.BodyMd}>Sample Title</Text>
-      <Text variant={TextVariant.BodySm}>Sample Description</Text>
-    </Box>
-    <Icon name={IconName.ArrowRight} />
-  </>
+import { ListItem } from '.';
+
+const noopPress = () => undefined;
+
+const listItemAvatar = (
+  <AvatarToken
+    name="ETH"
+    src={SAMPLE_AVATARTOKEN_URIS[1]}
+    size={AvatarTokenSize.Lg}
+  />
 );
 
 const meta: Meta<ListItemProps> = {
   title: 'Components/ListItem',
   component: ListItem,
   args: {
-    gap: 16,
-    verticalAlignment: ListItemVerticalAlignment.Center,
+    title: 'Label',
+    description: 'Secondary text',
+    value: 'Value',
+    verticalAlignment: ContentVerticalAlignment.Center,
   },
   argTypes: {
-    gap: {
-      control: { type: 'number' },
-    },
     verticalAlignment: {
-      options: Object.values(ListItemVerticalAlignment),
-      control: { type: 'select' },
+      control: 'select',
+      options: Object.keys(ContentVerticalAlignment),
+      mapping: ContentVerticalAlignment,
     },
-    topAccessoryGap: {
-      control: { type: 'number' },
-    },
-    bottomAccessoryGap: {
-      control: { type: 'number' },
-    },
-    twClassName: {
-      control: 'text',
+    title: { control: 'text' },
+    description: { control: 'text' },
+    value: { control: 'text' },
+    subvalue: { control: 'text' },
+    isInteractive: { control: 'boolean' },
+    accessoryGap: {
+      control: 'select',
+      options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     },
   },
-  decorators: [
-    (Story) => (
-      <Box
-        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
-        padding={4}
-      >
-        <Text variant={TextVariant.BodySm}>Content above list item</Text>
-        <Box padding={2} />
-        <Story />
-      </Box>
-    ),
-  ],
 };
 
 export default meta;
+
 type Story = StoryObj<ListItemProps>;
 
-export const Default: Story = {
-  render: (args) => (
-    <ListItem {...args}>
-      <SampleChildren />
+export const Default: Story = {};
+
+export const IsInteractive: Story = {
+  render: (args: ListItemProps) => (
+    <ListItem {...args} isInteractive onPress={noopPress} />
+  ),
+};
+
+export const Children: Story = {
+  render: (args: ListItemProps) => (
+    <ListItem {...args} title="Row title" description="Primary row">
+      <Box twClassName="mt-2 rounded bg-background-muted px-3 py-2">
+        <Icon name={IconName.Info} />
+      </Box>
     </ListItem>
   ),
 };
 
-export const VerticalAlignment: Story = {
-  render: (args) => (
+export const StartAccessory: Story = {
+  render: (args: ListItemProps) => (
+    <ListItem
+      {...args}
+      startAccessory={<Icon name={IconName.Coin} />}
+      accessoryGap={4}
+      title="With start accessory"
+      description={undefined}
+      value={undefined}
+    />
+  ),
+};
+
+export const EndAccessory: Story = {
+  render: (args: ListItemProps) => (
+    <ListItem
+      {...args}
+      endAccessory={<Icon name={IconName.ArrowRight} />}
+      accessoryGap={4}
+      title="With end accessory"
+      description={undefined}
+      value={undefined}
+    />
+  ),
+};
+
+export const AccessoryGap: Story = {
+  render: (args: ListItemProps) => (
     <>
-      {Object.values(ListItemVerticalAlignment).map((alignment) => (
-        <ListItem key={alignment} {...args} verticalAlignment={alignment}>
-          <Box twClassName="h-12 w-12 bg-primary-default rounded-lg" />
-          <Box twClassName="flex-1">
-            <Text variant={TextVariant.BodyMd}>{alignment}</Text>
-            <Text variant={TextVariant.BodySm}>Secondary line</Text>
-            <Text variant={TextVariant.BodySm}>Third line</Text>
-          </Box>
-        </ListItem>
-      ))}
+      <ListItem
+        {...args}
+        startAccessory={<Icon name={IconName.Coin} />}
+        accessoryGap={0}
+        title="accessoryGap={0}"
+        description={undefined}
+        value={undefined}
+      />
+      <ListItem
+        {...args}
+        startAccessory={<Icon name={IconName.Coin} />}
+        accessoryGap={4}
+        title="accessoryGap={4}"
+        description={undefined}
+        value={undefined}
+      />
     </>
   ),
 };
 
-export const Gap: Story = {
-  args: {
-    gap: 8,
-  },
-  render: (args) => (
-    <ListItem {...args}>
-      <SampleChildren />
-    </ListItem>
+export const Avatar: Story = {
+  render: (args: ListItemProps) => (
+    <ListItem
+      {...args}
+      avatar={listItemAvatar}
+      title="Ethereum"
+      value="0.24 ETH"
+      description={undefined}
+    />
   ),
 };
 
-export const TopAccessory: Story = {
-  args: {
-    topAccessory: <Text variant={TextVariant.BodySm}>Section Header</Text>,
-    topAccessoryGap: 8,
+const verticalAlignmentExamples: Record<
+  ContentVerticalAlignment,
+  { title: string; description: string }
+> = {
+  [ContentVerticalAlignment.Center]: {
+    title: 'Center',
+    description: 'Default for one- or two-line rows',
   },
-  render: (args) => (
-    <ListItem {...args}>
-      <SampleChildren />
-    </ListItem>
-  ),
+  [ContentVerticalAlignment.Top]: {
+    title: 'Top',
+    description:
+      'Use for three or more lines, or when row height is 88dp or more',
+  },
 };
 
-export const BottomAccessory: Story = {
-  args: {
-    bottomAccessory: <Text variant={TextVariant.BodySm}>Section Footer</Text>,
-    bottomAccessoryGap: 8,
-  },
-  render: (args) => (
-    <ListItem {...args}>
-      <SampleChildren />
-    </ListItem>
+export const VerticalAlignment: Story = {
+  render: (args: ListItemProps) => (
+    <>
+      {Object.values(ContentVerticalAlignment).map((alignment) => {
+        const { title, description } = verticalAlignmentExamples[alignment];
+
+        return (
+          <ListItem
+            key={alignment}
+            {...args}
+            verticalAlignment={alignment}
+            avatar={listItemAvatar}
+            title={title}
+            description={description}
+            value="Value"
+          />
+        );
+      })}
+    </>
   ),
 };

@@ -313,6 +313,7 @@ export const IconName = {
   Trash: 'Trash',
   TrendDown: 'TrendDown',
   TrendUp: 'TrendUp',
+  Trophy: 'Trophy',
   Undo: 'Undo',
   Unfold: 'Unfold',
   UnlockedFilled: 'UnlockedFilled',

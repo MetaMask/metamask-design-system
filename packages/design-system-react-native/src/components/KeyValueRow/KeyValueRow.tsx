@@ -1,6 +1,7 @@
 import {
   ButtonIconSize,
   FontWeight,
+  IconColor,
   KeyValueRowVariant,
   TextColor,
   TextVariant,
@@ -8,7 +9,6 @@ import {
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { IconColor } from '../../types';
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 import { ButtonIcon } from '../ButtonIcon';

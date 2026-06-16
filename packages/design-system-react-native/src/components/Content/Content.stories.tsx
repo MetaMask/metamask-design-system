@@ -180,66 +180,6 @@ export const Avatar: Story = {
   ),
 };
 
-export const StartAccessory: Story = {
-  render: (args: ContentProps) => (
-    <StoryWrapper>
-      <Content
-        {...args}
-        startAccessory={<Icon name={IconName.Add} />}
-        title="With start accessory"
-        description={undefined}
-        value={undefined}
-      />
-    </StoryWrapper>
-  ),
-};
-
-export const EndAccessory: Story = {
-  render: (args: ContentProps) => (
-    <StoryWrapper>
-      <Content
-        {...args}
-        endAccessory={<Icon name={IconName.ArrowRight} />}
-        title="With end accessory"
-        description={undefined}
-        value={undefined}
-      />
-    </StoryWrapper>
-  ),
-};
-
-export const TopAccessory: Story = {
-  render: (args: ContentProps) => (
-    <StoryWrapper>
-      <Content
-        {...args}
-        topAccessory={
-          <Box twClassName="rounded bg-warning-muted px-2 py-1">
-            <Icon name={IconName.Info} />
-          </Box>
-        }
-        title="With top accessory"
-        description={undefined}
-        value={undefined}
-      />
-    </StoryWrapper>
-  ),
-};
-
-export const BottomAccessory: Story = {
-  render: (args: ContentProps) => (
-    <StoryWrapper>
-      <Content
-        {...args}
-        bottomAccessory={<Icon name={IconName.Question} />}
-        title="With bottom accessory"
-        description={undefined}
-        value={undefined}
-      />
-    </StoryWrapper>
-  ),
-};
-
 export const TitleStartAccessory: Story = {
   render: (args: ContentProps) => (
     <StoryWrapper>

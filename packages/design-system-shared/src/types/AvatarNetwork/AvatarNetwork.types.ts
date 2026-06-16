@@ -1,8 +1,11 @@
+import { AvatarBaseSize } from '../AvatarBase/AvatarBase.types';
+
+export const AvatarNetworkSize = AvatarBaseSize;
+export type AvatarNetworkSize = AvatarBaseSize;
+
 /**
- * AvatarNetwork component shared props (ADR-0004)
+ * AvatarNetwork component shared props (ADR-0003 + ADR-0004)
  * Platform-independent properties shared across React and React Native.
- * Note: AvatarNetworkSize is not included here because it inherits from
- * AvatarBaseSize which will be migrated separately (DSYS-473).
  */
 export type AvatarNetworkPropsShared = {
   /**
@@ -16,4 +19,10 @@ export type AvatarNetworkPropsShared = {
    * fails to load. If not provided, the first letter of name is used.
    */
   fallbackText?: string;
+  /**
+   * Optional prop to control the size of the avatar network.
+   *
+   * @default AvatarNetworkSize.Md
+   */
+  size?: AvatarNetworkSize;
 };

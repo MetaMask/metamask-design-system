@@ -1,12 +1,12 @@
 import React, {
   forwardRef,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react';
-import type { RefObject } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 
@@ -22,16 +22,37 @@ import type {
   ToasterRef,
 } from './Toast.types';
 
-let registeredRef: RefObject<ToasterRef | null> | null = null;
+type ToastStoreListener = (options: ToastOptions | undefined) => void;
 
-const assertRegisteredRef = (method: 'dismiss' | 'toast'): ToasterRef => {
-  if (!registeredRef?.current) {
-    const invocation = method === 'toast' ? 'toast()' : `toast.${method}()`;
-    throw new Error(
-      `${invocation} called before <Toaster /> mounted. Render <Toaster /> once at the root of your app.`,
-    );
-  }
-  return registeredRef.current;
+let storeToastOptions: ToastOptions | undefined;
+const toastStoreListeners = new Set<ToastStoreListener>();
+
+const normalizeToastOptions = (options: ToastOptions): ToastOptions => ({
+  hasNoTimeout: false,
+  ...options,
+});
+
+const emitToastStoreChange = () => {
+  toastStoreListeners.forEach((listener) => listener(storeToastOptions));
+};
+
+const setStoreToastOptions = (options: ToastOptions) => {
+  storeToastOptions = normalizeToastOptions(options);
+  emitToastStoreChange();
+};
+
+const clearStoreToastOptions = () => {
+  storeToastOptions = undefined;
+  emitToastStoreChange();
+};
+
+const subscribeToToastStore = (listener: ToastStoreListener) => {
+  toastStoreListeners.add(listener);
+  listener(storeToastOptions);
+
+  return () => {
+    toastStoreListeners.delete(listener);
+  };
 };
 
 const getToastProps = ({
@@ -44,7 +65,9 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const [toastOptions, setToastOptions] = useState<ToastOptions | undefined>(
       undefined,
     );
+    const toastOptionsRef = useRef<ToastOptions | undefined>(undefined);
     const [isVisible, setIsVisible] = useState(false);
+    const isVisibleRef = useRef(false);
     const replacementTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
       null,
     );
@@ -54,9 +77,21 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const enterAnimationFrameRef = useRef<number | null>(null);
     const pendingToastRef = useRef<ToastOptions | undefined>(undefined);
-    const innerRef = useRef<ToasterRef | null>(null);
 
-    const clearPendingTimers = () => {
+    const setCurrentToastOptions = useCallback(
+      (options: ToastOptions | undefined) => {
+        toastOptionsRef.current = options;
+        setToastOptions(options);
+      },
+      [],
+    );
+
+    const setCurrentIsVisible = useCallback((nextIsVisible: boolean) => {
+      isVisibleRef.current = nextIsVisible;
+      setIsVisible(nextIsVisible);
+    }, []);
+
+    const clearPendingTimers = useCallback(() => {
       if (replacementTimerRef.current !== null) {
         clearTimeout(replacementTimerRef.current);
         replacementTimerRef.current = null;
@@ -73,63 +108,80 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         cancelAnimationFrame(enterAnimationFrameRef.current);
         enterAnimationFrameRef.current = null;
       }
-    };
+    }, []);
 
-    const closeToast = () => {
-      clearPendingTimers();
-      pendingToastRef.current = undefined;
-      setIsVisible(false);
-      exitTimerRef.current = setTimeout(() => {
-        exitTimerRef.current = null;
-        setToastOptions(undefined);
-      }, TOAST_ANIMATION_DURATION);
-    };
-
-    // Replace the currently mounted toast rather than queueing multiple toasts.
-    // This mirrors the old app-level toast service behavior while keeping the
-    // imperative API centered in the mounted Toaster instance.
-    const showToast = (options: ToastOptions) => {
-      const normalizedOptions = { hasNoTimeout: false, ...options };
-      const timeoutDuration = 0;
-
-      if (toastOptions) {
-        pendingToastRef.current = normalizedOptions;
-        setIsVisible(false);
-        if (exitTimerRef.current !== null) {
-          clearTimeout(exitTimerRef.current);
-          exitTimerRef.current = null;
-        }
-        exitTimerRef.current = setTimeout(() => {
-          exitTimerRef.current = null;
-          setToastOptions(pendingToastRef.current);
-          pendingToastRef.current = undefined;
-        }, TOAST_ANIMATION_DURATION);
+    const closeRenderedToast = useCallback(() => {
+      if (!toastOptionsRef.current && !isVisibleRef.current) {
+        clearPendingTimers();
+        pendingToastRef.current = undefined;
         return;
       }
 
-      if (replacementTimerRef.current !== null) {
-        clearTimeout(replacementTimerRef.current);
-      }
+      clearPendingTimers();
+      pendingToastRef.current = undefined;
+      setCurrentIsVisible(false);
+      exitTimerRef.current = setTimeout(() => {
+        exitTimerRef.current = null;
+        setCurrentToastOptions(undefined);
+      }, TOAST_ANIMATION_DURATION);
+    }, [clearPendingTimers, setCurrentIsVisible, setCurrentToastOptions]);
 
-      replacementTimerRef.current = setTimeout(() => {
-        replacementTimerRef.current = null;
-        setToastOptions(normalizedOptions);
-      }, timeoutDuration);
-    };
+    // Replace the currently mounted toast rather than queueing multiple toasts.
+    // This mirrors the old app-level toast service behavior while keeping the
+    // imperative API centered in the shared single-toast store.
+    const showRenderedToast = useCallback(
+      (options: ToastOptions) => {
+        const normalizedOptions = normalizeToastOptions(options);
+        const timeoutDuration = 0;
 
-    innerRef.current = { closeToast, showToast };
-
-    useImperativeHandle(ref, () => innerRef.current as ToasterRef);
-
-    // Register the mounted instance so toast() can be called from anywhere.
-    useLayoutEffect(() => {
-      registeredRef = innerRef;
-      return () => {
-        if (registeredRef === innerRef) {
-          registeredRef = null;
+        if (toastOptionsRef.current) {
+          pendingToastRef.current = normalizedOptions;
+          setCurrentIsVisible(false);
+          if (exitTimerRef.current !== null) {
+            clearTimeout(exitTimerRef.current);
+            exitTimerRef.current = null;
+          }
+          exitTimerRef.current = setTimeout(() => {
+            exitTimerRef.current = null;
+            setCurrentToastOptions(pendingToastRef.current);
+            pendingToastRef.current = undefined;
+          }, TOAST_ANIMATION_DURATION);
+          return;
         }
-      };
-    }, []);
+
+        if (replacementTimerRef.current !== null) {
+          clearTimeout(replacementTimerRef.current);
+        }
+
+        replacementTimerRef.current = setTimeout(() => {
+          replacementTimerRef.current = null;
+          setCurrentToastOptions(normalizedOptions);
+        }, timeoutDuration);
+      },
+      [setCurrentIsVisible, setCurrentToastOptions],
+    );
+
+    useImperativeHandle(
+      ref,
+      () => ({
+        closeToast: clearStoreToastOptions,
+        showToast: setStoreToastOptions,
+      }),
+      [],
+    );
+
+    // Subscribe before sibling passive effects run so toast() can be called
+    // from anywhere once the app root has rendered <Toaster />.
+    useLayoutEffect(() => {
+      return subscribeToToastStore((options) => {
+        if (options) {
+          showRenderedToast(options);
+          return;
+        }
+
+        closeRenderedToast();
+      });
+    }, [closeRenderedToast, showRenderedToast]);
 
     // Delay the enter transition until after mount so the DOM can paint the
     // offscreen starting position before we slide the toast into view.
@@ -137,7 +189,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       if (toastOptions && !isVisible) {
         enterAnimationFrameRef.current = requestAnimationFrame(() => {
           enterAnimationFrameRef.current = requestAnimationFrame(() => {
-            setIsVisible(true);
+            setCurrentIsVisible(true);
             enterAnimationFrameRef.current = null;
           });
         });
@@ -145,7 +197,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       return () => {
         clearPendingTimers();
       };
-    }, [toastOptions]); // intentionally omit isVisible — only react to new toast options
+    }, [clearPendingTimers, setCurrentIsVisible, toastOptions]); // intentionally omit isVisible — only react to new toast options
 
     // Auto-dismiss once the toast is visible, unless the caller requested a
     // persistent toast.
@@ -153,21 +205,23 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       if (isVisible && toastOptions && !toastOptions.hasNoTimeout) {
         autoDismissTimerRef.current = setTimeout(() => {
           autoDismissTimerRef.current = null;
-          innerRef.current?.closeToast();
+          clearStoreToastOptions();
         }, TOAST_VISIBILITY_DURATION);
         return () => {
           clearPendingTimers();
         };
       }
       return undefined;
-    }, [isVisible]); // intentionally omit toastOptions — timer fires once per visibility change
+    }, [clearPendingTimers, isVisible, toastOptions]);
 
     useEffect(() => {
       return () => {
         clearPendingTimers();
         pendingToastRef.current = undefined;
+        toastOptionsRef.current = undefined;
+        isVisibleRef.current = false;
       };
-    }, []);
+    }, [clearPendingTimers]);
 
     if (!toastOptions) {
       return null;
@@ -203,7 +257,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
             {...toastProps}
             className={toastClassName}
             onClose={() => {
-              closeToast();
+              clearStoreToastOptions();
               toastOnClose?.();
             }}
           />
@@ -222,9 +276,9 @@ type ToastFunction = ((options: ToastOptions) => void) & {
 export const Toaster = ToasterComponent;
 
 export const toast = ((options: ToastOptions) => {
-  assertRegisteredRef('toast').showToast(options);
+  setStoreToastOptions(options);
 }) as ToastFunction;
 
 toast.dismiss = () => {
-  assertRegisteredRef('dismiss').closeToast();
+  clearStoreToastOptions();
 };

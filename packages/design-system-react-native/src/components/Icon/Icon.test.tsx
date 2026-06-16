@@ -1,8 +1,7 @@
+import { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
-
-import { IconColor, IconName, IconSize } from '../../types';
 
 import { Icon } from './Icon';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';

@@ -15,9 +15,9 @@ export const IconAlertSeverity = {
    */
   Warning: 'warning',
   /**
-   * Critical error severity
+   * Critical danger severity
    */
-  Error: 'error',
+  Danger: 'danger',
 } as const;
 export type IconAlertSeverity =
   (typeof IconAlertSeverity)[keyof typeof IconAlertSeverity];
