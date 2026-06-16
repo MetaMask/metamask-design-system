@@ -23,7 +23,7 @@ index f5247c7674cb2e788daf47b343bc6f5708715024..1a9c0961c21a514b8f592b1bcca795f2
  import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
  import { styled } from '@storybook/react-native-theming';
 -import TypeMap from './types';
-+import TypeMap from './types.js';
++import TypeMap from './types/index.js';
  const InvalidTypeText = styled.Text(({ theme }) => ({
      color: theme.color.negative,
  }));

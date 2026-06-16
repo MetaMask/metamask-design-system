@@ -13,6 +13,11 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
+  - [BadgeCount Component](#badgecount-component)
+  - [BadgeIcon Component](#badgeicon-component)
+  - [BadgeNetwork Component](#badgenetwork-component)
+  - [BadgeStatus Component](#badgestatus-component)
+  - [BadgeWrapper Component](#badgewrapper-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
   - [Input Component](#input-component)
@@ -43,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.25.0 to 0.26.0](#from-version-0250-to-0260)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
@@ -494,7 +500,7 @@ The legacy `ButtonLink` (and `Button` with `variant={ButtonVariant.Link}`) is re
 - **`TextButton`** — for inline text-styled links within content flows (the primary replacement)
 - **`Button` with `variant={ButtonVariant.Tertiary}`** — for standalone link-style buttons with icons, full width, `isDanger`, `isLoading`, or other button-like affordances
 
-`TextButton` is built on `ButtonBase` and inherits its composition API (`asChild`, `textProps`, `startIconName`, `endIconName`, `startAccessory`, `endAccessory`).
+`TextButton` is a text-only control aligned with the React Native visual API. It renders a web `<button>` by default, exposes the standard React `onClick` interaction prop, and supports `asChild` for semantic links. It does not support icons, accessories, disabled state, or inverse styling. Use `Button` with `variant={ButtonVariant.Tertiary}` when those button-like affordances are required.
 
 #### Breaking Changes
 
@@ -503,28 +509,27 @@ The legacy `ButtonLink` (and `Button` with `variant={ButtonVariant.Link}`) is re
 | Extension Pattern                                                | Design System Migration                                                |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `import { ButtonLink } from '../../component-library'`           | `import { TextButton } from '@metamask/design-system-react'`           |
-| `import { ButtonLinkSize } from '../../component-library'`       | `import { TextButtonSize } from '@metamask/design-system-react'`       |
+| `import { ButtonLinkSize } from '../../component-library'`       | `import { TextVariant } from '@metamask/design-system-react'`          |
 | `import type { ButtonLinkProps } from '../../component-library'` | `import type { TextButtonProps } from '@metamask/design-system-react'` |
 
-##### Size Enum — Typography, Not Button Height
+##### Size Enum Removed — Use `variant`
 
-`ButtonLinkSize` controlled the button's height (inherited from `ButtonBaseSize`). `TextButtonSize` instead controls the inner text's typography variant — `TextButton` is a text-styled button, not a fixed-height button.
+`ButtonLinkSize` controlled the legacy button height. The design-system `TextButton` is text-only, so typography is controlled by the shared `TextVariant` values through the `variant` prop.
 
-| Extension Value                                 | Design System Migration                                                                            |
-| ----------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ButtonLinkSize.Auto` (default)                 | `TextButtonSize.BodyMd` (default)                                                                  |
-| `ButtonLinkSize.Sm` (32px height)               | `TextButtonSize.BodySm`                                                                            |
-| `ButtonLinkSize.Md` (40px height)               | `TextButtonSize.BodyMd`                                                                            |
-| `ButtonLinkSize.Lg` (48px height)               | `TextButtonSize.BodyLg`                                                                            |
-| `ButtonLinkSize.Inherit` (inherits parent font) | No direct equivalent — pick a `TextButtonSize` or pass `textProps={{ className: 'text-inherit' }}` |
-| —                                               | `TextButtonSize.BodyXs` (new smallest size)                                                        |
+| Extension Value                                 | Design System Migration                           |
+| ----------------------------------------------- | ------------------------------------------------- |
+| `ButtonLinkSize.Auto` (default)                 | Omit `variant` for `TextVariant.BodyMd`           |
+| `ButtonLinkSize.Sm` (32px height)               | `variant={TextVariant.BodySm}`                    |
+| `ButtonLinkSize.Md` (40px height)               | `variant={TextVariant.BodyMd}`                    |
+| `ButtonLinkSize.Lg` (48px height)               | `variant={TextVariant.BodyLg}`                    |
+| `ButtonLinkSize.Inherit` (inherits parent font) | No direct equivalent — pick a `TextVariant` value |
 
-##### State Props Renamed
+##### State Props Removed
 
-| Extension Prop | Design System Prop | Notes                                 |
-| -------------- | ------------------ | ------------------------------------- |
-| `disabled`     | `isDisabled`       | renamed                               |
-| `block`        | `isFullWidth`      | renamed (inherited from `ButtonBase`) |
+| Extension Prop | Design System Migration                                |
+| -------------- | ------------------------------------------------------ |
+| `disabled`     | Use `Button` tertiary if disabled behavior is required |
+| `block`        | Use `Button` tertiary if full-width layout is required |
 
 ##### `danger` Removed — Use `Button` Tertiary with `isDanger`
 
@@ -543,42 +548,41 @@ The legacy `ButtonLink` (and `Button` with `variant={ButtonVariant.Link}`) is re
 | `loading={true}`   | `<Button variant={ButtonVariant.Tertiary} isLoading>...</Button>`              |
 | `iconLoadingProps` | Removed — configure loading on `Button` via `loadingIconProps` / `loadingText` |
 
-##### Polymorphism Removed: `as` / `href` → `asChild`
+##### Polymorphism Replaced With `asChild`
 
-The extension `ButtonLink` is polymorphic — `as` toggles between `button` and `a`, and an `href` prop auto-switches to `a`. The design system `TextButton` always renders a `<button>` and uses the `asChild` composition pattern (inherited from `ButtonBase`) for anchor rendering.
+The extension `ButtonLink` is polymorphic — `as` toggles between `button` and `a`, and an `href` prop auto-switches to `a`. The design system `TextButton` renders a `<button>` by default and uses `asChild` composition for links. Put link props directly on the child anchor.
 
-| Extension Prop           | Design System Migration                                                         |
-| ------------------------ | ------------------------------------------------------------------------------- |
-| `as="a"` / `as="button"` | Removed — always `<button>`. Use `asChild` with your own `<a>`.                 |
-| `href="..."`             | Removed — wrap in `asChild` with `<a href="...">`.                              |
-| `externalLink`           | Removed — on your `<a>`, set `target="_blank"` and `rel="noopener noreferrer"`. |
-| `target` / `rel`         | Removed — set directly on your `<a>` inside `asChild`.                          |
+| Extension Prop   | Design System Migration                                   |
+| ---------------- | --------------------------------------------------------- |
+| `as="button"`    | Removed — omit `asChild` to render the default `<button>` |
+| `as="a"`         | Use `asChild` with a child `<a>`                          |
+| `href="..."`     | Move to the child `<a>`                                   |
+| `externalLink`   | Removed — set `target` and `rel` on the child `<a>`       |
+| `target` / `rel` | Move to the child `<a>`                                   |
 
-##### `color` Removed — Use `isInverse` or `Button` Tertiary
+##### `color` Removed — Use `Button` Tertiary
 
-The legacy `ButtonLink` accepted a `color` prop that overrode link coloring. `TextButton` exposes only `isInverse`; for other colors, use `Button` Tertiary.
+The legacy `ButtonLink` accepted a `color` prop that overrode link coloring. `TextButton` uses primary text color only; use `Button` Tertiary when another semantic state is required.
 
-| Extension Pattern              | Design System Migration                                                               |
-| ------------------------------ | ------------------------------------------------------------------------------------- |
-| `color={Color.primaryDefault}` | Remove — default `TextButton` color                                                   |
-| `color={Color.primaryInverse}` | `isInverse`                                                                           |
-| `color={Color.errorDefault}`   | `<Button variant={ButtonVariant.Tertiary} isDanger>...</Button>`                      |
-| Other `Color.*` values         | `<Button variant={ButtonVariant.Tertiary}>` + `className`, or `textProps={{ color }}` |
+| Extension Pattern              | Design System Migration                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------- |
+| `color={Color.primaryDefault}` | Remove — default `TextButton` color                                          |
+| `color={Color.primaryInverse}` | Use `Button` tertiary or a semantic `<button>` with product-specific styling |
+| `color={Color.errorDefault}`   | `<Button variant={ButtonVariant.Tertiary} isDanger>...</Button>`             |
+| Other `Color.*` values         | `<Button variant={ButtonVariant.Tertiary}>` + `className`                    |
 
 ##### Removed Props
 
-| Extension Prop                                                                                      | Design System Migration                                                     |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `ellipsis`                                                                                          | Removed — use `className="truncate"` or `textProps` with truncation classes |
-| `textDirection`                                                                                     | Removed — set the standard HTML `dir` attribute directly                    |
-| Box/Text style utility props (`padding*`, `margin*`, `backgroundColor`, `color`, `borderRadius`, …) | Removed — use Tailwind `className` instead                                  |
+| Extension Prop                                                                                      | Design System Migration                                  |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `ellipsis`                                                                                          | Removed — use `className="truncate"`                     |
+| `textDirection`                                                                                     | Removed — set the standard HTML `dir` attribute directly |
+| Box/Text style utility props (`padding*`, `margin*`, `backgroundColor`, `color`, `borderRadius`, …) | Removed — use Tailwind `className` instead               |
 
-#### New Props
+#### Prop Changes
 
-`TextButton` adds props not available in the extension `ButtonLink`:
-
-- `isInverse` — inverse coloring for use on dark or colored backgrounds
-- `asChild` — compose the button styling onto a child element (replaces `as`/`href` polymorphism)
+- `size` / `TextButtonSize` is replaced by `variant` / `TextVariant`.
+- Removed `isInverse`, `isDisabled`, `textProps`, start/end icons, and accessory slots.
 
 #### Migration Examples
 
@@ -619,18 +623,17 @@ import { ButtonLink, ButtonLinkSize } from '../../component-library';
 After (Design System):
 
 ```tsx
-import { TextButton, TextButtonSize } from '@metamask/design-system-react';
+import { TextButton, TextVariant } from '@metamask/design-system-react';
 
 <TextButton
-  size={TextButtonSize.BodySm}
-  isDisabled={isLocked}
-  onClick={toggleContent}
+  variant={TextVariant.BodySm}
+  onClick={isLocked ? undefined : toggleContent}
 >
   {isExpanded ? 'Show less' : 'Show more'}
 </TextButton>;
 ```
 
-##### External link (`as="a"` / `href` → `asChild`)
+##### External link (`as="a"` / `href`)
 
 Before (Extension):
 
@@ -724,11 +727,10 @@ import { TextButton } from '@metamask/design-system-react';
 
 #### API Differences
 
-- `size` controls typography via `TextButtonSize` (body typography variants) rather than fixed button height
+- `variant` controls typography via `TextVariant`; there is no `TextButtonSize`
 - No `isDanger`, `isLoading`, or `color` props — use `Button` with `variant={ButtonVariant.Tertiary}` when any of these are required
-- Root element is always `<button>` unless `asChild` is used
-- Coloring is locked to primary (or inverse via `isInverse`)
-- Inherits the full `ButtonBase` composition surface (`asChild`, `textProps`, accessory slots, icons, ARIA props)
+- Root element is `<button>` by default; use `asChild` with an `<a>` for semantic links
+- Coloring is locked to primary
 
 ### Box Component
 
@@ -853,6 +855,19 @@ The extension `banner-alert` maps directly to `BannerAlert` in the design system
 | `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
 | `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
 
+##### Severity Alignment
+
+The public severity APIs now use `Danger` instead of `Error` for destructive
+or critical states, and `Neutral` instead of any default-like severity. Internal
+color token names are unchanged, so `Danger` variants may still map to
+`ErrorDefault` or `ErrorMuted` tokens.
+
+| Before                                | After                                   | Notes                        |
+| ------------------------------------- | --------------------------------------- | ---------------------------- |
+| `AvatarIconSeverity.Error` (`error`)  | `AvatarIconSeverity.Danger` (`danger`)  | renamed public API value     |
+| `TagSeverity.Error` (`error`)         | `TagSeverity.Danger` (`danger`)         | renamed public API value     |
+| Any legacy default-like severity name | `Neutral` (`neutral`) where appropriate | canonical neutral vocabulary |
+
 #### Migration Example
 
 ##### Before (Extension)
@@ -960,6 +975,188 @@ import { BannerBase } from '@metamask/design-system-react';
   }}
   closeButtonProps={{ 'data-testid': 'banner-base-close-button' }}
 />;
+```
+
+### BadgeCount Component
+
+`BadgeCount` is **not** published from the MetaMask Extension `component-library` (no `badge-count` folder or export in `index.ts` on `main`). Treat this section as **net-new usage** for extension-based apps: import the component from `@metamask/design-system-react` and use the MMDS API below.
+
+The API is defined by shared types in `@metamask/design-system-shared` (ADR-0003/0004 const objects, not TypeScript enums).
+
+#### MMDS API (reference)
+
+| Prop    | Type             | Default / notes                                                                       |
+| ------- | ---------------- | ------------------------------------------------------------------------------------- |
+| `count` | `number`         | Required.                                                                             |
+| `max`   | `number`         | Optional. Default `99`. Values above `max` show as `max+`.                            |
+| `size`  | `BadgeCountSize` | Optional. `BadgeCountSize.Md` (`'md'`) or `BadgeCountSize.Lg` (`'lg'`). Default `Md`. |
+
+#### Platform props (React)
+
+| Prop        | Notes                                                    |
+| ----------- | -------------------------------------------------------- |
+| `textProps` | Optional. Passed to the inner `Text` used for the count. |
+| `className` | Tailwind / `twMerge` classes on the root.                |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react';
+
+<BadgeCount count={12} max={99} size={BadgeCountSize.Md} />;
+```
+
+### BadgeIcon Component
+
+`BadgeIcon` is **not** in the Extension `component-library` on `main`. Use MMDS directly.
+
+| Prop       | Type       | Notes                                              |
+| ---------- | ---------- | -------------------------------------------------- |
+| `iconName` | `IconName` | Required. Shared icon name from the design system. |
+
+#### Platform props (React)
+
+| Prop        | Notes                                |
+| ----------- | ------------------------------------ |
+| `iconProps` | Optional. `Omit<IconProps, 'name'>`. |
+| `className` | Optional.                            |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeIcon, IconName } from '@metamask/design-system-react';
+
+<BadgeIcon iconName={IconName.User} />;
+```
+
+### BadgeNetwork Component
+
+`BadgeNetwork` is **not** in the Extension `component-library` on `main`. MMDS `BadgeNetwork` is a thin wrapper around `AvatarNetwork` with **fixed** `size` and `hasBorder` — callers do not pass `size` or `shape` on `BadgeNetwork` (they are omitted from the public type).
+
+#### Shared props (`name`, `fallbackText`, image `src`)
+
+| Prop           | Notes                                                              |
+| -------------- | ------------------------------------------------------------------ |
+| `name`         | Optional. Used for alt text and initial fallback.                  |
+| `fallbackText` | Optional. Shown when no image; defaults to first letter of `name`. |
+| `src`          | Image source (string URL in React). Same role as `AvatarNetwork`.  |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeNetwork } from '@metamask/design-system-react';
+
+<BadgeNetwork name="Ethereum" src="https://example.com/icon.png" />;
+```
+
+### BadgeStatus Component
+
+`BadgeStatus` is **not** in the Extension `component-library` on `main`.
+
+#### Status values (`BadgeStatusStatus`)
+
+| Value                            | Meaning (MMDS)   |
+| -------------------------------- | ---------------- |
+| `BadgeStatusStatus.Active`       | `'active'`       |
+| `BadgeStatusStatus.Inactive`     | `'inactive'`     |
+| `BadgeStatusStatus.Disconnected` | `'disconnected'` |
+| `BadgeStatusStatus.New`          | `'new'`          |
+| `BadgeStatusStatus.Attention`    | `'attention'`    |
+
+#### Other props
+
+| Prop        | Type                | Default                                       |
+| ----------- | ------------------- | --------------------------------------------- |
+| `status`    | `BadgeStatusStatus` | Required.                                     |
+| `hasBorder` | `boolean`           | Default `true`.                               |
+| `size`      | `BadgeStatusSize`   | `Md` (`'md'`) or `Lg` (`'lg'`). Default `Md`. |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeStatus, BadgeStatusStatus } from '@metamask/design-system-react';
+
+<BadgeStatus status={BadgeStatusStatus.Active} />;
+```
+
+### BadgeWrapper Component
+
+The extension exports `BadgeWrapper`, `BadgeWrapperPosition`, and `BadgeWrapperAnchorElementShape` from `component-library/badge-wrapper`. Migrate to `@metamask/design-system-react` and align enums, prop names, defaults, and required `badge`.
+
+#### Breaking changes
+
+##### Enum casing and members
+
+Legacy extension enums use mixed-case **member names** with lowercase string values. MMDS uses **PascalCase** members (ADR-0003 const objects) with the same string values for position and anchor shape.
+
+| Legacy `BadgeWrapperPosition` | MMDS `BadgeWrapperPosition`        |
+| ----------------------------- | ---------------------------------- |
+| `topRight`                    | `BadgeWrapperPosition.TopRight`    |
+| `bottomRight`                 | `BadgeWrapperPosition.BottomRight` |
+| `topLeft`                     | `BadgeWrapperPosition.TopLeft`     |
+| `bottomLeft`                  | `BadgeWrapperPosition.BottomLeft`  |
+
+| Legacy `BadgeWrapperAnchorElementShape` | MMDS `BadgeWrapperPositionAnchorShape`        |
+| --------------------------------------- | --------------------------------------------- |
+| `rectangular`                           | `BadgeWrapperPositionAnchorShape.Rectangular` |
+| `circular`                              | `BadgeWrapperPositionAnchorShape.Circular`    |
+
+##### Renamed props
+
+| Extension prop       | MMDS prop              | Notes                                      |
+| -------------------- | ---------------------- | ------------------------------------------ |
+| `anchorElementShape` | `positionAnchorShape`  | Same semantics; use MMDS const object.     |
+| `positionObj`        | `customPosition`       | Same `{ top, right, bottom, left }` shape. |
+| `badge` (optional)   | `badge` (**required**) | MMDS requires the badge node.              |
+
+##### Default changes
+
+| Behavior        | Extension default                            | MMDS default                               |
+| --------------- | -------------------------------------------- | ------------------------------------------ |
+| Preset position | `BadgeWrapperPosition.bottomRight`           | `BadgeWrapperPosition.BottomRight`         |
+| Anchor shape    | `BadgeWrapperAnchorElementShape.rectangular` | `BadgeWrapperPositionAnchorShape.Circular` |
+
+##### Removed / narrowed surfaces
+
+- **`badge` optional → required:** supply an explicit badge node (often `BadgeCount`, `BadgeNetwork`, etc.).
+- **Polymorphic Box spread:** extension `BadgeWrapperProps` extends broad Box/style-utility props; MMDS `BadgeWrapper` uses an explicit API plus `className` / `childrenContainerProps` / `badgeContainerProps` instead of legacy style-utility breadth.
+
+#### Migration example
+
+##### Before (Extension)
+
+```tsx
+import {
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperAnchorElementShape,
+} from '../../component-library';
+
+<BadgeWrapper
+  position={BadgeWrapperPosition.topRight}
+  anchorElementShape={BadgeWrapperAnchorElementShape.circular}
+  badge={<span className="badge">3</span>}
+>
+  <div className="anchor">Avatar</div>
+</BadgeWrapper>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+} from '@metamask/design-system-react';
+
+<BadgeWrapper
+  position={BadgeWrapperPosition.TopRight}
+  positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+  badge={<span className="badge">3</span>}
+>
+  <div className="anchor">Avatar</div>
+</BadgeWrapper>;
 ```
 
 ### Text Component
@@ -1576,13 +1773,13 @@ The extension `avatar-icon` used a single `color` prop (text/icon colors). MMDS 
 
 #### Breaking Changes (Extension)
 
-| Extension API                    | MMDS API                                     | Change Type       | Notes                                                                                 |
-| -------------------------------- | -------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------- |
-| `iconName: IconName`             | `iconName: IconName`                         | unchanged         | same icon set                                                                         |
-| `iconProps`                      | `iconProps` (omit `name` from `IconProps`)   | typing tightened  | pass `Icon` overrides without repeating `name`                                        |
-| `color?: TextColor \| IconColor` | `severity?: AvatarIconSeverity`              | **replaced**      | `Neutral`, `Info`, `Success`, `Error`, `Warning` — not a 1:1 list with legacy `Color` |
-| `size` labels `xs`–`xl`          | `AvatarIconSize` (alias of `AvatarBaseSize`) | same string union | default `Md`                                                                          |
-| (no `severity` in extension)     | `AvatarIconSeverity`                         | new               | use instead of ad-hoc `color`                                                         |
+| Extension API                    | MMDS API                                     | Change Type       | Notes                                                                                  |
+| -------------------------------- | -------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------- |
+| `iconName: IconName`             | `iconName: IconName`                         | unchanged         | same icon set                                                                          |
+| `iconProps`                      | `iconProps` (omit `name` from `IconProps`)   | typing tightened  | pass `Icon` overrides without repeating `name`                                         |
+| `color?: TextColor \| IconColor` | `severity?: AvatarIconSeverity`              | **replaced**      | `Neutral`, `Info`, `Success`, `Danger`, `Warning` — not a 1:1 list with legacy `Color` |
+| `size` labels `xs`–`xl`          | `AvatarIconSize` (alias of `AvatarBaseSize`) | same string union | default `Md`                                                                           |
+| (no `severity` in extension)     | `AvatarIconSeverity`                         | new               | use instead of ad-hoc `color`                                                          |
 
 #### Migration Example
 
@@ -1615,7 +1812,7 @@ import {
 <AvatarIcon
   iconName={IconName.Eye}
   size={AvatarIconSize.Md}
-  severity={AvatarIconSeverity.Error}
+  severity={AvatarIconSeverity.Danger}
 />;
 ```
 
@@ -3378,6 +3575,68 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.25.0 to 0.26.0
+
+#### TextButton: `size`/`TextButtonSize` replaced by `variant`/`TextVariant`
+
+`TextButton` has been rewritten as a text-only control backed by `Text`, aligning its API with the React Native `TextButton`. The old `ButtonBase`-backed implementation and several props are removed.
+
+**What changed:**
+
+- `size` and `TextButtonSize` are removed. Use `variant` with `TextVariant` values instead.
+- `isInverse` is removed. Use `Button` with `variant={ButtonVariant.Tertiary}` for inverse or danger-styled actions.
+- `isDisabled` is removed. `TextButton` no longer manages a disabled state directly.
+- `textProps` is removed. Props that were forwarded to the inner `Text` can now be passed directly.
+- Start icon, end icon, and accessory slot props are removed. Compose icons outside `TextButton` as needed.
+- `asChild` is added for semantic link composition (for example wrapping an `<a>` element).
+
+**Migration:**
+
+```tsx
+// Before (0.25.0)
+import { TextButton, TextButtonSize } from '@metamask/design-system-react';
+
+<TextButton size={TextButtonSize.BodySm} isInverse>Learn more</TextButton>
+
+// After (0.26.0)
+import { TextButton } from '@metamask/design-system-react';
+import { TextVariant } from '@metamask/design-system-shared';
+
+<TextButton variant={TextVariant.BodySm}>Learn more</TextButton>
+
+// For semantic link usage
+<TextButton asChild><a href="/learn-more">Learn more</a></TextButton>
+```
+
+**Impact:**
+
+- Any call site using `size`, `isInverse`, `isDisabled`, `textProps`, or icon/accessory props must update.
+- `TextButtonSize` is no longer exported from `@metamask/design-system-react`.
+
+#### Severity vocabulary: `AvatarIconSeverity.Error` → `AvatarIconSeverity.Danger`
+
+The public severity API for `AvatarIcon` now uses `Danger` instead of `Error` for destructive or critical states.
+
+**What changed:**
+
+- `AvatarIconSeverity.Error` (`'error'`) is renamed to `AvatarIconSeverity.Danger` (`'danger'`).
+
+**Migration:**
+
+```tsx
+// Before (0.25.0)
+import { AvatarIcon, AvatarIconSeverity } from '@metamask/design-system-react';
+
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Error} />
+
+// After (0.26.0)
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Danger} />
+```
+
+**Impact:**
+
+- Any call site using `AvatarIconSeverity.Error` must change to `AvatarIconSeverity.Danger`. The rendered color is unchanged — `Danger` still maps to the error color tokens.
 
 ## From version 0.22.0 to 0.23.0
 

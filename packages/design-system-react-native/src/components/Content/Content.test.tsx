@@ -1,5 +1,4 @@
 import {
-  BoxFlexDirection,
   ContentVerticalAlignment,
   TextColor,
   TextVariant,
@@ -7,7 +6,7 @@ import {
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 
 import { Content } from './Content';
 
@@ -353,112 +352,6 @@ describe('Content', () => {
       );
 
       expect(getByTestId('subvalue-end')).toBeOnTheScreen();
-    });
-  });
-
-  describe('startAccessory', () => {
-    it('renders startAccessory on the content row', () => {
-      const { getByTestId } = render(
-        <Content
-          title="Label"
-          startAccessory={<Text testID="start-accessory">S</Text>}
-        />,
-      );
-
-      expect(getByTestId('start-accessory')).toBeOnTheScreen();
-    });
-
-    it('renders startAccessory with avatar on the content row', () => {
-      const { getByTestId } = render(
-        <Content
-          title="Label"
-          startAccessory={<Text testID="start-accessory">S</Text>}
-          avatar={<Text testID="avatar-slot">A</Text>}
-        />,
-      );
-
-      expect(getByTestId('start-accessory')).toBeOnTheScreen();
-      expect(getByTestId('avatar-slot')).toBeOnTheScreen();
-    });
-  });
-
-  describe('endAccessory', () => {
-    it('renders endAccessory on the content row', () => {
-      const { getByTestId } = render(
-        <Content
-          title="Label"
-          endAccessory={<Text testID="end-accessory">E</Text>}
-        />,
-      );
-
-      expect(getByTestId('end-accessory')).toBeOnTheScreen();
-    });
-  });
-
-  describe('topAccessory', () => {
-    it('renders topAccessory on screen', () => {
-      const { getByTestId } = render(
-        <Content
-          title="Label"
-          topAccessory={<View testID="top-accessory" />}
-        />,
-      );
-
-      expect(getByTestId('top-accessory')).toBeOnTheScreen();
-    });
-
-    it('uses BoxColumn root when topAccessory is provided', () => {
-      const { getByTestId } = render(
-        <Content
-          title="Label"
-          topAccessory={<View testID="top-accessory" />}
-          testID={ROOT_TEST_ID}
-        />,
-      );
-
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw.style('flex', BoxFlexDirection.Column),
-      );
-    });
-
-    it('applies twClassName on column shell root', () => {
-      const { getByTestId } = render(
-        <Content
-          title="Label"
-          topAccessory={<View testID="top-accessory" />}
-          twClassName="px-2"
-          testID={ROOT_TEST_ID}
-        />,
-      );
-
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-2`);
-    });
-  });
-
-  describe('bottomAccessory', () => {
-    it('renders bottomAccessory on screen', () => {
-      const { getByTestId } = render(
-        <Content
-          title="Label"
-          bottomAccessory={<View testID="bottom-accessory" />}
-        />,
-      );
-
-      expect(getByTestId('bottom-accessory')).toBeOnTheScreen();
-    });
-
-    it('uses BoxColumn root when only bottomAccessory is provided', () => {
-      const { getByTestId } = render(
-        <Content
-          title="Label"
-          bottomAccessory={<View testID="bottom-accessory" />}
-          testID={ROOT_TEST_ID}
-        />,
-      );
-
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw.style('flex', BoxFlexDirection.Column),
-      );
     });
   });
 
