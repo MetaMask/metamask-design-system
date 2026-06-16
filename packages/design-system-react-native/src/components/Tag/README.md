@@ -87,13 +87,14 @@ Optional React nodes shown when no start/end icon is resolved (e.g. custom glyph
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-import { Icon, IconName, IconSize, Tag } from '@metamask/design-system-react-native';
+import {
+  Icon,
+  IconName,
+  IconSize,
+  Tag,
+} from '@metamask/design-system-react-native';
 
-<Tag
-  startAccessory={
-    <Icon name={IconName.Warning} size={IconSize.Xs} />
-  }
->
+<Tag startAccessory={<Icon name={IconName.Warning} size={IconSize.Xs} />}>
   With accessory
 </Tag>;
 ```
