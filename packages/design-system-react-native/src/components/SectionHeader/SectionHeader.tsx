@@ -2,6 +2,7 @@ import {
   IconColor,
   IconName,
   IconSize,
+  mergeTwClassName,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -136,7 +137,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
       {...props}
       gap={1}
       style={style}
-      twClassName={`px-4 pb-2 pt-3 ${twClassName}`}
+      twClassName={mergeTwClassName('px-4 pb-2 pt-3', twClassName)}
       startAccessory={resolvedStartAccessory}
       endAccessory={resolvedEndAccessory}
     >

@@ -4,6 +4,7 @@ import {
   BoxBorderColor,
   ButtonSize,
   IconSize,
+  mergeTwClassName,
 } from '@metamask/design-system-shared';
 import React from 'react';
 
@@ -99,7 +100,7 @@ export const Toast: React.FC<ToastProps> = ({
       })}
       title={title}
       titleProps={titleProps}
-      twClassName={twClassName ? `rounded-xl ${twClassName}` : 'rounded-xl'}
+      twClassName={mergeTwClassName('rounded-xl', twClassName)}
     />
   );
 };

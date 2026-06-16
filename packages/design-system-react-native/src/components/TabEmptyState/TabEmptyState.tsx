@@ -1,3 +1,4 @@
+import { mergeTwClassName } from '@metamask/design-system-shared';
 import React from 'react';
 
 import {
@@ -30,7 +31,7 @@ export const TabEmptyState = ({
     justifyContent={BoxJustifyContent.Center}
     backgroundColor={BoxBackgroundColor.BackgroundDefault}
     gap={3}
-    twClassName={`max-w-64 ${twClassName}`}
+    twClassName={mergeTwClassName('max-w-64', twClassName)}
     style={style}
     {...props}
   >

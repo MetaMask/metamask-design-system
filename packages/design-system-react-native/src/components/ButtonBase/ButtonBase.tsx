@@ -1,6 +1,7 @@
 import {
   ButtonBaseSize,
   FontWeight,
+  mergeTwClassName,
   TextColor,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
@@ -171,7 +172,10 @@ export const ButtonBase = ({
             {isLoading && (
               <Box
                 {...restLoadingWrapper}
-                twClassName={`absolute inset-0 flex items-center justify-center ${loadingWrapperTw ?? ''}`}
+                twClassName={mergeTwClassName(
+                  'absolute inset-0 flex items-center justify-center',
+                  loadingWrapperTw,
+                )}
               >
                 <Spinner
                   color={
@@ -197,14 +201,20 @@ export const ButtonBase = ({
 
             <BoxRow
               {...restContentWrapper}
-              twClassName={`${contentWrapperTw ?? ''} ${isLoading ? 'opacity-0' : ''}`}
+              twClassName={mergeTwClassName(
+                contentWrapperTw,
+                isLoading ? 'opacity-0' : undefined,
+              )}
               gap={hasAccessories ? 1 : 0}
               startAccessory={
                 finalStartIconName ? (
                   <Icon
                     name={finalStartIconName}
                     size={iconSize}
-                    twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
+                    twClassName={mergeTwClassName(
+                      'shrink-0',
+                      iconClassName ? iconClassName(pressed) : undefined,
+                    )}
                     {...startIconProps}
                   />
                 ) : (
@@ -216,7 +226,10 @@ export const ButtonBase = ({
                   <Icon
                     name={finalEndIconName}
                     size={iconSize}
-                    twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
+                    twClassName={mergeTwClassName(
+                      'shrink-0',
+                      iconClassName ? iconClassName(pressed) : undefined,
+                    )}
                     {...endIconProps}
                   />
                 ) : (
@@ -230,7 +243,13 @@ export const ButtonBase = ({
                 numberOfLines: 1,
                 ellipsizeMode: 'clip',
                 ...textProps,
-                twClassName: `shrink grow-0 flex-wrap text-center ${textClassName ? textClassName(pressed) : ''} ${textProps?.twClassName ?? ''}`,
+                twClassName: mergeTwClassName(
+                  mergeTwClassName(
+                    'shrink grow-0 flex-wrap text-center',
+                    textClassName ? textClassName(pressed) : undefined,
+                  ),
+                  textProps?.twClassName,
+                ),
               }}
             >
               {children}

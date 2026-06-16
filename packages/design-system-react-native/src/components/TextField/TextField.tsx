@@ -1,3 +1,4 @@
+import { mergeTwClassName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { forwardRef, useCallback, useState } from 'react';
 import { View } from 'react-native';
@@ -100,9 +101,10 @@ export const TextField = forwardRef<View, TextFieldProps>(
             onBlur={onBlurHandler}
             onFocus={onFocusHandler}
             isStateStylesDisabled
-            twClassName={`min-h-0 flex-1 justify-center h-[46px] bg-transparent border-0${
-              inputTwClassNameFromProps ? ` ${inputTwClassNameFromProps}` : ''
-            }`}
+            twClassName={mergeTwClassName(
+              'min-h-0 flex-1 justify-center h-[46px] bg-transparent border-0',
+              inputTwClassNameFromProps,
+            )}
             numberOfLines={1}
             multiline={false}
           />
