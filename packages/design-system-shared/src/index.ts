@@ -148,6 +148,7 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
 // ButtonIcon types (ADR-0003 + ADR-0004)
 export {
   ButtonIconSize,
@@ -241,6 +242,9 @@ export { type FilterButtonGroupPropsShared } from './types/FilterButtonGroup';
 
 // SegmentedControl types (ADR-0004)
 export { type SegmentedControlPropsShared } from './types/SegmentedControl';
+
+// Switch types (ADR-0004)
+export { type SwitchPropsShared } from './types/Switch';
 
 // FilterButtonGroup context (ADR-0003 + ADR-0004)
 export {
