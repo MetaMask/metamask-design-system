@@ -149,6 +149,9 @@ export type {
   UseHeaderStandardAnimatedReturn,
 } from './HeaderStandardAnimated';
 
+export { HeaderSubpage } from './HeaderSubpage';
+export type { HeaderSubpageProps } from './HeaderSubpage';
+
 export { HeaderStandardCenterColumn } from './temp-components/HeaderStandardCenterColumn';
 export type {
   HeaderStandardCenterColumnFields,
