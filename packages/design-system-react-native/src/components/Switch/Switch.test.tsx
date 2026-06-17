@@ -1,5 +1,13 @@
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
+import { Platform } from 'react-native';
+
+import { Switch } from './Switch';
+
 jest.mock('react-native/Libraries/Components/Switch/Switch', () => {
-  const React = require('react');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const ReactMock = require('react');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { View } = require('react-native');
 
   const MockSwitch = ({
@@ -12,7 +20,7 @@ jest.mock('react-native/Libraries/Components/Switch/Switch', () => {
     style,
     ...rest
   }: Record<string, unknown>) =>
-    React.createElement(View, {
+    ReactMock.createElement(View, {
       ...rest,
       accessible: true,
       accessibilityRole,
@@ -28,13 +36,6 @@ jest.mock('react-native/Libraries/Components/Switch/Switch', () => {
     default: MockSwitch,
   };
 });
-
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { fireEvent, render, renderHook } from '@testing-library/react-native';
-import React from 'react';
-import { Platform } from 'react-native';
-
-import { Switch } from './Switch';
 
 describe('Switch', () => {
   let tw: ReturnType<typeof useTailwind>;
