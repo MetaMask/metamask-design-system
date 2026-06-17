@@ -239,6 +239,9 @@ export {
 // FilterButtonGroup types (ADR-0003 + ADR-0004)
 export { type FilterButtonGroupPropsShared } from './types/FilterButtonGroup';
 
+// SegmentedControl types (ADR-0004)
+export { type SegmentedControlPropsShared } from './types/SegmentedControl';
+
 // FilterButtonGroup context (ADR-0003 + ADR-0004)
 export {
   FilterButtonGroupContext,

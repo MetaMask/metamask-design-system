@@ -1,4 +1,5 @@
 import {
+  ButtonBaseSize,
   IconColor,
   IconName,
   IconSize,
@@ -11,6 +12,7 @@ import React from 'react';
 
 import { FilterButtonGroup } from '../FilterButtonGroup/FilterButtonGroup';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
+import { SegmentedControl } from '../SegmentedControl/SegmentedControl';
 
 import { FilterButton } from './FilterButton';
 
@@ -424,6 +426,45 @@ describe('FilterButton', () => {
 
       expect(getByTestId('filter-a')).toHaveStyle(tw`bg-transparent`);
       expect(getByTestId('filter-b')).toHaveStyle(tw`bg-icon-default`);
+    });
+  });
+
+  describe('when group context provides size and isEqualWidth', () => {
+    it('uses group size when child omits size', () => {
+      const { getByTestId } = render(
+        <SegmentedControl
+          value="a"
+          onChange={noopPress}
+          size={ButtonBaseSize.Md}
+          testID="group"
+        >
+          <FilterButton value="a" testID="filter-a" onPress={noopPress}>
+            A
+          </FilterButton>
+        </SegmentedControl>,
+      );
+
+      expect(getByTestId('filter-a')).toHaveStyle(tw`h-10`);
+    });
+
+    it('uses group isEqualWidth when isFullWidth is true', () => {
+      const { getByTestId } = render(
+        <SegmentedControl
+          value="a"
+          onChange={noopPress}
+          testID="group"
+          isFullWidth
+        >
+          <FilterButton value="a" testID="filter-a" onPress={noopPress}>
+            A
+          </FilterButton>
+          <FilterButton value="b" testID="filter-b" onPress={noopPress}>
+            B
+          </FilterButton>
+        </SegmentedControl>,
+      );
+
+      expect(getByTestId('filter-a')).toHaveStyle(tw`w-full`);
     });
   });
 });
