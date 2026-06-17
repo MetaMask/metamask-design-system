@@ -1,16 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
-
 import {
   FontFamily,
   FontStyle,
   FontWeight,
-  OverflowWrap,
-  TextAlign,
-  TextVariant,
-  TextTransform,
   TextColor,
-} from '../../types';
+  TextVariant,
+} from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import React from 'react';
+
+import { OverflowWrap, TextAlign, TextTransform } from '../../types';
 
 import README from './README.mdx';
 import { Text } from './Text';

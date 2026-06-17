@@ -3,7 +3,7 @@
 BottomSheetDialog is used to represent the animated content area within a BottomSheet. It provides swipe-to-dismiss gesture handling, keyboard avoidance, and smooth slide-in/slide-out animations. This is a foundation component and should be used within BottomSheet.
 
 ```tsx
-import BottomSheetDialog from './BottomSheetDialog';
+import { BottomSheetDialog } from './BottomSheetDialog';
 
 <BottomSheetDialog
   onOpen={() => console.log('Opened')}

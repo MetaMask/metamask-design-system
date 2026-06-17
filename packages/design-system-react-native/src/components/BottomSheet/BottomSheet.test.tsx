@@ -20,36 +20,38 @@ const mockOpenDialog = jest.fn();
 jest.mock('../BottomSheetDialog', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { forwardRef, useImperativeHandle } = require('react');
-  return forwardRef(
-    (
-      {
-        children,
-        onClose,
-        onOpen,
-      }: {
-        children?: unknown;
-        onClose?: (hasPendingAction?: boolean) => void;
-        onOpen?: (hasPendingAction?: boolean) => void;
+  return {
+    BottomSheetDialog: forwardRef(
+      (
+        {
+          children,
+          onClose,
+          onOpen,
+        }: {
+          children?: unknown;
+          onClose?: (hasPendingAction?: boolean) => void;
+          onOpen?: (hasPendingAction?: boolean) => void;
+        },
+        ref: unknown,
+      ) => {
+        capturedDialogOnClose = onClose;
+        capturedDialogOnOpen = onOpen;
+        useImperativeHandle(ref, () => ({
+          onCloseDialog: (callback?: () => void) => {
+            mockCloseDialog();
+            onClose?.();
+            callback?.();
+          },
+          onOpenDialog: (callback?: () => void) => {
+            mockOpenDialog();
+            onOpen?.();
+            callback?.();
+          },
+        }));
+        return children;
       },
-      ref: unknown,
-    ) => {
-      capturedDialogOnClose = onClose;
-      capturedDialogOnOpen = onOpen;
-      useImperativeHandle(ref, () => ({
-        onCloseDialog: (callback?: () => void) => {
-          mockCloseDialog();
-          onClose?.();
-          callback?.();
-        },
-        onOpenDialog: (callback?: () => void) => {
-          mockOpenDialog();
-          onOpen?.();
-          callback?.();
-        },
-      }));
-      return children;
-    },
-  );
+    ),
+  };
 });
 
 const noop = () => undefined;
@@ -60,6 +62,7 @@ describe('BottomSheet', () => {
     mockOpenDialog.mockClear();
     capturedDialogOnClose = undefined;
     capturedDialogOnOpen = undefined;
+    capturedPanGestureHandlerProps = undefined;
   });
 
   it('renders with testID on root element', () => {
@@ -139,10 +142,10 @@ describe('BottomSheet', () => {
     expect(onOpen).toHaveBeenCalledTimes(1);
   });
 
-  it('calls goBack when shouldNavigateBack is true and dialog closes', () => {
+  it('calls goBack when dialog closes', () => {
     const goBack = jest.fn();
     render(
-      <BottomSheet goBack={goBack} shouldNavigateBack>
+      <BottomSheet goBack={goBack}>
         <View />
       </BottomSheet>,
     );
@@ -154,25 +157,10 @@ describe('BottomSheet', () => {
     expect(goBack).toHaveBeenCalledTimes(1);
   });
 
-  it('does not call goBack when shouldNavigateBack is false', () => {
-    const goBack = jest.fn();
-    render(
-      <BottomSheet goBack={goBack} shouldNavigateBack={false}>
-        <View />
-      </BottomSheet>,
-    );
-
-    act(() => {
-      capturedDialogOnClose?.();
-    });
-
-    expect(goBack).not.toHaveBeenCalled();
-  });
-
   it('does not call goBack twice on duplicate close signals', () => {
     const goBack = jest.fn();
     render(
-      <BottomSheet goBack={goBack} shouldNavigateBack>
+      <BottomSheet goBack={goBack}>
         <View />
       </BottomSheet>,
     );
@@ -219,20 +207,21 @@ describe('BottomSheet', () => {
 
   describe('Android back button', () => {
     let backHandlerCallback: (() => boolean) | null = null;
+    let originalOS: typeof Platform.OS;
 
     beforeEach(() => {
+      originalOS = Platform.OS;
+      Platform.OS = 'android';
       jest
         .spyOn(BackHandler, 'addEventListener')
         .mockImplementation((_event, handler) => {
           backHandlerCallback = handler as () => boolean;
           return { remove: jest.fn() };
         });
-      jest
-        .spyOn(BackHandler, 'removeEventListener')
-        .mockImplementation(jest.fn());
     });
 
     afterEach(() => {
+      Platform.OS = originalOS;
       jest.restoreAllMocks();
       backHandlerCallback = null;
     });

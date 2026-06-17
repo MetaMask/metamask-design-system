@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { Icon, IconName, IconSize } from '../Icon';
 import { TextColor } from '../Text';
 
 import { AvatarBase } from './AvatarBase';
 import { SAMPLE_AVATARBASE_URIS } from './AvatarBase.dev';
 import README from './README.mdx';
+
+import { AvatarBaseSize, AvatarBaseShape } from '.';
 
 const meta: Meta<typeof AvatarBase> = {
   title: 'React Components/AvatarBase',

@@ -5,16 +5,10 @@ import type { BottomSheetDialogProps } from '../BottomSheetDialog/BottomSheetDia
  */
 export type BottomSheetProps = {
   /**
-   * Optional boolean that indicates if sheet is unmounted from the stack or not when closed.
-   *
-   * @default true
+   * Optional callback. Will be **always** invoked when provided.
+   * This callback serves as a replacement for `shouldNavigateBack` prop.
    */
-  shouldNavigateBack?: boolean;
-
-  /**
-   * Callback invoked to navigate back when shouldNavigateBack is true and the sheet closes.
-   */
-  goBack: () => void;
+  goBack?: () => void;
 
   /**
    * Optional boolean that indicates if the KeyboardAvoidingView is enabled.

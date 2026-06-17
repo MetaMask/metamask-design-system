@@ -1,7 +1,10 @@
+import {
+  AvatarBaseShape,
+  AvatarFaviconSize,
+} from '@metamask/design-system-shared';
 import React, { useState } from 'react';
-import type { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
+import type { ImageErrorEvent } from 'react-native';
 
-import { AvatarFaviconSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { ImageOrSvg } from '../temp-components/ImageOrSvg';
 
@@ -18,10 +21,8 @@ export const AvatarFavicon = ({
 }: AvatarFaviconProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
 
-  const backupFallbackText = fallbackText || name?.[0] || '';
-  const onImageErrorHandler = (
-    e: NativeSyntheticEvent<ImageErrorEventData>,
-  ) => {
+  const backupFallbackText = fallbackText || name?.[0] || '?';
+  const onImageErrorHandler = (e: ImageErrorEvent) => {
     setFallbackText(backupFallbackText);
     imageOrSvgProps?.onImageError?.(e);
   };
@@ -35,7 +36,7 @@ export const AvatarFavicon = ({
     <AvatarBase
       size={size}
       shape={AvatarBaseShape.Circle}
-      fallbackText={finalFallbackText}
+      fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
       {...props}
     >

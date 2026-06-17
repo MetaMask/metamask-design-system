@@ -7,17 +7,178 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.26.0]
+
+### Added
+
+- Added `Tag` component for categorization and filtering labels ([#1211](https://github.com/MetaMask/metamask-design-system/pull/1211))
+- Added `Toast` component with `Toaster` provider and imperative `toast()` API for non-blocking notifications ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+
+### Changed
+
+- **BREAKING:** `TextButton` API aligned with React Native — `size`/`TextButtonSize` replaced by `variant`/`TextVariant`; `isInverse`, `isDisabled`, `textProps`, start/end icons, and accessory slots removed; `asChild` added for semantic link composition ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
+  - See [Migration Guide](./MIGRATION.md#from-version-0250-to-0260)
+- **BREAKING:** `AvatarIconSeverity.Error` renamed to `AvatarIconSeverity.Danger`; severity vocabulary standardized to use `Danger` for destructive/critical states and `Neutral` for default states ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+  - See [Migration Guide](./MIGRATION.md#from-version-0250-to-0260)
+
+### Fixed
+
+- Fixed `Toast` to support `toast()` calls made before `Toaster` mounts ([#1217](https://github.com/MetaMask/metamask-design-system/pull/1217))
+
+## [0.25.0]
+
+### Added
+
+- Added `Popover` for anchored overlays such as menus, tooltips, and dialogs ([#1153](https://github.com/MetaMask/metamask-design-system/pull/1153))
+- Added `TextArea` for controlled multiline text entry ([#1036](https://github.com/MetaMask/metamask-design-system/pull/1036))
+- Added `TextFieldSearch` for controlled search-field flows on top of `TextField` ([#1171](https://github.com/MetaMask/metamask-design-system/pull/1171))
+- Added `FormTextField` for labeled form controls built from `Label`, `TextField`, and `HelpText` ([#1197](https://github.com/MetaMask/metamask-design-system/pull/1197))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; consumers must run Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- Updated avatar fallback handling so `AvatarToken`, `AvatarNetwork`, and `AvatarFavicon` resolve consistently when the requested image is unavailable ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
+
+## [0.24.0]
+
+### Added
+
+- Added `TextField` for labeled text entry with optional helper and validation text, exposing `TextFieldSize` and `TextFieldType` ([#1170](https://github.com/MetaMask/metamask-design-system/pull/1170))
+- Added `FlashFilled` icon (filled lightning bolt) to `IconName` ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
+
+## [0.23.1]
+
+### Changed
+
+- Updated the `Telegram` icon asset to match the official Telegram logo ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
+
+## [0.23.0]
+
+### Added
+
+- Added `PopoverHeader` for popover title rows and trailing actions, aligned with MetaMask extension screen patterns ([#1158](https://github.com/MetaMask/metamask-design-system/pull/1158))
+- Added `ModalHeader` for modal title rows and accessory slots, aligned with MetaMask extension screen patterns ([#1144](https://github.com/MetaMask/metamask-design-system/pull/1144))
+- Added `Label` for accessible captions paired with form controls ([#1152](https://github.com/MetaMask/metamask-design-system/pull/1152))
+- Added `SensitiveText` for masking and revealing sensitive strings (addresses, secrets, recovery phrases) with configurable visible length ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- Added `HelpText` for helper, success, warning, and error copy beneath inputs and other controls ([#1169](https://github.com/MetaMask/metamask-design-system/pull/1169))
+
+### Changed
+
+- `ButtonBase` now derives label typography, start and end icon sizes, and internal spacing from the `size` prop for every supported `ButtonBaseSize`, keeping defaults aligned without manual per-size tuning ([#1150](https://github.com/MetaMask/metamask-design-system/pull/1150))
+  - If you wrap **`ButtonBase`** and override label, icon, or spacing, see [Migration guide](./MIGRATION.md#buttonbase-size-defaults).
+- `BannerBase` close control behavior is simplified and aligned with the shared dismiss contract ([#1166](https://github.com/MetaMask/metamask-design-system/pull/1166))
+
+## [0.22.0]
+
+### Added
+
+- Added `Modal` and `useModalContext` for composing modal dialogs with focus management and the same layout patterns used in the MetaMask extension migration ([#1136](https://github.com/MetaMask/metamask-design-system/pull/1136))
+- Added `ModalContent` (with `ModalContentSize` and `MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR`) for sized modal bodies, entrance motion, and outside-click handling aligned with that migration ([#1139](https://github.com/MetaMask/metamask-design-system/pull/1139))
+- Added `Skeleton` for loading placeholders ([#1146](https://github.com/MetaMask/metamask-design-system/pull/1146))
+- Added `HeaderBase` for flexible header layouts when migrating extension screens into the design system ([#1142](https://github.com/MetaMask/metamask-design-system/pull/1142))
+- Added `ListArrow`, `Musd`, and `MusdFilled` icons; refreshed `Candlestick`; and added `Group`, `PieChart`, and `Predictions` icons ([#1157](https://github.com/MetaMask/metamask-design-system/pull/1157), [#1161](https://github.com/MetaMask/metamask-design-system/pull/1161), [#1162](https://github.com/MetaMask/metamask-design-system/pull/1162), [#1163](https://github.com/MetaMask/metamask-design-system/pull/1163))
+
+## [0.21.0]
+
+### Added
+
+- Added `Merge` to the icon set so it can be used anywhere `IconName` is supported in `@metamask/design-system-react` ([#1155](https://github.com/MetaMask/metamask-design-system/pull/1155))
+- Added `ModalOverlay`, `ModalBody`, `ModalFocus`, and `ModalFooter` to help Extension consumers migrate modal building blocks into `@metamask/design-system-react` ([#1120](https://github.com/MetaMask/metamask-design-system/pull/1120), [#1121](https://github.com/MetaMask/metamask-design-system/pull/1121), [#1128](https://github.com/MetaMask/metamask-design-system/pull/1128), [#1132](https://github.com/MetaMask/metamask-design-system/pull/1132))
+
+### Changed
+
+- Updated `Input` to use the shared cross-platform API. Consumers should pass a controlled `value`, use `isReadOnly` as the readonly prop name, and stop relying on `defaultValue` as part of the public component contract ([#1043](https://github.com/MetaMask/metamask-design-system/pull/1043))
+- Updated `AvatarGroup` to use shared cross-platform size and variant contracts, keeping React and React Native aligned on the same public API names and values ([#1067](https://github.com/MetaMask/metamask-design-system/pull/1067))
+
+## [0.20.0]
+
+### Changed
+
+- **BREAKING:** Updated `Button`, `ButtonBase`, and `ButtonHero` size and variant exports to use shared const-object + string-union types rather than platform-local enum-based definitions, aligning React with the shared cross-platform type contracts ([#1034](https://github.com/MetaMask/metamask-design-system/pull/1034))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+- **BREAKING:** Updated `ButtonIconSize` and `ButtonIconVariant` to use shared const-object + string-union types rather than platform-local enum-based definitions, aligning React with the shared cross-platform type contracts ([#1038](https://github.com/MetaMask/metamask-design-system/pull/1038))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+- Updated Figma Code Connect to the live `MMDS Components` file and aligned `ButtonIcon` and `TextButton` mappings with the current component APIs shown in Dev Mode ([#1109](https://github.com/MetaMask/metamask-design-system/pull/1109))
+- Expanded the `TextButton` migration guide for extension consumers replacing `ButtonLink` and `ButtonVariant.Link` with the current design-system APIs ([#1098](https://github.com/MetaMask/metamask-design-system/pull/1098))
+
+## [0.19.0]
+
+### Added
+
+- Added `Telegram` to the `IconName` set for use anywhere the React package accepts design system icons ([#1122](https://github.com/MetaMask/metamask-design-system/pull/1122))
+
+### Changed
+
+- **BREAKING:** Updated `AvatarIcon` exports to use shared const-object + string-union types rather than local enum-based definitions, aligning React with the shared cross-platform type contracts ([#996](https://github.com/MetaMask/metamask-design-system/pull/996))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+
+## [0.18.0]
+
+### Changed
+
+- **BREAKING:** Updated `IconName`, `IconColor`, and `IconSize` exports to use const-object + string-union types instead of local enums; existing imports from `@metamask/design-system-react` continue to work, but enum-specific type assumptions may need updating ([#1042](https://github.com/MetaMask/metamask-design-system/pull/1042), [#1101](https://github.com/MetaMask/metamask-design-system/pull/1101))
+  - See [Migration Guide](./MIGRATION.md#from-version-0170-to-0180)
+- **BREAKING:** Updated `Box` type exports (`BoxFlexDirection`, `BoxFlexWrap`, `BoxAlignItems`, `BoxJustifyContent`, `BoxBackgroundColor`, `BoxBorderColor`, `BoxSpacing`, `BoxBorderWidth`) to use const-object + string-union types, and removed stale Box color entries that no longer map to design tokens ([#1026](https://github.com/MetaMask/metamask-design-system/pull/1026))
+  - Removed `BoxBackgroundColor.WarningAlternative`, `BoxBackgroundColor.SuccessAlternative`, `BoxBorderColor.WarningAlternative`, `BoxBorderColor.SuccessAlternative`, and `BoxBorderColor.InfoAlternative`
+  - See [Migration Guide](./MIGRATION.md#from-version-0170-to-0180)
+- Updated `ButtonTertiary` to use the default text color for more consistent contrast across states ([#1099](https://github.com/MetaMask/metamask-design-system/pull/1099))
+
+## [0.17.1]
+
+### Changed
+
+- Expanded the `react` and `react-dom` peer dependency ranges to support React 19 consumers. ([#1089](https://github.com/MetaMask/metamask-design-system/pull/1089))
+
+## [0.17.0]
+
+### Changed
+
+- Updated `AvatarFavicon` type internals to use ADR-0003/ADR-0004 shared types; imports from `@metamask/design-system-react` are unchanged ([#1062](https://github.com/MetaMask/metamask-design-system/pull/1062))
+- **BREAKING:** Migrated `Text` typography types (`TextVariant`, `TextColor`, `FontWeight`, `FontStyle`, `FontFamily`) to `@metamask/design-system-shared`; all imports through `@metamask/design-system-react` continue to work without change ([#1047](https://github.com/MetaMask/metamask-design-system/pull/1047))
+  - `FontWeight`, `FontStyle`, and `FontFamily` underlying string values changed to semantic identifiers (e.g. `FontWeight.Bold` was `'font-bold'`, now `'bold'`); idiomatic usage is unaffected
+  - Projects scanning `node_modules` for Tailwind class names must also scan `@metamask/design-system-shared`
+  - See [Migration Guide](./MIGRATION.md#from-version-0160-to-0170)
+
+## [0.16.0]
+
+### Changed
+
+- Updated `BadgeNetwork` type internals; imports from `@metamask/design-system-react` are unchanged ([#1021](https://github.com/MetaMask/metamask-design-system/pull/1021))
+
+## [0.15.0]
+
+### Added
+
+- Added `NoPhotography` icon ([#1056](https://github.com/MetaMask/metamask-design-system/pull/1056))
+
+### Changed
+
+- **BREAKING:** Updated `AvatarToken` and `AvatarAccount` exports to use shared const-object + string-union types (ADR-0003/ADR-0004); normal use is unaffected ([#1009](https://github.com/MetaMask/metamask-design-system/pull/1009), [#1015](https://github.com/MetaMask/metamask-design-system/pull/1015))
+
+## [0.14.0]
+
+### Changed
+
+- **BREAKING:** Updated `AvatarBase` exports to consume shared const-object + string-union types rather than local enums, aligning React with shared cross-platform type contracts ([#1005](https://github.com/MetaMask/metamask-design-system/pull/1005))
+  - No migration required for typical usage; continue importing from `@metamask/design-system-react` as before.
+  - Runtime values remain stable while type definitions follow ADR-0003/ADR-0004.
+- Updated `@metamask/utils` peer dependency to `^11.11.0` ([#1033](https://github.com/MetaMask/metamask-design-system/pull/1033))
+- Expanded `BannerBase` migration documentation to improve upgrade guidance for consumers moving between recent releases ([#1011](https://github.com/MetaMask/metamask-design-system/pull/1011))
+
 ## [0.13.0]
 
 ### Changed
 
-- `FontWeight.Bold` and the `Text` component now treat the semantic bold slot as weight 600; Storybook moved to the `Geist-SemiBold` assets and the tokens now emit `--font-weight-bold: 600`, so update any hardcoded `font-weight: 700` references as outlined in MIGRATION.md#from-version-0120-to-0130 ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017)).
+- `FontWeight.Bold` and the `Text` component now treat the semantic bold slot as weight 600; Storybook moved to the `Geist-SemiBold` assets and the tokens now emit `--font-weight-bold: 600`, so update any hardcoded `font-weight: 700` references as outlined in MIGRATION.md#from-version-0120-to-0130 ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
 - `BadgeWrapperPosition`, `BadgeWrapperPositionAnchorShape`, `BadgeWrapperCustomPosition`, and `BadgeWrapperPropsShared` now derive from const objects with `as const`/string-union typings per ADR-0003 and ADR-0004, so the same values are available to both React and React Native while your import statements continue to reference `@metamask/design-system-react` (or the platform-specific entry point) as before ([#1014](https://github.com/MetaMask/metamask-design-system/pull/1014); see https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md and MIGRATION.md#from-version-0120-to-0130).
-- Documented the Button migration path that walks through prop, variant, and size mappings for both web and mobile, linking directly to MIGRATION.md#button-component so the release note, changelog, and migration guide share the same reference ([#999](https://github.com/MetaMask/metamask-design-system/pull/999)).
+- Documented the Button migration path that walks through prop, variant, and size mappings for both web and mobile, linking directly to MIGRATION.md#button-component so the release note, changelog, and migration guide share the same reference ([#999](https://github.com/MetaMask/metamask-design-system/pull/999))
 
 ### Fixed
 
-- Restored a visible keyboard focus outline for `Checkbox` keyboard users by making the hidden input a Tailwind `peer` and mirroring its `peer-focus-visible` state onto the visible container so Tab navigation shows a clear indicator ([#1008](https://github.com/MetaMask/metamask-design-system/pull/1008)).
+- Restored a visible keyboard focus outline for `Checkbox` keyboard users by making the hidden input a Tailwind `peer` and mirroring its `peer-focus-visible` state onto the visible container so Tab navigation shows a clear indicator ([#1008](https://github.com/MetaMask/metamask-design-system/pull/1008))
 
 ## [0.12.0]
 
@@ -155,8 +316,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New icons (AppleLogo, Backspace, Candlestick, Clear, MetamaskFoxOutline) ([#798](https://github.com/MetaMask/metamask-design-system/pull/798))
-
-- Figma code connect files for all components ([#766](https://github.com/MetaMask/metamask-design-system/pull/766)), ([#791](https://github.com/MetaMask/metamask-design-system/pull/791)), ([#795](https://github.com/MetaMask/metamask-design-system/pull/795)), ([#796](https://github.com/MetaMask/metamask-design-system/pull/796)), ([#794](https://github.com/MetaMask/metamask-design-system/pull/794)), ([#792](https://github.com/MetaMask/metamask-design-system/pull/792))
+- Figma code connect files for all components ([#766](https://github.com/MetaMask/metamask-design-system/pull/766), [#791](https://github.com/MetaMask/metamask-design-system/pull/791), [#795](https://github.com/MetaMask/metamask-design-system/pull/795), [#796](https://github.com/MetaMask/metamask-design-system/pull/796), [#794](https://github.com/MetaMask/metamask-design-system/pull/794), [#792](https://github.com/MetaMask/metamask-design-system/pull/792))
 
 ### Changed
 
@@ -173,13 +333,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added 5 new Text component variants with responsive typography support ([#777](https://github.com/MetaMask/metamask-design-system/pull/777)):
+- Added 5 new Text component variants with responsive typography support: ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
   - `TextVariant.PageHeading` - For main page titles (renders as `<h1>` by default)
   - `TextVariant.SectionHeading` - For section titles (renders as `<h2>` by default)
   - `TextVariant.ButtonLabelMd` - For medium-sized button labels (renders as `<span>` by default)
   - `TextVariant.ButtonLabelLg` - For large-sized button labels (renders as `<span>` by default)
   - `TextVariant.AmountDisplayLg` - For large amount/value displays (renders as `<span>` by default)
-- Added comprehensive utility props to Box component for enhanced layout control ([#779](https://github.com/MetaMask/metamask-design-system/pull/779)) and fixes ([#781](https://github.com/MetaMask/metamask-design-system/pull/781)):
+- Added comprehensive utility props to Box component for enhanced layout control and fixes: ([#779](https://github.com/MetaMask/metamask-design-system/pull/779), [#781](https://github.com/MetaMask/metamask-design-system/pull/781))
   - **Margin props:** `margin`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft`, `marginHorizontal`, `marginVertical`
   - **Padding props:** `padding`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`, `paddingHorizontal`, `paddingVertical`
   - **Border props:** `borderWidth`, `borderColor`
@@ -205,7 +365,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.13.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.26.0...HEAD
+[0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.25.0...@metamask/design-system-react@0.26.0
+[0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.24.0...@metamask/design-system-react@0.25.0
+[0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.23.1...@metamask/design-system-react@0.24.0
+[0.23.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.23.0...@metamask/design-system-react@0.23.1
+[0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.22.0...@metamask/design-system-react@0.23.0
+[0.22.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.21.0...@metamask/design-system-react@0.22.0
+[0.21.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.20.0...@metamask/design-system-react@0.21.0
+[0.20.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.19.0...@metamask/design-system-react@0.20.0
+[0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.18.0...@metamask/design-system-react@0.19.0
+[0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.17.1...@metamask/design-system-react@0.18.0
+[0.17.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.17.0...@metamask/design-system-react@0.17.1
+[0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.16.0...@metamask/design-system-react@0.17.0
+[0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.15.0...@metamask/design-system-react@0.16.0
+[0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.14.0...@metamask/design-system-react@0.15.0
+[0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.13.0...@metamask/design-system-react@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.12.0...@metamask/design-system-react@0.13.0
 [0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.11.0...@metamask/design-system-react@0.12.0
 [0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.10.0...@metamask/design-system-react@0.11.0

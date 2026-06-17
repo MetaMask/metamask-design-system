@@ -1,7 +1,6 @@
+import { AvatarNetworkSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-import { AvatarNetworkSize } from '../../types';
 
 import { AvatarNetwork } from './AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev';
@@ -101,6 +100,28 @@ export const Name: Story = {
       <AvatarNetwork name="Polygon" />
     </div>
   ),
+};
+
+export const Fallback: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarNetwork name="Ethereum" fallbackText="ETH" />
+      <AvatarNetwork name="Arbitrum" />
+      <AvatarNetwork />
+    </div>
+  ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const FallbackText: Story = {

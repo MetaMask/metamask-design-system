@@ -1,0 +1,6 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+import { Ref, forwardRef } from "react";
+const SvgNoPhotography = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="m22 19.125-2-2V7h-4.05l-1.825-2h-4.25l-.95 1.05L7.5 4.625 9 3h6l1.85 2H20q.825 0 1.413.587Q22 6.175 22 7zM4 21q-.824 0-1.412-.588A1.93 1.93 0 0 1 2 19V7q0-.825.588-1.413C3.176 5 3.45 5 4 5h1.025l2 2H4v12h15.025l2 2zm11.65-5.375a4.7 4.7 0 0 1-1.562 1.362A4.3 4.3 0 0 1 12 17.5q-1.875 0-3.187-1.313C7.5 14.874 7.5 14.25 7.5 13q0-1.15.513-2.088c.513-.938.796-1.146 1.362-1.562l1.45 1.45q-.6.324-.962.9A2.4 2.4 0 0 0 9.5 13q0 1.05.725 1.775.726.725 1.775.725.726 0 1.3-.363a2.56 2.56 0 0 0 .9-.962zM15.2 9.8q.626.6.963 1.425c.337.825.337 1.141.337 1.775v.3q0 .15-.025.3L11.4 8.525q.15-.025.3-.025h.3q.95 0 1.775.337c.825.337 1.025.546 1.425.963m5.275 13.5L.675 3.5 2.1 2.075l19.8 19.8z" /></svg>;
+const ForwardRef = forwardRef(SvgNoPhotography);
+export default ForwardRef;

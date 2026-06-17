@@ -1,18 +1,10 @@
+import type { BadgeNetworkPropsShared } from '@metamask/design-system-shared';
+
 import type { AvatarNetworkProps } from '../AvatarNetwork';
 
-export type BadgeNetworkProps = Omit<AvatarNetworkProps, 'size' | 'shape'> & {
-  /**
-   * Optional name of the network
-   * Used as alt text for image and first letter is used as fallback if no fallbackText provided
-   */
-  name?: string;
-  /**
-   * Optional URL for the network image
-   * When provided, displays the image instead of fallback text
-   */
-  src?: string;
-  /**
-   * Optional text to display when the image fails to load
-   */
-  fallbackText?: string;
-};
+/**
+ * BadgeNetwork component props (React platform-specific)
+ * Extends shared props from @metamask/design-system-shared with React-specific platform concerns
+ */
+export type BadgeNetworkProps = Omit<AvatarNetworkProps, 'size' | 'shape'> &
+  BadgeNetworkPropsShared;

@@ -319,6 +319,30 @@ These examples show:
 - @packages/design-system-tailwind-preset/ (React Web token classes)
 - @packages/design-system-twrnc-preset/ (React Native token classes)
 
+## Tailwind Preset Content Scanning
+
+Token-identity constants (e.g. `TextColor`, `BoxBackgroundColor`) live in `@metamask/design-system-shared` and their values are used directly as class strings. Tailwind's JIT must scan the compiled output of `design-system-shared` to generate these utility classes.
+
+**Tailwind CSS v3 does not merge `content` arrays from presets** — the consumer's `content` always wins. This means the preset cannot handle this automatically. Consumers must add `@metamask/design-system-shared` to their own `content` glob:
+
+```js
+// tailwind.config.js (consumer)
+module.exports = {
+  presets: [require('@metamask/design-system-tailwind-preset')],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/@metamask/design-system-react/dist/**/*.{mjs,cjs}',
+    './node_modules/@metamask/design-system-shared/dist/**/*.{mjs,cjs}', // required
+  ],
+};
+```
+
+**Consequences for contributors:**
+
+- ✅ Adding a new token-identity constant to shared → automatically picked up by any consumer already scanning the shared dist
+- ❌ Do NOT rely on the preset's `content` array to cover `design-system-shared` — Tailwind v3 ignores preset content
+- ❌ Do NOT add a manual safelist as a workaround — content scanning is the correct approach
+
 ## Verification
 
 After styling changes, verify:

@@ -1,8 +1,12 @@
+import {
+  AvatarBaseSize,
+  AvatarBaseShape,
+  mergeTwClassName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { Text, TextColor, TextVariant, FontWeight } from '../Text';
 
 import {
@@ -31,7 +35,7 @@ export const AvatarBase = ({
       {...props}
       style={[
         tw.style(
-          'items-center justify-center overflow-hidden bg-section',
+          'items-center justify-center overflow-hidden bg-alternative',
           shape === AvatarBaseShape.Circle
             ? 'rounded-full'
             : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],
@@ -50,7 +54,10 @@ export const AvatarBase = ({
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
           {...fallbackTextProps}
-          twClassName={`uppercase ${fallbackTextProps?.twClassName ? ` ${fallbackTextProps.twClassName}` : ''}`.trim()}
+          twClassName={mergeTwClassName(
+            'uppercase',
+            fallbackTextProps?.twClassName,
+          )}
         >
           {fallbackText}
         </Text>

@@ -1,0 +1,274 @@
+import { Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TextAreaStories from './TextArea.stories';
+
+# TextArea
+
+TextArea renders a controlled, multiline native `textarea` with design system styling. Use TextField when you need a single-line field or optional leading and trailing accessories.
+
+```tsx
+import { useState } from 'react';
+import { TextArea } from '@metamask/design-system-react';
+
+const [value, setValue] = useState('');
+
+<TextArea
+  value={value}
+  placeholder="Enter multiple lines..."
+  onChange={(event) => setValue(event.target.value)}
+/>;
+```
+
+<Canvas of={TextAreaStories.Default} />
+
+## Props
+
+### `autoFocus`
+
+Use the `autoFocus` prop to focus the TextArea during the first mount.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.AutoFocus} />
+
+### `rows`
+
+Use the `rows` prop to set the initial visible height of the TextArea, in lines. The component has a minimum height, so small `rows` values may not visibly change the rendered height.
+
+TextArea renders at full container width. Use layout styles or `className` for width changes instead of the native `cols` attribute.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>rows</code>
+      </td>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.Rows} />
+
+### `isError`
+
+Use the `isError` prop to set the error state of the TextArea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.IsError} />
+
+### `isDisabled`
+
+When true, the field applies reduced opacity and disables the textarea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.IsDisabled} />
+
+### `maxLength`
+
+Use the `maxLength` prop to set the maximum allowed input characters for the TextArea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.MaxLength} />
+
+### `isReadOnly`
+
+Use the `isReadOnly` prop to set the TextArea to read only.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.IsReadOnly} />
+
+### `required`
+
+Use the `required` prop to set the TextArea to required. Currently there is no visual difference to the TextArea when required.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.Required} />
+
+### `resize`
+
+Use the `resize` prop to set the resize behavior of the TextArea.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextAreaResize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextAreaResize.None</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextAreaStories.Resize} />
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the textarea element. These classes are merged with the component defaults using `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Controls
+
+<Controls of={TextAreaStories.Default} />

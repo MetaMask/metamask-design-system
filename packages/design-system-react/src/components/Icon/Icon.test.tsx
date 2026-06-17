@@ -1,7 +1,6 @@
+import { IconName, IconSize, IconColor } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-
-import { IconName, IconSize, IconColor } from '../../types';
 
 import { Icon } from './Icon';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';

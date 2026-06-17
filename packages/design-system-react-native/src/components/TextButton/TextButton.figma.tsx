@@ -1,9 +1,8 @@
 // import figma needs to remain as figma otherwise it breaks code connect
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
+import { TextVariant } from '@metamask/design-system-shared';
 import React from 'react';
-
-import { TextVariant } from '../../types';
 
 import { TextButton } from './TextButton';
 
@@ -18,16 +17,16 @@ import { TextButton } from './TextButton';
 
 figma.connect(
   TextButton,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-WIP--MMDS-Components?node-id=1%3A398',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=1%3A398',
   {
     props: {
-      variant: figma.enum('variant', {
+      size: figma.enum('size', {
         BodyMd: TextVariant.BodyMd,
         BodySm: TextVariant.BodySm,
       }),
     },
-    example: ({ variant, ...props }) => (
-      <TextButton variant={variant} {...props} onPress={() => undefined}>
+    example: ({ size, ...props }) => (
+      <TextButton {...props} variant={size} onPress={() => undefined}>
         Text Button
       </TextButton>
     ),

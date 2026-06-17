@@ -1,0 +1,102 @@
+import {
+  SelectButtonEndArrow,
+  SelectButtonSize,
+  SelectButtonVariant,
+} from '@metamask/design-system-shared';
+import React from 'react';
+
+import { ButtonBase } from '../ButtonBase';
+import { IconColor } from '../Icon';
+import { TextColor } from '../Text';
+
+import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from './SelectButton.constants';
+import type { SelectButtonProps } from './SelectButton.types';
+
+export const SelectButton = ({
+  placeholder,
+  value,
+  textProps,
+  startAccessory,
+  endArrowDirection,
+  endAccessory,
+  hideEndArrow = false,
+  isDisabled = false,
+  endArrowDirectionIconProps,
+  variant = SelectButtonVariant.Primary,
+  isLoading = false,
+  size = SelectButtonSize.Sm,
+  twClassName = '',
+  style,
+  ...buttonBaseRest
+}: SelectButtonProps) => {
+  const labelContent = value ?? placeholder;
+
+  let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;
+  if (hideEndArrow) {
+    resolvedEndArrowDirection = undefined;
+  } else if (endArrowDirection !== undefined && endArrowDirection !== null) {
+    resolvedEndArrowDirection = endArrowDirection;
+  } else if (endAccessory) {
+    resolvedEndArrowDirection = undefined;
+  } else {
+    resolvedEndArrowDirection = SelectButtonEndArrow.Down;
+  }
+
+  return (
+    <ButtonBase
+      {...buttonBaseRest}
+      size={size}
+      isDisabled={isDisabled}
+      isLoading={isLoading}
+      children={labelContent}
+      textProps={{
+        ...(variant === SelectButtonVariant.Tertiary
+          ? { color: TextColor.TextAlternative }
+          : {}),
+        ...textProps,
+      }}
+      startAccessory={startAccessory}
+      endAccessory={resolvedEndArrowDirection ? undefined : endAccessory}
+      endIconName={
+        resolvedEndArrowDirection
+          ? MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME[
+              resolvedEndArrowDirection
+            ]
+          : undefined
+      }
+      endIconProps={
+        resolvedEndArrowDirection
+          ? {
+              ...(variant === SelectButtonVariant.Tertiary
+                ? { color: IconColor.IconAlternative }
+                : {}),
+              ...endArrowDirectionIconProps,
+            }
+          : undefined
+      }
+      twClassName={(pressed) =>
+        variant === SelectButtonVariant.Secondary ||
+        variant === SelectButtonVariant.Tertiary
+          ? `min-w-0 ${pressed || isLoading ? 'bg-pressed' : 'bg-transparent'} border-0 ${
+              typeof twClassName === 'function'
+                ? twClassName(pressed)
+                : twClassName
+            }`
+          : `min-w-0 ${pressed || isLoading ? 'bg-muted-pressed' : 'bg-muted'} border-transparent border ${
+              typeof twClassName === 'function'
+                ? twClassName(pressed)
+                : twClassName
+            }`
+      }
+      textClassName={() =>
+        variant === SelectButtonVariant.Tertiary ? '' : 'text-default'
+      }
+      iconClassName={() =>
+        variant === SelectButtonVariant.Tertiary ? '' : 'text-default'
+      }
+      style={style}
+    />
+  );
+};
+
+SelectButton.displayName = 'SelectButton';

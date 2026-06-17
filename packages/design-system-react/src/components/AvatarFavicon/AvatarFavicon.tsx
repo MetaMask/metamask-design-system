@@ -1,6 +1,9 @@
+import {
+  AvatarBaseShape,
+  AvatarFaviconSize,
+} from '@metamask/design-system-shared';
 import React, { forwardRef, useState } from 'react';
 
-import { AvatarFaviconSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 
 import type { AvatarFaviconProps } from './AvatarFavicon.types';
@@ -20,7 +23,7 @@ export const AvatarFavicon = forwardRef<HTMLDivElement, AvatarFaviconProps>(
     ref,
   ) => {
     const [finalFallbackText, setFinalFallbackText] = useState<string>('');
-    const backupFallbackText = fallbackText || name?.[0] || '';
+    const backupFallbackText = fallbackText || name?.[0] || '?';
     const altText = name || 'Dapp logo'; // TBC: Add localization for default text
 
     const onErrorHandler = (e: React.SyntheticEvent<HTMLImageElement>) => {

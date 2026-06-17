@@ -1,7 +1,7 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { TextVariant } from '../../types';
 import { Text } from '../Text';
 
 import { TextButton } from './TextButton';

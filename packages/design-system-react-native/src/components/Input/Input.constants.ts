@@ -1,6 +1,5 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import { typography } from '@metamask/design-tokens';
-
-import { TextVariant } from '../../types';
 
 /**
  * Typographic metrics for Input: same tokens as `text-*` utilities but **without** `lineHeight`.

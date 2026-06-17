@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { AvatarTokenSize } from '../../types';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
@@ -9,6 +8,8 @@ import {
 } from '../AvatarBase/AvatarBase.constants';
 
 import { AvatarToken } from './AvatarToken';
+
+import { AvatarTokenSize } from '.';
 
 describe('AvatarToken', () => {
   it('forwards ref to the AvatarBase container', () => {
@@ -55,6 +56,13 @@ describe('AvatarToken', () => {
       );
       const fb2 = screen.getByTestId('fb2');
       expect(fb2).toHaveTextContent('Yo');
+    });
+
+    it('renders "?" when no name or fallbackText is provided', () => {
+      render(
+        <AvatarToken fallbackTextProps={{ 'data-testid': 'fb-default' }} />,
+      );
+      expect(screen.getByTestId('fb-default')).toHaveTextContent('?');
     });
   });
 

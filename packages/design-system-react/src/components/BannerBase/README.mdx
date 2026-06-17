@@ -203,7 +203,7 @@ When provided, `actionButtonLabel` is required. Use `actionButtonProps` to pass 
 
 ### `onClose`
 
-Optional close callback. If passed, a close button is shown. Use `closeButtonProps` to pass additional props to the close `ButtonIcon`, including `data-testid` when needed for testing.
+Optional close callback. If passed, a close button is shown. Use `closeButtonProps` to pass additional non-behavioral props to the close `ButtonIcon`, including `data-testid`, accessibility props, and styling hooks when needed for testing.
 
 <table>
   <thead>
@@ -232,10 +232,7 @@ Optional close callback. If passed, a close button is shown. Use `closeButtonPro
         <code>closeButtonProps</code>
       </td>
       <td align="left">
-        <code>
-          Omit&lt;Partial&lt;ButtonIconProps&gt;, 'iconName' | 'onClick'&gt;
-          &amp; {'{'} onClick?: MouseEventHandler&lt;HTMLButtonElement&gt; {'}'}
-        </code>
+        <code>Omit&lt;Partial&lt;ButtonIconProps&gt;, 'iconName' | 'onClick'&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -339,6 +336,10 @@ Use `style` for dynamic values or styles not available through Box props and `cl
 ## Component API
 
 <Controls of={BannerBaseStories.Default} />
+
+## Migration from Extension Component Library
+
+For detailed migration instructions from the Extension component-library, see the [Migration Guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react/MIGRATION.md#bannerbase-component).
 
 ## References
 

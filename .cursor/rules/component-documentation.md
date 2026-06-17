@@ -11,11 +11,35 @@ Documentation standards for Storybook stories and README files for React and Rea
 - **ALWAYS** follow templates exactly: @docs/component-readme-examples/
 - **Cross-platform**: Keep documentation identical across web/native (same sections, descriptions, examples)
 
+### Consumer-Facing Descriptions
+
+- **ALWAYS** write component descriptions for consumers of the component, not for reviewers or implementers
+- Opening descriptions should explain:
+  - what the component is
+  - when to use it
+  - how to use it in the default/common case
+  - when not to use it, if there is a nearby alternative or a common misuse
+- **PREFER** stable usage guidance over internal reasoning. Document the recommended composition or default sizing, not why the implementation was changed during review.
+- **NEVER** include development-process or review-history context in component docs
+- **NEVER** explain implementation details unless they directly affect consumer usage or API behavior
+- **NEVER** add fluff, defensive narration, or “why we removed/changed X in this PR” language to README descriptions
+
+**Good examples:**
+
+- `AvatarIcon` displays an icon inside an avatar-shaped container. Use it when you need a static icon avatar rather than an image- or account-based avatar.
+- `TitleSubpage` lays out a leading avatar beside a title stack with optional supporting rows. For avatars passed to `titleAvatar`, use a large size such as `AvatarToken` at `AvatarTokenSize.Lg`.
+
+**Bad examples (avoid these):**
+
+- `On React Native, this is passed straight through with no fixed-size wrapper because we removed the old overflow-hidden container during review.`
+- `This implementation stays agnostic so you own composition when you need extra chrome.`
+- `We changed this in the latest review round so badges are no longer clipped.`
+
 ### Storybook Stories
 
 **Story Structure:**
 
-1. **Default story** - ALWAYS first, minimal args, ALL controls wired up in argTypes
+1. **Default story** - ALWAYS first, minimal args, and **interactive controls** wired in `argTypes` for props that are practical to edit in Storybook (see **Storybook controls (cross-platform)** below). For React Native on-device constraints, see **React Native (DSRN)**.
 2. **Story per prop** - Each major prop gets its own story showcasing usage
 3. **Canvas reference** - Each prop section in README references its story Canvas
 
@@ -23,7 +47,7 @@ Documentation standards for Storybook stories and README files for React and Rea
 
 Stories are named after props in PascalCase:
 
-1. `Default` - First story with minimal args and all controls wired up
+1. `Default` - First story with minimal args and practical controls wired up (same guidance as Story Structure item 1)
 2. `{PropName}` - Story named after prop in PascalCase
 
 **Examples:**
@@ -43,7 +67,31 @@ Each story showcases that specific prop's usage and variations.
 - **ALWAYS** create showcase stories for major props (Variant, Size, etc.)
 - **NEVER** create stories for `className` (React) or `twClassName` (React Native); document these only in README/template guidance.
 
+**Storybook controls (cross-platform)**
+
+Applies to React web (`@storybook/react`) and React Native (`@storybook/react-native`) stories.
+
+- Wire **`argTypes`** with **interactive** controls only for props that are practical to edit in Storybook (**text**, **boolean**, **select**, etc.).
+- Avoid **`control: 'object'`** for pass-through props (`textProps`, `spinnerProps`, `style`, `startIconProps`, etc.). Document those props in the component **README** instead.
+- Prefer **omitting** non-interactive props from `argTypes` rather than long **`control: false`** listings; stories can set values in code. Reserve the README for full prop tables.
+- React Native `argTypes` may list **fewer** entries than web when extra rows would only be object editors or disabled clutter—the same practical-controls principle applies on web.
+
 See golden path examples for story implementation patterns.
+
+### React Native (DSRN) — `@storybook/react-native` stories
+
+Applies to stories under `packages/design-system-react-native/**` (on-device Storybook).
+
+Follow **Storybook controls (cross-platform)** above; mobile panels work best with a **small, focused** `argTypes` table (object/json editors are especially awkward on device).
+
+**DSRN-specific patterns:**
+
+- For shared **const-object** unions (`ButtonBaseSize`, `IconName`, etc.), use `options: Object.keys(Const)` with `mapping: Const` so TypeScript and Storybook stay aligned (never pass the whole object as `options`).
+- Keep **descriptions** on `argTypes` entries where they help consumers scanning the controls panel.
+
+**Default story:** Wire only props that have real on-device controls. Do not require every component prop to appear in `argTypes`.
+
+**Cross-platform:** Keep story **names** and **coverage** aligned with React web where possible.
 
 ### Cross-Platform Consistency
 
@@ -102,10 +150,12 @@ After adding/updating component documentation, verify:
 - [ ] README exists in component directory (.mdx for web, .md for native)
 - [ ] README follows templates exactly: @docs/component-readme-examples/
 - [ ] README includes: description, usage, props documentation
+- [ ] README description is consumer-facing and explains what the component is, when to use it, and the default usage pattern
+- [ ] README avoids implementation-history, review-process context, and unnecessary internal details
 - [ ] Web README uses Canvas blocks for interactive examples
 - [ ] Cross-platform: documentation is identical across web/native
 - [ ] Stories file exports meta with proper argTypes
-- [ ] Default story is first with minimal args and all controls wired up
+- [ ] Default story is first with minimal args and practical controls wired up (see **Storybook controls (cross-platform)**; on RN see **React Native (DSRN)** for on-device patterns)
 - [ ] Story exists for each major prop
 - [ ] Each prop section in README references its story Canvas
 - [ ] Web meta includes README in parameters.docs.page

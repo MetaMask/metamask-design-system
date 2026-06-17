@@ -1,4 +1,4 @@
-import { AvatarBaseSize } from '../../types';
+import { AvatarBaseSize } from '@metamask/design-system-shared';
 
 export const TWCLASSMAP_AVATARBASE_SIZE_DIMENSION: Record<
   AvatarBaseSize,

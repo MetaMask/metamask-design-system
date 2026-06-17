@@ -2,7 +2,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import Skeleton from './Skeleton';
+import { Skeleton } from './Skeleton';
 
 describe('Skeleton', () => {
   beforeEach(() => {

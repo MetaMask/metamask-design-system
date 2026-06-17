@@ -1,8 +1,7 @@
-import { BannerAlertSeverity } from '@metamask/design-system-shared';
+import { BannerAlertSeverity, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { IconSize } from '../../types';
 import { BannerBase } from '../BannerBase';
 import { Icon } from '../Icon';
 

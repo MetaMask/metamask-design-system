@@ -3,135 +3,143 @@
 Toast is a component that slides up from the bottom of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
 
 ```tsx
-import {
-  Toast,
-  ToastContext,
-  ToastContextWrapper,
-} from '@metamask/design-system-react-native';
-```
+import { Button, Toaster, toast } from '@metamask/design-system-react-native';
 
-## Setup
-
-Using Toast requires a three-step process:
-
-### 1. Wrap root with ToastContextWrapper
-
-```tsx
-import { ToastContextWrapper } from '@metamask/design-system-react-native';
-
-const App = () => (
-  <ToastContextWrapper>
-    <RootComponent />
-  </ToastContextWrapper>
-);
-```
-
-### 2. Render Toast with ref from context
-
-```tsx
-import { useContext } from 'react';
-import { Toast, ToastContext } from '@metamask/design-system-react-native';
-
-const RootComponent = () => {
-  const { toastRef } = useContext(ToastContext);
-
+const Demo = () => {
   return (
     <>
-      <Content />
-      <Toast ref={toastRef} />
+      <Button
+        onPress={() => {
+          toast({
+            title: 'Title is sentence case no period',
+            description: "Description shouldn't repeat title. 1-3 lines.",
+          });
+        }}
+      >
+        Show Toast
+      </Button>
+      <Toaster />
     </>
   );
 };
 ```
 
-### 3. Call showToast from any child
+## Usage
+
+Render the `Toaster` component once in your app, then create a toast by calling `toast(...)`.
 
 ```tsx
-import { useContext } from 'react';
-import {
-  ToastContext,
-  ToastVariant,
-} from '@metamask/design-system-react-native';
+import { Button, Toaster, toast } from '@metamask/design-system-react-native';
 
-const Content = () => {
-  const { toastRef } = useContext(ToastContext);
-
-  const handlePress = () => {
-    toastRef.current?.showToast({
-      variant: ToastVariant.Account,
-      hasNoTimeout: false,
-      labelOptions: [
-        { label: 'Switching to' },
-        { label: ' Account 2.', isBold: true },
-      ],
-      accountAddress: '0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8',
-      accountAvatarType: AvatarAccountVariant.Jazzicon,
-    });
-  };
-
-  return <Button onPress={handlePress}>Show Toast</Button>;
+const Demo = () => {
+  return (
+    <>
+      <Button
+        onPress={() => {
+          toast({
+            title: 'Title is sentence case no period',
+            description: "Description shouldn't repeat title. 1-3 lines.",
+          });
+        }}
+      >
+        Show Toast
+      </Button>
+      <Toaster />
+    </>
+  );
 };
 ```
 
-## Props
+`<Toaster />` must be rendered exactly once. On mount it registers the `toast(...)` / `toast.dismiss()` API so it can be called from anywhere in your app.
 
-### `twClassName`
+Call `toast.dismiss()` to dismiss the currently visible toast.
 
-Optional Tailwind CSS classes for the toast container.
+Use `closeButtonProps` to access the close button element when you need to set a `testID` or override its accessibility label. With the `toast(...)` / `<Toaster />` flow the close button is always shown; for direct `<Toast />` rendering, provide `onClose` to render it.
 
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
+`toast(...)` and `toast.dismiss()` throw a descriptive error if called before `<Toaster />` is mounted.
 
-```tsx
-<Toast ref={toastRef} twClassName="mx-2" />
-```
+### `title`
 
-### `labelsContainerProps`
-
-Props spread to the labels container View (e.g., `testID` for testing).
-
-| TYPE                                     | REQUIRED | DEFAULT     |
-| ---------------------------------------- | -------- | ----------- |
-| `Omit<ViewProps, 'children' \| 'style'>` | No       | `undefined` |
+Use `title` for the primary message. Use `titleProps` to access the title `Text` element when you need to set a `testID`, accessibility props, or other `Text` overrides.
 
 ```tsx
-<Toast ref={toastRef} labelsContainerProps={{ testID: 'toast-labels' }} />
+toast({
+  title: 'Account switched',
+});
 ```
 
-### `testID`
+### `description`
 
-Test identifier for the root element, inherited from `ViewProps`.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
+Use `description` for supporting content below the title. Use `descriptionProps` to access the description `Text` element when you need to set a `testID`, accessibility props, or other `Text` overrides.
 
 ```tsx
-<Toast ref={toastRef} testID="my-toast" />
+toast({
+  title: 'Account switched',
+  description: 'You are now using Account 2.',
+});
 ```
 
-## Methods
+### `severity`
 
-### `showToast(options: ToastOptions)`
+Use `severity` to show a semantic default start icon. Use `iconAlertProps` to access the default `IconAlert` element when you need to set a `testID`, accessibility props, or other icon overrides for a non-default severity.
 
-Triggers the toast to slide up with the provided options.
+Available severities:
 
-| PARAMETER | TYPE           | DESCRIPTION         |
-| --------- | -------------- | ------------------- |
-| options   | `ToastOptions` | Toast configuration |
+- `ToastSeverity.Default` - No default leading icon
+- `ToastSeverity.Success`
+- `ToastSeverity.Warning`
+- `ToastSeverity.Danger`
 
-### `closeToast()`
+```tsx
+toast({
+  title: 'Network changed',
+  description: 'You are now connected to Linea.',
+  severity: ToastSeverity.Success,
+});
+```
 
-Dismisses the toast with a slide-down animation.
+### `actionButtonOnPress`
 
-## Toast Variants
+Use `actionButtonOnPress` together with `actionButtonLabel` when the toast needs a secondary action. Use `actionButtonProps` to access the rendered button element when you need to set a `testID`, accessibility props, or other button overrides.
 
-- `ToastVariant.Plain` - Simple text toast
-- `ToastVariant.Account` - Toast with account avatar
-- `ToastVariant.Network` - Toast with network avatar
-- `ToastVariant.App` - Toast with app favicon
-- `ToastVariant.Icon` - Toast with icon avatar
+```tsx
+toast({
+  title: 'Privacy policy update',
+  description: 'Review how Consensys handles your data.',
+  actionButtonLabel: 'Read more',
+  actionButtonOnPress: () => {
+    console.log('Action pressed');
+  },
+});
+```
+
+### `startAccessory`
+
+Use `startAccessory` to replace the default severity icon with custom content such as an icon, avatar, or network badge. Use `children` and `childrenWrapperProps` when you need to render additional content below the description, or to access that content wrapper for a `testID` and other view-level overrides.
+
+```tsx
+import { Icon, IconName, IconSize } from '@metamask/design-system-react-native';
+
+toast({
+  title: 'Withdrawal pending',
+  description: 'Your withdrawal is processing.',
+  startAccessory: <Icon name={IconName.Clock} size={IconSize.Lg} />,
+});
+```
+
+## Toast Options
+
+- `title`, `titleProps` - Main toast content and optional text props.
+- `description`, `descriptionProps` - Optional secondary content and text props.
+- `children`, `childrenWrapperProps` - Optional extra content rendered below the description.
+- `actionButtonLabel`, `actionButtonOnPress`, `actionButtonProps` - Optional action button content and handler.
+- `onClose` - Optional callback invoked when the close button is pressed. Use this for side effects, or to dismiss a direct-rendered `Toast`. A direct-rendered `Toast` only shows a close button when `onClose` is provided.
+- `closeButtonProps` - Optional non-behavioral props merged onto the close `ButtonIcon` when it is rendered.
+- `startAccessory` - Optional leading accessory that overrides the severity icon.
+- `severity` - Optional semantic state used to choose the default icon. Defaults to `ToastSeverity.Default`, which shows no icon.
+- `iconAlertProps` - Optional props merged onto the default `IconAlert`.
+- `bottomOffset` - Optional offset from the bottom of the screen.
+- `hasNoTimeout` - When `true`, the toast stays visible until dismissed.
 
 ## References
 

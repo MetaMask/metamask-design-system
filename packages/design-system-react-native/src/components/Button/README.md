@@ -270,7 +270,7 @@ export const StyleExample = () => (
 
 ## Migration Guide
 
-Migrating from `app/component-library/components/Buttons/Button` in MetaMask Mobile? See the [Button Migration Guide](../../MIGRATION.md#button-component) for prop mappings, before/after examples, and breaking changes.
+Migrating from `app/component-library/components/Buttons/Button` in MetaMask Mobile? See the [Button Migration Guide](../../../MIGRATION.md#button-component) for prop mappings, before/after examples, and breaking changes.
 
 ## References
 

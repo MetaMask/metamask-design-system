@@ -1,15 +1,15 @@
-import React, { forwardRef } from 'react';
-
 import {
   BoxAlignItems,
   BoxBackgroundColor,
+  BoxFlexDirection,
   ButtonIconSize,
   ButtonSize,
   FontWeight,
-  BoxFlexDirection,
   IconName,
   TextVariant,
-} from '../../types';
+} from '@metamask/design-system-shared';
+import React, { forwardRef } from 'react';
+
 import { twMerge } from '../../utils/tw-merge';
 import { Box } from '../Box';
 import { Button } from '../Button';
@@ -48,12 +48,11 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
 
     const {
       ariaLabel: closeButtonAriaLabel = 'Close banner',
-      onClick: closeButtonPropsOnClick,
       className: closeButtonClassName,
       ...resolvedCloseButtonProps
     } = closeButtonProps ?? {};
 
-    const shouldShowCloseButton = Boolean(onClose || closeButtonProps);
+    const shouldShowCloseButton = Boolean(onClose);
     const shouldShowActionButton = Boolean(actionButtonOnClick);
 
     return (
@@ -123,7 +122,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
             iconName={IconName.Close}
             size={ButtonIconSize.Sm}
             ariaLabel={closeButtonAriaLabel}
-            onClick={onClose ?? closeButtonPropsOnClick}
+            onClick={onClose}
             {...resolvedCloseButtonProps}
           />
         )}

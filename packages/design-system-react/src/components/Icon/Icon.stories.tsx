@@ -1,7 +1,12 @@
+import {
+  IconColor,
+  IconName,
+  IconSize,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import type { StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
-import { IconName, IconSize, IconColor, TextVariant } from '../../types';
 import { Text } from '../Text/Text';
 
 import { Icon } from './Icon';

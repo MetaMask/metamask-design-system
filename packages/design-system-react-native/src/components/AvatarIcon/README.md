@@ -39,7 +39,7 @@ Available severities:
 - `AvatarIconSeverity.Neutral`
 - `AvatarIconSeverity.Info`
 - `AvatarIconSeverity.Success`
-- `AvatarIconSeverity.Error`
+- `AvatarIconSeverity.Danger`
 - `AvatarIconSeverity.Warning`
 
 ```tsx
@@ -144,6 +144,8 @@ export const StyleExample = () => (
   <AvatarIcon name={IconName.Bank} style={styles.custom} />
 );
 ```
+
+Migrating from the mobile `Avatar` + `Icon` variant? See the [AvatarIcon migration guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/MIGRATION.md#avataricon-component) for `iconName`, `severity`, and replacing string `iconColor` / `backgroundColor` values.
 
 ## References
 

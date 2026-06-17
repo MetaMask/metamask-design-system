@@ -1,9 +1,7 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render } from '@testing-library/react-native';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { Text, TextVariant } from '../Text';
 
 import { AvatarBase } from './AvatarBase';
@@ -13,6 +11,8 @@ import {
   TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
 } from './AvatarBase.constants';
+
+import { AvatarBaseSize, AvatarBaseShape } from '.';
 
 describe('AvatarBase', () => {
   it('renders children when no fallbackText is provided', () => {
@@ -66,7 +66,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -86,7 +86,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -106,7 +106,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -126,7 +126,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -146,7 +146,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -166,7 +166,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -186,7 +186,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -206,7 +206,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -226,7 +226,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -246,7 +246,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
       );
@@ -273,7 +273,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -296,7 +296,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -319,7 +319,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -342,7 +342,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -365,7 +365,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -388,7 +388,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -411,7 +411,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -434,7 +434,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -457,7 +457,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -480,7 +480,7 @@ describe('AvatarBase', () => {
         'items-center',
         'justify-center',
         'overflow-hidden',
-        'bg-section',
+        'bg-alternative',
         shapeClass,
         dimensionClass,
         borderClass,
@@ -501,7 +501,7 @@ describe('AvatarBase', () => {
       'items-center',
       'justify-center',
       'overflow-hidden',
-      'bg-section',
+      'bg-alternative',
       'rounded-full',
       TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[AvatarBaseSize.Md],
       'bg-default',

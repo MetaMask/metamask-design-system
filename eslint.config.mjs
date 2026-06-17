@@ -2,11 +2,14 @@ import base, { createConfig } from '@metamask/eslint-config';
 import jest from '@metamask/eslint-config-jest';
 import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
+// eslint-disable-next-line import-x/no-unresolved -- ESM-only package with non-standard "code" export condition
+import storybook from 'eslint-plugin-storybook';
 import tailwind from 'eslint-plugin-tailwindcss';
 
 const NODE_LTS_VERSION = 22;
 
 const config = createConfig([
+  ...storybook.configs['flat/recommended'],
   ...base,
   {
     ignores: [
@@ -42,8 +45,11 @@ const config = createConfig([
       'apps/storybook-react/postcss.config.js',
       'apps/storybook-react/tailwind.config.js',
       // storybook react native
-      'apps/storybook-react-native/.storybook/**/*.js',
-      'apps/storybook-react-native/*.js',
+      'apps/storybook-react-native/.rnstorybook/*.ts',
+      'apps/storybook-react-native/.rnstorybook/*.tsx',
+      'apps/storybook-react-native/.storybook/*.ts',
+      'apps/storybook-react-native/.storybook/*.tsx',
+      'apps/storybook-react-native/tailwind-intellisense.config.js',
     ],
   },
   {
@@ -74,6 +80,7 @@ const config = createConfig([
       '**/tests/**/*.{js,ts}',
       'scripts/*.ts',
       'scripts/create-package/**/*.ts',
+      'packages/*/scripts/**/*.ts',
     ],
     extends: [nodejs],
     rules: {
@@ -189,7 +196,7 @@ const config = createConfig([
     },
   },
   {
-    files: ['scripts/*.ts'],
+    files: ['scripts/*.ts', 'packages/*/scripts/**/*.ts'],
     rules: {
       // Scripts may be self-executable and thus have hashbangs.
       'n/hashbang': 'off',
@@ -206,6 +213,16 @@ const config = createConfig([
     files: ['**/*.mjs'],
     languageOptions: {
       sourceType: 'module',
+    },
+  },
+  {
+    files: [
+      'packages/design-system-react/src/components/**/*.{ts,tsx}',
+      'packages/design-system-react-native/src/components/**/*.{ts,tsx}',
+    ],
+    ignores: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.d.ts'],
+    rules: {
+      'import-x/no-default-export': 'error',
     },
   },
   // Tailwind ESLint for React Web

@@ -6,7 +6,7 @@ import { Box } from '../Box';
 import { Button, ButtonVariant } from '../Button';
 import { Text } from '../Text';
 
-import Skeleton from './Skeleton';
+import { Skeleton } from './Skeleton';
 import type { SkeletonProps } from './Skeleton.types';
 
 const meta: Meta<SkeletonProps> = {

@@ -1,15 +1,14 @@
+import {
+  FontFamily,
+  FontStyle,
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-
-import {
-  TextVariant,
-  TextColor,
-  FontWeight,
-  FontFamily,
-  FontStyle,
-} from '../../types';
 
 import { Text } from './Text';
 import type { TextProps } from './Text.types';

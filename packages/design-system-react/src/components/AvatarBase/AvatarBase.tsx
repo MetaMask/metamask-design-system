@@ -1,7 +1,10 @@
+import {
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-shared';
 import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Text, FontWeight, TextVariant, TextColor } from '../Text';
 
@@ -33,7 +36,7 @@ export const AvatarBase = forwardRef<HTMLDivElement, AvatarBaseProps>(
 
     const mergedClassName = twMerge(
       // Base styles
-      'inline-flex shrink-0 items-center justify-center overflow-hidden bg-section',
+      'inline-flex shrink-0 items-center justify-center overflow-hidden bg-alternative',
       shape === AvatarBaseShape.Circle
         ? 'rounded-full'
         : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],

@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 
-import { AvatarAccountVariant, AvatarAccountSize } from '../../types';
-
 import { AvatarAccount } from './AvatarAccount';
+
+import { AvatarAccountVariant, AvatarAccountSize } from '.';
 
 describe('AvatarAccount', () => {
   it('renders Jazzicon variant by default', () => {

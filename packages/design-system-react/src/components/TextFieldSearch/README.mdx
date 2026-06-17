@@ -1,0 +1,57 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as TextFieldSearchStories from './TextFieldSearch.stories';
+
+# TextFieldSearch
+
+TextFieldSearch is a controlled search input built on top of `TextField`. It renders a leading search icon, sets the native input `type` to `search`, and shows a trailing clear button when the field has a value. Use it for filtering or search experiences; for a general-purpose text input, use `TextField`.
+
+```tsx
+import { TextFieldSearch } from '@metamask/design-system-react';
+
+<TextFieldSearch placeholder="Search" value="" />;
+```
+
+The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` to your own state — the clear button always renders when `value` is truthy and `clearButtonOnClick` is required.
+
+<Canvas of={TextFieldSearchStories.Default} />
+
+## Props
+
+The clear button is rendered automatically after the input whenever `value` is truthy.
+
+### `clearButtonOnClick`
+
+Click handler invoked when the clear button is pressed. Use it to reset the controlled `value`.
+
+### `clearButtonProps`
+
+Additional props forwarded to the underlying `ButtonIcon`. Use `clearButtonProps.ariaLabel` to provide a localized label (defaults to `'Clear'`).
+
+<Canvas of={TextFieldSearchStories.ClearButtonProps} />
+
+### `size`
+
+Inherited from `TextField`. Controls the height of the container.
+
+<Canvas of={TextFieldSearchStories.Size} />
+
+### `isDisabled`
+
+Inherited from `TextField`. Disables the inner input and the clear button container.
+
+<Canvas of={TextFieldSearchStories.IsDisabled} />
+
+### `isError`
+
+Inherited from `TextField`. Renders the error border treatment.
+
+<Canvas of={TextFieldSearchStories.IsError} />
+
+### Other props
+
+All other `TextField` props (`isReadOnly`, `placeholder`, `inputProps`, `inputRef`, `startAccessory`, `endAccessory`, etc.) are supported. The `type` prop is fixed to `'search'` and is not configurable.
+
+## Controls
+
+<Controls of={TextFieldSearchStories.Default} />

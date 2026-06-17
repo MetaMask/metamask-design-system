@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { TouchableOpacityProps, ViewProps } from 'react-native';
+import type { TouchableOpacityProps } from 'react-native';
 
 /**
  * Card component props.
@@ -25,4 +25,4 @@ export type CardProps = {
     TouchableOpacityProps,
     'onPress' | 'style' | 'children'
   >;
-} & ViewProps;
+} & TouchableOpacityProps;

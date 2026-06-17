@@ -1,7 +1,11 @@
+import {
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { TextVariant, TextColor, FontWeight } from '../../../types';
 import { Box } from '../../Box';
 import { Text } from '../../Text';
 

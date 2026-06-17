@@ -1,8 +1,7 @@
+import { TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-
-import { TextVariant } from '../../types';
 
 import { Input } from './Input';
 import type { InputProps } from './Input.types';
@@ -27,7 +26,7 @@ const meta: Meta<InputProps> = {
     isDisabled: {
       control: 'boolean',
     },
-    isReadonly: {
+    isReadOnly: {
       control: 'boolean',
     },
     isStateStylesDisabled: {
@@ -88,11 +87,11 @@ export const IsDisabled: Story = {
   ),
 };
 
-export const IsReadonly: Story = {
+export const IsReadOnly: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ControlledInput placeholder="Editable" value="" />
-      <Input placeholder="Readonly" value="Read-only value" isReadonly />
+      <Input placeholder="Readonly" value="Read-only value" isReadOnly />
     </View>
   ),
 };

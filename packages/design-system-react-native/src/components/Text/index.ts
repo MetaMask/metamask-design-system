@@ -1,9 +1,10 @@
 export {
-  TextVariant,
   TextColor,
+  TextVariant,
   FontWeight,
   FontFamily,
   FontStyle,
-} from '../../types';
+  type TextPropsShared,
+} from '@metamask/design-system-shared';
 export { Text } from './Text';
 export type { TextProps } from './Text.types';
