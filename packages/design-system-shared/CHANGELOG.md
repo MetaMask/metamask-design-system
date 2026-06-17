@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(design-system-react-native): add Switch component ([#1022](https://github.com/MetaMask/metamask-design-system/pull/1022))
+- feat: Added SegmentedControl to DSRN ([#1242](https://github.com/MetaMask/metamask-design-system/pull/1242))
+- refactor: renamed segment to filter ([#1240](https://github.com/MetaMask/metamask-design-system/pull/1240))
+- refactor(shared): extract mergeTwClassName util for react-native ([#1239](https://github.com/MetaMask/metamask-design-system/pull/1239))
+- feat: [DSRN] Added ListItemSelect and ListItemMultiSelect ([#1230](https://github.com/MetaMask/metamask-design-system/pull/1230))
+- refactor: Addressed follow up for ListItem ([#1232](https://github.com/MetaMask/metamask-design-system/pull/1232))
+- feat(icons): add Trophy icon ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
+- refactor(dsrn): move list row shell accessories from Content to ListItem ([#1231](https://github.com/MetaMask/metamask-design-system/pull/1231))
+
 ## [0.22.0]
 
 ### Added
