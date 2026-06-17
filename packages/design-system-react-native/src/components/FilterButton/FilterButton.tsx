@@ -21,7 +21,8 @@ export const FilterButton = ({
   isSelected = false,
   variant,
   isLoading = false,
-  size = ButtonBaseSize.Sm,
+  size,
+  isFullWidth,
   twClassName = '',
   style,
   onPress,
@@ -32,6 +33,11 @@ export const FilterButton = ({
 
   const effectiveVariant =
     variant ?? filterButtonGroup?.variant ?? FilterButtonVariant.Primary;
+
+  const effectiveSize = size ?? filterButtonGroup?.size ?? ButtonBaseSize.Sm;
+
+  const effectiveIsFullWidth =
+    isFullWidth ?? filterButtonGroup?.isEqualWidth ?? false;
 
   const effectiveIsSelected = usesGroupSelection
     ? filterButtonGroup.value === value
@@ -68,7 +74,8 @@ export const FilterButton = ({
   return (
     <ButtonBase
       {...buttonBaseRest}
-      size={size}
+      size={effectiveSize}
+      isFullWidth={effectiveIsFullWidth}
       isLoading={isLoading}
       children={children}
       onPress={handlePress}

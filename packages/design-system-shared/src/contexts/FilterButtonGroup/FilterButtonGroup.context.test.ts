@@ -1,6 +1,7 @@
 import { createElement, useContext } from 'react';
 import { act, create } from 'react-test-renderer';
 
+import { ButtonBaseSize } from '../../types/ButtonBase/ButtonBase.types';
 import { FilterButtonVariant } from '../../types/FilterButton/FilterButton.types';
 
 import type { FilterButtonGroupContextValue } from '.';
@@ -97,6 +98,40 @@ describe('FilterButtonGroupContext', () => {
       expect(root.toJSON()).toMatchObject({
         type: 'span',
         children: ['secondary'],
+      });
+    });
+
+    it('exposes optional size and isEqualWidth when set', () => {
+      const providerValue: FilterButtonGroupContextValue = {
+        value: 'a',
+        onChange: jest.fn(),
+        size: ButtonBaseSize.Md,
+        isEqualWidth: true,
+      };
+
+      function Consumer() {
+        const ctx = useContext(FilterButtonGroupContext);
+        return createElement(
+          'span',
+          null,
+          `${ctx?.size ?? 'none'}-${ctx?.isEqualWidth ? 'equal' : 'auto'}`,
+        );
+      }
+
+      let root!: ReturnType<typeof create>;
+      act(() => {
+        root = create(
+          createElement(
+            FilterButtonGroupContext.Provider,
+            { value: providerValue },
+            createElement(Consumer),
+          ),
+        );
+      });
+
+      expect(root.toJSON()).toMatchObject({
+        type: 'span',
+        children: ['md-equal'],
       });
     });
   });
