@@ -1,13 +1,13 @@
 import type {
+  AlertAvatarPropsShared,
   AvatarBaseShape,
-  IconAvatarPropsShared,
 } from '@metamask/design-system-shared';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { AvatarBaseProps } from '../AvatarBase';
 import type { IconProps } from '../Icon';
 
-export type IconAvatarProps = Omit<
+export type AlertAvatarProps = Omit<
   AvatarBaseProps,
   | 'children'
   | 'badge'
@@ -16,7 +16,7 @@ export type IconAvatarProps = Omit<
   | 'positionYOffset'
   | 'customPosition'
 > &
-  IconAvatarPropsShared & {
+  AlertAvatarPropsShared & {
     shape?: AvatarBaseShape;
     iconProps?: Partial<IconProps>;
   } & Omit<ViewProps, 'children'> & {
@@ -24,5 +24,8 @@ export type IconAvatarProps = Omit<
     style?: StyleProp<ViewStyle>;
   };
 
-/** @deprecated Use IconAvatarProps — severity-based icon avatar */
-export type AvatarIconProps = IconAvatarProps;
+/** @deprecated Use AlertAvatarProps — severity-based icon avatar */
+export type IconAvatarProps = AlertAvatarProps;
+
+/** @deprecated Use AlertAvatarProps — severity-based icon avatar */
+export type AvatarIconProps = AlertAvatarProps;

@@ -9,12 +9,13 @@ import React from 'react';
 import { AvatarIcon } from '../Avatar/variants/AvatarIcon';
 
 import {
-  MAP_ICONAVATAR_SEVERITY_ICONCOLOR,
-  TWCLASSMAP_ICONAVATAR_SEVERITY_BACKGROUNDCOLOR,
-} from './IconAvatar.constants';
-import type { IconAvatarProps } from './IconAvatar.types';
+  MAP_ALERTAVATAR_SEVERITY_ICONCOLOR,
+  MAP_ALERTAVATAR_SEVERITY_ICONNAME,
+  TWCLASSMAP_ALERTAVATAR_SEVERITY_BACKGROUNDCOLOR,
+} from './AlertAvatar.constants';
+import type { AlertAvatarProps } from './AlertAvatar.types';
 
-export const IconAvatar = ({
+export const AlertAvatar = ({
   iconName,
   severity = AvatarIconSeverity.Neutral,
   size = AvatarIconSize.Md,
@@ -23,15 +24,17 @@ export const IconAvatar = ({
   twClassName,
   style,
   ...props
-}: IconAvatarProps) => {
+}: AlertAvatarProps) => {
   const tw = useTailwind();
+  const resolvedIconName =
+    iconName ?? MAP_ALERTAVATAR_SEVERITY_ICONNAME[severity];
   const backgroundColor =
-    TWCLASSMAP_ICONAVATAR_SEVERITY_BACKGROUNDCOLOR[severity];
-  const iconColor = MAP_ICONAVATAR_SEVERITY_ICONCOLOR[severity];
+    TWCLASSMAP_ALERTAVATAR_SEVERITY_BACKGROUNDCOLOR[severity];
+  const iconColor = MAP_ALERTAVATAR_SEVERITY_ICONCOLOR[severity];
 
   return (
     <AvatarIcon
-      iconName={iconName}
+      iconName={resolvedIconName}
       backgroundColor={backgroundColor}
       iconColor={iconColor}
       size={size}

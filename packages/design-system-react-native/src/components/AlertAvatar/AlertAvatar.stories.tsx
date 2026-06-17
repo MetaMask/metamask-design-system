@@ -6,12 +6,12 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { IconAvatar } from './IconAvatar';
-import type { IconAvatarProps } from './IconAvatar.types';
+import { AlertAvatar } from './AlertAvatar';
+import type { AlertAvatarProps } from './AlertAvatar.types';
 
-const meta: Meta<IconAvatarProps> = {
-  title: 'Components/IconAvatar',
-  component: IconAvatar,
+const meta: Meta<AlertAvatarProps> = {
+  title: 'Components/AlertAvatar',
+  component: AlertAvatar,
   argTypes: {
     size: {
       control: 'select',
@@ -33,13 +33,12 @@ const meta: Meta<IconAvatarProps> = {
 
 export default meta;
 
-type Story = StoryObj<IconAvatarProps>;
+type Story = StoryObj<AlertAvatarProps>;
 
 export const Default: Story = {
   args: {
     size: AvatarIconSize.Md,
     severity: AvatarIconSeverity.Neutral,
-    iconName: IconName.Arrow2UpRight,
     twClassName: '',
   },
 };
@@ -48,10 +47,9 @@ export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       {Object.keys(AvatarIconSize).map((sizeKey) => (
-        <IconAvatar
+        <AlertAvatar
           key={sizeKey}
           size={AvatarIconSize[sizeKey as keyof typeof AvatarIconSize]}
-          iconName={IconName.Arrow2UpRight}
         />
       ))}
     </View>
@@ -62,12 +60,11 @@ export const Severities: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       {Object.keys(AvatarIconSeverity).map((severityKey) => (
-        <IconAvatar
+        <AlertAvatar
           key={severityKey}
           severity={
             AvatarIconSeverity[severityKey as keyof typeof AvatarIconSeverity]
           }
-          iconName={IconName.Arrow2UpRight}
         />
       ))}
     </View>

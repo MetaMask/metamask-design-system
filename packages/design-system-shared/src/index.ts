@@ -24,6 +24,7 @@ export {
   type AvatarInitialsPropsShared,
   type AvatarPropsShared,
   type AvatarImageSrc,
+  type AlertAvatarPropsShared,
   type IconAvatarPropsShared,
 } from './types/Avatar';
 

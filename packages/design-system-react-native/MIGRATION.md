@@ -3362,22 +3362,22 @@ Layered architecture:
 AvatarBase
   → AvatarImageOrSvg | AvatarIcon | AvatarInitials  (primitives)
   → Avatar  (union: imageOrSvg, icon, initials)
-  → TokenAvatar | NetworkAvatar | FaviconAvatar | AccountAvatar | IconAvatar
+  → TokenAvatar | NetworkAvatar | FaviconAvatar | AccountAvatar | AlertAvatar
   → PredictionsAvatar | NFTAvatar | SocialAvatar  (domain)
 ```
 
-| Layer      | Components                                                                                                                                  |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Primitives | `AvatarImageOrSvg`, `AvatarIcon`, `AvatarInitials`                                                                                          |
-| Union      | `Avatar` (`variant`: `imageOrSvg`, `icon`, `initials`)                                                                                      |
-| Domain     | `TokenAvatar`, `NetworkAvatar`, `FaviconAvatar`, `AccountAvatar`, `IconAvatar`, `PredictionsAvatar`, `NFTAvatar`, `SocialAvatar` (circular) |
+| Layer      | Components                                                                                                                                   |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Primitives | `AvatarImageOrSvg`, `AvatarIcon`, `AvatarInitials`                                                                                           |
+| Union      | `Avatar` (`variant`: `imageOrSvg`, `icon`, `initials`)                                                                                       |
+| Domain     | `TokenAvatar`, `NetworkAvatar`, `FaviconAvatar`, `AccountAvatar`, `AlertAvatar`, `PredictionsAvatar`, `NFTAvatar`, `SocialAvatar` (circular) |
 
-Deprecated export aliases (`AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, `AvatarAccount`, `AvatarIcon`) remain on the package root for migration; use `TokenAvatar`, `NetworkAvatar`, `FaviconAvatar`, `AccountAvatar`, and `IconAvatar` instead.
+Deprecated export aliases (`AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, `AvatarAccount`, `IconAvatar`, `AvatarIcon`) remain on the package root for migration; use `TokenAvatar`, `NetworkAvatar`, `FaviconAvatar`, `AccountAvatar`, and `AlertAvatar` instead.
 
 #### Breaking changes
 
 - `AvatarBase` no longer accepts `fallbackText` / `fallbackTextProps`. Use `Avatar` with `variant="initials"` and `label`, or `AvatarInitials`.
-- Severity-based icons: use domain `IconAvatar` (or `AvatarIcon` alias). Primitive `AvatarIcon` requires explicit `backgroundColor` and `iconColor` (used internally by `IconAvatar`).
+- Severity-based icons: use domain `AlertAvatar` (or `IconAvatar` / `AvatarIcon` aliases). Primitive `AvatarIcon` requires explicit `backgroundColor` and `iconColor` (used internally by `AlertAvatar`).
 - `AvatarAccountVariant.Maskicon` is deprecated; use `AvatarAccountVariant.Polyicon` (`'polyicon'`). `Maskicon` is renamed to `Polyicon` (`Polyicon` export; `Maskicon` remains a deprecated alias).
 
 #### Domain avatar badges

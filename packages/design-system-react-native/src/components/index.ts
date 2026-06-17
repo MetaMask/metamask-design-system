@@ -36,17 +36,19 @@ export {
 export type { AvatarGroupProps } from './AvatarGroup';
 
 export {
+  AlertAvatar,
   IconAvatar,
   AvatarIcon,
   AvatarIconSeverity,
   AvatarIconSize,
   AvatarIconPrimitive,
-} from './IconAvatar';
+} from './AlertAvatar';
 export type {
+  AlertAvatarProps,
   IconAvatarProps,
   AvatarIconProps,
   AvatarIconPrimitiveProps,
-} from './IconAvatar';
+} from './AlertAvatar';
 
 export {
   NetworkAvatar,

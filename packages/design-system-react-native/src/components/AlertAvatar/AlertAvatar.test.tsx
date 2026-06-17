@@ -11,67 +11,81 @@ import React from 'react';
 import { MAP_AVATARICON_SIZE_ICONSIZE } from '../Avatar/variants/AvatarIcon/AvatarIcon.constants';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
-import { IconAvatar } from './IconAvatar';
+import { AlertAvatar } from './AlertAvatar';
 import {
-  MAP_ICONAVATAR_SEVERITY_ICONCOLOR,
-  TWCLASSMAP_ICONAVATAR_SEVERITY_BACKGROUNDCOLOR,
-} from './IconAvatar.constants';
+  MAP_ALERTAVATAR_SEVERITY_ICONCOLOR,
+  MAP_ALERTAVATAR_SEVERITY_ICONNAME,
+  TWCLASSMAP_ALERTAVATAR_SEVERITY_BACKGROUNDCOLOR,
+} from './AlertAvatar.constants';
 
-describe('IconAvatar', () => {
+describe('AlertAvatar', () => {
   it('applies default container style and default icon props', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
 
     const bgClass =
-      TWCLASSMAP_ICONAVATAR_SEVERITY_BACKGROUNDCOLOR[
+      TWCLASSMAP_ALERTAVATAR_SEVERITY_BACKGROUNDCOLOR[
         AvatarIconSeverity.Neutral
       ];
     const expectedIconBgStyle = tw.style(bgClass);
 
     const { getByTestId } = render(
-      <IconAvatar
-        iconName={IconName.Add}
-        testID="icon-avatar"
-        iconProps={{ testID: 'icon' }}
-      />,
+      <AlertAvatar testID="alert-avatar" iconProps={{ testID: 'icon' }} />,
     );
 
-    const iconAvatar = getByTestId('icon-avatar');
+    const alertAvatar = getByTestId('alert-avatar');
     const icon = getByTestId('icon');
 
-    expect(iconAvatar.props.style[0].backgroundColor).toBe(
+    expect(alertAvatar.props.style[0].backgroundColor).toBe(
       expectedIconBgStyle.backgroundColor,
+    );
+    expect(icon.props.name).toBe(
+      MAP_ALERTAVATAR_SEVERITY_ICONNAME[AvatarIconSeverity.Neutral],
     );
     expect(icon).toBeDefined();
     expect(icon.props.fill).toBe('currentColor');
   });
 
-  it('applies severity-specific styles', () => {
+  it('applies severity-specific styles and default icon name', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
 
     const { getByTestId } = render(
-      <IconAvatar
-        iconName={IconName.Add}
+      <AlertAvatar
         severity={AvatarIconSeverity.Error}
-        testID="icon-avatar"
+        testID="alert-avatar"
         iconProps={{ testID: 'icon' }}
       />,
     );
 
-    const iconAvatar = getByTestId('icon-avatar');
+    const alertAvatar = getByTestId('alert-avatar');
     const icon = getByTestId('icon');
     const bgClass =
-      TWCLASSMAP_ICONAVATAR_SEVERITY_BACKGROUNDCOLOR[AvatarIconSeverity.Error];
+      TWCLASSMAP_ALERTAVATAR_SEVERITY_BACKGROUNDCOLOR[AvatarIconSeverity.Error];
     const expectedIconBgStyle = tw.style(bgClass);
 
-    expect(iconAvatar.props.style[0].backgroundColor).toBe(
+    expect(alertAvatar.props.style[0].backgroundColor).toBe(
       expectedIconBgStyle.backgroundColor,
     );
+    expect(icon.props.name).toBe(
+      MAP_ALERTAVATAR_SEVERITY_ICONNAME[AvatarIconSeverity.Error],
+    );
     const expectedIconStyle = tw.style(
-      MAP_ICONAVATAR_SEVERITY_ICONCOLOR[AvatarIconSeverity.Error],
+      MAP_ALERTAVATAR_SEVERITY_ICONCOLOR[AvatarIconSeverity.Error],
     );
     expect(icon.props.style[0].color).toBe(expectedIconStyle.color);
+  });
+
+  it('respects a custom icon name override', () => {
+    const { getByTestId } = render(
+      <AlertAvatar
+        severity={AvatarIconSeverity.Error}
+        iconName={IconName.Add}
+        iconProps={{ testID: 'icon' }}
+      />,
+    );
+
+    expect(getByTestId('icon').props.name).toBe(IconName.Add);
   });
 
   it('respects custom size', () => {
@@ -81,7 +95,7 @@ describe('IconAvatar', () => {
     const expectedStyle = tw.style(TWCLASSMAP_ICON_SIZE_DIMENSION[iconSize]);
 
     const { getByTestId } = render(
-      <IconAvatar
+      <AlertAvatar
         iconName={IconName.Add}
         size={AvatarIconSize.Xl}
         iconProps={{ testID: 'icon' }}

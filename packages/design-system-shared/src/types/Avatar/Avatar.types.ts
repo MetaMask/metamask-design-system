@@ -71,10 +71,17 @@ export type AvatarPropsShared =
   | AvatarInitialsPropsShared;
 
 /**
- * Domain IconAvatar (severity-based) shared props.
+ * Domain AlertAvatar (severity-based) shared props.
  */
-export type IconAvatarPropsShared = {
-  iconName: IconName;
+export type AlertAvatarPropsShared = {
+  /**
+   * Optional icon name. When omitted, defaults to the icon mapped to `severity`
+   * (aligned with IconAlert for info, success, warning, and error).
+   */
+  iconName?: IconName;
   size?: AvatarBaseSize;
   severity?: AvatarIconSeverity;
 };
+
+/** @deprecated Use AlertAvatarPropsShared */
+export type IconAvatarPropsShared = AlertAvatarPropsShared;

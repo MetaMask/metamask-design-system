@@ -1,20 +1,20 @@
-# AvatarIcon
+# AlertAvatar
 
-Avatar reserved for representing static icons inside of an avatar.
+Avatar reserved for representing severity-based alert icons inside of an avatar.
 
 ```tsx
 import {
-  AvatarIcon,
+  AlertAvatar,
   AvatarIconSeverity,
   IconName,
 } from '@metamask/design-system-react-native';
 
-<AvatarIcon name={IconName.Bank} />;
+<AlertAvatar iconName={IconName.Bank} />;
 ```
 
 ## Props
 
-### `name`
+### `iconName`
 
 The icon name to display in the avatar.
 
@@ -23,7 +23,7 @@ The icon name to display in the avatar.
 | `IconName` | Yes      | `undefined` |
 
 ```tsx
-<AvatarIcon name={IconName.Bank} />
+<AlertAvatar iconName={IconName.Bank} />
 ```
 
 ### `severity`
@@ -43,14 +43,14 @@ Available severities:
 - `AvatarIconSeverity.Warning`
 
 ```tsx
-<AvatarIcon name={IconName.Warning} severity={AvatarIconSeverity.Warning} />
-<AvatarIcon name={IconName.CheckCircle} severity={AvatarIconSeverity.Success} />
-<AvatarIcon name={IconName.Info} severity={AvatarIconSeverity.Info} />
+<AlertAvatar iconName={IconName.Warning} severity={AvatarIconSeverity.Warning} />
+<AlertAvatar iconName={IconName.CheckCircle} severity={AvatarIconSeverity.Success} />
+<AlertAvatar iconName={IconName.Info} severity={AvatarIconSeverity.Info} />
 ```
 
 ### `size`
 
-The size of the AvatarIcon.
+The size of the AlertAvatar.
 
 Available sizes:
 
@@ -65,36 +65,9 @@ Available sizes:
 | `AvatarBaseSize` | No       | `AvatarBaseSize.Md` |
 
 ```tsx
-<AvatarIcon name={IconName.Bank} size={AvatarBaseSize.Sm} />
-<AvatarIcon name={IconName.Bank} />
-<AvatarIcon name={IconName.Bank} size={AvatarBaseSize.Lg} />
-```
-
-### `iconColor`
-
-Color of the icon within the avatar.
-
-| TYPE        | REQUIRED | DEFAULT                 |
-| ----------- | -------- | ----------------------- |
-| `IconColor` | No       | `IconColor.IconDefault` |
-
-```tsx
-<AvatarIcon name={IconName.Bank} iconColor={IconColor.IconPrimary} />
-```
-
-### `backgroundColor`
-
-Background color of the avatar.
-
-| TYPE              | REQUIRED | DEFAULT                                 |
-| ----------------- | -------- | --------------------------------------- |
-| `BackgroundColor` | No       | `BackgroundColor.BackgroundAlternative` |
-
-```tsx
-<AvatarIcon
-  name={IconName.Bank}
-  backgroundColor={BackgroundColor.BackgroundDefault}
-/>
+<AlertAvatar iconName={IconName.Bank} size={AvatarBaseSize.Sm} />
+<AlertAvatar iconName={IconName.Bank} />
+<AlertAvatar iconName={IconName.Bank} size={AvatarBaseSize.Lg} />
 ```
 
 ### `twClassName`
@@ -109,17 +82,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 | `string` | No       | `undefined` |
 
 ```tsx
-import { AvatarIcon } from '@metamask/design-system-react-native';
+import { AlertAvatar } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<AvatarIcon
-  name={IconName.Bank}
+<AlertAvatar
+  iconName={IconName.Bank}
   twClassName="border-2 border-primary-100"
 />
 
 // Override default styles
-<AvatarIcon
-  name={IconName.Bank}
+<AlertAvatar
+  iconName={IconName.Bank}
   twClassName="!bg-error-100"
 />
 ```
@@ -141,7 +114,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <AvatarIcon name={IconName.Bank} style={styles.custom} />
+  <AlertAvatar iconName={IconName.Bank} style={styles.custom} />
 );
 ```
 
