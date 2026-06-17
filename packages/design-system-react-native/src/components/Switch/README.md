@@ -1,10 +1,8 @@
 # Switch
 
-`Switch` allows users to toggle between two states (on/off).
+`Switch` allows users to toggle between two states (on/off). Use it for binary settings such as enabling notifications or turning a feature on or off.
 
 _Developer Note: This is a fully controlled component, requiring you to manage the state with `isOn` and `onValueChange` props._
-
-_Platform Note: This component wraps React Native's native `Switch` and automatically applies a margin fix on iOS to correct visual alignment issues when placed in flex containers with `justifyContent: 'space-between'`._
 
 ```tsx
 import { Switch } from '@metamask/design-system-react-native';
@@ -39,8 +37,6 @@ const [isOn, setIsOn] = useState(true);
 <Switch isOn={isOn} onValueChange={setIsOn} label="Enabled by default" />;
 ```
 
----
-
 ### `onValueChange`
 
 Required callback function triggered when the switch value changes. Use this to update your state.
@@ -54,8 +50,6 @@ const [isOn, setIsOn] = useState(false);
 
 <Switch isOn={isOn} onValueChange={setIsOn} label="Toggle me" />;
 ```
-
----
 
 ### `isDisabled`
 
@@ -76,8 +70,6 @@ const [isOn, setIsOn] = useState(false);
 />;
 ```
 
----
-
 ### `label`
 
 Optional label prop that renders text beside the switch.
@@ -92,11 +84,9 @@ const [isOn, setIsOn] = useState(false);
 <Switch isOn={isOn} onValueChange={setIsOn} label="Enable feature" />;
 ```
 
----
-
 ### `style`
 
-Custom styles for the native `Switch` component.
+Use the `style` prop to customize the native switch appearance with React Native styles.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
@@ -112,26 +102,6 @@ const [isOn, setIsOn] = useState(false);
   style={{ transform: [{ scale: 0.8 }] }}
 />;
 ```
-
----
-
-## iOS Alignment Fix
-
-React Native's native `Switch` component on iOS includes invisible built-in trailing padding. This causes visual misalignment when the switch is placed inside a `flexDirection: 'row'` / `justifyContent: 'space-between'` container - the switch appears shifted to the left compared to Android.
-
-This component automatically applies a `marginRight: 4` fix on iOS to correct this alignment issue, ensuring consistent visual appearance across both platforms.
-
----
-
-## Accessibility
-
-The Switch component includes proper accessibility support:
-
-- `accessibilityRole="switch"` is set automatically
-- `accessibilityState` includes `checked` and `disabled` states
-- `accessibilityLabel` is set to the `label` prop value when provided
-
----
 
 ## References
 

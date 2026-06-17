@@ -29,6 +29,7 @@ const SwitchStory: React.FC<
   Omit<SwitchProps, 'onValueChange'> & { initialValue?: boolean }
 > = ({ initialValue, isOn: isOnProp, ...args }) => {
   const [isOn, setIsOn] = useState(initialValue ?? isOnProp ?? false);
+
   return <Switch {...args} isOn={isOn} onValueChange={setIsOn} />;
 };
 
@@ -65,15 +66,6 @@ export const Label: Story = {
     <View style={{ gap: 16 }}>
       <SwitchStory isOn={false} />
       <SwitchStory isOn={false} label="Switch with label" />
-    </View>
-  ),
-};
-
-export const WithoutLabel: Story = {
-  render: () => (
-    <View style={{ gap: 16 }}>
-      <SwitchStory isOn={false} />
-      <SwitchStory isOn />
     </View>
   ),
 };
