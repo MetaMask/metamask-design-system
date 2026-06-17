@@ -9,10 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.27.0]
 
-### Uncategorized
+### Added
 
-- feat(icons): add Trophy icon ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
-- fix: add missing peer dependency devDeps across monorepo workspaces ([#1228](https://github.com/MetaMask/metamask-design-system/pull/1228))
+- Added `Trophy` to `IconName` ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
 
 ## [0.26.0]
 

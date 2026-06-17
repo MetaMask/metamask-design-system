@@ -9,16 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.23.0]
 
-### Uncategorized
+### Added
 
-- feat(design-system-react-native): add Switch component ([#1022](https://github.com/MetaMask/metamask-design-system/pull/1022))
-- feat: Added SegmentedControl to DSRN ([#1242](https://github.com/MetaMask/metamask-design-system/pull/1242))
-- refactor: renamed segment to filter ([#1240](https://github.com/MetaMask/metamask-design-system/pull/1240))
-- refactor(shared): extract mergeTwClassName util for react-native ([#1239](https://github.com/MetaMask/metamask-design-system/pull/1239))
-- feat: [DSRN] Added ListItemSelect and ListItemMultiSelect ([#1230](https://github.com/MetaMask/metamask-design-system/pull/1230))
-- refactor: Addressed follow up for ListItem ([#1232](https://github.com/MetaMask/metamask-design-system/pull/1232))
-- feat(icons): add Trophy icon ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
-- refactor(dsrn): move list row shell accessories from Content to ListItem ([#1231](https://github.com/MetaMask/metamask-design-system/pull/1231))
+- Added `SwitchPropsShared` for cross-platform `Switch` support ([#1022](https://github.com/MetaMask/metamask-design-system/pull/1022))
+- Added `SegmentedControlPropsShared` for cross-platform `SegmentedControl` support ([#1242](https://github.com/MetaMask/metamask-design-system/pull/1242))
+- Added `ListItemSelectPropsShared` and `ListItemMultiSelectPropsShared` for cross-platform list selection rows ([#1230](https://github.com/MetaMask/metamask-design-system/pull/1230))
+- Added `Trophy` to `IconName` ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
+
+### Changed
+
+- Added `accessoryGap` to `ListItemPropsShared` to control spacing between row accessories and inner content ([#1232](https://github.com/MetaMask/metamask-design-system/pull/1232))
+- **BREAKING:** Renamed `SegmentButton`/`SegmentGroup` shared types and context to `FilterButton`/`FilterButtonGroup`; prop shapes are unchanged ([#1240](https://github.com/MetaMask/metamask-design-system/pull/1240))
+  - See [Migration Guide](./MIGRATION.md#from-version-0220-to-0230)
+- **BREAKING:** Removed `startAccessory`/`endAccessory` from `ContentPropsShared` and removed `topAccessory`/`bottomAccessory`; row accessories belong on `ListItemPropsShared` instead ([#1231](https://github.com/MetaMask/metamask-design-system/pull/1231))
+  - See [design-system-react-native Migration Guide](../design-system-react-native/MIGRATION.md#content-shell-accessories-removed-row-accessories-moved-to-listitem)
 
 ## [0.22.0]
 
