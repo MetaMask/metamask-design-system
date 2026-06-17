@@ -5,10 +5,7 @@ import type { TextProps } from '../Text';
 
 export type TextButtonProps = TextButtonPropsShared &
   Omit<TextProps, 'asChild' | 'children' | 'color'> &
-  Omit<
-    ComponentProps<'button'>,
-    'children' | 'color' | 'onClick'
-  > & {
+  Omit<ComponentProps<'button'>, 'children' | 'color' | 'onClick'> & {
     /**
      * Called when the user clicks the label. Primary interaction for this control.
      */

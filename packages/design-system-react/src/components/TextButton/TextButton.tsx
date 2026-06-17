@@ -28,7 +28,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
       onClick,
       asChild,
       type = 'button',
-      ...rest
+      ...props
     },
     ref,
   ) => {
@@ -40,11 +40,11 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
     );
 
     const textButtonContent = asChild ? (
-      <Slot ref={ref} onClick={onClick} {...rest}>
+      <Slot ref={ref} onClick={onClick} {...props}>
         {children}
       </Slot>
     ) : (
-      <button ref={ref} type={type} onClick={onClick} {...rest}>
+      <button ref={ref} type={type} onClick={onClick} {...props}>
         {children}
       </button>
     );
