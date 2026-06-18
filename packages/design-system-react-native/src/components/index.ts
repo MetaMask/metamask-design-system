@@ -149,6 +149,9 @@ export type {
   UseHeaderStandardAnimatedReturn,
 } from './HeaderStandardAnimated';
 
+export { HeaderSubpage } from './HeaderSubpage';
+export type { HeaderSubpageProps } from './HeaderSubpage';
+
 export { HeaderStandardCenterColumn } from './temp-components/HeaderStandardCenterColumn';
 export type {
   HeaderStandardCenterColumnFields,
@@ -176,6 +179,12 @@ export type { LabelProps } from './Label';
 export { ListItem, ListItemVerticalAlignment } from './ListItem';
 export type { ListItemProps } from './ListItem';
 
+export { ListItemSelect } from './ListItemSelect';
+export type { ListItemSelectProps } from './ListItemSelect';
+
+export { ListItemMultiSelect } from './ListItemMultiSelect';
+export type { ListItemMultiSelectProps } from './ListItemMultiSelect';
+
 export { RadioButton } from './RadioButton';
 export type { RadioButtonProps } from './RadioButton';
 
@@ -191,11 +200,11 @@ export type { MainActionButtonProps } from './MainActionButton';
 export { SectionDivider } from './SectionDivider';
 export type { SectionDividerProps } from './SectionDivider';
 
-export { SegmentButton, SegmentButtonVariant } from './SegmentButton';
-export type { SegmentButtonProps } from './SegmentButton';
+export { FilterButton, FilterButtonVariant } from './FilterButton';
+export type { FilterButtonProps } from './FilterButton';
 
-export { SegmentGroup } from './SegmentGroup';
-export type { SegmentGroupProps } from './SegmentGroup';
+export { FilterButtonGroup } from './FilterButtonGroup';
+export type { FilterButtonGroupProps } from './FilterButtonGroup';
 
 export {
   SelectButton,
@@ -278,8 +287,14 @@ export type { SpinnerProps } from './temp-components/Spinner';
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
 
-export { Tag, TagSeverity } from './Tag';
-export type { TagProps } from './Tag';
-
 export { SectionHeader } from './SectionHeader';
 export type { SectionHeaderProps } from './SectionHeader';
+
+export { SegmentedControl } from './SegmentedControl';
+export type { SegmentedControlProps } from './SegmentedControl';
+
+export { Switch } from './Switch';
+export type { SwitchProps } from './Switch';
+
+export { Tag, TagSeverity } from './Tag';
+export type { TagProps } from './Tag';

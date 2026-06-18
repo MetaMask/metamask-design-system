@@ -6,6 +6,8 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
+export { mergeTwClassName } from './utils/merge-tw-class-name';
+
 // AvatarBase types (ADR-0003 + ADR-0004)
 export {
   AvatarBaseSize,
@@ -38,6 +40,12 @@ export {
 
 // ListItem types (ADR-0004)
 export { type ListItemPropsShared } from './types/ListItem';
+
+// ListItemSelect types (ADR-0004)
+export { type ListItemSelectPropsShared } from './types/ListItemSelect';
+
+// ListItemMultiSelect types (ADR-0004)
+export { type ListItemMultiSelectPropsShared } from './types/ListItemMultiSelect';
 
 // HelpText types (ADR-0003 + ADR-0004)
 export { HelpTextSeverity, type HelpTextPropsShared } from './types/HelpText';
@@ -140,6 +148,7 @@ export {
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
 } from './types/BadgeWrapper';
+
 // ButtonIcon types (ADR-0003 + ADR-0004)
 export {
   ButtonIconSize,
@@ -222,20 +231,26 @@ export {
   type SensitiveTextPropsShared,
 } from './types/SensitiveText';
 
-// SegmentButton types (ADR-0003 + ADR-0004)
+// FilterButton types (ADR-0003 + ADR-0004)
 export {
-  SegmentButtonVariant,
-  type SegmentButtonPropsShared,
-} from './types/SegmentButton';
+  FilterButtonVariant,
+  type FilterButtonPropsShared,
+} from './types/FilterButton';
 
-// SegmentGroup types (ADR-0003 + ADR-0004)
-export { type SegmentGroupPropsShared } from './types/SegmentGroup';
+// FilterButtonGroup types (ADR-0003 + ADR-0004)
+export { type FilterButtonGroupPropsShared } from './types/FilterButtonGroup';
 
-// SegmentGroup context (ADR-0003 + ADR-0004)
+// SegmentedControl types (ADR-0004)
+export { type SegmentedControlPropsShared } from './types/SegmentedControl';
+
+// Switch types (ADR-0004)
+export { type SwitchPropsShared } from './types/Switch';
+
+// FilterButtonGroup context (ADR-0003 + ADR-0004)
 export {
-  SegmentGroupContext,
-  type SegmentGroupContextValue,
-} from './contexts/SegmentGroup';
+  FilterButtonGroupContext,
+  type FilterButtonGroupContextValue,
+} from './contexts/FilterButtonGroup';
 
 // SelectButton types (ADR-0003 + ADR-0004)
 export {

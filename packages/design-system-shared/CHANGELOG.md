@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.23.0]
+
+### Added
+
+- Added `SwitchPropsShared` for cross-platform `Switch` support ([#1022](https://github.com/MetaMask/metamask-design-system/pull/1022))
+- Added `SegmentedControlPropsShared` for cross-platform `SegmentedControl` support ([#1242](https://github.com/MetaMask/metamask-design-system/pull/1242))
+- Added `ListItemSelectPropsShared` and `ListItemMultiSelectPropsShared` for cross-platform list selection rows ([#1230](https://github.com/MetaMask/metamask-design-system/pull/1230))
+- Added `Trophy` to `IconName` ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
+
+### Changed
+
+- Added `accessoryGap` to `ListItemPropsShared` to control spacing between row accessories and inner content ([#1232](https://github.com/MetaMask/metamask-design-system/pull/1232))
+- **BREAKING:** Renamed `SegmentButton`/`SegmentGroup` shared types and context to `FilterButton`/`FilterButtonGroup`; prop shapes are unchanged ([#1240](https://github.com/MetaMask/metamask-design-system/pull/1240))
+  - See [Migration Guide](./MIGRATION.md#from-version-0220-to-0230)
+- **BREAKING:** Removed `startAccessory`/`endAccessory` from `ContentPropsShared` and removed `topAccessory`/`bottomAccessory`; row accessories belong on `ListItemPropsShared` instead ([#1231](https://github.com/MetaMask/metamask-design-system/pull/1231))
+  - See [design-system-react-native Migration Guide](../design-system-react-native/MIGRATION.md#content-shell-accessories-removed-row-accessories-moved-to-listitem)
+
 ## [0.22.0]
 
 ### Added
@@ -232,7 +249,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.22.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.23.0...HEAD
+[0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.22.0...@metamask/design-system-shared@0.23.0
 [0.22.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.21.0...@metamask/design-system-shared@0.22.0
 [0.21.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.20.0...@metamask/design-system-shared@0.21.0
 [0.20.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.19.0...@metamask/design-system-shared@0.20.0

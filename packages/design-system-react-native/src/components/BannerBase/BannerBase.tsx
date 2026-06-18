@@ -6,6 +6,7 @@ import {
   ButtonSize,
   FontWeight,
   IconName,
+  mergeTwClassName,
   TextVariant,
 } from '@metamask/design-system-shared';
 import React from 'react';
@@ -61,7 +62,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
       gap={2}
       backgroundColor={BoxBackgroundColor.BackgroundDefault}
       padding={3}
-      twClassName={twClassName ? `rounded-sm ${twClassName}` : 'rounded-sm'}
+      twClassName={mergeTwClassName('rounded-sm', twClassName)}
       {...props}
     >
       {startAccessory}
