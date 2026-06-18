@@ -1,4 +1,5 @@
 // Third party dependencies.
+import { mergeTwClassName } from '@metamask/design-system-shared';
 import React, { useMemo } from 'react';
 
 // External dependencies.
@@ -82,7 +83,7 @@ export const HeaderStandard: React.FC<HeaderStandardProps> = ({
       startButtonIconProps={resolvedStartButtonIconProps}
       endButtonIconProps={resolvedEndButtonIconProps}
       {...headerBaseProps}
-      twClassName={`px-2 ${twClassName}`}
+      twClassName={mergeTwClassName('px-2', twClassName)}
     >
       {renderContent()}
     </HeaderBase>

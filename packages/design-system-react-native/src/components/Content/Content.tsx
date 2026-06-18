@@ -2,6 +2,7 @@ import {
   BoxFlexDirection,
   ContentVerticalAlignment,
   FontWeight,
+  mergeTwClassName,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -42,7 +43,7 @@ export const Content: React.FC<ContentProps> = ({
       flexDirection={BoxFlexDirection.Row}
       alignItems={VERTICAL_ALIGNMENT_MAP[verticalAlignment]}
       gap={4}
-      twClassName={`min-h-[46px] ${twClassName ?? ''}`.trim()}
+      twClassName={mergeTwClassName('min-h-[46px]', twClassName)}
       {...props}
     >
       {avatar}

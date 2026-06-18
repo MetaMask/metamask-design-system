@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.30.0]
+
+### Added
+
+- Added `Switch` for controlled on/off toggles with optional `label`, `isDisabled`, and `accessibilityRole="switch"` ([#1022](https://github.com/MetaMask/metamask-design-system/pull/1022))
+- Added `HeaderSubpage` — a fixed subpage navigation row with identity content and back/close shortcuts ([#1241](https://github.com/MetaMask/metamask-design-system/pull/1241))
+- Added `SegmentedControl` — a bordered, controlled segmented picker composing `FilterButton` children with `value`/`onChange` ([#1242](https://github.com/MetaMask/metamask-design-system/pull/1242))
+- Added `ListItemSelect` and `ListItemMultiSelect` for single- and multi-select list rows with `isSelected` styling ([#1230](https://github.com/MetaMask/metamask-design-system/pull/1230))
+- Added `Trophy` to `IconName` ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
+
+### Changed
+
+- Added `accessoryGap` to `ListItem` to control spacing between row accessories and inner content (`BoxSpacing`, default `0`; pass `accessoryGap={4}` for legacy 16px spacing) ([#1232](https://github.com/MetaMask/metamask-design-system/pull/1232))
+- **BREAKING:** Renamed `SegmentButton`/`SegmentGroup` (and related types/context) to `FilterButton`/`FilterButtonGroup`; props and behavior are unchanged — `ButtonFilter` is unaffected ([#1240](https://github.com/MetaMask/metamask-design-system/pull/1240))
+  - See [Migration Guide](./MIGRATION.md#from-version-0290-to-0300)
+- **BREAKING:** `Content` is now inner-only; `startAccessory`/`endAccessory` moved to `ListItem`, and `topAccessory`/`bottomAccessory` removed — compose column shell with `BoxColumn` instead ([#1231](https://github.com/MetaMask/metamask-design-system/pull/1231))
+  - Row accessory spacing defaults to `accessoryGap={0}`; pass `accessoryGap={4}` to restore previous 16px spacing
+  - See [Migration Guide](./MIGRATION.md#content-shell-accessories-removed-row-accessories-moved-to-listitem)
+
+### Fixed
+
+- Fixed unsatisfiable `lodash` peer dependency range from `^4.17.23` to `^4.17.21` ([#1228](https://github.com/MetaMask/metamask-design-system/pull/1228))
+
 ## [0.29.0]
 
 ### Added
@@ -492,7 +515,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.29.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.0...HEAD
+[0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.29.0...@metamask/design-system-react-native@0.30.0
 [0.29.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.28.0...@metamask/design-system-react-native@0.29.0
 [0.28.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.27.0...@metamask/design-system-react-native@0.28.0
 [0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.26.0...@metamask/design-system-react-native@0.27.0

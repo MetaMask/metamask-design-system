@@ -1,4 +1,7 @@
-import { BadgeCountSize } from '@metamask/design-system-shared';
+import {
+  BadgeCountSize,
+  mergeTwClassName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
@@ -39,7 +42,7 @@ export const BadgeCount = ({
         color={TextColor.ErrorInverse}
         fontWeight={FontWeight.Medium}
         {...textProps}
-        twClassName={`leading-0 ${textProps?.twClassName || ''}`}
+        twClassName={mergeTwClassName('leading-0', textProps?.twClassName)}
       >
         {count > max ? `${max}+` : `${count}`}
       </Text>
