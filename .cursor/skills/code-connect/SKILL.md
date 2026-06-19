@@ -154,6 +154,15 @@ Replace `[component_name]` in the commit message with the actual component name 
 
 ## Step 4: Generate a PR description
 
+**Before starting Step 4, ask the user:**
+
+> Do you want to generate a PR description?
+
+**Wait for the user's response. Do not proceed to Step 4 without it.**
+
+- If **no**, skip Steps 4–6 and continue to Step 7 only if the user opts in there.
+- If **yes**, continue below.
+
 For each `code-connect/` branch being published (e.g. `code-connect/[component_name]`, or multiple branches such as `code-connect/branch-name-1`, `code-connect/branch-name-2`, `code-connect/branch-name-3`):
 
 1. Check out the branch and read its `[component_name].figma.tsx` file(s)
@@ -224,5 +233,74 @@ gh pr create --title "chore: Add Code Connect for [component_name]" --body "$(ca
 EOF
 )"
 ```
+
+---
+
+## Step 7 [project-specific]: Mapping and updating JIRA
+
+**Before starting Step 7, ask the user:**
+
+> Do you want to update JIRA tickets and PR descriptions with Related Issues links?
+
+- If **no**, skip Step 7 and end the workflow.
+- If **yes**, continue below.
+
+**Prerequisite:** Confirm the Atlassian JIRA MCP is installed and authenticated (`plugin-atlassian-atlassian`). If unavailable, stop and ask the user to install it before continuing.
+
+### Find component tickets
+
+For each component in the current `code-connect/` work, search the epic board for matching JIRA tickets:
+
+- Epic: [DSYS-741](https://consensyssoftware.atlassian.net/browse/DSYS-741)
+
+Use JIRA MCP (`searchJiraIssuesUsingJql`) to find child issues under the epic. Match by component name in the issue summary or title.
+
+Return the mapping in this format:
+
+```
+[component_name] ([DSYS-XXX](https://consensyssoftware.atlassian.net/browse/DSYS-XXX))
+```
+
+Examples:
+
+- MainActionButton ([DSYS-825](https://consensyssoftware.atlassian.net/browse/DSYS-825))
+- SectionHeader ([DSYS-828](https://consensyssoftware.atlassian.net/browse/DSYS-828))
+- SectionDivider ([DSYS-827](https://consensyssoftware.atlassian.net/browse/DSYS-827))
+
+Always include the epic link:
+
+- DSYS-741 ([DSYS-741](https://consensyssoftware.atlassian.net/browse/DSYS-741))
+
+### Stop to verify
+
+**Stop here.** Present to the user:
+
+- Proposed component → JIRA ticket mapping
+- Which PR each ticket should link to
+
+Wait for user approval before updating PRs or JIRA.
+
+### Update PR descriptions
+
+After approval, append a **Related Issues** section to each PR description from Step 6:
+
+```markdown
+## Related Issues
+
+- [DSYS-741](https://consensyssoftware.atlassian.net/browse/DSYS-741) (epic)
+- [DSYS-XXX](https://consensyssoftware.atlassian.net/browse/DSYS-XXX) ([component_name])
+```
+
+Use `gh pr edit` to update the full PR body, preserving the existing description content.
+
+### Update JIRA
+
+Comment on each matched JIRA ticket with the corresponding PR link using JIRA MCP (`addCommentToJiraIssue`):
+
+```markdown
+Code Connect PR: [PR URL]
+```
+
+Also comment on DSYS-741 when multiple components are covered across PRs, listing each PR and its components.
 
 ---
