@@ -12,6 +12,7 @@ disable-model-invocation: true
 End-to-end workflow to add Figma Code Connect for a MMDS component.
 
 Read before starting:
+
 - @.cursor/rules/figma-integration.md
 - @docs/figma-code-connect.md
 
@@ -32,6 +33,7 @@ From the user prompt, extract:
 Substitute `[component_name]` and `[insert_figma_link]` everywhere below with the extracted values.
 
 Confirm which platforms exist before proceeding:
+
 - `packages/design-system-react-native/src/components/[component_name]/[component_name].tsx`
 - `packages/design-system-react/src/components/[component_name]/[component_name].tsx`
 
@@ -168,6 +170,7 @@ Adds Figma Code Connect mappings for React Native.
 New `[component_name].figma.tsx` for React Native
 
 **Matched props**
+
 - `[figma_prop]` → `[code_prop]`
 - `[figma_prop]` → `[code_prop]` (via `figma.children()` / `figma.nestedProps()` — note mapping type when relevant)
 
