@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed `BottomSheetDialog` slow-drag not tracking the finger by marking `Gesture.Pan()` callbacks as Reanimated worklets in the published `dist` bundle
+
 ## [0.30.0]
 
 ### Added
