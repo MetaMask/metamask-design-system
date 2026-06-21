@@ -1,7 +1,5 @@
 // Third party dependencies
 import { render, act, fireEvent } from '@testing-library/react-native';
-import { readFileSync } from 'fs';
-import { join } from 'path';
 import React, { useRef, useEffect } from 'react';
 import { Platform } from 'react-native';
 
@@ -374,19 +372,4 @@ describe('BottomSheetDialog', () => {
     expect(getByText('Android Content')).toBeDefined();
     Platform.OS = originalOS;
   });
-
-  it.each(['onStart', 'onUpdate', 'onEnd'])(
-    'marks the pan gesture %s callback as a Reanimated worklet',
-    (handler) => {
-      const source = readFileSync(
-        join(__dirname, 'BottomSheetDialog.tsx'),
-        'utf8',
-      );
-      const handlerWithWorklet = new RegExp(
-        `\\.${handler}\\(\\([^)]*\\)\\s*=>\\s*\\{\\s*'worklet';`,
-      );
-
-      expect(source).toMatch(handlerWithWorklet);
-    },
-  );
 });

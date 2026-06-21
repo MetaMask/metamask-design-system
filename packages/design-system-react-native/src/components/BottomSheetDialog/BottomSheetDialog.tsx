@@ -116,11 +116,13 @@ export const BottomSheetDialog = forwardRef<
         .enabled(isInteractable)
         .onStart(() => {
           'worklet';
+
           // Starts tracking vertical position of gesture.
           gestureStartYOffset.value = currentYOffset.value;
         })
         .onUpdate((event) => {
           'worklet';
+
           const { translationY } = event;
           currentYOffset.value = gestureStartYOffset.value + translationY;
           // If gesture Y value goes above the bottom of Dialog Y value(bottom of dialog),
@@ -138,6 +140,7 @@ export const BottomSheetDialog = forwardRef<
         })
         .onEnd((event) => {
           'worklet';
+
           const { translationY, velocityY } = event;
           // finalYOffset is used to animate the Y position of the Dialog after the gesture event
           let finalYOffset: number;
