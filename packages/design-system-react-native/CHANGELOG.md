@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.30.2]
 
-### Uncategorized
+### Fixed
 
-- fix(design-system-react-native): right-align Content value and subvalue ([#1257](https://github.com/MetaMask/metamask-design-system/pull/1257))
+- Fixed `Content` value and subvalue to right-align in list rows when token amounts and fiat equivalents differ in length, including in `ListItem` ([#1257](https://github.com/MetaMask/metamask-design-system/pull/1257))
 
 ## [0.30.1]
 
