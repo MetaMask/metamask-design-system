@@ -29,6 +29,7 @@ From the user prompt, extract:
 
 2. **Branch name** — PascalCase component name → kebab-case for git branches only  
    Insert a hyphen before each uppercase letter (except the first), then lowercase the whole string:
+
    - `MainActionButton` → `main-action-button`
    - `ModalContent` → `modal-content`
    - `Switch` → `switch`
