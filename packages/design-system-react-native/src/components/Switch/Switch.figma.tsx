@@ -39,7 +39,7 @@ figma.connect(
           isOn={rnSwitch.isOn}
           isDisabled={rnSwitch.isDisabled}
           label={resolvedLabel}
-          onValueChange={() => {}}
+          onValueChange={() => undefined}
         />
       );
     },
