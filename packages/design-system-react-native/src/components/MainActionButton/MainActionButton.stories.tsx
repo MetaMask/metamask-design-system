@@ -86,7 +86,12 @@ export const IconNameAndLabel: Story = {
     },
   },
   render: () => (
-    <Box flexDirection={BoxFlexDirection.Row} gap={2} marginTop={4} paddingHorizontal={4}>
+    <Box
+      flexDirection={BoxFlexDirection.Row}
+      gap={2}
+      marginTop={4}
+      paddingHorizontal={4}
+    >
       <MainActionButton
         iconName={IconName.AttachMoney}
         label="Buy"
