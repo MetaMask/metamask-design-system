@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.27.1]
+
 ### Uncategorized
 
 - docs: Standardize docs and stories for Tag ([#1221](https://github.com/MetaMask/metamask-design-system/pull/1221))
@@ -376,7 +378,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.1...HEAD
+[0.27.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.0...@metamask/design-system-react@0.27.1
 [0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.26.0...@metamask/design-system-react@0.27.0
 [0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.25.0...@metamask/design-system-react@0.26.0
 [0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.24.0...@metamask/design-system-react@0.25.0
