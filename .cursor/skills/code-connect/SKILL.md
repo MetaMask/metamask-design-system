@@ -27,10 +27,16 @@ From the user prompt, extract:
 1. **Component name** — from the `.tsx` file path  
    Example: `packages/design-system-react-native/src/components/MainActionButton/MainActionButton.tsx` → `MainActionButton`
 
-2. **Figma link** — must include `node-id`  
+2. **Branch name** — PascalCase component name → kebab-case for git branches only  
+   Insert a hyphen before each uppercase letter (except the first), then lowercase the whole string:
+   - `MainActionButton` → `main-action-button`
+   - `ModalContent` → `modal-content`
+   - `Switch` → `switch`
+
+3. **Figma link** — must include `node-id`  
    Example: `https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/...?node-id=15793-13`
 
-Substitute `[component_name]` and `[insert_figma_link]` everywhere below with the extracted values.
+Substitute `[component_name]`, `[branch_name]`, and `[insert_figma_link]` everywhere below with the extracted values. Use `[component_name]` for file paths and code; use `[branch_name]` for git branch names only.
 
 Confirm which platforms exist before proceeding:
 
@@ -50,10 +56,10 @@ Use Figma MCP (`get_context_for_code_connect`) to fetch Figma property definitio
 ```bash
 git checkout main
 git pull origin main
-git checkout -b code-connect/[component_name]
+git checkout -b code-connect/[branch_name]
 ```
 
-If `code-connect/[component_name]` already exists, check it out instead of creating a duplicate.
+If `code-connect/[branch_name]` already exists, check it out instead of creating a duplicate.
 
 ### Create `.figma.tsx` files
 
@@ -145,10 +151,10 @@ chore: Add Code Connect for [component_name]
 
 EOF
 )"
-git push -u origin code-connect/[component_name]
+git push -u origin code-connect/[branch_name]
 ```
 
-Replace `[component_name]` in the commit message with the actual component name (e.g. `MainActionButton`).
+Replace `[component_name]` in the commit message with the actual component name (e.g. `MainActionButton`). Use `[branch_name]` for the remote branch (e.g. `main-action-button`).
 
 ---
 
@@ -163,7 +169,7 @@ Replace `[component_name]` in the commit message with the actual component name 
 - If **no**, skip Steps 4–6 and continue to Step 7 only if the user opts in there.
 - If **yes**, continue below.
 
-For each `code-connect/` branch being published (e.g. `code-connect/[component_name]`, or multiple branches such as `code-connect/branch-name-1`, `code-connect/branch-name-2`, `code-connect/branch-name-3`):
+For each `code-connect/` branch being published (e.g. `code-connect/[branch_name]`, or multiple branches such as `code-connect/branch-name-1`, `code-connect/branch-name-2`, `code-connect/branch-name-3`):
 
 1. Check out the branch and read its `[component_name].figma.tsx` file(s)
 2. Derive matched props and omitted Figma-only properties from the mappings
@@ -225,7 +231,7 @@ EOF
 Run once per branch. If no PR exists yet, create it first:
 
 ```bash
-git push -u origin code-connect/[component_name]
+git push -u origin code-connect/[branch_name]
 
 gh pr create --title "chore: Add Code Connect for [component_name]" --body "$(cat <<'EOF'
 [paste approved PR description]
