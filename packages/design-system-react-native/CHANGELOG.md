@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.30.1]
+
+### Fixed
+
+- Fixed `BottomSheetDialog` pan callbacks to run on the UI thread, resolving broken slow-drag gesture ([#1253](https://github.com/MetaMask/metamask-design-system/pull/1253))
+- Fixed `Tag` gap between icon and label from 4px to 2px to match design spec ([#1236](https://github.com/MetaMask/metamask-design-system/pull/1236))
+
 ## [0.30.0]
 
 ### Added
@@ -515,7 +522,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.1...HEAD
+[0.30.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.0...@metamask/design-system-react-native@0.30.1
 [0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.29.0...@metamask/design-system-react-native@0.30.0
 [0.29.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.28.0...@metamask/design-system-react-native@0.29.0
 [0.28.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.27.0...@metamask/design-system-react-native@0.28.0
