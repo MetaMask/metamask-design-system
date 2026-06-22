@@ -174,12 +174,12 @@ Replace `[component_name]` in the commit message with the actual component name 
 
 Generate content **only** for the three sections below. Match headings exactly as in `.github/pull_request_template.md` (see `polish/main-actions` PR [#1246](https://github.com/MetaMask/metamask-design-system/pull/1246) for reference).
 
-| Generate / replace | Do **not** generate or overwrite |
-| ------------------ | -------------------------------- |
-| `## **Description**` | `## **Screenshots/Recordings**` |
-| `## **Related issues**` | `### **Before**` / `### **After**` |
-| `## **Manual testing steps**` | `## **Pre-merge author checklist**` |
-| | `## **Pre-merge reviewer checklist**` |
+| Generate / replace            | Do **not** generate or overwrite      |
+| ----------------------------- | ------------------------------------- |
+| `## **Description**`          | `## **Screenshots/Recordings**`       |
+| `## **Related issues**`       | `### **Before**` / `### **After**`    |
+| `## **Manual testing steps**` | `## **Pre-merge author checklist**`   |
+|                               | `## **Pre-merge reviewer checklist**` |
 
 When a PR already exists, **preserve** the Screenshots/Recordings and checklist sections from the current body (including any checked items or attached media). Only replace the three sections above.
 
