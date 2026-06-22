@@ -9,11 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.30.1]
 
-### Uncategorized
+### Fixed
 
-- fix(design-system-react-native): mark BottomSheetDialog pan callbacks as worklets ([#1253](https://github.com/MetaMask/metamask-design-system/pull/1253))
-- docs: Standardize docs and stories for Tag ([#1221](https://github.com/MetaMask/metamask-design-system/pull/1221))
-- chore: Polish tag and align Code Connect documentation ([#1236](https://github.com/MetaMask/metamask-design-system/pull/1236))
+- Fixed `BottomSheetDialog` pan callbacks to run on the UI thread, resolving broken slow-drag gesture ([#1253](https://github.com/MetaMask/metamask-design-system/pull/1253))
+- Fixed `Tag` gap between icon and label from 4px to 2px to match design spec ([#1236](https://github.com/MetaMask/metamask-design-system/pull/1236))
 
 ## [0.30.0]
 

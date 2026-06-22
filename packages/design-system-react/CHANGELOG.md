@@ -9,10 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.27.1]
 
-### Uncategorized
+### Fixed
 
-- docs: Standardize docs and stories for Tag ([#1221](https://github.com/MetaMask/metamask-design-system/pull/1221))
-- chore: Polish tag and align Code Connect documentation ([#1236](https://github.com/MetaMask/metamask-design-system/pull/1236))
+- Fixed `Tag` gap between icon and label from 4px to 2px to match design spec ([#1236](https://github.com/MetaMask/metamask-design-system/pull/1236))
 
 ## [0.27.0]
 
