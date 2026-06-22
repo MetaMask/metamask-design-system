@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix(design-system-react-native): right-align Content value and subvalue ([#1257](https://github.com/MetaMask/metamask-design-system/pull/1257))
+
 ## [0.30.1]
 
 ### Fixed
