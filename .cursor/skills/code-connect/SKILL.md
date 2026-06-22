@@ -302,12 +302,30 @@ Use `gh pr edit` to update the full PR body, preserving the existing description
 
 ### Update JIRA
 
-Comment on each matched JIRA ticket with the corresponding PR link using JIRA MCP (`addCommentToJiraIssue`):
+Comment on each matched JIRA ticket with the corresponding PR link using JIRA MCP (`addCommentToJiraIssue`).
+
+**Hyperlink requirement:** JIRA comments must use **markdown link syntax** — never paste a bare URL. Always pass `contentFormat: "markdown"` so Jira renders the link as clickable.
+
+Derive link text from the PR number: `MetaMask/metamask-design-system#1254` (from `gh pr view --json number,url`).
 
 ```markdown
-Code Connect PR: [PR URL]
+Code Connect PR: [MetaMask/metamask-design-system#1254](https://github.com/MetaMask/metamask-design-system/pull/1254)
+
+Adds React Native Code Connect for `[component_name]`.
 ```
 
-Also comment on DSYS-741 when multiple components are covered across PRs, listing each PR and its components.
+**Wrong (plain text — do not use):**
+
+```markdown
+Code Connect PR: https://github.com/MetaMask/metamask-design-system/pull/1254
+```
+
+Also comment on DSYS-741 when multiple components are covered across PRs. Use the same markdown hyperlink format for each PR, e.g.:
+
+```markdown
+Code Connect updates:
+
+- TitleStandard: [MetaMask/metamask-design-system#1254](https://github.com/MetaMask/metamask-design-system/pull/1254)
+```
 
 ---
