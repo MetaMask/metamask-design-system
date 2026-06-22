@@ -170,11 +170,25 @@ Replace `[component_name]` in the commit message with the actual component name 
 - If **no**, skip Steps 4–6 and continue to Step 7 only if the user opts in there.
 - If **yes**, continue below.
 
+### Scope — generate only these sections
+
+Generate content **only** for the three sections below. Match headings exactly as in `.github/pull_request_template.md` (see `polish/main-actions` PR [#1246](https://github.com/MetaMask/metamask-design-system/pull/1246) for reference).
+
+| Generate / replace | Do **not** generate or overwrite |
+| ------------------ | -------------------------------- |
+| `## **Description**` | `## **Screenshots/Recordings**` |
+| `## **Related issues**` | `### **Before**` / `### **After**` |
+| `## **Manual testing steps**` | `## **Pre-merge author checklist**` |
+| | `## **Pre-merge reviewer checklist**` |
+
+When a PR already exists, **preserve** the Screenshots/Recordings and checklist sections from the current body (including any checked items or attached media). Only replace the three sections above.
+
 For each `code-connect/` branch being published (e.g. `code-connect/[branch_name]`, or multiple branches such as `code-connect/branch-name-1`, `code-connect/branch-name-2`, `code-connect/branch-name-3`):
 
 1. Check out the branch and read its `[component_name].figma.tsx` file(s)
 2. Derive matched props and omitted Figma-only properties from the mappings
-3. Generate one PR description per branch using this template:
+3. If the PR exists, fetch the current body (`gh pr view --json body`) and extract preserved sections
+4. Generate one **partial** PR description per branch using this template:
 
 ```markdown
 ## **Description**
@@ -191,15 +205,28 @@ New `[component_name].figma.tsx` for React Native
 - `[figma_prop]` → `[code_prop]` (via `figma.children()` / `figma.nestedProps()` — note mapping type when relevant)
 
 **Intentionally omits Figma-only properties:** `[prop_name (Figma only)]`, `[prop_name (Figma only)]`
+
+## **Related issues**
+
+- [DSYS-741](https://consensyssoftware.atlassian.net/browse/DSYS-741) (epic)
+- [DSYS-XXX](https://consensyssoftware.atlassian.net/browse/DSYS-XXX) ([component_name])
+
+## **Manual testing steps**
+
+- [ ] Open [component in Figma Dev Mode]([figma_url]) and confirm the **React Native** snippet appears
+- [ ] Toggle key Figma variants and verify the snippet updates
+- [ ] Confirm matched props render correctly in the example snippet
 ```
 
-If the branch includes multiple components, repeat the `### [component_name].figma.tsx` section for each.
+If the branch includes multiple components, repeat the `### [component_name].figma.tsx` section under **Description**.
 
-If a branch also has a React web `.figma.tsx`, add a parallel section:
+If a branch also has a React web `.figma.tsx`, add a parallel block under **Description**:
 
 ```markdown
 New `[component_name].figma.tsx` for React
 ```
+
+**Do not** include Screenshots/Recordings or checklist sections in the generated draft — those come from the existing PR body or the default template when creating a new PR.
 
 ---
 
@@ -219,11 +246,22 @@ Wait for user approval before Step 6.
 
 Run only after user confirms Step 5.
 
-Update the PR description on each remote branch using `gh`:
+### Merge strategy
+
+**Existing PR:** Combine the Step 4 draft (Description, Related issues, Manual testing steps) with preserved sections from the current PR body:
+
+1. `gh pr view --json body` — read current body
+2. Extract and keep unchanged: `## **Screenshots/Recordings**` through end of `## **Pre-merge reviewer checklist**`
+3. Replace only Description, Related issues, and Manual testing steps with the approved Step 4 draft
+4. `gh pr edit --body` with the merged result
+
+**New PR:** Use the Step 4 draft plus the default template tail from `.github/pull_request_template.md` (Screenshots/Recordings, Before/After, both checklists — unchecked).
 
 ```bash
 gh pr edit --body "$(cat <<'EOF'
-[paste approved PR description for this branch]
+[approved Description + Related issues + Manual testing steps]
+
+[preserved or default Screenshots/Recordings + checklists]
 
 EOF
 )"
@@ -235,7 +273,32 @@ Run once per branch. If no PR exists yet, create it first:
 git push -u origin code-connect/[branch_name]
 
 gh pr create --title "chore: Add Code Connect for [component_name]" --body "$(cat <<'EOF'
-[paste approved PR description]
+[approved Description + Related issues + Manual testing steps]
+
+## **Screenshots/Recordings**
+
+<!-- If applicable, add screenshots and/or recordings to visualize the before and after of your change. -->
+
+### **Before**
+
+<!-- [screenshots/recordings] -->
+
+### **After**
+
+<!-- [screenshots/recordings] -->
+
+## **Pre-merge author checklist**
+
+- [ ] I've followed [MetaMask Contributor Docs](https://github.com/MetaMask/contributor-docs)
+- [ ] I've completed the PR template to the best of my ability
+- [ ] I’ve included tests if applicable
+- [ ] I’ve documented my code using [JSDoc](https://jsdoc.app/) format if applicable
+- [ ] I’ve applied the right labels on the PR (see [labeling guidelines](https://github.com/MetaMask/metamask-extension/blob/develop/.github/guidelines/LABELING_GUIDELINES.md)). Not required for external contributors.
+
+## **Pre-merge reviewer checklist**
+
+- [ ] I've manually tested the PR (e.g. pull and build branch, run the app, test code being changed).
+- [ ] I confirm that this PR addresses all acceptance criteria described in the ticket it closes and includes the necessary testing evidence such as recordings and or screenshots.
 
 EOF
 )"
@@ -289,16 +352,16 @@ Wait for user approval before updating PRs or JIRA.
 
 ### Update PR descriptions
 
-After approval, append a **Related Issues** section to each PR description from Step 6:
+After approval, update the **`## **Related issues**`** section in each PR using the merge strategy from Step 6. Do **not** append a duplicate Related Issues block at the end — replace the existing Related issues section in place.
 
 ```markdown
-## Related Issues
+## **Related issues**
 
 - [DSYS-741](https://consensyssoftware.atlassian.net/browse/DSYS-741) (epic)
 - [DSYS-XXX](https://consensyssoftware.atlassian.net/browse/DSYS-XXX) ([component_name])
 ```
 
-Use `gh pr edit` to update the full PR body, preserving the existing description content.
+Preserve Screenshots/Recordings and checklist sections unchanged.
 
 ### Update JIRA
 
