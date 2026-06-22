@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- docs: Standardize docs and stories for Tag ([#1221](https://github.com/MetaMask/metamask-design-system/pull/1221))
+- chore: Polish tag and align Code Connect documentation ([#1236](https://github.com/MetaMask/metamask-design-system/pull/1236))
+
 ## [0.27.0]
 
 ### Added
