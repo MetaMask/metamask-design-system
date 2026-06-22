@@ -55,7 +55,13 @@ export default meta;
 
 type Story = StoryObj<MainActionButtonProps>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: (args) => (
+    <Box marginTop={4} marginLeft={4} style={{ width: 85 }}>
+      <MainActionButton {...args} />
+    </Box>
+  ),
+};
 
 export const IsDisabled: Story = {
   args: {
@@ -66,6 +72,11 @@ export const IsDisabled: Story = {
       disable: true,
     },
   },
+  render: (args) => (
+    <Box marginTop={4} marginLeft={4} style={{ width: 85 }}>
+      <MainActionButton {...args} />
+    </Box>
+  ),
 };
 
 export const IconNameAndLabel: Story = {
@@ -75,25 +86,25 @@ export const IconNameAndLabel: Story = {
     },
   },
   render: () => (
-    <Box flexDirection={BoxFlexDirection.Row} gap={4} paddingHorizontal={4}>
+    <Box flexDirection={BoxFlexDirection.Row} gap={2} marginTop={4} paddingHorizontal={4}>
       <MainActionButton
-        iconName={IconName.BuySell}
-        label="Buy/Sell"
+        iconName={IconName.AttachMoney}
+        label="Buy"
         twClassName="flex-1"
       />
       <MainActionButton
-        iconName={IconName.SwapHorizontal}
+        iconName={IconName.SwapVertical}
         label="Swap"
-        twClassName="flex-1"
-      />
-      <MainActionButton
-        iconName={IconName.Receive}
-        label="Receive"
         twClassName="flex-1"
       />
       <MainActionButton
         iconName={IconName.Send}
         label="Send"
+        twClassName="flex-1"
+      />
+      <MainActionButton
+        iconName={IconName.Received}
+        label="Receive"
         twClassName="flex-1"
       />
     </Box>
