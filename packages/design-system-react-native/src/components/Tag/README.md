@@ -67,7 +67,7 @@ Optional `IconName` for small icons at the start or end of the tag (`IconSize.Xs
 import { IconName, Tag } from '@metamask/design-system-react-native';
 
 <Tag startIconName={IconName.Warning}>With start icon</Tag>
-<Tag endIconName={IconName.ArrowRight}>With end icon</Tag>
+<Tag endIconName={IconName.ArrowDown}>With end icon</Tag>
 ```
 
 ### `startIconProps` / `endIconProps`
@@ -87,10 +87,16 @@ Optional React nodes shown when no start/end icon is resolved (e.g. custom glyph
 | `ReactNode` | No       | `undefined` |
 
 ```tsx
-import { Tag } from '@metamask/design-system-react-native';
-import { Text } from 'react-native';
+import {
+  Icon,
+  IconName,
+  IconSize,
+  Tag,
+} from '@metamask/design-system-react-native';
 
-<Tag startAccessory={<Text>→</Text>}>With accessory</Tag>;
+<Tag startAccessory={<Icon name={IconName.Warning} size={IconSize.Xs} />}>
+  With accessory
+</Tag>;
 ```
 
 ### `testID`
