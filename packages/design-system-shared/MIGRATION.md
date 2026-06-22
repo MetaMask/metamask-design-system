@@ -5,10 +5,56 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
+  - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
+
+### From version 0.22.0 to 0.23.0
+
+<a id="filterbutton-shared-rename"></a>
+
+#### `SegmentButton` and `SegmentGroup` shared exports renamed to `FilterButton` and `FilterButtonGroup`
+
+Shared types and context for the segmented filter control are renamed to match the React Native component names. Prop shapes and runtime behavior are unchanged.
+
+**What changed:**
+
+| Before (0.22.0)            | After (0.23.0)                  |
+| -------------------------- | ------------------------------- |
+| `SegmentButtonVariant`     | `FilterButtonVariant`           |
+| `SegmentButtonPropsShared` | `FilterButtonPropsShared`       |
+| `SegmentGroupPropsShared`  | `FilterButtonGroupPropsShared`  |
+| `SegmentGroupContext`      | `FilterButtonGroupContext`      |
+| `SegmentGroupContextValue` | `FilterButtonGroupContextValue` |
+
+**Migration:**
+
+```tsx
+// Before (0.22.0)
+import {
+  SegmentButtonVariant,
+  SegmentGroupContext,
+  type SegmentButtonPropsShared,
+  type SegmentGroupPropsShared,
+  type SegmentGroupContextValue,
+} from '@metamask/design-system-shared';
+
+// After (0.23.0)
+import {
+  FilterButtonVariant,
+  FilterButtonGroupContext,
+  type FilterButtonPropsShared,
+  type FilterButtonGroupPropsShared,
+  type FilterButtonGroupContextValue,
+} from '@metamask/design-system-shared';
+```
+
+**Impact:**
+
+- Any direct import from `@metamask/design-system-shared` using the old `Segment*` names must be renamed.
+- `@metamask/design-system-react-native` re-exports the renamed components and types; see the [design-system-react-native migration guide](../design-system-react-native/MIGRATION.md#segmentbutton-and-segmentgroup-renamed-to-filterbutton-and-filterbuttongroup) for component usage.
 
 ### From version 0.12.0 to 0.13.0
 

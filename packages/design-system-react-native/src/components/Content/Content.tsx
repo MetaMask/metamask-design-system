@@ -1,11 +1,14 @@
 import {
+  BoxFlexDirection,
   ContentVerticalAlignment,
   FontWeight,
+  mergeTwClassName,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
 import React from 'react';
 
+import { Box } from '../Box';
 import { BoxColumn } from '../BoxColumn';
 import { BoxRow } from '../BoxRow';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
@@ -14,10 +17,6 @@ import { VERTICAL_ALIGNMENT_MAP } from './Content.constants';
 import type { ContentProps } from './Content.types';
 
 export const Content: React.FC<ContentProps> = ({
-  startAccessory,
-  endAccessory,
-  topAccessory,
-  bottomAccessory,
   verticalAlignment = ContentVerticalAlignment.Center,
   avatar,
   twClassName,
@@ -39,16 +38,13 @@ export const Content: React.FC<ContentProps> = ({
   subvalueEndAccessory,
   ...props
 }) => {
-  const hasColumnShell = Boolean(topAccessory) || Boolean(bottomAccessory);
-
-  const contentRow = (
-    <BoxRow
-      startAccessory={startAccessory}
-      endAccessory={endAccessory}
+  return (
+    <Box
+      flexDirection={BoxFlexDirection.Row}
       alignItems={VERTICAL_ALIGNMENT_MAP[verticalAlignment]}
       gap={4}
-      twClassName={`min-h-[46px] ${hasColumnShell ? 'min-w-0' : (twClassName ?? '')}`.trim()}
-      {...(hasColumnShell ? {} : props)}
+      twClassName={mergeTwClassName('min-h-[46px]', twClassName)}
+      {...props}
     >
       {avatar}
       {/* Title and description Column */}
@@ -143,24 +139,8 @@ export const Content: React.FC<ContentProps> = ({
           ) : null}
         </BoxColumn>
       ) : null}
-    </BoxRow>
+    </Box>
   );
-
-  if (hasColumnShell) {
-    return (
-      <BoxColumn
-        gap={1}
-        topAccessory={topAccessory}
-        bottomAccessory={bottomAccessory}
-        twClassName={twClassName}
-        {...props}
-      >
-        {contentRow}
-      </BoxColumn>
-    );
-  }
-
-  return contentRow;
 };
 
 Content.displayName = 'Content';

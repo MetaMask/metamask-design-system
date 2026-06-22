@@ -4,6 +4,8 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
+- [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
 - [From version 0.27.0 to 0.28.0](#from-version-0270-to-0280)
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
@@ -18,6 +20,12 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
+  - [BadgeCount Component](#badgecount-component)
+  - [BadgeIcon Component](#badgeicon-component)
+  - [BadgeNetwork Component](#badgenetwork-component)
+  - [BadgeStatus Component](#badgestatus-component)
+  - [BadgeWrapper Component](#badgewrapper-component)
+  - [Deprecated aggregate `Badge` component](#deprecated-aggregate-badge-component)
   - [HeaderBase Component](#headerbase-component)
   - [Text Component](#text-component)
   - [Label Component](#label-component)
@@ -53,6 +61,153 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.29.0 to 0.30.0
+
+<a id="segmentbutton-and-segmentgroup-renamed-to-filterbutton-and-filterbuttongroup"></a>
+
+#### `SegmentButton` and `SegmentGroup` renamed to `FilterButton` and `FilterButtonGroup`
+
+The segmented filter control components are renamed to align with product naming. Props and behavior are unchanged — only export names change.
+
+**What changed:**
+
+| Before (0.29.0)        | After (0.30.0)           |
+| ---------------------- | ------------------------ |
+| `SegmentButton`        | `FilterButton`           |
+| `SegmentButtonVariant` | `FilterButtonVariant`    |
+| `SegmentButtonProps`   | `FilterButtonProps`      |
+| `SegmentGroup`         | `FilterButtonGroup`      |
+| `SegmentGroupProps`    | `FilterButtonGroupProps` |
+
+**Migration:**
+
+```tsx
+// Before (0.29.0)
+import {
+  SegmentButton,
+  SegmentButtonVariant,
+  SegmentGroup,
+} from '@metamask/design-system-react-native';
+
+<SegmentGroup
+  value={value}
+  onChange={setValue}
+  variant={SegmentButtonVariant.Primary}
+>
+  <SegmentButton value="all" onPress={() => {}}>
+    All
+  </SegmentButton>
+  <SegmentButton value="tokens" onPress={() => {}}>
+    Tokens
+  </SegmentButton>
+</SegmentGroup>;
+
+// After (0.30.0)
+import {
+  FilterButton,
+  FilterButtonVariant,
+  FilterButtonGroup,
+} from '@metamask/design-system-react-native';
+
+<FilterButtonGroup
+  value={value}
+  onChange={setValue}
+  variant={FilterButtonVariant.Primary}
+>
+  <FilterButton value="all" onPress={() => {}}>
+    All
+  </FilterButton>
+  <FilterButton value="tokens" onPress={() => {}}>
+    Tokens
+  </FilterButton>
+</FilterButtonGroup>;
+```
+
+If you import shared types or context directly from `@metamask/design-system-shared`, apply the same renames there (`FilterButtonPropsShared`, `FilterButtonGroupPropsShared`, `FilterButtonGroupContext`, `FilterButtonGroupContextValue`). See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#filterbutton-shared-rename).
+
+**Impact:**
+
+- Any import of `SegmentButton`, `SegmentButtonVariant`, `SegmentGroup`, or related prop/context types must be renamed.
+- `ButtonFilter` is a separate component (active/inactive filter chip) and is not affected by this rename.
+
+#### `Content` shell accessories removed; row accessories moved to `ListItem`
+
+`Content` is now inner-only (avatar, title/description, value/subvalue, and inline text accessories). Row shell accessories (`startAccessory`, `endAccessory`) live on `ListItem`. Column shell accessories (`topAccessory`, `bottomAccessory`) are removed — compose them manually with `BoxColumn`.
+
+**What changed:**
+
+- `startAccessory` / `endAccessory` removed from `ContentPropsShared` → use `ListItem` instead
+- `topAccessory` / `bottomAccessory` removed from `ContentPropsShared` → wrap with `BoxColumn` instead
+
+**Migration:**
+
+`startAccessory` / `endAccessory` — moved to `ListItem`:
+
+```tsx
+// Before (0.29.0)
+<Content startAccessory={<Icon name={IconName.Token} />} title="Label" />
+
+// After (0.30.0)
+<ListItem startAccessory={<Icon name={IconName.Token} />} title="Label" />
+```
+
+`topAccessory` / `bottomAccessory` — removed; compose manually:
+
+```tsx
+// Before (0.29.0)
+<ListItem topAccessory={<BannerAlert />} title="Token" value="100" />
+
+// After (0.30.0)
+<BoxColumn topAccessory={<BannerAlert />}>
+  <ListItem title="Token" value="100" />
+</BoxColumn>
+```
+
+**Impact:**
+
+- Any call site passing `startAccessory` or `endAccessory` on `Content` must move those props to `ListItem`.
+- Any call site using `topAccessory` or `bottomAccessory` on `Content` or `ListItem` must wrap the row in `BoxColumn` (or an equivalent layout) instead.
+- Legacy `Content` shell rows used 16px spacing (`gap={4}`) between accessories and inner content. `ListItem` defaults to `accessoryGap={0}`; pass `accessoryGap={4}` to restore the previous spacing.
+
+### From version 0.28.0 to 0.29.0
+
+#### Severity vocabulary: `Error` renamed to `Danger` across `AvatarIconSeverity`, `IconAlertSeverity`, and `TagSeverity`
+
+The public severity API for `AvatarIcon`, `IconAlert`, and `Tag` now uses `Danger` instead of `Error` for destructive or critical states, and `Neutral` as the canonical name for default-like states.
+
+**What changed:**
+
+- `AvatarIconSeverity.Error` (`'error'`) → `AvatarIconSeverity.Danger` (`'danger'`)
+- `IconAlertSeverity.Error` (`'error'`) → `IconAlertSeverity.Danger` (`'danger'`)
+- `TagSeverity.Error` (`'error'`) → `TagSeverity.Danger` (`'danger'`)
+
+**Migration:**
+
+```tsx
+// Before (0.28.0)
+import {
+  AvatarIcon,
+  AvatarIconSeverity,
+  IconAlert,
+  IconAlertSeverity,
+  Tag,
+  TagSeverity,
+} from '@metamask/design-system-react-native';
+
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Error} />
+<IconAlert severity={IconAlertSeverity.Error} />
+<Tag severity={TagSeverity.Error}>High risk</Tag>
+
+// After (0.29.0)
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Danger} />
+<IconAlert severity={IconAlertSeverity.Danger} />
+<Tag severity={TagSeverity.Danger}>High risk</Tag>
+```
+
+**Impact:**
+
+- Any call site using `.Error` on these three severity const objects must change to `.Danger`. The rendered color is unchanged — `Danger` still maps to the error color tokens.
 
 ### From version 0.27.0 to 0.28.0
 
@@ -2328,6 +2483,20 @@ Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with s
 | `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
 | `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
 
+##### Severity Alignment
+
+The public severity APIs now use `Danger` instead of `Error` for destructive
+or critical states, and `Neutral` instead of any default-like severity. Internal
+color token names are unchanged, so `Danger` variants may still map to
+`ErrorDefault` or `ErrorMuted` tokens.
+
+| Before                                | After                                   | Notes                        |
+| ------------------------------------- | --------------------------------------- | ---------------------------- |
+| `IconAlertSeverity.Error` (`error`)   | `IconAlertSeverity.Danger` (`danger`)   | renamed public API value     |
+| `AvatarIconSeverity.Error` (`error`)  | `AvatarIconSeverity.Danger` (`danger`)  | renamed public API value     |
+| `TagSeverity.Error` (`error`)         | `TagSeverity.Danger` (`danger`)         | renamed public API value     |
+| Any legacy default-like severity name | `Neutral` (`neutral`) where appropriate | canonical neutral vocabulary |
+
 #### Migration Example
 
 ##### Before (Mobile)
@@ -2441,6 +2610,200 @@ import { BannerBase } from '@metamask/design-system-react-native';
   closeButtonProps={{ testID: 'banner-base-close-button' }}
 />;
 ```
+
+### BadgeCount Component
+
+MetaMask Mobile does not ship a standalone `BadgeCount` under `app/component-library` (no `BadgeCount` folder on `main`). Use `@metamask/design-system-react-native` **BadgeCount** for numeric overlays (often inside **BadgeWrapper**).
+
+Shared props match `@metamask/design-system-shared`: `count` (required), optional `max` (default `99`), optional `size` (`BadgeCountSize.Md` | `BadgeCountSize.Lg`, default `Md`).
+
+#### Platform props (React Native)
+
+| Prop          | Notes                                      |
+| ------------- | ------------------------------------------ |
+| `textProps`   | Optional. Passed to inner `Text`.          |
+| `twClassName` | Optional. Tailwind / twrnc overrides.      |
+| `style`       | Optional. React Native styles on the root. |
+
+#### Example (Design System)
+
+```tsx
+import {
+  BadgeCount,
+  BadgeCountSize,
+} from '@metamask/design-system-react-native';
+
+<BadgeCount count={5} max={99} size={BadgeCountSize.Md} />;
+```
+
+### BadgeIcon Component
+
+There is no separate legacy **BadgeIcon** component file in the mobile component-library. The closest legacy surface is the **`Badge`** composite’s `BadgeVariant.NotificationsKinds` branch (see [Deprecated aggregate `Badge` component](#deprecated-aggregate-badge-component)), which maps to MMDS **BadgeIcon** (`iconName`).
+
+| Prop       | Type       | Notes     |
+| ---------- | ---------- | --------- |
+| `iconName` | `IconName` | Required. |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeIcon, IconName } from '@metamask/design-system-react-native';
+
+<BadgeIcon iconName={IconName.FullCircle} />;
+```
+
+### BadgeNetwork Component
+
+Legacy **BadgeNetwork** lives under `Badge/variants/BadgeNetwork` and extends **AvatarNetwork** props plus optional `isScaled` (default `true`). MMDS **BadgeNetwork** wraps **AvatarNetwork** with fixed `size={AvatarNetworkSize.Xs}` and `hasBorder` — callers must **not** pass `size` or `shape` on `BadgeNetwork`.
+
+#### Mapping
+
+| Legacy mobile prop                                                                   | MMDS `BadgeNetwork`                                                                                                               |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `name`, `fallbackText`, `src`, other `AvatarNetwork` props (except `size` / `shape`) | Same shared semantics; `size` / `shape` are owned by the wrapper.                                                                 |
+| `isScaled`                                                                           | **Removed** from MMDS `BadgeNetwork`. Handle scaling outside or via `AvatarNetwork` if you need a non-badge-sized network avatar. |
+
+#### Before (Mobile)
+
+```tsx
+import BadgeNetwork from '../../../component-library/components/Badges/Badge/variants/BadgeNetwork';
+
+<BadgeNetwork variant={BadgeVariant.Network} src={uri} name="Ethereum" />;
+```
+
+#### After (Design System)
+
+```tsx
+import { BadgeNetwork } from '@metamask/design-system-react-native';
+
+<BadgeNetwork src={uri} name="Ethereum" />;
+```
+
+### BadgeStatus Component
+
+Legacy **BadgeStatus** (`Badge/variants/BadgeStatus`) used `BadgeStatusState` (`Active` / `Inactive`), optional `state`, and optional `borderColor`. MMDS **BadgeStatus** uses a richer **`status`** union (`BadgeStatusStatus`), optional **`hasBorder`** (default `true`), and **`size`**.
+
+#### Status mapping
+
+| Legacy `BadgeStatusState` | MMDS `BadgeStatusStatus`                    | Notes                                                  |
+| ------------------------- | ------------------------------------------- | ------------------------------------------------------ |
+| `Active` (`'Active'`)     | `BadgeStatusStatus.Active` (`'active'`)     | String value and semantics differ — update call sites. |
+| `Inactive` (`'Inactive'`) | `BadgeStatusStatus.Inactive` (`'inactive'`) |                                                        |
+
+#### New / different statuses in MMDS
+
+MMDS adds `Disconnected`, `New`, and `Attention` — use these for parity with design specs instead of overloading `Inactive`.
+
+#### Removed / changed props
+
+| Legacy mobile              | MMDS                                                                                                                            |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `state?: BadgeStatusState` | **`status`** (required): `BadgeStatusStatus`                                                                                    |
+| `borderColor`              | Not on shared API; use **`hasBorder`** (boolean) or stylers (`twClassName` / `className` on web) as supported by the component. |
+
+#### Before (Mobile)
+
+```tsx
+import BadgeStatus from '../../../component-library/components/Badges/Badge/variants/BadgeStatus';
+import { BadgeStatusState } from '../../../component-library/components/Badges/Badge/variants/BadgeStatus/BadgeStatus.types';
+
+<BadgeStatus variant={BadgeVariant.Status} state={BadgeStatusState.Active} />;
+```
+
+#### After (Design System)
+
+```tsx
+import {
+  BadgeStatus,
+  BadgeStatusStatus,
+} from '@metamask/design-system-react-native';
+
+<BadgeStatus status={BadgeStatusStatus.Active} />;
+```
+
+### BadgeWrapper Component
+
+Legacy **BadgeWrapper** lives at `app/component-library/components/Badges/BadgeWrapper`. MMDS aligns names with `@metamask/design-system-shared` but changes prop names, splits preset vs custom position, and renames the badge slot.
+
+#### Enum and value mapping
+
+| Legacy `BadgeAnchorElementShape` | MMDS `BadgeWrapperPositionAnchorShape` |
+| -------------------------------- | -------------------------------------- |
+| `Rectangular` (`'Rectangular'`)  | `Rectangular` (`'rectangular'`)        |
+| `Circular` (`'Circular'`)        | `Circular` (`'circular'`)              |
+
+| Legacy `BadgePosition` | MMDS `BadgeWrapperPosition`                     |
+| ---------------------- | ----------------------------------------------- |
+| `TopRight`             | `BadgeWrapperPosition.TopRight` (`'top-right'`) |
+| `BottomRight`          | `BadgeWrapperPosition.BottomRight`              |
+| `BottomLeft`           | `BadgeWrapperPosition.BottomLeft`               |
+| `TopLeft`              | `BadgeWrapperPosition.TopLeft`                  |
+
+#### Prop renames
+
+| Legacy mobile                                                                 | MMDS                   |
+| ----------------------------------------------------------------------------- | ---------------------- |
+| `anchorElementShape`                                                          | `positionAnchorShape`  |
+| `badgeElement`                                                                | `badge` (**required**) |
+| `badgePosition` when it is a **preset enum**                                  | `position`             |
+| `badgePosition` when it is a **custom object** `{ top, right, bottom, left }` | `customPosition`       |
+
+#### Default changes
+
+| Behavior        | Legacy default                     | MMDS default                                                                     |
+| --------------- | ---------------------------------- | -------------------------------------------------------------------------------- |
+| Anchor shape    | `BadgeAnchorElementShape.Circular` | `BadgeWrapperPositionAnchorShape.Circular` (aligned)                             |
+| Preset position | `BadgePosition.TopRight`           | **`BadgeWrapperPosition.BottomRight`** — verify visuals after migrating.         |
+| Offset tuning   | Encoded in legacy layout           | Use **`positionXOffset`** / **`positionYOffset`** (default `0`) with `position`. |
+
+#### Before (Mobile)
+
+```tsx
+import { View } from 'react-native';
+import BadgeWrapper from '../../../component-library/components/Badges/BadgeWrapper';
+import {
+  BadgeAnchorElementShape,
+  BadgePosition,
+} from '../../../component-library/components/Badges/BadgeWrapper/BadgeWrapper.types';
+
+<BadgeWrapper
+  anchorElementShape={BadgeAnchorElementShape.Circular}
+  badgePosition={BadgePosition.TopRight}
+  badgeElement={<BadgeCount count={3} />}
+>
+  <View />
+</BadgeWrapper>;
+```
+
+#### After (Design System)
+
+```tsx
+import { View } from 'react-native';
+import {
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+  BadgeCount,
+} from '@metamask/design-system-react-native';
+
+<BadgeWrapper
+  positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+  position={BadgeWrapperPosition.TopRight}
+  badge={<BadgeCount count={3} />}
+>
+  <View />
+</BadgeWrapper>;
+```
+
+### Deprecated aggregate `Badge` component
+
+The mobile **Badge** router (`app/component-library/components/Badges/Badge/Badge.tsx`) dispatches on **`variant`**:
+
+- `BadgeVariant.Network` → **BadgeNetwork**
+- `BadgeVariant.Status` → **BadgeStatus**
+- `BadgeVariant.NotificationsKinds` → **BadgeNotifications** (icon notification chip)
+
+MMDS does **not** provide a single drop-in replacement: import **`BadgeNetwork`**, **`BadgeStatus`**, **`BadgeIcon`**, or **`BadgeCount`** directly and pass the matching props for each use case (see sections above). The composite `Badge` is deprecated in favor of those exports from `@metamask/design-system-react-native`.
 
 ### Text Component
 
@@ -3636,13 +3999,13 @@ The mobile component uses a **default export**; the design system uses a **named
 
 ##### VerticalAlignment Enum Renamed
 
-The enum is renamed from `VerticalAlignment` to `ListItemVerticalAlignment` and converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
+The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` from `@metamask/design-system-shared`. When using `ListItem`, import `ListItemVerticalAlignment` from `@metamask/design-system-react-native` (a runtime alias for the same const object). `ContentVerticalAlignment` is also exported from the package root for `Content` call sites. It is converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
 
-| Mobile Value                            | Design System Value                             | Notes          |
-| --------------------------------------- | ----------------------------------------------- | -------------- |
-| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | casing changed |
-| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | casing changed |
-| `VerticalAlignment.Bottom` (`'Bottom'`) | `ListItemVerticalAlignment.Bottom` (`'bottom'`) | casing changed |
+| Mobile Value                            | Design System Value                             | Notes                      |
+| --------------------------------------- | ----------------------------------------------- | -------------------------- |
+| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | casing changed             |
+| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | casing changed             |
+| `VerticalAlignment.Bottom` (`'Bottom'`) | —                                               | removed; use `Top` instead |
 
 ##### Accessibility Attributes on Root
 
@@ -3830,7 +4193,7 @@ The following mobile `component-library` sub-components build on `ListItem` but 
 #### API Differences
 
 - MMDS `ListItem` adds `twClassName` for Tailwind-based style overrides.
-- The mobile `VerticalAlignment` enum is renamed to `ListItemVerticalAlignment` with lowercase values (`'top'`/`'center'`/`'bottom'` instead of `'Top'`/`'Center'`/`'Bottom'`).
+- The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` with lowercase values (`'top'`/`'center'` instead of `'Top'`/`'Center'`). `VerticalAlignment.Bottom` has no equivalent.
 - The mobile version sets `accessible accessibilityRole="none"` on the root element; MMDS does not.
 - The mobile version uses a default export; MMDS uses a named export.
 - `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.

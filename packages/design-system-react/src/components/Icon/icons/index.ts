@@ -265,6 +265,7 @@ import Translate from './Translate';
 import Trash from './Trash';
 import TrendDown from './TrendDown';
 import TrendUp from './TrendUp';
+import Trophy from './Trophy';
 import Undo from './Undo';
 import Unfold from './Unfold';
 import UnlockedFilled from './UnlockedFilled';
@@ -557,6 +558,7 @@ export const Icons = {
   Trash,
   TrendDown,
   TrendUp,
+  Trophy,
   Undo,
   Unfold,
   UnlockedFilled,

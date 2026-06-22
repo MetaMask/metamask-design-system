@@ -39,7 +39,7 @@ Available severities:
 - `AvatarIconSeverity.Neutral`
 - `AvatarIconSeverity.Info`
 - `AvatarIconSeverity.Success`
-- `AvatarIconSeverity.Error`
+- `AvatarIconSeverity.Danger`
 - `AvatarIconSeverity.Warning`
 
 ```tsx

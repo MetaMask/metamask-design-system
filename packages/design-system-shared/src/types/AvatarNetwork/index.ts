@@ -1,1 +1,4 @@
-export { type AvatarNetworkPropsShared } from './AvatarNetwork.types';
+export {
+  AvatarNetworkSize,
+  type AvatarNetworkPropsShared,
+} from './AvatarNetwork.types';

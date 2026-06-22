@@ -2,12 +2,12 @@ import {
   BoxAlignItems,
   BoxFlexDirection,
   FontWeight,
+  IconSize,
   TagSeverity,
   TextVariant,
 } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { IconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Box } from '../Box';
 import { Icon } from '../Icon';
@@ -84,7 +84,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
     );
 
     const mergedClassName = twMerge(
-      'inline-flex self-start rounded-md',
+      'inline-flex gap-0.5 self-start rounded-md',
       finalStartIconName ? 'pl-1' : 'pl-1.5',
       finalEndIconName ? 'pr-1' : 'pr-1.5',
       className,
@@ -95,7 +95,6 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
         ref={ref}
         flexDirection={BoxFlexDirection.Row}
         alignItems={BoxAlignItems.Center}
-        gap={1}
         backgroundColor={backgroundColor}
         className={mergedClassName}
         style={style}

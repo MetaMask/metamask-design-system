@@ -1,7 +1,6 @@
-import { BannerAlertSeverity } from '@metamask/design-system-shared';
+import { BannerAlertSeverity, IconSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { IconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { BannerBase } from '../BannerBase';
 import { Icon } from '../Icon';

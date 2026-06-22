@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.27.0]
+
+### Added
+
+- Added `Trophy` to `IconName` ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
+
+## [0.26.0]
+
+### Added
+
+- Added `Tag` component for categorization and filtering labels ([#1211](https://github.com/MetaMask/metamask-design-system/pull/1211))
+- Added `Toast` component with `Toaster` provider and imperative `toast()` API for non-blocking notifications ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+
+### Changed
+
+- **BREAKING:** `TextButton` API aligned with React Native — `size`/`TextButtonSize` replaced by `variant`/`TextVariant`; `isInverse`, `isDisabled`, `textProps`, start/end icons, and accessory slots removed; `asChild` added for semantic link composition ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
+  - See [Migration Guide](./MIGRATION.md#from-version-0250-to-0260)
+- **BREAKING:** `AvatarIconSeverity.Error` renamed to `AvatarIconSeverity.Danger`; severity vocabulary standardized to use `Danger` for destructive/critical states and `Neutral` for default states ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+  - See [Migration Guide](./MIGRATION.md#from-version-0250-to-0260)
+
+### Fixed
+
+- Fixed `Toast` to support `toast()` calls made before `Toaster` mounts ([#1217](https://github.com/MetaMask/metamask-design-system/pull/1217))
+
 ## [0.25.0]
 
 ### Added
@@ -347,7 +371,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.25.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.0...HEAD
+[0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.26.0...@metamask/design-system-react@0.27.0
+[0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.25.0...@metamask/design-system-react@0.26.0
 [0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.24.0...@metamask/design-system-react@0.25.0
 [0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.23.1...@metamask/design-system-react@0.24.0
 [0.23.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.23.0...@metamask/design-system-react@0.23.1
