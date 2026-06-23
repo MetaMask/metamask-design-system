@@ -22,11 +22,6 @@ const meta: Meta<typeof TextButton> = {
       description:
         'Required prop for the content to be rendered within the TextButton',
     },
-    className: {
-      control: 'text',
-      description:
-        'Optional prop for additional CSS classes to be applied to the TextButton component',
-    },
     isInverse: {
       control: 'boolean',
       description:
