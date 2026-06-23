@@ -34,7 +34,7 @@ export const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
       style={[
         tw.style(
           isHorizontal ? 'flex-row' : 'flex-col',
-          'px-4 pb-4',
+          'px-4 py-0',
           twClassName,
         ),
         style,
