@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.27.x to 0.28.0](#from-version-027x-to-0280)
   - [From version 0.25.0 to 0.26.0](#from-version-0250-to-0260)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
@@ -3580,9 +3581,45 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
+### From version 0.27.x to 0.28.0
+
+#### TextButton: `variant`/`TextVariant` reverted — `size`/`TextButtonSize` and full ButtonBase API restored
+
+The 0.26.0 `TextButton` rewrite has been reverted due to the migration scope affecting extension consumers. The pre-0.26.0 `ButtonBase`-backed API is restored.
+
+**What changed:**
+
+- `size` and `TextButtonSize` are restored. Use `TextButtonSize` values instead of `TextVariant`.
+- `isInverse` and `isDisabled` props are restored.
+- `textProps`, start icon, end icon, and accessory slot props are restored.
+- `variant`/`TextVariant` are removed — the `variant` prop added in 0.26.0 no longer exists.
+
+**Migration:**
+
+```tsx
+// Before (0.26.0 / 0.27.x)
+import { TextButton } from '@metamask/design-system-react';
+import { TextVariant } from '@metamask/design-system-shared';
+
+<TextButton variant={TextVariant.BodySm}>Learn more</TextButton>;
+
+// After (0.28.0)
+import { TextButton, TextButtonSize } from '@metamask/design-system-react';
+
+<TextButton size={TextButtonSize.BodySm}>Learn more</TextButton>;
+```
+
+**Impact:**
+
+- Any call site using `variant` must switch back to `size` with `TextButtonSize`.
+- `TextButtonSize` is re-exported from `@metamask/design-system-react`.
+- `TextButtonPropsShared` is no longer exported from `@metamask/design-system-shared`.
+
 ### From version 0.25.0 to 0.26.0
 
 #### TextButton: `size`/`TextButtonSize` replaced by `variant`/`TextVariant`
+
+> **Note:** This change was reverted in 0.28.0. If you are on 0.28.0 or later, use `size`/`TextButtonSize` and ignore the migration below. See [From version 0.27.x to 0.28.0](#from-version-027x-to-0280).
 
 `TextButton` has been rewritten as a text-only control backed by `Text`, aligning its API with the React Native `TextButton`. The old `ButtonBase`-backed implementation and several props are removed.
 
