@@ -49,10 +49,10 @@ figma.connect(
     }) => (
       <TitleHub
         title={title}
-        amount={amount || undefined}
+        amount={amount}
         titleEndAccessory={titleEndAccessory}
         amountEndAccessory={amountEndAccessory}
-        bottomLabel={bottomLabel || undefined}
+        bottomLabel={bottomLabel}
         bottomLabelEndAccessory={bottomLabelEndAccessory}
         bottomAccessory={bottomAccessory}
       />
