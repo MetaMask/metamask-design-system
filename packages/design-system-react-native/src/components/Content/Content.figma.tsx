@@ -49,10 +49,13 @@ figma.connect(
         true: figma.string('subvalue'),
         false: undefined,
       }),
-      titleStartAccessory: figma.boolean('show titleStartAccessory (Figma only)', {
-        true: figma.instance('titleStartAccessory'),
-        false: undefined,
-      }),
+      titleStartAccessory: figma.boolean(
+        'show titleStartAccessory (Figma only)',
+        {
+          true: figma.instance('titleStartAccessory'),
+          false: undefined,
+        },
+      ),
       titleEndAccessory: figma.boolean('show titleEndAccessory (Figma only)', {
         true: figma.instance('titleEndAccessory'),
         false: undefined,
@@ -71,10 +74,13 @@ figma.connect(
           false: undefined,
         },
       ),
-      valueStartAccessory: figma.boolean('show valueStartAccessory (Figma only)', {
-        true: figma.instance('valueStartAccessory'),
-        false: undefined,
-      }),
+      valueStartAccessory: figma.boolean(
+        'show valueStartAccessory (Figma only)',
+        {
+          true: figma.instance('valueStartAccessory'),
+          false: undefined,
+        },
+      ),
       valueEndAccessory: figma.boolean('show valueEndAccessory (Figma only)', {
         true: figma.instance('valueEndAccessory'),
         false: undefined,
@@ -86,10 +92,13 @@ figma.connect(
           false: undefined,
         },
       ),
-      subvalueEndAccessory: figma.boolean('show subvalueEndAccessory (Figma only)', {
-        true: figma.instance('subvalueEndAccessory'),
-        false: undefined,
-      }),
+      subvalueEndAccessory: figma.boolean(
+        'show subvalueEndAccessory (Figma only)',
+        {
+          true: figma.instance('subvalueEndAccessory'),
+          false: undefined,
+        },
+      ),
     },
     example: ({
       verticalAlignment,
