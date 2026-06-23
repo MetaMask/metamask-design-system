@@ -3601,12 +3601,12 @@ The 0.26.0 `TextButton` rewrite has been reverted due to the migration scope aff
 import { TextButton } from '@metamask/design-system-react';
 import { TextVariant } from '@metamask/design-system-shared';
 
-<TextButton variant={TextVariant.BodySm}>Learn more</TextButton>
+<TextButton variant={TextVariant.BodySm}>Learn more</TextButton>;
 
 // After (0.28.0)
 import { TextButton, TextButtonSize } from '@metamask/design-system-react';
 
-<TextButton size={TextButtonSize.BodySm}>Learn more</TextButton>
+<TextButton size={TextButtonSize.BodySm}>Learn more</TextButton>;
 ```
 
 **Impact:**
