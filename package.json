@@ -1,6 +1,6 @@
 {
   "name": "@metamask/metamask-design-system",
-  "version": "45.0.0",
+  "version": "47.0.0",
   "private": true,
   "description": "The MetaMask Design System monorepo",
   "repository": {
@@ -82,7 +82,7 @@
     "@babel/core": "^7.25.2",
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
-    "@figma/code-connect": "^1.0.0",
+    "@figma/code-connect": "^1.4.8",
     "@lavamoat/allow-scripts": "^3.2.1",
     "@metamask/create-release-branch": "^4.2.1",
     "@metamask/eslint-config": "^15.0.0",
