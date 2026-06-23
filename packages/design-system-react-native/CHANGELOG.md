@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.30.3]
+
 ### Uncategorized
 
 - revert: Align React TextButton with React Native API (#1224) ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
@@ -533,7 +535,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.2...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.3...HEAD
+[0.30.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.2...@metamask/design-system-react-native@0.30.3
 [0.30.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.1...@metamask/design-system-react-native@0.30.2
 [0.30.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.0...@metamask/design-system-react-native@0.30.1
 [0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.29.0...@metamask/design-system-react-native@0.30.0
