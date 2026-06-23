@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.24.0]
 
+### Changed
+
+- **BREAKING:** Removed `TextButtonPropsShared` export; cross-platform `TextButton` type alignment is deferred pending design coordination ([#1259](https://github.com/MetaMask/metamask-design-system/pull/1259))
+
 ## [0.23.0]
 
 ### Added

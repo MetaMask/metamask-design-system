@@ -9,10 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.30.3]
 
-### Uncategorized
+### Changed
 
-- revert: Align React TextButton with React Native API (#1224) ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
-- chore: Upgrade Code Connect to 1.4.8 to enable support for slot archi… ([#1260](https://github.com/MetaMask/metamask-design-system/pull/1260))
+- `TextButton` type definition reverted to standalone shape; no longer extends `TextButtonPropsShared` from `@metamask/design-system-shared` ([#1259](https://github.com/MetaMask/metamask-design-system/pull/1259))
 
 ## [0.30.2]
 
