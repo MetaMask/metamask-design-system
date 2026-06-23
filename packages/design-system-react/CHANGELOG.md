@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: Upgrade Code Connect to 1.4.8 to enable support for slot archi… ([#1260](https://github.com/MetaMask/metamask-design-system/pull/1260))
+
 ## [0.27.1]
 
 ### Fixed
