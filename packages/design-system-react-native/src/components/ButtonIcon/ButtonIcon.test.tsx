@@ -34,6 +34,56 @@ describe('ButtonIcon', () => {
     expect(icon.props.name).toStrictEqual(IconName.Close);
   });
 
+  it('renders with different sizes', () => {
+    const { result } = renderHook(() => useTailwind());
+    const tw = result.current;
+
+    const { getByTestId, rerender } = render(
+      <ButtonIcon
+        iconName={IconName.Close}
+        size={ButtonIconSize.Xs}
+        testID="button-icon"
+      />,
+    );
+    let btn = getByTestId('button-icon');
+    let expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Xs],
+      'rounded-lg bg-transparent opacity-100',
+    );
+    expect(btn.props.style[0]).toStrictEqual(expected);
+
+    rerender(
+      <ButtonIcon
+        iconName={IconName.Close}
+        size={ButtonIconSize.Sm}
+        testID="button-icon"
+      />,
+    );
+    btn = getByTestId('button-icon');
+    expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Sm],
+      'rounded-lg bg-transparent opacity-100',
+    );
+    expect(btn.props.style[0]).toStrictEqual(expected);
+
+    rerender(
+      <ButtonIcon
+        iconName={IconName.Close}
+        size={ButtonIconSize.Lg}
+        testID="button-icon"
+      />,
+    );
+    btn = getByTestId('button-icon');
+    expected = tw.style(
+      'items-center justify-center',
+      TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Lg],
+      'rounded-lg bg-transparent opacity-100',
+    );
+    expect(btn.props.style[0]).toStrictEqual(expected);
+  });
+
   it('applies isDisabled state', () => {
     const { result } = renderHook(() => useTailwind());
     const tw = result.current;
