@@ -32,7 +32,7 @@ export const MainActionButton = ({
       onPressOut={!isDisabled ? onPressOut : undefined}
       style={({ pressed }) => {
         const baseStyle = tw.style(
-          'items-center justify-center rounded-xl px-1 py-4 min-w-[68px]',
+          'items-center justify-center rounded-xl px-1 py-3 min-w-[68px]',
           pressed && !isDisabled ? 'bg-muted-pressed' : 'bg-muted',
           isDisabled ? 'opacity-50' : 'opacity-100',
           twClassName,
