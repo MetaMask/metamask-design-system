@@ -26,7 +26,6 @@ figma.connect(
         true: figma.children('bottomLabelEndAccessory'),
         false: undefined,
       }),
-      bottomAccessory: figma.slot('BottomLabelRow'),
     },
     example: ({
       title,
@@ -34,7 +33,6 @@ figma.connect(
       titleEndAccessory,
       bottomLabel,
       bottomLabelEndAccessory,
-      bottomAccessory,
     }) => (
       <TitleStandard
         title={title}
@@ -42,7 +40,6 @@ figma.connect(
         titleEndAccessory={titleEndAccessory}
         bottomLabel={bottomLabel}
         bottomLabelEndAccessory={bottomLabelEndAccessory}
-        bottomAccessory={bottomAccessory}
       />
     ),
   },
