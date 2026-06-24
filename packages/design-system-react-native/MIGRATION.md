@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.30.0 to 0.31.0](#from-version-0300-to-0310)
 - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
 - [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
 - [From version 0.27.0 to 0.28.0](#from-version-0270-to-0280)
@@ -61,6 +62,72 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.30.0 to 0.31.0
+
+<a id="titlealert-title-accessories-removed"></a>
+
+#### `TitleAlert`: title row accessories removed
+
+`titleStartAccessory` and `titleEndAccessory` are removed from **`TitleAlert`** and **`TitleAlertPropsShared`** to align with the Figma component, which does not expose inline title accessories.
+
+**What changed:**
+
+| Before (0.30.0)         | After (0.31.0)                          |
+| ----------------------- | --------------------------------------- |
+| `titleStartAccessory`   | removed — compose accessories in `title` |
+| `titleEndAccessory`     | removed — compose accessories in `title` |
+
+**Migration:**
+
+Pass a custom **`title`** `ReactNode` when you need icons or other inline content beside the heading. For string titles with default typography, use **`Text`** inside a **`BoxRow`** (or your own layout).
+
+```tsx
+// Before (0.30.0)
+import {
+  BoxJustifyContent,
+  BoxRow,
+  Icon,
+  IconAlertSeverity,
+  IconColor,
+  IconName,
+  IconSize,
+  Text,
+  TextColor,
+  TextVariant,
+  TitleAlert,
+} from '@metamask/design-system-react-native';
+
+<TitleAlert
+  severity={IconAlertSeverity.Warning}
+  title="High price impact"
+  titleStartAccessory={
+    <Icon name={IconName.Ai} size={IconSize.Sm} color={IconColor.IconAlternative} />
+  }
+/>;
+
+// After (0.31.0)
+<TitleAlert
+  severity={IconAlertSeverity.Warning}
+  title={
+    <BoxRow justifyContent={BoxJustifyContent.Center} gap={1}>
+      <Icon name={IconName.Ai} size={IconSize.Sm} color={IconColor.IconAlternative} />
+      <Text variant={TextVariant.HeadingLg} color={TextColor.TextDefault}>
+        High price impact
+      </Text>
+    </BoxRow>
+  }
+/>;
+```
+
+For an end accessory, place it after the title text in the same **`BoxRow`** (or use **`endAccessory`** on **`BoxRow`**).
+
+If you import **`TitleAlertPropsShared`** from **`@metamask/design-system-shared`**, remove the same props from your types. See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#titlealert-title-accessories-removed).
+
+**Impact:**
+
+- Any call site passing **`titleStartAccessory`** or **`titleEndAccessory`** on **`TitleAlert`** must be updated.
+- Custom **`title`** nodes do not receive default **`HeadingLg`** / **`TextDefault`** styling from **`titleProps`** unless you apply **`Text`** props yourself.
 
 ### From version 0.29.0 to 0.30.0
 

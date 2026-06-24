@@ -5,11 +5,35 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
+  - [From version 0.15.0 to 0.16.0](#from-version-0150-to-0160)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
+
+### From version 0.15.0 to 0.16.0
+
+<a id="titlealert-title-accessories-removed"></a>
+
+#### `TitleAlertPropsShared`: title row accessories removed
+
+**`titleStartAccessory`** and **`titleEndAccessory`** are removed from **`TitleAlertPropsShared`** to match the React Native **`TitleAlert`** API and Figma component.
+
+**What changed:**
+
+| Before (0.15.0)       | After (0.16.0)                          |
+| --------------------- | --------------------------------------- |
+| `titleStartAccessory` | removed — compose accessories in `title` |
+| `titleEndAccessory`   | removed — compose accessories in `title` |
+
+**Migration:**
+
+Remove the props from shared type consumers and compose inline accessories in the **`title`** `ReactNode` at the platform layer. See the [design-system-react-native migration guide](../design-system-react-native/MIGRATION.md#titlealert-title-accessories-removed) for a before/after example.
+
+**Impact:**
+
+- Any type or wrapper that extends **`TitleAlertPropsShared`** and references the removed props must be updated.
 
 ### From version 0.22.0 to 0.23.0
 
