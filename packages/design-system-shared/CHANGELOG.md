@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.0]
+
+### Changed
+
+- **BREAKING:** Removed `TextButtonPropsShared` export; cross-platform `TextButton` type alignment is deferred pending design coordination ([#1259](https://github.com/MetaMask/metamask-design-system/pull/1259))
+
 ## [0.23.0]
 
 ### Added
@@ -249,7 +255,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.23.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.24.0...HEAD
+[0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.23.0...@metamask/design-system-shared@0.24.0
 [0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.22.0...@metamask/design-system-shared@0.23.0
 [0.22.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.21.0...@metamask/design-system-shared@0.22.0
 [0.21.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.20.0...@metamask/design-system-shared@0.21.0
