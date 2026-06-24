@@ -1,7 +1,6 @@
 import {
   BannerAlertSeverity,
   BoxBackgroundColor,
-  BoxBorderColor,
   IconColor,
   IconName,
 } from '@metamask/design-system-shared';
@@ -34,14 +33,4 @@ export const MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR: Record<
   success: BoxBackgroundColor.SuccessMuted,
   warning: BoxBackgroundColor.WarningMuted,
   danger: BoxBackgroundColor.ErrorMuted,
-};
-
-export const MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR: Record<
-  (typeof BannerAlertSeverity)[keyof typeof BannerAlertSeverity],
-  BoxBorderColor
-> = {
-  info: BoxBorderColor.PrimaryDefault,
-  success: BoxBorderColor.SuccessDefault,
-  warning: BoxBorderColor.WarningDefault,
-  danger: BoxBorderColor.ErrorDefault,
 };
