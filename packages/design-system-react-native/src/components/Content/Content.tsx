@@ -1,4 +1,5 @@
 import {
+  BoxAlignItems,
   BoxFlexDirection,
   ContentVerticalAlignment,
   FontWeight,
@@ -95,11 +96,11 @@ export const Content: React.FC<ContentProps> = ({
       {/* Value and subvalue Column */}
       {value || subvalue ? (
         <BoxColumn
+          alignItems={BoxAlignItems.End}
           twClassName="min-w-0"
           bottomAccessory={
             subvalue ? (
               <BoxRow
-                twClassName="w-full"
                 startAccessory={subvalueStartAccessory}
                 endAccessory={subvalueEndAccessory}
                 gap={1}
@@ -120,7 +121,6 @@ export const Content: React.FC<ContentProps> = ({
         >
           {value ? (
             <BoxRow
-              twClassName="w-full"
               startAccessory={valueStartAccessory}
               endAccessory={valueEndAccessory}
               gap={1}
