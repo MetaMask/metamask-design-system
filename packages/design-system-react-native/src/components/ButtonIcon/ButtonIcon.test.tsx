@@ -28,7 +28,7 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn).toHaveStyle(expected);
 
     const icon = getByTestId('icon');
     expect(icon.props.name).toStrictEqual(IconName.Close);
@@ -51,7 +51,7 @@ describe('ButtonIcon', () => {
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Xs],
       'rounded-lg bg-transparent opacity-100',
     );
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn).toHaveStyle(expected);
 
     rerender(
       <ButtonIcon
@@ -66,7 +66,7 @@ describe('ButtonIcon', () => {
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Sm],
       'rounded-lg bg-transparent opacity-100',
     );
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn).toHaveStyle(expected);
 
     rerender(
       <ButtonIcon
@@ -81,7 +81,7 @@ describe('ButtonIcon', () => {
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Lg],
       'rounded-lg bg-transparent opacity-100',
     );
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn).toHaveStyle(expected);
   });
 
   it('applies isDisabled state', () => {
@@ -102,8 +102,8 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
-    expect(btn.props.accessibilityState.disabled).toBe(true);
+    expect(btn).toHaveStyle(expected);
+    expect(btn).toBeDisabled();
   });
 
   it('applies Floating variant', () => {
@@ -123,7 +123,7 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn).toHaveStyle(expected);
   });
 
   it('applies Filled variant', () => {
@@ -143,7 +143,7 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn).toHaveStyle(expected);
   });
 
   it('applies Filled variant pressed state', () => {
@@ -164,7 +164,7 @@ describe('ButtonIcon', () => {
     );
     const btn = getByTestId('button-icon');
     fireEvent(btn, 'pressIn');
-    expect(btn.props.style[0]).toStrictEqual(expected);
+    expect(btn).toHaveStyle(expected);
   });
 
   it('forwards style and twClassName', () => {
@@ -187,8 +187,7 @@ describe('ButtonIcon', () => {
       />,
     );
     const btn = getByTestId('button-icon');
-    expect(btn.props.style[0]).toStrictEqual(expected);
-    expect(btn.props.style[1]).toStrictEqual({ margin: 5 });
+    expect(btn).toHaveStyle([expected, { margin: 5 }]);
   });
 
   it('calls onPressIn and onPressOut handlers', () => {
