@@ -4,6 +4,7 @@ import {
   BoxFlexDirection,
   ButtonIconSize,
   ButtonSize,
+  ButtonVariant,
   FontWeight,
   IconName,
   mergeTwClassName,
@@ -105,6 +106,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
               size={ButtonSize.Md}
               onPress={actionButtonOnPress}
               {...resolvedActionButtonProps}
+              variant={ButtonVariant.Secondary}
             >
               {actionButtonLabel}
             </Button>
