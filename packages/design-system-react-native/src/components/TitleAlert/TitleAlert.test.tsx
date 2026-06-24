@@ -142,32 +142,6 @@ describe('TitleAlert', () => {
   });
 
   describe('when title is provided', () => {
-    it('displays titleStartAccessory beside string title', () => {
-      const { getByText } = render(
-        <TitleAlert
-          severity={IconAlertSeverity.Warning}
-          title="High price impact"
-          titleStartAccessory={<Text>Start</Text>}
-        />,
-      );
-
-      expect(getByText('High price impact')).toBeOnTheScreen();
-      expect(getByText('Start')).toBeOnTheScreen();
-    });
-
-    it('displays titleEndAccessory beside string title', () => {
-      const { getByText } = render(
-        <TitleAlert
-          severity={IconAlertSeverity.Warning}
-          title="High price impact"
-          titleEndAccessory={<Text>End</Text>}
-        />,
-      );
-
-      expect(getByText('High price impact')).toBeOnTheScreen();
-      expect(getByText('End')).toBeOnTheScreen();
-    });
-
     it('renders React node as title', () => {
       const { getByTestId } = render(
         <TitleAlert
@@ -237,43 +211,15 @@ describe('TitleAlert', () => {
     });
 
     it('omits title row when title is an empty string', () => {
-      const { queryByText } = render(
+      const { queryByTestId } = render(
         <TitleAlert
           severity={IconAlertSeverity.Info}
           title=""
-          titleStartAccessory={<Text>Orphan start</Text>}
-          titleEndAccessory={<Text>Orphan end</Text>}
+          titleProps={{ testID: TITLE_ROW_TEST_ID }}
         />,
       );
 
-      expect(queryByText('Orphan start')).not.toBeOnTheScreen();
-      expect(queryByText('Orphan end')).not.toBeOnTheScreen();
-    });
-
-    it('omits title row when title is false and only accessories are set', () => {
-      const { queryByText } = render(
-        <TitleAlert
-          severity={IconAlertSeverity.Info}
-          title={false}
-          titleEndAccessory={<Text>Orphan accessory</Text>}
-        />,
-      );
-
-      expect(queryByText('Orphan accessory')).not.toBeOnTheScreen();
-    });
-  });
-
-  describe('when titleEndAccessory is false', () => {
-    it('renders string title in title row', () => {
-      const { getByText } = render(
-        <TitleAlert
-          severity={IconAlertSeverity.Warning}
-          title="Hi"
-          titleEndAccessory={false}
-        />,
-      );
-
-      expect(getByText('Hi')).toBeOnTheScreen();
+      expect(queryByTestId(TITLE_ROW_TEST_ID)).not.toBeOnTheScreen();
     });
   });
 
