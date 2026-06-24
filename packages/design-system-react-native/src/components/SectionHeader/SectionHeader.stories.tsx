@@ -1,4 +1,5 @@
 import {
+  FontWeight,
   IconColor,
   IconName,
   IconSize,
@@ -115,7 +116,11 @@ export const TitleAccessory: Story = {
 export const Children: Story = {
   render: () => (
     <SectionHeader title="Tokens">
-      <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
+      <Text 
+        variant={TextVariant.BodySm} 
+        color={TextColor.TextAlternative}
+        fontWeight={FontWeight.Medium}
+      >
         12 assets
       </Text>
     </SectionHeader>
