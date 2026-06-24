@@ -28,14 +28,24 @@ describe('ButtonIcon', () => {
     const { rerender } = render(
       <ButtonIcon
         iconName={IconName.Close}
+        size={ButtonIconSize.Xs}
+        ariaLabel="Close extra small"
+        iconProps={{ 'data-testid': 'button-icon' }}
+      />,
+    );
+    expect(screen.getByRole('button')).toHaveClass('h-5', 'w-5');
+    const icon = screen.getByTestId('button-icon');
+    expect(icon).toHaveClass('text-inherit');
+
+    rerender(
+      <ButtonIcon
+        iconName={IconName.Close}
         size={ButtonIconSize.Sm}
         ariaLabel="Close small"
         iconProps={{ 'data-testid': 'button-icon' }}
       />,
     );
     expect(screen.getByRole('button')).toHaveClass('h-6', 'w-6');
-    const icon = screen.getByTestId('button-icon');
-    expect(icon).toHaveClass('text-inherit');
 
     rerender(
       <ButtonIcon

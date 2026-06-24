@@ -148,7 +148,7 @@ export type { TextProps } from './Text';
 export { TextArea, TextAreaResize } from './TextArea';
 export type { TextAreaProps } from './TextArea';
 
-export { TextButton } from './TextButton';
+export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
 export { TextField, TextFieldSize, TextFieldType } from './TextField';

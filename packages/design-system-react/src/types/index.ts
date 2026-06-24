@@ -32,3 +32,13 @@ export const TextTransform = {
   Normal: 'normal-case',
 } as const;
 export type TextTransform = (typeof TextTransform)[keyof typeof TextTransform];
+
+/**
+ * TextButton - size
+ */
+export enum TextButtonSize {
+  BodyLg = 'body-lg',
+  BodyMd = 'body-md',
+  BodySm = 'body-sm',
+  BodyXs = 'body-xs',
+}

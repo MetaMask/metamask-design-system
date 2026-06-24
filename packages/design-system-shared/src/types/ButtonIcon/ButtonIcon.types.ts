@@ -6,6 +6,10 @@ import type { IconName } from '../Icon';
  */
 export const ButtonIconSize = {
   /**
+   * Represents an extra small button size (20px).
+   */
+  Xs: 'xs',
+  /**
    * Represents a small button size (24px).
    */
   Sm: 'sm',
