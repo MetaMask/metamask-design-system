@@ -68,6 +68,11 @@ export const Size: Story = {
     <div className="flex gap-2">
       <ButtonIcon
         iconName={IconName.Close}
+        size={ButtonIconSize.Xs}
+        ariaLabel="Close extra small"
+      />
+      <ButtonIcon
+        iconName={IconName.Close}
         size={ButtonIconSize.Sm}
         ariaLabel="Close small"
       />
