@@ -15,6 +15,7 @@ import { SectionHeader } from './SectionHeader';
 const ROOT_TEST_ID = 'section-header-root';
 const TITLE_ROW_TEST_ID = 'section-header-title-row';
 const TITLE_TEXT_TEST_ID = 'section-header-title-text';
+const CHILDREN_TEST_ID = 'section-header-children';
 
 describe('SectionHeader', () => {
   let tw: ReturnType<typeof useTailwind>;
@@ -131,6 +132,43 @@ describe('SectionHeader', () => {
       );
 
       expect(getByTestId('section-header-title-acc')).toBeOnTheScreen();
+    });
+
+    it('renders children below the title row', () => {
+      const { getByText, getByTestId } = render(
+        <SectionHeader title="Section">
+          <Text testID={CHILDREN_TEST_ID}>Subtitle</Text>
+        </SectionHeader>,
+      );
+
+      expect(getByText('Section')).toBeOnTheScreen();
+      expect(getByTestId(CHILDREN_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('renders children when title is an empty string', () => {
+      const { getByTestId } = render(
+        <SectionHeader title="">
+          <Text testID={CHILDREN_TEST_ID}>Subtitle only</Text>
+        </SectionHeader>,
+      );
+
+      expect(getByTestId(CHILDREN_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('renders children between start and end accessories', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          startAccessory={<Text testID="section-header-start-acc">S</Text>}
+          endAccessory={<Text testID="section-header-end-acc">E</Text>}
+        >
+          <Text testID={CHILDREN_TEST_ID}>Subtitle</Text>
+        </SectionHeader>,
+      );
+
+      expect(getByTestId('section-header-start-acc')).toBeOnTheScreen();
+      expect(getByTestId(CHILDREN_TEST_ID)).toBeOnTheScreen();
+      expect(getByTestId('section-header-end-acc')).toBeOnTheScreen();
     });
 
     describe('when title is an empty string', () => {

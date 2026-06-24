@@ -19,6 +19,11 @@ export type SectionHeaderPropsShared = {
    */
   titleAccessory?: ReactNode;
   /**
+   * Optional content rendered below the title row in the middle column,
+   * between start and end accessories.
+   */
+  children?: ReactNode;
+  /**
    * Optional node before the title row (e.g. icon or avatar).
    */
   startAccessory?: ReactNode;

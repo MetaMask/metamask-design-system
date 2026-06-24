@@ -10,6 +10,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { Pressable } from 'react-native';
 
+import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 import { Icon } from '../Icon';
 
@@ -23,6 +24,7 @@ import type { SectionHeaderProps } from './SectionHeader.types';
  * @param sectionHeaderProps - Component props
  * @param sectionHeaderProps.title - Title content for the inner row (required)
  * @param sectionHeaderProps.titleAccessory - Optional node to the right of `title` in the inner row
+ * @param sectionHeaderProps.children - Optional content below the title row in the middle column, between start and end accessories
  * @param sectionHeaderProps.titleProps - Optional props merged into inner row `Text` when `title` is a string
  * @param sectionHeaderProps.titleWrapperProps - Optional props spread onto the inner `BoxRow`
  * @param sectionHeaderProps.startAccessory - Optional custom node before the title row on the outer row; used when no start icon is resolved
@@ -42,6 +44,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
 ) => {
   const {
     title,
+    children,
     titleAccessory,
     titleProps,
     titleWrapperProps,
@@ -101,6 +104,17 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     </BoxRow>
   ) : null;
 
+  const hasAccessories =
+    Boolean(resolvedStartAccessory) || Boolean(resolvedEndAccessory);
+
+  const mainContent =
+    titleRow || children ? (
+      <Box gap={1} twClassName={hasAccessories ? 'flex-1 min-w-0' : undefined}>
+        {titleRow}
+        {children}
+      </Box>
+    ) : null;
+
   if (isInteractive) {
     const { disabled, accessibilityRole = 'button' } = sectionHeaderProps;
     const isDisabled = Boolean(disabled);
@@ -126,7 +140,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
           startAccessory={resolvedStartAccessory}
           endAccessory={resolvedEndAccessory}
         >
-          {titleRow}
+          {mainContent}
         </BoxRow>
       </Pressable>
     );
@@ -141,7 +155,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
       startAccessory={resolvedStartAccessory}
       endAccessory={resolvedEndAccessory}
     >
-      {titleRow}
+      {mainContent}
     </BoxRow>
   );
 };
