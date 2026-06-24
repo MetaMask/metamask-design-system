@@ -61,7 +61,8 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
       alignItems={BoxAlignItems.Start}
       gap={4}
       backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      padding={4}
+      paddingVertical={3}
+      paddingHorizontal={4}
       twClassName={mergeTwClassName('rounded-xl', twClassName)}
       {...props}
     >
