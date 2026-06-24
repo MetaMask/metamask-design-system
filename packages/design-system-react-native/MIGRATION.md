@@ -75,12 +75,11 @@ This guide provides detailed instructions for migrating your project from one ve
 
 | Before (0.30.0)         | After (0.31.0)                          |
 | ----------------------- | --------------------------------------- |
-| `titleStartAccessory`   | removed — compose accessories in `title` |
-| `titleEndAccessory`     | removed — compose accessories in `title` |
+| `titleStartAccessory`   | removed |
+| `titleEndAccessory`     | removed |
 
 **Migration:**
 
-Pass a custom **`title`** `ReactNode` when you need icons or other inline content beside the heading. For string titles with default typography, use **`Text`** inside a **`BoxRow`** (or your own layout).
 
 ```tsx
 // Before (0.30.0)
@@ -109,18 +108,9 @@ import {
 // After (0.31.0)
 <TitleAlert
   severity={IconAlertSeverity.Warning}
-  title={
-    <BoxRow justifyContent={BoxJustifyContent.Center} gap={1}>
-      <Icon name={IconName.Ai} size={IconSize.Sm} color={IconColor.IconAlternative} />
-      <Text variant={TextVariant.HeadingLg} color={TextColor.TextDefault}>
-        High price impact
-      </Text>
-    </BoxRow>
-  }
+  title="High price impact"
 />;
 ```
-
-For an end accessory, place it after the title text in the same **`BoxRow`** (or use **`endAccessory`** on **`BoxRow`**).
 
 If you import **`TitleAlertPropsShared`** from **`@metamask/design-system-shared`**, remove the same props from your types. See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#titlealert-title-accessories-removed).
 

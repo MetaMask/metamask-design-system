@@ -22,14 +22,14 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-| Before (0.24.0)       | After (0.25.0)                          |
-| --------------------- | --------------------------------------- |
-| `titleStartAccessory` | removed — compose accessories in `title` |
-| `titleEndAccessory`   | removed — compose accessories in `title` |
+| Before (0.24.0)       | After (0.25.0) |
+| --------------------- | -------------- |
+| `titleStartAccessory` | removed        |
+| `titleEndAccessory`   | removed        |
 
 **Migration:**
 
-Remove the props from shared type consumers and compose inline accessories in the **`title`** `ReactNode` at the platform layer. See the [design-system-react-native migration guide](../design-system-react-native/MIGRATION.md#titlealert-title-accessories-removed) for a before/after example.
+Remove the props from shared type consumers and from **`TitleAlert`** call sites. See the [design-system-react-native migration guide](../design-system-react-native/MIGRATION.md#titlealert-title-accessories-removed) for a before/after example.
 
 **Impact:**
 
