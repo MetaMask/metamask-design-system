@@ -51,10 +51,6 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
   const shouldShowCloseButton = Boolean(onClose);
   const shouldShowActionButton = Boolean(actionButtonOnPress);
 
-  const mergedCloseButtonTwClassName = closeButtonTwClassName
-    ? `ml-3 ${closeButtonTwClassName}`
-    : 'ml-3';
-
   return (
     <Box
       flexDirection={BoxFlexDirection.Row}
@@ -83,7 +79,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
           ))}
 
         {hasContent(description) && (
-          <Box twClassName={hasContent(title) ? 'mt-1' : undefined}>
+          <Box>
             {isTextContent(description) ? (
               <Text variant={TextVariant.BodySm} {...descriptionProps}>
                 {description}
@@ -104,7 +100,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
           ))}
 
         {shouldShowActionButton && (
-          <Box twClassName="mt-4">
+          <Box twClassName="mt-2">
             <Button
               size={ButtonSize.Md}
               onPress={actionButtonOnPress}
@@ -118,7 +114,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
 
       {shouldShowCloseButton && (
         <ButtonIcon
-          twClassName={mergedCloseButtonTwClassName}
+          twClassName={closeButtonTwClassName}
           iconName={IconName.Close}
           size={ButtonIconSize.Sm}
           accessibilityLabel={closeButtonAccessibilityLabel}
