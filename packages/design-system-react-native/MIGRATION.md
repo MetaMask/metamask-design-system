@@ -73,13 +73,12 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-| Before (0.30.0)         | After (0.31.0)                          |
-| ----------------------- | --------------------------------------- |
-| `titleStartAccessory`   | removed |
-| `titleEndAccessory`     | removed |
+| Before (0.30.0)       | After (0.31.0) |
+| --------------------- | -------------- |
+| `titleStartAccessory` | removed        |
+| `titleEndAccessory`   | removed        |
 
 **Migration:**
-
 
 ```tsx
 // Before (0.30.0)
@@ -101,15 +100,16 @@ import {
   severity={IconAlertSeverity.Warning}
   title="High price impact"
   titleStartAccessory={
-    <Icon name={IconName.Ai} size={IconSize.Sm} color={IconColor.IconAlternative} />
+    <Icon
+      name={IconName.Ai}
+      size={IconSize.Sm}
+      color={IconColor.IconAlternative}
+    />
   }
 />;
 
 // After (0.31.0)
-<TitleAlert
-  severity={IconAlertSeverity.Warning}
-  title="High price impact"
-/>;
+<TitleAlert severity={IconAlertSeverity.Warning} title="High price impact" />;
 ```
 
 If you import **`TitleAlertPropsShared`** from **`@metamask/design-system-shared`**, remove the same props from your types. See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#titlealert-title-accessories-removed).
