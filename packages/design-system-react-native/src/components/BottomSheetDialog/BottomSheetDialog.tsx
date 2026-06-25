@@ -105,13 +105,24 @@ export const BottomSheetDialog = forwardRef<
     );
 
     const gestureHandler = useMemo(() => {
+      // These gesture callbacks need explicit 'worklet' directives because this
+      // package ships a pre-built dist compiled by ts-bridge (tsc), which emits the
+      // gesture chain as a namespaced call (react_native_gesture_handler_1.Gesture).
+      // The consumer's Reanimated/Worklets Babel plugin does run over dist (that's
+      // why useAnimatedStyle below works), but its gesture auto-detection doesn't
+      // recognize that compiled namespaced form, so without these directives the
+      // callbacks run on the JS thread and slow drags lag behind the finger.
       const gesture = Gesture.Pan()
         .enabled(isInteractable)
         .onStart(() => {
+          'worklet';
+
           // Starts tracking vertical position of gesture.
           gestureStartYOffset.value = currentYOffset.value;
         })
         .onUpdate((event) => {
+          'worklet';
+
           const { translationY } = event;
           currentYOffset.value = gestureStartYOffset.value + translationY;
           // If gesture Y value goes above the bottom of Dialog Y value(bottom of dialog),
@@ -128,6 +139,8 @@ export const BottomSheetDialog = forwardRef<
           }
         })
         .onEnd((event) => {
+          'worklet';
+
           const { translationY, velocityY } = event;
           // finalYOffset is used to animate the Y position of the Dialog after the gesture event
           let finalYOffset: number;

@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.28.0]
+
+### Changed
+
+- **BREAKING:** Reverted `TextButton` to its pre-0.26.0 `ButtonBase`-backed API — restores `size`/`TextButtonSize`, `isInverse`, `isDisabled`, `textProps`, and start/end icon props; removes `variant`/`TextVariant` ([#1259](https://github.com/MetaMask/metamask-design-system/pull/1259))
+  - See [Migration Guide](./MIGRATION.md#from-version-0270-to-0280)
+
+## [0.27.1]
+
+### Fixed
+
+- Fixed `Tag` gap between icon and label from 4px to 2px to match design spec ([#1236](https://github.com/MetaMask/metamask-design-system/pull/1236))
+
 ## [0.27.0]
 
 ### Added
@@ -371,7 +384,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.28.0...HEAD
+[0.28.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.1...@metamask/design-system-react@0.28.0
+[0.27.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.0...@metamask/design-system-react@0.27.1
 [0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.26.0...@metamask/design-system-react@0.27.0
 [0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.25.0...@metamask/design-system-react@0.26.0
 [0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.24.0...@metamask/design-system-react@0.25.0
