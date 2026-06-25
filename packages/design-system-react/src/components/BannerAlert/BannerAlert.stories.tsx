@@ -95,6 +95,13 @@ export const Severity: Story = {
       >
         This is a success banner.
       </BannerAlert>
+      <BannerAlert
+        {...args}
+        severity={BannerAlertSeverity.Neutral}
+        title="Neutral"
+      >
+        This is a neutral banner.
+      </BannerAlert>
     </div>
   ),
   args: {

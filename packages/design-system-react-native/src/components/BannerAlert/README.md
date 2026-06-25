@@ -30,6 +30,7 @@ Optional semantic severity used to choose icon and background styles.
 
 Supported values:
 
+- `BannerAlertSeverity.Neutral`
 - `BannerAlertSeverity.Info`
 - `BannerAlertSeverity.Success`
 - `BannerAlertSeverity.Warning`
