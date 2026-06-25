@@ -18,6 +18,8 @@ import { Modal } from '@metamask/design-system-react';
 
 <Canvas of={ModalStories.Default} />
 
+<Canvas of={ModalStories.Usage} />
+
 ## Props
 
 ### `isOpen`
@@ -120,6 +122,8 @@ When `true`, clicking the overlay (outside the modal content) calls `onClose`.
   </tbody>
 </table>
 
+<Canvas of={ModalStories.IsClosedOnOutsideClick} />
+
 ### `isClosedOnEscapeKey`
 
 When `true`, pressing Escape calls `onClose`. When `false`, ensure the modal exposes a visible/keyboard-reachable close affordance for keyboard-only users.
@@ -144,6 +148,8 @@ When `true`, pressing Escape calls `onClose`. When `false`, ensure the modal exp
     </tr>
   </tbody>
 </table>
+
+<Canvas of={ModalStories.IsClosedOnEscapeKey} />
 
 ### `autoFocus`
 
@@ -170,6 +176,8 @@ When `true`, the first focusable element within the modal subtree is focused on 
   </tbody>
 </table>
 
+<Canvas of={ModalStories.AutoFocus} />
+
 ### `initialFocusRef`
 
 The element to receive focus when the modal opens. Overrides `autoFocus`'s "first focusable" behavior.
@@ -194,6 +202,8 @@ The element to receive focus when the modal opens. Overrides `autoFocus`'s "firs
     </tr>
   </tbody>
 </table>
+
+<Canvas of={ModalStories.InitialFocusRef} />
 
 ### `finalFocusRef`
 
@@ -220,6 +230,8 @@ The element to receive focus when the modal closes/unmounts.
   </tbody>
 </table>
 
+<Canvas of={ModalStories.FinalFocusRef} />
+
 ### `restoreFocus`
 
 When `true`, focus is restored to the element that opened the modal once the modal closes. Ignored when `finalFocusRef` is provided.
@@ -244,6 +256,8 @@ When `true`, focus is restored to the element that opened the modal once the mod
     </tr>
   </tbody>
 </table>
+
+<Canvas of={ModalStories.RestoreFocus} />
 
 ### `className`
 

@@ -46,6 +46,8 @@ Header title content. When a string, it is auto-wrapped in a `Text` component wi
   </tbody>
 </table>
 
+<Canvas of={ModalHeaderStories.Children} />
+
 ### `onBack` + `backButtonProps`
 
 When `onBack` is set, the component renders a back `ButtonIcon` in the start slot. `backButtonProps` is **co-required** (the type system enforces this): consumers must supply at least `ariaLabel`. The component owns `iconName` (`IconName.ArrowLeft`) and `size` (`ButtonIconSize.Md`); they cannot be overridden via the prop bag.
@@ -102,6 +104,10 @@ Same shape as `onBack` / `backButtonProps`. When `onClose` is set, a close `Butt
   </tbody>
 </table>
 
+<Canvas of={ModalHeaderStories.OnClose} />
+
+<Canvas of={ModalHeaderStories.OnBack} />
+
 ### `startAccessory`
 
 Optional override for the start (left in LTR) slot. When provided, it replaces the auto-rendered back button — even if `onBack` is set.
@@ -127,6 +133,8 @@ Optional override for the start (left in LTR) slot. When provided, it replaces t
   </tbody>
 </table>
 
+<Canvas of={ModalHeaderStories.StartAccessory} />
+
 ### `endAccessory`
 
 Optional override for the end (right in LTR) slot. When provided, it replaces the auto-rendered close button — even if `onClose` is set.
@@ -151,6 +159,8 @@ Optional override for the end (right in LTR) slot. When provided, it replaces th
     </tr>
   </tbody>
 </table>
+
+<Canvas of={ModalHeaderStories.EndAccessory} />
 
 ### `className`
 
