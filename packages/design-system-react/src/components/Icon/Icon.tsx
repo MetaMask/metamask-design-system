@@ -4,7 +4,7 @@ import React, { Suspense } from 'react';
 import { twMerge } from '../../utils/tw-merge';
 
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
-import { getLazyIcon, isIconName } from './Icon.registry';
+import { getIconComponent, isIconName } from './Icon.registry';
 import type { IconProps } from './Icon.types';
 
 const IconRenderer: React.FC<IconProps> = ({
@@ -25,7 +25,7 @@ const IconRenderer: React.FC<IconProps> = ({
     return null;
   }
 
-  const LazyIconComponent = getLazyIcon(name);
+  const IconComponent = getIconComponent(name);
 
   const mergedClassName = twMerge(
     'inline-block',
@@ -35,7 +35,7 @@ const IconRenderer: React.FC<IconProps> = ({
   );
 
   return (
-    <LazyIconComponent
+    <IconComponent
       className={mergedClassName}
       {...(props as React.SVGProps<SVGSVGElement>)}
       style={style}

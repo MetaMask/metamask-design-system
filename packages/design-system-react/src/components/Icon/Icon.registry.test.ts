@@ -1,6 +1,11 @@
 import { IconName } from '@metamask/design-system-shared';
 
-import { getLazyIcon, preloadIcon } from './Icon.registry';
+import {
+  getIconComponent,
+  getLazyIcon,
+  preloadIcon,
+  preloadIconsForTests,
+} from './Icon.registry';
 
 describe('Icon.registry', () => {
   it('returns the same lazy component instance for repeated lookups', () => {
@@ -12,5 +17,20 @@ describe('Icon.registry', () => {
 
   it('preloads an icon module', async () => {
     expect(await preloadIcon(IconName.Close)).toBeUndefined();
+  });
+
+  it('returns cached synchronous components in test environment', async () => {
+    await preloadIconsForTests();
+
+    const component = getIconComponent(IconName.Add);
+
+    expect(component).toBeDefined();
+    expect(getLazyIcon(IconName.Add)).not.toBe(component);
+  });
+
+  it('falls back to lazy components when test cache is disabled', () => {
+    expect(getIconComponent(IconName.Add, { useTestCache: false })).toBe(
+      getLazyIcon(IconName.Add),
+    );
   });
 });

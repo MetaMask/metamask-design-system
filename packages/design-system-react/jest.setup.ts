@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 
-import { iconLoaders } from './src/components/Icon/icons';
+import { preloadIconsForTests } from './src/components/Icon/Icon.registry';
 
-// Preload all icon modules so React.lazy resolves synchronously in tests.
-// Production code still lazy-loads icons for per-icon code splitting.
+// Preload all icon modules once per Jest worker so Icon renders synchronously
+// in tests. Production code still lazy-loads icons for per-icon code splitting.
 beforeAll(async () => {
-  await Promise.all(Object.values(iconLoaders).map((loader) => loader()));
+  await preloadIconsForTests();
 });

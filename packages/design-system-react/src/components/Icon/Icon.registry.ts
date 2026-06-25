@@ -10,6 +10,28 @@ const lazyIconCache = new Map<
   LazyExoticComponent<IconComponentType>
 >();
 
+const testIconCache = new Map<IconName, IconComponentType>();
+
+let testPreloadPromise: Promise<void> | undefined;
+
+/**
+ * Preloads all icon modules for the Jest test environment.
+ * Icons are cached as synchronous components so tests can query the DOM
+ * immediately without waiting for React.lazy resolution.
+ *
+ * @returns A promise that resolves when all icons are cached.
+ */
+export function preloadIconsForTests(): Promise<void> {
+  testPreloadPromise ??= Promise.all(
+    Object.entries(iconLoaders).map(async ([name, loader]) => {
+      const mod = await loader();
+      testIconCache.set(name as IconName, mod.default);
+    }),
+  ).then(() => undefined);
+
+  return testPreloadPromise;
+}
+
 /**
  * Returns a cached React.lazy wrapper for the given icon name.
  * Each icon is loaded on demand via dynamic import, enabling per-icon
@@ -29,6 +51,34 @@ export function getLazyIcon(
   }
 
   return lazyIcon;
+}
+
+type GetIconComponentOptions = {
+  useTestCache?: boolean;
+};
+
+/**
+ * Resolves an icon component for rendering.
+ * In tests, returns a synchronously cached component after preloadIconsForTests().
+ * In production, returns a React.lazy wrapper for code splitting.
+ *
+ * @param name - The icon name to resolve.
+ * @param options - Optional resolver configuration.
+ * @param options.useTestCache - Whether to read from the Jest preload cache.
+ * @returns The icon component to render.
+ */
+export function getIconComponent(
+  name: IconName,
+  options?: GetIconComponentOptions,
+): IconComponentType | LazyExoticComponent<IconComponentType> {
+  const useTestCache = options?.useTestCache ?? process.env.NODE_ENV === 'test';
+  const cachedTestIcon = useTestCache ? testIconCache.get(name) : undefined;
+
+  if (cachedTestIcon) {
+    return cachedTestIcon;
+  }
+
+  return getLazyIcon(name);
 }
 
 /**
