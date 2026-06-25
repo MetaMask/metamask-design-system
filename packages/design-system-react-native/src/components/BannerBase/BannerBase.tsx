@@ -116,9 +116,9 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
 
       {shouldShowCloseButton && (
         <ButtonIcon
-          twClassName={closeButtonTwClassName}
+          twClassName={mergeTwClassName('-mt-1', closeButtonTwClassName)}
           iconName={IconName.Close}
-          size={ButtonIconSize.Sm}
+          size={ButtonIconSize.Md}
           accessibilityLabel={closeButtonAccessibilityLabel}
           onPress={onClose}
           {...resolvedCloseButtonProps}
