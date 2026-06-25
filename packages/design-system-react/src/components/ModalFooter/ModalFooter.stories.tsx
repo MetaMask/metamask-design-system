@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonsAlignment } from './ModalFooter.types';
 import { ModalFooter } from './ModalFooter';
+import { ButtonsAlignment } from './ModalFooter.types';
 import type { ModalFooterProps } from './ModalFooter.types';
 import README from './README.mdx';
 

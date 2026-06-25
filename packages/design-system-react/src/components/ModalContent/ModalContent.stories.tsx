@@ -49,7 +49,9 @@ export const Default: Story = {
           <ModalOverlay />
           <ModalContent size={args.size} className={args.className}>
             <Box flexDirection={BoxFlexDirection.Column} gap={4} padding={4}>
-              <Text>Dialog content. Press Escape or click outside to close.</Text>
+              <Text>
+                Dialog content. Press Escape or click outside to close.
+              </Text>
               <Button
                 variant={ButtonVariant.Secondary}
                 onClick={() => setIsOpen(false)}
