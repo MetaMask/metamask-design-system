@@ -86,7 +86,7 @@ export { HelpText, HelpTextSeverity } from './HelpText';
 export type { HelpTextProps } from './HelpText';
 
 export { Icon } from './Icon';
-export { IconName, IconSize, IconColor } from './Icon';
+export { IconName, IconSize, IconColor, preloadIcon } from './Icon';
 export type { IconProps } from './Icon';
 
 export { Input } from './Input';

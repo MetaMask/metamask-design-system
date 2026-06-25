@@ -282,23 +282,32 @@ async function generateReactIcons(svgFiles: string[]): Promise<void> {
     );
   }
 
-  // Generate icons/index.ts barrel export
+  // Generate icons/index.ts with lazy loaders for per-icon code splitting.
+  // Static imports of all ~291 icons were removed to allow bundlers to tree-shake
+  // unused icons — only icons actually rendered get included in the bundle.
   const indexLines: string[] = [
     `// This file is auto-generated — do not edit manually`,
     `// Run \`yarn generate:icons\` from the repo root to regenerate`,
-    `import type { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';`,
+    `import type { ComponentType, SVGProps } from 'react';`,
+    `import type { IconName } from '@metamask/design-system-shared';`,
     ``,
-    ...iconNames.map((name) => `import ${name} from './${name}';`),
+    `export type IconComponentType = ComponentType<SVGProps<SVGSVGElement>>;`,
     ``,
-    `export const Icons = {`,
-    ...iconNames.map((name) => `  ${name},`),
-    `} as const;`,
+    `export type IconLoader = () => Promise<{ default: IconComponentType }>;`,
     ``,
-    `export type IconComponentType = ForwardRefExoticComponent<`,
-    `  SVGProps<SVGSVGElement> & RefAttributes<SVGSVGElement>`,
-    `>;`,
+    `export const iconLoaders = {`,
+    ...iconNames.map((name) => `  ${name}: () => import('./${name}'),`),
+    `} as unknown as Record<IconName, IconLoader>;`,
     ``,
-    `export type IconsType = typeof Icons;`,
+    `/**`,
+    ` * Type guard to check if a string is a valid IconName at runtime.`,
+    ` *`,
+    ` * @param name - The icon name to check.`,
+    ` * @returns True if the name corresponds to a registered icon loader.`,
+    ` */`,
+    `export function isIconName(name: string): name is IconName {`,
+    `  return Object.prototype.hasOwnProperty.call(iconLoaders, name);`,
+    `}`,
     ``,
   ];
 

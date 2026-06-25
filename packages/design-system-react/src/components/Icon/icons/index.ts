@@ -1,595 +1,312 @@
 // This file is auto-generated — do not edit manually
 // Run `yarn generate:icons` from the repo root to regenerate
-import type { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';
+import type { ComponentType, SVGProps } from 'react';
+import type { IconName } from '@metamask/design-system-shared';
 
-import Accessibility from './Accessibility';
-import Activity from './Activity';
-import AddCard from './AddCard';
-import AddCircle from './AddCircle';
-import AddSquare from './AddSquare';
-import Add from './Add';
-import AfterHours from './AfterHours';
-import Ai from './Ai';
-import AlternateEmail from './AlternateEmail';
-import AppleLogo from './AppleLogo';
-import Apps from './Apps';
-import Arrow2Down from './Arrow2Down';
-import Arrow2Left from './Arrow2Left';
-import Arrow2Right from './Arrow2Right';
-import Arrow2UpRight from './Arrow2UpRight';
-import Arrow2Up from './Arrow2Up';
-import ArrowCircleDown from './ArrowCircleDown';
-import ArrowCircleUp from './ArrowCircleUp';
-import ArrowDoubleLeft from './ArrowDoubleLeft';
-import ArrowDoubleRight from './ArrowDoubleRight';
-import ArrowDown from './ArrowDown';
-import ArrowDropDownCircle from './ArrowDropDownCircle';
-import ArrowLeft from './ArrowLeft';
-import ArrowRight from './ArrowRight';
-import ArrowUp from './ArrowUp';
-import AttachMoney from './AttachMoney';
-import Attachment from './Attachment';
-import Backspace from './Backspace';
-import Ban from './Ban';
-import BankAssured from './BankAssured';
-import Bank from './Bank';
-import Bold from './Bold';
-import Book from './Book';
-import Bookmark from './Bookmark';
-import Bridge from './Bridge';
-import Briefcase from './Briefcase';
-import Bulb from './Bulb';
-import BuySell from './BuySell';
-import Cake from './Cake';
-import Calculator from './Calculator';
-import Calendar from './Calendar';
-import Call from './Call';
-import Camera from './Camera';
-import Campaign from './Campaign';
-import Candlestick from './Candlestick';
-import CardPos from './CardPos';
-import Card from './Card';
-import Cash from './Cash';
-import Category from './Category';
-import Chart from './Chart';
-import CheckBold from './CheckBold';
-import Check from './Check';
-import CircleX from './CircleX';
-import Clear from './Clear';
-import ClockFilled from './ClockFilled';
-import Clock from './Clock';
-import Close from './Close';
-import CloudDownload from './CloudDownload';
-import CloudUpload from './CloudUpload';
-import Cloud from './Cloud';
-import CodeCircle from './CodeCircle';
-import Code from './Code';
-import Coin from './Coin';
-import Collapse from './Collapse';
-import Confirmation from './Confirmation';
-import Connect from './Connect';
-import CopySuccess from './CopySuccess';
-import Copy from './Copy';
-import CorporateFare from './CorporateFare';
-import CreditCheck from './CreditCheck';
-import CurrencyFranc from './CurrencyFranc';
-import CurrencyLira from './CurrencyLira';
-import CurrencyPound from './CurrencyPound';
-import CurrencyYuan from './CurrencyYuan';
-import Customize from './Customize';
-import Danger from './Danger';
-import DarkFilled from './DarkFilled';
-import Dark from './Dark';
-import Data from './Data';
-import Description from './Description';
-import Details from './Details';
-import Diagram from './Diagram';
-import DocumentCode from './DocumentCode';
-import Download from './Download';
-import Draft from './Draft';
-import EcoLeaf from './EcoLeaf';
-import EditSquare from './EditSquare';
-import Edit from './Edit';
-import EncryptedAdd from './EncryptedAdd';
-import Eraser from './Eraser';
-import Error from './Error';
-import Ethereum from './Ethereum';
-import Exchange from './Exchange';
-import ExpandVertical from './ExpandVertical';
-import Expand from './Expand';
-import ExploreFilled from './ExploreFilled';
-import Explore from './Explore';
-import Export from './Export';
-import Extension from './Extension';
-import EyeSlash from './EyeSlash';
-import Eye from './Eye';
-import FaceId from './FaceId';
-import Feedback from './Feedback';
-import File from './File';
-import Filter from './Filter';
-import Fingerprint from './Fingerprint';
-import Fire from './Fire';
-import FirstPage from './FirstPage';
-import Flag from './Flag';
-import FlashFilled from './FlashFilled';
-import FlashSlash from './FlashSlash';
-import Flash from './Flash';
-import Flask from './Flask';
-import Flower from './Flower';
-import Folder from './Folder';
-import Forest from './Forest';
-import FullCircle from './FullCircle';
-import Gas from './Gas';
-import Gift from './Gift';
-import GlobalSearch from './GlobalSearch';
-import Global from './Global';
-import Graph from './Graph';
-import Group from './Group';
-import Hardware from './Hardware';
-import HashTag from './HashTag';
-import HeartFilled from './HeartFilled';
-import Heart from './Heart';
-import Hierarchy from './Hierarchy';
-import HomeFilled from './HomeFilled';
-import Home from './Home';
-import Image from './Image';
-import Info from './Info';
-import Inventory from './Inventory';
-import Joystick from './Joystick';
-import KeepFilled from './KeepFilled';
-import Keep from './Keep';
-import Key from './Key';
-import LastPage from './LastPage';
-import LightFilled from './LightFilled';
-import Light from './Light';
-import Link from './Link';
-import ListArrow from './ListArrow';
-import Loading from './Loading';
-import Location from './Location';
-import LockSlash from './LockSlash';
-import Lock from './Lock';
-import LockedFilled from './LockedFilled';
-import Login from './Login';
-import Logout from './Logout';
-import Mail from './Mail';
-import Map from './Map';
-import Menu from './Menu';
-import Merge from './Merge';
-import MessageQuestion from './MessageQuestion';
-import Messages from './Messages';
-import MetamaskFoxOutline from './MetamaskFoxOutline';
-import Mic from './Mic';
-import MinusBold from './MinusBold';
-import MinusSquare from './MinusSquare';
-import Minus from './Minus';
-import Mobile from './Mobile';
-import MoneyBag from './MoneyBag';
-import Money from './Money';
-import Monitor from './Monitor';
-import MoreHorizontal from './MoreHorizontal';
-import MoreVertical from './MoreVertical';
-import MountainFlag from './MountainFlag';
-import MusdFilled from './MusdFilled';
-import Musd from './Musd';
-import MusicNote from './MusicNote';
-import NoPhotography from './NoPhotography';
-import Notification from './Notification';
-import PageInfo from './PageInfo';
-import Palette from './Palette';
-import PasswordCheck from './PasswordCheck';
-import Pending from './Pending';
-import People from './People';
-import PersonCancel from './PersonCancel';
-import PieChart from './PieChart';
-import Pin from './Pin';
-import Plant from './Plant';
-import Plug from './Plug';
-import PlusAndMinus from './PlusAndMinus';
-import PolicyAlert from './PolicyAlert';
-import PopUp from './PopUp';
-import Predictions from './Predictions';
-import Print from './Print';
-import PriorityHigh from './PriorityHigh';
-import PrivacyTip from './PrivacyTip';
-import ProgrammingArrows from './ProgrammingArrows';
-import Publish from './Publish';
-import QrCode from './QrCode';
-import Question from './Question';
-import Receive from './Receive';
-import Received from './Received';
-import Refresh from './Refresh';
-import RemoveMinus from './RemoveMinus';
-import Report from './Report';
-import Rocket from './Rocket';
-import SaveFilled from './SaveFilled';
-import Save from './Save';
-import Saving from './Saving';
-import ScanBarcode from './ScanBarcode';
-import ScanFocus from './ScanFocus';
-import Scan from './Scan';
-import Search from './Search';
-import SecurityAlert from './SecurityAlert';
-import SecurityCross from './SecurityCross';
-import SecurityKey from './SecurityKey';
-import SecuritySearch from './SecuritySearch';
-import SecuritySlash from './SecuritySlash';
-import SecurityTick from './SecurityTick';
-import SecurityTime from './SecurityTime';
-import SecurityUser from './SecurityUser';
-import Security from './Security';
-import Send from './Send';
-import SentimentDissatisfied from './SentimentDissatisfied';
-import SentimentNeutral from './SentimentNeutral';
-import SentimentSatisfied from './SentimentSatisfied';
-import SentimentVerySatisfied from './SentimentVerySatisfied';
-import SettingFilled from './SettingFilled';
-import Setting from './Setting';
-import Share from './Share';
-import ShieldLock from './ShieldLock';
-import ShoppingBag from './ShoppingBag';
-import ShoppingCart from './ShoppingCart';
-import SidePanel from './SidePanel';
-import SignalCellular from './SignalCellular';
-import Slash from './Slash';
-import Sms from './Sms';
-import SnapsMobile from './SnapsMobile';
-import SnapsPlus from './SnapsPlus';
-import SnapsRound from './SnapsRound';
-import Snaps from './Snaps';
-import SortByAlpha from './SortByAlpha';
-import Sort from './Sort';
-import Sparkle from './Sparkle';
-import Speed from './Speed';
-import Speedometer from './Speedometer';
-import Square from './Square';
-import Stake from './Stake';
-import StarFilled from './StarFilled';
-import Star from './Star';
-import Start from './Start';
-import Storefront from './Storefront';
-import Student from './Student';
-import SwapHorizontal from './SwapHorizontal';
-import SwapVertical from './SwapVertical';
-import TabClose from './TabClose';
-import TableRow from './TableRow';
-import Tablet from './Tablet';
-import Tag from './Tag';
-import Telegram from './Telegram';
-import ThumbDownFilled from './ThumbDownFilled';
-import ThumbDown from './ThumbDown';
-import ThumbUpFilled from './ThumbUpFilled';
-import ThumbUp from './ThumbUp';
-import Tint from './Tint';
-import Tooltip from './Tooltip';
-import Translate from './Translate';
-import Trash from './Trash';
-import TrendDown from './TrendDown';
-import TrendUp from './TrendUp';
-import Trophy from './Trophy';
-import Undo from './Undo';
-import Unfold from './Unfold';
-import UnlockedFilled from './UnlockedFilled';
-import Unpin from './Unpin';
-import UploadFile from './UploadFile';
-import Upload from './Upload';
-import Usb from './Usb';
-import UserCheck from './UserCheck';
-import UserCircleAdd from './UserCircleAdd';
-import UserCircleRemove from './UserCircleRemove';
-import UserCircle from './UserCircle';
-import User from './User';
-import VerifiedFilled from './VerifiedFilled';
-import Verified from './Verified';
-import Videocam from './Videocam';
-import ViewColumn from './ViewColumn';
-import ViewInAr from './ViewInAr';
-import VolumeOff from './VolumeOff';
-import VolumeUp from './VolumeUp';
-import WalletFilled from './WalletFilled';
-import Wallet from './Wallet';
-import Warning from './Warning';
-import WebTraffic from './WebTraffic';
-import Widgets from './Widgets';
-import WifiOff from './WifiOff';
-import Wifi from './Wifi';
-import X from './X';
+export type IconComponentType = ComponentType<SVGProps<SVGSVGElement>>;
 
-export const Icons = {
-  Accessibility,
-  Activity,
-  AddCard,
-  AddCircle,
-  AddSquare,
-  Add,
-  AfterHours,
-  Ai,
-  AlternateEmail,
-  AppleLogo,
-  Apps,
-  Arrow2Down,
-  Arrow2Left,
-  Arrow2Right,
-  Arrow2UpRight,
-  Arrow2Up,
-  ArrowCircleDown,
-  ArrowCircleUp,
-  ArrowDoubleLeft,
-  ArrowDoubleRight,
-  ArrowDown,
-  ArrowDropDownCircle,
-  ArrowLeft,
-  ArrowRight,
-  ArrowUp,
-  AttachMoney,
-  Attachment,
-  Backspace,
-  Ban,
-  BankAssured,
-  Bank,
-  Bold,
-  Book,
-  Bookmark,
-  Bridge,
-  Briefcase,
-  Bulb,
-  BuySell,
-  Cake,
-  Calculator,
-  Calendar,
-  Call,
-  Camera,
-  Campaign,
-  Candlestick,
-  CardPos,
-  Card,
-  Cash,
-  Category,
-  Chart,
-  CheckBold,
-  Check,
-  CircleX,
-  Clear,
-  ClockFilled,
-  Clock,
-  Close,
-  CloudDownload,
-  CloudUpload,
-  Cloud,
-  CodeCircle,
-  Code,
-  Coin,
-  Collapse,
-  Confirmation,
-  Connect,
-  CopySuccess,
-  Copy,
-  CorporateFare,
-  CreditCheck,
-  CurrencyFranc,
-  CurrencyLira,
-  CurrencyPound,
-  CurrencyYuan,
-  Customize,
-  Danger,
-  DarkFilled,
-  Dark,
-  Data,
-  Description,
-  Details,
-  Diagram,
-  DocumentCode,
-  Download,
-  Draft,
-  EcoLeaf,
-  EditSquare,
-  Edit,
-  EncryptedAdd,
-  Eraser,
-  Error,
-  Ethereum,
-  Exchange,
-  ExpandVertical,
-  Expand,
-  ExploreFilled,
-  Explore,
-  Export,
-  Extension,
-  EyeSlash,
-  Eye,
-  FaceId,
-  Feedback,
-  File,
-  Filter,
-  Fingerprint,
-  Fire,
-  FirstPage,
-  Flag,
-  FlashFilled,
-  FlashSlash,
-  Flash,
-  Flask,
-  Flower,
-  Folder,
-  Forest,
-  FullCircle,
-  Gas,
-  Gift,
-  GlobalSearch,
-  Global,
-  Graph,
-  Group,
-  Hardware,
-  HashTag,
-  HeartFilled,
-  Heart,
-  Hierarchy,
-  HomeFilled,
-  Home,
-  Image,
-  Info,
-  Inventory,
-  Joystick,
-  KeepFilled,
-  Keep,
-  Key,
-  LastPage,
-  LightFilled,
-  Light,
-  Link,
-  ListArrow,
-  Loading,
-  Location,
-  LockSlash,
-  Lock,
-  LockedFilled,
-  Login,
-  Logout,
-  Mail,
-  Map,
-  Menu,
-  Merge,
-  MessageQuestion,
-  Messages,
-  MetamaskFoxOutline,
-  Mic,
-  MinusBold,
-  MinusSquare,
-  Minus,
-  Mobile,
-  MoneyBag,
-  Money,
-  Monitor,
-  MoreHorizontal,
-  MoreVertical,
-  MountainFlag,
-  MusdFilled,
-  Musd,
-  MusicNote,
-  NoPhotography,
-  Notification,
-  PageInfo,
-  Palette,
-  PasswordCheck,
-  Pending,
-  People,
-  PersonCancel,
-  PieChart,
-  Pin,
-  Plant,
-  Plug,
-  PlusAndMinus,
-  PolicyAlert,
-  PopUp,
-  Predictions,
-  Print,
-  PriorityHigh,
-  PrivacyTip,
-  ProgrammingArrows,
-  Publish,
-  QrCode,
-  Question,
-  Receive,
-  Received,
-  Refresh,
-  RemoveMinus,
-  Report,
-  Rocket,
-  SaveFilled,
-  Save,
-  Saving,
-  ScanBarcode,
-  ScanFocus,
-  Scan,
-  Search,
-  SecurityAlert,
-  SecurityCross,
-  SecurityKey,
-  SecuritySearch,
-  SecuritySlash,
-  SecurityTick,
-  SecurityTime,
-  SecurityUser,
-  Security,
-  Send,
-  SentimentDissatisfied,
-  SentimentNeutral,
-  SentimentSatisfied,
-  SentimentVerySatisfied,
-  SettingFilled,
-  Setting,
-  Share,
-  ShieldLock,
-  ShoppingBag,
-  ShoppingCart,
-  SidePanel,
-  SignalCellular,
-  Slash,
-  Sms,
-  SnapsMobile,
-  SnapsPlus,
-  SnapsRound,
-  Snaps,
-  SortByAlpha,
-  Sort,
-  Sparkle,
-  Speed,
-  Speedometer,
-  Square,
-  Stake,
-  StarFilled,
-  Star,
-  Start,
-  Storefront,
-  Student,
-  SwapHorizontal,
-  SwapVertical,
-  TabClose,
-  TableRow,
-  Tablet,
-  Tag,
-  Telegram,
-  ThumbDownFilled,
-  ThumbDown,
-  ThumbUpFilled,
-  ThumbUp,
-  Tint,
-  Tooltip,
-  Translate,
-  Trash,
-  TrendDown,
-  TrendUp,
-  Trophy,
-  Undo,
-  Unfold,
-  UnlockedFilled,
-  Unpin,
-  UploadFile,
-  Upload,
-  Usb,
-  UserCheck,
-  UserCircleAdd,
-  UserCircleRemove,
-  UserCircle,
-  User,
-  VerifiedFilled,
-  Verified,
-  Videocam,
-  ViewColumn,
-  ViewInAr,
-  VolumeOff,
-  VolumeUp,
-  WalletFilled,
-  Wallet,
-  Warning,
-  WebTraffic,
-  Widgets,
-  WifiOff,
-  Wifi,
-  X,
-} as const;
+export type IconLoader = () => Promise<{ default: IconComponentType }>;
 
-export type IconComponentType = ForwardRefExoticComponent<
-  SVGProps<SVGSVGElement> & RefAttributes<SVGSVGElement>
->;
+export const iconLoaders = {
+  Accessibility: () => import('./Accessibility'),
+  Activity: () => import('./Activity'),
+  AddCard: () => import('./AddCard'),
+  AddCircle: () => import('./AddCircle'),
+  AddSquare: () => import('./AddSquare'),
+  Add: () => import('./Add'),
+  AfterHours: () => import('./AfterHours'),
+  Ai: () => import('./Ai'),
+  AlternateEmail: () => import('./AlternateEmail'),
+  AppleLogo: () => import('./AppleLogo'),
+  Apps: () => import('./Apps'),
+  Arrow2Down: () => import('./Arrow2Down'),
+  Arrow2Left: () => import('./Arrow2Left'),
+  Arrow2Right: () => import('./Arrow2Right'),
+  Arrow2UpRight: () => import('./Arrow2UpRight'),
+  Arrow2Up: () => import('./Arrow2Up'),
+  ArrowCircleDown: () => import('./ArrowCircleDown'),
+  ArrowCircleUp: () => import('./ArrowCircleUp'),
+  ArrowDoubleLeft: () => import('./ArrowDoubleLeft'),
+  ArrowDoubleRight: () => import('./ArrowDoubleRight'),
+  ArrowDown: () => import('./ArrowDown'),
+  ArrowDropDownCircle: () => import('./ArrowDropDownCircle'),
+  ArrowLeft: () => import('./ArrowLeft'),
+  ArrowRight: () => import('./ArrowRight'),
+  ArrowUp: () => import('./ArrowUp'),
+  AttachMoney: () => import('./AttachMoney'),
+  Attachment: () => import('./Attachment'),
+  Backspace: () => import('./Backspace'),
+  Ban: () => import('./Ban'),
+  BankAssured: () => import('./BankAssured'),
+  Bank: () => import('./Bank'),
+  Bold: () => import('./Bold'),
+  Book: () => import('./Book'),
+  Bookmark: () => import('./Bookmark'),
+  Bridge: () => import('./Bridge'),
+  Briefcase: () => import('./Briefcase'),
+  Bulb: () => import('./Bulb'),
+  BuySell: () => import('./BuySell'),
+  Cake: () => import('./Cake'),
+  Calculator: () => import('./Calculator'),
+  Calendar: () => import('./Calendar'),
+  Call: () => import('./Call'),
+  Camera: () => import('./Camera'),
+  Campaign: () => import('./Campaign'),
+  Candlestick: () => import('./Candlestick'),
+  CardPos: () => import('./CardPos'),
+  Card: () => import('./Card'),
+  Cash: () => import('./Cash'),
+  Category: () => import('./Category'),
+  Chart: () => import('./Chart'),
+  CheckBold: () => import('./CheckBold'),
+  Check: () => import('./Check'),
+  CircleX: () => import('./CircleX'),
+  Clear: () => import('./Clear'),
+  ClockFilled: () => import('./ClockFilled'),
+  Clock: () => import('./Clock'),
+  Close: () => import('./Close'),
+  CloudDownload: () => import('./CloudDownload'),
+  CloudUpload: () => import('./CloudUpload'),
+  Cloud: () => import('./Cloud'),
+  CodeCircle: () => import('./CodeCircle'),
+  Code: () => import('./Code'),
+  Coin: () => import('./Coin'),
+  Collapse: () => import('./Collapse'),
+  Confirmation: () => import('./Confirmation'),
+  Connect: () => import('./Connect'),
+  CopySuccess: () => import('./CopySuccess'),
+  Copy: () => import('./Copy'),
+  CorporateFare: () => import('./CorporateFare'),
+  CreditCheck: () => import('./CreditCheck'),
+  CurrencyFranc: () => import('./CurrencyFranc'),
+  CurrencyLira: () => import('./CurrencyLira'),
+  CurrencyPound: () => import('./CurrencyPound'),
+  CurrencyYuan: () => import('./CurrencyYuan'),
+  Customize: () => import('./Customize'),
+  Danger: () => import('./Danger'),
+  DarkFilled: () => import('./DarkFilled'),
+  Dark: () => import('./Dark'),
+  Data: () => import('./Data'),
+  Description: () => import('./Description'),
+  Details: () => import('./Details'),
+  Diagram: () => import('./Diagram'),
+  DocumentCode: () => import('./DocumentCode'),
+  Download: () => import('./Download'),
+  Draft: () => import('./Draft'),
+  EcoLeaf: () => import('./EcoLeaf'),
+  EditSquare: () => import('./EditSquare'),
+  Edit: () => import('./Edit'),
+  EncryptedAdd: () => import('./EncryptedAdd'),
+  Eraser: () => import('./Eraser'),
+  Error: () => import('./Error'),
+  Ethereum: () => import('./Ethereum'),
+  Exchange: () => import('./Exchange'),
+  ExpandVertical: () => import('./ExpandVertical'),
+  Expand: () => import('./Expand'),
+  ExploreFilled: () => import('./ExploreFilled'),
+  Explore: () => import('./Explore'),
+  Export: () => import('./Export'),
+  Extension: () => import('./Extension'),
+  EyeSlash: () => import('./EyeSlash'),
+  Eye: () => import('./Eye'),
+  FaceId: () => import('./FaceId'),
+  Feedback: () => import('./Feedback'),
+  File: () => import('./File'),
+  Filter: () => import('./Filter'),
+  Fingerprint: () => import('./Fingerprint'),
+  Fire: () => import('./Fire'),
+  FirstPage: () => import('./FirstPage'),
+  Flag: () => import('./Flag'),
+  FlashFilled: () => import('./FlashFilled'),
+  FlashSlash: () => import('./FlashSlash'),
+  Flash: () => import('./Flash'),
+  Flask: () => import('./Flask'),
+  Flower: () => import('./Flower'),
+  Folder: () => import('./Folder'),
+  Forest: () => import('./Forest'),
+  FullCircle: () => import('./FullCircle'),
+  Gas: () => import('./Gas'),
+  Gift: () => import('./Gift'),
+  GlobalSearch: () => import('./GlobalSearch'),
+  Global: () => import('./Global'),
+  Graph: () => import('./Graph'),
+  Group: () => import('./Group'),
+  Hardware: () => import('./Hardware'),
+  HashTag: () => import('./HashTag'),
+  HeartFilled: () => import('./HeartFilled'),
+  Heart: () => import('./Heart'),
+  Hierarchy: () => import('./Hierarchy'),
+  HomeFilled: () => import('./HomeFilled'),
+  Home: () => import('./Home'),
+  Image: () => import('./Image'),
+  Info: () => import('./Info'),
+  Inventory: () => import('./Inventory'),
+  Joystick: () => import('./Joystick'),
+  KeepFilled: () => import('./KeepFilled'),
+  Keep: () => import('./Keep'),
+  Key: () => import('./Key'),
+  LastPage: () => import('./LastPage'),
+  LightFilled: () => import('./LightFilled'),
+  Light: () => import('./Light'),
+  Link: () => import('./Link'),
+  ListArrow: () => import('./ListArrow'),
+  Loading: () => import('./Loading'),
+  Location: () => import('./Location'),
+  LockSlash: () => import('./LockSlash'),
+  Lock: () => import('./Lock'),
+  LockedFilled: () => import('./LockedFilled'),
+  Login: () => import('./Login'),
+  Logout: () => import('./Logout'),
+  Mail: () => import('./Mail'),
+  Map: () => import('./Map'),
+  Menu: () => import('./Menu'),
+  Merge: () => import('./Merge'),
+  MessageQuestion: () => import('./MessageQuestion'),
+  Messages: () => import('./Messages'),
+  MetamaskFoxOutline: () => import('./MetamaskFoxOutline'),
+  Mic: () => import('./Mic'),
+  MinusBold: () => import('./MinusBold'),
+  MinusSquare: () => import('./MinusSquare'),
+  Minus: () => import('./Minus'),
+  Mobile: () => import('./Mobile'),
+  MoneyBag: () => import('./MoneyBag'),
+  Money: () => import('./Money'),
+  Monitor: () => import('./Monitor'),
+  MoreHorizontal: () => import('./MoreHorizontal'),
+  MoreVertical: () => import('./MoreVertical'),
+  MountainFlag: () => import('./MountainFlag'),
+  MusdFilled: () => import('./MusdFilled'),
+  Musd: () => import('./Musd'),
+  MusicNote: () => import('./MusicNote'),
+  NoPhotography: () => import('./NoPhotography'),
+  Notification: () => import('./Notification'),
+  PageInfo: () => import('./PageInfo'),
+  Palette: () => import('./Palette'),
+  PasswordCheck: () => import('./PasswordCheck'),
+  Pending: () => import('./Pending'),
+  People: () => import('./People'),
+  PersonCancel: () => import('./PersonCancel'),
+  PieChart: () => import('./PieChart'),
+  Pin: () => import('./Pin'),
+  Plant: () => import('./Plant'),
+  Plug: () => import('./Plug'),
+  PlusAndMinus: () => import('./PlusAndMinus'),
+  PolicyAlert: () => import('./PolicyAlert'),
+  PopUp: () => import('./PopUp'),
+  Predictions: () => import('./Predictions'),
+  Print: () => import('./Print'),
+  PriorityHigh: () => import('./PriorityHigh'),
+  PrivacyTip: () => import('./PrivacyTip'),
+  ProgrammingArrows: () => import('./ProgrammingArrows'),
+  Publish: () => import('./Publish'),
+  QrCode: () => import('./QrCode'),
+  Question: () => import('./Question'),
+  Receive: () => import('./Receive'),
+  Received: () => import('./Received'),
+  Refresh: () => import('./Refresh'),
+  RemoveMinus: () => import('./RemoveMinus'),
+  Report: () => import('./Report'),
+  Rocket: () => import('./Rocket'),
+  SaveFilled: () => import('./SaveFilled'),
+  Save: () => import('./Save'),
+  Saving: () => import('./Saving'),
+  ScanBarcode: () => import('./ScanBarcode'),
+  ScanFocus: () => import('./ScanFocus'),
+  Scan: () => import('./Scan'),
+  Search: () => import('./Search'),
+  SecurityAlert: () => import('./SecurityAlert'),
+  SecurityCross: () => import('./SecurityCross'),
+  SecurityKey: () => import('./SecurityKey'),
+  SecuritySearch: () => import('./SecuritySearch'),
+  SecuritySlash: () => import('./SecuritySlash'),
+  SecurityTick: () => import('./SecurityTick'),
+  SecurityTime: () => import('./SecurityTime'),
+  SecurityUser: () => import('./SecurityUser'),
+  Security: () => import('./Security'),
+  Send: () => import('./Send'),
+  SentimentDissatisfied: () => import('./SentimentDissatisfied'),
+  SentimentNeutral: () => import('./SentimentNeutral'),
+  SentimentSatisfied: () => import('./SentimentSatisfied'),
+  SentimentVerySatisfied: () => import('./SentimentVerySatisfied'),
+  SettingFilled: () => import('./SettingFilled'),
+  Setting: () => import('./Setting'),
+  Share: () => import('./Share'),
+  ShieldLock: () => import('./ShieldLock'),
+  ShoppingBag: () => import('./ShoppingBag'),
+  ShoppingCart: () => import('./ShoppingCart'),
+  SidePanel: () => import('./SidePanel'),
+  SignalCellular: () => import('./SignalCellular'),
+  Slash: () => import('./Slash'),
+  Sms: () => import('./Sms'),
+  SnapsMobile: () => import('./SnapsMobile'),
+  SnapsPlus: () => import('./SnapsPlus'),
+  SnapsRound: () => import('./SnapsRound'),
+  Snaps: () => import('./Snaps'),
+  SortByAlpha: () => import('./SortByAlpha'),
+  Sort: () => import('./Sort'),
+  Sparkle: () => import('./Sparkle'),
+  Speed: () => import('./Speed'),
+  Speedometer: () => import('./Speedometer'),
+  Square: () => import('./Square'),
+  Stake: () => import('./Stake'),
+  StarFilled: () => import('./StarFilled'),
+  Star: () => import('./Star'),
+  Start: () => import('./Start'),
+  Storefront: () => import('./Storefront'),
+  Student: () => import('./Student'),
+  SwapHorizontal: () => import('./SwapHorizontal'),
+  SwapVertical: () => import('./SwapVertical'),
+  TabClose: () => import('./TabClose'),
+  TableRow: () => import('./TableRow'),
+  Tablet: () => import('./Tablet'),
+  Tag: () => import('./Tag'),
+  Telegram: () => import('./Telegram'),
+  ThumbDownFilled: () => import('./ThumbDownFilled'),
+  ThumbDown: () => import('./ThumbDown'),
+  ThumbUpFilled: () => import('./ThumbUpFilled'),
+  ThumbUp: () => import('./ThumbUp'),
+  Tint: () => import('./Tint'),
+  Tooltip: () => import('./Tooltip'),
+  Translate: () => import('./Translate'),
+  Trash: () => import('./Trash'),
+  TrendDown: () => import('./TrendDown'),
+  TrendUp: () => import('./TrendUp'),
+  Trophy: () => import('./Trophy'),
+  Undo: () => import('./Undo'),
+  Unfold: () => import('./Unfold'),
+  UnlockedFilled: () => import('./UnlockedFilled'),
+  Unpin: () => import('./Unpin'),
+  UploadFile: () => import('./UploadFile'),
+  Upload: () => import('./Upload'),
+  Usb: () => import('./Usb'),
+  UserCheck: () => import('./UserCheck'),
+  UserCircleAdd: () => import('./UserCircleAdd'),
+  UserCircleRemove: () => import('./UserCircleRemove'),
+  UserCircle: () => import('./UserCircle'),
+  User: () => import('./User'),
+  VerifiedFilled: () => import('./VerifiedFilled'),
+  Verified: () => import('./Verified'),
+  Videocam: () => import('./Videocam'),
+  ViewColumn: () => import('./ViewColumn'),
+  ViewInAr: () => import('./ViewInAr'),
+  VolumeOff: () => import('./VolumeOff'),
+  VolumeUp: () => import('./VolumeUp'),
+  WalletFilled: () => import('./WalletFilled'),
+  Wallet: () => import('./Wallet'),
+  Warning: () => import('./Warning'),
+  WebTraffic: () => import('./WebTraffic'),
+  Widgets: () => import('./Widgets'),
+  WifiOff: () => import('./WifiOff'),
+  Wifi: () => import('./Wifi'),
+  X: () => import('./X'),
+} as unknown as Record<IconName, IconLoader>;
 
-export type IconsType = typeof Icons;
+/**
+ * Type guard to check if a string is a valid IconName at runtime.
+ *
+ * @param name - The icon name to check.
+ * @returns True if the name corresponds to a registered icon loader.
+ */
+export function isIconName(name: string): name is IconName {
+  return Object.prototype.hasOwnProperty.call(iconLoaders, name);
+}

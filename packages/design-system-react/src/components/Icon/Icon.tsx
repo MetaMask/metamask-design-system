@@ -1,13 +1,13 @@
 import { IconSize, IconColor } from '@metamask/design-system-shared';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
+import { getLazyIcon, isIconName } from './Icon.registry';
 import type { IconProps } from './Icon.types';
-import { Icons } from './icons';
 
-export const Icon: React.FC<IconProps> = ({
+const IconRenderer: React.FC<IconProps> = ({
   name,
   size = IconSize.Md,
   color = IconColor.IconDefault,
@@ -20,12 +20,12 @@ export const Icon: React.FC<IconProps> = ({
     return null;
   }
 
-  const IconComponent = Icons[name];
-
-  if (!IconComponent) {
-    console.warn(`Icon "${name}" not found`);
+  if (!isIconName(name)) {
+    console.warn(`Icon "${String(name)}" not found`);
     return null;
   }
+
+  const LazyIconComponent = getLazyIcon(name);
 
   const mergedClassName = twMerge(
     'inline-block',
@@ -35,10 +35,16 @@ export const Icon: React.FC<IconProps> = ({
   );
 
   return (
-    <IconComponent
+    <LazyIconComponent
       className={mergedClassName}
       {...(props as React.SVGProps<SVGSVGElement>)}
       style={style}
     />
   );
 };
+
+export const Icon: React.FC<IconProps> = (props) => (
+  <Suspense fallback={null}>
+    <IconRenderer {...props} />
+  </Suspense>
+);
