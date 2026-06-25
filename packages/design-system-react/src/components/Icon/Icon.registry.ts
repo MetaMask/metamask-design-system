@@ -59,23 +59,25 @@ type GetIconComponentOptions = {
 
 /**
  * Resolves an icon component for rendering.
- * In tests, returns a synchronously cached component after preloadIconsForTests().
- * In production, returns a React.lazy wrapper for code splitting.
+ * Returns a synchronously cached component when present in the test preload
+ * cache (populated by preloadIconsForTests()). Otherwise returns a React.lazy
+ * wrapper for per-icon code splitting.
  *
  * @param name - The icon name to resolve.
  * @param options - Optional resolver configuration.
- * @param options.useTestCache - Whether to read from the Jest preload cache.
+ * @param options.useTestCache - When false, skips the test preload cache.
  * @returns The icon component to render.
  */
 export function getIconComponent(
   name: IconName,
   options?: GetIconComponentOptions,
 ): IconComponentType | LazyExoticComponent<IconComponentType> {
-  const useTestCache = options?.useTestCache ?? process.env.NODE_ENV === 'test';
-  const cachedTestIcon = useTestCache ? testIconCache.get(name) : undefined;
+  if (options?.useTestCache !== false) {
+    const cachedTestIcon = testIconCache.get(name);
 
-  if (cachedTestIcon) {
-    return cachedTestIcon;
+    if (cachedTestIcon) {
+      return cachedTestIcon;
+    }
   }
 
   return getLazyIcon(name);
