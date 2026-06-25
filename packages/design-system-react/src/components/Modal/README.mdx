@@ -9,10 +9,36 @@ import * as ModalStories from './Modal.stories';
 `Modal` is intentionally a thin shell. Compose it with `ModalOverlay`, `ModalContent`, `ModalHeader`, `ModalBody`, and `ModalFooter` to assemble a full modal UI.
 
 ```tsx
-import { Modal } from '@metamask/design-system-react';
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+} from '@metamask/design-system-react';
 
 <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-  {/* ModalOverlay + ModalContent + … */}
+  <ModalOverlay />
+  <ModalContent>
+    <ModalHeader
+      onClose={() => setIsOpen(false)}
+      closeButtonProps={{ ariaLabel: 'Close' }}
+    >
+      Modal Header
+    </ModalHeader>
+    <ModalBody>ModalBody children</ModalBody>
+    <ModalFooter
+      primaryButtonProps={{
+        children: 'Confirm',
+        onClick: () => setIsOpen(false),
+      }}
+      secondaryButtonProps={{
+        children: 'Cancel',
+        onClick: () => setIsOpen(false),
+      }}
+    />
+  </ModalContent>
 </Modal>;
 ```
 
