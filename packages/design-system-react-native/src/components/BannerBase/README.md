@@ -76,7 +76,7 @@ Optional content rendered below the description. If a string is passed, BannerBa
 ### `actionButtonOnPress`
 
 Optional press handler for the action button.
-When provided, `actionButtonLabel` is required. Use `actionButtonProps` to pass additional props to the action `Button`; `variant` is not supported and defaults to primary.
+When provided, `actionButtonLabel` is required. Use `actionButtonProps` to pass additional props to the action `Button`; `variant` is not supported and defaults to secondary.
 
 | PROP                  | TYPE                                                               | REQUIRED                                                       | DEFAULT     |
 | --------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------- | ----------- |
