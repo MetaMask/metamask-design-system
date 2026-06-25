@@ -4,6 +4,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
+- [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
+- [From version 0.27.0 to 0.28.0](#from-version-0270-to-0280)
 - [From Mobile Component Library](#from-mobile-component-library)
   - [Button Component](#button-component)
   - [ButtonBase Component](#buttonbase-component)
@@ -17,17 +20,33 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
+  - [BadgeCount Component](#badgecount-component)
+  - [BadgeIcon Component](#badgeicon-component)
+  - [BadgeNetwork Component](#badgenetwork-component)
+  - [BadgeStatus Component](#badgestatus-component)
+  - [BadgeWrapper Component](#badgewrapper-component)
+  - [Deprecated aggregate `Badge` component](#deprecated-aggregate-badge-component)
   - [HeaderBase Component](#headerbase-component)
   - [Text Component](#text-component)
   - [Label Component](#label-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
   - [Checkbox Component](#checkbox-component)
+  - [AvatarBase Component](#avatarbase-component)
+  - [AvatarAccount Component](#avataraccount-component)
+  - [AvatarFavicon Component](#avatarfavicon-component)
+  - [AvatarIcon Component](#avataricon-component)
+  - [AvatarNetwork Component](#avatarenetwork-component)
+  - [AvatarToken Component](#avatartoken-component)
+  - [AvatarGroup Component](#avatargroup-component)
   - [TextField Component](#textfield-component)
+  - [KeyValueRow Component](#keyvaluerow-component)
   - [ListItem Component](#listitem-component)
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.24.0 to 0.x.0](#from-version-0240-to-0x0)
+  - [From version 0.26.0 to 0.27.0](#from-version-0260-to-0270)
+  - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
   - [From version 0.23.0 to 0.24.0](#from-version-0230-to-0240)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.21.0 to 0.22.0](#from-version-0210-to-0220)
@@ -43,9 +62,226 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
+### From version 0.29.0 to 0.30.0
 
-### From version 0.24.0 to 0.x.0
+<a id="segmentbutton-and-segmentgroup-renamed-to-filterbutton-and-filterbuttongroup"></a>
+
+#### `SegmentButton` and `SegmentGroup` renamed to `FilterButton` and `FilterButtonGroup`
+
+The segmented filter control components are renamed to align with product naming. Props and behavior are unchanged — only export names change.
+
+**What changed:**
+
+| Before (0.29.0)        | After (0.30.0)           |
+| ---------------------- | ------------------------ |
+| `SegmentButton`        | `FilterButton`           |
+| `SegmentButtonVariant` | `FilterButtonVariant`    |
+| `SegmentButtonProps`   | `FilterButtonProps`      |
+| `SegmentGroup`         | `FilterButtonGroup`      |
+| `SegmentGroupProps`    | `FilterButtonGroupProps` |
+
+**Migration:**
+
+```tsx
+// Before (0.29.0)
+import {
+  SegmentButton,
+  SegmentButtonVariant,
+  SegmentGroup,
+} from '@metamask/design-system-react-native';
+
+<SegmentGroup
+  value={value}
+  onChange={setValue}
+  variant={SegmentButtonVariant.Primary}
+>
+  <SegmentButton value="all" onPress={() => {}}>
+    All
+  </SegmentButton>
+  <SegmentButton value="tokens" onPress={() => {}}>
+    Tokens
+  </SegmentButton>
+</SegmentGroup>;
+
+// After (0.30.0)
+import {
+  FilterButton,
+  FilterButtonVariant,
+  FilterButtonGroup,
+} from '@metamask/design-system-react-native';
+
+<FilterButtonGroup
+  value={value}
+  onChange={setValue}
+  variant={FilterButtonVariant.Primary}
+>
+  <FilterButton value="all" onPress={() => {}}>
+    All
+  </FilterButton>
+  <FilterButton value="tokens" onPress={() => {}}>
+    Tokens
+  </FilterButton>
+</FilterButtonGroup>;
+```
+
+If you import shared types or context directly from `@metamask/design-system-shared`, apply the same renames there (`FilterButtonPropsShared`, `FilterButtonGroupPropsShared`, `FilterButtonGroupContext`, `FilterButtonGroupContextValue`). See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#filterbutton-shared-rename).
+
+**Impact:**
+
+- Any import of `SegmentButton`, `SegmentButtonVariant`, `SegmentGroup`, or related prop/context types must be renamed.
+- `ButtonFilter` is a separate component (active/inactive filter chip) and is not affected by this rename.
+
+#### `Content` shell accessories removed; row accessories moved to `ListItem`
+
+`Content` is now inner-only (avatar, title/description, value/subvalue, and inline text accessories). Row shell accessories (`startAccessory`, `endAccessory`) live on `ListItem`. Column shell accessories (`topAccessory`, `bottomAccessory`) are removed — compose them manually with `BoxColumn`.
+
+**What changed:**
+
+- `startAccessory` / `endAccessory` removed from `ContentPropsShared` → use `ListItem` instead
+- `topAccessory` / `bottomAccessory` removed from `ContentPropsShared` → wrap with `BoxColumn` instead
+
+**Migration:**
+
+`startAccessory` / `endAccessory` — moved to `ListItem`:
+
+```tsx
+// Before (0.29.0)
+<Content startAccessory={<Icon name={IconName.Token} />} title="Label" />
+
+// After (0.30.0)
+<ListItem startAccessory={<Icon name={IconName.Token} />} title="Label" />
+```
+
+`topAccessory` / `bottomAccessory` — removed; compose manually:
+
+```tsx
+// Before (0.29.0)
+<ListItem topAccessory={<BannerAlert />} title="Token" value="100" />
+
+// After (0.30.0)
+<BoxColumn topAccessory={<BannerAlert />}>
+  <ListItem title="Token" value="100" />
+</BoxColumn>
+```
+
+**Impact:**
+
+- Any call site passing `startAccessory` or `endAccessory` on `Content` must move those props to `ListItem`.
+- Any call site using `topAccessory` or `bottomAccessory` on `Content` or `ListItem` must wrap the row in `BoxColumn` (or an equivalent layout) instead.
+- Legacy `Content` shell rows used 16px spacing (`gap={4}`) between accessories and inner content. `ListItem` defaults to `accessoryGap={0}`; pass `accessoryGap={4}` to restore the previous spacing.
+
+### From version 0.28.0 to 0.29.0
+
+#### Severity vocabulary: `Error` renamed to `Danger` across `AvatarIconSeverity`, `IconAlertSeverity`, and `TagSeverity`
+
+The public severity API for `AvatarIcon`, `IconAlert`, and `Tag` now uses `Danger` instead of `Error` for destructive or critical states, and `Neutral` as the canonical name for default-like states.
+
+**What changed:**
+
+- `AvatarIconSeverity.Error` (`'error'`) → `AvatarIconSeverity.Danger` (`'danger'`)
+- `IconAlertSeverity.Error` (`'error'`) → `IconAlertSeverity.Danger` (`'danger'`)
+- `TagSeverity.Error` (`'error'`) → `TagSeverity.Danger` (`'danger'`)
+
+**Migration:**
+
+```tsx
+// Before (0.28.0)
+import {
+  AvatarIcon,
+  AvatarIconSeverity,
+  IconAlert,
+  IconAlertSeverity,
+  Tag,
+  TagSeverity,
+} from '@metamask/design-system-react-native';
+
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Error} />
+<IconAlert severity={IconAlertSeverity.Error} />
+<Tag severity={TagSeverity.Error}>High risk</Tag>
+
+// After (0.29.0)
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Danger} />
+<IconAlert severity={IconAlertSeverity.Danger} />
+<Tag severity={TagSeverity.Danger}>High risk</Tag>
+```
+
+**Impact:**
+
+- Any call site using `.Error` on these three severity const objects must change to `.Danger`. The rendered color is unchanged — `Danger` still maps to the error color tokens.
+
+### From version 0.27.0 to 0.28.0
+
+#### TextArea: flattened to the root `TextInput`
+
+`TextArea` now renders the root `TextInput` directly instead of wrapping it in a separate container with a nested input slot.
+This change is scoped to `TextArea`; `TextField` still supports `inputElement` and `inputRef`.
+
+**What changed:**
+
+- **`inputElement`** is removed.
+- **`inputProps`** is removed. Pass `TextInput` props directly on `TextArea`.
+- **`inputRef`** is removed. Use the component **`ref`** to access the root **`TextInput`**.
+- **`testID`**, **`style`**, and **`twClassName`** now apply to the root **`TextInput`**.
+
+**Migration:**
+
+- Move any custom input replacement out of `TextArea` and compose it around the component instead.
+- Pass native **`TextInput`** props directly to `TextArea`.
+- Update any imperative focus or measurement logic to use the component **`ref`**.
+
+**Impact:**
+
+- Existing call sites that relied on the wrapper `Box`, `inputProps`, or `inputRef` must update to the flattened API.
+
+### From version 0.26.0 to 0.27.0
+
+#### Removed `panGestureHandlerProps` from `BottomSheetDialog` and `BottomSheet`
+
+The `panGestureHandlerProps` prop has been removed from both `BottomSheetDialog` and `BottomSheet`.
+
+This prop was a compatibility shim from the old `react-native-gesture-handler` v1 `PanGestureHandler` JSX component. With the migration to the RNGH v2 `GestureDetector` + `Gesture.Pan()` API, the prop was mapped to individual method calls via an internal `applyPanGestureProps` function — however `simultaneousHandlers` (the only real-world use case) was never wired up and was silently dropped. The prop was also not used anywhere in the MetaMask Mobile or Extension consumer codebases.
+
+**Before (0.26.0):**
+
+```tsx
+<BottomSheet
+  goBack={goBack}
+  panGestureHandlerProps={{
+    simultaneousHandlers: scrollViewRef,
+  }}
+>
+  {children}
+</BottomSheet>
+```
+
+**After (0.27.0):**
+
+```tsx
+<BottomSheet goBack={goBack}>{children}</BottomSheet>
+```
+
+If you were relying on `simultaneousHandlers` for nested scroll behaviour, this was not functioning correctly in the previous version. First-class support for simultaneous gesture handling will be addressed in a follow-up.
+
+#### HeaderBase and BottomSheetHeader: variant-based title API removed
+
+**What changed:**
+
+- **`HeaderBase`** no longer exposes **`variant`** or **`HeaderBaseVariant`**.
+- **`BottomSheetHeader`** no longer exposes **`variant`** or **`BottomSheetHeaderVariant`**.
+- **`HeaderBase`** no longer exposes **`titleTestID`**. Use **`textProps.testID`** for the auto-rendered string title path.
+- String children now render with the shared centered **`HeadingSm`** title treatment. If you need a custom title layout, pass a custom **`ReactNode`** as **`children`** instead of relying on variants.
+- **`BottomSheetHeader`** continues to inherit **`HeaderBase`** root and title props, including **`textProps`**, while still owning its back and close accessories internally through **`onBack`** and **`onClose`**.
+
+**Migration:**
+
+- Remove **`variant`** from **`HeaderBase`** and **`BottomSheetHeader`** call sites.
+- Remove imports of **`HeaderBaseVariant`** and **`BottomSheetHeaderVariant`**.
+- Replace **`titleTestID="..."`** with **`textProps={{ testID: '...' }}`**.
+- If you previously used a variant to change title alignment or layout, pass custom **`children`** instead.
+
+See [HeaderBase Component](#headerbase-component) and [BottomSheetHeader Component](#bottomsheetheader-component) for complete before/after examples and API mappings.
+
+### From version 0.24.0 to 0.25.0
 
 #### BannerBase: `onClose` is now the only close-button behavior API
 
@@ -64,6 +300,45 @@ This guide provides detailed instructions for migrating your project from one ve
 **Impact:**
 
 - Existing **`@metamask/design-system-react-native`** consumers that relied on **`closeButtonProps.onPress`** or on rendering a close button without **`onClose`** must update those call sites.
+
+<a id="buttonbase-size-defaults"></a>
+
+#### ButtonBase: let `size` drive label, icons, and spacing
+
+**What changed:**
+
+- **`ButtonBase`** maps each **`ButtonBaseSize`** to a recommended label **`Text`** variant, matching start and end **`Icon`** sizes, and consistent spacing between accessories and the label.
+
+**Recommendation:**
+
+For any product-specific button built on **`ButtonBase`** (wrappers that forward **`textProps`**, **`textClassName`**, **`startIconProps`**, **`endIconProps`**, **`iconClassName`**, **`spinnerProps`**, or layout **`twClassName`**):
+
+- Remove **icon size** overrides on **`startIconProps`**, **`endIconProps`**, and loading **`spinnerProps`** unless a written design exception requires them.
+- Remove **label typography overrides** in **`textProps`** / **`textClassName`** so the label follows the mapping for the chosen **`size`**.
+- Remove **spacing overrides** (extra gap/margin **`twClassName`** on the root or content row) that only existed to nudge icon–label rhythm; **`ButtonBase`** now owns that layout.
+
+**Migration:**
+
+```tsx
+// Before: overrides that duplicate what size already encodes
+<ButtonBase
+  size={ButtonBaseSize.Md}
+  startIconProps={{ name: IconName.Add, size: IconSize.Md }}
+  textProps={{ variant: TextVariant.BodyLg }}
+  twClassName="gap-4"
+>
+  Continue
+</ButtonBase>
+
+// After: rely on size-driven defaults
+<ButtonBase size={ButtonBaseSize.Md} startIconProps={{ name: IconName.Add }}>
+  Continue
+</ButtonBase>
+```
+
+**Impact:**
+
+- Custom **`ButtonBase`** wrappers that hard-coded icon sizes, text variants, or gaps may render slightly differently after removing overrides; visually they should match the current design spec for that **`size`**.
 
 <!-- Backward-compatible anchor for the 0.24.0 changelog entry that shipped with the old placeholder link. -->
 
@@ -1652,6 +1927,24 @@ import BottomSheetHeader from '.../component-library/components/BottomSheets/Bot
 />;
 ```
 
+##### Removed Prop: `variant`
+
+The DS `BottomSheetHeader` no longer supports `variant` or `BottomSheetHeaderVariant`. It always uses the shared `HeaderBase` title path. If you previously used a variant to change title layout or alignment, pass custom header content as `children` instead.
+
+| Mobile Pattern                                   | Design System Migration                             |
+| ------------------------------------------------ | --------------------------------------------------- |
+| `variant={BottomSheetHeaderVariant.Compact}`     | Remove — default DS behavior                        |
+| `variant={BottomSheetHeaderVariant.Display}`     | Remove — compose custom title content as `children` |
+| `import { BottomSheetHeaderVariant } from '...'` | Remove — enum no longer exists                      |
+
+##### String title testing: `titleTestID` → `textProps.testID`
+
+The DS `BottomSheetHeader` inherits `textProps` from `HeaderBase`. When `children` is a string, use `textProps={{ testID: ... }}` to target the rendered title element.
+
+| Mobile / Older Pattern          | Design System Migration                     |
+| ------------------------------- | ------------------------------------------- |
+| `titleTestID="my-header-title"` | `textProps={{ testID: 'my-header-title' }}` |
+
 #### Migration Examples
 
 ##### Header with Close Button
@@ -1704,13 +1997,20 @@ After (Design System — identical JSX):
 
 #### API Differences
 
-The DS `BottomSheetHeader` adds a `variant` prop (`BottomSheetHeaderVariant.Compact` | `BottomSheetHeaderVariant.Display`) that is also present in the old mobile version — no change needed. The only removal is `endAccessory` (see above).
+The DS `BottomSheetHeader` supports the same back/close convenience props as mobile (`onBack`, `backButtonProps`, `onClose`, `closeButtonProps`) and still inherits `HeaderBase` root props such as `testID`, `style`, `twClassName`, and `textProps`. It does not support `endAccessory`, `startAccessory`, or `variant`, and string-title testing should use `textProps.testID` instead of `titleTestID`.
 
 ---
 
 ### BottomSheetFooter Component
 
 The `BottomSheetFooter` component has significant breaking changes. The old mobile version accepted a generic `buttonPropsArray` (an array of full `ButtonProps` objects including `variant`). The DS version uses a structured `primaryButtonProps` / `secondaryButtonProps` API instead, where `variant` is set automatically.
+
+Source references (for API diffing):
+
+- Legacy: [`app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.tsx`](https://github.com/MetaMask/metamask-mobile/blob/main/app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.tsx) and [`BottomSheetFooter.types.ts`](https://github.com/MetaMask/metamask-mobile/blob/main/app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.types.ts)
+- MMDS: [`packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.tsx`](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.tsx) and [`BottomSheetFooter.types.ts`](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.types.ts)
+
+On web, the extension modal footer migration lives under [ModalFooter Component](../design-system-react/MIGRATION.md#modalfooter-component); that API was converged onto the same primary/secondary slot shape as this footer.
 
 #### Breaking Changes
 
@@ -1724,6 +2024,18 @@ The `BottomSheetFooter` component has significant breaking changes. The old mobi
 ##### `buttonPropsArray` → `primaryButtonProps` / `secondaryButtonProps`
 
 The old `buttonPropsArray: ButtonProps[]` is replaced by two named props. The `variant` field is no longer accepted — the DS footer always renders the primary button as `ButtonVariant.Primary` and the secondary button as `ButtonVariant.Secondary`.
+
+| Legacy mobile API                               | MMDS API                                                 | Change type | Notes                                                                                                                                                                        |
+| ----------------------------------------------- | -------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `buttonPropsArray` (required)                   | `primaryButtonProps` / `secondaryButtonProps` (optional) | reshaped    | At least one slot should be provided when you need actions; see empty footer behavior below.                                                                                 |
+| Index `0` in the array                          | `secondaryButtonProps`                                   | renamed     | Cancel / secondary action — rendered first (left / top).                                                                                                                     |
+| Index `1` (when two buttons)                    | `primaryButtonProps`                                     | renamed     | Confirm / primary action — rendered second (right / bottom).                                                                                                                 |
+| Single-element array                            | Typically `primaryButtonProps` only                      | convention  | If the legacy array had one button, map it to the slot that matches its `variant` (`Primary` → `primaryButtonProps`, `Secondary` → `secondaryButtonProps`).                  |
+| `variant` on each entry                         | removed                                                  | removed     | Always `Primary` / `Secondary` per slot; types use `Omit<ButtonProps, 'variant'>`.                                                                                           |
+| `label`                                         | `children`                                               | renamed     | DS `Button` uses `children` for the visible label.                                                                                                                           |
+| `onPress`                                       | `onPress`                                                | unchanged   | Still the native press handler on each button bag.                                                                                                                           |
+| `style` on footer                               | `style`, `twClassName`                                   | extended    | `twClassName` is new for Tailwind utility overrides on the footer container.                                                                                                 |
+| Renders `View` when `buttonPropsArray` is empty | `null` when both slots omitted                           | behavior    | Legacy still mounted an empty footer `View` (with default `testID`). MMDS returns `null` — wrap with your own `View` if you need a stable layout or test id with no buttons. |
 
 | Old `buttonPropsArray` field                | New prop location                                       |
 | ------------------------------------------- | ------------------------------------------------------- |
@@ -1828,9 +2140,9 @@ After (Design System):
 />
 ```
 
-##### `ButtonsAlignment` — Unchanged
+##### `ButtonsAlignment` — Same enum within React Native
 
-`ButtonsAlignment.Horizontal` / `ButtonsAlignment.Vertical` values and import path are the same in both versions (only the package path changes):
+Between legacy mobile and `@metamask/design-system-react-native`, `ButtonsAlignment.Horizontal` / `ButtonsAlignment.Vertical` keep the same enum values (`'Horizontal'` | `'Vertical'`). Only the import path changes:
 
 ```tsx
 // Before
@@ -1845,6 +2157,8 @@ import {
 } from '@metamask/design-system-react-native';
 ```
 
+On web, `@metamask/design-system-react` **`ModalFooter`** uses lowercase alignment literals (`'horizontal'` | `'vertical'`). Do not copy raw alignment strings from Extension into Mobile or vice versa — import `ButtonsAlignment` from the package you are compiling against.
+
 #### Blocked Patterns
 
 If the `buttonPropsArray` contains **more than two** button entries, or if buttons need variants other than Primary/Secondary (e.g. `ButtonVariants.Link`), the DS `BottomSheetFooter` cannot be used as a drop-in replacement. Keep the old CL import for those files until the DS component adds broader support.
@@ -1853,11 +2167,19 @@ If the `buttonPropsArray` contains **more than two** button entries, or if butto
 
 The DS `BottomSheetFooter` adds `twClassName` for Tailwind utility class overrides. The `style` prop (from `ViewProps`) is still supported and behaves the same.
 
+##### Button prop renames inside each slot
+
+Mobile legacy `Button` and MMDS `Button` already share names like `isDanger` on primary/secondary variants. When migrating footers, apply the same [Button Component](#button-component) renames (`isDisabled`, `isLoading`, etc.) inside `primaryButtonProps` / `secondaryButtonProps` if your old `buttonPropsArray` entries used older prop names.
+
+##### Extension / web modal footer (`ModalFooter`)
+
+MetaMask Extension’s `ModalFooter` migrated to the same slot-based API in `@metamask/design-system-react`; event handlers use `onClick` there instead of `onPress`. See [ModalFooter Component](../design-system-react/MIGRATION.md#modalfooter-component).
+
 ---
 
 ### HeaderBase Component
 
-The `HeaderBase` component is a flexible header with optional start/end accessories and a configurable title variant. Migration is nearly a drop-in swap — most consumers change the import, remove two constant imports, and switch any affected test IDs to explicit props.
+The `HeaderBase` component is a flexible header with optional start/end accessories and a centered title. Migration is still close to a drop-in import swap, but the DS version removes the old variant-based title API and the dedicated `titleTestID` prop.
 
 #### Breaking Changes
 
@@ -1866,7 +2188,7 @@ The `HeaderBase` component is a flexible header with optional start/end accessor
 | Mobile Pattern                                                                    | Design System Migration                                                       |
 | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | `import HeaderBase from '.../component-library/components/HeaderBase'`            | `import { HeaderBase } from '@metamask/design-system-react-native'`           |
-| `import { HeaderBaseVariant } from '.../component-library/components/HeaderBase'` | `import { HeaderBaseVariant } from '@metamask/design-system-react-native'`    |
+| `import { HeaderBaseVariant } from '.../component-library/components/HeaderBase'` | Remove — enum no longer exists                                                |
 | `import type { HeaderBaseProps } from '.../HeaderBase/HeaderBase.types'`          | `import type { HeaderBaseProps } from '@metamask/design-system-react-native'` |
 
 Note: The legacy component uses a **default export**; the design system uses a **named export**.
@@ -1880,12 +2202,12 @@ The legacy component exported two test-ID constants from `HeaderBase.constants`:
 
 The design system removes both constants. Test IDs are now explicit per call site.
 
-| Mobile Pattern                                                        | Design System Migration                                 |
-| --------------------------------------------------------------------- | ------------------------------------------------------- |
-| `import { HEADERBASE_TEST_ID } from '.../HeaderBase.constants'`       | Remove — pass `testID="..."` explicitly on `HeaderBase` |
-| `import { HEADERBASE_TITLE_TEST_ID } from '.../HeaderBase.constants'` | Remove — use the new `titleTestID` prop on `HeaderBase` |
-| Querying by the default `'header'` container id                       | Pass an explicit `testID` and query by that value       |
-| Querying by `'header-title'` in tests                                 | Pass `titleTestID="..."` and query by that value        |
+| Mobile Pattern                                                        | Design System Migration                                      |
+| --------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `import { HEADERBASE_TEST_ID } from '.../HeaderBase.constants'`       | Remove — pass `testID="..."` explicitly on `HeaderBase`      |
+| `import { HEADERBASE_TITLE_TEST_ID } from '.../HeaderBase.constants'` | Remove — use `textProps={{ testID: '...' }}` instead         |
+| Querying by the default `'header'` container id                       | Pass an explicit `testID` and query by that value            |
+| Querying by `'header-title'` in tests                                 | Pass `textProps={{ testID: '...' }}` and query by that value |
 
 ##### Default Container `testID` Removed
 
@@ -1895,36 +2217,42 @@ The legacy component set `testID = HEADERBASE_TEST_ID` (`'header'`) by default o
 | ------------------------------------------------------------------ | ------------------------------------------------------ |
 | `<HeaderBase>Title</HeaderBase>` — rendered with `testID="header"` | Pass `testID="..."` explicitly if any tests rely on it |
 
-##### New `titleTestID` Prop
+##### Removed Prop: `titleTestID`
 
-The inner title `Text` (rendered when `children` is a string) no longer carries the hard-coded `HEADERBASE_TITLE_TEST_ID`. Pass the new `titleTestID` prop to target the title element in tests.
+The DS `HeaderBase` no longer exposes `titleTestID`. When `children` is a string, target the rendered title element with `textProps={{ testID: '...' }}` instead.
 
 ```tsx
 // Before — queried by the constant
 getByTestId(HEADERBASE_TITLE_TEST_ID);
 
-// After — caller provides the id
-<HeaderBase titleTestID="update-needed-title">{title}</HeaderBase>;
+// After — caller provides the id through textProps
+<HeaderBase textProps={{ testID: 'update-needed-title' }}>{title}</HeaderBase>;
 getByTestId('update-needed-title');
 ```
 
-##### `Display` Variant: Fixed Height (`h-14`)
+##### Removed Prop: `variant`
 
-The legacy `HeaderBase` applied `min-h-14` only to the `Compact` variant; `Display` had no vertical height constraint and grew with its content. The design system applies `h-14` (56px fixed) to **both** variants.
+The DS `HeaderBase` no longer exposes `variant` or `HeaderBaseVariant`. String children now render through a single centered title path using the shared `HeadingSm` text treatment.
 
-Review `Display` headers after migration — they now render with a fixed 56px height. If your layout expects content-sized heights for `Display`, override via `twClassName` or `style` on the call site.
+If you previously relied on variants to change title layout or alignment, pass custom title content as `children` instead of using the removed enum.
 
-##### Unchanged Props
+| Mobile Pattern                            | Design System Migration                             |
+| ----------------------------------------- | --------------------------------------------------- |
+| `variant={HeaderBaseVariant.Compact}`     | Remove — default DS behavior                        |
+| `variant={HeaderBaseVariant.Display}`     | Remove — compose custom title content as `children` |
+| `import { HeaderBaseVariant } from '...'` | Remove — enum no longer exists                      |
 
-All other props carry over with the same names, defaults, and semantics:
+##### Title rendering and accessory precedence
 
-- `children` — title (string auto-renders as `Text`; `ReactNode` renders as-is)
-- `variant` — `HeaderBaseVariant.Compact` (default) / `HeaderBaseVariant.Display`
-- `startAccessory` / `endAccessory` — custom `ReactNode` slots (take priority over the `*ButtonIconProps` variants)
+The DS component keeps the same core escape hatches, but there are a few important behavior notes:
+
+- `children` — pass a string for the standard centered title, or a custom `ReactNode` for a fully custom title layout
+- `startAccessory` / `endAccessory` — custom `ReactNode` slots (take priority over the `*ButtonIconProps` convenience props)
 - `startButtonIconProps: ButtonIconProps` — render a `ButtonIcon` at the start (default size `ButtonIconSize.Md`)
-- `endButtonIconProps: ButtonIconProps[]` — render multiple `ButtonIcon`s at the end, in reverse order — first item rightmost (default size `ButtonIconSize.Md` each)
+- `endButtonIconProps: ButtonIconProps[]` — render multiple `ButtonIcon`s at the end, in reverse order, so the first item appears rightmost (default size `ButtonIconSize.Md` each)
 - `includesTopInset` — adds the `react-native-safe-area-context` top inset as a top margin (default `false`)
 - `startAccessoryWrapperProps` / `endAccessoryWrapperProps` — `ViewProps` forwarded to the accessory wrappers
+- `textProps` — forwarded to the auto-rendered title text when `children` is a string
 - `twClassName` — Tailwind classes merged with the container defaults
 - `style` — RN style applied to the container
 - All `ViewProps` (including `testID`, `accessibilityLabel`)
@@ -1989,7 +2317,7 @@ import {
 
 <HeaderBase
   testID="account-details-header"
-  titleTestID="account-details-title"
+  textProps={{ testID: 'account-details-title' }}
   endButtonIconProps={[
     {
       iconName: IconName.Close,
@@ -2006,7 +2334,7 @@ getByTestId('account-details-header');
 getByTestId('account-details-title');
 ```
 
-##### `Display` variant with left-aligned title
+##### Custom title content instead of `variant`
 
 Before (Mobile):
 
@@ -2014,8 +2342,12 @@ Before (Mobile):
 import HeaderBase, {
   HeaderBaseVariant,
 } from '../../../component-library/components/HeaderBase';
+import Text from '../../../component-library/components/Texts/Text';
+import { TextVariant } from '../../../component-library/components/Texts/Text';
 
-<HeaderBase variant={HeaderBaseVariant.Display}>Wallet</HeaderBase>;
+<HeaderBase variant={HeaderBaseVariant.Display}>
+  <Text variant={TextVariant.HeadingMD}>Wallet</Text>
+</HeaderBase>;
 ```
 
 After (Design System):
@@ -2023,20 +2355,26 @@ After (Design System):
 ```tsx
 import {
   HeaderBase,
-  HeaderBaseVariant,
+  Box,
+  Text,
+  TextVariant,
 } from '@metamask/design-system-react-native';
 
-<HeaderBase variant={HeaderBaseVariant.Display}>Wallet</HeaderBase>;
+<HeaderBase>
+  <Box twClassName="w-full items-start">
+    <Text variant={TextVariant.HeadingSm}>Wallet</Text>
+    <Text variant={TextVariant.BodySm}>Subtitle</Text>
+  </Box>
+</HeaderBase>;
 ```
-
-Note: the `Display` variant now has a fixed `h-14` container. If you need the legacy content-sized height, override via `twClassName="h-auto"` or an equivalent `style`.
 
 #### API Differences
 
 - The default container `testID="header"` is gone — pass `testID` explicitly if any tests rely on it
-- The `HEADERBASE_TITLE_TEST_ID` constant is gone — use the new `titleTestID` prop to tag the title `Text`
-- `Display` variant now applies a fixed `h-14` (56px) container height; legacy `Display` was content-sized
-- Variant alignment (`Compact` center, `Display` left) and all accessory, inset, and styling props are otherwise unchanged — most call sites migrate with just an import swap plus a test-ID refactor
+- The `HEADERBASE_TITLE_TEST_ID` constant is gone — use `textProps.testID` to tag the auto-rendered title text
+- The `variant` prop and `HeaderBaseVariant` enum are gone — custom title layouts should be passed as custom `children`
+- `startAccessory` / `endAccessory` override the shorthand `startButtonIconProps` / `endButtonIconProps` paths when both are provided
+- `endButtonIconProps` renders in reverse order so the first item appears rightmost
 
 ---
 
@@ -2144,6 +2482,20 @@ Mobile `BannerAlert` maps directly to `BannerAlert` in the design system, with s
 | `BannerAlertSeverity.Success` (`'Success'`) | `BannerAlertSeverity.Success` (`'success'`) | casing changed |
 | `BannerAlertSeverity.Warning` (`'Warning'`) | `BannerAlertSeverity.Warning` (`'warning'`) | casing changed |
 | `BannerAlertSeverity.Error` (`'Error'`)     | `BannerAlertSeverity.Danger` (`'danger'`)   | renamed        |
+
+##### Severity Alignment
+
+The public severity APIs now use `Danger` instead of `Error` for destructive
+or critical states, and `Neutral` instead of any default-like severity. Internal
+color token names are unchanged, so `Danger` variants may still map to
+`ErrorDefault` or `ErrorMuted` tokens.
+
+| Before                                | After                                   | Notes                        |
+| ------------------------------------- | --------------------------------------- | ---------------------------- |
+| `IconAlertSeverity.Error` (`error`)   | `IconAlertSeverity.Danger` (`danger`)   | renamed public API value     |
+| `AvatarIconSeverity.Error` (`error`)  | `AvatarIconSeverity.Danger` (`danger`)  | renamed public API value     |
+| `TagSeverity.Error` (`error`)         | `TagSeverity.Danger` (`danger`)         | renamed public API value     |
+| Any legacy default-like severity name | `Neutral` (`neutral`) where appropriate | canonical neutral vocabulary |
 
 #### Migration Example
 
@@ -2258,6 +2610,200 @@ import { BannerBase } from '@metamask/design-system-react-native';
   closeButtonProps={{ testID: 'banner-base-close-button' }}
 />;
 ```
+
+### BadgeCount Component
+
+MetaMask Mobile does not ship a standalone `BadgeCount` under `app/component-library` (no `BadgeCount` folder on `main`). Use `@metamask/design-system-react-native` **BadgeCount** for numeric overlays (often inside **BadgeWrapper**).
+
+Shared props match `@metamask/design-system-shared`: `count` (required), optional `max` (default `99`), optional `size` (`BadgeCountSize.Md` | `BadgeCountSize.Lg`, default `Md`).
+
+#### Platform props (React Native)
+
+| Prop          | Notes                                      |
+| ------------- | ------------------------------------------ |
+| `textProps`   | Optional. Passed to inner `Text`.          |
+| `twClassName` | Optional. Tailwind / twrnc overrides.      |
+| `style`       | Optional. React Native styles on the root. |
+
+#### Example (Design System)
+
+```tsx
+import {
+  BadgeCount,
+  BadgeCountSize,
+} from '@metamask/design-system-react-native';
+
+<BadgeCount count={5} max={99} size={BadgeCountSize.Md} />;
+```
+
+### BadgeIcon Component
+
+There is no separate legacy **BadgeIcon** component file in the mobile component-library. The closest legacy surface is the **`Badge`** composite’s `BadgeVariant.NotificationsKinds` branch (see [Deprecated aggregate `Badge` component](#deprecated-aggregate-badge-component)), which maps to MMDS **BadgeIcon** (`iconName`).
+
+| Prop       | Type       | Notes     |
+| ---------- | ---------- | --------- |
+| `iconName` | `IconName` | Required. |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeIcon, IconName } from '@metamask/design-system-react-native';
+
+<BadgeIcon iconName={IconName.FullCircle} />;
+```
+
+### BadgeNetwork Component
+
+Legacy **BadgeNetwork** lives under `Badge/variants/BadgeNetwork` and extends **AvatarNetwork** props plus optional `isScaled` (default `true`). MMDS **BadgeNetwork** wraps **AvatarNetwork** with fixed `size={AvatarNetworkSize.Xs}` and `hasBorder` — callers must **not** pass `size` or `shape` on `BadgeNetwork`.
+
+#### Mapping
+
+| Legacy mobile prop                                                                   | MMDS `BadgeNetwork`                                                                                                               |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `name`, `fallbackText`, `src`, other `AvatarNetwork` props (except `size` / `shape`) | Same shared semantics; `size` / `shape` are owned by the wrapper.                                                                 |
+| `isScaled`                                                                           | **Removed** from MMDS `BadgeNetwork`. Handle scaling outside or via `AvatarNetwork` if you need a non-badge-sized network avatar. |
+
+#### Before (Mobile)
+
+```tsx
+import BadgeNetwork from '../../../component-library/components/Badges/Badge/variants/BadgeNetwork';
+
+<BadgeNetwork variant={BadgeVariant.Network} src={uri} name="Ethereum" />;
+```
+
+#### After (Design System)
+
+```tsx
+import { BadgeNetwork } from '@metamask/design-system-react-native';
+
+<BadgeNetwork src={uri} name="Ethereum" />;
+```
+
+### BadgeStatus Component
+
+Legacy **BadgeStatus** (`Badge/variants/BadgeStatus`) used `BadgeStatusState` (`Active` / `Inactive`), optional `state`, and optional `borderColor`. MMDS **BadgeStatus** uses a richer **`status`** union (`BadgeStatusStatus`), optional **`hasBorder`** (default `true`), and **`size`**.
+
+#### Status mapping
+
+| Legacy `BadgeStatusState` | MMDS `BadgeStatusStatus`                    | Notes                                                  |
+| ------------------------- | ------------------------------------------- | ------------------------------------------------------ |
+| `Active` (`'Active'`)     | `BadgeStatusStatus.Active` (`'active'`)     | String value and semantics differ — update call sites. |
+| `Inactive` (`'Inactive'`) | `BadgeStatusStatus.Inactive` (`'inactive'`) |                                                        |
+
+#### New / different statuses in MMDS
+
+MMDS adds `Disconnected`, `New`, and `Attention` — use these for parity with design specs instead of overloading `Inactive`.
+
+#### Removed / changed props
+
+| Legacy mobile              | MMDS                                                                                                                            |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `state?: BadgeStatusState` | **`status`** (required): `BadgeStatusStatus`                                                                                    |
+| `borderColor`              | Not on shared API; use **`hasBorder`** (boolean) or stylers (`twClassName` / `className` on web) as supported by the component. |
+
+#### Before (Mobile)
+
+```tsx
+import BadgeStatus from '../../../component-library/components/Badges/Badge/variants/BadgeStatus';
+import { BadgeStatusState } from '../../../component-library/components/Badges/Badge/variants/BadgeStatus/BadgeStatus.types';
+
+<BadgeStatus variant={BadgeVariant.Status} state={BadgeStatusState.Active} />;
+```
+
+#### After (Design System)
+
+```tsx
+import {
+  BadgeStatus,
+  BadgeStatusStatus,
+} from '@metamask/design-system-react-native';
+
+<BadgeStatus status={BadgeStatusStatus.Active} />;
+```
+
+### BadgeWrapper Component
+
+Legacy **BadgeWrapper** lives at `app/component-library/components/Badges/BadgeWrapper`. MMDS aligns names with `@metamask/design-system-shared` but changes prop names, splits preset vs custom position, and renames the badge slot.
+
+#### Enum and value mapping
+
+| Legacy `BadgeAnchorElementShape` | MMDS `BadgeWrapperPositionAnchorShape` |
+| -------------------------------- | -------------------------------------- |
+| `Rectangular` (`'Rectangular'`)  | `Rectangular` (`'rectangular'`)        |
+| `Circular` (`'Circular'`)        | `Circular` (`'circular'`)              |
+
+| Legacy `BadgePosition` | MMDS `BadgeWrapperPosition`                     |
+| ---------------------- | ----------------------------------------------- |
+| `TopRight`             | `BadgeWrapperPosition.TopRight` (`'top-right'`) |
+| `BottomRight`          | `BadgeWrapperPosition.BottomRight`              |
+| `BottomLeft`           | `BadgeWrapperPosition.BottomLeft`               |
+| `TopLeft`              | `BadgeWrapperPosition.TopLeft`                  |
+
+#### Prop renames
+
+| Legacy mobile                                                                 | MMDS                   |
+| ----------------------------------------------------------------------------- | ---------------------- |
+| `anchorElementShape`                                                          | `positionAnchorShape`  |
+| `badgeElement`                                                                | `badge` (**required**) |
+| `badgePosition` when it is a **preset enum**                                  | `position`             |
+| `badgePosition` when it is a **custom object** `{ top, right, bottom, left }` | `customPosition`       |
+
+#### Default changes
+
+| Behavior        | Legacy default                     | MMDS default                                                                     |
+| --------------- | ---------------------------------- | -------------------------------------------------------------------------------- |
+| Anchor shape    | `BadgeAnchorElementShape.Circular` | `BadgeWrapperPositionAnchorShape.Circular` (aligned)                             |
+| Preset position | `BadgePosition.TopRight`           | **`BadgeWrapperPosition.BottomRight`** — verify visuals after migrating.         |
+| Offset tuning   | Encoded in legacy layout           | Use **`positionXOffset`** / **`positionYOffset`** (default `0`) with `position`. |
+
+#### Before (Mobile)
+
+```tsx
+import { View } from 'react-native';
+import BadgeWrapper from '../../../component-library/components/Badges/BadgeWrapper';
+import {
+  BadgeAnchorElementShape,
+  BadgePosition,
+} from '../../../component-library/components/Badges/BadgeWrapper/BadgeWrapper.types';
+
+<BadgeWrapper
+  anchorElementShape={BadgeAnchorElementShape.Circular}
+  badgePosition={BadgePosition.TopRight}
+  badgeElement={<BadgeCount count={3} />}
+>
+  <View />
+</BadgeWrapper>;
+```
+
+#### After (Design System)
+
+```tsx
+import { View } from 'react-native';
+import {
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+  BadgeCount,
+} from '@metamask/design-system-react-native';
+
+<BadgeWrapper
+  positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+  position={BadgeWrapperPosition.TopRight}
+  badge={<BadgeCount count={3} />}
+>
+  <View />
+</BadgeWrapper>;
+```
+
+### Deprecated aggregate `Badge` component
+
+The mobile **Badge** router (`app/component-library/components/Badges/Badge/Badge.tsx`) dispatches on **`variant`**:
+
+- `BadgeVariant.Network` → **BadgeNetwork**
+- `BadgeVariant.Status` → **BadgeStatus**
+- `BadgeVariant.NotificationsKinds` → **BadgeNotifications** (icon notification chip)
+
+MMDS does **not** provide a single drop-in replacement: import **`BadgeNetwork`**, **`BadgeStatus`**, **`BadgeIcon`**, or **`BadgeCount`** directly and pass the matching props for each use case (see sections above). The composite `Badge` is deprecated in favor of those exports from `@metamask/design-system-react-native`.
 
 ### Text Component
 
@@ -2555,6 +3101,70 @@ import { Icon, IconName, IconSize, IconColor } from '@metamask/design-system-rea
 - `hitSlop` remains available via inherited `ViewProps`
 - `twClassName` is available for Tailwind utility overrides in the design system
 
+### Input Component
+
+The mobile `Input` (under `Form/TextField/foundation/Input`) maps to `Input` in the design system. The legacy component extends `Omit<TextInputProps, 'editable'>`; the design system enforces a controlled `value` and omits `value` and `defaultValue` from the spread to avoid uncontrolled usage.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Mobile Pattern                                                                     | Design System Migration                                                     |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `import Input from '.../Form/TextField/foundation/Input'`                          | `import { Input, TextVariant } from '@metamask/design-system-react-native'` |
+| `import { TextVariant } from '.../components/Texts/Text'` (legacy casing `BodyMD`) | `import { TextVariant } from '@metamask/design-system-react-native'`        |
+
+##### Props and Typing
+
+| Mobile API                                      | Design System API                                                    | Change type                        | Notes                                                                                                                                      |
+| ----------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `value?: string` (optional in `TextInputProps`) | `value: string`                                                      | now required on the component type | Input is **controlled-only**; omitting `value` is a type error (see [TextField Component](#textfield-component) for the surrounding field) |
+| `textVariant` default `BodyMD` (legacy enum)    | `TextVariant.BodyMd`                                                 | value rename                       | align with [Text Component](#text-component) variant naming                                                                                |
+| `isDisabled`, `isStateStylesDisabled`           | same names                                                           | unchanged                          | `isStateStylesDisabled` still disables focus/disabled visual treatment                                                                     |
+| `isReadonly`                                    | `isReadOnly`                                                         | renamed                            | capital 'R' in the design system prop; see also [TextField Component](#textfield-component)                                                |
+| `autoFocus` default `true`                      | `autoFocus` default `false`                                          | default changed                    | MMDS matches React Native `TextInput` default; set `autoFocus` explicitly if you relied on the legacy default                              |
+| `style`                                         | `style` + `twClassName`                                              | MMDS adds `twClassName`            | use `twClassName` for Tailwind overrides; `style` still supported                                                                          |
+| Inherits `TextInputProps` except `editable`     | Inherits `TextInputProps` except `editable`, `value`, `defaultValue` | omissions                          | `defaultValue` is omitted so the component stays controlled; use `value` from parent state                                                 |
+
+#### Migration Examples
+
+##### Before (Mobile)
+
+```tsx
+import Input from '.../component-library/components/Form/TextField/foundation/Input';
+import { TextVariant } from '.../component-library/components/Texts/Text';
+
+<Input
+  value={value}
+  onChangeText={onChangeText}
+  placeholder="Amount"
+  textVariant={TextVariant.BodyMD}
+  isDisabled={false}
+  autoFocus
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react-native';
+
+<Input
+  value={value}
+  onChangeText={onChangeText}
+  placeholder="Amount"
+  textVariant={TextVariant.BodyMd}
+  isDisabled={false}
+  autoFocus
+/>;
+```
+
+#### API Differences
+
+- **Controlled `value`:** the design system requires `value: string` as part of `InputProps`; the legacy `Input` type still allowed the full `TextInput` surface including uncontrolled usage.
+- **`autoFocus` default** is `false` in MMDS (`true` in the legacy `Input` implementation) — set explicitly when you need first-mount focus.
+- Styling: design system input uses the shared Tailwind + token pipeline (`twClassName`); single-line metrics use `MAP_TEXT_VARIANT_INPUT_METRICS` (font size/letter spacing without paragraph `lineHeight`) for consistent `TextInput` layout.
+
 ### Checkbox Component
 
 The mobile `Checkbox` maps to `Checkbox` in the design system, with controlled-state naming changes and removed indeterminate/read-only/danger paths.
@@ -2636,6 +3246,322 @@ import { Checkbox } from '@metamask/design-system-react-native';
 - Mobile legacy `Checkbox` forwarded `TouchableOpacityProps`; MMDS forwards `PressableProps`.
 - Imperative `ref.toggle()` remains available in MMDS.
 
+### AvatarBase Component
+
+The mobile `Avatar` foundation (`…/Avatars/Avatar/foundation/AvatarBase`) maps to MMDS `AvatarBase` with a **lowercase** `size` value space, **`hasBorder`** (replacing `includesBorder`), plus **`shape`**, **`fallbackText`**, and **token-first styling** via `twClassName` instead of StyleSheet keys.
+
+#### Breaking Changes
+
+| Mobile API                                                       | MMDS API                                            | Change Type           | Notes                                                          |
+| ---------------------------------------------------------------- | --------------------------------------------------- | --------------------- | -------------------------------------------------------------- |
+| `size?: AvatarSize` with string pixel values (`'16'`, `'24'`, …) | `size?: AvatarBaseSize` with labels `'xs'` … `'xl'` | value space + default | use mapping table in [AvatarAccount](#avataraccount-component) |
+| `includesBorder`                                                 | `hasBorder`                                         | renamed               | default `false`                                                |
+| (no `shape` / `fallbackText` on legacy base)                     | `shape?`, `fallbackText?`                           | new                   | MMDS matches web semantics for stacked avatars                 |
+| `ViewProps` spread                                               | `ViewProps` + `twClassName?`                        | extended              | TWRNC utilities replace many bespoke StyleSheet uses           |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar from '.../Avatars/Avatar/Avatar';
+import { AvatarSize } from '.../Avatars/Avatar/Avatar.types';
+
+<Avatar
+  size={AvatarSize.Md}
+  // variant-specific props on wrapper Avatar…
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarBase,
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-react-native';
+
+<AvatarBase
+  size={AvatarBaseSize.Md}
+  shape={AvatarBaseShape.Circle}
+  hasBorder={false}
+/>;
+```
+
+### AvatarAccount Component
+
+`AvatarAccount` is composed through the old mobile `Avatar` + `variant={AvatarVariant.Account}`. MMDS exposes **`AvatarAccount` directly** and normalizes the address field and variant **values** to ADR-0003 consts.
+
+#### Breaking Changes (Mobile `AvatarAccount` props)
+
+| Mobile API                                            | MMDS API                                             | Change Type                | Notes                                                                                              |
+| ----------------------------------------------------- | ---------------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------- |
+| `accountAddress: string`                              | `address: string`                                    | renamed                    |                                                                                                    |
+| `type?: AvatarAccountType` (PascalCase string values) | `variant?: AvatarAccountVariant` (lowercase)         | enum style + value mapping | see [React MIGRATION](../design-system-react/MIGRATION.md#avataraccount-component) for value table |
+| `size?: AvatarSize`                                   | `size?: AvatarAccountSize`                           | `AvatarBaseSize`           | map `'16'` → `xs`, etc. (same table as web doc)                                                    |
+| (variant-specific)                                    | `blockiesProps?`, `jazziconProps?`, `maskiconProps?` | new                        | pass-through to temp identicon components                                                          |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+import { AvatarAccountType, AvatarSize } from '.../Avatars/Avatar/Avatar.types';
+
+<Avatar
+  variant={AvatarVariant.Account}
+  accountAddress={address}
+  type={AvatarAccountType.JazzIcon}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarAccount,
+  AvatarAccountVariant,
+  AvatarAccountSize,
+} from '@metamask/design-system-react-native';
+
+<AvatarAccount
+  address={address}
+  variant={AvatarAccountVariant.Jazzicon}
+  size={AvatarAccountSize.Md}
+/>;
+```
+
+### AvatarFavicon Component
+
+The mobile `Avatar` favicon branch required **`imageSource: ImageSourcePropType`**. MMDS **`AvatarFavicon`** is URL/source-first: pass **`src`** (typed as `ImageOrSvgSrc` for RN) and an optional dapp `name` for a11y/fallback. There is no longer a required `imageSource` + separate name pairing — **`src` is the primary image** when you want a remote/local asset.
+
+| Mobile API                                    | MMDS API                                  | Change Type   | Notes                                                                                                 |
+| --------------------------------------------- | ----------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------- |
+| `imageSource: ImageSourcePropType` (required) | `src?` + optional `name` / `fallbackText` | restructured  | supply `src` for image-driven favicons; text-only state uses `fallbackText` or first letter of `name` |
+| (implicit sizing via `AvatarSize`)            | `size?: AvatarFaviconSize`                | const + alias | `xs`–`xl` strings, default `Md`                                                                       |
+| (no `twClassName` on old favicon)             | `twClassName?` on `AvatarBase`            | new           |                                                                                                       |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+
+<Avatar
+  variant={AvatarVariant.Favicon}
+  imageSource={{ uri: faviconUrl }}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarFavicon,
+  AvatarFaviconSize,
+} from '@metamask/design-system-react-native';
+
+<AvatarFavicon
+  src={{ uri: faviconUrl }}
+  name="Dapp"
+  size={AvatarFaviconSize.Md}
+/>;
+```
+
+### AvatarIcon Component
+
+The mobile `Avatar` + `AvatarVariant.Icon` branch used **`name`** to choose an icon, plus optional **`iconColor` / `backgroundColor` strings**. MMDS `AvatarIcon` is **`iconName: IconName`** and uses **`severity: AvatarIconSeverity`** for a consistent **background + icon** treatment (replacing ad-hoc color strings).
+
+| Mobile API                                   | MMDS API                        | Change Type | Notes                                                                                        |
+| -------------------------------------------- | ------------------------------- | ----------- | -------------------------------------------------------------------------------------------- |
+| `name: IconName` (prop on `AvatarIconProps`) | `iconName: IconName`            | renamed     | align with the rest of MMDS                                                                  |
+| `iconColor?`, `backgroundColor?`             | `iconProps?`, `severity?`       | replaced    | set `iconProps` for one-off icon tweaks; use `severity` for semantic background/icon pairing |
+| (no `severity` on mobile)                    | `severity?: AvatarIconSeverity` | new         | default `Neutral`                                                                            |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+
+<Avatar
+  variant={AvatarVariant.Icon}
+  name={IconName.Star}
+  iconColor={colors.primary}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarIcon,
+  AvatarIconSize,
+  AvatarIconSeverity,
+  IconColor,
+  IconName,
+} from '@metamask/design-system-react-native';
+
+// Severity drives both background and icon color — no iconProps needed for most cases
+<AvatarIcon
+  iconName={IconName.Star}
+  size={AvatarIconSize.Md}
+  severity={AvatarIconSeverity.Neutral}
+/>;
+
+// Override icon color independently via iconProps when severity alone is insufficient
+<AvatarIcon
+  iconName={IconName.Star}
+  size={AvatarIconSize.Md}
+  severity={AvatarIconSeverity.Neutral}
+  iconProps={{ color: IconColor.IconAlternative }}
+/>;
+```
+
+### AvatarNetwork Component
+
+| Mobile API                          | MMDS API                 | Change Type             | Notes                                         |
+| ----------------------------------- | ------------------------ | ----------------------- | --------------------------------------------- |
+| `imageSource?: ImageSourcePropType` | `src?` (ImageOrSvgSrc)   | renamed + union widened | supports the design-system `ImageOrSvg` types |
+| `name?: string`                     | `name?`, `fallbackText?` | same surface            |                                               |
+| (n/a)                               | `imageOrSvgProps?`       | new                     | pass-through to the underlying `ImageOrSvg`   |
+
+`AvatarNetwork` in MMDS is **square** (via internal `AvatarBase` shape) like web.
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+
+<Avatar
+  variant={AvatarVariant.Network}
+  name="Mainnet"
+  imageSource={{ uri: networkIconUrl }}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarNetwork,
+  AvatarNetworkSize,
+} from '@metamask/design-system-react-native';
+
+<AvatarNetwork
+  name="Mainnet"
+  src={{ uri: networkIconUrl }}
+  size={AvatarNetworkSize.Md}
+  imageOrSvgProps={{ testID: 'network-avatar' }}
+/>;
+```
+
+### AvatarToken Component
+
+| Mobile API                             | MMDS API               | Change Type | Notes                              |
+| -------------------------------------- | ---------------------- | ----------- | ---------------------------------- |
+| `imageSource?: ImageSourcePropType`    | `src?` (ImageOrSvgSrc) | renamed     |                                    |
+| `isHaloEnabled?: boolean`              | (not supported)        | removed     | reimplement in product if required |
+| `isIpfsGatewayCheckBypassed?: boolean` | (not supported)        | removed     |                                    |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar/Avatar';
+
+<Avatar
+  variant={AvatarVariant.Token}
+  name="DAI"
+  imageSource={{ uri: tokenIconUrl }}
+  size={AvatarSize.Md}
+  isHaloEnabled
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarToken,
+  AvatarTokenSize,
+} from '@metamask/design-system-react-native';
+
+<AvatarToken
+  name="DAI"
+  src={{ uri: tokenIconUrl }}
+  size={AvatarTokenSize.Md}
+/>;
+```
+
+### AvatarGroup Component
+
+Mobile `AvatarGroup` accepted **`avatarPropsList: AvatarProps[]`** (discriminated-union `Avatar` props) with **`maxStackedAvatars`**, **`size` defaulting to the smaller stack scale**, and **`spaceBetweenAvatars`**. MMDS `AvatarGroup` is **variant + `avatarPropsArr`**, with **`max`**, default **`size` of `AvatarGroupSize.Md`**, optional **`isReverse`**, and **`twClassName`**. The **`spaceBetweenAvatars`**, **stack-level `includesBorder` override**, and mixing **`AvatarVariant.Icon` inside the list** are not part of the MMDS `AvatarGroup` contract — handle icon rows separately or compose multiple `AvatarIcon`s.
+
+| Mobile API                                            | MMDS API                                     | Change Type     | Notes                               |
+| ----------------------------------------------------- | -------------------------------------------- | --------------- | ----------------------------------- |
+| `avatarPropsList: AvatarProps[]`                      | `variant` + `avatarPropsArr: Avatar*Props[]` | restructured    | one variant per group, matching web |
+| `maxStackedAvatars?`                                  | `max?`                                       | renamed         | default `4`                         |
+| `size?` (default `AvatarSize.Xs` in mobile component) | `size?: AvatarGroupSize` (default `Md`)      | default changed | re-check design spacing             |
+| `spaceBetweenAvatars?`                                | (not exposed)                                | removed         | use `twClassName` / parent layout   |
+| (n/a)                                                 | `isReverse?`, `overflowTextProps?`           | new             |                                     |
+
+#### Migration Example
+
+##### Before (Mobile)
+
+```tsx
+import AvatarGroup from '.../Avatars/AvatarGroup/AvatarGroup';
+import {
+  AvatarVariant,
+  AvatarSize,
+  AvatarAccountType,
+} from '.../Avatars/Avatar/Avatar.types';
+
+<AvatarGroup
+  size={AvatarSize.Md}
+  maxStackedAvatars={3}
+  avatarPropsList={addresses.map((accountAddress) => ({
+    variant: AvatarVariant.Account,
+    accountAddress,
+    type: AvatarAccountType.JazzIcon,
+  }))}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarGroupSize,
+  AvatarAccountVariant,
+} from '@metamask/design-system-react-native';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  size={AvatarGroupSize.Md}
+  max={3}
+  twClassName="mb-2"
+  avatarPropsArr={addresses.map((address) => ({
+    address,
+    variant: AvatarAccountVariant.Jazzicon,
+  }))}
+/>;
+```
+
 ### TextField Component
 
 The TextField component in `@metamask/design-system-react-native` is a near-identical replacement for the mobile `component-library` TextField. The core props API is preserved; the main changes are the import path, styling system (TWRNC instead of `useStyles`), and two new customization props.
@@ -2707,7 +3633,6 @@ These props work identically in both versions — no migration needed:
 | `autoFocus`          | `boolean`                | Auto-focus on mount                       |
 | `startAccessory`     | `ReactNode`              | Content before the input                  |
 | `endAccessory`       | `ReactNode`              | Content after the input                   |
-| `inputElement`       | `ReactNode`              | Custom input replacement                  |
 | `ref`                | `Ref<TextInput>`         | Forwarded to inner TextInput              |
 | `numberOfLines`      | Forced to `1`            | Single-line enforced                      |
 | `multiline`          | Forced to `false`        | Single-line enforced                      |
@@ -2836,6 +3761,224 @@ const MyInput: React.FC<TextFieldProps> = (props) => (
 - MMDS sets `accessible={false}` on the root `Pressable`; the mobile version does not.
 - Border radius is `8px` in MMDS vs. `12px` in the mobile version.
 
+### KeyValueRow Component
+
+The mobile `components-temp/KeyValueRow` is replaced by `KeyValueRow` from `@metamask/design-system-react-native`. The legacy API matches the pre-0.16.0 design system API, so **the prop-shape migration is fully documented in [From version 0.15.0 to 0.16.0 › KeyValueRow API](#keyvaluerow-api)** (nested `field`/`value` objects → flat `keyLabel` / `value` / `*TextProps` / `*StartAccessory` / `*EndAccessory` / `*EndButtonIconProps`). Read that section for the full prop-by-prop mapping; this section covers the mobile-specific concerns.
+
+#### Breaking Changes (Mobile)
+
+##### Import Path and Export Shape
+
+| Mobile Pattern                                                                               | Design System Migration                                                                  |
+| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `import KeyValueRow from '.../component-library/components-temp/KeyValueRow'`                | `import { KeyValueRow } from '@metamask/design-system-react-native'`                     |
+| `import KeyValueRow from '.../component-library/components-temp/KeyValueRow/KeyValueRow'`    | `import { KeyValueRow } from '@metamask/design-system-react-native'`                     |
+| `import { TooltipSizes } from '.../components-temp/KeyValueRow'`                             | Removed — drop the import, or remap to `ButtonIconSize` from the design system if needed |
+| `import { KeyValueRowStubs } from '.../components-temp/KeyValueRow'`                         | Removed — no equivalent. See [Blocked Patterns](#blocked-patterns-1) below               |
+| `import KeyValueRowLabel from '.../components-temp/KeyValueRow/KeyValueLabel/KeyValueLabel'` | Removed — no equivalent                                                                  |
+
+Note: The legacy component uses a **default export**; the design system uses a **named export**. The legacy index also re-exports `TooltipSizes` — that re-export is gone, so imports like `import KeyValueRow, { TooltipSizes } from '.../components-temp/KeyValueRow'` must be split.
+
+##### Tooltip Behavior — Host Must Open the Modal
+
+The legacy `KeyValueRow` rendered the tooltip trigger **and** opened the modal internally via `useTooltipModal` (see `KeyValueLabel.tsx`). The design system renders **only** the `ButtonIcon` trigger — the host app is responsible for opening the modal/sheet.
+
+| Legacy Mobile Behavior                                                                                                     | Design System Behavior                                                                                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tooltip={{ title, content, onPress }}` — component calls `openTooltipModal(title, content, …)` and then invokes `onPress` | `keyEndButtonIconProps={{ iconName, onPress }}` / `valueEndButtonIconProps={{ … }}` — host must call `openTooltipModal(…)` inside `onPress`; `title` and `content` are **not rendered** by the component |
+| `tooltip.size`, `tooltip.iconName`                                                                                         | Use `keyEndButtonIconProps` / `valueEndButtonIconProps` fields (`size`, `iconName`, `iconProps`, etc.)                                                                                                   |
+| Default icon color `IconColor.Alternative` via `KeyValueRowLabel`                                                          | Key trigger defaults to `IconColor.IconAlternative`; value trigger defaults to `IconColor.IconDefault`; override via `iconProps.color`                                                                   |
+
+##### Removed Types and Enums
+
+The following are no longer available. Remove the imports and refactor any code that branches on them.
+
+| Removed                                                                                               | Migration                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `KeyValueRowFieldIconSides` (`LEFT` / `RIGHT` / `BOTH`)                                               | Pass a node on `keyStartAccessory` / `keyEndAccessory` / `valueStartAccessory` / `valueEndAccessory` (both = set start **and** end) |
+| `KeyValueRowSectionAlignments`                                                                        | Alignment is handled internally (key shrinks, value row is `flex-1 min-w-0 justify-end`). Drop the import                           |
+| `TooltipSizes`, `IconSizes`                                                                           | Use `ButtonIconSize` / `IconSize` from `@metamask/design-system-react-native` if sizing is needed                                   |
+| `KeyValueRowField`, `KeyValueRowTooltip`                                                              | Use `KeyValueRowProps` from `@metamask/design-system-react-native` (flat props)                                                     |
+| `PreDefinedKeyValueRowLabel`, `KeyValueRowLabelProps`, `KeyValueRowRootProps`, `KeyValueSectionProps` | No direct replacement — these supported custom stub-based layouts not yet available in MMDS                                         |
+
+##### Default Typography Differences
+
+The legacy `KeyValueRowLabel` defaulted to `TextVariant.BodyMDMedium` + `TextColor.Default` for both sides. The design system applies different defaults per side:
+
+- Key: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextAlternative`, `numberOfLines: 1`, `ellipsizeMode: 'tail'`
+- Value: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextDefault`, `numberOfLines: 1`, `ellipsizeMode: 'tail'`
+
+If you relied on the legacy "both sides identical" styling, override via `keyTextProps` / `valueTextProps`.
+
+##### Row Height Now Fixed
+
+Legacy layout was driven by the intrinsic height of the inner `Label` plus section padding. The design system pins the row height:
+
+- `KeyValueRowVariant.Summary` (default) → 40px (`h-10`)
+- `KeyValueRowVariant.Input` → 48px (`h-12`)
+
+If a screen needs a taller row (e.g. input-style confirmation screens where the value is a chip or button), pass `variant={KeyValueRowVariant.Input}`.
+
+#### Migration Examples (Mobile-Specific)
+
+##### Simple label + tooltip with `useTooltipModal`
+
+Before (Mobile):
+
+```tsx
+import KeyValueRow, {
+  TooltipSizes,
+} from '../../../../../../component-library/components-temp/KeyValueRow';
+import { TextVariant } from '../../../../../../component-library/components/Texts/Text';
+
+<KeyValueRow
+  field={{
+    label: { text: strings('tooltip_modal.unstaking_time.title') },
+    tooltip: {
+      title: strings('tooltip_modal.unstaking_time.title'),
+      content: strings('tooltip_modal.unstaking_time.tooltip'),
+      size: TooltipSizes.Sm,
+      onPress: () => trackEvent(createTooltipOpenedEvent(...)),
+    },
+  }}
+  value={{
+    label: {
+      text: strings('stake.estimated_unstaking_time'),
+      variant: TextVariant.BodyMD,
+    },
+  }}
+/>;
+```
+
+After (Design System — host opens the modal):
+
+```tsx
+import {
+  ButtonIconSize,
+  IconName,
+  KeyValueRow,
+} from '@metamask/design-system-react-native';
+import useTooltipModal from '../../../../../../components/hooks/useTooltipModal';
+
+const { openTooltipModal } = useTooltipModal();
+
+<KeyValueRow
+  keyLabel={strings('tooltip_modal.unstaking_time.title')}
+  value={strings('stake.estimated_unstaking_time')}
+  keyEndButtonIconProps={{
+    size: ButtonIconSize.Sm,
+    iconName: IconName.Question,
+    accessibilityLabel: `${strings(
+      'tooltip_modal.unstaking_time.title',
+    )} tooltip`,
+    onPress: () => {
+      openTooltipModal(
+        strings('tooltip_modal.unstaking_time.title'),
+        strings('tooltip_modal.unstaking_time.tooltip'),
+      );
+      trackEvent(createTooltipOpenedEvent(...));
+    },
+  }}
+/>;
+```
+
+Key points: `keyEndButtonIconProps` renders the trigger; the host calls `openTooltipModal(title, content)` and then invokes any analytics side effect.
+
+##### Icon before the key label (legacy `icon.side: LEFT`)
+
+Before (Mobile):
+
+```tsx
+<KeyValueRow
+  field={{
+    label: { text: 'Network' },
+    icon: {
+      name: IconName.Wifi,
+      color: IconColor.PrimaryDefault,
+      size: IconSize.Sm,
+      side: KeyValueRowFieldIconSides.LEFT,
+    },
+  }}
+  value={{ label: { text: 'Mainnet' } }}
+/>
+```
+
+After (Design System):
+
+```tsx
+import {
+  Icon,
+  IconColor,
+  IconName,
+  IconSize,
+  KeyValueRow,
+} from '@metamask/design-system-react-native';
+
+<KeyValueRow
+  keyLabel="Network"
+  value="Mainnet"
+  keyStartAccessory={
+    <Icon
+      name={IconName.Wifi}
+      color={IconColor.PrimaryDefault}
+      size={IconSize.Sm}
+    />
+  }
+/>;
+```
+
+For `side: BOTH`, pass an accessory on both `keyStartAccessory` and `keyEndAccessory`.
+
+##### Taller input-style row
+
+Before (Mobile) — no explicit height control; callers wrapped `KeyValueRow` in `Card` or added `style` to force height.
+
+After (Design System):
+
+```tsx
+import {
+  Icon,
+  IconName,
+  IconSize,
+  KeyValueRow,
+  KeyValueRowVariant,
+} from '@metamask/design-system-react-native';
+
+<KeyValueRow
+  keyLabel="Pay with"
+  value="Debit or credit"
+  variant={KeyValueRowVariant.Input}
+  valueStartAccessory={<Icon name={IconName.Card} size={IconSize.Sm} />}
+  valueEndAccessory={<Icon name={IconName.ArrowDown} size={IconSize.Sm} />}
+/>;
+```
+
+#### Blocked Patterns
+
+These patterns have no drop-in replacement in `@metamask/design-system-react-native`. Keep the legacy import (or rebuild with `Box` / `BoxRow` + `Text`) until the caller is refactored:
+
+- **`KeyValueRowStubs` (`Root` / `Section` / `Label`)** — the legacy module exported sub-components for bespoke layouts. The design system does **not** expose these. Rebuild custom layouts using `Box`, `BoxRow`, and `Text` from `@metamask/design-system-react-native` directly.
+- **Three-or-more-column rows** — `KeyValueRow` renders exactly a key + value row. Compositions that previously nested multiple `KeyValueSection` instances must be rebuilt as plain `BoxRow` layouts.
+- **Using legacy `KeyValueRowLabel` standalone** — the `KeyValueLabel` default export (plus its `useTooltipModal` wiring) is not re-exported. Rebuild with `Text` + a host-owned tooltip handler, or migrate the whole row to `KeyValueRow`.
+
+A sample of mobile call sites exercising these blocked patterns (not exhaustive — grep `components-temp/KeyValueRow` in `metamask-mobile` for the current full set, as the codebase moves fast):
+
+- `app/components/UI/Bridge/components/QuoteDetailsRecipientKeyValueRow/QuoteDetailsRecipientKeyValueRow.tsx` — uses `KeyValueRowStubs` (owner: `@MetaMask/swaps-engineers`)
+- `app/components/UI/Bridge/components/QuoteDetailsCard/QuoteDetailsCard.tsx` — imports `KeyValueRowLabel` directly alongside `KeyValueRow` (owner: `@MetaMask/swaps-engineers`)
+- `app/components/UI/Rewards/components/Tabs/MusdCalculatorTab/MusdCalculatorTab.tsx` — uses `KeyValueRowStubs` (owner: `@MetaMask/rewards`)
+
+Additional consumers exist across Earn, Stake, Predict, Bridge, and Perps — some import `KeyValueRowLabel` directly, others only pull in `TooltipSizes`. Run the grep above to enumerate the complete set before opening a migration PR.
+
+Separately, the deprecated `TooltipSizes` re-export is consumed across additional files in `Earn`, `Stake`, `Predict`, `Bridge`, and `Perps` even when `KeyValueRow` itself is not rendered. Those sites are not "blocked" — swap `TooltipSizes.<X>` for the value-equivalent `ButtonIconSizes.<X>` from the legacy `ButtonIcon` (or `ButtonIconSize` from the design system if the surrounding `ButtonIcon` is also being migrated). Grep `components-temp/KeyValueRow` to enumerate the current set before opening a migration PR.
+
+#### API Differences
+
+- MMDS `KeyValueRow` uses flat props (`keyLabel`, `value`, `*TextProps`, `*StartAccessory`, `*EndAccessory`, `*EndButtonIconProps`) instead of nested `field` / `value` objects.
+- Row height is controlled by `variant` (`KeyValueRowVariant.Summary` / `KeyValueRowVariant.Input`), not by caller-controlled styles.
+- Tooltips render a `ButtonIcon` trigger only — the host opens the modal in `onPress`.
+- `twClassName` is supported on the outer `BoxRow` for Tailwind overrides.
+- `KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the matching types are removed.
+
 ### ListItem Component
 
 The ListItem component in `@metamask/design-system-react-native` is a near-identical replacement for the mobile `component-library` ListItem. The props API is largely preserved; the main changes are the import path, enum naming (ADR-0003), styling system (TWRNC/Box instead of `useStyles`/`StyleSheet`), and a new `twClassName` prop.
@@ -2856,13 +3999,13 @@ The mobile component uses a **default export**; the design system uses a **named
 
 ##### VerticalAlignment Enum Renamed
 
-The enum is renamed from `VerticalAlignment` to `ListItemVerticalAlignment` and converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
+The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` from `@metamask/design-system-shared`. When using `ListItem`, import `ListItemVerticalAlignment` from `@metamask/design-system-react-native` (a runtime alias for the same const object). `ContentVerticalAlignment` is also exported from the package root for `Content` call sites. It is converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
 
-| Mobile Value                            | Design System Value                             | Notes          |
-| --------------------------------------- | ----------------------------------------------- | -------------- |
-| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | casing changed |
-| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | casing changed |
-| `VerticalAlignment.Bottom` (`'Bottom'`) | `ListItemVerticalAlignment.Bottom` (`'bottom'`) | casing changed |
+| Mobile Value                            | Design System Value                             | Notes                      |
+| --------------------------------------- | ----------------------------------------------- | -------------------------- |
+| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | casing changed             |
+| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | casing changed             |
+| `VerticalAlignment.Bottom` (`'Bottom'`) | —                                               | removed; use `Top` instead |
 
 ##### Accessibility Attributes on Root
 
@@ -3050,7 +4193,7 @@ The following mobile `component-library` sub-components build on `ListItem` but 
 #### API Differences
 
 - MMDS `ListItem` adds `twClassName` for Tailwind-based style overrides.
-- The mobile `VerticalAlignment` enum is renamed to `ListItemVerticalAlignment` with lowercase values (`'top'`/`'center'`/`'bottom'` instead of `'Top'`/`'Center'`/`'Bottom'`).
+- The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` with lowercase values (`'top'`/`'center'` instead of `'Top'`/`'Center'`). `VerticalAlignment.Bottom` has no equivalent.
 - The mobile version sets `accessible accessibilityRole="none"` on the root element; MMDS does not.
 - The mobile version uses a default export; MMDS uses a named export.
 - `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.

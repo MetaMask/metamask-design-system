@@ -1,6 +1,7 @@
 import { IconColor, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import { assetByIconName } from './Icon.assets';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
@@ -21,8 +22,7 @@ export const Icon = ({
     TWCLASSMAP_ICON_SIZE_DIMENSION[size],
     twClassName,
   );
+  const svgStyle = StyleSheet.flatten([twStyle, style]);
 
-  return (
-    <SVG name={name} fill="currentColor" style={[twStyle, style]} {...props} />
-  );
+  return <SVG name={name} fill="currentColor" style={svgStyle} {...props} />;
 };

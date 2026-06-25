@@ -74,10 +74,7 @@ export type {
   BottomSheetFooterButtonProps,
 } from './BottomSheetFooter';
 
-export {
-  BottomSheetHeader,
-  BottomSheetHeaderVariant,
-} from './BottomSheetHeader';
+export { BottomSheetHeader } from './BottomSheetHeader';
 export type { BottomSheetHeaderProps } from './BottomSheetHeader';
 
 export { BottomSheetOverlay } from './BottomSheetOverlay';
@@ -106,6 +103,9 @@ export type { BoxColumnProps } from './BoxColumn';
 export { Card } from './Card';
 export type { CardProps } from './Card';
 
+export { Content, ContentVerticalAlignment } from './Content';
+export type { ContentProps } from './Content';
+
 export { ButtonAnimated } from './temp-components/ButtonAnimated';
 export type { ButtonAnimatedProps } from './temp-components/ButtonAnimated';
 
@@ -124,7 +124,7 @@ export type { ButtonSemanticProps } from './ButtonSemantic';
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
-export { HeaderBase, HeaderBaseVariant } from './HeaderBase';
+export { HeaderBase } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
 export { HeaderRoot } from './HeaderRoot';
@@ -148,6 +148,9 @@ export type {
   HeaderStandardAnimatedProps,
   UseHeaderStandardAnimatedReturn,
 } from './HeaderStandardAnimated';
+
+export { HeaderSubpage } from './HeaderSubpage';
+export type { HeaderSubpageProps } from './HeaderSubpage';
 
 export { HeaderStandardCenterColumn } from './temp-components/HeaderStandardCenterColumn';
 export type {
@@ -176,6 +179,12 @@ export type { LabelProps } from './Label';
 export { ListItem, ListItemVerticalAlignment } from './ListItem';
 export type { ListItemProps } from './ListItem';
 
+export { ListItemSelect } from './ListItemSelect';
+export type { ListItemSelectProps } from './ListItemSelect';
+
+export { ListItemMultiSelect } from './ListItemMultiSelect';
+export type { ListItemMultiSelectProps } from './ListItemMultiSelect';
+
 export { RadioButton } from './RadioButton';
 export type { RadioButtonProps } from './RadioButton';
 
@@ -187,6 +196,23 @@ export type { MaskiconProps } from './temp-components/Maskicon';
 
 export { MainActionButton } from './MainActionButton';
 export type { MainActionButtonProps } from './MainActionButton';
+
+export { SectionDivider } from './SectionDivider';
+export type { SectionDividerProps } from './SectionDivider';
+
+export { FilterButton, FilterButtonVariant } from './FilterButton';
+export type { FilterButtonProps } from './FilterButton';
+
+export { FilterButtonGroup } from './FilterButtonGroup';
+export type { FilterButtonGroupProps } from './FilterButtonGroup';
+
+export {
+  SelectButton,
+  SelectButtonEndArrow,
+  SelectButtonSize,
+  SelectButtonVariant,
+} from './SelectButton';
+export type { SelectButtonProps } from './SelectButton';
 
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
@@ -221,6 +247,9 @@ export type { TextFieldSearchProps } from './TextFieldSearch';
 
 export { TextOrChildren } from './temp-components/TextOrChildren';
 export type { TextOrChildrenProps } from './temp-components/TextOrChildren';
+
+export { TitleAlert } from './TitleAlert';
+export type { TitleAlertProps } from './TitleAlert';
 
 export { TitleHub } from './TitleHub';
 export type { TitleHubProps, TitleHubPropsShared } from './TitleHub';
@@ -257,6 +286,15 @@ export type { SpinnerProps } from './temp-components/Spinner';
 
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
+
+export { SectionHeader } from './SectionHeader';
+export type { SectionHeaderProps } from './SectionHeader';
+
+export { SegmentedControl } from './SegmentedControl';
+export type { SegmentedControlProps } from './SegmentedControl';
+
+export { Switch } from './Switch';
+export type { SwitchProps } from './Switch';
 
 export { Tag, TagSeverity } from './Tag';
 export type { TagProps } from './Tag';

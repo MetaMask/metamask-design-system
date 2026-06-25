@@ -7,6 +7,115 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.30.2]
+
+### Fixed
+
+- Fixed `Content` value and subvalue to right-align in list rows when token amounts and fiat equivalents differ in length, including in `ListItem` ([#1257](https://github.com/MetaMask/metamask-design-system/pull/1257))
+
+## [0.30.1]
+
+### Fixed
+
+- Fixed `BottomSheetDialog` pan callbacks to run on the UI thread, resolving broken slow-drag gesture ([#1253](https://github.com/MetaMask/metamask-design-system/pull/1253))
+- Fixed `Tag` gap between icon and label from 4px to 2px to match design spec ([#1236](https://github.com/MetaMask/metamask-design-system/pull/1236))
+
+## [0.30.0]
+
+### Added
+
+- Added `Switch` for controlled on/off toggles with optional `label`, `isDisabled`, and `accessibilityRole="switch"` ([#1022](https://github.com/MetaMask/metamask-design-system/pull/1022))
+- Added `HeaderSubpage` — a fixed subpage navigation row with identity content and back/close shortcuts ([#1241](https://github.com/MetaMask/metamask-design-system/pull/1241))
+- Added `SegmentedControl` — a bordered, controlled segmented picker composing `FilterButton` children with `value`/`onChange` ([#1242](https://github.com/MetaMask/metamask-design-system/pull/1242))
+- Added `ListItemSelect` and `ListItemMultiSelect` for single- and multi-select list rows with `isSelected` styling ([#1230](https://github.com/MetaMask/metamask-design-system/pull/1230))
+- Added `Trophy` to `IconName` ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
+
+### Changed
+
+- Added `accessoryGap` to `ListItem` to control spacing between row accessories and inner content (`BoxSpacing`, default `0`; pass `accessoryGap={4}` for legacy 16px spacing) ([#1232](https://github.com/MetaMask/metamask-design-system/pull/1232))
+- **BREAKING:** Renamed `SegmentButton`/`SegmentGroup` (and related types/context) to `FilterButton`/`FilterButtonGroup`; props and behavior are unchanged — `ButtonFilter` is unaffected ([#1240](https://github.com/MetaMask/metamask-design-system/pull/1240))
+  - See [Migration Guide](./MIGRATION.md#from-version-0290-to-0300)
+- **BREAKING:** `Content` is now inner-only; `startAccessory`/`endAccessory` moved to `ListItem`, and `topAccessory`/`bottomAccessory` removed — compose column shell with `BoxColumn` instead ([#1231](https://github.com/MetaMask/metamask-design-system/pull/1231))
+  - Row accessory spacing defaults to `accessoryGap={0}`; pass `accessoryGap={4}` to restore previous 16px spacing
+  - See [Migration Guide](./MIGRATION.md#content-shell-accessories-removed-row-accessories-moved-to-listitem)
+
+### Fixed
+
+- Fixed unsatisfiable `lodash` peer dependency range from `^4.17.23` to `^4.17.21` ([#1228](https://github.com/MetaMask/metamask-design-system/pull/1228))
+
+## [0.29.0]
+
+### Added
+
+- Added `ListItem` component for list row layouts ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
+
+### Changed
+
+- **BREAKING:** `AvatarIconSeverity.Error`, `IconAlertSeverity.Error`, and `TagSeverity.Error` renamed to `.Danger`; severity vocabulary standardized to use `Danger` for destructive/critical states and `Neutral` for default states ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+  - See [Migration Guide](./MIGRATION.md#from-version-0280-to-0290)
+
+## [0.28.0]
+
+### Added
+
+- Added `Content` for composing scrollable and padded content sections on React Native screens; it is closely related to the upcoming `ListItem` work ([#1192](https://github.com/MetaMask/metamask-design-system/pull/1192))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; consumers must run Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- Added default padding and `isInteractive` support to `SectionHeader` so section rows match the new mobile layout patterns ([#1210](https://github.com/MetaMask/metamask-design-system/pull/1210))
+- **BREAKING:** Flattened `TextArea` so it renders the root `TextInput` directly; pass `TextInput` props on `TextArea`, use the component `ref` for the input, and stop relying on `inputProps` or `inputElement` ([#1205](https://github.com/MetaMask/metamask-design-system/pull/1205))
+- Updated avatar fallback handling so `AvatarToken`, `AvatarNetwork`, and `AvatarFavicon` resolve consistently when the requested image is unavailable ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
+
+## [0.27.0]
+
+### Added
+
+- Added `FlashFilled` icon (filled lightning bolt) to `IconName` ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
+- Added `SelectButtonSize` so `SelectButton` exposes a semantic size type ([#1177](https://github.com/MetaMask/metamask-design-system/pull/1177))
+
+### Changed
+
+- **BREAKING:** Removed `panGestureHandlerProps` from `BottomSheet` and `BottomSheetDialog` following the migration to the `react-native-gesture-handler` v2 `GestureDetector`/`Gesture.Pan()` API ([#1165](https://github.com/MetaMask/metamask-design-system/pull/1165))
+  - See [Migration Guide](./MIGRATION.md#from-version-0260-to-0270)
+- **BREAKING:** Removed the variant-based title API from `HeaderBase` and `BottomSheetHeader` ([#1103](https://github.com/MetaMask/metamask-design-system/pull/1103))
+  - Removed `variant`, `HeaderBaseVariant`, and `BottomSheetHeaderVariant`, plus `HeaderBase`'s `titleTestID`
+  - String titles now render with a centered `HeadingSm` treatment; pass custom `children` for bespoke title layouts and use `textProps.testID` in place of `titleTestID`
+  - See [Migration Guide](./MIGRATION.md#from-version-0260-to-0270)
+- Reduced the default `SegmentGroup` segment spacing from `gap-3` to `gap-1` for tighter grouped segments ([#1194](https://github.com/MetaMask/metamask-design-system/pull/1194))
+
+### Fixed
+
+- Fixed a `HeaderStandardAnimated` runtime crash under React Native Reanimated 4 by inlining the scroll-handler worklet ([#1185](https://github.com/MetaMask/metamask-design-system/pull/1185))
+- Fixed React Native Web rendering for `BottomSheet`, `BottomSheetOverlay`, `Icon`, and the animated `ButtonAnimated` and `Spinner` components ([#1187](https://github.com/MetaMask/metamask-design-system/pull/1187))
+
+## [0.26.0]
+
+### Added
+
+- Added `TitleAlert` for alert-style headings with a severity icon, title row, and optional description in modals, bottom sheets, and other compact surfaces ([#1131](https://github.com/MetaMask/metamask-design-system/pull/1131))
+- Added `SectionHeader` for section titles with optional start and end accessories, icon shortcuts, and an inline title accessory ([#1175](https://github.com/MetaMask/metamask-design-system/pull/1175))
+- Added `SectionDivider` as a horizontal rule with a muted top border and default vertical spacing for separating screen sections ([#1174](https://github.com/MetaMask/metamask-design-system/pull/1174))
+
+### Changed
+
+- Updated the `Telegram` icon asset to match the official Telegram logo ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
+
+## [0.25.0]
+
+### Added
+
+- Added `SelectButton`, `SegmentButton`, and `SegmentGroup` for option rows, single-choice segments, and grouped segment controls ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
+- Added `SensitiveText` for masking and revealing sensitive strings, matching the cross-platform contract used on web ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- Added `HeaderStandardAnimated` and `useHeaderStandardAnimated` for standard headers with coordinated scroll-driven motion ([#1151](https://github.com/MetaMask/metamask-design-system/pull/1151))
+- Added `TextArea` for multi-line text entry ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
+
+### Changed
+
+- `ButtonBase` now derives label typography, start and end icon sizes, and internal spacing from the `size` prop for every supported `ButtonBaseSize`, keeping defaults aligned without manual per-size tuning ([#1150](https://github.com/MetaMask/metamask-design-system/pull/1150))
+  - If you wrap **`ButtonBase`** and override label, icon, or spacing, see [Migration guide](./MIGRATION.md#buttonbase-size-defaults).
+- `BannerBase` close control behavior is simplified and aligned with the shared dismiss contract ([#1166](https://github.com/MetaMask/metamask-design-system/pull/1166))
+
 ## [0.24.0]
 
 ### Added
@@ -419,7 +528,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.24.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.2...HEAD
+[0.30.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.1...@metamask/design-system-react-native@0.30.2
+[0.30.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.0...@metamask/design-system-react-native@0.30.1
+[0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.29.0...@metamask/design-system-react-native@0.30.0
+[0.29.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.28.0...@metamask/design-system-react-native@0.29.0
+[0.28.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.27.0...@metamask/design-system-react-native@0.28.0
+[0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.26.0...@metamask/design-system-react-native@0.27.0
+[0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.25.0...@metamask/design-system-react-native@0.26.0
+[0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.24.0...@metamask/design-system-react-native@0.25.0
 [0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.23.0...@metamask/design-system-react-native@0.24.0
 [0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.22.0...@metamask/design-system-react-native@0.23.0
 [0.22.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.21.0...@metamask/design-system-react-native@0.22.0

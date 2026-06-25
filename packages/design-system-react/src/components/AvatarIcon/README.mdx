@@ -89,8 +89,8 @@ Available severities:
 - `AvatarIconSeverity.Neutral` - neutral styling for general use
 - `AvatarIconSeverity.Info` - info styling for informational content
 - `AvatarIconSeverity.Success` - success styling for positive actions/states
-- `AvatarIconSeverity.Warning` - warning styling for cautionary content
-- `AvatarIconSeverity.Error` - error styling for critical issues
+ - `AvatarIconSeverity.Warning` - warning styling for cautionary content
+ - `AvatarIconSeverity.Danger` - danger styling for destructive/critical issues
 
 <table>
   <thead>
@@ -223,6 +223,8 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## Component API
 
 <Controls of={AvatarIconStories.Default} />
+
+Migrating from the extension `avatar-icon` or mobile `Avatar` icon variant? See the [AvatarIcon migration guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react/MIGRATION.md#avataricon-component) for replacing `color` with `severity` and for `iconName` naming.
 
 ## References
 

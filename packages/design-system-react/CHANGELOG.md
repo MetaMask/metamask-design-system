@@ -7,6 +7,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.28.0]
+
+### Changed
+
+- **BREAKING:** Reverted `TextButton` to its pre-0.26.0 `ButtonBase`-backed API — restores `size`/`TextButtonSize`, `isInverse`, `isDisabled`, `textProps`, and start/end icon props; removes `variant`/`TextVariant` ([#1259](https://github.com/MetaMask/metamask-design-system/pull/1259))
+  - See [Migration Guide](./MIGRATION.md#from-version-0270-to-0280)
+
+## [0.27.1]
+
+### Fixed
+
+- Fixed `Tag` gap between icon and label from 4px to 2px to match design spec ([#1236](https://github.com/MetaMask/metamask-design-system/pull/1236))
+
+## [0.27.0]
+
+### Added
+
+- Added `Trophy` to `IconName` ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
+
+## [0.26.0]
+
+### Added
+
+- Added `Tag` component for categorization and filtering labels ([#1211](https://github.com/MetaMask/metamask-design-system/pull/1211))
+- Added `Toast` component with `Toaster` provider and imperative `toast()` API for non-blocking notifications ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+
+### Changed
+
+- **BREAKING:** `TextButton` API aligned with React Native — `size`/`TextButtonSize` replaced by `variant`/`TextVariant`; `isInverse`, `isDisabled`, `textProps`, start/end icons, and accessory slots removed; `asChild` added for semantic link composition ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
+  - See [Migration Guide](./MIGRATION.md#from-version-0250-to-0260)
+- **BREAKING:** `AvatarIconSeverity.Error` renamed to `AvatarIconSeverity.Danger`; severity vocabulary standardized to use `Danger` for destructive/critical states and `Neutral` for default states ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+  - See [Migration Guide](./MIGRATION.md#from-version-0250-to-0260)
+
+### Fixed
+
+- Fixed `Toast` to support `toast()` calls made before `Toaster` mounts ([#1217](https://github.com/MetaMask/metamask-design-system/pull/1217))
+
+## [0.25.0]
+
+### Added
+
+- Added `Popover` for anchored overlays such as menus, tooltips, and dialogs ([#1153](https://github.com/MetaMask/metamask-design-system/pull/1153))
+- Added `TextArea` for controlled multiline text entry ([#1036](https://github.com/MetaMask/metamask-design-system/pull/1036))
+- Added `TextFieldSearch` for controlled search-field flows on top of `TextField` ([#1171](https://github.com/MetaMask/metamask-design-system/pull/1171))
+- Added `FormTextField` for labeled form controls built from `Label`, `TextField`, and `HelpText` ([#1197](https://github.com/MetaMask/metamask-design-system/pull/1197))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; consumers must run Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- Updated avatar fallback handling so `AvatarToken`, `AvatarNetwork`, and `AvatarFavicon` resolve consistently when the requested image is unavailable ([#1212](https://github.com/MetaMask/metamask-design-system/pull/1212))
+
+## [0.24.0]
+
+### Added
+
+- Added `TextField` for labeled text entry with optional helper and validation text, exposing `TextFieldSize` and `TextFieldType` ([#1170](https://github.com/MetaMask/metamask-design-system/pull/1170))
+- Added `FlashFilled` icon (filled lightning bolt) to `IconName` ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
+
+## [0.23.1]
+
+### Changed
+
+- Updated the `Telegram` icon asset to match the official Telegram logo ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
+
+## [0.23.0]
+
+### Added
+
+- Added `PopoverHeader` for popover title rows and trailing actions, aligned with MetaMask extension screen patterns ([#1158](https://github.com/MetaMask/metamask-design-system/pull/1158))
+- Added `ModalHeader` for modal title rows and accessory slots, aligned with MetaMask extension screen patterns ([#1144](https://github.com/MetaMask/metamask-design-system/pull/1144))
+- Added `Label` for accessible captions paired with form controls ([#1152](https://github.com/MetaMask/metamask-design-system/pull/1152))
+- Added `SensitiveText` for masking and revealing sensitive strings (addresses, secrets, recovery phrases) with configurable visible length ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- Added `HelpText` for helper, success, warning, and error copy beneath inputs and other controls ([#1169](https://github.com/MetaMask/metamask-design-system/pull/1169))
+
+### Changed
+
+- `ButtonBase` now derives label typography, start and end icon sizes, and internal spacing from the `size` prop for every supported `ButtonBaseSize`, keeping defaults aligned without manual per-size tuning ([#1150](https://github.com/MetaMask/metamask-design-system/pull/1150))
+  - If you wrap **`ButtonBase`** and override label, icon, or spacing, see [Migration guide](./MIGRATION.md#buttonbase-size-defaults).
+- `BannerBase` close control behavior is simplified and aligned with the shared dismiss contract ([#1166](https://github.com/MetaMask/metamask-design-system/pull/1166))
+
 ## [0.22.0]
 
 ### Added
@@ -304,7 +384,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.22.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.28.0...HEAD
+[0.28.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.1...@metamask/design-system-react@0.28.0
+[0.27.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.0...@metamask/design-system-react@0.27.1
+[0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.26.0...@metamask/design-system-react@0.27.0
+[0.26.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.25.0...@metamask/design-system-react@0.26.0
+[0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.24.0...@metamask/design-system-react@0.25.0
+[0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.23.1...@metamask/design-system-react@0.24.0
+[0.23.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.23.0...@metamask/design-system-react@0.23.1
+[0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.22.0...@metamask/design-system-react@0.23.0
 [0.22.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.21.0...@metamask/design-system-react@0.22.0
 [0.21.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.20.0...@metamask/design-system-react@0.21.0
 [0.20.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.19.0...@metamask/design-system-react@0.20.0

@@ -82,6 +82,9 @@ export type { CheckboxProps } from './Checkbox';
 export { HeaderBase } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
+export { HelpText, HelpTextSeverity } from './HelpText';
+export type { HelpTextProps } from './HelpText';
+
 export { Icon } from './Icon';
 export { IconName, IconSize, IconColor } from './Icon';
 export type { IconProps } from './Icon';
@@ -91,6 +94,9 @@ export type { InputProps } from './Input';
 
 export { Jazzicon } from './temp-components/Jazzicon';
 export type { JazziconProps } from './temp-components/Jazzicon';
+
+export { Label } from './Label';
+export type { LabelProps } from './Label';
 
 export { Maskicon } from './temp-components/Maskicon';
 export type { MaskiconProps } from './temp-components/Maskicon';
@@ -103,6 +109,8 @@ export { ModalFocus } from './ModalFocus';
 export type { FocusableElement, ModalFocusProps } from './ModalFocus';
 export { ButtonsAlignment, ModalFooter } from './ModalFooter';
 export type { ModalFooterButtonProps, ModalFooterProps } from './ModalFooter';
+export { ModalHeader } from './ModalHeader';
+export type { ModalHeaderProps } from './ModalHeader';
 export { Modal, useModalContext } from './Modal';
 export type { ModalContextType, ModalProps } from './Modal';
 export {
@@ -114,6 +122,15 @@ export type { ModalContentProps } from './ModalContent';
 
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
+
+export { SensitiveText, SensitiveTextLength } from './SensitiveText';
+export type { SensitiveTextProps } from './SensitiveText';
+
+export { PopoverHeader } from './PopoverHeader';
+export type { PopoverHeaderProps } from './PopoverHeader';
+
+export { Popover, PopoverPosition, PopoverRole } from './Popover';
+export type { PopoverProps } from './Popover';
 
 export { Text } from './Text';
 export {
@@ -128,14 +145,32 @@ export {
 } from './Text';
 export type { TextProps } from './Text';
 
+export { TextArea, TextAreaResize } from './TextArea';
+export type { TextAreaProps } from './TextArea';
+
 export { TextButton, TextButtonSize } from './TextButton';
 export type { TextButtonProps } from './TextButton';
 
+export { TextField, TextFieldSize, TextFieldType } from './TextField';
+export type { TextFieldProps } from './TextField';
+
+export { FormTextField } from './FormTextField';
+export type { FormTextFieldProps } from './FormTextField';
+
+export { TextFieldSearch } from './TextFieldSearch';
+export type { TextFieldSearchProps } from './TextFieldSearch';
+
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
+
+export { Tag, TagSeverity } from './Tag';
+export type { TagProps } from './Tag';
 
 export { ButtonHero, ButtonHeroSize } from './ButtonHero';
 export type { ButtonHeroProps } from './ButtonHero';
 
 export { ButtonFilter } from './ButtonFilter';
 export type { ButtonFilterProps } from './ButtonFilter';
+
+export { Toast, Toaster, toast, ToastSeverity } from './Toast';
+export type { ToastOptions, ToastProps, ToasterProps } from './Toast';

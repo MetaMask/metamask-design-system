@@ -20,7 +20,25 @@ function getAbsolutePath(value: string): any {
 // Check if we're running in test mode (Vitest)
 const isTestMode = process.env.VITEST === 'true';
 
+// In dev both servers run simultaneously: React on 6006, RN web on 6007.
+// In production the RN static build is nested at /react-native on the same host.
+const rnStorybookUrl =
+  process.env.STORYBOOK_RN_URL ??
+  (process.env.NODE_ENV === 'production'
+    ? './react-native'
+    : 'http://localhost:6007');
+
 const config: StorybookConfig = {
+  features: {
+    componentsManifest: true,
+  },
+  refs: {
+    'react-native': {
+      title: 'React Native Components',
+      url: rnStorybookUrl,
+      expanded: false,
+    },
+  },
   stories: [
     '../stories/',
     // Only include MDX documentation files when not in test mode

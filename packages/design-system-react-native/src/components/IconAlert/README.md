@@ -22,7 +22,7 @@ Available severities:
 - `IconAlertSeverity.Info` — `IconName.Info`, `IconColor.PrimaryDefault`
 - `IconAlertSeverity.Success` — `IconName.Confirmation`, `IconColor.SuccessDefault`
 - `IconAlertSeverity.Warning` — `IconName.Danger`, `IconColor.WarningDefault`
-- `IconAlertSeverity.Error` — `IconName.Error`, `IconColor.ErrorDefault`
+- `IconAlertSeverity.Danger` — `IconName.Error`, `IconColor.ErrorDefault`
 
 | TYPE                | REQUIRED | DEFAULT |
 | ------------------- | -------- | ------- |
@@ -34,7 +34,7 @@ import { IconAlert, IconAlertSeverity } from '@metamask/design-system-react-nati
 <IconAlert severity={IconAlertSeverity.Info} />
 <IconAlert severity={IconAlertSeverity.Success} />
 <IconAlert severity={IconAlertSeverity.Warning} />
-<IconAlert severity={IconAlertSeverity.Error} />
+<IconAlert severity={IconAlertSeverity.Danger} />
 ```
 
 ### `size`

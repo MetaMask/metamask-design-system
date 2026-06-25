@@ -40,7 +40,7 @@ const meta: Meta<typeof AvatarIcon> = {
       options: Object.keys(AvatarIconSeverity),
       mapping: AvatarIconSeverity,
       description:
-        'Optional prop to control the severity of the avatar. Defaults to AvatarIconSeverity.Default',
+        'Optional prop to control the severity of the avatar. Defaults to AvatarIconSeverity.Neutral',
     },
     className: {
       control: 'text',
@@ -105,7 +105,7 @@ export const Severity: Story = {
       />
       <AvatarIcon
         iconName={IconName.Danger}
-        severity={AvatarIconSeverity.Error}
+        severity={AvatarIconSeverity.Danger}
       />
     </div>
   ),

@@ -7,6 +7,81 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.0]
+
+### Changed
+
+- **BREAKING:** Removed `TextButtonPropsShared` export; cross-platform `TextButton` type alignment is deferred pending design coordination ([#1259](https://github.com/MetaMask/metamask-design-system/pull/1259))
+
+## [0.23.0]
+
+### Added
+
+- Added `SwitchPropsShared` for cross-platform `Switch` support ([#1022](https://github.com/MetaMask/metamask-design-system/pull/1022))
+- Added `SegmentedControlPropsShared` for cross-platform `SegmentedControl` support ([#1242](https://github.com/MetaMask/metamask-design-system/pull/1242))
+- Added `ListItemSelectPropsShared` and `ListItemMultiSelectPropsShared` for cross-platform list selection rows ([#1230](https://github.com/MetaMask/metamask-design-system/pull/1230))
+- Added `Trophy` to `IconName` ([#1235](https://github.com/MetaMask/metamask-design-system/pull/1235))
+
+### Changed
+
+- Added `accessoryGap` to `ListItemPropsShared` to control spacing between row accessories and inner content ([#1232](https://github.com/MetaMask/metamask-design-system/pull/1232))
+- **BREAKING:** Renamed `SegmentButton`/`SegmentGroup` shared types and context to `FilterButton`/`FilterButtonGroup`; prop shapes are unchanged ([#1240](https://github.com/MetaMask/metamask-design-system/pull/1240))
+  - See [Migration Guide](./MIGRATION.md#from-version-0220-to-0230)
+- **BREAKING:** Removed `startAccessory`/`endAccessory` from `ContentPropsShared` and removed `topAccessory`/`bottomAccessory`; row accessories belong on `ListItemPropsShared` instead ([#1231](https://github.com/MetaMask/metamask-design-system/pull/1231))
+  - See [design-system-react-native Migration Guide](../design-system-react-native/MIGRATION.md#content-shell-accessories-removed-row-accessories-moved-to-listitem)
+
+## [0.22.0]
+
+### Added
+
+- Added `ListItemPropsShared` and related shared types for cross-platform `ListItem` support ([#1203](https://github.com/MetaMask/metamask-design-system/pull/1203))
+- Added `ToastPropsShared`, `ToastSeverity`, and `Toast` animation constants to shared package, consolidating the Toast type definitions used by React and React Native ([#1190](https://github.com/MetaMask/metamask-design-system/pull/1190))
+- Added `TextButtonPropsShared` to align `TextButton` API across React and React Native ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
+- Added `AvatarNetworkSize` as a named export from the shared package ([#1225](https://github.com/MetaMask/metamask-design-system/pull/1225))
+
+### Changed
+
+- **BREAKING:** `AvatarIconSeverity.Error`, `IconAlertSeverity.Error`, and `TagSeverity.Error` renamed to `.Danger`; severity vocabulary standardized to use `Danger` for destructive/critical states ([#1159](https://github.com/MetaMask/metamask-design-system/pull/1159))
+
+## [0.21.0]
+
+### Added
+
+- Added `ContentPropsShared` and `ContentVerticalAlignment` so React Native can compose list-style rows and related layout patterns ([#1192](https://github.com/MetaMask/metamask-design-system/pull/1192))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; no public API changes were needed in `@metamask/design-system-shared`, but consumers must run on Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+- **BREAKING:** Updated `TextAreaPropsShared` to remove `inputElement` so React Native `TextArea` can render the root `TextInput` directly ([#1205](https://github.com/MetaMask/metamask-design-system/pull/1205))
+
+## [0.20.0]
+
+### Added
+
+- Added `FlashFilled` icon (filled lightning bolt) to `IconName`, keeping the centralized icon set aligned across React and React Native ([#1191](https://github.com/MetaMask/metamask-design-system/pull/1191))
+- Added `SelectButtonSize` so `SelectButton` exposes a semantic size type shared across platforms ([#1177](https://github.com/MetaMask/metamask-design-system/pull/1177))
+- Added `TextFieldPropsShared` for the cross-platform text field input contract ([#1170](https://github.com/MetaMask/metamask-design-system/pull/1170))
+
+## [0.19.0]
+
+### Added
+
+- Exported `TitleAlertPropsShared` for cross-platform alert title layouts ([#1131](https://github.com/MetaMask/metamask-design-system/pull/1131))
+- Exported `SectionHeaderPropsShared` for cross-platform section heading layouts ([#1175](https://github.com/MetaMask/metamask-design-system/pull/1175))
+
+### Changed
+
+- Updated the shared `Telegram` icon asset to match the official Telegram logo so React and React Native stay aligned ([#1176](https://github.com/MetaMask/metamask-design-system/pull/1176))
+
+## [0.18.0]
+
+### Added
+
+- Exported `SelectButton` prop and variant types (`SelectButtonPropsShared`, `SelectButtonVariant`, `SelectButtonEndArrow`), `SegmentGroupPropsShared`, and `SegmentGroupContext` so mobile and web packages share one segment and select contract ([#1172](https://github.com/MetaMask/metamask-design-system/pull/1172))
+- Exported `SensitiveTextLength`, `SensitiveTextPropsShared`, and related types for cross-platform masking and reveal behavior ([#1164](https://github.com/MetaMask/metamask-design-system/pull/1164))
+- Exported `HelpTextSeverity`, `HelpTextPropsShared`, and related types for cross-platform helper and validation text ([#1169](https://github.com/MetaMask/metamask-design-system/pull/1169))
+- Exported `TextAreaPropsShared` for cross-platform multi-line input wrappers ([#1141](https://github.com/MetaMask/metamask-design-system/pull/1141))
+
 ## [0.17.0]
 
 ### Added
@@ -180,7 +255,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.17.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.24.0...HEAD
+[0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.23.0...@metamask/design-system-shared@0.24.0
+[0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.22.0...@metamask/design-system-shared@0.23.0
+[0.22.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.21.0...@metamask/design-system-shared@0.22.0
+[0.21.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.20.0...@metamask/design-system-shared@0.21.0
+[0.20.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.19.0...@metamask/design-system-shared@0.20.0
+[0.19.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.18.0...@metamask/design-system-shared@0.19.0
+[0.18.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.17.0...@metamask/design-system-shared@0.18.0
 [0.17.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.16.0...@metamask/design-system-shared@0.17.0
 [0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.15.0...@metamask/design-system-shared@0.16.0
 [0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.14.0...@metamask/design-system-shared@0.15.0

@@ -40,7 +40,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `placeholder`
 
-Optional placeholder string for the inner input.
+Optional placeholder string for the input.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -54,7 +54,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `isReadOnly`
 
-When true, the inner input is not editable.
+When true, the input is not editable.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -68,7 +68,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `onFocus`
 
-Optional handler when the inner input receives focus. TextArea composes this with its own focus border behavior. Do not pass `onFocus` through `inputProps`; use this prop instead.
+Optional handler when the input receives focus. TextArea composes this with its own focus border behavior.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -82,7 +82,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `onBlur`
 
-Optional handler when the inner input loses focus. TextArea composes this with its own focus border behavior. Do not pass `onBlur` through `inputProps`; use this prop instead.
+Optional handler when the input loses focus. TextArea composes this with its own focus border behavior.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -94,34 +94,9 @@ import { TextArea } from '@metamask/design-system-react-native';
 <TextArea value="" placeholder="Blur" onBlur={() => {}} />;
 ```
 
-### `inputProps`
+### `ref`
 
-Additional props forwarded to the inner [Input](../Input/Input.tsx) / `TextInput`. Do not pass `placeholder`, `isReadOnly`, `onFocus`, `onBlur`, or `multiline` here; use the TextArea-level props where applicable. `placeholderTextColor` is omitted from the type; the inner `Input` sets it from the theme. For screen readers, set `inputProps.accessibilityLabel` and `inputProps.accessibilityHint`. You can use `inputProps.testID` to target the native `TextInput` in E2E tests.
-
-Use top-level `Box` / `View` props for layout and pointer handling (`pointerEvents`, margins, hit areas via wrappers, etc.). Keys reserved by TextArea (`style`, `twClassName`, `testID`, `children`, `accessible`, and keys owned by the TextArea API surface) are not passed through from this intersection.
-
-| TYPE                                                               | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------------ | -------- | ----------- |
-| `TextAreaProps['inputProps']` (see `TextAreaProps` in the package) | No       | `undefined` |
-
-```tsx
-import { TextArea } from '@metamask/design-system-react-native';
-
-<TextArea
-  value=""
-  onChangeText={(text) => {}}
-  placeholder="Notes"
-  inputProps={{
-    autoCapitalize: 'sentences',
-    maxHeight: 200,
-    scrollEnabled: true,
-  }}
-/>;
-```
-
-### `inputRef`
-
-Ref to the inner `TextInput`. The component’s `ref` (from `forwardRef`) points at the root [Box](../Box/Box.tsx) (`View`).
+Ref to the `TextInput`. The component’s `ref` (from `forwardRef`) points at the editable field itself.
 
 | TYPE             | REQUIRED | DEFAULT     |
 | ---------------- | -------- | ----------- |
@@ -132,9 +107,9 @@ import { createRef } from 'react';
 import { TextArea } from '@metamask/design-system-react-native';
 import type { TextInput } from 'react-native';
 
-const inputRef = createRef<TextInput>();
+const textAreaRef = createRef<TextInput>();
 
-<TextArea value="" inputRef={inputRef} placeholder="Focus me" />;
+<TextArea value="" ref={textAreaRef} placeholder="Focus me" />;
 ```
 
 ### `isError`
@@ -153,7 +128,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `isDisabled`
 
-When true, the field applies reduced opacity and forwards disabled state to the inner `Input` (non-editable).
+When true, the field applies reduced opacity and forwards disabled state to the input (non-editable).
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -167,7 +142,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `autoFocus`
 
-When true, the inner input requests focus on mount.
+When true, the input requests focus on mount.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -179,24 +154,9 @@ import { TextArea } from '@metamask/design-system-react-native';
 <TextArea value="" autoFocus placeholder="Focused on mount" />;
 ```
 
-### `inputElement`
-
-Optional node that replaces the default `Input`. `inputRef` is only forwarded when the default `Input` is rendered; with a custom `inputElement`, attach your own ref to the control if you need imperative focus or measurement.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-import { TextArea } from '@metamask/design-system-react-native';
-import { TextInput } from 'react-native';
-
-<TextArea value="" inputElement={<TextInput placeholder="Custom input" />} />;
-```
-
 ### `testID`
 
-Optional test id for the root [Box](../Box/Box.tsx). The root sets `accessible={false}` so assistive technologies focus the inner `TextInput`. The inner `TextInput` does not inherit this id; pass `inputProps.testID` if your tests must query the editable control directly.
+Optional test id for the `TextInput`.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -210,7 +170,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `twClassName` prop to add Tailwind CSS classes to the `TextInput`. These classes are merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -235,7 +195,7 @@ import { TextArea } from '@metamask/design-system-react-native';
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the `TextInput` appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

@@ -111,6 +111,7 @@ import Fingerprint from './Fingerprint';
 import Fire from './Fire';
 import FirstPage from './FirstPage';
 import Flag from './Flag';
+import FlashFilled from './FlashFilled';
 import FlashSlash from './FlashSlash';
 import Flash from './Flash';
 import Flask from './Flask';
@@ -264,6 +265,7 @@ import Translate from './Translate';
 import Trash from './Trash';
 import TrendDown from './TrendDown';
 import TrendUp from './TrendUp';
+import Trophy from './Trophy';
 import Undo from './Undo';
 import Unfold from './Unfold';
 import UnlockedFilled from './UnlockedFilled';
@@ -402,6 +404,7 @@ export const Icons = {
   Fire,
   FirstPage,
   Flag,
+  FlashFilled,
   FlashSlash,
   Flash,
   Flask,
@@ -555,6 +558,7 @@ export const Icons = {
   Trash,
   TrendDown,
   TrendUp,
+  Trophy,
   Undo,
   Unfold,
   UnlockedFilled,

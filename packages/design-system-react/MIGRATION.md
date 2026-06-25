@@ -13,19 +13,44 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Box Component](#box-component)
   - [BannerAlert Component](#banneralert-component)
   - [BannerBase Component](#bannerbase-component)
+  - [BadgeCount Component](#badgecount-component)
+  - [BadgeIcon Component](#badgeicon-component)
+  - [BadgeNetwork Component](#badgenetwork-component)
+  - [BadgeStatus Component](#badgestatus-component)
+  - [BadgeWrapper Component](#badgewrapper-component)
   - [Text Component](#text-component)
   - [Icon Component](#icon-component)
+  - [Input Component](#input-component)
+  - [TextArea Component](#textarea-component)
   - [Checkbox Component](#checkbox-component)
+  - [AvatarBase Component](#avatarbase-component)
+  - [AvatarAccount Component](#avataraccount-component)
+  - [AvatarFavicon Component](#avatarfavicon-component)
+  - [AvatarIcon Component](#avataricon-component)
+  - [AvatarNetwork Component](#avatarenetwork-component)
+  - [AvatarToken Component](#avatartoken-component)
+  - [AvatarGroup Component](#avatargroup-component)
   - [HeaderBase Component](#headerbase-component)
+  - [HelpText Component](#helptext-component)
+  - [Label Component](#label-component)
   - [Modal Component](#modal-component)
   - [ModalContent Component](#modalcontent-component)
   - [ModalBody Component](#modalbody-component)
   - [ModalFocus Component](#modalfocus-component)
   - [ModalFooter Component](#modalfooter-component)
+  - [ModalHeader Component](#modalheader-component)
   - [ModalOverlay Component](#modaloverlay-component)
+  - [Popover Component](#popover-component)
+  - [PopoverHeader Component](#popoverheader-component)
+  - [SensitiveText Component](#sensitivetext-component)
   - [Skeleton Component](#skeleton-component)
+  - [TextField Component](#textfield-component)
+  - [TextFieldSearch Component](#textfieldsearch-component)
+  - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.22.0 to 0.x.0](#from-version-0220-to-0x0)
+  - [From version 0.27.x to 0.28.0](#from-version-027x-to-0280)
+  - [From version 0.25.0 to 0.26.0](#from-version-0250-to-0260)
+  - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.17.0 to 0.18.0](#from-version-0170-to-0180)
   - [From version 0.16.0 to 0.17.0](#from-version-0160-to-0170)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
@@ -835,6 +860,19 @@ The extension `banner-alert` maps directly to `BannerAlert` in the design system
 | `BannerAlertSeverity.Warning` (`'warning'`) | `BannerAlertSeverity.Warning` |
 | `BannerAlertSeverity.Danger` (`'danger'`)   | `BannerAlertSeverity.Danger`  |
 
+##### Severity Alignment
+
+The public severity APIs now use `Danger` instead of `Error` for destructive
+or critical states, and `Neutral` instead of any default-like severity. Internal
+color token names are unchanged, so `Danger` variants may still map to
+`ErrorDefault` or `ErrorMuted` tokens.
+
+| Before                                | After                                   | Notes                        |
+| ------------------------------------- | --------------------------------------- | ---------------------------- |
+| `AvatarIconSeverity.Error` (`error`)  | `AvatarIconSeverity.Danger` (`danger`)  | renamed public API value     |
+| `TagSeverity.Error` (`error`)         | `TagSeverity.Danger` (`danger`)         | renamed public API value     |
+| Any legacy default-like severity name | `Neutral` (`neutral`) where appropriate | canonical neutral vocabulary |
+
 #### Migration Example
 
 ##### Before (Extension)
@@ -942,6 +980,188 @@ import { BannerBase } from '@metamask/design-system-react';
   }}
   closeButtonProps={{ 'data-testid': 'banner-base-close-button' }}
 />;
+```
+
+### BadgeCount Component
+
+`BadgeCount` is **not** published from the MetaMask Extension `component-library` (no `badge-count` folder or export in `index.ts` on `main`). Treat this section as **net-new usage** for extension-based apps: import the component from `@metamask/design-system-react` and use the MMDS API below.
+
+The API is defined by shared types in `@metamask/design-system-shared` (ADR-0003/0004 const objects, not TypeScript enums).
+
+#### MMDS API (reference)
+
+| Prop    | Type             | Default / notes                                                                       |
+| ------- | ---------------- | ------------------------------------------------------------------------------------- |
+| `count` | `number`         | Required.                                                                             |
+| `max`   | `number`         | Optional. Default `99`. Values above `max` show as `max+`.                            |
+| `size`  | `BadgeCountSize` | Optional. `BadgeCountSize.Md` (`'md'`) or `BadgeCountSize.Lg` (`'lg'`). Default `Md`. |
+
+#### Platform props (React)
+
+| Prop        | Notes                                                    |
+| ----------- | -------------------------------------------------------- |
+| `textProps` | Optional. Passed to the inner `Text` used for the count. |
+| `className` | Tailwind / `twMerge` classes on the root.                |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react';
+
+<BadgeCount count={12} max={99} size={BadgeCountSize.Md} />;
+```
+
+### BadgeIcon Component
+
+`BadgeIcon` is **not** in the Extension `component-library` on `main`. Use MMDS directly.
+
+| Prop       | Type       | Notes                                              |
+| ---------- | ---------- | -------------------------------------------------- |
+| `iconName` | `IconName` | Required. Shared icon name from the design system. |
+
+#### Platform props (React)
+
+| Prop        | Notes                                |
+| ----------- | ------------------------------------ |
+| `iconProps` | Optional. `Omit<IconProps, 'name'>`. |
+| `className` | Optional.                            |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeIcon, IconName } from '@metamask/design-system-react';
+
+<BadgeIcon iconName={IconName.User} />;
+```
+
+### BadgeNetwork Component
+
+`BadgeNetwork` is **not** in the Extension `component-library` on `main`. MMDS `BadgeNetwork` is a thin wrapper around `AvatarNetwork` with **fixed** `size` and `hasBorder` — callers do not pass `size` or `shape` on `BadgeNetwork` (they are omitted from the public type).
+
+#### Shared props (`name`, `fallbackText`, image `src`)
+
+| Prop           | Notes                                                              |
+| -------------- | ------------------------------------------------------------------ |
+| `name`         | Optional. Used for alt text and initial fallback.                  |
+| `fallbackText` | Optional. Shown when no image; defaults to first letter of `name`. |
+| `src`          | Image source (string URL in React). Same role as `AvatarNetwork`.  |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeNetwork } from '@metamask/design-system-react';
+
+<BadgeNetwork name="Ethereum" src="https://example.com/icon.png" />;
+```
+
+### BadgeStatus Component
+
+`BadgeStatus` is **not** in the Extension `component-library` on `main`.
+
+#### Status values (`BadgeStatusStatus`)
+
+| Value                            | Meaning (MMDS)   |
+| -------------------------------- | ---------------- |
+| `BadgeStatusStatus.Active`       | `'active'`       |
+| `BadgeStatusStatus.Inactive`     | `'inactive'`     |
+| `BadgeStatusStatus.Disconnected` | `'disconnected'` |
+| `BadgeStatusStatus.New`          | `'new'`          |
+| `BadgeStatusStatus.Attention`    | `'attention'`    |
+
+#### Other props
+
+| Prop        | Type                | Default                                       |
+| ----------- | ------------------- | --------------------------------------------- |
+| `status`    | `BadgeStatusStatus` | Required.                                     |
+| `hasBorder` | `boolean`           | Default `true`.                               |
+| `size`      | `BadgeStatusSize`   | `Md` (`'md'`) or `Lg` (`'lg'`). Default `Md`. |
+
+#### Example (Design System)
+
+```tsx
+import { BadgeStatus, BadgeStatusStatus } from '@metamask/design-system-react';
+
+<BadgeStatus status={BadgeStatusStatus.Active} />;
+```
+
+### BadgeWrapper Component
+
+The extension exports `BadgeWrapper`, `BadgeWrapperPosition`, and `BadgeWrapperAnchorElementShape` from `component-library/badge-wrapper`. Migrate to `@metamask/design-system-react` and align enums, prop names, defaults, and required `badge`.
+
+#### Breaking changes
+
+##### Enum casing and members
+
+Legacy extension enums use mixed-case **member names** with lowercase string values. MMDS uses **PascalCase** members (ADR-0003 const objects) with the same string values for position and anchor shape.
+
+| Legacy `BadgeWrapperPosition` | MMDS `BadgeWrapperPosition`        |
+| ----------------------------- | ---------------------------------- |
+| `topRight`                    | `BadgeWrapperPosition.TopRight`    |
+| `bottomRight`                 | `BadgeWrapperPosition.BottomRight` |
+| `topLeft`                     | `BadgeWrapperPosition.TopLeft`     |
+| `bottomLeft`                  | `BadgeWrapperPosition.BottomLeft`  |
+
+| Legacy `BadgeWrapperAnchorElementShape` | MMDS `BadgeWrapperPositionAnchorShape`        |
+| --------------------------------------- | --------------------------------------------- |
+| `rectangular`                           | `BadgeWrapperPositionAnchorShape.Rectangular` |
+| `circular`                              | `BadgeWrapperPositionAnchorShape.Circular`    |
+
+##### Renamed props
+
+| Extension prop       | MMDS prop              | Notes                                      |
+| -------------------- | ---------------------- | ------------------------------------------ |
+| `anchorElementShape` | `positionAnchorShape`  | Same semantics; use MMDS const object.     |
+| `positionObj`        | `customPosition`       | Same `{ top, right, bottom, left }` shape. |
+| `badge` (optional)   | `badge` (**required**) | MMDS requires the badge node.              |
+
+##### Default changes
+
+| Behavior        | Extension default                            | MMDS default                               |
+| --------------- | -------------------------------------------- | ------------------------------------------ |
+| Preset position | `BadgeWrapperPosition.bottomRight`           | `BadgeWrapperPosition.BottomRight`         |
+| Anchor shape    | `BadgeWrapperAnchorElementShape.rectangular` | `BadgeWrapperPositionAnchorShape.Circular` |
+
+##### Removed / narrowed surfaces
+
+- **`badge` optional → required:** supply an explicit badge node (often `BadgeCount`, `BadgeNetwork`, etc.).
+- **Polymorphic Box spread:** extension `BadgeWrapperProps` extends broad Box/style-utility props; MMDS `BadgeWrapper` uses an explicit API plus `className` / `childrenContainerProps` / `badgeContainerProps` instead of legacy style-utility breadth.
+
+#### Migration example
+
+##### Before (Extension)
+
+```tsx
+import {
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperAnchorElementShape,
+} from '../../component-library';
+
+<BadgeWrapper
+  position={BadgeWrapperPosition.topRight}
+  anchorElementShape={BadgeWrapperAnchorElementShape.circular}
+  badge={<span className="badge">3</span>}
+>
+  <div className="anchor">Avatar</div>
+</BadgeWrapper>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  BadgeWrapper,
+  BadgeWrapperPosition,
+  BadgeWrapperPositionAnchorShape,
+} from '@metamask/design-system-react';
+
+<BadgeWrapper
+  position={BadgeWrapperPosition.TopRight}
+  positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+  badge={<span className="badge">3</span>}
+>
+  <div className="anchor">Avatar</div>
+</BadgeWrapper>;
 ```
 
 ### Text Component
@@ -1155,6 +1375,167 @@ import {
 - Icon color values should use `IconColor` enum values from `@metamask/design-system-react`
 - Use SVG props directly for accessibility and rendering behavior
 
+### Input Component
+
+The extension `input` component is implemented as `Text` with `as="input"` and carries broad `Box` / style-utility behavior through its polymorphic props. The design system `Input` is a native `<input>` with a small semantic API (`textVariant`, `isDisabled`, `isReadonly`) and standard HTML attributes on the element.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) and the [Text Component](#text-component) section for `TextVariant` value casing (`bodyMd` → `BodyMd`).
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                            | Design System Migration                                              |
+| ------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `import { Input, InputType } from '../../component-library'` | `import { Input, TextVariant } from '@metamask/design-system-react'` |
+
+##### Renamed and Behavioral Props
+
+| Extension API                                                      | Design System API              | Notes                                                                                                                                                   |
+| ------------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `disabled`                                                         | `isDisabled`                   | boolean; default `false`                                                                                                                                |
+| `readOnly`                                                         | `isReadonly`                   | renamed; note **lowercase “only”** in the design system prop name                                                                                       |
+| `error` (sets `aria-invalid`)                                      | pass `aria-invalid` on `Input` | no `error` shorthand; use native ARIA on the underlying `<input>`                                                                                       |
+| `disableStateStyles`                                               | removed                        | removed “disable focus ring” escape hatch; if you need custom focus for accessibility, handle it explicitly (for example with `className` or a wrapper) |
+| `type` using `InputType` enum                                      | `type` as HTML string          | use `'text' \| 'password' \| 'number' \| 'search'` (or other valid `<input type>`). The `InputType` enum is not exported from the design system         |
+| `autoComplete` as `boolean`                                        | `autoComplete` as string       | use standard HTML autocomplete tokens (for example `on` / `off` or a specific token)                                                                    |
+| Polymorphic `as` and `...` style-utility props from `Text` / `Box` | removed from the component API | use `className` (and native attributes allowed on `<input>`) per [General Extension Migration Guidance](#general-extension-migration-guidance)          |
+| `textVariant`                                                      | `textVariant`                  | same name; values move to shared `TextVariant` from `@metamask/design-system-react` (see [Text Component](#text-component))                             |
+
+##### Still Available via Native `<input>`
+
+`Input` is `Omit<ComponentPropsWithoutRef<'input'>, 'defaultValue' | 'disabled' | 'readOnly' | 'value'>` plus the fields above. Standard attributes such as `id`, `name`, `placeholder`, `onChange`, `onBlur`, `onFocus`, `maxLength`, `required`, and `autoFocus` work as on a normal input. Note that `value` is a required `string` prop and `defaultValue` is omitted entirely — uncontrolled usage is not supported.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Input, InputType } from '../../component-library';
+import { TextVariant } from '../../../helpers/constants/design-system';
+
+<Input
+  name="query"
+  placeholder="Search"
+  value={query}
+  onChange={onQueryChange}
+  disabled={isBusy}
+  readOnly={isLocked}
+  error={hasError}
+  type={InputType.Search}
+  textVariant={TextVariant.bodyMd}
+  autoComplete
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Input, TextVariant } from '@metamask/design-system-react';
+
+<Input
+  name="query"
+  placeholder="Search"
+  value={query}
+  onChange={onQueryChange}
+  isDisabled={isBusy}
+  isReadonly={isLocked}
+  aria-invalid={hasError}
+  type="search"
+  textVariant={TextVariant.BodyMd}
+  autoComplete="on"
+/>;
+```
+
+#### API Differences
+
+- No polymorphic `as` prop — the component always renders `<input>`.
+- Extension-only `error` and `disableStateStyles` are not mirrored; use `aria-invalid` and `className` as needed.
+- `TextVariant` imports and member names follow the design system (Pascal-cased members such as `TextVariant.BodyMd`).
+
+### TextArea Component
+
+The extension `textarea` component maps to `TextArea` in the design system. The design system keeps the controlled textarea contract, but removes the extension's `defaultValue` path, renames state props to the shared `is*` convention, and narrows the resize options to the values supported by the design-system component.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration behavior.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                              | Design System Migration                                              |
+| -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import { Textarea } from '../../component-library'`           | `import { TextArea } from '@metamask/design-system-react'`           |
+| `import { TextareaResize } from '../../component-library'`     | `import { TextAreaResize } from '@metamask/design-system-react'`     |
+| `import type { TextareaProps } from '../../component-library'` | `import type { TextAreaProps } from '@metamask/design-system-react'` |
+
+##### Renamed and Removed Props
+
+| Extension Prop / Value                              | Design System Migration                           | Notes                                              |
+| --------------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- |
+| `disabled`                                          | `isDisabled`                                      | renamed                                            |
+| `readOnly`                                          | `isReadOnly`                                      | renamed                                            |
+| `error`                                             | `isError`                                         | renamed                                            |
+| `defaultValue`                                      | removed                                           | use controlled `value` instead                     |
+| `TextareaResize.Initial` / `TextareaResize.Inherit` | removed                                           | use one of the supported resize values below       |
+| `resize` default                                    | `TextareaResize.Vertical` → `TextAreaResize.None` | the design system defaults to no resize affordance |
+
+##### Supported Resize Values
+
+| Extension Value             | Design System Value         | Notes                                                      |
+| --------------------------- | --------------------------- | ---------------------------------------------------------- |
+| `TextareaResize.None`       | `TextAreaResize.None`       | unchanged                                                  |
+| `TextareaResize.Both`       | `TextAreaResize.Both`       | unchanged                                                  |
+| `TextareaResize.Horizontal` | `TextAreaResize.Horizontal` | unchanged                                                  |
+| `TextareaResize.Vertical`   | `TextAreaResize.Vertical`   | unchanged                                                  |
+| `TextareaResize.Initial`    | removed                     | use `TextAreaResize.None` if you want no resize affordance |
+| `TextareaResize.Inherit`    | removed                     | no direct equivalent                                       |
+
+##### Style and Native Props
+
+- The extension's Box-style utility props are removed from the public API.
+- Use `className` for layout and style overrides.
+- Native `<textarea>` props such as `rows`, `cols`, `name`, `id`, `maxLength`, `required`, `onChange`, `onBlur`, `onFocus`, and `onClick` continue to work on the design system component.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { Textarea, TextareaResize } from '../../component-library';
+
+<Textarea
+  defaultValue="Notes"
+  disabled={isBusy}
+  readOnly={isLocked}
+  error={hasError}
+  resize={TextareaResize.Vertical}
+  rows={4}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import { TextArea, TextAreaResize } from '@metamask/design-system-react';
+
+<TextArea
+  value={notes}
+  isDisabled={isBusy}
+  isReadOnly={isLocked}
+  isError={hasError}
+  resize={TextAreaResize.Vertical}
+  rows={4}
+/>;
+```
+
+#### API Differences
+
+- `TextArea` is controlled-only in the design system; there is no `defaultValue` escape hatch.
+- `resize` now defaults to `TextAreaResize.None`, so call sites that depended on the extension's vertical resize affordance should opt back into `TextAreaResize.Vertical`.
+- `TextareaResize.Initial` and `TextareaResize.Inherit` are no longer available.
+- The component remains a native `<textarea>` with standard HTML attributes and `className`.
+
 ### Checkbox Component
 
 The extension `checkbox` component maps to `Checkbox` in the design system, with controlled-state naming and callback-signature changes.
@@ -1238,6 +1619,355 @@ import { Checkbox } from '@metamask/design-system-react';
 - `Checkbox` still exposes a `toggle` imperative handle via `ref`, but top-level `inputRef` is not available.
 - `inputProps` remains available and should be used for native input attributes such as `name`, `required`, and `title`.
 - `isInvalid` is available for error-state visuals and is not part of the extension checkbox API.
+
+### AvatarBase Component
+
+The extension `avatar-base` component maps to `AvatarBase` in the design system. MMDS adds a **shape** model and renames the border flag to `hasBorder` (shared with other avatar primitives). Broad style-utility props on the extension `AvatarBase` are not carried forward; use [General Extension Migration Guidance](#general-extension-migration-guidance).
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                                  | Design System Migration                                                                       |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `import { AvatarBase, AvatarBaseSize } from '../../component-library/avatar-base'` | `import { AvatarBase, AvatarBaseSize, AvatarBaseShape } from '@metamask/design-system-react'` |
+
+##### Props and Enum Mapping
+
+| Extension API                                                                  | MMDS API                                           | Change Type            | Notes                                                                                                  |
+| ------------------------------------------------------------------------------ | -------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------ |
+| `backgroundColor`, `borderColor`, `color` (design-system enums on style props) | `className` / `style` on root                      | removed as first-class | use Tailwind or explicit layout; token-backed `Box`-style color props are not re-exposed the same way  |
+| Polymorphic `as` / `ref` from Box                                              | `asChild` on `AvatarBase`                          | different pattern      | MMDS `AvatarBase` is `div` by default; `asChild` merges onto a single child when needed                |
+| `size` values `'xs'`, …, `'xl'`                                                | `AvatarBaseSize` const object (same string values) | value alignment        | e.g. `AvatarBaseSize.Md` is `'md'`                                                                     |
+| (no equivalent in extension)                                                   | `hasBorder`                                        | new                    | extension `AvatarBase` had no border-inclusion prop; mobile's `includesBorder` maps here               |
+| (no `shape` in extension)                                                      | `shape` + `AvatarBaseShape`                        | new                    | `Circle` (default) or `Square` — child avatars set shape internally (e.g. `AvatarNetwork` uses square) |
+| (no `fallbackText` in extension)                                               | `fallbackText?`                                    | new                    | text rendered when no children or image; first letter used as avatar letter fallback                   |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import {
+  AvatarBase,
+  AvatarBaseSize,
+} from '../../component-library/avatar-base';
+
+<AvatarBase size={AvatarBaseSize.Md} className="custom-avatar" />;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarBase,
+  AvatarBaseSize,
+  AvatarBaseShape,
+} from '@metamask/design-system-react';
+
+<AvatarBase
+  size={AvatarBaseSize.Md}
+  shape={AvatarBaseShape.Circle}
+  hasBorder={false}
+  className="custom-avatar"
+/>;
+```
+
+### AvatarAccount Component
+
+**`AvatarAccount` is not in the extension `component-library` index** (the extension exports `AvatarBase`, `AvatarFavicon`, `AvatarIcon`, `AvatarNetwork`, and `AvatarToken` only). Use this section when migrating from **MetaMask Mobile** or any local fork that still implements account avatars. MMDS `AvatarAccount` is imported from `@metamask/design-system-react` and uses the shared const object `AvatarAccountVariant` (lowercase string values) instead of mobile’s `AvatarAccountType` (PascalCase values).
+
+#### Breaking Changes (vs Mobile `AvatarAccount`)
+
+| Mobile API                                                           | MMDS API                                                                  | Change Type             | Notes                                                      |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------- |
+| `accountAddress: string`                                             | `address: string`                                                         | renamed                 | same data, new prop name                                   |
+| `type?: AvatarAccountType` (e.g. `JazzIcon`, `Blockies`, `Maskicon`) | `variant?: AvatarAccountVariant`                                          | renamed + value mapping | MMDS: `Jazzicon`, `Blockies`, `Maskicon` (see table below) |
+| `size?: AvatarSize` with values `'16'`, `'24'`, …                    | `size?: AvatarAccountSize` (alias of `AvatarBaseSize`: `'xs'`, `'sm'`, …) | value space changed     | map pixel-like enums to `AvatarBaseSize` (see size table)  |
+| `includesBorder` on `AvatarBaseProps`                                | `hasBorder`                                                               | renamed                 | on shared base props                                       |
+
+##### Variant value mapping (Mobile `AvatarAccountType` → MMDS `AvatarAccountVariant`)
+
+| Mobile                       | MMDS                            |
+| ---------------------------- | ------------------------------- |
+| `AvatarAccountType.JazzIcon` | `AvatarAccountVariant.Jazzicon` |
+| `AvatarAccountType.Blockies` | `AvatarAccountVariant.Blockies` |
+| `AvatarAccountType.Maskicon` | `AvatarAccountVariant.Maskicon` |
+
+##### Size value mapping (Mobile `AvatarSize` → MMDS `AvatarBaseSize` / `AvatarAccountSize`)
+
+| Mobile (`AvatarSize`)    | MMDS                                                  |
+| ------------------------ | ----------------------------------------------------- |
+| `AvatarSize.Xs` (`'16'`) | `AvatarAccountSize.Xs` / `AvatarBaseSize.Xs` (`'xs'`) |
+| `AvatarSize.Sm` (`'24'`) | `Sm`                                                  |
+| `AvatarSize.Md` (`'32'`) | `Md`                                                  |
+| `AvatarSize.Lg` (`'40'`) | `Lg`                                                  |
+| `AvatarSize.Xl` (`'48'`) | `Xl`                                                  |
+
+#### Migration Example (Mobile)
+
+##### Before (Mobile)
+
+```tsx
+import Avatar, { AvatarVariant } from '.../Avatars/Avatar';
+import { AvatarAccountType, AvatarSize } from '.../Avatars/Avatar/Avatar.types';
+
+<Avatar
+  variant={AvatarVariant.Account}
+  accountAddress={address}
+  type={AvatarAccountType.JazzIcon}
+  size={AvatarSize.Md}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarAccount,
+  AvatarAccountVariant,
+  AvatarAccountSize,
+} from '@metamask/design-system-react';
+
+<AvatarAccount
+  address={address}
+  variant={AvatarAccountVariant.Jazzicon}
+  size={AvatarAccountSize.Md}
+/>;
+```
+
+### AvatarFavicon Component
+
+The extension `avatar-favicon` and MMDS `AvatarFavicon` both use a dapp name for alt/fallback, but the **image source and fallback mechanisms differ**.
+
+#### Breaking Changes (Extension)
+
+| Extension API                     | MMDS API                                              | Change Type     | Notes                                                                                |
+| --------------------------------- | ----------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------ |
+| `name: string` (required)         | `name?: string`                                       | now optional    | still used for alt text; defaults inside component when empty                        |
+| `src?: string`                    | `src?: string`                                        | keep            | string URL for `<img>`                                                               |
+| `fallbackIconProps`               | (no equivalent)                                       | removed         | MMDS uses `fallbackText` + optional `imageProps.onError` for recovery                |
+| `size` / `AvatarFaviconSize` enum | `AvatarFaviconSize` (alias of `AvatarBaseSize` const) | values align    | same `xs`–`xl` labels                                                                |
+| `borderColor` on style props      | use `className` / `style` or token classes            | not carried 1:1 | prefer design tokens via Tailwind                                                    |
+| (no `fallbackText` in extension)  | `fallbackText?`                                       | new             | explicit fallback text when no image loads; overrides first-letter-of-`name` default |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { AvatarFavicon } from '../../component-library/avatar-favicon';
+
+<AvatarFavicon name="Uniswap" src={faviconUrl} size={AvatarFaviconSize.Md} />;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarFavicon,
+  AvatarFaviconSize,
+} from '@metamask/design-system-react';
+
+<AvatarFavicon name="Uniswap" src={faviconUrl} size={AvatarFaviconSize.Md} />;
+```
+
+### AvatarIcon Component
+
+The extension `avatar-icon` used a single `color` prop (text/icon colors). MMDS **`AvatarIcon` replaces `color` with `severity`**, which drives both **background (via container classes) and icon color** through `AvatarIconSeverity`.
+
+#### Breaking Changes (Extension)
+
+| Extension API                    | MMDS API                                     | Change Type       | Notes                                                                                  |
+| -------------------------------- | -------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------- |
+| `iconName: IconName`             | `iconName: IconName`                         | unchanged         | same icon set                                                                          |
+| `iconProps`                      | `iconProps` (omit `name` from `IconProps`)   | typing tightened  | pass `Icon` overrides without repeating `name`                                         |
+| `color?: TextColor \| IconColor` | `severity?: AvatarIconSeverity`              | **replaced**      | `Neutral`, `Info`, `Success`, `Danger`, `Warning` — not a 1:1 list with legacy `Color` |
+| `size` labels `xs`–`xl`          | `AvatarIconSize` (alias of `AvatarBaseSize`) | same string union | default `Md`                                                                           |
+| (no `severity` in extension)     | `AvatarIconSeverity`                         | new               | use instead of ad-hoc `color`                                                          |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import {
+  AvatarIcon,
+  AvatarIconSize,
+} from '../../component-library/avatar-icon';
+import { IconName } from '../../component-library/icon';
+
+<AvatarIcon
+  iconName={IconName.Eye}
+  size={AvatarIconSize.Md}
+  color={TextColor.ErrorDefault}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarIcon,
+  AvatarIconSize,
+  AvatarIconSeverity,
+  IconName,
+} from '@metamask/design-system-react';
+
+<AvatarIcon
+  iconName={IconName.Eye}
+  size={AvatarIconSize.Md}
+  severity={AvatarIconSeverity.Danger}
+/>;
+```
+
+### AvatarNetwork Component
+
+`AvatarNetwork` exists in the extension. MMDS does **not** support `showHalo`; the shared **`name` prop is optional** and is used for alt text and the letter fallback. Root shape is **square** in the MMDS implementation.
+
+#### Breaking Changes (Extension)
+
+| Extension API             | MMDS API                                                       | Change Type     | Notes                                                 |
+| ------------------------- | -------------------------------------------------------------- | --------------- | ----------------------------------------------------- |
+| `name: string` (required) | `name?: string`                                                | now optional    | letter fallback still derived when `name` is provided |
+| `src?: string`            | `src?: string`                                                 | unchanged       |                                                       |
+| `showHalo?: boolean`      | (removed)                                                      | not supported   | drop or reimplement in product UI if still required   |
+| `size`                    | `size` (defaults to `AvatarNetworkSize` → `AvatarBaseSize.Md`) | value alignment | same `xs`–`xl` strings as `AvatarBase`                |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import {
+  AvatarNetwork,
+  AvatarNetworkSize,
+} from '../../component-library/avatar-network';
+
+<AvatarNetwork
+  name="Mainnet"
+  src={networkIcon}
+  size={AvatarNetworkSize.Md}
+  showHalo
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarNetwork,
+  AvatarNetworkSize,
+} from '@metamask/design-system-react';
+
+<AvatarNetwork name="Mainnet" src={networkIcon} size={AvatarNetworkSize.Md} />;
+```
+
+### AvatarToken Component
+
+`AvatarToken` exists in the extension. MMDS does **not** support `showHalo`. Optional `name` and `fallbackText` follow the same pattern as `AvatarNetwork`/`AvatarFavicon`.
+
+#### Breaking Changes (Extension)
+
+| Extension API                    | MMDS API                                      | Change Type     | Notes                                                                                |
+| -------------------------------- | --------------------------------------------- | --------------- | ------------------------------------------------------------------------------------ |
+| `showHalo?: boolean`             | (removed)                                     | not supported   |                                                                                      |
+| `name?: string`                  | `name?`, `fallbackText?`                      | extended        | MMDS documents shared fallback rules in types                                        |
+| `src?`                           | `src?`                                        | unchanged       |                                                                                      |
+| `size`                           | `AvatarTokenSize` (alias of `AvatarBaseSize`) | value alignment |                                                                                      |
+| (no `fallbackText` in extension) | `fallbackText?`                               | new             | explicit fallback text when no image loads; overrides first-letter-of-`name` default |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import {
+  AvatarToken,
+  AvatarTokenSize,
+} from '../../component-library/avatar-token';
+
+<AvatarToken name="DAI" src={iconUrl} size={AvatarTokenSize.Md} showHalo />;
+```
+
+##### After (Design System)
+
+```tsx
+import { AvatarToken, AvatarTokenSize } from '@metamask/design-system-react';
+
+<AvatarToken name="DAI" src={iconUrl} size={AvatarTokenSize.Md} />;
+```
+
+### AvatarGroup Component
+
+`AvatarGroup` is **not exported** from the extension `component-library` (see [extension `index.ts`](https://github.com/MetaMask/metamask-extension/blob/main/ui/components/component-library/index.ts)). Use this section for **MetaMask Mobile** and any app that used the standalone `AvatarGroup` molecule.
+
+**MMDS** requires a **required `variant`** (const object + union `AvatarGroupVariant`) and **`avatarPropsArr`** (not `avatarPropsList`). The **`max` prop** defaults to 4, **`size`** to `AvatarGroupSize.Md`. **`isReverse`** and **`overflowTextProps`** are new. Mobile’s **`spaceBetweenAvatars`**, **`includesBorder` stack override**, and the **`+N` size default of `AvatarSize.Xs`** are not part of the MMDS `AvatarGroup` public API; recreate spacing and borders with layout/`twClassName` if needed.
+
+#### Breaking Changes (vs Mobile `AvatarGroup`)
+
+| Mobile API                                                          | MMDS API                                                                | Change Type              | Notes                                                           |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------- |
+| `avatarPropsList: AvatarProps[]` (discriminated by inner `variant`) | `variant` + `avatarPropsArr: Avatar*Props[]` (single variant per group) | restructured             | pick one of Account / Favicon / Network / Token for the group   |
+| `size?: AvatarSize` (default `Xs` in mobile types)                  | `size?: AvatarGroupSize` (alias of `AvatarBaseSize`, default `Md`)      | default and type changed | verify visual overlap                                           |
+| `maxStackedAvatars?`                                                | `max?`                                                                  | renamed                  | same intent (default `4`)                                       |
+| `includesBorder?`                                                   | (not on `AvatarGroup`)                                                  | removed                  | set `hasBorder` on children via props if the design requires it |
+| `spaceBetweenAvatars?`                                              | (no direct prop)                                                        | removed                  | use wrapper layout / utilities                                  |
+| (n/a)                                                               | `isReverse?`, `overflowTextProps?`                                      | new                      | stack direction and overflow label styling                      |
+
+#### Mobile variant → MMDS `AvatarGroupVariant` + item props
+
+| Mobile `Avatar` variant (on each item) | MMDS `variant` on `AvatarGroup` | `avatarPropsArr` item type                   |
+| -------------------------------------- | ------------------------------- | -------------------------------------------- |
+| `AvatarVariant.Account`                | `AvatarGroupVariant.Account`    | `AvatarAccountProps`                         |
+| `AvatarVariant.Favicon`                | `AvatarGroupVariant.Favicon`    | `AvatarFaviconProps`                         |
+| `AvatarVariant.Network`                | `AvatarGroupVariant.Network`    | `AvatarNetworkProps`                         |
+| `AvatarVariant.Token`                  | `AvatarGroupVariant.Token`      | `AvatarTokenProps`                           |
+| `AvatarVariant.Icon`                   | (no `AvatarGroup` branch)       | use separate layout or multiple `AvatarIcon` |
+
+#### Migration Example (Mobile)
+
+##### Before (Mobile)
+
+```tsx
+import AvatarGroup from '.../Avatars/AvatarGroup';
+import {
+  AvatarSize,
+  AvatarVariant,
+  AvatarAccountType,
+} from '.../Avatars/Avatar/Avatar.types';
+
+<AvatarGroup
+  size={AvatarSize.Md}
+  maxStackedAvatars={3}
+  avatarPropsList={addresses.map((accountAddress) => ({
+    variant: AvatarVariant.Account,
+    accountAddress,
+    type: AvatarAccountType.JazzIcon,
+  }))}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarGroupSize,
+  AvatarAccountVariant,
+} from '@metamask/design-system-react';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Account}
+  size={AvatarGroupSize.Md}
+  max={3}
+  avatarPropsArr={addresses.map((address) => ({
+    address,
+    variant: AvatarAccountVariant.Jazzicon,
+  }))}
+/>;
+```
 
 ### HeaderBase Component
 
@@ -1331,6 +2061,140 @@ For typical call sites — for example `ui/components/multichain/pages/page/comp
 - `HeaderBase` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it. The `mm-header-base` class hook is gone — use `className` to apply Tailwind utilities.
 - The `useRef` / `useEffect` / `useState` / `window.addEventListener('resize', …)` measurement code is gone. There are no longer any layout side effects on mount or window resize.
 - Slot wrappers (`childrenWrapperProps` / `startAccessoryWrapperProps` / `endAccessoryWrapperProps`) ship their grid-placement utilities (`col-start-*`, `justify-self-*`) as defaults; consumer `className` is merged via `twMerge` so it can override placement when needed.
+
+### HelpText Component
+
+The extension `help-text` component maps to `HelpText` in the design system. It still renders a `<p>` with the `body-sm` typography and applies a severity-based text color, but the polymorphic `as` API is replaced with the design-system `asChild` pattern, and the `HelpTextSeverity` enum is now a const object (ADR-0003) sourced from `@metamask/design-system-shared`.
+
+#### Breaking Changes
+
+##### Imports and Enum Source
+
+| Extension Pattern                                                  | Design System Migration                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `import { HelpText } from '../../component-library/help-text'`     | `import { HelpText } from '@metamask/design-system-react'`         |
+| `import { HelpTextSeverity } from '.../help-text/help-text.types'` | `import { HelpTextSeverity } from '@metamask/design-system-react'` |
+
+##### Severity Values
+
+`HelpTextSeverity` is now a const object instead of a TypeScript enum, but member names and string values are unchanged.
+
+| Extension Value                          | Design System Value        |
+| ---------------------------------------- | -------------------------- |
+| `HelpTextSeverity.Info` (`'info'`)       | `HelpTextSeverity.Info`    |
+| `HelpTextSeverity.Success` (`'success'`) | `HelpTextSeverity.Success` |
+| `HelpTextSeverity.Warning` (`'warning'`) | `HelpTextSeverity.Warning` |
+| `HelpTextSeverity.Danger` (`'danger'`)   | `HelpTextSeverity.Danger`  |
+
+##### Removed / No Direct Equivalent
+
+| Legacy Extension API                                              | MMDS Status                                   | Migration                                                                            |
+| ----------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Polymorphic `as` prop / `PolymorphicRef` typing                   | Removed                                       | Use `asChild` to render a different element (see example below)                      |
+| Implicit `as="div"` switch when `children` is a non-string node   | Removed — always renders `<p>`                | Use `asChild` with a `<div>` wrapper when content includes block-level children      |
+| `Severity` union (extension-wide) accepted by the `severity` prop | Removed — only `HelpTextSeverity` is accepted | Map any `Severity.*` value to the matching `HelpTextSeverity.*` member               |
+| Forwarded `ref` to the underlying element                         | Not supported (matches `Text`)                | If a ref is required, render a parent element via `asChild` and attach the ref there |
+| `mm-help-text` CSS class hook                                     | Removed                                       | Apply Tailwind utilities through `className`                                         |
+
+##### Type Changes
+
+| Legacy Extension API                        | MMDS API                                              | Notes                                                |
+| ------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
+| `severity?: HelpTextSeverity \| Severity`   | `severity?: HelpTextSeverity`                         | Single source of truth; const object (ADR-0003/0004) |
+| `color?: TextColor` (extension `TextColor`) | `color?: TextColor` (shared `TextColor` const object) | PascalCase members (e.g. `TextColor.ErrorDefault`)   |
+| `children: string \| ReactNodeLike`         | `children: ReactNode`                                 | Standard React typing                                |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '../../component-library';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Implicit `as="div"` when children was an object node
+<HelpText>
+  <span>Complex</span> content
+</HelpText>;
+```
+
+##### After (Design System)
+
+```tsx
+import { HelpText, HelpTextSeverity } from '@metamask/design-system-react';
+
+<HelpText severity={HelpTextSeverity.Danger}>Address is invalid</HelpText>;
+
+// Render as a div explicitly via `asChild`
+<HelpText asChild>
+  <div>
+    <span>Complex</span> content
+  </div>
+</HelpText>;
+```
+
+### Label Component
+
+The extension `label` component maps to `Label` in the design system. The runtime API stays the same for typical usage — `<Label htmlFor="...">…</Label>` — but the component drops the polymorphic Box surface and the legacy SCSS class hooks in favor of a `<Text asChild>` composition that renders a semantic `<label>` element with Tailwind utilities.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { Label } from '../../component-library'`           | `import { Label } from '@metamask/design-system-react'`           |
+| `import type { LabelProps } from '../../component-library'` | `import type { LabelProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                                 | Design System API                                                             | Change Type | Notes                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `htmlFor?: string`                                                                            | `htmlFor?: string`                                                            | unchanged   | forwarded to the underlying `<label>` element as the `for` attribute                                                                                                            |
+| `children: string \| React.ReactNode`                                                         | `children: ReactNode`                                                         | unchanged   | label content                                                                                                                                                                   |
+| `className?: string`                                                                          | `className?: string`                                                          | unchanged   | merged with default Tailwind classes via `twMerge`                                                                                                                              |
+| `'data-testid'?: string`                                                                      | inherited from `ComponentProps<'label'>`                                      | unchanged   | any `data-*`/`aria-*` HTML attribute is forwarded to the `<label>` element                                                                                                      |
+| Polymorphic `as` / `LabelProps<C extends React.ElementType>` typing                           | removed                                                                       | removed     | always renders a semantic `<label>` element. If you need a different element, wrap or compose.                                                                                  |
+| Box / Text style-utility props (`color`, `fontWeight`, `variant`, `display`, `alignItems`, …) | overrides via `Text` props (`color`, `fontWeight`, `variant`, `textAlign`, …) | changed     | `Label` is composed from `Text`, so `Text` props remain available as overrides. The component owns its layout (`inline-flex items-center`); use `className` to override layout. |
+| `mm-label` / `mm-label--html-for` SCSS class hooks                                            | removed                                                                       | removed     | use `className` and Tailwind utilities to customize the label                                                                                                                   |
+
+##### Default and Behavior Changes
+
+| Concern        | Extension Behavior                                                                     | Design System Behavior                                                                   |
+| -------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Element        | `<Text as="label">` → `<label>`                                                        | `<Text asChild><label>…</label></Text>` → still a semantic `<label>`                     |
+| Default layout | `Display.InlineFlex` + `AlignItems.center` Box props                                   | `inline-flex items-center` Tailwind utilities                                            |
+| Typography     | `TextVariant.bodyMd` + `FontWeight.Medium`                                             | `TextVariant.BodyMd` + `FontWeight.Medium` (same defaults; overridable via `Text` props) |
+| Cursor         | `cursor: pointer` applied via `mm-label--html-for` SCSS modifier when `htmlFor` is set | `cursor-pointer` Tailwind utility applied conditionally when `htmlFor` is set            |
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { Label } from '../../component-library';
+
+<Label htmlFor="email-input">Email address</Label>;
+```
+
+##### After (Design System)
+
+```tsx
+import { Label } from '@metamask/design-system-react';
+
+<Label htmlFor="email-input">Email address</Label>;
+```
+
+For typical call sites — for example `ui/components/component-library/form-text-field/form-text-field.tsx`, `ui/components/component-library/file-uploader/file-uploader.tsx`, and `ui/pages/deep-link/deep-link.tsx` (verified via fresh grep) — the only change is the import path; the JSX stays identical.
+
+#### API Differences
+
+- `Label` no longer composes Box/Text's polymorphic `as` API. It always renders a `<label>` element and forwards arbitrary HTML attributes (`id`, `data-*`, `aria-*`, `ref`) to it.
+- The `asChild` prop is owned by the component and is intentionally excluded from the public API.
+- One-off styling that previously used Box/Text utility props (e.g. `display={Display.Block}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="block"`). Typography overrides (`color`, `fontWeight`, `variant`, `textAlign`) remain available via the inherited `Text` props.
 
 ### Modal Component
 
@@ -1728,6 +2592,12 @@ The extension `modal-footer` component maps to `ModalFooter` in the design syste
 - Layout direction is now an explicit `buttonsAlignment` prop (`Horizontal` default, `Vertical` opt-in) instead of the legacy `flex-wrap` + `Container.maxWidth` arrangement.
 - The polymorphic Box surface, the `Container` dependency, the `useI18nContext` coupling, and the `mm-modal-footer*` SCSS class hooks are all removed.
 
+#### Cross-platform parity (React Native)
+
+Web `ModalFooter` and React Native `BottomSheetFooter` share the same **named slot** model (`primaryButtonProps` / `secondaryButtonProps`), enforced variants, and secondary-then-primary ordering. For mobile `component-library` → `@metamask/design-system-react-native` mappings (including the legacy `buttonPropsArray` API), see [BottomSheetFooter Component](../design-system-react-native/MIGRATION.md#bottomsheetfooter-component) in the React Native migration guide.
+
+**`ButtonsAlignment` values differ by platform:** on web, `ModalFooter` uses lowercase string literals `'horizontal'` | `'vertical'` (`ButtonsAlignment.Horizontal` / `ButtonsAlignment.Vertical` from `@metamask/design-system-react`). On React Native, the enum string values are `'Horizontal'` | `'Vertical'`. Import the enum from the package you target; do not assume the raw strings are interchangeable across platforms.
+
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
 
 #### Breaking Changes
@@ -1750,6 +2620,7 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 | `containerProps?: ContainerProps<'div'>`                                                    | removed; layout direction moved to `buttonsAlignment`                                 | removed            | the `Container.maxWidth` (`Sm` / `Md` / `Lg` ≈ 360 / 480 / 720) is gone. Width is now governed by the surrounding `ModalContent.size`. Custom outer footer styling moves to `className`.                                                               |
 | —                                                                                           | `buttonsAlignment?: ButtonsAlignment` (`Horizontal` default, `Vertical` opt-in)       | added              | `Horizontal` lays buttons in a `flex-row` with each button at `flex-1`; `Vertical` lays them in a `flex-col` with each button at `w-full`. Order: secondary → primary in both modes. Mirrors the React Native `BottomSheetFooter` API.                 |
 | `children?: ReactNode`                                                                      | `children?: ReactNode`                                                                | unchanged          | rendered above the action button row.                                                                                                                                                                                                                  |
+| —                                                                                           | both buttons use `ButtonSize.Lg` internally                                           | behavior note      | same default sizing as extension (`ButtonSize.Lg` on each built-in button); optional `size` on `*ButtonProps` can still override per button if needed.                                                                                                 |
 | `className?: string`                                                                        | `className?: string`                                                                  | unchanged          | merged with default Tailwind classes via `twMerge`.                                                                                                                                                                                                    |
 | Polymorphic `as` / `PolymorphicComponentPropWithRef<C, ...>`                                | removed                                                                               | removed            | always renders a `<footer>`. If you need a different element, wrap or compose.                                                                                                                                                                         |
 | Box style-utility props (`paddingLeft`, `paddingRight`, `paddingTop`, `backgroundColor`, …) | removed from public API                                                               | removed            | use `className` with Tailwind utilities. The default `px-4 pt-4` remains, applied internally; override with `className="px-0 pt-2"` etc.                                                                                                               |
@@ -1874,6 +2745,143 @@ For typical call sites — for example `ui/components/multichain-accounts/accoun
 - The component **owns** the button variant via `Omit<ButtonProps, 'variant'>` on the prop bags. Consumers cannot pass `variant`; the API surfaces this at compile time. This mirrors the React Native `BottomSheetFooter` and is the recommended footer contract going forward.
 - Layout direction is configured via `buttonsAlignment` (`Horizontal` default, `Vertical` opt-in). The legacy `Container.maxWidth` enum is gone — width comes from the surrounding `ModalContent.size`.
 
+### ModalHeader Component
+
+The extension `modal-header` component maps to `ModalHeader` in the design system. The behavioral contract — a `<header>` with an optional back button on the start, a title in the center, and an optional close button on the end — is preserved. The polymorphic Box surface, the `mm-modal-header` SCSS class hook, and the implicit `useI18nContext` coupling for the icon-button `aria-label`s are removed.
+
+`ModalHeader` is built on top of the same three-column grid layout as `HeaderBase`, replicated locally so the outer element stays a single semantic `<header>` (no extra wrapper).
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                 | Design System Migration                                                 |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `import { ModalHeader } from '../../component-library'`           | `import { ModalHeader } from '@metamask/design-system-react'`           |
+| `import type { ModalHeaderProps } from '../../component-library'` | `import type { ModalHeaderProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                        | Design System API                                                                          | Change Type | Notes                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children?: ReactNode`                                               | `children?: ReactNode`                                                                     | unchanged   | string children still auto-wrap as `<Text variant={TextVariant.HeadingSm} textAlign={TextAlign.Center}>`; `ReactNode` children render as-is.                                                                           |
+| `onBack?: () => void`                                                | `onBack?: () => void`                                                                      | unchanged   | when set, renders the back button — but **`backButtonProps` is now co-required** (see "i18n decoupling" below).                                                                                                        |
+| `onClose?: () => void`                                               | `onClose?: () => void`                                                                     | unchanged   | when set, renders the close button — but **`closeButtonProps` is now co-required**.                                                                                                                                    |
+| `backButtonProps?: Partial<ButtonIconProps<'button'>>`               | `backButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.)  | shape       | type now bound to MMDS `ButtonIconProps`; `iconName` (`ArrowLeft`) and `size` (`Md`) are owned by the component and cannot be overridden via the prop bag. `ariaLabel` is required (preserved from `ButtonIconProps`). |
+| `closeButtonProps?: Partial<ButtonIconProps<'button'>>`              | `closeButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.) | shape       | same shape change as `backButtonProps`; component owns `iconName=Close` and `size=Md`.                                                                                                                                 |
+| `startAccessory?: ReactNode`                                         | `startAccessory?: ReactNode`                                                               | unchanged   | when provided, replaces the auto-rendered back button — even if `onBack` is set (legacy precedence preserved).                                                                                                         |
+| `endAccessory?: ReactNode`                                           | `endAccessory?: ReactNode`                                                                 | unchanged   | when provided, replaces the auto-rendered close button — even if `onClose` is set.                                                                                                                                     |
+| `className?: string`                                                 | `className?: string`                                                                       | unchanged   | applied to the outer `<header>`; merged with the component's defaults via `twMerge`.                                                                                                                                   |
+| Polymorphic `as` / extension's `HeaderBaseStyleUtilityProps` surface | removed                                                                                    | removed     | always renders `<header>`. Box utility props on the root (`paddingLeft`, `paddingBottom`, `width`, …) are removed — use `className` with Tailwind utilities (e.g. `className="pt-0 pb-2"`).                            |
+| `mm-modal-header` SCSS class hook                                    | removed                                                                                    | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities.                                                                                   |
+| `childrenWrapperProps={{ width: BlockSize.Full }}` (legacy internal) | applied automatically as `w-full` on the title slot                                        | unchanged   | preserved internal behavior; no consumer-facing prop change.                                                                                                                                                           |
+
+##### i18n Decoupling
+
+The extension auto-defaulted the icon-button `aria-label`s to `t('back')` and `t('close')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. The type system enforces this: `onBack` and `backButtonProps` (and `onClose` / `closeButtonProps`) are co-required via a discriminated union — when `onBack` is set, you must also pass `backButtonProps` with at least an `ariaLabel`:
+
+```tsx
+<ModalHeader onClose={handleClose} closeButtonProps={{ ariaLabel: t('close') }}>
+  {t('removeAccount')}
+</ModalHeader>
+```
+
+If a consumer sets `onClose` without `closeButtonProps`, TypeScript errors at the call site. This guarantees every dismiss button gets a properly localized label without the component reaching into any global i18n context.
+
+##### ButtonIcon API Differences
+
+The extension's `ButtonIconProps<'button'>` is replaced by MMDS `ButtonIconProps`. The most common difference for migrating consumers is that the polymorphic `as` typing is gone (the prop bag types against the underlying `<button>` HTML element directly). All standard ButtonIcon props (`ariaLabel`, `disabled`, `onClick`, `data-testid`, etc.) are preserved.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { ModalHeader } from '../../component-library';
+
+// i18n-defaulted back + close
+<ModalHeader onBack={onBack} onClose={onClose}>
+  {t('headerTitle')}
+</ModalHeader>
+
+// Box utility props on the root
+<ModalHeader
+  paddingBottom={4}
+  paddingRight={4}
+  paddingLeft={4}
+  onClose={onClose}
+>
+  {title}
+</ModalHeader>
+
+// Custom close-button override (test id, aria-label)
+<ModalHeader
+  onClose={onClose}
+  closeButtonProps={{
+    ariaLabel: t('close'),
+    'data-testid': 'modal-close',
+  }}
+>
+  {title}
+</ModalHeader>
+```
+
+##### After (Design System)
+
+```tsx
+import { ModalHeader } from '@metamask/design-system-react';
+
+// aria-labels are explicit; back + close prop bags are now co-required
+<ModalHeader
+  onBack={onBack}
+  backButtonProps={{ ariaLabel: t('back') }}
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {t('headerTitle')}
+</ModalHeader>
+
+// Root padding overrides move into className
+<ModalHeader
+  className="pb-4 pr-4 pl-4"
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {title}
+</ModalHeader>
+
+// Custom close-button overrides — same shape, just bound to the new type
+<ModalHeader
+  onClose={onClose}
+  closeButtonProps={{
+    ariaLabel: t('close'),
+    'data-testid': 'modal-close',
+  }}
+>
+  {title}
+</ModalHeader>
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/account-remove-modal/account-remove-modal.tsx` (bare `<ModalHeader onClose={onClose}>{title}</ModalHeader>`), `ui/components/app/basic-configuration-modal/basic-configuration-modal.tsx` (`paddingLeft={4} paddingRight={4} paddingBottom={4} onClose={fn}`), and `ui/components/app/connections-removed-modal/connections-removed-modal.tsx` (custom JSX `children`) (verified via fresh grep) — the typical churn is:
+
+1. Swap the import path.
+2. Add `closeButtonProps={{ ariaLabel: t('close') }}` (and/or `backButtonProps={{ ariaLabel: t('back') }}`) to every `<ModalHeader>` that uses `onClose` / `onBack`. The compiler flags missing prop bags so this can be applied mechanically.
+3. Move any root-level Box utility props (`paddingLeft`, `paddingRight`, `paddingBottom`, `width`, etc.) onto `className` with Tailwind utilities.
+4. If the call site's `closeButtonProps` / `backButtonProps` already passed `ariaLabel`, only the import path needs to change.
+
+#### Deprecated `ModalHeader`
+
+The extension exports a separate `deprecated/` `ModalHeader` from `ui/components/component-library/modal-header/deprecated`. **It is not migrated.** Consumers still importing from the deprecated path need to migrate to the current `ModalHeader` first, then switch to `@metamask/design-system-react`. The deprecated path predates the current `paddingTop`/`paddingBottom`/`width` defaults and uses `ButtonIconSize.Sm` instead of `Md`.
+
+#### API Differences
+
+- `ModalHeader` always renders a `<header>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The `useI18nContext` coupling for the icon-button `aria-label`s is gone. Discriminated unions enforce co-required `backButtonProps` / `closeButtonProps` at compile time.
+- The component owns `iconName` (`ArrowLeft` / `Close`) and `size` (`Md`) on the built-in icon buttons. Consumers cannot override them via the prop bag.
+- `startAccessory` / `endAccessory` precedence over the auto-rendered back/close buttons is preserved from the legacy.
+
 ### ModalOverlay Component
 
 The extension `modal-overlay` component maps to `ModalOverlay` in the design system. The runtime API stays the same for typical usage — `<ModalOverlay />` with optional `onClick` and `className` — but the component drops the polymorphic Box surface and the legacy SCSS class hook in favor of Tailwind utilities and a token-driven fade-in animation.
@@ -1933,6 +2941,329 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 
 - `ModalOverlay` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - One-off styling that previously used Box utility props (e.g. `backgroundColor={BackgroundColor.overlayAlternative}`) should now use `className` with the equivalent Tailwind utility (e.g. `className="bg-overlay-alternative"`).
+
+### Popover Component
+
+The extension `popover` component maps to `Popover` in the design system. The runtime contract — `referenceElement`, `isOpen`, `position`, `role`, `hasArrow`, `matchWidth`, `flip`, `preventOverflow`, `referenceHidden`, `offset`, `isPortal`, `arrowProps`, `onPressEscKey`, `onClickOutside` — is preserved 1:1, including the `PopoverPosition` and `PopoverRole` value strings. The breaking changes are limited to the surrounding API surface: `@floating-ui/react-dom` is used internally for positioning (consumers do not need to install it), the polymorphic `as` / Box style-utility passthrough is gone, and the legacy SCSS class hooks (`.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`) are replaced by Tailwind utilities and inline styles.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                        | Design System Migration                                                        |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `import { Popover } from '../../component-library'`                      | `import { Popover } from '@metamask/design-system-react'`                      |
+| `import { PopoverPosition, PopoverRole } from '../../component-library'` | `import { PopoverPosition, PopoverRole } from '@metamask/design-system-react'` |
+| `import type { PopoverProps } from '../../component-library'`            | `import type { PopoverProps } from '@metamask/design-system-react'`            |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                                                              | Design System API                                                          | Change Type | Notes                                                                                                                                                                                                             |
+| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `referenceElement?: HTMLElement \| null`                                                                   | `referenceElement?: HTMLElement \| null`                                   | unchanged   | reference element for Floating UI positioning                                                                                                                                                                     |
+| `isOpen?: boolean`                                                                                         | `isOpen?: boolean`                                                         | unchanged   | nothing renders when `false`                                                                                                                                                                                      |
+| `position?: PopoverPosition`                                                                               | `position?: PopoverPosition`                                               | unchanged   | same string values; default `PopoverPosition.Auto` still forces `flip` and `preventOverflow` on                                                                                                                   |
+| `role?: PopoverRole`                                                                                       | `role?: PopoverRole`                                                       | unchanged   | same string values; default `PopoverRole.Tooltip`                                                                                                                                                                 |
+| `hasArrow?: boolean`                                                                                       | `hasArrow?: boolean`                                                       | unchanged   | default `false`; the rendered notch rotates with the resolved placement                                                                                                                                           |
+| `arrowProps?: BoxProps<'div'>`                                                                             | `arrowProps?: Omit<ComponentProps<'div'>, 'ref' \| 'style' \| 'children'>` | narrowed    | extension Box style-utility props are no longer accepted; `ref`, `style`, and `children` are reserved for internal use (popper positioning, rotation styles, arrow visual). Pass `className` for one-off styling. |
+| `matchWidth?: boolean`                                                                                     | `matchWidth?: boolean`                                                     | unchanged   | matches the reference's `clientWidth` when `true`                                                                                                                                                                 |
+| `preventOverflow?: boolean`                                                                                | `preventOverflow?: boolean`                                                | unchanged   | forced on when `position === PopoverPosition.Auto`                                                                                                                                                                |
+| `flip?: boolean`                                                                                           | `flip?: boolean`                                                           | unchanged   | forced on when `position === PopoverPosition.Auto`                                                                                                                                                                |
+| `referenceHidden?: boolean`                                                                                | `referenceHidden?: boolean`                                                | unchanged   | default `true`; behavior preserved (hides popover when `data-popper-reference-hidden="true"`) — implemented via Tailwind `data-[]:` variants instead of SCSS                                                      |
+| `offset?: [number, number]`                                                                                | `offset?: [number, number]`                                                | unchanged   | default `[0, 8]`                                                                                                                                                                                                  |
+| `isPortal?: boolean`                                                                                       | `isPortal?: boolean`                                                       | unchanged   | renders into `document.body` via `createPortal`                                                                                                                                                                   |
+| `onPressEscKey?: () => void`                                                                               | `onPressEscKey?: () => void`                                               | unchanged   | Escape-key callback                                                                                                                                                                                               |
+| `onClickOutside?: () => void`                                                                              | `onClickOutside?: () => void`                                              | unchanged   | click-outside callback (ignores clicks on the reference element)                                                                                                                                                  |
+| `as?: React.ElementType` / `PolymorphicComponentPropWithRef`                                               | removed                                                                    | removed     | always renders a `<div>`. Wrap or compose if you need a different element                                                                                                                                         |
+| Box style-utility props (`backgroundColor`, `padding`, `borderRadius`, …)                                  | removed from public API                                                    | removed     | the popover surface uses fixed design tokens (`BoxBackgroundColor.BackgroundDefault`, `BoxBorderColor.BorderMuted`, `padding={4}`, `rounded-lg`, `shadow-md`). Override via `className`                           |
+| `.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`, `.mm-popover--open` SCSS class hooks | removed                                                                    | removed     | the SCSS file is gone; styling is Tailwind + inline styles. Use `className` and `arrowProps.className` for overrides                                                                                              |
+
+##### Default and Behavior Changes
+
+| Concern                                | Extension Behavior                                                                                                                                                                     | Design System Behavior                                                                                                                                                                                                                                                        |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Positioning library                    | `react-popper` declared as a direct dependency of the extension                                                                                                                        | `@floating-ui/react-dom` is used internally by `@metamask/design-system-react` — consumers do not install or import it directly                                                                                                                                               |
+| Surface styling                        | Box props applied inside the component (`backgroundColor.backgroundDefault`, `borderRadius.LG`, `borderColor.borderMuted`, `padding={4}`) plus `mm-popover` SCSS hook for `box-shadow` | Same visual: `BoxBackgroundColor.BackgroundDefault`, `BoxBorderColor.BorderMuted`, `borderWidth={1}`, `padding={4}`, `rounded-lg`, `shadow-md` Tailwind utilities applied internally                                                                                          |
+| Arrow rendering                        | Outer 40×40 invisible container with an `::before` pseudo-element drawing the visible 8×8 notch; rotation via SCSS attribute selectors keyed off `data-popper-placement`               | Same outer container but the visible notch is a real `<Box>` child instead of a pseudo-element. Rotation is computed from the resolved placement and applied as inline `transform`                                                                                            |
+| Reference-hidden visibility            | `.mm-popover--reference-hidden[data-popper-reference-hidden="true"] { visibility: hidden; pointer-events: none; }`                                                                     | Tailwind `data-[popper-reference-hidden=true]:invisible data-[popper-reference-hidden=true]:pointer-events-none` applied when `referenceHidden` is `true`                                                                                                                     |
+| `keydown` listener cleanup             | Registered with `{ capture: true }` but removed without options — listener accumulates across re-renders                                                                               | Registered and removed with matching `{ capture: true }` options (no listener leak)                                                                                                                                                                                           |
+| `PopoverPosition` / `PopoverRole` type | TypeScript `enum` (`enum PopoverPosition { Auto = 'auto', … }`)                                                                                                                        | Const object with derived string-union type ([ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)). All string values unchanged, so `PopoverPosition.Auto`, `PopoverRole.Dialog`, etc. continue to work |
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { useState } from 'react';
+import { Popover, PopoverPosition, PopoverRole } from '../../component-library';
+
+const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(
+  null,
+);
+const [isOpen, setIsOpen] = useState(false);
+
+<button ref={(node) => setReferenceElement(node)} onClick={() => setIsOpen(true)}>
+  Open
+</button>
+
+<Popover
+  isOpen={isOpen}
+  referenceElement={referenceElement}
+  position={PopoverPosition.BottomStart}
+  role={PopoverRole.Dialog}
+  hasArrow
+  isPortal
+  onPressEscKey={() => setIsOpen(false)}
+  onClickOutside={() => setIsOpen(false)}
+>
+  Menu contents
+</Popover>;
+```
+
+##### After (Design System)
+
+```tsx
+import { useState } from 'react';
+import {
+  Popover,
+  PopoverPosition,
+  PopoverRole,
+} from '@metamask/design-system-react';
+
+const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(
+  null,
+);
+const [isOpen, setIsOpen] = useState(false);
+
+<button ref={(node) => setReferenceElement(node)} onClick={() => setIsOpen(true)}>
+  Open
+</button>
+
+<Popover
+  isOpen={isOpen}
+  referenceElement={referenceElement}
+  position={PopoverPosition.BottomStart}
+  role={PopoverRole.Dialog}
+  hasArrow
+  isPortal
+  onPressEscKey={() => setIsOpen(false)}
+  onClickOutside={() => setIsOpen(false)}
+>
+  Menu contents
+</Popover>;
+```
+
+For typical call sites — for example `ui/components/multichain-accounts/multichain-address-rows-hovered-list/multichain-hovered-address-rows-hovered-list.tsx`, `ui/components/app/perps/perps-candle-period-selector/perps-candle-period-selector.tsx`, and `ui/pages/bridge/prepare/bridge-cta-info-text.tsx` (verified via fresh grep) — the only change is the import path; the JSX, prop names, and `PopoverPosition` / `PopoverRole` values stay identical.
+
+##### Replacing Box style-utility passthrough
+
+If a call site relied on extension Box style-utility props flowing through `Popover` (e.g. `marginTop`, `padding`, `backgroundColor`), move those to the design system equivalents:
+
+```tsx
+// Before (Extension) — utility props on the Popover root via Box passthrough
+<Popover
+  isOpen={isOpen}
+  referenceElement={referenceElement}
+  padding={6}
+  backgroundColor={BackgroundColor.backgroundAlternative}
+>
+  …
+</Popover>
+
+// After (Design System) — use className for one-off overrides
+<Popover
+  isOpen={isOpen}
+  referenceElement={referenceElement}
+  className="p-6 bg-alternative"
+>
+  …
+</Popover>
+```
+
+##### Replacing legacy SCSS class hooks
+
+If a call site or stylesheet targeted `.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`, or `.mm-popover--open`, replace those selectors with `className` (popover root) or `arrowProps.className` (arrow). The `data-popper-placement` and `data-popper-reference-hidden` data attributes are still present on the popover root for callers that need to key styling off the resolved placement.
+
+#### API Differences
+
+- `Popover` is no longer polymorphic. It always renders a `<div>`. Consumers that used `as="section"` or similar should wrap or compose.
+- `arrowProps` accepts standard `<div>` props instead of extension Box props, with `ref`, `style`, and `children` omitted (reserved for popper positioning, rotation styles, and the arrow visual). Pass `className` (or any other HTML attribute / `data-*` / `aria-*`) directly.
+- `@floating-ui/react-dom` is bundled inside `@metamask/design-system-react`. Consumers should not add it to their own dependencies after migrating.
+- The `PopoverPosition` and `PopoverRole` exports are now const objects with derived string-union types ([ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)). Runtime usage (`PopoverPosition.Auto`, `PopoverRole.Tooltip`) is unchanged. Code that relied on TypeScript `enum`-only behavior (e.g. reverse lookups via `PopoverPosition['auto']`) needs to switch to the string union pattern.
+
+### PopoverHeader Component
+
+The extension `popover-header` component maps to `PopoverHeader` in the design system. The behavioral contract — a `<header>` with an optional back button on the start, a title in the center, and an optional close button on the end — is preserved. The polymorphic Box surface (`HeaderBaseStyleUtilityProps`), the `mm-popover-header` SCSS class hook, and the implicit `useI18nContext` coupling for the icon-button `aria-label`s are removed.
+
+`PopoverHeader` is built on top of the same three-column grid layout as `HeaderBase`, replicated locally so the outer element stays a single semantic `<header>` (no extra wrapper). Unlike `ModalHeader`, it applies no outer padding — popover surfaces own their own spacing.
+
+The auto-rendered icon buttons and the auto-wrapped title default to inheriting color from the popover surface (`text-inherit` / `TextColor.Inherit`), preserving the legacy `IconColor.inherit` / `TextColor.inherit` defaults so headers placed on inverse or semantic backgrounds pick up the right foreground color automatically.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
+
+#### Breaking Changes
+
+##### Import Path
+
+| Extension Pattern                                                   | Design System Migration                                                   |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import { PopoverHeader } from '../../component-library'`           | `import { PopoverHeader } from '@metamask/design-system-react'`           |
+| `import type { PopoverHeaderProps } from '../../component-library'` | `import type { PopoverHeaderProps } from '@metamask/design-system-react'` |
+
+##### Props and Behavior Mapping
+
+| Extension API                                                        | Design System API                                                                          | Change Type | Notes                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children?: ReactNode`                                               | `children?: ReactNode`                                                                     | unchanged   | string children still auto-wrap as `<Text variant={TextVariant.HeadingSm} textAlign={TextAlign.Center} color={TextColor.Inherit}>`; `ReactNode` children render as-is.                                                 |
+| `onBack?: () => void`                                                | `onBack?: () => void`                                                                      | unchanged   | when set, renders the back button — but **`backButtonProps` is now co-required** (see "i18n decoupling" below).                                                                                                        |
+| `onClose?: () => void`                                               | `onClose?: () => void`                                                                     | unchanged   | when set, renders the close button — but **`closeButtonProps` is now co-required**.                                                                                                                                    |
+| `backButtonProps?: ButtonIconProps<'button'>`                        | `backButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.)  | shape       | type now bound to MMDS `ButtonIconProps`; `iconName` (`ArrowLeft`) and `size` (`Sm`) are owned by the component and cannot be overridden via the prop bag. `ariaLabel` is required (preserved from `ButtonIconProps`). |
+| `closeButtonProps?: ButtonIconProps<'button'>`                       | `closeButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.) | shape       | same shape change as `backButtonProps`; component owns `iconName=Close` and `size=Sm`.                                                                                                                                 |
+| `startAccessory?: ReactNode`                                         | `startAccessory?: ReactNode`                                                               | unchanged   | when provided, replaces the auto-rendered back button — even if `onBack` is set (legacy precedence preserved).                                                                                                         |
+| `endAccessory?: ReactNode`                                           | `endAccessory?: ReactNode`                                                                 | unchanged   | when provided, replaces the auto-rendered close button — even if `onClose` is set.                                                                                                                                     |
+| `className?: string`                                                 | `className?: string`                                                                       | unchanged   | applied to the outer `<header>`; merged with the component's defaults via `twMerge`.                                                                                                                                   |
+| Polymorphic `as` / extension's `HeaderBaseStyleUtilityProps` surface | removed                                                                                    | removed     | always renders `<header>`. Box utility props on the root (`color`, `textAlign`, `justifyContent`, `padding*`, `width`, …) are removed — use `className` with Tailwind utilities.                                       |
+| `mm-popover-header` SCSS class hook                                  | removed                                                                                    | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities.                                                                                   |
+| `childrenWrapperProps`                                               | removed                                                                                    | removed     | the auto-wrapped title slot is fixed at `col-start-2 col-end-3 w-full`. To customize the title layout, pass a custom `ReactNode` as `children` instead of relying on `childrenWrapperProps`.                           |
+
+##### i18n Decoupling
+
+The extension auto-defaulted the icon-button `aria-label`s to `t('back')` and `t('close')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. The type system enforces this: `onBack` and `backButtonProps` (and `onClose` / `closeButtonProps`) are co-required via a discriminated union — when `onBack` is set, you must also pass `backButtonProps` with at least an `ariaLabel`:
+
+```tsx
+<PopoverHeader
+  onClose={handleClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  {t('headerTitle')}
+</PopoverHeader>
+```
+
+If a consumer sets `onClose` without `closeButtonProps`, TypeScript errors at the call site. This guarantees every dismiss button gets a properly localized label without the component reaching into any global i18n context.
+
+##### Color Inheritance
+
+The extension hard-coded `IconColor.inherit` and `TextColor.inherit` on the auto-rendered icon buttons and the auto-wrapped title. The design system preserves this default — the title uses `TextColor.Inherit`, and the auto-rendered `ButtonIcon`s receive `className="text-inherit"` (merged with any consumer-provided `className`). To force a specific color, pass `className` on the prop bag:
+
+```tsx
+closeButtonProps={{ ariaLabel: t('close'), className: 'text-error-default' }}
+```
+
+##### ButtonIcon API Differences
+
+The extension's `ButtonIconProps<'button'>` is replaced by MMDS `ButtonIconProps`. The most common difference for migrating consumers is that the polymorphic `as` typing is gone (the prop bag types against the underlying `<button>` HTML element directly). All standard ButtonIcon props (`ariaLabel`, `disabled`, `onClick`, `data-testid`, etc.) are preserved.
+
+#### Migration Examples
+
+##### Before (Extension)
+
+```tsx
+import { PopoverHeader } from '../../component-library';
+
+// i18n-defaulted close + Box utility props
+<PopoverHeader
+  color={TextColor.infoInverse}
+  textAlign={TextAlign.Center}
+  justifyContent={JustifyContent.spaceBetween}
+  onClose={onClose}
+  childrenWrapperProps={{ style: { whiteSpace: 'nowrap' } }}
+>
+  {title}
+</PopoverHeader>;
+```
+
+##### After (Design System)
+
+```tsx
+import { PopoverHeader } from '@metamask/design-system-react';
+
+// aria-label is explicit; Box utility props move to className.
+// The title and the auto-rendered close button inherit color from the
+// surrounding popover surface, so no `color` prop is needed on the header
+// itself — set the color on the popover container instead.
+<PopoverHeader
+  className="text-info-inverse"
+  onClose={onClose}
+  closeButtonProps={{ ariaLabel: t('close') }}
+>
+  <span className="whitespace-nowrap">{title}</span>
+</PopoverHeader>;
+```
+
+For the typical extension call site — `ui/pages/bridge/layout/tooltip.tsx` (the only consumer outside of the `popover-header/` package itself, verified via fresh grep) — the churn is:
+
+1. Swap the import path.
+2. Add `closeButtonProps={{ ariaLabel: t('close') }}` to every `<PopoverHeader>` that uses `onClose` (and `backButtonProps={{ ariaLabel: t('back') }}` for `onBack`). The compiler flags missing prop bags so this can be applied mechanically.
+3. Move any root-level Box utility props (`color`, `textAlign`, `justifyContent`, `padding*`, `width`, etc.) onto `className` with Tailwind utilities.
+4. Replace `childrenWrapperProps` with a custom `ReactNode` `children` that wraps the title in the desired layout.
+
+#### API Differences
+
+- `PopoverHeader` always renders a `<header>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
+- The `useI18nContext` coupling for the icon-button `aria-label`s is gone. Discriminated unions enforce co-required `backButtonProps` / `closeButtonProps` at compile time.
+- The component owns `iconName` (`ArrowLeft` / `Close`) and `size` (`Sm`) on the built-in icon buttons. Consumers cannot override them via the prop bag.
+- The auto-rendered icon buttons and the auto-wrapped title default to `text-inherit` so they pick up the popover surface color, preserving the legacy `IconColor.inherit` / `TextColor.inherit` behavior.
+- `startAccessory` / `endAccessory` precedence over the auto-rendered back/close buttons is preserved from the legacy.
+- No outer padding is applied by default — popover surfaces own their own spacing.
+
+### SensitiveText Component
+
+The extension `sensitive-text` component maps directly to `SensitiveText` in the design system. The public API (`isHidden`, `length`, `children`, plus inherited `Text` props) is unchanged — only the import path moves.
+
+`SensitiveTextLength` is now sourced from `@metamask/design-system-shared` and re-exported from both `@metamask/design-system-react` and `@metamask/design-system-react-native`, so the same const object can be used across web and native consumers.
+
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared style-utility migration patterns.
+
+#### Import Path
+
+| Extension Pattern                                               | Design System Migration                                                   |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `import { SensitiveText } from '../../component-library'`       | `import { SensitiveText } from '@metamask/design-system-react'`           |
+| `import { SensitiveTextLength } from '../../component-library'` | `import { SensitiveTextLength } from '@metamask/design-system-react'`     |
+| `import type { SensitiveTextProps } from '...'`                 | `import type { SensitiveTextProps } from '@metamask/design-system-react'` |
+
+#### Props
+
+| Extension Prop | Design System Prop | Change Type | Notes                                                                            |
+| -------------- | ------------------ | ----------- | -------------------------------------------------------------------------------- |
+| `isHidden`     | `isHidden`         | unchanged   | Defaults to `false`.                                                             |
+| `length`       | `length`           | unchanged   | Accepts `SensitiveTextLength` or a custom numeric string (e.g. `"15"`).          |
+| `children`     | `children`         | unchanged   | The text content to display or hide.                                             |
+| `ref`          | removed            | removed     | The new component is a function component and does not forward a ref to the DOM. |
+
+All other `Text` props (`variant`, `color`, `fontWeight`, `className`, `style`, etc.) continue to be forwarded to the underlying `Text`.
+
+#### Behavior
+
+- Invalid `length` values still fall back to `SensitiveTextLength.Short` and log a `console.warn`, matching the extension behavior.
+- The hidden representation continues to use the bullet character (`•`).
+
+#### Migration Example
+
+##### Before (Extension)
+
+```tsx
+import { SensitiveText, SensitiveTextLength } from '../../component-library';
+
+<SensitiveText isHidden length={SensitiveTextLength.Medium}>
+  $1,234.56
+</SensitiveText>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  SensitiveText,
+  SensitiveTextLength,
+} from '@metamask/design-system-react';
+
+<SensitiveText isHidden length={SensitiveTextLength.Medium}>
+  $1,234.56
+</SensitiveText>;
+```
 
 ### Skeleton Component
 
@@ -2041,11 +3372,314 @@ Codemod-friendly: every `isLoading=` token in the extension's existing call site
 - `Skeleton` always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
 - The container, animated overlay, and (when present) hidden-children wrapper are all `aria-hidden="true"` and `pointer-events-none` by default. The skeleton takes no part in the accessibility tree.
 
+### TextField Component
+
+The `TextField` is now available from the design system. The new component drops the polymorphic `Box`/`InputComponent` pattern in favor of a concrete `forwardRef<HTMLDivElement>` container that composes the design-system `Input`. State props are renamed to match the system-wide `is*` convention, and styling moves from SCSS (`mm-text-field`) to Tailwind utilities.
+
+#### Import Path
+
+| Extension Pattern                                         | Design System Migration                                         |
+| --------------------------------------------------------- | --------------------------------------------------------------- |
+| `import { TextField } from '../../component-library'`     | `import { TextField } from '@metamask/design-system-react'`     |
+| `import { TextFieldSize } from '../../component-library'` | `import { TextFieldSize } from '@metamask/design-system-react'` |
+| `import { TextFieldType } from '../../component-library'` | `import { TextFieldType } from '@metamask/design-system-react'` |
+
+#### Enums → Const Objects
+
+`TextFieldSize` and `TextFieldType` are now const objects with derived string union types (per ADR-0003). Member access (`TextFieldSize.Md`) and underlying string values (`'sm'`, `'md'`, `'lg'`, `'text'`, `'number'`, `'password'`, `'search'`) are unchanged, so most call sites need no edits.
+
+#### State Props
+
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+| `readOnly`     | `isReadOnly`       | renamed |
+| `error`        | `isError`          | renamed |
+
+```tsx
+// Before (Extension)
+<TextField disabled readOnly error value={value} onChange={onChange} />
+
+// After (Design System)
+<TextField isDisabled isReadOnly isError value={value} onChange={onChange} />
+```
+
+#### Removed Props
+
+| Extension Prop                                                | Design System Migration                                                                                                                                 |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`                                        | Removed. The container is always a `<div>`. Wrap with a custom element if you need a different root.                                                    |
+| `InputComponent`                                              | Replaced by the shared `inputElement` slot. Pass a fully-rendered element instead of a component reference.                                             |
+| `testId`                                                      | Pass `data-testid` directly on `TextField` (root). For the inner input, use `getByRole('textbox')` in tests or compose your own via `inputElement`.     |
+| `defaultValue`                                                | Removed. The design-system `Input` is controlled-only; manage state with `value`/`onChange` (or use `inputElement` for an uncontrolled custom input).   |
+| Box style-utility props (`paddingLeft`, `borderRadius`, etc.) | Use `className` with Tailwind utilities, or compose with `Box`. The container's default chrome (border, radius, padding) is fixed by the design system. |
+
+```tsx
+// Before (Extension): custom InputComponent reference
+<TextField InputComponent={CustomInput} value={value} />
+
+// After (Design System): pass a rendered element via inputElement
+<TextField
+  value={value}
+  inputElement={<CustomInput value={value} onChange={onChange} />}
+/>
+```
+
+#### Ref
+
+- `ref` on `TextField` targets the root container (`HTMLDivElement`).
+- Use `inputRef` to reach the inner `<input>`. Both object refs and callback refs are supported.
+
+#### Styling
+
+The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven by design tokens) instead of the `mm-text-field` SCSS module. Custom container styles should be passed via `className`; the legacy `mm-text-field--*` classes are no longer applied.
+
+### TextFieldSearch Component
+
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`.
+
+#### Import Path
+
+| Extension Pattern                                           | Design System Migration                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `import { TextFieldSearch } from '../../component-library'` | `import { TextFieldSearch } from '@metamask/design-system-react'` |
+
+#### Size Enum
+
+The extension exported a dedicated `TextFieldSearchSize` enum with the same values as `TextFieldSize` (`'sm'`, `'md'`, `'lg'`). The design system removes this duplicate and reuses `TextFieldSize` from `TextField` directly. Import `TextFieldSize` instead.
+
+```tsx
+// Before (Extension)
+import { TextFieldSearch, TextFieldSearchSize } from '../../component-library';
+<TextFieldSearch size={TextFieldSearchSize.Lg} />;
+
+// After (Design System)
+import { TextFieldSearch, TextFieldSize } from '@metamask/design-system-react';
+<TextFieldSearch size={TextFieldSize.Lg} />;
+```
+
+#### State Props
+
+`TextFieldSearch` inherits the renamed state props from `TextField`:
+
+| Extension Prop | Design System Prop | Notes   |
+| -------------- | ------------------ | ------- |
+| `disabled`     | `isDisabled`       | renamed |
+| `readOnly`     | `isReadOnly`       | renamed |
+| `error`        | `isError`          | renamed |
+
+#### Clear Button Aria Label (`useI18nContext` removed)
+
+The extension component pulled the clear-button aria-label from `useI18nContext` (`t('clear')`). The design system has no i18n context, so the clear `ButtonIcon` uses a default `ariaLabel` of `'Clear'` and lets consumers override it via `clearButtonProps`.
+
+```tsx
+// Before (Extension): label resolved via useI18nContext('clear')
+<TextFieldSearch value={value} clearButtonOnClick={handleClear} />
+
+// After (Design System): pass a localized label via clearButtonProps
+<TextFieldSearch
+  value={value}
+  clearButtonOnClick={handleClear}
+  clearButtonProps={{ ariaLabel: t('clear') }}
+/>
+```
+
+#### Removed Props
+
+| Extension Prop                      | Design System Migration                                                                                                     |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`              | Removed. The container is always a `<div>`.                                                                                 |
+| `type`                              | Fixed to `'search'`; not configurable. Use `TextField` if you need a different input type.                                  |
+| `inputProps.marginRight` adjustment | Removed. The container automatically reserves room for the clear button via the existing `TextField` end-accessory padding. |
+
+#### Ref
+
+- `ref` on `TextFieldSearch` targets the root container (`HTMLDivElement`).
+- Use `inputRef` (inherited from `TextField`) to reach the inner `<input>`.
+
+#### Styling
+
+The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className`.
+
+### FormTextField Component
+
+`FormTextField` is now available from the design system. The new component drops the polymorphic `Box` root and the standalone `FormTextFieldSize` enum, switches state props to the `is*` convention, and replaces SCSS (`mm-form-text-field`) with Tailwind utilities. Internally it composes the design-system `Label`, `TextField`, and `HelpText`.
+
+#### Import Path
+
+| Extension Pattern                                             | Design System Migration                                         |
+| ------------------------------------------------------------- | --------------------------------------------------------------- |
+| `import { FormTextField } from '../../component-library'`     | `import { FormTextField } from '@metamask/design-system-react'` |
+| `import { FormTextFieldSize } from '../../component-library'` | `import { TextFieldSize } from '@metamask/design-system-react'` |
+
+#### Size Enum Consolidation
+
+`FormTextFieldSize` is removed. Use `TextFieldSize` (`'sm'`/`'md'`/`'lg'`) directly — the values are unchanged from the extension.
+
+```tsx
+// Before (Extension)
+<FormTextField size={FormTextFieldSize.Md} … />
+
+// After (Design System)
+<FormTextField size={TextFieldSize.Md} … />
+```
+
+#### State Props
+
+| Extension Prop            | Design System Prop | Notes                                     |
+| ------------------------- | ------------------ | ----------------------------------------- |
+| `disabled` / `isDisabled` | `isDisabled`       | Single canonical name                     |
+| `readOnly`                | `isReadOnly`       | renamed                                   |
+| `error`                   | `isError`          | renamed (also drives `HelpText` severity) |
+
+```tsx
+// Before (Extension)
+<FormTextField
+  id="amount"
+  label="Amount"
+  disabled
+  readOnly
+  error
+  helpText="Required"
+  value={value}
+  onChange={onChange}
+/>
+
+// After (Design System)
+<FormTextField
+  id="amount"
+  label="Amount"
+  isDisabled
+  isReadOnly
+  isError
+  helpText="Required"
+  value={value}
+  onChange={onChange}
+/>
+```
+
+#### Removed Props
+
+| Extension Prop          | Design System Migration                                                                                                       |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`  | Removed. The root is always a `<div>`. Wrap with a custom element if you need a different root.                               |
+| `defaultValue`          | Removed. The inner `TextField` is controlled-only — manage state with `value`/`onChange`.                                     |
+| Box style-utility props | Use `className` with Tailwind utilities. The container's `flex flex-col` layout and child spacing are owned by the component. |
+
+#### Refs
+
+- `ref` on `FormTextField` targets the root container (`HTMLDivElement`).
+- Use `inputRef` to reach the inner `<input>`. Object refs and callback refs are both supported.
+
+#### Forwarded sub-component props
+
+- `labelProps`, `helpTextProps`, and `textFieldProps` continue to forward extra props to the rendered `Label`, `HelpText`, and `TextField`. Their `className` is merged with the component defaults (`mb-1` on the label, `mt-1` on the help text).
+
+#### Styling
+
+`FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
+
 ## Version Updates
 
-<!-- TODO: Replace 0.x.0 with the actual next released version when this BannerBase follow-up ships. -->
+### From version 0.27.x to 0.28.0
 
-## From version 0.22.0 to 0.x.0
+#### TextButton: `variant`/`TextVariant` reverted — `size`/`TextButtonSize` and full ButtonBase API restored
+
+The 0.26.0 `TextButton` rewrite has been reverted due to the migration scope affecting extension consumers. The pre-0.26.0 `ButtonBase`-backed API is restored.
+
+**What changed:**
+
+- `size` and `TextButtonSize` are restored. Use `TextButtonSize` values instead of `TextVariant`.
+- `isInverse` and `isDisabled` props are restored.
+- `textProps`, start icon, end icon, and accessory slot props are restored.
+- `variant`/`TextVariant` are removed — the `variant` prop added in 0.26.0 no longer exists.
+
+**Migration:**
+
+```tsx
+// Before (0.26.0 / 0.27.x)
+import { TextButton } from '@metamask/design-system-react';
+import { TextVariant } from '@metamask/design-system-shared';
+
+<TextButton variant={TextVariant.BodySm}>Learn more</TextButton>;
+
+// After (0.28.0)
+import { TextButton, TextButtonSize } from '@metamask/design-system-react';
+
+<TextButton size={TextButtonSize.BodySm}>Learn more</TextButton>;
+```
+
+**Impact:**
+
+- Any call site using `variant` must switch back to `size` with `TextButtonSize`.
+- `TextButtonSize` is re-exported from `@metamask/design-system-react`.
+- `TextButtonPropsShared` is no longer exported from `@metamask/design-system-shared`.
+
+### From version 0.25.0 to 0.26.0
+
+#### TextButton: `size`/`TextButtonSize` replaced by `variant`/`TextVariant`
+
+> **Note:** This change was reverted in 0.28.0. If you are on 0.28.0 or later, use `size`/`TextButtonSize` and ignore the migration below. See [From version 0.27.x to 0.28.0](#from-version-027x-to-0280).
+
+`TextButton` has been rewritten as a text-only control backed by `Text`, aligning its API with the React Native `TextButton`. The old `ButtonBase`-backed implementation and several props are removed.
+
+**What changed:**
+
+- `size` and `TextButtonSize` are removed. Use `variant` with `TextVariant` values instead.
+- `isInverse` is removed. Use `Button` with `variant={ButtonVariant.Tertiary}` for inverse or danger-styled actions.
+- `isDisabled` is removed. `TextButton` no longer manages a disabled state directly.
+- `textProps` is removed. Props that were forwarded to the inner `Text` can now be passed directly.
+- Start icon, end icon, and accessory slot props are removed. Compose icons outside `TextButton` as needed.
+- `asChild` is added for semantic link composition (for example wrapping an `<a>` element).
+
+**Migration:**
+
+```tsx
+// Before (0.25.0)
+import { TextButton, TextButtonSize } from '@metamask/design-system-react';
+
+<TextButton size={TextButtonSize.BodySm} isInverse>Learn more</TextButton>
+
+// After (0.26.0)
+import { TextButton } from '@metamask/design-system-react';
+import { TextVariant } from '@metamask/design-system-shared';
+
+<TextButton variant={TextVariant.BodySm}>Learn more</TextButton>
+
+// For semantic link usage
+<TextButton asChild><a href="/learn-more">Learn more</a></TextButton>
+```
+
+**Impact:**
+
+- Any call site using `size`, `isInverse`, `isDisabled`, `textProps`, or icon/accessory props must update.
+- `TextButtonSize` is no longer exported from `@metamask/design-system-react`.
+
+#### Severity vocabulary: `AvatarIconSeverity.Error` → `AvatarIconSeverity.Danger`
+
+The public severity API for `AvatarIcon` now uses `Danger` instead of `Error` for destructive or critical states.
+
+**What changed:**
+
+- `AvatarIconSeverity.Error` (`'error'`) is renamed to `AvatarIconSeverity.Danger` (`'danger'`).
+
+**Migration:**
+
+```tsx
+// Before (0.25.0)
+import { AvatarIcon, AvatarIconSeverity } from '@metamask/design-system-react';
+
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Error} />
+
+// After (0.26.0)
+<AvatarIcon iconName={IconName.Warning} severity={AvatarIconSeverity.Danger} />
+```
+
+**Impact:**
+
+- Any call site using `AvatarIconSeverity.Error` must change to `AvatarIconSeverity.Danger`. The rendered color is unchanged — `Danger` still maps to the error color tokens.
+
+## From version 0.22.0 to 0.23.0
 
 ### BannerBase: `onClose` is now the only close-button behavior API
 
@@ -2064,6 +3698,45 @@ Codemod-friendly: every `isLoading=` token in the extension's existing call site
 **Impact:**
 
 - Existing **`@metamask/design-system-react`** consumers that relied on **`closeButtonProps.onClick`** or on rendering a close button without **`onClose`** must update those call sites.
+
+<a id="buttonbase-size-defaults"></a>
+
+### ButtonBase: let `size` drive label, icons, and spacing
+
+**What changed:**
+
+- **`ButtonBase`** maps each **`ButtonBaseSize`** to a recommended label **`Text`** variant, matching start and end **`Icon`** sizes, and consistent spacing between accessories and the label.
+
+**Recommendation:**
+
+For any product-specific button built on **`ButtonBase`** (wrappers that forward **`textProps`**, **`startIconProps`**, **`endIconProps`**, **`loadingIconProps`**, or extra layout classes):
+
+- Remove **icon size** overrides on **`startIconProps`**, **`endIconProps`**, and **`loadingIconProps`** unless a written design exception requires them.
+- Remove **label typography overrides** in **`textProps`** (for example a different **`variant`**) so the label follows the mapping for the chosen **`size`**.
+- Remove **spacing or gap overrides** (extra **`className`** / layout utilities on the root or content row) that only existed to nudge icon–label rhythm; **`ButtonBase`** now owns that layout.
+
+**Migration:**
+
+```tsx
+// Before: overrides that duplicate what size already encodes
+<ButtonBase
+  size={ButtonBaseSize.Md}
+  startIconProps={{ name: IconName.Add, size: IconSize.Md }}
+  textProps={{ variant: TextVariant.BodyLg }}
+  className="gap-4"
+>
+  Continue
+</ButtonBase>
+
+// After: rely on size-driven defaults
+<ButtonBase size={ButtonBaseSize.Md} startIconProps={{ name: IconName.Add }}>
+  Continue
+</ButtonBase>
+```
+
+**Impact:**
+
+- Custom **`ButtonBase`** wrappers that hard-coded icon sizes, text variants, or gaps may render slightly differently after removing overrides; visually they should match the current design spec for that **`size`**.
 
 This section covers version-to-version breaking changes within `@metamask/design-system-react`.
 

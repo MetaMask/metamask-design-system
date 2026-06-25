@@ -1,8 +1,7 @@
+import { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
-
-import { IconColor, IconName, IconSize } from '../../types';
 
 import { Icon } from './Icon';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
@@ -33,7 +32,7 @@ describe('Icon', () => {
       const iconElement = getByTestId('icon');
 
       expect(expectedStyles).toBeDefined();
-      expect(iconElement.props.style[0]).toStrictEqual(expectedStyles);
+      expect(iconElement.props.style).toStrictEqual(expectedStyles);
     });
 
     Object.values(IconSize).forEach((size) => {
@@ -53,7 +52,7 @@ describe('Icon', () => {
         const textElement = getByTestId('icon');
 
         expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+        expect(textElement.props.style).toStrictEqual(expectedStyles);
       });
     });
 
@@ -74,7 +73,7 @@ describe('Icon', () => {
         const textElement = getByTestId('icon');
 
         expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+        expect(textElement.props.style).toStrictEqual(expectedStyles);
       });
     });
 
@@ -98,7 +97,7 @@ describe('Icon', () => {
       const textElement = getByTestId('icon');
 
       expect(expectedStyles).toBeDefined();
-      expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+      expect(textElement.props.style).toStrictEqual(expectedStyles);
     });
   });
 });

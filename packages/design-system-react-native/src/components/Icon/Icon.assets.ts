@@ -111,6 +111,7 @@ import FingerprintSVG from './assets/fingerprint.svg';
 import FireSVG from './assets/fire.svg';
 import FirstPageSVG from './assets/first-page.svg';
 import FlagSVG from './assets/flag.svg';
+import FlashFilledSVG from './assets/flash-filled.svg';
 import FlashSlashSVG from './assets/flash-slash.svg';
 import FlashSVG from './assets/flash.svg';
 import FlaskSVG from './assets/flask.svg';
@@ -264,6 +265,7 @@ import TranslateSVG from './assets/translate.svg';
 import TrashSVG from './assets/trash.svg';
 import TrendDownSVG from './assets/trend-down.svg';
 import TrendUpSVG from './assets/trend-up.svg';
+import TrophySVG from './assets/trophy.svg';
 import UndoSVG from './assets/undo.svg';
 import UnfoldSVG from './assets/unfold.svg';
 import UnlockedFilledSVG from './assets/unlocked-filled.svg';
@@ -406,6 +408,7 @@ export const assetByIconName: AssetByIconName = {
   Fire: FireSVG,
   FirstPage: FirstPageSVG,
   Flag: FlagSVG,
+  FlashFilled: FlashFilledSVG,
   FlashSlash: FlashSlashSVG,
   Flash: FlashSVG,
   Flask: FlaskSVG,
@@ -559,6 +562,7 @@ export const assetByIconName: AssetByIconName = {
   Trash: TrashSVG,
   TrendDown: TrendDownSVG,
   TrendUp: TrendUpSVG,
+  Trophy: TrophySVG,
   Undo: UndoSVG,
   Unfold: UnfoldSVG,
   UnlockedFilled: UnlockedFilledSVG,

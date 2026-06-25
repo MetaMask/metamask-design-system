@@ -1,10 +1,11 @@
 import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render, fireEvent } from '@testing-library/react-native';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { View, Text } from 'react-native';
-import * as ReactTestRenderer from 'react-test-renderer';
+import type { ReactTestInstance } from 'react-test-renderer';
+
+import { createRenderer } from '../../test-utils/createRenderer';
 
 import { ButtonBase } from './ButtonBase';
 import { getButtonBaseBorderRadiusTwClass } from './ButtonBase.constants';
@@ -13,7 +14,8 @@ describe('ButtonBase', () => {
   let tw: ReturnType<typeof useTailwind>;
 
   beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
+    const { result } = renderHook(() => useTailwind());
+    tw = result.current;
   });
 
   const createFunctionStyle =
@@ -90,7 +92,7 @@ describe('ButtonBase', () => {
 
   describe('border radius', () => {
     it('uses size-based radius classes from constants', () => {
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase size={ButtonBaseSize.Lg}>Large</ButtonBase>,
       );
 
@@ -127,7 +129,7 @@ describe('ButtonBase', () => {
       const twClassNameFn = (pressed: boolean) =>
         pressed ? 'bg-pressed' : 'bg-default';
 
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase twClassName={twClassNameFn}>Fn twClassName</ButtonBase>,
       );
 
@@ -159,7 +161,7 @@ describe('ButtonBase', () => {
     it('merges function style when pressed changes', () => {
       const functionStyle = createFunctionStyle();
 
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase style={functionStyle}>Function Style</ButtonBase>,
       );
 
@@ -198,7 +200,7 @@ describe('ButtonBase', () => {
     it('omits extra styles when function returns null when not pressed', () => {
       const falsyStyleFunction = createFalsyStyleFunction();
 
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase style={falsyStyleFunction}>Falsy Style</ButtonBase>,
       );
 
@@ -229,7 +231,7 @@ describe('ButtonBase', () => {
     it('merges static style objects', () => {
       const staticStyle = { borderWidth: 3, borderColor: 'green' };
 
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase style={staticStyle}>Static Style</ButtonBase>,
       );
 
@@ -400,7 +402,7 @@ describe('ButtonBase', () => {
     });
 
     it('hides the content row with opacity while keeping layout', () => {
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase
           isLoading
           startAccessory={<View testID="sa" />}
@@ -424,7 +426,7 @@ describe('ButtonBase', () => {
     });
 
     it('hides non-string children during loading', () => {
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase isLoading testID="btn">
           <View testID="custom-child">
             <View testID="nested-content" />
@@ -434,7 +436,7 @@ describe('ButtonBase', () => {
 
       const customChild = tree.root.findByProps({ testID: 'custom-child' });
 
-      let opacityAncestor: ReactTestRenderer.ReactTestInstance | undefined =
+      let opacityAncestor: ReactTestInstance | undefined =
         customChild.parent ?? undefined;
       let foundRowOpacity = false;
       while (opacityAncestor) {
@@ -525,7 +527,7 @@ describe('ButtonBase', () => {
       const textClassNameFn = (pressed: boolean) =>
         pressed ? 'text-pressed' : 'text-default';
 
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase
           startIconName={IconName.Add}
           startIconProps={{ testID: 'start-icon' }}
@@ -555,7 +557,7 @@ describe('ButtonBase', () => {
       const iconClassNameFn = (pressed: boolean) =>
         pressed ? 'icon-pressed' : 'icon-default';
 
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase
           isLoading
           startIconName={IconName.Add}
@@ -585,7 +587,7 @@ describe('ButtonBase', () => {
       const textClassNameFn = (pressed: boolean) =>
         pressed ? 'text-pressed' : 'text-default';
 
-      const tree = ReactTestRenderer.create(
+      const tree = createRenderer(
         <ButtonBase
           isLoading
           loadingText="Loading"

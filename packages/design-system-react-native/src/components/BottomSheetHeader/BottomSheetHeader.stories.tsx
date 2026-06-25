@@ -6,16 +6,11 @@ import { Text } from '../Text';
 
 import { BottomSheetHeader } from './BottomSheetHeader';
 import type { BottomSheetHeaderProps } from './BottomSheetHeader.types';
-import { BottomSheetHeaderVariant } from './BottomSheetHeader.types';
 
 const meta: Meta<BottomSheetHeaderProps> = {
   title: 'Components/BottomSheetHeader',
   component: BottomSheetHeader,
   argTypes: {
-    variant: {
-      control: 'select',
-      options: Object.values(BottomSheetHeaderVariant),
-    },
     onBack: { action: 'onBack pressed' },
     onClose: { action: 'onClose pressed' },
     backButtonProps: { control: 'object' },
@@ -44,74 +39,30 @@ export const Default: Story = {
   },
 };
 
-export const Variant: Story = {
+export const WithTitle: Story = {
   render: () => (
-    <Box twClassName="gap-4">
-      <BottomSheetHeader variant={BottomSheetHeaderVariant.Compact}>
-        Compact variant (center-aligned)
-      </BottomSheetHeader>
-      <BottomSheetHeader variant={BottomSheetHeaderVariant.Display}>
-        Display variant (left-aligned)
-      </BottomSheetHeader>
-    </Box>
+    <BottomSheetHeader>Centered bottom sheet title</BottomSheetHeader>
   ),
 };
 
 export const OnBack: Story = {
   render: () => (
-    <Box twClassName="gap-4">
-      <BottomSheetHeader
-        variant={BottomSheetHeaderVariant.Compact}
-        onBack={() => null}
-      >
-        With back button
-      </BottomSheetHeader>
-      <BottomSheetHeader
-        variant={BottomSheetHeaderVariant.Display}
-        onBack={() => null}
-      >
-        With back button (Display)
-      </BottomSheetHeader>
-    </Box>
+    <BottomSheetHeader onBack={() => null}>With back button</BottomSheetHeader>
   ),
 };
 
 export const OnClose: Story = {
   render: () => (
-    <Box twClassName="gap-4">
-      <BottomSheetHeader
-        variant={BottomSheetHeaderVariant.Compact}
-        onClose={() => null}
-      >
-        With close button
-      </BottomSheetHeader>
-      <BottomSheetHeader
-        variant={BottomSheetHeaderVariant.Display}
-        onClose={() => null}
-      >
-        With close button (Display)
-      </BottomSheetHeader>
-    </Box>
+    <BottomSheetHeader onClose={() => null}>
+      With close button
+    </BottomSheetHeader>
   ),
 };
 
 export const OnBackAndOnClose: Story = {
   render: () => (
-    <Box twClassName="gap-4">
-      <BottomSheetHeader
-        variant={BottomSheetHeaderVariant.Compact}
-        onBack={() => null}
-        onClose={() => null}
-      >
-        Both buttons (Compact)
-      </BottomSheetHeader>
-      <BottomSheetHeader
-        variant={BottomSheetHeaderVariant.Display}
-        onBack={() => null}
-        onClose={() => null}
-      >
-        Both buttons (Display)
-      </BottomSheetHeader>
-    </Box>
+    <BottomSheetHeader onBack={() => null} onClose={() => null}>
+      Both buttons
+    </BottomSheetHeader>
   ),
 };

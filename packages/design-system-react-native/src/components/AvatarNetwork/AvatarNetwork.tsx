@@ -1,8 +1,10 @@
-import { AvatarBaseShape } from '@metamask/design-system-shared';
+import {
+  AvatarBaseShape,
+  AvatarNetworkSize,
+} from '@metamask/design-system-shared';
 import React, { useState } from 'react';
-import type { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
+import type { ImageErrorEvent } from 'react-native';
 
-import { AvatarNetworkSize } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { ImageOrSvg } from '../temp-components/ImageOrSvg';
 
@@ -19,10 +21,8 @@ export const AvatarNetwork = ({
 }: AvatarNetworkProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
 
-  const backupFallbackText = fallbackText || name?.[0] || '';
-  const onImageErrorHandler = (
-    e: NativeSyntheticEvent<ImageErrorEventData>,
-  ) => {
+  const backupFallbackText = fallbackText || name?.[0] || '?';
+  const onImageErrorHandler = (e: ImageErrorEvent) => {
     setFallbackText(backupFallbackText);
     imageOrSvgProps?.onImageError?.(e);
   };
@@ -36,7 +36,7 @@ export const AvatarNetwork = ({
     <AvatarBase
       size={size}
       shape={AvatarBaseShape.Square}
-      fallbackText={finalFallbackText}
+      fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
       {...props}
     >

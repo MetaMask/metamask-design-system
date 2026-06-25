@@ -57,3 +57,13 @@ export const SampleFavicons: Story = {
     </View>
   ),
 };
+
+export const Fallback: Story = {
+  render: () => (
+    <View style={{ flexDirection: 'row', gap: 16 }}>
+      <AvatarFavicon name="OpenSea" fallbackText="OS" />
+      <AvatarFavicon name="Github" />
+      <AvatarFavicon />
+    </View>
+  ),
+};

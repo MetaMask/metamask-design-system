@@ -102,6 +102,28 @@ export const Name: Story = {
   ),
 };
 
+export const Fallback: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarFavicon name="OpenSea" fallbackText="OS" />
+      <AvatarFavicon name="Github" />
+      <AvatarFavicon />
+    </div>
+  ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
+};
+
 export const FallbackText: Story = {
   render: () => (
     <div className="flex gap-2">

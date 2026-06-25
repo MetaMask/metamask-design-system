@@ -50,11 +50,11 @@ export type ModalProps = Omit<ComponentProps<'div'>, 'children'> & {
    * The element to receive focus when the modal opens. Overrides `autoFocus`'s
    * "first focusable" behavior.
    */
-  initialFocusRef?: RefObject<FocusableElement>;
+  initialFocusRef?: RefObject<FocusableElement | null>;
   /**
    * The element to receive focus when the modal closes/unmounts.
    */
-  finalFocusRef?: RefObject<FocusableElement>;
+  finalFocusRef?: RefObject<FocusableElement | null>;
   /**
    * When `true`, focus is restored to the element that opened the modal once
    * the modal closes. Ignored when `finalFocusRef` is provided.

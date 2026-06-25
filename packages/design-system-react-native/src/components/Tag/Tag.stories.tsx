@@ -1,9 +1,9 @@
-import { TagSeverity } from '@metamask/design-system-shared';
+import { BoxFlexDirection, TagSeverity } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { Text } from 'react-native';
 
-import { IconName } from '../Icon';
+import { Box } from '../Box';
+import { Icon, IconColor, IconName, IconSize } from '../Icon';
 
 import { Tag } from './Tag';
 import type { TagProps } from './Tag.types';
@@ -11,7 +11,13 @@ import type { TagProps } from './Tag.types';
 const meta: Meta<TagProps> = {
   title: 'Components/Tag',
   component: Tag,
-  parameters: {},
+  decorators: [
+    (Story) => (
+      <Box twClassName="p-4">
+        <Story />
+      </Box>
+    ),
+  ],
   argTypes: {
     severity: {
       control: 'select',
@@ -43,21 +49,13 @@ export const Default: Story = {
 
 export const Severity: Story = {
   render: () => (
-    <>
+    <Box flexDirection={BoxFlexDirection.Column} gap={2}>
       <Tag severity={TagSeverity.Neutral}>Neutral</Tag>
-      <Tag severity={TagSeverity.Success} twClassName="mt-2">
-        Success
-      </Tag>
-      <Tag severity={TagSeverity.Error} twClassName="mt-2">
-        Error
-      </Tag>
-      <Tag severity={TagSeverity.Warning} twClassName="mt-2">
-        Warning
-      </Tag>
-      <Tag severity={TagSeverity.Info} twClassName="mt-2">
-        Info
-      </Tag>
-    </>
+      <Tag severity={TagSeverity.Success}>Success</Tag>
+      <Tag severity={TagSeverity.Danger}>Danger</Tag>
+      <Tag severity={TagSeverity.Warning}>Warning</Tag>
+      <Tag severity={TagSeverity.Info}>Info</Tag>
+    </Box>
   ),
 };
 
@@ -66,12 +64,21 @@ export const StartIconName: Story = {
 };
 
 export const EndIconName: Story = {
-  render: () => <Tag endIconName={IconName.ArrowRight}>Tag</Tag>,
+  render: () => <Tag endIconName={IconName.ArrowDown}>Tag</Tag>,
 };
 
 export const StartAccessory: Story = {
   render: () => (
-    <Tag startAccessory={<Text testID="tag-story-start-accessory">→</Text>}>
+    <Tag
+      startAccessory={
+        <Icon
+          name={IconName.Warning}
+          size={IconSize.Xs}
+          color={IconColor.IconDefault}
+          testID="tag-story-start-accessory"
+        />
+      }
+    >
       Tag
     </Tag>
   ),
@@ -79,7 +86,16 @@ export const StartAccessory: Story = {
 
 export const EndAccessory: Story = {
   render: () => (
-    <Tag endAccessory={<Text testID="tag-story-end-accessory">←</Text>}>
+    <Tag
+      endAccessory={
+        <Icon
+          name={IconName.ArrowDown}
+          size={IconSize.Xs}
+          color={IconColor.IconDefault}
+          testID="tag-story-end-accessory"
+        />
+      }
+    >
       Tag
     </Tag>
   ),
@@ -87,7 +103,7 @@ export const EndAccessory: Story = {
 
 export const StartAndEndIconNames: Story = {
   render: () => (
-    <Tag startIconName={IconName.Warning} endIconName={IconName.ArrowRight}>
+    <Tag startIconName={IconName.Warning} endIconName={IconName.ArrowDown}>
       Tag
     </Tag>
   ),

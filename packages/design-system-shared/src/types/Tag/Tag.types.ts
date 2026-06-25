@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
 export const TagSeverity = {
   Neutral: 'neutral',
   Success: 'success',
-  Error: 'error',
+  Danger: 'danger',
   Warning: 'warning',
   Info: 'info',
 } as const;
