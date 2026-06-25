@@ -32,7 +32,7 @@ import {
   BadgeStatusStatus,
   IconSize,
 } from '@metamask/design-system-react-native';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { useTailwind, Theme, ThemeProvider } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView, Pressable } from 'react-native';
@@ -40,6 +40,16 @@ import { ScrollView, Pressable } from 'react-native';
 const meta: Meta = {
   title: 'Examples/Wallet Home',
   component: () => null,
+  globals: {
+    backgrounds: { value: 'pureBlack' },
+  },
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={Theme.Dark} isPureBlack>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
 
 export default meta;
