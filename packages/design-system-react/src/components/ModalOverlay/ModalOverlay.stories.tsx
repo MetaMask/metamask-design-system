@@ -1,8 +1,5 @@
-import { ButtonVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React, { useState } from 'react';
-
-import { Button } from '../Button';
+import React from 'react';
 
 import { ModalOverlay } from './ModalOverlay';
 import type { ModalOverlayProps } from './ModalOverlay.types';
@@ -37,18 +34,4 @@ type Story = StoryObj<ModalOverlayProps>;
 export const Default: Story = {
   args: {},
   render: (args) => <ModalOverlay {...args} />,
-};
-
-export const OnClick: Story = {
-  render: (args) => {
-    const [isOpen, setIsOpen] = useState(false);
-    return (
-      <>
-        <Button variant={ButtonVariant.Primary} onClick={() => setIsOpen(true)}>
-          Show modal overlay
-        </Button>
-        {isOpen && <ModalOverlay {...args} onClick={() => setIsOpen(false)} />}
-      </>
-    );
-  },
 };

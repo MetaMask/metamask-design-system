@@ -76,8 +76,6 @@ Max-width of the inner dialog. Override entirely via `modalDialogProps.className
   </tbody>
 </table>
 
-<Canvas of={ModalContentStories.Size} />
-
 ### `modalDialogProps`
 
 Props forwarded to the inner dialog `Box` (the `<section role="dialog">`). Use this to add `data-testid`, override layout, change background, or apply Tailwind utilities via `className`. Consumer `className` is merged with the component's defaults via `twMerge`.
@@ -141,8 +139,6 @@ Custom CSS classes applied to the outer positioning element. Merged with the com
 | `finalFocusRef`           | Forwarded to `ModalFocus`. When set, this element receives focus on close.                        |
 | `restoreFocus`            | Forwarded to `ModalFocus`. When `true`, focus returns to the element that opened the modal.       |
 
-<Canvas of={ModalContentStories.KeyboardAndOutsideClickConfig} />
-
 ## Outside-click opt-out for floating UI primitives
 
 Floating UI primitives (Popover, Tooltip, Select dropdown, etc.) often render via portal as **siblings** to the modal — so a click inside the popover lands outside the modal's dialog DOM tree, which would otherwise trigger the close-on-outside-click handler.
@@ -156,8 +152,6 @@ import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from '@metamask/design-system
 ```
 
 The constant resolves to the literal string `data-mm-modal-ignore-outside-click`. The attribute presence is what matters — the value is unused.
-
-<Canvas of={ModalContentStories.IgnoreOutsideClickAttr} />
 
 ## Component API
 

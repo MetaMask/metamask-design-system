@@ -1,11 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Box, BoxFlexDirection } from '../Box';
-import { Checkbox } from '../Checkbox';
-
-import { ModalFooter } from './ModalFooter';
 import { ButtonsAlignment } from './ModalFooter.types';
+import { ModalFooter } from './ModalFooter';
 import type { ModalFooterProps } from './ModalFooter.types';
 import README from './README.mdx';
 
@@ -71,79 +68,5 @@ export const Default: Story = {
       children: 'Cancel',
       onClick: () => undefined,
     },
-  },
-};
-
-export const PrimaryOnly: Story = {
-  args: {
-    primaryButtonProps: {
-      children: 'Confirm',
-      onClick: () => undefined,
-    },
-  },
-};
-
-export const SecondaryOnly: Story = {
-  args: {
-    secondaryButtonProps: {
-      children: 'Cancel',
-      onClick: () => undefined,
-    },
-  },
-};
-
-export const HorizontalAlignment: Story = {
-  args: {
-    buttonsAlignment: ButtonsAlignment.Horizontal,
-    primaryButtonProps: {
-      children: 'I want to approve',
-      onClick: () => undefined,
-    },
-    secondaryButtonProps: {
-      children: 'Cancel this',
-      onClick: () => undefined,
-    },
-  },
-};
-
-export const VerticalAlignment: Story = {
-  args: {
-    buttonsAlignment: ButtonsAlignment.Vertical,
-    primaryButtonProps: {
-      children: 'I want to approve',
-      onClick: () => undefined,
-    },
-    secondaryButtonProps: {
-      children: 'Cancel this',
-      onClick: () => undefined,
-    },
-  },
-};
-
-export const Children: Story = {
-  args: {
-    primaryButtonProps: {
-      children: 'Confirm',
-      onClick: () => undefined,
-    },
-    secondaryButtonProps: {
-      children: 'Cancel',
-      onClick: () => undefined,
-    },
-  },
-  render: (args) => {
-    const [isSelected, setIsSelected] = useState(false);
-    return (
-      <ModalFooter {...args}>
-        <Box flexDirection={BoxFlexDirection.Row} gap={2} className="mb-4">
-          <Checkbox
-            id="modal-footer-terms"
-            label="I agree to the terms and conditions"
-            isSelected={isSelected}
-            onChange={() => setIsSelected(!isSelected)}
-          />
-        </Box>
-      </ModalFooter>
-    );
   },
 };
