@@ -4,6 +4,7 @@ import {
   BoxFlexDirection,
   ButtonIconSize,
   ButtonSize,
+  ButtonVariant,
   FontWeight,
   IconName,
   TextVariant,
@@ -60,10 +61,11 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
         ref={ref}
         flexDirection={BoxFlexDirection.Row}
         alignItems={BoxAlignItems.Start}
-        gap={2}
+        gap={4}
         backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        padding={3}
-        className={twMerge('rounded-sm', className)}
+        paddingVertical={3}
+        paddingHorizontal={4}
+        className={twMerge('rounded-xl', className)}
         {...props}
       >
         {startAccessory}
@@ -83,7 +85,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
             ))}
 
           {hasContent(description) && (
-            <Box className={hasContent(title) ? 'mt-1' : undefined}>
+            <Box>
               {isTextContent(description) ? (
                 <Text variant={TextVariant.BodySm} {...descriptionProps}>
                   {description}
@@ -104,11 +106,12 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
             ))}
 
           {shouldShowActionButton && (
-            <Box className="mt-4">
+            <Box className="mt-2">
               <Button
                 size={ButtonSize.Md}
                 onClick={actionButtonOnClick}
                 {...resolvedActionButtonProps}
+                variant={ButtonVariant.Secondary}
               >
                 {actionButtonLabel}
               </Button>
@@ -118,9 +121,9 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
 
         {shouldShowCloseButton && (
           <ButtonIcon
-            className={twMerge('ml-3 self-start', closeButtonClassName)}
+            className={twMerge('-mt-1 self-start', closeButtonClassName)}
             iconName={IconName.Close}
-            size={ButtonIconSize.Sm}
+            size={ButtonIconSize.Md}
             ariaLabel={closeButtonAriaLabel}
             onClick={onClose}
             {...resolvedCloseButtonProps}

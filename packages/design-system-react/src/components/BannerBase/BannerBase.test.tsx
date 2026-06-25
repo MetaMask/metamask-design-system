@@ -112,7 +112,7 @@ describe('BannerBase', () => {
     );
 
     const closeButton = screen.getByTestId(closeButtonTestId);
-    expect(closeButton.className).toContain('ml-3');
+    expect(closeButton.className).toContain('-mt-1');
     expect(closeButton.className).toContain('self-start');
     expect(closeButton.className).toContain('rotate-45');
   });
