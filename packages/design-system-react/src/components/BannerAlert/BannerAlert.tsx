@@ -1,13 +1,11 @@
 import { BannerAlertSeverity, IconSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
 import { BannerBase } from '../BannerBase';
 import { Icon } from '../Icon';
 
 import {
   MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR,
-  MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_COLOR,
   MAP_BANNER_ALERT_SEVERITY_ICON_NAME,
 } from './BannerAlert.constants';
@@ -22,8 +20,6 @@ export const BannerAlert = forwardRef<HTMLDivElement, BannerAlertProps>(
     const iconColor = MAP_BANNER_ALERT_SEVERITY_ICON_COLOR[severity];
     const backgroundColor =
       MAP_BANNER_ALERT_SEVERITY_BACKGROUND_COLOR[severity];
-    const borderColorClass = MAP_BANNER_ALERT_SEVERITY_BORDER_COLOR[severity];
-    const mergedClassName = twMerge('border-l-4', borderColorClass, className);
 
     return (
       <BannerBase
@@ -37,8 +33,7 @@ export const BannerAlert = forwardRef<HTMLDivElement, BannerAlertProps>(
           />
         }
         backgroundColor={backgroundColor}
-        paddingLeft={2}
-        className={mergedClassName}
+        className={className}
         {...props}
       />
     );
