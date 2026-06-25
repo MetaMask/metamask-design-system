@@ -279,9 +279,7 @@ export const FinalFocusRef: Story = {
             <ModalHeader {...modalHeaderProps(handleOnClose)}>
               Modal Header
             </ModalHeader>
-            <ModalBody>
-              <Text>{bodyChildren}</Text>
-            </ModalBody>
+            <ModalBody>{bodyChildren}</ModalBody>
           </ModalContent>
         </Modal>
       </>
