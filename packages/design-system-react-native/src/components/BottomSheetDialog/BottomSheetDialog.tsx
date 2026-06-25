@@ -1,9 +1,4 @@
-import {
-  Theme,
-  useTailwind,
-  useTheme,
-} from '@metamask/design-system-twrnc-preset';
-import { lightTheme, darkTheme } from '@metamask/design-tokens';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { debounce } from 'lodash';
 import React, {
   forwardRef,
@@ -61,11 +56,6 @@ export const BottomSheetDialog = forwardRef<
     ref,
   ) => {
     const tw = useTailwind();
-    const currentTheme = useTheme();
-    const shadowLg =
-      currentTheme === Theme.Light
-        ? lightTheme.shadows.size.lg
-        : darkTheme.shadows.size.lg;
 
     const { top: screenTopPadding, bottom: screenBottomPadding } =
       useSafeAreaInsets();
@@ -251,10 +241,7 @@ export const BottomSheetDialog = forwardRef<
 
     const sheetStyle = useMemo(
       () => [
-        tw.style(
-          'bg-default rounded-t-3xl overflow-hidden border border-muted',
-          twClassName,
-        ),
+        tw.style('bg-default rounded-t-3xl overflow-hidden', twClassName),
         {
           maxHeight: maxSheetHeight,
           paddingBottom: Platform.select({
@@ -263,7 +250,6 @@ export const BottomSheetDialog = forwardRef<
             default: screenBottomPadding + 16,
           }),
           ...(isFullscreen && { height: maxSheetHeight }),
-          ...shadowLg,
         },
         style,
       ],
@@ -273,7 +259,6 @@ export const BottomSheetDialog = forwardRef<
         maxSheetHeight,
         screenBottomPadding,
         isFullscreen,
-        shadowLg,
         style,
         twClassName,
       ],

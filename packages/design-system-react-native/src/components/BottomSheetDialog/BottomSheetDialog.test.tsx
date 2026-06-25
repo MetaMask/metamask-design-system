@@ -10,8 +10,6 @@ import { Text } from '../Text';
 import { BottomSheetDialog } from './BottomSheetDialog';
 import type { BottomSheetDialogRef } from './BottomSheetDialog.types';
 
-const mockThemeRef = { current: 'light' };
-
 jest.mock('react-native-gesture-handler', () => ({
   GestureDetector: ({ children }: { children: React.ReactNode }) => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -35,11 +33,9 @@ jest.mock('react-native-gesture-handler', () => ({
 }));
 
 jest.mock('@metamask/design-system-twrnc-preset', () => ({
-  Theme: { Light: 'light', Dark: 'dark' },
   useTailwind: () => ({
     style: (...args: string[]) => args,
   }),
-  useTheme: () => mockThemeRef.current,
 }));
 
 jest.mock('react-native-reanimated', () => {
@@ -348,17 +344,6 @@ describe('BottomSheetDialog', () => {
     expect(dialogRef.current).not.toBeNull();
     expect(typeof dialogRef.current?.onOpenDialog).toBe('function');
     expect(typeof dialogRef.current?.onCloseDialog).toBe('function');
-  });
-
-  it('uses dark theme shadow when theme is dark', () => {
-    mockThemeRef.current = 'dark';
-    const { getByText } = render(
-      <BottomSheetDialog>
-        <Text>Dark Theme</Text>
-      </BottomSheetDialog>,
-    );
-    expect(getByText('Dark Theme')).toBeDefined();
-    mockThemeRef.current = 'light';
   });
 
   it('renders on Android platform', () => {
