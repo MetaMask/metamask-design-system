@@ -6,7 +6,7 @@ import figma from 'figma';
  * Component list: IconGlyphs.figma.batch.json (generated).
  */
 const iconGlyphBatchTemplate = {
-  example: figma.tsx`IconName.${figma.batch.iconNameKey}`,
+  example: figma.code`IconName.${figma.batch.iconNameKey}`,
   imports: ['import { IconName } from "@metamask/design-system-shared"'],
   id: figma.batch.id,
   metadata: {
