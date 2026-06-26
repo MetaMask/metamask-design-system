@@ -22,7 +22,7 @@ figma.connect(
         Info: IconAlertSeverity.Info,
         Success: IconAlertSeverity.Success,
         Warning: IconAlertSeverity.Warning,
-        Danger: IconAlertSeverity.Danger,
+        Error: IconAlertSeverity.Danger,
       }),
       size: figma.enum('size', {
         Xs: IconSize.Xs,
