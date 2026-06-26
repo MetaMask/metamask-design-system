@@ -12,8 +12,8 @@ import type { TextProps } from '../Text/Text.types';
 export type TitleAlertProps = TitleAlertPropsShared & {
   /**
    * Optional props spread onto the title row {@link BoxRow}. Omits `children`, `startAccessory`,
-   * `endAccessory`, and `textProps` (TitleAlert sets those via `title`, `titleStartAccessory`,
-   * `titleEndAccessory`, and `titleProps`). Defaults `justifyContent` to center and `twClassName`
+   * `endAccessory`, and `textProps` (TitleAlert sets those via `title` and `titleProps`). Defaults
+   * `justifyContent` to center and `twClassName`
    * to include `self-stretch`; values on this object override those defaults when set.
    */
   titleWrapperProps?: Omit<

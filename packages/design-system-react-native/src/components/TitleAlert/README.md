@@ -43,7 +43,7 @@ import {
 
 ### `title`
 
-Title row content. When `title` is a string, it uses `TextVariant.HeadingLg` and `TextColor.TextDefault` (merged with `titleProps`). The title row renders only when `title` is renderable (`null`, `undefined`, `false`, and `''` are not); `titleStartAccessory` / `titleEndAccessory` without a renderable `title` do not show the row.
+Title row content. When `title` is a string, it uses `TextVariant.HeadingLg` and `TextColor.TextDefault` (merged with `titleProps`). The title row renders only when `title` is renderable (`null`, `undefined`, `false`, and `''` are not).
 
 | TYPE        | REQUIRED | DEFAULT |
 | ----------- | -------- | ------- |
@@ -57,22 +57,6 @@ import {
 
 <TitleAlert severity={IconAlertSeverity.Warning} title="High price impact" />;
 ```
-
-### `titleStartAccessory`
-
-Optional node to the left of `title` in the title row. Only visible when `title` is renderable.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-### `titleEndAccessory`
-
-Optional node to the right of `title` in the title row. Only visible when `title` is renderable.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
 
 ### `titleProps`
 
