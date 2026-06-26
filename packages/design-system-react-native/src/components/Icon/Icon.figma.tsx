@@ -1,6 +1,7 @@
 // import figma needs to remain as figma otherwise it breaks code connect
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
+import type { IconName } from '@metamask/design-system-shared';
 import React from 'react';
 
 import { Icon } from './Icon';
@@ -17,7 +18,7 @@ figma.connect(
   'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=1%3A2554',
   {
     props: {
-      name: figma.instance<string>('name'),
+      name: figma.instance<IconName>('name'),
       size: figma.enum('size', {
         Xs: IconSize.Xs,
         Sm: IconSize.Sm,

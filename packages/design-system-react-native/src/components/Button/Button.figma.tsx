@@ -1,6 +1,7 @@
 // import figma needs to remain as figma otherwise it breaks code connect
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
+import type { IconName } from '@metamask/design-system-shared';
 import React from 'react';
 
 import { Button } from './Button';
@@ -36,13 +37,13 @@ figma.connect(
         label: figma.string('label'),
         startIconProps: figma.boolean('startIcon (Figma Only)', {
           true: figma.nestedProps('startIcon', {
-            name: figma.instance<string>('name'),
+            name: figma.instance<IconName>('name'),
           }),
           false: { name: undefined },
         }),
         endIconProps: figma.boolean('endIcon (Figma Only)', {
           true: figma.nestedProps('endIcon', {
-            name: figma.instance<string>('name'),
+            name: figma.instance<IconName>('name'),
           }),
           false: { name: undefined },
         }),
