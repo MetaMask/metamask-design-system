@@ -1,4 +1,4 @@
-/* eslint-disable import-x/no-anonymous-default-export, import-x/no-default-export -- Figma batch template requires default export */
+/* eslint-disable import-x/no-default-export -- Figma batch template requires default export */
 import figma from 'figma';
 
 /**
