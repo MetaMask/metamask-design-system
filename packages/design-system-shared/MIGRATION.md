@@ -22,10 +22,10 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-| Before (0.x.0)        | After (0.x.0)  |
-| --------------------- | -------------- |
-| `titleStartAccessory` | removed        |
-| `titleEndAccessory`   | removed        |
+| Before (0.x.0)        | After (0.x.0) |
+| --------------------- | ------------- |
+| `titleStartAccessory` | removed       |
+| `titleEndAccessory`   | removed       |
 
 **Migration:**
 

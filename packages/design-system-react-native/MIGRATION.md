@@ -74,26 +74,21 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-| Before (0.x.0)        | After (0.x.0)  |
-| --------------------- | -------------- |
-| `titleStartAccessory` | removed        |
-| `titleEndAccessory`   | removed        |
+| Before (0.x.0)        | After (0.x.0) |
+| --------------------- | ------------- |
+| `titleStartAccessory` | removed       |
+| `titleEndAccessory`   | removed       |
 
 **Migration:**
 
 ```tsx
 // Before (0.x.0)
 import {
-  BoxJustifyContent,
-  BoxRow,
   Icon,
   IconAlertSeverity,
   IconColor,
   IconName,
   IconSize,
-  Text,
-  TextColor,
-  TextVariant,
   TitleAlert,
 } from '@metamask/design-system-react-native';
 
@@ -110,6 +105,11 @@ import {
 />;
 
 // After (0.x.0)
+import {
+  IconAlertSeverity,
+  TitleAlert,
+} from '@metamask/design-system-react-native';
+
 <TitleAlert severity={IconAlertSeverity.Warning} title="High price impact" />;
 ```
 
