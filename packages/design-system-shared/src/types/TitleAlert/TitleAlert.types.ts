@@ -13,20 +13,9 @@ export type TitleAlertPropsShared = {
    */
   severity: IconAlertSeverity;
   /**
-   * Title row content. The title row renders only when `title` is renderable;
-   * `titleStartAccessory` / `titleEndAccessory` alone do not show the row.
+   * Title row content. The title row renders only when `title` is renderable.
    */
   title: ReactNode;
-  /**
-   * Optional accessory rendered inline to the left of `title` in the title row.
-   * Only shown when the title row is shown (i.e. when `title` is renderable).
-   */
-  titleStartAccessory?: ReactNode;
-  /**
-   * Optional accessory rendered inline to the right of `title` in the title row.
-   * Only shown when the title row is shown (i.e. when `title` is renderable).
-   */
-  titleEndAccessory?: ReactNode;
   /**
    * Optional description below the title row (platform packages render via `TextOrChildren`).
    * Shown only when `description` is renderable (`null`, `undefined`, `false`, and `''` are not).

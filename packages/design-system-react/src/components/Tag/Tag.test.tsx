@@ -2,8 +2,6 @@ import { IconName, TagSeverity } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { TextColor } from '../Text';
-
 import { Tag } from './Tag';
 import {
   MAP_TAG_SEVERITY_BACKGROUND,
@@ -29,7 +27,7 @@ describe('Tag', () => {
     expect(screen.getByText('From string')).toBeInTheDocument();
     expect(tag.querySelector('p')).toHaveClass(
       'text-s-body-xs',
-      TextColor.TextDefault,
+      MAP_TAG_SEVERITY_TEXT_COLOR[TagSeverity.Neutral],
     );
   });
 
