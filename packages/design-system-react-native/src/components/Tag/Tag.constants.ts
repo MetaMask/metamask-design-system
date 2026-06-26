@@ -17,7 +17,7 @@ export const MAP_TAG_SEVERITY_BACKGROUND: Record<
 };
 
 export const MAP_TAG_SEVERITY_TEXT_COLOR: Record<TagSeverity, TextColor> = {
-  [TagSeverity.Neutral]: TextColor.TextDefault,
+  [TagSeverity.Neutral]: TextColor.TextAlternative,
   [TagSeverity.Success]: TextColor.SuccessDefault,
   [TagSeverity.Danger]: TextColor.ErrorDefault,
   [TagSeverity.Warning]: TextColor.WarningDefault,
@@ -25,7 +25,7 @@ export const MAP_TAG_SEVERITY_TEXT_COLOR: Record<TagSeverity, TextColor> = {
 };
 
 export const MAP_TAG_SEVERITY_ICON_COLOR: Record<TagSeverity, IconColor> = {
-  [TagSeverity.Neutral]: IconColor.IconDefault,
+  [TagSeverity.Neutral]: IconColor.IconAlternative,
   [TagSeverity.Success]: IconColor.SuccessDefault,
   [TagSeverity.Danger]: IconColor.ErrorDefault,
   [TagSeverity.Warning]: IconColor.WarningDefault,

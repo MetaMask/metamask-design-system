@@ -9,14 +9,42 @@ import * as ModalStories from './Modal.stories';
 `Modal` is intentionally a thin shell. Compose it with `ModalOverlay`, `ModalContent`, `ModalHeader`, `ModalBody`, and `ModalFooter` to assemble a full modal UI.
 
 ```tsx
-import { Modal } from '@metamask/design-system-react';
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+} from '@metamask/design-system-react';
 
 <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-  {/* ModalOverlay + ModalContent + … */}
+  <ModalOverlay />
+  <ModalContent>
+    <ModalHeader
+      onClose={() => setIsOpen(false)}
+      closeButtonProps={{ ariaLabel: 'Close' }}
+    >
+      Modal Header
+    </ModalHeader>
+    <ModalBody>ModalBody children</ModalBody>
+    <ModalFooter
+      primaryButtonProps={{
+        children: 'Confirm',
+        onClick: () => setIsOpen(false),
+      }}
+      secondaryButtonProps={{
+        children: 'Cancel',
+        onClick: () => setIsOpen(false),
+      }}
+    />
+  </ModalContent>
 </Modal>;
 ```
 
 <Canvas of={ModalStories.Default} />
+
+<Canvas of={ModalStories.Usage} />
 
 ## Props
 
@@ -120,6 +148,8 @@ When `true`, clicking the overlay (outside the modal content) calls `onClose`.
   </tbody>
 </table>
 
+<Canvas of={ModalStories.IsClosedOnOutsideClick} />
+
 ### `isClosedOnEscapeKey`
 
 When `true`, pressing Escape calls `onClose`. When `false`, ensure the modal exposes a visible/keyboard-reachable close affordance for keyboard-only users.
@@ -144,6 +174,8 @@ When `true`, pressing Escape calls `onClose`. When `false`, ensure the modal exp
     </tr>
   </tbody>
 </table>
+
+<Canvas of={ModalStories.IsClosedOnEscapeKey} />
 
 ### `autoFocus`
 
@@ -170,6 +202,8 @@ When `true`, the first focusable element within the modal subtree is focused on 
   </tbody>
 </table>
 
+<Canvas of={ModalStories.AutoFocus} />
+
 ### `initialFocusRef`
 
 The element to receive focus when the modal opens. Overrides `autoFocus`'s "first focusable" behavior.
@@ -194,6 +228,8 @@ The element to receive focus when the modal opens. Overrides `autoFocus`'s "firs
     </tr>
   </tbody>
 </table>
+
+<Canvas of={ModalStories.InitialFocusRef} />
 
 ### `finalFocusRef`
 
@@ -220,6 +256,8 @@ The element to receive focus when the modal closes/unmounts.
   </tbody>
 </table>
 
+<Canvas of={ModalStories.FinalFocusRef} />
+
 ### `restoreFocus`
 
 When `true`, focus is restored to the element that opened the modal once the modal closes. Ignored when `finalFocusRef` is provided.
@@ -244,6 +282,8 @@ When `true`, focus is restored to the element that opened the modal once the mod
     </tr>
   </tbody>
 </table>
+
+<Canvas of={ModalStories.RestoreFocus} />
 
 ### `className`
 
@@ -284,8 +324,6 @@ function MyCloseButton() {
 ```
 
 Calling `useModalContext()` outside of a `<Modal>` subtree throws a developer-friendly error.
-
-<Canvas of={ModalStories.UseModalContext} />
 
 ## Component API
 
