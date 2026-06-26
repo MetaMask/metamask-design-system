@@ -62,7 +62,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "installConfig": {}
 }
