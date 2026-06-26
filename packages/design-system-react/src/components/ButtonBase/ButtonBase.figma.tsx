@@ -9,7 +9,7 @@ import { ButtonBaseSize } from '.';
 
 /**
  * React web implementation of ButtonBase component.
- * Icon names resolve via nested startIcon/endIcon instance swaps (IconGlyphs.figma.tsx).
+ * Icon names resolve via nested startIcon/endIcon instance swaps (IconGlyphs.figma.batch.json).
  */
 
 figma.connect(

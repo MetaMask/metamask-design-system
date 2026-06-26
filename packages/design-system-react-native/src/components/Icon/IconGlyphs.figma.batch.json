@@ -1,0 +1,1637 @@
+{
+  "templateFile": "./IconGlyphs.figma.batch.ts",
+  "components": [
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-307",
+      "iconNameKey": "Accessibility",
+      "id": "mmds-icon-accessibility",
+      "source": "packages/design-system-shared/src/assets/icons/accessibility.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11172",
+      "iconNameKey": "Activity",
+      "id": "mmds-icon-activity",
+      "source": "packages/design-system-shared/src/assets/icons/activity.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11065",
+      "iconNameKey": "Add",
+      "id": "mmds-icon-add",
+      "source": "packages/design-system-shared/src/assets/icons/add.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-188",
+      "iconNameKey": "AddCard",
+      "id": "mmds-icon-add-card",
+      "source": "packages/design-system-shared/src/assets/icons/add-card.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11069",
+      "iconNameKey": "AddCircle",
+      "id": "mmds-icon-add-circle",
+      "source": "packages/design-system-shared/src/assets/icons/add-circle.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11071",
+      "iconNameKey": "AddSquare",
+      "id": "mmds-icon-add-square",
+      "source": "packages/design-system-shared/src/assets/icons/add-square.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-326",
+      "iconNameKey": "AfterHours",
+      "id": "mmds-icon-after-hours",
+      "source": "packages/design-system-shared/src/assets/icons/after-hours.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11076",
+      "iconNameKey": "Ai",
+      "id": "mmds-icon-ai",
+      "source": "packages/design-system-shared/src/assets/icons/ai.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-311",
+      "iconNameKey": "AlternateEmail",
+      "id": "mmds-icon-alternate-email",
+      "source": "packages/design-system-shared/src/assets/icons/alternate-email.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-322",
+      "iconNameKey": "AppleLogo",
+      "id": "mmds-icon-apple-logo",
+      "source": "packages/design-system-shared/src/assets/icons/apple-logo.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11063",
+      "iconNameKey": "Apps",
+      "id": "mmds-icon-apps",
+      "source": "packages/design-system-shared/src/assets/icons/apps.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11087",
+      "iconNameKey": "Arrow2Down",
+      "id": "mmds-icon-arrow-2-down",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-2-down.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11085",
+      "iconNameKey": "Arrow2Left",
+      "id": "mmds-icon-arrow-2-left",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-2-left.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11084",
+      "iconNameKey": "Arrow2Right",
+      "id": "mmds-icon-arrow-2-right",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-2-right.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11086",
+      "iconNameKey": "Arrow2Up",
+      "id": "mmds-icon-arrow-2-up",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-2-up.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11081",
+      "iconNameKey": "Arrow2UpRight",
+      "id": "mmds-icon-arrow-2-up-right",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-2-up-right.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11088",
+      "iconNameKey": "ArrowCircleDown",
+      "id": "mmds-icon-arrow-circle-down",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-circle-down.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11089",
+      "iconNameKey": "ArrowCircleUp",
+      "id": "mmds-icon-arrow-circle-up",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-circle-up.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11083",
+      "iconNameKey": "ArrowDoubleLeft",
+      "id": "mmds-icon-arrow-double-left",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-double-left.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11082",
+      "iconNameKey": "ArrowDoubleRight",
+      "id": "mmds-icon-arrow-double-right",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-double-right.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11078",
+      "iconNameKey": "ArrowDown",
+      "id": "mmds-icon-arrow-down",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-down.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11098",
+      "iconNameKey": "ArrowDropDownCircle",
+      "id": "mmds-icon-arrow-drop-down-circle",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-drop-down-circle.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11080",
+      "iconNameKey": "ArrowLeft",
+      "id": "mmds-icon-arrow-left",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-left.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11079",
+      "iconNameKey": "ArrowRight",
+      "id": "mmds-icon-arrow-right",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-right.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11077",
+      "iconNameKey": "ArrowUp",
+      "id": "mmds-icon-arrow-up",
+      "source": "packages/design-system-shared/src/assets/icons/arrow-up.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-267",
+      "iconNameKey": "Attachment",
+      "id": "mmds-icon-attachment",
+      "source": "packages/design-system-shared/src/assets/icons/attachment.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-318",
+      "iconNameKey": "Backspace",
+      "id": "mmds-icon-backspace",
+      "source": "packages/design-system-shared/src/assets/icons/backspace.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11115",
+      "iconNameKey": "Ban",
+      "id": "mmds-icon-ban",
+      "source": "packages/design-system-shared/src/assets/icons/ban.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-190",
+      "iconNameKey": "Bank",
+      "id": "mmds-icon-bank",
+      "source": "packages/design-system-shared/src/assets/icons/bank.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-191",
+      "iconNameKey": "BankAssured",
+      "id": "mmds-icon-bank-assured",
+      "source": "packages/design-system-shared/src/assets/icons/bank-assured.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11134",
+      "iconNameKey": "Bold",
+      "id": "mmds-icon-bold",
+      "source": "packages/design-system-shared/src/assets/icons/bold.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-235",
+      "iconNameKey": "Book",
+      "id": "mmds-icon-book",
+      "source": "packages/design-system-shared/src/assets/icons/book.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-240",
+      "iconNameKey": "Bookmark",
+      "id": "mmds-icon-bookmark",
+      "source": "packages/design-system-shared/src/assets/icons/bookmark.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-195",
+      "iconNameKey": "Bridge",
+      "id": "mmds-icon-bridge",
+      "source": "packages/design-system-shared/src/assets/icons/bridge.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-306",
+      "iconNameKey": "Briefcase",
+      "id": "mmds-icon-briefcase",
+      "source": "packages/design-system-shared/src/assets/icons/briefcase.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-298",
+      "iconNameKey": "Bulb",
+      "id": "mmds-icon-bulb",
+      "source": "packages/design-system-shared/src/assets/icons/bulb.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-330",
+      "iconNameKey": "BuySell",
+      "id": "mmds-icon-buy-sell",
+      "source": "packages/design-system-shared/src/assets/icons/buy-sell.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-275",
+      "iconNameKey": "Cake",
+      "id": "mmds-icon-cake",
+      "source": "packages/design-system-shared/src/assets/icons/cake.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-237",
+      "iconNameKey": "Calculator",
+      "id": "mmds-icon-calculator",
+      "source": "packages/design-system-shared/src/assets/icons/calculator.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-268",
+      "iconNameKey": "Calendar",
+      "id": "mmds-icon-calendar",
+      "source": "packages/design-system-shared/src/assets/icons/calendar.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-277",
+      "iconNameKey": "Call",
+      "id": "mmds-icon-call",
+      "source": "packages/design-system-shared/src/assets/icons/call.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-280",
+      "iconNameKey": "Camera",
+      "id": "mmds-icon-camera",
+      "source": "packages/design-system-shared/src/assets/icons/camera.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-308",
+      "iconNameKey": "Campaign",
+      "id": "mmds-icon-campaign",
+      "source": "packages/design-system-shared/src/assets/icons/campaign.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-320",
+      "iconNameKey": "Candlestick",
+      "id": "mmds-icon-candlestick",
+      "source": "packages/design-system-shared/src/assets/icons/candlestick.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-187",
+      "iconNameKey": "Card",
+      "id": "mmds-icon-card",
+      "source": "packages/design-system-shared/src/assets/icons/card.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11179",
+      "iconNameKey": "Cash",
+      "id": "mmds-icon-cash",
+      "source": "packages/design-system-shared/src/assets/icons/cash.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11117",
+      "iconNameKey": "Category",
+      "id": "mmds-icon-category",
+      "source": "packages/design-system-shared/src/assets/icons/category.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11127",
+      "iconNameKey": "Chart",
+      "id": "mmds-icon-chart",
+      "source": "packages/design-system-shared/src/assets/icons/chart.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11099",
+      "iconNameKey": "Check",
+      "id": "mmds-icon-check",
+      "source": "packages/design-system-shared/src/assets/icons/check.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11100",
+      "iconNameKey": "CheckBold",
+      "id": "mmds-icon-check-bold",
+      "source": "packages/design-system-shared/src/assets/icons/check-bold.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11105",
+      "iconNameKey": "CircleX",
+      "id": "mmds-icon-circle-x",
+      "source": "packages/design-system-shared/src/assets/icons/circle-x.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-321",
+      "iconNameKey": "Clear",
+      "id": "mmds-icon-clear",
+      "source": "packages/design-system-shared/src/assets/icons/clear.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11170",
+      "iconNameKey": "Clock",
+      "id": "mmds-icon-clock",
+      "source": "packages/design-system-shared/src/assets/icons/clock.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11171",
+      "iconNameKey": "ClockFilled",
+      "id": "mmds-icon-clock-filled",
+      "source": "packages/design-system-shared/src/assets/icons/clock-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11104",
+      "iconNameKey": "Close",
+      "id": "mmds-icon-close",
+      "source": "packages/design-system-shared/src/assets/icons/close.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-211",
+      "iconNameKey": "Cloud",
+      "id": "mmds-icon-cloud",
+      "source": "packages/design-system-shared/src/assets/icons/cloud.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-210",
+      "iconNameKey": "CloudDownload",
+      "id": "mmds-icon-cloud-download",
+      "source": "packages/design-system-shared/src/assets/icons/cloud-download.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-209",
+      "iconNameKey": "CloudUpload",
+      "id": "mmds-icon-cloud-upload",
+      "source": "packages/design-system-shared/src/assets/icons/cloud-upload.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-228",
+      "iconNameKey": "Code",
+      "id": "mmds-icon-code",
+      "source": "packages/design-system-shared/src/assets/icons/code.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11178",
+      "iconNameKey": "Coin",
+      "id": "mmds-icon-coin",
+      "source": "packages/design-system-shared/src/assets/icons/coin.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-199",
+      "iconNameKey": "Collapse",
+      "id": "mmds-icon-collapse",
+      "source": "packages/design-system-shared/src/assets/icons/collapse.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11101",
+      "iconNameKey": "Confirmation",
+      "id": "mmds-icon-confirmation",
+      "source": "packages/design-system-shared/src/assets/icons/confirmation.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11166",
+      "iconNameKey": "Connect",
+      "id": "mmds-icon-connect",
+      "source": "packages/design-system-shared/src/assets/icons/connect.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-220",
+      "iconNameKey": "Copy",
+      "id": "mmds-icon-copy",
+      "source": "packages/design-system-shared/src/assets/icons/copy.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-221",
+      "iconNameKey": "CopySuccess",
+      "id": "mmds-icon-copy-success",
+      "source": "packages/design-system-shared/src/assets/icons/copy-success.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10503-4429",
+      "iconNameKey": "CorporateFare",
+      "id": "mmds-icon-corporate-fare",
+      "source": "packages/design-system-shared/src/assets/icons/corporate-fare.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-189",
+      "iconNameKey": "CreditCheck",
+      "id": "mmds-icon-credit-check",
+      "source": "packages/design-system-shared/src/assets/icons/credit-check.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-184",
+      "iconNameKey": "CurrencyFranc",
+      "id": "mmds-icon-currency-franc",
+      "source": "packages/design-system-shared/src/assets/icons/currency-franc.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11181",
+      "iconNameKey": "CurrencyLira",
+      "id": "mmds-icon-currency-lira",
+      "source": "packages/design-system-shared/src/assets/icons/currency-lira.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-185",
+      "iconNameKey": "CurrencyPound",
+      "id": "mmds-icon-currency-pound",
+      "source": "packages/design-system-shared/src/assets/icons/currency-pound.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11180",
+      "iconNameKey": "CurrencyYuan",
+      "id": "mmds-icon-currency-yuan",
+      "source": "packages/design-system-shared/src/assets/icons/currency-yuan.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11123",
+      "iconNameKey": "Customize",
+      "id": "mmds-icon-customize",
+      "source": "packages/design-system-shared/src/assets/icons/customize.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11108",
+      "iconNameKey": "Danger",
+      "id": "mmds-icon-danger",
+      "source": "packages/design-system-shared/src/assets/icons/danger.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-248",
+      "iconNameKey": "Dark",
+      "id": "mmds-icon-dark",
+      "source": "packages/design-system-shared/src/assets/icons/dark.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-249",
+      "iconNameKey": "DarkFilled",
+      "id": "mmds-icon-dark-filled",
+      "source": "packages/design-system-shared/src/assets/icons/dark-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-243",
+      "iconNameKey": "Data",
+      "id": "mmds-icon-data",
+      "source": "packages/design-system-shared/src/assets/icons/data.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11138",
+      "iconNameKey": "Description",
+      "id": "mmds-icon-description",
+      "source": "packages/design-system-shared/src/assets/icons/description.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-258",
+      "iconNameKey": "Details",
+      "id": "mmds-icon-details",
+      "source": "packages/design-system-shared/src/assets/icons/details.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11126",
+      "iconNameKey": "Diagram",
+      "id": "mmds-icon-diagram",
+      "source": "packages/design-system-shared/src/assets/icons/diagram.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-229",
+      "iconNameKey": "DocumentCode",
+      "id": "mmds-icon-document-code",
+      "source": "packages/design-system-shared/src/assets/icons/document-code.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-206",
+      "iconNameKey": "Download",
+      "id": "mmds-icon-download",
+      "source": "packages/design-system-shared/src/assets/icons/download.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-303",
+      "iconNameKey": "Draft",
+      "id": "mmds-icon-draft",
+      "source": "packages/design-system-shared/src/assets/icons/draft.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-270",
+      "iconNameKey": "EcoLeaf",
+      "id": "mmds-icon-eco-leaf",
+      "source": "packages/design-system-shared/src/assets/icons/eco-leaf.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-222",
+      "iconNameKey": "Edit",
+      "id": "mmds-icon-edit",
+      "source": "packages/design-system-shared/src/assets/icons/edit.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11153",
+      "iconNameKey": "EncryptedAdd",
+      "id": "mmds-icon-encrypted-add",
+      "source": "packages/design-system-shared/src/assets/icons/encrypted-add.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-219",
+      "iconNameKey": "Eraser",
+      "id": "mmds-icon-eraser",
+      "source": "packages/design-system-shared/src/assets/icons/eraser.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11107",
+      "iconNameKey": "Error",
+      "id": "mmds-icon-error",
+      "source": "packages/design-system-shared/src/assets/icons/error.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11133",
+      "iconNameKey": "Ethereum",
+      "id": "mmds-icon-ethereum",
+      "source": "packages/design-system-shared/src/assets/icons/ethereum.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-186",
+      "iconNameKey": "Exchange",
+      "id": "mmds-icon-exchange",
+      "source": "packages/design-system-shared/src/assets/icons/exchange.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-197",
+      "iconNameKey": "Expand",
+      "id": "mmds-icon-expand",
+      "source": "packages/design-system-shared/src/assets/icons/expand.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-198",
+      "iconNameKey": "ExpandVertical",
+      "id": "mmds-icon-expand-vertical",
+      "source": "packages/design-system-shared/src/assets/icons/expand-vertical.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11056",
+      "iconNameKey": "Explore",
+      "id": "mmds-icon-explore",
+      "source": "packages/design-system-shared/src/assets/icons/explore.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11057",
+      "iconNameKey": "ExploreFilled",
+      "id": "mmds-icon-explore-filled",
+      "source": "packages/design-system-shared/src/assets/icons/explore-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-203",
+      "iconNameKey": "Export",
+      "id": "mmds-icon-export",
+      "source": "packages/design-system-shared/src/assets/icons/export.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-305",
+      "iconNameKey": "Extension",
+      "id": "mmds-icon-extension",
+      "source": "packages/design-system-shared/src/assets/icons/extension.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11143",
+      "iconNameKey": "Eye",
+      "id": "mmds-icon-eye",
+      "source": "packages/design-system-shared/src/assets/icons/eye.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11144",
+      "iconNameKey": "EyeSlash",
+      "id": "mmds-icon-eye-slash",
+      "source": "packages/design-system-shared/src/assets/icons/eye-slash.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-310",
+      "iconNameKey": "FaceId",
+      "id": "mmds-icon-face-id",
+      "source": "packages/design-system-shared/src/assets/icons/face-id.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11114",
+      "iconNameKey": "Feedback",
+      "id": "mmds-icon-feedback",
+      "source": "packages/design-system-shared/src/assets/icons/feedback.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11136",
+      "iconNameKey": "File",
+      "id": "mmds-icon-file",
+      "source": "packages/design-system-shared/src/assets/icons/file.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11120",
+      "iconNameKey": "Filter",
+      "id": "mmds-icon-filter",
+      "source": "packages/design-system-shared/src/assets/icons/filter.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-312",
+      "iconNameKey": "Fingerprint",
+      "id": "mmds-icon-fingerprint",
+      "source": "packages/design-system-shared/src/assets/icons/fingerprint.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-273",
+      "iconNameKey": "Fire",
+      "id": "mmds-icon-fire",
+      "source": "packages/design-system-shared/src/assets/icons/fire.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11095",
+      "iconNameKey": "FirstPage",
+      "id": "mmds-icon-first-page",
+      "source": "packages/design-system-shared/src/assets/icons/first-page.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11167",
+      "iconNameKey": "Flag",
+      "id": "mmds-icon-flag",
+      "source": "packages/design-system-shared/src/assets/icons/flag.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11168",
+      "iconNameKey": "Flash",
+      "id": "mmds-icon-flash",
+      "source": "packages/design-system-shared/src/assets/icons/flash.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11169",
+      "iconNameKey": "FlashSlash",
+      "id": "mmds-icon-flash-slash",
+      "source": "packages/design-system-shared/src/assets/icons/flash-slash.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11128",
+      "iconNameKey": "Flask",
+      "id": "mmds-icon-flask",
+      "source": "packages/design-system-shared/src/assets/icons/flask.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-272",
+      "iconNameKey": "Flower",
+      "id": "mmds-icon-flower",
+      "source": "packages/design-system-shared/src/assets/icons/flower.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11137",
+      "iconNameKey": "Folder",
+      "id": "mmds-icon-folder",
+      "source": "packages/design-system-shared/src/assets/icons/folder.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-271",
+      "iconNameKey": "Forest",
+      "id": "mmds-icon-forest",
+      "source": "packages/design-system-shared/src/assets/icons/forest.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-241",
+      "iconNameKey": "Gas",
+      "id": "mmds-icon-gas",
+      "source": "packages/design-system-shared/src/assets/icons/gas.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-276",
+      "iconNameKey": "Gift",
+      "id": "mmds-icon-gift",
+      "source": "packages/design-system-shared/src/assets/icons/gift.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11059",
+      "iconNameKey": "Global",
+      "id": "mmds-icon-global",
+      "source": "packages/design-system-shared/src/assets/icons/global.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11058",
+      "iconNameKey": "GlobalSearch",
+      "id": "mmds-icon-global-search",
+      "source": "packages/design-system-shared/src/assets/icons/global-search.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11124",
+      "iconNameKey": "Graph",
+      "id": "mmds-icon-graph",
+      "source": "packages/design-system-shared/src/assets/icons/graph.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-253",
+      "iconNameKey": "Hardware",
+      "id": "mmds-icon-hardware",
+      "source": "packages/design-system-shared/src/assets/icons/hardware.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-317",
+      "iconNameKey": "HashTag",
+      "id": "mmds-icon-hash-tag",
+      "source": "packages/design-system-shared/src/assets/icons/hash-tag.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-231",
+      "iconNameKey": "Heart",
+      "id": "mmds-icon-heart",
+      "source": "packages/design-system-shared/src/assets/icons/heart.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-232",
+      "iconNameKey": "HeartFilled",
+      "id": "mmds-icon-heart-filled",
+      "source": "packages/design-system-shared/src/assets/icons/heart-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-244",
+      "iconNameKey": "Hierarchy",
+      "id": "mmds-icon-hierarchy",
+      "source": "packages/design-system-shared/src/assets/icons/hierarchy.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11054",
+      "iconNameKey": "Home",
+      "id": "mmds-icon-home",
+      "source": "packages/design-system-shared/src/assets/icons/home.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11055",
+      "iconNameKey": "HomeFilled",
+      "id": "mmds-icon-home-filled",
+      "source": "packages/design-system-shared/src/assets/icons/home-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11139",
+      "iconNameKey": "Image",
+      "id": "mmds-icon-image",
+      "source": "packages/design-system-shared/src/assets/icons/image.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11109",
+      "iconNameKey": "Info",
+      "id": "mmds-icon-info",
+      "source": "packages/design-system-shared/src/assets/icons/info.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-313",
+      "iconNameKey": "Inventory",
+      "id": "mmds-icon-inventory",
+      "source": "packages/design-system-shared/src/assets/icons/inventory.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-269",
+      "iconNameKey": "Joystick",
+      "id": "mmds-icon-joystick",
+      "source": "packages/design-system-shared/src/assets/icons/joystick.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-261",
+      "iconNameKey": "Keep",
+      "id": "mmds-icon-keep",
+      "source": "packages/design-system-shared/src/assets/icons/keep.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-262",
+      "iconNameKey": "KeepFilled",
+      "id": "mmds-icon-keep-filled",
+      "source": "packages/design-system-shared/src/assets/icons/keep-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11160",
+      "iconNameKey": "Key",
+      "id": "mmds-icon-key",
+      "source": "packages/design-system-shared/src/assets/icons/key.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11096",
+      "iconNameKey": "LastPage",
+      "id": "mmds-icon-last-page",
+      "source": "packages/design-system-shared/src/assets/icons/last-page.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-251",
+      "iconNameKey": "Light",
+      "id": "mmds-icon-light",
+      "source": "packages/design-system-shared/src/assets/icons/light.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-250",
+      "iconNameKey": "LightFilled",
+      "id": "mmds-icon-light-filled",
+      "source": "packages/design-system-shared/src/assets/icons/light-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-200",
+      "iconNameKey": "Link",
+      "id": "mmds-icon-link",
+      "source": "packages/design-system-shared/src/assets/icons/link.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-256",
+      "iconNameKey": "Loading",
+      "id": "mmds-icon-loading",
+      "source": "packages/design-system-shared/src/assets/icons/loading.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-295",
+      "iconNameKey": "Location",
+      "id": "mmds-icon-location",
+      "source": "packages/design-system-shared/src/assets/icons/location.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11161",
+      "iconNameKey": "Lock",
+      "id": "mmds-icon-lock",
+      "source": "packages/design-system-shared/src/assets/icons/lock.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11162",
+      "iconNameKey": "LockSlash",
+      "id": "mmds-icon-lock-slash",
+      "source": "packages/design-system-shared/src/assets/icons/lock-slash.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-201",
+      "iconNameKey": "Login",
+      "id": "mmds-icon-login",
+      "source": "packages/design-system-shared/src/assets/icons/login.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-202",
+      "iconNameKey": "Logout",
+      "id": "mmds-icon-logout",
+      "source": "packages/design-system-shared/src/assets/icons/logout.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-302",
+      "iconNameKey": "Mail",
+      "id": "mmds-icon-mail",
+      "source": "packages/design-system-shared/src/assets/icons/mail.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-297",
+      "iconNameKey": "Map",
+      "id": "mmds-icon-map",
+      "source": "packages/design-system-shared/src/assets/icons/map.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11062",
+      "iconNameKey": "Menu",
+      "id": "mmds-icon-menu",
+      "source": "packages/design-system-shared/src/assets/icons/menu.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11112",
+      "iconNameKey": "MessageQuestion",
+      "id": "mmds-icon-message-question",
+      "source": "packages/design-system-shared/src/assets/icons/message-question.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-234",
+      "iconNameKey": "Messages",
+      "id": "mmds-icon-messages",
+      "source": "packages/design-system-shared/src/assets/icons/messages.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-319",
+      "iconNameKey": "MetamaskFoxOutline",
+      "id": "mmds-icon-metamask-fox-outline",
+      "source": "packages/design-system-shared/src/assets/icons/metamask-fox-outline.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-278",
+      "iconNameKey": "Mic",
+      "id": "mmds-icon-mic",
+      "source": "packages/design-system-shared/src/assets/icons/mic.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11066",
+      "iconNameKey": "Minus",
+      "id": "mmds-icon-minus",
+      "source": "packages/design-system-shared/src/assets/icons/minus.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10260-420",
+      "iconNameKey": "Minus",
+      "id": "mmds-icon-minus",
+      "source": "packages/design-system-shared/src/assets/icons/minus.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11067",
+      "iconNameKey": "MinusBold",
+      "id": "mmds-icon-minus-bold",
+      "source": "packages/design-system-shared/src/assets/icons/minus-bold.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11072",
+      "iconNameKey": "MinusSquare",
+      "id": "mmds-icon-minus-square",
+      "source": "packages/design-system-shared/src/assets/icons/minus-square.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-225",
+      "iconNameKey": "Mobile",
+      "id": "mmds-icon-mobile",
+      "source": "packages/design-system-shared/src/assets/icons/mobile.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11173",
+      "iconNameKey": "Money",
+      "id": "mmds-icon-money",
+      "source": "packages/design-system-shared/src/assets/icons/money.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11176",
+      "iconNameKey": "MoneyBag",
+      "id": "mmds-icon-money-bag",
+      "source": "packages/design-system-shared/src/assets/icons/money-bag.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-224",
+      "iconNameKey": "Monitor",
+      "id": "mmds-icon-monitor",
+      "source": "packages/design-system-shared/src/assets/icons/monitor.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-296",
+      "iconNameKey": "MountainFlag",
+      "id": "mmds-icon-mountain-flag",
+      "source": "packages/design-system-shared/src/assets/icons/mountain-flag.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=13956-118",
+      "iconNameKey": "Musd",
+      "id": "mmds-icon-musd",
+      "source": "packages/design-system-shared/src/assets/icons/musd.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=13956-119",
+      "iconNameKey": "MusdFilled",
+      "id": "mmds-icon-musd-filled",
+      "source": "packages/design-system-shared/src/assets/icons/musd-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-282",
+      "iconNameKey": "MusicNote",
+      "id": "mmds-icon-music-note",
+      "source": "packages/design-system-shared/src/assets/icons/music-note.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-245",
+      "iconNameKey": "Notification",
+      "id": "mmds-icon-notification",
+      "source": "packages/design-system-shared/src/assets/icons/notification.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11140",
+      "iconNameKey": "PageInfo",
+      "id": "mmds-icon-page-info",
+      "source": "packages/design-system-shared/src/assets/icons/page-info.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-301",
+      "iconNameKey": "Palette",
+      "id": "mmds-icon-palette",
+      "source": "packages/design-system-shared/src/assets/icons/palette.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11159",
+      "iconNameKey": "PasswordCheck",
+      "id": "mmds-icon-password-check",
+      "source": "packages/design-system-shared/src/assets/icons/password-check.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-255",
+      "iconNameKey": "Pending",
+      "id": "mmds-icon-pending",
+      "source": "packages/design-system-shared/src/assets/icons/pending.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-216",
+      "iconNameKey": "People",
+      "id": "mmds-icon-people",
+      "source": "packages/design-system-shared/src/assets/icons/people.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-218",
+      "iconNameKey": "PersonCancel",
+      "id": "mmds-icon-person-cancel",
+      "source": "packages/design-system-shared/src/assets/icons/person-cancel.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-260",
+      "iconNameKey": "Pin",
+      "id": "mmds-icon-pin",
+      "source": "packages/design-system-shared/src/assets/icons/pin.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11073",
+      "iconNameKey": "Plant",
+      "id": "mmds-icon-plant",
+      "source": "packages/design-system-shared/src/assets/icons/plant.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11129",
+      "iconNameKey": "Plug",
+      "id": "mmds-icon-plug",
+      "source": "packages/design-system-shared/src/assets/icons/plug.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11068",
+      "iconNameKey": "PlusAndMinus",
+      "id": "mmds-icon-plus-and-minus",
+      "source": "packages/design-system-shared/src/assets/icons/plus-and-minus.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11156",
+      "iconNameKey": "PolicyAlert",
+      "id": "mmds-icon-policy-alert",
+      "source": "packages/design-system-shared/src/assets/icons/policy-alert.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-325",
+      "iconNameKey": "PopUp",
+      "id": "mmds-icon-pop-up",
+      "source": "packages/design-system-shared/src/assets/icons/pop-up.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-300",
+      "iconNameKey": "Print",
+      "id": "mmds-icon-print",
+      "source": "packages/design-system-shared/src/assets/icons/print.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11111",
+      "iconNameKey": "PriorityHigh",
+      "id": "mmds-icon-priority-high",
+      "source": "packages/design-system-shared/src/assets/icons/priority-high.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11154",
+      "iconNameKey": "PrivacyTip",
+      "id": "mmds-icon-privacy-tip",
+      "source": "packages/design-system-shared/src/assets/icons/privacy-tip.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-194",
+      "iconNameKey": "ProgrammingArrows",
+      "id": "mmds-icon-programming-arrows",
+      "source": "packages/design-system-shared/src/assets/icons/programming-arrows.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-205",
+      "iconNameKey": "Publish",
+      "id": "mmds-icon-publish",
+      "source": "packages/design-system-shared/src/assets/icons/publish.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11164",
+      "iconNameKey": "QrCode",
+      "id": "mmds-icon-qr-code",
+      "source": "packages/design-system-shared/src/assets/icons/qr-code.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11113",
+      "iconNameKey": "Question",
+      "id": "mmds-icon-question",
+      "source": "packages/design-system-shared/src/assets/icons/question.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11165",
+      "iconNameKey": "Receive",
+      "id": "mmds-icon-receive",
+      "source": "packages/design-system-shared/src/assets/icons/receive.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-193",
+      "iconNameKey": "Received",
+      "id": "mmds-icon-received",
+      "source": "packages/design-system-shared/src/assets/icons/received.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11092",
+      "iconNameKey": "Refresh",
+      "id": "mmds-icon-refresh",
+      "source": "packages/design-system-shared/src/assets/icons/refresh.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11070",
+      "iconNameKey": "RemoveMinus",
+      "id": "mmds-icon-remove-minus",
+      "source": "packages/design-system-shared/src/assets/icons/remove-minus.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11110",
+      "iconNameKey": "Report",
+      "id": "mmds-icon-report",
+      "source": "packages/design-system-shared/src/assets/icons/report.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-274",
+      "iconNameKey": "Rocket",
+      "id": "mmds-icon-rocket",
+      "source": "packages/design-system-shared/src/assets/icons/rocket.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-238",
+      "iconNameKey": "Save",
+      "id": "mmds-icon-save",
+      "source": "packages/design-system-shared/src/assets/icons/save.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-239",
+      "iconNameKey": "SaveFilled",
+      "id": "mmds-icon-save-filled",
+      "source": "packages/design-system-shared/src/assets/icons/save-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11177",
+      "iconNameKey": "Saving",
+      "id": "mmds-icon-saving",
+      "source": "packages/design-system-shared/src/assets/icons/saving.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11163",
+      "iconNameKey": "Scan",
+      "id": "mmds-icon-scan",
+      "source": "packages/design-system-shared/src/assets/icons/scan.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-196",
+      "iconNameKey": "Search",
+      "id": "mmds-icon-search",
+      "source": "packages/design-system-shared/src/assets/icons/search.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11145",
+      "iconNameKey": "Security",
+      "id": "mmds-icon-security",
+      "source": "packages/design-system-shared/src/assets/icons/security.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11148",
+      "iconNameKey": "SecurityAlert",
+      "id": "mmds-icon-security-alert",
+      "source": "packages/design-system-shared/src/assets/icons/security-alert.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11147",
+      "iconNameKey": "SecurityCross",
+      "id": "mmds-icon-security-cross",
+      "source": "packages/design-system-shared/src/assets/icons/security-cross.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11151",
+      "iconNameKey": "SecurityKey",
+      "id": "mmds-icon-security-key",
+      "source": "packages/design-system-shared/src/assets/icons/security-key.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11155",
+      "iconNameKey": "SecuritySearch",
+      "id": "mmds-icon-security-search",
+      "source": "packages/design-system-shared/src/assets/icons/security-search.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11150",
+      "iconNameKey": "SecuritySlash",
+      "id": "mmds-icon-security-slash",
+      "source": "packages/design-system-shared/src/assets/icons/security-slash.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11146",
+      "iconNameKey": "SecurityTick",
+      "id": "mmds-icon-security-tick",
+      "source": "packages/design-system-shared/src/assets/icons/security-tick.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11158",
+      "iconNameKey": "SecurityTime",
+      "id": "mmds-icon-security-time",
+      "source": "packages/design-system-shared/src/assets/icons/security-time.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11157",
+      "iconNameKey": "SecurityUser",
+      "id": "mmds-icon-security-user",
+      "source": "packages/design-system-shared/src/assets/icons/security-user.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-316",
+      "iconNameKey": "Send",
+      "id": "mmds-icon-send",
+      "source": "packages/design-system-shared/src/assets/icons/send.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-287",
+      "iconNameKey": "SentimentDissatisfied",
+      "id": "mmds-icon-sentiment-dissatisfied",
+      "source": "packages/design-system-shared/src/assets/icons/sentiment-dissatisfied.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-288",
+      "iconNameKey": "SentimentNeutral",
+      "id": "mmds-icon-sentiment-neutral",
+      "source": "packages/design-system-shared/src/assets/icons/sentiment-neutral.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-289",
+      "iconNameKey": "SentimentSatisfied",
+      "id": "mmds-icon-sentiment-satisfied",
+      "source": "packages/design-system-shared/src/assets/icons/sentiment-satisfied.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-290",
+      "iconNameKey": "SentimentVerySatisfied",
+      "id": "mmds-icon-sentiment-very-satisfied",
+      "source": "packages/design-system-shared/src/assets/icons/sentiment-very-satisfied.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11118",
+      "iconNameKey": "Setting",
+      "id": "mmds-icon-setting",
+      "source": "packages/design-system-shared/src/assets/icons/setting.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11119",
+      "iconNameKey": "SettingFilled",
+      "id": "mmds-icon-setting-filled",
+      "source": "packages/design-system-shared/src/assets/icons/setting-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-204",
+      "iconNameKey": "Share",
+      "id": "mmds-icon-share",
+      "source": "packages/design-system-shared/src/assets/icons/share.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11152",
+      "iconNameKey": "ShieldLock",
+      "id": "mmds-icon-shield-lock",
+      "source": "packages/design-system-shared/src/assets/icons/shield-lock.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-294",
+      "iconNameKey": "ShoppingBag",
+      "id": "mmds-icon-shopping-bag",
+      "source": "packages/design-system-shared/src/assets/icons/shopping-bag.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-293",
+      "iconNameKey": "ShoppingCart",
+      "id": "mmds-icon-shopping-cart",
+      "source": "packages/design-system-shared/src/assets/icons/shopping-cart.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-324",
+      "iconNameKey": "SidePanel",
+      "id": "mmds-icon-side-panel",
+      "source": "packages/design-system-shared/src/assets/icons/side-panel.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-304",
+      "iconNameKey": "SignalCellular",
+      "id": "mmds-icon-signal-cellular",
+      "source": "packages/design-system-shared/src/assets/icons/signal-cellular.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11116",
+      "iconNameKey": "Slash",
+      "id": "mmds-icon-slash",
+      "source": "packages/design-system-shared/src/assets/icons/slash.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-233",
+      "iconNameKey": "Sms",
+      "id": "mmds-icon-sms",
+      "source": "packages/design-system-shared/src/assets/icons/sms.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-246",
+      "iconNameKey": "Snaps",
+      "id": "mmds-icon-snaps",
+      "source": "packages/design-system-shared/src/assets/icons/snaps.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-247",
+      "iconNameKey": "SnapsPlus",
+      "id": "mmds-icon-snaps-plus",
+      "source": "packages/design-system-shared/src/assets/icons/snaps-plus.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11121",
+      "iconNameKey": "Sort",
+      "id": "mmds-icon-sort",
+      "source": "packages/design-system-shared/src/assets/icons/sort.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11122",
+      "iconNameKey": "SortByAlpha",
+      "id": "mmds-icon-sort-by-alpha",
+      "source": "packages/design-system-shared/src/assets/icons/sort-by-alpha.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11075",
+      "iconNameKey": "Sparkle",
+      "id": "mmds-icon-sparkle",
+      "source": "packages/design-system-shared/src/assets/icons/sparkle.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-291",
+      "iconNameKey": "Speed",
+      "id": "mmds-icon-speed",
+      "source": "packages/design-system-shared/src/assets/icons/speed.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-242",
+      "iconNameKey": "Speedometer",
+      "id": "mmds-icon-speedometer",
+      "source": "packages/design-system-shared/src/assets/icons/speedometer.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11135",
+      "iconNameKey": "Square",
+      "id": "mmds-icon-square",
+      "source": "packages/design-system-shared/src/assets/icons/square.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11074",
+      "iconNameKey": "Stake",
+      "id": "mmds-icon-stake",
+      "source": "packages/design-system-shared/src/assets/icons/stake.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-230",
+      "iconNameKey": "Star",
+      "id": "mmds-icon-star",
+      "source": "packages/design-system-shared/src/assets/icons/star.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-227",
+      "iconNameKey": "StarFilled",
+      "id": "mmds-icon-star-filled",
+      "source": "packages/design-system-shared/src/assets/icons/star-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11094",
+      "iconNameKey": "Start",
+      "id": "mmds-icon-start",
+      "source": "packages/design-system-shared/src/assets/icons/start.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-292",
+      "iconNameKey": "Storefront",
+      "id": "mmds-icon-storefront",
+      "source": "packages/design-system-shared/src/assets/icons/storefront.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-236",
+      "iconNameKey": "Student",
+      "id": "mmds-icon-student",
+      "source": "packages/design-system-shared/src/assets/icons/student.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11090",
+      "iconNameKey": "SwapHorizontal",
+      "id": "mmds-icon-swap-horizontal",
+      "source": "packages/design-system-shared/src/assets/icons/swap-horizontal.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11091",
+      "iconNameKey": "SwapVertical",
+      "id": "mmds-icon-swap-vertical",
+      "source": "packages/design-system-shared/src/assets/icons/swap-vertical.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-314",
+      "iconNameKey": "TabClose",
+      "id": "mmds-icon-tab-close",
+      "source": "packages/design-system-shared/src/assets/icons/tab-close.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-285",
+      "iconNameKey": "TableRow",
+      "id": "mmds-icon-table-row",
+      "source": "packages/design-system-shared/src/assets/icons/table-row.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-226",
+      "iconNameKey": "Tablet",
+      "id": "mmds-icon-tablet",
+      "source": "packages/design-system-shared/src/assets/icons/tablet.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-192",
+      "iconNameKey": "Tag",
+      "id": "mmds-icon-tag",
+      "source": "packages/design-system-shared/src/assets/icons/tag.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=14337-350",
+      "iconNameKey": "Telegram",
+      "id": "mmds-icon-telegram",
+      "source": "packages/design-system-shared/src/assets/icons/telegram.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=13518-1017",
+      "iconNameKey": "Telegram",
+      "id": "mmds-icon-telegram",
+      "source": "packages/design-system-shared/src/assets/icons/telegram.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-263",
+      "iconNameKey": "ThumbDown",
+      "id": "mmds-icon-thumb-down",
+      "source": "packages/design-system-shared/src/assets/icons/thumb-down.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-264",
+      "iconNameKey": "ThumbDownFilled",
+      "id": "mmds-icon-thumb-down-filled",
+      "source": "packages/design-system-shared/src/assets/icons/thumb-down-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-265",
+      "iconNameKey": "ThumbUp",
+      "id": "mmds-icon-thumb-up",
+      "source": "packages/design-system-shared/src/assets/icons/thumb-up.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-266",
+      "iconNameKey": "ThumbUpFilled",
+      "id": "mmds-icon-thumb-up-filled",
+      "source": "packages/design-system-shared/src/assets/icons/thumb-up-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-252",
+      "iconNameKey": "Tint",
+      "id": "mmds-icon-tint",
+      "source": "packages/design-system-shared/src/assets/icons/tint.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-299",
+      "iconNameKey": "Translate",
+      "id": "mmds-icon-translate",
+      "source": "packages/design-system-shared/src/assets/icons/translate.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-223",
+      "iconNameKey": "Trash",
+      "id": "mmds-icon-trash",
+      "source": "packages/design-system-shared/src/assets/icons/trash.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11149",
+      "iconNameKey": "TrendDown",
+      "id": "mmds-icon-trend-down",
+      "source": "packages/design-system-shared/src/assets/icons/trend-down.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11125",
+      "iconNameKey": "TrendUp",
+      "id": "mmds-icon-trend-up",
+      "source": "packages/design-system-shared/src/assets/icons/trend-up.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-328",
+      "iconNameKey": "Trophy",
+      "id": "mmds-icon-trophy",
+      "source": "packages/design-system-shared/src/assets/icons/trophy.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11093",
+      "iconNameKey": "Undo",
+      "id": "mmds-icon-undo",
+      "source": "packages/design-system-shared/src/assets/icons/undo.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11097",
+      "iconNameKey": "Unfold",
+      "id": "mmds-icon-unfold",
+      "source": "packages/design-system-shared/src/assets/icons/unfold.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-259",
+      "iconNameKey": "Unpin",
+      "id": "mmds-icon-unpin",
+      "source": "packages/design-system-shared/src/assets/icons/unpin.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-207",
+      "iconNameKey": "Upload",
+      "id": "mmds-icon-upload",
+      "source": "packages/design-system-shared/src/assets/icons/upload.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-208",
+      "iconNameKey": "UploadFile",
+      "id": "mmds-icon-upload-file",
+      "source": "packages/design-system-shared/src/assets/icons/upload-file.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-254",
+      "iconNameKey": "Usb",
+      "id": "mmds-icon-usb",
+      "source": "packages/design-system-shared/src/assets/icons/usb.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-212",
+      "iconNameKey": "User",
+      "id": "mmds-icon-user",
+      "source": "packages/design-system-shared/src/assets/icons/user.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-217",
+      "iconNameKey": "UserCheck",
+      "id": "mmds-icon-user-check",
+      "source": "packages/design-system-shared/src/assets/icons/user-check.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-215",
+      "iconNameKey": "UserCircle",
+      "id": "mmds-icon-user-circle",
+      "source": "packages/design-system-shared/src/assets/icons/user-circle.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-213",
+      "iconNameKey": "UserCircleAdd",
+      "id": "mmds-icon-user-circle-add",
+      "source": "packages/design-system-shared/src/assets/icons/user-circle-add.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-214",
+      "iconNameKey": "UserCircleRemove",
+      "id": "mmds-icon-user-circle-remove",
+      "source": "packages/design-system-shared/src/assets/icons/user-circle-remove.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11102",
+      "iconNameKey": "Verified",
+      "id": "mmds-icon-verified",
+      "source": "packages/design-system-shared/src/assets/icons/verified.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11103",
+      "iconNameKey": "VerifiedFilled",
+      "id": "mmds-icon-verified-filled",
+      "source": "packages/design-system-shared/src/assets/icons/verified-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-281",
+      "iconNameKey": "Videocam",
+      "id": "mmds-icon-videocam",
+      "source": "packages/design-system-shared/src/assets/icons/videocam.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-286",
+      "iconNameKey": "ViewColumn",
+      "id": "mmds-icon-view-column",
+      "source": "packages/design-system-shared/src/assets/icons/view-column.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-279",
+      "iconNameKey": "ViewInAr",
+      "id": "mmds-icon-view-in-ar",
+      "source": "packages/design-system-shared/src/assets/icons/view-in-ar.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-283",
+      "iconNameKey": "VolumeOff",
+      "id": "mmds-icon-volume-off",
+      "source": "packages/design-system-shared/src/assets/icons/volume-off.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-284",
+      "iconNameKey": "VolumeUp",
+      "id": "mmds-icon-volume-up",
+      "source": "packages/design-system-shared/src/assets/icons/volume-up.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11174",
+      "iconNameKey": "Wallet",
+      "id": "mmds-icon-wallet",
+      "source": "packages/design-system-shared/src/assets/icons/wallet.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11175",
+      "iconNameKey": "WalletFilled",
+      "id": "mmds-icon-wallet-filled",
+      "source": "packages/design-system-shared/src/assets/icons/wallet-filled.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11106",
+      "iconNameKey": "Warning",
+      "id": "mmds-icon-warning",
+      "source": "packages/design-system-shared/src/assets/icons/warning.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-309",
+      "iconNameKey": "WebTraffic",
+      "id": "mmds-icon-web-traffic",
+      "source": "packages/design-system-shared/src/assets/icons/web-traffic.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11064",
+      "iconNameKey": "Widgets",
+      "id": "mmds-icon-widgets",
+      "source": "packages/design-system-shared/src/assets/icons/widgets.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11141",
+      "iconNameKey": "Wifi",
+      "id": "mmds-icon-wifi",
+      "source": "packages/design-system-shared/src/assets/icons/wifi.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10261-11142",
+      "iconNameKey": "WifiOff",
+      "id": "mmds-icon-wifi-off",
+      "source": "packages/design-system-shared/src/assets/icons/wifi-off.svg"
+    },
+    {
+      "url": "https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10271-315",
+      "iconNameKey": "X",
+      "id": "mmds-icon-x",
+      "source": "packages/design-system-shared/src/assets/icons/x.svg"
+    }
+  ]
+}

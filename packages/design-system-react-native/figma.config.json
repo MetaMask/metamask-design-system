@@ -1,6 +1,9 @@
 {
   "codeConnect": {
-    "include": ["packages/design-system-react-native/src/components/**/*.tsx"],
+    "include": [
+      "packages/design-system-react-native/src/components/**/*.tsx",
+      "packages/design-system-react-native/src/components/**/*.figma.batch.json"
+    ],
     "exclude": ["**/temp-components/**/*"],
     "parser": "react",
     "label": "React Native",

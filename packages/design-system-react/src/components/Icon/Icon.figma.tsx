@@ -9,7 +9,7 @@ import { IconSize } from '.';
 
 /**
  * React web implementation of Icon component.
- * `name` uses figma.instance against glyph connects in IconGlyphs.figma.tsx.
+ * `name` uses figma.instance against glyph batch connects (IconGlyphs.figma.batch.json).
  */
 
 figma.connect(
