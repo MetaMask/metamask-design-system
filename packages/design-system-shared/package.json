@@ -44,6 +44,7 @@
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "generate-icons": "tsx scripts/generate-icons.ts",
+    "generate-icon-figma-connect": "tsx scripts/generate-icon-figma-connect.ts",
     "publish:preview": "yarn npm publish --tag preview"
   },
   "dependencies": {

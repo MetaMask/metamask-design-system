@@ -5,11 +5,11 @@ import React from 'react';
 
 import { Icon } from './Icon';
 
-import { IconName, IconSize } from '.';
+import { IconSize } from '.';
 
 /**
- * React web implementation of Icon component
- * `name` prop is hard to implement because it uses .instance but we use enums in code
+ * React web implementation of Icon component.
+ * `name` uses figma.instance against glyph connects in IconGlyphs.figma.tsx.
  */
 
 figma.connect(
@@ -17,6 +17,7 @@ figma.connect(
   'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=1%3A2554',
   {
     props: {
+      name: figma.instance<string>('name'),
       size: figma.enum('size', {
         Xs: IconSize.Xs,
         Sm: IconSize.Sm,
@@ -25,12 +26,6 @@ figma.connect(
         Xl: IconSize.Xl,
       }),
     },
-    example: ({ size, ...props }) => (
-      <Icon
-        name={IconName.Close} // Check the icon name in figma
-        size={size}
-        {...props}
-      />
-    ),
+    example: ({ name, size }) => <Icon name={name} size={size} />,
   },
 );

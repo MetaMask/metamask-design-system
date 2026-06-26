@@ -15,6 +15,7 @@
   "scripts": {
     "build": "yarn workspaces foreach --all --topological-dev run build",
     "generate:icons": "yarn workspace @metamask/design-system-shared generate-icons",
+    "generate:icon-figma-connect": "yarn workspace @metamask/design-system-shared generate-icon-figma-connect",
     "build:clean": "rimraf 'packages/*/dist' '**/*.tsbuildinfo' && yarn build",
     "build:types": "tsc --build tsconfig.build.json --verbose",
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",

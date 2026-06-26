@@ -3,8 +3,6 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { IconName } from '../Icon';
-
 import { Button } from './Button';
 
 import { ButtonVariant, ButtonSize } from '.';
@@ -36,13 +34,17 @@ figma.connect(
           Lg: ButtonSize.Lg,
         }),
         label: figma.string('label'),
-        startIconName: figma.boolean('startIcon (Figma Only)', {
-          true: IconName.Add,
-          false: undefined,
+        startIconProps: figma.boolean('startIcon (Figma Only)', {
+          true: figma.nestedProps('startIcon', {
+            name: figma.instance<string>('name'),
+          }),
+          false: { name: undefined },
         }),
-        endIconName: figma.boolean('endIcon (Figma Only)', {
-          true: IconName.Add,
-          false: undefined,
+        endIconProps: figma.boolean('endIcon (Figma Only)', {
+          true: figma.nestedProps('endIcon', {
+            name: figma.instance<string>('name'),
+          }),
+          false: { name: undefined },
         }),
       }),
       loadingText: figma.nestedProps('_Loading Label', {
@@ -77,8 +79,8 @@ figma.connect(
         isDisabled={isDisabled}
         isDanger={isDanger}
         isInverse={isInverse}
-        startIconName={buttonBase.startIconName}
-        endIconName={buttonBase.endIconName}
+        startIconName={buttonBase.startIconProps.name}
+        endIconName={buttonBase.endIconProps.name}
         {...props}
       >
         {buttonBase.label}
