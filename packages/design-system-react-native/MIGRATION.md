@@ -118,7 +118,6 @@ If you import **`TitleAlertPropsShared`** from **`@metamask/design-system-shared
 **Impact:**
 
 - Any call site passing **`titleStartAccessory`** or **`titleEndAccessory`** on **`TitleAlert`** must be updated.
-- Custom **`title`** nodes do not receive default **`HeadingLg`** / **`TextDefault`** styling from **`titleProps`** unless you apply **`Text`** props yourself.
 
 ### From version 0.29.0 to 0.30.0
 
