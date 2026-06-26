@@ -46,6 +46,11 @@ describe('BannerAlert', () => {
       iconColor: IconColor.ErrorDefault,
       backgroundColor: BoxBackgroundColor.ErrorMuted,
     },
+    {
+      severity: BannerAlertSeverity.Neutral,
+      iconColor: IconColor.IconDefault,
+      backgroundColor: BoxBackgroundColor.BackgroundSection,
+    },
   ])(
     'applies expected icon and background for $severity severity',
     ({ severity, iconColor, backgroundColor }) => {
