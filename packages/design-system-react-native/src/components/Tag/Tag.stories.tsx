@@ -74,7 +74,7 @@ export const StartAccessory: Story = {
         <Icon
           name={IconName.Warning}
           size={IconSize.Xs}
-          color={IconColor.IconDefault}
+          color={IconColor.IconAlternative}
           testID="tag-story-start-accessory"
         />
       }
@@ -91,7 +91,7 @@ export const EndAccessory: Story = {
         <Icon
           name={IconName.ArrowDown}
           size={IconSize.Xs}
-          color={IconColor.IconDefault}
+          color={IconColor.IconAlternative}
           testID="tag-story-end-accessory"
         />
       }
