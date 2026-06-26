@@ -75,7 +75,7 @@ figma.connect(
         size={buttonBase.size}
         isFullWidth={isFullWidth}
         isLoading={isLoading}
-        loadingText={loadingText?.text}
+        loadingText={loadingText.text}
         isDisabled={isDisabled}
         isDanger={isDanger}
         isInverse={isInverse}
