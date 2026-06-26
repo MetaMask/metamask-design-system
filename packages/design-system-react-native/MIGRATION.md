@@ -46,6 +46,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
   - [From version 0.26.0 to 0.27.0](#from-version-0260-to-0270)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
   - [From version 0.23.0 to 0.24.0](#from-version-0230-to-0240)
@@ -63,7 +64,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.30.0 to 0.31.0
+### From version 0.x.0 to 0.x.0
 
 <a id="titlealert-title-accessories-removed"></a>
 
@@ -73,7 +74,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-| Before (0.30.0)       | After (0.31.0) |
+| Before (0.x.0)        | After (0.x.0)  |
 | --------------------- | -------------- |
 | `titleStartAccessory` | removed        |
 | `titleEndAccessory`   | removed        |
@@ -81,7 +82,7 @@ This guide provides detailed instructions for migrating your project from one ve
 **Migration:**
 
 ```tsx
-// Before (0.30.0)
+// Before (0.x.0)
 import {
   BoxJustifyContent,
   BoxRow,
@@ -108,7 +109,7 @@ import {
   }
 />;
 
-// After (0.31.0)
+// After (0.x.0)
 <TitleAlert severity={IconAlertSeverity.Warning} title="High price impact" />;
 ```
 
