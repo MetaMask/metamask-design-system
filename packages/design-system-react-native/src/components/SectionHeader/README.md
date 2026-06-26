@@ -46,6 +46,29 @@ import {
 />;
 ```
 
+### `children`
+
+Optional content rendered below the title row in the middle column, between `startAccessory` / `startIconName` and `endAccessory` / `endIconName`. Use for subtitles or other supporting content.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+import {
+  SectionHeader,
+  Text,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-react-native';
+
+<SectionHeader title="Tokens">
+  <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
+    12 assets
+  </Text>
+</SectionHeader>;
+```
+
 ### `startIconName`
 
 Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconDefault`; override with `startIconProps`.

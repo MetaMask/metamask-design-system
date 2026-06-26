@@ -43,9 +43,10 @@ The size of the button.
 
 Available sizes:
 
-- `ButtonIconSize.Sm` (32px)
-- `ButtonIconSize.Md` (40px)
-- `ButtonIconSize.Lg` (48px)
+- `ButtonIconSize.Xs` (20px)
+- `ButtonIconSize.Sm` (24px)
+- `ButtonIconSize.Md` (32px)
+- `ButtonIconSize.Lg` (40px)
 
 | TYPE             | REQUIRED | DEFAULT             |
 | ---------------- | -------- | ------------------- |

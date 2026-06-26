@@ -5,6 +5,8 @@ import type { BannerBasePropsShared } from '../BannerBase';
  * Uses const object with derived union type (ADR-0003).
  */
 export const BannerAlertSeverity = {
+  /** Neutral style. */
+  Neutral: 'neutral',
   /** Informational style. */
   Info: 'info',
   /** Success style. */

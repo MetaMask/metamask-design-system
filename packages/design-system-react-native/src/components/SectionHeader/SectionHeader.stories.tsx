@@ -1,9 +1,17 @@
-import { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
+import {
+  FontWeight,
+  IconColor,
+  IconName,
+  IconSize,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import { Box } from '../Box';
 import { Icon } from '../Icon';
+import { Text } from '../Text';
 
 import { SectionHeader } from './SectionHeader';
 import type { SectionHeaderProps } from './SectionHeader.types';
@@ -102,6 +110,20 @@ export const TitleAccessory: Story = {
         />
       }
     />
+  ),
+};
+
+export const Children: Story = {
+  render: () => (
+    <SectionHeader title="Tokens">
+      <Text
+        variant={TextVariant.BodySm}
+        color={TextColor.TextAlternative}
+        fontWeight={FontWeight.Medium}
+      >
+        12 assets
+      </Text>
+    </SectionHeader>
   ),
 };
 
