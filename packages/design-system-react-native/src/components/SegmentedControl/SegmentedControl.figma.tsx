@@ -2,7 +2,7 @@
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
 import { ButtonBaseSize } from '@metamask/design-system-shared';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FilterButton } from '../FilterButton';
 
@@ -43,10 +43,14 @@ figma.connect(
     example: ({ size, isFullWidth, selectedSegment, segmentLabel }) => {
       const selectedValue = 'selected';
       const unselectedValue = 'unselected';
-      const initialValue = selectedSegment.isSelected
+      const figmaValue = selectedSegment.isSelected
         ? selectedValue
         : unselectedValue;
-      const [value, setValue] = useState(initialValue);
+      const [value, setValue] = useState(figmaValue);
+
+      useEffect(() => {
+        setValue(figmaValue);
+      }, [figmaValue]);
 
       return (
         <SegmentedControl
