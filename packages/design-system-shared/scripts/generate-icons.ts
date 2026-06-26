@@ -8,6 +8,8 @@ import * as path from 'path';
 
 const REPO_ROOT = path.join(__dirname, '../../..');
 
+const SHARED_PACKAGE_JSON = path.join(__dirname, '../package.json');
+
 /** Single source of truth for all icon SVG assets */
 const SHARED_ASSETS_DIR = path.join(__dirname, '../src/assets/icons');
 
@@ -192,6 +194,7 @@ async function generateReactNativeAssets(svgFiles: string[]): Promise<void> {
   // already rewritten the scope in committed source files — causing TS2307 in
   // the preview publish workflow. The AssetByIconName type annotation provides
   // the same compile-time exhaustiveness check without the cross-package import.
+  // React icons/index.ts uses the same package name from package.json instead.
   const lines: string[] = [
     `// /////////////////////////////////////////////////////`,
     `// This is a generated file`,
@@ -223,9 +226,23 @@ async function generateReactNativeAssets(svgFiles: string[]): Promise<void> {
   await fs.writeFile(RN_ASSETS_FILE, lines.join('\n'));
 }
 
+/**
+ * Reads the shared package name from package.json.
+ * Preview publish renames the package (e.g. to @metamask-previews/design-system-shared)
+ * before build, so generated cross-package imports must use the current name rather
+ * than a hardcoded @metamask/ scope.
+ *
+ * @returns The current npm package name from package.json.
+ */
+async function getSharedPackageName(): Promise<string> {
+  const raw = await fs.readFile(SHARED_PACKAGE_JSON, 'utf-8');
+  return (JSON.parse(raw) as { name: string }).name;
+}
+
 // ─── Step 4: React — generate TSX components + icons/index.ts ────────────────
 
 async function generateReactIcons(svgFiles: string[]): Promise<void> {
+  const sharedPackageName = await getSharedPackageName();
   // Ensure icons directory exists and clear previous output
   await fs.mkdir(REACT_ICONS_DIR, { recursive: true });
   const existing = await fs.readdir(REACT_ICONS_DIR);
@@ -289,7 +306,7 @@ async function generateReactIcons(svgFiles: string[]): Promise<void> {
     `// This file is auto-generated — do not edit manually`,
     `// Run \`yarn generate:icons\` from the repo root to regenerate`,
     `import type { ComponentType, SVGProps } from 'react';`,
-    `import type { IconName } from '@metamask/design-system-shared';`,
+    `import type { IconName } from '${sharedPackageName}';`,
     ``,
     `export type IconComponentType = ComponentType<SVGProps<SVGSVGElement>>;`,
     ``,
