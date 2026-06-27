@@ -7,7 +7,18 @@ export const DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG = {
   stiffness: 320,
   mass: 0.9,
   overshootClamping: true,
-} satisfies WithSpringConfig;
+} as const satisfies WithSpringConfig;
+
+type BottomSheetDialogSpringOverrides = Partial<
+  Pick<WithSpringConfig, 'velocity' | 'reduceMotion' | 'energyThreshold'>
+>;
+
+export const getBottomSheetDialogSpringConfig = (
+  overrides?: BottomSheetDialogSpringOverrides,
+): WithSpringConfig => ({
+  ...DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG,
+  ...overrides,
+});
 
 /**
  * Minimum swipe velocity (px/s) to treat the gesture as a fling for snap/dismiss.

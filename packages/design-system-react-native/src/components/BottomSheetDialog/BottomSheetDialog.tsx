@@ -25,7 +25,6 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  type WithSpringConfig,
 } from 'react-native-reanimated';
 import {
   useSafeAreaFrame,
@@ -35,8 +34,8 @@ import {
 // Internal dependencies.
 import {
   DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD,
-  DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG,
   DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_VELOCITY,
+  getBottomSheetDialogSpringConfig,
 } from './BottomSheetDialog.constants';
 import type {
   BottomSheetDialogRef,
@@ -89,14 +88,10 @@ export const BottomSheetDialog = forwardRef<
       onClose?.();
     }, [onClose]);
 
-    const animateSheetTo = (
-      target: number,
-      config?: WithSpringConfig,
-      onComplete?: () => void,
-    ) => {
+    const animateSheetTo = (target: number, onComplete?: () => void) => {
       currentYOffset.value = withSpring(
         target,
-        { ...DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG, ...config },
+        getBottomSheetDialogSpringConfig(),
         (finished) => {
           if (finished && onComplete) {
             runOnJS(onComplete)();
@@ -108,7 +103,7 @@ export const BottomSheetDialog = forwardRef<
     const onCloseDialog = useCallback(
       (callback?: () => void) => {
         onDismissStart?.();
-        animateSheetTo(bottomOfDialogYValue.value, undefined, () => {
+        animateSheetTo(bottomOfDialogYValue.value, () => {
           onCloseCB();
           if (callback) {
             callback();
@@ -192,10 +187,10 @@ export const BottomSheetDialog = forwardRef<
           if (isDismissed) {
             runOnJS(onCloseDialog)();
           } else {
-            currentYOffset.value = withSpring(finalYOffset, {
-              ...DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG,
-              velocity: velocityY,
-            });
+            currentYOffset.value = withSpring(
+              finalYOffset,
+              getBottomSheetDialogSpringConfig({ velocity: velocityY }),
+            );
           }
         });
 
@@ -212,7 +207,7 @@ export const BottomSheetDialog = forwardRef<
     // Animate in sheet on initial render.
     const onOpenDialog = (callback?: () => void) => {
       currentYOffset.value = bottomOfDialogYValue.value;
-      animateSheetTo(topOfDialogYValue.value, undefined, () => {
+      animateSheetTo(topOfDialogYValue.value, () => {
         onOpenCB();
         if (callback) {
           callback();
