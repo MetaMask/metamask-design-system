@@ -56,7 +56,9 @@ describe('BottomSheetOverlay', () => {
       jest.spyOn(Animated, 'timing').mockImplementation(
         () =>
           ({
-            start: (completionCallback?: (result: { finished: boolean }) => void) => {
+            start: (
+              completionCallback?: (result: { finished: boolean }) => void,
+            ) => {
               completionCallback?.({ finished: true });
             },
             stop: jest.fn(),
@@ -93,7 +95,9 @@ describe('BottomSheetOverlay', () => {
       jest.spyOn(Animated, 'timing').mockImplementation(
         () =>
           ({
-            start: (completionCallback?: (result: { finished: boolean }) => void) => {
+            start: (
+              completionCallback?: (result: { finished: boolean }) => void,
+            ) => {
               completionCallback?.({ finished: false });
             },
             stop: jest.fn(),

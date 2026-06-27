@@ -23,19 +23,16 @@ jest.mock('../BottomSheetOverlay/BottomSheetOverlay', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { forwardRef, useImperativeHandle } = require('react');
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { TouchableOpacity } = require('react-native');
+  const { TouchableOpacity: MockTouchableOpacity } = require('react-native');
   return {
     BottomSheetOverlay: forwardRef(
-      (
-        { onPress }: { onPress?: () => void },
-        ref: unknown,
-      ) => {
+      ({ onPress }: { onPress?: () => void }, ref: unknown) => {
         useImperativeHandle(ref, () => ({
           fadeIn: mockOverlayFadeIn,
           fadeOut: mockOverlayFadeOut,
         }));
         return onPress ? (
-          <TouchableOpacity onPress={onPress} testID="overlay-touchable" />
+          <MockTouchableOpacity onPress={onPress} testID="overlay-touchable" />
         ) : null;
       },
     ),

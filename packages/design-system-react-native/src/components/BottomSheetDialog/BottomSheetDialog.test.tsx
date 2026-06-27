@@ -303,28 +303,7 @@ describe('BottomSheetDialog', () => {
       </BottomSheetDialog>,
     );
 
-    // Find the Animated.View parent that has onLayout
-    const content = getByText('Layout Content');
-    const findLayoutNode = (
-      current: typeof content | null,
-    ): typeof content | null => {
-      if (!current) {
-        return null;
-      }
-      if (current.props.onLayout) {
-        return current;
-      }
-      return findLayoutNode(current.parent);
-    };
-    const layoutNode = findLayoutNode(content.parent);
-    expect(layoutNode).toBeDefined();
-    if (layoutNode) {
-      act(() => {
-        fireEvent(layoutNode, 'layout', {
-          nativeEvent: { layout: { height: 400, width: 300, x: 0, y: 0 } },
-        });
-      });
-    }
+    triggerSheetLayout(getByText);
 
     expect(onOpenMock).toHaveBeenCalled();
   });
@@ -338,18 +317,7 @@ describe('BottomSheetDialog', () => {
     );
 
     const content = getByText('Layout Content');
-    const findLayoutNode = (
-      current: typeof content | null,
-    ): typeof content | null => {
-      if (!current) {
-        return null;
-      }
-      if (current.props.onLayout) {
-        return current;
-      }
-      return findLayoutNode(current.parent);
-    };
-    const layoutNode = findLayoutNode(content.parent);
+    const layoutNode = findLayoutNode(content.parent as never);
     expect(layoutNode).toBeDefined();
     if (layoutNode) {
       act(() => {
@@ -479,7 +447,10 @@ describe('BottomSheetDialog', () => {
 
       act(() => {
         capturedPanGestureCallbacks.onStart?.();
-        capturedPanGestureCallbacks.onUpdate?.({ translationY: 500, velocityY: 0 });
+        capturedPanGestureCallbacks.onUpdate?.({
+          translationY: 500,
+          velocityY: 0,
+        });
       });
 
       expect(capturedPanGestureCallbacks.onUpdate).toBeDefined();
@@ -490,7 +461,10 @@ describe('BottomSheetDialog', () => {
 
       act(() => {
         capturedPanGestureCallbacks.onStart?.();
-        capturedPanGestureCallbacks.onUpdate?.({ translationY: -50, velocityY: 0 });
+        capturedPanGestureCallbacks.onUpdate?.({
+          translationY: -50,
+          velocityY: 0,
+        });
       });
 
       expect(capturedPanGestureCallbacks.onUpdate).toBeDefined();
@@ -502,7 +476,10 @@ describe('BottomSheetDialog', () => {
 
       act(() => {
         capturedPanGestureCallbacks.onStart?.();
-        capturedPanGestureCallbacks.onEnd?.({ translationY: 50, velocityY: 500 });
+        capturedPanGestureCallbacks.onEnd?.({
+          translationY: 50,
+          velocityY: 500,
+        });
       });
 
       expect(onCloseMock).toHaveBeenCalledTimes(1);
@@ -514,7 +491,10 @@ describe('BottomSheetDialog', () => {
 
       act(() => {
         capturedPanGestureCallbacks.onStart?.();
-        capturedPanGestureCallbacks.onEnd?.({ translationY: -50, velocityY: -500 });
+        capturedPanGestureCallbacks.onEnd?.({
+          translationY: -50,
+          velocityY: -500,
+        });
       });
 
       expect(onCloseMock).not.toHaveBeenCalled();
@@ -526,7 +506,10 @@ describe('BottomSheetDialog', () => {
 
       act(() => {
         capturedPanGestureCallbacks.onStart?.();
-        capturedPanGestureCallbacks.onEnd?.({ translationY: 300, velocityY: 0 });
+        capturedPanGestureCallbacks.onEnd?.({
+          translationY: 300,
+          velocityY: 0,
+        });
       });
 
       expect(onCloseMock).toHaveBeenCalledTimes(1);
