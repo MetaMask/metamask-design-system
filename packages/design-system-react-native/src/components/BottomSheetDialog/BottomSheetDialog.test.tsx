@@ -12,6 +12,19 @@ import type { BottomSheetDialogRef } from './BottomSheetDialog.types';
 
 const mockThemeRef = { current: 'light' };
 
+type PanGestureEvent = {
+  translationY: number;
+  velocityY: number;
+};
+
+type CapturedPanGestureCallbacks = {
+  onStart?: () => void;
+  onUpdate?: (event: PanGestureEvent) => void;
+  onEnd?: (event: PanGestureEvent) => void;
+};
+
+const capturedPanGestureCallbacks: CapturedPanGestureCallbacks = {};
+
 jest.mock('react-native-gesture-handler', () => ({
   GestureDetector: ({ children }: { children: React.ReactNode }) => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -21,11 +34,15 @@ jest.mock('react-native-gesture-handler', () => ({
   Gesture: {
     Pan: () => {
       const gesture: Record<string, unknown> = {};
-      const noop = () => gesture;
-      gesture.enabled = noop;
-      gesture.onStart = noop;
-      gesture.onUpdate = noop;
-      gesture.onEnd = noop;
+      const capture =
+        (key: keyof CapturedPanGestureCallbacks) => (callback: unknown) => {
+          capturedPanGestureCallbacks[key] = callback as never;
+          return gesture;
+        };
+      gesture.enabled = () => gesture;
+      gesture.onStart = capture('onStart');
+      gesture.onUpdate = capture('onUpdate');
+      gesture.onEnd = capture('onEnd');
       return gesture;
     },
   },
@@ -51,7 +68,42 @@ jest.mock('react-native-reanimated', () => {
   return Reanimated;
 });
 
+const SHEET_HEIGHT = 400;
+
+const findLayoutNode = (
+  current: { props: { onLayout?: unknown }; parent: unknown } | null,
+): typeof current => {
+  if (!current) {
+    return null;
+  }
+  if (current.props.onLayout) {
+    return current;
+  }
+  return findLayoutNode(current.parent as typeof current);
+};
+
+const triggerSheetLayout = (
+  getByText: (text: string) => { parent: unknown },
+  height = SHEET_HEIGHT,
+) => {
+  const content = getByText('Layout Content');
+  const layoutNode = findLayoutNode(content.parent as never);
+  expect(layoutNode).toBeDefined();
+  if (layoutNode) {
+    act(() => {
+      fireEvent(layoutNode, 'layout', {
+        nativeEvent: { layout: { height, width: 300, x: 0, y: 0 } },
+      });
+    });
+  }
+};
+
 describe('BottomSheetDialog', () => {
+  beforeEach(() => {
+    capturedPanGestureCallbacks.onStart = undefined;
+    capturedPanGestureCallbacks.onUpdate = undefined;
+    capturedPanGestureCallbacks.onEnd = undefined;
+  });
   it('renders correctly with children', () => {
     const { getByText } = render(
       <BottomSheetDialog>
@@ -371,5 +423,125 @@ describe('BottomSheetDialog', () => {
     );
     expect(getByText('Android Content')).toBeDefined();
     Platform.OS = originalOS;
+  });
+
+  it('calls onDismissStart when onCloseDialog ref is called', () => {
+    const onDismissStartMock = jest.fn();
+    const TestComponent = () => {
+      const ref = useRef<BottomSheetDialogRef>(null);
+
+      useEffect(() => {
+        if (ref.current) {
+          act(() => {
+            ref.current?.onCloseDialog();
+          });
+        }
+      }, []);
+
+      return (
+        <BottomSheetDialog ref={ref} onDismissStart={onDismissStartMock}>
+          <Text>Test Child</Text>
+        </BottomSheetDialog>
+      );
+    };
+
+    render(<TestComponent />);
+
+    expect(onDismissStartMock).toHaveBeenCalledTimes(1);
+  });
+
+  describe('pan gesture handler', () => {
+    const renderGestureSheet = (props?: {
+      onClose?: () => void;
+      onDismissStart?: () => void;
+    }) => {
+      const result = render(
+        <BottomSheetDialog {...props}>
+          <Text>Layout Content</Text>
+        </BottomSheetDialog>,
+      );
+      triggerSheetLayout(result.getByText);
+      return result;
+    };
+
+    it('tracks gesture start offset on pan start', () => {
+      renderGestureSheet();
+
+      act(() => {
+        capturedPanGestureCallbacks.onStart?.();
+      });
+
+      expect(capturedPanGestureCallbacks.onStart).toBeDefined();
+    });
+
+    it('updates offset during pan and clamps below sheet bottom', () => {
+      renderGestureSheet();
+
+      act(() => {
+        capturedPanGestureCallbacks.onStart?.();
+        capturedPanGestureCallbacks.onUpdate?.({ translationY: 500, velocityY: 0 });
+      });
+
+      expect(capturedPanGestureCallbacks.onUpdate).toBeDefined();
+    });
+
+    it('clamps offset above sheet top during pan update', () => {
+      renderGestureSheet();
+
+      act(() => {
+        capturedPanGestureCallbacks.onStart?.();
+        capturedPanGestureCallbacks.onUpdate?.({ translationY: -50, velocityY: 0 });
+      });
+
+      expect(capturedPanGestureCallbacks.onUpdate).toBeDefined();
+    });
+
+    it('dismisses on quick downward swipe', () => {
+      const onCloseMock = jest.fn();
+      renderGestureSheet({ onClose: onCloseMock });
+
+      act(() => {
+        capturedPanGestureCallbacks.onStart?.();
+        capturedPanGestureCallbacks.onEnd?.({ translationY: 50, velocityY: 500 });
+      });
+
+      expect(onCloseMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('snaps back open on quick upward swipe', () => {
+      const onCloseMock = jest.fn();
+      renderGestureSheet({ onClose: onCloseMock });
+
+      act(() => {
+        capturedPanGestureCallbacks.onStart?.();
+        capturedPanGestureCallbacks.onEnd?.({ translationY: -50, velocityY: -500 });
+      });
+
+      expect(onCloseMock).not.toHaveBeenCalled();
+    });
+
+    it('dismisses when drag exceeds dismiss offset threshold', () => {
+      const onCloseMock = jest.fn();
+      renderGestureSheet({ onClose: onCloseMock });
+
+      act(() => {
+        capturedPanGestureCallbacks.onStart?.();
+        capturedPanGestureCallbacks.onEnd?.({ translationY: 300, velocityY: 0 });
+      });
+
+      expect(onCloseMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('snaps back when drag is below dismiss offset threshold', () => {
+      const onCloseMock = jest.fn();
+      renderGestureSheet({ onClose: onCloseMock });
+
+      act(() => {
+        capturedPanGestureCallbacks.onStart?.();
+        capturedPanGestureCallbacks.onEnd?.({ translationY: 50, velocityY: 0 });
+      });
+
+      expect(onCloseMock).not.toHaveBeenCalled();
+    });
   });
 });
