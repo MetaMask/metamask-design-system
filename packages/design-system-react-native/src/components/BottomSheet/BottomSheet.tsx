@@ -15,6 +15,7 @@ import {
 import { BottomSheetDialog } from '../BottomSheetDialog';
 import type { BottomSheetDialogRef } from '../BottomSheetDialog';
 import { BottomSheetOverlay } from '../BottomSheetOverlay/BottomSheetOverlay';
+import type { BottomSheetOverlayRef } from '../BottomSheetOverlay/BottomSheetOverlay.types';
 
 import type {
   BottomSheetPostCallback,
@@ -43,6 +44,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     const { y: frameY } = useSafeAreaFrame();
     const postCallback = useRef<BottomSheetPostCallback | undefined>(undefined);
     const bottomSheetDialogRef = useRef<BottomSheetDialogRef>(null);
+    const bottomSheetOverlayRef = useRef<BottomSheetOverlayRef>(null);
     const didNavigateBackRef = useRef(false);
     const closeRequestedRef = useRef(false);
     const didRunPostCallbackRef = useRef(false);
@@ -77,6 +79,14 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
       }
     }, [goBack, onClose]);
 
+    const onDismissStart = useCallback(() => {
+      bottomSheetOverlayRef.current?.fadeOut();
+    }, []);
+
+    const dismissSheet = useCallback((callback?: () => void) => {
+      bottomSheetDialogRef.current?.onCloseDialog(callback);
+    }, []);
+
     // Dismiss the sheet when Android back button is pressed.
     useEffect(() => {
       if (Platform.OS !== 'android') {
@@ -85,7 +95,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
 
       const hardwareBackPress = () => {
         if (isInteractable) {
-          bottomSheetDialogRef.current?.onCloseDialog();
+          dismissSheet();
         }
         return true;
       };
@@ -96,7 +106,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
       return () => {
         subscription.remove();
       };
-    }, [isInteractable]);
+    }, [dismissSheet, isInteractable]);
 
     useImperativeHandle(ref, () => ({
       onCloseBottomSheet: (callback) => {
@@ -105,7 +115,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         }
         closeRequestedRef.current = true;
         postCallback.current = callback;
-        bottomSheetDialogRef.current?.onCloseDialog();
+        dismissSheet();
       },
       onOpenBottomSheet: (callback) => {
         didNavigateBackRef.current = false;
@@ -127,14 +137,12 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         {...props}
       >
         <BottomSheetOverlay
-          onPress={
-            isInteractable
-              ? () => bottomSheetDialogRef.current?.onCloseDialog()
-              : undefined
-          }
+          ref={bottomSheetOverlayRef}
+          onPress={isInteractable ? () => dismissSheet() : undefined}
         />
         <BottomSheetDialog
           isInteractable={isInteractable}
+          onDismissStart={onDismissStart}
           onClose={onCloseCB}
           onOpen={onOpenCB}
           ref={bottomSheetDialogRef}

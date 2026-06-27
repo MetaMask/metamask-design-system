@@ -24,7 +24,8 @@ import Animated, {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
-  withTiming,
+  withSpring,
+  type WithSpringConfig,
 } from 'react-native-reanimated';
 import {
   useSafeAreaFrame,
@@ -33,9 +34,9 @@ import {
 
 // Internal dependencies.
 import {
-  DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
   DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD,
-  DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION,
+  DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG,
+  DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_VELOCITY,
 } from './BottomSheetDialog.constants';
 import type {
   BottomSheetDialogRef,
@@ -52,6 +53,7 @@ export const BottomSheetDialog = forwardRef<
       isFullscreen = false,
       isInteractable = true,
       keyboardAvoidingViewEnabled = true,
+      onDismissStart,
       onClose,
       onOpen,
       style,
@@ -87,21 +89,34 @@ export const BottomSheetDialog = forwardRef<
       onClose?.();
     }, [onClose]);
 
+    const animateSheetTo = (
+      target: number,
+      config?: WithSpringConfig,
+      onComplete?: () => void,
+    ) => {
+      currentYOffset.value = withSpring(
+        target,
+        { ...DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG, ...config },
+        (finished) => {
+          if (finished && onComplete) {
+            runOnJS(onComplete)();
+          }
+        },
+      );
+    };
+
     const onCloseDialog = useCallback(
       (callback?: () => void) => {
-        currentYOffset.value = withTiming(
-          bottomOfDialogYValue.value,
-          { duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION },
-          () => {
-            runOnJS(onCloseCB)();
-            if (callback) {
-              runOnJS(callback)();
-            }
-          },
-        );
+        onDismissStart?.();
+        animateSheetTo(bottomOfDialogYValue.value, undefined, () => {
+          onCloseCB();
+          if (callback) {
+            callback();
+          }
+        });
         // Ref values do not affect deps.
       },
-      [onCloseCB],
+      [onCloseCB, onDismissStart],
     );
 
     const gestureHandler = useMemo(() => {
@@ -155,7 +170,7 @@ export const BottomSheetDialog = forwardRef<
           // Check if the gesture's vertical speed has reached the threshold to determine a swipe action
           const hasReachedSwipeThreshold =
             Math.abs(velocityY) >
-            DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION;
+            DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_VELOCITY;
           const isQuickDismissing = velocityY > 0;
 
           // If user is swiping
@@ -177,9 +192,9 @@ export const BottomSheetDialog = forwardRef<
           if (isDismissed) {
             runOnJS(onCloseDialog)();
           } else {
-            // Only animate dialog to a certain Y position instead
-            currentYOffset.value = withTiming(finalYOffset, {
-              duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
+            currentYOffset.value = withSpring(finalYOffset, {
+              ...DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG,
+              velocity: velocityY,
             });
           }
         });
@@ -196,21 +211,13 @@ export const BottomSheetDialog = forwardRef<
 
     // Animate in sheet on initial render.
     const onOpenDialog = (callback?: () => void) => {
-      // Starts setting the Y position of the dialog to the bottom of the dialog
       currentYOffset.value = bottomOfDialogYValue.value;
-      // Animate the Y position to the top of the dialog, then call onOpenCB
-      currentYOffset.value = withTiming(
-        topOfDialogYValue.value,
-        {
-          duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
-        },
-        () => {
-          runOnJS(onOpenCB)();
-          if (callback) {
-            runOnJS(callback)();
-          }
-        },
-      );
+      animateSheetTo(topOfDialogYValue.value, undefined, () => {
+        onOpenCB();
+        if (callback) {
+          callback();
+        }
+      });
     };
 
     const onDebouncedCloseDialog = useMemo(
