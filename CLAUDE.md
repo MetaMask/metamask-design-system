@@ -18,6 +18,8 @@ Repository-specific conventions and patterns:
 
 See @docs/ai-agents.md for comprehensive strategy explanation.
 
+**Component prop consts:** Export scoped names (`ComponentNameSize`, `ComponentNameVariant`) on public APIs — not base types like `ButtonBaseSize`. Details: @.cursor/rules/component-architecture.md (**Component-Scoped Prop Const Objects**).
+
 ## Monorepo Structure
 
 **This is a yarn workspaces monorepo.** Run all commands from the repository root.

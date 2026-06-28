@@ -62,7 +62,7 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 **Current Rule Files**
 
-- `component-architecture.md` - Component architectural patterns (ADR-0003/0004, layered architecture, cross-platform)
+- `component-architecture.md` - Component architectural patterns (ADR-0003/0004, layered architecture, cross-platform, **component-scoped prop const objects** — e.g. `SegmentedControlSize` not `ButtonBaseSize` on public props)
 - `component-creation.md` - Component scaffolding HOW-TO guide
 - `component-migration.md` - Extension/mobile component migration (priority workflow)
 - `component-enum-union-migration.md` - Internal ADR-0003/0004 migration
@@ -165,6 +165,18 @@ Every line must prevent a mistake or provide essential guidance. Remove anything
 ### 4. Iterative Improvement
 
 Add rules when observing AI agents make repeated mistakes. Test with agents and refine based on their behavior.
+
+**Recent example:** `SegmentedControl` and `FilterButton` shipped with `size` typed as `ButtonBaseSize`, so consumers had to guess the correct import. The guardrail now lives in @.cursor/rules/component-architecture.md (**Component-Scoped Prop Const Objects**); sibling component rules link there instead of duplicating the full convention.
+
+### Reference hierarchy for component API types
+
+| Layer                                                           | Role                                                                        |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| @.cursor/rules/component-architecture.md                        | **Canonical** ADR patterns + scoped prop const naming                       |
+| Other `component-*.md` rules                                    | Checklists and workflow steps; `@`-link architecture for type-naming detail |
+| Golden path files in `packages/design-system-shared/src/types/` | Code agents should read when implementing (e.g. `SelectButton.types.ts`)    |
+
+This follows **Reference Over Duplication**: strategy docs describe _where_ rules live; rules point to _code_, not long copied snippets.
 
 ## References
 

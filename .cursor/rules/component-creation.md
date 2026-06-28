@@ -73,6 +73,8 @@ mkdir -p packages/design-system-shared/src/types/MyComponent
 - ✅ Create in `packages/design-system-shared/src/types/ComponentName/`
 - ✅ Use const objects (ADR-0003): `export const MyComponentVariant = { Primary: 'primary' } as const;`
 - ✅ Derive types: `export type MyComponentVariant = (typeof MyComponentVariant)[keyof typeof MyComponentVariant];`
+- ✅ Name prop const objects `ComponentName` + `PropName` (e.g. `MyComponentSize`, `MyComponentVariant`) — see @.cursor/rules/component-architecture.md **Component-Scoped Prop Const Objects**
+- ✅ When values alias a base scale (`ButtonBaseSize`, `AvatarBaseSize`), export a scoped alias (`export const MyComponentSize = ButtonBaseSize`) and type shared props with the scoped name — never `ButtonBaseSize` on public shared props
 - ✅ Use `type` not `interface` for props (enforced by ESLint for better composition and intersection patterns)
 - ✅ Add "Shared" suffix: `ComponentNamePropsShared`
 - ✅ Platform-independent properties only (no className/twClassName, no onClick/onPress)
@@ -177,6 +179,7 @@ Follow @.cursor/rules/component-documentation.md:
 - ✅ Default story with all controls wired up (FIRST)
 - ✅ Story per major prop (Variant, Size, IsDisabled)
 - ✅ Meta with proper argTypes
+- ✅ Use component-scoped const objects in stories (`MyComponentSize.Md`), not base types like `ButtonBaseSize`
 
 ### Step 8: Write Tests
 
@@ -328,6 +331,12 @@ export type { MyComponentProps } from './MyComponent.types';
 
 **Why this matters:** Duplicate const object exports create uncovered code paths, failing Jest coverage thresholds (see BadgeCount PR).
 
+### ❌ Using Base Types in Public API
+
+Do not type public shared props or story/README examples with `ButtonBaseSize` / `AvatarBaseSize`, and do not use a sibling component's const (e.g. `ButtonSize` on `SegmentedControl`). Export and use `ComponentNameSize` / `ComponentNameVariant` instead.
+
+See @.cursor/rules/component-architecture.md **Component-Scoped Prop Const Objects** (golden path: @packages/design-system-shared/src/types/SelectButton/SelectButton.types.ts).
+
 ## Verification Checklist
 
 ### Setup & Scaffolding
@@ -339,6 +348,8 @@ export type { MyComponentProps } from './MyComponent.types';
 
 - [ ] Types in `@metamask/design-system-shared/src/types/ComponentName/`
 - [ ] Const objects used, NOT enums
+- [ ] Each public prop union has a component-scoped const (`ComponentNameSize`, `ComponentNameVariant`, etc.)
+- [ ] Shared props use scoped types, not base types (`ButtonBaseSize`, `AvatarBaseSize`)
 - [ ] Shared type named `ComponentNamePropsShared` (with "Shared" suffix)
 - [ ] Used `type` not `interface` for shared props
 - [ ] Exported from `@metamask/design-system-shared/src/index.ts`
@@ -396,6 +407,16 @@ export type { MyComponentProps } from './MyComponent.types';
 - @packages/design-system-shared/src/types/BadgeStatus/ (Shared types - SOURCE OF TRUTH)
 - @packages/design-system-react/src/components/BadgeStatus/ (React)
 - @packages/design-system-react-native/src/components/BadgeStatus/ (React Native)
+
+**SelectButton** (scoped prop const aliases to a base type):
+
+- @packages/design-system-shared/src/types/SelectButton/SelectButton.types.ts (`SelectButtonSize`, `SelectButtonVariant`)
+- @packages/design-system-react-native/src/components/SelectButton/ (React Native implementation)
+
+**FilterButton / SegmentedControl** (button-scale size aliases):
+
+- @packages/design-system-shared/src/types/FilterButton/FilterButton.types.ts (`FilterButtonSize`)
+- @packages/design-system-shared/src/types/SegmentedControl/SegmentedControl.types.ts (`SegmentedControlSize`)
 
 ### Required Reading
 

@@ -89,6 +89,35 @@ props: {
 }
 ```
 
+### Component-Scoped Const Imports
+
+Import prop const objects from the **component barrel** (`'.'`), using the component-scoped name — not base types from `@metamask/design-system-shared`.
+
+```tsx
+// ✅ Button — scoped size from component barrel
+import { ButtonVariant, ButtonSize } from '.';
+
+// ✅ FilterButton — same pattern (aliases ButtonBaseSize in shared)
+import { FilterButtonVariant, FilterButtonSize } from '.';
+
+props: {
+  variant: figma.enum('variant', {
+    primary: FilterButtonVariant.Primary,
+    secondary: FilterButtonVariant.Secondary,
+  }),
+  size: figma.enum('size', {
+    Lg: FilterButtonSize.Lg,
+    Md: FilterButtonSize.Md,
+    Sm: FilterButtonSize.Sm,
+  }),
+}
+
+// ❌ Wrong — base type from shared in Code Connect (consumer-facing leak)
+import { ButtonBaseSize, FilterButtonVariant } from '@metamask/design-system-shared';
+```
+
+See @.cursor/rules/component-architecture.md **Component-Scoped Prop Const Objects**.
+
 ### Realistic Example Props
 
 - **ALWAYS** provide realistic, meaningful prop values in examples
