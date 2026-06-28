@@ -2,7 +2,7 @@
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
 import {
-  ButtonBaseSize,
+  FilterButtonSize,
   FilterButtonVariant,
 } from '@metamask/design-system-shared';
 import React from 'react';
@@ -30,9 +30,9 @@ figma.connect(
         false: false,
       }),
       size: figma.enum('size', {
-        Lg: ButtonBaseSize.Lg,
-        Md: ButtonBaseSize.Md,
-        Sm: ButtonBaseSize.Sm,
+        Lg: FilterButtonSize.Lg,
+        Md: FilterButtonSize.Md,
+        Sm: FilterButtonSize.Sm,
       }),
       buttonBase: figma.nestedProps('_ButtonBase', {
         label: figma.string('label'),

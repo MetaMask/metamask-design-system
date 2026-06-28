@@ -1,4 +1,4 @@
-import { ButtonBaseSize } from '@metamask/design-system-shared';
+import { SegmentedControlSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { useState } from 'react';
@@ -95,9 +95,9 @@ describe('SegmentedControl', () => {
 
     describe('when size is provided', () => {
       it.each([
-        [ButtonBaseSize.Sm, 'rounded-xl'],
-        [ButtonBaseSize.Md, 'rounded-2xl'],
-        [ButtonBaseSize.Lg, 'rounded-2xl'],
+        [SegmentedControlSize.Sm, 'rounded-xl'],
+        [SegmentedControlSize.Md, 'rounded-2xl'],
+        [SegmentedControlSize.Lg, 'rounded-2xl'],
       ] as const)(
         'applies %s container border radius',
         (size, borderRadiusClass) => {
@@ -116,7 +116,7 @@ describe('SegmentedControl', () => {
 
       it('propagates size to child filter buttons', () => {
         const { getByTestId } = renderSegmentedControl({
-          size: ButtonBaseSize.Md,
+          size: SegmentedControlSize.Md,
         });
 
         expect(getByTestId(FILTER_A_TEST_ID)).toHaveStyle(tw`h-10`);

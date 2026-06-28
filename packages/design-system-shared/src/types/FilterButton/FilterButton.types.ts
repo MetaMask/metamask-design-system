@@ -1,3 +1,12 @@
+import { ButtonBaseSize } from '../ButtonBase/ButtonBase.types';
+
+/**
+ * FilterButton size options (ADR-0003).
+ * Alias to ButtonBaseSize to keep values in sync.
+ */
+export const FilterButtonSize = ButtonBaseSize;
+export type FilterButtonSize = ButtonBaseSize;
+
 /**
  * FilterButton visual variant (ADR-0003).
  * Maps to combinations of ButtonPrimary / ButtonSecondary / ButtonTertiary presentation with `isSelected`.

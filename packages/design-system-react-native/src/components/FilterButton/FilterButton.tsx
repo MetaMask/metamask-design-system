@@ -1,5 +1,5 @@
 import {
-  ButtonBaseSize,
+  FilterButtonSize,
   FilterButtonVariant,
   FilterButtonGroupContext,
 } from '@metamask/design-system-shared';
@@ -34,7 +34,7 @@ export const FilterButton = ({
   const effectiveVariant =
     variant ?? filterButtonGroup?.variant ?? FilterButtonVariant.Primary;
 
-  const effectiveSize = size ?? filterButtonGroup?.size ?? ButtonBaseSize.Sm;
+  const effectiveSize = size ?? filterButtonGroup?.size ?? FilterButtonSize.Sm;
 
   const effectiveIsFullWidth =
     isFullWidth ?? filterButtonGroup?.isEqualWidth ?? false;
