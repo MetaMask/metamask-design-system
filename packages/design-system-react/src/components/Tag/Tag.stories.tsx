@@ -1,5 +1,6 @@
 import {
   IconName,
+  IconColor,
   IconSize,
   TagSeverity,
 } from '@metamask/design-system-shared';
@@ -80,6 +81,7 @@ export const StartAccessory: Story = {
       startAccessory={
         <Icon
           name={IconName.Warning}
+          color={IconColor.IconAlternative}
           size={IconSize.Xs}
           data-testid="tag-story-start-accessory"
           aria-hidden
@@ -97,6 +99,7 @@ export const EndAccessory: Story = {
       endAccessory={
         <Icon
           name={IconName.ArrowDown}
+          color={IconColor.IconAlternative}
           size={IconSize.Xs}
           data-testid="tag-story-end-accessory"
           aria-hidden

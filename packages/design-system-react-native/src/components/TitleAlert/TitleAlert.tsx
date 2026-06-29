@@ -17,14 +17,12 @@ import { TextOrChildren } from '../temp-components/TextOrChildren';
 import type { TitleAlertProps } from './TitleAlert.types';
 
 /**
- * Displays a severity-based {@link IconAlert} above a centered title row with optional inline accessories.
+ * Displays a severity-based {@link IconAlert} above a centered title row.
  * Remaining `View` props are forwarded to the root {@link BoxColumn}.
  *
  * @param props - Component props
  * @param props.severity - Passed to {@link IconAlert} for glyph and color
  * @param props.title - Title row content; row renders only when `title` is renderable
- * @param props.titleStartAccessory - Optional inline accessory to the left of `title`
- * @param props.titleEndAccessory - Optional inline accessory to the right of `title`
  * @param props.titleWrapperProps - Optional props spread onto the title row {@link BoxRow}
  * @param props.titleProps - Optional props merged into title row `Text` when `title` is a string
  * @param props.description - Optional description below the title; uses {@link TextOrChildren}
@@ -36,8 +34,6 @@ import type { TitleAlertProps } from './TitleAlert.types';
 export const TitleAlert: React.FC<TitleAlertProps> = ({
   severity,
   title,
-  titleStartAccessory,
-  titleEndAccessory,
   titleProps,
   titleWrapperProps,
   description,
@@ -75,8 +71,6 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
           justifyContent={BoxJustifyContent.Center}
           twClassName="self-stretch"
           {...titleWrapperProps}
-          startAccessory={titleStartAccessory}
-          endAccessory={titleEndAccessory}
           textProps={{
             variant: TextVariant.HeadingLg,
             color: TextColor.TextDefault,

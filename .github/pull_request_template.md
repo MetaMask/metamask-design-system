@@ -39,7 +39,6 @@ Fixes:
 - [ ] I've completed the PR template to the best of my ability
 - [ ] I’ve included tests if applicable
 - [ ] I’ve documented my code using [JSDoc](https://jsdoc.app/) format if applicable
-- [ ] I’ve applied the right labels on the PR (see [labeling guidelines](https://github.com/MetaMask/metamask-extension/blob/develop/.github/guidelines/LABELING_GUIDELINES.md)). Not required for external contributors.
 
 ## **Pre-merge reviewer checklist**
 
