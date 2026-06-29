@@ -115,7 +115,7 @@ export const Example = () => {
 
 ### `size`
 
-Height of the filter button row. Matches the button scale used by **`Button`**, **`SelectButton`**, and **`SegmentedControl`**.
+Height of the filter button row. Matches the universal button scale (`sm` / `md` / `lg`). See the **Size** story in React Native Storybook (**Components / FilterButton**) for a vertical comparison of all three heights.
 
 Available sizes:
 
@@ -133,11 +133,33 @@ When used under **`SegmentedControl`**, segment size comes from the control’s 
 import {
   FilterButton,
   FilterButtonSize,
+  FilterButtonVariant,
 } from '@metamask/design-system-react-native';
 
-<FilterButton size={FilterButtonSize.Md} onPress={() => {}}>
-  Medium
-</FilterButton>;
+<FilterButton
+  variant={FilterButtonVariant.Primary}
+  isSelected
+  size={FilterButtonSize.Sm}
+  onPress={() => {}}
+>
+  Sm
+</FilterButton>
+<FilterButton
+  variant={FilterButtonVariant.Primary}
+  isSelected
+  size={FilterButtonSize.Md}
+  onPress={() => {}}
+>
+  Md
+</FilterButton>
+<FilterButton
+  variant={FilterButtonVariant.Primary}
+  isSelected
+  size={FilterButtonSize.Lg}
+  onPress={() => {}}
+>
+  Lg
+</FilterButton>
 ```
 
 ### `twClassName`
