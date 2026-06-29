@@ -62,9 +62,45 @@ export type SelectButtonPropsShared = {
 
 **Golden path:** @packages/design-system-shared/src/types/SelectButton/SelectButton.types.ts
 
-Other examples: `FilterButtonSize`, `SegmentedControlSize` (alias `ButtonBaseSize`); `AvatarNetworkSize`, `AvatarTokenSize` (alias `AvatarBaseSize`); `ButtonSize`, `ButtonHeroSize` (alias `ButtonBaseSize`).
+### Current alias examples in the monorepo
 
-### Rules
+Two base scales exist in shared. Each public component aliases its own const — consumers never import the base type for another component's props.
+
+**Avatars** — all alias `AvatarBaseSize`:
+
+| Export              | Component     |
+| ------------------- | ------------- |
+| `AvatarAccountSize` | AvatarAccount |
+| `AvatarTokenSize`   | AvatarToken   |
+| `AvatarNetworkSize` | AvatarNetwork |
+| `AvatarFaviconSize` | AvatarFavicon |
+| `AvatarGroupSize`   | AvatarGroup   |
+| `AvatarIconSize`    | AvatarIcon    |
+
+**Button-scale controls** — all alias `ButtonBaseSize`:
+
+| Export                 | Component        |
+| ---------------------- | ---------------- |
+| `ButtonSize`           | Button           |
+| `ButtonHeroSize`       | ButtonHero       |
+| `SelectButtonSize`     | SelectButton     |
+| `FilterButtonSize`     | FilterButton     |
+| `SegmentedControlSize` | SegmentedControl |
+
+**Usage:**
+
+```tsx
+<AvatarToken size={AvatarTokenSize.Lg} />
+<Button size={ButtonSize.Md} />
+<SelectButton size={SelectButtonSize.Sm} />
+<SegmentedControl size={SegmentedControlSize.Md} />
+```
+
+### Future: plain string union props
+
+We may eventually roll out plain string unions (e.g. `size="md"` instead of `size={ButtonSize.Md}`) per [ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md). That requires a **team announcement and coordinated migration** — do not ship `size="md"` on new components until that decision is published and existing const-object exports are deprecated with a clear timeline.
+
+**Until then:** always add component-scoped const objects for new prop unions, even when values alias `AvatarBaseSize` or `ButtonBaseSize`.
 
 | Rule                   | Detail                                                                                                                       |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -74,7 +110,7 @@ Other examples: `FilterButtonSize`, `SegmentedControlSize` (alias `ButtonBaseSiz
 | Stories / docs / Figma | Examples import and use scoped consts — never `ButtonBaseSize` in consumer-facing snippets                                   |
 | Internal only          | `ButtonBaseSize` is valid inside `ButtonBase`, button variants, and other internal implementations                           |
 | Platform extension     | A component may extend `ButtonBaseProps` on the platform layer but must still export `FilterButtonSize` (etc.) for consumers |
-| Future migration       | Plain string unions (e.g. `size="md"`) may arrive via an explicit ADR announcement — until then, ship scoped const objects   |
+| Future migration       | Plain string unions (e.g. `size="md"`) require an explicit team announcement — until then, ship scoped const objects only    |
 
 ### Anti-patterns
 

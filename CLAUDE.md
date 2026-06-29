@@ -18,7 +18,7 @@ Repository-specific conventions and patterns:
 
 See @docs/ai-agents.md for comprehensive strategy explanation.
 
-**Component prop consts:** Export scoped names (`ComponentNameSize`, `ComponentNameVariant`) on public APIs — not base types like `ButtonBaseSize`. Details: @.cursor/rules/component-architecture.md (**Component-Scoped Prop Const Objects**).
+**Component prop consts:** Avatars use `AvatarTokenSize`, etc. (alias `AvatarBaseSize`); buttons use `ButtonSize`, `SelectButtonSize`, etc. (alias `ButtonBaseSize`). Do not expose base types on public APIs. Future `size="md"` unions require a team-wide rollout first — see @.cursor/rules/component-architecture.md (**Component-Scoped Prop Const Objects**).
 
 ## Monorepo Structure
 
