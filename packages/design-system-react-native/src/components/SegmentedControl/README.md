@@ -83,25 +83,29 @@ Size of the control and all child **`FilterButton`** segments. Also sets the con
 
 Available sizes:
 
-- `ButtonBaseSize.Sm` (32px segment height, 12px container radius)
-- `ButtonBaseSize.Md` (40px segment height, 16px container radius)
-- `ButtonBaseSize.Lg` (48px segment height, 16px container radius)
+- `SegmentedControlSize.Sm` (32px segment height, 12px container radius)
+- `SegmentedControlSize.Md` (40px segment height, 16px container radius)
+- `SegmentedControlSize.Lg` (48px segment height, 16px container radius)
 
-| TYPE             | REQUIRED | DEFAULT             |
-| ---------------- | -------- | ------------------- |
-| `ButtonBaseSize` | No       | `ButtonBaseSize.Sm` |
+| TYPE                   | REQUIRED | DEFAULT                   |
+| ---------------------- | -------- | ------------------------- |
+| `SegmentedControlSize` | No       | `SegmentedControlSize.Sm` |
 
 ```tsx
 import { useState } from 'react';
 import {
-  ButtonBaseSize,
   FilterButton,
   SegmentedControl,
+  SegmentedControlSize,
 } from '@metamask/design-system-react-native';
 
 const [value, setValue] = useState('a');
 
-<SegmentedControl value={value} onChange={setValue} size={ButtonBaseSize.Md}>
+<SegmentedControl
+  value={value}
+  onChange={setValue}
+  size={SegmentedControlSize.Md}
+>
   <FilterButton value="a" onPress={() => {}}>
     A
   </FilterButton>
