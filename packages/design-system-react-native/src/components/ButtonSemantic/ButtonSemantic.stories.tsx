@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
 import { ButtonSemanticSize } from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
