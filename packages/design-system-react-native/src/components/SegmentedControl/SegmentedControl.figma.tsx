@@ -1,7 +1,7 @@
 // import figma needs to remain as figma otherwise it breaks code connect
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
-import { ButtonBaseSize } from '@metamask/design-system-shared';
+import { SegmentedControlSize } from '@metamask/design-system-shared';
 import React, { useEffect, useState } from 'react';
 
 import { FilterButton } from '../FilterButton';
@@ -22,9 +22,9 @@ figma.connect(
   {
     props: {
       size: figma.enum('size', {
-        Sm: ButtonBaseSize.Sm,
-        Md: ButtonBaseSize.Md,
-        Lg: ButtonBaseSize.Lg,
+        Sm: SegmentedControlSize.Sm,
+        Md: SegmentedControlSize.Md,
+        Lg: SegmentedControlSize.Lg,
       }),
       isFullWidth: figma.enum('isFullWidth', {
         true: true,
