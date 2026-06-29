@@ -77,7 +77,7 @@ Default string styles: `TextVariant.BodySm`, `FontWeight.Medium`, `TextColor.Tex
 <Content
   avatar={<AvatarToken name="ETH" src={ethIcon} size={AvatarTokenSize.Lg} />}
   subvalue={
-    <Button variant={ButtonVariant.Secondary} size={ButtonBaseSize.Sm}>
+    <Button variant={ButtonVariant.Secondary} size={ButtonSize.Sm}>
       3% bonus
     </Button>
   }

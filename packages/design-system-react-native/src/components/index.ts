@@ -118,7 +118,11 @@ export type { ButtonProps } from './Button';
 export { ButtonIcon, ButtonIconSize, ButtonIconVariant } from './ButtonIcon';
 export type { ButtonIconProps } from './ButtonIcon';
 
-export { ButtonSemantic, ButtonSemanticSeverity } from './ButtonSemantic';
+export {
+  ButtonSemantic,
+  ButtonSemanticSeverity,
+  ButtonSemanticSize,
+} from './ButtonSemantic';
 export type { ButtonSemanticProps } from './ButtonSemantic';
 
 export { Checkbox } from './Checkbox';

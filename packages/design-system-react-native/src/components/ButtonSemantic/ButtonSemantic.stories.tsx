@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { ButtonSemanticSize } from '@metamask/design-system-shared';
 import React from 'react';
 import { View } from 'react-native';
 
 import { Box } from '../Box';
-import { ButtonBaseSize } from '../ButtonBase';
 import { Text, TextVariant, TextColor } from '../Text';
 
 import { ButtonSemantic } from './ButtonSemantic';
@@ -26,8 +26,8 @@ const meta: Meta<ButtonSemanticProps> = {
     },
     size: {
       control: 'select',
-      options: Object.keys(ButtonBaseSize),
-      mapping: ButtonBaseSize,
+      options: Object.keys(ButtonSemanticSize),
+      mapping: ButtonSemanticSize,
     },
     isDisabled: {
       control: 'boolean',
@@ -60,7 +60,7 @@ type Story = StoryObj<ButtonSemanticProps>;
 export const Default: Story = {
   args: {
     severity: ButtonSemanticSeverity.Success,
-    size: ButtonBaseSize.Lg,
+    size: ButtonSemanticSize.Lg,
     isDisabled: false,
     isLoading: false,
     isFullWidth: false,
@@ -83,11 +83,11 @@ export const Severity: Story = {
 export const Size: Story = {
   render: (args) => (
     <Box gap={4}>
-      {Object.keys(ButtonBaseSize).map((sizeKey) => (
+      {Object.keys(ButtonSemanticSize).map((sizeKey) => (
         <ButtonSemantic
           key={sizeKey}
           {...args}
-          size={ButtonBaseSize[sizeKey as keyof typeof ButtonBaseSize]}
+          size={ButtonSemanticSize[sizeKey as keyof typeof ButtonSemanticSize]}
         >
           {sizeKey}
         </ButtonSemantic>

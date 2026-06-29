@@ -110,6 +110,7 @@ export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 export {
   ButtonBaseSize,
   ButtonHeroSize,
+  ButtonSemanticSize,
   ButtonSize,
   type ButtonBasePropsShared,
 } from './types/ButtonBase';

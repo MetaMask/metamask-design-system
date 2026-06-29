@@ -66,19 +66,19 @@ The size of the button.
 
 Available sizes:
 
-- `ButtonBaseSize.Sm` (32px height)
-- `ButtonBaseSize.Md` (40px height)
-- `ButtonBaseSize.Lg` (48px height)
+- `ButtonSize.Sm` (32px height)
+- `ButtonSize.Md` (40px height)
+- `ButtonSize.Lg` (48px height)
 
-| TYPE             | REQUIRED | DEFAULT             |
-| ---------------- | -------- | ------------------- |
-| `ButtonBaseSize` | No       | `ButtonBaseSize.Lg` |
+| TYPE         | REQUIRED | DEFAULT         |
+| ------------ | -------- | --------------- |
+| `ButtonSize` | No       | `ButtonSize.Lg` |
 
 ```tsx
-<Button variant={ButtonVariant.Primary} size={ButtonBaseSize.Sm} onPress={() => {}}>
+<Button variant={ButtonVariant.Primary} size={ButtonSize.Sm} onPress={() => {}}>
   Small Button
 </Button>
-<Button variant={ButtonVariant.Primary} size={ButtonBaseSize.Lg} onPress={() => {}}>
+<Button variant={ButtonVariant.Primary} size={ButtonSize.Lg} onPress={() => {}}>
   Large Button
 </Button>
 ```
