@@ -98,7 +98,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
       gap={1}
       endAccessory={titleAccessory}
       twClassName={mergeTwClassName(
-        hasAccessories && 'w-full shrink min-w-0',
+        hasAccessories ? 'w-full shrink min-w-0' : '',
         titleWrapperProps?.twClassName,
       )}
       textProps={{
@@ -111,13 +111,14 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     </BoxRow>
   ) : null;
 
-  const mainContent = titleRow ? (
-    hasAccessories ? (
+  let mainContent = null;
+  if (titleRow) {
+    mainContent = hasAccessories ? (
       <Box twClassName="shrink min-w-0">{titleRow}</Box>
     ) : (
       titleRow
-    )
-  ) : null;
+    );
+  }
 
   const headerRow = (
     <BoxRow

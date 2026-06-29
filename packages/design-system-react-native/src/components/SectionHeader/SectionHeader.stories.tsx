@@ -115,10 +115,7 @@ export const TitleAccessory: Story = {
 export const Children: Story = {
   render: () => (
     <Box twClassName="w-full bg-background-default">
-      <SectionHeader
-        title="How it works"
-        endIconName={IconName.ArrowRight}
-      >
+      <SectionHeader title="How it works" endIconName={IconName.ArrowRight}>
         <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Add mUSD and earn up to{' '}
           <Text variant={TextVariant.BodySm} color={TextColor.SuccessDefault}>

@@ -369,7 +369,7 @@ describe('SectionHeader', () => {
       );
 
       expect(
-        findInstanceWithStyle(tree.root, tw`shrink min-w-0`),
+        findInstanceWithStyle(tree.root, tw`min-w-0 shrink`),
       ).not.toBeNull();
     });
 
@@ -385,6 +385,21 @@ describe('SectionHeader', () => {
       expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`w-full`);
       expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`shrink`);
       expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`min-w-0`);
+    });
+
+    it('merges titleWrapperProps twClassName when row accessories are absent', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          titleWrapperProps={{
+            testID: TITLE_ROW_TEST_ID,
+            twClassName: 'mt-4',
+          }}
+        />,
+      );
+
+      expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`mt-4`);
+      expect(getByTestId(TITLE_ROW_TEST_ID)).not.toHaveStyle(tw`w-full`);
     });
   });
 
