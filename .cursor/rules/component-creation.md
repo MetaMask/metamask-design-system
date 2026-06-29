@@ -73,7 +73,7 @@ mkdir -p packages/design-system-shared/src/types/MyComponent
 - ✅ Create in `packages/design-system-shared/src/types/ComponentName/`
 - ✅ Use const objects (ADR-0003): `export const MyComponentVariant = { Primary: 'primary' } as const;`
 - ✅ Derive types: `export type MyComponentVariant = (typeof MyComponentVariant)[keyof typeof MyComponentVariant];`
-- ✅ Name prop const objects `ComponentName` + `PropName` (e.g. `MyComponentSize`, `MyComponentVariant`) — see @.cursor/rules/component-architecture.md **Component-Scoped Prop Const Objects**
+- ✅ Name prop const objects `ComponentName` + prop name in PascalCase (e.g. `MyComponentSize` for `size`, `MyComponentVariant` for `variant`) — see @.cursor/rules/component-architecture.md **Component-Scoped Prop Const Objects**
 - ✅ When values alias a base scale (`ButtonBaseSize`, `AvatarBaseSize`), export a scoped alias (`export const MyComponentSize = ButtonBaseSize`) and type shared props with the scoped name — never `ButtonBaseSize` on public shared props
 - ✅ Use `type` not `interface` for props (enforced by ESLint for better composition and intersection patterns)
 - ✅ Add "Shared" suffix: `ComponentNamePropsShared`

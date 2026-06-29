@@ -36,7 +36,13 @@ export enum ButtonVariant {
 
 ## Component-Scoped Prop Const Objects
 
-Every public prop that accepts a fixed set of values must expose a **component-scoped** const object named `ComponentName` + `PropName` (PascalCase). Consumers import the const for the component they are using — not a shared base type from another component.
+Every public prop that accepts a fixed set of values must expose a **component-scoped** const object named `ComponentName` + `PropNameInPascalCase`, where `PropNameInPascalCase` matches the **prop name** (not an abbreviated concept). Consumers import the const for the component they are using — not a shared base type from another component.
+
+| Prop name           | Const export                                                 |
+| ------------------- | ------------------------------------------------------------ |
+| `size`              | `SegmentedControlSize`                                       |
+| `variant`           | `FilterButtonVariant`                                        |
+| `endArrowDirection` | `SelectButtonEndArrowDirection` (not `SelectButtonEndArrow`) |
 
 **Why:** Discoverability at the import site. When using `SegmentedControl`, consumers look for `SegmentedControlSize` — not `ButtonBaseSize` or `ButtonSize`.
 
@@ -102,9 +108,13 @@ We may eventually roll out plain string unions (e.g. `size="md"` instead of `siz
 
 **Until then:** always add component-scoped const objects for new prop unions, even when values alias `AvatarBaseSize` or `ButtonBaseSize`.
 
+### Legacy naming to avoid copying
+
+`SelectButtonEndArrow` is shipped for the `endArrowDirection` prop but **does not follow** the convention (prop → `SelectButtonEndArrowDirection`). Do not use it as a template for new components. Renaming may happen in a future breaking release; new work should use the full prop name in the const export.
+
 | Rule                   | Detail                                                                                                                       |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Naming                 | `ComponentName` + `PropName`: `FilterButtonVariant`, `SelectButtonEndArrow`                                                  |
+| Naming                 | `ComponentName` + prop name in PascalCase: `FilterButtonVariant`, `SegmentedControlSize`, `AvatarTokenSize`                  |
 | Prop typing            | Shared props use the **scoped** type (`SegmentedControlSize`), not `ButtonBaseSize` / `AvatarBaseSize`                       |
 | Exports                | Export scoped const from shared `index.ts` and component `index.ts` (single export location — unchanged)                     |
 | Stories / docs / Figma | Examples import and use scoped consts — never `ButtonBaseSize` in consumer-facing snippets                                   |

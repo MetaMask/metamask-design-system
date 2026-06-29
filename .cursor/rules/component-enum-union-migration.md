@@ -51,7 +51,7 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
 
    - Use const objects (ADR-0003): `export const ComponentVariant = { Primary: 'primary' } as const;`
    - Derive types: `export type ComponentVariant = (typeof ComponentVariant)[keyof typeof ComponentVariant];`
-   - Name prop consts `ComponentName` + `PropName`; alias base scales when values match (`ComponentNameSize = ButtonBaseSize`) — see @.cursor/rules/component-architecture.md **Component-Scoped Prop Const Objects**
+   - Name prop consts `ComponentName` + prop name in PascalCase (`size` → `MyComponentSize`); alias base scales when values match — see @.cursor/rules/component-architecture.md **Component-Scoped Prop Const Objects**
    - Use `type` not `interface` for props
    - Add "Shared" suffix: `ComponentNamePropsShared`
    - Export from `packages/design-system-shared/src/index.ts` with inline `type` keyword
