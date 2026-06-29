@@ -118,7 +118,11 @@ export type { ButtonProps } from './Button';
 export { ButtonIcon, ButtonIconSize, ButtonIconVariant } from './ButtonIcon';
 export type { ButtonIconProps } from './ButtonIcon';
 
-export { ButtonSemantic, ButtonSemanticSeverity } from './ButtonSemantic';
+export {
+  ButtonSemantic,
+  ButtonSemanticSeverity,
+  ButtonSemanticSize,
+} from './ButtonSemantic';
 export type { ButtonSemanticProps } from './ButtonSemantic';
 
 export { Checkbox } from './Checkbox';
@@ -200,7 +204,11 @@ export type { MainActionButtonProps } from './MainActionButton';
 export { SectionDivider } from './SectionDivider';
 export type { SectionDividerProps } from './SectionDivider';
 
-export { FilterButton, FilterButtonVariant } from './FilterButton';
+export {
+  FilterButton,
+  FilterButtonSize,
+  FilterButtonVariant,
+} from './FilterButton';
 export type { FilterButtonProps } from './FilterButton';
 
 export { FilterButtonGroup } from './FilterButtonGroup';
@@ -290,7 +298,7 @@ export type { BannerAlertProps } from './BannerAlert';
 export { SectionHeader } from './SectionHeader';
 export type { SectionHeaderProps } from './SectionHeader';
 
-export { SegmentedControl } from './SegmentedControl';
+export { SegmentedControl, SegmentedControlSize } from './SegmentedControl';
 export type { SegmentedControlProps } from './SegmentedControl';
 
 export { Switch } from './Switch';

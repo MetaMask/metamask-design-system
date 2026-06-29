@@ -86,7 +86,8 @@ Follow **Storybook controls (cross-platform)** above; mobile panels work best wi
 
 **DSRN-specific patterns:**
 
-- For shared **const-object** unions (`ButtonBaseSize`, `IconName`, etc.), use `options: Object.keys(Const)` with `mapping: Const` so TypeScript and Storybook stay aligned (never pass the whole object as `options`).
+- For shared **const-object** unions (`SegmentedControlSize`, `IconName`, etc.), use `options: Object.keys(Const)` with `mapping: Const` so TypeScript and Storybook stay aligned (never pass the whole object as `options`).
+- **ALWAYS** use the **component-scoped** const in story imports and README usage examples (e.g. `SegmentedControlSize.Md`), not base types like `ButtonBaseSize` or sibling consts like `ButtonSize` on non-Button components.
 - Keep **descriptions** on `argTypes` entries where they help consumers scanning the controls panel.
 
 **Default story:** Wire only props that have real on-device controls. Do not require every component prop to appear in `argTypes`.
@@ -98,6 +99,7 @@ Follow **Storybook controls (cross-platform)** above; mobile panels work best wi
 - **ALWAYS** document same props in both platforms
 - **ALWAYS** use same section headings (Props, Usage, Accessibility)
 - **ALWAYS** use same enum names and values across platforms
+- **ALWAYS** use component-scoped const names in usage examples (`FilterButtonSize`, not `ButtonBaseSize`)
 - **Web**: Interactive Canvas examples, minimal written examples
 - **Native**: Comprehensive written examples, multiple usage patterns
 

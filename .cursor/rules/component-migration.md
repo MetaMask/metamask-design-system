@@ -81,12 +81,13 @@ Use this workflow when:
 
 2. **Create comparison table:**
 
-| Concern        | Extension API | Mobile API   | Decision                  |
-| -------------- | ------------- | ------------ | ------------------------- |
-| Prop names     | Document      | Document     | Choose unified            |
-| Types          | Document      | Document     | Align or unify            |
-| Event handlers | `onClick`     | `onPress`    | Keep both (platform)      |
-| Styling        | `className`   | style object | Use className/twClassName |
+| Concern        | Extension API | Mobile API   | Decision                                                                      |
+| -------------- | ------------- | ------------ | ----------------------------------------------------------------------------- |
+| Prop names     | Document      | Document     | Choose unified                                                                |
+| Types          | Document      | Document     | Align or unify                                                                |
+| Size / variant | Document      | Document     | `ComponentNameSize` alias if values match `ButtonBaseSize` / `AvatarBaseSize` |
+| Event handlers | `onClick`     | `onPress`    | Keep both (platform)                                                          |
+| Styling        | `className`   | style object | Use className/twClassName                                                     |
 
 3. **Answer key questions:**
    - Which props are cross-platform? (variant, size, isDisabled)
@@ -122,6 +123,7 @@ Use this workflow when:
 - Shared props type with "Shared" suffix
 - Platform-independent properties only
 - Use `type` not `interface`
+- **Component-scoped prop consts:** When `size` or `variant` maps to an existing base scale, create `ComponentNameSize` / `ComponentNameVariant` aliases in shared (e.g. `export const FilterButtonSize = ButtonBaseSize`) — do not type public shared props with `ButtonBaseSize`. See @.cursor/rules/component-architecture.md **Component-Scoped Prop Const Objects**.
 
 **Platform packages pattern:**
 

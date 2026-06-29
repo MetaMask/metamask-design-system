@@ -110,6 +110,7 @@ export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 export {
   ButtonBaseSize,
   ButtonHeroSize,
+  ButtonSemanticSize,
   ButtonSize,
   type ButtonBasePropsShared,
 } from './types/ButtonBase';
@@ -230,6 +231,7 @@ export {
 
 // FilterButton types (ADR-0003 + ADR-0004)
 export {
+  FilterButtonSize,
   FilterButtonVariant,
   type FilterButtonPropsShared,
 } from './types/FilterButton';
@@ -238,7 +240,10 @@ export {
 export { type FilterButtonGroupPropsShared } from './types/FilterButtonGroup';
 
 // SegmentedControl types (ADR-0004)
-export { type SegmentedControlPropsShared } from './types/SegmentedControl';
+export {
+  SegmentedControlSize,
+  type SegmentedControlPropsShared,
+} from './types/SegmentedControl';
 
 // Switch types (ADR-0004)
 export { type SwitchPropsShared } from './types/Switch';
