@@ -1,5 +1,4 @@
 import {
-  FontWeight,
   IconColor,
   IconName,
   IconSize,
@@ -115,15 +114,21 @@ export const TitleAccessory: Story = {
 
 export const Children: Story = {
   render: () => (
-    <SectionHeader title="Tokens">
-      <Text
-        variant={TextVariant.BodySm}
-        color={TextColor.TextAlternative}
-        fontWeight={FontWeight.Medium}
+    <Box twClassName="w-full bg-background-default">
+      <SectionHeader
+        title="How it works"
+        endIconName={IconName.ArrowRight}
       >
-        12 assets
-      </Text>
-    </SectionHeader>
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
+          Add mUSD and earn up to{' '}
+          <Text variant={TextVariant.BodySm} color={TextColor.SuccessDefault}>
+            4% APY
+          </Text>{' '}
+          (variable). Your balance is dollar-backed and ready to spend, trade,
+          or send anytime.
+        </Text>
+      </SectionHeader>
+    </Box>
   ),
 };
 
