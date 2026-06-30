@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.0]
+
+### Added
+
+- Added `BannerAlertSeverity.Neutral` for cross-platform informational banner styling ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
+- Added `ButtonIconSize.Xs` to the shared `ButtonIconSize` const object ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
+- Added `children` to `SectionHeaderPropsShared` for supporting content below the title row ([#1267](https://github.com/MetaMask/metamask-design-system/pull/1267))
+- Added `FilterButtonSize`, `SegmentedControlSize`, and `ButtonSemanticSize` as component-scoped size aliases ([#1297](https://github.com/MetaMask/metamask-design-system/pull/1297))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 20 and 22 support for the release line; no public API changes were needed in `@metamask/design-system-shared`, but consumers must run on Node 24 or newer ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+- **BREAKING:** Removed `titleStartAccessory` and `titleEndAccessory` from `TitleAlertPropsShared` ([#1268](https://github.com/MetaMask/metamask-design-system/pull/1268))
+  - See [Migration Guide](./MIGRATION.md#titlealert-title-accessories-removed)
+
 ## [0.24.0]
 
 ### Changed
@@ -255,7 +270,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.24.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.25.0...HEAD
+[0.25.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.24.0...@metamask/design-system-shared@0.25.0
 [0.24.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.23.0...@metamask/design-system-shared@0.24.0
 [0.23.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.22.0...@metamask/design-system-shared@0.23.0
 [0.22.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.21.0...@metamask/design-system-shared@0.22.0

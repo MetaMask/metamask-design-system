@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.29.0]
+
+### Added
+
+- Added `BannerAlertSeverity.Neutral` for informational banners without semantic severity coloring ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
+- Added `ButtonIconSize.Xs` (20px button dimension mapping to `IconSize.Sm`) ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 20 and 22 support for the release line; consumers must run Node 24 or newer ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+- Updated `Tag` neutral variant default icon and text colors to `alternative` ([#1294](https://github.com/MetaMask/metamask-design-system/pull/1294))
+- Updated `BannerBase` spacing, padding, action button margin, and close button alignment to match Figma ([#1269](https://github.com/MetaMask/metamask-design-system/pull/1269))
+- Updated `BannerAlert` to remove the severity-colored left border and inherit `BannerBase` default padding ([#1283](https://github.com/MetaMask/metamask-design-system/pull/1283))
+
 ## [0.28.0]
 
 ### Changed
@@ -384,7 +398,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.28.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.29.0...HEAD
+[0.29.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.28.0...@metamask/design-system-react@0.29.0
 [0.28.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.1...@metamask/design-system-react@0.28.0
 [0.27.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.0...@metamask/design-system-react@0.27.1
 [0.27.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.26.0...@metamask/design-system-react@0.27.0

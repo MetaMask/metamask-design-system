@@ -5,14 +5,14 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
-  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
+  - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
 
-### From version 0.x.0 to 0.x.0
+### From version 0.24.0 to 0.25.0
 
 <a id="titlealert-title-accessories-removed"></a>
 
@@ -22,10 +22,10 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-| Before (0.x.0)        | After (0.x.0) |
-| --------------------- | ------------- |
-| `titleStartAccessory` | removed       |
-| `titleEndAccessory`   | removed       |
+| Before (0.24.0)       | After (0.25.0) |
+| --------------------- | -------------- |
+| `titleStartAccessory` | removed        |
+| `titleEndAccessory`   | removed        |
 
 **Migration:**
 
@@ -33,7 +33,7 @@ Remove the props from shared type consumers and from **`TitleAlert`** call sites
 
 **Impact:**
 
-- Any type or wrapper that extends **`TitleAlertPropsShared`** and references the removed props must be updated.
+- Any type or wrapper that extends **`TitleAlertPropsShared`** and references the removed props must be updated
 
 ### From version 0.22.0 to 0.23.0
 
