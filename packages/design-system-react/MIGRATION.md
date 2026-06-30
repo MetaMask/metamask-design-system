@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
   - [From version 0.27.x to 0.28.0](#from-version-027x-to-0280)
   - [From version 0.25.0 to 0.26.0](#from-version-0250-to-0260)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
@@ -3580,6 +3581,32 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.28.0 to 0.29.0
+
+#### Node.js requirement
+
+**What changed:**
+
+- Minimum Node.js version raised from 20 to 24
+- Node.js 20 and 22 are no longer supported
+- Component APIs and runtime behavior are unchanged aside from other entries in this release
+
+**Migration:**
+
+Upgrade local development, CI, and build environments to Node.js 24 (current LTS). If your app enforces Node versions, update `engines.node` accordingly:
+
+```json
+{
+  "engines": {
+    "node": ">=24"
+  }
+}
+```
+
+**Impact:**
+
+- Projects running Node.js 20 or 22 must upgrade before installing or building against this release
 
 ### From version 0.27.x to 0.28.0
 

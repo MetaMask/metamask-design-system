@@ -9,15 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.29.0]
 
-### Uncategorized
+### Added
 
-- feat: align Modal stories with extension legacy modal stories ([#1285](https://github.com/MetaMask/metamask-design-system/pull/1285))
-- chore: polish tag neutral variant ([#1294](https://github.com/MetaMask/metamask-design-system/pull/1294))
-- feat(BannerAlert): add Neutral severity variant ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
-- chore: drop Node.js 20 and 22 support, require Node.js 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
-- fix(BannerBase): align spacing and action button with Figma (web and mobile) ([#1269](https://github.com/MetaMask/metamask-design-system/pull/1269))
-- fix(BannerAlert): remove left border and padding override (web) ([#1283](https://github.com/MetaMask/metamask-design-system/pull/1283))
-- feat(ButtonIcon): add ButtonIconSize.Xs with 20px dimension and IconSize.Sm mapping ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
+- Added `BannerAlertSeverity.Neutral` for informational banners without semantic severity coloring ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
+- Added `ButtonIconSize.Xs` (20px button dimension mapping to `IconSize.Sm`) ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 20 and 22 support; minimum Node.js version is now 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+  - See [Migration Guide](./MIGRATION.md#from-version-0280-to-0290)
+- Updated `Tag` neutral variant default icon and text colors to `alternative` ([#1294](https://github.com/MetaMask/metamask-design-system/pull/1294))
+- Updated `BannerBase` spacing, padding, action button margin, and close button alignment to match Figma ([#1269](https://github.com/MetaMask/metamask-design-system/pull/1269))
+- Updated `BannerAlert` to remove the severity-colored left border and inherit `BannerBase` default padding ([#1283](https://github.com/MetaMask/metamask-design-system/pull/1283))
 
 ## [0.28.0]
 

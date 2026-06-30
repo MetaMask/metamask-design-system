@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.6.0]
 
-### Uncategorized
+### Changed
 
-- chore: drop Node.js 20 and 22 support, require Node.js 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+- **BREAKING:** Dropped Node.js 20 and 22 support; minimum Node.js version is now 24. Token values and CSS output are unchanged ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+  - See [Migration Guide](./MIGRATION.md#from-version-850-to-860)
 
 ## [8.5.0]
 

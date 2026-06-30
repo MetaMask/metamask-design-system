@@ -46,7 +46,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
+  - [From version 0.30.0 to 0.31.0](#from-version-0300-to-0310)
   - [From version 0.26.0 to 0.27.0](#from-version-0260-to-0270)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
   - [From version 0.23.0 to 0.24.0](#from-version-0230-to-0240)
@@ -64,7 +64,31 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.x.0 to 0.x.0
+### From version 0.30.0 to 0.31.0
+
+#### Node.js requirement
+
+**What changed:**
+
+- Minimum Node.js version raised from 20 to 24
+- Node.js 20 and 22 are no longer supported
+- Component APIs and runtime behavior are unchanged aside from other entries in this release
+
+**Migration:**
+
+Upgrade local development, CI, and build environments to Node.js 24 (current LTS). If your app enforces Node versions, update `engines.node` accordingly:
+
+```json
+{
+  "engines": {
+    "node": ">=24"
+  }
+}
+```
+
+**Impact:**
+
+- Projects running Node.js 20 or 22 must upgrade before installing or building against this release
 
 <a id="titlealert-title-accessories-removed"></a>
 
@@ -74,15 +98,15 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-| Before (0.x.0)        | After (0.x.0) |
-| --------------------- | ------------- |
-| `titleStartAccessory` | removed       |
-| `titleEndAccessory`   | removed       |
+| Before (0.30.0)       | After (0.31.0) |
+| --------------------- | -------------- |
+| `titleStartAccessory` | removed        |
+| `titleEndAccessory`   | removed        |
 
 **Migration:**
 
 ```tsx
-// Before (0.x.0)
+// Before (0.30.0)
 import {
   Icon,
   IconAlertSeverity,
@@ -104,7 +128,7 @@ import {
   }
 />;
 
-// After (0.x.0)
+// After (0.31.0)
 import {
   IconAlertSeverity,
   TitleAlert,
@@ -117,7 +141,7 @@ If you import **`TitleAlertPropsShared`** from **`@metamask/design-system-shared
 
 **Impact:**
 
-- Any call site passing **`titleStartAccessory`** or **`titleEndAccessory`** on **`TitleAlert`** must be updated.
+- Any call site passing **`titleStartAccessory`** or **`titleEndAccessory`** on **`TitleAlert`** must be updated
 
 ### From version 0.29.0 to 0.30.0
 

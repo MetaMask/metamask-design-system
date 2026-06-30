@@ -9,15 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.25.0]
 
-### Uncategorized
+### Added
 
-- fix(dsrn): move SectionHeader children below header row ([#1298](https://github.com/MetaMask/metamask-design-system/pull/1298))
-- fix: add component-scoped size aliases and document prop const convention ([#1297](https://github.com/MetaMask/metamask-design-system/pull/1297))
-- fix: Refine TitleAlert API and update associated documentation ([#1268](https://github.com/MetaMask/metamask-design-system/pull/1268))
-- feat(BannerAlert): add Neutral severity variant ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
-- chore: drop Node.js 20 and 22 support, require Node.js 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
-- feat(ButtonIcon): add ButtonIconSize.Xs with 20px dimension and IconSize.Sm mapping ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
-- refactor: added children to sectionheader ([#1267](https://github.com/MetaMask/metamask-design-system/pull/1267))
+- Added `BannerAlertSeverity.Neutral` for cross-platform informational banner styling ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
+- Added `ButtonIconSize.Xs` to the shared `ButtonIconSize` const object ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
+- Added `children` to `SectionHeaderPropsShared` for supporting content below the title row ([#1267](https://github.com/MetaMask/metamask-design-system/pull/1267))
+- Added `FilterButtonSize`, `SegmentedControlSize`, and `ButtonSemanticSize` as component-scoped size aliases ([#1297](https://github.com/MetaMask/metamask-design-system/pull/1297))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 20 and 22 support; minimum Node.js version is now 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+  - See [Migration Guide](./MIGRATION.md#from-version-0240-to-0250)
+- **BREAKING:** Removed `titleStartAccessory` and `titleEndAccessory` from `TitleAlertPropsShared` ([#1268](https://github.com/MetaMask/metamask-design-system/pull/1268))
+  - See [Migration Guide](./MIGRATION.md#titlealert-title-accessories-removed)
 
 ## [0.24.0]
 
