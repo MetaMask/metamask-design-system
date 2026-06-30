@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.31.0]
+
+### Added
+
+- Added `children` prop to `SectionHeader` for supporting content below the title row ([#1267](https://github.com/MetaMask/metamask-design-system/pull/1267))
+- Added `BannerAlertSeverity.Neutral` for informational banners without semantic severity coloring ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
+- Added `ButtonIconSize.Xs` (20px button dimension mapping to `IconSize.Sm`) ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
+- Added `FilterButtonSize`, `SegmentedControlSize`, and `ButtonSemanticSize` as component-scoped size aliases for `FilterButton`, `SegmentedControl`, and `ButtonSemantic` ([#1297](https://github.com/MetaMask/metamask-design-system/pull/1297))
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 20 and 22 support for the release line; consumers must run Node 24 or newer ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+- **BREAKING:** Removed `titleStartAccessory` and `titleEndAccessory` from `TitleAlert` to align with the Figma component ([#1268](https://github.com/MetaMask/metamask-design-system/pull/1268))
+  - See [Migration Guide](./MIGRATION.md#titlealert-title-accessories-removed)
+- Updated `SectionHeader` so `children` render full-width below the header row; default start and end icon size changed from `Md` to `Sm` ([#1298](https://github.com/MetaMask/metamask-design-system/pull/1298))
+- Updated `BannerBase` spacing, padding, action button margin, and close button alignment to match Figma ([#1269](https://github.com/MetaMask/metamask-design-system/pull/1269))
+- Updated `BannerAlert` to remove the severity-colored left border and inherit `BannerBase` default padding ([#1270](https://github.com/MetaMask/metamask-design-system/pull/1270))
+- Updated `MainActionButtons` vertical padding from 16px to 12px to match Figma ([#1246](https://github.com/MetaMask/metamask-design-system/pull/1246))
+- Updated `Tag` neutral variant default icon and text colors to `alternative` ([#1294](https://github.com/MetaMask/metamask-design-system/pull/1294))
+- Updated `BottomSheetHeader` default horizontal padding to match Figma and align with `HeaderStandard` ([#1264](https://github.com/MetaMask/metamask-design-system/pull/1264))
+- Updated `BottomSheetFooter` container padding to 16px horizontal and 0px vertical ([#1265](https://github.com/MetaMask/metamask-design-system/pull/1265))
+
 ## [0.30.2]
 
 ### Fixed
@@ -528,7 +550,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.2...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.31.0...HEAD
+[0.31.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.2...@metamask/design-system-react-native@0.31.0
 [0.30.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.1...@metamask/design-system-react-native@0.30.2
 [0.30.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.0...@metamask/design-system-react-native@0.30.1
 [0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.29.0...@metamask/design-system-react-native@0.30.0
