@@ -1,0 +1,38 @@
+/**
+ * Pure Black Dark Theme Colors
+ *
+ * Overrides only — inherits unchanged tokens from dark-theme-colors.css
+ * on the same .dark / [data-theme='dark'] ancestor.
+ *
+ * Supported nesting (either order):
+ * - .dark > [data-pure-black='true'] > … (canonical; Storybook preview)
+ * - [data-pure-black='true'] > .dark > … (PureBlackProvider wrapping a .dark root)
+ */
+[data-theme='dark'][data-pure-black='true'],
+.dark[data-pure-black='true'],
+[data-theme='dark'] [data-pure-black='true'],
+.dark [data-pure-black='true'],
+[data-pure-black='true'] .dark,
+[data-theme='dark'] [data-pure-black='true'] .dark {
+  --color-background-default: #000000;
+  --color-background-alternative: #0d0d0f;
+  --color-background-section: #18181b;
+  --color-background-subsection: #222226;
+  --color-background-muted: #e2e2ff1b;
+  --color-background-muted-hover: #e2e2ff26;
+  --color-background-muted-pressed: #e2e2ff30;
+  --color-background-default-hover: #18181b;
+  --color-background-default-pressed: #222226;
+  --color-background-hover: #e2e2ff1b;
+  --color-background-pressed: #e2e2ff30;
+  --color-text-muted: var(--brand-colors-grey-grey500);
+  --color-icon-muted: var(--brand-colors-grey-grey500);
+  --color-icon-inverse: #0d0d0f;
+  --color-border-muted: #e2e2ff26;
+  --color-primary-inverse: #0d0d0f;
+  --color-error-inverse: #0d0d0f;
+  --color-warning-inverse: #0d0d0f;
+  --color-success-inverse: #0d0d0f;
+  --color-info-inverse: #0d0d0f;
+  --color-flask-inverse: #0d0d0f;
+}
