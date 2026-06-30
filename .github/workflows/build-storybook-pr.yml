@@ -52,5 +52,19 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HOST_URL: ${{ vars.AWS_CLOUDFRONT_URL }}/${{ github.event.repository.name }}/${{ github.run_id }}
         run: |
-          gh pr comment "${PR_NUMBER}" --body "### 📖 Storybook Preview
-          - [View PR Storybook](${HOST_URL}/storybook-build/index.html)"
+          {
+            echo "### 📖 Storybook Links"
+            echo ""
+            echo "Compare the preview for this pull request with the latest Storybooks from the \`main\` branch."
+            echo ""
+            echo "#### 🔀 Pull Request Preview"
+            echo ""
+            echo "* 🖥️ [React](${HOST_URL}/storybook-build/index.html)"
+            echo "* 📱 [React Native](${HOST_URL}/storybook-build/react-native/index.html)"
+            echo ""
+            echo "#### 🌳 Main Branch (Latest)"
+            echo ""
+            echo "* 🖥️ [React](https://metamask.github.io/metamask-design-system)"
+            echo "* 📱 [React Native](https://metamask.github.io/metamask-design-system/react-native)"
+          } > comment.md
+          gh pr comment "${PR_NUMBER}" --body-file comment.md
