@@ -18,8 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Dropped Node.js 20 and 22 support; minimum Node.js version is now 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
-  - See [Migration Guide](./MIGRATION.md#from-version-0300-to-0310)
+- **BREAKING:** Dropped Node.js 20 and 22 support for the release line; consumers must run Node 24 or newer ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
 - **BREAKING:** Removed `titleStartAccessory` and `titleEndAccessory` from `TitleAlert` to align with the Figma component ([#1268](https://github.com/MetaMask/metamask-design-system/pull/1268))
   - See [Migration Guide](./MIGRATION.md#titlealert-title-accessories-removed)
 - Updated `SectionHeader` so `children` render full-width below the header row; default start and end icon size changed from `Md` to `Sm` ([#1298](https://github.com/MetaMask/metamask-design-system/pull/1298))

@@ -66,30 +66,6 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ### From version 0.30.0 to 0.31.0
 
-#### Node.js requirement
-
-**What changed:**
-
-- Minimum Node.js version raised from 20 to 24
-- Node.js 20 and 22 are no longer supported
-- Component APIs and runtime behavior are unchanged aside from other entries in this release
-
-**Migration:**
-
-Upgrade local development, CI, and build environments to Node.js 24 (current LTS). If your app enforces Node versions, update `engines.node` accordingly:
-
-```json
-{
-  "engines": {
-    "node": ">=24"
-  }
-}
-```
-
-**Impact:**
-
-- Projects running Node.js 20 or 22 must upgrade before installing or building against this release
-
 <a id="titlealert-title-accessories-removed"></a>
 
 #### `TitleAlert`: title row accessories removed

@@ -3,7 +3,6 @@
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
 - [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
-- [From version 8.5.0 to 8.6.0](#from-version-850-to-860)
 - [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
 - [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
 - [From version 6.0.0 to 7.0.0](#from-version-600-to-700)
@@ -11,32 +10,6 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
-
-## From version 8.5.0 to 8.6.0
-
-### Node.js requirement
-
-**What changed:**
-
-- Minimum Node.js version raised from 20 to 24
-- Node.js 20 and 22 are no longer supported
-- Token values, CSS output, and package APIs are unchanged
-
-**Migration:**
-
-Upgrade local development, CI, and build environments to Node.js 24 (current LTS). If your app enforces Node versions, update `engines.node` accordingly:
-
-```json
-{
-  "engines": {
-    "node": ">=24"
-  }
-}
-```
-
-**Impact:**
-
-- Projects running Node.js 20 or 22 must upgrade before installing or building against this release
 
 ## Tailwind CSS v3 to v4
 

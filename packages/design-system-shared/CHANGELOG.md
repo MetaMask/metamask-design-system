@@ -18,8 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Dropped Node.js 20 and 22 support; minimum Node.js version is now 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
-  - See [Migration Guide](./MIGRATION.md#from-version-0240-to-0250)
+- **BREAKING:** Dropped Node.js 20 and 22 support for the release line; no public API changes were needed in `@metamask/design-system-shared`, but consumers must run on Node 24 or newer ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
 - **BREAKING:** Removed `titleStartAccessory` and `titleEndAccessory` from `TitleAlertPropsShared` ([#1268](https://github.com/MetaMask/metamask-design-system/pull/1268))
   - See [Migration Guide](./MIGRATION.md#titlealert-title-accessories-removed)
 

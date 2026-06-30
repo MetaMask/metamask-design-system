@@ -16,8 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Dropped Node.js 20 and 22 support; minimum Node.js version is now 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
-  - See [Migration Guide](./MIGRATION.md#from-version-0280-to-0290)
+- **BREAKING:** Dropped Node.js 20 and 22 support for the release line; consumers must run Node 24 or newer ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
 - Updated `Tag` neutral variant default icon and text colors to `alternative` ([#1294](https://github.com/MetaMask/metamask-design-system/pull/1294))
 - Updated `BannerBase` spacing, padding, action button margin, and close button alignment to match Figma ([#1269](https://github.com/MetaMask/metamask-design-system/pull/1269))
 - Updated `BannerAlert` to remove the severity-colored left border and inherit `BannerBase` default padding ([#1283](https://github.com/MetaMask/metamask-design-system/pull/1283))
