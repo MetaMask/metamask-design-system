@@ -2,16 +2,12 @@ import {
   BoxBackgroundColor,
   BoxFlexDirection,
   IconAlertSeverity,
-  IconColor,
-  IconName,
-  IconSize,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import { Box } from '../Box';
 import type { BoxProps } from '../Box';
-import { Icon } from '../Icon';
 import { Text } from '../Text';
 
 import { TitleAlert } from './TitleAlert';
@@ -105,40 +101,6 @@ export const Title: Story = {
       severity={IconAlertSeverity.Danger}
       title={<Text>Custom title node</Text>}
       description={SAMPLE_DESCRIPTION}
-    />
-  ),
-};
-
-export const TitleStartAccessory: Story = {
-  render: () => (
-    <TitleAlert
-      severity={IconAlertSeverity.Warning}
-      title="High price impact"
-      description={SAMPLE_DESCRIPTION}
-      titleStartAccessory={
-        <Icon
-          name={IconName.Ai}
-          size={IconSize.Sm}
-          color={IconColor.IconAlternative}
-        />
-      }
-    />
-  ),
-};
-
-export const TitleEndAccessory: Story = {
-  render: () => (
-    <TitleAlert
-      severity={IconAlertSeverity.Warning}
-      title="High price impact"
-      description={SAMPLE_DESCRIPTION}
-      titleEndAccessory={
-        <Icon
-          name={IconName.Info}
-          size={IconSize.Sm}
-          color={IconColor.IconAlternative}
-        />
-      }
     />
   ),
 };

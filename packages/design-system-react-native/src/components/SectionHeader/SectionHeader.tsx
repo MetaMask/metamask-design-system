@@ -23,15 +23,15 @@ import type { SectionHeaderProps } from './SectionHeader.types';
  *
  * @param sectionHeaderProps - Component props
  * @param sectionHeaderProps.title - Title content for the inner row (required)
- * @param sectionHeaderProps.titleAccessory - Optional node to the right of `title` in the inner row
- * @param sectionHeaderProps.children - Optional content below the title row in the middle column, between start and end accessories
+ * @param sectionHeaderProps.titleAccessory - Optional inline metadata beside `title` in the inner row (not for trailing chevrons; use `endIconName` / `endIconProps`)
+ * @param sectionHeaderProps.children - Optional full-width content below the header row
  * @param sectionHeaderProps.titleProps - Optional props merged into inner row `Text` when `title` is a string
  * @param sectionHeaderProps.titleWrapperProps - Optional props spread onto the inner `BoxRow`
  * @param sectionHeaderProps.startAccessory - Optional custom node before the title row on the outer row; used when no start icon is resolved
  * @param sectionHeaderProps.startIconName - Optional start icon; takes precedence over `startAccessory` when set
  * @param sectionHeaderProps.startIconProps - Props merged into the start `Icon` (defaults include medium size and default icon color)
  * @param sectionHeaderProps.endAccessory - Optional custom node after the title row on the outer row; used when no end icon is resolved
- * @param sectionHeaderProps.endIconName - Optional end icon; takes precedence over `endAccessory` when set. Defaults to `IconName.ArrowRight` when `isInteractive` is `true` and no end icon or `endAccessory` is provided
+ * @param sectionHeaderProps.endIconName - Optional end icon on the outer header row (trailing chevrons, disclosure arrows); takes precedence over `endAccessory` when set. Defaults to `IconName.ArrowRight` when `isInteractive` is `true` and no end icon or `endAccessory` is provided
  * @param sectionHeaderProps.endIconProps - Props merged into the end `Icon`
  * @param sectionHeaderProps.isInteractive - When `true`, wraps the header in a `Pressable` with reduced opacity on press
  * @param sectionHeaderProps.style - Optional style on the outer wrapper (`View` or `Pressable` style, including function form when interactive)
@@ -67,7 +67,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
 
   const resolvedStartAccessory = startIconName ? (
     <Icon
-      size={IconSize.Md}
+      size={IconSize.Sm}
       color={IconColor.IconDefault}
       twClassName="shrink-0"
       {...startIconProps}
@@ -79,7 +79,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
 
   const resolvedEndAccessory = resolvedEndIconName ? (
     <Icon
-      size={IconSize.Md}
+      size={IconSize.Sm}
       color={IconColor.IconAlternative}
       twClassName="shrink-0"
       {...endIconProps}
@@ -89,11 +89,18 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     endAccessory
   );
 
+  const hasAccessories =
+    Boolean(resolvedStartAccessory) || Boolean(resolvedEndAccessory);
+
   const titleRow = title ? (
     <BoxRow
       {...titleWrapperProps}
       gap={1}
       endAccessory={titleAccessory}
+      twClassName={mergeTwClassName(
+        hasAccessories ? 'w-full shrink min-w-0' : '',
+        titleWrapperProps?.twClassName,
+      )}
       textProps={{
         variant: TextVariant.HeadingMd,
         color: TextColor.TextDefault,
@@ -104,16 +111,33 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     </BoxRow>
   ) : null;
 
-  const hasAccessories =
-    Boolean(resolvedStartAccessory) || Boolean(resolvedEndAccessory);
+  let mainContent = null;
+  if (titleRow) {
+    mainContent = hasAccessories ? (
+      <Box twClassName="shrink min-w-0">{titleRow}</Box>
+    ) : (
+      titleRow
+    );
+  }
 
-  const mainContent =
-    titleRow || children ? (
-      <Box gap={1} twClassName={hasAccessories ? 'flex-1 min-w-0' : undefined}>
-        {titleRow}
-        {children}
-      </Box>
-    ) : null;
+  const headerRow = (
+    <BoxRow
+      gap={1}
+      startAccessory={resolvedStartAccessory}
+      endAccessory={resolvedEndAccessory}
+    >
+      {mainContent}
+    </BoxRow>
+  );
+
+  const body = children ? (
+    <Box gap={1}>
+      {headerRow}
+      {children}
+    </Box>
+  ) : (
+    headerRow
+  );
 
   if (isInteractive) {
     const { disabled, accessibilityRole = 'button' } = sectionHeaderProps;
@@ -135,14 +159,22 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
         }}
         {...props}
       >
-        <BoxRow
-          gap={1}
-          startAccessory={resolvedStartAccessory}
-          endAccessory={resolvedEndAccessory}
-        >
-          {mainContent}
-        </BoxRow>
+        {body}
       </Pressable>
+    );
+  }
+
+  if (children) {
+    return (
+      <Box
+        {...props}
+        gap={1}
+        style={style}
+        twClassName={mergeTwClassName('px-4 pb-2 pt-3', twClassName)}
+      >
+        {headerRow}
+        {children}
+      </Box>
     );
   }
 

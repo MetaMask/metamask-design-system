@@ -4,6 +4,7 @@ import {
   BoxFlexDirection,
   ButtonIconSize,
   ButtonSize,
+  ButtonVariant,
   FontWeight,
   IconName,
   mergeTwClassName,
@@ -51,18 +52,15 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
   const shouldShowCloseButton = Boolean(onClose);
   const shouldShowActionButton = Boolean(actionButtonOnPress);
 
-  const mergedCloseButtonTwClassName = closeButtonTwClassName
-    ? `ml-3 ${closeButtonTwClassName}`
-    : 'ml-3';
-
   return (
     <Box
       flexDirection={BoxFlexDirection.Row}
       alignItems={BoxAlignItems.Start}
-      gap={2}
+      gap={4}
       backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      padding={3}
-      twClassName={mergeTwClassName('rounded-sm', twClassName)}
+      paddingVertical={3}
+      paddingHorizontal={4}
+      twClassName={mergeTwClassName('rounded-xl', twClassName)}
       {...props}
     >
       {startAccessory}
@@ -82,7 +80,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
           ))}
 
         {hasContent(description) && (
-          <Box twClassName={hasContent(title) ? 'mt-1' : undefined}>
+          <Box>
             {isTextContent(description) ? (
               <Text variant={TextVariant.BodySm} {...descriptionProps}>
                 {description}
@@ -103,11 +101,12 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
           ))}
 
         {shouldShowActionButton && (
-          <Box twClassName="mt-4">
+          <Box twClassName="mt-2">
             <Button
               size={ButtonSize.Md}
               onPress={actionButtonOnPress}
               {...resolvedActionButtonProps}
+              variant={ButtonVariant.Secondary}
             >
               {actionButtonLabel}
             </Button>
@@ -117,9 +116,9 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
 
       {shouldShowCloseButton && (
         <ButtonIcon
-          twClassName={mergedCloseButtonTwClassName}
+          twClassName={mergeTwClassName('-mt-1', closeButtonTwClassName)}
           iconName={IconName.Close}
-          size={ButtonIconSize.Sm}
+          size={ButtonIconSize.Md}
           accessibilityLabel={closeButtonAccessibilityLabel}
           onPress={onClose}
           {...resolvedCloseButtonProps}

@@ -1,6 +1,6 @@
 {
   "name": "@metamask/metamask-design-system",
-  "version": "48.0.0",
+  "version": "49.0.0",
   "private": true,
   "description": "The MetaMask Design System monorepo",
   "repository": {
@@ -127,7 +127,7 @@
   },
   "packageManager": "yarn@4.16.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "lavamoat": {
     "allowScripts": {

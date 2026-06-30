@@ -1,4 +1,11 @@
-import type { ButtonBaseSize } from '../ButtonBase/ButtonBase.types';
+import { ButtonBaseSize } from '../ButtonBase/ButtonBase.types';
+
+/**
+ * SegmentedControl size options (ADR-0003).
+ * Alias to ButtonBaseSize to keep values in sync.
+ */
+export const SegmentedControlSize = ButtonBaseSize;
+export type SegmentedControlSize = ButtonBaseSize;
 
 /**
  * SegmentedControl component shared props (ADR-0004).
@@ -16,9 +23,9 @@ export type SegmentedControlPropsShared = {
   /**
    * Size of the control and child filter buttons.
    *
-   * @default ButtonBaseSize.Sm
+   * @default SegmentedControlSize.Sm
    */
-  size?: ButtonBaseSize;
+  size?: SegmentedControlSize;
   /**
    * When true, the control stretches to the width of its parent and segments share equal width.
    *

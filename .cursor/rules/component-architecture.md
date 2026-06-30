@@ -8,6 +8,7 @@ This file defines the architectural patterns that ALL component workflows must f
 
 - [ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md): String unions with const objects (no enums)
 - [ADR-0004](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0004-centralized-types-architecture.md): Centralized types in shared package
+- **Component-scoped prop const objects:** `ComponentName` + `PropName` exports (e.g. `SegmentedControlSize`) — canonical detail in **Component-Scoped Prop Const Objects** below
 - Platform-Specific Props: Layered architecture pattern
 - Cross-platform consistency principles
 
@@ -32,6 +33,111 @@ export enum ButtonVariant {
 ```
 
 **Reference:** [ADR-0003: Enum to String Union Migration](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)
+
+## Component-Scoped Prop Const Objects
+
+Every public prop that accepts a fixed set of values must expose a **component-scoped** const object named `ComponentName` + `PropNameInPascalCase`, where `PropNameInPascalCase` matches the **prop name** (not an abbreviated concept). Consumers import the const for the component they are using — not a shared base type from another component.
+
+| Prop name           | Const export                                                 |
+| ------------------- | ------------------------------------------------------------ |
+| `size`              | `SegmentedControlSize`                                       |
+| `variant`           | `FilterButtonVariant`                                        |
+| `endArrowDirection` | `SelectButtonEndArrowDirection` (not `SelectButtonEndArrow`) |
+
+**Why:** Discoverability at the import site. When using `SegmentedControl`, consumers look for `SegmentedControlSize` — not `ButtonBaseSize` or `ButtonSize`.
+
+### Naming and aliasing
+
+When values match an existing base scale, **alias** the base const in shared — do not reference the base type on public prop interfaces:
+
+```tsx
+import { ButtonBaseSize } from '../ButtonBase/ButtonBase.types';
+
+/**
+ * SelectButton size options (ADR-0003).
+ * Alias to ButtonBaseSize to keep values in sync.
+ */
+export const SelectButtonSize = ButtonBaseSize;
+export type SelectButtonSize = ButtonBaseSize;
+
+export type SelectButtonPropsShared = {
+  /** @default SelectButtonSize.Sm */
+  size?: SelectButtonSize;
+};
+```
+
+**Golden path:** @packages/design-system-shared/src/types/SelectButton/SelectButton.types.ts
+
+### Current alias examples in the monorepo
+
+Two base scales exist in shared. Each public component aliases its own const — consumers never import the base type for another component's props.
+
+**Avatars** — all alias `AvatarBaseSize`:
+
+| Export              | Component     |
+| ------------------- | ------------- |
+| `AvatarAccountSize` | AvatarAccount |
+| `AvatarTokenSize`   | AvatarToken   |
+| `AvatarNetworkSize` | AvatarNetwork |
+| `AvatarFaviconSize` | AvatarFavicon |
+| `AvatarGroupSize`   | AvatarGroup   |
+| `AvatarIconSize`    | AvatarIcon    |
+
+**Button-scale controls** — all alias `ButtonBaseSize`:
+
+| Export                 | Component        |
+| ---------------------- | ---------------- |
+| `ButtonSize`           | Button           |
+| `ButtonHeroSize`       | ButtonHero       |
+| `ButtonSemanticSize`   | ButtonSemantic   |
+| `SelectButtonSize`     | SelectButton     |
+| `FilterButtonSize`     | FilterButton     |
+| `SegmentedControlSize` | SegmentedControl |
+
+**Usage:**
+
+```tsx
+<AvatarToken size={AvatarTokenSize.Lg} />
+<Button size={ButtonSize.Md} />
+<SelectButton size={SelectButtonSize.Sm} />
+<SegmentedControl size={SegmentedControlSize.Md} />
+```
+
+### Future: plain string union props
+
+We may eventually roll out plain string unions (e.g. `size="md"` instead of `size={ButtonSize.Md}`) per [ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md). That requires a **team announcement and coordinated migration** — do not ship `size="md"` on new components until that decision is published and existing const-object exports are deprecated with a clear timeline.
+
+**Until then:** always add component-scoped const objects for new prop unions, even when values alias `AvatarBaseSize` or `ButtonBaseSize`.
+
+### Legacy naming to avoid copying
+
+`SelectButtonEndArrow` is shipped for the `endArrowDirection` prop but **does not follow** the convention (prop → `SelectButtonEndArrowDirection`). Do not use it as a template for new components. Renaming may happen in a future breaking release; new work should use the full prop name in the const export.
+
+| Rule                   | Detail                                                                                                                       |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Naming                 | `ComponentName` + prop name in PascalCase: `FilterButtonVariant`, `SegmentedControlSize`, `AvatarTokenSize`                  |
+| Prop typing            | Shared props use the **scoped** type (`SegmentedControlSize`), not `ButtonBaseSize` / `AvatarBaseSize`                       |
+| Exports                | Export scoped const from shared `index.ts` and component `index.ts` (single export location — unchanged)                     |
+| Stories / docs / Figma | Examples import and use scoped consts — never `ButtonBaseSize` in consumer-facing snippets                                   |
+| Internal only          | `ButtonBaseSize` is valid inside `ButtonBase`, button variants, and other internal implementations                           |
+| Platform extension     | A component may extend `ButtonBaseProps` on the platform layer but must still export `FilterButtonSize` (etc.) for consumers |
+| Future migration       | Plain string unions (e.g. `size="md"`) require an explicit team announcement — until then, ship scoped const objects only    |
+
+### Anti-patterns
+
+```tsx
+// ❌ Wrong - base type on public shared prop (requires internal knowledge)
+export type SegmentedControlPropsShared = {
+  size?: ButtonBaseSize;
+};
+
+// ❌ Wrong - sibling component's const on a different component (compiles but confuses)
+<SegmentedControl size={ButtonSize.Md} />
+
+// ✅ Correct
+<SegmentedControl size={SegmentedControlSize.Md} />
+<FilterButton size={FilterButtonSize.Sm} />
+```
 
 ## ADR-0004: Centralized Types Architecture
 
@@ -254,6 +360,8 @@ Both `Input` and `Text` are _consumers_ of `TextVariant` — neither owns it. Im
 - [ ] Platform `src/types/index.ts` does NOT re-export shared types
 - [ ] NO className/twClassName in shared package
 - [ ] NO unified event handlers in shared package
+- [ ] Each public prop union has a component-scoped const object export (`ComponentNameSize`, `ComponentNameVariant`, etc.)
+- [ ] Shared props reference scoped types, not base types (`ButtonBaseSize`, `AvatarBaseSize`)
 
 ## Optional slot rendering (`ReactNode`)
 

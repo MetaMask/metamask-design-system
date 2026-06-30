@@ -1,14 +1,14 @@
-import { ButtonBaseSize } from '@metamask/design-system-shared';
+import { SegmentedControlSize } from '@metamask/design-system-shared';
 
 export const TWCLASSMAP_SEGMENTEDCONTROL_BORDER_RADIUS: Record<
-  ButtonBaseSize,
+  SegmentedControlSize,
   string
 > = {
-  [ButtonBaseSize.Sm]: 'rounded-xl',
-  [ButtonBaseSize.Md]: 'rounded-2xl',
-  [ButtonBaseSize.Lg]: 'rounded-2xl',
+  [SegmentedControlSize.Sm]: 'rounded-xl',
+  [SegmentedControlSize.Md]: 'rounded-2xl',
+  [SegmentedControlSize.Lg]: 'rounded-2xl',
 };
 
 export const getSegmentedControlBorderRadiusTwClass = (
-  size: ButtonBaseSize,
+  size: SegmentedControlSize,
 ): string => TWCLASSMAP_SEGMENTEDCONTROL_BORDER_RADIUS[size];

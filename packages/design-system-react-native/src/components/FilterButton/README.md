@@ -113,6 +113,55 @@ export const Example = () => {
 };
 ```
 
+### `size`
+
+Height of the filter button row. Matches the universal button scale (`sm` / `md` / `lg`). See the **Size** story in React Native Storybook (**Components / FilterButton**) for a vertical comparison of all three heights.
+
+Available sizes:
+
+- `FilterButtonSize.Sm` (32px height)
+- `FilterButtonSize.Md` (40px height)
+- `FilterButtonSize.Lg` (48px height)
+
+When used under **`SegmentedControl`**, segment size comes from the control’s **`size`** prop unless overridden on an individual **`FilterButton`**.
+
+| TYPE               | REQUIRED | DEFAULT               |
+| ------------------ | -------- | --------------------- |
+| `FilterButtonSize` | No       | `FilterButtonSize.Sm` |
+
+```tsx
+import {
+  FilterButton,
+  FilterButtonSize,
+  FilterButtonVariant,
+} from '@metamask/design-system-react-native';
+
+<FilterButton
+  variant={FilterButtonVariant.Primary}
+  isSelected
+  size={FilterButtonSize.Sm}
+  onPress={() => {}}
+>
+  Sm
+</FilterButton>
+<FilterButton
+  variant={FilterButtonVariant.Primary}
+  isSelected
+  size={FilterButtonSize.Md}
+  onPress={() => {}}
+>
+  Md
+</FilterButton>
+<FilterButton
+  variant={FilterButtonVariant.Primary}
+  isSelected
+  size={FilterButtonSize.Lg}
+  onPress={() => {}}
+>
+  Lg
+</FilterButton>
+```
+
 ### `twClassName`
 
 Use the `twClassName` prop to add Tailwind CSS classes to the root pressable. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
@@ -157,7 +206,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 
 ### Other `ButtonBase` props
 
-`FilterButton` accepts the rest of **`ButtonBase`** props (for example **`size`**, **`isLoading`**, **`isDisabled`**, **`startIconName`**, **`startAccessory`**, **`textProps`**, **`startIconProps`**, **`endIconProps`**). The full props contract is **`FilterButtonProps`** from **`@metamask/design-system-react-native`**.
+`FilterButton` accepts the rest of **`ButtonBase`** props (for example **`isLoading`**, **`isDisabled`**, **`startIconName`**, **`startAccessory`**, **`textProps`**, **`startIconProps`**, **`endIconProps`**). Use **`FilterButtonSize`** for **`size`** (documented above). The full props contract is **`FilterButtonProps`** from **`@metamask/design-system-react-native`**.
 
 ## References
 

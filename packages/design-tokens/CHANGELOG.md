@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.6.0]
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 20 and 22 support for the release line; the emitted token values and CSS output are unchanged, but consumers must run on Node 24 or newer ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+
 ## [8.5.0]
 
 ### Changed
@@ -441,7 +447,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.5.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.6.0...HEAD
+[8.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.5.0...@metamask/design-tokens@8.6.0
 [8.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.4.0...@metamask/design-tokens@8.5.0
 [8.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.3.0...@metamask/design-tokens@8.4.0
 [8.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.2...@metamask/design-tokens@8.3.0

@@ -1,5 +1,5 @@
 import {
-  ButtonBaseSize,
+  FilterButtonSize,
   IconColor,
   IconName,
   IconSize,
@@ -435,7 +435,7 @@ describe('FilterButton', () => {
         <SegmentedControl
           value="a"
           onChange={noopPress}
-          size={ButtonBaseSize.Md}
+          size={FilterButtonSize.Md}
           testID="group"
         >
           <FilterButton value="a" testID="filter-a" onPress={noopPress}>

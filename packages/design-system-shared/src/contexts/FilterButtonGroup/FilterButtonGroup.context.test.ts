@@ -1,8 +1,10 @@
 import { createElement, useContext } from 'react';
 import { act, create } from 'react-test-renderer';
 
-import { ButtonBaseSize } from '../../types/ButtonBase/ButtonBase.types';
-import { FilterButtonVariant } from '../../types/FilterButton/FilterButton.types';
+import {
+  FilterButtonSize,
+  FilterButtonVariant,
+} from '../../types/FilterButton/FilterButton.types';
 
 import type { FilterButtonGroupContextValue } from '.';
 import { FilterButtonGroupContext } from '.';
@@ -105,7 +107,7 @@ describe('FilterButtonGroupContext', () => {
       const providerValue: FilterButtonGroupContextValue = {
         value: 'a',
         onChange: jest.fn(),
-        size: ButtonBaseSize.Md,
+        size: FilterButtonSize.Md,
         isEqualWidth: true,
       };
 

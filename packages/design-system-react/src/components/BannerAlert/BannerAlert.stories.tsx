@@ -71,8 +71,22 @@ export const Default: Story = {
 export const Severity: Story = {
   render: (args: BannerAlertProps) => (
     <div className="space-y-2">
+      <BannerAlert
+        {...args}
+        severity={BannerAlertSeverity.Neutral}
+        title="Neutral"
+      >
+        This is a neutral banner.
+      </BannerAlert>
       <BannerAlert {...args} severity={BannerAlertSeverity.Info} title="Info">
         This is an info banner.
+      </BannerAlert>
+      <BannerAlert
+        {...args}
+        severity={BannerAlertSeverity.Success}
+        title="Success"
+      >
+        This is a success banner.
       </BannerAlert>
       <BannerAlert
         {...args}
@@ -87,13 +101,6 @@ export const Severity: Story = {
         title="Danger"
       >
         This is a danger banner.
-      </BannerAlert>
-      <BannerAlert
-        {...args}
-        severity={BannerAlertSeverity.Success}
-        title="Success"
-      >
-        This is a success banner.
       </BannerAlert>
     </div>
   ),
