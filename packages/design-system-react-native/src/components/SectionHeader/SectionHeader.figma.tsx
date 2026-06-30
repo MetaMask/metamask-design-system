@@ -11,7 +11,7 @@ import { SectionHeader } from './SectionHeader';
  */
 figma.connect(
   SectionHeader,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=9624-8419',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=9624-8420',
   {
     props: {
       title: figma.string('title'),
@@ -27,14 +27,26 @@ figma.connect(
         true: figma.children('endAccessory'),
         false: undefined,
       }),
+      children: figma.boolean('subtitle', {
+        true: figma.children('children'),
+        false: undefined,
+      }),
     },
-    example: ({ title, startAccessory, titleAccessory, endAccessory }) => (
+    example: ({
+      title,
+      startAccessory,
+      titleAccessory,
+      endAccessory,
+      children,
+    }) => (
       <SectionHeader
         title={title}
         startAccessory={startAccessory}
         titleAccessory={titleAccessory}
         endAccessory={endAccessory}
-      />
+      >
+        {children}
+      </SectionHeader>
     ),
   },
 );
