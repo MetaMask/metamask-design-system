@@ -1,4 +1,4 @@
-import { ButtonBaseSize } from '@metamask/design-system-shared';
+import { SegmentedControlSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
@@ -22,8 +22,8 @@ const meta: Meta<SegmentedControlProps> = {
     },
     size: {
       control: 'select',
-      options: Object.keys(ButtonBaseSize),
-      mapping: ButtonBaseSize,
+      options: Object.keys(SegmentedControlSize),
+      mapping: SegmentedControlSize,
       description: 'Size of the control and child FilterButton segments.',
     },
     isFullWidth: {
@@ -70,7 +70,7 @@ const ControlledSegmentedControl = ({
 export const Default: Story = {
   args: {
     value: 'reaches',
-    size: ButtonBaseSize.Sm,
+    size: SegmentedControlSize.Sm,
     isFullWidth: false,
   },
   render: (args) => <ControlledSegmentedControl {...args} />,
@@ -87,7 +87,7 @@ export const Size: Story = {
         <SegmentedControl
           value={smValue}
           onChange={setSmValue}
-          size={ButtonBaseSize.Sm}
+          size={SegmentedControlSize.Sm}
         >
           <FilterButton value="reaches" onPress={noopPress}>
             Small
@@ -99,7 +99,7 @@ export const Size: Story = {
         <SegmentedControl
           value={mdValue}
           onChange={setMdValue}
-          size={ButtonBaseSize.Md}
+          size={SegmentedControlSize.Md}
         >
           <FilterButton value="reaches" onPress={noopPress}>
             Medium
@@ -111,7 +111,7 @@ export const Size: Story = {
         <SegmentedControl
           value={lgValue}
           onChange={setLgValue}
-          size={ButtonBaseSize.Lg}
+          size={SegmentedControlSize.Lg}
         >
           <FilterButton value="reaches" onPress={noopPress}>
             Large

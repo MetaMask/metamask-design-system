@@ -76,6 +76,43 @@ describe('SectionHeader', () => {
     return styleFn;
   };
 
+  const countDirectChildInstances = (instance: ReactTestInstance): number =>
+    instance.children.filter(
+      (child) =>
+        typeof child === 'object' && child !== null && 'props' in child,
+    ).length;
+
+  const findInstanceWithStyle = (
+    instance: ReactTestInstance,
+    expectedStyle: ReturnType<ReturnType<typeof useTailwind>>,
+  ): ReactTestInstance | null => {
+    const styles = flattenStyles(instance.props.style);
+
+    if (
+      styles.some((item) =>
+        Object.entries(expectedStyle as ViewStyle).every(
+          ([key, value]) => item[key as keyof ViewStyle] === value,
+        ),
+      )
+    ) {
+      return instance;
+    }
+
+    for (const child of instance.children) {
+      if (typeof child === 'object' && child !== null && 'props' in child) {
+        const found = findInstanceWithStyle(
+          child as ReactTestInstance,
+          expectedStyle,
+        );
+        if (found) {
+          return found;
+        }
+      }
+    }
+
+    return null;
+  };
+
   describe('rendering', () => {
     it('renders string title', () => {
       const { getByText } = render(<SectionHeader title="Assets" />);
@@ -134,7 +171,7 @@ describe('SectionHeader', () => {
       expect(getByTestId('section-header-title-acc')).toBeOnTheScreen();
     });
 
-    it('renders children below the title row', () => {
+    it('renders children below the header row', () => {
       const { getByText, getByTestId } = render(
         <SectionHeader title="Section">
           <Text testID={CHILDREN_TEST_ID}>Subtitle</Text>
@@ -143,6 +180,27 @@ describe('SectionHeader', () => {
 
       expect(getByText('Section')).toBeOnTheScreen();
       expect(getByTestId(CHILDREN_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('uses a vertical outer wrapper when children are provided', () => {
+      const { getByTestId } = render(
+        <SectionHeader title="Section" testID={ROOT_TEST_ID}>
+          <Text testID={CHILDREN_TEST_ID}>Subtitle</Text>
+        </SectionHeader>,
+      );
+
+      const rootInstance = getByTestId(ROOT_TEST_ID);
+
+      expect(rootInstance).not.toHaveStyle(tw`flex-row`);
+      expect(countDirectChildInstances(rootInstance)).toBe(2);
+    });
+
+    it('uses a horizontal outer wrapper when children are omitted', () => {
+      const { getByTestId } = render(
+        <SectionHeader title="Section" testID={ROOT_TEST_ID} />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`flex-row`);
     });
 
     it('renders children when title is an empty string', () => {
@@ -155,7 +213,7 @@ describe('SectionHeader', () => {
       expect(getByTestId(CHILDREN_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('renders children between start and end accessories', () => {
+    it('renders children with start and end accessories', () => {
       const { getByTestId } = render(
         <SectionHeader
           title="Section"
@@ -303,6 +361,45 @@ describe('SectionHeader', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`gap-1`);
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pb-2 pt-3`);
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
+    });
+
+    it('applies shrink and min-w-0 to mainContent when row accessories are present', () => {
+      const tree = createRenderer(
+        <SectionHeader title="Section" endIconName={IconName.ArrowRight} />,
+      );
+
+      expect(
+        findInstanceWithStyle(tree.root, tw`min-w-0 shrink`),
+      ).not.toBeNull();
+    });
+
+    it('applies w-full shrink and min-w-0 to the title row when row accessories are present', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          endIconName={IconName.ArrowRight}
+          titleWrapperProps={{ testID: TITLE_ROW_TEST_ID }}
+        />,
+      );
+
+      expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`w-full`);
+      expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`shrink`);
+      expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`min-w-0`);
+    });
+
+    it('merges titleWrapperProps twClassName when row accessories are absent', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          titleWrapperProps={{
+            testID: TITLE_ROW_TEST_ID,
+            twClassName: 'mt-4',
+          }}
+        />,
+      );
+
+      expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`mt-4`);
+      expect(getByTestId(TITLE_ROW_TEST_ID)).not.toHaveStyle(tw`w-full`);
     });
   });
 

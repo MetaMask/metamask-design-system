@@ -1,7 +1,6 @@
+import { ButtonSemanticSize } from '@metamask/design-system-shared';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
-
-import { ButtonBaseSize } from '../ButtonBase';
 
 import { ButtonSemantic } from './ButtonSemantic';
 import { ButtonSemanticSeverity } from './ButtonSemantic.types';
@@ -40,22 +39,23 @@ describe('ButtonSemantic', () => {
       expect(getByText('Danger Button')).toBeDefined();
     });
 
-    it.each([ButtonBaseSize.Sm, ButtonBaseSize.Md, ButtonBaseSize.Lg])(
-      'renders with %s size',
-      (size) => {
-        const { getByText } = render(
-          <ButtonSemantic
-            severity={ButtonSemanticSeverity.Success}
-            size={size}
-            onPress={mockOnPress}
-          >
-            Button
-          </ButtonSemantic>,
-        );
+    it.each([
+      ButtonSemanticSize.Sm,
+      ButtonSemanticSize.Md,
+      ButtonSemanticSize.Lg,
+    ])('renders with %s size', (size) => {
+      const { getByText } = render(
+        <ButtonSemantic
+          severity={ButtonSemanticSeverity.Success}
+          size={size}
+          onPress={mockOnPress}
+        >
+          Button
+        </ButtonSemantic>,
+      );
 
-        expect(getByText('Button')).toBeDefined();
-      },
-    );
+      expect(getByText('Button')).toBeDefined();
+    });
 
     it('uses large size by default', () => {
       const { getByText } = render(

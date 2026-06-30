@@ -1,1 +1,4 @@
-export { type SegmentedControlPropsShared } from './SegmentedControl.types';
+export {
+  SegmentedControlSize,
+  type SegmentedControlPropsShared,
+} from './SegmentedControl.types';

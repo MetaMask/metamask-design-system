@@ -6,6 +6,7 @@ ButtonSemantic is a semantic button component that provides predefined color sch
 import {
   ButtonSemantic,
   ButtonSemanticSeverity,
+  ButtonSemanticSize,
 } from '@metamask/design-system-react-native';
 
 <ButtonSemantic
@@ -46,22 +47,22 @@ Optional prop to control the size of the button.
 
 Available sizes:
 
-- `ButtonBaseSize.Sm` (32px)
-- `ButtonBaseSize.Md` (40px)
-- `ButtonBaseSize.Lg` (48px)
+- `ButtonSemanticSize.Sm` (32px)
+- `ButtonSemanticSize.Md` (40px)
+- `ButtonSemanticSize.Lg` (48px)
 
-| TYPE             | REQUIRED | DEFAULT             |
-| ---------------- | -------- | ------------------- |
-| `ButtonBaseSize` | No       | `ButtonBaseSize.Lg` |
+| TYPE                 | REQUIRED | DEFAULT                 |
+| -------------------- | -------- | ----------------------- |
+| `ButtonSemanticSize` | No       | `ButtonSemanticSize.Lg` |
 
 ```tsx
-<ButtonSemantic severity={ButtonSemanticSeverity.Success} size={ButtonBaseSize.Sm}>
+<ButtonSemantic severity={ButtonSemanticSeverity.Success} size={ButtonSemanticSize.Sm}>
   Small
 </ButtonSemantic>
 <ButtonSemantic severity={ButtonSemanticSeverity.Success}>
   Large (default)
 </ButtonSemantic>
-<ButtonSemantic severity={ButtonSemanticSeverity.Success} size={ButtonBaseSize.Lg}>
+<ButtonSemantic severity={ButtonSemanticSeverity.Success} size={ButtonSemanticSize.Lg}>
   Large
 </ButtonSemantic>
 ```

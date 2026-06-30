@@ -1,7 +1,7 @@
 import {
-  ButtonBaseSize,
   FilterButtonGroupContext,
   FilterButtonVariant,
+  SegmentedControlSize,
   mergeTwClassName,
 } from '@metamask/design-system-shared';
 import React, { Children, useMemo } from 'react';
@@ -14,7 +14,7 @@ import type { SegmentedControlProps } from './SegmentedControl.types';
 export const SegmentedControl = ({
   value,
   onChange,
-  size = ButtonBaseSize.Sm,
+  size = SegmentedControlSize.Sm,
   isFullWidth = false,
   children,
   twClassName,

@@ -25,6 +25,9 @@ export type ButtonSize = ButtonBaseSize;
 export const ButtonHeroSize = ButtonBaseSize;
 export type ButtonHeroSize = ButtonBaseSize;
 
+export const ButtonSemanticSize = ButtonBaseSize;
+export type ButtonSemanticSize = ButtonBaseSize;
+
 /**
  * ButtonBase component shared props (ADR-0004)
  * Platform-independent properties shared across React and React Native

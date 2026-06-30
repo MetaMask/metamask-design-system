@@ -26,7 +26,7 @@ import { SectionHeader } from '@metamask/design-system-react-native';
 
 ### `titleAccessory`
 
-Optional node to the right of `title` in the inner row. Only visible when `title` is renderable.
+Optional node to the right of `title` in the **inner** title row. Only visible when `title` is renderable. Use for metadata or actions tied to the title itself (for example an info icon beside "Tokens"). **Do not** use for trailing row icons such as chevrons or navigation arrows; use `endIconName` / `endIconProps` or `endAccessory` on the **outer** header row instead.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -48,7 +48,7 @@ import {
 
 ### `children`
 
-Optional content rendered below the title row in the middle column, between `startAccessory` / `startIconName` and `endAccessory` / `endIconName`. Use for subtitles or other supporting content.
+Optional full-width content rendered below the header row. Use for subtitles or other supporting content.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -69,9 +69,37 @@ import {
 </SectionHeader>;
 ```
 
+## Accessory slots
+
+`SectionHeader` has two horizontal rows of concern:
+
+| Slot                 | Props                                                              | Use for                                                                   |
+| -------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| **Inner title row**  | `titleAccessory`                                                   | Inline metadata beside the title (info icon, badge, short label)          |
+| **Outer header row** | `startIconName` / `startAccessory`, `endIconName` / `endAccessory` | Leading avatars or icons; trailing chevrons, actions, or custom end nodes |
+
+When implementing designs or stories, map Figma trailing chevrons (`>`, `ArrowRight`) to `endIconName` (and `endIconProps`), not `titleAccessory`—even when the chevron appears visually close to the title.
+
+```tsx
+// Correct — trailing chevron on the outer row
+<SectionHeader
+  title="How it works"
+  endIconName={IconName.ArrowRight}
+  endIconProps={{ size: IconSize.Sm }}
+/>
+
+// Incorrect — chevron belongs on the outer row, not the title row
+<SectionHeader
+  title="How it works"
+  titleAccessory={<Icon name={IconName.ArrowRight} size={IconSize.Sm} />}
+/>
+```
+
+See the `Children` Storybook story for a title + description + trailing chevron example.
+
 ### `startIconName`
 
-Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconDefault`; override with `startIconProps`.
+Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconDefault`; override with `startIconProps`.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -85,7 +113,7 @@ import { SectionHeader, IconName } from '@metamask/design-system-react-native';
 
 ### `endIconName`
 
-Optional icon name for the end of the **outer** row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconAlternative`; override with `endIconProps`.
+Optional icon name for the end of the **outer** header row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconAlternative`; override with `endIconProps`. Use for trailing chevrons, disclosure arrows, and other row-level affordances (including beside titles like "How it works"). **Do not** place these icons in `titleAccessory`.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |

@@ -1,9 +1,13 @@
-import { FilterButtonVariant } from '@metamask/design-system-shared';
+import {
+  FilterButtonSize,
+  FilterButtonVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
 
+import { Box } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
 
 import { FilterButton } from './FilterButton';
@@ -21,6 +25,11 @@ const meta: Meta<FilterButtonProps> = {
     },
     isSelected: {
       control: 'boolean',
+    },
+    size: {
+      control: 'select',
+      options: Object.keys(FilterButtonSize),
+      mapping: FilterButtonSize,
     },
     isDisabled: {
       control: 'boolean',
@@ -88,6 +97,24 @@ export const Variant: Story = {
         onPress={noopPress}
       />
     </FilterButtonStoryWrapper>
+  ),
+};
+
+export const Size: Story = {
+  render: () => (
+    <Box gap={4} twClassName="p-4">
+      {Object.keys(FilterButtonSize).map((sizeKey) => (
+        <FilterButton
+          key={sizeKey}
+          variant={FilterButtonVariant.Primary}
+          isSelected
+          size={FilterButtonSize[sizeKey as keyof typeof FilterButtonSize]}
+          onPress={noopPress}
+        >
+          {sizeKey}
+        </FilterButton>
+      ))}
+    </Box>
   ),
 };
 
