@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: Add Code Connect for IconAlert ([#1293](https://github.com/MetaMask/metamask-design-system/pull/1293))
+- fix(dsrn): move SectionHeader children below header row ([#1298](https://github.com/MetaMask/metamask-design-system/pull/1298))
+- fix: add component-scoped size aliases and document prop const convention ([#1297](https://github.com/MetaMask/metamask-design-system/pull/1297))
+- chore: Add Code Connect for SegmentedControl ([#1291](https://github.com/MetaMask/metamask-design-system/pull/1291))
+- chore: Add Code Connect for FilterButton ([#1292](https://github.com/MetaMask/metamask-design-system/pull/1292))
+- fix: Refine TitleAlert API and update associated documentation ([#1268](https://github.com/MetaMask/metamask-design-system/pull/1268))
+- chore: polish tag neutral variant ([#1294](https://github.com/MetaMask/metamask-design-system/pull/1294))
+- feat(BannerAlert): add Neutral severity variant ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
+- chore: drop Node.js 20 and 22 support, require Node.js 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+- fix(BannerBase): align spacing and action button with Figma (web and mobile) ([#1269](https://github.com/MetaMask/metamask-design-system/pull/1269))
+- fix(BannerAlert): remove left border and padding override ([#1270](https://github.com/MetaMask/metamask-design-system/pull/1270))
+- chore: Add Code Connect for TitleStandard ([#1254](https://github.com/MetaMask/metamask-design-system/pull/1254))
+- feat(ButtonIcon): add ButtonIconSize.Xs with 20px dimension and IconSize.Sm mapping ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
+- chore: Polish padding for MainActionButtons ([#1246](https://github.com/MetaMask/metamask-design-system/pull/1246))
+- refactor: added children to sectionheader ([#1267](https://github.com/MetaMask/metamask-design-system/pull/1267))
+- chore: Add Code Connect for Switch ([#1256](https://github.com/MetaMask/metamask-design-system/pull/1256))
+- chore: Add Code Connect for TitleHub ([#1252](https://github.com/MetaMask/metamask-design-system/pull/1252))
+- fix(react-native): update BottomSheetFooter padding ([#1265](https://github.com/MetaMask/metamask-design-system/pull/1265))
+- fix(react-native): align BottomSheetHeader horizontal padding with Figma ([#1264](https://github.com/MetaMask/metamask-design-system/pull/1264))
+- revert: Align React TextButton with React Native API (#1224) ([#1224](https://github.com/MetaMask/metamask-design-system/pull/1224))
+- chore: Upgrade Code Connect to 1.4.8 to enable support for slot archi… ([#1260](https://github.com/MetaMask/metamask-design-system/pull/1260))
+
 ## [0.30.2]
 
 ### Fixed

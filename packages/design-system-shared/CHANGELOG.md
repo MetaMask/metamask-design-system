@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix(dsrn): move SectionHeader children below header row ([#1298](https://github.com/MetaMask/metamask-design-system/pull/1298))
+- fix: add component-scoped size aliases and document prop const convention ([#1297](https://github.com/MetaMask/metamask-design-system/pull/1297))
+- fix: Refine TitleAlert API and update associated documentation ([#1268](https://github.com/MetaMask/metamask-design-system/pull/1268))
+- feat(BannerAlert): add Neutral severity variant ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
+- chore: drop Node.js 20 and 22 support, require Node.js 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+- feat(ButtonIcon): add ButtonIconSize.Xs with 20px dimension and IconSize.Sm mapping ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
+- refactor: added children to sectionheader ([#1267](https://github.com/MetaMask/metamask-design-system/pull/1267))
+
 ## [0.24.0]
 
 ### Changed

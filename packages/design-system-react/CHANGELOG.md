@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: align Modal stories with extension legacy modal stories ([#1285](https://github.com/MetaMask/metamask-design-system/pull/1285))
+- chore: polish tag neutral variant ([#1294](https://github.com/MetaMask/metamask-design-system/pull/1294))
+- feat(BannerAlert): add Neutral severity variant ([#1287](https://github.com/MetaMask/metamask-design-system/pull/1287))
+- chore: drop Node.js 20 and 22 support, require Node.js 24 ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+- fix(BannerBase): align spacing and action button with Figma (web and mobile) ([#1269](https://github.com/MetaMask/metamask-design-system/pull/1269))
+- fix(BannerAlert): remove left border and padding override (web) ([#1283](https://github.com/MetaMask/metamask-design-system/pull/1283))
+- feat(ButtonIcon): add ButtonIconSize.Xs with 20px dimension and IconSize.Sm mapping ([#1266](https://github.com/MetaMask/metamask-design-system/pull/1266))
+
 ## [0.28.0]
 
 ### Changed
