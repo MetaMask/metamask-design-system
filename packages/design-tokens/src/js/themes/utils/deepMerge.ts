@@ -14,6 +14,9 @@ export type DeepPartial<T> = {
 /**
  * Returns true only for plain `{}` objects — not arrays, null, class instances,
  * or primitives. Used to decide whether to recurse rather than overwrite.
+ *
+ * @param value - The value to check.
+ * @returns True if the value is a plain object.
  */
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -29,6 +32,10 @@ const isPlainObject = (value: unknown): value is Record<string, unknown> =>
  *   recurses so only the specified leaf tokens are replaced.
  * - For all other value types (strings, numbers, arrays), the override
  *   replaces the base value outright.
+ *
+ * @param base - The complete base object (e.g. darkTheme.colors).
+ * @param overrides - A partial object containing only the values to override.
+ * @returns A new object with overrides deeply merged into base.
  *
  * @example
  * const theme = deepMerge(darkTheme.colors, { background: { default: '#000' } });
