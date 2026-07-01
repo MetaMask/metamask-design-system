@@ -125,6 +125,7 @@ import GlobalSearch from './GlobalSearch';
 import Global from './Global';
 import Graph from './Graph';
 import Group from './Group';
+import HardDrive from './HardDrive';
 import Hardware from './Hardware';
 import HashTag from './HashTag';
 import HeartFilled from './HeartFilled';
@@ -418,6 +419,7 @@ export const Icons = {
   Global,
   Graph,
   Group,
+  HardDrive,
   Hardware,
   HashTag,
   HeartFilled,

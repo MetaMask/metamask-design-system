@@ -125,6 +125,7 @@ import GlobalSearchSVG from './assets/global-search.svg';
 import GlobalSVG from './assets/global.svg';
 import GraphSVG from './assets/graph.svg';
 import GroupSVG from './assets/group.svg';
+import HardDriveSVG from './assets/hard-drive.svg';
 import HardwareSVG from './assets/hardware.svg';
 import HashTagSVG from './assets/hash-tag.svg';
 import HeartFilledSVG from './assets/heart-filled.svg';
@@ -422,6 +423,7 @@ export const assetByIconName: AssetByIconName = {
   Global: GlobalSVG,
   Graph: GraphSVG,
   Group: GroupSVG,
+  HardDrive: HardDriveSVG,
   Hardware: HardwareSVG,
   HashTag: HashTagSVG,
   HeartFilled: HeartFilledSVG,
