@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: Add harddrive icon ([#1302](https://github.com/MetaMask/metamask-design-system/pull/1302))
+
 ## [0.31.0]
 
 ### Added
