@@ -1,6 +1,7 @@
-import React from 'react';
+import { PureBlackContext } from '@metamask/design-system-shared';
+import React, { useContext } from 'react';
 
-import { lightTheme as lightThemeJS, darkTheme as darkThemeJS } from '../src';
+import { lightTheme as lightThemeJS, resolveDarkTheme } from '../src';
 
 import { ColorSwatch, ColorSwatchGroup } from './components';
 import {
@@ -91,7 +92,15 @@ export const CSSLightTheme = {
 
 export const CSSDarkTheme = {
   render: () => {
-    const darkThemeColors = getCSSVariablesFromStylesheet('--color-', 'dark');
+    const { isPureBlack } = useContext(PureBlackContext);
+    const darkThemeColors = getCSSVariablesFromStylesheet(
+      '--color-',
+      'dark',
+      isPureBlack,
+    );
+    const backgroundDefault =
+      resolveDarkTheme(isPureBlack).colors.background.default;
+
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {Object.entries(darkThemeColors).map(
@@ -103,10 +112,7 @@ export const CSSDarkTheme = {
               backgroundColor={colorName}
               borderColor="var(--color-border-muted)"
               textBackgroundColor="transparent"
-              textColor={getContrastYIQ(
-                color,
-                darkThemeJS.colors.background.default,
-              )}
+              textColor={getContrastYIQ(color, backgroundDefault)}
             />
           ),
         )}
@@ -145,7 +151,10 @@ export const JSLightTheme = {
 
 export const JSDarkTheme = {
   render: () => {
-    const colors = getJSColors(darkThemeJS.colors);
+    const { isPureBlack } = useContext(PureBlackContext);
+    const darkTheme = resolveDarkTheme(isPureBlack);
+    const colors = getJSColors(darkTheme.colors);
+
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {colors.map(({ name, color }) => (
@@ -155,7 +164,7 @@ export const JSDarkTheme = {
             textBackgroundColor="transparent"
             textColor={getContrastYIQ(
               color,
-              darkThemeJS.colors.background.default,
+              darkTheme.colors.background.default,
             )}
             name={name}
           />

@@ -2,6 +2,7 @@ import React from 'react';
 import '../../../packages/design-tokens/dist/styles.css';
 import '../tailwind.css';
 
+import { PureBlackContext } from '@metamask/design-system-shared';
 import { Preview } from '@storybook/react-vite';
 import { StoryContext, StoryFn } from '@storybook/react-vite';
 
@@ -20,28 +21,67 @@ export const globalTypes = {
       icon: 'paintbrush',
     },
   },
+  isPureBlack: {
+    name: 'Pure black',
+    description: 'Use pure black dark theme (OLED)',
+    defaultValue: false,
+    toolbar: {
+      icon: 'contrast',
+      items: [
+        { value: false, title: 'Grey dark' },
+        { value: true, title: 'Pure black' },
+      ],
+      showName: true,
+    },
+  },
 };
+
+/** Storybook may serialize toolbar booleans as strings in URL/globals. */
+function parseIsPureBlack(value: unknown): boolean {
+  return value === true || value === 'true';
+}
 
 function withColorScheme(Story: StoryFn, context: StoryContext) {
   const storyColorScheme = context.parameters.colorScheme;
   const globalColorScheme = context.globals.colorScheme;
+  const isPureBlack = parseIsPureBlack(context.globals.isPureBlack);
 
   // Use story-level parameter if available, otherwise fall back to global
   const colorScheme = storyColorScheme || globalColorScheme;
 
   function Wrapper({
     children,
-    ...props
-  }: { children: React.ReactNode } & Record<string, any>) {
-    return (
+    className,
+  }: {
+    children: React.ReactNode;
+    className?: 'light' | 'dark';
+  }) {
+    const inner = (
       <div
-        {...props}
         style={{
           padding: '1rem',
           backgroundColor: 'var(--color-background-default)',
         }}
       >
         {children}
+      </div>
+    );
+
+    if (className === 'light') {
+      return <div className="light">{inner}</div>;
+    }
+
+    // Pure-black CSS requires [data-pure-black] inside .dark (see pure-black-dark-theme-colors.css).
+    return (
+      <div className="dark">
+        <PureBlackContext.Provider value={{ isPureBlack }}>
+          <div
+            data-pure-black={isPureBlack ? 'true' : undefined}
+            style={{ display: 'contents' }}
+          >
+            {inner}
+          </div>
+        </PureBlackContext.Provider>
       </div>
     );
   }
