@@ -174,3 +174,5 @@ export type { ButtonFilterProps } from './ButtonFilter';
 
 export { Toast, Toaster, toast, ToastSeverity } from './Toast';
 export type { ToastOptions, ToastProps, ToasterProps } from './Toast';
+
+export { PureBlackProvider, usePureBlack } from './PureBlackProvider';
