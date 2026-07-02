@@ -57,6 +57,9 @@ const getToastProps = ({
   ...toastProps
 }: ToastOptions): Omit<ToastProps, 'twClassName'> => toastProps;
 
+const getHiddenTranslateY = (height: number, offset: number) =>
+  -(height + offset);
+
 const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
   ({ twClassName, ...props }, ref) => {
     const tw = useTailwind();
@@ -107,7 +110,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         replacementTimerRef.current = null;
       }
       translateYProgress.value = withSpring(
-        -toastHeight.value,
+        getHiddenTranslateY(toastHeight.value, topOffset),
         TOAST_SPRING_CONFIG,
         () => {
           runOnJS(resetState)();
@@ -146,7 +149,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
 
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
       const { height } = e.nativeEvent.layout;
-      const hiddenTranslateY = -height;
+      const hiddenTranslateY = getHiddenTranslateY(height, topOffset);
       const visibleTranslateY = topInset + TOAST_TOP_PADDING;
 
       toastHeight.value = height;
