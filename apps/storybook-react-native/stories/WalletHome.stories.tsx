@@ -1,37 +1,37 @@
 import {
-  AvatarAccount,
   AvatarAccountVariant,
   AvatarBaseShape,
-  AvatarToken,
   AvatarTokenSize,
-  BadgeCount,
-  BadgeWrapper,
-  BadgeNetwork,
-  Box,
+  BadgeStatusStatus,
+  BadgeWrapperPosition,
   BoxAlignItems,
   BoxBackgroundColor,
   BoxBorderColor,
   BoxFlexDirection,
   BoxFlexWrap,
   BoxJustifyContent,
-  Button,
-  ButtonBase,
-  ButtonIcon,
   ButtonSize,
   ButtonVariant,
   FontWeight,
-  Icon,
-  IconName,
   IconColor,
-  Text,
-  TextButton,
+  IconName,
+  IconSize,
   TextColor,
   TextVariant,
-  BadgeWrapperPosition,
-  BadgeStatus,
-  BadgeStatusStatus,
-  IconSize,
-} from '@metamask/design-system-react-native';
+} from '@metamask/design-system-shared';
+import { AvatarAccount } from '@metamask/design-system-react-native/components/AvatarAccount';
+import { AvatarToken } from '@metamask/design-system-react-native/components/AvatarToken';
+import { BadgeCount } from '@metamask/design-system-react-native/components/BadgeCount';
+import { BadgeNetwork } from '@metamask/design-system-react-native/components/BadgeNetwork';
+import { BadgeStatus } from '@metamask/design-system-react-native/components/BadgeStatus';
+import { BadgeWrapper } from '@metamask/design-system-react-native/components/BadgeWrapper';
+import { Box } from '@metamask/design-system-react-native/components/Box';
+import { Button } from '@metamask/design-system-react-native/components/Button';
+import { ButtonBase } from '@metamask/design-system-react-native/components/ButtonBase';
+import { ButtonIcon } from '@metamask/design-system-react-native/components/ButtonIcon';
+import { Icon } from '@metamask/design-system-react-native/components/Icon';
+import { Text } from '@metamask/design-system-react-native/components/Text';
+import { TextButton } from '@metamask/design-system-react-native/components/TextButton';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
