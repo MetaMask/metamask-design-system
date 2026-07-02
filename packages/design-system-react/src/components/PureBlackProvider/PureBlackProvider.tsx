@@ -27,7 +27,7 @@ export const PureBlackProvider = ({
         // would leave a misleading data-pure-black attribute on the DOM.
         data-pure-black={isPureBlack ? 'true' : undefined}
         // Carrier for data-pure-black only; children layout as if unwrapped.
-        style={{ display: 'contents' }}
+        className="contents"
       >
         {children}
       </div>
