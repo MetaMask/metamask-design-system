@@ -3,6 +3,8 @@ export {
   brandColor,
   lightTheme,
   darkTheme,
+  pureBlackDarkTheme,
+  resolveDarkTheme,
   typography,
   fontFamilies,
   AnimationDuration,

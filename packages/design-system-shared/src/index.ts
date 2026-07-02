@@ -254,6 +254,13 @@ export {
   type FilterButtonGroupContextValue,
 } from './contexts/FilterButtonGroup';
 
+// PureBlack context
+export {
+  PureBlackContext,
+  type PureBlackContextValue,
+  type PureBlackProviderProps,
+} from './contexts/PureBlack';
+
 // SelectButton types (ADR-0003 + ADR-0004)
 export {
   SelectButtonSize,

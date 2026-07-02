@@ -15,11 +15,13 @@ export type Color = {
  *
  * @param varPrefix - The prefix of the CSS variables to retrieve.
  * @param theme - The theme to retrieve variables for ('light' or 'dark').
+ * @param isPureBlack - When true with dark theme, apply pure-black CSS variable overrides.
  * @returns An object containing the retrieved CSS variables.
  */
 export const getCSSVariablesFromStylesheet = (
   varPrefix: string,
   theme: 'light' | 'dark' = 'light',
+  isPureBlack = false,
 ): Color => {
   const cssVariables: Color = {};
 
@@ -30,6 +32,9 @@ export const getCSSVariablesFromStylesheet = (
   if (theme === 'dark') {
     tempDiv.setAttribute('data-theme', 'dark');
     tempDiv.classList.add('dark');
+    if (isPureBlack) {
+      tempDiv.setAttribute('data-pure-black', 'true');
+    }
   } else {
     tempDiv.setAttribute('data-theme', 'light');
     tempDiv.classList.add('light');

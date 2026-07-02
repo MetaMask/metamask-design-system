@@ -20,6 +20,19 @@ export const globalTypes = {
       icon: 'paintbrush',
     },
   },
+  isPureBlack: {
+    name: 'Pure black',
+    description: 'Use pure black dark theme (OLED) in Design Tokens stories',
+    defaultValue: false,
+    toolbar: {
+      icon: 'contrast',
+      items: [
+        { value: false, title: 'Grey dark' },
+        { value: true, title: 'Pure black' },
+      ],
+      showName: true,
+    },
+  },
 };
 
 function withColorScheme(Story: StoryFn, context: StoryContext) {

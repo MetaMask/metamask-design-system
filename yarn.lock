@@ -3369,6 +3369,7 @@ __metadata:
   dependencies:
     "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/design-system-react": "workspace:^"
+    "@metamask/design-system-shared": "workspace:^"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
