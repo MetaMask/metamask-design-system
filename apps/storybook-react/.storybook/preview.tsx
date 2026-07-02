@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../../packages/design-tokens/dist/styles.css';
 import '../tailwind.css';
 
@@ -41,6 +41,34 @@ function parseIsPureBlack(value: unknown): boolean {
   return value === true || value === 'true';
 }
 
+/**
+ * Storybook-only: Modal and other portaled UI render on document.body, outside
+ * the decorator wrapper. Mirror dark / pure-black theme attrs on <html> so CSS
+ * variables resolve the same as in the extension (which sets .dark on the root).
+ */
+function StorybookDocumentThemeSync({
+  isPureBlack,
+}: {
+  isPureBlack: boolean;
+}) {
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+
+    if (isPureBlack) {
+      document.documentElement.setAttribute('data-pure-black', 'true');
+    } else {
+      document.documentElement.removeAttribute('data-pure-black');
+    }
+
+    return () => {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.removeAttribute('data-pure-black');
+    };
+  }, [isPureBlack]);
+
+  return null;
+}
+
 function withColorScheme(Story: StoryFn, context: StoryContext) {
   const storyColorScheme = context.parameters.colorScheme;
   const globalColorScheme = context.globals.colorScheme;
@@ -52,9 +80,11 @@ function withColorScheme(Story: StoryFn, context: StoryContext) {
   function Wrapper({
     children,
     className,
+    syncDocumentTheme = false,
   }: {
     children: React.ReactNode;
     className?: 'light' | 'dark';
+    syncDocumentTheme?: boolean;
   }) {
     const inner = (
       <div
@@ -73,9 +103,14 @@ function withColorScheme(Story: StoryFn, context: StoryContext) {
 
     // Pure-black CSS requires [data-pure-black] inside .dark (see pure-black-dark-theme-colors.css).
     return (
-      <div className="dark">
-        <PureBlackProvider isPureBlack={isPureBlack}>{inner}</PureBlackProvider>
-      </div>
+      <>
+        {syncDocumentTheme && (
+          <StorybookDocumentThemeSync isPureBlack={isPureBlack} />
+        )}
+        <div className="dark">
+          <PureBlackProvider isPureBlack={isPureBlack}>{inner}</PureBlackProvider>
+        </div>
+      </>
     );
   }
 
@@ -89,7 +124,7 @@ function withColorScheme(Story: StoryFn, context: StoryContext) {
 
   if (colorScheme === 'dark') {
     return (
-      <Wrapper className="dark">
+      <Wrapper className="dark" syncDocumentTheme>
         <Story {...context} />
       </Wrapper>
     );
