@@ -3,22 +3,16 @@ import {
   BoxAlignItems,
   BoxBackgroundColor,
   BoxFlexDirection,
-} from '@metamask/design-system-react-native/components/Box';
-import {
-  Button,
-  ButtonVariant,
-} from '@metamask/design-system-react-native/components/Button';
-import {
   Icon,
   IconColor,
   IconName,
-} from '@metamask/design-system-react-native/components/Icon';
-import {
   Text,
+  TextButton,
   TextColor,
   TextVariant,
-} from '@metamask/design-system-react-native/components/Text';
-import { TextButton } from '@metamask/design-system-react-native/components/TextButton';
+  Button,
+  ButtonVariant,
+} from '@metamask/design-system-react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';

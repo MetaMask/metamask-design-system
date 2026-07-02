@@ -1,23 +1,12 @@
 import {
   AvatarAccount,
   AvatarAccountVariant,
-} from '@metamask/design-system-react-native/components/AvatarAccount';
-import { AvatarBaseShape } from '@metamask/design-system-react-native/components/AvatarBase';
-import {
+  AvatarBaseShape,
   AvatarToken,
   AvatarTokenSize,
-} from '@metamask/design-system-react-native/components/AvatarToken';
-import { BadgeCount } from '@metamask/design-system-react-native/components/BadgeCount';
-import { BadgeNetwork } from '@metamask/design-system-react-native/components/BadgeNetwork';
-import {
-  BadgeStatus,
-  BadgeStatusStatus,
-} from '@metamask/design-system-react-native/components/BadgeStatus';
-import {
+  BadgeCount,
   BadgeWrapper,
-  BadgeWrapperPosition,
-} from '@metamask/design-system-react-native/components/BadgeWrapper';
-import {
+  BadgeNetwork,
   Box,
   BoxAlignItems,
   BoxBackgroundColor,
@@ -25,27 +14,24 @@ import {
   BoxFlexDirection,
   BoxFlexWrap,
   BoxJustifyContent,
-} from '@metamask/design-system-react-native/components/Box';
-import {
   Button,
+  ButtonBase,
+  ButtonIcon,
   ButtonSize,
   ButtonVariant,
-} from '@metamask/design-system-react-native/components/Button';
-import { ButtonBase } from '@metamask/design-system-react-native/components/ButtonBase';
-import { ButtonIcon } from '@metamask/design-system-react-native/components/ButtonIcon';
-import {
-  Icon,
-  IconColor,
-  IconName,
-  IconSize,
-} from '@metamask/design-system-react-native/components/Icon';
-import {
-  Text,
   FontWeight,
+  Icon,
+  IconName,
+  IconColor,
+  Text,
+  TextButton,
   TextColor,
   TextVariant,
-} from '@metamask/design-system-react-native/components/Text';
-import { TextButton } from '@metamask/design-system-react-native/components/TextButton';
+  BadgeWrapperPosition,
+  BadgeStatus,
+  BadgeStatusStatus,
+  IconSize,
+} from '@metamask/design-system-react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
