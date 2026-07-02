@@ -3,15 +3,16 @@ import type { PureBlackProviderProps } from '@metamask/design-system-shared';
 import React, { useContext, useMemo } from 'react';
 
 /**
- * Applies pure-black (OLED) dark mode for web consumers.
+ * React context for pure-black (OLED) dark mode on web.
  *
  * Controlled component: the app owns when pure black is active (e.g. feature
- * flag and resolved dark theme) and passes `isPureBlack`. Sets `data-pure-black`
- * so CSS from `@metamask/design-tokens` can override variables under `.dark`.
+ * flag and resolved dark theme) and passes `isPureBlack`. CSS token overrides
+ * come from `data-pure-black` on the document root (see extension `setTheme`);
+ * this provider supplies `usePureBlack()` for components that branch in JS.
  *
  * @param options - Component props
  * @param options.children - Child components to render
- * @param options.isPureBlack - When true, pure-black token overrides apply
+ * @param options.isPureBlack - When true, `usePureBlack()` returns true
  * @returns React component that provides pure-black context to children
  */
 export const PureBlackProvider = ({
@@ -22,15 +23,7 @@ export const PureBlackProvider = ({
 
   return (
     <PureBlackContext.Provider value={value}>
-      <div
-        // Omit the attribute when false — React renders false as "false", which
-        // would leave a misleading data-pure-black attribute on the DOM.
-        data-pure-black={isPureBlack ? 'true' : undefined}
-        // Carrier for data-pure-black only; children layout as if unwrapped.
-        className="contents"
-      >
-        {children}
-      </div>
+      {children}
     </PureBlackContext.Provider>
   );
 };
