@@ -1,4 +1,8 @@
-import { lightTheme, darkTheme } from '@metamask/design-tokens';
+import {
+  darkTheme,
+  lightTheme,
+  pureBlackDarkTheme,
+} from '@metamask/design-tokens';
 
 import { Theme } from './Theme.types';
 
@@ -73,4 +77,17 @@ const flattenColors = (
 export const themeColors: Record<Theme, Record<string, string>> = {
   [Theme.Light]: flattenColors(lightTheme.colors),
   [Theme.Dark]: flattenColors(darkTheme.colors),
+};
+
+export const pureBlackThemeColors = flattenColors(pureBlackDarkTheme.colors);
+
+export const getThemeColors = (
+  theme: Theme,
+  isPureBlack = false,
+): Record<string, string> => {
+  if (theme === Theme.Dark && isPureBlack) {
+    return pureBlackThemeColors;
+  }
+
+  return themeColors[theme];
 };
