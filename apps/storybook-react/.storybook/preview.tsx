@@ -110,7 +110,12 @@ function withColorScheme(Story: StoryFn, context: StoryContext) {
   }) {
     if (theme === 'dark') {
       return (
-        <div data-theme="dark">
+        <div
+          data-theme="dark"
+          // Both mode: scoped wrapper must carry data-pure-black — context-only
+          // PureBlackProvider no longer sets DOM attributes (see #1312).
+          data-pure-black={isPureBlack ? 'true' : undefined}
+        >
           <PureBlackProvider isPureBlack={isPureBlack}>
             {children}
           </PureBlackProvider>
