@@ -5,6 +5,7 @@ import type { StorybookConfig } from '@storybook/react-native-web-vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import babel from '@rolldown/plugin-babel';
+import { designSystemBarrelImportsPlugin } from './vite-plugin-design-system-barrel-imports';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -69,6 +70,12 @@ const config: StorybookConfig = {
     return {
       ...viteConfig,
       plugins: [
+        designSystemBarrelImportsPlugin(
+          path.resolve(
+            repoRoot,
+            'packages/design-system-react-native/src/components/index.ts',
+          ),
+        ),
         svgr({
           include: '**/*.svg',
         }),
