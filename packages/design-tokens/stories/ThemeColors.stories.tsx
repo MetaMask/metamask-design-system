@@ -9,12 +9,14 @@ import {
   getContrastYIQ,
   getJSColors,
   useJsonColor,
+  withPureBlackContext,
 } from './test-utils';
 import README from './ThemeColors.mdx';
 
 const meta = {
   title: 'Design Tokens/Color/Theme Colors',
   component: ColorSwatchGroup,
+  decorators: [withPureBlackContext],
   parameters: {
     docs: {
       page: README,

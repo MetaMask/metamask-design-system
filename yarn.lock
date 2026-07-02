@@ -3565,7 +3565,6 @@ __metadata:
   dependencies:
     "@chromatic-com/storybook": "npm:^5.2.1"
     "@metamask/design-system-react": "workspace:^"
-    "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
     "@metamask/utils": "npm:^11.11.0"
