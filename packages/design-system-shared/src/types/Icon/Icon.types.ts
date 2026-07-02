@@ -173,6 +173,7 @@ export const IconName = {
   Global: 'Global',
   Graph: 'Graph',
   Group: 'Group',
+  HardDrive: 'HardDrive',
   Hardware: 'Hardware',
   HashTag: 'HashTag',
   HeartFilled: 'HeartFilled',
