@@ -1,3 +1,4 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 import { createRequire } from 'node:module';
 import path, { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -5,6 +6,8 @@ import type { StorybookConfig } from '@storybook/react-native-web-vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import babel from '@rolldown/plugin-babel';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
