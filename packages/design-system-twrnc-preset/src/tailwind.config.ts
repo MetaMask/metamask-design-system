@@ -1,7 +1,7 @@
 import { brandColor } from '@metamask/design-tokens';
 import type { TwConfig } from 'twrnc';
 
-import { themeColors } from './colors';
+import { getThemeColors } from './colors';
 import type { Theme } from './Theme.types';
 import { typographyTailwindConfig } from './typography';
 
@@ -42,10 +42,14 @@ const extractColorsByPrefix = (
  * and other style properties for use in React Native with `twrnc`.
  *
  * @param theme - The theme ('light' or 'dark'). Specifies whether to use light or dark mode styles.
+ * @param isPureBlack - When true with dark theme, uses pureBlackDarkTheme token values.
  * @returns A Tailwind CSS configuration object with extended theme properties and plugins.
  */
-export const generateTailwindConfig = (theme: Theme): TwConfig => {
-  const designSystemColors = themeColors[theme];
+export const generateTailwindConfig = (
+  theme: Theme,
+  isPureBlack = false,
+): TwConfig => {
+  const designSystemColors = getThemeColors(theme, isPureBlack);
 
   if (!designSystemColors) {
     console.error('Theme colors not found.');
