@@ -30,6 +30,10 @@ export type BottomSheetDialogProps = {
    */
   keyboardAvoidingViewEnabled?: boolean;
   /**
+   * Optional callback invoked when the sheet begins closing (before animation).
+   */
+  onDismissStart?: () => void;
+  /**
    * Optional callback that gets triggered when the sheet is closed.
    */
   onClose?: (hasPendingAction?: boolean) => void;

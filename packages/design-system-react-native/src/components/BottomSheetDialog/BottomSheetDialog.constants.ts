@@ -1,17 +1,32 @@
 import { AnimationDuration } from '@metamask/design-tokens';
+import type { WithSpringConfig } from 'react-native-reanimated';
 
-// Defaults
+/** iOS-like sheet spring: natural deceleration with minimal overshoot on open. */
+export const DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG = {
+  damping: 28,
+  stiffness: 320,
+  mass: 0.9,
+  overshootClamping: true,
+} as const satisfies WithSpringConfig;
+
+type BottomSheetDialogSpringOverrides = Partial<
+  Pick<WithSpringConfig, 'velocity' | 'reduceMotion' | 'energyThreshold'>
+>;
+
+export const getBottomSheetDialogSpringConfig = (
+  overrides?: BottomSheetDialogSpringOverrides,
+): WithSpringConfig => ({
+  ...DEFAULT_BOTTOMSHEETDIALOG_SPRING_CONFIG,
+  ...overrides,
+});
+
 /**
- * The animation duration used for initial render.
+ * Minimum swipe velocity (px/s) to treat the gesture as a fling for snap/dismiss.
  */
-export const DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION =
-  AnimationDuration.Fast;
-/**
- * This number represents the swipe speed to meet the velocity threshold.
- */
-export const DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION =
+export const DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_VELOCITY =
   AnimationDuration.Regularly;
+
 /**
- * This indicates that 60% of the sheet needs to be offscreen to meet the distance threshold.
+ * Fraction of sheet height dragged down before dismiss without a fling.
  */
 export const DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD = 0.6;
