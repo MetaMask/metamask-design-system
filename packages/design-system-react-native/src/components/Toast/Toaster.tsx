@@ -17,15 +17,15 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withDelay,
-  withTiming,
+  withSpring,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Internal dependencies.
 import { Toast } from './Toast';
 import {
-  TOAST_ANIMATION_DURATION,
-  TOAST_BOTTOM_PADDING,
+  TOAST_SPRING_CONFIG,
+  TOAST_TOP_PADDING,
   TOAST_VISIBILITY_DURATION,
 } from './Toast.constants';
 import type {
@@ -50,9 +50,9 @@ const assertRegisteredRef = (method: 'dismiss' | 'toast'): ToasterRef => {
 };
 
 const getToastProps = ({
-  bottomOffset: _bottomOffset,
   hasNoTimeout: _hasNoTimeout,
   onClose: _onClose,
+  topOffset: _topOffset,
   twClassName: _twClassName,
   ...toastProps
 }: ToastOptions): Omit<ToastProps, 'twClassName'> => toastProps;
@@ -66,14 +66,15 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const replacementTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
       null,
     );
-    const { bottom: bottomNotchSpacing } = useSafeAreaInsets();
-    const translateYProgress = useSharedValue(screenHeight);
-    const bottomOffset = toastOptions?.bottomOffset ?? 0;
+    const { top: topInset } = useSafeAreaInsets();
+    const toastHeight = useSharedValue(screenHeight);
+    const translateYProgress = useSharedValue(-screenHeight);
+    const topOffset = toastOptions?.topOffset ?? 0;
     const animatedStyle = useAnimatedStyle(() => ({
-      transform: [{ translateY: translateYProgress.value - bottomOffset }],
+      transform: [{ translateY: translateYProgress.value + topOffset }],
     }));
     const baseStyle: StyleProp<ViewStyle> = useMemo(
-      () => [tw.style('absolute left-4 right-4 bottom-0'), animatedStyle],
+      () => [tw.style('absolute left-4 right-4 top-0'), animatedStyle],
       [tw, animatedStyle],
     );
     const innerRef = useRef<ToasterRef | null>(null);
@@ -105,9 +106,9 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         clearTimeout(replacementTimerRef.current);
         replacementTimerRef.current = null;
       }
-      translateYProgress.value = withTiming(
-        screenHeight,
-        { duration: TOAST_ANIMATION_DURATION },
+      translateYProgress.value = withSpring(
+        -toastHeight.value,
+        TOAST_SPRING_CONFIG,
         () => {
           runOnJS(resetState)();
         },
@@ -145,24 +146,27 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
 
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
       const { height } = e.nativeEvent.layout;
-      const translateYToValue = -(TOAST_BOTTOM_PADDING + bottomNotchSpacing);
+      const hiddenTranslateY = -height;
+      const visibleTranslateY = topInset + TOAST_TOP_PADDING;
 
-      translateYProgress.value = height;
+      toastHeight.value = height;
+      translateYProgress.value = hiddenTranslateY;
 
       if (toastOptions.hasNoTimeout) {
-        translateYProgress.value = withTiming(translateYToValue, {
-          duration: TOAST_ANIMATION_DURATION,
-        });
+        translateYProgress.value = withSpring(
+          visibleTranslateY,
+          TOAST_SPRING_CONFIG,
+        );
       } else {
-        translateYProgress.value = withTiming(
-          translateYToValue,
-          { duration: TOAST_ANIMATION_DURATION },
+        translateYProgress.value = withSpring(
+          visibleTranslateY,
+          TOAST_SPRING_CONFIG,
           () => {
             translateYProgress.value = withDelay(
               TOAST_VISIBILITY_DURATION,
-              withTiming(
-                height,
-                { duration: TOAST_ANIMATION_DURATION },
+              withSpring(
+                hiddenTranslateY,
+                TOAST_SPRING_CONFIG,
                 runOnJS(resetState),
               ),
             );
