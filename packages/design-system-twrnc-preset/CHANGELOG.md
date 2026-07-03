@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add isPureBlack to TWRNC ThemeProvider and RN Storybook ([#1306](https://github.com/MetaMask/metamask-design-system/pull/1306))
+
 ## [0.6.0]
 
 ### Changed

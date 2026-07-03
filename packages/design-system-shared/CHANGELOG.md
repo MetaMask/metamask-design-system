@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add pureBlackDarkTheme and shared PureBlack context ([#1300](https://github.com/MetaMask/metamask-design-system/pull/1300))
+
 ## [0.26.0]
 
 ### Added

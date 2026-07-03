@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: make PureBlackProvider context-only for web ([#1312](https://github.com/MetaMask/metamask-design-system/pull/1312))
+- feat: add PureBlackProvider and wire Storybook preview ([#1305](https://github.com/MetaMask/metamask-design-system/pull/1305))
+- feat: add pureBlackDarkTheme and shared PureBlack context ([#1300](https://github.com/MetaMask/metamask-design-system/pull/1300))
+
 ## [8.6.0]
 
 ### Changed
