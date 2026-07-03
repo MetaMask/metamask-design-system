@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.31.0]
+
+### Added
+
+- Added `PureBlackProvider` and `usePureBlack` for OLED pure-black dark mode; on web, CSS token overrides come from `data-pure-black` on the document root while the provider supplies context for component logic ([#1305](https://github.com/MetaMask/metamask-design-system/pull/1305), [#1312](https://github.com/MetaMask/metamask-design-system/pull/1312))
+
+### Changed
+
+- Updated `ModalContent` to use `background.alternative` for the dialog surface when pure-black mode is active, giving modals visible elevation on OLED black backgrounds ([#1308](https://github.com/MetaMask/metamask-design-system/pull/1308))
+
 ## [0.30.0]
 
 ### Added
@@ -404,7 +414,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.30.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.31.0...HEAD
+[0.31.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.30.0...@metamask/design-system-react@0.31.0
 [0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.29.0...@metamask/design-system-react@0.30.0
 [0.29.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.28.0...@metamask/design-system-react@0.29.0
 [0.28.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.27.1...@metamask/design-system-react@0.28.0

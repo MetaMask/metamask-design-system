@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.7.0]
+
+### Added
+
+- Added `pureBlackDarkTheme` and `resolveDarkTheme(isPureBlack)` for OLED pure-black dark mode token values ([#1300](https://github.com/MetaMask/metamask-design-system/pull/1300))
+
 ## [8.6.0]
 
 ### Changed
@@ -447,7 +453,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.6.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...HEAD
+[8.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.6.0...@metamask/design-tokens@8.7.0
 [8.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.5.0...@metamask/design-tokens@8.6.0
 [8.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.4.0...@metamask/design-tokens@8.5.0
 [8.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.3.0...@metamask/design-tokens@8.4.0
