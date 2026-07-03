@@ -5,7 +5,7 @@ on:
 
 jobs:
   test-storybook:
-    name: Test Storybook (accessibility & stories)
+    name: Test Storybook (React & React Native stories)
     runs-on: ubuntu-latest
     strategy:
       matrix:
