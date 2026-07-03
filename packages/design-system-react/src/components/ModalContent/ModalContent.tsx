@@ -10,6 +10,7 @@ import {
 } from '../Box';
 import { useModalContext } from '../Modal';
 import { ModalFocus } from '../ModalFocus';
+import { usePureBlack } from '../PureBlackProvider';
 
 import {
   MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR,
@@ -38,6 +39,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
       restoreFocus,
       autoFocus,
     } = useModalContext();
+    const isPureBlack = usePureBlack();
     const modalDialogRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
@@ -94,7 +96,11 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
           <Box
             ref={modalDialogRef as React.Ref<HTMLDivElement>}
             asChild
-            backgroundColor={BoxBackgroundColor.BackgroundDefault}
+            backgroundColor={
+              isPureBlack
+                ? BoxBackgroundColor.BackgroundAlternative
+                : BoxBackgroundColor.BackgroundDefault
+            }
             justifyContent={BoxJustifyContent.Start}
             alignItems={BoxAlignItems.Stretch}
             flexDirection={BoxFlexDirection.Column}
