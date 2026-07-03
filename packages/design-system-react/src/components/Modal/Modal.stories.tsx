@@ -264,9 +264,13 @@ export const FinalFocusRef: Story = {
           >
             Open modal
           </Button>
-          <button ref={buttonRef} type="button">
+          <Button
+            ref={buttonRef}
+            variant={ButtonVariant.Secondary}
+            onClick={() => undefined}
+          >
             Receives focus after close
-          </button>
+          </Button>
         </Box>
         <Modal
           {...modalArgs}
