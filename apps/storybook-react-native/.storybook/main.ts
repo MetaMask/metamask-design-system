@@ -6,6 +6,8 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import babel from '@rolldown/plugin-babel';
 
+const __filename = fileURLToPath(import.meta.url);
+
 const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '../../..');
@@ -54,8 +56,11 @@ const config: StorybookConfig = {
       : [];
     rolldownPlugins.push(
       babel({
-        exclude: /node_modules\/(?!.*(react-native-reanimated|react-native-worklets))/,
-        plugins: [['react-native-worklets/plugin', { disableSourceMaps: true }]],
+        exclude:
+          /node_modules\/(?!.*(react-native-reanimated|react-native-worklets))/,
+        plugins: [
+          ['react-native-worklets/plugin', { disableSourceMaps: true }],
+        ],
         babelrc: false,
         configFile: false,
       }),
@@ -69,16 +74,13 @@ const config: StorybookConfig = {
         }),
         tsconfigPaths({
           ignoreConfigErrors: true,
-          projects: [path.resolve(repoRoot, 'apps/storybook-react-native/tsconfig.json')],
+          projects: [
+            path.resolve(repoRoot, 'apps/storybook-react-native/tsconfig.json'),
+          ],
         }),
         ...filteredPlugins,
       ],
-      assetsInclude: [
-        '**/*.woff2',
-        '**/*.woff',
-        '**/*.ttf',
-        '**/*.otf',
-      ],
+      assetsInclude: ['**/*.woff2', '**/*.woff', '**/*.ttf', '**/*.otf'],
       optimizeDeps: {
         ...viteConfig.optimizeDeps,
         exclude: [
@@ -103,15 +105,24 @@ const config: StorybookConfig = {
               )),
           {
             find: '@metamask/design-system-shared',
-            replacement: path.resolve(repoRoot, 'packages/design-system-shared/src'),
+            replacement: path.resolve(
+              repoRoot,
+              'packages/design-system-shared/src',
+            ),
           },
           {
             find: '@metamask/design-system-react-native',
-            replacement: path.resolve(repoRoot, 'packages/design-system-react-native/src'),
+            replacement: path.resolve(
+              repoRoot,
+              'packages/design-system-react-native/src',
+            ),
           },
           {
             find: '@metamask/design-system-twrnc-preset',
-            replacement: path.resolve(repoRoot, 'packages/design-system-twrnc-preset/src'),
+            replacement: path.resolve(
+              repoRoot,
+              'packages/design-system-twrnc-preset/src',
+            ),
           },
           {
             find: '@metamask/design-tokens',
