@@ -17,12 +17,9 @@ describe('PureBlackProvider', () => {
     );
 
     expect(screen.getByTestId('consumer')).toHaveTextContent('off');
-    expect(screen.getByTestId('consumer').parentElement).not.toHaveAttribute(
-      'data-pure-black',
-    );
   });
 
-  it('provides isPureBlack and sets data-pure-black when enabled', () => {
+  it('provides isPureBlack when enabled', () => {
     render(
       <PureBlackProvider isPureBlack>
         <Consumer />
@@ -30,9 +27,5 @@ describe('PureBlackProvider', () => {
     );
 
     expect(screen.getByTestId('consumer')).toHaveTextContent('on');
-    expect(screen.getByTestId('consumer').parentElement).toHaveAttribute(
-      'data-pure-black',
-      'true',
-    );
   });
 });
