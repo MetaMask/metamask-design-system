@@ -64,7 +64,7 @@
     "@metamask/utils": "^11.11.0",
     "@react-native/babel-preset": "0.81.5",
     "@react-native/typescript-config": "0.81.5",
-    "@storybook/react-native": "10.4.4",
+    "@storybook/react-native": "10.4.7",
     "@testing-library/react-native": "^13.3.3",
     "@ts-bridge/cli": "^0.6.3",
     "@types/babel__preset-env": "^7",
@@ -85,7 +85,7 @@
     "react-native-svg-transformer": "^1.5.3",
     "react-native-worklets": "patch:react-native-worklets@npm%3A0.5.1#~/.yarn/patches/react-native-worklets-npm-0.5.1-dcf1422a19.patch",
     "react-test-renderer": "19.1.0",
-    "storybook": "10.4.2",
+    "storybook": "10.4.6",
     "ts-jest": "^29.2.5",
     "tsx": "^4.20.6",
     "typescript": "~5.2.2"
