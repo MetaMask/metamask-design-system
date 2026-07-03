@@ -9,11 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.33.0]
 
-### Uncategorized
+### Changed
 
-- feat: update BottomSheetDialog for pure-black elevated surface ([#1307](https://github.com/MetaMask/metamask-design-system/pull/1307))
-- chore: upgrade Storybook to 10.4.6 across monorepo ([#1309](https://github.com/MetaMask/metamask-design-system/pull/1309))
-- chore: Add Code Connect for MainActionButton ([#1250](https://github.com/MetaMask/metamask-design-system/pull/1250))
+- Updated `BottomSheetDialog` to use `background.alternative` and pure-black shadow tokens when pure-black mode is active via `usePureBlack` from `@metamask/design-system-twrnc-preset` ([#1307](https://github.com/MetaMask/metamask-design-system/pull/1307))
 
 ## [0.32.0]
 

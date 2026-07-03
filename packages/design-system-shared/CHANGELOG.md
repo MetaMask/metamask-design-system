@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.27.0]
 
-### Uncategorized
+### Added
 
-- feat: add pureBlackDarkTheme and shared PureBlack context ([#1300](https://github.com/MetaMask/metamask-design-system/pull/1300))
+- Added `PureBlackContext`, `PureBlackContextValue`, and `PureBlackProviderProps` for cross-platform pure-black dark mode state ([#1300](https://github.com/MetaMask/metamask-design-system/pull/1300))
 
 ## [0.26.0]
 

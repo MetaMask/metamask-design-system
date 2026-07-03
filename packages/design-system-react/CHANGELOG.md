@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.31.0]
 
-### Uncategorized
+### Added
 
-- fix: make PureBlackProvider context-only for web ([#1312](https://github.com/MetaMask/metamask-design-system/pull/1312))
-- feat: update ModalContent for pure-black elevated surface ([#1308](https://github.com/MetaMask/metamask-design-system/pull/1308))
-- feat: add PureBlackProvider and wire Storybook preview ([#1305](https://github.com/MetaMask/metamask-design-system/pull/1305))
+- Added `PureBlackProvider` and `usePureBlack` for OLED pure-black dark mode; on web, CSS token overrides come from `data-pure-black` on the document root while the provider supplies context for component logic ([#1305](https://github.com/MetaMask/metamask-design-system/pull/1305), [#1312](https://github.com/MetaMask/metamask-design-system/pull/1312))
+
+### Changed
+
+- Updated `ModalContent` to use `background.alternative` for the dialog surface when pure-black mode is active, giving modals visible elevation on OLED black backgrounds ([#1308](https://github.com/MetaMask/metamask-design-system/pull/1308))
 
 ## [0.30.0]
 
