@@ -1,5 +1,5 @@
-import { PureBlackContext } from '@metamask/design-system-shared';
-import React, { useContext } from 'react';
+import { usePureBlack } from '@metamask/design-system-react';
+import React from 'react';
 
 import { lightTheme as lightThemeJS, resolveDarkTheme } from '../src';
 
@@ -9,14 +9,12 @@ import {
   getContrastYIQ,
   getJSColors,
   useJsonColor,
-  withPureBlackContext,
 } from './test-utils';
 import README from './ThemeColors.mdx';
 
 const meta = {
   title: 'Design Tokens/Color/Theme Colors',
   component: ColorSwatchGroup,
-  decorators: [withPureBlackContext],
   parameters: {
     docs: {
       page: README,
@@ -94,7 +92,7 @@ export const CSSLightTheme = {
 
 export const CSSDarkTheme = {
   render: () => {
-    const { isPureBlack } = useContext(PureBlackContext);
+    const isPureBlack = usePureBlack();
     const darkThemeColors = getCSSVariablesFromStylesheet(
       '--color-',
       'dark',
@@ -153,7 +151,7 @@ export const JSLightTheme = {
 
 export const JSDarkTheme = {
   render: () => {
-    const { isPureBlack } = useContext(PureBlackContext);
+    const isPureBlack = usePureBlack();
     const darkTheme = resolveDarkTheme(isPureBlack);
     const colors = getJSColors(darkTheme.colors);
 
