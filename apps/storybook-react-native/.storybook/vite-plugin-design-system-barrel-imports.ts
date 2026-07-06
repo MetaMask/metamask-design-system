@@ -6,7 +6,7 @@ const PACKAGE_NAME = '@metamask/design-system-react-native';
 
 /**
  * Maps public export names to their component directory under `src/components/`.
- * Built from `packages/design-system-react-native/src/components/index.ts`.
+ * Parsed from `components/index.ts` so the rewrite stays in sync with the package barrel.
  */
 function buildExportMap(componentsIndexPath: string): Map<string, string> {
   const content = fs.readFileSync(componentsIndexPath, 'utf8');
@@ -40,6 +40,7 @@ function buildExportMap(componentsIndexPath: string): Map<string, string> {
 const BARREL_IMPORT_PATTERN =
   /import\s+(type\s+)?\{([^}]+)\}\s+from\s+['"]@metamask\/design-system-react-native['"]\s*;?/g;
 
+/** Split a barrel import into one import statement per component subpath. */
 function rewriteBarrelImports(
   code: string,
   exportMap: Map<string, string>,
@@ -84,9 +85,18 @@ function rewriteBarrelImports(
 /**
  * Rewrites package-root barrel imports to direct component subpath imports.
  *
- * Source files keep production-style `import { Box } from '@metamask/design-system-react-native'`,
- * but the Storybook static build avoids Rolldown's shared barrel orchestrator chunk that
- * eagerly initializes unrelated components and races on cold CDN loads (React error #130).
+ * Example stories intentionally use production-style imports:
+ * `import { Box } from '@metamask/design-system-react-native'`
+ *
+ * When Vite resolves those through `src/index.ts` → `src/components/index.ts`, Rolldown
+ * creates a shared "orchestrator" chunk that runs before per-component inits and eagerly
+ * loads unrelated modules (Avatar, Badge, Jazzicon, etc.). On cold CDN loads, ~45 parallel
+ * preloads make init order non-deterministic and a component binding can still be `undefined`
+ * at render time → React error #130 ("Element type is invalid").
+ *
+ * Rewriting to `@metamask/design-system-react-native/components/<Component>` at build time
+ * preserves the documented import style in source while matching the init order of direct
+ * component imports (which do not hit this race).
  */
 export function designSystemBarrelImportsPlugin(
   componentsIndexPath: string,
@@ -95,6 +105,7 @@ export function designSystemBarrelImportsPlugin(
 
   return {
     name: 'design-system-barrel-imports',
+    // Run before other transforms so downstream plugins see resolved subpath imports.
     enforce: 'pre',
     transform(code, id) {
       if (!/\.(?:[cm]?[jt]sx?)$/.test(id)) {

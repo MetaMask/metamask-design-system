@@ -70,6 +70,11 @@ const config: StorybookConfig = {
     return {
       ...viteConfig,
       plugins: [
+        // Example stories import from the package barrel to mirror production usage, but the
+        // static build must not resolve those through `src/index.ts`. Rolldown otherwise emits
+        // a shared orchestrator chunk that inits Avatar/Badge (and other) modules before the
+        // components a story actually renders, which races on cold CDN preloads → React #130.
+        // This plugin rewrites barrel imports to component subpaths at build time only.
         designSystemBarrelImportsPlugin(
           path.resolve(
             repoRoot,
