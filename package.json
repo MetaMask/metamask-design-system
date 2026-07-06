@@ -26,10 +26,10 @@
     "figma:connect:react-native": "figma connect --config packages/design-system-react-native/figma.config.json",
     "figma:connect:publish": "yarn figma:connect:publish:react && yarn figma:connect:publish:react-native",
     "figma:connect:publish:dry-run": "yarn figma:connect:publish:react:dry-run && yarn figma:connect:publish:react-native:dry-run",
-    "figma:connect:publish:react": "figma connect publish --config packages/design-system-react/figma.config.json",
-    "figma:connect:publish:react:dry-run": "figma connect publish --dry-run --config packages/design-system-react/figma.config.json",
-    "figma:connect:publish:react-native": "figma connect publish --config packages/design-system-react-native/figma.config.json",
-    "figma:connect:publish:react-native:dry-run": "figma connect publish --dry-run --config packages/design-system-react-native/figma.config.json",
+    "figma:connect:publish:react": "figma connect publish --exit-on-unreadable-files --config packages/design-system-react/figma.config.json",
+    "figma:connect:publish:react:dry-run": "figma connect publish --dry-run --exit-on-unreadable-files --config packages/design-system-react/figma.config.json",
+    "figma:connect:publish:react-native": "figma connect publish --exit-on-unreadable-files --config packages/design-system-react-native/figma.config.json",
+    "figma:connect:publish:react-native:dry-run": "figma connect publish --dry-run --exit-on-unreadable-files --config packages/design-system-react-native/figma.config.json",
     "figma:connect:unpublish": "yarn figma:connect:unpublish:react && yarn figma:connect:unpublish:react-native",
     "figma:connect:unpublish:react": "figma connect unpublish --config packages/design-system-react/figma.config.json",
     "figma:connect:unpublish:react-native": "figma connect unpublish --config packages/design-system-react-native/figma.config.json",
@@ -53,7 +53,7 @@
     "test:scripts": "NODE_OPTIONS=--experimental-vm-modules yarn jest --config ./jest.config.scripts.js --silent",
     "test:storybook": "yarn workspace @metamask/storybook-react test-storybook",
     "test:verbose": "yarn workspaces foreach --all --parallel --verbose run test:verbose",
-    "update-readme-content": "tsx scripts/update-readme-content.ts",
+    "validate:figma-code-connect-changes": "tsx scripts/validate-figma-code-connect-changes.ts",
     "workspaces:list-versions": "./scripts/list-workspace-versions.sh"
   },
   "simple-git-hooks": {
