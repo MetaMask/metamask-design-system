@@ -10,21 +10,32 @@ Storybook app for validating `@metamask/design-system-react-native` components i
 
 ## Runtime policy
 
-| Mode                                                         | Status                     | Use case                                        |
-| ------------------------------------------------------------ | -------------------------- | ----------------------------------------------- |
-| Development build (`expo run:*` + `expo start --dev-client`) | Supported                  | Primary and required validation path            |
-| Storybook web (`storybook dev` / static build)               | Supported                  | Browser-based component review and sharing      |
-| Expo Go (`expo start --ios` / `--android`)                   | Unsupported for validation | Smoke checks only; known native module failures |
+| Mode                                                         | Status                     | Use case                                    |
+| ------------------------------------------------------------ | -------------------------- | ------------------------------------------- |
+| Development build (`expo run:*` + `expo start --dev-client`) | Supported                  | Primary and required validation path        |
+| Storybook web (`storybook dev` / static build)               | Supported                  | Browser-based component review and sharing  |
+| Expo Go (`expo start --ios` / `--android`)                   | Unsupported for validation | Known Reanimated/Worklets native mismatches |
+
+Reanimated 4 + Worklets require a **development build**. Expo Go cannot load our current JS stack (Reanimated 4.3 / Worklets 0.8.3 on Expo SDK 54) because its prebuilt native binaries are older.
 
 ## Run Storybook (supported flow)
 
+### First time, or after native dependency changes
+
+Build and install the dev client on a simulator or device:
+
 ```bash
-# 1) Build and install the native clients
+yarn storybook:ios:build
+yarn storybook:android:build
+```
+
+### Day-to-day development
+
+Start Metro and open the installed dev client (runs `prestorybook` to regenerate story manifests):
+
+```bash
 yarn storybook:ios
 yarn storybook:android
-
-# 2) Start Metro for dev-client
-yarn workspace @metamask/storybook-react-native exec expo start --dev-client
 ```
 
 If you are running Mobile and Storybook side-by-side, use a separate Metro port:
@@ -45,27 +56,33 @@ yarn workspace @metamask/storybook-react-native build-storybook
 
 ## Version alignment policy
 
-This app should remain aligned with Mobile versions (currently Expo 52 / RN 0.76.x) rather than tracking newer Storybook template stacks (for example Expo 55) ahead of Mobile.
+Storybook native validation uses a **development build**, so it can run Reanimated/Worklets versions ahead of Expo Go. Peer dependencies on `@metamask/design-system-react-native` are aligned with Mobile's Expo SDK 55 platform bump ([metamask-mobile#32281](https://github.com/MetaMask/metamask-mobile/pull/32281)): `react-native-reanimated >=4.2.0` and `react-native-worklets >=0.7.4`.
+
+Expo Go alignment will improve once Storybook follows Mobile to Expo SDK 55.
 
 ## Known Expo Go behavior (expected)
 
-- iOS Expo Go can throw repeated Reanimated Worklets initialization errors.
-- Android Expo Go can fail with missing DateTimePicker native module (`RNCMaterialDatePicker`).
-- These are dependency/runtime mismatches in Expo Go for our current alignment, not dev-build blockers.
+- iOS/Android Expo Go throws Reanimated Worklets initialization errors with our current stack.
+- Android Expo Go can also fail with missing DateTimePicker native module (`RNCMaterialDatePicker`).
+- Use the dev build scripts above instead.
 
 ## Troubleshooting
 
 ### No development build is installed
 
 ```text
-› Opening on Android...
 CommandError: No development build (com.metamask.storybook) for this project is installed.
 Please make and install a development build on the device first.
 ```
 
 ```bash
-yarn workspace @metamask/storybook-react-native exec expo run:android
-yarn workspace @metamask/storybook-react-native exec expo start --dev-client --android
+yarn storybook:ios:build
+yarn storybook:ios
+```
+
+```bash
+yarn storybook:android:build
+yarn storybook:android
 ```
 
 ### Failed to locate Android application identifier
@@ -74,11 +91,11 @@ yarn workspace @metamask/storybook-react-native exec expo start --dev-client --a
 CommandError: Failed to locate the android application identifier in the "android/" folder.
 ```
 
-This means the local `android/` folder is partial or malformed. Regenerate it cleanly:
+Regenerate native projects cleanly, then rebuild:
 
 ```bash
 yarn workspace @metamask/storybook-react-native exec expo prebuild --clean --platform android
-yarn storybook:android
+yarn storybook:android:build
 ```
 
 ### Android install fails with insufficient storage
