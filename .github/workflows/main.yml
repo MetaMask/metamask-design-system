@@ -66,6 +66,16 @@ jobs:
         with:
           commit-starts-with: 'Release [version],Release v[version],Release/[version],Release/v[version],Release `[version]`'
 
+  figma-code-connect:
+    name: Figma Code Connect
+    needs: check-workflows
+    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    uses: ./.github/workflows/figma-code-connect.yml
+    with:
+      publish: ${{ github.event_name == 'push' }}
+    secrets:
+      FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+
   is-release:
     name: Determine whether this is a release merge commit
     needs: lint-build-test
@@ -100,6 +110,7 @@ jobs:
       - lint-build-test
       - test-storybook
       - chromatic
+      - figma-code-connect
     outputs:
       passed: ${{ steps.set-output.outputs.passed }}
     steps:
