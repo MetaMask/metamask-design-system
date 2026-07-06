@@ -32,9 +32,16 @@ module.exports = merge(
         statements: 84,
       },
     },
-    preset: 'react-native',
     transform: {
-      '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+      '^.+\\.(js|jsx|ts|tsx)$': [
+        'babel-jest',
+        {
+          presets: [
+            'module:metro-react-native-babel-preset',
+            '@babel/preset-typescript',
+          ],
+        },
+      ],
     },
     transformIgnorePatterns: [
       'node_modules/(?!(react-native|@react-native|@react-navigation)/)',
