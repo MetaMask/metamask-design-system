@@ -3,9 +3,9 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { Box } from '../Box';
 import { BottomSheetFooter } from '../BottomSheetFooter';
 import { BottomSheetHeader } from '../BottomSheetHeader';
+import { Box } from '../Box';
 import { Text } from '../Text';
 
 import { BottomSheet } from './BottomSheet';
@@ -37,9 +37,7 @@ figma.connect(
 
       return (
         <BottomSheet goBack={goBack} isFullscreen={isFullscreen}>
-          <BottomSheetHeader onClose={goBack}>
-            {header.title}
-          </BottomSheetHeader>
+          <BottomSheetHeader onClose={goBack}>{header.title}</BottomSheetHeader>
           <Box twClassName="p-4">
             <Text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
