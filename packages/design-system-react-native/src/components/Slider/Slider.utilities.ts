@@ -166,7 +166,7 @@ export function defaultFormatStepLabel(step: number): string {
   return `${step}%`;
 }
 
-/** Dot `left` offset; edge steps inset so dots stay inside the track. */
+/** Marker `left` percent for range dots and labels; edge steps inset to stay on track. */
 export function getDotLeftPercent(step: number): string {
   if (step === 0) {
     return '2%';

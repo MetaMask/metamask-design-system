@@ -89,7 +89,7 @@ export const Default: Story = {
 
 export const ShowRangeLabels: Story = {
   render: () => (
-    <Box gap={6}>
+    <Box gap={12}>
       <ControlledSlider value={50} />
       <ControlledSlider value={50} showRangeLabels />
     </Box>
@@ -98,7 +98,7 @@ export const ShowRangeLabels: Story = {
 
 export const ShowRangeDots: Story = {
   render: () => (
-    <Box gap={6}>
+    <Box gap={12}>
       <ControlledSlider value={50} />
       <ControlledSlider value={50} showRangeDots />
     </Box>
@@ -118,7 +118,7 @@ export const RangeLabelSteps: Story = {
 
 export const Step: Story = {
   render: () => (
-    <Box gap={6}>
+    <Box gap={12}>
       <ControlledSlider value={50} step={1} showRangeLabels showRangeDots />
       <ControlledSlider value={50} step={5} showRangeLabels showRangeDots />
     </Box>
@@ -127,7 +127,7 @@ export const Step: Story = {
 
 export const IsDisabled: Story = {
   render: () => (
-    <Box gap={6}>
+    <Box gap={12}>
       <ControlledSlider value={50} showRangeLabels showRangeDots />
       <ControlledSlider value={50} showRangeLabels showRangeDots isDisabled />
     </Box>

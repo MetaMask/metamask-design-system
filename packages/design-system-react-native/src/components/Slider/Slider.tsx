@@ -16,6 +16,8 @@ import { Text } from '../Text';
 import {
   DEFAULT_RANGE_LABEL_STEPS,
   DEFAULT_TICK_THRESHOLDS,
+  RANGE_LABEL_TOP,
+  THUMB_BOTTOM_OFFSET,
   THUMB_LEFT_OFFSET,
   THUMB_SIZE,
   THUMB_TOP_OFFSET,
@@ -140,7 +142,9 @@ export const Slider = ({
       twClassName={twClassName}
     >
       <GestureDetector gesture={gesture}>
-        <Animated.View style={tw.style('relative')}>
+        <Animated.View
+          style={[tw.style('relative'), { height: THUMB_BOTTOM_OFFSET }]}
+        >
           <Animated.View
             style={tw.style(
               'absolute left-0 top-0 h-2 w-full rounded-full bg-border-muted',
@@ -154,6 +158,19 @@ export const Slider = ({
               progressStyle,
             ]}
           />
+          {showRangeDots &&
+            rangeLabelSteps.map((rangeStep) => (
+              <Box
+                key={`dot-${rangeStep}`}
+                pointerEvents="none"
+                twClassName="absolute top-0.5 h-1 w-1 rounded-full bg-text-muted"
+                style={{
+                  left: getDotLeftPercent(rangeStep) as ViewStyle['left'],
+                  transform: [{ translateX: -2 }],
+                  zIndex: -2,
+                }}
+              />
+            ))}
           <Animated.View
             style={[
               tw.style('absolute rounded-full bg-icon-default'),
@@ -171,35 +188,17 @@ export const Slider = ({
         </Animated.View>
       </GestureDetector>
 
-      {showRangeDots &&
-        rangeLabelSteps.map((rangeStep) => (
-          <Box
-            key={`dot-${rangeStep}`}
-            pointerEvents="none"
-            twClassName="absolute top-0.5 h-1 w-1 rounded-full bg-text-muted"
-            style={{
-              left: getDotLeftPercent(rangeStep) as ViewStyle['left'],
-              transform: [{ translateX: -2 }],
-              zIndex: -2,
-            }}
-          />
-        ))}
-
       {showRangeLabels &&
         rangeLabelSteps.map((rangeStep) => (
           <Pressable
             key={`label-${rangeStep}`}
             style={[
-              tw.style(
-                'absolute top-3.5 items-center',
-                rangeStep === 0 && 'left-0',
-                rangeStep === 100 && 'right-0',
-                rangeStep !== 0 && rangeStep !== 100 && '-translate-x-[15px]',
-              ),
-              rangeStep !== 0 &&
-                rangeStep !== 100 && {
-                  left: `${rangeStep}%` as ViewStyle['left'],
-                },
+              tw.style('absolute items-center'),
+              {
+                top: RANGE_LABEL_TOP,
+                left: getDotLeftPercent(rangeStep) as ViewStyle['left'],
+                transform: [{ translateX: '-50%' }],
+              },
             ]}
             onPress={() => handlePressStep(rangeStep)}
             disabled={isDisabled}
@@ -208,7 +207,6 @@ export const Slider = ({
               variant={TextVariant.BodyMd}
               fontWeight={FontWeight.Medium}
               color={TextColor.TextAlternative}
-              twClassName="mt-2"
             >
               {formatLabel(rangeStep)}
             </Text>
