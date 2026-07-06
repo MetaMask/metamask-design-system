@@ -122,7 +122,8 @@ Use a service account or bot token with access to the [MMDS Components Figma fil
 On every pull request:
 
 1. **Change validation** — new components must include `.figma.tsx` files on both React and React Native (excluding internal primitives such as `Box`, `Text`, and modal building blocks)
-2. **Dry run** — all existing Code Connect files are parsed and validated against the Figma API, catching prop mapping drift and unreadable files
+2. **Dry run** — when `FIGMA_ACCESS_TOKEN` is configured, all existing Code Connect files are parsed and validated against the Figma API, catching prop mapping drift and unreadable files
+3. **Parse-only fallback** — when the token is not yet configured, CI still validates that all Code Connect files parse correctly (without Figma API validation) and emits a workflow warning
 
 On merge to `main`:
 

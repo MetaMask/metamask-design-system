@@ -29,17 +29,17 @@ jobs:
         if: ${{ !inputs.publish }}
         run: yarn validate:figma-code-connect-changes
 
-      - name: Dry run Code Connect publish
+      - name: Validate Code Connect
         if: ${{ !inputs.publish }}
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-        run: yarn figma:connect:publish:dry-run
+        run: yarn figma:connect:ci:validate
 
       - name: Publish Code Connect to Figma
         if: ${{ inputs.publish }}
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-        run: yarn figma:connect:publish
+        run: yarn figma:connect:ci:publish
 
       - name: Require clean working directory
         shell: bash
