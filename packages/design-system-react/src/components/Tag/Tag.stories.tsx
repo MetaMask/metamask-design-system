@@ -52,6 +52,18 @@ export const Default: Story = {
 };
 
 export const Severity: Story = {
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Showcasing all severity color pairings including muted backgrounds
+          },
+        ],
+      },
+    },
+  },
   render: () => (
     <Box
       flexDirection={BoxFlexDirection.Column}

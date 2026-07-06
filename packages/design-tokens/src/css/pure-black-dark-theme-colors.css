@@ -4,9 +4,9 @@
  * Overrides only — inherits unchanged tokens from dark-theme-colors.css
  * on the same .dark / [data-theme='dark'] ancestor.
  *
- * Supported nesting (either order):
- * - .dark > [data-pure-black='true'] > … (canonical; Storybook preview)
- * - [data-pure-black='true'] > .dark > … (PureBlackProvider wrapping a .dark root)
+ * Canonical: `[data-theme='dark'][data-pure-black='true']` on the document root
+ * (extension `setTheme`, Storybook document sync). Descendant selectors support
+ * scoped wrappers (e.g. Storybook "Both" mode side-by-side previews).
  */
 [data-theme='dark'][data-pure-black='true'],
 .dark[data-pure-black='true'],
