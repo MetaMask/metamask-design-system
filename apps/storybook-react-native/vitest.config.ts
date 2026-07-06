@@ -26,6 +26,7 @@ export default mergeConfig(
             storybookTest({
               configDir: path.join(dirname, '.storybook'),
               storybookScript: 'yarn storybook:web --ci',
+              storybookUrl: 'http://localhost:6007',
             }),
           ],
           test: {
