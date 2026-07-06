@@ -120,10 +120,10 @@ function runGitDiff(args: string[]): string[] {
       .filter(Boolean);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    console.warn(
-      `Unable to diff against ${args.at(-1)}. Skipping change validation. (${message})`,
+    // Fail validation if we cannot determine the diff, rather than silently skipping.
+    throw new Error(
+      `Unable to diff against ${args.at(-1)}. Failing change validation. (${message})`,
     );
-    return [];
   }
 }
 
