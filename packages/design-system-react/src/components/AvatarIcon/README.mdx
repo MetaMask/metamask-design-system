@@ -1,4 +1,4 @@
-import { Controls, Canvas } from '@storybook/blocks';
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
 
 import * as AvatarIconStories from './AvatarIcon.stories';
 
@@ -50,6 +50,7 @@ The `iconName` prop is required and specifies which icon to display from the des
 AvatarIcon supports five sizes, each with a corresponding icon size.
 
 Available sizes:
+
 - `AvatarIconSize.Xs` (16px) - uses IconSize.Xs (12px)
 - `AvatarIconSize.Sm` (24px) - uses IconSize.Sm (16px)
 - `AvatarIconSize.Md` (32px) - uses IconSize.Md (20px)
@@ -84,11 +85,12 @@ Available sizes:
 The `severity` prop allows you to apply predefined color combinations to the avatar and icon. Each severity level uses appropriate background and icon colors.
 
 Available severities:
+
 - `AvatarIconSeverity.Neutral` - neutral styling for general use
 - `AvatarIconSeverity.Info` - info styling for informational content
 - `AvatarIconSeverity.Success` - success styling for positive actions/states
-- `AvatarIconSeverity.Warning` - warning styling for cautionary content
-- `AvatarIconSeverity.Error` - error styling for critical issues
+ - `AvatarIconSeverity.Warning` - warning styling for cautionary content
+ - `AvatarIconSeverity.Danger` - danger styling for destructive/critical issues
 
 <table>
   <thead>
@@ -221,6 +223,8 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## Component API
 
 <Controls of={AvatarIconStories.Default} />
+
+Migrating from the extension `avatar-icon` or mobile `Avatar` icon variant? See the [AvatarIcon migration guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react/MIGRATION.md#avataricon-component) for replacing `color` with `severity` and for `iconName` naming.
 
 ## References
 

@@ -1,0 +1,359 @@
+# Styling
+
+Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Native).
+
+## Critical Rules
+
+### Component-First Approach
+
+- **ALWAYS** use design system components (Box, Text, Button) over raw JSX elements
+- **ALWAYS** prefer component props over className/twClassName when available
+- **ONLY** use className/twClassName when no equivalent prop exists
+
+**React Web:**
+
+```tsx
+// ❌ Wrong
+<div className="rounded-lg bg-alternative flex-1 p-4">
+  <span className="text-default text-s-body-md">Content</span>
+</div>
+
+// ✅ Correct
+<Box
+  borderRadius={BoxBorderRadius.Lg}
+  backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+  p={4}
+  className="flex-1" // No flex-1 prop exists, so className is fine
+>
+  <Text variant={TextVariant.BodyMd}>Content</Text>
+</Box>
+```
+
+**React Native:**
+
+```tsx
+// ❌ Wrong
+<View style={{ borderRadius: 8, backgroundColor: '#F2F4F6', padding: 16 }}>
+  <Text style={{ color: '#24272A', fontSize: 16 }}>Content</Text>
+</View>
+
+// ✅ Correct
+<Box
+  borderRadius={BoxBorderRadius.Lg}
+  backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+  p={4}
+  twClassName="flex-1" // No flex-1 prop exists, so twClassName is fine
+>
+  <Text variant={TextVariant.BodyMd}>Content</Text>
+</Box>
+```
+
+### Design Tokens Only
+
+- **ALWAYS** use design token generated classes (bg-default, text-error-default)
+- **NEVER** use default Tailwind colors (bg-blue-500, text-gray-700)
+- **NEVER** use arbitrary values (bg-[#4459ff], p-[16px]) unless critical
+- **ALWAYS** use Text component for typography, never Tailwind text classes
+
+**React Web:**
+
+```tsx
+// ❌ Wrong - Default Tailwind colors and arbitrary values
+<div className="bg-[#4459ff] text-white">
+  <p className="text-gray-900 text-lg font-medium">Title</p>
+</div>
+
+// ✅ Correct - Design tokens and Text component
+<Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+  <Text
+    variant={TextVariant.HeadingSm}
+    color={TextColor.TextDefault}
+  >
+    Title
+  </Text>
+</Box>
+```
+
+**React Native:**
+
+```tsx
+// ❌ Wrong - Hardcoded values in StyleSheet
+<View style={{ backgroundColor: '#4459ff', padding: 16 }}>
+  <Text style={{ color: '#ffffff', fontSize: 14 }}>Title</Text>
+</View>
+
+// ✅ Correct - Design tokens and Text component
+<Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+  <Text
+    variant={TextVariant.HeadingSm}
+    color={TextColor.TextDefault}
+  >
+    Title
+  </Text>
+</Box>
+```
+
+### Platform-Specific Props
+
+- **React Web:** Use `className` for Tailwind utilities
+- **React Native:** Use `twClassName` for TWRNC utilities OR `useTailwind()` hook
+- **NEVER** mix inline styles with Tailwind classes
+- **NEVER** import twrnc directly (use design system preset)
+
+**React Web:**
+
+```tsx
+// ❌ Wrong - Mixing inline styles with className
+<div style={{ padding: '16px' }} className="bg-default">
+  Content
+</div>
+
+// ✅ Correct - Component props + className when needed
+<Box
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
+  padding={4}
+  className="hover:bg-hover active:bg-pressed"
+>
+  <Text>Content</Text>
+</Box>
+```
+
+**React Native:**
+
+```tsx
+// ❌ Wrong - Mixing StyleSheet with twClassName
+<View
+  style={[{ padding: 16 }, tw`bg-default`]}
+>
+  <Text>Content</Text>
+</View>
+
+// ✅ Correct - Component props + twClassName when needed
+<Box
+  backgroundColor={BoxBackgroundColor.BackgroundDefault}
+  padding={4}
+  twClassName="flex-1"
+>
+  <Text>Content</Text>
+</Box>
+```
+
+## Platform Patterns
+
+### React Web
+
+**Interactive states (hover/active):**
+
+```tsx
+<Box width={BoxWidth.Full} className="hover:bg-hover active:bg-pressed" asChild>
+  <button onClick={handleOnClick}>
+    Clickable content
+  <button>
+</Box>
+```
+
+**className for unsupported props:**
+
+```tsx
+<Text
+  variant={TextVariant.BodyMd}
+  color={TextColor.TextDefault}
+  className="mt-4" // margin-top not available as prop
+>
+  Content with margin
+</Text>
+```
+
+**CVA Integration (Coming Soon):**
+
+Class Variance Authority for managing component variants. See [Issue #282](https://github.com/MetaMask/metamask-design-system/issues/282)
+
+### React Native
+
+**useTailwind hook from preset:**
+
+```tsx
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+
+const MyComponent = () => {
+  const tw = useTailwind(); // Handles theme switching automatically
+
+  return (
+    <View style={tw`bg-default p-4`}>
+      <Text style={tw`mt-4`}>Content</Text>
+    </View>
+  );
+};
+```
+
+**twClassName for Box components:**
+
+```tsx
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  twClassName="px-4 py-4 border-b border-muted"
+>
+  <Text>Content</Text>
+</Box>
+```
+
+**Interactive states with Pressable:**
+
+```tsx
+<Pressable
+  style={({ pressed }) =>
+    tw.style(
+      'w-full flex-row items-center justify-between px-4 py-2',
+      pressed && 'bg-pressed',
+    )
+  }
+>
+  <Text>Interactive content</Text>
+</Pressable>
+```
+
+**NEVER store classes in variables:**
+
+```tsx
+// ❌ Wrong - Breaks VSCode Tailwind IntelliSense and linting
+const twContainerClassNames = 'flex-1 bg-default p-4';
+<View style={tw`${twContainerClassNames}`} />
+
+// ✅ Correct - Use tw.style() for conditionals/props
+<View
+  style={tw.style(
+    'flex-1 bg-default p-4',
+    isActive && 'bg-pressed',
+  )}
+/>
+```
+
+**Merging tw.style() with style prop (Array Pattern):**
+
+When a component needs to apply Tailwind classes AND accept a custom `style` prop, use the array pattern for the component's own styles and forward `twClassName` as a prop:
+
+```tsx
+// ❌ Wrong - Passing style directly to tw.style() causes type errors
+style={tw.style('border-l-4 border-primary-default', style)}
+
+// ❌ Wrong - Merging twClassName into style instead of forwarding as prop
+style={[
+  tw.style('border-l-4 border-primary-default', twClassName),
+  style,
+]}
+
+// ✅ Correct - Own classes in style, twClassName forwarded as prop
+<Component
+  style={[tw.style('border-l-4 border-primary-default'), style]}
+  twClassName={twClassName}
+/>
+
+// ✅ Also correct - twClassName forwarded via props spread
+<Component
+  style={[tw.style('border-l-4 border-primary-default'), style]}
+  {...props} // twClassName passed through to child component
+/>
+```
+
+**Why this pattern:**
+
+- ✅ Type safety (`tw.style` only receives the component's own classes)
+- ✅ Clear separation (component styles in `style`, consumer overrides in `twClassName` prop)
+- ✅ Consistency with Box foundational pattern
+- ✅ Native-optimized style merging (React Native handles arrays)
+- ✅ `twClassName` forwarded as a prop is handled by Box internally
+
+**Example from BannerAlert:**
+
+```tsx
+export const BannerAlert = ({ severity, style, ...props }) => {
+  const tw = useTailwind();
+  const borderColorClass = MAP_SEVERITY_BORDER[severity];
+
+  return (
+    <BannerBase
+      style={[tw.style(`border-l-4 ${borderColorClass}`), style]}
+      {...props} // twClassName forwarded as prop to BannerBase → Box
+    />
+  );
+};
+```
+
+**NEVER import twrnc directly:**
+
+```tsx
+// ❌ Wrong
+import tw from 'twrnc';
+
+// ✅ Correct
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+```
+
+## Commands
+
+```bash
+# Validate Tailwind classes
+yarn lint
+
+# Auto-fix class ordering
+yarn lint:fix
+```
+
+## Golden Path Examples
+
+**Complete examples demonstrating best practices:**
+
+- @apps/storybook-react/stories/WalletHome.stories.tsx (React Web)
+- @apps/storybook-react-native/stories/WalletHome.stories.tsx (React Native)
+
+These examples show:
+
+- Component-first approach (Box props over className/twClassName)
+- Design token enum usage (BoxBackgroundColor, BoxBorderColor, etc.)
+- className/twClassName only for unsupported features (media queries, hover, flex-1)
+- React Native `tw.style()` with conditionals (Pressable pressed state)
+- Text component for all typography
+
+**Design token reference:**
+
+- @packages/design-system-tailwind-preset/ (React Web token classes)
+- @packages/design-system-twrnc-preset/ (React Native token classes)
+
+## Tailwind Preset Content Scanning
+
+Token-identity constants (e.g. `TextColor`, `BoxBackgroundColor`) live in `@metamask/design-system-shared` and their values are used directly as class strings. Tailwind's JIT must scan the compiled output of `design-system-shared` to generate these utility classes.
+
+**Tailwind CSS v3 does not merge `content` arrays from presets** — the consumer's `content` always wins. This means the preset cannot handle this automatically. Consumers must add `@metamask/design-system-shared` to their own `content` glob:
+
+```js
+// tailwind.config.js (consumer)
+module.exports = {
+  presets: [require('@metamask/design-system-tailwind-preset')],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/@metamask/design-system-react/dist/**/*.{mjs,cjs}',
+    './node_modules/@metamask/design-system-shared/dist/**/*.{mjs,cjs}', // required
+  ],
+};
+```
+
+**Consequences for contributors:**
+
+- ✅ Adding a new token-identity constant to shared → automatically picked up by any consumer already scanning the shared dist
+- ❌ Do NOT rely on the preset's `content` array to cover `design-system-shared` — Tailwind v3 ignores preset content
+- ❌ Do NOT add a manual safelist as a workaround — content scanning is the correct approach
+
+## Verification
+
+After styling changes, verify:
+
+- [ ] No raw HTML/JSX elements (div, span, p) with Tailwind classes
+- [ ] Component props used where available
+- [ ] className/twClassName only when no equivalent prop exists
+- [ ] No default Tailwind colors (bg-blue-500, text-gray-700)
+- [ ] No arbitrary values (unless documented as necessary)
+- [ ] No inline styles mixed with Tailwind classes
+- [ ] Platform-specific prop used (className for web, twClassName for native)
+- [ ] Text component used for all typography, not Tailwind classes
+- [ ] React Native: useTailwind from preset, not direct twrnc import
+- [ ] ESLint passes: `yarn lint`

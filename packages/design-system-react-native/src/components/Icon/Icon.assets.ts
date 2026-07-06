@@ -1,17 +1,17 @@
 // /////////////////////////////////////////////////////
 // This is a generated file
-// DO NOT EDIT - Use generate-icons.js
+// DO NOT EDIT — run `yarn generate:icons` from the repo root
 // /////////////////////////////////////////////////////
-import { IconName } from '../../types';
-
 import AccessibilitySVG from './assets/accessibility.svg';
 import ActivitySVG from './assets/activity.svg';
 import AddCardSVG from './assets/add-card.svg';
 import AddCircleSVG from './assets/add-circle.svg';
 import AddSquareSVG from './assets/add-square.svg';
 import AddSVG from './assets/add.svg';
+import AfterHoursSVG from './assets/after-hours.svg';
 import AiSVG from './assets/ai.svg';
 import AlternateEmailSVG from './assets/alternate-email.svg';
+import AppleLogoSVG from './assets/apple-logo.svg';
 import AppsSVG from './assets/apps.svg';
 import Arrow2DownSVG from './assets/arrow-2-down.svg';
 import Arrow2LeftSVG from './assets/arrow-2-left.svg';
@@ -27,7 +27,9 @@ import ArrowDropDownCircleSVG from './assets/arrow-drop-down-circle.svg';
 import ArrowLeftSVG from './assets/arrow-left.svg';
 import ArrowRightSVG from './assets/arrow-right.svg';
 import ArrowUpSVG from './assets/arrow-up.svg';
+import AttachMoneySVG from './assets/attach-money.svg';
 import AttachmentSVG from './assets/attachment.svg';
+import BackspaceSVG from './assets/backspace.svg';
 import BanSVG from './assets/ban.svg';
 import BankAssuredSVG from './assets/bank-assured.svg';
 import BankSVG from './assets/bank.svg';
@@ -44,6 +46,7 @@ import CalendarSVG from './assets/calendar.svg';
 import CallSVG from './assets/call.svg';
 import CameraSVG from './assets/camera.svg';
 import CampaignSVG from './assets/campaign.svg';
+import CandlestickSVG from './assets/candlestick.svg';
 import CardPosSVG from './assets/card-pos.svg';
 import CardSVG from './assets/card.svg';
 import CashSVG from './assets/cash.svg';
@@ -52,6 +55,7 @@ import ChartSVG from './assets/chart.svg';
 import CheckBoldSVG from './assets/check-bold.svg';
 import CheckSVG from './assets/check.svg';
 import CircleXSVG from './assets/circle-x.svg';
+import ClearSVG from './assets/clear.svg';
 import ClockFilledSVG from './assets/clock-filled.svg';
 import ClockSVG from './assets/clock.svg';
 import CloseSVG from './assets/close.svg';
@@ -66,6 +70,7 @@ import ConfirmationSVG from './assets/confirmation.svg';
 import ConnectSVG from './assets/connect.svg';
 import CopySuccessSVG from './assets/copy-success.svg';
 import CopySVG from './assets/copy.svg';
+import CorporateFareSVG from './assets/corporate-fare.svg';
 import CreditCheckSVG from './assets/credit-check.svg';
 import CurrencyFrancSVG from './assets/currency-franc.svg';
 import CurrencyLiraSVG from './assets/currency-lira.svg';
@@ -106,6 +111,7 @@ import FingerprintSVG from './assets/fingerprint.svg';
 import FireSVG from './assets/fire.svg';
 import FirstPageSVG from './assets/first-page.svg';
 import FlagSVG from './assets/flag.svg';
+import FlashFilledSVG from './assets/flash-filled.svg';
 import FlashSlashSVG from './assets/flash-slash.svg';
 import FlashSVG from './assets/flash.svg';
 import FlaskSVG from './assets/flask.svg';
@@ -118,6 +124,8 @@ import GiftSVG from './assets/gift.svg';
 import GlobalSearchSVG from './assets/global-search.svg';
 import GlobalSVG from './assets/global.svg';
 import GraphSVG from './assets/graph.svg';
+import GroupSVG from './assets/group.svg';
+import HardDriveSVG from './assets/hard-drive.svg';
 import HardwareSVG from './assets/hardware.svg';
 import HashTagSVG from './assets/hash-tag.svg';
 import HeartFilledSVG from './assets/heart-filled.svg';
@@ -136,6 +144,7 @@ import LastPageSVG from './assets/last-page.svg';
 import LightFilledSVG from './assets/light-filled.svg';
 import LightSVG from './assets/light.svg';
 import LinkSVG from './assets/link.svg';
+import ListArrowSVG from './assets/list-arrow.svg';
 import LoadingSVG from './assets/loading.svg';
 import LocationSVG from './assets/location.svg';
 import LockSlashSVG from './assets/lock-slash.svg';
@@ -146,8 +155,10 @@ import LogoutSVG from './assets/logout.svg';
 import MailSVG from './assets/mail.svg';
 import MapSVG from './assets/map.svg';
 import MenuSVG from './assets/menu.svg';
+import MergeSVG from './assets/merge.svg';
 import MessageQuestionSVG from './assets/message-question.svg';
 import MessagesSVG from './assets/messages.svg';
+import MetamaskFoxOutlineSVG from './assets/metamask-fox-outline.svg';
 import MicSVG from './assets/mic.svg';
 import MinusBoldSVG from './assets/minus-bold.svg';
 import MinusSquareSVG from './assets/minus-square.svg';
@@ -159,7 +170,10 @@ import MonitorSVG from './assets/monitor.svg';
 import MoreHorizontalSVG from './assets/more-horizontal.svg';
 import MoreVerticalSVG from './assets/more-vertical.svg';
 import MountainFlagSVG from './assets/mountain-flag.svg';
+import MusdFilledSVG from './assets/musd-filled.svg';
+import MusdSVG from './assets/musd.svg';
 import MusicNoteSVG from './assets/music-note.svg';
+import NoPhotographySVG from './assets/no-photography.svg';
 import NotificationSVG from './assets/notification.svg';
 import PageInfoSVG from './assets/page-info.svg';
 import PaletteSVG from './assets/palette.svg';
@@ -167,11 +181,14 @@ import PasswordCheckSVG from './assets/password-check.svg';
 import PendingSVG from './assets/pending.svg';
 import PeopleSVG from './assets/people.svg';
 import PersonCancelSVG from './assets/person-cancel.svg';
+import PieChartSVG from './assets/pie-chart.svg';
 import PinSVG from './assets/pin.svg';
 import PlantSVG from './assets/plant.svg';
 import PlugSVG from './assets/plug.svg';
 import PlusAndMinusSVG from './assets/plus-and-minus.svg';
 import PolicyAlertSVG from './assets/policy-alert.svg';
+import PopUpSVG from './assets/pop-up.svg';
+import PredictionsSVG from './assets/predictions.svg';
 import PrintSVG from './assets/print.svg';
 import PriorityHighSVG from './assets/priority-high.svg';
 import PrivacyTipSVG from './assets/privacy-tip.svg';
@@ -212,6 +229,7 @@ import ShareSVG from './assets/share.svg';
 import ShieldLockSVG from './assets/shield-lock.svg';
 import ShoppingBagSVG from './assets/shopping-bag.svg';
 import ShoppingCartSVG from './assets/shopping-cart.svg';
+import SidePanelSVG from './assets/side-panel.svg';
 import SignalCellularSVG from './assets/signal-cellular.svg';
 import SlashSVG from './assets/slash.svg';
 import SmsSVG from './assets/sms.svg';
@@ -237,6 +255,7 @@ import TabCloseSVG from './assets/tab-close.svg';
 import TableRowSVG from './assets/table-row.svg';
 import TabletSVG from './assets/tablet.svg';
 import TagSVG from './assets/tag.svg';
+import TelegramSVG from './assets/telegram.svg';
 import ThumbDownFilledSVG from './assets/thumb-down-filled.svg';
 import ThumbDownSVG from './assets/thumb-down.svg';
 import ThumbUpFilledSVG from './assets/thumb-up-filled.svg';
@@ -247,6 +266,7 @@ import TranslateSVG from './assets/translate.svg';
 import TrashSVG from './assets/trash.svg';
 import TrendDownSVG from './assets/trend-down.svg';
 import TrendUpSVG from './assets/trend-up.svg';
+import TrophySVG from './assets/trophy.svg';
 import UndoSVG from './assets/undo.svg';
 import UnfoldSVG from './assets/unfold.svg';
 import UnlockedFilledSVG from './assets/unlocked-filled.svg';
@@ -280,274 +300,296 @@ import type { AssetByIconName } from './Icon.types';
  * Asset stored by icon name
  */
 export const assetByIconName: AssetByIconName = {
-  [IconName.Accessibility]: AccessibilitySVG,
-  [IconName.Activity]: ActivitySVG,
-  [IconName.AddCard]: AddCardSVG,
-  [IconName.AddCircle]: AddCircleSVG,
-  [IconName.AddSquare]: AddSquareSVG,
-  [IconName.Add]: AddSVG,
-  [IconName.Ai]: AiSVG,
-  [IconName.AlternateEmail]: AlternateEmailSVG,
-  [IconName.Apps]: AppsSVG,
-  [IconName.Arrow2Down]: Arrow2DownSVG,
-  [IconName.Arrow2Left]: Arrow2LeftSVG,
-  [IconName.Arrow2Right]: Arrow2RightSVG,
-  [IconName.Arrow2UpRight]: Arrow2UpRightSVG,
-  [IconName.Arrow2Up]: Arrow2UpSVG,
-  [IconName.ArrowCircleDown]: ArrowCircleDownSVG,
-  [IconName.ArrowCircleUp]: ArrowCircleUpSVG,
-  [IconName.ArrowDoubleLeft]: ArrowDoubleLeftSVG,
-  [IconName.ArrowDoubleRight]: ArrowDoubleRightSVG,
-  [IconName.ArrowDown]: ArrowDownSVG,
-  [IconName.ArrowDropDownCircle]: ArrowDropDownCircleSVG,
-  [IconName.ArrowLeft]: ArrowLeftSVG,
-  [IconName.ArrowRight]: ArrowRightSVG,
-  [IconName.ArrowUp]: ArrowUpSVG,
-  [IconName.Attachment]: AttachmentSVG,
-  [IconName.Ban]: BanSVG,
-  [IconName.BankAssured]: BankAssuredSVG,
-  [IconName.Bank]: BankSVG,
-  [IconName.Bold]: BoldSVG,
-  [IconName.Book]: BookSVG,
-  [IconName.Bookmark]: BookmarkSVG,
-  [IconName.Bridge]: BridgeSVG,
-  [IconName.Briefcase]: BriefcaseSVG,
-  [IconName.Bulb]: BulbSVG,
-  [IconName.BuySell]: BuySellSVG,
-  [IconName.Cake]: CakeSVG,
-  [IconName.Calculator]: CalculatorSVG,
-  [IconName.Calendar]: CalendarSVG,
-  [IconName.Call]: CallSVG,
-  [IconName.Camera]: CameraSVG,
-  [IconName.Campaign]: CampaignSVG,
-  [IconName.CardPos]: CardPosSVG,
-  [IconName.Card]: CardSVG,
-  [IconName.Cash]: CashSVG,
-  [IconName.Category]: CategorySVG,
-  [IconName.Chart]: ChartSVG,
-  [IconName.CheckBold]: CheckBoldSVG,
-  [IconName.Check]: CheckSVG,
-  [IconName.CircleX]: CircleXSVG,
-  [IconName.ClockFilled]: ClockFilledSVG,
-  [IconName.Clock]: ClockSVG,
-  [IconName.Close]: CloseSVG,
-  [IconName.CloudDownload]: CloudDownloadSVG,
-  [IconName.CloudUpload]: CloudUploadSVG,
-  [IconName.Cloud]: CloudSVG,
-  [IconName.CodeCircle]: CodeCircleSVG,
-  [IconName.Code]: CodeSVG,
-  [IconName.Coin]: CoinSVG,
-  [IconName.Collapse]: CollapseSVG,
-  [IconName.Confirmation]: ConfirmationSVG,
-  [IconName.Connect]: ConnectSVG,
-  [IconName.CopySuccess]: CopySuccessSVG,
-  [IconName.Copy]: CopySVG,
-  [IconName.CreditCheck]: CreditCheckSVG,
-  [IconName.CurrencyFranc]: CurrencyFrancSVG,
-  [IconName.CurrencyLira]: CurrencyLiraSVG,
-  [IconName.CurrencyPound]: CurrencyPoundSVG,
-  [IconName.CurrencyYuan]: CurrencyYuanSVG,
-  [IconName.Customize]: CustomizeSVG,
-  [IconName.Danger]: DangerSVG,
-  [IconName.DarkFilled]: DarkFilledSVG,
-  [IconName.Dark]: DarkSVG,
-  [IconName.Data]: DataSVG,
-  [IconName.Description]: DescriptionSVG,
-  [IconName.Details]: DetailsSVG,
-  [IconName.Diagram]: DiagramSVG,
-  [IconName.DocumentCode]: DocumentCodeSVG,
-  [IconName.Download]: DownloadSVG,
-  [IconName.Draft]: DraftSVG,
-  [IconName.EcoLeaf]: EcoLeafSVG,
-  [IconName.EditSquare]: EditSquareSVG,
-  [IconName.Edit]: EditSVG,
-  [IconName.EncryptedAdd]: EncryptedAddSVG,
-  [IconName.Eraser]: EraserSVG,
-  [IconName.Error]: ErrorSVG,
-  [IconName.Ethereum]: EthereumSVG,
-  [IconName.Exchange]: ExchangeSVG,
-  [IconName.ExpandVertical]: ExpandVerticalSVG,
-  [IconName.Expand]: ExpandSVG,
-  [IconName.ExploreFilled]: ExploreFilledSVG,
-  [IconName.Explore]: ExploreSVG,
-  [IconName.Export]: ExportSVG,
-  [IconName.Extension]: ExtensionSVG,
-  [IconName.EyeSlash]: EyeSlashSVG,
-  [IconName.Eye]: EyeSVG,
-  [IconName.FaceId]: FaceIdSVG,
-  [IconName.Feedback]: FeedbackSVG,
-  [IconName.File]: FileSVG,
-  [IconName.Filter]: FilterSVG,
-  [IconName.Fingerprint]: FingerprintSVG,
-  [IconName.Fire]: FireSVG,
-  [IconName.FirstPage]: FirstPageSVG,
-  [IconName.Flag]: FlagSVG,
-  [IconName.FlashSlash]: FlashSlashSVG,
-  [IconName.Flash]: FlashSVG,
-  [IconName.Flask]: FlaskSVG,
-  [IconName.Flower]: FlowerSVG,
-  [IconName.Folder]: FolderSVG,
-  [IconName.Forest]: ForestSVG,
-  [IconName.FullCircle]: FullCircleSVG,
-  [IconName.Gas]: GasSVG,
-  [IconName.Gift]: GiftSVG,
-  [IconName.GlobalSearch]: GlobalSearchSVG,
-  [IconName.Global]: GlobalSVG,
-  [IconName.Graph]: GraphSVG,
-  [IconName.Hardware]: HardwareSVG,
-  [IconName.HashTag]: HashTagSVG,
-  [IconName.HeartFilled]: HeartFilledSVG,
-  [IconName.Heart]: HeartSVG,
-  [IconName.Hierarchy]: HierarchySVG,
-  [IconName.HomeFilled]: HomeFilledSVG,
-  [IconName.Home]: HomeSVG,
-  [IconName.Image]: ImageSVG,
-  [IconName.Info]: InfoSVG,
-  [IconName.Inventory]: InventorySVG,
-  [IconName.Joystick]: JoystickSVG,
-  [IconName.KeepFilled]: KeepFilledSVG,
-  [IconName.Keep]: KeepSVG,
-  [IconName.Key]: KeySVG,
-  [IconName.LastPage]: LastPageSVG,
-  [IconName.LightFilled]: LightFilledSVG,
-  [IconName.Light]: LightSVG,
-  [IconName.Link]: LinkSVG,
-  [IconName.Loading]: LoadingSVG,
-  [IconName.Location]: LocationSVG,
-  [IconName.LockSlash]: LockSlashSVG,
-  [IconName.Lock]: LockSVG,
-  [IconName.LockedFilled]: LockedFilledSVG,
-  [IconName.Login]: LoginSVG,
-  [IconName.Logout]: LogoutSVG,
-  [IconName.Mail]: MailSVG,
-  [IconName.Map]: MapSVG,
-  [IconName.Menu]: MenuSVG,
-  [IconName.MessageQuestion]: MessageQuestionSVG,
-  [IconName.Messages]: MessagesSVG,
-  [IconName.Mic]: MicSVG,
-  [IconName.MinusBold]: MinusBoldSVG,
-  [IconName.MinusSquare]: MinusSquareSVG,
-  [IconName.Minus]: MinusSVG,
-  [IconName.Mobile]: MobileSVG,
-  [IconName.MoneyBag]: MoneyBagSVG,
-  [IconName.Money]: MoneySVG,
-  [IconName.Monitor]: MonitorSVG,
-  [IconName.MoreHorizontal]: MoreHorizontalSVG,
-  [IconName.MoreVertical]: MoreVerticalSVG,
-  [IconName.MountainFlag]: MountainFlagSVG,
-  [IconName.MusicNote]: MusicNoteSVG,
-  [IconName.Notification]: NotificationSVG,
-  [IconName.PageInfo]: PageInfoSVG,
-  [IconName.Palette]: PaletteSVG,
-  [IconName.PasswordCheck]: PasswordCheckSVG,
-  [IconName.Pending]: PendingSVG,
-  [IconName.People]: PeopleSVG,
-  [IconName.PersonCancel]: PersonCancelSVG,
-  [IconName.Pin]: PinSVG,
-  [IconName.Plant]: PlantSVG,
-  [IconName.Plug]: PlugSVG,
-  [IconName.PlusAndMinus]: PlusAndMinusSVG,
-  [IconName.PolicyAlert]: PolicyAlertSVG,
-  [IconName.Print]: PrintSVG,
-  [IconName.PriorityHigh]: PriorityHighSVG,
-  [IconName.PrivacyTip]: PrivacyTipSVG,
-  [IconName.ProgrammingArrows]: ProgrammingArrowsSVG,
-  [IconName.Publish]: PublishSVG,
-  [IconName.QrCode]: QrCodeSVG,
-  [IconName.Question]: QuestionSVG,
-  [IconName.Receive]: ReceiveSVG,
-  [IconName.Received]: ReceivedSVG,
-  [IconName.Refresh]: RefreshSVG,
-  [IconName.RemoveMinus]: RemoveMinusSVG,
-  [IconName.Report]: ReportSVG,
-  [IconName.Rocket]: RocketSVG,
-  [IconName.SaveFilled]: SaveFilledSVG,
-  [IconName.Save]: SaveSVG,
-  [IconName.Saving]: SavingSVG,
-  [IconName.ScanBarcode]: ScanBarcodeSVG,
-  [IconName.ScanFocus]: ScanFocusSVG,
-  [IconName.Scan]: ScanSVG,
-  [IconName.Search]: SearchSVG,
-  [IconName.SecurityAlert]: SecurityAlertSVG,
-  [IconName.SecurityCross]: SecurityCrossSVG,
-  [IconName.SecurityKey]: SecurityKeySVG,
-  [IconName.SecuritySearch]: SecuritySearchSVG,
-  [IconName.SecuritySlash]: SecuritySlashSVG,
-  [IconName.SecurityTick]: SecurityTickSVG,
-  [IconName.SecurityTime]: SecurityTimeSVG,
-  [IconName.SecurityUser]: SecurityUserSVG,
-  [IconName.Security]: SecuritySVG,
-  [IconName.Send]: SendSVG,
-  [IconName.SentimentDissatisfied]: SentimentDissatisfiedSVG,
-  [IconName.SentimentNeutral]: SentimentNeutralSVG,
-  [IconName.SentimentSatisfied]: SentimentSatisfiedSVG,
-  [IconName.SentimentVerySatisfied]: SentimentVerySatisfiedSVG,
-  [IconName.SettingFilled]: SettingFilledSVG,
-  [IconName.Setting]: SettingSVG,
-  [IconName.Share]: ShareSVG,
-  [IconName.ShieldLock]: ShieldLockSVG,
-  [IconName.ShoppingBag]: ShoppingBagSVG,
-  [IconName.ShoppingCart]: ShoppingCartSVG,
-  [IconName.SignalCellular]: SignalCellularSVG,
-  [IconName.Slash]: SlashSVG,
-  [IconName.Sms]: SmsSVG,
-  [IconName.SnapsMobile]: SnapsMobileSVG,
-  [IconName.SnapsPlus]: SnapsPlusSVG,
-  [IconName.SnapsRound]: SnapsRoundSVG,
-  [IconName.Snaps]: SnapsSVG,
-  [IconName.SortByAlpha]: SortByAlphaSVG,
-  [IconName.Sort]: SortSVG,
-  [IconName.Sparkle]: SparkleSVG,
-  [IconName.Speed]: SpeedSVG,
-  [IconName.Speedometer]: SpeedometerSVG,
-  [IconName.Square]: SquareSVG,
-  [IconName.Stake]: StakeSVG,
-  [IconName.StarFilled]: StarFilledSVG,
-  [IconName.Star]: StarSVG,
-  [IconName.Start]: StartSVG,
-  [IconName.Storefront]: StorefrontSVG,
-  [IconName.Student]: StudentSVG,
-  [IconName.SwapHorizontal]: SwapHorizontalSVG,
-  [IconName.SwapVertical]: SwapVerticalSVG,
-  [IconName.TabClose]: TabCloseSVG,
-  [IconName.TableRow]: TableRowSVG,
-  [IconName.Tablet]: TabletSVG,
-  [IconName.Tag]: TagSVG,
-  [IconName.ThumbDownFilled]: ThumbDownFilledSVG,
-  [IconName.ThumbDown]: ThumbDownSVG,
-  [IconName.ThumbUpFilled]: ThumbUpFilledSVG,
-  [IconName.ThumbUp]: ThumbUpSVG,
-  [IconName.Tint]: TintSVG,
-  [IconName.Tooltip]: TooltipSVG,
-  [IconName.Translate]: TranslateSVG,
-  [IconName.Trash]: TrashSVG,
-  [IconName.TrendDown]: TrendDownSVG,
-  [IconName.TrendUp]: TrendUpSVG,
-  [IconName.Undo]: UndoSVG,
-  [IconName.Unfold]: UnfoldSVG,
-  [IconName.UnlockedFilled]: UnlockedFilledSVG,
-  [IconName.Unpin]: UnpinSVG,
-  [IconName.UploadFile]: UploadFileSVG,
-  [IconName.Upload]: UploadSVG,
-  [IconName.Usb]: UsbSVG,
-  [IconName.UserCheck]: UserCheckSVG,
-  [IconName.UserCircleAdd]: UserCircleAddSVG,
-  [IconName.UserCircleRemove]: UserCircleRemoveSVG,
-  [IconName.UserCircle]: UserCircleSVG,
-  [IconName.User]: UserSVG,
-  [IconName.VerifiedFilled]: VerifiedFilledSVG,
-  [IconName.Verified]: VerifiedSVG,
-  [IconName.Videocam]: VideocamSVG,
-  [IconName.ViewColumn]: ViewColumnSVG,
-  [IconName.ViewInAr]: ViewInArSVG,
-  [IconName.VolumeOff]: VolumeOffSVG,
-  [IconName.VolumeUp]: VolumeUpSVG,
-  [IconName.WalletFilled]: WalletFilledSVG,
-  [IconName.Wallet]: WalletSVG,
-  [IconName.Warning]: WarningSVG,
-  [IconName.WebTraffic]: WebTrafficSVG,
-  [IconName.Widgets]: WidgetsSVG,
-  [IconName.WifiOff]: WifiOffSVG,
-  [IconName.Wifi]: WifiSVG,
-  [IconName.X]: XSVG,
+  Accessibility: AccessibilitySVG,
+  Activity: ActivitySVG,
+  AddCard: AddCardSVG,
+  AddCircle: AddCircleSVG,
+  AddSquare: AddSquareSVG,
+  Add: AddSVG,
+  AfterHours: AfterHoursSVG,
+  Ai: AiSVG,
+  AlternateEmail: AlternateEmailSVG,
+  AppleLogo: AppleLogoSVG,
+  Apps: AppsSVG,
+  Arrow2Down: Arrow2DownSVG,
+  Arrow2Left: Arrow2LeftSVG,
+  Arrow2Right: Arrow2RightSVG,
+  Arrow2UpRight: Arrow2UpRightSVG,
+  Arrow2Up: Arrow2UpSVG,
+  ArrowCircleDown: ArrowCircleDownSVG,
+  ArrowCircleUp: ArrowCircleUpSVG,
+  ArrowDoubleLeft: ArrowDoubleLeftSVG,
+  ArrowDoubleRight: ArrowDoubleRightSVG,
+  ArrowDown: ArrowDownSVG,
+  ArrowDropDownCircle: ArrowDropDownCircleSVG,
+  ArrowLeft: ArrowLeftSVG,
+  ArrowRight: ArrowRightSVG,
+  ArrowUp: ArrowUpSVG,
+  AttachMoney: AttachMoneySVG,
+  Attachment: AttachmentSVG,
+  Backspace: BackspaceSVG,
+  Ban: BanSVG,
+  BankAssured: BankAssuredSVG,
+  Bank: BankSVG,
+  Bold: BoldSVG,
+  Book: BookSVG,
+  Bookmark: BookmarkSVG,
+  Bridge: BridgeSVG,
+  Briefcase: BriefcaseSVG,
+  Bulb: BulbSVG,
+  BuySell: BuySellSVG,
+  Cake: CakeSVG,
+  Calculator: CalculatorSVG,
+  Calendar: CalendarSVG,
+  Call: CallSVG,
+  Camera: CameraSVG,
+  Campaign: CampaignSVG,
+  Candlestick: CandlestickSVG,
+  CardPos: CardPosSVG,
+  Card: CardSVG,
+  Cash: CashSVG,
+  Category: CategorySVG,
+  Chart: ChartSVG,
+  CheckBold: CheckBoldSVG,
+  Check: CheckSVG,
+  CircleX: CircleXSVG,
+  Clear: ClearSVG,
+  ClockFilled: ClockFilledSVG,
+  Clock: ClockSVG,
+  Close: CloseSVG,
+  CloudDownload: CloudDownloadSVG,
+  CloudUpload: CloudUploadSVG,
+  Cloud: CloudSVG,
+  CodeCircle: CodeCircleSVG,
+  Code: CodeSVG,
+  Coin: CoinSVG,
+  Collapse: CollapseSVG,
+  Confirmation: ConfirmationSVG,
+  Connect: ConnectSVG,
+  CopySuccess: CopySuccessSVG,
+  Copy: CopySVG,
+  CorporateFare: CorporateFareSVG,
+  CreditCheck: CreditCheckSVG,
+  CurrencyFranc: CurrencyFrancSVG,
+  CurrencyLira: CurrencyLiraSVG,
+  CurrencyPound: CurrencyPoundSVG,
+  CurrencyYuan: CurrencyYuanSVG,
+  Customize: CustomizeSVG,
+  Danger: DangerSVG,
+  DarkFilled: DarkFilledSVG,
+  Dark: DarkSVG,
+  Data: DataSVG,
+  Description: DescriptionSVG,
+  Details: DetailsSVG,
+  Diagram: DiagramSVG,
+  DocumentCode: DocumentCodeSVG,
+  Download: DownloadSVG,
+  Draft: DraftSVG,
+  EcoLeaf: EcoLeafSVG,
+  EditSquare: EditSquareSVG,
+  Edit: EditSVG,
+  EncryptedAdd: EncryptedAddSVG,
+  Eraser: EraserSVG,
+  Error: ErrorSVG,
+  Ethereum: EthereumSVG,
+  Exchange: ExchangeSVG,
+  ExpandVertical: ExpandVerticalSVG,
+  Expand: ExpandSVG,
+  ExploreFilled: ExploreFilledSVG,
+  Explore: ExploreSVG,
+  Export: ExportSVG,
+  Extension: ExtensionSVG,
+  EyeSlash: EyeSlashSVG,
+  Eye: EyeSVG,
+  FaceId: FaceIdSVG,
+  Feedback: FeedbackSVG,
+  File: FileSVG,
+  Filter: FilterSVG,
+  Fingerprint: FingerprintSVG,
+  Fire: FireSVG,
+  FirstPage: FirstPageSVG,
+  Flag: FlagSVG,
+  FlashFilled: FlashFilledSVG,
+  FlashSlash: FlashSlashSVG,
+  Flash: FlashSVG,
+  Flask: FlaskSVG,
+  Flower: FlowerSVG,
+  Folder: FolderSVG,
+  Forest: ForestSVG,
+  FullCircle: FullCircleSVG,
+  Gas: GasSVG,
+  Gift: GiftSVG,
+  GlobalSearch: GlobalSearchSVG,
+  Global: GlobalSVG,
+  Graph: GraphSVG,
+  Group: GroupSVG,
+  HardDrive: HardDriveSVG,
+  Hardware: HardwareSVG,
+  HashTag: HashTagSVG,
+  HeartFilled: HeartFilledSVG,
+  Heart: HeartSVG,
+  Hierarchy: HierarchySVG,
+  HomeFilled: HomeFilledSVG,
+  Home: HomeSVG,
+  Image: ImageSVG,
+  Info: InfoSVG,
+  Inventory: InventorySVG,
+  Joystick: JoystickSVG,
+  KeepFilled: KeepFilledSVG,
+  Keep: KeepSVG,
+  Key: KeySVG,
+  LastPage: LastPageSVG,
+  LightFilled: LightFilledSVG,
+  Light: LightSVG,
+  Link: LinkSVG,
+  ListArrow: ListArrowSVG,
+  Loading: LoadingSVG,
+  Location: LocationSVG,
+  LockSlash: LockSlashSVG,
+  Lock: LockSVG,
+  LockedFilled: LockedFilledSVG,
+  Login: LoginSVG,
+  Logout: LogoutSVG,
+  Mail: MailSVG,
+  Map: MapSVG,
+  Menu: MenuSVG,
+  Merge: MergeSVG,
+  MessageQuestion: MessageQuestionSVG,
+  Messages: MessagesSVG,
+  MetamaskFoxOutline: MetamaskFoxOutlineSVG,
+  Mic: MicSVG,
+  MinusBold: MinusBoldSVG,
+  MinusSquare: MinusSquareSVG,
+  Minus: MinusSVG,
+  Mobile: MobileSVG,
+  MoneyBag: MoneyBagSVG,
+  Money: MoneySVG,
+  Monitor: MonitorSVG,
+  MoreHorizontal: MoreHorizontalSVG,
+  MoreVertical: MoreVerticalSVG,
+  MountainFlag: MountainFlagSVG,
+  MusdFilled: MusdFilledSVG,
+  Musd: MusdSVG,
+  MusicNote: MusicNoteSVG,
+  NoPhotography: NoPhotographySVG,
+  Notification: NotificationSVG,
+  PageInfo: PageInfoSVG,
+  Palette: PaletteSVG,
+  PasswordCheck: PasswordCheckSVG,
+  Pending: PendingSVG,
+  People: PeopleSVG,
+  PersonCancel: PersonCancelSVG,
+  PieChart: PieChartSVG,
+  Pin: PinSVG,
+  Plant: PlantSVG,
+  Plug: PlugSVG,
+  PlusAndMinus: PlusAndMinusSVG,
+  PolicyAlert: PolicyAlertSVG,
+  PopUp: PopUpSVG,
+  Predictions: PredictionsSVG,
+  Print: PrintSVG,
+  PriorityHigh: PriorityHighSVG,
+  PrivacyTip: PrivacyTipSVG,
+  ProgrammingArrows: ProgrammingArrowsSVG,
+  Publish: PublishSVG,
+  QrCode: QrCodeSVG,
+  Question: QuestionSVG,
+  Receive: ReceiveSVG,
+  Received: ReceivedSVG,
+  Refresh: RefreshSVG,
+  RemoveMinus: RemoveMinusSVG,
+  Report: ReportSVG,
+  Rocket: RocketSVG,
+  SaveFilled: SaveFilledSVG,
+  Save: SaveSVG,
+  Saving: SavingSVG,
+  ScanBarcode: ScanBarcodeSVG,
+  ScanFocus: ScanFocusSVG,
+  Scan: ScanSVG,
+  Search: SearchSVG,
+  SecurityAlert: SecurityAlertSVG,
+  SecurityCross: SecurityCrossSVG,
+  SecurityKey: SecurityKeySVG,
+  SecuritySearch: SecuritySearchSVG,
+  SecuritySlash: SecuritySlashSVG,
+  SecurityTick: SecurityTickSVG,
+  SecurityTime: SecurityTimeSVG,
+  SecurityUser: SecurityUserSVG,
+  Security: SecuritySVG,
+  Send: SendSVG,
+  SentimentDissatisfied: SentimentDissatisfiedSVG,
+  SentimentNeutral: SentimentNeutralSVG,
+  SentimentSatisfied: SentimentSatisfiedSVG,
+  SentimentVerySatisfied: SentimentVerySatisfiedSVG,
+  SettingFilled: SettingFilledSVG,
+  Setting: SettingSVG,
+  Share: ShareSVG,
+  ShieldLock: ShieldLockSVG,
+  ShoppingBag: ShoppingBagSVG,
+  ShoppingCart: ShoppingCartSVG,
+  SidePanel: SidePanelSVG,
+  SignalCellular: SignalCellularSVG,
+  Slash: SlashSVG,
+  Sms: SmsSVG,
+  SnapsMobile: SnapsMobileSVG,
+  SnapsPlus: SnapsPlusSVG,
+  SnapsRound: SnapsRoundSVG,
+  Snaps: SnapsSVG,
+  SortByAlpha: SortByAlphaSVG,
+  Sort: SortSVG,
+  Sparkle: SparkleSVG,
+  Speed: SpeedSVG,
+  Speedometer: SpeedometerSVG,
+  Square: SquareSVG,
+  Stake: StakeSVG,
+  StarFilled: StarFilledSVG,
+  Star: StarSVG,
+  Start: StartSVG,
+  Storefront: StorefrontSVG,
+  Student: StudentSVG,
+  SwapHorizontal: SwapHorizontalSVG,
+  SwapVertical: SwapVerticalSVG,
+  TabClose: TabCloseSVG,
+  TableRow: TableRowSVG,
+  Tablet: TabletSVG,
+  Tag: TagSVG,
+  Telegram: TelegramSVG,
+  ThumbDownFilled: ThumbDownFilledSVG,
+  ThumbDown: ThumbDownSVG,
+  ThumbUpFilled: ThumbUpFilledSVG,
+  ThumbUp: ThumbUpSVG,
+  Tint: TintSVG,
+  Tooltip: TooltipSVG,
+  Translate: TranslateSVG,
+  Trash: TrashSVG,
+  TrendDown: TrendDownSVG,
+  TrendUp: TrendUpSVG,
+  Trophy: TrophySVG,
+  Undo: UndoSVG,
+  Unfold: UnfoldSVG,
+  UnlockedFilled: UnlockedFilledSVG,
+  Unpin: UnpinSVG,
+  UploadFile: UploadFileSVG,
+  Upload: UploadSVG,
+  Usb: UsbSVG,
+  UserCheck: UserCheckSVG,
+  UserCircleAdd: UserCircleAddSVG,
+  UserCircleRemove: UserCircleRemoveSVG,
+  UserCircle: UserCircleSVG,
+  User: UserSVG,
+  VerifiedFilled: VerifiedFilledSVG,
+  Verified: VerifiedSVG,
+  Videocam: VideocamSVG,
+  ViewColumn: ViewColumnSVG,
+  ViewInAr: ViewInArSVG,
+  VolumeOff: VolumeOffSVG,
+  VolumeUp: VolumeUpSVG,
+  WalletFilled: WalletFilledSVG,
+  Wallet: WalletSVG,
+  Warning: WarningSVG,
+  WebTraffic: WebTrafficSVG,
+  Widgets: WidgetsSVG,
+  WifiOff: WifiOffSVG,
+  Wifi: WifiSVG,
+  X: XSVG,
 };

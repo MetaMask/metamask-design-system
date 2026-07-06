@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-import { View } from 'react-native';
-
 import {
   BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
-} from '../../types';
+} from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-native';
+import { View } from 'react-native';
+
 import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
 import { AvatarNetwork } from '../AvatarNetwork';
 import { BadgeCount } from '../BadgeCount';

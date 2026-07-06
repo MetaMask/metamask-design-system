@@ -1,7 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+} from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 
 import { AvatarGroup } from './AvatarGroup';
 import {

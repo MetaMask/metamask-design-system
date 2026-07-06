@@ -1,16 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
-
 import {
   FontFamily,
   FontStyle,
   FontWeight,
-  OverflowWrap,
-  TextAlign,
-  TextVariant,
-  TextTransform,
   TextColor,
-} from '../../types';
+  TextVariant,
+} from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import React from 'react';
+
+import { OverflowWrap, TextAlign, TextTransform } from '../../types';
 
 import README from './README.mdx';
 import { Text } from './Text';
@@ -48,14 +46,14 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontWeight),
       mapping: FontWeight,
       description:
-        'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 700',
+        'Optional prop to control the font weight of the text. Normal: 400, Medium: 500, Bold: 600',
     },
     fontFamily: {
       control: 'select',
       options: Object.keys(FontFamily),
       mapping: FontFamily,
       description:
-        'Optional prop to adjust the font family. Default: Geist, Accent: MMSans, Hero: MMPoly',
+        'Optional prop to adjust the font family. Default: Geist, Accent: MM Sans, Hero: MM Poly',
     },
     fontStyle: {
       control: 'select',
@@ -131,6 +129,17 @@ export const Variant: Story = {
       <Text variant={TextVariant.BodyMd}>BodyMd</Text>
       <Text variant={TextVariant.BodySm}>BodySm</Text>
       <Text variant={TextVariant.BodyXs}>BodyXs</Text>
+      <Text variant={TextVariant.PageHeading}>PageHeading</Text>
+      <Text variant={TextVariant.SectionHeading}>SectionHeading</Text>
+      <Text variant={TextVariant.ButtonLabelMd} className="block">
+        ButtonLabelMd
+      </Text>
+      <Text variant={TextVariant.ButtonLabelLg} className="block">
+        ButtonLabelLg
+      </Text>
+      <Text variant={TextVariant.AmountDisplayLg} className="block">
+        AmountDisplayLg
+      </Text>
     </div>
   ),
 };
@@ -203,6 +212,18 @@ export const Color: Story = {
       </Text>
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Showcasing all text colors including muted variant
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const FontWeightStory: Story = {
@@ -210,7 +231,7 @@ export const FontWeightStory: Story = {
     <div className="space-y-4">
       <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
       <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
-      <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
+      <Text fontWeight={FontWeight.Bold}>Bold (600)</Text>
     </div>
   ),
   name: 'Font Weight',
@@ -220,8 +241,8 @@ export const FontFamilyStory: Story = {
   render: () => (
     <div className="space-y-4">
       <Text fontFamily={FontFamily.Default}>Default (Geist)</Text>
-      <Text fontFamily={FontFamily.Accent}>Accent (MMSans)</Text>
-      <Text fontFamily={FontFamily.Hero}>Hero (MMPoly)</Text>
+      <Text fontFamily={FontFamily.Accent}>Accent (MM Sans)</Text>
+      <Text fontFamily={FontFamily.Hero}>Hero (MM Poly)</Text>
     </div>
   ),
   name: 'Font Family',

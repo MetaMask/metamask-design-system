@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { AvatarFaviconSize } from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-import { AvatarFaviconSize } from '../../types';
 
 import { AvatarFavicon } from './AvatarFavicon';
 import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.dev';
@@ -103,6 +102,28 @@ export const Name: Story = {
   ),
 };
 
+export const Fallback: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarFavicon name="OpenSea" fallbackText="OS" />
+      <AvatarFavicon name="Github" />
+      <AvatarFavicon />
+    </div>
+  ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
+};
+
 export const FallbackText: Story = {
   render: () => (
     <div className="flex gap-2">
@@ -115,6 +136,18 @@ export const FallbackText: Story = {
       />
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const Size: Story = {
@@ -147,6 +180,18 @@ export const Size: Story = {
       />
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const HasBorder: Story = {

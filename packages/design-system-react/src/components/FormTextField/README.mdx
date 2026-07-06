@@ -1,0 +1,73 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as FormTextFieldStories from './FormTextField.stories';
+
+# FormTextField
+
+FormTextField composes a `Label`, a `TextField`, and an optional `HelpText` into a single accessible form field. Use it whenever you need a labeled text input with optional helper or error text. When you only need the input without a label or help text, reach for `TextField` directly.
+
+```tsx
+import { FormTextField } from '@metamask/design-system-react';
+
+<FormTextField
+  id="email"
+  label="Email"
+  placeholder="you@example.com"
+  helpText="We never share your email."
+  value={value}
+  onChange={(event) => setValue(event.target.value)}
+/>;
+
+```
+
+<Canvas of={FormTextFieldStories.Default} />
+
+## Props
+
+### `label`
+
+Renders a `Label` above the field and associates it with the inner input via `htmlFor`. When `label` is provided, `id` becomes required.
+
+<Canvas of={FormTextFieldStories.Label} />
+
+### `helpText`
+
+Renders a `HelpText` below the field. When `isError` is true, it switches to the danger color.
+
+<Canvas of={FormTextFieldStories.HelpText} />
+
+### `isError`
+
+Marks the inner input as `aria-invalid` and renders any `helpText` with the danger color.
+
+<Canvas of={FormTextFieldStories.IsError} />
+
+### `isDisabled`
+
+Disables the inner input and applies the disabled container treatment.
+
+<Canvas of={FormTextFieldStories.IsDisabled} />
+
+### `isReadOnly`
+
+Marks the inner input as read-only.
+
+<Canvas of={FormTextFieldStories.IsReadOnly} />
+
+### `size`
+
+Controls the height of the inner `TextField`.
+
+<Canvas of={FormTextFieldStories.Size} />
+
+### `labelProps` / `helpTextProps` / `textFieldProps`
+
+Forward additional props to the rendered `Label`, `HelpText`, and `TextField` respectively. The `className` on each is merged with the component's defaults.
+
+### `inputRef`
+
+Exposes a ref to the underlying `<input>` element. The component `ref` targets the root container.
+
+## Controls
+
+<Controls of={FormTextFieldStories.Default} />

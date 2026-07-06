@@ -1,7 +1,10 @@
+import {
+  AvatarBaseShape,
+  AvatarTokenSize,
+} from '@metamask/design-system-shared';
 import React, { useState } from 'react';
-import type { ImageErrorEventData, NativeSyntheticEvent } from 'react-native';
+import type { ImageErrorEvent } from 'react-native';
 
-import { AvatarTokenSize, AvatarBaseShape } from '../../types';
 import { AvatarBase } from '../AvatarBase';
 import { ImageOrSvg } from '../temp-components/ImageOrSvg';
 
@@ -13,16 +16,13 @@ export const AvatarToken = ({
   name,
   fallbackText,
   fallbackTextProps,
-  twClassName,
   imageOrSvgProps,
   ...props
 }: AvatarTokenProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
+  const backupFallbackText = fallbackText || name?.[0] || '?';
 
-  const backupFallbackText = fallbackText || name?.[0] || '';
-  const onImageErrorHandler = (
-    e: NativeSyntheticEvent<ImageErrorEventData>,
-  ) => {
+  const onImageErrorHandler = (e: ImageErrorEvent) => {
     setFallbackText(backupFallbackText);
     imageOrSvgProps?.onImageError?.(e);
   };
@@ -36,9 +36,8 @@ export const AvatarToken = ({
     <AvatarBase
       size={size}
       shape={AvatarBaseShape.Circle}
-      fallbackText={finalFallbackText}
+      fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
-      twClassName={twClassName}
       {...props}
     >
       {src && (

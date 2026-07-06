@@ -1,17 +1,18 @@
+import type { AvatarTokenPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
 import type { AvatarBaseProps } from '../AvatarBase';
 
+/**
+ * AvatarToken component props (React platform-specific)
+ * Extends shared props from @metamask/design-system-shared with React-specific platform concerns
+ */
 export type AvatarTokenProps = Omit<
   ComponentProps<'img'>,
   'children' | 'size'
 > &
-  Omit<AvatarBaseProps, 'children'> & {
-    /**
-     * Required name of the token
-     * Used as alt text for image and first letter is used as fallback if no fallbackText provided
-     */
-    name?: string;
+  Omit<AvatarBaseProps, 'children'> &
+  AvatarTokenPropsShared & {
     /**
      * Optional URL for the token image
      * When provided, displays the image instead of fallback text

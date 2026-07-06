@@ -1,3 +1,5 @@
+import type { AvatarFaviconPropsShared } from '@metamask/design-system-shared';
+
 import type { AvatarBaseProps } from '../AvatarBase';
 import type {
   ImageOrSvgProps,
@@ -5,20 +7,18 @@ import type {
 } from '../temp-components/ImageOrSvg';
 
 /**
- * AvatarFavicon component props.
+ * AvatarFavicon component props (React Native platform-specific)
+ * Extends shared props from @metamask/design-system-shared with React Native-specific platform concerns
  */
-export type AvatarFaviconProps = {
-  /**
-   * Optional prop for the source of the image or SVG
-   */
-  src?: ImageOrSvgSrc;
-  /**
-   * Optional props for favicon name, to be used to calculate the fallbackText.
-   */
-  name?: string;
-  /**
-   * Optional prop to pass to the underlying ImageOrSvg element
-   * Useful for overriding the default alt text which is the dapp name
-   */
-  imageOrSvgProps?: Partial<ImageOrSvgProps>;
-} & Omit<AvatarBaseProps, 'children'>;
+export type AvatarFaviconProps = AvatarFaviconPropsShared &
+  Omit<AvatarBaseProps, 'children'> & {
+    /**
+     * Optional prop for the source of the image or SVG
+     */
+    src?: ImageOrSvgSrc;
+    /**
+     * Optional prop to pass to the underlying ImageOrSvg element
+     * Useful for overriding the default alt text which is the dapp name
+     */
+    imageOrSvgProps?: Partial<ImageOrSvgProps>;
+  };

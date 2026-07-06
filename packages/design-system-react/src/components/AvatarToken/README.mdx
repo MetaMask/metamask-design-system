@@ -1,4 +1,4 @@
-import { Controls, Canvas } from '@storybook/blocks';
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
 
 import * as AvatarTokenStories from './AvatarToken.stories';
 
@@ -106,6 +106,7 @@ The `fallbackText` prop is optional and is used for display text when no image i
 AvatarToken supports five sizes.
 
 Available sizes:
+
 - `AvatarTokenSize.Xs` (16px)
 - `AvatarTokenSize.Sm` (24px)
 - `AvatarTokenSize.Md` (32px)
@@ -268,6 +269,8 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## Component API
 
 <Controls of={AvatarTokenStories.Default} />
+
+Migrating from the extension `avatar-token` or mobile `Avatar` token variant? See the [AvatarToken migration guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react/MIGRATION.md#avatartoken-component) for halo and IPFS-related prop removals and `src` mapping on React Native.
 
 ## References
 

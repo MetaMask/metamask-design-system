@@ -171,7 +171,6 @@ import { ComponentName } from '@metamask/design-system-react';
       `;
 
       (fs.readFile as jest.Mock).mockImplementation(async (path: string) => {
-        // eslint-disable-next-line jest/no-conditional-in-test
         if (path.endsWith('README.mdx')) {
           return Promise.resolve(mockReadmeContent);
         }
@@ -213,7 +212,7 @@ import { ComponentName } from '@metamask/design-system-react';
 
       // Mock a more complex README.mdx template
       const mockReadmeContent = `
-import { Controls, Canvas } from '@storybook/blocks';
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
 
 import * as ComponentNameStories from './ComponentName.stories';
 
@@ -231,7 +230,6 @@ import { ComponentName } from '@metamask/design-system-react';
       `;
 
       (fs.readFile as jest.Mock).mockImplementation(async (path: string) => {
-        // eslint-disable-next-line jest/no-conditional-in-test
         if (path.endsWith('README.mdx')) {
           return Promise.resolve(mockReadmeContent);
         }
@@ -254,7 +252,7 @@ import { ComponentName } from '@metamask/design-system-react';
 
       // Verify the structure is preserved
       expect(updatedContent).toContain(
-        "import { Controls, Canvas } from '@storybook/blocks';",
+        "import { Controls, Canvas } from '@storybook/addon-docs/blocks';",
       );
       expect(updatedContent).toContain('import * as ButtonStories from ');
       expect(updatedContent).toContain('<Canvas of={ButtonStories.Default} />');

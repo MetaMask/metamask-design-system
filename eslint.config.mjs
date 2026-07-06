@@ -2,17 +2,22 @@ import base, { createConfig } from '@metamask/eslint-config';
 import jest from '@metamask/eslint-config-jest';
 import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
+// eslint-disable-next-line import-x/no-unresolved -- ESM-only package with non-standard "code" export condition
+import storybook from 'eslint-plugin-storybook';
 import tailwind from 'eslint-plugin-tailwindcss';
 
 const NODE_LTS_VERSION = 22;
 
 const config = createConfig([
+  ...storybook.configs['flat/recommended'],
   ...base,
   {
     ignores: [
+      '**/node_modules/**',
       '**/dist/**',
       '**/docs/**',
       '**/coverage/**',
+      '**/storybook-static/**',
       'merged-packages/**',
       '.yarn/**',
       'scripts/create-package/package-template/**',
@@ -40,36 +45,27 @@ const config = createConfig([
       'apps/storybook-react/postcss.config.js',
       'apps/storybook-react/tailwind.config.js',
       // storybook react native
-      'apps/storybook-react-native/.storybook/**/*.js',
-      'apps/storybook-react-native/*.js',
+      'apps/storybook-react-native/.rnstorybook/*.ts',
+      'apps/storybook-react-native/.rnstorybook/*.tsx',
+      'apps/storybook-react-native/.storybook/*.ts',
+      'apps/storybook-react-native/.storybook/*.tsx',
+      'apps/storybook-react-native/tailwind-intellisense.config.js',
     ],
   },
   {
     rules: {
-      // Left disabled because various properties throughough this repo are snake_case because the
-      // names come from external sources or must comply with standards
-      // e.g. `txreceipt_status`, `signTypedData_v4`, `token_id`
-      camelcase: 'off',
-      'id-length': 'off',
-
       // TODO: re-enble most of these rules
+      'id-length': 'off',
       'id-denylist': 'off',
       'import-x/no-unassigned-import': 'off',
       'no-negated-condition': 'off',
       'no-param-reassign': 'off',
       'no-restricted-syntax': 'off',
-      radix: 'off',
       'require-atomic-updates': 'off',
       'jsdoc/match-description': [
         'off',
         { matchDescription: '^[A-Z`\\d_][\\s\\S]*[.?!`>)}]$' },
       ],
-
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      'import-x/no-named-as-default-member': 'warn',
-      'prettier/prettier': 'warn',
-      'no-empty-function': 'warn',
     },
     settings: {
       jsdoc: {
@@ -84,26 +80,22 @@ const config = createConfig([
       '**/tests/**/*.{js,ts}',
       'scripts/*.ts',
       'scripts/create-package/**/*.ts',
+      'packages/*/scripts/**/*.ts',
     ],
     extends: [nodejs],
     rules: {
       // TODO: Re-enable this
       'n/no-sync': 'off',
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      'n/no-unsupported-features/node-builtins': 'warn',
+      // TODO: Re-enable these rules. Enabling them with error suppression
+      // breaks `--fix`, because the autofixer for these rules do not work very
+      // well.
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/check-tag-names': 'off',
     },
   },
   {
     files: ['**/*.test.{js,ts,tsx}'],
     extends: [jest],
-    rules: {
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      'jest/no-conditional-in-test': 'warn',
-      'jest/prefer-lowercase-title': 'warn',
-      'jest/prefer-strict-equal': 'warn',
-    },
     settings: {
       node: {
         version: `^${NODE_LTS_VERSION}`,
@@ -138,12 +130,6 @@ const config = createConfig([
           considerDefaultExhaustiveForUnions: true,
         },
       ],
-
-      // This rule does not detect multiple imports of the same file where types
-      // are being imported in one case and runtime values are being imported in
-      // another
-      'import-x/no-duplicates': 'off',
-
       // Enable rules that are disabled in `@metamask/eslint-config-typescript`
       '@typescript-eslint/no-explicit-any': 'error',
 
@@ -160,22 +146,14 @@ const config = createConfig([
       '@typescript-eslint/prefer-reduce-type-parameter': 'off',
       'no-restricted-syntax': 'off',
       'no-restricted-globals': 'off',
-
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      '@typescript-eslint/consistent-type-exports': 'warn',
       '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/no-base-to-string': 'warn',
-      '@typescript-eslint/no-duplicate-enum-values': 'warn',
-      '@typescript-eslint/no-misused-promises': 'warn',
-      '@typescript-eslint/no-unsafe-enum-comparison': 'warn',
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/only-throw-error': 'warn',
-      '@typescript-eslint/prefer-promise-reject-errors': 'warn',
-      '@typescript-eslint/prefer-readonly': 'warn',
-      '@typescript-eslint/no-shadow': 'warn',
-      'import-x/namespace': 'warn',
-      'import-x/no-named-as-default': 'warn',
+
+      // TODO: Re-enable these rules. Enabling them with error suppression
+      // breaks `--fix`, because the autofixer for these rules do not work very
+      // well.
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/check-tag-names': 'off',
+
       // Overrides eslint base config which isn't following outer most pattern. Can be removed once this issue is resolved and eslint config updated
       // issue: https://github.com/MetaMask/eslint-config/issues/403
       'import-x/order': [
@@ -201,15 +179,6 @@ const config = createConfig([
           },
         },
       ],
-      'jsdoc/check-tag-names': 'warn',
-      'jsdoc/require-returns': 'warn',
-      'jsdoc/require-param-description': 'warn',
-      'jsdoc/require-returns-description': 'warn',
-      'jsdoc/tag-lines': 'warn',
-      'no-unused-private-class-members': 'warn',
-      'promise/always-return': 'warn',
-      'promise/catch-or-return': 'warn',
-      'promise/param-names': 'warn',
     },
   },
   {
@@ -222,12 +191,12 @@ const config = createConfig([
   {
     files: ['**/*.d.ts'],
     rules: {
-      '@typescript-eslint/naming-convention': 'warn',
+      '@typescript-eslint/naming-convention': 'error',
       'import-x/unambiguous': 'off',
     },
   },
   {
-    files: ['scripts/*.ts'],
+    files: ['scripts/*.ts', 'packages/*/scripts/**/*.ts'],
     rules: {
       // Scripts may be self-executable and thus have hashbangs.
       'n/hashbang': 'off',
@@ -238,12 +207,6 @@ const config = createConfig([
     rules: {
       // These files run under Node, and thus `require(...)` is expected.
       'n/global-require': 'off',
-
-      // TODO: These rules created more errors after the upgrade to ESLint 9.
-      // Re-enable these rules and address any lint violations.
-      'n/prefer-global/text-encoder': 'warn',
-      'n/prefer-global/text-decoder': 'warn',
-      'no-shadow': 'warn',
     },
   },
   {
@@ -252,12 +215,20 @@ const config = createConfig([
       sourceType: 'module',
     },
   },
-  // Tailwind ESLint
+  {
+    files: [
+      'packages/design-system-react/src/components/**/*.{ts,tsx}',
+      'packages/design-system-react-native/src/components/**/*.{ts,tsx}',
+    ],
+    ignores: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.d.ts'],
+    rules: {
+      'import-x/no-default-export': 'error',
+    },
+  },
+  // Tailwind ESLint for React Web
   {
     files: [
       'packages/design-tokens/stories/**',
-      'packages/design-system-react-native/src/**',
-      'apps/storybook-react-native/stories/**',
       'packages/design-system-react/src/**',
       'apps/storybook-react/stories/**',
     ],
@@ -275,9 +246,35 @@ const config = createConfig([
     },
     settings: {
       tailwindcss: {
-        callees: ['twMerge', 'twClassName'],
+        callees: ['twMerge'],
         config: 'apps/storybook-react/tailwind.config.js',
         classRegex: ['^(class(Name)?|twClassName)$'],
+      },
+    },
+  },
+  // Tailwind ESLint for React Native
+  {
+    files: [
+      'packages/design-system-react-native/src/**',
+      'apps/storybook-react-native/stories/**',
+    ],
+    plugins: {
+      tailwindcss: tailwind,
+    },
+    rules: {
+      'tailwindcss/classnames-order': 'error',
+      'tailwindcss/enforces-negative-arbitrary-values': 'error',
+      'tailwindcss/enforces-shorthand': 'error',
+      'tailwindcss/no-arbitrary-value': 'off', // There are legitimate reasons to use arbitrary values but we should specifically error on static colors
+      'tailwindcss/no-custom-classname': 'error',
+      'tailwindcss/no-contradicting-classname': 'error',
+      'tailwindcss/no-unnecessary-arbitrary-value': 'error',
+    },
+    settings: {
+      tailwindcss: {
+        callees: ['twClassName', 'tw'],
+        config: 'apps/storybook-react-native/tailwind-intellisense.config.js',
+        tags: ['tw'], // Enable template literal support for tw`classnames`
       },
     },
   },

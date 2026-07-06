@@ -135,7 +135,7 @@ async function writeJsonFile(
 ): Promise<void> {
   await fs.writeFile(
     filePath,
-    prettierFormat(fileContent, { ...prettierRc, parser: 'json' }),
+    await prettierFormat(fileContent, { ...prettierRc, parser: 'json' }),
   );
 }
 
@@ -199,19 +199,18 @@ function processTemplateContent(
 
   return content.replace(allPlaceholdersRegex, (match) => {
     switch (match) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       case Placeholders.CurrentYear:
         return currentYear;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+
       case Placeholders.NodeVersions:
         return nodeVersions;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+
       case Placeholders.PackageName:
         return name;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+
       case Placeholders.PackageDescription:
         return description;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+
       case Placeholders.PackageDirectoryName:
         return packageData.directoryName;
       /* istanbul ignore next: should be impossible */

@@ -1,4 +1,4 @@
-import { Controls, Canvas } from '@storybook/blocks';
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
 
 import * as AvatarAccountStories from './AvatarAccount.stories';
 
@@ -48,6 +48,7 @@ The `address` prop is required and is used as a unique identifier to generate th
 The `variant` prop controls the type of avatar art rendered.
 
 Available variants:
+
 - `AvatarAccountVariant.Jazzicon` - Displays a Jazzicon
 - `AvatarAccountVariant.Blockies` - Displays a Blockies avatar
 - `AvatarAccountVariant.Maskicon` - Displays a Maskicon avatar
@@ -80,6 +81,7 @@ Available variants:
 AvatarAccount supports five sizes.
 
 Available sizes:
+
 - `AvatarAccountSize.Xs` (16px)
 - `AvatarAccountSize.Sm` (24px)
 - `AvatarAccountSize.Md` (32px)
@@ -267,6 +269,8 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## Component API
 
 <Controls of={AvatarAccountStories.Default} />
+
+Migrating from a legacy `AvatarAccount` (for example the mobile `Avatar` + `Account` variant)? See the [AvatarAccount migration guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react/MIGRATION.md#avataraccount-component) for `address` / `variant` mappings, enum value changes, and size mapping.
 
 ## References
 

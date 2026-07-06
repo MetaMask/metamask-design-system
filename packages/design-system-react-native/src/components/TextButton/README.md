@@ -1,226 +1,95 @@
 # TextButton
 
-`TextButton` is used for text-only button actions or hyperlink without padding or background.
+Use `TextButton` for links placed **inline with text** (for example inside a sentence). It is text-only and is not meant to carry start or end icons. If you need icons with the label, use [`Button`](../Button/README.md) with `variant={ButtonVariant.Tertiary}` instead.
 
----
+Pass [`onPress`](#onpress) (and other [`Text`](../Text/README.md) props as needed) to handle taps.
+
+The React web `TextButton` in `@metamask/design-system-react` may expose different props until the platforms are aligned.
+
+```tsx
+import { TextButton } from '@metamask/design-system-react-native';
+
+<TextButton onPress={() => console.log('Pressed')}>Click me</TextButton>;
+```
+
+If you need start or end icons, use tertiary `Button` instead:
+
+```tsx
+import { Button, ButtonVariant } from '@metamask/design-system-react-native';
+
+<Button variant={ButtonVariant.Tertiary} onPress={() => console.log('Pressed')}>
+  Action
+</Button>;
+```
 
 ## Props
 
-### `children` (Required)
+### `children`
 
-The content to be rendered within the `TextButton`.
+Content for the label.
+
+| TYPE              | REQUIRED | DEFAULT     |
+| ----------------- | -------- | ----------- |
+| `React.ReactNode` | Yes      | `undefined` |
+
+### `onPress`
+
+Called when the user presses the label. Primary interaction for this component.
+
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `TextProps['onPress']` | No       | `undefined` |
+
+### `variant`
+
+Typography variant. Defaults to `TextVariant.BodyMd` (same as [`Text`](../Text/README.md)).
+
+| TYPE          | REQUIRED | DEFAULT              |
+| ------------- | -------- | -------------------- |
+| `TextVariant` | No       | `TextVariant.BodyMd` |
+
+### `fontWeight`
+
+| TYPE         | REQUIRED | DEFAULT             |
+| ------------ | -------- | ------------------- |
+| `FontWeight` | No       | `FontWeight.Medium` |
+
+### `accessibilityRole`
 
 | TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | Yes      | `N/A`   |
-
----
-
-### `textProps`
-
-Optional props to be passed to the `Text` component when the `children` is a string.
-
-| TYPE                                   | REQUIRED | DEFAULT                                                          |
-| :------------------------------------- | :------- | :--------------------------------------------------------------- |
-| `Omit<Partial<TextProps>, 'children'>` | No       | `{ variant: BodyMd, fontWeight: Medium, color: PrimaryDefault }` |
-
----
-
-### `isLoading`
-
-Optional prop that, when `true`, shows a loading spinner.
-
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `false` |
-
----
-
-### `loadingText`
-
-Optional text to display when the button is in the loading state.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| :------- | :------- | :---------- |
-| `string` | No       | `"Loading"` |
-
----
-
-### `spinnerProps`
-
-Optional props to customize the appearance of the spinner.
-
-| TYPE                    | REQUIRED | DEFAULT                  |
-| :---------------------- | :------- | :----------------------- |
-| `Partial<SpinnerProps>` | No       | `{ color: IconDefault }` |
-
----
-
-### `startIconName`
-
-Optional prop to specify an icon to show at the start of the button.
-
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | No       | `null`  |
-
----
-
-### `startIconProps`
-
-Optional props to pass additional properties to the start icon.
-
-| TYPE                 | REQUIRED | DEFAULT                              |
-| :------------------- | :------- | :----------------------------------- |
-| `Partial<IconProps>` | No       | `{ size: Sm, testID: 'start-icon' }` |
-
----
-
-### `startAccessory`
-
-Optional prop for a custom element to show at the start of the button.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `ReactNode` | No       | `null`  |
-
----
-
-### `endIconName`
-
-Optional prop to specify an icon to show at the end of the button.
-
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | No       | `null`  |
-
----
-
-### `endIconProps`
-
-Optional props to pass additional properties to the end icon.
-
-| TYPE                 | REQUIRED | DEFAULT                            |
-| :------------------- | :------- | :--------------------------------- |
-| `Partial<IconProps>` | No       | `{ size: Sm, testID: 'end-icon' }` |
-
----
-
-### `endAccessory`
-
-Optional prop for a custom element to show at the end of the button.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `ReactNode` | No       | `null`  |
-
----
-
-### `isDisabled`
-
-Optional prop that, when `true`, disables the button.
-
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `false` |
-
----
-
-### `isInverse`
-
-Optional prop to show the inverse state of the button, typically used for buttons on colored backgrounds.
-
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `false` |
-
----
+| -------- | -------- | ------- |
+| `string` | No       | `link`  |
 
 ### `twClassName`
 
-Optional prop to add `twrnc` overriding class names.
+Additional TWRNC classes merged into the label.
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
----
+### `suppressHighlighting`
+
+When `true` (default), React Native does not apply its default text press highlight.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `true`  |
 
 ### `style`
 
-Optional prop to control the style.
+Style for the label, merged after design-token styles. Prefer `twClassName` with design tokens when possible.
 
-| TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
-| `StyleProp<ViewStyle>` | No       | `null`  |
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<TextStyle>` | No       | `undefined` |
 
----
+Other `Text` / React Native `Text` props are supported via `TextButtonProps` (see [`TextProps`](../Text/Text.types.ts)).
 
-## Usage
+## Migration from MetaMask Mobile Component Library
 
-### Basic Usage
+Migrating from the legacy `ButtonLink` in `app/component-library/components/Buttons/Button/variants/ButtonLink`? See the [TextButton (ButtonLink) migration guide](../../../MIGRATION.md#textbutton-component-buttonlink) for the full prop mapping, `label` → `children`, and when to use `Button` with `variant={ButtonVariant.Tertiary}` instead.
 
-```tsx
-import React from 'react';
-import TextButton from '@metamask/design-system-react-native';
+## References
 
-<TextButton onPress={() => console.log('Pressed!')}>Click Me</TextButton>;
-```
-
----
-
-### Button with Icon
-
-```tsx
-<TextButton startIconName="ArrowLeft">Go Back</TextButton>
-```
-
----
-
-### Button with Spinner
-
-```tsx
-<TextButton isLoading>Loading...</TextButton>
-```
-
----
-
-### Customizing the Spinner
-
-```tsx
-<TextButton
-  isLoading
-  spinnerProps={{
-    color: IconColor.PrimaryDefault,
-  }}
->
-  Please wait
-</TextButton>
-```
-
----
-
-### Accessibility
-
-- Use the `accessibilityLabel` prop to provide meaningful labels for assistive technologies.
-- Ensure `children` describes the button's purpose or action.
-
----
-
-### Notes
-
-- `TextButton` uses the `Text` component as its base to ensure proper inline rendering with other text elements.
-- Custom alignment logic is applied to ensure consistent layout of icons and spinners.
-- Use `isLoading` to disable user interactions during a loading state.
-
----
-
-## Contributing
-
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
-
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

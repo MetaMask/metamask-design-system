@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0]
+
+### Added
+
+- Added `isPureBlack` prop to `ThemeProvider` and `usePureBlack` hook so React Native apps can apply `pureBlackDarkTheme` token values through twrnc classes ([#1306](https://github.com/MetaMask/metamask-design-system/pull/1306))
+
+## [0.6.0]
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 20 and 22 support for the release line; preset behavior is unchanged, but consumers must run on Node 24 or newer ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+
+## [0.5.0]
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; no TWRNC preset behavior changed, but consumers must run on Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+
+## [0.4.2]
+
+### Changed
+
+- Expanded the `react` peer dependency range to `>=18.2.0`, allowing the preset to install alongside newer React Native 0.76 and React 19 app stacks. ([#844](https://github.com/MetaMask/metamask-design-system/pull/844))
+
+## [0.4.1]
+
+### Fixed
+
+- Fixed typography class generation so custom font family mappings are no longer combined with forced `fontWeight` values, preventing incorrect or fallback font rendering in React Native apps that supply custom font families ([#1037](https://github.com/MetaMask/metamask-design-system/pull/1037))
+
+## [0.4.0]
+
+### Changed
+
+- The `default-bold` and `default-bold-italic` font mappings now resolve to `Geist-SemiBold`/`Geist-SemiBoldItalic`, aligning the preset with the new semibold typography tokens and font assets introduced in this release ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017); see `@metamask/design-tokens` release notes for details). Update any custom `tw` classnames or font bundles that referenced the old `Geist-Bold`/`Geist-BoldItalic` names so Metro/Expo resolve the semibold files.
+
+## [0.3.0]
+
+### Changed
+
+- **BREAKING:** Update font family names from space-separated to hyphenated PostScript format for iOS Metro bundler and expo-font compatibility ([#862](https://github.com/MetaMask/metamask-design-system/pull/862))
+  - Font family names changed: `"Geist Regular"` → `"Geist-Regular"`, `"Geist Medium"` → `"Geist-Medium"`, `"Geist Bold"` → `"Geist-Bold"`
+  - Fixes critical font loading issues on iOS when using Metro bundler with expo-font
+  - If using TWRNC preset via `@metamask/design-system-react-native` components, fonts automatically use correct names with no migration needed
+  - If directly referencing font families in custom TWRNC styles, update to hyphenated names (e.g., tw`font-['Geist-Regular']` instead of tw`font-['Geist_Regular']`)
+  - Android is unaffected by this change
+  - Aligns with MetaMask Mobile's font configuration and expo-font requirements
+
+## [0.2.1]
+
+### Fixed
+
+- Updated font file across apps and packages to match mobile codebase ([#801](https://github.com/MetaMask/metamask-design-system/pull/801))
+
+## [0.2.0]
+
+### Added
+
+- Added classnames for 5 new text styles: page heading, section heading, button labels, and amount display ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
+- Added functionality to improve developer experience with tailwind intellisense and linting for react native ([#783](https://github.com/MetaMask/metamask-design-system/pull/783))
+
 ## [0.1.0]
 
 ### Added
@@ -18,5 +79,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.1.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.7.0...HEAD
+[0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.6.0...@metamask/design-system-twrnc-preset@0.7.0
+[0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.5.0...@metamask/design-system-twrnc-preset@0.6.0
+[0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.2...@metamask/design-system-twrnc-preset@0.5.0
+[0.4.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.1...@metamask/design-system-twrnc-preset@0.4.2
+[0.4.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.0...@metamask/design-system-twrnc-preset@0.4.1
+[0.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.3.0...@metamask/design-system-twrnc-preset@0.4.0
+[0.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.1...@metamask/design-system-twrnc-preset@0.3.0
+[0.2.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.2.0...@metamask/design-system-twrnc-preset@0.2.1
+[0.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.1.0...@metamask/design-system-twrnc-preset@0.2.0
 [0.1.0]: https://github.com/MetaMask/metamask-design-system/releases/tag/@metamask/design-system-twrnc-preset@0.1.0

@@ -1,0 +1,82 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as TextFieldStories from './TextField.stories';
+
+# TextField
+
+TextField is a controlled text input with a styled container, optional start/end accessories, configurable size, and error/disabled/read-only states. Use it when you need a labeled, accessory-capable input. For a plain borderless input (typically composed inside a custom container), use `Input`.
+
+```tsx
+import { TextField, TextFieldSize, TextFieldType } from '@metamask/design-system-react';
+
+<TextField
+  placeholder="Enter value"
+  value=""
+  size={TextFieldSize.Md}
+  type={TextFieldType.Text}
+/>;
+```
+
+<Canvas of={TextFieldStories.Default} />
+
+## Props
+
+### `size`
+
+Controls the height of the container.
+
+<Canvas of={TextFieldStories.Size} />
+
+### `type`
+
+Sets the native `type` attribute on the inner input.
+
+<Canvas of={TextFieldStories.Type} />
+
+### `startAccessory`
+
+Content rendered before the input.
+
+<Canvas of={TextFieldStories.StartAccessory} />
+
+### `endAccessory`
+
+Content rendered after the input.
+
+<Canvas of={TextFieldStories.EndAccessory} />
+
+### `isError`
+
+Renders the error border treatment and sets `aria-invalid` on the inner input.
+
+<Canvas of={TextFieldStories.IsError} />
+
+### `isDisabled`
+
+Disables the inner input and applies the disabled container treatment. Click events on the container are ignored.
+
+<Canvas of={TextFieldStories.IsDisabled} />
+
+### `isReadOnly`
+
+Marks the inner input as read-only. The user can focus but not edit the value.
+
+<Canvas of={TextFieldStories.IsReadOnly} />
+
+### `truncate`
+
+When `true` (default) the inner input truncates overflowing text with an ellipsis.
+
+<Canvas of={TextFieldStories.Truncate} />
+
+### `inputElement`
+
+Replaces the default `Input` with a custom element when you need a different inner control.
+
+### `inputProps` / `inputRef`
+
+`inputProps` forwards extra attributes to the inner `Input`. `inputRef` exposes a ref to the underlying `<input>`; the component `ref` targets the root container.
+
+## Controls
+
+<Controls of={TextFieldStories.Default} />

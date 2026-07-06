@@ -14,7 +14,13 @@ describe('ComponentName Component', () => {
       <ComponentName className="bg-default">Styled Content</ComponentName>,
     );
     expect(screen.getByText('Styled Content')).toHaveClass('bg-default');
-    // Add more class-related tests as needed
+  });
+
+  it('accepts data-testid prop', () => {
+    render(
+      <ComponentName data-testid="component-name">Test Content</ComponentName>,
+    );
+    expect(screen.getByTestId('component-name')).toBeInTheDocument();
   });
 
   // Add more tests as needed

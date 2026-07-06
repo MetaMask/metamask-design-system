@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-import { AvatarTokenSize } from '../../types';
 
 import { AvatarToken } from './AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.dev';
 import README from './README.mdx';
+
+import { AvatarTokenSize } from '.';
 
 const meta: Meta<typeof AvatarToken> = {
   title: 'React Components/AvatarToken',
@@ -103,6 +103,28 @@ export const Name: Story = {
   ),
 };
 
+export const Fallback: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarToken name="Bitcoin" fallbackText="BTC" />
+      <AvatarToken name="Ethereum" />
+      <AvatarToken />
+    </div>
+  ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
+};
+
 export const FallbackText: Story = {
   render: () => (
     <div className="flex gap-2">
@@ -115,6 +137,18 @@ export const FallbackText: Story = {
       <AvatarToken name="USDC" fallbackText="USDC" />
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const Size: Story = {
@@ -143,6 +177,18 @@ export const Size: Story = {
       />
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const HasBorder: Story = {

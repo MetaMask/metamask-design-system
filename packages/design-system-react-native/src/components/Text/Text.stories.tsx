@@ -1,15 +1,14 @@
+import {
+  FontFamily,
+  FontStyle,
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-
-import {
-  TextVariant,
-  TextColor,
-  FontWeight,
-  FontFamily,
-  FontStyle,
-} from '../../types';
 
 import { Text } from './Text';
 import type { TextProps } from './Text.types';
@@ -115,7 +114,7 @@ export const FontWeightStory: Story = {
     <View>
       <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
       <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
-      <Text fontWeight={FontWeight.Bold}>Bold (700)</Text>
+      <Text fontWeight={FontWeight.Bold}>Bold (600)</Text>
     </View>
   ),
   name: 'Font Weight',

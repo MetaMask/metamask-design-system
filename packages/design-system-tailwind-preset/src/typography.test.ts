@@ -77,6 +77,16 @@ describe('Typography', () => {
     '--typography-l-body-md-font-weight',
     '--typography-l-body-sm-font-weight',
     '--typography-l-body-xs-font-weight',
+    '--typography-s-page-heading-font-weight',
+    '--typography-l-page-heading-font-weight',
+    '--typography-s-section-heading-font-weight',
+    '--typography-l-section-heading-font-weight',
+    '--typography-s-button-label-md-font-weight',
+    '--typography-l-button-label-md-font-weight',
+    '--typography-s-button-label-lg-font-weight',
+    '--typography-l-button-label-lg-font-weight',
+    '--typography-s-amount-display-lg-font-weight',
+    '--typography-l-amount-display-lg-font-weight',
   ];
 
   /**
@@ -115,7 +125,7 @@ describe('Typography', () => {
 
     // Filter out variables that are either used or explicitly ignored
     const unusedVariables = Array.from(designTokens).filter(
-      (varName) => !usedSet.has(varName) && !ignoredSet.has(varName), // eslint-disable-line jest/no-conditional-in-test -- Legitimate data processing for test setup
+      (varName) => !usedSet.has(varName) && !ignoredSet.has(varName),
     );
 
     // Expect no unused variables

@@ -1,7 +1,6 @@
+import { AvatarFaviconSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
-
-import { AvatarFaviconSize } from '../../types';
 
 import { AvatarFavicon } from './AvatarFavicon';
 import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.dev';
@@ -55,6 +54,16 @@ export const SampleFavicons: Story = {
       {SAMPLE_AVATARFAVICON_URIS.map((faviconSrc, index) => (
         <AvatarFavicon src={faviconSrc} key={`favicon-${index}`} />
       ))}
+    </View>
+  ),
+};
+
+export const Fallback: Story = {
+  render: () => (
+    <View style={{ flexDirection: 'row', gap: 16 }}>
+      <AvatarFavicon name="OpenSea" fallbackText="OS" />
+      <AvatarFavicon name="Github" />
+      <AvatarFavicon />
     </View>
   ),
 };

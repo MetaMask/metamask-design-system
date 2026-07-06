@@ -1,15 +1,14 @@
+import { BadgeCountSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { BadgeCountSize } from '../../types';
 import { Text, TextColor, FontWeight } from '../Text';
 
 import { BadgeCount } from './BadgeCount';
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
-  MAP_BADGECOUNT_SIZE_LINEHEIGHT,
 } from './BadgeCount.constants';
 
 describe('BadgeCount', () => {
@@ -17,13 +16,14 @@ describe('BadgeCount', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
-      const computedExpectedOuter = tw`items-center justify-center self-start rounded-lg bg-error-default ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]} `;
+      const computedExpectedOuter = tw.style(
+        'items-center justify-center self-start rounded-lg bg-error-default',
+        TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal],
+      );
       const expectedTextProps = {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[sizeVal],
         color: TextColor.ErrorInverse,
         fontWeight: FontWeight.Medium,
-        // Note: trailing space comes from template literal if textProps.twClassName is undefined.
-        twClassName: `${MAP_BADGECOUNT_SIZE_LINEHEIGHT[sizeVal]} `,
       };
       return (
         <>
@@ -57,16 +57,16 @@ describe('BadgeCount', () => {
     expect(textElement.props.fontWeight).toStrictEqual(
       expectedTextProps.fontWeight,
     );
-    expect(textElement.props.twClassName).toContain(
-      MAP_BADGECOUNT_SIZE_LINEHEIGHT[BadgeCountSize.Md],
-    );
   });
 
   it('renders with count greater than max (overflow)', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
-      const computedExpectedOuter = tw`items-center justify-center self-start rounded-lg bg-error-default ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]} `;
+      const computedExpectedOuter = tw.style(
+        'items-center justify-center self-start rounded-lg bg-error-default',
+        TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal],
+      );
       return (
         <>
           <BadgeCount count={150} max={99} testID="badge-count" />
@@ -97,12 +97,14 @@ describe('BadgeCount', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
-      const computedExpectedOuter = tw`items-center justify-center self-start rounded-lg bg-error-default ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal]} `;
+      const computedExpectedOuter = tw.style(
+        'items-center justify-center self-start rounded-lg bg-error-default',
+        TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal],
+      );
       const expectedTextProps = {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[sizeVal],
         color: customTextProps.color, // overridden
         fontWeight: customTextProps.fontWeight, // overridden
-        twClassName: `${MAP_BADGECOUNT_SIZE_LINEHEIGHT[sizeVal]} ${customTextProps.twClassName}`,
       };
       return (
         <>
@@ -137,10 +139,8 @@ describe('BadgeCount', () => {
     expect(textElement.props.fontWeight).toStrictEqual(
       expectedTextProps.fontWeight,
     );
-    expect(textElement.props.twClassName).toContain(
-      MAP_BADGECOUNT_SIZE_LINEHEIGHT[BadgeCountSize.Md],
-    );
-    expect(textElement.props.twClassName).toContain('custom');
+    // Custom twClassName should be applied with leading-0 prepended
+    expect(textElement.props.twClassName).toBe('leading-0 custom');
   });
 
   it('applies additional container style and forwards extra props', () => {
@@ -167,12 +167,14 @@ describe('BadgeCount', () => {
     const customSize = BadgeCountSize.Lg;
     const TestComponent = () => {
       const tw = useTailwind();
-      const computedExpectedOuter = tw`items-center justify-center self-start rounded-lg bg-error-default ${TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[customSize]} `;
+      const computedExpectedOuter = tw.style(
+        'items-center justify-center self-start rounded-lg bg-error-default',
+        TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[customSize],
+      );
       const expectedTextProps = {
         variant: MAP_BADGECOUNT_SIZE_TEXTVARIANT[customSize],
         color: TextColor.ErrorInverse,
         fontWeight: FontWeight.Medium,
-        twClassName: `${MAP_BADGECOUNT_SIZE_LINEHEIGHT[customSize]} `,
       };
       return (
         <>
@@ -198,8 +200,9 @@ describe('BadgeCount', () => {
     expect(container.props.style[0]).toStrictEqual(expectedOuter);
     const textElement = container.props.children;
     expect(textElement.props.variant).toStrictEqual(expectedTextProps.variant);
-    expect(textElement.props.twClassName).toContain(
-      MAP_BADGECOUNT_SIZE_LINEHEIGHT[customSize],
+    expect(textElement.props.color).toStrictEqual(expectedTextProps.color);
+    expect(textElement.props.fontWeight).toStrictEqual(
+      expectedTextProps.fontWeight,
     );
   });
 });

@@ -1,6 +1,9 @@
+import {
+  ButtonIconSize,
+  ButtonIconVariant,
+} from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { ButtonIconSize } from '../../types';
 import { twMerge } from '../../utils/tw-merge';
 import { Icon } from '../Icon';
 
@@ -18,8 +21,7 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
       iconProps,
       ariaLabel,
       isDisabled = false,
-      isInverse = false,
-      isFloating = false,
+      variant = ButtonIconVariant.Default,
       size = ButtonIconSize.Md,
       style,
       ...props
@@ -33,19 +35,20 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
       'inline-flex items-center justify-center p-0',
       // Size styles
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
-      // Floating styles
-      isFloating && [
-        'rounded-full',
-        !isInverse && 'bg-icon-default text-background-default',
-        isInverse && 'bg-icon-default text-background-default',
-      ],
-      // Non-floating styles
-      !isFloating && [
-        'rounded bg-transparent',
-        // Only apply hover/active styles when interactive
+      // Variant styles
+      variant === ButtonIconVariant.Default && [
+        'rounded-lg bg-transparent',
         isInteractive && 'hover:bg-hover active:bg-pressed',
-        !isInverse && 'text-icon-default',
-        isInverse && 'text-background-default',
+        'text-icon-default',
+      ],
+      variant === ButtonIconVariant.Floating && [
+        'rounded-full',
+        'bg-icon-default text-background-default',
+      ],
+      variant === ButtonIconVariant.Filled && [
+        'rounded-full',
+        'bg-muted text-icon-default',
+        isInteractive && 'hover:bg-muted-hover active:bg-muted-pressed',
       ],
       // Disabled state
       isDisabled && 'cursor-not-allowed opacity-50',

@@ -9,8 +9,17 @@
     "esModuleInterop": true,
     "noEmit": true
   },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
+    ".rnstorybook/**/*.ts",
+    ".rnstorybook/**/*.tsx"
+  ],
   "exclude": [
     "node_modules",
+    "storybook-static",
     "babel.config.js",
     "metro.config.js",
     "jest.config.js",

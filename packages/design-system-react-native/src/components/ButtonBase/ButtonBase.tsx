@@ -1,17 +1,26 @@
+import {
+  ButtonBaseSize,
+  FontWeight,
+  mergeTwClassName,
+  TextColor,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
-import { View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { ButtonBaseSize } from '../../types';
-import { Icon } from '../Icon';
-import { IconColor, IconSize } from '../Icon';
+import { Box } from '../Box';
+import { BoxRow } from '../BoxRow';
+import { Icon, IconColor } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Spinner } from '../temp-components/Spinner';
-import { TextOrChildren } from '../temp-components/TextOrChildren/TextOrChildren';
-import { TextVariant, FontWeight, TextColor } from '../Text';
 
-import { TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION } from './ButtonBase.constants';
+import {
+  MAP_BUTTONBASE_SIZE_ICONSIZE,
+  MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
+  getButtonBaseBorderRadiusTwClass,
+  getButtonBaseHorizontalPaddingTwClasses,
+  TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
+} from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
 
 export const ButtonBase = ({
@@ -21,6 +30,8 @@ export const ButtonBase = ({
   isLoading,
   loadingText,
   spinnerProps,
+  loadingWrapperProps,
+  contentWrapperProps,
   startIconName,
   startIconProps,
   startAccessory,
@@ -29,7 +40,7 @@ export const ButtonBase = ({
   endAccessory,
   isDisabled,
   isFullWidth,
-  twClassName = '',
+  twClassName,
   textClassName,
   iconClassName,
   style,
@@ -44,6 +55,13 @@ export const ButtonBase = ({
 
   const finalStartIconName = startIconName ?? startIconProps?.name;
   const finalEndIconName = endIconName ?? endIconProps?.name;
+
+  const hasStart = Boolean(finalStartIconName || startAccessory);
+  const hasEnd = Boolean(finalEndIconName || endAccessory);
+  const hasAccessories = hasStart || hasEnd;
+
+  const iconSize = MAP_BUTTONBASE_SIZE_ICONSIZE[size];
+  const labelTextVariant = MAP_BUTTONBASE_SIZE_TEXT_VARIANT[size];
 
   // Generate accessibility label if not provided
   const finalAccessibilityLabel = useMemo(() => {
@@ -103,98 +121,143 @@ export const ButtonBase = ({
       accessibilityState={accessibilityState}
       accessible
       style={({ pressed }) => {
-        const containerClassName =
+        // Evaluate custom className if it's a function
+        const customClassName =
           typeof twClassName === 'function'
             ? twClassName(pressed)
             : twClassName;
 
-        const baseContainerClassNames = `
-          flex-row items-center justify-center rounded-xl bg-muted px-4 min-w-[80px] overflow-hidden
-          ${TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size]}
-          ${isDisabled ? 'opacity-50' : 'opacity-100'}
-          ${isFullWidth ? 'w-full' : 'w-auto'}
-          ${containerClassName}
-        `;
+        // Build button container styles
+        const buttonStyles = tw.style(
+          // Base layout - flex container for button content
+          'flex-row items-center justify-center',
+          // Visual styling
+          'bg-muted overflow-hidden',
+          // Conditional Border Radius and Horizontal Spacing based on requirements
+          getButtonBaseBorderRadiusTwClass(size),
+          getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
+          // Size
+          TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],
+          // State-based opacity
+          isDisabled ? 'opacity-50' : 'opacity-100',
+          // Width - use self-start to prevent stretching when not full width
+          isFullWidth ? 'w-full' : 'self-start',
+          // Custom classes
+          customClassName,
+        );
 
-        const computedStyle: StyleProp<ViewStyle>[] = [
-          tw`${baseContainerClassNames}`,
-        ];
-        if (typeof style === 'function') {
-          const additionalStyle = style({ pressed });
-          if (additionalStyle) {
-            computedStyle.push(additionalStyle);
-          }
-        } else if (style) {
-          computedStyle.push(style);
+        // Merge with additional styles if provided
+        const computedStyle: StyleProp<ViewStyle>[] = [buttonStyles];
+
+        const additionalStyle =
+          typeof style === 'function' ? style({ pressed }) : style;
+
+        if (additionalStyle) {
+          computedStyle.push(additionalStyle);
         }
 
         return computedStyle;
       }}
       {...props}
     >
-      {({ pressed }) => (
-        <>
-          <View
-            style={tw`absolute inset-0 flex items-center justify-center ${
-              isLoading ? 'opacity-100' : 'opacity-0'
-            }`}
-            testID="spinner-container"
-          >
-            <Spinner
-              color={
-                textClassName
-                  ? (textClassName(pressed) as IconColor)
-                  : IconColor.IconDefault
-              }
-              loadingText={loadingText}
-              loadingTextProps={{
-                numberOfLines: 1,
-                twClassName: textClassName ? textClassName(pressed) : '',
-                ...spinnerProps?.loadingTextProps,
-              }}
-              {...spinnerProps}
-            />
-          </View>
-          <View
-            style={tw`flex-row items-center justify-center gap-x-2 ${
-              isLoading ? 'opacity-0' : 'opacity-100'
-            }`}
-            testID="content-container"
-          >
-            {finalStartIconName ? (
-              <Icon
-                name={finalStartIconName}
-                size={IconSize.Sm}
-                twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
-                {...startIconProps}
-              />
-            ) : (
-              startAccessory
+      {({ pressed }) => {
+        const { twClassName: loadingWrapperTw, ...restLoadingWrapper } =
+          loadingWrapperProps ?? {};
+        const { twClassName: contentWrapperTw, ...restContentWrapper } =
+          contentWrapperProps ?? {};
+
+        return (
+          <>
+            {/* Loading spinner overlay */}
+            {isLoading && (
+              <Box
+                {...restLoadingWrapper}
+                twClassName={mergeTwClassName(
+                  'absolute inset-0 flex items-center justify-center',
+                  loadingWrapperTw,
+                )}
+              >
+                <Spinner
+                  color={
+                    textClassName
+                      ? (textClassName(pressed) as IconColor)
+                      : IconColor.IconDefault
+                  }
+                  loadingText={loadingText}
+                  {...spinnerProps}
+                  spinnerIconProps={{
+                    size: iconSize,
+                    ...spinnerProps?.spinnerIconProps,
+                  }}
+                  loadingTextProps={{
+                    numberOfLines: 1,
+                    variant: labelTextVariant,
+                    twClassName: textClassName ? textClassName(pressed) : '',
+                    ...spinnerProps?.loadingTextProps,
+                  }}
+                />
+              </Box>
             )}
-            <TextOrChildren
+
+            <BoxRow
+              {...restContentWrapper}
+              twClassName={
+                isLoading
+                  ? mergeTwClassName('opacity-0', contentWrapperTw)
+                  : contentWrapperTw
+              }
+              gap={hasAccessories ? 1 : 0}
+              startAccessory={
+                finalStartIconName ? (
+                  <Icon
+                    name={finalStartIconName}
+                    size={iconSize}
+                    twClassName={mergeTwClassName(
+                      'shrink-0',
+                      iconClassName ? iconClassName(pressed) : undefined,
+                    )}
+                    {...startIconProps}
+                  />
+                ) : (
+                  startAccessory
+                )
+              }
+              endAccessory={
+                finalEndIconName ? (
+                  <Icon
+                    name={finalEndIconName}
+                    size={iconSize}
+                    twClassName={mergeTwClassName(
+                      'shrink-0',
+                      iconClassName ? iconClassName(pressed) : undefined,
+                    )}
+                    {...endIconProps}
+                  />
+                ) : (
+                  endAccessory
+                )
+              }
               textProps={{
-                variant: TextVariant.BodyMd,
+                variant: labelTextVariant,
                 fontWeight: FontWeight.Medium,
                 color: TextColor.TextDefault,
-                twClassName: `shrink grow-0 flex-wrap text-center ${textClassName ? textClassName(pressed) : ''}`,
+                numberOfLines: 1,
+                ellipsizeMode: 'clip',
                 ...textProps,
+                twClassName: mergeTwClassName(
+                  mergeTwClassName(
+                    'shrink grow-0 flex-wrap text-center',
+                    textClassName ? textClassName(pressed) : undefined,
+                  ),
+                  textProps?.twClassName,
+                ),
               }}
             >
               {children}
-            </TextOrChildren>
-            {finalEndIconName ? (
-              <Icon
-                name={finalEndIconName}
-                size={IconSize.Sm}
-                twClassName={`shrink-0 ${iconClassName ? iconClassName(pressed) : ''}`}
-                {...endIconProps}
-              />
-            ) : (
-              endAccessory
-            )}
-          </View>
-        </>
-      )}
+            </BoxRow>
+          </>
+        );
+      }}
     </ButtonAnimated>
   );
 };

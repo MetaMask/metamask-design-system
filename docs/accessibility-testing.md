@@ -1,82 +1,108 @@
 # Accessibility Testing
 
-Our Storybook React setup includes comprehensive accessibility testing capabilities powered by [axe-core](https://github.com/dequelabs/axe-core) through the `@storybook/addon-a11y` addon.
+Our Storybook automatically runs accessibility tests on all component stories using [axe-core](https://github.com/dequelabs/axe-core) through the `@storybook/addon-a11y` addon. Tests check for WCAG 2.1 AA compliance and catch up to 57% of accessibility issues automatically.
 
-## Real-time Testing
+## How It Works
 
-When running Storybook, you can access real-time accessibility testing through the Accessibility tab in the addons panel. This provides:
+**Accessibility tests run automatically** when you:
 
-- Immediate feedback on accessibility violations
-- Detailed explanations of issues
-- Suggestions for fixes
-- WCAG guidelines references
+- View stories in Storybook (results appear in the Accessibility panel)
+- Run `yarn test:storybook` (accessibility violations cause test failures)
 
-## Automated Testing
+No additional setup is needed - just write your component stories and accessibility tests are included.
 
-1. First, start Storybook:
+## Running Tests
+
+### In Storybook UI
+
+1. Navigate to any story
+2. Open the **Accessibility** panel in the addon panel
+3. View results in three tabs: **Violations**, **Passes**, **Incomplete**
+
+### From Command Line
 
 ```bash
-yarn storybook
-```
-
-2. Once Storybook is running, open a new terminal window and run the accessibility tests:
-
-```bash
+# Run all component tests (includes accessibility)
 yarn test:storybook
+
+# Run tests in watch mode
+yarn test:storybook --watch
+
+# Run tests for specific stories
+yarn test:storybook "Button"
 ```
 
-This will:
+## Handling Violations
 
-- Test all stories for accessibility violations
-- Generate detailed reports of any issues
-- Integrate with CI/CD pipelines
+When accessibility violations are found, tests will **fail** with detailed error messages:
 
-You can also test specific components by adding a filter:
+```
+✗ Button/Primary A11y
+  Expected: 0 violations
+  Received: 1 violation
 
-```bash
-yarn test:storybook "ComponentName"
+  color-contrast: Elements must have sufficient color contrast
+  Expected contrast ratio of 4.5:1
+
+  Fix: https://dequeuniversity.com/rules/axe/4.7/color-contrast
 ```
 
-## Marking Stories for A11y Review
+**Common violations and fixes:**
 
-To mark components that need accessibility review or improvements, add the following to your story:
+- **Color contrast**: Ensure text has sufficient contrast against background
+- **Missing labels**: Add `aria-label` or associate with label elements
+- **Keyboard navigation**: Ensure interactive elements are keyboard accessible
+- **Semantic HTML**: Use proper heading hierarchy and semantic elements
+
+## Disabling Tests for Specific Stories
+
+Sometimes you need to disable accessibility tests for specific stories (e.g., error states, loading states):
 
 ```typescript
-export default {
-  title: 'Components/YourComponent',
-  component: YourComponent,
+// In your story file
+export const LoadingState: Story = {
   parameters: {
-    a11y: { test: 'todo' },
+    a11y: {
+      test: 'off', // Disable accessibility tests for this story
+    },
+  },
+};
+
+// Or disable specific rules
+export const ErrorState: Story = {
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Disable color contrast check
+          },
+        ],
+      },
+    },
   },
 };
 ```
 
-## Skipping A11y Tests
+## Test Behavior Options
 
-You can skip accessibility tests for specific stories by setting the `a11y` parameter to `disable: true`:
+| Value     | Description                                                         |
+| --------- | ------------------------------------------------------------------- |
+| `'error'` | Fail tests when violations are found (default, recommended for CI)  |
+| `'todo'`  | Show warnings in Storybook UI but don't fail tests                  |
+| `'off'`   | Disable accessibility tests (can still run manually in addon panel) |
 
-```typescript
-export const MyStory = {
-  parameters: {
-    a11y: { disable: true },
-  },
-  render: () => (
-    // Your story content
-  ),
-};
-```
+## Best Practices
 
-This is useful when:
+1. **Write accessible components from the start** - don't rely on tests to catch everything
+2. **Fix violations immediately** - accessibility issues compound over time
+3. **Test with real assistive technology** - automated tests catch ~57% of issues
+4. **Consider the full user journey** - test component interactions, not just static states
+5. **Use semantic HTML** - proper markup prevents many accessibility issues
 
-- A story is purely for visual demonstration
-- The accessibility requirements are handled differently for specific variants
-- You need to temporarily bypass tests while working on improvements
+## Resources
 
-Note: Use this sparingly and document why the test is being skipped to maintain accessibility standards.
-
-## References
-
-- [Storybook Testing Documentation](https://storybook.js.org/docs/writing-tests/accessibility-testing)
-- [Storybook Accessibility Addon Documentation](https://storybook.js.org/addons/@storybook/addon-a11y)
-- [axe-core Rules Documentation](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [axe-core Rule Descriptions](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md)
+- [Deque University](https://dequeuniversity.com/) - accessibility training and resources

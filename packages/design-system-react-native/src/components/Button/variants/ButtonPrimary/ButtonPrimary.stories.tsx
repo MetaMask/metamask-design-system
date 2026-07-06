@@ -1,9 +1,7 @@
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
-
-import { ButtonPrimarySize } from '../../../../types';
-import { IconName } from '../../../Icon';
 
 import { ButtonPrimary } from './ButtonPrimary';
 import type { ButtonPrimaryProps } from './ButtonPrimary.types';
@@ -17,7 +15,7 @@ const meta: Meta<ButtonPrimaryProps> = {
     },
     size: {
       control: 'select',
-      options: ButtonPrimarySize,
+      options: ButtonSize,
     },
     isLoading: {
       control: 'boolean',
@@ -69,7 +67,7 @@ const ButtonPrimaryStory: React.FC<ButtonPrimaryProps> = ({
 export const Default: Story = {
   args: {
     children: 'Sample ButtonPrimary Text',
-    size: ButtonPrimarySize.Lg,
+    size: ButtonSize.Lg,
     isLoading: false,
     loadingText: 'Loading',
     startIconName: IconName.Add,
@@ -85,9 +83,9 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <ButtonPrimary size={ButtonPrimarySize.Sm}>ButtonSize Sm</ButtonPrimary>
-      <ButtonPrimary size={ButtonPrimarySize.Md}>ButtonSize Md</ButtonPrimary>
-      <ButtonPrimary size={ButtonPrimarySize.Lg}>
+      <ButtonPrimary size={ButtonSize.Sm}>ButtonSize Sm</ButtonPrimary>
+      <ButtonPrimary size={ButtonSize.Md}>ButtonSize Md</ButtonPrimary>
+      <ButtonPrimary size={ButtonSize.Lg}>
         ButtonSize Lg (Default)
       </ButtonPrimary>
     </View>
@@ -127,14 +125,14 @@ export const WithStartAndEndAccessory: Story = {
   },
 };
 
-export const isDisabled: Story = {
+export const IsDisabled: Story = {
   args: {
     children: 'isDisabled',
     isDisabled: true,
   },
 };
 
-export const isFullWidth: Story = {
+export const IsFullWidth: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonPrimary>ButtonPrimary</ButtonPrimary>
@@ -143,7 +141,7 @@ export const isFullWidth: Story = {
   ),
 };
 
-export const isDanger: Story = {
+export const IsDanger: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonPrimary isDanger>ButtonPrimary</ButtonPrimary>
@@ -154,7 +152,7 @@ export const isDanger: Story = {
   ),
 };
 
-export const isInverse: Story = {
+export const IsInverse: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonPrimaryStory isInverse>ButtonPrimary</ButtonPrimaryStory>

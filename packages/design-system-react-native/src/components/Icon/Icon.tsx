@@ -1,11 +1,11 @@
+import { IconColor, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useMemo } from 'react';
-
-import { IconColor, IconSize } from '../../types';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import { assetByIconName } from './Icon.assets';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
 import type { IconProps } from './Icon.types';
-import { generateIconClassNames } from './Icon.utilities';
 
 export const Icon = ({
   size = IconSize.Md,
@@ -17,16 +17,12 @@ export const Icon = ({
 }: IconProps) => {
   const tw = useTailwind();
   const SVG = assetByIconName[name];
-  const twStyle = useMemo(() => {
-    const mergedClassnames = generateIconClassNames({
-      color,
-      size,
-      twClassName,
-    });
-    return tw`${mergedClassnames}`;
-  }, [color, size, tw, twClassName]);
-
-  return (
-    <SVG name={name} fill="currentColor" style={[twStyle, style]} {...props} />
+  const twStyle = tw.style(
+    color,
+    TWCLASSMAP_ICON_SIZE_DIMENSION[size],
+    twClassName,
   );
+  const svgStyle = StyleSheet.flatten([twStyle, style]);
+
+  return <SVG name={name} fill="currentColor" style={svgStyle} {...props} />;
 };

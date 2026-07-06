@@ -1,7 +1,7 @@
+import { AvatarNetworkSize } from '@metamask/design-system-shared';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { AvatarNetworkSize } from '../../types';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
@@ -55,6 +55,13 @@ describe('AvatarNetwork', () => {
       );
       const fb2 = screen.getByTestId('fb2');
       expect(fb2).toHaveTextContent('Yo');
+    });
+
+    it('renders "?" when no name or fallbackText is provided', () => {
+      render(
+        <AvatarNetwork fallbackTextProps={{ 'data-testid': 'fb-default' }} />,
+      );
+      expect(screen.getByTestId('fb-default')).toHaveTextContent('?');
     });
   });
 

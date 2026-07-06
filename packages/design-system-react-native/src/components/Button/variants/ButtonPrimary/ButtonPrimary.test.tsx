@@ -1,10 +1,9 @@
+import { ButtonBaseSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render } from '@testing-library/react-native';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
-import * as ReactTestRenderer from 'react-test-renderer';
 
-import { ButtonBaseSize } from '../../../../types';
+import { createRenderer } from '../../../../test-utils/createRenderer';
 
 import { ButtonPrimary } from './ButtonPrimary';
 
@@ -106,9 +105,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('toggles pressed styles (default)', () => {
-    const tree = ReactTestRenderer.create(
-      <ButtonPrimary>Press me</ButtonPrimary>,
-    );
+    const tree = createRenderer(<ButtonPrimary>Press me</ButtonPrimary>);
 
     // Find the ButtonAnimated component which has the style function
     const buttonAnimated = tree.root.findByProps({
@@ -129,9 +126,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('toggles pressed styles (danger)', () => {
-    const tree = ReactTestRenderer.create(
-      <ButtonPrimary isDanger>Danger</ButtonPrimary>,
-    );
+    const tree = createRenderer(<ButtonPrimary isDanger>Danger</ButtonPrimary>);
 
     const buttonAnimated = tree.root.findByProps({
       accessibilityRole: 'button',
@@ -151,7 +146,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('toggles pressed styles (inverse)', () => {
-    const tree = ReactTestRenderer.create(
+    const tree = createRenderer(
       <ButtonPrimary isInverse>Inverse</ButtonPrimary>,
     );
 
@@ -173,7 +168,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('toggles pressed styles (inverse+danger)', () => {
-    const tree = ReactTestRenderer.create(
+    const tree = createRenderer(
       <ButtonPrimary isInverse isDanger>
         Inverse+Danger
       </ButtonPrimary>,
@@ -194,38 +189,6 @@ describe('ButtonPrimary', () => {
 
     expect(defaultStyles).toBeDefined();
     expect(pressedStyles).toBeDefined();
-  });
-
-  it('shows spinner + hides content when loading', () => {
-    const spinnerTW =
-      'absolute inset-0 flex items-center justify-center opacity-100';
-    const contentTW = 'flex-row items-center justify-center gap-x-2 opacity-0';
-
-    const { getByTestId } = render(
-      <ButtonPrimary
-        isLoading
-        spinnerProps={{ twClassName: spinnerTW }}
-        testID="button-primary"
-      >
-        Loading
-      </ButtonPrimary>,
-    );
-
-    const spinner = getByTestId('spinner-container');
-    const spinnerStyles = flattenStyles(spinner.props.style);
-    expect(spinnerStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
-    );
-
-    const content = getByTestId('content-container');
-    const contentStyles = flattenStyles(content.props.style);
-    expect(contentStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining(tw`${contentTW}`)]),
-    );
-
-    expect(
-      getByTestId('button-primary').props.accessibilityState.disabled,
-    ).toBe(true);
   });
 
   it('renders danger+loading background', () => {

@@ -1,6 +1,5 @@
+import { ButtonVariant } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
-
-import { ButtonVariant } from '../../types';
 
 import type { ButtonProps } from './Button.types';
 import { ButtonPrimary } from './variants/ButtonPrimary';

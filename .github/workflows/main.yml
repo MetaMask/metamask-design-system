@@ -36,6 +36,18 @@ jobs:
     needs: check-workflows
     uses: ./.github/workflows/lint-build-test.yml
 
+  test-storybook:
+    name: Test Storybook
+    needs: check-workflows
+    uses: ./.github/workflows/test-storybook.yml
+
+  chromatic:
+    name: Chromatic
+    needs: check-workflows
+    uses: ./.github/workflows/chromatic.yml
+    secrets:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
   is-release:
     name: Determine whether this is a release merge commit
     needs: lint-build-test
@@ -55,6 +67,7 @@ jobs:
     if: needs.is-release.outputs.IS_RELEASE == 'true'
     permissions:
       contents: write
+      id-token: write
     uses: ./.github/workflows/publish-release.yml
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -66,6 +79,8 @@ jobs:
     needs:
       - analyse-code
       - lint-build-test
+      - test-storybook
+      - chromatic
     outputs:
       passed: ${{ steps.set-output.outputs.passed }}
     steps:

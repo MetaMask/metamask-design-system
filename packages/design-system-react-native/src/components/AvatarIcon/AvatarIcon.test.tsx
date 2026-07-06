@@ -1,10 +1,13 @@
+import {
+  AvatarIconSeverity,
+  AvatarIconSize,
+  IconName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render } from '@testing-library/react-native';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { AvatarIconSeverity, AvatarIconSize } from '../../types';
-import { IconName } from '../Icon';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
 import { AvatarIcon } from './AvatarIcon';
 import {
@@ -22,11 +25,11 @@ describe('AvatarIcon', () => {
       TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
         AvatarIconSeverity.Neutral
       ];
-    const expectedIconBgStyle = tw`${bgClass}`;
+    const expectedIconBgStyle = tw.style(bgClass);
 
-    const expectedIconColor =
-      tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral]}`
-        .color;
+    const expectedIconColor = tw.style(
+      MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral],
+    ).color;
 
     const { getByTestId } = render(
       <AvatarIcon
@@ -39,7 +42,7 @@ describe('AvatarIcon', () => {
     expect(container.props.style[1][0]).toStrictEqual(expectedIconBgStyle);
 
     const icon = getByTestId('icon');
-    expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
+    expect(icon.props.style.color).toStrictEqual(expectedIconColor);
     expect(container.props.accessibilityRole).toBe('image');
   });
 
@@ -51,11 +54,11 @@ describe('AvatarIcon', () => {
       TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[
         AvatarIconSeverity.Neutral
       ];
-    const expectedIconBgStyle = tw`${bgClass} bg-default`;
+    const expectedIconBgStyle = tw.style(bgClass, 'bg-default');
 
-    const expectedIconColor =
-      tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral]}`
-        .color;
+    const expectedIconColor = tw.style(
+      MAP_AVATARICON_SEVERITY_ICONCOLOR[AvatarIconSeverity.Neutral],
+    ).color;
     const customStyle = { margin: 10 };
 
     const { getByTestId } = render(
@@ -74,7 +77,7 @@ describe('AvatarIcon', () => {
     expect(container.props.accessibilityLabel).toBe('avatar');
 
     const icon = getByTestId('icon');
-    expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
+    expect(icon.props.style.color).toStrictEqual(expectedIconColor);
   });
 
   it.each(Object.values(AvatarIconSeverity))(
@@ -84,10 +87,11 @@ describe('AvatarIcon', () => {
       const tw = result.current;
 
       const bgClass = TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity];
-      const expectedIconBgStyle = tw`${bgClass}`;
+      const expectedIconBgStyle = tw.style(bgClass);
 
-      const expectedIconColor =
-        tw`${MAP_AVATARICON_SEVERITY_ICONCOLOR[severity]}`.color;
+      const expectedIconColor = tw.style(
+        MAP_AVATARICON_SEVERITY_ICONCOLOR[severity],
+      ).color;
 
       const { getByTestId } = render(
         <AvatarIcon
@@ -101,14 +105,19 @@ describe('AvatarIcon', () => {
       expect(container.props.style[1][0]).toStrictEqual(expectedIconBgStyle);
 
       const icon = getByTestId('icon');
-      expect(icon.props.style[0].color).toStrictEqual(expectedIconColor);
+      expect(icon.props.style.color).toStrictEqual(expectedIconColor);
     },
   );
 
   it.each(Object.values(AvatarIconSize))(
     'applies correct icon size for size %s',
     (size) => {
-      const expectedSize = MAP_AVATARICON_SIZE_ICONSIZE[size].toString();
+      const { result } = renderHook(() => useTailwind());
+      const tw = result.current;
+
+      const iconSize = MAP_AVATARICON_SIZE_ICONSIZE[size];
+      const expectedStyle = tw.style(TWCLASSMAP_ICON_SIZE_DIMENSION[iconSize]);
+
       const { getByTestId } = render(
         <AvatarIcon
           iconName={IconName.Add}
@@ -118,8 +127,8 @@ describe('AvatarIcon', () => {
         />,
       );
       const icon = getByTestId('icon');
-      expect(icon.props.style[0].width.toString()).toStrictEqual(expectedSize);
-      expect(icon.props.style[0].height.toString()).toStrictEqual(expectedSize);
+      expect(icon.props.style.width).toStrictEqual(expectedStyle.width);
+      expect(icon.props.style.height).toStrictEqual(expectedStyle.height);
     },
   );
 });

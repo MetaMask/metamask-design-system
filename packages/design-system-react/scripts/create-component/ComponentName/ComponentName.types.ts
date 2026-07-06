@@ -13,4 +13,8 @@ export type ComponentNameProps = {
    * Inline styles to be applied to the ComponentName component.
    */
   style?: React.CSSProperties;
+  /**
+   * Test identifier for selecting the component in tests.
+   */
+  'data-testid'?: string;
 };

@@ -9,6 +9,9 @@
   },
   "references": [
     {
+      "path": "../design-system-shared"
+    },
+    {
       "path": "../design-system-twrnc-preset"
     }
   ],

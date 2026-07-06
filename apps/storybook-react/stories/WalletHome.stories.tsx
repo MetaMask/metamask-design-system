@@ -9,6 +9,8 @@ import {
   BadgeNetwork,
   Box,
   BoxAlignItems,
+  BoxBackgroundColor,
+  BoxBorderColor,
   BoxFlexDirection,
   BoxFlexWrap,
   BoxJustifyContent,
@@ -30,7 +32,7 @@ import {
   BadgeStatusStatus,
   IconSize,
 } from '@metamask/design-system-react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 const meta: Meta = {
@@ -53,9 +55,16 @@ const WalletHome: React.FC = () => {
   return (
     <Box className="min-h-screen md:flex md:items-center md:justify-center md:bg-alternative md:py-4">
       {/* Container Expanded View */}
-      <Box className="mx-auto w-full bg-default md:max-w-xl md:rounded-3xl md:py-4">
+      <Box
+        backgroundColor={BoxBackgroundColor.BackgroundDefault}
+        className="mx-auto w-full md:max-w-xl md:rounded-3xl md:py-4"
+      >
         {/* Header */}
-        <Box className="border-b border-muted p-4 md:px-8">
+        <Box
+          padding={4}
+          borderColor={BoxBorderColor.BorderMuted}
+          className="border-b md:px-8"
+        >
           <Box
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
@@ -96,7 +105,7 @@ const WalletHome: React.FC = () => {
           </Box>
         </Box>
         {/* Balance */}
-        <Box className="p-4 md:px-8">
+        <Box padding={4} className="md:px-8">
           <Text variant={TextVariant.DisplayMd}>$10,528.46</Text>
           <Box
             flexDirection={BoxFlexDirection.Row}
@@ -111,7 +120,8 @@ const WalletHome: React.FC = () => {
           flexDirection={BoxFlexDirection.Row}
           flexWrap={BoxFlexWrap.Wrap}
           gap={2}
-          className="p-4 md:px-8"
+          padding={4}
+          className="md:px-8"
         >
           <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
             <Icon name={IconName.Bank} className="mb-2" />
@@ -131,7 +141,11 @@ const WalletHome: React.FC = () => {
           </ButtonBase>
         </Box>
         {/* Tabs */}
-        <Box className="border-b border-muted px-4 md:px-8">
+        <Box
+          paddingHorizontal={4}
+          borderColor={BoxBorderColor.BorderMuted}
+          className="border-b md:px-8"
+        >
           <Box flexDirection={BoxFlexDirection.Row}>
             <Text
               asChild
@@ -175,7 +189,8 @@ const WalletHome: React.FC = () => {
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
             justifyContent={BoxJustifyContent.Between}
-            className="p-4 md:px-8"
+            padding={4}
+            className="md:px-8"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -202,7 +217,9 @@ const WalletHome: React.FC = () => {
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
             justifyContent={BoxJustifyContent.Between}
-            className="w-full px-4 py-2 hover:bg-hover active:bg-pressed md:px-8"
+            paddingHorizontal={4}
+            paddingVertical={2}
+            className="w-full hover:bg-hover active:bg-pressed md:px-8"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -281,7 +298,9 @@ const WalletHome: React.FC = () => {
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
             justifyContent={BoxJustifyContent.Between}
-            className="w-full px-4 py-2 hover:bg-hover active:bg-pressed md:px-8"
+            paddingHorizontal={4}
+            paddingVertical={2}
+            className="w-full hover:bg-hover active:bg-pressed md:px-8"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -341,7 +360,9 @@ const WalletHome: React.FC = () => {
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
             justifyContent={BoxJustifyContent.Between}
-            className="w-full px-4 py-2 hover:bg-hover active:bg-pressed md:px-8"
+            paddingHorizontal={4}
+            paddingVertical={2}
+            className="w-full hover:bg-hover active:bg-pressed md:px-8"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}
@@ -401,7 +422,9 @@ const WalletHome: React.FC = () => {
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
             justifyContent={BoxJustifyContent.Between}
-            className="w-full px-4 py-2 hover:bg-hover active:bg-pressed md:px-8"
+            paddingHorizontal={4}
+            paddingVertical={2}
+            className="w-full hover:bg-hover active:bg-pressed md:px-8"
           >
             <Box
               flexDirection={BoxFlexDirection.Row}

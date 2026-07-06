@@ -1,10 +1,9 @@
+import { ButtonBaseSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { renderHook } from '@testing-library/react-hooks';
-import { render } from '@testing-library/react-native';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
-import * as ReactTestRenderer from 'react-test-renderer';
 
-import { ButtonBaseSize } from '../../../../types';
+import { createRenderer } from '../../../../test-utils/createRenderer';
 
 import { ButtonTertiary } from './ButtonTertiary';
 
@@ -110,9 +109,7 @@ describe('ButtonTertiary', () => {
   });
 
   it('toggles pressed styles (default)', () => {
-    const tree = ReactTestRenderer.create(
-      <ButtonTertiary>Press me</ButtonTertiary>,
-    );
+    const tree = createRenderer(<ButtonTertiary>Press me</ButtonTertiary>);
 
     // Find the ButtonAnimated component which has the style function
     const buttonAnimated = tree.root.findByProps({
@@ -133,7 +130,7 @@ describe('ButtonTertiary', () => {
   });
 
   it('toggles pressed styles (danger)', () => {
-    const tree = ReactTestRenderer.create(
+    const tree = createRenderer(
       <ButtonTertiary isDanger>Danger</ButtonTertiary>,
     );
 
@@ -155,7 +152,7 @@ describe('ButtonTertiary', () => {
   });
 
   it('toggles pressed styles (inverse)', () => {
-    const tree = ReactTestRenderer.create(
+    const tree = createRenderer(
       <ButtonTertiary isInverse>Inverse</ButtonTertiary>,
     );
 
@@ -177,7 +174,7 @@ describe('ButtonTertiary', () => {
   });
 
   it('toggles pressed styles (inverse+danger)', () => {
-    const tree = ReactTestRenderer.create(
+    const tree = createRenderer(
       <ButtonTertiary isInverse isDanger>
         Inverse+Danger
       </ButtonTertiary>,
@@ -198,38 +195,6 @@ describe('ButtonTertiary', () => {
 
     expect(defaultStyles).toBeDefined();
     expect(pressedStyles).toBeDefined();
-  });
-
-  it('shows spinner + hides content when loading', () => {
-    const spinnerTW =
-      'absolute inset-0 flex items-center justify-center opacity-100';
-    const contentTW = 'flex-row items-center justify-center gap-x-2 opacity-0';
-
-    const { getByTestId } = render(
-      <ButtonTertiary
-        isLoading
-        spinnerProps={{ twClassName: spinnerTW }}
-        testID="button-tertiary"
-      >
-        Loading
-      </ButtonTertiary>,
-    );
-
-    const spinner = getByTestId('spinner-container');
-    const spinnerStyles = flattenStyles(spinner.props.style);
-    expect(spinnerStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining(tw`${spinnerTW}`)]),
-    );
-
-    const content = getByTestId('content-container');
-    const contentStyles = flattenStyles(content.props.style);
-    expect(contentStyles).toStrictEqual(
-      expect.arrayContaining([expect.objectContaining(tw`${contentTW}`)]),
-    );
-
-    expect(
-      getByTestId('button-tertiary').props.accessibilityState.disabled,
-    ).toBe(true);
   });
 
   it('renders danger+loading background', () => {

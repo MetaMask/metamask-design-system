@@ -1,9 +1,12 @@
+import {
+  IconColor,
+  ButtonIconSize,
+  ButtonIconVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import { ButtonIconSize } from '../../types';
-import type { IconColor } from '../Icon';
 import { Icon } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 
@@ -18,35 +21,32 @@ export const ButtonIcon = ({
   iconName,
   iconProps,
   isDisabled = false,
-  isInverse = false,
-  isFloating = false,
+  variant = ButtonIconVariant.Default,
   onPressIn,
   onPressOut,
-  twClassName = '',
+  twClassName,
   style,
   ...props
 }: ButtonIconProps) => {
   const [isPressed, setIsPressed] = useState(false);
   const tw = useTailwind();
 
-  // Determine background color based on state
   let backgroundColor = 'bg-transparent';
-  if (isFloating) {
+  if (variant === ButtonIconVariant.Floating) {
     backgroundColor = 'bg-icon-default';
+  } else if (variant === ButtonIconVariant.Filled) {
+    backgroundColor = isPressed ? 'bg-muted-pressed' : 'bg-muted';
   } else if (isPressed) {
     backgroundColor = 'bg-pressed';
   }
 
-  const twContainerClassNames = `
-    items-center justify-center
-    ${TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size]}
-    ${isFloating ? 'rounded-full' : 'rounded-sm'}
-    ${backgroundColor}
-    ${isDisabled ? 'opacity-50' : 'opacity-100'}
-    ${twClassName}`;
-
   const twIconColorClassNames =
-    isInverse || isFloating ? 'text-primary-inverse' : 'text-icon-default';
+    variant === ButtonIconVariant.Floating
+      ? 'text-primary-inverse'
+      : 'text-icon-default';
+
+  const borderRadiusClass =
+    variant === ButtonIconVariant.Default ? 'rounded-lg' : 'rounded-full';
 
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);
@@ -64,9 +64,19 @@ export const ButtonIcon = ({
       onPressIn={onPressInHandler}
       onPressOut={onPressOutHandler}
       accessible
-      style={[tw`${twContainerClassNames}`, style]}
       testID="button-icon"
       {...props}
+      style={[
+        tw.style(
+          'items-center justify-center',
+          TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
+          borderRadiusClass,
+          backgroundColor,
+          isDisabled ? 'opacity-50' : 'opacity-100',
+          twClassName,
+        ),
+        style,
+      ]}
     >
       <Icon
         name={iconName}

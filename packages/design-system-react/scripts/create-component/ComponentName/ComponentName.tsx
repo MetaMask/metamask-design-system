@@ -8,11 +8,12 @@ export const ComponentName: React.FC<ComponentNameProps> = ({
   children,
   className,
   style,
+  ...props
 }) => {
   const mergedClassName = twMerge('text-default', className);
 
   return (
-    <div className={mergedClassName} style={style}>
+    <div className={mergedClassName} style={style} {...props}>
       {children}
     </div>
   );

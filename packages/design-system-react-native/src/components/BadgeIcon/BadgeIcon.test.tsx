@@ -1,8 +1,8 @@
+import { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconName, IconColor, IconSize } from '../Icon';
 import { Text } from '../Text';
 
 import { BadgeIcon } from './BadgeIcon';
@@ -12,7 +12,9 @@ describe('BadgeIcon', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       // Compute expected container style using an empty twClassName.
-      const computedExpectedContainer = tw`h-[16px] w-[16px] items-center justify-center rounded-full bg-icon-default`;
+      const computedExpectedContainer = tw.style(
+        'h-4 w-4 bg-icon-default rounded-full items-center justify-center',
+      );
       return (
         <>
           <BadgeIcon iconName={IconName.Add} testID="badge-icon" />

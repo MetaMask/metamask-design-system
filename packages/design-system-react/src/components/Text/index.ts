@@ -1,12 +1,11 @@
 export {
+  TextColor,
+  TextVariant,
   FontFamily,
   FontStyle,
   FontWeight,
-  OverflowWrap,
-  TextAlign,
-  TextVariant,
-  TextTransform,
-  TextColor,
-} from '../../types';
+  type TextPropsShared,
+} from '@metamask/design-system-shared';
+export { OverflowWrap, TextAlign, TextTransform } from '../../types';
 export { Text } from './Text';
 export type { TextProps } from './Text.types';

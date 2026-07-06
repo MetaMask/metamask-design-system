@@ -1,4 +1,4 @@
-import { Controls, Canvas } from '@storybook/blocks';
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
 
 import * as AvatarFaviconStories from './AvatarFavicon.stories';
 
@@ -106,6 +106,7 @@ The `fallbackText` prop is optional and is used for display text when no image i
 AvatarFavicon supports five sizes.
 
 Available sizes:
+
 - `AvatarFaviconSize.Xs` (16px)
 - `AvatarFaviconSize.Sm` (24px)
 - `AvatarFaviconSize.Md` (32px)
@@ -268,6 +269,8 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## Component API
 
 <Controls of={AvatarFaviconStories.Default} />
+
+Migrating from the extension `avatar-favicon` or mobile `Avatar` favicon variant? See the [AvatarFavicon migration guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react/MIGRATION.md#avatarfavicon-component) for `name` / `src` and fallback changes.
 
 ## References
 

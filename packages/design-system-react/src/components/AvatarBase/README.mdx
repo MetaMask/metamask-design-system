@@ -1,4 +1,4 @@
-import { Controls, Canvas } from '@storybook/blocks';
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
 
 import * as AvatarBaseStories from './AvatarBase.stories';
 
@@ -21,6 +21,7 @@ import { AvatarBase } from '@metamask/design-system-react';
 AvatarBase supports two shapes.
 
 Available shapes:
+
 - `AvatarBaseShape.Circle` - Fully rounded
 - `AvatarBaseShape.Square` - Slightly rounded corners
 
@@ -52,6 +53,7 @@ Available shapes:
 AvatarBase supports five sizes.
 
 Available sizes:
+
 - `AvatarBaseSize.Xs` (16px)
 - `AvatarBaseSize.Sm` (24px)
 - `AvatarBaseSize.Md` (32px)
@@ -245,6 +247,8 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## Component API
 
 <Controls of={AvatarBaseStories.Default} />
+
+Migrating from the MetaMask Extension or Mobile `component-library`? See the [AvatarBase migration guide](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react/MIGRATION.md#avatarbase-component) for import paths, `hasBorder` / `shape` mappings, and before/after examples.
 
 ## References
 
