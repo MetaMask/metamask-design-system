@@ -17,6 +17,9 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
+      // Run story files sequentially to avoid CI resource contention when
+      // many modules are loaded in parallel via the Vite dev server.
+      fileParallelism: false,
       projects: [
         {
           plugins: [
@@ -27,8 +30,7 @@ export default mergeConfig(
           ],
           test: {
             name: 'storybook',
-            // Reduce resource contention in CI when loading many story modules in parallel.
-            isolate: false,
+            retry: 2,
             browser: {
               enabled: true,
               provider: playwright(),
