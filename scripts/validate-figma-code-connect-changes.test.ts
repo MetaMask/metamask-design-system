@@ -3,6 +3,7 @@ import os from 'os';
 import path from 'path';
 
 import {
+  createValidationContext,
   EXCLUDED_COMPONENT_NAMES,
   findMissingCrossPlatformFigmaFiles,
   findMissingFigmaFilesForNewComponents,
@@ -11,20 +12,14 @@ import {
 
 describe('validate-figma-code-connect-changes', () => {
   let tempDir: string;
-  let previousRepoRoot: string | undefined;
+  let context: ReturnType<typeof createValidationContext>;
 
   beforeEach(() => {
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'figma-validate-'));
-    previousRepoRoot = process.env.FIGMA_VALIDATE_REPO_ROOT;
-    process.env.FIGMA_VALIDATE_REPO_ROOT = tempDir;
+    context = createValidationContext({ repoRoot: tempDir });
   });
 
   afterEach(() => {
-    if (previousRepoRoot === undefined) {
-      delete process.env.FIGMA_VALIDATE_REPO_ROOT;
-    } else {
-      process.env.FIGMA_VALIDATE_REPO_ROOT = previousRepoRoot;
-    }
     fs.rmSync(tempDir, { recursive: true, force: true });
   });
 
@@ -33,8 +28,9 @@ describe('validate-figma-code-connect-changes', () => {
       expect(
         parseMainComponentFile(
           'packages/design-system-react/src/components/Button/Button.tsx',
+          context,
         ),
-      ).toEqual({
+      ).toStrictEqual({
         packagePath: 'packages/design-system-react',
         componentName: 'Button',
         componentDir: path.join(
@@ -48,6 +44,7 @@ describe('validate-figma-code-connect-changes', () => {
       expect(
         parseMainComponentFile(
           'packages/design-system-react/src/components/Button/Button.stories.tsx',
+          context,
         ),
       ).toBeNull();
     });
@@ -60,21 +57,23 @@ describe('validate-figma-code-connect-changes', () => {
         'export const NewWidget = () => null;',
       );
 
-      const errors = findMissingFigmaFilesForNewComponents([
-        'packages/design-system-react/src/components/NewWidget/NewWidget.tsx',
-      ]);
+      const errors = findMissingFigmaFilesForNewComponents(
+        ['packages/design-system-react/src/components/NewWidget/NewWidget.tsx'],
+        context,
+      );
 
-      expect(errors).toEqual([
+      expect(errors).toStrictEqual([
         'New component "NewWidget" in packages/design-system-react is missing packages/design-system-react/src/components/NewWidget/NewWidget.figma.tsx',
       ]);
     });
 
     it('does not require figma files for excluded components', () => {
-      const errors = findMissingFigmaFilesForNewComponents([
-        'packages/design-system-react/src/components/Box/Box.tsx',
-      ]);
+      const errors = findMissingFigmaFilesForNewComponents(
+        ['packages/design-system-react/src/components/Box/Box.tsx'],
+        context,
+      );
 
-      expect(errors).toEqual([]);
+      expect(errors).toStrictEqual([]);
       expect(EXCLUDED_COMPONENT_NAMES.has('Box')).toBe(true);
     });
   });
@@ -94,12 +93,15 @@ describe('validate-figma-code-connect-changes', () => {
         'export const NewWidget = () => null;',
       );
 
-      const errors = findMissingCrossPlatformFigmaFiles([
-        'packages/design-system-react/src/components/NewWidget/NewWidget.tsx',
-        'packages/design-system-react-native/src/components/NewWidget/NewWidget.tsx',
-      ]);
+      const errors = findMissingCrossPlatformFigmaFiles(
+        [
+          'packages/design-system-react/src/components/NewWidget/NewWidget.tsx',
+          'packages/design-system-react-native/src/components/NewWidget/NewWidget.tsx',
+        ],
+        context,
+      );
 
-      expect(errors).toEqual([
+      expect(errors).toStrictEqual([
         'Component "NewWidget" is missing a Code Connect file in packages/design-system-react-native',
       ]);
     });

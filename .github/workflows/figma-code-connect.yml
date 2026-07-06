@@ -25,6 +25,10 @@ jobs:
           is-high-risk-environment: ${{ inputs.publish }}
           fetch-depth: 0
 
+      - name: Fetch pull request base branch
+        if: ${{ !inputs.publish }}
+        run: git fetch origin "${GITHUB_BASE_REF:-main}"
+
       - name: Validate new components include Code Connect files
         if: ${{ !inputs.publish }}
         run: yarn validate:figma-code-connect-changes
