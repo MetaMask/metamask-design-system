@@ -125,42 +125,15 @@ describe('typography types', () => {
     it('has correct structure for fontSize property', () => {
       const mockConfig: TypographyTailwindConfigProps = {
         fontSize: {
-          'display-lg': [
-            '48',
-            { lineHeight: '56px', letterSpacing: '0' },
-          ],
-          'display-md': [
-            '32',
-            { lineHeight: '40px', letterSpacing: '0' },
-          ],
-          'heading-lg': [
-            '24',
-            { lineHeight: '32px', letterSpacing: '0' },
-          ],
-          'heading-md': [
-            '18',
-            { lineHeight: '24px', letterSpacing: '0' },
-          ],
-          'heading-sm': [
-            '16',
-            { lineHeight: '24px', letterSpacing: '0' },
-          ],
-          'body-lg': [
-            '18',
-            { lineHeight: '24px', letterSpacing: '0' },
-          ],
-          'body-md': [
-            '14',
-            { lineHeight: '20px', letterSpacing: '0' },
-          ],
-          'body-sm': [
-            '12',
-            { lineHeight: '16px', letterSpacing: '0' },
-          ],
-          'body-xs': [
-            '10',
-            { lineHeight: '12px', letterSpacing: '0' },
-          ],
+          'display-lg': ['48', { lineHeight: '56px', letterSpacing: '0' }],
+          'display-md': ['32', { lineHeight: '40px', letterSpacing: '0' }],
+          'heading-lg': ['24', { lineHeight: '32px', letterSpacing: '0' }],
+          'heading-md': ['18', { lineHeight: '24px', letterSpacing: '0' }],
+          'heading-sm': ['16', { lineHeight: '24px', letterSpacing: '0' }],
+          'body-lg': ['18', { lineHeight: '24px', letterSpacing: '0' }],
+          'body-md': ['14', { lineHeight: '20px', letterSpacing: '0' }],
+          'body-sm': ['12', { lineHeight: '16px', letterSpacing: '0' }],
+          'body-xs': ['10', { lineHeight: '12px', letterSpacing: '0' }],
         },
         fontFamily: {
           'default-regular': 'Geist-Regular',
