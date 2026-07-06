@@ -13,18 +13,10 @@ jobs:
         include:
           - label: React
             command: yarn test:storybook:react
-          - label: React Native 1/6
-            command: yarn workspace @metamask/storybook-react-native test-storybook --shard=1/6
-          - label: React Native 2/6
-            command: yarn workspace @metamask/storybook-react-native test-storybook --shard=2/6
-          - label: React Native 3/6
-            command: yarn workspace @metamask/storybook-react-native test-storybook --shard=3/6
-          - label: React Native 4/6
-            command: yarn workspace @metamask/storybook-react-native test-storybook --shard=4/6
-          - label: React Native 5/6
-            command: yarn workspace @metamask/storybook-react-native test-storybook --shard=5/6
-          - label: React Native 6/6
-            command: yarn workspace @metamask/storybook-react-native test-storybook --shard=6/6
+            retry: 'false'
+          - label: React Native
+            command: yarn test:storybook:react-native
+            retry: 'true'
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
@@ -35,7 +27,16 @@ jobs:
       - name: Build packages
         run: yarn build
       - name: Run Storybook tests
+        if: matrix.retry != 'true'
         run: ${{ matrix.command }}
+      - name: Run Storybook tests
+        if: matrix.retry == 'true'
+        uses: MetaMask/action-retry-command@v1
+        with:
+          command: ${{ matrix.command }}
+          max-retries: 3
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
       - name: Require clean working directory
         shell: bash
         run: |

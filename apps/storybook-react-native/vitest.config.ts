@@ -17,9 +17,6 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
-      // Run story files sequentially to avoid CI resource contention when
-      // many modules are loaded in parallel via the Vite dev server.
-      fileParallelism: false,
       projects: [
         {
           plugins: [
@@ -31,7 +28,18 @@ export default mergeConfig(
           ],
           test: {
             name: 'storybook',
+            fileParallelism: false,
             retry: 2,
+            testTimeout: 60_000,
+            hookTimeout: 60_000,
+            server: {
+              deps: {
+                inline: [
+                  '@metamask/design-system-react-native',
+                  'react-native-web',
+                ],
+              },
+            },
             browser: {
               enabled: true,
               provider: playwright(),

@@ -4,6 +4,14 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react/jsx-dev-runtime',
+      'react-native-web',
+    ],
+  },
   resolve: {
     alias: {
       '@metamask/design-system-shared': path.resolve(
