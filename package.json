@@ -62,6 +62,7 @@
     "test:storybook:react": "yarn workspace @metamask/storybook-react test-storybook",
     "test:storybook:react-native": "yarn workspace @metamask/storybook-react-native test-storybook",
     "test:verbose": "yarn workspaces foreach --all --parallel --verbose run test:verbose",
+    "update-readme-content": "tsx scripts/update-readme-content.ts",
     "validate:figma-code-connect-changes": "tsx scripts/validate-figma-code-connect-changes.ts",
     "workspaces:list-versions": "./scripts/list-workspace-versions.sh"
   },
