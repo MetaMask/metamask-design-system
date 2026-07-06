@@ -246,6 +246,20 @@ export const FinalFocusRef: Story = {
       </Text>
     ),
   },
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            // Story intentionally uses an unstyled button to demonstrate
+            // finalFocusRef returning focus to external page controls.
+            enabled: false,
+          },
+        ],
+      },
+    },
+  },
   render: (args) => {
     const { children: bodyChildren, ...modalArgs } = args;
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -264,9 +278,11 @@ export const FinalFocusRef: Story = {
           >
             Open modal
           </Button>
-          <button ref={buttonRef} type="button">
-            Receives focus after close
-          </button>
+          <Text asChild>
+            <button ref={buttonRef} type="button">
+              Receives focus after close
+            </button>
+          </Text>
         </Box>
         <Modal
           {...modalArgs}
