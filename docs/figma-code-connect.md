@@ -103,10 +103,10 @@ See [`.cursor/rules/figma-integration.md`](../.cursor/rules/figma-integration.md
 
 Figma Code Connect is validated and published automatically via GitHub Actions:
 
-| Event | Workflow behavior |
-| --- | --- |
-| **Pull request** | Runs `yarn validate:figma-code-connect-changes` and `yarn figma:connect:publish:dry-run` to validate Code Connect files against the Figma API without publishing |
-| **Push to `main`** | Runs `yarn figma:connect:publish` to publish Code Connect mappings to Figma |
+| Event              | Workflow behavior                                                                                                                                                |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Pull request**   | Runs `yarn validate:figma-code-connect-changes` and `yarn figma:connect:publish:dry-run` to validate Code Connect files against the Figma API without publishing |
+| **Push to `main`** | Runs `yarn figma:connect:publish` to publish Code Connect mappings to Figma                                                                                      |
 
 ### Required repository secret
 
