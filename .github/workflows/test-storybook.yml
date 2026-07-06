@@ -5,11 +5,20 @@ on:
 
 jobs:
   test-storybook:
-    name: Test Storybook (accessibility & stories)
+    name: Test Storybook (accessibility & stories) (${{ matrix.label }})
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [24.x]
+        include:
+          - label: React
+            command: yarn test:storybook:react
+          - label: React Native 1/3
+            command: yarn workspace @metamask/storybook-react-native test-storybook --shard=1/3
+          - label: React Native 2/3
+            command: yarn workspace @metamask/storybook-react-native test-storybook --shard=2/3
+          - label: React Native 3/3
+            command: yarn workspace @metamask/storybook-react-native test-storybook --shard=3/3
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
@@ -20,7 +29,7 @@ jobs:
       - name: Build packages
         run: yarn build
       - name: Run Storybook tests
-        run: yarn test:storybook
+        run: ${{ matrix.command }}
       - name: Require clean working directory
         shell: bash
         run: |
