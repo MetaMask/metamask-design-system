@@ -16,7 +16,7 @@ Repository-specific conventions and patterns:
 - @.cursor/rules/figma-integration.md
 - @.cursor/rules/release-workflow.md
 
-See @docs/ai-agents.md for comprehensive strategy explanation.
+See [docs/ai-agents.md](./docs/ai-agents.md) for comprehensive strategy explanation.
 
 ## Monorepo Structure
 
