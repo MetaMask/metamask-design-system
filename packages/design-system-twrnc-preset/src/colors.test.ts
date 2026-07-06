@@ -1,4 +1,4 @@
-import { themeColors } from './colors';
+import { themeColors, getThemeColors, pureBlackThemeColors } from './colors';
 import { Theme } from './Theme.types';
 
 describe('colors', () => {
@@ -163,6 +163,20 @@ describe('colors', () => {
       darkKeys.forEach((key) => {
         expect(typeof darkColors[key]).toBe('string');
       });
+    });
+  });
+
+  describe('getThemeColors', () => {
+    it('returns light theme colors for Theme.Light', () => {
+      expect(getThemeColors(Theme.Light)).toBe(themeColors[Theme.Light]);
+    });
+
+    it('returns dark theme colors for Theme.Dark when pure black is disabled', () => {
+      expect(getThemeColors(Theme.Dark, false)).toBe(themeColors[Theme.Dark]);
+    });
+
+    it('returns pure black dark theme colors when enabled', () => {
+      expect(getThemeColors(Theme.Dark, true)).toBe(pureBlackThemeColors);
     });
   });
 });

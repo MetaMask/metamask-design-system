@@ -14,6 +14,9 @@ module.exports = merge(baseConfig, {
   // The display name when running multiple projects
   displayName,
 
+  // Use V8 coverage to avoid Babel JSX parsing in non-RN tests
+  coverageProvider: 'v8',
+
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
@@ -23,22 +26,23 @@ module.exports = merge(baseConfig, {
       statements: 84,
     },
   },
-  preset: 'react-native',
-  transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
-  },
-  transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-native|@react-navigation)/)',
-  ],
-  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  moduleNameMapper: {
-    '\\.(css|less|scss)$': 'identity-obj-proxy',
-  },
   // Exclude pure type files from coverage since they contain no executable code
   // Also exclude enum files that Jest has difficulty tracking coverage for
   coveragePathIgnorePatterns: [
     '/node_modules/',
     'typography\\.types\\.ts$',
     'Theme\\.types\\.ts$',
+    // Exclude non-color modules from this package's initial test scope
+    'src/(ThemeProvider|ThemeContext|hooks|tailwind\\.config|typography)\\.(ts|tsx)$',
   ],
+  moduleNameMapper: {
+    // Prefer local source for monorepo package resolution
+    '^@metamask/design-tokens$': '<rootDir>/../design-tokens/src',
+  },
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/../../tsconfig.packages.json',
+      isolatedModules: true,
+    },
+  },
 });
