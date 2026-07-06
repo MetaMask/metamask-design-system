@@ -27,6 +27,8 @@ export default mergeConfig(
           ],
           test: {
             name: 'storybook',
+            // Reduce resource contention in CI when loading many story modules in parallel.
+            isolate: false,
             browser: {
               enabled: true,
               provider: playwright(),
