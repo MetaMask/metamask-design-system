@@ -1,8 +1,12 @@
+import {
+  AvatarBaseSize,
+  AvatarBaseShape,
+  mergeTwClassName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { Text, TextColor, TextVariant, FontWeight } from '../Text';
 
 import {
@@ -20,32 +24,40 @@ export const AvatarBase = ({
   fallbackText,
   fallbackTextProps,
   hasBorder = false,
-  twClassName = '',
+  twClassName,
   style,
   ...props
 }: AvatarBaseProps) => {
   const tw = useTailwind();
-  const twContainerClassNames = `
-    items-center justify-center overflow-hidden bg-section
-    ${
-      shape === AvatarBaseShape.Circle
-        ? 'rounded-full'
-        : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size]
-    }
-    ${hasBorder ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size] : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size]}
-    ${hasBorder ? TWCLASSMAP_AVATARBASE_SIZE_BORDER[size] : ''}
-    ${twClassName}
-  `;
 
   return (
-    <View style={[tw`${twContainerClassNames}`, style]} {...props}>
+    <View
+      {...props}
+      style={[
+        tw.style(
+          'items-center justify-center overflow-hidden bg-alternative',
+          shape === AvatarBaseShape.Circle
+            ? 'rounded-full'
+            : TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE[size],
+          hasBorder
+            ? TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION[size]
+            : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size],
+          hasBorder && TWCLASSMAP_AVATARBASE_SIZE_BORDER[size],
+          twClassName,
+        ),
+        style,
+      ]}
+    >
       {fallbackText ? (
         <Text
           color={TextColor.TextMuted}
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
           {...fallbackTextProps}
-          twClassName={`uppercase ${fallbackTextProps?.twClassName ? ` ${fallbackTextProps.twClassName}` : ''}`.trim()}
+          twClassName={mergeTwClassName(
+            'uppercase',
+            fallbackTextProps?.twClassName,
+          )}
         >
           {fallbackText}
         </Text>

@@ -3,7 +3,10 @@ export {
   BoxFlexWrap,
   BoxAlignItems,
   BoxJustifyContent,
-} from '../../types';
-export type { BoxSpacing } from '../../types';
+  BoxBackgroundColor,
+  BoxBorderColor,
+  type BoxSpacing,
+  type BoxBorderWidth,
+} from '@metamask/design-system-shared';
 export { Box } from './Box';
 export type { BoxProps } from './Box.types';

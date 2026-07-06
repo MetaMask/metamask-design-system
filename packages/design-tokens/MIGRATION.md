@@ -2,11 +2,367 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
+- [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
+- [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
 - [From version 6.0.0 to 7.0.0](#from-version-600-to-700)
 - [From version 5.1.0 to 6.0.0](#from-version-510-to-600)
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## Tailwind CSS v3 to v4
+
+This section covers migrating from Tailwind CSS v3 (using `@metamask/design-system-tailwind-preset`) to Tailwind CSS v4 (using the new `theme.css` export from this package).
+
+### Overview
+
+In Tailwind v3, design tokens were consumed through a combination of:
+
+- `@metamask/design-tokens/styles.css` (CSS custom properties)
+- `@metamask/design-system-tailwind-preset` (Tailwind v3 theme config)
+
+In Tailwind v4, a single CSS file replaces both:
+
+- `@metamask/design-tokens/tailwind/theme.css`
+
+This file provides all design token CSS variables, `@theme` color/shadow definitions, and `@utility` directives for typography, font weights, font families, and color shortcuts.
+
+### Step 1: Install Tailwind CSS v4
+
+```bash
+yarn add -D tailwindcss@^4.0.0 @tailwindcss/postcss@^4.0.0
+# If using Vite:
+yarn add -D @tailwindcss/vite@^4.0.0
+```
+
+### Step 2: Replace the Tailwind v3 configuration
+
+Remove `tailwind.config.js` (or `.ts`) and replace with a CSS entry point.
+
+**Before (Tailwind v3):**
+
+```js
+// tailwind.config.js
+const preset = require('@metamask/design-system-tailwind-preset');
+
+module.exports = {
+  presets: [preset],
+  content: ['./src/**/*.{ts,tsx}'],
+};
+```
+
+**After (Tailwind v4):**
+
+Create a CSS entry point (e.g. `tailwind.css`):
+
+```css
+@import 'tailwindcss';
+@import '@metamask/design-tokens/tailwind/theme.css';
+
+@source "./src/**/*.{ts,tsx}";
+```
+
+### Step 3: Update build tooling
+
+**PostCSS (`postcss.config.js`):**
+
+```js
+module.exports = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};
+```
+
+**Vite (`vite.config.ts`):**
+
+```ts
+import tailwindcss from '@tailwindcss/vite';
+
+export default {
+  plugins: [tailwindcss()],
+};
+```
+
+### Step 4: Update CSS imports
+
+Replace the old CSS imports with the new entry point.
+
+**Before:**
+
+```ts
+import '@metamask/design-tokens/styles.css';
+import './tailwind.css'; // or wherever your Tailwind directives were
+```
+
+**After:**
+
+```ts
+import './tailwind.css'; // your new CSS entry point that imports theme.css
+```
+
+### Step 5: Remove the v3 preset dependency
+
+```bash
+yarn remove @metamask/design-system-tailwind-preset
+```
+
+The preset is no longer needed for Tailwind v4 consumers. It will eventually be deprecated.
+
+### What `theme.css` provides
+
+| Token category    | How it works in v4                                                                                                                             |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Colors            | `@theme` variables (e.g. `--color-primary-default`) auto-generate `bg-*`, `text-*`, `border-*` utilities                                       |
+| Color shortcuts   | `@utility` directives (e.g. `bg-default`, `text-default`, `border-default`)                                                                    |
+| Typography        | `@utility` directives for `text-*`, `leading-*`, `tracking-*`                                                                                  |
+| Font weights      | `@utility` directives for `font-regular`, `font-medium`, `font-bold`                                                                           |
+| Font families     | `@utility` directives for `font-default`, `font-accent`, `font-hero`                                                                           |
+| Box shadows       | `@theme` variables (`--shadow-xs` / `sm` / `md` / `lg`) auto-generate `shadow-xs`–`shadow-lg` utilities                                        |
+| Shadow colors     | `--color-shadow-default` / `primary` / `error` in `@theme` only (no `shadow-default` etc. utilities; v3’s color-stack pattern had no adoption) |
+| Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                                                              |
+
+### Shadow utility changes
+
+Default neutral shadow sizes remain available as Tailwind utilities:
+
+- `shadow-xs`
+- `shadow-sm`
+- `shadow-md`
+- `shadow-lg`
+
+However, the old v3 color utility classes are no longer generated:
+
+- `shadow-default`
+- `shadow-primary`
+- `shadow-error`
+
+If you need a colored shadow in v4, compose the size token with the shadow color token explicitly.
+
+**Before (v3):**
+
+```html
+<div class="shadow-sm shadow-primary"></div>
+```
+
+**After (v4, Tailwind markup):**
+
+```html
+<div class="shadow-[var(--shadow-size-sm)_var(--color-shadow-primary)]"></div>
+```
+
+**After (v4, CSS):**
+
+```css
+box-shadow: var(--shadow-size-sm) var(--color-shadow-primary);
+```
+
+### Class name changes
+
+Most utility class names remain the same between v3 and v4. Notable differences:
+
+| v3 class    | v4 class       | Notes                                                                        |
+| ----------- | -------------- | ---------------------------------------------------------------------------- |
+| `font-sans` | `font-default` | v4 uses `font-default` instead of overriding Tailwind's built-in `font-sans` |
+
+### React Native
+
+React Native packages (`@metamask/design-system-react-native`, `@metamask/design-system-twrnc-preset`) remain on Tailwind v3 via twrnc. This migration only applies to web consumers.
+
+## From version 7.0.0 to 8.0.0
+
+### Background Color Token Changes (Breaking Changes)
+
+In version 8.0.0, we've made significant changes to background color tokens that separate muted backgrounds into transparent and opaque variants. This is a breaking change that affects components requiring opaque backgrounds.
+
+#### Key Changes
+
+**`background/muted` is now transparent:**
+
+- **Before**: `grey050 | grey800` (opaque colors)
+- **After**: `#3C4D9D 10% | E0E5FF 15%` (transparent colors)
+
+**New opaque tokens added:**
+
+- `background/section`: `grey050 | grey800` (replaces the old opaque `background/muted`)
+- `background/subsection`: `grey000 | grey700`
+
+**Updated transparent hover/pressed states:**
+
+- `background/muted-hover`: `#3C4D9D 15% | E0E5FF 20%`
+- `background/muted-pressed`: `#3C4D9D 20% | E0E5FF 25%`
+
+#### Breaking Change Impact
+
+This change affects components that require opaque backgrounds, including:
+
+- **BadgeNetwork** and other badge components
+- **Avatar fallbacks**
+- **Non-action type elements** (read-only sections)
+- Any component where transparency would break the visual design
+
+#### Added Tokens
+
+##### CSS Variables
+
+```css
+/* New opaque background hierarchy tokens */
+--color-background-section: var(--brand-colors-grey-grey050); /* Light theme */
+--color-background-section: var(--brand-colors-grey-grey800); /* Dark theme */
+--color-background-subsection: var(
+  --brand-colors-grey-grey000
+); /* Light theme */
+--color-background-subsection: var(
+  --brand-colors-grey-grey700
+); /* Dark theme */
+```
+
+##### JS Tokens
+
+```javascript
+colors.background.section; // For opaque section backgrounds (replaces old muted)
+colors.background.subsection; // For opaque subsection backgrounds
+```
+
+### Typography Token Removal (Breaking Changes)
+
+Version 8.0.0 removes deprecated typography tokens that were scheduled for deletion.
+
+#### Removed Typography Tokens
+
+**HeadingSMRegular tokens have been completely removed:**
+
+##### CSS Variables
+
+```css
+/* REMOVED - No longer available */
+--typography-s-heading-sm-regular-font-family
+--typography-l-heading-sm-regular-font-family
+/* And all other HeadingSMRegular properties */
+```
+
+##### JS Tokens
+
+```javascript
+// REMOVED - No longer available
+typography.sHeadingSMRegular; // All properties
+typography.lHeadingSMRegular; // All properties
+```
+
+#### Replacement Strategy
+
+**Choose an appropriate typography token based on your design needs:**
+
+The HeadingSMRegular tokens have been removed as they were deprecated. You should evaluate your specific use case and select the most appropriate typography token from the available options such as:
+
+- Body variants (BodyXS, BodySM, BodyMD, BodyLG)
+- Heading variants (HeadingSM, HeadingMD, HeadingLG)
+- Display variants (DisplayMD)
+
+Consult with your design team to determine the most suitable replacement for each specific use case.
+
+#### Font Family Change (Breaking Changes)
+
+Version 8.0.0 changes the default font from CentraNo1 to Geist. This is a breaking change that affects all typography tokens and requires updating font imports and references.
+
+#### Key Changes
+
+**Default font family has changed:**
+
+- **Before**: `'CentraNo1', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+- **After**: `'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+
+#### Migration Steps
+
+1. **Update Font Imports**:
+
+   - Remove any imports of CentraNo1 font files
+   - Add imports for Geist font files
+   - Update any font-face declarations in your CSS
+
+2. **Update Font References**:
+
+   ```css
+   /* Update font family references */
+   --font-family-default: 'Geist', 'Helvetica Neue', Helvetica, Arial,
+     sans-serif;
+   ```
+
+3. **Test Typography**:
+
+   - Review all text components to ensure they render correctly with Geist
+   - Check for any layout shifts or spacing issues
+   - Verify font weights and styles are applied correctly
+
+4. **Update Custom Font Stacks**:
+
+   - If you have custom font stacks that include CentraNo1, update them to use Geist
+   - Ensure fallback fonts are appropriate for your use case
+
+5. **React Native Specific**:
+   - Update any React Native font configurations
+   - Test font rendering on both iOS and Android
+
+### Migration Steps
+
+1. **Critical: Replace `background.muted` for opaque use cases**:
+
+   - **Badges**: Replace `background.muted` with `background.section` for BadgeNetwork and other badge components
+   - **Avatar fallbacks**: Replace `background.muted` with `background.section` for avatar fallback backgrounds
+   - **Read-only sections**: Replace `background.muted` with `background.section` for any non-interactive background fills
+   - **Any opaque background**: If your component requires an opaque background, use `background.section` instead of `background.muted`
+
+2. **Keep `background.muted` for transparent use cases**:
+
+   - **Button backgrounds**: The new transparent `background.muted` is intended for button and interactive element backgrounds
+   - **Overlay backgrounds**: Use for backgrounds that should be semi-transparent
+
+3. **Update CSS Variables**:
+
+   ```css
+   /* Replace opaque muted usage */
+   background-color: var(--color-background-muted); /* OLD - now transparent */
+   background-color: var(
+     --color-background-section
+   ); /* NEW - for opaque backgrounds */
+   ```
+
+4. **Update JS Token Usage**:
+
+   ```javascript
+   // Replace opaque muted usage
+   backgroundColor: colors.background.muted, // OLD - now transparent
+   backgroundColor: colors.background.section, // NEW - for opaque backgrounds
+   ```
+
+5. **Test Visual Regression**: Carefully test all components that previously used `background.muted` to ensure they still appear correctly with the new transparent values
+
+6. **Replace HeadingSMRegular tokens**:
+
+   - Identify all usage of `sHeadingSMRegular` and `lHeadingSMRegular` tokens in your codebase
+   - Work with your design team to determine the appropriate replacement typography token for each use case
+   - Update your CSS variables and JS token references accordingly
+   - Test the visual changes to ensure the new typography meets your design requirements
+
+7. **Update Import Statements**: If you're importing directly from specific paths, update to use the main package exports
+8. **Remove Deprecated Font Family References**: Ensure all typography uses the base font family tokens (if not already updated from 7.0.0)
+9. **Test React Native Integration**: Verify TWRNC compatibility if using React Native
+
+## From version 8.2.2 to 8.3.0
+
+### Typography: bold weight is now 600 and uses semibold assets
+
+- The `fontWeights.bold` token and the `--font-weight-bold` CSS variable now return `600`; the Storybook font loaders switched from the former `Geist-Bold` binaries to the new `Geist-SemiBold` and `Geist-SemiBoldItalic` assets.
+- Update any static `font-weight: 700` references or CSS `@font-face` definitions to 600 and point at the semibold files. React and React Native packages now expect `Geist-SemiBold` for the semantic bold slot, so bundlers that previously inlined `Geist-Bold` should replace those files.
+- `@metamask/design-system-twrnc-preset` now maps `default-bold` and `default-bold-italic` to the semibold PostScript names, so confirm any custom Tailwind font classnames align with `Geist-SemiBold` if you override them.
+
+### Migration steps
+
+- Replace `@font-face` declarations, font imports, and any asset references from `Geist-Bold`/`Geist-BoldItalic` to `Geist-SemiBold`/`Geist-SemiBoldItalic`, and set `font-weight: 600`.
+- Update code or styles that assumed `fontWeights.bold === '700'` to read from `fontWeights.bold` directly so they automatically pick up the new value.
+- If you bundle fonts manually, include the semibold OTF/WOFF2 files from `apps/storybook-react-native/fonts/Geist` and `apps/storybook-react/fonts/Geist` and verify the new names load in development and production builds.
+- Run your Storybook or native font loader checks to confirm the Metro bundler now resolves `Geist-SemiBold`/`Geist-SemiBoldItalic` per the updated `FontLoader` and tailwind preset mappings.
 
 ## From version 6.0.0 to 7.0.0
 
@@ -303,7 +659,7 @@ colors.networks.sepolia.inverse
 
 ## Theme colors
 --color-primary-shadow modified to --color-shadow-primary
---color-error-shadow modified to --color-shadow-primary
+--color-error-shadow modified to --color-shadow-error
 ```
 
 #### JS
@@ -322,7 +678,7 @@ brandColor.black000 modified to brandColor.black
 
 ### Theme colors
 colors.primary.shadow modified to colors.shadow.primary
-colors.error.shadow modified to colors.shadow.primary
+colors.error.shadow modified to colors.shadow.error
 ```
 
 ## From version 2.1.1 to 3.0.0

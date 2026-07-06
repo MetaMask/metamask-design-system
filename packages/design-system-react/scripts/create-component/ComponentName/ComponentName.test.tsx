@@ -11,10 +11,16 @@ describe('ComponentName Component', () => {
 
   it('applies the correct classes', () => {
     render(
-      <ComponentName className="custom-class">Styled Content</ComponentName>,
+      <ComponentName className="bg-default">Styled Content</ComponentName>,
     );
-    expect(screen.getByText('Styled Content')).toHaveClass('custom-class');
-    // Add more class-related tests as needed
+    expect(screen.getByText('Styled Content')).toHaveClass('bg-default');
+  });
+
+  it('accepts data-testid prop', () => {
+    render(
+      <ComponentName data-testid="component-name">Test Content</ComponentName>,
+    );
+    expect(screen.getByTestId('component-name')).toBeInTheDocument();
   });
 
   // Add more tests as needed

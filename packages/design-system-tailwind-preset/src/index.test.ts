@@ -32,6 +32,7 @@ describe('Tailwind Preset', () => {
     const textColorFn = tailwindConfig.theme?.extend?.textColor as (options: {
       theme: (path: string) => unknown;
     }) => Record<string, string>;
+
     const result = textColorFn({
       theme: (path: string) => (path === 'colors' ? colors : {}),
     });
@@ -48,6 +49,7 @@ describe('Tailwind Preset', () => {
       ?.backgroundColor as (options: {
       theme: (path: string) => unknown;
     }) => Record<string, string>;
+
     const result = bgColorFn({
       theme: (path: string) => (path === 'colors' ? colors : {}),
     });
@@ -64,6 +66,7 @@ describe('Tailwind Preset', () => {
       ?.borderColor as (options: {
       theme: (path: string) => unknown;
     }) => Record<string, string>;
+
     const result = borderColorFn({
       theme: (path: string) => (path === 'colors' ? colors : {}),
     });

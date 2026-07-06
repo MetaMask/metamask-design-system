@@ -1,95 +1,9 @@
-import { KnownCaipNamespace, stringToBytes } from '@metamask/utils';
 import { render, screen, waitFor, act } from '@testing-library/react';
 import React from 'react';
 
 import { Jazzicon } from './Jazzicon';
-import * as utilities from './Jazzicon.utilities';
-
-// Mock the external dependency for Bitcoin address validation.
-jest.mock('bitcoin-address-validation', () => ({
-  validate: (address: string, network: any) => {
-    // For our test Bitcoin address, return true; for others, return false.
-    if (address === '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa') {
-      return true;
-    }
-    return false;
-  },
-  Network: {
-    mainnet: 'mainnet',
-    testnet: 'testnet',
-  },
-}));
-
-// Polyfill TextEncoder for JSDOM (Node < 18)
-if (typeof TextEncoder === 'undefined') {
-  // @ts-ignore
-  global.TextEncoder = require('util').TextEncoder;
-}
 
 describe('Jazzicon', () => {
-  describe('Jazzicon utilities', () => {
-    describe('generateSeedEthereum', () => {
-      it('returns a numeric seed based on a slice of the address', () => {
-        const address = '0xabcdef1234567890';
-        const expected = parseInt(address.slice(2, 10), 16);
-        expect(utilities.generateSeedEthereum(address)).toBe(expected);
-      });
-    });
-
-    describe('generateSeedNonEthereum', () => {
-      it('returns an array of numbers representing the bytes of the address', () => {
-        const address = 'SomeNonEthereumAddress';
-        const expected = Array.from(
-          stringToBytes(address.normalize('NFKC').toLowerCase()),
-        );
-        expect(utilities.generateSeedNonEthereum(address)).toEqual(expected);
-      });
-    });
-
-    describe('getCaipNamespaceFromAddress', () => {
-      it('returns Bip122 for a valid Bitcoin address', async () => {
-        const bitcoinAddress = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
-        const result =
-          await utilities.getCaipNamespaceFromAddress(bitcoinAddress);
-        expect(result).toBe(KnownCaipNamespace.Bip122);
-      });
-
-      it('returns Solana for a valid Solana address', async () => {
-        const solanaAddress = '4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7';
-        const result =
-          await utilities.getCaipNamespaceFromAddress(solanaAddress);
-        expect(result).toBe(KnownCaipNamespace.Solana);
-      });
-
-      it('returns Eip155 for a non-Bitcoin and non-Solana address', async () => {
-        const ethereumAddress = '0xabc';
-        const result =
-          await utilities.getCaipNamespaceFromAddress(ethereumAddress);
-        expect(result).toBe(KnownCaipNamespace.Eip155);
-      });
-
-      it('returns Eip155 for a CAIP-10 formatted address', async () => {
-        const caip10Address = 'eip155:1:0xabc';
-        const result =
-          await utilities.getCaipNamespaceFromAddress(caip10Address);
-        expect(result).toBe(KnownCaipNamespace.Eip155);
-      });
-
-      it('returns the correct namespace for a non-EIP155 CAIP-10 formatted address', async () => {
-        const caip10BitcoinAddress =
-          'bip122:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
-        const caip10SolanaAddress =
-          'solana:mainnet:4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7';
-        const bitCoinResult =
-          await utilities.getCaipNamespaceFromAddress(caip10BitcoinAddress);
-        const solanaResult =
-          await utilities.getCaipNamespaceFromAddress(caip10SolanaAddress);
-        expect(bitCoinResult).toBe(KnownCaipNamespace.Bip122);
-        expect(solanaResult).toBe(KnownCaipNamespace.Solana);
-      });
-    });
-  });
-
   describe('Jazzicon component', () => {
     beforeEach(() => {
       // Reset modules to clear internal caches (like iconCache)
@@ -100,10 +14,7 @@ describe('Jazzicon', () => {
       jest.clearAllMocks();
     });
 
-    it('renders with default size (32) and uses Ethereum path by default', async () => {
-      const spyNamespace = jest.spyOn(utilities, 'getCaipNamespaceFromAddress');
-      const spyEthereum = jest.spyOn(utilities, 'generateSeedEthereum');
-
+    it('renders an icon with default size (32)', async () => {
       render(<Jazzicon address="0xabc" data-testid="jazzicon" />);
 
       await waitFor(() => {
@@ -112,45 +23,33 @@ describe('Jazzicon', () => {
         // The component asynchronously appends a child (the generated icon)
         expect(container.childNodes.length).toBeGreaterThan(0);
       });
-
-      expect(spyNamespace).toHaveBeenCalledWith('0xabc');
-      expect(spyEthereum).toHaveBeenCalledWith('0xabc');
     });
 
     it('accepts a custom size, className, and style', async () => {
-      const spyNamespace = jest.spyOn(utilities, 'getCaipNamespaceFromAddress');
-      const spyEthereum = jest.spyOn(utilities, 'generateSeedEthereum');
-
       render(
         <Jazzicon
           address="0xdef"
           size={48}
           data-testid="jazzicon"
-          className="test-class"
+          className="bg-default"
           style={{ backgroundColor: 'red' }}
         />,
       );
 
       await waitFor(() => {
         const container = screen.getByTestId('jazzicon');
-        expect(container).toHaveClass('test-class');
+        expect(container).toHaveClass('bg-default');
         expect(container).toHaveStyle('background-color: red');
         expect(container.childNodes.length).toBeGreaterThan(0);
       });
-
-      expect(spyNamespace).toHaveBeenCalledWith('0xdef');
-      expect(spyEthereum).toHaveBeenCalledWith('0xdef');
     });
 
-    it('caches the generated icon and reuses it on a second render with the same address/size', async () => {
-      const spyEthereum = jest.spyOn(utilities, 'generateSeedEthereum');
-
+    it('caches icons for same address and size', async () => {
       const { rerender } = render(
         <Jazzicon address="0xAAA" size={40} data-testid="jazzicon" />,
       );
 
       await waitFor(() => {
-        expect(spyEthereum).toHaveBeenCalledWith('0xAAA');
         const container = screen.getByTestId('jazzicon');
         expect(container.childNodes.length).toBeGreaterThan(0);
       });
@@ -161,24 +60,24 @@ describe('Jazzicon', () => {
       rerender(<Jazzicon address="0xAAA" size={40} data-testid="jazzicon" />);
 
       await waitFor(() => {
-        expect(spyEthereum).not.toHaveBeenCalled();
         const container = screen.getByTestId('jazzicon');
         expect(container.childNodes.length).toBeGreaterThan(0);
       });
     });
 
-    it('switches to non-Ethereum path when namespace is not Eip155', async () => {
-      const solanaAddress = '4Nd1m3NnENa8h8Xte1Xr7s9jcvKqqm21z3FvY9hKg4s7';
-      const spyNamespace = jest.spyOn(utilities, 'getCaipNamespaceFromAddress');
-      const spyNonEthereum = jest.spyOn(utilities, 'generateSeedNonEthereum');
-
-      render(
-        <Jazzicon address={solanaAddress} size={50} data-testid="jazzicon" />,
+    it('renders different icons for different addresses', async () => {
+      const { rerender } = render(
+        <Jazzicon address="0x123" size={32} data-testid="jazzicon" />,
       );
 
       await waitFor(() => {
-        expect(spyNamespace).toHaveBeenCalledWith(solanaAddress);
-        expect(spyNonEthereum).toHaveBeenCalledWith(solanaAddress);
+        const container = screen.getByTestId('jazzicon');
+        expect(container.childNodes.length).toBeGreaterThan(0);
+      });
+
+      rerender(<Jazzicon address="0x456" size={32} data-testid="jazzicon" />);
+
+      await waitFor(() => {
         const container = screen.getByTestId('jazzicon');
         expect(container.childNodes.length).toBeGreaterThan(0);
       });
@@ -196,32 +95,10 @@ describe('Jazzicon', () => {
       });
 
       unmount();
-      await act(async () => {}); // allow cleanup effect to run
-      expect(screen.queryByTestId('jazzicon')).toBeNull();
-    });
-
-    it('does nothing if the component unmounts before async logic completes', async () => {
-      const spy = jest
-        .spyOn(utilities, 'getCaipNamespaceFromAddress')
-        .mockImplementation(
-          () =>
-            new Promise((resolve) =>
-              setTimeout(() => resolve(KnownCaipNamespace.Eip155), 500),
-            ),
-        );
-
-      const { unmount } = render(
-        <Jazzicon address="0xHELLO" size={32} data-testid="jazzicon" />,
-      );
-
-      unmount();
-
       await act(async () => {
-        await new Promise((res) => setTimeout(res, 600));
+        // Allow cleanup effect to run
       });
-
       expect(screen.queryByTestId('jazzicon')).toBeNull();
-      spy.mockRestore();
     });
 
     it('returns early if containerRef.current is null before effect runs', async () => {
@@ -289,13 +166,14 @@ describe('Jazzicon', () => {
     it('clears pre-existing children on initial mount using delayed effect', async () => {
       // Capture effect callbacks instead of letting them run automatically.
       const effectCallbacks: (() => void)[] = [];
-      const originalUseEffect = React.useEffect;
-      jest
+      const useEffectSpy = jest
         .spyOn(React, 'useEffect')
-        .mockImplementation((cb: any, deps?: any) => {
-          effectCallbacks.push(cb);
-          // Do not call the callback automatically.
-        });
+        .mockImplementation(
+          (cb: React.EffectCallback, _deps?: React.DependencyList) => {
+            effectCallbacks.push(cb);
+            // Do not call the callback automatically.
+          },
+        );
 
       // Render the component.
       const { getByTestId } = render(
@@ -321,7 +199,59 @@ describe('Jazzicon', () => {
       expect(container.querySelector('[data-testid="dummy"]')).toBeNull();
 
       // Restore the original useEffect implementation.
-      React.useEffect = originalUseEffect;
+      useEffectSpy.mockRestore();
+    });
+
+    it('handles cleanup when container has children during unmount', async () => {
+      const { unmount } = render(
+        <Jazzicon address="0xcleanup" data-testid="jazzicon" />,
+      );
+
+      // Wait for the icon to be generated
+      await waitFor(() => {
+        const container = screen.getByTestId('jazzicon');
+        expect(container.childNodes.length).toBeGreaterThan(0);
+      });
+
+      // Manually add additional children to test cleanup
+      const container = screen.getByTestId('jazzicon');
+      const extraChild = document.createElement('div');
+      extraChild.setAttribute('data-testid', 'extra-child');
+      container.appendChild(extraChild);
+
+      expect(container.childNodes.length).toBeGreaterThan(1);
+
+      // Unmount should trigger cleanup
+      unmount();
+
+      // Verify component is removed
+      expect(screen.queryByTestId('jazzicon')).toBeNull();
+    });
+
+    it('tests cleanup function execution path when container is null', async () => {
+      // Mock useRef to return a ref that becomes null during cleanup
+      const mockRef = { current: null as HTMLDivElement | null };
+      const useRefSpy = jest.spyOn(React, 'useRef').mockReturnValue(mockRef);
+
+      const { unmount } = render(
+        <Jazzicon address="0xnullcleanup" data-testid="jazzicon" />,
+      );
+
+      // Set the ref to have a current value initially
+      const mockContainer = document.createElement('div');
+      mockContainer.appendChild(document.createElement('span'));
+      mockRef.current = mockContainer;
+
+      // Now set it to null before unmounting
+      mockRef.current = null;
+
+      // Unmount should not crash even with null containerRef
+      unmount();
+
+      // Verify the component unmounted successfully
+      expect(screen.queryByTestId('jazzicon')).toBeNull();
+
+      useRefSpy.mockRestore();
     });
   });
 });

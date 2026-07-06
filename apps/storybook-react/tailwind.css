@@ -2,47 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Centra No 1 */
+/* Matches extension global scrollbar styling:
+ * https://github.com/MetaMask/metamask-extension/blob/main/ui/css/base-styles.scss#L69-L90 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-icon-muted) transparent;
+}
+
+/* Geist */
 @font-face {
-  font-family: 'CentraNo1';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 400;
-  src: url('fonts/CentraNo1/CentraNo1-Book.woff2') format('woff2');
+  src: url('fonts/Geist/Geist-Regular.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'CentraNo1';
+  font-family: 'Geist';
   font-style: italic;
   font-weight: 400;
-  src: url('fonts/CentraNo1/CentraNo1-BookItalic.woff2') format('woff2');
+  src: url('fonts/Geist/Geist-RegularItalic.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'CentraNo1';
+  font-family: 'Geist';
   font-style: normal;
   font-weight: 500;
-  src: url('fonts/CentraNo1/CentraNo1-Medium.woff2') format('woff2');
+  src: url('fonts/Geist/Geist-Medium.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'CentraNo1';
+  font-family: 'Geist';
   font-style: italic;
   font-weight: 500;
-  src: url('fonts/CentraNo1/CentraNo1-MediumItalic.woff2') format('woff2');
+  src: url('fonts/Geist/Geist-MediumItalic.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'CentraNo1';
+  font-family: 'Geist';
   font-style: normal;
-  font-weight: 700;
-  src: url('fonts/CentraNo1/CentraNo1-Bold.woff2') format('woff2');
+  font-weight: 600;
+  src: url('fonts/Geist/Geist-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'CentraNo1';
+  font-family: 'Geist';
   font-style: italic;
-  font-weight: 700;
-  src: url('fonts/CentraNo1/CentraNo1-BoldItalic.woff2') format('woff2');
+  font-weight: 600;
+  src: url('fonts/Geist/Geist-SemiBoldItalic.woff2') format('woff2');
 }
 
 /* MM Sans */
@@ -63,7 +70,7 @@
 @font-face {
   font-family: 'MMSans';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   src: url('fonts/MMSans/MMSans-Bold.woff2') format('woff2');
 }
 
@@ -85,6 +92,6 @@
 @font-face {
   font-family: 'MMPoly';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
 }

@@ -1,82 +1,7 @@
-import { stringToBytes, KnownCaipNamespace } from '@metamask/utils';
-import { isAddress as isSolanaAddress } from '@solana/addresses';
-
-// /////////////////////////////////////////////////////
-// Address validation
-// /////////////////////////////////////////////////////
-/**
- * Generates a numeric seed for Ethereum (eip155) addresses.
- *
- * @param address The Ethereum address to generate a seed from
- * @returns A numeric seed derived from the address
- */
-export function generateSeedEthereum(address: string): number {
-  // Example: parse the first 8 chars of the address after '0x'
-  const addr = address.slice(2, 10);
-  return parseInt(addr, 16);
-}
-
-/**
- * Generates a byte-array seed for non-Ethereum addresses (Solana, Bitcoin, etc.).
- *
- * @param address The non-Ethereum address to generate a seed from
- * @returns An array of numbers representing the byte-array seed
- */
-export function generateSeedNonEthereum(address: string): number[] {
-  return Array.from(stringToBytes(address.normalize('NFKC').toLowerCase()));
-}
-
-/**
- * Dynamically checks if the address is Bitcoin or Solana; otherwise defaults to Ethereum.
- * Returns a Promise that resolves to one of the known CAIP-2 namespaces.
- *
- * In this update, if the address starts with "0x", we'll assume it's Ethereum (Eip155)
- * and avoid the dynamic import that can cause the "Requiring unknown module '2021'" error.
- *
- * @param address The address to check and determine its namespace
- * @returns A promise that resolves to the detected CAIP-2 namespace
- */
-export async function getCaipNamespaceFromAddress(
-  address: string,
-): Promise<KnownCaipNamespace> {
-  // If the address starts with '0x', assume Ethereum.
-  if (address.startsWith('0x')) {
-    return KnownCaipNamespace.Eip155;
-  }
-
-  // Check for CAIP-10 formatted addresses
-  if (address.includes(':')) {
-    const [namespace] = address.split(':');
-    const nsLower = namespace.toLowerCase();
-    if (nsLower === 'bip122') {
-      return KnownCaipNamespace.Bip122;
-    }
-    if (nsLower === 'solana') {
-      return KnownCaipNamespace.Solana;
-    }
-  }
-
-  // Attempt to use bitcoin-address-validation if available.
-  try {
-    const { validate, Network } = await import('bitcoin-address-validation');
-    if (
-      validate(address, Network.mainnet) ||
-      validate(address, Network.testnet)
-    ) {
-      return KnownCaipNamespace.Bip122;
-    }
-  } catch {
-    // If the import fails, fall through.
-  }
-
-  // Fallback: if it looks like a Solana address, return Solana.
-  if (isSolanaAddress(address)) {
-    return KnownCaipNamespace.Solana;
-  }
-
-  // Default to Ethereum.
-  return KnownCaipNamespace.Eip155;
-}
+import {
+  extractAccountAddress,
+  generateIconSeed,
+} from '@metamask/design-system-shared';
 
 // /////////////////////////////////////////////////////
 // Maskicon SVG Creation
@@ -292,14 +217,11 @@ export async function getMaskiconSVG(
     return svgCache[cacheKey];
   }
 
-  const namespace = await getCaipNamespaceFromAddress(address);
-  let seed: number | number[];
+  // Extract the account address from CAIP-10 format if needed
+  const accountAddress = extractAccountAddress(address);
 
-  if (namespace === KnownCaipNamespace.Eip155) {
-    seed = generateSeedEthereum(address);
-  } else {
-    seed = generateSeedNonEthereum(address);
-  }
+  // Generate appropriate seed based on address format
+  const seed = generateIconSeed(accountAddress);
 
   const svgString = createMaskiconSVG(seed, size);
   svgCache[cacheKey] = svgString;

@@ -1,0 +1,1 @@
+export { AnimationDuration } from './durations';

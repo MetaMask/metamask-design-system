@@ -1,18 +1,22 @@
+import {
+  AvatarBaseShape,
+  AvatarGroupSize,
+  AvatarGroupVariant,
+  TextColor,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
 
-import { AvatarGroupSize, AvatarGroupVariant } from '../../types';
 import type { AvatarAccountProps } from '../AvatarAccount';
 import { AvatarAccount } from '../AvatarAccount';
-import { AvatarBase, AvatarBaseShape } from '../AvatarBase';
+import { AvatarBase } from '../AvatarBase';
 import type { AvatarFaviconProps } from '../AvatarFavicon';
 import { AvatarFavicon } from '../AvatarFavicon';
 import type { AvatarNetworkProps } from '../AvatarNetwork';
 import { AvatarNetwork } from '../AvatarNetwork';
 import type { AvatarTokenProps } from '../AvatarToken';
 import { AvatarToken } from '../AvatarToken';
-import { TextColor } from '../Text';
 
 import {
   MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT,
@@ -34,10 +38,6 @@ export const AvatarGroup = ({
   const tw = useTailwind();
   const overflowCounter = avatarPropsArr.length - max;
   const shouldRenderOverflowCounter = overflowCounter > 0;
-  const twContainerClassNames = `
-    ${isReverse ? 'flex-row-reverse' : 'flex-row'}
-    ${TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[size]}
-  `;
 
   const renderAvatarList = useCallback(
     () =>
@@ -89,7 +89,17 @@ export const AvatarGroup = ({
   );
 
   return (
-    <View style={[tw`${twContainerClassNames}`, style]} {...props}>
+    <View
+      {...props}
+      style={[
+        tw.style(
+          isReverse ? 'flex-row-reverse' : 'flex-row',
+          TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[size],
+          twClassName,
+        ),
+        style,
+      ]}
+    >
       {renderAvatarList()}
       {shouldRenderOverflowCounter && (
         <AvatarBase

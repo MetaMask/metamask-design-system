@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { AvatarNetworkSize } from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-
-import { AvatarNetworkSize } from '../../types';
 
 import { AvatarNetwork } from './AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev';
@@ -103,6 +102,28 @@ export const Name: Story = {
   ),
 };
 
+export const Fallback: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarNetwork name="Ethereum" fallbackText="ETH" />
+      <AvatarNetwork name="Arbitrum" />
+      <AvatarNetwork />
+    </div>
+  ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
+};
+
 export const FallbackText: Story = {
   render: () => (
     <div className="flex gap-2">
@@ -115,6 +136,18 @@ export const FallbackText: Story = {
       <AvatarNetwork name="Polygon" fallbackText="POL" />
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const Size: Story = {
@@ -147,6 +180,18 @@ export const Size: Story = {
       />
     </div>
   ),
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Uses text-muted by design for avatar placeholders
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const HasBorder: Story = {

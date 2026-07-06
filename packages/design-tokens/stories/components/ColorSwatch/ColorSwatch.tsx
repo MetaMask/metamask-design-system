@@ -42,7 +42,7 @@ export const ColorSwatch: FunctionComponent<ColorSwatchProps> = ({
 }) => {
   return (
     <div
-      className="flex h-[120px] flex-col-reverse rounded-lg border-2"
+      className="flex h-32 flex-col-reverse rounded-lg border-2"
       style={{
         backgroundColor: backgroundColor ?? color,
         borderColor,

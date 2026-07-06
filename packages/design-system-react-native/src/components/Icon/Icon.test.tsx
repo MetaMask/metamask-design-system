@@ -1,48 +1,12 @@
+import { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconColor, IconName, IconSize } from '../../types';
-
 import { Icon } from './Icon';
-import { generateIconClassNames } from './Icon.utilities';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
 
 describe('Icon', () => {
-  describe('generateIconClassNames', () => {
-    it('returns default class names when no props are provided', () => {
-      const classNames = generateIconClassNames({});
-      expect(classNames).toBe(
-        generateIconClassNames({
-          color: IconColor.IconDefault,
-          size: IconSize.Md,
-        }),
-      );
-    });
-
-    it('generates class names correctly for each color', () => {
-      Object.values(IconColor).forEach((color) => {
-        const classNames = generateIconClassNames({ color });
-        expect(classNames).toContain(color);
-      });
-    });
-
-    it('generates class names correctly for each size', () => {
-      Object.values(IconSize)
-        .filter((size): size is IconSize => typeof size === 'number') // Ensure only numbers
-        .forEach((size) => {
-          const classNames = generateIconClassNames({ size });
-          expect(classNames).toContain(size.toString()); // Convert number to string for comparison
-        });
-    });
-
-    it('includes twClassName', () => {
-      const classNames = generateIconClassNames({
-        twClassName: 'text-primary-default',
-      });
-      expect(classNames).toContain('text-primary-default');
-    });
-  });
-
   describe('Icon Component', () => {
     it('renders the specified icon', () => {
       const { getByTestId } = render(
@@ -57,8 +21,10 @@ describe('Icon', () => {
 
       const TestComponent = () => {
         const tw = useTailwind();
-        const expectedClassNames = generateIconClassNames({});
-        expectedStyles = tw`${expectedClassNames}`;
+        expectedStyles = tw.style(
+          IconColor.IconDefault,
+          TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Md],
+        );
         return <Icon name={IconName.Add} testID="icon" />;
       };
 
@@ -66,7 +32,7 @@ describe('Icon', () => {
       const iconElement = getByTestId('icon');
 
       expect(expectedStyles).toBeDefined();
-      expect(iconElement.props.style[0]).toStrictEqual(expectedStyles);
+      expect(iconElement.props.style).toStrictEqual(expectedStyles);
     });
 
     Object.values(IconSize).forEach((size) => {
@@ -75,20 +41,18 @@ describe('Icon', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          const expectedClassNames = generateIconClassNames({
-            size: size as IconSize,
-          });
-          expectedStyles = tw`${expectedClassNames}`;
-          return (
-            <Icon name={IconName.Add} testID="icon" size={size as IconSize} />
+          expectedStyles = tw.style(
+            IconColor.IconDefault,
+            TWCLASSMAP_ICON_SIZE_DIMENSION[size],
           );
+          return <Icon name={IconName.Add} testID="icon" size={size} />;
         };
 
         const { getByTestId } = render(<TestComponent />);
         const textElement = getByTestId('icon');
 
         expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+        expect(textElement.props.style).toStrictEqual(expectedStyles);
       });
     });
 
@@ -98,8 +62,10 @@ describe('Icon', () => {
 
         const TestComponent = () => {
           const tw = useTailwind();
-          const expectedClassNames = generateIconClassNames({ color });
-          expectedStyles = tw`${expectedClassNames}`;
+          expectedStyles = tw.style(
+            color,
+            TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Md],
+          );
           return <Icon name={IconName.Add} testID="icon" color={color} />;
         };
 
@@ -107,7 +73,7 @@ describe('Icon', () => {
         const textElement = getByTestId('icon');
 
         expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+        expect(textElement.props.style).toStrictEqual(expectedStyles);
       });
     });
 
@@ -120,8 +86,10 @@ describe('Icon', () => {
 
       const TestComponent = () => {
         const tw = useTailwind();
-        const expectedClassNames = generateIconClassNames(props);
-        expectedStyles = tw`${expectedClassNames}`;
+        expectedStyles = tw.style(
+          props.color,
+          TWCLASSMAP_ICON_SIZE_DIMENSION[props.size],
+        );
         return <Icon name={IconName.Add} testID="icon" {...props} />;
       };
 
@@ -129,7 +97,7 @@ describe('Icon', () => {
       const textElement = getByTestId('icon');
 
       expect(expectedStyles).toBeDefined();
-      expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+      expect(textElement.props.style).toStrictEqual(expectedStyles);
     });
   });
 });

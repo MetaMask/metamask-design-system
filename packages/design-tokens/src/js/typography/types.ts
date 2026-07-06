@@ -20,6 +20,11 @@ export type ThemeTypography = {
   sBodySMBold: TypeStyle;
   sBodyXS: TypeStyle;
   sBodyXSMedium: TypeStyle;
+  sPageHeading: TypeStyle;
+  sSectionHeading: TypeStyle;
+  sButtonLabelMd: TypeStyle;
+  sButtonLabelLg: TypeStyle;
+  sAmountDisplayLg: TypeStyle;
   lDisplayLG: TypeStyle;
   lDisplayMD: TypeStyle;
   lHeadingLG: TypeStyle;
@@ -34,6 +39,11 @@ export type ThemeTypography = {
   lBodySMBold: TypeStyle;
   lBodyXS: TypeStyle;
   lBodyXSMedium: TypeStyle;
+  lPageHeading: TypeStyle;
+  lSectionHeading: TypeStyle;
+  lButtonLabelMd: TypeStyle;
+  lButtonLabelLg: TypeStyle;
+  lAmountDisplayLg: TypeStyle;
 };
 
 export type FontFamilies = {

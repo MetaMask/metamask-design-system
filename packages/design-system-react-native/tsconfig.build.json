@@ -11,6 +11,7 @@
     "moduleResolution": "Node16"
   },
   "references": [
+    { "path": "../design-system-shared/tsconfig.build.json" },
     { "path": "../design-system-twrnc-preset/tsconfig.build.json" }
   ],
   "include": ["./src", "global.d.ts"]

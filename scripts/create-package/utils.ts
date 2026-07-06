@@ -20,8 +20,8 @@ const allPlaceholdersRegex = new RegExp(
   'gu',
 );
 
-// Our lint config really hates this, but it works.
-// eslint-disable-next-line
+// Dynamic require needed for loading prettier config at runtime - ESM import not supported for .js config files
+// eslint-disable-next-line @typescript-eslint/no-require-imports, import-x/no-dynamic-require, n/global-require
 const prettierRc = require(
   path.join(REPO_ROOT, '.prettierrc.js'),
 ) as PrettierOptions;
@@ -135,7 +135,7 @@ async function writeJsonFile(
 ): Promise<void> {
   await fs.writeFile(
     filePath,
-    prettierFormat(fileContent, { ...prettierRc, parser: 'json' }),
+    await prettierFormat(fileContent, { ...prettierRc, parser: 'json' }),
   );
 }
 
@@ -201,12 +201,16 @@ function processTemplateContent(
     switch (match) {
       case Placeholders.CurrentYear:
         return currentYear;
+
       case Placeholders.NodeVersions:
         return nodeVersions;
+
       case Placeholders.PackageName:
         return name;
+
       case Placeholders.PackageDescription:
         return description;
+
       case Placeholders.PackageDirectoryName:
         return packageData.directoryName;
       /* istanbul ignore next: should be impossible */

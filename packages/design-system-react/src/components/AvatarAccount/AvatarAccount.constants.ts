@@ -1,4 +1,4 @@
-import { AvatarAccountSize } from '../../types';
+import { AvatarAccountSize } from '@metamask/design-system-shared';
 
 export const MAP_AVATARACCOUNT_SIZE_SIZENUMBER: Record<
   AvatarAccountSize,

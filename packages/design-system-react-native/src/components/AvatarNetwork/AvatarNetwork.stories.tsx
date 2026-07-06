@@ -1,7 +1,6 @@
+import { AvatarNetworkSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
-
-import { AvatarNetworkSize } from '../../types';
 
 import { AvatarNetwork } from './AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev';
@@ -55,6 +54,16 @@ export const SampleNetworks: Story = {
       {SAMPLE_AVATARNETWORK_URIS.map((networkSrc, index) => (
         <AvatarNetwork src={networkSrc} key={`network-${index}`} />
       ))}
+    </View>
+  ),
+};
+
+export const Fallback: Story = {
+  render: () => (
+    <View style={{ flexDirection: 'row', gap: 16 }}>
+      <AvatarNetwork name="Ethereum" fallbackText="ETH" />
+      <AvatarNetwork name="Arbitrum" />
+      <AvatarNetwork />
     </View>
   ),
 };

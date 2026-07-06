@@ -11,24 +11,24 @@ export const colors: ThemeColors = {
     section: brandColor.grey050,
     /** For subsection bg usually over background/section (#FFFFFF) */
     subsection: brandColor.grey000,
-    /** For muted neutral surface (#3c4d9d1a) */
-    muted: '#3c4d9d1a',
-    /** Hover state surface for background/default (#f6f6f7) */
-    defaultHover: '#f6f6f7',
-    /** Pressed state surface for background/default (#ebecef) */
-    defaultPressed: '#ebecef',
+    /** For muted neutral surface (#b4b4b528) */
+    muted: '#b4b4b528',
+    /** Hover state surface for background/default */
+    defaultHover: '#f3f3f4',
+    /** Pressed state surface for background/default */
+    defaultPressed: '#ededed',
     /** Hover state surface for background/alternative (#ebedf1) */
     alternativeHover: '#ebedf1',
     /** Pressed state surface for background/alternative (#e1e4ea) */
     alternativePressed: '#e1e4ea',
-    /** Hover state surface for background/muted (#3c4d9d26) */
-    mutedHover: '#3c4d9d26',
-    /** Pressed state surface for background/muted (#3c4d9d33) */
-    mutedPressed: '#3c4d9d33',
-    /** General purpose hover state tint (#858b9a14) */
-    hover: '#858b9a14',
-    /** General purpose pressed state tint (#858b9a29) */
-    pressed: '#858b9a29',
+    /** Hover state surface for background/muted (#b4b4b53d) */
+    mutedHover: '#b4b4b53d',
+    /** Pressed state surface for background/muted (#b4b4b552) */
+    mutedPressed: '#b4b4b552',
+    /** General purpose hover state tint (#b4b4b528) */
+    hover: '#b4b4b528',
+    /** General purpose pressed state tint (#b4b4b53d) */
+    pressed: '#b4b4b53d',
   },
   text: {
     /** Default color for text (#121314) */
@@ -36,7 +36,7 @@ export const colors: ThemeColors = {
     /** Softer color for text (#686E7D) */
     alternative: brandColor.grey500,
     /** Muted color for text (Not accessible) (#9CA1AF) */
-    muted: brandColor.grey300,
+    muted: brandColor.grey200,
   },
   icon: {
     /** Default color for icons (#121314) */
@@ -48,21 +48,21 @@ export const colors: ThemeColors = {
     defaultPressed: '#414243',
     alternative: brandColor.grey500,
     /** Muted color for icons (Not accessible) (#9CA1AF) */
-    muted: brandColor.grey300,
+    muted: brandColor.grey200,
     /** For elements placed on top of icon.default fill (#FFFFFF) */
     inverse: brandColor.grey000,
   },
   border: {
-    /** Default color for borders (#B7BBC8) */
-    default: brandColor.grey200,
-    /** Muted color for borders (#B7BBC866) */
-    muted: '#b7bbc866',
+    /** Default color for borders */
+    default: brandColor.grey400,
+    /** Muted color for borders (#b4b4b566) */
+    muted: '#b4b4b566',
   },
   overlay: {
-    /** Default color for overlays (scrim) (#3f434a66) */
-    default: '#3f434a66',
-    /** Dimmer color for overlays (scrim) (#000000CC) */
-    alternative: '#000000cc',
+    /** Default color for overlays (scrim) (#0a0d135c) */
+    default: '#0a0d135c',
+    /** Dimmer color for overlays (scrim) (#0a0d1392) */
+    alternative: '#0a0d1392',
     /** For elements placed on top of overlay/alternative (#FFFFFF) */
     inverse: brandColor.grey000,
   },
@@ -119,20 +119,20 @@ export const colors: ThemeColors = {
     mutedPressed: '#9a630033',
   },
   success: {
-    /** For positive semantic elements: success, confirm, complete, safe (#1C7E33) */
-    default: brandColor.green500,
-    /** Muted color for positive semantic (#1C7E331A) */
-    muted: '#1c7e331a',
+    /** For positive semantic elements: success, confirm, complete, safe (#457A39) */
+    default: brandColor.lime500,
+    /** Muted color for positive semantic (#457a391a) */
+    muted: '#457a391a',
     /** For elements placed on top of success/default fill (#FFFFFF) */
     inverse: brandColor.grey000,
-    /** Hover state surface for success/default (#186c2c) */
-    defaultHover: '#186c2c',
-    /** Pressed state surface for success/default (#114B1E) */
-    defaultPressed: '#114b1e',
-    /** Hover state surface for success/muted (#1C7E3326) */
-    mutedHover: '#1c7e3326',
-    /** Pressed state surface for success/muted (#1C7E3333) */
-    mutedPressed: '#1c7e3333',
+    /** Hover state surface for success/default (#3d6c32) */
+    defaultHover: '#3d6c32',
+    /** Pressed state surface for success/default (#2d5025) */
+    defaultPressed: '#2d5025',
+    /** Hover state surface for success/muted (#457a3926) */
+    mutedHover: '#457a3926',
+    /** Pressed state surface for success/muted (#457a3933) */
+    mutedPressed: '#457a3933',
   },
   info: {
     /** For informational read-only elements: info, reminder, hint (#4459ff) */

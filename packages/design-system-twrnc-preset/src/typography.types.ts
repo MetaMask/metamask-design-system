@@ -10,7 +10,12 @@ export type TypographyVariant =
   | 'body-lg'
   | 'body-md'
   | 'body-sm'
-  | 'body-xs';
+  | 'body-xs'
+  | 'page-heading'
+  | 'section-heading'
+  | 'button-label-md'
+  | 'button-label-lg'
+  | 'amount-display-lg';
 
 /**
  * Different FontWeight and FontStyle to be used to calculate the FontFamily
@@ -37,28 +42,24 @@ export type FontStyle = 'normal' | 'italic';
  * {
  *   fontSize: {
  *     'display-md': {
- *       fontFamily: 'CentraNo1-Bold',
+ *       fontFamily: 'Geist-SemiBold',
  *       fontSize: '32',
- *       fontWeight: '700',
  *       letterSpacing: '0',
  *       lineHeight: '40px',
  *     },
  *   },
  *   fontFamily: {
  *     sans: [
- *       'CentraNo1',
+ *       'Geist',
  *       'Helvetica Neue',
  *       'Helvetica',
  *       'Arial',
  *       'sans-serif',
  *     ],
- *     'display-md': 'CentraNo1',
+ *     'display-md': 'Geist',
  *   },
  *   letterSpacing: {
  *     'display-md': '0',
- *   },
- *   fontWeight: {
- *     'display-md': '400',
  *   },
  *   lineHeight: {
  *     'display-md': '40px',
@@ -73,7 +74,6 @@ export type TypographyTailwindConfigProps = {
       {
         lineHeight: string; // Make sure to include units - "40px" instead of "40"
         letterSpacing: string;
-        fontWeight: string;
       },
     ]
   >;

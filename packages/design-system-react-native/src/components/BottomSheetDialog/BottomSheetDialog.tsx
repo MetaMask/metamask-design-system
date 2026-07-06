@@ -1,0 +1,323 @@
+import {
+  Theme,
+  usePureBlack,
+  useTailwind,
+  useTheme,
+} from '@metamask/design-system-twrnc-preset';
+import { lightTheme, resolveDarkTheme } from '@metamask/design-tokens';
+import { debounce } from 'lodash';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useImperativeHandle,
+} from 'react';
+import {
+  LayoutChangeEvent,
+  View,
+  Platform,
+  KeyboardAvoidingView,
+} from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import {
+  useSafeAreaFrame,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+
+// Internal dependencies.
+import {
+  DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
+  DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD,
+  DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION,
+} from './BottomSheetDialog.constants';
+import type {
+  BottomSheetDialogRef,
+  BottomSheetDialogProps,
+} from './BottomSheetDialog.types';
+
+export const BottomSheetDialog = forwardRef<
+  BottomSheetDialogRef,
+  BottomSheetDialogProps
+>(
+  (
+    {
+      children,
+      isFullscreen = false,
+      isInteractable = true,
+      keyboardAvoidingViewEnabled = true,
+      onClose,
+      onOpen,
+      style,
+      twClassName,
+      ...props
+    },
+    ref,
+  ) => {
+    const tw = useTailwind();
+    const currentTheme = useTheme();
+    const isPureBlack = usePureBlack();
+    const shadowLg =
+      currentTheme === Theme.Light
+        ? lightTheme.shadows.size.lg
+        : resolveDarkTheme(isPureBlack).shadows.size.lg;
+
+    const { top: screenTopPadding, bottom: screenBottomPadding } =
+      useSafeAreaInsets();
+    const { y: frameY, height: screenHeight } = useSafeAreaFrame();
+
+    const maxSheetHeight = screenHeight - screenTopPadding;
+    // X and Y values start on top left of the DIALOG
+    // currentYOffset will be used to animate the Y position of the Dialog
+    const currentYOffset = useSharedValue(screenHeight);
+    const topOfDialogYValue = useSharedValue(0);
+    const bottomOfDialogYValue = useSharedValue(screenHeight);
+    const gestureStartYOffset = useSharedValue(0);
+    const isMounted = useRef(false);
+
+    const onOpenCB = useCallback(() => {
+      onOpen?.();
+    }, [onOpen]);
+    const onCloseCB = useCallback(() => {
+      onClose?.();
+    }, [onClose]);
+
+    const onCloseDialog = useCallback(
+      (callback?: () => void) => {
+        currentYOffset.value = withTiming(
+          bottomOfDialogYValue.value,
+          { duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION },
+          () => {
+            runOnJS(onCloseCB)();
+            if (callback) {
+              runOnJS(callback)();
+            }
+          },
+        );
+        // Ref values do not affect deps.
+      },
+      [onCloseCB],
+    );
+
+    const gestureHandler = useMemo(() => {
+      // These gesture callbacks need explicit 'worklet' directives because this
+      // package ships a pre-built dist compiled by ts-bridge (tsc), which emits the
+      // gesture chain as a namespaced call (react_native_gesture_handler_1.Gesture).
+      // The consumer's Reanimated/Worklets Babel plugin does run over dist (that's
+      // why useAnimatedStyle below works), but its gesture auto-detection doesn't
+      // recognize that compiled namespaced form, so without these directives the
+      // callbacks run on the JS thread and slow drags lag behind the finger.
+      const gesture = Gesture.Pan()
+        .enabled(isInteractable)
+        .onStart(() => {
+          'worklet';
+
+          // Starts tracking vertical position of gesture.
+          gestureStartYOffset.value = currentYOffset.value;
+        })
+        .onUpdate((event) => {
+          'worklet';
+
+          const { translationY } = event;
+          currentYOffset.value = gestureStartYOffset.value + translationY;
+          // If gesture Y value goes above the bottom of Dialog Y value(bottom of dialog),
+          // which means the gesture is currently below the bottom of the dialog,
+          // sets it to bottom of Dialog Y value
+          if (currentYOffset.value >= bottomOfDialogYValue.value) {
+            currentYOffset.value = bottomOfDialogYValue.value;
+          }
+          // If gesture Y value goes below the top of Dialog Y value(top of dialog),
+          // which means the gesture is currently above the top of the dialog,
+          // sets it to top of Dialog Y value
+          if (currentYOffset.value <= topOfDialogYValue.value) {
+            currentYOffset.value = topOfDialogYValue.value;
+          }
+        })
+        .onEnd((event) => {
+          'worklet';
+
+          const { translationY, velocityY } = event;
+          // finalYOffset is used to animate the Y position of the Dialog after the gesture event
+          let finalYOffset: number;
+          // Measuring dismissing swipe action
+          const latestOffset = gestureStartYOffset.value + translationY;
+          // Check if the swipe distance reach the dismiss offset threshold,
+          // which is currently 60% of sheet height
+          const hasReachedDismissOffset =
+            latestOffset >
+            bottomOfDialogYValue.value *
+              DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD;
+          // Check if the gesture's vertical speed has reached the threshold to determine a swipe action
+          const hasReachedSwipeThreshold =
+            Math.abs(velocityY) >
+            DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION;
+          const isQuickDismissing = velocityY > 0;
+
+          // If user is swiping
+          if (hasReachedSwipeThreshold) {
+            // Quick swipe takes priority
+            if (isQuickDismissing) {
+              finalYOffset = bottomOfDialogYValue.value;
+            } else {
+              finalYOffset = topOfDialogYValue.value;
+            }
+          } else if (hasReachedDismissOffset) {
+            finalYOffset = bottomOfDialogYValue.value;
+          } else {
+            finalYOffset = topOfDialogYValue.value;
+          }
+
+          const isDismissed = finalYOffset === bottomOfDialogYValue.value;
+
+          if (isDismissed) {
+            runOnJS(onCloseDialog)();
+          } else {
+            // Only animate dialog to a certain Y position instead
+            currentYOffset.value = withTiming(finalYOffset, {
+              duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
+            });
+          }
+        });
+
+      return gesture;
+    }, [
+      isInteractable,
+      currentYOffset,
+      gestureStartYOffset,
+      bottomOfDialogYValue,
+      topOfDialogYValue,
+      onCloseDialog,
+    ]);
+
+    // Animate in sheet on initial render.
+    const onOpenDialog = (callback?: () => void) => {
+      // Starts setting the Y position of the dialog to the bottom of the dialog
+      currentYOffset.value = bottomOfDialogYValue.value;
+      // Animate the Y position to the top of the dialog, then call onOpenCB
+      currentYOffset.value = withTiming(
+        topOfDialogYValue.value,
+        {
+          duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
+        },
+        () => {
+          runOnJS(onOpenCB)();
+          if (callback) {
+            runOnJS(callback)();
+          }
+        },
+      );
+    };
+
+    const onDebouncedCloseDialog = useMemo(
+      // Prevent hide from being called multiple times. Potentially caused by taps in quick succession.
+      () => debounce(onCloseDialog, 2000, { leading: true }),
+      [onCloseDialog],
+    );
+
+    useEffect(
+      () =>
+        // Automatically handles animation when content changes
+        // Disable for now since network switches causes the screen to hang with this on.
+        // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+        onDebouncedCloseDialog.cancel(),
+      [children, onDebouncedCloseDialog],
+    );
+
+    const updateSheetHeight = (e: LayoutChangeEvent) => {
+      const { height } = e.nativeEvent.layout;
+      bottomOfDialogYValue.value = height;
+
+      if (!isMounted.current) {
+        isMounted.current = true;
+        onOpenDialog();
+      }
+    };
+
+    const animatedSheetStyle = useAnimatedStyle(
+      () => ({
+        transform: [
+          {
+            translateY: currentYOffset.value,
+          },
+        ],
+      }),
+      [],
+    );
+
+    const sheetStyle = useMemo(
+      () => [
+        tw.style(
+          isPureBlack ? 'bg-alternative' : 'bg-default',
+          'rounded-t-3xl overflow-hidden border border-muted',
+          twClassName,
+        ),
+        {
+          maxHeight: maxSheetHeight,
+          paddingBottom: Platform.select({
+            ios: screenBottomPadding,
+            macos: screenBottomPadding,
+            default: screenBottomPadding + 16,
+          }),
+          ...(isFullscreen && { height: maxSheetHeight }),
+          ...shadowLg,
+        },
+        style,
+      ],
+
+      [
+        tw,
+        isPureBlack,
+        maxSheetHeight,
+        screenBottomPadding,
+        isFullscreen,
+        shadowLg,
+        style,
+        twClassName,
+      ],
+    );
+
+    const combinedSheetStyle = useMemo(
+      () => [...sheetStyle, animatedSheetStyle],
+
+      [sheetStyle],
+    );
+
+    useImperativeHandle(ref, () => ({
+      onOpenDialog,
+      onCloseDialog,
+    }));
+
+    return (
+      <KeyboardAvoidingView
+        style={tw.style('absolute bottom-0 inset-x-0')}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        keyboardVerticalOffset={
+          Platform.OS === 'ios' ? -screenBottomPadding : frameY
+        }
+        enabled={keyboardAvoidingViewEnabled}
+        {...props}
+      >
+        <GestureDetector gesture={gestureHandler}>
+          <Animated.View
+            onLayout={updateSheetHeight}
+            style={combinedSheetStyle}
+          >
+            {isInteractable && (
+              <View style={tw.style('self-stretch items-center p-1')}>
+                <View style={tw.style('h-1 w-10 rounded-sm bg-border-muted')} />
+              </View>
+            )}
+            {children}
+          </Animated.View>
+        </GestureDetector>
+      </KeyboardAvoidingView>
+    );
+  },
+);

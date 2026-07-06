@@ -1,5 +1,5 @@
 import { Text, TextColor } from '@metamask/design-system-react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import README from './Shadows.mdx';
@@ -14,7 +14,7 @@ const ShadowSwatch: React.FC<ShadowSwatchProps> = ({
   className = '',
 }) => (
   <div
-    className={`grid h-[100px] place-content-center rounded bg-default text-center ${className}`}
+    className={`grid h-24 place-content-center rounded bg-default text-center ${className}`}
   >
     {children}
   </div>

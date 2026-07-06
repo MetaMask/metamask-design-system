@@ -1,20 +1,23 @@
-// This file is auto-generated. Do not edit manually
+// This file is auto-generated — do not edit manually
+// Run `yarn generate:icons` from the repo root to regenerate
 import type { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';
 
 import Accessibility from './Accessibility';
 import Activity from './Activity';
-import Add from './Add';
 import AddCard from './AddCard';
 import AddCircle from './AddCircle';
 import AddSquare from './AddSquare';
+import Add from './Add';
+import AfterHours from './AfterHours';
 import Ai from './Ai';
 import AlternateEmail from './AlternateEmail';
+import AppleLogo from './AppleLogo';
 import Apps from './Apps';
 import Arrow2Down from './Arrow2Down';
 import Arrow2Left from './Arrow2Left';
 import Arrow2Right from './Arrow2Right';
-import Arrow2Up from './Arrow2Up';
 import Arrow2UpRight from './Arrow2UpRight';
+import Arrow2Up from './Arrow2Up';
 import ArrowCircleDown from './ArrowCircleDown';
 import ArrowCircleUp from './ArrowCircleUp';
 import ArrowDoubleLeft from './ArrowDoubleLeft';
@@ -24,10 +27,12 @@ import ArrowDropDownCircle from './ArrowDropDownCircle';
 import ArrowLeft from './ArrowLeft';
 import ArrowRight from './ArrowRight';
 import ArrowUp from './ArrowUp';
+import AttachMoney from './AttachMoney';
 import Attachment from './Attachment';
+import Backspace from './Backspace';
 import Ban from './Ban';
-import Bank from './Bank';
 import BankAssured from './BankAssured';
+import Bank from './Bank';
 import Bold from './Bold';
 import Book from './Book';
 import Bookmark from './Bookmark';
@@ -41,28 +46,31 @@ import Calendar from './Calendar';
 import Call from './Call';
 import Camera from './Camera';
 import Campaign from './Campaign';
-import Card from './Card';
+import Candlestick from './Candlestick';
 import CardPos from './CardPos';
+import Card from './Card';
 import Cash from './Cash';
 import Category from './Category';
 import Chart from './Chart';
-import Check from './Check';
 import CheckBold from './CheckBold';
+import Check from './Check';
 import CircleX from './CircleX';
-import Clock from './Clock';
+import Clear from './Clear';
 import ClockFilled from './ClockFilled';
+import Clock from './Clock';
 import Close from './Close';
-import Cloud from './Cloud';
 import CloudDownload from './CloudDownload';
 import CloudUpload from './CloudUpload';
-import Code from './Code';
+import Cloud from './Cloud';
 import CodeCircle from './CodeCircle';
+import Code from './Code';
 import Coin from './Coin';
 import Collapse from './Collapse';
 import Confirmation from './Confirmation';
 import Connect from './Connect';
-import Copy from './Copy';
 import CopySuccess from './CopySuccess';
+import Copy from './Copy';
+import CorporateFare from './CorporateFare';
 import CreditCheck from './CreditCheck';
 import CurrencyFranc from './CurrencyFranc';
 import CurrencyLira from './CurrencyLira';
@@ -70,8 +78,8 @@ import CurrencyPound from './CurrencyPound';
 import CurrencyYuan from './CurrencyYuan';
 import Customize from './Customize';
 import Danger from './Danger';
-import Dark from './Dark';
 import DarkFilled from './DarkFilled';
+import Dark from './Dark';
 import Data from './Data';
 import Description from './Description';
 import Details from './Details';
@@ -80,21 +88,21 @@ import DocumentCode from './DocumentCode';
 import Download from './Download';
 import Draft from './Draft';
 import EcoLeaf from './EcoLeaf';
-import Edit from './Edit';
 import EditSquare from './EditSquare';
+import Edit from './Edit';
 import EncryptedAdd from './EncryptedAdd';
 import Eraser from './Eraser';
 import Error from './Error';
 import Ethereum from './Ethereum';
 import Exchange from './Exchange';
-import Expand from './Expand';
 import ExpandVertical from './ExpandVertical';
-import Explore from './Explore';
+import Expand from './Expand';
 import ExploreFilled from './ExploreFilled';
+import Explore from './Explore';
 import Export from './Export';
 import Extension from './Extension';
-import Eye from './Eye';
 import EyeSlash from './EyeSlash';
+import Eye from './Eye';
 import FaceId from './FaceId';
 import Feedback from './Feedback';
 import File from './File';
@@ -103,8 +111,9 @@ import Fingerprint from './Fingerprint';
 import Fire from './Fire';
 import FirstPage from './FirstPage';
 import Flag from './Flag';
-import Flash from './Flash';
+import FlashFilled from './FlashFilled';
 import FlashSlash from './FlashSlash';
+import Flash from './Flash';
 import Flask from './Flask';
 import Flower from './Flower';
 import Folder from './Folder';
@@ -112,51 +121,59 @@ import Forest from './Forest';
 import FullCircle from './FullCircle';
 import Gas from './Gas';
 import Gift from './Gift';
-import Global from './Global';
 import GlobalSearch from './GlobalSearch';
+import Global from './Global';
 import Graph from './Graph';
+import Group from './Group';
+import HardDrive from './HardDrive';
 import Hardware from './Hardware';
 import HashTag from './HashTag';
-import Heart from './Heart';
 import HeartFilled from './HeartFilled';
+import Heart from './Heart';
 import Hierarchy from './Hierarchy';
-import Home from './Home';
 import HomeFilled from './HomeFilled';
+import Home from './Home';
 import Image from './Image';
 import Info from './Info';
 import Inventory from './Inventory';
 import Joystick from './Joystick';
-import Keep from './Keep';
 import KeepFilled from './KeepFilled';
+import Keep from './Keep';
 import Key from './Key';
 import LastPage from './LastPage';
-import Light from './Light';
 import LightFilled from './LightFilled';
+import Light from './Light';
 import Link from './Link';
+import ListArrow from './ListArrow';
 import Loading from './Loading';
 import Location from './Location';
-import Lock from './Lock';
 import LockSlash from './LockSlash';
+import Lock from './Lock';
 import LockedFilled from './LockedFilled';
 import Login from './Login';
 import Logout from './Logout';
 import Mail from './Mail';
 import Map from './Map';
 import Menu from './Menu';
+import Merge from './Merge';
 import MessageQuestion from './MessageQuestion';
 import Messages from './Messages';
+import MetamaskFoxOutline from './MetamaskFoxOutline';
 import Mic from './Mic';
-import Minus from './Minus';
 import MinusBold from './MinusBold';
 import MinusSquare from './MinusSquare';
+import Minus from './Minus';
 import Mobile from './Mobile';
-import Money from './Money';
 import MoneyBag from './MoneyBag';
+import Money from './Money';
 import Monitor from './Monitor';
 import MoreHorizontal from './MoreHorizontal';
 import MoreVertical from './MoreVertical';
 import MountainFlag from './MountainFlag';
+import MusdFilled from './MusdFilled';
+import Musd from './Musd';
 import MusicNote from './MusicNote';
+import NoPhotography from './NoPhotography';
 import Notification from './Notification';
 import PageInfo from './PageInfo';
 import Palette from './Palette';
@@ -164,11 +181,14 @@ import PasswordCheck from './PasswordCheck';
 import Pending from './Pending';
 import People from './People';
 import PersonCancel from './PersonCancel';
+import PieChart from './PieChart';
 import Pin from './Pin';
 import Plant from './Plant';
 import Plug from './Plug';
 import PlusAndMinus from './PlusAndMinus';
 import PolicyAlert from './PolicyAlert';
+import PopUp from './PopUp';
+import Predictions from './Predictions';
 import Print from './Print';
 import PriorityHigh from './PriorityHigh';
 import PrivacyTip from './PrivacyTip';
@@ -182,14 +202,13 @@ import Refresh from './Refresh';
 import RemoveMinus from './RemoveMinus';
 import Report from './Report';
 import Rocket from './Rocket';
-import Save from './Save';
 import SaveFilled from './SaveFilled';
+import Save from './Save';
 import Saving from './Saving';
-import Scan from './Scan';
 import ScanBarcode from './ScanBarcode';
 import ScanFocus from './ScanFocus';
+import Scan from './Scan';
 import Search from './Search';
-import Security from './Security';
 import SecurityAlert from './SecurityAlert';
 import SecurityCross from './SecurityCross';
 import SecurityKey from './SecurityKey';
@@ -198,33 +217,35 @@ import SecuritySlash from './SecuritySlash';
 import SecurityTick from './SecurityTick';
 import SecurityTime from './SecurityTime';
 import SecurityUser from './SecurityUser';
+import Security from './Security';
 import Send from './Send';
 import SentimentDissatisfied from './SentimentDissatisfied';
 import SentimentNeutral from './SentimentNeutral';
 import SentimentSatisfied from './SentimentSatisfied';
 import SentimentVerySatisfied from './SentimentVerySatisfied';
-import Setting from './Setting';
 import SettingFilled from './SettingFilled';
+import Setting from './Setting';
 import Share from './Share';
 import ShieldLock from './ShieldLock';
 import ShoppingBag from './ShoppingBag';
 import ShoppingCart from './ShoppingCart';
+import SidePanel from './SidePanel';
 import SignalCellular from './SignalCellular';
 import Slash from './Slash';
 import Sms from './Sms';
-import Snaps from './Snaps';
 import SnapsMobile from './SnapsMobile';
 import SnapsPlus from './SnapsPlus';
 import SnapsRound from './SnapsRound';
-import Sort from './Sort';
+import Snaps from './Snaps';
 import SortByAlpha from './SortByAlpha';
+import Sort from './Sort';
 import Sparkle from './Sparkle';
 import Speed from './Speed';
 import Speedometer from './Speedometer';
 import Square from './Square';
 import Stake from './Stake';
-import Star from './Star';
 import StarFilled from './StarFilled';
+import Star from './Star';
 import Start from './Start';
 import Storefront from './Storefront';
 import Student from './Student';
@@ -234,59 +255,63 @@ import TabClose from './TabClose';
 import TableRow from './TableRow';
 import Tablet from './Tablet';
 import Tag from './Tag';
-import ThumbDown from './ThumbDown';
+import Telegram from './Telegram';
 import ThumbDownFilled from './ThumbDownFilled';
-import ThumbUp from './ThumbUp';
+import ThumbDown from './ThumbDown';
 import ThumbUpFilled from './ThumbUpFilled';
+import ThumbUp from './ThumbUp';
 import Tint from './Tint';
 import Tooltip from './Tooltip';
 import Translate from './Translate';
 import Trash from './Trash';
 import TrendDown from './TrendDown';
 import TrendUp from './TrendUp';
+import Trophy from './Trophy';
 import Undo from './Undo';
 import Unfold from './Unfold';
 import UnlockedFilled from './UnlockedFilled';
 import Unpin from './Unpin';
-import Upload from './Upload';
 import UploadFile from './UploadFile';
+import Upload from './Upload';
 import Usb from './Usb';
-import User from './User';
 import UserCheck from './UserCheck';
-import UserCircle from './UserCircle';
 import UserCircleAdd from './UserCircleAdd';
 import UserCircleRemove from './UserCircleRemove';
-import Verified from './Verified';
+import UserCircle from './UserCircle';
+import User from './User';
 import VerifiedFilled from './VerifiedFilled';
+import Verified from './Verified';
 import Videocam from './Videocam';
 import ViewColumn from './ViewColumn';
 import ViewInAr from './ViewInAr';
 import VolumeOff from './VolumeOff';
 import VolumeUp from './VolumeUp';
-import Wallet from './Wallet';
 import WalletFilled from './WalletFilled';
+import Wallet from './Wallet';
 import Warning from './Warning';
 import WebTraffic from './WebTraffic';
 import Widgets from './Widgets';
-import Wifi from './Wifi';
 import WifiOff from './WifiOff';
+import Wifi from './Wifi';
 import X from './X';
 
 export const Icons = {
   Accessibility,
   Activity,
-  Add,
   AddCard,
   AddCircle,
   AddSquare,
+  Add,
+  AfterHours,
   Ai,
   AlternateEmail,
+  AppleLogo,
   Apps,
   Arrow2Down,
   Arrow2Left,
   Arrow2Right,
-  Arrow2Up,
   Arrow2UpRight,
+  Arrow2Up,
   ArrowCircleDown,
   ArrowCircleUp,
   ArrowDoubleLeft,
@@ -296,10 +321,12 @@ export const Icons = {
   ArrowLeft,
   ArrowRight,
   ArrowUp,
+  AttachMoney,
   Attachment,
+  Backspace,
   Ban,
-  Bank,
   BankAssured,
+  Bank,
   Bold,
   Book,
   Bookmark,
@@ -313,28 +340,31 @@ export const Icons = {
   Call,
   Camera,
   Campaign,
-  Card,
+  Candlestick,
   CardPos,
+  Card,
   Cash,
   Category,
   Chart,
-  Check,
   CheckBold,
+  Check,
   CircleX,
-  Clock,
+  Clear,
   ClockFilled,
+  Clock,
   Close,
-  Cloud,
   CloudDownload,
   CloudUpload,
-  Code,
+  Cloud,
   CodeCircle,
+  Code,
   Coin,
   Collapse,
   Confirmation,
   Connect,
-  Copy,
   CopySuccess,
+  Copy,
+  CorporateFare,
   CreditCheck,
   CurrencyFranc,
   CurrencyLira,
@@ -342,8 +372,8 @@ export const Icons = {
   CurrencyYuan,
   Customize,
   Danger,
-  Dark,
   DarkFilled,
+  Dark,
   Data,
   Description,
   Details,
@@ -352,21 +382,21 @@ export const Icons = {
   Download,
   Draft,
   EcoLeaf,
-  Edit,
   EditSquare,
+  Edit,
   EncryptedAdd,
   Eraser,
   Error,
   Ethereum,
   Exchange,
-  Expand,
   ExpandVertical,
-  Explore,
+  Expand,
   ExploreFilled,
+  Explore,
   Export,
   Extension,
-  Eye,
   EyeSlash,
+  Eye,
   FaceId,
   Feedback,
   File,
@@ -375,8 +405,9 @@ export const Icons = {
   Fire,
   FirstPage,
   Flag,
-  Flash,
+  FlashFilled,
   FlashSlash,
+  Flash,
   Flask,
   Flower,
   Folder,
@@ -384,51 +415,59 @@ export const Icons = {
   FullCircle,
   Gas,
   Gift,
-  Global,
   GlobalSearch,
+  Global,
   Graph,
+  Group,
+  HardDrive,
   Hardware,
   HashTag,
-  Heart,
   HeartFilled,
+  Heart,
   Hierarchy,
-  Home,
   HomeFilled,
+  Home,
   Image,
   Info,
   Inventory,
   Joystick,
-  Keep,
   KeepFilled,
+  Keep,
   Key,
   LastPage,
-  Light,
   LightFilled,
+  Light,
   Link,
+  ListArrow,
   Loading,
   Location,
-  Lock,
   LockSlash,
+  Lock,
   LockedFilled,
   Login,
   Logout,
   Mail,
   Map,
   Menu,
+  Merge,
   MessageQuestion,
   Messages,
+  MetamaskFoxOutline,
   Mic,
-  Minus,
   MinusBold,
   MinusSquare,
+  Minus,
   Mobile,
-  Money,
   MoneyBag,
+  Money,
   Monitor,
   MoreHorizontal,
   MoreVertical,
   MountainFlag,
+  MusdFilled,
+  Musd,
   MusicNote,
+  NoPhotography,
   Notification,
   PageInfo,
   Palette,
@@ -436,11 +475,14 @@ export const Icons = {
   Pending,
   People,
   PersonCancel,
+  PieChart,
   Pin,
   Plant,
   Plug,
   PlusAndMinus,
   PolicyAlert,
+  PopUp,
+  Predictions,
   Print,
   PriorityHigh,
   PrivacyTip,
@@ -454,14 +496,13 @@ export const Icons = {
   RemoveMinus,
   Report,
   Rocket,
-  Save,
   SaveFilled,
+  Save,
   Saving,
-  Scan,
   ScanBarcode,
   ScanFocus,
+  Scan,
   Search,
-  Security,
   SecurityAlert,
   SecurityCross,
   SecurityKey,
@@ -470,33 +511,35 @@ export const Icons = {
   SecurityTick,
   SecurityTime,
   SecurityUser,
+  Security,
   Send,
   SentimentDissatisfied,
   SentimentNeutral,
   SentimentSatisfied,
   SentimentVerySatisfied,
-  Setting,
   SettingFilled,
+  Setting,
   Share,
   ShieldLock,
   ShoppingBag,
   ShoppingCart,
+  SidePanel,
   SignalCellular,
   Slash,
   Sms,
-  Snaps,
   SnapsMobile,
   SnapsPlus,
   SnapsRound,
-  Sort,
+  Snaps,
   SortByAlpha,
+  Sort,
   Sparkle,
   Speed,
   Speedometer,
   Square,
   Stake,
-  Star,
   StarFilled,
+  Star,
   Start,
   Storefront,
   Student,
@@ -506,42 +549,44 @@ export const Icons = {
   TableRow,
   Tablet,
   Tag,
-  ThumbDown,
+  Telegram,
   ThumbDownFilled,
-  ThumbUp,
+  ThumbDown,
   ThumbUpFilled,
+  ThumbUp,
   Tint,
   Tooltip,
   Translate,
   Trash,
   TrendDown,
   TrendUp,
+  Trophy,
   Undo,
   Unfold,
   UnlockedFilled,
   Unpin,
-  Upload,
   UploadFile,
+  Upload,
   Usb,
-  User,
   UserCheck,
-  UserCircle,
   UserCircleAdd,
   UserCircleRemove,
-  Verified,
+  UserCircle,
+  User,
   VerifiedFilled,
+  Verified,
   Videocam,
   ViewColumn,
   ViewInAr,
   VolumeOff,
   VolumeUp,
-  Wallet,
   WalletFilled,
+  Wallet,
   Warning,
   WebTraffic,
   Widgets,
-  Wifi,
   WifiOff,
+  Wifi,
   X,
 } as const;
 

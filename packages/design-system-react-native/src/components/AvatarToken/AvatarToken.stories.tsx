@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarTokenSize } from '../../types';
-
 import { AvatarToken } from './AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.dev';
 import type { AvatarTokenProps } from './AvatarToken.types';
+
+import { AvatarTokenSize } from '.';
 
 const meta: Meta<AvatarTokenProps> = {
   title: 'Components/AvatarToken',
@@ -53,6 +53,16 @@ export const SampleTokens: Story = {
       {SAMPLE_AVATARTOKEN_URIS.map((tokenSrc, index) => (
         <AvatarToken src={tokenSrc} key={`token-${index}`} />
       ))}
+    </View>
+  ),
+};
+
+export const Fallback: Story = {
+  render: () => (
+    <View style={{ flexDirection: 'row', gap: 16 }}>
+      <AvatarToken name="Bitcoin" fallbackText="BTC" />
+      <AvatarToken name="Ethereum" />
+      <AvatarToken />
     </View>
   ),
 };

@@ -207,11 +207,11 @@ module.exports = defineConfig({
       if (isChildWorkspace) {
         workspace.unset('packageManager');
       } else {
-        expectWorkspaceField(workspace, 'packageManager', 'yarn@4.2.2');
+        expectWorkspaceField(workspace, 'packageManager', 'yarn@4.16.0');
       }
 
-      // All packages must specify a minimum Node.js version of 18.18.
-      expectWorkspaceField(workspace, 'engines.node', '^18.18 || >=20');
+      // All packages must specify a minimum Node.js version of 24.
+      expectWorkspaceField(workspace, 'engines.node', '>=24');
 
       // All non-root public packages should be published to the NPM registry;
       // all non-root private packages should not.
@@ -613,10 +613,23 @@ function expectUpToDateWorkspacePeerDependencies(Yarn, workspace) {
           dependency.range,
         )
       ) {
+        // Ensure peer dependency includes latest breaking changes.
+        //
+        // Technically pre-1.0 versions can make breaking changes in patch releases, but
+        // conventionally we always bump the most significant digit for breaking changes.
+        let peerDependencyRange;
+        if (dependencyWorkspaceVersion.major > 0) {
+          peerDependencyRange = `^${dependencyWorkspaceVersion.major}.0.0`;
+        } else if (dependencyWorkspaceVersion.minor > 0) {
+          peerDependencyRange = `^0.${dependencyWorkspaceVersion.minor}.0`;
+        } else {
+          peerDependencyRange = `^0.0.${dependencyWorkspaceVersion.patch}`;
+        }
+
         expectWorkspaceField(
           workspace,
           `peerDependencies["${dependency.ident}"]`,
-          `^${dependencyWorkspaceVersion.major}.0.0`,
+          peerDependencyRange,
         );
       }
     }

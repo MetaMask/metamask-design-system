@@ -1,397 +1,147 @@
 # ButtonBase
 
-`ButtonBase` is a labeled element that a user can click or tap to initiate an action.
+ButtonBase is a labeled element that a user can click or tap to initiate an action.
 
----
+```tsx
+import { ButtonBase } from '@metamask/design-system-react-native';
+
+<ButtonBase onPress={() => {}}>Default Example</ButtonBase>;
+```
 
 ## Props
 
-### `children` (Required)
-
-The content to be rendered within the `ButtonBase`.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ | ----- |
-| `ReactNode` | string   | Yes     | `N/A` |
-
----
-
-### `textProps`
-
-Optional props to be passed to the `Text` component when the `children` is a string.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `TextProps` | No       | `{}`    |
-
----
-
 ### `size`
 
-Optional prop to control the size of the `ButtonBase`.
-
-| TYPE             | REQUIRED | DEFAULT             |
-| :--------------- | :------- | :------------------ |
-| `ButtonBaseSize` | No       | `ButtonBaseSize.Lg` |
+The size of the button.
 
 Available sizes:
 
-- `ButtonBaseSize.Sm` (32px)
-- `ButtonBaseSize.Md` (40px)
-- `ButtonBaseSize.Lg` (48px)
+- `ButtonBaseSize.Sm` (32px height)
+- `ButtonBaseSize.Md` (40px height)
+- `ButtonBaseSize.Lg` (48px height)
 
----
+| TYPE             | REQUIRED | DEFAULT             |
+| ---------------- | -------- | ------------------- |
+| `ButtonBaseSize` | No       | `ButtonBaseSize.Lg` |
 
-### `isLoading`
+```tsx
+import { ButtonBaseSize } from '@metamask/design-system-shared';
 
-Optional prop that, when `true`, shows a loading spinner.
+<ButtonBase size={ButtonBaseSize.Sm} onPress={() => {}}>
+  Small Button
+</ButtonBase>
+<ButtonBase onPress={() => {}}>Large Button (default)</ButtonBase>
+<ButtonBase size={ButtonBaseSize.Lg} onPress={() => {}}>
+  Large Button
+</ButtonBase>
+```
 
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `false` |
+### `children`
 
----
+The content of the `ButtonBase` component.
 
-### `loadingText`
+| TYPE                        | REQUIRED | DEFAULT     |
+| --------------------------- | -------- | ----------- |
+| `React.ReactNode \| string` | Yes      | `undefined` |
 
-Optional text to display when the button is in the loading state.
+```tsx
+import { ButtonBase } from '@metamask/design-system-react-native';
 
-| TYPE     | REQUIRED | DEFAULT     |
-| :------- | :------- | :---------- |
-| `string` | No       | `"Loading"` |
+<ButtonBase onPress={() => {}}>
+  <Text>Custom button content</Text>
+</ButtonBase>;
+```
 
----
+### `onPress`
 
-### `spinnerProps`
+Function to trigger when pressing the button.
 
-Optional props to customize the appearance of the spinner.
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | Yes      | `undefined` |
 
-| TYPE           | REQUIRED | DEFAULT |
-| :------------- | :------- | :------ |
-| `SpinnerProps` | No       | `{}`    |
-
----
-
-### `startIconName`
-
-Optional prop to specify an icon to show at the start of the button.
-
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | No       | `null`  |
-
----
-
-### `startIconProps`
-
-Optional props to pass additional properties to the start icon.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `IconProps` | No       | `{}`    |
-
----
-
-### `startAccessory`
-
-Optional prop for a custom element to show at the start of the button.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `ReactNode` | No       | `null`  |
-
----
-
-### `endIconName`
-
-Optional prop to specify an icon to show at the end of the button.
-
-| TYPE       | REQUIRED | DEFAULT |
-| :--------- | :------- | :------ |
-| `IconName` | No       | `null`  |
-
----
-
-### `endIconProps`
-
-Optional props to pass additional properties to the end icon.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `IconProps` | No       | `{}`    |
-
----
-
-### `endAccessory`
-
-Optional prop for a custom element to show at the end of the button.
-
-| TYPE        | REQUIRED | DEFAULT |
-| :---------- | :------- | :------ |
-| `ReactNode` | No       | `null`  |
-
----
+```tsx
+<ButtonBase onPress={() => console.log('Button pressed')}>Press me</ButtonBase>
+```
 
 ### `isDisabled`
 
-Optional prop that, when `true`, disables the button.
+Whether the button is disabled.
 
 | TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
+| --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
----
-
-### `isFullWidth`
-
-Optional prop that, when `true`, makes the button take up the full width of its container.
-
-| TYPE      | REQUIRED | DEFAULT |
-| :-------- | :------- | :------ |
-| `boolean` | No       | `false` |
-
----
+```tsx
+<ButtonBase isDisabled onPress={() => {}}>
+  Disabled Button
+</ButtonBase>
+```
 
 ### `twClassName`
 
-Optional prop to add `twrnc` overriding class names.
+Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
 
-| TYPE     | REQUIRED | DEFAULT |
-| :------- | :------- | :------ |
-| `string` | No       | `''`    |
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
 
----
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+import { ButtonBase } from '@metamask/design-system-react-native';
+
+// Add additional styles
+<ButtonBase onPress={() => {}} twClassName="mt-4">
+  Custom Background
+</ButtonBase>
+
+// Override default styles
+<ButtonBase onPress={() => {}} twClassName="bg-error-default">
+  Override Background
+</ButtonBase>
+```
 
 ### `style`
 
-Optional prop to control the style.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
-| TYPE                   | REQUIRED | DEFAULT |
-| :--------------------- | :------- | :------ |
-| `StyleProp<ViewStyle>` | No       | `null`  |
-
----
-
-## Usage
-
-### Basic Usage
+| TYPE                   | REQUIRED | DEFAULT     |
+| ---------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
-import React from 'react';
-import ButtonBase from '@metamask/design-system-react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
 
-<ButtonBase onPress={() => console.log('Pressed!')}>Click Me</ButtonBase>;
+import { ButtonBase } from '@metamask/design-system-react-native';
+
+export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
+  const tw = useTailwind();
+
+  return (
+    <ButtonBase
+      onPress={() => {}}
+      style={tw.style('bg-default', isActive && 'bg-success-default')}
+    >
+      Conditional styling
+    </ButtonBase>
+  );
+};
 ```
 
----
+### `loadingWrapperProps`
 
-### Button with Icon
+Props applied to the `Box` that wraps the loading spinner when `isLoading` is true. Merges with the default full-area centered layout; set `twClassName` to extend (not replace) that layout. The loading wrapper has **no default `testID`**—pass `testID` here for tests or automation (for example, if you previously queried `spinner-container`, pass `loadingWrapperProps={{ testID: 'spinner-container' }}`).
 
-```tsx
-<ButtonBase startIconName={IconName.Add}>Go Back</ButtonBase>
-```
+### `contentWrapperProps`
 
----
+Props applied to the label row (`BoxRow`). Label typography is still controlled via `textProps` on `ButtonBase`, not through this object.
 
-### Button with Spinner
+## Migration from MetaMask Mobile Component Library
 
-```tsx
-<ButtonBase isLoading>Loading...</ButtonBase>
-```
+Migrating from the legacy `ButtonBase` in `app/component-library/components/Buttons/Button/foundation/ButtonBase`? See the [ButtonBase migration guide](../../../MIGRATION.md#buttonbase-component) for a full prop mapping and before/after examples.
 
----
+## References
 
-### Customizing the Spinner
-
-```tsx
-<ButtonBase
-  isLoading
-  spinnerProps={{
-    color: IconColor.PrimaryDefault,
-  }}
->
-  Please wait
-</ButtonBase>
-```
-
----
-
-### Accessibility
-
-The `ButtonBase` component is designed to be fully accessible according to WCAG guidelines and React Native accessibility standards.
-
-#### Automatic Accessibility Features
-
-- **Default Role**: Automatically sets `accessibilityRole="button"`
-- **Auto-Generated Labels**: Uses string `children` as `accessibilityLabel` when no custom label is provided
-- **State Management**: Automatically manages `accessibilityState` for disabled and loading states
-- **Loading Announcements**: Provides automatic loading state announcements for screen readers
-
-#### Accessibility Props
-
-##### `accessibilityLabel`
-
-Optional accessibility label to describe the button for screen readers.
-
-| TYPE     | REQUIRED | DEFAULT                                         |
-| :------- | :------- | :---------------------------------------------- |
-| `string` | No       | Auto-generated from `children` or loading state |
-
-```tsx
-<ButtonBase accessibilityLabel="Save your changes">Save</ButtonBase>
-```
-
-##### `accessibilityHint`
-
-Optional accessibility hint to provide additional context about the button's action.
-
-| TYPE     | REQUIRED | DEFAULT                          |
-| :------- | :------- | :------------------------------- |
-| `string` | No       | Auto-generated for loading state |
-
-```tsx
-<ButtonBase
-  accessibilityLabel="Submit form"
-  accessibilityHint="Submits the form and navigates to confirmation page"
->
-  Submit
-</ButtonBase>
-```
-
-##### `accessibilityRole`
-
-Optional accessibility role. Defaults to 'button' but can be overridden for specific use cases.
-
-| TYPE                                                  | REQUIRED | DEFAULT    |
-| :---------------------------------------------------- | :------- | :--------- |
-| `'button' \| 'link' \| 'menuitem' \| 'tab' \| 'none'` | No       | `'button'` |
-
-```tsx
-<ButtonBase accessibilityRole="link">View Details</ButtonBase>
-```
-
-##### `accessibilityActions`
-
-Optional accessibility actions for custom interactions. Use sparingly and only when default button behavior is insufficient.
-
-| TYPE                                       | REQUIRED | DEFAULT     |
-| :----------------------------------------- | :------- | :---------- |
-| `Array<{ name: string; label?: string; }>` | No       | `undefined` |
-
-```tsx
-<ButtonBase
-  accessibilityActions={[
-    { name: 'longpress', label: 'Long press for options' },
-  ]}
-  onAccessibilityAction={(event) => {
-    if (event.nativeEvent.actionName === 'longpress') {
-      showContextMenu();
-    }
-  }}
->
-  Options
-</ButtonBase>
-```
-
-##### `onAccessibilityAction`
-
-Optional callback for handling accessibility action events.
-
-| TYPE                                                       | REQUIRED | DEFAULT     |
-| :--------------------------------------------------------- | :------- | :---------- |
-| `(event: { nativeEvent: { actionName: string } }) => void` | No       | `undefined` |
-
-#### Accessibility State Management
-
-The component automatically manages `accessibilityState` based on props:
-
-- **Disabled State**: Set when `isDisabled={true}` or `isLoading={true}`
-- **Busy State**: Set when `isLoading={true}` to indicate loading operations
-
-#### Loading State Accessibility
-
-When `isLoading={true}`:
-
-- Button becomes disabled and announces "busy" state
-- Accessibility label prioritizes `loadingText` if provided
-- Accessibility hint automatically explains loading state
-- Custom `accessibilityHint` overrides automatic loading hint
-
-```tsx
-// Automatic loading accessibility
-<ButtonBase isLoading loadingText="Saving...">
-  Save Changes
-</ButtonBase>
-// Screen reader announces: "Saving..., button, busy, Button is currently loading, please wait"
-
-// Custom loading accessibility
-<ButtonBase
-  isLoading
-  loadingText="Processing payment"
-  accessibilityHint="Please wait while we process your payment securely"
->
-  Pay Now
-</ButtonBase>
-```
-
-#### Best Practices
-
-1. **Descriptive Labels**: Use clear, descriptive text for button content
-2. **Meaningful Hints**: Provide hints that explain the button's action or outcome
-3. **Loading States**: Always provide `loadingText` for better loading state communication
-4. **Icon-Only Buttons**: Always provide `accessibilityLabel` for buttons with only icons
-5. **Context-Specific Roles**: Use appropriate `accessibilityRole` (e.g., 'link' for navigation)
-
-#### Examples
-
-```tsx
-// Basic accessible button
-<ButtonBase>Save Changes</ButtonBase>
-
-// Icon-only button with accessibility
-<ButtonBase
-  startIconName={IconName.Plus}
-  accessibilityLabel="Add new item"
-  accessibilityHint="Opens dialog to create a new item"
->
-  {/* No text content */}
-</ButtonBase>
-
-// Loading button with custom accessibility
-<ButtonBase
-  isLoading
-  loadingText="Creating account..."
-  accessibilityHint="Please wait while we set up your new account"
->
-  Create Account
-</ButtonBase>
-
-// Navigation button
-<ButtonBase
-  accessibilityRole="link"
-  accessibilityHint="Opens user profile page"
-  onPress={() => navigation.navigate('Profile')}
->
-  View Profile
-</ButtonBase>
-```
-
----
-
-### Notes
-
-- `ButtonBase` is optimized for handling different button states (loading, disabled, full width).
-- Use `isLoading` to disable user interactions during a loading state.
-- Icons and spinners are fully customizable through props.
-
----
-
-## Contributing
-
-1. Add tests for new features.
-2. Update this README for any changes to the API.
-3. Follow the design system's coding guidelines.
-
----
-
-For questions, refer to the [React Native documentation](https://reactnative.dev/docs) or contact the maintainers of the design system.
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

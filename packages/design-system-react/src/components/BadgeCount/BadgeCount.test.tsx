@@ -1,7 +1,7 @@
+import { BadgeCountSize } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { BadgeCountSize } from '../../types';
 import { TextColor } from '../Text';
 
 import { BadgeCount } from './BadgeCount';
@@ -60,10 +60,10 @@ describe('BadgeCount', () => {
   });
   it('merges custom className with default classes', () => {
     render(
-      <BadgeCount count={9} className="custom-class" data-testid="badge" />,
+      <BadgeCount count={9} className="text-default" data-testid="badge" />,
     );
     const badge = screen.getByTestId('badge');
-    expect(badge).toHaveClass('custom-class');
+    expect(badge).toHaveClass('text-default');
     expect(badge).toHaveClass('bg-error-default');
   });
 

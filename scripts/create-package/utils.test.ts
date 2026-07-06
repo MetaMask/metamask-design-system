@@ -46,8 +46,10 @@ describe('create-package/utils', () => {
           switch (path.basename(filePath)) {
             case MonorepoFiles.TsConfig:
               return tsConfig;
+
             case MonorepoFiles.TsConfigBuild:
               return tsConfigBuild;
+
             case MonorepoFiles.PackageJson:
               return packageJson;
             default:
@@ -97,6 +99,7 @@ describe('create-package/utils', () => {
         'mock3.file': 'PACKAGE_DESCRIPTION PACKAGE_DIRECTORY_NAME',
       });
 
+      // eslint-disable-next-line import-x/no-named-as-default-member
       (prettier.format as jest.Mock).mockImplementation((input) => input);
 
       await finalizeAndWriteData(packageData, monorepoFileData);
@@ -121,6 +124,7 @@ describe('create-package/utils', () => {
 
       // Writing monorepo files
       expect(fs.promises.writeFile).toHaveBeenCalledTimes(2);
+      // eslint-disable-next-line import-x/no-named-as-default-member
       expect(prettier.format).toHaveBeenCalledTimes(2);
       expect(fs.promises.writeFile).toHaveBeenCalledWith(
         expect.stringMatching(/tsconfig\.json$/u),

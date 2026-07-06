@@ -1,8 +1,6 @@
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-
-import { ButtonPrimarySize } from '../../../../types';
-import { IconName } from '../../../Icon';
 
 import { ButtonPrimary } from './ButtonPrimary';
 
@@ -44,13 +42,9 @@ describe('ButtonPrimary', () => {
   });
 
   it('merges custom className with default styles', () => {
-    render(
-      <ButtonPrimary className="custom-class">Primary Button</ButtonPrimary>,
-    );
-
+    render(<ButtonPrimary className="bg-default">Button</ButtonPrimary>);
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('custom-class');
-    expect(button).toHaveClass('bg-icon-default');
+    expect(button).toHaveClass('bg-default');
   });
 
   it('renders with inverse danger styles when both isInverse and isDanger are true', () => {
@@ -120,11 +114,11 @@ describe('ButtonPrimary', () => {
 
   it('renders with correct size classes', () => {
     const { rerender } = render(
-      <ButtonPrimary size={ButtonPrimarySize.Sm}>Small</ButtonPrimary>,
+      <ButtonPrimary size={ButtonSize.Sm}>Small</ButtonPrimary>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
-    rerender(<ButtonPrimary size={ButtonPrimarySize.Lg}>Large</ButtonPrimary>);
+    rerender(<ButtonPrimary size={ButtonSize.Lg}>Large</ButtonPrimary>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 
@@ -140,10 +134,12 @@ describe('ButtonPrimary', () => {
       </ButtonPrimary>,
     );
 
+    const button = screen.getByRole('button');
     const startIcon = screen.getByTestId('start-icon');
     const endIcon = screen.getByTestId('end-icon');
-    expect(startIcon).toHaveClass('mr-2');
-    expect(endIcon).toHaveClass('ml-2');
+    expect(startIcon).toHaveClass('shrink-0', 'text-inherit');
+    expect(endIcon).toHaveClass('shrink-0', 'text-inherit');
+    expect(button).toHaveClass('gap-x-1');
   });
 
   it('renders loading text when provided', () => {
@@ -154,7 +150,10 @@ describe('ButtonPrimary', () => {
     );
 
     expect(screen.getAllByText('Please wait...')).toHaveLength(2);
-    expect(screen.getByText('Submit')).toHaveClass('invisible');
+    const widthPlaceholder = screen
+      .getByRole('button')
+      .querySelector('span.invisible');
+    expect(widthPlaceholder).toHaveTextContent('Submit');
   });
 
   it('applies full width class correctly', () => {

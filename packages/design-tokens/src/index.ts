@@ -3,8 +3,11 @@ export {
   brandColor,
   lightTheme,
   darkTheme,
+  pureBlackDarkTheme,
+  resolveDarkTheme,
   typography,
   fontFamilies,
+  AnimationDuration,
 } from './js';
 export type {
   BrandColor,

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { TextButtonSize } from '../../types';
@@ -21,11 +21,6 @@ const meta: Meta<typeof TextButton> = {
       control: 'text',
       description:
         'Required prop for the content to be rendered within the TextButton',
-    },
-    className: {
-      control: 'text',
-      description:
-        'Optional prop for additional CSS classes to be applied to the TextButton component',
     },
     isInverse: {
       control: 'boolean',

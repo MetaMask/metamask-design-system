@@ -1,8 +1,6 @@
+import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-
-import { ButtonBaseSize } from '../../types';
-import { IconName } from '../Icon';
 
 import { ButtonBase } from './ButtonBase';
 
@@ -17,17 +15,26 @@ describe('ButtonBase', () => {
       <ButtonBase size={ButtonBaseSize.Sm}>Button</ButtonBase>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
+    expect(screen.getByRole('button')).toHaveClass('px-3');
 
     rerender(<ButtonBase size={ButtonBaseSize.Md}>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-10');
+    expect(screen.getByRole('button')).toHaveClass('px-3');
 
     rerender(<ButtonBase>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
+    expect(screen.getByRole('button')).toHaveClass('px-4');
   });
 
   it('applies large size by default', () => {
     render(<ButtonBase>Default Size</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
+    expect(screen.getByRole('button')).toHaveClass('px-4');
+  });
+
+  it('applies size-based border radius for default large button', () => {
+    render(<ButtonBase>Rounded</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('rounded-xl');
   });
 
   it('renders as child component when asChild is true', () => {
@@ -58,7 +65,10 @@ describe('ButtonBase', () => {
     expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
     const loadingTexts = screen.getAllByText('Please wait...');
     expect(loadingTexts).toHaveLength(2);
-    expect(screen.getByText('Submit')).toHaveClass('invisible');
+    const widthPlaceholder = screen
+      .getByRole('button')
+      .querySelector('span.invisible');
+    expect(widthPlaceholder).toHaveTextContent('Submit');
   });
 
   it('shows loading state with children when no loading text provided', () => {
@@ -83,9 +93,10 @@ describe('ButtonBase', () => {
         With Icon
       </ButtonBase>,
     );
+    expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('mr-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
   });
 
   it('renders end icon when endIconName is provided', () => {
@@ -97,23 +108,26 @@ describe('ButtonBase', () => {
         With Icon
       </ButtonBase>,
     );
+    expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('ml-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
   });
 
   it('renders start accessory when provided', () => {
     render(<ButtonBase startAccessory="→">With Accessory</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const accessory = screen.getByText('→');
     expect(accessory).toBeInTheDocument();
-    expect(accessory).toHaveClass('mr-2');
+    expect(accessory.closest('span')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('renders end accessory when provided', () => {
     render(<ButtonBase endAccessory="←">With Accessory</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('gap-x-1');
     const accessory = screen.getByText('←');
     expect(accessory).toBeInTheDocument();
-    expect(accessory).toHaveClass('ml-2');
+    expect(accessory.closest('span')).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('applies disabled state', () => {
@@ -138,7 +152,7 @@ describe('ButtonBase', () => {
       <ButtonBase
         isLoading
         loadingIconProps={{
-          className: 'custom-class',
+          className: 'bg-default',
           'data-testid': 'custom-loading-icon',
         }}
       >
@@ -148,7 +162,7 @@ describe('ButtonBase', () => {
 
     const loadingIcon = screen.getByTestId('custom-loading-icon');
     expect(loadingIcon).toBeInTheDocument();
-    expect(loadingIcon).toHaveClass('custom-class');
+    expect(loadingIcon).toHaveClass('bg-default');
   });
 
   it('merges loading icon classes correctly', () => {
@@ -156,7 +170,7 @@ describe('ButtonBase', () => {
       <ButtonBase
         isLoading
         loadingIconProps={{
-          className: 'custom-class',
+          className: 'bg-default',
           'data-testid': 'custom-loading-icon',
         }}
       >
@@ -165,7 +179,7 @@ describe('ButtonBase', () => {
     );
 
     const loadingIcon = screen.getByTestId('custom-loading-icon');
-    expect(loadingIcon).toHaveClass('custom-class');
+    expect(loadingIcon).toHaveClass('bg-default');
   });
 
   it('disables the button when isLoading is true', () => {

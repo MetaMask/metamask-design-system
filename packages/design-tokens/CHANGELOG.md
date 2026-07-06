@@ -7,6 +7,94 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.7.0]
+
+### Added
+
+- Added `pureBlackDarkTheme` and `resolveDarkTheme(isPureBlack)` for OLED pure-black dark mode token values ([#1300](https://github.com/MetaMask/metamask-design-system/pull/1300))
+
+## [8.6.0]
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 20 and 22 support for the release line; the emitted token values and CSS output are unchanged, but consumers must run on Node 24 or newer ([#1263](https://github.com/MetaMask/metamask-design-system/pull/1263))
+
+## [8.5.0]
+
+### Changed
+
+- **BREAKING:** Dropped Node.js 18 support for the release line; the emitted token values and CSS output are unchanged, but consumers must run on Node 20 or newer ([#1206](https://github.com/MetaMask/metamask-design-system/pull/1206))
+
+## [8.4.0]
+
+### Added
+
+- Added `@metamask/design-tokens/tailwind/theme.css` for Tailwind CSS v4, giving consumers a single import for MetaMask token variables, theme values, typography utilities, font utilities, and shadow utilities. See the [migration guide](./MIGRATION.md#tailwind-css-v3-to-v4) for upgrade steps ([#1117](https://github.com/MetaMask/metamask-design-system/pull/1117))
+
+## [8.3.0]
+
+### Changed
+
+- `fontWeights.bold` and the `--font-weight-bold` CSS variable now return `600`, and the Storybook font loaders/`@font-face` declarations consume the new `Geist-SemiBold`/`Geist-SemiBoldItalic` assets instead of the retired bold files. The `design-system-twrnc-preset` mapping for `default-bold`/`default-bold-italic` now resolves to those semibold PostScript names, so custom Tailwind classnames should align with the new fonts. Update `@font-face` declarations, font bundles, and `font-weight: 700` styles to point at the semibold files, include the semibold assets from `apps/storybook-react-native/fonts/Geist` and `apps/storybook-react/fonts/Geist` when you bundle fonts manually, and run the [migration guide](./MIGRATION.md#from-version-822-to-830) to verify `fontWeights.bold` references propagate through CSS, JS, and Tailwind configurations. ([#1017](https://github.com/MetaMask/metamask-design-system/pull/1017))
+
+## [8.2.2]
+
+### Changed
+
+- Updated typography scale for improved text hierarchy ([#936](https://github.com/MetaMask/metamask-design-system/pull/936))
+  - `fontSize.5` increased from 18px to 20px, affecting `HeadingMd`, `SectionHeading`, `BodyLg`, and `ButtonLabelLg` typography tokens
+  - `SectionHeading` on large screens now uses 24px (up from 20px) to maintain consistent hierarchy with `HeadingMd`
+  - These tokens map to `TextVariant.HeadingMd`, `TextVariant.SectionHeading`, `TextVariant.BodyLg`, and `TextVariant.ButtonLabelLg` used in the `Text` component from both `@metamask/design-system-react` and `@metamask/design-system-react-native` packages
+  - Typography documentation updated to reflect the refined sizes
+
+## [8.2.1]
+
+### Changed
+
+- Updated neutral grey palette (grey050-grey1000) to ensure consistent elevations and interactions across themes ([#849](https://github.com/MetaMask/metamask-design-system/pull/849))
+  - Refined neutral color values for more perceptible uniform elevations
+  - Improved hue consistency across muted shades
+  - Updated `background.muted`, `background.defaultHover`, `background.defaultPressed` for better theme consistency
+  - Aligned border and overlay colors with theme-appropriate values
+  - Synchronized all design tokens (CSS, JS, Figma JSONs) with latest Figma specifications
+
+## [8.2.0]
+
+### Added
+
+- Exported `AnimationDuration` enum for standardized animation timing values ([#897](https://github.com/MetaMask/metamask-design-system/pull/897))
+
+## [8.1.1]
+
+### Fixed
+
+- Updated `background/muted`, `background/muted-hover` and `background/muted-pressed` colors to align with trade ([#788](https://github.com/MetaMask/metamask-design-system/pull/788))
+
+## [8.1.0]
+
+### Added
+
+- Added design tokens for 5 new text styles: page heading, section heading, button labels, and amount display ([#777](https://github.com/MetaMask/metamask-design-system/pull/777))
+
+### Changed
+
+- Updating semantic design token color values ([#775](https://github.com/MetaMask/metamask-design-system/pull/775))
+- Updating neutral design token color values ([#774](https://github.com/MetaMask/metamask-design-system/pull/774))
+
+## [8.0.0]
+
+### Added
+
+- Added DisplayLG typography token for larger display text ([#607](https://github.com/MetaMask/metamask-design-system/pull/607))
+- Added `icon/default-hover`, `icon/default-pressed` state colors and `icon/inverse` color tokens for monochromatic button support ([#709](https://github.com/MetaMask/metamask-design-system/pull/709))
+
+### Changed
+
+- **BREAKING:** Updated `background/muted` from opaque colors to transparent colors and added new `background/section` and `background/subsection` tokens. This is a breaking change that affects components requiring opaque backgrounds like BadgeNetwork, avatar fallbacks, and non-action elements. Applications must swap `background/muted` with `background/section` for opaque backgrounds. ([#682](https://github.com/MetaMask/metamask-design-system/pull/682))
+- **BREAKING:** Removed deprecated typography tokens `sHeadingSMRegular` and `lHeadingSMRegular`. Choose an appropriate replacement typography token based on your design needs. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details. ([#699](https://github.com/MetaMask/metamask-design-system/pull/699))
+- **BREAKING:** Changed default font from CentraNo1 to Geist. This affects all typography tokens and requires updating font imports and references. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details. ([#756](https://github.com/MetaMask/metamask-design-system/pull/756))
+- Fixed `text/alternative`, `text/muted`, `icon/alternative`, and `icon/muted` colors in dark mode to match design specifications ([#709](https://github.com/MetaMask/metamask-design-system/pull/709))
+
 ## [7.1.0]
 
 ### Added
@@ -18,7 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **BREAKING:** Removed individual typography font family tokens in favor of base font family tokens. See the [migration guide](./MIGRATION.md#from-version-600-to-700) for details.
-- **BREAKING:** Updated Body variants(BodyXs, BodySm, BodyMd, BodyLg) font size for small screens ([#533](https://github.com/MetaMask/metamask-design-system/pull/533)). See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details.
+- **BREAKING:** Updated Body variants(BodyXs, BodySm, BodyMd, BodyLg) font size for small screens. See the [migration guide](./MIGRATION.md#from-version-700-to-800) for details. ([#533](https://github.com/MetaMask/metamask-design-system/pull/533))
 
 ## [6.1.0]
 
@@ -36,7 +124,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Replaced Euclid Circular B with CentraNo1 as the primary font family ([#499](https://github.com/MetaMask/metamask-design-system/pull/499)). See the [migration guide](./MIGRATION.md#from-version-510-to-600) for details.
+- **BREAKING:** Replaced Euclid Circular B with CentraNo1 as the primary font family. See the [migration guide](./MIGRATION.md#from-version-510-to-600) for details. ([#499](https://github.com/MetaMask/metamask-design-system/pull/499))
 
   - Removed `--font-family-euclid-circular-b` and `--font-family-roboto` CSS variables
   - Changed `--font-family-sans` to use CentraNo1 with updated fallback chain
@@ -54,16 +142,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **BREAKING:** Following the unintentional breaking change in `4.2.0` we are now exporting the types from root index instead of requiring deep imports ([#340](https://github.com/MetaMask/metamask-design-system/pull/340)). See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details.
-
+- **BREAKING:** Following the unintentional breaking change in `4.2.0` we are now exporting the types from root index instead of requiring deep imports. See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details. ([#340](https://github.com/MetaMask/metamask-design-system/pull/340))
 - Added 8 new colors (4 muted-hover & 4 muted-pressed) to design-tokens Figma Json. ([#325](https://github.com/MetaMask/metamask-design-system/pull/325))
 
 ## [4.2.0]
 
 ### Added
 
-- feat: color updates to the design tokens package ([#230](https://github.com/metamask/metamask-design-system/pull/230))
-
+- feat: color updates to the design tokens package ([#230](https://github.com/MetaMask/metamask-design-system/pull/230))
 - **BREAKING:** `@metamask/design-tokens` package migrated from standalone repository into the design system monorepo, which unintentionally broke type imports ([128](https://github.com/MetaMask/metamask-design-system/pull/128)). See the [migration guide](./MIGRATION.md#from-version-410-to-500) for details on the fix in 5.0.0.
 
 ## [4.1.0]
@@ -367,7 +453,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.1.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...HEAD
+[8.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.6.0...@metamask/design-tokens@8.7.0
+[8.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.5.0...@metamask/design-tokens@8.6.0
+[8.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.4.0...@metamask/design-tokens@8.5.0
+[8.4.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.3.0...@metamask/design-tokens@8.4.0
+[8.3.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.2...@metamask/design-tokens@8.3.0
+[8.2.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.1...@metamask/design-tokens@8.2.2
+[8.2.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.2.0...@metamask/design-tokens@8.2.1
+[8.2.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.1...@metamask/design-tokens@8.2.0
+[8.1.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.1.0...@metamask/design-tokens@8.1.1
+[8.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.0.0...@metamask/design-tokens@8.1.0
+[8.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.1.0...@metamask/design-tokens@8.0.0
 [7.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@7.0.0...@metamask/design-tokens@7.1.0
 [7.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.1.0...@metamask/design-tokens@7.0.0
 [6.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@6.0.1...@metamask/design-tokens@6.1.0

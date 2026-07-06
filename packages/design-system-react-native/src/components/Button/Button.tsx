@@ -1,6 +1,5 @@
+import { ButtonVariant } from '@metamask/design-system-shared';
 import React from 'react';
-
-import { ButtonVariant } from '../../types';
 
 import type { ButtonProps } from './Button.types';
 import { ButtonPrimary } from './variants/ButtonPrimary';
@@ -8,7 +7,7 @@ import { ButtonSecondary } from './variants/ButtonSecondary';
 import { ButtonTertiary } from './variants/ButtonTertiary';
 
 export const Button = (buttonProps: ButtonProps) => {
-  const { variant, ...restProps } = buttonProps;
+  const { variant = ButtonVariant.Primary, ...restProps } = buttonProps;
 
   switch (variant) {
     case ButtonVariant.Tertiary:

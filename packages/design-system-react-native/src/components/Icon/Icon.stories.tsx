@@ -1,9 +1,8 @@
+import { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-
-import { IconColor, IconName, IconSize } from '../../types';
 
 import { Icon } from './Icon';
 import type { IconProps } from './Icon.types';
@@ -95,7 +94,7 @@ export const AllIcons: Story = {
             key={iconName}
             style={{ width: 60, alignItems: 'center', margin: 8 }}
           >
-            <Icon name={iconName} />
+            <Icon name={iconName} size={IconSize.Xl} />
           </View>
         ))}
       </View>

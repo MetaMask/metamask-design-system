@@ -1,10 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import React, { createRef } from 'react';
-
 import {
   BadgeWrapperPosition,
   BadgeWrapperPositionAnchorShape,
-} from '../../types';
+} from '@metamask/design-system-shared';
+import { render, screen } from '@testing-library/react';
+import React, { createRef } from 'react';
 
 import { BadgeWrapper } from './BadgeWrapper';
 
@@ -150,7 +149,7 @@ describe('BadgeWrapper', () => {
     render(
       <BadgeWrapper
         data-testid="wrapper"
-        className="extra"
+        className="bg-default"
         style={{ margin: 7 }}
         badge={<div data-testid="badge" />}
       >
@@ -162,7 +161,7 @@ describe('BadgeWrapper', () => {
       'relative',
       'inline-flex',
       'self-start',
-      'extra',
+      'bg-default',
     );
     expect(wrapper).toHaveStyle({ margin: '7px' });
   });

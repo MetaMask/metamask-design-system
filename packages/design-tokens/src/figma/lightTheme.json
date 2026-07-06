@@ -25,19 +25,19 @@
       "description": "For subsection bg usually over background/section."
     },
     "muted": {
-      "value": "#3c4d9d1a",
+      "value": "#b4b4b528",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "For muted neutral surface."
     },
     "default-hover": {
-      "value": "#f6f6f7",
+      "value": "{grey.050}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for background/default."
     },
     "default-pressed": {
-      "value": "#ebecef",
+      "value": "{grey.100}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for background/default."
@@ -55,25 +55,25 @@
       "description": "Pressed state surface for background/alternative."
     },
     "muted-hover": {
-      "value": "#3c4d9d26",
+      "value": "#b4b4b53d",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for background/muted."
     },
     "muted-pressed": {
-      "value": "#3c4d9d33",
+      "value": "#b4b4b552",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for background/muted."
     },
     "hover": {
-      "value": "#858b9a14",
+      "value": "#b4b4b528",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "General purpose hover state tint."
     },
     "pressed": {
-      "value": "#858b9a29",
+      "value": "#b4b4b53d",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "General purpose pressed state tint."
@@ -93,7 +93,7 @@
       "description": "Softer color for text."
     },
     "muted": {
-      "value": "{grey.300}",
+      "value": "{grey.200}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Muted color for text (Not accessible)."
@@ -125,7 +125,7 @@
       "description": "Softer color for icons, following text/alternative."
     },
     "muted": {
-      "value": "{grey.300}",
+      "value": "{grey.200}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Muted color for icons (Not accessible), following text/muted."
@@ -139,13 +139,13 @@
   },
   "border": {
     "default": {
-      "value": "{grey.200}",
+      "value": "{grey.400}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Default color for borders."
     },
     "muted": {
-      "value": "#b7bbc866",
+      "value": "#b4b4b566",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Muted color for borders."
@@ -153,13 +153,13 @@
   },
   "overlay": {
     "default": {
-      "value": "#3f434a66",
+      "value": "#0a0d135c",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Default color for overlays(scrim)."
     },
     "alternative": {
-      "value": "#000000cc",
+      "value": "#0a0d1392",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Dimmer color for overlays(scrim)."
@@ -317,13 +317,13 @@
   },
   "success": {
     "default": {
-      "value": "{green.500}",
+      "value": "{lime.500}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "For positive semantic elements: success, confirm, complete, safe..."
     },
     "muted": {
-      "value": "#1c7e331a",
+      "value": "#457A391A",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Muted color for positive semantic."
@@ -335,25 +335,25 @@
       "description": "For elements placed on top of success/default fill."
     },
     "default-hover": {
-      "value": "#186c2c",
+      "value": "#3D6C32",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for success/default."
     },
     "default-pressed": {
-      "value": "#114b1e",
+      "value": "#2D5025",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for success/default."
     },
     "muted-hover": {
-      "value": "#1c7e3326",
+      "value": "#457A3926",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Hover state surface for success/muted."
     },
     "muted-pressed": {
-      "value": "#1c7e3333",
+      "value": "#457A3933",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "Pressed state surface for success/muted."

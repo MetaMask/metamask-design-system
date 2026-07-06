@@ -1,7 +1,10 @@
+import {
+  AvatarGroupSize,
+  AvatarGroupVariant,
+} from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { AvatarGroupVariant, AvatarGroupSize } from '../../types';
 import { AvatarAccountVariant } from '../AvatarAccount';
 import { TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE } from '../AvatarBase/AvatarBase.constants';
 import { TextColor } from '../Text';
@@ -27,13 +30,13 @@ describe('AvatarGroup', () => {
       <AvatarGroup
         variant={AvatarGroupVariant.Account}
         avatarPropsArr={[]}
-        className="my-group"
+        className="bg-default"
         style={{ margin: 8 }}
         data-testid="avatar-group"
       />,
     );
     const avatarGroupElement = screen.getByTestId('avatar-group');
-    expect(avatarGroupElement).toHaveClass('my-group');
+    expect(avatarGroupElement).toHaveClass('bg-default');
     expect(avatarGroupElement).toHaveStyle({ margin: '8px' });
   });
 

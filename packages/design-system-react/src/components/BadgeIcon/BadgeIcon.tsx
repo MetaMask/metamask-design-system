@@ -1,14 +1,15 @@
+import { IconSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Icon, IconSize } from '../Icon';
+import { Icon } from '../Icon';
 
 import type { BadgeIconProps } from './BadgeIcon.types';
 
 export const BadgeIcon = forwardRef<HTMLDivElement, BadgeIconProps>(
   ({ iconName, iconProps, className = '', style, ...props }, ref) => {
     const mergedClassName = twMerge(
-      'inline-flex h-4 w-4 items-center justify-center rounded-full bg-icon-default',
+      'inline-flex size-4 items-center justify-center rounded-full bg-icon-default',
       className,
     );
 

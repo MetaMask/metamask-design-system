@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { AvatarBaseSize, AvatarBaseShape } from '../../types';
 import { TextColor } from '../Text';
 
 import { AvatarBase } from './AvatarBase';
@@ -9,6 +8,8 @@ import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
 } from './AvatarBase.constants';
+
+import { AvatarBaseSize, AvatarBaseShape } from '.';
 
 describe('AvatarBase', () => {
   it('renders with default styles', () => {
@@ -63,14 +64,14 @@ describe('AvatarBase', () => {
   it('merges custom className with default classes', () => {
     render(
       <AvatarBase
-        className="custom-class"
+        className="bg-default"
         fallbackText="A"
         data-testid="avatar"
       />,
     );
 
     const avatar = screen.getByTestId('avatar');
-    expect(avatar).toHaveClass('custom-class');
+    expect(avatar).toHaveClass('bg-default');
     expect(avatar).toHaveClass('rounded-full');
   });
 

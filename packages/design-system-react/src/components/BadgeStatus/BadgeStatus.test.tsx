@@ -1,7 +1,9 @@
+import {
+  BadgeStatusSize,
+  BadgeStatusStatus,
+} from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
-
-import { BadgeStatusSize, BadgeStatusStatus } from '../../types';
 
 import { BadgeStatus } from './BadgeStatus';
 import {
@@ -75,12 +77,12 @@ describe('BadgeStatus', () => {
     render(
       <BadgeStatus
         status={BadgeStatusStatus.New}
-        className="custom-class"
+        className="bg-default"
         data-testid="badge-status"
       />,
     );
     const badge = screen.getByTestId('badge-status');
-    expect(badge).toHaveClass('custom-class');
+    expect(badge).toHaveClass('bg-default');
   });
 
   it('applies inline styles when provided', () => {

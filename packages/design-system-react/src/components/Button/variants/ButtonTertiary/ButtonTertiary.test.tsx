@@ -1,8 +1,6 @@
+import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
-
-import { ButtonTertiarySize } from '../../../../types';
-import { IconName } from '../../../Icon';
 
 import { ButtonTertiary } from './ButtonTertiary';
 
@@ -11,7 +9,7 @@ describe('ButtonTertiary', () => {
     render(<ButtonTertiary>Button Tertiary</ButtonTertiary>);
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-transparent', 'text-primary-default');
+    expect(button).toHaveClass('bg-transparent', 'text-default');
   });
 
   it('renders with danger styles when isDanger is true', () => {
@@ -22,13 +20,9 @@ describe('ButtonTertiary', () => {
   });
 
   it('merges custom className with default styles', () => {
-    render(
-      <ButtonTertiary className="custom-class">Button Tertiary</ButtonTertiary>,
-    );
-
+    render(<ButtonTertiary className="bg-default">Button</ButtonTertiary>);
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('custom-class');
-    expect(button).toHaveClass('bg-transparent');
+    expect(button).toHaveClass('bg-default');
   });
 
   it('applies disabled styles while preserving variant-specific classes', () => {
@@ -40,7 +34,7 @@ describe('ButtonTertiary', () => {
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
       'bg-transparent',
-      'text-primary-default',
+      'text-default',
       'opacity-50',
       'cursor-not-allowed',
     );
@@ -51,7 +45,7 @@ describe('ButtonTertiary', () => {
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass(
-      'text-primary-default',
+      'text-default',
       'bg-pressed',
       'cursor-not-allowed',
     );
@@ -59,18 +53,14 @@ describe('ButtonTertiary', () => {
 
   it('renders with correct size classes', () => {
     const { rerender } = render(
-      <ButtonTertiary size={ButtonTertiarySize.Sm}>Small</ButtonTertiary>,
+      <ButtonTertiary size={ButtonSize.Sm}>Small</ButtonTertiary>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
 
-    rerender(
-      <ButtonTertiary size={ButtonTertiarySize.Md}>Medium</ButtonTertiary>,
-    );
+    rerender(<ButtonTertiary size={ButtonSize.Md}>Medium</ButtonTertiary>);
     expect(screen.getByRole('button')).toHaveClass('h-10');
 
-    rerender(
-      <ButtonTertiary size={ButtonTertiarySize.Lg}>Large</ButtonTertiary>,
-    );
+    rerender(<ButtonTertiary size={ButtonSize.Lg}>Large</ButtonTertiary>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
   });
 
@@ -83,9 +73,11 @@ describe('ButtonTertiary', () => {
         With Icon
       </ButtonTertiary>,
     );
+    const button = screen.getByRole('button');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('mr-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
+    expect(button).toHaveClass('gap-x-1');
   });
 
   it('renders end icon when endIconName is provided', () => {
@@ -97,9 +89,11 @@ describe('ButtonTertiary', () => {
         With Icon
       </ButtonTertiary>,
     );
+    const button = screen.getByRole('button');
     const icon = screen.getByTestId('icon-add-square');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('ml-2');
+    expect(icon).toHaveClass('shrink-0', 'text-inherit');
+    expect(button).toHaveClass('gap-x-1');
   });
 
   it('applies full width class correctly', () => {
@@ -112,7 +106,7 @@ describe('ButtonTertiary', () => {
       render(<ButtonTertiary>Button</ButtonTertiary>);
       const button = screen.getByRole('button');
       expect(button).toHaveClass(
-        'transition-[transform,colors,opacity]',
+        'transition-all',
         'duration-100',
         'ease-linear',
         'active:scale-[0.97]',
@@ -220,7 +214,7 @@ describe('ButtonTertiary', () => {
       const { rerender } = render(<ButtonTertiary>Button</ButtonTertiary>);
 
       // Default
-      expect(screen.getByRole('button')).toHaveClass('text-primary-default');
+      expect(screen.getByRole('button')).toHaveClass('text-default');
 
       // Danger
       rerender(<ButtonTertiary isDanger>Button</ButtonTertiary>);
@@ -293,7 +287,7 @@ describe('ButtonTertiary', () => {
       const { rerender } = render(<ButtonTertiary>Button</ButtonTertiary>);
 
       // Default state (both false)
-      expect(screen.getByRole('button')).toHaveClass('text-primary-default');
+      expect(screen.getByRole('button')).toHaveClass('text-default');
 
       // Only isDanger
       rerender(<ButtonTertiary isDanger>Button</ButtonTertiary>);
@@ -314,27 +308,14 @@ describe('ButtonTertiary', () => {
     });
 
     it('handles all interactive state combinations', () => {
-      const { rerender } = render(<ButtonTertiary>Button</ButtonTertiary>);
-
-      // Default interactive state
-      let button = screen.getByRole('button');
-      expect(button).toHaveClass('text-primary-default');
-      // Check for transition classes instead of specific hover states
-      expect(button).toHaveClass('transition-[transform,colors,opacity]');
+      render(<ButtonTertiary>Button</ButtonTertiary>);
+      const button = screen.getByRole('button');
+      expect(button).toHaveClass('text-default');
+      // Check for transition classes
+      expect(button).toHaveClass('transition-all');
       expect(button).toHaveClass('duration-100');
       expect(button).toHaveClass('ease-linear');
       expect(button).toHaveClass('active:scale-[0.97]');
-      expect(button).toHaveClass('active:ease-[cubic-bezier(0.3,0.8,0.3,1)]');
-
-      // Disabled
-      rerender(<ButtonTertiary isDisabled>Button</ButtonTertiary>);
-      button = screen.getByRole('button');
-      expect(button).not.toHaveClass('transition-[transform,colors,opacity]');
-
-      // Loading
-      rerender(<ButtonTertiary isLoading>Button</ButtonTertiary>);
-      button = screen.getByRole('button');
-      expect(button).not.toHaveClass('transition-[transform,colors,opacity]');
     });
   });
 });

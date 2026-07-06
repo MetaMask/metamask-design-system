@@ -1,7 +1,7 @@
+import { AvatarNetworkSize } from '@metamask/design-system-shared';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { AvatarNetworkSize } from '../../types';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
@@ -21,13 +21,13 @@ describe('AvatarNetwork', () => {
     render(
       <AvatarNetwork
         name="Demo"
-        className="foo-bar"
+        className="bg-default"
         style={{ margin: 4 }}
         data-testid="cont"
       />,
     );
     const cont = screen.getByTestId('cont');
-    expect(cont).toHaveClass('foo-bar');
+    expect(cont).toHaveClass('bg-default');
     expect(cont).toHaveStyle({ margin: '4px' });
   });
 
@@ -56,6 +56,13 @@ describe('AvatarNetwork', () => {
       const fb2 = screen.getByTestId('fb2');
       expect(fb2).toHaveTextContent('Yo');
     });
+
+    it('renders "?" when no name or fallbackText is provided', () => {
+      render(
+        <AvatarNetwork fallbackTextProps={{ 'data-testid': 'fb-default' }} />,
+      );
+      expect(screen.getByTestId('fb-default')).toHaveTextContent('?');
+    });
   });
 
   describe('when src IS provided', () => {
@@ -72,7 +79,7 @@ describe('AvatarNetwork', () => {
       const img = screen.getByTestId('img') as HTMLImageElement;
       expect(img.src).toContain(src);
       expect(img.alt).toBe('ACME');
-      expect(img).toHaveClass('h-full', 'w-full', 'object-contain');
+      expect(img).toHaveClass('size-full', 'object-contain');
       expect(img).toHaveAttribute('id', 'img-id');
     });
 

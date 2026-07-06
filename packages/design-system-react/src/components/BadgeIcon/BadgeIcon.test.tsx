@@ -1,8 +1,8 @@
 // BadgeIcon.test.tsx
+import { IconColor, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { IconName, IconColor } from '../Icon';
 import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
 
 import { BadgeIcon } from './BadgeIcon';
@@ -13,10 +13,12 @@ describe('BadgeIcon', () => {
     const badgeIcon = screen.getByTestId('badge-icon');
     expect(badgeIcon).toBeInTheDocument();
     expect(badgeIcon).toHaveClass(
-      'bg-icon-default',
+      'inline-flex',
+      'size-4',
+      'items-center',
+      'justify-center',
       'rounded-full',
-      'h-4',
-      'w-4',
+      'bg-icon-default',
     );
   });
 
@@ -50,12 +52,12 @@ describe('BadgeIcon', () => {
     render(
       <BadgeIcon
         iconName={IconName.User}
-        className="custom-class"
+        className="bg-default"
         data-testid="badge-icon"
       />,
     );
     const badgeIcon = screen.getByTestId('badge-icon');
-    expect(badgeIcon).toHaveClass('custom-class');
+    expect(badgeIcon).toHaveClass('bg-default');
   });
 
   it('forwards ref to the root div', () => {

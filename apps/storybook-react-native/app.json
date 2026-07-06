@@ -4,6 +4,18 @@
     "slug": "storybook-react-native",
     "version": "1.0.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "automatic"
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "com.metamask.storybook",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.metamask.storybook",
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "plugins": []
   }
 }
