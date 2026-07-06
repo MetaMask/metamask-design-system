@@ -18,11 +18,16 @@ describe('typography types', () => {
         'body-md',
         'body-sm',
         'body-xs',
+        'page-heading',
+        'section-heading',
+        'button-label-md',
+        'button-label-lg',
+        'amount-display-lg',
       ];
 
       const testVariants: TypographyVariant[] =
         expectedVariants as TypographyVariant[];
-      expect(testVariants).toHaveLength(9);
+      expect(testVariants).toHaveLength(14);
       expect(testVariants).toStrictEqual(expectedVariants);
     });
 
@@ -38,6 +43,11 @@ describe('typography types', () => {
       expect(testFunction('body-md')).toBe('body-md');
       expect(testFunction('body-sm')).toBe('body-sm');
       expect(testFunction('body-xs')).toBe('body-xs');
+      expect(testFunction('page-heading')).toBe('page-heading');
+      expect(testFunction('section-heading')).toBe('section-heading');
+      expect(testFunction('button-label-md')).toBe('button-label-md');
+      expect(testFunction('button-label-lg')).toBe('button-label-lg');
+      expect(testFunction('amount-display-lg')).toBe('amount-display-lg');
     });
 
     it('can be used as object keys', () => {
@@ -51,9 +61,14 @@ describe('typography types', () => {
         'body-md': 'test',
         'body-sm': 'test',
         'body-xs': 'test',
+        'page-heading': 'test',
+        'section-heading': 'test',
+        'button-label-md': 'test',
+        'button-label-lg': 'test',
+        'amount-display-lg': 'test',
       };
 
-      expect(Object.keys(testObject)).toHaveLength(9);
+      expect(Object.keys(testObject)).toHaveLength(14);
     });
   });
 
@@ -112,48 +127,48 @@ describe('typography types', () => {
         fontSize: {
           'display-lg': [
             '48',
-            { lineHeight: '56px', letterSpacing: '0', fontWeight: '700' },
+            { lineHeight: '56px', letterSpacing: '0' },
           ],
           'display-md': [
             '32',
-            { lineHeight: '40px', letterSpacing: '0', fontWeight: '700' },
+            { lineHeight: '40px', letterSpacing: '0' },
           ],
           'heading-lg': [
             '24',
-            { lineHeight: '32px', letterSpacing: '0', fontWeight: '700' },
+            { lineHeight: '32px', letterSpacing: '0' },
           ],
           'heading-md': [
             '18',
-            { lineHeight: '24px', letterSpacing: '0', fontWeight: '700' },
+            { lineHeight: '24px', letterSpacing: '0' },
           ],
           'heading-sm': [
             '16',
-            { lineHeight: '24px', letterSpacing: '0', fontWeight: '700' },
+            { lineHeight: '24px', letterSpacing: '0' },
           ],
           'body-lg': [
             '18',
-            { lineHeight: '24px', letterSpacing: '0', fontWeight: '500' },
+            { lineHeight: '24px', letterSpacing: '0' },
           ],
           'body-md': [
             '14',
-            { lineHeight: '20px', letterSpacing: '0', fontWeight: '400' },
+            { lineHeight: '20px', letterSpacing: '0' },
           ],
           'body-sm': [
             '12',
-            { lineHeight: '16px', letterSpacing: '0', fontWeight: '400' },
+            { lineHeight: '16px', letterSpacing: '0' },
           ],
           'body-xs': [
             '10',
-            { lineHeight: '12px', letterSpacing: '0', fontWeight: '400' },
+            { lineHeight: '12px', letterSpacing: '0' },
           ],
         },
         fontFamily: {
-          'default-regular': 'CentraNo1-Book',
-          'default-regular-italic': 'CentraNo1-BookItalic',
-          'default-medium': 'CentraNo1-Medium',
-          'default-medium-italic': 'CentraNo1-MediumItalic',
-          'default-bold': 'CentraNo1-Bold',
-          'default-bold-italic': 'CentraNo1-BoldItalic',
+          'default-regular': 'Geist-Regular',
+          'default-regular-italic': 'Geist-RegularItalic',
+          'default-medium': 'Geist-Medium',
+          'default-medium-italic': 'Geist-MediumItalic',
+          'default-bold': 'Geist-SemiBold',
+          'default-bold-italic': 'Geist-SemiBoldItalic',
           'accent-regular': 'MMSans-Regular',
           'accent-medium': 'MMSans-Medium',
           'accent-bold': 'MMSans-Bold',
@@ -209,14 +224,7 @@ describe('typography types', () => {
 
     it('requires fontSize to be tuple with string and style object', () => {
       const validFontSize: TypographyTailwindConfigProps['fontSize']['display-lg'] =
-        [
-          '48',
-          {
-            lineHeight: '56px',
-            letterSpacing: '0',
-            fontWeight: '700',
-          },
-        ];
+        ['48', { lineHeight: '56px', letterSpacing: '0' }];
 
       expect(Array.isArray(validFontSize)).toBe(true);
       expect(validFontSize).toHaveLength(2);

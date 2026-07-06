@@ -41,7 +41,7 @@ describe('typography', () => {
           const styleProperties = fontSize[1];
           expect(styleProperties).toHaveProperty('lineHeight');
           expect(styleProperties).toHaveProperty('letterSpacing');
-          expect(styleProperties).toHaveProperty('fontWeight');
+          // fontWeight is not part of the style object
         });
       });
 
@@ -98,22 +98,22 @@ describe('typography', () => {
 
       it('has correct MetaMask font family values', () => {
         expect(typographyTailwindConfig.fontFamily['default-regular']).toBe(
-          'CentraNo1-Book',
+          'Geist-Regular',
         );
         expect(
           typographyTailwindConfig.fontFamily['default-regular-italic'],
-        ).toBe('CentraNo1-BookItalic');
+        ).toBe('Geist-RegularItalic');
         expect(typographyTailwindConfig.fontFamily['default-medium']).toBe(
-          'CentraNo1-Medium',
+          'Geist-Medium',
         );
         expect(
           typographyTailwindConfig.fontFamily['default-medium-italic'],
-        ).toBe('CentraNo1-MediumItalic');
+        ).toBe('Geist-MediumItalic');
         expect(typographyTailwindConfig.fontFamily['default-bold']).toBe(
-          'CentraNo1-Bold',
+          'Geist-SemiBold',
         );
         expect(typographyTailwindConfig.fontFamily['default-bold-italic']).toBe(
-          'CentraNo1-BoldItalic',
+          'Geist-SemiBoldItalic',
         );
         expect(typographyTailwindConfig.fontFamily['accent-regular']).toBe(
           'MMSans-Regular',
