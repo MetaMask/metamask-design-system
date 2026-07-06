@@ -17,88 +17,76 @@ import { ButtonsAlignment } from '.';
 
 figma.connect(
   BottomSheetFooter,
-  'https://www.figma.com/design/FhTeTCS0k1PHBab25vXl79/refactor--BottomSheet?node-id=16452-20245',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=16571-1069',
   {
     props: {
-      buttonsAlignment: figma.enum('variant', {
+      buttonsAlignment: figma.enum('buttonAlignment', {
         horizontal: ButtonsAlignment.Horizontal,
         vertical: ButtonsAlignment.Vertical,
       }),
-      primaryButtonBase: figma.boolean('hasPrimary', {
-        true: figma.nestedProps('primaryButton/_ButtonBase', {
-          label: figma.string('label'),
-          size: figma.enum('size', {
-            Lg: ButtonSize.Lg,
-          }),
-          startIconName: figma.boolean('startIcon (Figma Only)', {
-            true: IconName.Add,
-            false: undefined,
-          }),
-          endIconName: figma.boolean('endIcon (Figma Only)', {
-            true: IconName.Add,
-            false: undefined,
-          }),
+      primaryButtonBase: figma.nestedProps('primaryButton/_ButtonBase', {
+        label: figma.string('label'),
+        size: figma.enum('size', {
+          Lg: ButtonSize.Lg,
         }),
-        false: undefined,
+        startIconName: figma.boolean('startIcon (Figma Only)', {
+          true: IconName.Add,
+          false: undefined,
+        }),
+        endIconName: figma.boolean('endIcon (Figma Only)', {
+          true: IconName.Add,
+          false: undefined,
+        }),
       }),
-      primaryButtonState: figma.boolean('hasPrimary', {
-        true: figma.nestedProps('primaryButton', {
-          isDisabled: figma.boolean('isDisabled', {
-            false: false,
-            true: true,
-          }),
-          isDanger: figma.boolean('isDanger', {
-            false: false,
-            true: true,
-          }),
-          isInverse: figma.boolean('isInverse', {
-            false: false,
-            true: true,
-          }),
-          isLoading: figma.boolean('isLoading', {
-            false: false,
-            true: true,
-          }),
+      primaryButtonState: figma.nestedProps('primaryButton', {
+        isDisabled: figma.boolean('isDisabled', {
+          false: false,
+          true: true,
         }),
-        false: undefined,
+        isDanger: figma.boolean('isDanger', {
+          false: false,
+          true: true,
+        }),
+        isInverse: figma.boolean('isInverse', {
+          false: false,
+          true: true,
+        }),
+        isLoading: figma.boolean('isLoading', {
+          false: false,
+          true: true,
+        }),
       }),
-      secondaryButtonBase: figma.boolean('hasSecondary', {
-        true: figma.nestedProps('secondaryButton/_ButtonBase', {
-          label: figma.string('label'),
-          size: figma.enum('size', {
-            Lg: ButtonSize.Lg,
-          }),
-          startIconName: figma.boolean('startIcon (Figma Only)', {
-            true: IconName.Add,
-            false: undefined,
-          }),
-          endIconName: figma.boolean('endIcon (Figma Only)', {
-            true: IconName.Add,
-            false: undefined,
-          }),
+      secondaryButtonBase: figma.nestedProps('secondaryButton/_ButtonBase', {
+        label: figma.string('label'),
+        size: figma.enum('size', {
+          Lg: ButtonSize.Lg,
         }),
-        false: undefined,
+        startIconName: figma.boolean('startIcon (Figma Only)', {
+          true: IconName.Add,
+          false: undefined,
+        }),
+        endIconName: figma.boolean('endIcon (Figma Only)', {
+          true: IconName.Add,
+          false: undefined,
+        }),
       }),
-      secondaryButtonState: figma.boolean('hasSecondary', {
-        true: figma.nestedProps('secondaryButton', {
-          isDisabled: figma.boolean('isDisabled', {
-            false: false,
-            true: true,
-          }),
-          isDanger: figma.boolean('isDanger', {
-            false: false,
-            true: true,
-          }),
-          isInverse: figma.boolean('isInverse', {
-            false: false,
-            true: true,
-          }),
-          isLoading: figma.boolean('isLoading', {
-            false: false,
-            true: true,
-          }),
+      secondaryButtonState: figma.nestedProps('secondaryButton', {
+        isDisabled: figma.boolean('isDisabled', {
+          false: false,
+          true: true,
         }),
-        false: undefined,
+        isDanger: figma.boolean('isDanger', {
+          false: false,
+          true: true,
+        }),
+        isInverse: figma.boolean('isInverse', {
+          false: false,
+          true: true,
+        }),
+        isLoading: figma.boolean('isLoading', {
+          false: false,
+          true: true,
+        }),
       }),
     },
     example: ({
