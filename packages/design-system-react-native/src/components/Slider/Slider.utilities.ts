@@ -1,0 +1,197 @@
+/**
+ * Pure helpers for Slider coordinate conversion and UI defaults.
+ *
+ * Three coordinate systems:
+ * - **Domain value** — the controlled `value` prop (`minimumValue`…`maximumValue`).
+ * - **Track percent** — normalized 0–100 position along the track (used for dots,
+ *   labels, and `tickThresholds`; may be non-linear via `map*` hooks).
+ * - **Pixel position** — thumb/fill offset in layout pixels (`translateX`).
+ *
+ * Functions marked with `'worklet'` run on the UI thread inside gesture handlers.
+ * JS-thread callers use the non-worklet wrappers (`getTrackPercentFromValue`, etc.).
+ */
+
+// --- Track-percent primitives (worklet) ---
+
+export function clampTrackPercent(trackPercent: number): number {
+  'worklet';
+
+  return Math.max(0, Math.min(100, trackPercent));
+}
+
+// --- Domain ↔ track-percent mappers (worklet) ---
+
+/** Linear default: domain value → 0–100 track position. */
+export function defaultMapValueToTrackPercent(
+  value: number,
+  minimumValue: number,
+  maximumValue: number,
+): number {
+  'worklet';
+
+  const range = maximumValue - minimumValue;
+  if (range === 0) {
+    return 0;
+  }
+
+  const percent = ((value - minimumValue) / range) * 100;
+  return clampTrackPercent(percent);
+}
+
+/** Linear default: track position → stepped domain value. */
+export function defaultMapTrackPercentToValue(
+  trackPercent: number,
+  minimumValue: number,
+  maximumValue: number,
+  step: number,
+): number {
+  'worklet';
+
+  const range = maximumValue - minimumValue;
+  if (range === 0) {
+    return minimumValue;
+  }
+
+  const rawValue =
+    (clampTrackPercent(trackPercent) / 100) * range + minimumValue;
+  const stepped = Math.round(rawValue / step) * step;
+  return Math.max(minimumValue, Math.min(maximumValue, stepped));
+}
+
+/** UI-thread entry: custom `mapTrackPercentToValue` or linear default. */
+export function resolveTrackPercentToValue(
+  trackPercent: number,
+  minimumValue: number,
+  maximumValue: number,
+  step: number,
+  mapTrackPercentToValue?: (trackPercent: number) => number,
+): number {
+  'worklet';
+
+  if (mapTrackPercentToValue) {
+    return mapTrackPercentToValue(trackPercent);
+  }
+
+  return defaultMapTrackPercentToValue(
+    trackPercent,
+    minimumValue,
+    maximumValue,
+    step,
+  );
+}
+
+/** UI-thread entry: custom `mapValueToTrackPercent` or linear default. */
+export function resolveValueToTrackPercent(
+  value: number,
+  minimumValue: number,
+  maximumValue: number,
+  mapValueToTrackPercent?: (value: number) => number,
+): number {
+  'worklet';
+
+  if (mapValueToTrackPercent) {
+    return mapValueToTrackPercent(value);
+  }
+
+  return defaultMapValueToTrackPercent(value, minimumValue, maximumValue);
+}
+
+// --- Track-percent ↔ pixel position (worklet) ---
+
+export function trackPercentToPosition(
+  trackPercent: number,
+  width: number,
+): number {
+  'worklet';
+
+  if (width === 0) {
+    return 0;
+  }
+
+  return (clampTrackPercent(trackPercent) / 100) * width;
+}
+
+export function positionToTrackPercent(
+  position: number,
+  width: number,
+): number {
+  'worklet';
+
+  if (width === 0) {
+    return 0;
+  }
+
+  return clampTrackPercent((position / width) * 100);
+}
+
+/** Clamps a touch X coordinate to the track bounds. */
+export function clampGesturePosition(position: number, width: number): number {
+  'worklet';
+
+  return Math.max(0, Math.min(position, width));
+}
+
+// --- JS-thread domain ↔ track-percent ---
+
+/**
+ * JS-thread entry for mapping domain value → track percent.
+ * Used by Slider (labels, a11y) and useSliderGesture (prop/layout sync).
+ */
+export function getTrackPercentFromValue(
+  value: number,
+  minimumValue: number,
+  maximumValue: number,
+  mapValueToTrackPercent?: (value: number) => number,
+): number {
+  if (mapValueToTrackPercent) {
+    return mapValueToTrackPercent(value);
+  }
+
+  return defaultMapValueToTrackPercent(value, minimumValue, maximumValue);
+}
+
+// --- Range label / dot defaults (Slider.tsx) ---
+
+/** Default `stepToValue`: linear track-percent → domain value. */
+export function defaultStepToValue(
+  step: number,
+  minimumValue: number,
+  maximumValue: number,
+): number {
+  return (step / 100) * (maximumValue - minimumValue) + minimumValue;
+}
+
+/** Default `formatStepLabel`: display track percent as a percent string. */
+export function defaultFormatStepLabel(step: number): string {
+  return `${step}%`;
+}
+
+/** Dot `left` offset; edge steps inset so dots stay inside the track. */
+export function getDotLeftPercent(step: number): string {
+  if (step === 0) {
+    return '2%';
+  }
+  if (step === 100) {
+    return '98%';
+  }
+
+  return `${step}%`;
+}
+
+// --- Accessibility (Slider.tsx) ---
+
+/** Clamps and steps a domain value for increment/decrement actions. */
+export function clampValueToRange(
+  value: number,
+  minimumValue: number,
+  maximumValue: number,
+  step: number,
+): number {
+  const range = maximumValue - minimumValue;
+  if (range === 0) {
+    return minimumValue;
+  }
+
+  const clamped = Math.max(minimumValue, Math.min(maximumValue, value));
+  return Math.round(clamped / step) * step;
+}
