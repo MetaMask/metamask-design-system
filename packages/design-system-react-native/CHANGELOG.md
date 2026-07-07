@@ -7,12 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Uncategorized
+## [0.34.0]
 
-- feat(icons): add CandlestickFilled icon ([#1373](https://github.com/MetaMask/metamask-design-system/pull/1373))
-- chore: migrate design system to reanimated 4 ([#1216](https://github.com/MetaMask/metamask-design-system/pull/1216))
-- chore: add Storybook testing for React Native web stories ([#1315](https://github.com/MetaMask/metamask-design-system/pull/1315))
-- fix: hosted react native Storybook cold-load error ([#1310](https://github.com/MetaMask/metamask-design-system/pull/1310))
+### Added
+
+- Added `CandlestickFilled` to `IconName` ([#1373](https://github.com/MetaMask/metamask-design-system/pull/1373))
+
+### Changed
+
+- **BREAKING:** Updated peer dependencies to require React Native Reanimated 4 and `react-native-worklets`; Reanimated 3 is no longer supported ([#1216](https://github.com/MetaMask/metamask-design-system/pull/1216))
+  - See [Migration Guide](./MIGRATION.md#reanimated-4-worklets-peer-dependencies)
 
 ## [0.33.0]
 
@@ -569,7 +573,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.33.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.34.0...HEAD
+[0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.33.0...@metamask/design-system-react-native@0.34.0
 [0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.32.0...@metamask/design-system-react-native@0.33.0
 [0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.31.0...@metamask/design-system-react-native@0.32.0
 [0.31.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.2...@metamask/design-system-react-native@0.31.0
