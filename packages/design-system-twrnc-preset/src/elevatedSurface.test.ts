@@ -1,9 +1,9 @@
-import { Theme } from './Theme.types';
 import {
   useElevatedListItemClass,
   useElevatedSurfaceClass,
 } from './elevatedSurface';
 import { usePureBlack, useTheme } from './hooks';
+import { Theme } from './Theme.types';
 
 jest.mock('./hooks', () => ({
   useTheme: jest.fn(),
