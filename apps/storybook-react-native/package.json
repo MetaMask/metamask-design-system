@@ -58,8 +58,8 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^6.0.0",
-    "@vitest/browser": "^4.1.7",
-    "@vitest/browser-playwright": "^4.1.7",
+    "@vitest/browser": "^4.1.9",
+    "@vitest/browser-playwright": "^4.1.9",
     "axe-playwright": "^2.1.0",
     "babel-plugin-react-docgen-typescript": "^1.5.1",
     "playwright": "^1.52.0",
@@ -72,7 +72,7 @@
     "vite": "^8.0.14",
     "vite-plugin-svgr": "^5.2.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^4.1.7"
+    "vitest": "^4.1.9"
   },
   "engines": {
     "node": ">=24"
