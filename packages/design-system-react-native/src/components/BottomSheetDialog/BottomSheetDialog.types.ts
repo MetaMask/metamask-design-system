@@ -24,6 +24,14 @@ export type BottomSheetDialogProps = {
    */
   isInteractable?: boolean;
   /**
+   * When true, the sheet uses the elevated surface hierarchy in pure-black dark
+   * mode (`bg-alternative`). Set to false for screen-level surfaces such as
+   * swap numpads that should match the `#000000` canvas (`bg-default`).
+   *
+   * @default true
+   */
+  isElevatedSurface?: boolean;
+  /**
    * Optional boolean that indicates if the KeyboardAvoidingView is enabled.
    *
    * @default true

@@ -1,6 +1,8 @@
 import {
   Theme,
+  useElevatedSurfaceClass,
   usePureBlack,
+  useScreenSurfaceClass,
   useTailwind,
   useTheme,
 } from '@metamask/design-system-twrnc-preset';
@@ -52,6 +54,7 @@ export const BottomSheetDialog = forwardRef<
       children,
       isFullscreen = false,
       isInteractable = true,
+      isElevatedSurface = true,
       keyboardAvoidingViewEnabled = true,
       onClose,
       onOpen,
@@ -64,6 +67,11 @@ export const BottomSheetDialog = forwardRef<
     const tw = useTailwind();
     const currentTheme = useTheme();
     const isPureBlack = usePureBlack();
+    const elevatedSurfaceClass = useElevatedSurfaceClass();
+    const screenSurfaceClass = useScreenSurfaceClass();
+    const surfaceClass = isElevatedSurface
+      ? elevatedSurfaceClass
+      : screenSurfaceClass;
     const shadowLg =
       currentTheme === Theme.Light
         ? lightTheme.shadows.size.lg
@@ -254,7 +262,7 @@ export const BottomSheetDialog = forwardRef<
     const sheetStyle = useMemo(
       () => [
         tw.style(
-          isPureBlack ? 'bg-alternative' : 'bg-default',
+          surfaceClass,
           'rounded-t-3xl overflow-hidden border border-muted',
           twClassName,
         ),
@@ -273,7 +281,7 @@ export const BottomSheetDialog = forwardRef<
 
       [
         tw,
-        isPureBlack,
+        surfaceClass,
         maxSheetHeight,
         screenBottomPadding,
         isFullscreen,

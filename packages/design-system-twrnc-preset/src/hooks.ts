@@ -2,6 +2,12 @@ import { useContext } from 'react';
 
 import type { Theme } from './Theme.types';
 import { ThemeContext } from './ThemeContext';
+import {
+  getElevatedListItemClass,
+  getElevatedSurfaceClass,
+  getScreenSurfaceClass,
+} from './surfaceHierarchy';
+import type { ElevatedListItemOptions } from './surfaceHierarchy';
 
 /**
  * Hook that provides access to the current theme.
@@ -28,6 +34,24 @@ export const useTheme = (): Theme => {
 export const usePureBlack = (): boolean => {
   const { isPureBlack } = useContext(ThemeContext);
   return isPureBlack;
+};
+
+export const useElevatedSurfaceClass = (): string => {
+  const theme = useTheme();
+  const isPureBlack = usePureBlack();
+
+  return getElevatedSurfaceClass(theme, isPureBlack);
+};
+
+export const useScreenSurfaceClass = (): string => getScreenSurfaceClass();
+
+export const useElevatedListItemClass = (
+  options: ElevatedListItemOptions = {},
+): string => {
+  const theme = useTheme();
+  const isPureBlack = usePureBlack();
+
+  return getElevatedListItemClass(theme, isPureBlack, options);
 };
 
 /**

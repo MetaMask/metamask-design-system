@@ -121,6 +121,32 @@ This provides:
 - 📝 **Type safety** - TypeScript definitions for all design tokens
 - ⚡ **Actual Design System Config** - Uses the same configuration as the TWRNC preset
 
+### Pure-black surface hierarchy
+
+In pure-black dark mode the screen canvas uses `background.default` (`#000000`). Not every surface should use that token:
+
+| Surface type | Hook / prop | Pure-black class | Example |
+| ------------ | ----------- | ---------------- | ------- |
+| Screen canvas, numpads, full-width footers | `useScreenSurfaceClass()` | `bg-default` | Swap numpad |
+| Elevated sheets and modals | `useElevatedSurfaceClass()` or `BottomSheetDialog` default | `bg-alternative` | Pay-with picker |
+| Rows on elevated sheets | `useElevatedListItemClass()` | transparent (inherits parent) | Asset list item |
+
+For `BottomSheetDialog`, pass `isElevatedSurface={false}` when the sheet should match the screen canvas instead of sitting above it.
+
+```tsx
+import {
+  useScreenSurfaceClass,
+  useTailwind,
+} from '@metamask/design-system-twrnc-preset';
+
+function SwapNumpad() {
+  const tw = useTailwind();
+  const surfaceClass = useScreenSurfaceClass();
+
+  return <View style={tw.style(surfaceClass, 'px-4 pt-2')}>{/* keys */}</View>;
+}
+```
+
 ## Contributing
 
 This package is part of a monorepo. Instructions for contributing can be found in the [monorepo README](https://github.com/MetaMask/metamask-design-system#readme).

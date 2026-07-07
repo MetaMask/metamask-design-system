@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { View, Pressable } from 'react-native';
 
 import { Box } from '../Box';
-import { Text } from '../Text';
+import { Text, TextVariant } from '../Text';
 
 import { BottomSheetDialog } from './BottomSheetDialog';
 import type {
@@ -17,6 +17,7 @@ const meta: Meta<BottomSheetDialogProps> = {
   argTypes: {
     isFullscreen: { control: 'boolean' },
     isInteractable: { control: 'boolean' },
+    isElevatedSurface: { control: 'boolean' },
     keyboardAvoidingViewEnabled: { control: 'boolean' },
     onClose: { action: 'closed' },
     onOpen: { action: 'opened' },
@@ -99,5 +100,44 @@ export const ImperativeControl: Story = {
   render: (args) => <ImperativeControlTemplate {...args} />,
   args: {
     isInteractable: true,
+  },
+};
+
+const NUMPAD_KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', '⌫'];
+
+const ScreenLevelNumpadTemplate = (args: BottomSheetDialogProps) => (
+  <Box twClassName="w-full h-full relative bg-default">
+    <Box twClassName="flex-1 p-4">
+      <Text variant={TextVariant.HeadingMd}>Swap amount</Text>
+      <Text variant={TextVariant.AmountDisplayLg} twClassName="mt-2">
+        0.00
+      </Text>
+    </Box>
+    <BottomSheetDialog {...args} isInteractable={false} isElevatedSurface={false}>
+      <Box twClassName="px-4 pt-2 pb-0">
+        <Box twClassName="flex-row flex-wrap">
+          {NUMPAD_KEYS.map((key) => (
+            <Box
+              key={key}
+              twClassName="w-1/3 items-center justify-center py-4"
+            >
+              <Text variant={TextVariant.HeadingMd}>{key}</Text>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+    </BottomSheetDialog>
+  </Box>
+);
+
+export const ScreenLevelNumpad: Story = {
+  render: (args) => <ScreenLevelNumpadTemplate {...args} />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Screen-level bottom surfaces such as swap numpads should use `isElevatedSurface={false}` so the sheet matches the pure-black canvas (`#000000`) instead of the elevated `bg-alternative` surface.',
+      },
+    },
   },
 };

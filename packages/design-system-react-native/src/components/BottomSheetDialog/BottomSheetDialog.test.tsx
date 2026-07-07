@@ -43,6 +43,11 @@ jest.mock('@metamask/design-system-twrnc-preset', () => ({
   }),
   useTheme: () => mockThemeRef.current,
   usePureBlack: () => mockIsPureBlackRef.current,
+  useElevatedSurfaceClass: () =>
+    mockThemeRef.current === 'dark' && mockIsPureBlackRef.current
+      ? 'bg-alternative'
+      : 'bg-default',
+  useScreenSurfaceClass: () => 'bg-default',
 }));
 
 jest.mock('react-native-reanimated', () => {
@@ -381,6 +386,23 @@ describe('BottomSheetDialog', () => {
 
     expect(mockStyle).toHaveBeenCalledWith(
       'bg-alternative',
+      'rounded-t-3xl overflow-hidden border border-muted',
+      undefined,
+    );
+  });
+
+  it('uses default background class for screen-level sheets in pure black', () => {
+    mockThemeRef.current = 'dark';
+    mockIsPureBlackRef.current = true;
+
+    render(
+      <BottomSheetDialog isElevatedSurface={false}>
+        <Text>Screen Level Sheet</Text>
+      </BottomSheetDialog>,
+    );
+
+    expect(mockStyle).toHaveBeenCalledWith(
+      'bg-default',
       'rounded-t-3xl overflow-hidden border border-muted',
       undefined,
     );

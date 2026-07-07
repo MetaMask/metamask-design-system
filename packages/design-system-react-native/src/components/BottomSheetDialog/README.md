@@ -69,6 +69,26 @@ Optional boolean that indicates if the sheet is swippable. This affects whether 
 </BottomSheetDialog>
 ```
 
+### `isElevatedSurface`
+
+When `true` (default), the sheet uses the elevated surface hierarchy in pure-black dark mode (`bg-alternative`). Set to `false` for screen-level surfaces such as swap numpads that should match the `#000000` canvas (`bg-default`).
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `true`  |
+
+```tsx
+// Elevated picker sheet (default)
+<BottomSheetDialog>
+  <Text>Pay with ETH</Text>
+</BottomSheetDialog>
+
+// Screen-level numpad that should blend with the pure-black canvas
+<BottomSheetDialog isElevatedSurface={false} isInteractable={false}>
+  <Numpad />
+</BottomSheetDialog>
+```
+
 ### `keyboardAvoidingViewEnabled`
 
 Optional boolean that indicates if the KeyboardAvoidingView is enabled. When enabled, the dialog adjusts its position to avoid being obscured by the keyboard.
