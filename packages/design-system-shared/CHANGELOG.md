@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(icons): add CandlestickFilled icon ([#1373](https://github.com/MetaMask/metamask-design-system/pull/1373))
+
 ## [0.27.0]
 
 ### Added

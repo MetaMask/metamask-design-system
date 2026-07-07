@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(icons): add CandlestickFilled icon ([#1373](https://github.com/MetaMask/metamask-design-system/pull/1373))
+- chore: migrate design system to reanimated 4 ([#1216](https://github.com/MetaMask/metamask-design-system/pull/1216))
+- chore: add Storybook testing for React Native web stories ([#1315](https://github.com/MetaMask/metamask-design-system/pull/1315))
+- fix: hosted react native Storybook cold-load error ([#1310](https://github.com/MetaMask/metamask-design-system/pull/1310))
+
 ## [0.33.0]
 
 ### Changed

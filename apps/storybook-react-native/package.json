@@ -33,7 +33,7 @@
     "react-native-gesture-handler": "~2.28.0",
     "react-native-reanimated": "~4.3.0",
     "react-native-web": "^0.21.0",
-    "react-native-worklets": "patch:react-native-worklets@npm%3A0.8.3#~/.yarn/patches/react-native-worklets-npm-0.8.3-89f34099cb.patch"
+    "react-native-worklets": "0.8.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

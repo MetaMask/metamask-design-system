@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(icons): add CandlestickFilled icon ([#1373](https://github.com/MetaMask/metamask-design-system/pull/1373))
+- chore: re-enable Storybook test job in main workflow ([#1314](https://github.com/MetaMask/metamask-design-system/pull/1314))
+
 ## [0.31.0]
 
 ### Added
