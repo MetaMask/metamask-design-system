@@ -36,12 +36,26 @@ yarn workspace @metamask/storybook-react-native exec expo start --dev-client --p
 ## Run Storybook web
 
 ```bash
-# Start the web Storybook app
+# Start the web Storybook app (port 6007)
 yarn workspace @metamask/storybook-react-native storybook:web
 
 # Build a static Storybook site
 yarn workspace @metamask/storybook-react-native build-storybook
 ```
+
+## Run Storybook tests
+
+Component stories are tested in the browser via Vitest and Playwright (same approach as `@metamask/storybook-react`):
+
+```bash
+# From the monorepo root
+yarn test:storybook:react-native
+
+# Or from this workspace
+yarn workspace @metamask/storybook-react-native test-storybook
+```
+
+Automated accessibility checks are disabled for React Native web stories because `react-native-web` renders components as generic `div` elements, which produces false positives from axe. Use the Accessibility panel in Storybook UI for manual review.
 
 ## Version alignment policy
 
