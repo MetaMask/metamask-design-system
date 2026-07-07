@@ -10,20 +10,21 @@ const baseConfig = require('../../jest.config.packages');
 
 const displayName = path.basename(__dirname);
 
-const config = merge(baseConfig, {
+module.exports = merge(baseConfig, {
   // The display name when running multiple projects
   displayName,
 
+  // TODO add tests to twrnc preset https://github.com/MetaMask/metamask-design-system/issues/90
   // Pass with no tests if no test files are found
   passWithNoTests: true,
 
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
-      branches: 100,
-      functions: 100,
-      lines: 100,
-      statements: 100,
+      branches: 75,
+      functions: 70,
+      lines: 84,
+      statements: 84,
     },
   },
   preset: 'react-native',
@@ -38,8 +39,3 @@ const config = merge(baseConfig, {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
   },
 });
-
-// Scoped coverage until the package has broader test coverage (issue #90).
-config.collectCoverageFrom = ['./src/elevatedSurface.ts'];
-
-module.exports = config;

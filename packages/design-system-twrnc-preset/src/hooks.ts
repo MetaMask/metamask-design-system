@@ -48,9 +48,3 @@ export const useTailwind = () => {
   const { tw } = useContext(ThemeContext);
   return tw;
 };
-
-export {
-  useElevatedSurfaceClass,
-  useElevatedListItemClass,
-} from './elevatedSurface';
-export type { ElevatedListItemOptions } from './elevatedSurface';
