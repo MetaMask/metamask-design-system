@@ -3,10 +3,12 @@ import React, { useRef, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { ActionListItem } from '../ActionListItem';
 import { BottomSheetFooter } from '../BottomSheetFooter';
 import { BottomSheetHeader } from '../BottomSheetHeader';
 import { Box } from '../Box';
 import { Button, ButtonVariant } from '../Button';
+import { IconName } from '../Icon';
 import { Text } from '../Text';
 
 import { BottomSheet } from './BottomSheet';
@@ -166,5 +168,68 @@ export const ScrollableList: Story = {
     isInteractable: true,
     isFullscreen: false,
     keyboardAvoidingViewEnabled: true,
+  },
+};
+
+const PAY_WITH_ASSETS = [
+  { id: 'usdc', label: 'USDC', description: 'USD Coin' },
+  { id: 'eth', label: 'Ethereum', description: '0.42 ETH' },
+  { id: 'usdt', label: 'USDT', description: 'Tether USD' },
+];
+
+const PureBlackPayWithListTemplate = (args: BottomSheetProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [selectedAssetId, setSelectedAssetId] = useState('usdc');
+  const goBack = () => setIsVisible(false);
+
+  return (
+    <View style={{ flex: 1, width: '100%' }}>
+      <Button
+        variant={ButtonVariant.Primary}
+        onPress={() => setIsVisible(true)}
+        twClassName="mb-4"
+      >
+        Open Pay With BottomSheet
+      </Button>
+      {isVisible && (
+        <BottomSheet {...args} goBack={goBack} onClose={goBack}>
+          <BottomSheetHeader onClose={goBack}>Pay with</BottomSheetHeader>
+          <ScrollView>
+            {PAY_WITH_ASSETS.map((asset) => (
+              <ActionListItem
+                key={asset.id}
+                label={asset.label}
+                description={asset.description}
+                iconName={IconName.Coin}
+                onPress={() => setSelectedAssetId(asset.id)}
+                twClassName={
+                  selectedAssetId === asset.id ? 'bg-section' : undefined
+                }
+              />
+            ))}
+          </ScrollView>
+          <BottomSheetFooter
+            primaryButtonProps={{ children: 'Done', onPress: goBack }}
+          />
+        </BottomSheet>
+      )}
+    </View>
+  );
+};
+
+export const PureBlackPayWithList: Story = {
+  render: (args) => <PureBlackPayWithListTemplate {...args} />,
+  args: {
+    isInteractable: true,
+    isFullscreen: false,
+    keyboardAvoidingViewEnabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Simulates the perps Add funds Pay With sheet. Toggle pure black in the Storybook toolbar and confirm list rows inherit the elevated sheet background instead of painting #000000 patches.',
+      },
+    },
   },
 };

@@ -121,6 +121,45 @@ This provides:
 - 📝 **Type safety** - TypeScript definitions for all design tokens
 - ⚡ **Actual Design System Config** - Uses the same configuration as the TWRNC preset
 
+### Pure-black elevated surfaces
+
+When `isPureBlack` is enabled on `ThemeProvider`, bottom sheets and modals use elevated backgrounds. Use these helpers instead of hardcoding `bg-default` on child rows:
+
+```tsx
+import {
+  ThemeProvider,
+  Theme,
+  useElevatedSurfaceClass,
+  useElevatedListItemClass,
+  useTailwind,
+} from '@metamask/design-system-twrnc-preset';
+
+function PayWithRow({ isSelected }: { isSelected: boolean }) {
+  const tw = useTailwind();
+  const surfaceClass = useElevatedListItemClass({ isSelected });
+
+  return <Pressable style={tw.style('px-4 py-3', surfaceClass)} />;
+}
+
+function PayWithSheet() {
+  const sheetSurfaceClass = useElevatedSurfaceClass();
+
+  return (
+    <BottomSheet twClassName={sheetSurfaceClass}>
+      <PayWithRow isSelected={false} />
+    </BottomSheet>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider theme={Theme.Dark} isPureBlack>
+      <PayWithSheet />
+    </ThemeProvider>
+  );
+}
+```
+
 ## Contributing
 
 This package is part of a monorepo. Instructions for contributing can be found in the [monorepo README](https://github.com/MetaMask/metamask-design-system#readme).
