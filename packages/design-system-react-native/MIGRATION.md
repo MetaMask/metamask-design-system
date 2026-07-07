@@ -4,7 +4,6 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.30.0 to 0.31.0](#from-version-0300-to-0310)
 - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
 - [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
 - [From version 0.27.0 to 0.28.0](#from-version-0270-to-0280)
@@ -118,6 +117,52 @@ If you import **`TitleAlertPropsShared`** from **`@metamask/design-system-shared
 **Impact:**
 
 - Any call site passing **`titleStartAccessory`** or **`titleEndAccessory`** on **`TitleAlert`** must be updated
+
+<a id="reanimated-4-worklets-peer-dependencies"></a>
+
+#### React Native Reanimated 4 and Worklets peer dependencies
+
+`@metamask/design-system-react-native` now requires **React Native Reanimated 4** and **`react-native-worklets`**. Reanimated 3 is no longer supported.
+
+**What changed:**
+
+| Before (0.x.0)                                        | After (0.x.0)                     |
+| ----------------------------------------------------- | --------------------------------- |
+| `react-native-reanimated >=3.17.0` (no worklets peer) | `react-native-reanimated >=4.2.0` |
+| —                                                     | `react-native-worklets >=0.7.4`   |
+
+**Migration:**
+
+Upgrade Reanimated and Worklets together in your app before bumping the design system. Match the versions bundled with your Expo SDK when using Expo Go, or use a dev build when your JS and native versions differ.
+
+| Expo SDK | `react-native-reanimated` | `react-native-worklets` |
+| -------- | ------------------------- | ----------------------- |
+| 54       | ~4.1.1                    | 0.5.1                   |
+| 55       | 4.2.1                     | 0.7.4                   |
+| 56       | 4.3.1                     | 0.8.3                   |
+
+1. Install compatible versions (example for Expo SDK 55 / MetaMask Mobile platform upgrade):
+
+   ```bash
+   npx expo install react-native-reanimated@~4.2.1 react-native-worklets@0.7.4
+   ```
+
+2. Update Babel to use the Worklets plugin (replace the Reanimated 3 plugin if present):
+
+   ```js
+   // babel.config.js
+   module.exports = {
+     plugins: ['react-native-worklets/plugin'],
+   };
+   ```
+
+3. Rebuild native apps after upgrading (required for Worklets native code).
+
+**Impact:**
+
+- Apps still on Reanimated 3 must complete the Reanimated 4 migration before upgrading to the next `@metamask/design-system-react-native` release that includes this change.
+- `BottomSheetDialog` and `Toaster` use `scheduleOnRN` from `react-native-worklets`; both packages must be present at runtime.
+- When using Expo Go, JS and native Worklets/Reanimated versions must match the SDK bundle — use a dev build if you need newer JS versions than Expo Go provides.
 
 ### From version 0.29.0 to 0.30.0
 
