@@ -6,11 +6,11 @@ import {
   useSharedValue,
 } from 'react-native-reanimated';
 
+import { DEFAULT_TICK_THRESHOLDS } from './Slider.constants';
 import type {
   UseSliderGestureParams,
   UseSliderGestureResult,
 } from './Slider.types';
-import { DEFAULT_TICK_THRESHOLDS } from './Slider.constants';
 import {
   clampGesturePosition,
   defaultStepToValue,
@@ -31,22 +31,28 @@ import {
  *   domain value → trackPercent → translateX (thumb + progress fill)
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
+ *
+ * @param params - Gesture configuration and callbacks.
+ * @returns Gesture state and handlers for Slider.
  */
-export function useSliderGesture({
-  value,
-  minimumValue = 0,
-  maximumValue = 100,
-  step = 1,
-  isDisabled = false,
-  onValueChange,
-  onDragEnd,
-  onGrip,
-  onTick,
-  tickThresholds = DEFAULT_TICK_THRESHOLDS,
-  mapValueToTrackPercent,
-  mapTrackPercentToValue,
-  stepToValue: stepToValueProp,
-}: UseSliderGestureParams): UseSliderGestureResult {
+export function useSliderGesture(
+  params: UseSliderGestureParams,
+): UseSliderGestureResult {
+  const {
+    value,
+    minimumValue = 0,
+    maximumValue = 100,
+    step = 1,
+    isDisabled = false,
+    onValueChange,
+    onDragEnd,
+    onGrip,
+    onTick,
+    tickThresholds = DEFAULT_TICK_THRESHOLDS,
+    mapValueToTrackPercent,
+    mapTrackPercentToValue,
+    stepToValue: stepToValueProp,
+  } = params;
   const stepToValue = useMemo(
     () =>
       stepToValueProp ??
@@ -67,6 +73,7 @@ export function useSliderGesture({
       mapValueToTrackPercent,
     ),
   );
+  const isDraggingRef = useRef(false);
 
   // --- Position sync (domain value → thumb pixels) ---
 
@@ -100,12 +107,14 @@ export function useSliderGesture({
 
   useEffect(() => {
     syncPositionFromValue(value);
-    previousTrackPercentRef.current = getTrackPercentFromValue(
-      value,
-      minimumValue,
-      maximumValue,
-      mapValueToTrackPercent,
-    );
+    if (!isDraggingRef.current) {
+      previousTrackPercentRef.current = getTrackPercentFromValue(
+        value,
+        minimumValue,
+        maximumValue,
+        mapValueToTrackPercent,
+      );
+    }
   }, [
     mapValueToTrackPercent,
     maximumValue,
@@ -135,6 +144,10 @@ export function useSliderGesture({
       onGrip?.();
     }
   }, [isDisabled, onGrip]);
+
+  const setDragging = useCallback((dragging: boolean) => {
+    isDraggingRef.current = dragging;
+  }, []);
 
   const checkThresholdCrossing = useCallback(
     (newTrackPercent: number) => {
@@ -202,7 +215,7 @@ export function useSliderGesture({
       );
     };
 
-    /** Finalize a gesture: emit callbacks, then re-sync thumb to stepped value. */
+    // Finalize a gesture: emit callbacks, then re-sync thumb to stepped value.
     const commitAtPosition = (
       position: number,
       options: { checkThreshold: boolean; triggerGrip: boolean },
@@ -226,6 +239,9 @@ export function useSliderGesture({
     const panGesture = Gesture.Pan()
       .enabled(!isDisabled)
       .onBegin(() => {
+        'worklet';
+
+        runOnJS(setDragging)(true);
         runOnJS(triggerGrip)();
       })
       .onUpdate((event) => {
@@ -246,6 +262,7 @@ export function useSliderGesture({
           checkThreshold: false,
           triggerGrip: true,
         });
+        runOnJS(setDragging)(false);
       });
 
     const tapGesture = Gesture.Tap()
@@ -270,6 +287,7 @@ export function useSliderGesture({
     mapValueToTrackPercent,
     maximumValue,
     minimumValue,
+    setDragging,
     sliderWidth,
     step,
     translateX,

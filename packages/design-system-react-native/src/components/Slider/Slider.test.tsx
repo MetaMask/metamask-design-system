@@ -9,6 +9,8 @@ import React from 'react';
 
 import { Slider } from './Slider';
 import {
+  clampGesturePosition,
+  clampTrackPercent,
   clampValueToRange,
   defaultFormatStepLabel,
   defaultMapTrackPercentToValue,
@@ -17,6 +19,8 @@ import {
   getDotLeftPercent,
   getTrackPercentFromValue,
   positionToTrackPercent,
+  resolveTrackPercentToValue,
+  resolveValueToTrackPercent,
   trackPercentToPosition,
 } from './Slider.utilities';
 
@@ -126,6 +130,39 @@ describe('Slider.utilities', () => {
       expect(
         getTrackPercentFromValue(1000, 0, 10000, mockMusdAmountToPercent),
       ).toBe(50);
+    });
+
+    it('resolveTrackPercentToValue uses a custom mapper', () => {
+      const customMapper = jest.fn((trackPercent: number) => trackPercent * 10);
+
+      expect(resolveTrackPercentToValue(25, 0, 100, 1, customMapper)).toBe(250);
+      expect(customMapper).toHaveBeenCalledWith(25);
+    });
+
+    it('resolveTrackPercentToValue falls back to the default mapper', () => {
+      expect(resolveTrackPercentToValue(50, 0, 100, 5)).toBe(50);
+    });
+
+    it('resolveValueToTrackPercent uses a custom mapper', () => {
+      const customMapper = jest.fn((domainValue: number) => domainValue / 2);
+
+      expect(resolveValueToTrackPercent(80, 0, 100, customMapper)).toBe(40);
+      expect(customMapper).toHaveBeenCalledWith(80);
+    });
+
+    it('resolveValueToTrackPercent falls back to the default mapper', () => {
+      expect(resolveValueToTrackPercent(50, 0, 100)).toBe(50);
+    });
+
+    it('clampTrackPercent clamps values to 0–100', () => {
+      expect(clampTrackPercent(-10)).toBe(0);
+      expect(clampTrackPercent(110)).toBe(100);
+    });
+
+    it('clampGesturePosition clamps touch coordinates to track width', () => {
+      expect(clampGesturePosition(-5, 100)).toBe(0);
+      expect(clampGesturePosition(150, 100)).toBe(100);
+      expect(clampGesturePosition(50, 100)).toBe(50);
     });
   });
 
@@ -388,6 +425,46 @@ describe('Slider', () => {
     fireEvent.press(screen.getByText('50%'));
 
     expect(onValueChange).toHaveBeenCalledWith(100);
+  });
+
+  it('does not call onValueChange when incrementing at maximum value', () => {
+    const onValueChange = jest.fn();
+    const { getByTestId } = render(
+      <Slider
+        {...defaultProps}
+        value={100}
+        maximumValue={100}
+        onValueChange={onValueChange}
+        testID="slider-max"
+      />,
+    );
+
+    fireEvent(getByTestId('slider-max'), 'accessibilityAction', {
+      nativeEvent: { actionName: 'increment' },
+    });
+
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+
+  it('uses default range props when optional values are omitted', () => {
+    render(
+      <Slider
+        value={50}
+        onValueChange={jest.fn()}
+        showRangeLabels
+        showRangeDots
+      />,
+    );
+
+    expect(screen.getByText('0%')).toBeOnTheScreen();
+    expect(screen.getByText('100%')).toBeOnTheScreen();
+  });
+
+  it('hides range labels and dots by default', () => {
+    render(<Slider value={50} onValueChange={jest.fn()} />);
+
+    expect(screen.queryByText('0%')).toBeNull();
+    expect(screen.queryByText('100%')).toBeNull();
   });
 
   describe('when twClassName is provided', () => {

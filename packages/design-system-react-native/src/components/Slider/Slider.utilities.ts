@@ -21,7 +21,14 @@ export function clampTrackPercent(trackPercent: number): number {
 
 // --- Domain ↔ track-percent mappers (worklet) ---
 
-/** Linear default: domain value → 0–100 track position. */
+/**
+ * Linear default: domain value → 0–100 track position.
+ *
+ * @param value - Domain value to map.
+ * @param minimumValue - Lower bound of the domain range.
+ * @param maximumValue - Upper bound of the domain range.
+ * @returns Track percent clamped to 0–100.
+ */
 export function defaultMapValueToTrackPercent(
   value: number,
   minimumValue: number,
@@ -38,7 +45,15 @@ export function defaultMapValueToTrackPercent(
   return clampTrackPercent(percent);
 }
 
-/** Linear default: track position → stepped domain value. */
+/**
+ * Linear default: track position → stepped domain value.
+ *
+ * @param trackPercent - Track position from 0–100.
+ * @param minimumValue - Lower bound of the domain range.
+ * @param maximumValue - Upper bound of the domain range.
+ * @param step - Step increment for rounding.
+ * @returns Stepped domain value clamped to the range.
+ */
 export function defaultMapTrackPercentToValue(
   trackPercent: number,
   minimumValue: number,
@@ -58,7 +73,16 @@ export function defaultMapTrackPercentToValue(
   return Math.max(minimumValue, Math.min(maximumValue, stepped));
 }
 
-/** UI-thread entry: custom `mapTrackPercentToValue` or linear default. */
+/**
+ * UI-thread entry: custom `mapTrackPercentToValue` or linear default.
+ *
+ * @param trackPercent - Track position from 0–100.
+ * @param minimumValue - Lower bound of the domain range.
+ * @param maximumValue - Upper bound of the domain range.
+ * @param step - Step increment for the default mapper.
+ * @param mapTrackPercentToValue - Optional custom mapper.
+ * @returns Domain value for the track position.
+ */
 export function resolveTrackPercentToValue(
   trackPercent: number,
   minimumValue: number,
@@ -80,7 +104,15 @@ export function resolveTrackPercentToValue(
   );
 }
 
-/** UI-thread entry: custom `mapValueToTrackPercent` or linear default. */
+/**
+ * UI-thread entry: custom `mapValueToTrackPercent` or linear default.
+ *
+ * @param value - Domain value to map.
+ * @param minimumValue - Lower bound of the domain range.
+ * @param maximumValue - Upper bound of the domain range.
+ * @param mapValueToTrackPercent - Optional custom mapper.
+ * @returns Track percent for the domain value.
+ */
 export function resolveValueToTrackPercent(
   value: number,
   minimumValue: number,
@@ -124,7 +156,13 @@ export function positionToTrackPercent(
   return clampTrackPercent((position / width) * 100);
 }
 
-/** Clamps a touch X coordinate to the track bounds. */
+/**
+ * Clamps a touch X coordinate to the track bounds.
+ *
+ * @param position - Touch X in track coordinates.
+ * @param width - Track width in pixels.
+ * @returns Clamped pixel position.
+ */
 export function clampGesturePosition(position: number, width: number): number {
   'worklet';
 
@@ -136,6 +174,12 @@ export function clampGesturePosition(position: number, width: number): number {
 /**
  * JS-thread entry for mapping domain value → track percent.
  * Used by Slider (labels, a11y) and useSliderGesture (prop/layout sync).
+ *
+ * @param value - Domain value to map.
+ * @param minimumValue - Lower bound of the domain range.
+ * @param maximumValue - Upper bound of the domain range.
+ * @param mapValueToTrackPercent - Optional custom mapper.
+ * @returns Track percent for the domain value.
  */
 export function getTrackPercentFromValue(
   value: number,
@@ -152,7 +196,14 @@ export function getTrackPercentFromValue(
 
 // --- Range label / dot defaults (Slider.tsx) ---
 
-/** Default `stepToValue`: linear track-percent → domain value. */
+/**
+ * Default `stepToValue`: linear track-percent → domain value.
+ *
+ * @param step - Track-percent step from `rangeLabelSteps`.
+ * @param minimumValue - Lower bound of the domain range.
+ * @param maximumValue - Upper bound of the domain range.
+ * @returns Domain value for the step.
+ */
 export function defaultStepToValue(
   step: number,
   minimumValue: number,
@@ -161,12 +212,22 @@ export function defaultStepToValue(
   return (step / 100) * (maximumValue - minimumValue) + minimumValue;
 }
 
-/** Default `formatStepLabel`: display track percent as a percent string. */
+/**
+ * Default `formatStepLabel`: display track percent as a percent string.
+ *
+ * @param step - Track-percent step from `rangeLabelSteps`.
+ * @returns Formatted label string.
+ */
 export function defaultFormatStepLabel(step: number): string {
   return `${step}%`;
 }
 
-/** Marker `left` percent for range dots and labels; edge steps inset to stay on track. */
+/**
+ * Marker `left` percent for range dots and labels; edge steps inset to stay on track.
+ *
+ * @param step - Track-percent step from `rangeLabelSteps`.
+ * @returns CSS `left` percentage string.
+ */
 export function getDotLeftPercent(step: number): string {
   if (step === 0) {
     return '2%';
@@ -180,7 +241,15 @@ export function getDotLeftPercent(step: number): string {
 
 // --- Accessibility (Slider.tsx) ---
 
-/** Clamps and steps a domain value for increment/decrement actions. */
+/**
+ * Clamps and steps a domain value for increment/decrement actions.
+ *
+ * @param value - Domain value to clamp.
+ * @param minimumValue - Lower bound of the domain range.
+ * @param maximumValue - Upper bound of the domain range.
+ * @param step - Step increment for rounding.
+ * @returns Clamped and stepped domain value.
+ */
 export function clampValueToRange(
   value: number,
   minimumValue: number,

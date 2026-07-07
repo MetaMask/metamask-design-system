@@ -61,10 +61,10 @@ module.exports = merge(baseConfig, {
     // by Reanimated's Jest mock. Label-press and layout paths are covered in tests;
     // drag behavior is verified via Storybook on device.
     './src/components/Slider/useSliderGesture.ts': {
-      branches: 38,
-      functions: 50,
-      lines: 52,
-      statements: 54,
+      branches: 68,
+      functions: 48,
+      lines: 60,
+      statements: 60,
     },
   },
 
@@ -76,6 +76,7 @@ module.exports = merge(baseConfig, {
     '\\.constants\\.ts$', // ignore all .constants.ts files
     '\\.dev\\.ts$', // ignore all .dev.ts files
     '\\.figma\\.tsx', // Figma code connect files
+    '\\.types\\.ts$', // type-only modules
     'Icon.assets.ts', // Exclude Icon.assets file
     'Blockies.utilities.ts', // Exclude Blockies.utilities file
   ],

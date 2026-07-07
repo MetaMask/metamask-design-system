@@ -202,6 +202,7 @@ export const Slider = ({
             ]}
             onPress={() => handlePressStep(rangeStep)}
             disabled={isDisabled}
+            accessibilityRole="button"
           >
             <Text
               variant={TextVariant.BodyMd}
