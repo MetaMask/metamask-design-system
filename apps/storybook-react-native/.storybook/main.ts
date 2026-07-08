@@ -5,6 +5,7 @@ import type { StorybookConfig } from '@storybook/react-native-web-vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import babel from '@rolldown/plugin-babel';
+import { designSystemBarrelImportsPlugin } from './vite-plugin-design-system-barrel-imports';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -21,7 +22,12 @@ const config: StorybookConfig = {
     '../stories/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/design-system-react-native/src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: [getAbsolutePath('@storybook/addon-docs')],
+  addons: [
+    getAbsolutePath('@chromatic-com/storybook'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-vitest'),
+  ],
   framework: {
     name: getAbsolutePath('@storybook/react-native-web-vite'),
     options: {
@@ -69,6 +75,17 @@ const config: StorybookConfig = {
     return {
       ...viteConfig,
       plugins: [
+        // Example stories import from the package barrel to mirror production usage, but the
+        // static build must not resolve those through `src/index.ts`. Rolldown otherwise emits
+        // a shared orchestrator chunk that inits Avatar/Badge (and other) modules before the
+        // components a story actually renders, which races on cold CDN preloads → React #130.
+        // This plugin rewrites barrel imports to component subpaths at build time only.
+        designSystemBarrelImportsPlugin(
+          path.resolve(
+            repoRoot,
+            'packages/design-system-react-native/src/components/index.ts',
+          ),
+        ),
         svgr({
           include: '**/*.svg',
         }),

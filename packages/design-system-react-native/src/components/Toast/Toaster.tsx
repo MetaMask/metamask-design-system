@@ -13,13 +13,13 @@ import { Dimensions } from 'react-native';
 import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 import Animated, {
   cancelAnimation,
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 
 // Internal dependencies.
 import { Toast } from './Toast';
@@ -72,8 +72,12 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const animatedStyle = useAnimatedStyle(() => ({
       transform: [{ translateY: translateYProgress.value - bottomOffset }],
     }));
-    const baseStyle: StyleProp<ViewStyle> = useMemo(
-      () => [tw.style('absolute left-4 right-4 bottom-0'), animatedStyle],
+    const baseStyle = useMemo(
+      () =>
+        [
+          tw.style('absolute left-4 right-4 bottom-0'),
+          animatedStyle,
+        ] as StyleProp<ViewStyle>,
       [tw, animatedStyle],
     );
     const innerRef = useRef<ToasterRef | null>(null);
@@ -109,7 +113,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         screenHeight,
         { duration: TOAST_ANIMATION_DURATION },
         () => {
-          runOnJS(resetState)();
+          scheduleOnRN(resetState);
         },
       );
     };
@@ -160,10 +164,8 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
           () => {
             translateYProgress.value = withDelay(
               TOAST_VISIBILITY_DURATION,
-              withTiming(
-                height,
-                { duration: TOAST_ANIMATION_DURATION },
-                runOnJS(resetState),
+              withTiming(height, { duration: TOAST_ANIMATION_DURATION }, () =>
+                scheduleOnRN(resetState),
               ),
             );
           },

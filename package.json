@@ -1,6 +1,6 @@
 {
   "name": "@metamask/metamask-design-system",
-  "version": "51.0.0",
+  "version": "52.0.0",
   "private": true,
   "description": "The MetaMask Design System monorepo",
   "repository": {
@@ -46,12 +46,16 @@
     "setup": "yarn install && yarn build",
     "storybook": "yarn workspace @metamask/storybook-react storybook",
     "storybook:android": "yarn workspace @metamask/storybook-react-native android",
+    "storybook:android:build": "yarn workspace @metamask/storybook-react-native android:build",
     "storybook:ios": "yarn workspace @metamask/storybook-react-native ios",
+    "storybook:ios:build": "yarn workspace @metamask/storybook-react-native ios:build",
     "test": "yarn test:scripts --silent --collectCoverage=false --reporters=jest-silent-reporter && yarn test:packages",
     "test:clean": "yarn workspaces foreach --all --parallel --verbose run test:clean && yarn test",
     "test:packages": "yarn test:verbose --silent --collectCoverage=false --reporters=jest-silent-reporter",
     "test:scripts": "NODE_OPTIONS=--experimental-vm-modules yarn jest --config ./jest.config.scripts.js --silent",
-    "test:storybook": "yarn workspace @metamask/storybook-react test-storybook",
+    "test:storybook": "yarn test:storybook:react && yarn test:storybook:react-native",
+    "test:storybook:react": "yarn workspace @metamask/storybook-react test-storybook",
+    "test:storybook:react-native": "yarn workspace @metamask/storybook-react-native test-storybook",
     "test:verbose": "yarn workspaces foreach --all --parallel --verbose run test:verbose",
     "update-readme-content": "tsx scripts/update-readme-content.ts",
     "workspaces:list-versions": "./scripts/list-workspace-versions.sh"
@@ -76,7 +80,8 @@
     "elliptic@6.5.4": "^6.5.7",
     "fast-xml-parser@^4.3.4": "^4.4.1",
     "send": "^0.19.0",
-    "ws@7.4.6": "^7.5.10"
+    "ws@7.4.6": "^7.5.10",
+    "react-native-worklets@npm:0.8.3": "patch:react-native-worklets@npm%3A0.8.3#~/.yarn/patches/react-native-worklets-npm-0.8.3-89f34099cb.patch"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
