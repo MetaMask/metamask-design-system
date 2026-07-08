@@ -57,11 +57,17 @@ export const FilterButton = ({
     onPress?.(event);
   };
 
-  const buttonVariant = !effectiveIsSelected
-    ? ButtonVariant.Tertiary
-    : effectiveVariant === FilterButtonVariant.Primary
-      ? ButtonVariant.Primary
-      : ButtonVariant.Secondary;
+  const selectedButtonVariantByFilterVariant: Record<
+    FilterButtonVariant,
+    ButtonVariant
+  > = {
+    [FilterButtonVariant.Primary]: ButtonVariant.Primary,
+    [FilterButtonVariant.Secondary]: ButtonVariant.Secondary,
+  };
+
+  const buttonVariant = effectiveIsSelected
+    ? selectedButtonVariantByFilterVariant[effectiveVariant]
+    : ButtonVariant.Tertiary;
 
   return (
     <Button
