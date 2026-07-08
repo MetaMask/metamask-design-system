@@ -101,12 +101,19 @@ See [`.cursor/rules/figma-integration.md`](../.cursor/rules/figma-integration.md
 
 ## Continuous Integration
 
-Figma Code Connect is validated and published automatically via GitHub Actions:
+Figma Code Connect is validated and published automatically via GitHub Actions when Code Connect files change:
 
 | Event              | Workflow behavior                                                                              |
 | ------------------ | ---------------------------------------------------------------------------------------------- |
 | **Pull request**   | Runs `yarn figma:connect:publish:dry-run` to validate Code Connect files against the Figma API |
 | **Push to `main`** | Runs `yarn figma:connect:publish` to publish Code Connect mappings to Figma Dev Mode           |
+
+The workflow only runs when files matching these paths change:
+
+- `packages/design-system-react/**/*.figma.tsx`
+- `packages/design-system-react-native/**/*.figma.tsx`
+- `packages/design-system-react/figma.config.json`
+- `packages/design-system-react-native/figma.config.json`
 
 ### Required repository secret
 
