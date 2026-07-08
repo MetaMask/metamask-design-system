@@ -1,4 +1,5 @@
 import {
+  ButtonVariant,
   FilterButtonSize,
   FilterButtonVariant,
   FilterButtonGroupContext,
@@ -7,9 +8,7 @@ import {
 import React, { useContext } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import { ButtonPrimary } from '../Button/variants/ButtonPrimary';
-import { ButtonSecondary } from '../Button/variants/ButtonSecondary';
-import { ButtonTertiary } from '../Button/variants/ButtonTertiary';
+import { Button } from '../Button';
 import { IconColor } from '../Icon';
 import { TextColor } from '../Text';
 
@@ -58,63 +57,56 @@ export const FilterButton = ({
     onPress?.(event);
   };
 
-  const sharedProps = {
-    ...buttonBaseRest,
-    size: effectiveSize,
-    isFullWidth: effectiveIsFullWidth,
-    isLoading,
-    children,
-    onPress: handlePress,
-    style,
-    twClassName,
-  };
-
-  if (!effectiveIsSelected) {
-    return (
-      <ButtonTertiary
-        {...sharedProps}
-        textProps={{
-          ...textProps,
-          twClassName: mergeTwClassName(
-            TextColor.TextAlternative,
-            textProps?.twClassName,
-          ),
-        }}
-        startIconProps={{
-          ...startIconProps,
-          twClassName: mergeTwClassName(
-            IconColor.IconAlternative,
-            startIconProps?.twClassName,
-          ),
-        }}
-        endIconProps={{
-          ...endIconProps,
-          twClassName: mergeTwClassName(
-            IconColor.IconAlternative,
-            endIconProps?.twClassName,
-          ),
-        }}
-      />
-    );
-  }
-
-  if (effectiveVariant === FilterButtonVariant.Primary) {
-    return (
-      <ButtonPrimary
-        {...sharedProps}
-        textProps={textProps}
-        startIconProps={startIconProps}
-        endIconProps={endIconProps}
-      />
-    );
-  }
+  const buttonVariant = !effectiveIsSelected
+    ? ButtonVariant.Tertiary
+    : effectiveVariant === FilterButtonVariant.Primary
+      ? ButtonVariant.Primary
+      : ButtonVariant.Secondary;
 
   return (
-    <ButtonSecondary
-      {...sharedProps}
-      textProps={textProps}
-      startIconProps={startIconProps}
-      endIconProps={endIconProps}
+    <Button
+      {...buttonBaseRest}
+      variant={buttonVariant}
+      size={effectiveSize}
+      isFullWidth={effectiveIsFullWidth}
+      isLoading={isLoading}
+      children={children}
+      onPress={handlePress}
+      style={style}
+      twClassName={twClassName}
+      textProps={
+        effectiveIsSelected
+          ? textProps
+          : {
+              ...textProps,
+              twClassName: mergeTwClassName(
+                TextColor.TextAlternative,
+                textProps?.twClassName,
+              ),
+            }
+      }
+      startIconProps={
+        effectiveIsSelected
+          ? startIconProps
+          : {
+              ...startIconProps,
+              twClassName: mergeTwClassName(
+                IconColor.IconAlternative,
+                startIconProps?.twClassName,
+              ),
+            }
+      }
+      endIconProps={
+        effectiveIsSelected
+          ? endIconProps
+          : {
+              ...endIconProps,
+              twClassName: mergeTwClassName(
+                IconColor.IconAlternative,
+                endIconProps?.twClassName,
+              ),
+            }
+      }
     />
   );
 };
