@@ -29,9 +29,10 @@ jest.mock('react-native-gesture-handler', () => {
     const gesture: Record<string, unknown> = {};
     const chain = () => gesture;
     gesture.enabled = chain;
-    gesture.onBegin = chain;
+    gesture.onStart = chain;
     gesture.onUpdate = chain;
     gesture.onEnd = chain;
+    gesture.onFinalize = chain;
     return gesture;
   };
 

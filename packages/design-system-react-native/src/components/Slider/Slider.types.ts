@@ -69,7 +69,7 @@ export type UseSliderGestureParams = {
   onDragEnd?: (value: number) => void;
 
   /**
-   * Called when the user begins a pan (`onBegin`) and again when the pan ends.
+   * Called when a pan activates (`onStart`) and again when the pan ends.
    * Not fired on tap or range-label press. Use for haptic feedback.
    */
   onGrip?: () => void;

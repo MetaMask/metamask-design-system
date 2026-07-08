@@ -247,7 +247,7 @@ export function useSliderGesture(
 
     const panGesture = Gesture.Pan()
       .enabled(!isDisabled)
-      .onBegin(() => {
+      .onStart(() => {
         'worklet';
 
         thumbScale.value = withTiming(THUMB_GRIP_SCALE, {
@@ -270,14 +270,18 @@ export function useSliderGesture(
       .onEnd(() => {
         'worklet';
 
-        thumbScale.value = withTiming(1, {
-          duration: THUMB_GRIP_ANIMATION_DURATION,
-          easing: gripEasing,
-        });
         // Thresholds already checked during onUpdate; grip fires again on release.
         commitAtPosition(translateX.value, {
           checkThreshold: false,
           triggerGrip: true,
+        });
+      })
+      .onFinalize(() => {
+        'worklet';
+
+        thumbScale.value = withTiming(1, {
+          duration: THUMB_GRIP_ANIMATION_DURATION,
+          easing: gripEasing,
         });
         runOnJS(setDragging)(false);
       });
