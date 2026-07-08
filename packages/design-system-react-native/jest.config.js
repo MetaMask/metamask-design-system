@@ -57,6 +57,15 @@ module.exports = merge(baseConfig, {
       lines: 67,
       statements: 67,
     },
+    // Pan/tap gesture worklet callbacks run on the UI thread and are not invoked
+    // by Reanimated's Jest mock. Label-press and layout paths are covered in tests;
+    // drag behavior is verified via Storybook on device.
+    './src/components/Slider/useSliderGesture.ts': {
+      branches: 68,
+      functions: 47,
+      lines: 60,
+      statements: 60,
+    },
   },
 
   // Add coverage ignore patterns
@@ -67,6 +76,7 @@ module.exports = merge(baseConfig, {
     '\\.constants\\.ts$', // ignore all .constants.ts files
     '\\.dev\\.ts$', // ignore all .dev.ts files
     '\\.figma\\.tsx', // Figma code connect files
+    '\\.types\\.ts$', // type-only modules across the package; must not export runtime values
     'Icon.assets.ts', // Exclude Icon.assets file
     'Blockies.utilities.ts', // Exclude Blockies.utilities file
   ],

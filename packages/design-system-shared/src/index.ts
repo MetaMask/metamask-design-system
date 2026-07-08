@@ -248,6 +248,9 @@ export {
 // Switch types (ADR-0004)
 export { type SwitchPropsShared } from './types/Switch';
 
+// Slider types (ADR-0004)
+export { type SliderPropsShared } from './types/Slider';
+
 // FilterButtonGroup context (ADR-0003 + ADR-0004)
 export {
   FilterButtonGroupContext,
