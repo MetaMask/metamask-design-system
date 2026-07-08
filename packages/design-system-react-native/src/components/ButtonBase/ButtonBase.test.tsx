@@ -541,6 +541,7 @@ describe('ButtonBase', () => {
       expect(getByTestId('start-icon')).toHaveStyle(
         tw.style(IconColor.IconAlternative),
       );
+      expect(getByTestId('start-icon')).toHaveStyle(tw.style('shrink-0'));
     });
   });
 

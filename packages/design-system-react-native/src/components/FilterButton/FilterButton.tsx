@@ -14,6 +14,14 @@ import { TextColor } from '../Text';
 
 import type { FilterButtonProps } from './FilterButton.types';
 
+const SELECTED_BUTTON_VARIANT_BY_FILTER_VARIANT: Record<
+  FilterButtonVariant,
+  ButtonVariant
+> = {
+  [FilterButtonVariant.Primary]: ButtonVariant.Primary,
+  [FilterButtonVariant.Secondary]: ButtonVariant.Secondary,
+};
+
 export const FilterButton = ({
   children,
   textProps,
@@ -57,16 +65,8 @@ export const FilterButton = ({
     onPress?.(event);
   };
 
-  const selectedButtonVariantByFilterVariant: Record<
-    FilterButtonVariant,
-    ButtonVariant
-  > = {
-    [FilterButtonVariant.Primary]: ButtonVariant.Primary,
-    [FilterButtonVariant.Secondary]: ButtonVariant.Secondary,
-  };
-
   const buttonVariant = effectiveIsSelected
-    ? selectedButtonVariantByFilterVariant[effectiveVariant]
+    ? SELECTED_BUTTON_VARIANT_BY_FILTER_VARIANT[effectiveVariant]
     : ButtonVariant.Tertiary;
 
   return (
