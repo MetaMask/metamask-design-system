@@ -9,6 +9,12 @@ import React from 'react';
 
 import { Slider } from './Slider';
 import {
+  DOT_EDGE_INSET_PERCENT,
+  DOT_EDGE_MAX_PERCENT,
+  SLIDER_BOTTOM_PADDING,
+  SLIDER_TRACK_INSET,
+} from './Slider.constants';
+import {
   clampGesturePosition,
   clampTrackPercent,
   clampValueToRange,
@@ -169,9 +175,9 @@ describe('Slider.utilities', () => {
 
   describe('layout positioning', () => {
     it('positions dots at track-percent offsets', () => {
-      expect(getDotLeftPercent(0)).toBe('2%');
+      expect(getDotLeftPercent(0)).toBe(DOT_EDGE_INSET_PERCENT);
       expect(getDotLeftPercent(50)).toBe('50%');
-      expect(getDotLeftPercent(100)).toBe('98%');
+      expect(getDotLeftPercent(100)).toBe(DOT_EDGE_MAX_PERCENT);
     });
   });
 });
@@ -474,7 +480,21 @@ describe('Slider', () => {
         <Slider {...defaultProps} twClassName="mt-4" testID="slider-tw" />,
       );
 
-      expect(getByTestId('slider-tw')).toHaveStyle(tw.style('py-2 mt-4'));
+      expect(getByTestId('slider-tw')).toHaveStyle({
+        ...tw.style('py-2 mt-4'),
+        paddingBottom: SLIDER_BOTTOM_PADDING,
+        marginHorizontal: SLIDER_TRACK_INSET,
+      });
+    });
+  });
+
+  describe('when trackInset is provided', () => {
+    it('applies custom horizontal inset on root container', () => {
+      const { getByTestId } = render(
+        <Slider {...defaultProps} trackInset={0} testID="slider-inset" />,
+      );
+
+      expect(getByTestId('slider-inset')).toHaveStyle({ marginHorizontal: 0 });
     });
   });
 
@@ -484,9 +504,11 @@ describe('Slider', () => {
         <Slider {...defaultProps} isDisabled testID="slider-opacity" />,
       );
 
-      expect(getByTestId('slider-opacity')).toHaveStyle(
-        tw.style('py-2 opacity-40'),
-      );
+      expect(getByTestId('slider-opacity')).toHaveStyle({
+        ...tw.style('py-2 opacity-40'),
+        paddingBottom: SLIDER_BOTTOM_PADDING,
+        marginHorizontal: SLIDER_TRACK_INSET,
+      });
     });
   });
 });

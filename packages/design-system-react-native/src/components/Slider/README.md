@@ -204,7 +204,7 @@ const [value, setValue] = useState(50);
 
 ### `onGrip`
 
-Optional callback fired when the user begins or ends dragging the thumb. Use for haptic feedback. Not fired on track tap or range-label press.
+Optional callback that fires once when pan begins and once when pan ends. Use for haptic feedback (e.g. `ImpactMoment.SliderGrip`). Not fired on track tap or range-label press.
 
 | TYPE         | REQUIRED | DEFAULT     |
 | ------------ | -------- | ----------- |
@@ -414,6 +414,8 @@ const [value, setValue] = useState(50);
 
 ### Layout and accessibility (`Box` / `View`)
 
+The root container applies a default horizontal inset (`trackInset`, 16px) so the thumb can overhang the track at min/max without clipping. Override with `trackInset={0}` when the parent already provides edge padding, or pass `style={{ marginHorizontal: 0 }}` to reset the default margin.
+
 The root `Box` sets `accessibilityRole="adjustable"` with increment/decrement actions. Use top-level `View` props for layout and accessibility overrides (`accessibilityLabel`, `accessibilityHint`, `pointerEvents`, etc.). Keys reserved by Slider (`style`, `twClassName`, `testID`, and keys owned by the Slider API surface) are not passed through from this intersection.
 
 Accessibility increment/decrement uses linear `step` on the domain value. For non-linear scales, consumers may need custom handling outside the slider for screen-reader stepping.
@@ -430,6 +432,23 @@ const [value, setValue] = useState(50);
   accessibilityLabel="Position size"
   accessibilityHint="Adjust position size as a percentage of maximum"
 />;
+```
+
+### `trackInset`
+
+Optional horizontal inset on the root container so the thumb can overhang the track at min/max without clipping. Defaults to `16` (matches thumb half-width). Set to `0` when the parent already provides edge padding.
+
+| TYPE     | REQUIRED | DEFAULT |
+| -------- | -------- | ------- |
+| `number` | No       | `16`    |
+
+```tsx
+import { Slider } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+const [value, setValue] = useState(50);
+
+<Slider value={value} onValueChange={setValue} trackInset={0} />;
 ```
 
 ### `twClassName`

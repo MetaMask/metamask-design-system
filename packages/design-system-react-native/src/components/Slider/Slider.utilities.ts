@@ -11,6 +11,11 @@
  * JS-thread callers use the non-worklet wrappers (`getTrackPercentFromValue`, etc.).
  */
 
+import {
+  DOT_EDGE_INSET_PERCENT,
+  DOT_EDGE_MAX_PERCENT,
+} from './Slider.constants';
+
 // --- Track-percent primitives (worklet) ---
 
 export function clampTrackPercent(trackPercent: number): number {
@@ -230,10 +235,10 @@ export function defaultFormatStepLabel(step: number): string {
  */
 export function getDotLeftPercent(step: number): string {
   if (step === 0) {
-    return '2%';
+    return DOT_EDGE_INSET_PERCENT;
   }
   if (step === 100) {
-    return '98%';
+    return DOT_EDGE_MAX_PERCENT;
   }
 
   return `${step}%`;

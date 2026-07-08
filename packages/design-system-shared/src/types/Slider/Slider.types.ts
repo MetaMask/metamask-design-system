@@ -68,7 +68,8 @@ export type SliderPropsShared = {
   showRangeDots?: boolean;
 
   /**
-   * Fired when the user begins or ends dragging the thumb.
+   * Fires once when pan begins and once when pan ends; not fired on tap or
+   * range-label press. Use for haptic feedback (e.g. ImpactMoment.SliderGrip).
    */
   onGrip?: () => void;
 

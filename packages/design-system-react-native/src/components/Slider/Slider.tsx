@@ -17,6 +17,8 @@ import {
   DEFAULT_RANGE_LABEL_STEPS,
   DEFAULT_TICK_THRESHOLDS,
   RANGE_LABEL_TOP,
+  SLIDER_BOTTOM_PADDING,
+  SLIDER_TRACK_INSET,
   THUMB_BOTTOM_OFFSET,
   THUMB_LEFT_OFFSET,
   THUMB_SIZE,
@@ -50,6 +52,7 @@ export const Slider = ({
   mapTrackPercentToValue,
   formatStepLabel,
   stepToValue: stepToValueProp,
+  trackInset = SLIDER_TRACK_INSET,
   twClassName,
   style,
   ...props
@@ -134,9 +137,13 @@ export const Slider = ({
       onLayout={handleLayout}
       style={[
         tw.style(
-          'relative mx-4 self-stretch pb-[30px]',
+          'relative self-stretch',
           isDisabled ? 'py-2 opacity-40' : 'py-2',
         ),
+        {
+          marginHorizontal: trackInset,
+          paddingBottom: SLIDER_BOTTOM_PADDING,
+        },
         style,
       ]}
       twClassName={twClassName}

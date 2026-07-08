@@ -1,5 +1,7 @@
 import type { SliderPropsShared } from '@metamask/design-system-shared';
+import type { Gesture } from 'react-native-gesture-handler';
 import type { ViewProps } from 'react-native';
+import type { useAnimatedStyle } from 'react-native-reanimated';
 
 /**
  * React Native Slider props.
@@ -10,6 +12,15 @@ import type { ViewProps } from 'react-native';
  */
 export type SliderProps = SliderPropsShared &
   ViewProps & {
+    /**
+     * Horizontal inset on the root container so the thumb can overhang the track
+     * at min/max without clipping. Defaults to {@link SLIDER_TRACK_INSET} (16);
+     * override when the parent already provides edge padding.
+     *
+     * @default 16
+     */
+    trackInset?: number;
+
     /**
      * Optional twrnc classes merged into the root container after component defaults.
      * Use for layout spacing the Box API does not cover (e.g. `mt-4`).
@@ -69,8 +80,8 @@ export type UseSliderGestureParams = {
   onDragEnd?: (value: number) => void;
 
   /**
-   * Called when a pan activates (`onStart`) and again when the pan ends.
-   * Not fired on tap or range-label press. Use for haptic feedback.
+   * Fires once when pan begins and once when pan ends; not fired on tap or
+   * range-label press. Use for haptic feedback (e.g. ImpactMoment.SliderGrip).
    */
   onGrip?: () => void;
 
@@ -122,19 +133,13 @@ export type UseSliderGestureResult = {
   handleLayout: (event: { nativeEvent: { layout: { width: number } } }) => void;
 
   /** Animated width for the filled portion of the track (follows thumb). */
-  progressStyle: ReturnType<
-    typeof import('react-native-reanimated').useAnimatedStyle
-  >;
+  progressStyle: ReturnType<typeof useAnimatedStyle>;
 
   /** Animated `translateX` for the thumb relative to the track start. */
-  thumbStyle: ReturnType<
-    typeof import('react-native-reanimated').useAnimatedStyle
-  >;
+  thumbStyle: ReturnType<typeof useAnimatedStyle>;
 
   /** Combined pan + tap gesture for the track/thumb hit area. */
-  gesture: ReturnType<
-    typeof import('react-native-gesture-handler').Gesture.Simultaneous
-  >;
+  gesture: ReturnType<typeof Gesture.Simultaneous>;
 
   /**
    * Sets value from a tapped range label: `stepToValue` → callbacks → thumb sync.
