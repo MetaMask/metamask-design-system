@@ -2,11 +2,14 @@ import {
   FilterButtonSize,
   FilterButtonVariant,
   FilterButtonGroupContext,
+  mergeTwClassName,
 } from '@metamask/design-system-shared';
 import React, { useContext } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import { ButtonBase } from '../ButtonBase';
+import { ButtonPrimary } from '../Button/variants/ButtonPrimary';
+import { ButtonSecondary } from '../Button/variants/ButtonSecondary';
+import { ButtonTertiary } from '../Button/variants/ButtonTertiary';
 import { IconColor } from '../Icon';
 import { TextColor } from '../Text';
 
@@ -43,22 +46,6 @@ export const FilterButton = ({
     ? filterButtonGroup.value === value
     : isSelected;
 
-  const getTextAndIconClassName = () => {
-    if (
-      effectiveVariant === FilterButtonVariant.Primary &&
-      effectiveIsSelected
-    ) {
-      return 'text-primary-inverse';
-    }
-    if (
-      effectiveVariant === FilterButtonVariant.Secondary &&
-      effectiveIsSelected
-    ) {
-      return 'text-default';
-    }
-    return '';
-  };
-
   const handlePress = (event: GestureResponderEvent) => {
     if (
       usesGroupSelection &&
@@ -71,56 +58,63 @@ export const FilterButton = ({
     onPress?.(event);
   };
 
+  const sharedProps = {
+    ...buttonBaseRest,
+    size: effectiveSize,
+    isFullWidth: effectiveIsFullWidth,
+    isLoading,
+    children,
+    onPress: handlePress,
+    style,
+    twClassName,
+  };
+
+  if (!effectiveIsSelected) {
+    return (
+      <ButtonTertiary
+        {...sharedProps}
+        textProps={{
+          ...textProps,
+          twClassName: mergeTwClassName(
+            TextColor.TextAlternative,
+            textProps?.twClassName,
+          ),
+        }}
+        startIconProps={{
+          ...startIconProps,
+          twClassName: mergeTwClassName(
+            IconColor.IconAlternative,
+            startIconProps?.twClassName,
+          ),
+        }}
+        endIconProps={{
+          ...endIconProps,
+          twClassName: mergeTwClassName(
+            IconColor.IconAlternative,
+            endIconProps?.twClassName,
+          ),
+        }}
+      />
+    );
+  }
+
+  if (effectiveVariant === FilterButtonVariant.Primary) {
+    return (
+      <ButtonPrimary
+        {...sharedProps}
+        textProps={textProps}
+        startIconProps={startIconProps}
+        endIconProps={endIconProps}
+      />
+    );
+  }
+
   return (
-    <ButtonBase
-      {...buttonBaseRest}
-      size={effectiveSize}
-      isFullWidth={effectiveIsFullWidth}
-      isLoading={isLoading}
-      children={children}
-      onPress={handlePress}
-      textProps={{
-        ...(!effectiveIsSelected ? { color: TextColor.TextAlternative } : {}),
-        ...textProps,
-      }}
-      startIconProps={{
-        ...(!effectiveIsSelected ? { color: IconColor.IconAlternative } : {}),
-        ...startIconProps,
-      }}
-      endIconProps={{
-        ...(!effectiveIsSelected ? { color: IconColor.IconAlternative } : {}),
-        ...endIconProps,
-      }}
-      twClassName={(pressed) => {
-        if (
-          effectiveVariant === FilterButtonVariant.Primary &&
-          effectiveIsSelected
-        ) {
-          return `${pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default'} ${
-            typeof twClassName === 'function'
-              ? twClassName(pressed)
-              : twClassName
-          }`;
-        }
-
-        if (
-          effectiveVariant === FilterButtonVariant.Secondary &&
-          effectiveIsSelected
-        ) {
-          return `${pressed || isLoading ? 'bg-muted-pressed' : 'bg-muted'} ${
-            typeof twClassName === 'function'
-              ? twClassName(pressed)
-              : twClassName
-          }`;
-        }
-
-        return `${pressed || isLoading ? 'bg-pressed' : 'bg-transparent'} border-0 ${
-          typeof twClassName === 'function' ? twClassName(pressed) : twClassName
-        }`;
-      }}
-      textClassName={getTextAndIconClassName}
-      iconClassName={getTextAndIconClassName}
-      style={style}
+    <ButtonSecondary
+      {...sharedProps}
+      textProps={textProps}
+      startIconProps={startIconProps}
+      endIconProps={endIconProps}
     />
   );
 };
