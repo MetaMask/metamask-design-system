@@ -1,8 +1,8 @@
 diff --git a/plugin/index.js b/plugin/index.js
-index 6419dc44d51d8e46743c1f69b84bfc4771802dec..5ce424cd96ec3ea01d050c2cadeeb623a8e3d0d0 100644
+index 1eb7f402550526bf9d150d950f2f83fc920f2bb5..4cdc2a000ea30b3ab0eeedc163cf34a162ec10c1 100644
 --- a/plugin/index.js
 +++ b/plugin/index.js
-@@ -694,7 +694,7 @@ var require_workletStringCode = __commonJS({
+@@ -818,7 +818,7 @@ var require_workletStringCode = __commonJS({
        if (includeSourceMap) {
          inputMap.sourcesContent = [];
          for (const sourceFile of inputMap.sources) {

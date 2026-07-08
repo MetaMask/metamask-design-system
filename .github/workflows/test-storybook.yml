@@ -5,11 +5,18 @@ on:
 
 jobs:
   test-storybook:
-    name: Test Storybook (accessibility & stories)
+    name: Test Storybook (accessibility & stories) (${{ matrix.label }})
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [24.x]
+        include:
+          - label: React
+            command: yarn test:storybook:react
+            retry: 'false'
+          - label: React Native
+            command: yarn test:storybook:react-native
+            retry: 'true'
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
@@ -20,7 +27,16 @@ jobs:
       - name: Build packages
         run: yarn build
       - name: Run Storybook tests
-        run: yarn test:storybook
+        if: matrix.retry != 'true'
+        run: ${{ matrix.command }}
+      - name: Run Storybook tests
+        if: matrix.retry == 'true'
+        uses: MetaMask/action-retry-command@v1
+        with:
+          command: ${{ matrix.command }}
+          max-retries: 3
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
       - name: Require clean working directory
         shell: bash
         run: |
