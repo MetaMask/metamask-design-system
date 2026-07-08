@@ -6,6 +6,25 @@ import * as BannerBaseStories from './BannerBase.stories';
 
 BannerBase is a foundational banner container with optional title, description, action button, start accessory, and close affordance.
 
+```tsx
+import {
+  BannerBase,
+  Icon,
+  IconName,
+  IconSize,
+} from '@metamask/design-system-react';
+
+<BannerBase
+  title="Title is sentence case no period"
+  description="Description shouldn't repeat title. 1-3 lines."
+  actionButtonLabel="Action"
+  actionButtonOnClick={() => undefined}
+  onClose={() => undefined}
+  closeButtonProps={{ 'data-testid': 'banner-base-close-button' }}
+  startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
+/>;
+```
+
 <Canvas of={BannerBaseStories.Default} />
 
 ## Props
