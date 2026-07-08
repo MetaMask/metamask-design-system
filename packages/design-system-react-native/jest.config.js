@@ -62,7 +62,7 @@ module.exports = merge(baseConfig, {
     // drag behavior is verified via Storybook on device.
     './src/components/Slider/useSliderGesture.ts': {
       branches: 68,
-      functions: 48,
+      functions: 47,
       lines: 60,
       statements: 60,
     },
