@@ -48,10 +48,46 @@ jobs:
     secrets:
       CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
+  detect-figma-code-connect-changes:
+    name: Detect Figma Code Connect changes
+    needs: check-workflows
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.detect.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect Code Connect file changes
+        id: detect
+        shell: bash
+        run: |
+          PATTERN='^packages/design-system-react(-native)?/(.*/)?[^/]+\.figma\.tsx$|^packages/design-system-react(-native)?/figma\.config\.json$'
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git fetch origin "${{ github.base_ref }}"
+            CHANGED_FILES="$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")"
+          else
+            if [[ -z "${{ github.event.before }}" || "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            CHANGED_FILES="$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}")"
+          fi
+
+          if echo "$CHANGED_FILES" | grep -qE "$PATTERN"; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
   figma-code-connect:
     name: Figma Code Connect
-    needs: check-workflows
-    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    needs:
+      - check-workflows
+      - detect-figma-code-connect-changes
+    if: needs.detect-figma-code-connect-changes.outputs.changed == 'true'
     uses: ./.github/workflows/figma-code-connect.yml
     with:
       publish: ${{ github.event_name == 'push' }}
@@ -85,6 +121,7 @@ jobs:
 
   all-jobs-complete:
     name: All jobs complete
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     needs:
       - analyse-code
@@ -95,9 +132,33 @@ jobs:
     outputs:
       passed: ${{ steps.set-output.outputs.passed }}
     steps:
-      - name: Set passed output
+      - name: Check that all jobs have passed
         id: set-output
-        run: echo "passed=true" >> "$GITHUB_OUTPUT"
+        shell: bash
+        run: |
+          REQUIRED=(
+            "analyse-code:${{ needs.analyse-code.result }}"
+            "lint-build-test:${{ needs.lint-build-test.result }}"
+            "test-storybook:${{ needs.test-storybook.result }}"
+            "chromatic:${{ needs.chromatic.result }}"
+          )
+
+          for entry in "${REQUIRED[@]}"; do
+            name="${entry%%:*}"
+            result="${entry#*:}"
+            if [[ "$result" != "success" ]]; then
+              echo "$name finished with $result"
+              exit 1
+            fi
+          done
+
+          FIGMA_RESULT="${{ needs.figma-code-connect.result }}"
+          if [[ "$FIGMA_RESULT" != "success" && "$FIGMA_RESULT" != "skipped" ]]; then
+            echo "figma-code-connect finished with $FIGMA_RESULT"
+            exit 1
+          fi
+
+          echo "passed=true" >> "$GITHUB_OUTPUT"
 
   all-jobs-pass:
     name: All jobs pass
