@@ -1,8 +1,8 @@
 import { act, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { useSliderGesture } from './useSliderGesture';
 import type { UseSliderGestureParams } from './Slider.types';
+import { useSliderGesture } from './useSliderGesture';
 
 jest.mock('react-native-gesture-handler', () => {
   const createGestureMock = () => {
@@ -41,9 +41,9 @@ describe('useSliderGesture', () => {
   it('returns gesture handlers and animated styles', () => {
     const { result } = renderHook(() => useSliderGesture(createParams()));
 
-    expect(result.current.handleLayout).toEqual(expect.any(Function));
-    expect(result.current.handlePressStep).toEqual(expect.any(Function));
-    expect(result.current.gesture).toEqual(
+    expect(result.current.handleLayout).toStrictEqual(expect.any(Function));
+    expect(result.current.handlePressStep).toStrictEqual(expect.any(Function));
+    expect(result.current.gesture).toStrictEqual(
       expect.objectContaining({
         tap: expect.anything(),
         pan: expect.anything(),
