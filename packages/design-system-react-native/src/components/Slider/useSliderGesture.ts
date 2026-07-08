@@ -1,12 +1,18 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { Gesture } from 'react-native-gesture-handler';
 import {
+  Easing,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
 
-import { DEFAULT_TICK_THRESHOLDS } from './Slider.constants';
+import {
+  DEFAULT_TICK_THRESHOLDS,
+  THUMB_GRIP_ANIMATION_DURATION,
+  THUMB_GRIP_SCALE,
+} from './Slider.constants';
 import type {
   UseSliderGestureParams,
   UseSliderGestureResult,
@@ -65,6 +71,7 @@ export function useSliderGesture(
 
   const sliderWidth = useSharedValue(0);
   const translateX = useSharedValue(0);
+  const thumbScale = useSharedValue(1);
   const previousTrackPercentRef = useRef(
     getTrackPercentFromValue(
       value,
@@ -175,7 +182,7 @@ export function useSliderGesture(
   }));
 
   const thumbStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: translateX.value }],
+    transform: [{ translateX: translateX.value }, { scale: thumbScale.value }],
   }));
 
   // --- Pan + tap gestures ---
@@ -184,6 +191,8 @@ export function useSliderGesture(
     // Gesture callbacks need explicit 'worklet' directives because this package
     // ships pre-built dist compiled by ts-bridge. The consumer's Reanimated Babel
     // plugin does not auto-detect the compiled namespaced Gesture form.
+
+    const gripEasing = Easing.bezier(0.3, 0.8, 0.3, 1);
 
     const positionToDomainValue = (position: number) => {
       'worklet';
@@ -241,6 +250,10 @@ export function useSliderGesture(
       .onBegin(() => {
         'worklet';
 
+        thumbScale.value = withTiming(THUMB_GRIP_SCALE, {
+          duration: THUMB_GRIP_ANIMATION_DURATION,
+          easing: gripEasing,
+        });
         runOnJS(setDragging)(true);
         runOnJS(triggerGrip)();
       })
@@ -257,6 +270,10 @@ export function useSliderGesture(
       .onEnd(() => {
         'worklet';
 
+        thumbScale.value = withTiming(1, {
+          duration: THUMB_GRIP_ANIMATION_DURATION,
+          easing: gripEasing,
+        });
         // Thresholds already checked during onUpdate; grip fires again on release.
         commitAtPosition(translateX.value, {
           checkThreshold: false,
@@ -290,6 +307,7 @@ export function useSliderGesture(
     setDragging,
     sliderWidth,
     step,
+    thumbScale,
     translateX,
     triggerGrip,
   ]);
