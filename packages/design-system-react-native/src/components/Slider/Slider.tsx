@@ -142,7 +142,7 @@ export const Slider = ({
         ),
         {
           marginHorizontal: trackInset,
-          paddingBottom: SLIDER_BOTTOM_PADDING,
+          ...(showRangeLabels && { paddingBottom: SLIDER_BOTTOM_PADDING }),
         },
         style,
       ]}

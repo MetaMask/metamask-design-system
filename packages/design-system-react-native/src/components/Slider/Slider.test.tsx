@@ -228,6 +228,40 @@ describe('Slider', () => {
     expect(screen.queryByText('25%')).toBeNull();
   });
 
+  it('does not reserve bottom padding for range labels when showRangeLabels is false', () => {
+    const { getByTestId } = render(
+      <Slider
+        value={50}
+        onValueChange={jest.fn()}
+        showRangeLabels={false}
+        testID={ROOT_TEST_ID}
+      />,
+    );
+
+    expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({
+      ...tw.style('py-2'),
+      marginHorizontal: SLIDER_TRACK_INSET,
+    });
+    expect(getByTestId(ROOT_TEST_ID)).not.toHaveStyle({
+      paddingBottom: SLIDER_BOTTOM_PADDING,
+    });
+  });
+
+  it('reserves bottom padding for range labels when showRangeLabels is true', () => {
+    const { getByTestId } = render(
+      <Slider
+        value={50}
+        onValueChange={jest.fn()}
+        showRangeLabels
+        testID={ROOT_TEST_ID}
+      />,
+    );
+
+    expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({
+      paddingBottom: SLIDER_BOTTOM_PADDING,
+    });
+  });
+
   it('calls onValueChange when a range label is pressed', () => {
     const onValueChange = jest.fn();
     render(<Slider {...defaultProps} onValueChange={onValueChange} />);
