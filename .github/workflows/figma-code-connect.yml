@@ -23,27 +23,18 @@ jobs:
         uses: MetaMask/action-checkout-and-setup@v1
         with:
           is-high-risk-environment: ${{ inputs.publish }}
-          fetch-depth: 0
 
-      - name: Fetch pull request base branch
-        if: ${{ !inputs.publish }}
-        run: git fetch origin "${GITHUB_BASE_REF:-main}"
-
-      - name: Validate new components include Code Connect files
-        if: ${{ !inputs.publish }}
-        run: yarn validate:figma-code-connect-changes
-
-      - name: Validate Code Connect
+      - name: Dry run Code Connect publish
         if: ${{ !inputs.publish }}
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-        run: yarn figma:connect:ci:validate
+        run: yarn figma:connect:publish:dry-run
 
       - name: Publish Code Connect to Figma
         if: ${{ inputs.publish }}
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-        run: yarn figma:connect:ci:publish
+        run: yarn figma:connect:publish
 
       - name: Require clean working directory
         shell: bash

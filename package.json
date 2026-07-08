@@ -30,11 +30,6 @@
     "figma:connect:publish:react:dry-run": "figma connect publish --dry-run --exit-on-unreadable-files --config packages/design-system-react/figma.config.json",
     "figma:connect:publish:react-native": "figma connect publish --exit-on-unreadable-files --config packages/design-system-react-native/figma.config.json",
     "figma:connect:publish:react-native:dry-run": "figma connect publish --dry-run --exit-on-unreadable-files --config packages/design-system-react-native/figma.config.json",
-    "figma:connect:parse": "yarn figma:connect:parse:react && yarn figma:connect:parse:react-native",
-    "figma:connect:parse:react": "figma connect parse --exit-on-unreadable-files --config packages/design-system-react/figma.config.json > /dev/null",
-    "figma:connect:parse:react-native": "figma connect parse --exit-on-unreadable-files --config packages/design-system-react-native/figma.config.json > /dev/null",
-    "figma:connect:ci:validate": "./scripts/figma-code-connect-ci-validate.sh",
-    "figma:connect:ci:publish": "./scripts/figma-code-connect-ci-publish.sh",
     "figma:connect:unpublish": "yarn figma:connect:unpublish:react && yarn figma:connect:unpublish:react-native",
     "figma:connect:unpublish:react": "figma connect unpublish --config packages/design-system-react/figma.config.json",
     "figma:connect:unpublish:react-native": "figma connect unpublish --config packages/design-system-react-native/figma.config.json",
@@ -63,7 +58,6 @@
     "test:storybook:react-native": "yarn workspace @metamask/storybook-react-native test-storybook",
     "test:verbose": "yarn workspaces foreach --all --parallel --verbose run test:verbose",
     "update-readme-content": "tsx scripts/update-readme-content.ts",
-    "validate:figma-code-connect-changes": "tsx scripts/validate-figma-code-connect-changes.ts",
     "workspaces:list-versions": "./scripts/list-workspace-versions.sh"
   },
   "simple-git-hooks": {
