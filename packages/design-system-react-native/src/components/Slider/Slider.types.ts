@@ -1,6 +1,6 @@
 import type { SliderPropsShared } from '@metamask/design-system-shared';
-import type { Gesture } from 'react-native-gesture-handler';
 import type { ViewProps } from 'react-native';
+import type { Gesture } from 'react-native-gesture-handler';
 import type { useAnimatedStyle } from 'react-native-reanimated';
 
 /**
