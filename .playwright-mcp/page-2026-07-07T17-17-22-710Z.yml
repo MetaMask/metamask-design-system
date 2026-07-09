@@ -1,0 +1,69 @@
+- generic [ref=f10e3]:
+  - generic [ref=f10e4]:
+    - banner "Storybook" [ref=f10e6]:
+      - heading "Storybook" [level=1] [ref=f10e7]
+      - img
+      - generic [ref=f10e11]:
+        - generic [ref=f10e13]:
+          - link "Skip to content" [ref=f10e14] [cursor=pointer]:
+            - /url: "#storybook-preview-wrapper"
+          - link "Storybook" [ref=f10e16] [cursor=pointer]:
+            - /url: ./
+            - img "Storybook" [ref=f10e17]
+          - switch "Settings" [ref=f10e22] [cursor=pointer]:
+            - img [ref=f10e23]
+        - generic [ref=f10e26]: Search for components
+        - search [ref=f10e27]:
+          - combobox "Search for components" [ref=f10e28]:
+            - generic:
+              - img
+            - searchbox "Search for components" [ref=f10e29]
+            - code:
+              - generic: ⌘
+              - text: K
+          - button "Create a new story" [ref=f10e30] [cursor=pointer]:
+            - img [ref=f10e31]
+        - navigation "Stories" [ref=f10e34]:
+          - heading "Stories" [level=2] [ref=f10e35]
+    - separator "Sidebar resize handle" [ref=f10e55]
+  - generic [ref=f10e57]:
+    - region "Toolbar" [ref=f10e58]:
+      - heading "Toolbar" [level=2] [ref=f10e59]
+      - toolbar [ref=f10e60]:
+        - button "Reload story" [ref=f10e62] [cursor=pointer]:
+          - img [ref=f10e63]
+        - generic [ref=f10e65]:
+          - button "Open in isolation mode" [ref=f10e66] [cursor=pointer]:
+            - img [ref=f10e67]
+          - switch "Change zoom level" [ref=f10e72] [cursor=pointer]: 100%
+          - button "Enter full screen" [ref=f10e73] [cursor=pointer]:
+            - img [ref=f10e74]
+    - main "Main preview area" [ref=f10e76]:
+      - heading "Main preview area" [level=2] [ref=f10e77]
+      - generic [ref=f10e78]:
+        - progressbar "Content is loading..." [ref=f10e80]
+        - generic [ref=f10e81]:
+          - link "Skip to sidebar" [ref=f10e82] [cursor=pointer]:
+            - /url: "#components-text--default"
+          - iframe [ref=f10e86]:
+            
+  - generic [ref=f10e87]:
+    - separator "Addon panel resize handle" [ref=f10e88]
+    - region "Addon panel" [ref=f10e90]:
+      - heading "Addon panel" [level=2] [ref=f10e91]
+      - generic [ref=f10e92]:
+        - generic [ref=f10e94]:
+          - button "Move addon panel to right" [ref=f10e95] [cursor=pointer]:
+            - img [ref=f10e96]
+          - button "Hide addon panel" [ref=f10e99] [cursor=pointer]:
+            - img [ref=f10e100]
+        - generic [ref=f10e103]:
+          - generic [ref=f10e104]:
+            - generic [ref=f10e105]: Storybook add-ons
+            - generic [ref=f10e106]: Integrate your tools with Storybook to connect workflows and unlock advanced features.
+          - link "Explore integrations catalog" [ref=f10e108] [cursor=pointer]:
+            - /url: https://storybook.js.org/addons?ref=ui
+            - generic [ref=f10e109]:
+              - img [ref=f10e110]
+              - text: Explore integrations catalog
+              - img [ref=f10e113]

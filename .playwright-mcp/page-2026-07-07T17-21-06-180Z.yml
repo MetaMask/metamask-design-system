@@ -1,0 +1,572 @@
+- generic [active] [ref=f8e1]:
+  - generic [ref=f8e115]:
+    - log
+    - log
+  - generic [ref=f8e3]:
+    - generic [ref=f8e4]:
+      - banner "Storybook" [ref=f8e6]:
+        - heading "Storybook" [level=1] [ref=f8e7]
+        - img
+        - generic [ref=f8e10]:
+          - generic [ref=f8e11]:
+            - generic [ref=f8e13]:
+              - link "Skip to content" [ref=f8e14] [cursor=pointer]:
+                - /url: "#storybook-preview-wrapper"
+              - link "Storybook" [ref=f8e16] [cursor=pointer]:
+                - /url: ./
+                - img "Storybook" [ref=f8e17]
+              - switch "Settings" [ref=f8e22] [cursor=pointer]:
+                - img [ref=f8e23]
+            - generic [ref=f8e26]: Search for components
+            - search [ref=f8e27]:
+              - combobox "Search for components" [ref=f8e28]:
+                - generic:
+                  - img
+                - searchbox "Search for components" [ref=f8e29]
+                - code:
+                  - generic: ⌘
+                  - text: K
+                - button "Tag filters" [ref=f8e117] [cursor=pointer]:
+                  - img [ref=f8e118]
+              - button "Create a new story" [ref=f8e30] [cursor=pointer]:
+                - img [ref=f8e31]
+            - navigation "Stories" [ref=f8e34]:
+              - heading "Stories" [level=2] [ref=f8e35]
+              - generic [ref=f8e120]:
+                - generic [ref=f8e121]:
+                  - button "Collapse" [expanded] [ref=f8e122] [cursor=pointer]:
+                    - img [ref=f8e124]
+                    - text: Examples
+                  - button "Expand all" [ref=f8e126] [cursor=pointer]:
+                    - img [ref=f8e127]
+                - button "Backgrounds" [ref=f8e130] [cursor=pointer]:
+                  - generic [ref=f8e131]:
+                    - img [ref=f8e133]
+                    - img [ref=f8e135]
+                  - text: Backgrounds
+                - button "Wallet Home" [ref=f8e138] [cursor=pointer]:
+                  - generic [ref=f8e139]:
+                    - img [ref=f8e141]
+                    - img [ref=f8e143]
+                  - text: Wallet Home
+                - generic [ref=f8e145]:
+                  - button "Collapse" [expanded] [ref=f8e146] [cursor=pointer]:
+                    - img [ref=f8e148]
+                    - text: Components
+                  - button "Expand all" [ref=f8e150] [cursor=pointer]:
+                    - img [ref=f8e151]
+                - button "ActionListItem" [ref=f8e154] [cursor=pointer]:
+                  - generic [ref=f8e155]:
+                    - img [ref=f8e157]
+                    - img [ref=f8e159]
+                  - text: ActionListItem
+                - button "AvatarAccount" [ref=f8e162] [cursor=pointer]:
+                  - generic [ref=f8e163]:
+                    - img [ref=f8e165]
+                    - img [ref=f8e167]
+                  - text: AvatarAccount
+                - button "AvatarBase" [ref=f8e170] [cursor=pointer]:
+                  - generic [ref=f8e171]:
+                    - img [ref=f8e173]
+                    - img [ref=f8e175]
+                  - text: AvatarBase
+                - button "AvatarFavicon" [ref=f8e178] [cursor=pointer]:
+                  - generic [ref=f8e179]:
+                    - img [ref=f8e181]
+                    - img [ref=f8e183]
+                  - text: AvatarFavicon
+                - button "AvatarGroup" [ref=f8e186] [cursor=pointer]:
+                  - generic [ref=f8e187]:
+                    - img [ref=f8e189]
+                    - img [ref=f8e191]
+                  - text: AvatarGroup
+                - button "AvatarIcon" [ref=f8e194] [cursor=pointer]:
+                  - generic [ref=f8e195]:
+                    - img [ref=f8e197]
+                    - img [ref=f8e199]
+                  - text: AvatarIcon
+                - button "AvatarNetwork" [ref=f8e202] [cursor=pointer]:
+                  - generic [ref=f8e203]:
+                    - img [ref=f8e205]
+                    - img [ref=f8e207]
+                  - text: AvatarNetwork
+                - button "AvatarToken" [ref=f8e210] [cursor=pointer]:
+                  - generic [ref=f8e211]:
+                    - img [ref=f8e213]
+                    - img [ref=f8e215]
+                  - text: AvatarToken
+                - button "BadgeCount" [ref=f8e218] [cursor=pointer]:
+                  - generic [ref=f8e219]:
+                    - img [ref=f8e221]
+                    - img [ref=f8e223]
+                  - text: BadgeCount
+                - button "BadgeIcon" [ref=f8e226] [cursor=pointer]:
+                  - generic [ref=f8e227]:
+                    - img [ref=f8e229]
+                    - img [ref=f8e231]
+                  - text: BadgeIcon
+                - button "BadgeNetwork" [ref=f8e234] [cursor=pointer]:
+                  - generic [ref=f8e235]:
+                    - img [ref=f8e237]
+                    - img [ref=f8e239]
+                  - text: BadgeNetwork
+                - button "BadgeStatus" [ref=f8e242] [cursor=pointer]:
+                  - generic [ref=f8e243]:
+                    - img [ref=f8e245]
+                    - img [ref=f8e247]
+                  - text: BadgeStatus
+                - button "BadgeWrapper" [ref=f8e250] [cursor=pointer]:
+                  - generic [ref=f8e251]:
+                    - img [ref=f8e253]
+                    - img [ref=f8e255]
+                  - text: BadgeWrapper
+                - button "BannerAlert" [ref=f8e258] [cursor=pointer]:
+                  - generic [ref=f8e259]:
+                    - img [ref=f8e261]
+                    - img [ref=f8e263]
+                  - text: BannerAlert
+                - button "BannerBase" [ref=f8e266] [cursor=pointer]:
+                  - generic [ref=f8e267]:
+                    - img [ref=f8e269]
+                    - img [ref=f8e271]
+                  - text: BannerBase
+                - button "BottomSheet" [expanded] [ref=f8e274] [cursor=pointer]:
+                  - generic [ref=f8e275]:
+                    - img [ref=f8e277]
+                    - img [ref=f8e279]
+                  - text: BottomSheet
+                - generic [ref=f8e281]:
+                  - link "Default" [ref=f8e282] [cursor=pointer]:
+                    - /url: /?path=/story/components-bottomsheet--default
+                    - img [ref=f8e284]
+                    - text: Default
+                  - link "Skip to content" [ref=f8e286] [cursor=pointer]:
+                    - /url: "#storybook-preview-wrapper"
+                - link "Is Interactable" [ref=f8e288] [cursor=pointer]:
+                  - /url: /?path=/story/components-bottomsheet--is-interactable
+                  - img [ref=f8e290]
+                  - text: Is Interactable
+                - link "Is Fullscreen" [ref=f8e293] [cursor=pointer]:
+                  - /url: /?path=/story/components-bottomsheet--is-fullscreen
+                  - img [ref=f8e295]
+                  - text: Is Fullscreen
+                - link "Imperative Control" [ref=f8e298] [cursor=pointer]:
+                  - /url: /?path=/story/components-bottomsheet--imperative-control
+                  - img [ref=f8e300]
+                  - text: Imperative Control
+                - link "Scrollable List" [ref=f8e303] [cursor=pointer]:
+                  - /url: /?path=/story/components-bottomsheet--scrollable-list
+                  - img [ref=f8e305]
+                  - text: Scrollable List
+                - button "BottomSheetDialog" [ref=f8e308] [cursor=pointer]:
+                  - generic [ref=f8e309]:
+                    - img [ref=f8e311]
+                    - img [ref=f8e313]
+                  - text: BottomSheetDialog
+                - button "BottomSheetFooter" [ref=f8e316] [cursor=pointer]:
+                  - generic [ref=f8e317]:
+                    - img [ref=f8e319]
+                    - img [ref=f8e321]
+                  - text: BottomSheetFooter
+                - button "BottomSheetHeader" [ref=f8e324] [cursor=pointer]:
+                  - generic [ref=f8e325]:
+                    - img [ref=f8e327]
+                    - img [ref=f8e329]
+                  - text: BottomSheetHeader
+                - button "BottomSheetOverlay" [ref=f8e332] [cursor=pointer]:
+                  - generic [ref=f8e333]:
+                    - img [ref=f8e335]
+                    - img [ref=f8e337]
+                  - text: BottomSheetOverlay
+                - button "Box" [ref=f8e340] [cursor=pointer]:
+                  - generic [ref=f8e341]:
+                    - img [ref=f8e343]
+                    - img [ref=f8e345]
+                  - text: Box
+                - button "BoxColumn" [ref=f8e348] [cursor=pointer]:
+                  - generic [ref=f8e349]:
+                    - img [ref=f8e351]
+                    - img [ref=f8e353]
+                  - text: BoxColumn
+                - button "BoxRow" [ref=f8e356] [cursor=pointer]:
+                  - generic [ref=f8e357]:
+                    - img [ref=f8e359]
+                    - img [ref=f8e361]
+                  - text: BoxRow
+                - button "Button" [ref=f8e364] [cursor=pointer]:
+                  - generic [ref=f8e365]:
+                    - img [ref=f8e367]
+                    - img [ref=f8e369]
+                  - text: Button
+                - button "ButtonBase" [ref=f8e372] [cursor=pointer]:
+                  - generic [ref=f8e373]:
+                    - img [ref=f8e375]
+                    - img [ref=f8e377]
+                  - text: ButtonBase
+                - button "ButtonFilter" [ref=f8e380] [cursor=pointer]:
+                  - generic [ref=f8e381]:
+                    - img [ref=f8e383]
+                    - img [ref=f8e385]
+                  - text: ButtonFilter
+                - button "ButtonHero" [ref=f8e388] [cursor=pointer]:
+                  - generic [ref=f8e389]:
+                    - img [ref=f8e391]
+                    - img [ref=f8e393]
+                  - text: ButtonHero
+                - button "Button Icon" [ref=f8e396] [cursor=pointer]:
+                  - generic [ref=f8e397]:
+                    - img [ref=f8e399]
+                    - img [ref=f8e401]
+                  - text: Button Icon
+                - button "ButtonSemantic" [ref=f8e404] [cursor=pointer]:
+                  - generic [ref=f8e405]:
+                    - img [ref=f8e407]
+                    - img [ref=f8e409]
+                  - text: ButtonSemantic
+                - button "Card" [ref=f8e412] [cursor=pointer]:
+                  - generic [ref=f8e413]:
+                    - img [ref=f8e415]
+                    - img [ref=f8e417]
+                  - text: Card
+                - button "Checkbox" [ref=f8e420] [cursor=pointer]:
+                  - generic [ref=f8e421]:
+                    - img [ref=f8e423]
+                    - img [ref=f8e425]
+                  - text: Checkbox
+                - button "Content" [ref=f8e428] [cursor=pointer]:
+                  - generic [ref=f8e429]:
+                    - img [ref=f8e431]
+                    - img [ref=f8e433]
+                  - text: Content
+                - button "FilterButton" [ref=f8e436] [cursor=pointer]:
+                  - generic [ref=f8e437]:
+                    - img [ref=f8e439]
+                    - img [ref=f8e441]
+                  - text: FilterButton
+                - button "FilterButtonGroup" [ref=f8e444] [cursor=pointer]:
+                  - generic [ref=f8e445]:
+                    - img [ref=f8e447]
+                    - img [ref=f8e449]
+                  - text: FilterButtonGroup
+                - button "HeaderBase" [ref=f8e452] [cursor=pointer]:
+                  - generic [ref=f8e453]:
+                    - img [ref=f8e455]
+                    - img [ref=f8e457]
+                  - text: HeaderBase
+                - button "HeaderRoot" [ref=f8e460] [cursor=pointer]:
+                  - generic [ref=f8e461]:
+                    - img [ref=f8e463]
+                    - img [ref=f8e465]
+                  - text: HeaderRoot
+                - button "HeaderSearch" [ref=f8e468] [cursor=pointer]:
+                  - generic [ref=f8e469]:
+                    - img [ref=f8e471]
+                    - img [ref=f8e473]
+                  - text: HeaderSearch
+                - button "HeaderStandard" [ref=f8e476] [cursor=pointer]:
+                  - generic [ref=f8e477]:
+                    - img [ref=f8e479]
+                    - img [ref=f8e481]
+                  - text: HeaderStandard
+                - button "HeaderStandardAnimated" [ref=f8e484] [cursor=pointer]:
+                  - generic [ref=f8e485]:
+                    - img [ref=f8e487]
+                    - img [ref=f8e489]
+                  - text: HeaderStandardAnimated
+                - button "HeaderSubpage" [ref=f8e492] [cursor=pointer]:
+                  - generic [ref=f8e493]:
+                    - img [ref=f8e495]
+                    - img [ref=f8e497]
+                  - text: HeaderSubpage
+                - button "Icon" [ref=f8e500] [cursor=pointer]:
+                  - generic [ref=f8e501]:
+                    - img [ref=f8e503]
+                    - img [ref=f8e505]
+                  - text: Icon
+                - button "IconAlert" [ref=f8e508] [cursor=pointer]:
+                  - generic [ref=f8e509]:
+                    - img [ref=f8e511]
+                    - img [ref=f8e513]
+                  - text: IconAlert
+                - button "Input" [ref=f8e516] [cursor=pointer]:
+                  - generic [ref=f8e517]:
+                    - img [ref=f8e519]
+                    - img [ref=f8e521]
+                  - text: Input
+                - button "KeyValueColumn" [ref=f8e524] [cursor=pointer]:
+                  - generic [ref=f8e525]:
+                    - img [ref=f8e527]
+                    - img [ref=f8e529]
+                  - text: KeyValueColumn
+                - button "KeyValueRow" [ref=f8e532] [cursor=pointer]:
+                  - generic [ref=f8e533]:
+                    - img [ref=f8e535]
+                    - img [ref=f8e537]
+                  - text: KeyValueRow
+                - button "Label" [ref=f8e540] [cursor=pointer]:
+                  - generic [ref=f8e541]:
+                    - img [ref=f8e543]
+                    - img [ref=f8e545]
+                  - text: Label
+                - button "ListItem" [ref=f8e548] [cursor=pointer]:
+                  - generic [ref=f8e549]:
+                    - img [ref=f8e551]
+                    - img [ref=f8e553]
+                  - text: ListItem
+                - button "ListItemMultiSelect" [ref=f8e556] [cursor=pointer]:
+                  - generic [ref=f8e557]:
+                    - img [ref=f8e559]
+                    - img [ref=f8e561]
+                  - text: ListItemMultiSelect
+                - button "ListItemSelect" [ref=f8e564] [cursor=pointer]:
+                  - generic [ref=f8e565]:
+                    - img [ref=f8e567]
+                    - img [ref=f8e569]
+                  - text: ListItemSelect
+                - button "MainActionButton" [ref=f8e572] [cursor=pointer]:
+                  - generic [ref=f8e573]:
+                    - img [ref=f8e575]
+                    - img [ref=f8e577]
+                  - text: MainActionButton
+                - button "RadioButton" [ref=f8e580] [cursor=pointer]:
+                  - generic [ref=f8e581]:
+                    - img [ref=f8e583]
+                    - img [ref=f8e585]
+                  - text: RadioButton
+                - button "SectionDivider" [ref=f8e588] [cursor=pointer]:
+                  - generic [ref=f8e589]:
+                    - img [ref=f8e591]
+                    - img [ref=f8e593]
+                  - text: SectionDivider
+                - button "SectionHeader" [ref=f8e596] [cursor=pointer]:
+                  - generic [ref=f8e597]:
+                    - img [ref=f8e599]
+                    - img [ref=f8e601]
+                  - text: SectionHeader
+                - button "SegmentedControl" [ref=f8e604] [cursor=pointer]:
+                  - generic [ref=f8e605]:
+                    - img [ref=f8e607]
+                    - img [ref=f8e609]
+                  - text: SegmentedControl
+                - button "SelectButton" [ref=f8e612] [cursor=pointer]:
+                  - generic [ref=f8e613]:
+                    - img [ref=f8e615]
+                    - img [ref=f8e617]
+                  - text: SelectButton
+                - button "SensitiveText" [ref=f8e620] [cursor=pointer]:
+                  - generic [ref=f8e621]:
+                    - img [ref=f8e623]
+                    - img [ref=f8e625]
+                  - text: SensitiveText
+                - button "Skeleton" [ref=f8e628] [cursor=pointer]:
+                  - generic [ref=f8e629]:
+                    - img [ref=f8e631]
+                    - img [ref=f8e633]
+                  - text: Skeleton
+                - button "Switch" [ref=f8e636] [cursor=pointer]:
+                  - generic [ref=f8e637]:
+                    - img [ref=f8e639]
+                    - img [ref=f8e641]
+                  - text: Switch
+                - button "TabEmptyState" [ref=f8e644] [cursor=pointer]:
+                  - generic [ref=f8e645]:
+                    - img [ref=f8e647]
+                    - img [ref=f8e649]
+                  - text: TabEmptyState
+                - button "Tag" [ref=f8e652] [cursor=pointer]:
+                  - generic [ref=f8e653]:
+                    - img [ref=f8e655]
+                    - img [ref=f8e657]
+                  - text: Tag
+                - button "Text" [ref=f8e660] [cursor=pointer]:
+                  - generic [ref=f8e661]:
+                    - img [ref=f8e663]
+                    - img [ref=f8e665]
+                  - text: Text
+                - button "TextArea" [ref=f8e668] [cursor=pointer]:
+                  - generic [ref=f8e669]:
+                    - img [ref=f8e671]
+                    - img [ref=f8e673]
+                  - text: TextArea
+                - button "TextButton" [ref=f8e676] [cursor=pointer]:
+                  - generic [ref=f8e677]:
+                    - img [ref=f8e679]
+                    - img [ref=f8e681]
+                  - text: TextButton
+                - button "TextField" [ref=f8e684] [cursor=pointer]:
+                  - generic [ref=f8e685]:
+                    - img [ref=f8e687]
+                    - img [ref=f8e689]
+                  - text: TextField
+                - button "TextFieldSearch" [ref=f8e692] [cursor=pointer]:
+                  - generic [ref=f8e693]:
+                    - img [ref=f8e695]
+                    - img [ref=f8e697]
+                  - text: TextFieldSearch
+                - button "TitleAlert" [ref=f8e700] [cursor=pointer]:
+                  - generic [ref=f8e701]:
+                    - img [ref=f8e703]
+                    - img [ref=f8e705]
+                  - text: TitleAlert
+                - button "TitleHub" [ref=f8e708] [cursor=pointer]:
+                  - generic [ref=f8e709]:
+                    - img [ref=f8e711]
+                    - img [ref=f8e713]
+                  - text: TitleHub
+                - button "TitleStandard" [ref=f8e716] [cursor=pointer]:
+                  - generic [ref=f8e717]:
+                    - img [ref=f8e719]
+                    - img [ref=f8e721]
+                  - text: TitleStandard
+                - button "TitleSubpage" [ref=f8e724] [cursor=pointer]:
+                  - generic [ref=f8e725]:
+                    - img [ref=f8e727]
+                    - img [ref=f8e729]
+                  - text: TitleSubpage
+                - button "Toast" [ref=f8e732] [cursor=pointer]:
+                  - generic [ref=f8e733]:
+                    - img [ref=f8e735]
+                    - img [ref=f8e737]
+                  - text: Toast
+                - generic [ref=f8e739]:
+                  - button "Collapse" [expanded] [ref=f8e740] [cursor=pointer]:
+                    - img [ref=f8e742]
+                    - text: Temp Components
+                  - button "Expand all" [ref=f8e744] [cursor=pointer]:
+                    - img [ref=f8e745]
+                - button "Blockies" [ref=f8e748] [cursor=pointer]:
+                  - generic [ref=f8e749]:
+                    - img [ref=f8e751]
+                    - img [ref=f8e753]
+                  - text: Blockies
+                - button "ButtonAnimated" [ref=f8e756] [cursor=pointer]:
+                  - generic [ref=f8e757]:
+                    - img [ref=f8e759]
+                    - img [ref=f8e761]
+                  - text: ButtonAnimated
+                - button "HeaderStandardCenterColumn" [ref=f8e764] [cursor=pointer]:
+                  - generic [ref=f8e765]:
+                    - img [ref=f8e767]
+                    - img [ref=f8e769]
+                  - text: HeaderStandardCenterColumn
+                - button "ImageOrSvg" [ref=f8e772] [cursor=pointer]:
+                  - generic [ref=f8e773]:
+                    - img [ref=f8e775]
+                    - img [ref=f8e777]
+                  - text: ImageOrSvg
+                - button "Jazzicon" [ref=f8e780] [cursor=pointer]:
+                  - generic [ref=f8e781]:
+                    - img [ref=f8e783]
+                    - img [ref=f8e785]
+                  - text: Jazzicon
+                - button "Maskicon" [ref=f8e788] [cursor=pointer]:
+                  - generic [ref=f8e789]:
+                    - img [ref=f8e791]
+                    - img [ref=f8e793]
+                  - text: Maskicon
+                - button "Spinner" [ref=f8e796] [cursor=pointer]:
+                  - generic [ref=f8e797]:
+                    - img [ref=f8e799]
+                    - img [ref=f8e801]
+                  - text: Spinner
+                - button "TextOrChildren" [ref=f8e804] [cursor=pointer]:
+                  - generic [ref=f8e805]:
+                    - img [ref=f8e807]
+                    - img [ref=f8e809]
+                  - text: TextOrChildren
+          - region "Component tests" [ref=f8e812]:
+            - generic [ref=f8e813]:
+              - heading "Component tests" [level=2] [ref=f8e814]
+              - generic [ref=f8e815] [cursor=pointer]:
+                - button "Run tests" [ref=f8e819]:
+                  - img [ref=f8e821]
+                  - text: Run tests
+                - button "Expand testing module" [ref=f8e825]:
+                  - img [ref=f8e826]
+              - generic [ref=f8e828]:
+                - generic [ref=f8e831]:
+                  - generic [ref=f8e832]: Visual tests
+                  - button "Set up visual tests" [ref=f8e834]
+                - generic [ref=f8e836]:
+                  - generic [ref=f8e837]:
+                    - generic [ref=f8e838]:
+                      - generic [ref=f8e839]: Run component tests
+                      - generic [ref=f8e840]: Not run
+                    - generic [ref=f8e841]:
+                      - switch "Watch mode" [ref=f8e842] [cursor=pointer]:
+                        - img [ref=f8e843]
+                      - button "Start test run" [ref=f8e846] [cursor=pointer]:
+                        - img [ref=f8e847]
+                  - list [ref=f8e849]:
+                    - listitem [ref=f8e850]:
+                      - generic [ref=f8e851]:
+                        - checkbox "Interactions" [checked] [disabled] [ref=f8e853]
+                        - generic [ref=f8e854]: Interactions
+                      - button "Run tests to see results" [disabled] [ref=f8e855]
+                    - listitem [ref=f8e857]:
+                      - generic [ref=f8e858] [cursor=pointer]:
+                        - checkbox "Coverage" [ref=f8e860]
+                        - generic [ref=f8e861]: Coverage
+                      - button "Coverage unavailable, run tests first" [disabled] [ref=f8e862]
+                    - listitem [ref=f8e864]:
+                      - generic [ref=f8e865] [cursor=pointer]:
+                        - checkbox "Accessibility" [ref=f8e867]
+                        - generic [ref=f8e868]: Accessibility
+                      - button "Run tests to see accessibility results" [disabled] [ref=f8e869]
+      - separator "Sidebar resize handle" [ref=f8e55]
+    - generic [ref=f8e57]:
+      - region "Toolbar" [ref=f8e58]:
+        - heading "Toolbar" [level=2] [ref=f8e59]
+        - toolbar [ref=f8e60]:
+          - generic [ref=f8e61]:
+            - button "Reload story" [ref=f8e62] [cursor=pointer]:
+              - img [ref=f8e63]
+            - switch "Measure tool" [ref=f8e871] [cursor=pointer]:
+              - img [ref=f8e872]
+            - switch "Outline tool" [ref=f8e875] [cursor=pointer]:
+              - img [ref=f8e876]
+            - button "Viewport size" [ref=f8e878] [cursor=pointer]:
+              - img [ref=f8e879]
+            - button "Vision filter" [ref=f8e883] [cursor=pointer]:
+              - img [ref=f8e884]
+          - generic [ref=f8e65]:
+            - button "Open in isolation mode" [ref=f8e66] [cursor=pointer]:
+              - img [ref=f8e67]
+            - switch "Change zoom level" [ref=f8e72] [cursor=pointer]: 100%
+            - button "Enter full screen" [ref=f8e73] [cursor=pointer]:
+              - img [ref=f8e74]
+            - button "Open in editor" [ref=f8e888] [cursor=pointer]:
+              - img [ref=f8e889]
+            - button "Share" [ref=f8e892] [cursor=pointer]
+      - main "Main preview area" [ref=f8e76]:
+        - heading "Main preview area" [level=2] [ref=f8e77]
+        - generic [ref=f8e78]:
+          - progressbar "Content is loading..." [ref=f8e80]
+          - generic [ref=f8e81]:
+            - link "Skip to sidebar" [ref=f8e82] [cursor=pointer]:
+              - /url: "#components-bottomsheet--default"
+            - iframe [ref=f8e86]:
+              
+    - generic [ref=f8e87]:
+      - separator "Addon panel resize handle" [ref=f8e88]
+      - region "Addon panel" [ref=f8e90]:
+        - heading "Addon panel" [level=2] [ref=f8e91]
+        - generic [ref=f8e92]:
+          - generic [ref=f8e93]:
+            - generic [ref=f8e94]:
+              - button "Move addon panel to right" [ref=f8e95] [cursor=pointer]:
+                - img [ref=f8e96]
+              - button "Hide addon panel" [ref=f8e99] [cursor=pointer]:
+                - img [ref=f8e100]
+            - tablist "Available addons" [ref=f8e895]:
+              - tab "Controls" [selected] [ref=f8e896] [cursor=pointer]:
+                - generic [ref=f8e898]: Controls
+              - tab "Actions" [ref=f8e899] [cursor=pointer]:
+                - generic [ref=f8e901]: Actions
+              - tab "Interactions" [ref=f8e902] [cursor=pointer]:
+                - generic [ref=f8e904]: Interactions
+              - tab "Visual tests" [ref=f8e905] [cursor=pointer]
+              - tab "Accessibility" [ref=f8e906] [cursor=pointer]:
+                - generic [ref=f8e908]: Accessibility
+              - tab "Code" [ref=f8e909] [cursor=pointer]
+          - tabpanel "Controls" [ref=f8e910]

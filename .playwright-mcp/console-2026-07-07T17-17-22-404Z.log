@@ -1,0 +1,24 @@
+[     100ms] [WARNING] The 'ariaLabel' prop on 'PopoverProvider' will become mandatory in Storybook 11. Provide a concise, accessible label describing the popover's purpose. @ http://localhost:6007/sb-manager/globals-runtime.js:5798
+[     179ms] [WARNING] The 'ariaLabel' prop on 'Button' will become mandatory in Storybook 11. Buttons with text content should set 'ariaLabel={false}' to indicate that they are accessible as-is. Buttons without text content must provide a meaningful 'ariaLabel' for accessibility. The button content is: Share. @ http://localhost:6007/sb-manager/globals-runtime.js:5798
+[     217ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     218ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     306ms] Identifier 'RefreshRuntime' has already been declared
+[     759ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     759ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     761ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     761ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     831ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     831ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     881ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     881ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     897ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[     897ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[    1197ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[    1197ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[    1700ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[    1700ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[    2704ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[    2704ms] [VERBOSE] Rendering was performed in a subtree hidden by content-visibility. @ http://localhost:6007/sb-manager/runtime.js:12887
+[    4984ms] Identifier 'RefreshRuntime' has already been declared
+[    4986ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:6007/favicon.ico:0
+[  156904ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:6007/@vite/client:992

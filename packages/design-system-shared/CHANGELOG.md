@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: [DSRN] Added Slider component ([#1372](https://github.com/MetaMask/metamask-design-system/pull/1372))
+
 ## [0.28.0]
 
 ### Added

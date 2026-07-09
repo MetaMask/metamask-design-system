@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: [DSRN] Added Slider component ([#1372](https://github.com/MetaMask/metamask-design-system/pull/1372))
+- fix(dsrn): compose FilterButton from button variants ([#1379](https://github.com/MetaMask/metamask-design-system/pull/1379))
+- fix: use transparent background with bg-pressed on press ([#1374](https://github.com/MetaMask/metamask-design-system/pull/1374))
+
 ## [0.34.0]
 
 ### Added
