@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.29.0]
 
-### Uncategorized
+### Added
 
-- feat: [DSRN] Added Slider component ([#1372](https://github.com/MetaMask/metamask-design-system/pull/1372))
+- Added `SliderPropsShared` for cross-platform `Slider` support ([#1372](https://github.com/MetaMask/metamask-design-system/pull/1372))
 
 ## [0.28.0]
 
