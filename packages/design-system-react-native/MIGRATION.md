@@ -91,10 +91,12 @@ Upgrade Reanimated and Worklets together in your app before bumping the design s
 | 55       | 4.2.1                     | 0.7.4                   |
 | 56       | 4.3.1                     | 0.8.3                   |
 
+For the RN 0.85 pre-upgrade animation stack on MetaMask Mobile main, use `react-native-reanimated` 4.5.1, `react-native-worklets` 0.10.1, and `react-native-gesture-handler` ~2.32.0 ([metamask-mobile#32966](https://github.com/MetaMask/metamask-mobile/pull/32966)).
+
 1. Install compatible versions (example for Expo SDK 55 / MetaMask Mobile platform upgrade):
 
    ```bash
-   npx expo install react-native-reanimated@~4.2.1 react-native-worklets@0.7.4
+   npx expo install react-native-reanimated@4.5.1 react-native-worklets@0.10.1 react-native-gesture-handler@~2.32.0
    ```
 
 2. Update Babel to use the Worklets plugin (replace the Reanimated 3 plugin if present):
