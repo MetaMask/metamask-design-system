@@ -1,3 +1,8 @@
+// Reanimated 4.5+ ships ESM-only entrypoints; mock before any component import.
+jest.mock('react-native-reanimated', () =>
+  jest.requireActual('react-native-reanimated/mock'),
+);
+
 jest.mock('react-native-worklets', () => {
   const Worklets = jest.requireActual('react-native-worklets/src/mock');
 
