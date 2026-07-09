@@ -16,7 +16,7 @@ Storybook app for validating `@metamask/design-system-react-native` components i
 | Storybook web (`storybook dev` / static build)               | Supported                  | Browser-based component review and sharing  |
 | Expo Go (`expo start --ios` / `--android`)                   | Unsupported for validation | Known Reanimated/Worklets native mismatches |
 
-Reanimated 4 + Worklets require a **development build**. Expo Go cannot load our current JS stack (Reanimated 4.3 / Worklets 0.8.3 on Expo SDK 54) because its prebuilt native binaries are older.
+Reanimated 4 + Worklets require a **development build**. Expo Go cannot load our current JS stack (Reanimated 4.5.1 / Worklets 0.10.1 on Expo SDK 54) because its prebuilt native binaries are older.
 
 ## Run Storybook (supported flow)
 
@@ -70,7 +70,7 @@ Automated accessibility checks are disabled for React Native web stories because
 
 ## Version alignment policy
 
-Storybook native validation uses a **development build**, so it can run Reanimated/Worklets versions ahead of Expo Go. Peer dependencies on `@metamask/design-system-react-native` are aligned with Mobile's Expo SDK 55 platform bump ([metamask-mobile#32281](https://github.com/MetaMask/metamask-mobile/pull/32281)): `react-native-reanimated >=4.2.0` and `react-native-worklets >=0.7.4`.
+Storybook native validation uses a **development build**, so it can run Reanimated/Worklets versions ahead of Expo Go. Dev dependencies are aligned with MetaMask Mobile's animation-stack bump ([metamask-mobile#32966](https://github.com/MetaMask/metamask-mobile/pull/32966)): `react-native-reanimated` 4.5.1, `react-native-worklets` 0.10.1, and `react-native-gesture-handler` ~2.32.0.
 
 Expo Go alignment will improve once Storybook follows Mobile to Expo SDK 55.
 
