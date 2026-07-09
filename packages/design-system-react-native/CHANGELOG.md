@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.35.0]
+
+### Added
+
+- Added `Slider` for controlled range input with pan/tap gestures, optional range dots and labels, and hooks for non-linear scales ([#1372](https://github.com/MetaMask/metamask-design-system/pull/1372))
+
+### Changed
+
+- Updated `FilterButton` to compose from `ButtonPrimary`, `ButtonSecondary`, and `ButtonTertiary` instead of hand-rolled styles, so selected-state text and icon colors stay consistent with button variants ([#1379](https://github.com/MetaMask/metamask-design-system/pull/1379))
+- Updated `ButtonBase` to merge `startIconProps.twClassName` and `endIconProps.twClassName` last, matching the existing `textProps.twClassName` pattern ([#1379](https://github.com/MetaMask/metamask-design-system/pull/1379))
+
+### Fixed
+
+- Fixed `ActionListItem` painting `bg-default` on elevated surfaces in pure-black mode; rows now inherit the parent background and use `bg-pressed` on press ([#1374](https://github.com/MetaMask/metamask-design-system/pull/1374))
+- Fixed `FilterButton` selected-state text appearing invisible (white-on-white) in dark mode ([#1379](https://github.com/MetaMask/metamask-design-system/pull/1379))
+
 ## [0.34.0]
 
 ### Added
@@ -573,7 +589,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.34.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.35.0...HEAD
+[0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.34.0...@metamask/design-system-react-native@0.35.0
 [0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.33.0...@metamask/design-system-react-native@0.34.0
 [0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.32.0...@metamask/design-system-react-native@0.33.0
 [0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.31.0...@metamask/design-system-react-native@0.32.0
