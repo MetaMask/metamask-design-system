@@ -28,7 +28,7 @@ export const pureBlackDarkColorOverrides = {
     inverse: '#0d0d0f',
   },
   border: {
-    muted: '#e2e2ff26',
+    muted: '#e2e2ff33',
   },
   primary: {
     inverse: '#0d0d0f',
