@@ -1,4 +1,7 @@
-import { ContentVerticalAlignment } from '@metamask/design-system-shared';
+import {
+  ContentVariant,
+  mergeTwClassName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { Pressable } from 'react-native';
@@ -11,7 +14,7 @@ import type {
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 import { Content } from '../Content';
-import { VERTICAL_ALIGNMENT_MAP } from '../Content/Content.constants';
+import { getContentVariantLayout } from '../Content/Content.constants';
 
 import type { ListItemProps } from './ListItem.types';
 
@@ -23,7 +26,7 @@ export const ListItem: React.FC<ListItemProps> = ({
   startAccessory,
   endAccessory,
   accessoryGap = 0,
-  verticalAlignment,
+  variant = ContentVariant.TwoLines,
   avatar,
   title,
   titleProps,
@@ -45,19 +48,22 @@ export const ListItem: React.FC<ListItemProps> = ({
   ...props
 }) => {
   const tw = useTailwind();
+  const layout = getContentVariantLayout(variant);
+
+  const rootBaseClassName = mergeTwClassName(
+    'w-full px-4 py-3',
+    `${layout.listItemMinHeight} ${layout.listItemJustify}`,
+  );
+  const rootTwClassName = mergeTwClassName(rootBaseClassName, twClassName);
 
   const wrapperStyle = style
-    ? [tw.style('px-4 py-3', twClassName), style]
-    : tw.style('px-4 py-3', twClassName);
+    ? [tw.style(rootTwClassName), style]
+    : tw.style(rootTwClassName);
 
   const getPressableStyle = ({
     pressed,
   }: PressableStateCallbackType): StyleProp<ViewStyle> => {
-    const baseStyle = tw.style(
-      'w-full px-4 py-3',
-      twClassName,
-      pressed && 'bg-pressed',
-    );
+    const baseStyle = tw.style(rootTwClassName, pressed && 'bg-pressed');
 
     if (!style) {
       return baseStyle;
@@ -69,15 +75,11 @@ export const ListItem: React.FC<ListItemProps> = ({
   };
 
   const hasRowAccessories = Boolean(startAccessory) || Boolean(endAccessory);
-  const rowAlignment =
-    VERTICAL_ALIGNMENT_MAP[
-      verticalAlignment ?? ContentVerticalAlignment.Center
-    ];
 
   const content = (
     <Content
       twClassName={hasRowAccessories ? 'flex-1 min-w-0' : undefined}
-      verticalAlignment={verticalAlignment}
+      variant={variant}
       avatar={avatar}
       title={title}
       titleProps={titleProps}
@@ -102,9 +104,8 @@ export const ListItem: React.FC<ListItemProps> = ({
     <BoxRow
       startAccessory={startAccessory}
       endAccessory={endAccessory}
-      alignItems={rowAlignment}
+      alignItems={layout.alignItems}
       gap={accessoryGap}
-      twClassName="min-h-[46px] w-full"
     >
       {content}
     </BoxRow>

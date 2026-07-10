@@ -215,29 +215,32 @@ Gap between `startAccessory` / `endAccessory` and the inner content row. Uses th
 />
 ```
 
-### `verticalAlignment`
+### `variant`
 
-Vertical alignment of the content row.
+Layout variant controlling row min-height, vertical alignment, and which secondary slots render.
 
 Available values:
 
-- `ListItemVerticalAlignment.Center` — default; use for one- or two-line rows
-- `ListItemVerticalAlignment.Top` — use for taller rows (three+ lines or ~88dp+ height)
+- `ListItemVariant.OneLine` — 48px min height (incl. padding), centered; omits `description` and `subvalue`
+- `ListItemVariant.TwoLines` — 72px min height, centered; all slots
+- `ListItemVariant.MultiLine` — 88px min height, top-aligned; all slots
 
-| TYPE                        | REQUIRED | DEFAULT                            |
-| --------------------------- | -------- | ---------------------------------- |
-| `ListItemVerticalAlignment` | No       | `ListItemVerticalAlignment.Center` |
+| TYPE              | REQUIRED | DEFAULT                    |
+| ----------------- | -------- | -------------------------- |
+| `ListItemVariant` | No       | `ListItemVariant.TwoLines` |
 
-`ListItemVerticalAlignment` is re-exported from `@metamask/design-system-react-native` alongside `ListItem`. It is the same const object as `ContentVerticalAlignment` (also exported from the package root).
+`ListItemVariant` is re-exported from `@metamask/design-system-react-native` alongside `ListItem`. It is the same const object as `ContentVariant` (also exported from the package root).
 
 ```tsx
 import {
   ListItem,
-  ListItemVerticalAlignment,
+  ListItemVariant,
 } from '@metamask/design-system-react-native';
 
+<ListItem variant={ListItemVariant.OneLine} title="Network" value="Mainnet" />
+
 <ListItem
-  verticalAlignment={ListItemVerticalAlignment.Top}
+  variant={ListItemVariant.MultiLine}
   avatar={<AvatarToken name="ETH" src={ethIcon} size={AvatarTokenSize.Lg} />}
   title="Network"
   description="Secondary line"

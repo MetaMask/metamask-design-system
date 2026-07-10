@@ -1,5 +1,5 @@
 import {
-  ContentVerticalAlignment,
+  ContentVariant,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -9,6 +9,10 @@ import React from 'react';
 import { Text } from 'react-native';
 
 import { Content } from './Content';
+import {
+  CONTENT_LINE_HEIGHT,
+  LIST_ITEM_PADDING_Y_TOTAL_PX,
+} from './Content.constants';
 
 const ROOT_TEST_ID = 'content-root';
 
@@ -355,28 +359,93 @@ describe('Content', () => {
     });
   });
 
-  describe('verticalAlignment', () => {
-    it('applies center alignment on flat BoxRow root by default', () => {
+  describe('variant', () => {
+    it('applies center alignment on root by default', () => {
       const { getByTestId } = render(
         <Content title="Label" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw`min-h-[46px] flex-row items-center gap-4`,
+        tw`flex-row items-center gap-4`,
       );
     });
 
-    it('applies top alignment on flat BoxRow root when verticalAlignment is Top', () => {
+    it('applies start alignment on root when variant is MultiLine', () => {
       const { getByTestId } = render(
         <Content
           title="Label"
-          verticalAlignment={ContentVerticalAlignment.Top}
+          variant={ContentVariant.MultiLine}
           testID={ROOT_TEST_ID}
         />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw`min-h-[46px] flex-row items-start gap-4`,
+        tw`flex-row items-start gap-4`,
+      );
+    });
+
+    it('does not render description or subvalue when variant is OneLine', () => {
+      const { getByText, queryByText } = render(
+        <Content
+          title="Title"
+          description="Secondary"
+          value="100"
+          subvalue="Balance"
+          variant={ContentVariant.OneLine}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Title')).toBeOnTheScreen();
+      expect(getByText('100')).toBeOnTheScreen();
+      expect(queryByText('Secondary')).toBeNull();
+      expect(queryByText('Balance')).toBeNull();
+    });
+
+    it('renders description and subvalue when variant is TwoLines', () => {
+      const { getByText } = render(
+        <Content
+          title="Title"
+          description="Secondary"
+          value="100"
+          subvalue="Balance"
+          variant={ContentVariant.TwoLines}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Secondary')).toBeOnTheScreen();
+      expect(getByText('Balance')).toBeOnTheScreen();
+    });
+
+    it('matches one-line ListItem min-height formula from typography tokens', () => {
+      expect(CONTENT_LINE_HEIGHT.primary + LIST_ITEM_PADDING_Y_TOTAL_PX).toBe(
+        48,
+      );
+    });
+
+    it('renders multi-line description nodes on screen', () => {
+      const { getByText } = render(
+        <Content
+          title="Title"
+          variant={ContentVariant.MultiLine}
+          description={
+            <>
+              <Text>Secondary line</Text>
+              <Text>Third line</Text>
+            </>
+          }
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Secondary line')).toBeOnTheScreen();
+      expect(getByText('Third line')).toBeOnTheScreen();
+    });
+
+    it('matches two-line content height from typography tokens', () => {
+      expect(CONTENT_LINE_HEIGHT.primary + CONTENT_LINE_HEIGHT.secondary).toBe(
+        46,
       );
     });
   });

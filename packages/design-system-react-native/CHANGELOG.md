@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **BREAKING:** Replaced `ContentVerticalAlignment` / `ListItemVerticalAlignment` and `verticalAlignment` with `ContentVariant` / `ListItemVariant` and `variant` on `Content` and `ListItem`. ListItem applies variant min-heights (48px / 72px / 88px including `py-3`); `OneLine` omits `description` and `subvalue`.
+
 ## [0.35.0]
 
 ### Added

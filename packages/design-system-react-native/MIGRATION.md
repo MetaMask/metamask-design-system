@@ -4096,23 +4096,36 @@ The ListItem component in `@metamask/design-system-react-native` is a near-ident
 
 ##### Import Path
 
-| Mobile Pattern                                                                                  | Design System Migration                                                            |
-| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `import ListItem from '.../component-library/components/List/ListItem'`                         | `import { ListItem } from '@metamask/design-system-react-native'`                  |
-| `import { VerticalAlignment } from '.../component-library/components/List/ListItem'`            | `import { ListItemVerticalAlignment } from '@metamask/design-system-react-native'` |
-| `import { ListItemProps } from '.../component-library/components/List/ListItem/ListItem.types'` | `import type { ListItemProps } from '@metamask/design-system-react-native'`        |
+| Mobile Pattern                                                                                  | Design System Migration                                                     |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `import ListItem from '.../component-library/components/List/ListItem'`                         | `import { ListItem } from '@metamask/design-system-react-native'`           |
+| `import { VerticalAlignment } from '.../component-library/components/List/ListItem'`            | `import { ListItemVariant } from '@metamask/design-system-react-native'`    |
+| `import { ListItemProps } from '.../component-library/components/List/ListItem/ListItem.types'` | `import type { ListItemProps } from '@metamask/design-system-react-native'` |
 
 The mobile component uses a **default export**; the design system uses a **named export**.
 
-##### VerticalAlignment Enum Renamed
+##### `verticalAlignment` replaced by `variant`
 
-The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` from `@metamask/design-system-shared`. When using `ListItem`, import `ListItemVerticalAlignment` from `@metamask/design-system-react-native` (a runtime alias for the same const object). `ContentVerticalAlignment` is also exported from the package root for `Content` call sites. It is converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
+**`ListItemVerticalAlignment`** / **`ContentVerticalAlignment`** and **`verticalAlignment`** are removed. Use **`ListItemVariant`** / **`ContentVariant`** and **`variant`** instead.
 
-| Mobile Value                            | Design System Value                             | Notes                      |
-| --------------------------------------- | ----------------------------------------------- | -------------------------- |
-| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | casing changed             |
-| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | casing changed             |
-| `VerticalAlignment.Bottom` (`'Bottom'`) | —                                               | removed; use `Top` instead |
+| Previous                                                 | Replacement                           |
+| -------------------------------------------------------- | ------------------------------------- |
+| `verticalAlignment={Center}` + secondary text            | `variant={ListItemVariant.TwoLines}`  |
+| `verticalAlignment={Center}` + title/value only          | `variant={ListItemVariant.OneLine}`   |
+| `verticalAlignment={Top}`                                | `variant={ListItemVariant.MultiLine}` |
+| `ListItemVerticalAlignment` / `ContentVerticalAlignment` | `ListItemVariant` / `ContentVariant`  |
+
+Variant min-heights (including `py-3` padding): `OneLine` 48px, `TwoLines` 72px, `MultiLine` 88px. `OneLine` omits `description` and `subvalue`.
+
+##### VerticalAlignment Enum Renamed (historical)
+
+The mobile `VerticalAlignment` enum originally mapped to `ContentVerticalAlignment` (now removed). When migrating from an older MMDS version that used `verticalAlignment`, use `variant` as in the table above.
+
+| Mobile Value                            | Design System Value (historical)                | Current replacement                     |
+| --------------------------------------- | ----------------------------------------------- | --------------------------------------- |
+| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | `ListItemVariant.MultiLine`             |
+| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | `ListItemVariant.TwoLines` or `OneLine` |
+| `VerticalAlignment.Bottom` (`'Bottom'`) | —                                               | removed; use `MultiLine`                |
 
 ##### Accessibility Attributes on Root
 
@@ -4180,7 +4193,7 @@ import { ListItem } from '@metamask/design-system-react-native';
 </ListItem>;
 ```
 
-##### ListItem with VerticalAlignment
+##### ListItem with variant
 
 Before (Mobile):
 
@@ -4203,16 +4216,16 @@ After (Design System):
 ```tsx
 import {
   ListItem,
-  ListItemVerticalAlignment,
+  ListItemVariant,
 } from '@metamask/design-system-react-native';
 
-<ListItem verticalAlignment={ListItemVerticalAlignment.Top} gap={8}>
-  <AvatarFavicon />
-  <View>
-    <Text>Title</Text>
-    <Text>Description</Text>
-  </View>
-</ListItem>;
+<ListItem
+  variant={ListItemVariant.MultiLine}
+  accessoryGap={8}
+  title="Title"
+  description="Description"
+  avatar={<AvatarFavicon />}
+/>;
 ```
 
 ##### ListItem with Accessories
@@ -4300,7 +4313,8 @@ The following mobile `component-library` sub-components build on `ListItem` but 
 #### API Differences
 
 - MMDS `ListItem` adds `twClassName` for Tailwind-based style overrides.
-- The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` with lowercase values (`'top'`/`'center'` instead of `'Top'`/`'Center'`). `VerticalAlignment.Bottom` has no equivalent.
+- **`verticalAlignment`** / **`ListItemVerticalAlignment`** are removed; use **`variant`** / **`ListItemVariant`** (`one-line`, `two-lines`, `multi-line`).
+- Row min-heights are variant-driven (48px / 72px / 88px including `py-3`).
 - The mobile version sets `accessible accessibilityRole="none"` on the root element; MMDS does not.
 - The mobile version uses a default export; MMDS uses a named export.
 - `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.

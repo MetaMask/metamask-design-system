@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **BREAKING:** Replaced `ContentVerticalAlignment` / `verticalAlignment` with `ContentVariant` / `variant` on `ContentPropsShared`. `OneLine` omits `description` and `subvalue`; row min-heights are 48px / 72px / 88px (including ListItem `py-3`).
+
 ## [0.29.0]
 
 ### Added

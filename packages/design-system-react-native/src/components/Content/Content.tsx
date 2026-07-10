@@ -1,9 +1,8 @@
 import {
   BoxAlignItems,
   BoxFlexDirection,
-  ContentVerticalAlignment,
+  ContentVariant,
   FontWeight,
-  mergeTwClassName,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -14,11 +13,11 @@ import { BoxColumn } from '../BoxColumn';
 import { BoxRow } from '../BoxRow';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 
-import { VERTICAL_ALIGNMENT_MAP } from './Content.constants';
+import { getContentVariantLayout } from './Content.constants';
 import type { ContentProps } from './Content.types';
 
 export const Content: React.FC<ContentProps> = ({
-  verticalAlignment = ContentVerticalAlignment.Center,
+  variant = ContentVariant.TwoLines,
   avatar,
   twClassName,
   title,
@@ -39,36 +38,60 @@ export const Content: React.FC<ContentProps> = ({
   subvalueEndAccessory,
   ...props
 }) => {
+  const layout = getContentVariantLayout(variant);
+
+  const showDescription = layout.showDescription && Boolean(description);
+  const showSubvalue = layout.showSubvalue && Boolean(subvalue);
+  const secondaryRowAlignItems =
+    variant === ContentVariant.MultiLine
+      ? BoxAlignItems.Start
+      : BoxAlignItems.Center;
+
+  if (__DEV__) {
+    if (!layout.showDescription && description) {
+      console.warn(
+        'Content: `description` is ignored when `variant` is `ContentVariant.OneLine`.',
+      );
+    }
+    if (!layout.showSubvalue && subvalue) {
+      console.warn(
+        'Content: `subvalue` is ignored when `variant` is `ContentVariant.OneLine`.',
+      );
+    }
+  }
+
   return (
     <Box
       flexDirection={BoxFlexDirection.Row}
-      alignItems={VERTICAL_ALIGNMENT_MAP[verticalAlignment]}
+      alignItems={layout.alignItems}
       gap={4}
-      twClassName={mergeTwClassName('min-h-[46px]', twClassName)}
+      twClassName={twClassName}
       {...props}
     >
       {avatar}
-      {/* Title and description Column */}
       <BoxColumn
         twClassName="flex-1 min-w-0"
         bottomAccessory={
-          description ? (
+          showDescription ? (
             <BoxRow
               twClassName="w-full"
+              alignItems={secondaryRowAlignItems}
               startAccessory={descriptionStartAccessory}
               endAccessory={descriptionEndAccessory}
               gap={1}
             >
-              <TextOrChildren
-                textProps={{
-                  variant: TextVariant.BodySm,
-                  fontWeight: FontWeight.Medium,
-                  color: TextColor.TextAlternative,
-                  ...descriptionProps,
-                }}
-              >
-                {description}
-              </TextOrChildren>
+              <BoxColumn twClassName="flex-1 min-w-0">
+                <TextOrChildren
+                  textProps={{
+                    variant: TextVariant.BodySm,
+                    fontWeight: FontWeight.Medium,
+                    color: TextColor.TextAlternative,
+                    ...descriptionProps,
+                  }}
+                >
+                  {description}
+                </TextOrChildren>
+              </BoxColumn>
             </BoxRow>
           ) : null
         }
@@ -93,28 +116,30 @@ export const Content: React.FC<ContentProps> = ({
           </BoxRow>
         ) : null}
       </BoxColumn>
-      {/* Value and subvalue Column */}
-      {value || subvalue ? (
+      {value || showSubvalue ? (
         <BoxColumn
           alignItems={BoxAlignItems.End}
           twClassName="min-w-0"
           bottomAccessory={
-            subvalue ? (
+            showSubvalue ? (
               <BoxRow
+                alignItems={secondaryRowAlignItems}
                 startAccessory={subvalueStartAccessory}
                 endAccessory={subvalueEndAccessory}
                 gap={1}
               >
-                <TextOrChildren
-                  textProps={{
-                    variant: TextVariant.BodySm,
-                    fontWeight: FontWeight.Medium,
-                    color: TextColor.TextAlternative,
-                    ...subvalueProps,
-                  }}
-                >
-                  {subvalue}
-                </TextOrChildren>
+                <BoxColumn twClassName="min-w-0">
+                  <TextOrChildren
+                    textProps={{
+                      variant: TextVariant.BodySm,
+                      fontWeight: FontWeight.Medium,
+                      color: TextColor.TextAlternative,
+                      ...subvalueProps,
+                    }}
+                  >
+                    {subvalue}
+                  </TextOrChildren>
+                </BoxColumn>
               </BoxRow>
             ) : null
           }
