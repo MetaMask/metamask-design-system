@@ -2,6 +2,42 @@
  * Slider component shared props (ADR-0004)
  * Platform-independent properties shared across React and React Native
  */
+
+/**
+ * Semantic color tokens for tick theming (flat palette keys).
+ */
+export const TickColor = {
+  SuccessDefault: 'success-default',
+  WarningDefault: 'warning-default',
+  ErrorDefault: 'error-default',
+  PrimaryDefault: 'primary-default',
+  InfoDefault: 'info-default',
+  /** Default thumb color fallback. */
+  IconDefault: 'icon-default',
+  /** Default fill color fallback. */
+  IconAlternative: 'icon-alternative',
+} as const;
+export type TickColor = (typeof TickColor)[keyof typeof TickColor];
+
+export type SliderTickColor =
+  | TickColor
+  | `#${string}`
+  | `rgb${string}`
+  | `rgba${string}`;
+
+export type SliderTick = {
+  /** Track-percent position (0–100). */
+  step: number;
+  /** Label text. Omit for dot-only markers. */
+  label?: string;
+  /** Domain value when tick is tapped. Default: linear from step. */
+  value?: number;
+  /** Theme color token or raw hex/rgb. Omit for default slider colors. */
+  color?: SliderTickColor;
+  /** Fires onTick when crossed. Default: true when label is set. */
+  haptic?: boolean;
+};
+
 export type SliderPropsShared = {
   /**
    * Current slider value. This component is fully controlled.
@@ -47,21 +83,22 @@ export type SliderPropsShared = {
   isDisabled?: boolean;
 
   /**
-   * Track-percent positions (0–100) for markers and labels — not domain values.
+   * Tick markers along the track. Each entry defines position, optional label,
+   * optional domain value, optional theme color, and optional haptic threshold.
    *
-   * @default [0, 25, 50, 75, 100]
+   * @default DEFAULT_TICKS (0%, 25%, 50%, 75%, 100%)
    */
-  rangeLabelSteps?: readonly number[];
+  ticks?: readonly SliderTick[];
 
   /**
-   * When true, renders tappable labels below the track at each rangeLabelSteps position.
+   * When true, renders tappable labels below the track for ticks with a label.
    *
    * @default false
    */
   showRangeLabels?: boolean;
 
   /**
-   * When true, renders dots on the track at each rangeLabelSteps position.
+   * When true, renders dots on the track at each tick position.
    *
    * @default false
    */
@@ -74,16 +111,9 @@ export type SliderPropsShared = {
   onGrip?: () => void;
 
   /**
-   * Fired when the track percent crosses a tick threshold while dragging.
+   * Fired when the track percent crosses a haptic tick threshold while dragging.
    */
   onTick?: () => void;
-
-  /**
-   * Track-percent thresholds (0–100) for onTick — not domain values.
-   *
-   * @default [25, 50, 75]
-   */
-  tickThresholds?: readonly number[];
 
   /**
    * Maps domain value to 0–100 track position.
@@ -100,17 +130,4 @@ export type SliderPropsShared = {
    * Must be a Reanimated worklet when provided (include `'worklet';` in the function body).
    */
   mapTrackPercentToValue?: (trackPercent: number) => number;
-
-  /**
-   * Formats a rangeLabelSteps entry for display.
-   *
-   * @default `${step}%`
-   */
-  formatStepLabel?: (step: number) => string;
-
-  /**
-   * Converts a tapped rangeLabelSteps entry to a domain value.
-   * Default: `(step / 100) * (max - min) + min`.
-   */
-  stepToValue?: (step: number) => number;
 };

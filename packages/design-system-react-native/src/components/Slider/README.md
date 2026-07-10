@@ -147,7 +147,7 @@ const [value, setValue] = useState(50);
 
 ### `showRangeLabels`
 
-Optional prop that when true, renders tappable labels below the track at each `rangeLabelSteps` position.
+Optional prop that when true, renders tappable labels below the track for ticks that define a `label`.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -164,7 +164,7 @@ const [value, setValue] = useState(50);
 
 ### `showRangeDots`
 
-Optional prop that when true, renders dots on the track at each `rangeLabelSteps` position.
+Optional prop that when true, renders dots on the track at each tick position.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -179,16 +179,18 @@ const [value, setValue] = useState(50);
 <Slider value={value} onValueChange={setValue} showRangeDots />;
 ```
 
-### `rangeLabelSteps`
+### `ticks`
 
-Optional track-percent positions (0–100) for markers and labels — not domain values.
+Optional tick markers along the track. Each entry defines a track-percent position (`step`), optional `label`, optional domain `value`, optional theme `color`, and optional `haptic` threshold for `onTick`.
 
-| TYPE                | REQUIRED | DEFAULT                |
-| ------------------- | -------- | ---------------------- |
-| `readonly number[]` | No       | `[0, 25, 50, 75, 100]` |
+When no tick defines `color`, the slider uses default track and thumb colors. When at least one tick has `color`, thumb and fill colors interpolate smoothly as the user drags.
+
+| TYPE                    | REQUIRED | DEFAULT         |
+| ----------------------- | -------- | --------------- |
+| `readonly SliderTick[]` | No       | `DEFAULT_TICKS` |
 
 ```tsx
-import { Slider } from '@metamask/design-system-react-native';
+import { Slider, TickColor } from '@metamask/design-system-react-native';
 import { useState } from 'react';
 
 const [value, setValue] = useState(50);
@@ -198,9 +200,42 @@ const [value, setValue] = useState(50);
   onValueChange={setValue}
   showRangeLabels
   showRangeDots
-  rangeLabelSteps={[25, 50, 75]}
+  ticks={[
+    { step: 0, label: '0%' },
+    { step: 50, label: '50%' },
+    { step: 100, label: '100%' },
+  ]}
 />;
 ```
+
+#### Themed ticks with `TickColor`
+
+Use `TickColor` for design token colors, or pass a raw hex/rgb string for custom colors:
+
+```tsx
+import { Slider, TickColor } from '@metamask/design-system-react-native';
+import { useState } from 'react';
+
+const [leverage, setLeverage] = useState(20);
+
+<Slider
+  value={leverage}
+  onValueChange={setLeverage}
+  minimumValue={1}
+  maximumValue={40}
+  showRangeLabels
+  showRangeDots
+  ticks={[
+    { step: 0, label: '1x', value: 1, color: TickColor.SuccessDefault },
+    { step: 25 },
+    { step: 50, label: '20x', value: 20 },
+    { step: 75 },
+    { step: 100, label: '40x', value: 40, color: TickColor.ErrorDefault },
+  ]}
+/>;
+```
+
+Ticks without `label` render as dot-only markers. Ticks without `color` use default slider colors (`icon-alternative` fill, `icon-default` thumb) during interpolation.
 
 ### `onGrip`
 
@@ -225,7 +260,7 @@ const [value, setValue] = useState(50);
 
 ### `onTick`
 
-Optional callback fired when the track percent crosses a `tickThresholds` entry while dragging or when a range label is pressed.
+Optional callback fired when the track percent crosses a haptic tick threshold while dragging or when a labeled tick is pressed. Haptic thresholds default to ticks with a `label`; override per tick with `haptic: true` or `haptic: false`.
 
 | TYPE         | REQUIRED | DEFAULT     |
 | ------------ | -------- | ----------- |
@@ -241,29 +276,11 @@ const [value, setValue] = useState(50);
   value={value}
   onValueChange={setValue}
   onTick={() => triggerHaptic()}
-  tickThresholds={[25, 50, 75]}
-/>;
-```
-
-### `tickThresholds`
-
-Optional track-percent thresholds (0–100) for `onTick` — not domain values.
-
-| TYPE                | REQUIRED | DEFAULT        |
-| ------------------- | -------- | -------------- |
-| `readonly number[]` | No       | `[25, 50, 75]` |
-
-```tsx
-import { Slider } from '@metamask/design-system-react-native';
-import { useState } from 'react';
-
-const [value, setValue] = useState(50);
-
-<Slider
-  value={value}
-  onValueChange={setValue}
-  onTick={() => triggerHaptic()}
-  tickThresholds={[33, 66]}
+  ticks={[
+    { step: 0, label: '0%' },
+    { step: 50, label: '50%', haptic: true },
+    { step: 100, label: '100%' },
+  ]}
 />;
 ```
 
@@ -313,40 +330,9 @@ const [value, setValue] = useState(500);
 />;
 ```
 
-### `formatStepLabel`
+### Non-linear scale with custom ticks
 
-Optional formatter for a `rangeLabelSteps` entry. Default: `` `${step}%` ``.
-
-| TYPE                       | REQUIRED | DEFAULT     |
-| -------------------------- | -------- | ----------- |
-| `(step: number) => string` | No       | `undefined` |
-
-```tsx
-import { Slider } from '@metamask/design-system-react-native';
-import { useState } from 'react';
-
-const [amount, setAmount] = useState(1000);
-
-<Slider
-  value={amount}
-  onValueChange={setAmount}
-  rangeLabelSteps={[0, 50, 100]}
-  showRangeLabels
-  formatStepLabel={(step) => {
-    if (step === 0) return '$100';
-    if (step === 50) return '$1,000';
-    return '$10,000';
-  }}
-/>;
-```
-
-### `stepToValue`
-
-Optional converter from a tapped `rangeLabelSteps` entry to a domain value. Default: `(step / 100) * (max - min) + min`. Use together with `formatStepLabel`, `mapValueToTrackPercent`, and `mapTrackPercentToValue` for non-linear scales.
-
-| TYPE                       | REQUIRED | DEFAULT     |
-| -------------------------- | -------- | ----------- |
-| `(step: number) => number` | No       | `undefined` |
+Use `ticks` with explicit `label` and `value` per stop, together with `mapValueToTrackPercent` and `mapTrackPercentToValue` for non-linear scales:
 
 ```tsx
 import { Slider } from '@metamask/design-system-react-native';
@@ -377,19 +363,13 @@ const [amount, setAmount] = useState(1000);
   minimumValue={MIN_AMOUNT}
   maximumValue={MAX_AMOUNT}
   step={1}
-  rangeLabelSteps={[0, 50, 100]}
+  ticks={[
+    { step: 0, label: '$100', value: 100 },
+    { step: 50, label: '$1,000', value: 1000 },
+    { step: 100, label: '$10,000', value: 10000 },
+  ]}
   showRangeDots
   showRangeLabels
-  formatStepLabel={(step) => {
-    if (step === 0) return '$100';
-    if (step === 50) return '$1,000';
-    return '$10,000';
-  }}
-  stepToValue={(step) => {
-    if (step === 0) return 100;
-    if (step === 50) return 1000;
-    return 10000;
-  }}
   mapValueToTrackPercent={amountToPercent}
   mapTrackPercentToValue={percentToAmount}
 />;

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Box } from '../Box';
 
 import { Slider } from './Slider';
+import { TickColor } from '@metamask/design-system-shared';
 import type { SliderProps } from './Slider.types';
 
 const meta: Meta<SliderProps> = {
@@ -33,12 +34,12 @@ const meta: Meta<SliderProps> = {
     showRangeLabels: {
       control: 'boolean',
       description:
-        'When true, renders tappable percent labels below the track.',
+        'When true, renders tappable labels below the track for ticks with a label.',
     },
     showRangeDots: {
       control: 'boolean',
       description:
-        'When true, renders dots on the track at each rangeLabelSteps position.',
+        'When true, renders dots on the track at each tick position.',
     },
   },
   decorators: [
@@ -105,11 +106,15 @@ export const ShowRangeDots: Story = {
   ),
 };
 
-export const RangeLabelSteps: Story = {
+export const CustomTicks: Story = {
   render: () => (
     <ControlledSlider
       value={50}
-      rangeLabelSteps={[0, 50, 100]}
+      ticks={[
+        { step: 0, label: '0%' },
+        { step: 50, label: '50%' },
+        { step: 100, label: '100%' },
+      ]}
       showRangeLabels
       showRangeDots
     />
@@ -160,42 +165,58 @@ const mockMusdPercentToAmount = (trackPercent: number): number => {
   return Math.round(1000 + ((trackPercent - 50) / 50) * 9000);
 };
 
-const mockMusdStepToValue = (step: number): number => {
-  if (step === 0) {
-    return 100;
-  }
-  if (step === 50) {
-    return 1000;
-  }
-
-  return 10000;
-};
-
-const mockMusdFormatStepLabel = (step: number): string => {
-  if (step === 0) {
-    return '$100';
-  }
-  if (step === 50) {
-    return '$1,000';
-  }
-
-  return '$10,000';
-};
-
-export const StepToValue: Story = {
+export const NonLinearScale: Story = {
   render: () => (
     <ControlledSlider
       value={1000}
       minimumValue={100}
       maximumValue={10000}
       step={1}
-      rangeLabelSteps={[0, 50, 100]}
+      ticks={[
+        { step: 0, label: '$100', value: 100 },
+        { step: 50, label: '$1,000', value: 1000 },
+        { step: 100, label: '$10,000', value: 10000 },
+      ]}
       showRangeLabels
       showRangeDots
-      formatStepLabel={mockMusdFormatStepLabel}
-      stepToValue={mockMusdStepToValue}
       mapValueToTrackPercent={mockMusdAmountToPercent}
       mapTrackPercentToValue={mockMusdPercentToAmount}
+    />
+  ),
+};
+
+export const ThemedTicks: Story = {
+  render: () => (
+    <ControlledSlider
+      value={10}
+      minimumValue={1}
+      maximumValue={40}
+      ticks={[
+        { step: 0, label: '1x', value: 1, color: TickColor.SuccessDefault },
+        { step: 23, label: '10x', value: 10, color: TickColor.WarningDefault },
+        { step: 49, label: '20x', value: 20, color: TickColor.WarningDefault },
+        { step: 74, label: '30x', value: 30, color: TickColor.WarningDefault },
+        { step: 100, label: '40x', value: 40, color: TickColor.ErrorDefault },
+      ]}
+      showRangeLabels
+      showRangeDots
+    />
+  ),
+};
+
+export const CustomHexColor: Story = {
+  render: () => (
+    <ControlledSlider
+      value={50}
+      ticks={[
+        { step: 0, label: '0%', color: '#39FF14' },
+        { step: 25, label: '25%', color: '#00D4FF' },
+        { step: 50, label: '50%', color: '#FF00FF' },
+        { step: 75, label: '75%', color: '#FF6600' },
+        { step: 100, label: '100%', color: '#FF0040' },
+      ]}
+      showRangeLabels
+      showRangeDots
     />
   ),
 };

@@ -301,12 +301,8 @@ export type { SectionHeaderProps } from './SectionHeader';
 export { SegmentedControl, SegmentedControlSize } from './SegmentedControl';
 export type { SegmentedControlProps } from './SegmentedControl';
 
-export {
-  Slider,
-  DEFAULT_RANGE_LABEL_STEPS,
-  DEFAULT_TICK_THRESHOLDS,
-} from './Slider';
-export type { SliderProps } from './Slider';
+export { Slider, TickColor, DEFAULT_TICKS } from './Slider';
+export type { SliderProps, SliderTick, SliderTickColor } from './Slider';
 
 export { Switch } from './Switch';
 export type { SwitchProps } from './Switch';

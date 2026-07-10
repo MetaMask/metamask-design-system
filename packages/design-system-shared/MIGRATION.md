@@ -5,12 +5,25 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
+  - [Slider tick API consolidation](#slider-tick-api-consolidation)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
+
+<a id="slider-tick-api-consolidation"></a>
+
+### Slider tick API consolidation
+
+`SliderPropsShared` replaces fragmented tick props with a unified `ticks` array.
+
+**Removed from `SliderPropsShared`:** `rangeLabelSteps`, `formatStepLabel`, `stepToValue`, `tickThresholds`
+
+**Added:** `ticks`, `TickColor`, `SliderTick`, `SliderTickColor`
+
+See the [design-system-react-native migration guide](../design-system-react-native/MIGRATION.md#slider-tick-api-consolidation) for before/after examples.
 
 ### From version 0.24.0 to 0.25.0
 

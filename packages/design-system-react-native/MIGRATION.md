@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [From version 0.33.0 to 0.34.0](#from-version-0330-to-0340)
+- [Slider tick API consolidation](#slider-tick-api-consolidation)
 - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
 - [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
 - [From version 0.27.0 to 0.28.0](#from-version-0270-to-0280)
@@ -61,6 +62,58 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
   - [From version 0.10.0 to 0.11.0](#from-version-0100-to-0110)
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
+
+<a id="slider-tick-api-consolidation"></a>
+
+## Slider tick API consolidation
+
+`Slider` tick configuration is consolidated into a single `ticks` prop. Legacy props are removed.
+
+**Removed props:**
+
+| Removed prop      | Replacement                                               |
+| ----------------- | --------------------------------------------------------- |
+| `rangeLabelSteps` | `ticks[].step`                                            |
+| `formatStepLabel` | `ticks[].label`                                           |
+| `stepToValue`     | `ticks[].value`                                           |
+| `tickThresholds`  | `ticks[].haptic` (defaults to `true` when `label` is set) |
+
+**Removed exports:** `DEFAULT_RANGE_LABEL_STEPS`, `DEFAULT_TICK_THRESHOLDS`
+
+**New exports:** `TickColor`, `DEFAULT_TICKS`, `SliderTick`, `SliderTickColor`
+
+**Before:**
+
+```tsx
+import { Slider } from '@metamask/design-system-react-native';
+
+<Slider
+  value={leverage}
+  onValueChange={setLeverage}
+  rangeLabelSteps={[0, 50, 100]}
+  formatStepLabel={(step) => ({ 0: '1x', 50: '20x', 100: '40x' })[step] ?? ''}
+  stepToValue={(step) => ({ 0: 1, 50: 20, 100: 40 })[step] ?? leverage}
+  tickThresholds={[50]}
+  showRangeLabels
+/>;
+```
+
+**After:**
+
+```tsx
+import { Slider, TickColor } from '@metamask/design-system-react-native';
+
+<Slider
+  value={leverage}
+  onValueChange={setLeverage}
+  ticks={[
+    { step: 0, label: '1x', value: 1, color: TickColor.SuccessDefault },
+    { step: 50, label: '20x', value: 20, haptic: true },
+    { step: 100, label: '40x', value: 40, color: TickColor.ErrorDefault },
+  ]}
+  showRangeLabels
+/>;
+```
 
 ## Version Updates
 

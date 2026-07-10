@@ -4,7 +4,7 @@
  * Three coordinate systems:
  * - **Domain value** — the controlled `value` prop (`minimumValue`…`maximumValue`).
  * - **Track percent** — normalized 0–100 position along the track (used for dots,
- *   labels, and `tickThresholds`; may be non-linear via `map*` hooks).
+ *   labels, and haptic thresholds; may be non-linear via `map*` hooks).
  * - **Pixel position** — thumb/fill offset in layout pixels (`translateX`).
  *
  * Functions marked with `'worklet'` run on the UI thread inside gesture handlers.
@@ -12,9 +12,21 @@
  */
 
 import {
+  type SliderTick,
+  type SliderTickColor,
+  TickColor,
+} from '@metamask/design-system-shared';
+import { interpolateColor } from 'react-native-reanimated';
+
+import {
   DOT_EDGE_INSET_PERCENT,
   DOT_EDGE_MAX_PERCENT,
 } from './Slider.constants';
+
+export type SliderColorStop = {
+  step: number;
+  color: string;
+};
 
 // --- Track-percent primitives (worklet) ---
 
@@ -202,9 +214,9 @@ export function getTrackPercentFromValue(
 // --- Range label / dot defaults (Slider.tsx) ---
 
 /**
- * Default `stepToValue`: linear track-percent → domain value.
+ * Default linear track-percent → domain value for a tick.
  *
- * @param step - Track-percent step from `rangeLabelSteps`.
+ * @param step - Track-percent step from a tick entry.
  * @param minimumValue - Lower bound of the domain range.
  * @param maximumValue - Upper bound of the domain range.
  * @returns Domain value for the step.
@@ -218,19 +230,130 @@ export function defaultStepToValue(
 }
 
 /**
- * Default `formatStepLabel`: display track percent as a percent string.
+ * Domain value for a tick: explicit `value` or linear default from step.
  *
- * @param step - Track-percent step from `rangeLabelSteps`.
- * @returns Formatted label string.
+ * @param tick - Tick entry.
+ * @param minimumValue - Lower bound of the domain range.
+ * @param maximumValue - Upper bound of the domain range.
+ * @returns Domain value for the tick.
  */
-export function defaultFormatStepLabel(step: number): string {
-  return `${step}%`;
+export function getTickValue(
+  tick: SliderTick,
+  minimumValue: number,
+  maximumValue: number,
+): number {
+  if (tick.value !== undefined) {
+    return tick.value;
+  }
+
+  return defaultStepToValue(tick.step, minimumValue, maximumValue);
+}
+
+/**
+ * Track-percent thresholds that trigger onTick while dragging.
+ *
+ * @param ticks - Tick entries.
+ * @returns Haptic threshold positions.
+ */
+export function getTickHapticThresholds(
+  ticks: readonly SliderTick[],
+): number[] {
+  return ticks
+    .filter((tick) => tick.haptic ?? Boolean(tick.label))
+    .map((tick) => tick.step);
+}
+
+/**
+ * Resolves a tick color token or raw color string to a hex/rgb value.
+ *
+ * @param color - Tick color token or raw hex/rgb string.
+ * @param palette - Flattened theme color palette.
+ * @param fallback - Fallback color when token is not found.
+ * @returns Resolved color string.
+ */
+export function resolveTickColor(
+  color: SliderTickColor,
+  palette: Record<string, string>,
+  fallback: string,
+): string {
+  if (color.startsWith('#') || color.startsWith('rgb')) {
+    return color;
+  }
+
+  return palette[color] ?? fallback;
+}
+
+/**
+ * Builds color interpolation stops from ticks, applying fallback for missing colors.
+ *
+ * @param ticks - Tick entries.
+ * @param palette - Flattened theme color palette.
+ * @param fallbackToken - Default token key when tick.color is omitted.
+ * @returns Sorted color stops for interpolation.
+ */
+export function buildColorStops(
+  ticks: readonly SliderTick[],
+  palette: Record<string, string>,
+  fallbackToken: string,
+): SliderColorStop[] {
+  const fallback = palette[fallbackToken] ?? '#000000';
+
+  return [...ticks]
+    .sort((a, b) => a.step - b.step)
+    .map((tick) => ({
+      step: tick.step,
+      color: tick.color
+        ? resolveTickColor(tick.color, palette, fallback)
+        : fallback,
+    }));
+}
+
+/**
+ * Interpolates a color along the track based on tick color stops.
+ *
+ * @param trackPercent - Current track position from 0–100.
+ * @param stops - Sorted color stops.
+ * @returns Interpolated color string.
+ */
+export function interpolateTickColor(
+  trackPercent: number,
+  stops: readonly SliderColorStop[],
+): string {
+  'worklet';
+
+  if (stops.length === 0) {
+    return '#000000';
+  }
+
+  if (stops.length === 1) {
+    return stops[0].color;
+  }
+
+  const inputRange = stops.map((stop) => stop.step);
+  const outputRange = stops.map((stop) => stop.color);
+
+  return interpolateColor(
+    clampTrackPercent(trackPercent),
+    inputRange,
+    outputRange,
+    'RGB',
+  );
+}
+
+/**
+ * Whether any tick defines a theme color.
+ *
+ * @param ticks - Tick entries.
+ * @returns True when at least one tick has a color.
+ */
+export function hasThemedTickColors(ticks: readonly SliderTick[]): boolean {
+  return ticks.some((tick) => tick.color != null);
 }
 
 /**
  * Marker `left` percent for range dots and labels; edge steps inset to stay on track.
  *
- * @param step - Track-percent step from `rangeLabelSteps`.
+ * @param step - Track-percent step from a tick entry.
  * @returns CSS `left` percentage string.
  */
 export function getDotLeftPercent(step: number): string {

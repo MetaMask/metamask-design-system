@@ -1,7 +1,11 @@
 import { act, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
+import { TickColor } from '@metamask/design-system-shared';
+
+import { DEFAULT_TICKS } from './Slider.constants';
 import type { UseSliderGestureParams } from './Slider.types';
+import { buildColorStops } from './Slider.utilities';
 import { useSliderGesture } from './useSliderGesture';
 
 jest.mock('react-native-gesture-handler', () => {
@@ -26,13 +30,32 @@ jest.mock('react-native-gesture-handler', () => {
   };
 });
 
+const mockPalette = {
+  'icon-default': '#111111',
+  'icon-alternative': '#222222',
+  'success-default': '#00FF00',
+  'error-default': '#FF0000',
+};
+
 const createParams = (
   overrides: Partial<UseSliderGestureParams> = {},
-): UseSliderGestureParams => ({
-  value: 50,
-  onValueChange: jest.fn(),
-  ...overrides,
-});
+): UseSliderGestureParams => {
+  const ticks = overrides.ticks ?? DEFAULT_TICKS;
+
+  return {
+    value: 50,
+    onValueChange: jest.fn(),
+    ticks,
+    fillColorStops: buildColorStops(
+      ticks,
+      mockPalette,
+      TickColor.IconAlternative,
+    ),
+    thumbColorStops: buildColorStops(ticks, mockPalette, TickColor.IconDefault),
+    hasThemedColors: ticks.some((tick) => tick.color != null),
+    ...overrides,
+  };
+};
 
 describe('useSliderGesture', () => {
   beforeEach(() => {
@@ -68,7 +91,7 @@ describe('useSliderGesture', () => {
     expect(result.current.progressStyle).toBeDefined();
   });
 
-  it('handlePressStep updates value from stepToValue', () => {
+  it('handlePressStep updates value from tick value', () => {
     const onValueChange = jest.fn();
     const onDragEnd = jest.fn();
     const { result } = renderHook(() =>
@@ -76,7 +99,7 @@ describe('useSliderGesture', () => {
         createParams({
           onValueChange,
           onDragEnd,
-          stepToValue: (step) => step * 2,
+          ticks: [{ step: 25, label: '25', value: 50 }],
         }),
       ),
     );
@@ -89,7 +112,7 @@ describe('useSliderGesture', () => {
     expect(onDragEnd).toHaveBeenCalledWith(50);
   });
 
-  it('handlePressStep uses default stepToValue when omitted', () => {
+  it('handlePressStep uses linear default when tick value is omitted', () => {
     const onValueChange = jest.fn();
     const { result } = renderHook(() =>
       useSliderGesture(
@@ -97,6 +120,7 @@ describe('useSliderGesture', () => {
           onValueChange,
           minimumValue: 0,
           maximumValue: 200,
+          ticks: [{ step: 50, label: '50%' }],
         }),
       ),
     );
@@ -126,14 +150,18 @@ describe('useSliderGesture', () => {
     expect(onValueChange).not.toHaveBeenCalled();
   });
 
-  it('fires onTick when handlePressStep crosses a threshold', () => {
+  it('fires onTick when handlePressStep crosses a haptic threshold', () => {
     const onTick = jest.fn();
     const { result } = renderHook(() =>
       useSliderGesture(
         createParams({
           value: 10,
           onTick,
-          tickThresholds: [50],
+          ticks: [
+            { step: 0, label: '0%' },
+            { step: 50, label: '50%', haptic: true },
+            { step: 100, label: '100%' },
+          ],
         }),
       ),
     );
@@ -179,5 +207,38 @@ describe('useSliderGesture', () => {
     });
 
     expect(onValueChange).toHaveBeenCalledWith(50);
+  });
+
+  it('includes backgroundColor in animated styles when themed', () => {
+    const { result } = renderHook(() =>
+      useSliderGesture(
+        createParams({
+          hasThemedColors: true,
+          ticks: [
+            { step: 0, color: TickColor.SuccessDefault },
+            { step: 100, color: TickColor.ErrorDefault },
+          ],
+          fillColorStops: buildColorStops(
+            [
+              { step: 0, color: TickColor.SuccessDefault },
+              { step: 100, color: TickColor.ErrorDefault },
+            ],
+            mockPalette,
+            TickColor.IconAlternative,
+          ),
+          thumbColorStops: buildColorStops(
+            [
+              { step: 0, color: TickColor.SuccessDefault },
+              { step: 100, color: TickColor.ErrorDefault },
+            ],
+            mockPalette,
+            TickColor.IconDefault,
+          ),
+        }),
+      ),
+    );
+
+    expect(result.current.progressStyle).toBeDefined();
+    expect(result.current.thumbStyle).toBeDefined();
   });
 });

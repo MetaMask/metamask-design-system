@@ -3,13 +3,14 @@ import { Gesture } from 'react-native-gesture-handler';
 import {
   Easing,
   runOnJS,
+  useAnimatedReaction,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 
 import {
-  DEFAULT_TICK_THRESHOLDS,
   THUMB_GRIP_ANIMATION_DURATION,
   THUMB_GRIP_SCALE,
 } from './Slider.constants';
@@ -19,8 +20,10 @@ import type {
 } from './Slider.types';
 import {
   clampGesturePosition,
-  defaultStepToValue,
+  getTickHapticThresholds,
+  getTickValue,
   getTrackPercentFromValue,
+  interpolateTickColor,
   positionToTrackPercent,
   resolveTrackPercentToValue,
   resolveValueToTrackPercent,
@@ -33,8 +36,8 @@ import {
  * Flow during drag (UI thread):
  *   touch X → clamp to track width → trackPercent → domain value → callbacks
  *
- * Flow when `value` prop changes (JS thread):
- *   domain value → trackPercent → translateX (thumb + progress fill)
+ * Flow when `value` prop changes (JS thread → UI thread via useAnimatedReaction):
+ *   domain value → trackPercent → translateX (skipped while dragging)
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
  *
@@ -54,17 +57,17 @@ export function useSliderGesture(
     onDragEnd,
     onGrip,
     onTick,
-    tickThresholds = DEFAULT_TICK_THRESHOLDS,
+    ticks,
+    fillColorStops,
+    thumbColorStops,
+    hasThemedColors,
     mapValueToTrackPercent,
     mapTrackPercentToValue,
-    stepToValue: stepToValueProp,
   } = params;
-  const stepToValue = useMemo(
-    () =>
-      stepToValueProp ??
-      ((rangeStep: number) =>
-        defaultStepToValue(rangeStep, minimumValue, maximumValue)),
-    [maximumValue, minimumValue, stepToValueProp],
+
+  const hapticThresholds = useMemo(
+    () => getTickHapticThresholds(ticks),
+    [ticks],
   );
 
   // --- Animated state ---
@@ -72,6 +75,8 @@ export function useSliderGesture(
   const sliderWidth = useSharedValue(0);
   const translateX = useSharedValue(0);
   const thumbScale = useSharedValue(1);
+  const isDragging = useSharedValue(false);
+  const propValue = useSharedValue(value);
   const previousTrackPercentRef = useRef(
     getTrackPercentFromValue(
       value,
@@ -113,7 +118,7 @@ export function useSliderGesture(
   );
 
   useEffect(() => {
-    syncPositionFromValue(value);
+    propValue.value = value;
     if (!isDraggingRef.current) {
       previousTrackPercentRef.current = getTrackPercentFromValue(
         value,
@@ -122,13 +127,32 @@ export function useSliderGesture(
         mapValueToTrackPercent,
       );
     }
-  }, [
-    mapValueToTrackPercent,
-    maximumValue,
-    minimumValue,
-    syncPositionFromValue,
-    value,
-  ]);
+  }, [mapValueToTrackPercent, maximumValue, minimumValue, propValue, value]);
+
+  useAnimatedReaction(
+    () => propValue.value,
+    (currentValue, previousValue) => {
+      if (isDragging.value) {
+        return;
+      }
+
+      if (previousValue !== null && currentValue === previousValue) {
+        return;
+      }
+
+      const trackPercent = resolveValueToTrackPercent(
+        currentValue,
+        minimumValue,
+        maximumValue,
+        mapValueToTrackPercent,
+      );
+      translateX.value = trackPercentToPosition(
+        trackPercent,
+        sliderWidth.value,
+      );
+    },
+    [mapValueToTrackPercent, maximumValue, minimumValue],
+  );
 
   // --- JS-thread bridges (stable refs for runOnJS from worklets) ---
 
@@ -160,7 +184,7 @@ export function useSliderGesture(
     (newTrackPercent: number) => {
       const prevTrackPercent = previousTrackPercentRef.current;
 
-      for (const threshold of tickThresholds) {
+      for (const threshold of hapticThresholds) {
         if (
           (prevTrackPercent < threshold && newTrackPercent >= threshold) ||
           (prevTrackPercent > threshold && newTrackPercent <= threshold)
@@ -172,18 +196,55 @@ export function useSliderGesture(
 
       previousTrackPercentRef.current = newTrackPercent;
     },
-    [onTick, tickThresholds],
+    [hapticThresholds, onTick],
   );
 
   // --- Animated styles (thumb + fill width follow translateX) ---
 
-  const progressStyle = useAnimatedStyle(() => ({
-    width: translateX.value,
-  }));
+  const activeFillColor = useDerivedValue(() => {
+    if (!hasThemedColors) {
+      return undefined;
+    }
 
-  const thumbStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: translateX.value }, { scale: thumbScale.value }],
-  }));
+    return interpolateTickColor(
+      positionToTrackPercent(translateX.value, sliderWidth.value),
+      fillColorStops,
+    );
+  });
+
+  const activeThumbColor = useDerivedValue(() => {
+    if (!hasThemedColors) {
+      return undefined;
+    }
+
+    return interpolateTickColor(
+      positionToTrackPercent(translateX.value, sliderWidth.value),
+      thumbColorStops,
+    );
+  });
+
+  const progressStyle = useAnimatedStyle(
+    () => ({
+      width: translateX.value,
+      ...(hasThemedColors && {
+        backgroundColor: activeFillColor.value,
+      }),
+    }),
+    [fillColorStops, hasThemedColors],
+  );
+
+  const thumbStyle = useAnimatedStyle(
+    () => ({
+      transform: [
+        { translateX: translateX.value },
+        { scale: thumbScale.value },
+      ],
+      ...(hasThemedColors && {
+        backgroundColor: activeThumbColor.value,
+      }),
+    }),
+    [hasThemedColors, thumbColorStops],
+  );
 
   // --- Pan + tap gestures ---
 
@@ -250,6 +311,7 @@ export function useSliderGesture(
       .onStart(() => {
         'worklet';
 
+        isDragging.value = true;
         thumbScale.value = withTiming(THUMB_GRIP_SCALE, {
           duration: THUMB_GRIP_ANIMATION_DURATION,
           easing: gripEasing,
@@ -279,6 +341,7 @@ export function useSliderGesture(
       .onFinalize(() => {
         'worklet';
 
+        isDragging.value = false;
         thumbScale.value = withTiming(1, {
           duration: THUMB_GRIP_ANIMATION_DURATION,
           easing: gripEasing,
@@ -304,6 +367,7 @@ export function useSliderGesture(
     emitDragEnd,
     emitValueChange,
     isDisabled,
+    isDragging,
     mapTrackPercentToValue,
     mapValueToTrackPercent,
     maximumValue,
@@ -316,7 +380,7 @@ export function useSliderGesture(
     triggerGrip,
   ]);
 
-  // --- Range label tap (JS thread; uses stepToValue from Slider.tsx) ---
+  // --- Range label tap (JS thread) ---
 
   const handlePressStep = useCallback(
     (rangeStep: number) => {
@@ -324,7 +388,12 @@ export function useSliderGesture(
         return;
       }
 
-      const newValue = stepToValue(rangeStep);
+      const tick = ticks.find((entry) => entry.step === rangeStep);
+      if (!tick) {
+        return;
+      }
+
+      const newValue = getTickValue(tick, minimumValue, maximumValue);
       onValueChange(newValue);
       const trackPercent = getTrackPercentFromValue(
         newValue,
@@ -344,8 +413,8 @@ export function useSliderGesture(
       minimumValue,
       onDragEnd,
       onValueChange,
-      stepToValue,
       syncPositionFromValue,
+      ticks,
     ],
   );
 
