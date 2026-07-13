@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
 - [From version 0.33.0 to 0.34.0](#from-version-0330-to-0340)
 - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
 - [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
@@ -46,6 +47,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
   - [From version 0.30.0 to 0.31.0](#from-version-0300-to-0310)
   - [From version 0.26.0 to 0.27.0](#from-version-0260-to-0270)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
@@ -63,6 +65,68 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.35.0 to 0.36.0
+
+<a id="from-version-0350-to-0360"></a>
+
+<a id="content-and-listitem-verticalalignment-replaced-by-variant"></a>
+
+#### `Content` and `ListItem`: `verticalAlignment` replaced by `variant`
+
+**`ContentVerticalAlignment`**, **`ListItemVerticalAlignment`**, and **`verticalAlignment`** are removed from **`Content`** and **`ListItem`**. Use **`ContentVariant`**, **`ListItemVariant`**, and **`variant`** instead.
+
+**What changed:**
+
+| Before (0.35.0)                                          | After (0.36.0)                        |
+| -------------------------------------------------------- | ------------------------------------- |
+| `ContentVerticalAlignment` / `ListItemVerticalAlignment` | `ContentVariant` / `ListItemVariant`  |
+| `verticalAlignment` prop                                 | `variant` prop                        |
+| `verticalAlignment={Center}` + secondary text            | `variant={ListItemVariant.TwoLines}`  |
+| `verticalAlignment={Center}` + title/value only          | `variant={ListItemVariant.OneLine}`   |
+| `verticalAlignment={Top}`                                | `variant={ListItemVariant.MultiLine}` |
+
+Variant min-heights (including **`ListItem`** **`py-3`** padding): **`OneLine`** 48px, **`TwoLines`** 72px, **`MultiLine`** 88px. **`OneLine`** omits **`description`** and **`subvalue`**.
+
+**Migration:**
+
+```tsx
+// Before (0.35.0)
+import {
+  ContentVerticalAlignment,
+  ListItem,
+} from '@metamask/design-system-react-native';
+
+<ListItem
+  verticalAlignment={ContentVerticalAlignment.Top}
+  title="Network"
+  description="Ethereum Mainnet"
+  value="1.234 ETH"
+  subvalue="~$2,500"
+/>;
+
+// After (0.36.0)
+import {
+  ListItem,
+  ListItemVariant,
+} from '@metamask/design-system-react-native';
+
+<ListItem
+  variant={ListItemVariant.MultiLine}
+  title="Network"
+  description="Ethereum Mainnet"
+  value="1.234 ETH"
+  subvalue="~$2,500"
+/>;
+```
+
+If you import **`ContentPropsShared`** or **`ContentVariant`** from **`@metamask/design-system-shared`**, apply the same rename there. See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#content-verticalalignment-replaced-by-variant).
+
+**Impact:**
+
+- Any import of **`ContentVerticalAlignment`**, **`ListItemVerticalAlignment`**, or usage of **`verticalAlignment`** on **`Content`** or **`ListItem`** must be updated.
+- **`ListItemVariant.OneLine`** omits **`description`** and **`subvalue`** even when passed.
+- **`ListItem`** applies variant-driven min-heights and vertical alignment on the root row; **`Content`** no longer sets its own min-height.
 
 ### From version 0.33.0 to 0.34.0
 
@@ -4117,9 +4181,11 @@ The mobile component uses a **default export**; the design system uses a **named
 
 Variant min-heights (including `py-3` padding): `OneLine` 48px, `TwoLines` 72px, `MultiLine` 88px. `OneLine` omits `description` and `subvalue`.
 
+When migrating from an older MMDS version that used **`verticalAlignment`**, see [From version 0.35.0 to 0.36.0](#content-and-listitem-verticalalignment-replaced-by-variant).
+
 ##### VerticalAlignment Enum Renamed (historical)
 
-The mobile `VerticalAlignment` enum originally mapped to `ContentVerticalAlignment` (now removed). When migrating from an older MMDS version that used `verticalAlignment`, use `variant` as in the table above.
+The mobile `VerticalAlignment` enum originally mapped to `ContentVerticalAlignment` (now removed). Use `variant` as in the table above.
 
 | Mobile Value                            | Design System Value (historical)                | Current replacement                     |
 | --------------------------------------- | ----------------------------------------------- | --------------------------------------- |
