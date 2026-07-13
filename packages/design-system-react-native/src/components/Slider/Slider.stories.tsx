@@ -1,10 +1,10 @@
+import { TickColor } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
 
 import { Box } from '../Box';
 
 import { Slider } from './Slider';
-import { TickColor } from '@metamask/design-system-shared';
 import type { SliderProps } from './Slider.types';
 
 const meta: Meta<SliderProps> = {

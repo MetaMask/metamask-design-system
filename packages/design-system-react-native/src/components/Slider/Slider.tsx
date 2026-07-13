@@ -2,6 +2,7 @@ import {
   FontWeight,
   TextColor,
   TextVariant,
+  TickColor,
 } from '@metamask/design-system-shared';
 import {
   getThemeColors,
@@ -36,7 +37,6 @@ import {
   getTrackPercentFromValue,
   hasThemedTickColors,
 } from './Slider.utilities';
-import { TickColor } from '@metamask/design-system-shared';
 import { useSliderGesture } from './useSliderGesture';
 
 export const Slider = ({
@@ -84,7 +84,7 @@ export const Slider = ({
   }, [palette, ticks]);
 
   const labeledTicks = useMemo(
-    () => ticks.filter((tick) => tick.label != null),
+    () => ticks.filter((tick) => tick.label !== undefined),
     [ticks],
   );
 

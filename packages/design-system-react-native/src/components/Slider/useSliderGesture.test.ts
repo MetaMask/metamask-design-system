@@ -1,7 +1,6 @@
+import { TickColor } from '@metamask/design-system-shared';
 import { act, renderHook } from '@testing-library/react-native';
 import React from 'react';
-
-import { TickColor } from '@metamask/design-system-shared';
 
 import { DEFAULT_TICKS } from './Slider.constants';
 import type { UseSliderGestureParams } from './Slider.types';
@@ -52,7 +51,7 @@ const createParams = (
       TickColor.IconAlternative,
     ),
     thumbColorStops: buildColorStops(ticks, mockPalette, TickColor.IconDefault),
-    hasThemedColors: ticks.some((tick) => tick.color != null),
+    hasThemedColors: ticks.some((tick) => tick.color !== undefined),
     ...overrides,
   };
 };
@@ -130,6 +129,24 @@ describe('useSliderGesture', () => {
     });
 
     expect(onValueChange).toHaveBeenCalledWith(100);
+  });
+
+  it('handlePressStep is a no-op when the tick step is not found', () => {
+    const onValueChange = jest.fn();
+    const { result } = renderHook(() =>
+      useSliderGesture(
+        createParams({
+          onValueChange,
+          ticks: [{ step: 50, label: '50%' }],
+        }),
+      ),
+    );
+
+    act(() => {
+      result.current.handlePressStep(25);
+    });
+
+    expect(onValueChange).not.toHaveBeenCalled();
   });
 
   it('handlePressStep is a no-op when disabled', () => {

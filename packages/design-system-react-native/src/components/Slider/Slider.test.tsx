@@ -28,6 +28,7 @@ import {
   getTickValue,
   getTrackPercentFromValue,
   hasThemedTickColors,
+  interpolateTickColor,
   positionToTrackPercent,
   resolveTickColor,
   resolveTrackPercentToValue,
@@ -232,6 +233,29 @@ describe('Slider.utilities', () => {
       expect(
         hasThemedTickColors([{ step: 0, color: TickColor.SuccessDefault }]),
       ).toBe(true);
+    });
+
+    it('interpolateTickColor returns black when stops are empty', () => {
+      expect(interpolateTickColor(50, [])).toBe('#000000');
+    });
+
+    it('interpolateTickColor returns the sole stop color', () => {
+      expect(interpolateTickColor(50, [{ step: 0, color: '#00FF00' }])).toBe(
+        '#00FF00',
+      );
+    });
+
+    it('buildColorStops uses hard-coded fallback when palette token is missing', () => {
+      expect(
+        buildColorStops(
+          [{ step: 0 }, { step: 100 }],
+          {},
+          TickColor.IconDefault,
+        ),
+      ).toStrictEqual([
+        { step: 0, color: '#000000' },
+        { step: 100, color: '#000000' },
+      ]);
     });
   });
 

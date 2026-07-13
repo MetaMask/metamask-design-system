@@ -11,10 +11,9 @@
  * JS-thread callers use the non-worklet wrappers (`getTrackPercentFromValue`, etc.).
  */
 
-import {
-  type SliderTick,
-  type SliderTickColor,
-  TickColor,
+import type {
+  SliderTick,
+  SliderTickColor,
 } from '@metamask/design-system-shared';
 import { interpolateColor } from 'react-native-reanimated';
 
@@ -347,7 +346,7 @@ export function interpolateTickColor(
  * @returns True when at least one tick has a color.
  */
 export function hasThemedTickColors(ticks: readonly SliderTick[]): boolean {
-  return ticks.some((tick) => tick.color != null);
+  return ticks.some((tick) => tick.color !== undefined);
 }
 
 /**
