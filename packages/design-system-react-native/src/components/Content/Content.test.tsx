@@ -448,6 +448,34 @@ describe('Content', () => {
         46,
       );
     });
+
+    describe('when __DEV__ is false', () => {
+      const originalDev = global.__DEV__;
+
+      afterEach(() => {
+        global.__DEV__ = originalDev;
+      });
+
+      it('does not warn when OneLine ignores description and subvalue', () => {
+        global.__DEV__ = false;
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => undefined);
+
+        render(
+          <Content
+            title="Title"
+            description="Secondary"
+            subvalue="Balance"
+            variant={ContentVariant.OneLine}
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(warnSpy).not.toHaveBeenCalled();
+        warnSpy.mockRestore();
+      });
+    });
   });
 
   describe('twClassName', () => {
