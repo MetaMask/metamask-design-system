@@ -13,7 +13,6 @@ import { BoxColumn } from '../BoxColumn';
 import { BoxRow } from '../BoxRow';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 
-import { getContentVariantLayout } from './Content.constants';
 import type { ContentProps } from './Content.types';
 
 export const Content: React.FC<ContentProps> = ({
@@ -38,22 +37,19 @@ export const Content: React.FC<ContentProps> = ({
   subvalueEndAccessory,
   ...props
 }) => {
-  const layout = getContentVariantLayout(variant);
-
-  const showDescription = layout.showDescription && Boolean(description);
-  const showSubvalue = layout.showSubvalue && Boolean(subvalue);
-  const secondaryRowAlignItems =
-    variant === ContentVariant.MultiLine
-      ? BoxAlignItems.Start
-      : BoxAlignItems.Center;
+  const isOneLine = variant === ContentVariant.OneLine;
+  const isMultiLine = variant === ContentVariant.MultiLine;
+  const showDescription = !isOneLine && Boolean(description);
+  const showSubvalue = !isOneLine && Boolean(subvalue);
+  const alignItems = isMultiLine ? BoxAlignItems.Start : BoxAlignItems.Center;
 
   if (__DEV__) {
-    if (!layout.showDescription && description) {
+    if (isOneLine && description) {
       console.warn(
         'Content: `description` is ignored when `variant` is `ContentVariant.OneLine`.',
       );
     }
-    if (!layout.showSubvalue && subvalue) {
+    if (isOneLine && subvalue) {
       console.warn(
         'Content: `subvalue` is ignored when `variant` is `ContentVariant.OneLine`.',
       );
@@ -63,7 +59,7 @@ export const Content: React.FC<ContentProps> = ({
   return (
     <Box
       flexDirection={BoxFlexDirection.Row}
-      alignItems={layout.alignItems}
+      alignItems={alignItems}
       gap={4}
       twClassName={twClassName}
       {...props}
@@ -75,7 +71,7 @@ export const Content: React.FC<ContentProps> = ({
           showDescription ? (
             <BoxRow
               twClassName="w-full"
-              alignItems={secondaryRowAlignItems}
+              alignItems={alignItems}
               startAccessory={descriptionStartAccessory}
               endAccessory={descriptionEndAccessory}
               gap={1}
@@ -123,7 +119,7 @@ export const Content: React.FC<ContentProps> = ({
           bottomAccessory={
             showSubvalue ? (
               <BoxRow
-                alignItems={secondaryRowAlignItems}
+                alignItems={alignItems}
                 startAccessory={subvalueStartAccessory}
                 endAccessory={subvalueEndAccessory}
                 gap={1}

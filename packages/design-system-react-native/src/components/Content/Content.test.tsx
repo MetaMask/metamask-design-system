@@ -9,10 +9,6 @@ import React from 'react';
 import { Text } from 'react-native';
 
 import { Content } from './Content';
-import {
-  CONTENT_LINE_HEIGHT,
-  LIST_ITEM_PADDING_Y_TOTAL_PX,
-} from './Content.constants';
 
 const ROOT_TEST_ID = 'content-root';
 
@@ -418,12 +414,6 @@ describe('Content', () => {
       expect(getByText('Balance')).toBeOnTheScreen();
     });
 
-    it('matches one-line ListItem min-height formula from typography tokens', () => {
-      expect(CONTENT_LINE_HEIGHT.primary + LIST_ITEM_PADDING_Y_TOTAL_PX).toBe(
-        48,
-      );
-    });
-
     it('renders multi-line description nodes on screen', () => {
       const { getByText } = render(
         <Content
@@ -441,12 +431,6 @@ describe('Content', () => {
 
       expect(getByText('Secondary line')).toBeOnTheScreen();
       expect(getByText('Third line')).toBeOnTheScreen();
-    });
-
-    it('matches two-line content height from typography tokens', () => {
-      expect(CONTENT_LINE_HEIGHT.primary + CONTENT_LINE_HEIGHT.secondary).toBe(
-        46,
-      );
     });
 
     describe('when __DEV__ is false', () => {

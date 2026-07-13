@@ -1,4 +1,5 @@
 import {
+  BoxAlignItems,
   ContentVariant,
   mergeTwClassName,
 } from '@metamask/design-system-shared';
@@ -14,7 +15,6 @@ import type {
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 import { Content } from '../Content';
-import { getContentVariantLayout } from '../Content/Content.constants';
 
 import type { ListItemProps } from './ListItem.types';
 
@@ -48,11 +48,20 @@ export const ListItem: React.FC<ListItemProps> = ({
   ...props
 }) => {
   const tw = useTailwind();
-  const layout = getContentVariantLayout(variant);
+  const isMultiLine = variant === ContentVariant.MultiLine;
+  const rootSizeClassName =
+    variant === ContentVariant.OneLine
+      ? 'min-h-[48px] justify-center'
+      : isMultiLine
+        ? 'min-h-[88px] justify-start'
+        : 'min-h-[72px] justify-center';
+  const accessoryAlignItems = isMultiLine
+    ? BoxAlignItems.Start
+    : BoxAlignItems.Center;
 
   const rootBaseClassName = mergeTwClassName(
     'w-full px-4 py-3',
-    `${layout.listItemMinHeight} ${layout.listItemJustify}`,
+    rootSizeClassName,
   );
   const rootTwClassName = mergeTwClassName(rootBaseClassName, twClassName);
 
@@ -104,7 +113,7 @@ export const ListItem: React.FC<ListItemProps> = ({
     <BoxRow
       startAccessory={startAccessory}
       endAccessory={endAccessory}
-      alignItems={layout.alignItems}
+      alignItems={accessoryAlignItems}
       gap={accessoryGap}
     >
       {content}
