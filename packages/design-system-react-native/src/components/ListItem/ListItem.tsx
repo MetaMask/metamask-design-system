@@ -49,12 +49,12 @@ export const ListItem: React.FC<ListItemProps> = ({
 }) => {
   const tw = useTailwind();
   const isMultiLine = variant === ContentVariant.MultiLine;
-  const rootSizeClassName =
-    variant === ContentVariant.OneLine
-      ? 'min-h-[48px] justify-center'
-      : isMultiLine
-        ? 'min-h-[88px] justify-start'
-        : 'min-h-[72px] justify-center';
+  let rootSizeClassName = 'min-h-[72px] justify-center';
+  if (variant === ContentVariant.OneLine) {
+    rootSizeClassName = 'min-h-[48px] justify-center';
+  } else if (isMultiLine) {
+    rootSizeClassName = 'min-h-[88px] justify-start';
+  }
   const accessoryAlignItems = isMultiLine
     ? BoxAlignItems.Start
     : BoxAlignItems.Center;

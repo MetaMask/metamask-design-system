@@ -39,8 +39,8 @@ export const Content: React.FC<ContentProps> = ({
 }) => {
   const isOneLine = variant === ContentVariant.OneLine;
   const isMultiLine = variant === ContentVariant.MultiLine;
-  const showDescription = !isOneLine && Boolean(description);
-  const showSubvalue = !isOneLine && Boolean(subvalue);
+  const showDescription = !isOneLine && description;
+  const showSubvalue = !isOneLine && subvalue;
   const alignItems = isMultiLine ? BoxAlignItems.Start : BoxAlignItems.Center;
 
   if (__DEV__) {
