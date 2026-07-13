@@ -5,7 +5,6 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
-  - [Slider tick API consolidation](#slider-tick-api-consolidation)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
@@ -13,18 +12,6 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
-
-<a id="slider-tick-api-consolidation"></a>
-
-### Slider tick API consolidation
-
-`SliderPropsShared` replaces fragmented tick props with a unified `ticks` array.
-
-**Removed from `SliderPropsShared`:** `rangeLabelSteps`, `formatStepLabel`, `stepToValue`, `tickThresholds`
-
-**Added:** `ticks`, `TickColor`, `SliderTick`, `SliderTickColor`
-
-See the [design-system-react-native migration guide](../design-system-react-native/MIGRATION.md#slider-tick-api-consolidation) for before/after examples.
 
 ### From version 0.29.0 to 0.30.0
 
@@ -74,6 +61,61 @@ When using **`ListItem`** from **`@metamask/design-system-react-native`**, impor
 - Any import of **`ContentVerticalAlignment`** or usage of **`verticalAlignment`** on **`ContentPropsShared`** must be updated.
 - **`ContentVariant.OneLine`** omits **`description`** and **`subvalue`** even when passed.
 - Row min-heights (including **`ListItem`** **`py-3`** padding): **`OneLine`** 48px, **`TwoLines`** 72px, **`MultiLine`** 88px.
+
+<a id="slider-tick-api-consolidation"></a>
+
+#### `SliderPropsShared`: tick props consolidated into `ticks`
+
+**`rangeLabelSteps`**, **`formatStepLabel`**, **`stepToValue`**, and **`tickThresholds`** are removed from **`SliderPropsShared`**. Use the unified **`ticks`** array instead. **`TickColor`**, **`SliderTick`**, and **`SliderTickColor`** are added.
+
+**What changed:**
+
+| Before (0.29.0)   | After (0.30.0)                                            |
+| ----------------- | --------------------------------------------------------- |
+| `rangeLabelSteps` | `ticks[].step`                                            |
+| `formatStepLabel` | `ticks[].label`                                           |
+| `stepToValue`     | `ticks[].value`                                           |
+| `tickThresholds`  | `ticks[].haptic` (defaults to `true` when `label` is set) |
+| —                 | `ticks`, `TickColor`, `SliderTick`, `SliderTickColor`     |
+
+**Migration:**
+
+```tsx
+// Before (0.29.0)
+import type { SliderPropsShared } from '@metamask/design-system-shared';
+
+const props: SliderPropsShared = {
+  value: leverage,
+  onValueChange: setLeverage,
+  rangeLabelSteps: [0, 50, 100],
+  formatStepLabel: (step) => ({ 0: '1x', 50: '20x', 100: '40x' })[step] ?? '',
+  stepToValue: (step) => ({ 0: 1, 50: 20, 100: 40 })[step] ?? leverage,
+  tickThresholds: [50],
+};
+
+// After (0.30.0)
+import {
+  TickColor,
+  type SliderPropsShared,
+} from '@metamask/design-system-shared';
+
+const props: SliderPropsShared = {
+  value: leverage,
+  onValueChange: setLeverage,
+  ticks: [
+    { step: 0, label: '1x', value: 1, color: TickColor.SuccessDefault },
+    { step: 50, label: '20x', value: 20, haptic: true },
+    { step: 100, label: '40x', value: 40, color: TickColor.ErrorDefault },
+  ],
+};
+```
+
+See the [design-system-react-native migration guide](../design-system-react-native/MIGRATION.md#slider-tick-api-consolidation) for component usage examples.
+
+**Impact:**
+
+- Any type or wrapper that extends **`SliderPropsShared`** and references the removed props must be updated.
+- Prefer **`TickColor`** for theme tokens; raw hex/rgb remain supported via **`SliderTickColor`**.
 
 ### From version 0.24.0 to 0.25.0
 
