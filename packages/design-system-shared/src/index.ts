@@ -33,10 +33,7 @@ export {
 } from './types/BadgeStatus';
 
 // Content types (ADR-0003 + ADR-0004)
-export {
-  ContentVerticalAlignment,
-  type ContentPropsShared,
-} from './types/Content';
+export { ContentVariant, type ContentPropsShared } from './types/Content';
 
 // ListItem types (ADR-0004)
 export { type ListItemPropsShared } from './types/ListItem';

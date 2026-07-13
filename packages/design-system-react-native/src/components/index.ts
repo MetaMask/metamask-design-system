@@ -103,7 +103,7 @@ export type { BoxColumnProps } from './BoxColumn';
 export { Card } from './Card';
 export type { CardProps } from './Card';
 
-export { Content, ContentVerticalAlignment } from './Content';
+export { Content, ContentVariant } from './Content';
 export type { ContentProps } from './Content';
 
 export { ButtonAnimated } from './temp-components/ButtonAnimated';
@@ -180,7 +180,7 @@ export type { KeyValueRowProps } from './KeyValueRow';
 export { Label } from './Label';
 export type { LabelProps } from './Label';
 
-export { ListItem, ListItemVerticalAlignment } from './ListItem';
+export { ListItem, ListItemVariant } from './ListItem';
 export type { ListItemProps } from './ListItem';
 
 export { ListItemSelect } from './ListItemSelect';
