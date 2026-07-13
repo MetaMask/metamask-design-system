@@ -229,6 +229,12 @@ describe('Slider.utilities', () => {
       expect(hasThemedTickColors([{ step: 0, label: '0%' }])).toBe(false);
     });
 
+    it('hasThemedTickColors returns false when tick color is null', () => {
+      expect(
+        hasThemedTickColors([{ step: 0, color: null as unknown as undefined }]),
+      ).toBe(false);
+    });
+
     it('hasThemedTickColors returns true when a tick has color', () => {
       expect(
         hasThemedTickColors([{ step: 0, color: TickColor.SuccessDefault }]),

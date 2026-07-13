@@ -51,7 +51,7 @@ const createParams = (
       TickColor.IconAlternative,
     ),
     thumbColorStops: buildColorStops(ticks, mockPalette, TickColor.IconDefault),
-    hasThemedColors: ticks.some((tick) => tick.color !== undefined),
+    hasThemedColors: ticks.some((tick) => Boolean(tick.color)),
     ...overrides,
   };
 };

@@ -346,7 +346,7 @@ export function interpolateTickColor(
  * @returns True when at least one tick has a color.
  */
 export function hasThemedTickColors(ticks: readonly SliderTick[]): boolean {
-  return ticks.some((tick) => tick.color !== undefined);
+  return ticks.some((tick) => Boolean(tick.color));
 }
 
 /**
