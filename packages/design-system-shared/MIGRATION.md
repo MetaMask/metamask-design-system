@@ -5,12 +5,62 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
+  - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
   - [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
+
+### From version 0.29.0 to 0.30.0
+
+<a id="from-version-0290-to-0300"></a>
+
+<a id="content-verticalalignment-replaced-by-variant"></a>
+
+#### `ContentPropsShared`: `verticalAlignment` removed, `variant` added
+
+**`ContentVerticalAlignment`** and **`verticalAlignment`** are removed from **`ContentPropsShared`**. Use **`ContentVariant`** and **`variant`** instead.
+
+**What changed:**
+
+| Before (0.29.0)                                       | After (0.30.0)                                                  |
+| ----------------------------------------------------- | --------------------------------------------------------------- |
+| `ContentVerticalAlignment`                            | `ContentVariant`                                                |
+| `verticalAlignment` prop                              | `variant` prop                                                  |
+| `verticalAlignment={ContentVerticalAlignment.Center}` | `variant={ContentVariant.TwoLines}` or `ContentVariant.OneLine` |
+| `verticalAlignment={ContentVerticalAlignment.Top}`    | `variant={ContentVariant.MultiLine}`                            |
+
+**Migration:**
+
+```tsx
+// Before (0.29.0)
+import { ContentVerticalAlignment } from '@metamask/design-system-shared';
+
+<Content
+  verticalAlignment={ContentVerticalAlignment.Top}
+  title="Label"
+  description="Secondary"
+/>;
+
+// After (0.30.0)
+import { ContentVariant } from '@metamask/design-system-shared';
+
+<Content
+  variant={ContentVariant.MultiLine}
+  title="Label"
+  description="Secondary"
+/>;
+```
+
+When using **`ListItem`** from **`@metamask/design-system-react-native`**, import **`ListItemVariant`** (alias of **`ContentVariant`**) and pass **`variant`** on the row. See the [design-system-react-native migration guide](../design-system-react-native/MIGRATION.md#content-and-listitem-verticalalignment-replaced-by-variant).
+
+**Impact:**
+
+- Any import of **`ContentVerticalAlignment`** or usage of **`verticalAlignment`** on **`ContentPropsShared`** must be updated.
+- **`ContentVariant.OneLine`** omits **`description`** and **`subvalue`** even when passed.
+- Row min-heights (including **`ListItem`** **`py-3`** padding): **`OneLine`** 48px, **`TwoLines`** 72px, **`MultiLine`** 88px.
 
 ### From version 0.24.0 to 0.25.0
 
