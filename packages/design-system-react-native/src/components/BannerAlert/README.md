@@ -83,6 +83,19 @@ Optional press handler for the action button. When provided, `actionButtonLabel`
 
 See the **ActionButtonOnPress** story for an example.
 
+### `actionButtonLayout`
+
+Optional layout for the action button relative to the banner body.
+
+- `BannerBaseActionButtonLayout.Below` — under title / description / children (default).
+- `BannerBaseActionButtonLayout.End` — right of the body, left of the close button.
+
+| PROP                 | TYPE                           | REQUIRED | DEFAULT                              |
+| -------------------- | ------------------------------ | -------- | ------------------------------------ |
+| `actionButtonLayout` | `BannerBaseActionButtonLayout` | No       | `BannerBaseActionButtonLayout.Below` |
+
+See the **ActionButtonLayoutEnd** story for an example.
+
 ### `onClose`
 
 Optional callback that renders the close icon; `closeButtonProps` customizes the button’s accessibility props or styles.

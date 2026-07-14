@@ -1,3 +1,4 @@
+import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
@@ -34,6 +35,13 @@ const meta: Meta<BannerAlertProps> = {
     actionButtonLabel: {
       control: 'text',
       description: 'Optional action button label',
+    },
+    actionButtonLayout: {
+      control: 'select',
+      options: Object.keys(BannerBaseActionButtonLayout),
+      mapping: BannerBaseActionButtonLayout,
+      description:
+        'Layout for the action button relative to the banner body (Below or End)',
     },
     actionButtonOnPress: {
       action: 'actionButtonOnPress',
@@ -147,6 +155,17 @@ export const ActionButtonOnPress: Story = {
     },
     children:
       'Use actionButtonLabel for the text and actionButtonOnPress for interaction.',
+  },
+};
+
+export const ActionButtonLayoutEnd: Story = {
+  args: {
+    title: 'Action at the end',
+    description: 'Action sits to the right of the body, left of close.',
+    actionButtonLabel: 'Action',
+    actionButtonOnPress: () => undefined,
+    actionButtonLayout: BannerBaseActionButtonLayout.End,
+    onClose: () => undefined,
   },
 };
 

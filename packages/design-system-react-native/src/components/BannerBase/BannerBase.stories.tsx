@@ -1,3 +1,4 @@
+import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
@@ -26,6 +27,13 @@ const meta: Meta<BannerBaseProps> = {
     actionButtonLabel: {
       control: 'text',
       description: 'Optional action button label',
+    },
+    actionButtonLayout: {
+      control: 'select',
+      options: Object.keys(BannerBaseActionButtonLayout),
+      mapping: BannerBaseActionButtonLayout,
+      description:
+        'Layout for the action button relative to the banner body (Below or End)',
     },
     actionButtonProps: {
       control: 'object',
@@ -119,6 +127,26 @@ export const ActionButtonOnPress: Story = {
     children:
       'Use actionButtonLabel for the text and the action handler prop for interaction.',
   },
+};
+
+export const ActionButtonLayoutEnd: Story = {
+  args: {
+    title: 'Action at the end',
+    description: 'Action sits to the right of the body, left of close.',
+    actionButtonLabel: 'Action',
+    actionButtonOnPress: () => undefined,
+    actionButtonLayout: BannerBaseActionButtonLayout.End,
+    onClose: () => undefined,
+    closeButtonProps: {
+      testID: 'banner-base-close-button',
+    },
+  },
+  render: (args) => (
+    <BannerBase
+      {...args}
+      startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
+    />
+  ),
 };
 
 export const OnClose: Story = {
