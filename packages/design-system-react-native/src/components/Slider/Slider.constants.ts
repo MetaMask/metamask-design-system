@@ -1,4 +1,4 @@
-import type { SliderTick } from '@metamask/design-system-shared';
+import type { SliderMark } from '@metamask/design-system-shared';
 
 /** Slider geometry and behavior defaults — not typography or spacing tokens. */
 export const THUMB_SIZE = 32;
@@ -32,7 +32,7 @@ export const SLIDER_TRACK_INSET = Math.abs(THUMB_LEFT_OFFSET);
 export const DOT_EDGE_INSET_PERCENT = '2%';
 export const DOT_EDGE_MAX_PERCENT = '98%';
 
-export const DEFAULT_TICKS: readonly SliderTick[] = [
+export const DEFAULT_MARKS: readonly SliderMark[] = [
   { step: 0, label: '0%' },
   { step: 25, label: '25%', haptic: true },
   { step: 50, label: '50%', haptic: true },

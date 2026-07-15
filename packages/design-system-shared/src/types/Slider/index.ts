@@ -1,6 +1,5 @@
 export {
-  TickColor,
+  SliderMarkColor,
   type SliderPropsShared,
-  type SliderTick,
-  type SliderTickColor,
+  type SliderMark,
 } from './Slider.types';

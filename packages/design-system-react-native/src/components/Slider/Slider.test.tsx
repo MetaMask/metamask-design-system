@@ -1,4 +1,4 @@
-import { TickColor } from '@metamask/design-system-shared';
+import { SliderMarkColor } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import {
   fireEvent,
@@ -24,13 +24,13 @@ import {
   defaultMapValueToTrackPercent,
   defaultStepToValue,
   getDotLeftPercent,
-  getTickHapticThresholds,
-  getTickValue,
+  getMarkHapticThresholds,
+  getMarkValue,
   getTrackPercentFromValue,
-  hasThemedTickColors,
-  interpolateTickColor,
+  hasThemedMarkColors,
+  interpolateMarkColor,
   positionToTrackPercent,
-  resolveTickColor,
+  resolveMarkColor,
   resolveTrackPercentToValue,
   resolveValueToTrackPercent,
   trackPercentToPosition,
@@ -69,7 +69,7 @@ const mockMusdAmountToPercent = (amount: number): number => {
   return 50 + ((amount - 1000) / 9000) * 50;
 };
 
-const mockMusdTicks = [
+const mockMusdMarks = [
   { step: 0, label: '$100', value: 100 },
   { step: 50, label: '$1,000', value: 1000 },
   { step: 100, label: '$10,000', value: 10000 },
@@ -159,7 +159,7 @@ describe('Slider.utilities', () => {
     });
   });
 
-  describe('tick helpers', () => {
+  describe('mark helpers', () => {
     const mockPalette = {
       'success-default': '#00FF00',
       'error-default': '#FF0000',
@@ -167,17 +167,17 @@ describe('Slider.utilities', () => {
       'icon-alternative': '#222222',
     };
 
-    it('getTickValue uses explicit value when provided', () => {
-      expect(getTickValue({ step: 50, value: 20 }, 0, 100)).toBe(20);
+    it('getMarkValue uses explicit value when provided', () => {
+      expect(getMarkValue({ step: 50, value: 20 }, 0, 100)).toBe(20);
     });
 
-    it('getTickValue falls back to linear default', () => {
-      expect(getTickValue({ step: 50 }, 0, 100)).toBe(50);
+    it('getMarkValue falls back to linear default', () => {
+      expect(getMarkValue({ step: 50 }, 0, 100)).toBe(50);
     });
 
-    it('getTickHapticThresholds includes labeled ticks by default', () => {
+    it('getMarkHapticThresholds includes labeled marks by default', () => {
       expect(
-        getTickHapticThresholds([
+        getMarkHapticThresholds([
           { step: 0, label: '0%' },
           { step: 25 },
           { step: 50, label: '50%' },
@@ -185,39 +185,39 @@ describe('Slider.utilities', () => {
       ).toStrictEqual([0, 50]);
     });
 
-    it('getTickHapticThresholds respects explicit haptic flag', () => {
+    it('getMarkHapticThresholds respects explicit haptic flag', () => {
       expect(
-        getTickHapticThresholds([
+        getMarkHapticThresholds([
           { step: 0, haptic: true },
           { step: 50, label: '50%', haptic: false },
         ]),
       ).toStrictEqual([0]);
     });
 
-    it('resolveTickColor resolves token keys from palette', () => {
+    it('resolveMarkColor resolves token keys from palette', () => {
       expect(
-        resolveTickColor(TickColor.SuccessDefault, mockPalette, '#000000'),
+        resolveMarkColor(SliderMarkColor.SuccessDefault, mockPalette, '#000000'),
       ).toBe('#00FF00');
     });
 
-    it('resolveTickColor passes through hex values', () => {
-      expect(resolveTickColor('#ABCDEF', mockPalette, '#000000')).toBe(
+    it('resolveMarkColor passes through legacy hex values for migration bridge', () => {
+      expect(resolveMarkColor('#ABCDEF', mockPalette, '#000000')).toBe(
         '#ABCDEF',
       );
     });
 
-    it('resolveTickColor falls back when token is missing', () => {
-      expect(resolveTickColor('missing-token', mockPalette, '#FALLBACK')).toBe(
+    it('resolveMarkColor falls back when token is missing', () => {
+      expect(resolveMarkColor('missing-token', mockPalette, '#FALLBACK')).toBe(
         '#FALLBACK',
       );
     });
 
-    it('buildColorStops applies fallback for ticks without color', () => {
+    it('buildColorStops applies fallback for marks without color', () => {
       expect(
         buildColorStops(
-          [{ step: 0, color: TickColor.SuccessDefault }, { step: 100 }],
+          [{ step: 0, color: SliderMarkColor.SuccessDefault }, { step: 100 }],
           mockPalette,
-          TickColor.IconAlternative,
+          SliderMarkColor.IconAlternative,
         ),
       ).toStrictEqual([
         { step: 0, color: '#00FF00' },
@@ -225,38 +225,38 @@ describe('Slider.utilities', () => {
       ]);
     });
 
-    it('hasThemedTickColors returns false when no tick has color', () => {
-      expect(hasThemedTickColors([{ step: 0, label: '0%' }])).toBe(false);
+    it('hasThemedMarkColors returns false when no mark has color', () => {
+      expect(hasThemedMarkColors([{ step: 0, label: '0%' }])).toBe(false);
     });
 
-    it('hasThemedTickColors returns false when tick color is null', () => {
+    it('hasThemedMarkColors returns false when mark color is null', () => {
       expect(
-        hasThemedTickColors([{ step: 0, color: null as unknown as undefined }]),
+        hasThemedMarkColors([{ step: 0, color: null as unknown as undefined }]),
       ).toBe(false);
     });
 
-    it('hasThemedTickColors returns true when a tick has color', () => {
+    it('hasThemedMarkColors returns true when a mark has color', () => {
       expect(
-        hasThemedTickColors([{ step: 0, color: TickColor.SuccessDefault }]),
+        hasThemedMarkColors([{ step: 0, color: SliderMarkColor.SuccessDefault }]),
       ).toBe(true);
     });
 
-    it('interpolateTickColor returns black when stops are empty', () => {
-      expect(interpolateTickColor(50, [])).toBe('#000000');
+    it('interpolateMarkColor returns black when stops are empty', () => {
+      expect(interpolateMarkColor(50, [])).toBe('#000000');
     });
 
-    it('interpolateTickColor returns the sole stop color', () => {
-      expect(interpolateTickColor(50, [{ step: 0, color: '#00FF00' }])).toBe(
+    it('interpolateMarkColor returns the sole stop color', () => {
+      expect(interpolateMarkColor(50, [{ step: 0, color: '#00FF00' }])).toBe(
         '#00FF00',
       );
     });
 
-    it('buildColorStops uses hard-coded fallback when palette token is missing', () => {
+    it('& uses hard-coded fallback when palette token is missing', () => {
       expect(
         buildColorStops(
           [{ step: 0 }, { step: 100 }],
           {},
-          TickColor.IconDefault,
+          SliderMarkColor.IconDefault,
         ),
       ).toStrictEqual([
         { step: 0, color: '#000000' },
@@ -383,28 +383,28 @@ describe('Slider', () => {
     expect(onValueChange).not.toHaveBeenCalled();
   });
 
-  it('fires onTick when crossing a threshold via label press', () => {
-    const onTick = jest.fn();
+  it('fires onMark when crossing a threshold via label press', () => {
+    const onMark = jest.fn();
     const { rerender } = render(
-      <Slider {...defaultProps} value={10} onTick={onTick} />,
+      <Slider {...defaultProps} value={10} onMark={onMark} />,
     );
 
     fireEvent.press(screen.getByText('50%'));
 
-    expect(onTick).toHaveBeenCalled();
+    expect(onMark).toHaveBeenCalled();
 
-    onTick.mockClear();
-    rerender(<Slider {...defaultProps} value={60} onTick={onTick} />);
+    onMark.mockClear();
+    rerender(<Slider {...defaultProps} value={60} onMark={onMark} />);
     fireEvent.press(screen.getByText('25%'));
 
-    expect(onTick).toHaveBeenCalled();
+    expect(onMark).toHaveBeenCalled();
   });
 
-  it('supports custom ticks', () => {
+  it('supports custom marks', () => {
     render(
       <Slider
         {...defaultProps}
-        ticks={[
+        marks={[
           { step: 0, label: '0%' },
           { step: 50, label: '50%' },
           { step: 100, label: '100%' },
@@ -420,14 +420,14 @@ describe('Slider', () => {
     expect(screen.queryByText('25%')).toBeNull();
   });
 
-  it('renders custom tick labels', () => {
+  it('renders custom mark labels', () => {
     render(
       <Slider
         {...defaultProps}
         value={1000}
         minimumValue={100}
         maximumValue={10000}
-        ticks={mockMusdTicks}
+        marks={mockMusdMarks}
         mapValueToTrackPercent={mockMusdAmountToPercent}
       />,
     );
@@ -437,7 +437,7 @@ describe('Slider', () => {
     expect(screen.getByText('$10,000')).toBeOnTheScreen();
   });
 
-  it('calls onValueChange with tick value when a custom label is pressed', () => {
+  it('calls onValueChange with mark value when a custom label is pressed', () => {
     const onValueChange = jest.fn();
     render(
       <Slider
@@ -445,7 +445,7 @@ describe('Slider', () => {
         value={200}
         minimumValue={100}
         maximumValue={10000}
-        ticks={mockMusdTicks}
+        marks={mockMusdMarks}
         onValueChange={onValueChange}
         mapValueToTrackPercent={mockMusdAmountToPercent}
       />,
@@ -456,34 +456,34 @@ describe('Slider', () => {
     expect(onValueChange).toHaveBeenCalledWith(1000);
   });
 
-  it('fires onTick using haptic tick thresholds for non-linear scales', () => {
-    const onTick = jest.fn();
+  it('fires onMark using haptic mark thresholds for non-linear scales', () => {
+    const onMark = jest.fn();
     render(
       <Slider
         {...defaultProps}
         value={200}
         minimumValue={100}
         maximumValue={10000}
-        ticks={[
+        marks={[
           { step: 0, label: '$100', value: 100 },
           { step: 50, label: '$1,000', value: 1000, haptic: true },
           { step: 100, label: '$10,000', value: 10000 },
         ]}
-        onTick={onTick}
+        onMark={onMark}
         mapValueToTrackPercent={mockMusdAmountToPercent}
       />,
     );
 
     fireEvent.press(screen.getByText('$1,000'));
 
-    expect(onTick).toHaveBeenCalled();
+    expect(onMark).toHaveBeenCalled();
   });
 
-  it('renders dot-only ticks without labels', () => {
+  it('renders dot-only marks without labels', () => {
     render(
       <Slider
         {...defaultProps}
-        ticks={[
+        marks={[
           { step: 0, label: '1x' },
           { step: 25 },
           { step: 50, label: '20x' },
@@ -564,7 +564,7 @@ describe('Slider', () => {
     expect(onValueChange).not.toHaveBeenCalled();
   });
 
-  it('maps label press to custom min/max range with default tick value', () => {
+  it('maps label press to custom min/max range with default mark value', () => {
     const onValueChange = jest.fn();
     render(
       <Slider

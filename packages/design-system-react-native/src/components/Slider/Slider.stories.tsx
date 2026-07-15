@@ -1,4 +1,4 @@
-import { TickColor } from '@metamask/design-system-shared';
+import { SliderMarkColor } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
 
@@ -34,12 +34,12 @@ const meta: Meta<SliderProps> = {
     showRangeLabels: {
       control: 'boolean',
       description:
-        'When true, renders tappable labels below the track for ticks with a label.',
+        'When true, renders tappable labels below the track for marks with a label.',
     },
     showRangeDots: {
       control: 'boolean',
       description:
-        'When true, renders dots on the track at each tick position.',
+        'When true, renders dots on the track at each mark position.',
     },
   },
   decorators: [
@@ -106,11 +106,11 @@ export const ShowRangeDots: Story = {
   ),
 };
 
-export const CustomTicks: Story = {
+export const CustomMarks: Story = {
   render: () => (
     <ControlledSlider
       value={50}
-      ticks={[
+      marks={[
         { step: 0, label: '0%' },
         { step: 50, label: '50%' },
         { step: 100, label: '100%' },
@@ -172,7 +172,7 @@ export const NonLinearScale: Story = {
       minimumValue={100}
       maximumValue={10000}
       step={1}
-      ticks={[
+      marks={[
         { step: 0, label: '$100', value: 100 },
         { step: 50, label: '$1,000', value: 1000 },
         { step: 100, label: '$10,000', value: 10000 },
@@ -185,35 +185,43 @@ export const NonLinearScale: Story = {
   ),
 };
 
-export const ThemedTicks: Story = {
+export const ThemedMarks: Story = {
   render: () => (
     <ControlledSlider
       value={10}
       minimumValue={1}
       maximumValue={40}
-      ticks={[
-        { step: 0, label: '1x', value: 1, color: TickColor.SuccessDefault },
-        { step: 23, label: '10x', value: 10, color: TickColor.WarningDefault },
-        { step: 49, label: '20x', value: 20, color: TickColor.WarningDefault },
-        { step: 74, label: '30x', value: 30, color: TickColor.WarningDefault },
-        { step: 100, label: '40x', value: 40, color: TickColor.ErrorDefault },
-      ]}
-      showRangeLabels
-      showRangeDots
-    />
-  ),
-};
-
-export const CustomHexColor: Story = {
-  render: () => (
-    <ControlledSlider
-      value={50}
-      ticks={[
-        { step: 0, label: '0%', color: '#39FF14' },
-        { step: 25, label: '25%', color: '#00D4FF' },
-        { step: 50, label: '50%', color: '#FF00FF' },
-        { step: 75, label: '75%', color: '#FF6600' },
-        { step: 100, label: '100%', color: '#FF0040' },
+      marks={[
+        {
+          step: 0,
+          label: '1x',
+          value: 1,
+          color: SliderMarkColor.SuccessDefault,
+        },
+        {
+          step: 23,
+          label: '10x',
+          value: 10,
+          color: SliderMarkColor.WarningDefault,
+        },
+        {
+          step: 49,
+          label: '20x',
+          value: 20,
+          color: SliderMarkColor.WarningDefault,
+        },
+        {
+          step: 74,
+          label: '30x',
+          value: 30,
+          color: SliderMarkColor.WarningDefault,
+        },
+        {
+          step: 100,
+          label: '40x',
+          value: 40,
+          color: SliderMarkColor.ErrorDefault,
+        },
       ]}
       showRangeLabels
       showRangeDots

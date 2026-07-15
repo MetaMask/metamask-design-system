@@ -1,7 +1,7 @@
 import type {
   SliderPropsShared,
-  SliderTick,
-  SliderTickColor,
+  SliderMark,
+  SliderMarkColor,
 } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 import type { Gesture } from 'react-native-gesture-handler';
@@ -9,7 +9,8 @@ import type { useAnimatedStyle } from 'react-native-reanimated';
 
 import type { SliderColorStop } from './Slider.utilities';
 
-export type { SliderTick, SliderTickColor };
+export type { SliderMark, SliderMarkColor };
+
 
 /**
  * React Native Slider props.
@@ -94,13 +95,13 @@ export type UseSliderGestureParams = {
   onGrip?: () => void;
 
   /**
-   * Called when track percent crosses a haptic tick threshold while dragging.
+   * Called when track percent crosses a haptic mark threshold while dragging.
    * Evaluated on each pan `onUpdate` and on range-label press.
    */
-  onTick?: () => void;
+  onMark?: () => void;
 
-  /** Tick entries for label press value resolution and haptic thresholds. */
-  ticks: readonly SliderTick[];
+  /** Mark entries for label press value resolution and haptic thresholds. */
+  marks: readonly SliderMark[];
 
   /** Resolved fill color stops for themed interpolation. */
   fillColorStops: readonly SliderColorStop[];
@@ -148,7 +149,7 @@ export type UseSliderGestureResult = {
   gesture: ReturnType<typeof Gesture.Simultaneous>;
 
   /**
-   * Sets value from a tapped tick label: tick value → callbacks → thumb sync.
+   * Sets value from a tapped mark label: mark value → callbacks → thumb sync.
    * No-op when `isDisabled` is true.
    */
   handlePressStep: (rangeStep: number) => void;

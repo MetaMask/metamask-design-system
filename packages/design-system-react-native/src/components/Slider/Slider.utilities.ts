@@ -12,8 +12,8 @@
  */
 
 import type {
-  SliderTick,
-  SliderTickColor,
+  SliderMark,
+  SliderMarkColor,
 } from '@metamask/design-system-shared';
 import { interpolateColor } from 'react-native-reanimated';
 
@@ -213,9 +213,9 @@ export function getTrackPercentFromValue(
 // --- Range label / dot defaults (Slider.tsx) ---
 
 /**
- * Default linear track-percent → domain value for a tick.
+ * Default linear track-percent → domain value for a mark.
  *
- * @param step - Track-percent step from a tick entry.
+ * @param step - Track-percent step from a mark entry.
  * @param minimumValue - Lower bound of the domain range.
  * @param maximumValue - Upper bound of the domain range.
  * @returns Domain value for the step.
@@ -229,49 +229,51 @@ export function defaultStepToValue(
 }
 
 /**
- * Domain value for a tick: explicit `value` or linear default from step.
+ * Domain value for a mark: explicit `value` or linear default from step.
  *
- * @param tick - Tick entry.
+ * @param mark - Mark entry.
  * @param minimumValue - Lower bound of the domain range.
  * @param maximumValue - Upper bound of the domain range.
- * @returns Domain value for the tick.
+ * @returns Domain value for the mark.
  */
-export function getTickValue(
-  tick: SliderTick,
+export function getMarkValue(
+  mark: SliderMark,
   minimumValue: number,
   maximumValue: number,
 ): number {
-  if (tick.value !== undefined) {
-    return tick.value;
+  if (mark.value !== undefined) {
+    return mark.value;
   }
 
-  return defaultStepToValue(tick.step, minimumValue, maximumValue);
+  return defaultStepToValue(mark.step, minimumValue, maximumValue);
 }
 
 /**
- * Track-percent thresholds that trigger onTick while dragging.
+ * Track-percent thresholds that trigger onMark while dragging.
  *
- * @param ticks - Tick entries.
+ * @param marks - Mark entries.
  * @returns Haptic threshold positions.
  */
-export function getTickHapticThresholds(
-  ticks: readonly SliderTick[],
+export function getMarkHapticThresholds(
+  marks: readonly SliderMark[],
 ): number[] {
-  return ticks
-    .filter((tick) => tick.haptic ?? Boolean(tick.label))
-    .map((tick) => tick.step);
+  return marks
+    .filter((mark) => mark.haptic ?? Boolean(mark.label))
+    .map((mark) => mark.step);
 }
 
 /**
- * Resolves a tick color token or raw color string to a hex/rgb value.
+ * Resolves a mark color to a concrete color string for Reanimated.
+ * Design tokens are looked up on the palette; raw hex/rgb pass through
+ * (temporary migration bridge — prefer `SliderMarkColor` tokens in app code).
  *
- * @param color - Tick color token or raw hex/rgb string.
+ * @param color - Theme token key (or legacy hex/rgb string).
  * @param palette - Flattened theme color palette.
  * @param fallback - Fallback color when token is not found.
  * @returns Resolved color string.
  */
-export function resolveTickColor(
-  color: SliderTickColor,
+export function resolveMarkColor(
+  color: SliderMarkColor | string,
   palette: Record<string, string>,
   fallback: string,
 ): string {
@@ -283,38 +285,38 @@ export function resolveTickColor(
 }
 
 /**
- * Builds color interpolation stops from ticks, applying fallback for missing colors.
+ * Builds color interpolation stops from marks, applying fallback for missing colors.
  *
- * @param ticks - Tick entries.
+ * @param marks - Mark entries.
  * @param palette - Flattened theme color palette.
- * @param fallbackToken - Default token key when tick.color is omitted.
+ * @param fallbackToken - Default token key when mark.color is omitted.
  * @returns Sorted color stops for interpolation.
  */
 export function buildColorStops(
-  ticks: readonly SliderTick[],
+  marks: readonly SliderMark[],
   palette: Record<string, string>,
   fallbackToken: string,
 ): SliderColorStop[] {
   const fallback = palette[fallbackToken] ?? '#000000';
 
-  return [...ticks]
+  return [...marks]
     .sort((a, b) => a.step - b.step)
-    .map((tick) => ({
-      step: tick.step,
-      color: tick.color
-        ? resolveTickColor(tick.color, palette, fallback)
+    .map((mark) => ({
+      step: mark.step,
+      color: mark.color
+        ? resolveMarkColor(mark.color, palette, fallback)
         : fallback,
     }));
 }
 
 /**
- * Interpolates a color along the track based on tick color stops.
+ * Interpolates a color along the track based on mark color stops.
  *
  * @param trackPercent - Current track position from 0–100.
  * @param stops - Sorted color stops.
  * @returns Interpolated color string.
  */
-export function interpolateTickColor(
+export function interpolateMarkColor(
   trackPercent: number,
   stops: readonly SliderColorStop[],
 ): string {
@@ -340,19 +342,19 @@ export function interpolateTickColor(
 }
 
 /**
- * Whether any tick defines a theme color.
+ * Whether any mark defines a theme color.
  *
- * @param ticks - Tick entries.
- * @returns True when at least one tick has a color.
+ * @param marks - Mark entries.
+ * @returns True when at least one mark has a color.
  */
-export function hasThemedTickColors(ticks: readonly SliderTick[]): boolean {
-  return ticks.some((tick) => Boolean(tick.color));
+export function hasThemedMarkColors(marks: readonly SliderMark[]): boolean {
+  return marks.some((mark) => Boolean(mark.color));
 }
 
 /**
  * Marker `left` percent for range dots and labels; edge steps inset to stay on track.
  *
- * @param step - Track-percent step from a tick entry.
+ * @param step - Track-percent step from a mark entry.
  * @returns CSS `left` percentage string.
  */
 export function getDotLeftPercent(step: number): string {

@@ -20,10 +20,10 @@ import type {
 } from './Slider.types';
 import {
   clampGesturePosition,
-  getTickHapticThresholds,
-  getTickValue,
+  getMarkHapticThresholds,
+  getMarkValue,
   getTrackPercentFromValue,
-  interpolateTickColor,
+  interpolateMarkColor,
   positionToTrackPercent,
   resolveTrackPercentToValue,
   resolveValueToTrackPercent,
@@ -56,8 +56,8 @@ export function useSliderGesture(
     onValueChange,
     onDragEnd,
     onGrip,
-    onTick,
-    ticks,
+    onMark,
+    marks,
     fillColorStops,
     thumbColorStops,
     hasThemedColors,
@@ -66,8 +66,8 @@ export function useSliderGesture(
   } = params;
 
   const hapticThresholds = useMemo(
-    () => getTickHapticThresholds(ticks),
-    [ticks],
+    () => getMarkHapticThresholds(marks),
+    [marks],
   );
 
   // --- Animated state ---
@@ -189,14 +189,14 @@ export function useSliderGesture(
           (prevTrackPercent < threshold && newTrackPercent >= threshold) ||
           (prevTrackPercent > threshold && newTrackPercent <= threshold)
         ) {
-          onTick?.();
+          onMark?.();
           break;
         }
       }
 
       previousTrackPercentRef.current = newTrackPercent;
     },
-    [hapticThresholds, onTick],
+    [hapticThresholds, onMark],
   );
 
   // --- Animated styles (thumb + fill width follow translateX) ---
@@ -206,7 +206,7 @@ export function useSliderGesture(
       return undefined;
     }
 
-    return interpolateTickColor(
+    return interpolateMarkColor(
       positionToTrackPercent(translateX.value, sliderWidth.value),
       fillColorStops,
     );
@@ -217,7 +217,7 @@ export function useSliderGesture(
       return undefined;
     }
 
-    return interpolateTickColor(
+    return interpolateMarkColor(
       positionToTrackPercent(translateX.value, sliderWidth.value),
       thumbColorStops,
     );
@@ -388,12 +388,12 @@ export function useSliderGesture(
         return;
       }
 
-      const tick = ticks.find((entry) => entry.step === rangeStep);
-      if (!tick) {
+      const mark = marks.find((entry) => entry.step === rangeStep);
+      if (!mark) {
         return;
       }
 
-      const newValue = getTickValue(tick, minimumValue, maximumValue);
+      const newValue = getMarkValue(mark, minimumValue, maximumValue);
       onValueChange(newValue);
       const trackPercent = getTrackPercentFromValue(
         newValue,
@@ -414,7 +414,7 @@ export function useSliderGesture(
       onDragEnd,
       onValueChange,
       syncPositionFromValue,
-      ticks,
+      marks,
     ],
   );
 

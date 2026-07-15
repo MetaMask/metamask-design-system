@@ -2,7 +2,7 @@ import {
   FontWeight,
   TextColor,
   TextVariant,
-  TickColor,
+  SliderMarkColor,
 } from '@metamask/design-system-shared';
 import {
   getThemeColors,
@@ -20,7 +20,7 @@ import { Box } from '../Box';
 import { Text } from '../Text';
 
 import {
-  DEFAULT_TICKS,
+  DEFAULT_MARKS,
   RANGE_LABEL_TOP,
   SLIDER_BOTTOM_PADDING,
   SLIDER_TRACK_INSET,
@@ -35,7 +35,7 @@ import {
   clampValueToRange,
   getDotLeftPercent,
   getTrackPercentFromValue,
-  hasThemedTickColors,
+  hasThemedMarkColors,
 } from './Slider.utilities';
 import { useSliderGesture } from './useSliderGesture';
 
@@ -48,11 +48,11 @@ export const Slider = ({
   step = 1,
   isDisabled = false,
   testID,
-  ticks = DEFAULT_TICKS,
+  marks = DEFAULT_MARKS,
   showRangeLabels = false,
   showRangeDots = false,
   onGrip,
-  onTick,
+  onMark,
   mapValueToTrackPercent,
   mapTrackPercentToValue,
   trackInset = SLIDER_TRACK_INSET,
@@ -70,22 +70,26 @@ export const Slider = ({
   );
 
   const themedColors = useMemo(() => {
-    const hasThemedColors = hasThemedTickColors(ticks);
+    const hasThemedColors = hasThemedMarkColors(marks);
 
     return {
       hasThemedColors,
       fillColorStops: buildColorStops(
-        ticks,
+        marks,
         palette,
-        TickColor.IconAlternative,
+        SliderMarkColor.IconAlternative,
       ),
-      thumbColorStops: buildColorStops(ticks, palette, TickColor.IconDefault),
+      thumbColorStops: buildColorStops(
+        marks,
+        palette,
+        SliderMarkColor.IconDefault,
+      ),
     };
-  }, [palette, ticks]);
+  }, [palette, marks]);
 
-  const labeledTicks = useMemo(
-    () => ticks.filter((tick) => tick.label !== undefined),
-    [ticks],
+  const labeledMarks = useMemo(
+    () => marks.filter((mark) => mark.label !== undefined),
+    [marks],
   );
 
   const { handleLayout, progressStyle, thumbStyle, gesture, handlePressStep } =
@@ -98,8 +102,8 @@ export const Slider = ({
       onValueChange,
       onDragEnd,
       onGrip,
-      onTick,
-      ticks,
+      onMark,
+      marks,
       fillColorStops: themedColors.fillColorStops,
       thumbColorStops: themedColors.thumbColorStops,
       hasThemedColors: themedColors.hasThemedColors,
@@ -196,13 +200,13 @@ export const Slider = ({
             ]}
           />
           {showRangeDots &&
-            ticks.map((tick) => (
+            marks.map((mark) => (
               <Box
-                key={`dot-${tick.step}`}
+                key={`dot-${mark.step}`}
                 pointerEvents="none"
                 twClassName="absolute top-0.5 h-1 w-1 rounded-full bg-text-muted"
                 style={{
-                  left: getDotLeftPercent(tick.step) as ViewStyle['left'],
+                  left: getDotLeftPercent(mark.step) as ViewStyle['left'],
                   transform: [{ translateX: -2 }],
                   zIndex: -2,
                 }}
@@ -229,18 +233,18 @@ export const Slider = ({
       </GestureDetector>
 
       {showRangeLabels &&
-        labeledTicks.map((tick) => (
+        labeledMarks.map((mark) => (
           <Pressable
-            key={`label-${tick.step}`}
+            key={`label-${mark.step}`}
             style={[
               tw.style('absolute items-center'),
               {
                 top: RANGE_LABEL_TOP,
-                left: getDotLeftPercent(tick.step) as ViewStyle['left'],
+                left: getDotLeftPercent(mark.step) as ViewStyle['left'],
                 transform: [{ translateX: '-50%' }],
               },
             ]}
-            onPress={() => handlePressStep(tick.step)}
+            onPress={() => handlePressStep(mark.step)}
             disabled={isDisabled}
             accessibilityRole="button"
           >
@@ -249,7 +253,7 @@ export const Slider = ({
               fontWeight={FontWeight.Medium}
               color={TextColor.TextAlternative}
             >
-              {tick.label}
+              {mark.label}
             </Text>
           </Pressable>
         ))}

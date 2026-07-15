@@ -247,10 +247,9 @@ export { type SwitchPropsShared } from './types/Switch';
 
 // Slider types (ADR-0004)
 export {
-  TickColor,
+  SliderMarkColor,
   type SliderPropsShared,
-  type SliderTick,
-  type SliderTickColor,
+  type SliderMark,
 } from './types/Slider';
 
 // FilterButtonGroup context (ADR-0003 + ADR-0004)

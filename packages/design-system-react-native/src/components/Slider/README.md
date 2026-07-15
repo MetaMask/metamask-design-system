@@ -147,7 +147,7 @@ const [value, setValue] = useState(50);
 
 ### `showRangeLabels`
 
-Optional prop that when true, renders tappable labels below the track for ticks that define a `label`.
+Optional prop that when true, renders tappable labels below the track for marks that define a `label`.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -164,7 +164,7 @@ const [value, setValue] = useState(50);
 
 ### `showRangeDots`
 
-Optional prop that when true, renders dots on the track at each tick position.
+Optional prop that when true, renders dots on the track at each mark position.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -179,18 +179,18 @@ const [value, setValue] = useState(50);
 <Slider value={value} onValueChange={setValue} showRangeDots />;
 ```
 
-### `ticks`
+### `marks`
 
-Optional tick markers along the track. Each entry defines a track-percent position (`step`), optional `label`, optional domain `value`, optional theme `color`, and optional `haptic` threshold for `onTick`.
+Optional marks along the track. Each entry defines a track-percent position (`step`), optional `label`, optional domain `value`, optional theme `color`, and optional `haptic` threshold for `onMark`.
 
-When no tick defines `color`, the slider uses default track and thumb colors. When at least one tick has `color`, thumb and fill colors interpolate smoothly as the user drags.
+When no mark defines `color`, the slider uses default track and thumb colors. When at least one mark has `color`, thumb and fill colors interpolate smoothly as the user drags.
 
 | TYPE                    | REQUIRED | DEFAULT         |
 | ----------------------- | -------- | --------------- |
-| `readonly SliderTick[]` | No       | `DEFAULT_TICKS` |
+| `readonly SliderMark[]` | No       | `DEFAULT_MARKS` |
 
 ```tsx
-import { Slider, TickColor } from '@metamask/design-system-react-native';
+import { Slider, SliderMarkColor } from '@metamask/design-system-react-native';
 import { useState } from 'react';
 
 const [value, setValue] = useState(50);
@@ -200,7 +200,7 @@ const [value, setValue] = useState(50);
   onValueChange={setValue}
   showRangeLabels
   showRangeDots
-  ticks={[
+  marks={[
     { step: 0, label: '0%' },
     { step: 50, label: '50%' },
     { step: 100, label: '100%' },
@@ -208,12 +208,12 @@ const [value, setValue] = useState(50);
 />;
 ```
 
-#### Themed ticks with `TickColor`
+#### Themed marks with `SliderMarkColor`
 
-Use `TickColor` for design token colors, or pass a raw hex/rgb string for custom colors:
+Use `SliderMarkColor` design tokens for mark colors (e.g. `SliderMarkColor.SuccessDefault`). Tokens resolve to theme hex values internally for Reanimated interpolation. App code must use design tokens (`@metamask/design-tokens/color-no-hex`); do not pass raw hex/rgb in product UI. The Perps leverage ramp currently relies on temporary hardcoded colors ([`leverageColors.ts`](https://github.com/MetaMask/metamask-mobile/blob/main/app/components/UI/Perps/constants/leverageColors.ts)) — that ramp should be tokenized rather than treated as a supported Slider pattern.
 
 ```tsx
-import { Slider, TickColor } from '@metamask/design-system-react-native';
+import { Slider, SliderMarkColor } from '@metamask/design-system-react-native';
 import { useState } from 'react';
 
 const [leverage, setLeverage] = useState(20);
@@ -225,17 +225,17 @@ const [leverage, setLeverage] = useState(20);
   maximumValue={40}
   showRangeLabels
   showRangeDots
-  ticks={[
-    { step: 0, label: '1x', value: 1, color: TickColor.SuccessDefault },
+  marks={[
+    { step: 0, label: '1x', value: 1, color: SliderMarkColor.SuccessDefault },
     { step: 25 },
     { step: 50, label: '20x', value: 20 },
     { step: 75 },
-    { step: 100, label: '40x', value: 40, color: TickColor.ErrorDefault },
+    { step: 100, label: '40x', value: 40, color: SliderMarkColor.ErrorDefault },
   ]}
 />;
 ```
 
-Ticks without `label` render as dot-only markers. Ticks without `color` use default slider colors (`icon-alternative` fill, `icon-default` thumb) during interpolation.
+Marks without `label` render as dot-only markers. Marks without `color` use default slider colors (`icon-alternative` fill, `icon-default` thumb) during interpolation.
 
 ### `onGrip`
 
@@ -258,9 +258,9 @@ const [value, setValue] = useState(50);
 />;
 ```
 
-### `onTick`
+### `onMark`
 
-Optional callback fired when the track percent crosses a haptic tick threshold while dragging or when a labeled tick is pressed. Haptic thresholds default to ticks with a `label`; override per tick with `haptic: true` or `haptic: false`.
+Optional callback fired when the track percent crosses a haptic mark threshold while dragging or when a labeled mark is pressed. Haptic thresholds default to marks with a `label`; override per mark with `haptic: true` or `haptic: false`.
 
 | TYPE         | REQUIRED | DEFAULT     |
 | ------------ | -------- | ----------- |
@@ -275,8 +275,8 @@ const [value, setValue] = useState(50);
 <Slider
   value={value}
   onValueChange={setValue}
-  onTick={() => triggerHaptic()}
-  ticks={[
+  onMark={() => triggerHaptic()}
+  marks={[
     { step: 0, label: '0%' },
     { step: 50, label: '50%', haptic: true },
     { step: 100, label: '100%' },
@@ -330,9 +330,9 @@ const [value, setValue] = useState(500);
 />;
 ```
 
-### Non-linear scale with custom ticks
+### Non-linear scale with custom marks
 
-Use `ticks` with explicit `label` and `value` per stop, together with `mapValueToTrackPercent` and `mapTrackPercentToValue` for non-linear scales:
+Use `marks` with explicit `label` and `value` per stop, together with `mapValueToTrackPercent` and `mapTrackPercentToValue` for non-linear scales:
 
 ```tsx
 import { Slider } from '@metamask/design-system-react-native';
@@ -363,7 +363,7 @@ const [amount, setAmount] = useState(1000);
   minimumValue={MIN_AMOUNT}
   maximumValue={MAX_AMOUNT}
   step={1}
-  ticks={[
+  marks={[
     { step: 0, label: '$100', value: 100 },
     { step: 50, label: '$1,000', value: 1000 },
     { step: 100, label: '$10,000', value: 10000 },

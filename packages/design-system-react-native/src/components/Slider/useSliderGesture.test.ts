@@ -1,8 +1,8 @@
-import { TickColor } from '@metamask/design-system-shared';
+import { SliderMarkColor } from '@metamask/design-system-shared';
 import { act, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { DEFAULT_TICKS } from './Slider.constants';
+import { DEFAULT_MARKS } from './Slider.constants';
 import type { UseSliderGestureParams } from './Slider.types';
 import { buildColorStops } from './Slider.utilities';
 import { useSliderGesture } from './useSliderGesture';
@@ -39,19 +39,19 @@ const mockPalette = {
 const createParams = (
   overrides: Partial<UseSliderGestureParams> = {},
 ): UseSliderGestureParams => {
-  const ticks = overrides.ticks ?? DEFAULT_TICKS;
+  const marks = overrides.marks ?? DEFAULT_MARKS;
 
   return {
     value: 50,
     onValueChange: jest.fn(),
-    ticks,
+    marks,
     fillColorStops: buildColorStops(
-      ticks,
+      marks,
       mockPalette,
-      TickColor.IconAlternative,
+      SliderMarkColor.IconAlternative,
     ),
-    thumbColorStops: buildColorStops(ticks, mockPalette, TickColor.IconDefault),
-    hasThemedColors: ticks.some((tick) => Boolean(tick.color)),
+    thumbColorStops: buildColorStops(marks, mockPalette, SliderMarkColor.IconDefault),
+    hasThemedColors: marks.some((mark) => Boolean(mark.color)),
     ...overrides,
   };
 };
@@ -90,7 +90,7 @@ describe('useSliderGesture', () => {
     expect(result.current.progressStyle).toBeDefined();
   });
 
-  it('handlePressStep updates value from tick value', () => {
+  it('handlePressStep updates value from mark value', () => {
     const onValueChange = jest.fn();
     const onDragEnd = jest.fn();
     const { result } = renderHook(() =>
@@ -98,7 +98,7 @@ describe('useSliderGesture', () => {
         createParams({
           onValueChange,
           onDragEnd,
-          ticks: [{ step: 25, label: '25', value: 50 }],
+          marks: [{ step: 25, label: '25', value: 50 }],
         }),
       ),
     );
@@ -111,7 +111,7 @@ describe('useSliderGesture', () => {
     expect(onDragEnd).toHaveBeenCalledWith(50);
   });
 
-  it('handlePressStep uses linear default when tick value is omitted', () => {
+  it('handlePressStep uses linear default when mark value is omitted', () => {
     const onValueChange = jest.fn();
     const { result } = renderHook(() =>
       useSliderGesture(
@@ -119,7 +119,7 @@ describe('useSliderGesture', () => {
           onValueChange,
           minimumValue: 0,
           maximumValue: 200,
-          ticks: [{ step: 50, label: '50%' }],
+          marks: [{ step: 50, label: '50%' }],
         }),
       ),
     );
@@ -131,13 +131,13 @@ describe('useSliderGesture', () => {
     expect(onValueChange).toHaveBeenCalledWith(100);
   });
 
-  it('handlePressStep is a no-op when the tick step is not found', () => {
+  it('handlePressStep is a no-op when the mark step is not found', () => {
     const onValueChange = jest.fn();
     const { result } = renderHook(() =>
       useSliderGesture(
         createParams({
           onValueChange,
-          ticks: [{ step: 50, label: '50%' }],
+          marks: [{ step: 50, label: '50%' }],
         }),
       ),
     );
@@ -167,14 +167,14 @@ describe('useSliderGesture', () => {
     expect(onValueChange).not.toHaveBeenCalled();
   });
 
-  it('fires onTick when handlePressStep crosses a haptic threshold', () => {
-    const onTick = jest.fn();
+  it('fires onMark when handlePressStep crosses a haptic threshold', () => {
+    const onMark = jest.fn();
     const { result } = renderHook(() =>
       useSliderGesture(
         createParams({
           value: 10,
-          onTick,
-          ticks: [
+          onMark,
+          marks: [
             { step: 0, label: '0%' },
             { step: 50, label: '50%', haptic: true },
             { step: 100, label: '100%' },
@@ -187,7 +187,7 @@ describe('useSliderGesture', () => {
       result.current.handlePressStep(50);
     });
 
-    expect(onTick).toHaveBeenCalled();
+    expect(onMark).toHaveBeenCalled();
   });
 
   it('syncs thumb position when value prop changes', () => {
@@ -231,25 +231,25 @@ describe('useSliderGesture', () => {
       useSliderGesture(
         createParams({
           hasThemedColors: true,
-          ticks: [
-            { step: 0, color: TickColor.SuccessDefault },
-            { step: 100, color: TickColor.ErrorDefault },
+          marks: [
+            { step: 0, color: SliderMarkColor.SuccessDefault },
+            { step: 100, color: SliderMarkColor.ErrorDefault },
           ],
           fillColorStops: buildColorStops(
             [
-              { step: 0, color: TickColor.SuccessDefault },
-              { step: 100, color: TickColor.ErrorDefault },
+              { step: 0, color: SliderMarkColor.SuccessDefault },
+              { step: 100, color: SliderMarkColor.ErrorDefault },
             ],
             mockPalette,
-            TickColor.IconAlternative,
+            SliderMarkColor.IconAlternative,
           ),
           thumbColorStops: buildColorStops(
             [
-              { step: 0, color: TickColor.SuccessDefault },
-              { step: 100, color: TickColor.ErrorDefault },
+              { step: 0, color: SliderMarkColor.SuccessDefault },
+              { step: 100, color: SliderMarkColor.ErrorDefault },
             ],
             mockPalette,
-            TickColor.IconDefault,
+            SliderMarkColor.IconDefault,
           ),
         }),
       ),

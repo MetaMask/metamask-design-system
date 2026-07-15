@@ -4,9 +4,9 @@
  */
 
 /**
- * Semantic color tokens for tick theming (flat palette keys).
+ * Semantic color tokens for Slider mark theming (flat palette keys).
  */
-export const TickColor = {
+export const SliderMarkColor = {
   SuccessDefault: 'success-default',
   WarningDefault: 'warning-default',
   ErrorDefault: 'error-default',
@@ -17,24 +17,22 @@ export const TickColor = {
   /** Default fill color fallback. */
   IconAlternative: 'icon-alternative',
 } as const;
-export type TickColor = (typeof TickColor)[keyof typeof TickColor];
+export type SliderMarkColor =
+  (typeof SliderMarkColor)[keyof typeof SliderMarkColor];
 
-export type SliderTickColor =
-  | TickColor
-  | `#${string}`
-  | `rgb${string}`
-  | `rgba${string}`;
-
-export type SliderTick = {
+export type SliderMark = {
   /** Track-percent position (0–100). */
   step: number;
   /** Label text. Omit for dot-only markers. */
   label?: string;
-  /** Domain value when tick is tapped. Default: linear from step. */
+  /** Domain value when mark is tapped. Default: linear from step. */
   value?: number;
-  /** Theme color token or raw hex/rgb. Omit for default slider colors. */
-  color?: SliderTickColor;
-  /** Fires onTick when crossed. Default: true when label is set. */
+  /**
+   * Theme color token for this mark. Omit for default slider colors.
+   * Tokens resolve to hex internally for Reanimated interpolation.
+   */
+  color?: SliderMarkColor;
+  /** Fires onMark when crossed. Default: true when label is set. */
   haptic?: boolean;
 };
 
@@ -83,22 +81,22 @@ export type SliderPropsShared = {
   isDisabled?: boolean;
 
   /**
-   * Tick markers along the track. Each entry defines position, optional label,
+   * Marks along the track. Each entry defines position, optional label,
    * optional domain value, optional theme color, and optional haptic threshold.
    *
-   * @default DEFAULT_TICKS (0%, 25%, 50%, 75%, 100%)
+   * @default DEFAULT_MARKS (0%, 25%, 50%, 75%, 100%)
    */
-  ticks?: readonly SliderTick[];
+  marks?: readonly SliderMark[];
 
   /**
-   * When true, renders tappable labels below the track for ticks with a label.
+   * When true, renders tappable labels below the track for marks with a label.
    *
    * @default false
    */
   showRangeLabels?: boolean;
 
   /**
-   * When true, renders dots on the track at each tick position.
+   * When true, renders dots on the track at each mark position.
    *
    * @default false
    */
@@ -111,9 +109,9 @@ export type SliderPropsShared = {
   onGrip?: () => void;
 
   /**
-   * Fired when the track percent crosses a haptic tick threshold while dragging.
+   * Fired when the track percent crosses a haptic mark threshold while dragging.
    */
-  onTick?: () => void;
+  onMark?: () => void;
 
   /**
    * Maps domain value to 0–100 track position.

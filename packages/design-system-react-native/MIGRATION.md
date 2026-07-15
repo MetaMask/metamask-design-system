@@ -128,22 +128,22 @@ If you import **`ContentPropsShared`** or **`ContentVariant`** from **`@metamask
 - **`ListItemVariant.OneLine`** omits **`description`** and **`subvalue`** even when passed.
 - **`ListItem`** applies variant-driven min-heights and vertical alignment on the root row; **`Content`** no longer sets its own min-height.
 
-<a id="slider-tick-api-consolidation"></a>
+<a id="slider-mark-api-consolidation"></a>
 
-#### `Slider`: tick props consolidated into `ticks`
+#### `Slider`: mark props consolidated into `marks`
 
-`Slider` tick configuration is consolidated into a single `ticks` prop. Legacy tick props and exports are removed.
+`Slider` mark configuration is consolidated into a single `marks` prop. Legacy range/tick props and exports are removed.
 
 **What changed:**
 
 | Before (0.35.0)                                         | After (0.36.0)                                                         |
 | ------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `rangeLabelSteps`                                       | `ticks[].step`                                                         |
-| `formatStepLabel`                                       | `ticks[].label`                                                        |
-| `stepToValue`                                           | `ticks[].value`                                                        |
-| `tickThresholds`                                        | `ticks[].haptic` (defaults to `true` when `label` is set)              |
+| `rangeLabelSteps`                                       | `marks[].step`                                                         |
+| `formatStepLabel`                                       | `marks[].label`                                                        |
+| `stepToValue`                                           | `marks[].value`                                                        |
+| `tickThresholds`                                        | `marks[].haptic` (defaults to `true` when `label` is set)              |
 | `DEFAULT_RANGE_LABEL_STEPS` / `DEFAULT_TICK_THRESHOLDS` | removed                                                                |
-| —                                                       | `ticks`, `TickColor`, `DEFAULT_TICKS`, `SliderTick`, `SliderTickColor` |
+| —                                                       | `marks`, `SliderMarkColor`, `DEFAULT_MARKS`, `SliderMark`              |
 
 **Migration:**
 
@@ -162,27 +162,27 @@ import { Slider } from '@metamask/design-system-react-native';
 />;
 
 // After (0.36.0)
-import { Slider, TickColor } from '@metamask/design-system-react-native';
+import { Slider, SliderMarkColor } from '@metamask/design-system-react-native';
 
 <Slider
   value={leverage}
   onValueChange={setLeverage}
-  ticks={[
-    { step: 0, label: '1x', value: 1, color: TickColor.SuccessDefault },
+  marks={[
+    { step: 0, label: '1x', value: 1, color: SliderMarkColor.SuccessDefault },
     { step: 50, label: '20x', value: 20, haptic: true },
-    { step: 100, label: '40x', value: 40, color: TickColor.ErrorDefault },
+    { step: 100, label: '40x', value: 40, color: SliderMarkColor.ErrorDefault },
   ]}
   showRangeLabels
 />;
 ```
 
-If you import **`SliderPropsShared`**, **`TickColor`**, or **`SliderTick`** from **`@metamask/design-system-shared`**, apply the same API there. See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#slider-tick-api-consolidation).
+If you import **`SliderPropsShared`**, **`SliderMarkColor`**, or **`SliderMark`** from **`@metamask/design-system-shared`**, apply the same API there. See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#slider-mark-api-consolidation).
 
 **Impact:**
 
-- Any usage of **`rangeLabelSteps`**, **`formatStepLabel`**, **`stepToValue`**, or **`tickThresholds`** must migrate to **`ticks`**.
-- Imports of **`DEFAULT_RANGE_LABEL_STEPS`** or **`DEFAULT_TICK_THRESHOLDS`** must switch to **`DEFAULT_TICKS`** (or an explicit `ticks` array).
-- Optional **`ticks[].color`** accepts **`TickColor`** tokens or raw hex/rgb; when omitted on all ticks, default slider colors are unchanged.
+- Any usage of **`rangeLabelSteps`**, **`formatStepLabel`**, **`stepToValue`**, or **`tickThresholds`** must migrate to **`marks`**.
+- Imports of **`DEFAULT_RANGE_LABEL_STEPS`** or **`DEFAULT_TICK_THRESHOLDS`** must switch to **`DEFAULT_MARKS`** (or an explicit `marks` array).
+- Optional **`marks[].color`** accepts **`SliderMarkColor`** tokens only; tokens resolve to hex internally for Reanimated. When omitted on all marks, default slider colors are unchanged. App code must not pass raw hex/rgb — the Perps leverage ramp’s temporary hardcoded colors should be tokenized rather than treated as a supported Slider pattern.
 
 ### From version 0.33.0 to 0.34.0
 
