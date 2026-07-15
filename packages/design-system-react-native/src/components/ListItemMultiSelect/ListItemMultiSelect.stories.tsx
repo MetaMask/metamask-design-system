@@ -118,8 +118,6 @@ const getVariantLeadingProps = (variant: ContentVariant) =>
       }
     : {
         avatar: listItemAvatar,
-        startAccessory: undefined,
-        accessoryGap: 0 as const,
       };
 
 const variantExamples: Record<
