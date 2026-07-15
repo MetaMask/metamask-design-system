@@ -158,13 +158,26 @@ export const ActionButtonOnPress: Story = {
   },
 };
 
-export const ActionButtonLayoutEnd: Story = {
+export const ActionButtonLayout: Story = {
+  render: (args) => (
+    <View style={{ gap: 8 }}>
+      <BannerAlert
+        {...args}
+        title="End"
+        description="One-line description for short copy."
+        actionButtonLayout={BannerBaseActionButtonLayout.End}
+      />
+      <BannerAlert
+        {...args}
+        title="Below"
+        description="Use Below when the body is longer or wraps across multiple lines so the action stays under the content."
+        actionButtonLayout={BannerBaseActionButtonLayout.Below}
+      />
+    </View>
+  ),
   args: {
-    title: 'Action at the end',
-    description: 'Action sits to the right of the body, left of close.',
     actionButtonLabel: 'Action',
     actionButtonOnPress: () => undefined,
-    actionButtonLayout: BannerBaseActionButtonLayout.End,
     onClose: () => undefined,
   },
 };

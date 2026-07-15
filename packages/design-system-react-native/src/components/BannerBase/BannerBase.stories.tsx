@@ -1,6 +1,7 @@
 import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
+import { View } from 'react-native';
 
 import { Icon, IconName, IconSize } from '../Icon';
 import { Text } from '../Text';
@@ -129,24 +130,33 @@ export const ActionButtonOnPress: Story = {
   },
 };
 
-export const ActionButtonLayoutEnd: Story = {
+export const ActionButtonLayout: Story = {
+  render: (args) => (
+    <View style={{ gap: 8 }}>
+      <BannerBase
+        {...args}
+        title="End"
+        description="One-line description for short copy."
+        actionButtonLayout={BannerBaseActionButtonLayout.End}
+        startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
+      />
+      <BannerBase
+        {...args}
+        title="Below"
+        description="Use Below when the body is longer or wraps across multiple lines so the action stays under the content."
+        actionButtonLayout={BannerBaseActionButtonLayout.Below}
+        startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
+      />
+    </View>
+  ),
   args: {
-    title: 'Action at the end',
-    description: 'Action sits to the right of the body, left of close.',
     actionButtonLabel: 'Action',
     actionButtonOnPress: () => undefined,
-    actionButtonLayout: BannerBaseActionButtonLayout.End,
     onClose: () => undefined,
     closeButtonProps: {
       testID: 'banner-base-close-button',
     },
   },
-  render: (args) => (
-    <BannerBase
-      {...args}
-      startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
-    />
-  ),
 };
 
 export const OnClose: Story = {

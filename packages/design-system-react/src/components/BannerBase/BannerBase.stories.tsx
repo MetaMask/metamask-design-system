@@ -136,24 +136,33 @@ export const ActionButtonOnClick: Story = {
   },
 };
 
-export const ActionButtonLayoutEnd: Story = {
+export const ActionButtonLayout: Story = {
+  render: (args) => (
+    <div className="space-y-2">
+      <BannerBase
+        {...args}
+        title="End"
+        description="One-line description for short copy."
+        actionButtonLayout={BannerBaseActionButtonLayout.End}
+        startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
+      />
+      <BannerBase
+        {...args}
+        title="Below"
+        description="Use Below when the body is longer or wraps across multiple lines so the action stays under the content."
+        actionButtonLayout={BannerBaseActionButtonLayout.Below}
+        startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
+      />
+    </div>
+  ),
   args: {
-    title: 'Action at the end',
-    description: 'Action sits to the right of the body, left of close.',
     actionButtonLabel: 'Action',
     actionButtonOnClick: () => undefined,
-    actionButtonLayout: BannerBaseActionButtonLayout.End,
     onClose: () => undefined,
     closeButtonProps: {
       'data-testid': 'banner-base-close-button',
     },
   },
-  render: (args) => (
-    <BannerBase
-      {...args}
-      startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
-    />
-  ),
 };
 
 export const OnClose: Story = {
