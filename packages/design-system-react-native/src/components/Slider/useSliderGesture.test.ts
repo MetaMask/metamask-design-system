@@ -50,7 +50,11 @@ const createParams = (
       mockPalette,
       SliderMarkColor.IconAlternative,
     ),
-    thumbColorStops: buildColorStops(marks, mockPalette, SliderMarkColor.IconDefault),
+    thumbColorStops: buildColorStops(
+      marks,
+      mockPalette,
+      SliderMarkColor.IconDefault,
+    ),
     hasThemedColors: marks.some((mark) => Boolean(mark.color)),
     ...overrides,
   };

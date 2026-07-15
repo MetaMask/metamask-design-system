@@ -196,7 +196,11 @@ describe('Slider.utilities', () => {
 
     it('resolveMarkColor resolves token keys from palette', () => {
       expect(
-        resolveMarkColor(SliderMarkColor.SuccessDefault, mockPalette, '#000000'),
+        resolveMarkColor(
+          SliderMarkColor.SuccessDefault,
+          mockPalette,
+          '#000000',
+        ),
       ).toBe('#00FF00');
     });
 
@@ -237,7 +241,9 @@ describe('Slider.utilities', () => {
 
     it('hasThemedMarkColors returns true when a mark has color', () => {
       expect(
-        hasThemedMarkColors([{ step: 0, color: SliderMarkColor.SuccessDefault }]),
+        hasThemedMarkColors([
+          { step: 0, color: SliderMarkColor.SuccessDefault },
+        ]),
       ).toBe(true);
     });
 

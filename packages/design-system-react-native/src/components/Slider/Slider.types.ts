@@ -11,7 +11,6 @@ import type { SliderColorStop } from './Slider.utilities';
 
 export type { SliderMark, SliderMarkColor };
 
-
 /**
  * React Native Slider props.
  *
