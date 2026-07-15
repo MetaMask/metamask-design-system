@@ -136,14 +136,14 @@ If you import **`ContentPropsShared`** or **`ContentVariant`** from **`@metamask
 
 **What changed:**
 
-| Before (0.35.0)                                         | After (0.36.0)                                                         |
-| ------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `rangeLabelSteps`                                       | `marks[].step`                                                         |
-| `formatStepLabel`                                       | `marks[].label`                                                        |
-| `stepToValue`                                           | `marks[].value`                                                        |
-| `tickThresholds`                                        | `marks[].haptic` (defaults to `true` when `label` is set)              |
-| `DEFAULT_RANGE_LABEL_STEPS` / `DEFAULT_TICK_THRESHOLDS` | removed                                                                |
-| —                                                       | `marks`, `SliderMarkColor`, `DEFAULT_MARKS`, `SliderMark`              |
+| Before (0.35.0)                                         | After (0.36.0)                                            |
+| ------------------------------------------------------- | --------------------------------------------------------- |
+| `rangeLabelSteps`                                       | `marks[].step`                                            |
+| `formatStepLabel`                                       | `marks[].label`                                           |
+| `stepToValue`                                           | `marks[].value`                                           |
+| `tickThresholds`                                        | `marks[].haptic` (defaults to `true` when `label` is set) |
+| `DEFAULT_RANGE_LABEL_STEPS` / `DEFAULT_TICK_THRESHOLDS` | removed                                                   |
+| —                                                       | `marks`, `SliderMarkColor`, `DEFAULT_MARKS`, `SliderMark` |
 
 **Migration:**
 
