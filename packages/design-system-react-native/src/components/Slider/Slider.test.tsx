@@ -257,7 +257,7 @@ describe('Slider.utilities', () => {
       );
     });
 
-    it('& uses hard-coded fallback when palette token is missing', () => {
+    it('uses hard-coded fallback when palette token is missing', () => {
       expect(
         buildColorStops(
           [{ step: 0 }, { step: 100 }],

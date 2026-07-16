@@ -33,9 +33,9 @@ export const DOT_EDGE_INSET_PERCENT = '2%';
 export const DOT_EDGE_MAX_PERCENT = '98%';
 
 export const DEFAULT_MARKS: readonly SliderMark[] = [
-  { step: 0, label: '0%' },
+  { step: 0, label: '0%', haptic: false },
   { step: 25, label: '25%', haptic: true },
   { step: 50, label: '50%', haptic: true },
   { step: 75, label: '75%', haptic: true },
-  { step: 100, label: '100%' },
+  { step: 100, label: '100%', haptic: false },
 ];
