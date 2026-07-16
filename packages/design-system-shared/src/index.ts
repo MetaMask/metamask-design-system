@@ -53,8 +53,11 @@ export {
   type IconAlertPropsShared,
 } from './types/IconAlert';
 
-// BannerBase types (ADR-0004)
-export { type BannerBasePropsShared } from './types/BannerBase';
+// BannerBase types (ADR-0003 + ADR-0004)
+export {
+  BannerBaseActionButtonLayout,
+  type BannerBasePropsShared,
+} from './types/BannerBase';
 
 // TextOrChildren types (ADR-0004)
 export { type TextOrChildrenPropsShared } from './types/TextOrChildren';

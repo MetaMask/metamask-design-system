@@ -52,7 +52,7 @@ export type {
   BadgeWrapperCustomPosition,
 } from './BadgeWrapper';
 
-export { BannerBase } from './BannerBase';
+export { BannerBase, BannerBaseActionButtonLayout } from './BannerBase';
 export type { BannerBaseProps } from './BannerBase';
 
 export { BottomSheet } from './BottomSheet';

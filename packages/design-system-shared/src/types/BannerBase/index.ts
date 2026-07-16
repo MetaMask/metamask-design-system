@@ -1,1 +1,4 @@
-export { type BannerBasePropsShared } from './BannerBase.types';
+export {
+  BannerBaseActionButtonLayout,
+  type BannerBasePropsShared,
+} from './BannerBase.types';
