@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.33.0]
+
+### Added
+
+- Added `actionButtonLayout` to `BannerBase` (inherited by `BannerAlert`) with `BannerBaseActionButtonLayout.Below` (default) and `BannerBaseActionButtonLayout.End` to place the action button beside the body, left of close ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
+
 ## [0.32.0]
 
 ### Added
@@ -420,7 +426,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.32.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.33.0...HEAD
+[0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.32.0...@metamask/design-system-react@0.33.0
 [0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.31.0...@metamask/design-system-react@0.32.0
 [0.31.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.30.0...@metamask/design-system-react@0.31.0
 [0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.29.0...@metamask/design-system-react@0.30.0
