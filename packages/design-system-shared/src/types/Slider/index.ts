@@ -1,1 +1,5 @@
-export { type SliderPropsShared } from './Slider.types';
+export {
+  SliderMarkColor,
+  type SliderPropsShared,
+  type SliderMark,
+} from './Slider.types';

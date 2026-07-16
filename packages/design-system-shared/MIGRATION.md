@@ -62,6 +62,61 @@ When using **`ListItem`** from **`@metamask/design-system-react-native`**, impor
 - **`ContentVariant.OneLine`** omits **`description`** and **`subvalue`** even when passed.
 - Row min-heights (including **`ListItem`** **`py-3`** padding): **`OneLine`** 48px, **`TwoLines`** 72px, **`MultiLine`** 88px.
 
+<a id="slider-mark-api-consolidation"></a>
+
+#### `SliderPropsShared`: mark props consolidated into `marks`
+
+**`rangeLabelSteps`**, **`formatStepLabel`**, **`stepToValue`**, and **`tickThresholds`** are removed from **`SliderPropsShared`**. Use the unified **`marks`** array instead. **`SliderMarkColor`** and **`SliderMark`** are added.
+
+**What changed:**
+
+| Before (0.29.0)   | After (0.30.0)                                            |
+| ----------------- | --------------------------------------------------------- |
+| `rangeLabelSteps` | `marks[].step`                                            |
+| `formatStepLabel` | `marks[].label`                                           |
+| `stepToValue`     | `marks[].value`                                           |
+| `tickThresholds`  | `marks[].haptic` (defaults to `true` when `label` is set) |
+| —                 | `marks`, `SliderMarkColor`, `SliderMark`                  |
+
+**Migration:**
+
+```tsx
+// Before (0.29.0)
+import type { SliderPropsShared } from '@metamask/design-system-shared';
+
+const props: SliderPropsShared = {
+  value: leverage,
+  onValueChange: setLeverage,
+  rangeLabelSteps: [0, 50, 100],
+  formatStepLabel: (step) => ({ 0: '1x', 50: '20x', 100: '40x' })[step] ?? '',
+  stepToValue: (step) => ({ 0: 1, 50: 20, 100: 40 })[step] ?? leverage,
+  tickThresholds: [50],
+};
+
+// After (0.30.0)
+import {
+  SliderMarkColor,
+  type SliderPropsShared,
+} from '@metamask/design-system-shared';
+
+const props: SliderPropsShared = {
+  value: leverage,
+  onValueChange: setLeverage,
+  marks: [
+    { step: 0, label: '1x', value: 1, color: SliderMarkColor.SuccessDefault },
+    { step: 50, label: '20x', value: 20, haptic: true },
+    { step: 100, label: '40x', value: 40, color: SliderMarkColor.ErrorDefault },
+  ],
+};
+```
+
+See the [design-system-react-native migration guide](../design-system-react-native/MIGRATION.md#slider-mark-api-consolidation) for component usage examples.
+
+**Impact:**
+
+- Any type or wrapper that extends **`SliderPropsShared`** and references the removed props must be updated.
+- Use **`SliderMarkColor`** tokens for **`marks[].color`**. App code must not pass raw hex/rgb (enforced by `@metamask/design-tokens/color-no-hex`). Tokens resolve to hex internally for Reanimated. The Perps leverage ramp currently uses temporary hardcoded colors behind an eslint-disable; tokenize that ramp rather than treating hex as a supported Slider API.
+
 ### From version 0.24.0 to 0.25.0
 
 <a id="titlealert-title-accessories-removed"></a>

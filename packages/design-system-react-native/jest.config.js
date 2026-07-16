@@ -57,14 +57,15 @@ module.exports = merge(baseConfig, {
       lines: 67,
       statements: 67,
     },
-    // Pan/tap gesture worklet callbacks run on the UI thread and are not invoked
-    // by Reanimated's Jest mock. Label-press and layout paths are covered in tests;
-    // drag behavior is verified via Storybook on device.
+    // Pan/tap gesture worklets and useAnimatedReaction sync run on the UI
+    // thread and are not invoked by Reanimated's Jest mock. Label-press,
+    // layout, themed-style wiring, and tick lookup paths are covered in tests;
+    // drag/color interpolation behavior is verified via Storybook on device.
     './src/components/Slider/useSliderGesture.ts': {
-      branches: 68,
-      functions: 47,
-      lines: 60,
-      statements: 60,
+      branches: 70,
+      functions: 55,
+      lines: 65,
+      statements: 65,
     },
   },
 

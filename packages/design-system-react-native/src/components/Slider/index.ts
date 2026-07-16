@@ -1,6 +1,5 @@
 export { Slider } from './Slider';
+export { DEFAULT_MARKS } from './Slider.constants';
+export { SliderMarkColor } from '@metamask/design-system-shared';
 export type { SliderProps } from './Slider.types';
-export {
-  DEFAULT_RANGE_LABEL_STEPS,
-  DEFAULT_TICK_THRESHOLDS,
-} from './Slider.constants';
+export type { SliderMark } from '@metamask/design-system-shared';

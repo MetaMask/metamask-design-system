@@ -2,9 +2,15 @@ import {
   FontWeight,
   TextColor,
   TextVariant,
+  SliderMarkColor,
 } from '@metamask/design-system-shared';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useCallback } from 'react';
+import {
+  getThemeColors,
+  usePureBlack,
+  useTailwind,
+  useTheme,
+} from '@metamask/design-system-twrnc-preset';
+import React, { useCallback, useMemo } from 'react';
 import { AccessibilityActionEvent, Pressable } from 'react-native';
 import type { ViewStyle } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
@@ -14,8 +20,7 @@ import { Box } from '../Box';
 import { Text } from '../Text';
 
 import {
-  DEFAULT_RANGE_LABEL_STEPS,
-  DEFAULT_TICK_THRESHOLDS,
+  DEFAULT_MARKS,
   RANGE_LABEL_TOP,
   SLIDER_BOTTOM_PADDING,
   SLIDER_TRACK_INSET,
@@ -26,10 +31,11 @@ import {
 } from './Slider.constants';
 import type { SliderProps } from './Slider.types';
 import {
+  buildColorStops,
   clampValueToRange,
-  defaultFormatStepLabel,
   getDotLeftPercent,
   getTrackPercentFromValue,
+  hasThemedMarkColors,
 } from './Slider.utilities';
 import { useSliderGesture } from './useSliderGesture';
 
@@ -42,24 +48,49 @@ export const Slider = ({
   step = 1,
   isDisabled = false,
   testID,
-  rangeLabelSteps = DEFAULT_RANGE_LABEL_STEPS,
+  marks = DEFAULT_MARKS,
   showRangeLabels = false,
   showRangeDots = false,
   onGrip,
-  onTick,
-  tickThresholds = DEFAULT_TICK_THRESHOLDS,
+  onMark,
   mapValueToTrackPercent,
   mapTrackPercentToValue,
-  formatStepLabel,
-  stepToValue: stepToValueProp,
   trackInset = SLIDER_TRACK_INSET,
   twClassName,
   style,
   ...props
 }: SliderProps) => {
   const tw = useTailwind();
+  const theme = useTheme();
+  const isPureBlack = usePureBlack();
 
-  const formatLabel = formatStepLabel ?? defaultFormatStepLabel;
+  const palette = useMemo(
+    () => getThemeColors(theme, isPureBlack),
+    [isPureBlack, theme],
+  );
+
+  const themedColors = useMemo(() => {
+    const hasThemedColors = hasThemedMarkColors(marks);
+
+    return {
+      hasThemedColors,
+      fillColorStops: buildColorStops(
+        marks,
+        palette,
+        SliderMarkColor.IconAlternative,
+      ),
+      thumbColorStops: buildColorStops(
+        marks,
+        palette,
+        SliderMarkColor.IconDefault,
+      ),
+    };
+  }, [palette, marks]);
+
+  const labeledMarks = useMemo(
+    () => marks.filter((mark) => mark.label !== undefined),
+    [marks],
+  );
 
   const { handleLayout, progressStyle, thumbStyle, gesture, handlePressStep } =
     useSliderGesture({
@@ -71,11 +102,13 @@ export const Slider = ({
       onValueChange,
       onDragEnd,
       onGrip,
-      onTick,
-      tickThresholds,
+      onMark,
+      marks,
+      fillColorStops: themedColors.fillColorStops,
+      thumbColorStops: themedColors.thumbColorStops,
+      hasThemedColors: themedColors.hasThemedColors,
       mapValueToTrackPercent,
       mapTrackPercentToValue,
-      stepToValue: stepToValueProp,
     });
 
   const getAccessibilityText = useCallback(() => {
@@ -160,19 +193,20 @@ export const Slider = ({
           <Animated.View
             style={[
               tw.style(
-                'absolute left-0 top-0 h-2 rounded-full bg-icon-alternative',
+                'absolute left-0 top-0 h-2 rounded-full',
+                !themedColors.hasThemedColors && 'bg-icon-alternative',
               ),
               progressStyle,
             ]}
           />
           {showRangeDots &&
-            rangeLabelSteps.map((rangeStep) => (
+            marks.map((mark) => (
               <Box
-                key={`dot-${rangeStep}`}
+                key={`dot-${mark.step}`}
                 pointerEvents="none"
                 twClassName="absolute top-0.5 h-1 w-1 rounded-full bg-text-muted"
                 style={{
-                  left: getDotLeftPercent(rangeStep) as ViewStyle['left'],
+                  left: getDotLeftPercent(mark.step) as ViewStyle['left'],
                   transform: [{ translateX: -2 }],
                   zIndex: -2,
                 }}
@@ -180,7 +214,10 @@ export const Slider = ({
             ))}
           <Animated.View
             style={[
-              tw.style('absolute rounded-full bg-icon-default'),
+              tw.style(
+                'absolute rounded-full',
+                !themedColors.hasThemedColors && 'bg-icon-default',
+              ),
               {
                 width: THUMB_SIZE,
                 height: THUMB_SIZE,
@@ -196,18 +233,18 @@ export const Slider = ({
       </GestureDetector>
 
       {showRangeLabels &&
-        rangeLabelSteps.map((rangeStep) => (
+        labeledMarks.map((mark) => (
           <Pressable
-            key={`label-${rangeStep}`}
+            key={`label-${mark.step}`}
             style={[
               tw.style('absolute items-center'),
               {
                 top: RANGE_LABEL_TOP,
-                left: getDotLeftPercent(rangeStep) as ViewStyle['left'],
+                left: getDotLeftPercent(mark.step) as ViewStyle['left'],
                 transform: [{ translateX: '-50%' }],
               },
             ]}
-            onPress={() => handlePressStep(rangeStep)}
+            onPress={() => handlePressStep(mark.step)}
             disabled={isDisabled}
             accessibilityRole="button"
           >
@@ -216,7 +253,7 @@ export const Slider = ({
               fontWeight={FontWeight.Medium}
               color={TextColor.TextAlternative}
             >
-              {formatLabel(rangeStep)}
+              {mark.label}
             </Text>
           </Pressable>
         ))}

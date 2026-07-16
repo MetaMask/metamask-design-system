@@ -1,7 +1,15 @@
-import type { SliderPropsShared } from '@metamask/design-system-shared';
+import type {
+  SliderPropsShared,
+  SliderMark,
+  SliderMarkColor,
+} from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 import type { Gesture } from 'react-native-gesture-handler';
 import type { useAnimatedStyle } from 'react-native-reanimated';
+
+import type { SliderColorStop } from './Slider.utilities';
+
+export type { SliderMark, SliderMarkColor };
 
 /**
  * React Native Slider props.
@@ -86,18 +94,22 @@ export type UseSliderGestureParams = {
   onGrip?: () => void;
 
   /**
-   * Called when track percent crosses a `tickThresholds` entry while dragging.
+   * Called when track percent crosses a haptic mark threshold while dragging.
    * Evaluated on each pan `onUpdate` and on range-label press.
    */
-  onTick?: () => void;
+  onMark?: () => void;
 
-  /**
-   * Track-percent positions (0–100) that trigger `onTick` when crossed.
-   * Not domain values — use the same coordinate system as `rangeLabelSteps`.
-   *
-   * @default [25, 50, 75]
-   */
-  tickThresholds?: readonly number[];
+  /** Mark entries for label press value resolution and haptic thresholds. */
+  marks: readonly SliderMark[];
+
+  /** Resolved fill color stops for themed interpolation. */
+  fillColorStops: readonly SliderColorStop[];
+
+  /** Resolved thumb color stops for themed interpolation. */
+  thumbColorStops: readonly SliderColorStop[];
+
+  /** When true, thumb and fill use interpolated theme colors. */
+  hasThemedColors: boolean;
 
   /**
    * Maps domain value → 0–100 track position for thumb/fill sync.
@@ -111,12 +123,6 @@ export type UseSliderGestureParams = {
    * Must be a Reanimated worklet when provided (`'worklet';` in the function body).
    */
   mapTrackPercentToValue?: (trackPercent: number) => number;
-
-  /**
-   * Converts a tapped `rangeLabelSteps` entry to a domain value.
-   * Default: `(step / 100) * (max - min) + min`.
-   */
-  stepToValue?: (step: number) => number;
 };
 
 /**
@@ -142,7 +148,7 @@ export type UseSliderGestureResult = {
   gesture: ReturnType<typeof Gesture.Simultaneous>;
 
   /**
-   * Sets value from a tapped range label: `stepToValue` → callbacks → thumb sync.
+   * Sets value from a tapped mark label: mark value → callbacks → thumb sync.
    * No-op when `isDisabled` is true.
    */
   handlePressStep: (rangeStep: number) => void;
