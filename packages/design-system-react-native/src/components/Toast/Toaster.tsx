@@ -4,13 +4,12 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useLayoutEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
 import type { RefObject } from 'react';
 import { Dimensions } from 'react-native';
-import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,
@@ -72,14 +71,6 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const animatedStyle = useAnimatedStyle(() => ({
       transform: [{ translateY: translateYProgress.value - bottomOffset }],
     }));
-    const baseStyle = useMemo(
-      () =>
-        [
-          tw.style('absolute left-4 right-4 bottom-0'),
-          animatedStyle,
-        ] as StyleProp<ViewStyle>,
-      [tw, animatedStyle],
-    );
     const innerRef = useRef<ToasterRef | null>(null);
 
     const resetState = () => setToastOptions(undefined);
@@ -176,7 +167,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     return (
       <Animated.View
         onLayout={onAnimatedViewLayout}
-        style={baseStyle}
+        style={[tw.style('absolute left-4 right-4 bottom-0'), animatedStyle]}
         {...props}
       >
         {actionButtonLabel && actionButtonOnPress ? (
