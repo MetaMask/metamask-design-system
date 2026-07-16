@@ -9,10 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.33.0]
 
-### Uncategorized
+### Added
 
-- feat(BannerBase): add actionButtonLayout End option ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
-- docs: add code example to React BannerBase README ([#1371](https://github.com/MetaMask/metamask-design-system/pull/1371))
+- Added `actionButtonLayout` to `BannerBase` (inherited by `BannerAlert`) with `BannerBaseActionButtonLayout.Below` (default) and `BannerBaseActionButtonLayout.End` to place the action button beside the body, left of close ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
 
 ## [0.32.0]
 

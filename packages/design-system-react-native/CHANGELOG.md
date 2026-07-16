@@ -9,12 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.36.0]
 
-### Uncategorized
+### Added
 
-- feat(dsrn): add themed mark colors and unified marks API to Slider ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
-- feat(BannerBase): add actionButtonLayout End option ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
-- fix: Fixed ListItemMultiSelect story for variants ([#1387](https://github.com/MetaMask/metamask-design-system/pull/1387))
-- feat(dsrn): replace ListItem verticalAlignment with variant layout ([#1384](https://github.com/MetaMask/metamask-design-system/pull/1384))
+- Added `actionButtonLayout` to `BannerBase` (inherited by `BannerAlert`) with `BannerBaseActionButtonLayout.Below` (default) and `BannerBaseActionButtonLayout.End` to place the action button beside the body, left of close ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
+- Added `SliderMarkColor` for themed `Slider` mark colors that interpolate with the thumb ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+
+### Changed
+
+- **BREAKING:** Replaced `verticalAlignment` / `ContentVerticalAlignment` / `ListItemVerticalAlignment` on `Content` and `ListItem` with `variant` / `ContentVariant` / `ListItemVariant` (`OneLine`, `TwoLines`, `MultiLine`) for preset row heights, alignment, and secondary-slot gating ([#1384](https://github.com/MetaMask/metamask-design-system/pull/1384))
+  - See [Migration Guide](./MIGRATION.md#content-and-listitem-verticalalignment-replaced-by-variant)
+- **BREAKING:** Consolidated `Slider` mark configuration into a single `marks` prop; removed `rangeLabelSteps`, `formatStepLabel`, `stepToValue`, `tickThresholds`, `DEFAULT_RANGE_LABEL_STEPS`, and `DEFAULT_TICK_THRESHOLDS` ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+  - See [Migration Guide](./MIGRATION.md#slider-mark-api-consolidation)
+
+### Fixed
+
+- Fixed `Slider` drag jerking when the controlled `value` updates mid-gesture ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
 
 ## [0.35.0]
 

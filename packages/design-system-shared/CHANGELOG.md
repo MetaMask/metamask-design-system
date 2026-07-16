@@ -9,11 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.30.0]
 
-### Uncategorized
+### Added
 
-- feat(dsrn): add themed mark colors and unified marks API to Slider ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
-- feat(BannerBase): add actionButtonLayout End option ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
-- feat(dsrn): replace ListItem verticalAlignment with variant layout ([#1384](https://github.com/MetaMask/metamask-design-system/pull/1384))
+- Added `BannerBaseActionButtonLayout` and `actionButtonLayout` to `BannerBasePropsShared` (`Below` default, `End` for beside-body placement) ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
+- Added `SliderMarkColor` and `SliderMark` for the unified `Slider` `marks` API ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+
+### Changed
+
+- **BREAKING:** Replaced `ContentVerticalAlignment` / `verticalAlignment` on `ContentPropsShared` with `ContentVariant` / `variant` (`OneLine`, `TwoLines`, `MultiLine`) ([#1384](https://github.com/MetaMask/metamask-design-system/pull/1384))
+  - See [Migration Guide](./MIGRATION.md#content-verticalalignment-replaced-by-variant)
+- **BREAKING:** Consolidated `SliderPropsShared` mark props into `marks`; removed `rangeLabelSteps`, `formatStepLabel`, `stepToValue`, and `tickThresholds` ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+  - See [Migration Guide](./MIGRATION.md#slider-mark-api-consolidation)
 
 ## [0.29.0]
 
