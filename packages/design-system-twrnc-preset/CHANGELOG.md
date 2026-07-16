@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(dsrn): add themed mark colors and unified marks API to Slider ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+
 ## [0.7.0]
 
 ### Added

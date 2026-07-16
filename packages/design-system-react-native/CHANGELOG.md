@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(dsrn): add themed mark colors and unified marks API to Slider ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+- feat(BannerBase): add actionButtonLayout End option ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
+- fix: Fixed ListItemMultiSelect story for variants ([#1387](https://github.com/MetaMask/metamask-design-system/pull/1387))
+- feat(dsrn): replace ListItem verticalAlignment with variant layout ([#1384](https://github.com/MetaMask/metamask-design-system/pull/1384))
+
 ## [0.35.0]
 
 ### Added

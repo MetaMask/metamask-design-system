@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(BannerBase): add actionButtonLayout End option ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
+- docs: add code example to React BannerBase README ([#1371](https://github.com/MetaMask/metamask-design-system/pull/1371))
+
 ## [0.32.0]
 
 ### Added
