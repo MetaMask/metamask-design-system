@@ -298,6 +298,43 @@ describe('useSliderGesture', () => {
     expect(onMark).not.toHaveBeenCalled();
   });
 
+  it('ignores a late stale echo after the latest commit was already acknowledged', () => {
+    const onMark = jest.fn();
+    const marks = [
+      { step: 0, label: '0%', haptic: false },
+      { step: 40, label: '40%', value: 40, haptic: false },
+      { step: 50, label: '50%', value: 50, haptic: true },
+      { step: 60, label: '60%', value: 60, haptic: false },
+      { step: 75, label: '75%', value: 75, haptic: false },
+      { step: 100, label: '100%', haptic: false },
+    ];
+    const { result, rerender } = renderHook(
+      ({ value }: { value: number }) =>
+        useSliderGesture(createParams({ value, onMark, marks })),
+      { initialProps: { value: 10 } },
+    );
+
+    act(() => {
+      result.current.handlePressStep(40);
+    });
+    act(() => {
+      result.current.handlePressStep(75);
+    });
+    expect(onMark).toHaveBeenCalled();
+    onMark.mockClear();
+
+    // Parent caught up to the latest commit first...
+    rerender({ value: 75 });
+    // ...then a lagged intermediate echo arrives (common after fast pans).
+    rerender({ value: 40 });
+
+    act(() => {
+      result.current.handlePressStep(60);
+    });
+
+    expect(onMark).not.toHaveBeenCalled();
+  });
+
   it('syncs thumb position when value prop changes', () => {
     const { result, rerender } = renderHook(
       ({ value }: { value: number }) =>

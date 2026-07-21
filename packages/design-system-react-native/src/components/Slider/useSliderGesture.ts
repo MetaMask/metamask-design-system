@@ -31,6 +31,24 @@ import {
 } from './Slider.utilities';
 
 /**
+ * How many recently-acked commit generations to retain so late prop echoes
+ * (common after fast pans) can still be recognized and ignored.
+ */
+const RECENT_COMMIT_HISTORY_LIMIT = 256;
+
+type CommitEntry = {
+  value: number;
+  generation: number;
+};
+
+type PropReconciliation = {
+  /** Write `value` into `propValue` for the UI-thread reaction. */
+  syncPropValue: boolean;
+  /** Update haptic baseline from the prop (external updates only). */
+  syncBaseline: boolean;
+};
+
+/**
  * Owns Slider gesture handling, animated thumb/fill position, and range-label taps.
  *
  * Flow during drag (UI thread):
@@ -40,13 +58,14 @@ import {
  *   domain value → trackPercent → translateX (skipped while dragging).
  *
  * Stale controlled self-echoes (gesture → onValueChange → parent state → value
- * prop) are suppressed with an in-flight commit queue — the same sequence
- * principle as React Native TextInput's `mostRecentEventCount`, kept local to
- * the Slider so the public API stays a plain `value` number. Direct commits
- * push the emitted domain value; incoming props that match an in-flight emit
- * are acknowledged and do not rewind thumb position or the haptic baseline.
- * Props that do not match any in-flight emit are treated as external updates
- * and applied immediately.
+ * prop) are suppressed with a monotonically increasing commit generation — the
+ * same sequence principle as React Native TextInput's `mostRecentEventCount`,
+ * kept local so the public API stays a plain `value` number. Direct commits
+ * record `{ value, generation }`; incoming props that match a recent emit are
+ * acknowledged and must not rewind thumb position or the haptic baseline
+ * (including late echoes that arrive after a newer commit was already acked).
+ * Props that do not match any recent emit are treated as external updates and
+ * applied immediately.
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
  *
@@ -86,8 +105,7 @@ export function useSliderGesture(
   const thumbScale = useSharedValue(1);
   const isDragging = useSharedValue(false);
   const propValue = useSharedValue(value);
-  // True while at least one direct commit has not yet been acknowledged by a
-  // matching `value` prop echo — UI thread skips prop→thumb sync until then.
+  // True while commitGeneration > ackedGeneration — UI thread skips prop→thumb.
   const hasInflightCommits = useSharedValue(false);
   const previousTrackPercentRef = useRef(
     getTrackPercentFromValue(
@@ -98,55 +116,74 @@ export function useSliderGesture(
     ),
   );
   const isDraggingRef = useRef(false);
-  // Domain values emitted by direct commits, awaiting prop acknowledgment.
-  const inflightCommitsRef = useRef<number[]>([]);
+  const commitGenerationRef = useRef(0);
+  const ackedGenerationRef = useRef(0);
   const lastEmittedValueRef = useRef<number | null>(null);
+  const lastEmittedGenerationRef = useRef(0);
+  const recentCommitsRef = useRef<CommitEntry[]>([]);
 
-  // --- In-flight commit tracking (sequence ack, not a time heuristic) ---
+  // --- Commit generation tracking (sequence ack, not a time heuristic) ---
 
   const recordDirectCommit = useCallback(
     (domainValue: number) => {
-      inflightCommitsRef.current.push(domainValue);
+      commitGenerationRef.current += 1;
+      const generation = commitGenerationRef.current;
       lastEmittedValueRef.current = domainValue;
+      lastEmittedGenerationRef.current = generation;
+      recentCommitsRef.current.push({ value: domainValue, generation });
+      if (recentCommitsRef.current.length > RECENT_COMMIT_HISTORY_LIMIT) {
+        recentCommitsRef.current.shift();
+      }
       hasInflightCommits.value = true;
     },
     [hasInflightCommits],
   );
 
   /**
-   * Reconciles an incoming controlled `value` against in-flight local commits.
+   * Reconciles an incoming controlled `value` against recent local commits.
    *
    * @param incoming - Next `value` prop.
-   * @returns Whether thumb position / haptic baseline should sync from the prop.
+   * @returns Whether to sync `propValue` / haptic baseline from the prop.
    */
-  const shouldApplyPropValue = useCallback(
-    (incoming: number): boolean => {
-      const inflight = inflightCommitsRef.current;
-      if (inflight.length === 0) {
-        return true;
+  const reconcilePropValue = useCallback(
+    (incoming: number): PropReconciliation => {
+      const recent = recentCommitsRef.current;
+      let match: CommitEntry | undefined;
+      for (let index = recent.length - 1; index >= 0; index -= 1) {
+        if (recent[index].value === incoming) {
+          match = recent[index];
+          break;
+        }
       }
 
-      // Caught up to the latest local commit — drop all intermediate emits.
-      if (incoming === lastEmittedValueRef.current) {
-        inflightCommitsRef.current = [];
-        lastEmittedValueRef.current = null;
-        hasInflightCommits.value = false;
-        return false;
+      if (match) {
+        // Late echo of an already-acked commit — do not write propValue or the
+        // reaction will snap the thumb backward after a fast pan.
+        if (match.generation <= ackedGenerationRef.current) {
+          return { syncPropValue: false, syncBaseline: false };
+        }
+
+        if (incoming === lastEmittedValueRef.current) {
+          ackedGenerationRef.current = lastEmittedGenerationRef.current;
+        } else {
+          ackedGenerationRef.current = match.generation;
+        }
+
+        hasInflightCommits.value =
+          ackedGenerationRef.current < commitGenerationRef.current;
+
+        // Sync propValue only when catching up to the latest emit (correct
+        // position). Intermediate echoes must not overwrite propValue.
+        const isLatestAck =
+          ackedGenerationRef.current === lastEmittedGenerationRef.current;
+        return { syncPropValue: isLatestAck, syncBaseline: false };
       }
 
-      // Stale intermediate echo — acknowledge through this value, keep newer.
-      const matchIndex = inflight.indexOf(incoming);
-      if (matchIndex >= 0) {
-        inflightCommitsRef.current = inflight.slice(matchIndex + 1);
-        hasInflightCommits.value = inflightCommitsRef.current.length > 0;
-        return false;
-      }
-
-      // Not an echo of anything we emitted — external update or parent transform.
-      inflightCommitsRef.current = [];
+      // Not a recent local emit — external update or parent transform.
+      ackedGenerationRef.current = commitGenerationRef.current;
       lastEmittedValueRef.current = null;
       hasInflightCommits.value = false;
-      return true;
+      return { syncPropValue: true, syncBaseline: true };
     },
     [hasInflightCommits],
   );
@@ -182,10 +219,15 @@ export function useSliderGesture(
   );
 
   useEffect(() => {
-    const shouldApply = shouldApplyPropValue(value);
-    propValue.value = value;
+    const { syncPropValue, syncBaseline } = reconcilePropValue(value);
 
-    if (isDraggingRef.current || !shouldApply) {
+    // Never push stale echoes into propValue — the animated reaction would
+    // otherwise move the thumb even when syncBaseline is false.
+    if (syncPropValue) {
+      propValue.value = value;
+    }
+
+    if (isDraggingRef.current || !syncBaseline) {
       return;
     }
 
@@ -200,7 +242,7 @@ export function useSliderGesture(
     maximumValue,
     minimumValue,
     propValue,
-    shouldApplyPropValue,
+    reconcilePropValue,
     value,
   ]);
 
@@ -215,10 +257,8 @@ export function useSliderGesture(
         return;
       }
 
-      // Skip while local commits are unacked — a matching echo may be stale
-      // relative to a newer tap/pan/label press already applied on the UI
-      // thread. External updates clear inflight on the JS thread before this
-      // reaction runs, so they are not blocked.
+      // Skip while newer local commits are unacked. Stale echoes are kept out
+      // of propValue on the JS thread; this is a second guard for races.
       if (hasInflightCommits.value) {
         return;
       }
