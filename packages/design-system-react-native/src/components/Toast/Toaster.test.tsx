@@ -110,7 +110,7 @@ describe('Toaster', () => {
     expect(screen.queryByText('Test Label')).toBeNull();
   });
 
-  it('hides toast with topOffset when closeToast is called', async () => {
+  it('accepts topOffset option and hides on close', async () => {
     render(<Toaster ref={toasterRef} />);
 
     await showToastAndWait(toasterRef, {
