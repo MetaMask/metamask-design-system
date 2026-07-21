@@ -78,13 +78,22 @@ export function useSliderGesture(
   const translateX = useSharedValue(0);
   const thumbScale = useSharedValue(1);
   const isDragging = useSharedValue(false);
-  // Generation-based stale-echo suppression: each direct commit (tap, pan end,
-  // label press) records its committed value and marks an echo as pending. The
-  // useEffect that receives the value-prop change compares the incoming value to
-  // the last committed value; a mismatch while a commit is pending means the
-  // incoming change is a stale echo from an older commit and is skipped.
+  // Generation-based stale-echo suppression.
+  //
+  // Inspired by RN TextInput's mostRecentEventCount pattern
+  // (https://github.com/react/react-native/blob/v0.81.5/packages/react-native/Libraries/Components/TextInput/TextInput.js#L397):
+  // each direct commit (tap, pan end, label press) increments commitCountRef
+  // and records the committed value. useEffect increments echoCountRef as
+  // prop-echoes arrive, suppressing any that don't match lastCommittedValueRef.
+  //
+  // Using a counter rather than a boolean flag (cf. Radix useControllableState,
+  // React DOM shadow-property value equality) means the guard self-heals: if a
+  // consumer rejects or remaps the committed value, echoCountRef increments on
+  // the first non-matching prop change and catches up to commitCountRef, so
+  // subsequent external updates are never permanently blocked.
   const lastCommittedValueRef = useRef<number>(value);
-  const hasPendingEchoRef = useRef(false);
+  const commitCountRef = useRef(0);
+  const echoCountRef = useRef(0);
   const previousTrackPercentRef = useRef(
     getTrackPercentFromValue(
       value,
@@ -130,18 +139,18 @@ export function useSliderGesture(
       return;
     }
 
-    // Stale-echo guard: after a direct commit (tap, pan end, label press) we
-    // mark an echo as pending. The first value-prop change that matches the
-    // committed value is our echo — accept it and clear the flag. Any change
-    // that arrives while the flag is set but does NOT match is a stale echo
-    // from an older commit and is skipped (it would otherwise snap the thumb
-    // backward and corrupt the haptic baseline).
-    if (hasPendingEchoRef.current) {
-      if (value === lastCommittedValueRef.current) {
-        hasPendingEchoRef.current = false;
-      } else {
+    // Stale-echo guard: suppress prop-echoes from older commits.
+    // echoCountRef trails commitCountRef while echoes are in flight.
+    // Each arriving prop change increments echoCountRef; if the value doesn't
+    // match the latest commit it's a stale echo and we return early. On a
+    // match (or when React batches multiple commits into one render) we catch
+    // echoCountRef up to commitCountRef so the guard doesn't stay open.
+    if (echoCountRef.current < commitCountRef.current) {
+      echoCountRef.current++;
+      if (value !== lastCommittedValueRef.current) {
         return;
       }
+      echoCountRef.current = commitCountRef.current;
     }
 
     const trackPercent = getTrackPercentFromValue(
@@ -174,7 +183,7 @@ export function useSliderGesture(
   // is primed before the value-prop change arrives on the JS thread.
   const markCommit = useCallback((committedValue: number) => {
     lastCommittedValueRef.current = committedValue;
-    hasPendingEchoRef.current = true;
+    commitCountRef.current++;
   }, []);
 
   const emitDragEnd = useCallback(
@@ -413,7 +422,7 @@ export function useSliderGesture(
 
       const newValue = getMarkValue(mark, minimumValue, maximumValue);
       lastCommittedValueRef.current = newValue;
-      hasPendingEchoRef.current = true;
+      commitCountRef.current++;
       onValueChange(newValue);
       const trackPercent = getTrackPercentFromValue(
         newValue,
