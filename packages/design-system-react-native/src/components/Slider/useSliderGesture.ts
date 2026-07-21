@@ -146,7 +146,7 @@ export function useSliderGesture(
     // match (or when React batches multiple commits into one render) we catch
     // echoCountRef up to commitCountRef so the guard doesn't stay open.
     if (echoCountRef.current < commitCountRef.current) {
-      echoCountRef.current++;
+      echoCountRef.current += 1;
       if (value !== lastCommittedValueRef.current) {
         return;
       }
@@ -183,7 +183,7 @@ export function useSliderGesture(
   // is primed before the value-prop change arrives on the JS thread.
   const markCommit = useCallback((committedValue: number) => {
     lastCommittedValueRef.current = committedValue;
-    commitCountRef.current++;
+    commitCountRef.current += 1;
   }, []);
 
   const emitDragEnd = useCallback(
@@ -422,7 +422,7 @@ export function useSliderGesture(
 
       const newValue = getMarkValue(mark, minimumValue, maximumValue);
       lastCommittedValueRef.current = newValue;
-      commitCountRef.current++;
+      commitCountRef.current += 1;
       onValueChange(newValue);
       const trackPercent = getTrackPercentFromValue(
         newValue,
