@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.37.0]
+
 ### Uncategorized
 
 - docs: Add Toast topOffset migration notes for next release ([#1395](https://github.com/MetaMask/metamask-design-system/pull/1395))
@@ -614,7 +616,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.36.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.37.0...HEAD
+[0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.36.0...@metamask/design-system-react-native@0.37.0
 [0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.35.0...@metamask/design-system-react-native@0.36.0
 [0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.34.0...@metamask/design-system-react-native@0.35.0
 [0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.33.0...@metamask/design-system-react-native@0.34.0
