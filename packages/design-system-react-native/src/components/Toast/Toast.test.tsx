@@ -1,4 +1,10 @@
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { TextColor } from '@metamask/design-system-shared';
+import {
+  Theme,
+  ThemeProvider,
+  useTailwind,
+} from '@metamask/design-system-twrnc-preset';
+import { lightTheme } from '@metamask/design-tokens';
 import {
   render,
   screen,
@@ -162,5 +168,65 @@ describe('Toast', () => {
     );
 
     expect(screen.getByTestId('toast-root')).toHaveStyle(tw.style('mx-2'));
+  });
+
+  it('uses background default, md shadow, and 16px radius in light theme', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    render(
+      <Toast
+        onClose={() => undefined}
+        testID="toast-root"
+        title="Light toast"
+      />,
+    );
+
+    expect(screen.getByTestId('toast-root')).toHaveStyle(
+      tw.style('bg-default rounded-2xl'),
+    );
+    expect(screen.getByTestId('toast-root')).toHaveStyle(
+      lightTheme.shadows.size.md,
+    );
+  });
+
+  it('uses background section and no shadow in dark theme', () => {
+    const tw = renderHook(() => useTailwind(), {
+      wrapper: ({ children }) => (
+        <ThemeProvider theme={Theme.Dark}>{children}</ThemeProvider>
+      ),
+    }).result.current;
+
+    render(
+      <ThemeProvider theme={Theme.Dark}>
+        <Toast
+          onClose={() => undefined}
+          testID="toast-root"
+          title="Dark toast"
+        />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByTestId('toast-root')).toHaveStyle(
+      tw.style('bg-section rounded-2xl'),
+    );
+    expect(screen.getByTestId('toast-root')).not.toHaveStyle(
+      lightTheme.shadows.size.md,
+    );
+  });
+
+  it('applies text alternative color to description', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    render(
+      <Toast
+        description="Description of toast"
+        onClose={() => undefined}
+        title="Toast message"
+      />,
+    );
+
+    expect(screen.getByText('Description of toast')).toHaveStyle(
+      tw.style(TextColor.TextAlternative),
+    );
   });
 });
