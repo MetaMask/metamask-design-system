@@ -39,7 +39,9 @@ import {
  *
  * Flow when `value` prop changes (JS thread → UI thread via useAnimatedReaction):
  *   domain value → trackPercent → translateX (skipped while dragging, and
- *   briefly after a direct tap/pan/label commit to avoid stale self-echo flicker)
+ *   briefly after a direct tap/pan/label commit to avoid stale self-echo flicker).
+ *   The same grace window also skips syncing `previousTrackPercentRef` from
+ *   prop echoes so the haptic baseline cannot rewind behind the thumb.
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
  *
@@ -124,15 +126,32 @@ export function useSliderGesture(
 
   useEffect(() => {
     propValue.value = value;
-    if (!isDraggingRef.current) {
-      previousTrackPercentRef.current = getTrackPercentFromValue(
-        value,
-        minimumValue,
-        maximumValue,
-        mapValueToTrackPercent,
-      );
+    if (isDraggingRef.current) {
+      return;
     }
-  }, [mapValueToTrackPercent, maximumValue, minimumValue, propValue, value]);
+
+    // Skip echoes that arrive shortly after a direct commit — they may be
+    // stale relative to a newer tap/pan/label press already applied. A lagged
+    // echo would rewind the haptic baseline while the thumb stays at the
+    // newer commit (`useAnimatedReaction` already skips those echoes).
+    if (Date.now() - lastDirectCommitAt.value < SELF_ECHO_GRACE_MS) {
+      return;
+    }
+
+    previousTrackPercentRef.current = getTrackPercentFromValue(
+      value,
+      minimumValue,
+      maximumValue,
+      mapValueToTrackPercent,
+    );
+  }, [
+    lastDirectCommitAt,
+    mapValueToTrackPercent,
+    maximumValue,
+    minimumValue,
+    propValue,
+    value,
+  ]);
 
   useAnimatedReaction(
     () => propValue.value,

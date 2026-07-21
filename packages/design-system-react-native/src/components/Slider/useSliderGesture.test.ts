@@ -194,6 +194,41 @@ describe('useSliderGesture', () => {
     expect(onMark).toHaveBeenCalled();
   });
 
+  it('does not rewind haptic baseline from a stale value-prop echo during the grace window', () => {
+    const onMark = jest.fn();
+    const marks = [
+      { step: 0, label: '0%', haptic: false },
+      { step: 40, label: '40%', value: 40, haptic: false },
+      { step: 50, label: '50%', value: 50, haptic: true },
+      { step: 60, label: '60%', value: 60, haptic: false },
+      { step: 75, label: '75%', value: 75, haptic: false },
+      { step: 100, label: '100%', haptic: false },
+    ];
+    const { result, rerender } = renderHook(
+      ({ value }: { value: number }) =>
+        useSliderGesture(createParams({ value, onMark, marks })),
+      { initialProps: { value: 60 } },
+    );
+
+    // Commit above the haptic mark — baseline becomes 75%, no crossing.
+    act(() => {
+      result.current.handlePressStep(75);
+    });
+    expect(onMark).not.toHaveBeenCalled();
+    onMark.mockClear();
+
+    // Lagged stale echo from an older value below the mark. Thumb sync is
+    // already grace-skipped; baseline must not rewind either, or the next
+    // press above the mark would false-fire onMark.
+    rerender({ value: 40 });
+
+    act(() => {
+      result.current.handlePressStep(60);
+    });
+
+    expect(onMark).not.toHaveBeenCalled();
+  });
+
   it('syncs thumb position when value prop changes', () => {
     const { result, rerender } = renderHook(
       ({ value }: { value: number }) =>

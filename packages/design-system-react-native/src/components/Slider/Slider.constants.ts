@@ -21,8 +21,11 @@ export const THUMB_GRIP_ANIMATION_DURATION = 100;
  * prop change → effect → `useAnimatedReaction`) to also sync `propValue`.
  * If a second, newer commit happens before that round trip completes, the
  * stale echo would otherwise snap the thumb backward for one frame before
- * the newer echo corrects it. Keep this comfortably above a slow JS-thread
- * round trip while staying under normal human tap cadence (~100–250ms).
+ * the newer echo corrects it — and would rewind `previousTrackPercentRef`
+ * (haptic baseline) even when the thumb skip keeps the UI at the newer
+ * commit, causing the next mark crossing to fire or miss `onMark`. Keep this
+ * comfortably above a slow JS-thread round trip while staying under normal
+ * human tap cadence (~100–250ms).
  */
 export const SELF_ECHO_GRACE_MS = 120;
 /** Matches root `py-2` vertical padding on the slider container. */
