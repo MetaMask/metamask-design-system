@@ -11,11 +11,11 @@ import React, {
 import type { RefObject } from 'react';
 import { Dimensions } from 'react-native';
 import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,
   useSharedValue,
-  withDelay,
   withSpring,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -24,7 +24,11 @@ import { scheduleOnRN } from 'react-native-worklets';
 // Internal dependencies.
 import { Toast } from './Toast';
 import {
+  TOAST_DISMISS_DISTANCE_THRESHOLD,
+  TOAST_DISMISS_VELOCITY_THRESHOLD,
   TOAST_SPRING_CONFIG,
+  TOAST_SWIPE_ACTIVE_OFFSET_Y,
+  TOAST_SWIPE_FAIL_OFFSET_X,
   TOAST_TOP_PADDING,
   TOAST_VISIBILITY_DURATION,
 } from './Toast.constants';
@@ -69,10 +73,21 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const replacementTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
       null,
     );
+    const autoDismissTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+      null,
+    );
+    const animationStartedRef = useRef(false);
+    const visibleAtRef = useRef<number | null>(null);
+    const hasNoTimeoutRef = useRef(false);
     const { top: topInset } = useSafeAreaInsets();
     const toastHeight = useSharedValue(screenHeight);
+    const hiddenTranslateY = useSharedValue(-screenHeight);
+    const visibleTranslateY = useSharedValue(0);
+    const gestureStartY = useSharedValue(0);
     const translateYProgress = useSharedValue(-screenHeight);
+    const isDismissing = useSharedValue(false);
     const topOffset = toastOptions?.topOffset ?? 0;
+    hasNoTimeoutRef.current = Boolean(toastOptions?.hasNoTimeout);
     const animatedStyle = useAnimatedStyle(() => ({
       transform: [{ translateY: translateYProgress.value + topOffset }],
     }));
@@ -86,7 +101,68 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     );
     const innerRef = useRef<ToasterRef | null>(null);
 
-    const resetState = () => setToastOptions(undefined);
+    const clearScheduledAutoDismiss = () => {
+      if (autoDismissTimeoutRef.current !== null) {
+        clearTimeout(autoDismissTimeoutRef.current);
+        autoDismissTimeoutRef.current = null;
+      }
+    };
+
+    const resetState = () => {
+      animationStartedRef.current = false;
+      visibleAtRef.current = null;
+      isDismissing.value = false;
+      clearScheduledAutoDismiss();
+      setToastOptions(undefined);
+    };
+
+    const startDismissAnimation = () => {
+      clearScheduledAutoDismiss();
+      isDismissing.value = true;
+      visibleAtRef.current = null;
+      translateYProgress.value = withSpring(
+        hiddenTranslateY.value,
+        TOAST_SPRING_CONFIG,
+        (finished) => {
+          if (finished) {
+            scheduleOnRN(resetState);
+          }
+        },
+      );
+    };
+
+    const scheduleAutoDismiss = (delayMs: number) => {
+      clearScheduledAutoDismiss();
+      autoDismissTimeoutRef.current = setTimeout(() => {
+        autoDismissTimeoutRef.current = null;
+        startDismissAnimation();
+      }, delayMs);
+    };
+
+    const beginAutoDismiss = () => {
+      visibleAtRef.current = Date.now();
+      scheduleAutoDismiss(TOAST_VISIBILITY_DURATION);
+    };
+
+    const resumeAutoDismissAfterSwipe = () => {
+      if (hasNoTimeoutRef.current || isDismissing.value) {
+        return;
+      }
+
+      // Entrance was interrupted before auto-dismiss started — start a full timer.
+      if (visibleAtRef.current === null) {
+        beginAutoDismiss();
+        return;
+      }
+
+      const elapsed = Date.now() - visibleAtRef.current;
+      if (elapsed >= TOAST_VISIBILITY_DURATION) {
+        startDismissAnimation();
+        return;
+      }
+
+      scheduleAutoDismiss(TOAST_VISIBILITY_DURATION - elapsed);
+    };
 
     const showToast = (options: ToastOptions) => {
       let timeoutDuration = 0;
@@ -95,8 +171,15 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         ...options,
       };
       if (toastOptions) {
+        // Always clear any pending auto-dismiss from the previous toast, including
+        // when the replacement is persistent (hasNoTimeout). Otherwise the old
+        // timer can fire and dismiss the new toast.
+        clearScheduledAutoDismiss();
         cancelAnimation(translateYProgress);
         timeoutDuration = 100;
+        animationStartedRef.current = false;
+        visibleAtRef.current = null;
+        isDismissing.value = false;
         setToastOptions(undefined);
       }
       if (replacementTimerRef.current !== null) {
@@ -113,14 +196,103 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         clearTimeout(replacementTimerRef.current);
         replacementTimerRef.current = null;
       }
-      translateYProgress.value = withSpring(
-        getHiddenTranslateY(toastHeight.value, topOffset),
-        TOAST_SPRING_CONFIG,
-        () => {
-          scheduleOnRN(resetState);
-        },
-      );
+      startDismissAnimation();
     };
+
+    const closeToastRef = useRef(closeToast);
+    const resumeAutoDismissAfterSwipeRef = useRef(resumeAutoDismissAfterSwipe);
+    const clearScheduledAutoDismissRef = useRef(clearScheduledAutoDismiss);
+    closeToastRef.current = closeToast;
+    resumeAutoDismissAfterSwipeRef.current = resumeAutoDismissAfterSwipe;
+    clearScheduledAutoDismissRef.current = clearScheduledAutoDismiss;
+
+    const dismissToastFromSwipe = () => {
+      closeToastRef.current();
+    };
+
+    const resumeAutoDismissFromSwipe = () => {
+      resumeAutoDismissAfterSwipeRef.current();
+    };
+
+    const clearScheduledAutoDismissFromSwipe = () => {
+      clearScheduledAutoDismissRef.current();
+    };
+
+    const swipeGesture = useMemo(
+      () =>
+        // These gesture callbacks need explicit 'worklet' directives because this
+        // package ships a pre-built dist compiled by ts-bridge (tsc), which emits the
+        // gesture chain as a namespaced call (react_native_gesture_handler_1.Gesture).
+        // The consumer's Reanimated/Worklets Babel plugin does run over dist, but its
+        // gesture auto-detection doesn't recognize that compiled namespaced form.
+        Gesture.Pan()
+          .activeOffsetY(TOAST_SWIPE_ACTIVE_OFFSET_Y)
+          .failOffsetX([-TOAST_SWIPE_FAIL_OFFSET_X, TOAST_SWIPE_FAIL_OFFSET_X])
+          .onStart(() => {
+            'worklet';
+
+            // Don't interrupt an in-progress dismiss animation.
+            if (isDismissing.value) {
+              return;
+            }
+            scheduleOnRN(clearScheduledAutoDismissFromSwipe);
+            cancelAnimation(translateYProgress);
+            gestureStartY.value = translateYProgress.value;
+          })
+          .onUpdate((event) => {
+            'worklet';
+
+            if (isDismissing.value) {
+              return;
+            }
+            const nextTranslateY = gestureStartY.value + event.translationY;
+            // Toast sits at the top; only allow dragging upward (more negative).
+            translateYProgress.value = Math.min(
+              nextTranslateY,
+              visibleTranslateY.value,
+            );
+          })
+          .onEnd((event) => {
+            'worklet';
+
+            if (isDismissing.value) {
+              return;
+            }
+            const { translationY, velocityY } = event;
+            const dismissDistance = Math.max(
+              toastHeight.value * TOAST_DISMISS_DISTANCE_THRESHOLD,
+              24,
+            );
+            const hasReachedDismissOffset = translationY <= -dismissDistance;
+            const hasReachedSwipeThreshold =
+              Math.abs(velocityY) > TOAST_DISMISS_VELOCITY_THRESHOLD;
+            const isQuickDismissing = velocityY < 0;
+
+            const shouldDismiss =
+              hasReachedDismissOffset ||
+              (hasReachedSwipeThreshold && isQuickDismissing);
+
+            if (shouldDismiss) {
+              scheduleOnRN(dismissToastFromSwipe);
+              return;
+            }
+
+            translateYProgress.value = withSpring(
+              visibleTranslateY.value,
+              TOAST_SPRING_CONFIG,
+              (finished) => {
+                // A new pan cancels this spring via cancelAnimation; only resume
+                // auto-dismiss when the spring-back completed naturally.
+                if (finished) {
+                  scheduleOnRN(resumeAutoDismissFromSwipe);
+                }
+              },
+            );
+          }),
+      // Shared values and swipe JS wrappers are stable for the component lifetime.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [],
+    );
 
     innerRef.current = {
       closeToast,
@@ -153,61 +325,68 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
 
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
       const { height } = e.nativeEvent.layout;
-      const hiddenTranslateY = getHiddenTranslateY(height, topOffset);
-      const visibleTranslateY = topInset + TOAST_TOP_PADDING;
+      const nextHiddenTranslateY = getHiddenTranslateY(height, topOffset);
+      const nextVisibleTranslateY = topInset + TOAST_TOP_PADDING;
 
+      hiddenTranslateY.value = nextHiddenTranslateY;
+      visibleTranslateY.value = nextVisibleTranslateY;
       toastHeight.value = height;
-      translateYProgress.value = hiddenTranslateY;
+
+      if (animationStartedRef.current) {
+        return;
+      }
+
+      animationStartedRef.current = true;
+      translateYProgress.value = nextHiddenTranslateY;
 
       if (toastOptions.hasNoTimeout) {
         translateYProgress.value = withSpring(
-          visibleTranslateY,
+          nextVisibleTranslateY,
           TOAST_SPRING_CONFIG,
         );
       } else {
         translateYProgress.value = withSpring(
-          visibleTranslateY,
+          nextVisibleTranslateY,
           TOAST_SPRING_CONFIG,
-          () => {
-            translateYProgress.value = withDelay(
-              TOAST_VISIBILITY_DURATION,
-              withSpring(hiddenTranslateY, TOAST_SPRING_CONFIG, () => {
-                scheduleOnRN(resetState);
-              }),
-            );
+          (finished) => {
+            if (finished) {
+              scheduleOnRN(beginAutoDismiss);
+            }
           },
         );
       }
     };
 
     return (
-      <Animated.View
-        onLayout={onAnimatedViewLayout}
-        style={baseStyle}
-        {...props}
-      >
-        {actionButtonLabel && actionButtonOnPress ? (
-          <Toast
-            {...toastProps}
-            actionButtonLabel={actionButtonLabel}
-            actionButtonOnPress={actionButtonOnPress}
-            onClose={() => {
-              closeToast();
-              toastOnClose?.();
-            }}
-            twClassName={toastTwClassNames}
-          />
-        ) : (
-          <Toast
-            {...restToastProps}
-            onClose={() => {
-              closeToast();
-              toastOnClose?.();
-            }}
-            twClassName={toastTwClassNames}
-          />
-        )}
-      </Animated.View>
+      <GestureDetector gesture={swipeGesture}>
+        <Animated.View
+          onLayout={onAnimatedViewLayout}
+          style={baseStyle}
+          {...props}
+        >
+          {actionButtonLabel && actionButtonOnPress ? (
+            <Toast
+              {...toastProps}
+              actionButtonLabel={actionButtonLabel}
+              actionButtonOnPress={actionButtonOnPress}
+              onClose={() => {
+                closeToast();
+                toastOnClose?.();
+              }}
+              twClassName={toastTwClassNames}
+            />
+          ) : (
+            <Toast
+              {...restToastProps}
+              onClose={() => {
+                closeToast();
+                toastOnClose?.();
+              }}
+              twClassName={toastTwClassNames}
+            />
+          )}
+        </Animated.View>
+      </GestureDetector>
     );
   },
 );

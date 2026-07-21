@@ -10,6 +10,10 @@ import React, { createRef, useEffect } from 'react';
 import { Text as RNText } from 'react-native';
 
 // Internal dependencies.
+import {
+  TOAST_DISMISS_VELOCITY_THRESHOLD,
+  TOAST_VISIBILITY_DURATION,
+} from './Toast.constants';
 import type { ToastOptions, ToasterRef } from './Toast.types';
 import { ToastSeverity } from './Toast.types';
 import { Toaster, toast } from './Toaster';
@@ -24,6 +28,40 @@ jest.mock('react-native-reanimated', () => {
     cancelAnimation: (...args: unknown[]) => mockCancelAnimation(...args),
   };
 });
+
+const mockPanGestureHandlers: {
+  onStart?: () => void;
+  onUpdate?: (event: { translationY: number }) => void;
+  onEnd?: (event: { translationY: number; velocityY: number }) => void;
+} = {};
+
+jest.mock('react-native-gesture-handler', () => ({
+  GestureDetector: ({ children }: { children: React.ReactNode }) => children,
+  Gesture: {
+    Pan: () => ({
+      activeOffsetY() {
+        return this;
+      },
+      failOffsetX() {
+        return this;
+      },
+      onStart(handler: () => void) {
+        mockPanGestureHandlers.onStart = handler;
+        return this;
+      },
+      onUpdate(handler: (event: { translationY: number }) => void) {
+        mockPanGestureHandlers.onUpdate = handler;
+        return this;
+      },
+      onEnd(
+        handler: (event: { translationY: number; velocityY: number }) => void,
+      ) {
+        mockPanGestureHandlers.onEnd = handler;
+        return this;
+      },
+    }),
+  },
+}));
 
 jest.mock('../Icon', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -47,12 +85,39 @@ const showToastAndWait = async (
   });
 };
 
+const triggerToastLayout = (
+  toastElement: ReturnType<typeof screen.getByTestId>,
+  height = 100,
+) => {
+  fireEvent(toastElement, 'layout', {
+    nativeEvent: { layout: { height, width: 300, x: 0, y: 0 } },
+  });
+};
+
+const swipeToast = async ({
+  translationY,
+  velocityY = 0,
+}: {
+  translationY: number;
+  velocityY?: number;
+}) => {
+  await act(async () => {
+    mockPanGestureHandlers.onStart?.();
+    mockPanGestureHandlers.onUpdate?.({ translationY });
+    mockPanGestureHandlers.onEnd?.({ translationY, velocityY });
+    jest.runAllTimers();
+  });
+};
+
 describe('Toaster', () => {
   let toasterRef: React.RefObject<ToasterRef>;
 
   beforeEach(() => {
     toasterRef = createRef<ToasterRef>();
     jest.clearAllMocks();
+    mockPanGestureHandlers.onStart = undefined;
+    mockPanGestureHandlers.onUpdate = undefined;
+    mockPanGestureHandlers.onEnd = undefined;
     jest.useFakeTimers();
   });
 
@@ -389,6 +454,189 @@ describe('Toaster', () => {
       jest.runAllTimers();
     });
     expect(screen.queryByText('Replacement')).toBeNull();
+  });
+
+  it('keeps persistent toast after replacing a timed toast', async () => {
+    render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+    await showToastAndWait(toasterRef, {
+      hasNoTimeout: false,
+      title: 'Timed toast',
+    });
+
+    await act(async () => {
+      triggerToastLayout(screen.getByTestId('toast-root'));
+    });
+
+    await act(async () => {
+      toasterRef.current?.showToast({
+        hasNoTimeout: true,
+        title: 'Persistent toast',
+      });
+      jest.advanceTimersByTime(100);
+    });
+
+    await act(async () => {
+      triggerToastLayout(screen.getByTestId('toast-root'));
+      jest.runAllTimers();
+    });
+
+    expect(screen.queryByText('Timed toast')).toBeNull();
+    expect(screen.getByText('Persistent toast')).toBeOnTheScreen();
+  });
+
+  it('ignores subsequent layout events after entrance has started', async () => {
+    render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+    await showToastAndWait(toasterRef, {
+      hasNoTimeout: true,
+      title: 'Layout once toast',
+    });
+
+    await act(async () => {
+      triggerToastLayout(screen.getByTestId('toast-root'), 100);
+      triggerToastLayout(screen.getByTestId('toast-root'), 120);
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('Layout once toast')).toBeOnTheScreen();
+  });
+
+  describe('swipe to dismiss', () => {
+    it('dismisses toast when swiped up past the distance threshold', async () => {
+      render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: true,
+        title: 'Swipe dismiss toast',
+      });
+
+      await act(async () => {
+        triggerToastLayout(screen.getByTestId('toast-root'));
+        jest.runAllTimers();
+      });
+
+      expect(screen.getByText('Swipe dismiss toast')).toBeOnTheScreen();
+
+      await swipeToast({ translationY: -500 });
+
+      expect(screen.queryByText('Swipe dismiss toast')).toBeNull();
+    });
+
+    it('dismisses toast when swiped up with sufficient velocity', async () => {
+      render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: true,
+        title: 'Quick swipe toast',
+      });
+
+      await act(async () => {
+        triggerToastLayout(screen.getByTestId('toast-root'));
+        jest.runAllTimers();
+      });
+
+      await swipeToast({
+        translationY: -10,
+        velocityY: -(TOAST_DISMISS_VELOCITY_THRESHOLD + 1),
+      });
+
+      expect(screen.queryByText('Quick swipe toast')).toBeNull();
+    });
+
+    it('keeps toast visible when swipe does not meet dismiss thresholds', async () => {
+      render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: true,
+        title: 'Incomplete swipe toast',
+      });
+
+      await act(async () => {
+        triggerToastLayout(screen.getByTestId('toast-root'));
+        jest.runAllTimers();
+      });
+
+      await swipeToast({ translationY: -10, velocityY: -100 });
+
+      expect(screen.getByText('Incomplete swipe toast')).toBeOnTheScreen();
+    });
+
+    it('still auto-dismisses after an incomplete swipe during entrance', async () => {
+      render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: false,
+        title: 'Entrance swipe toast',
+      });
+
+      await act(async () => {
+        triggerToastLayout(screen.getByTestId('toast-root'));
+      });
+
+      await act(async () => {
+        mockPanGestureHandlers.onStart?.();
+        mockPanGestureHandlers.onUpdate?.({ translationY: -10 });
+        mockPanGestureHandlers.onEnd?.({ translationY: -10, velocityY: -100 });
+      });
+
+      expect(screen.getByText('Entrance swipe toast')).toBeOnTheScreen();
+
+      await act(async () => {
+        jest.runAllTimers();
+      });
+
+      expect(screen.queryByText('Entrance swipe toast')).toBeNull();
+    });
+
+    it('dismisses after incomplete swipe when visibility duration already elapsed', async () => {
+      let now = 1_000_000;
+      const dateNowSpy = jest.spyOn(Date, 'now').mockImplementation(() => now);
+
+      render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: false,
+        title: 'Elapsed swipe toast',
+      });
+
+      await act(async () => {
+        triggerToastLayout(screen.getByTestId('toast-root'));
+      });
+
+      await act(async () => {
+        mockPanGestureHandlers.onStart?.();
+        now += TOAST_VISIBILITY_DURATION + 1;
+        mockPanGestureHandlers.onUpdate?.({ translationY: -10 });
+        mockPanGestureHandlers.onEnd?.({ translationY: -10, velocityY: -100 });
+        jest.runAllTimers();
+      });
+
+      expect(screen.queryByText('Elapsed swipe toast')).toBeNull();
+      dateNowSpy.mockRestore();
+    });
+
+    it('does not restore toast when panned after closeToast starts dismissing', async () => {
+      render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: true,
+        title: 'Closing toast',
+      });
+
+      await act(async () => {
+        triggerToastLayout(screen.getByTestId('toast-root'));
+        jest.runAllTimers();
+      });
+
+      await act(async () => {
+        toasterRef.current?.closeToast();
+      });
+
+      await swipeToast({ translationY: -10, velocityY: -100 });
+
+      expect(screen.queryByText('Closing toast')).toBeNull();
+    });
   });
 });
 
