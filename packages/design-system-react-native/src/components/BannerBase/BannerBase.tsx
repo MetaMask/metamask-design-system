@@ -1,4 +1,5 @@
 import {
+  BannerBaseActionButtonLayout,
   BoxAlignItems,
   BoxBackgroundColor,
   BoxFlexDirection,
@@ -35,6 +36,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
   actionButtonLabel,
   actionButtonOnPress,
   actionButtonProps,
+  actionButtonLayout = BannerBaseActionButtonLayout.Below,
   startAccessory,
   onClose,
   closeButtonProps,
@@ -51,6 +53,19 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
 
   const shouldShowCloseButton = Boolean(onClose);
   const shouldShowActionButton = Boolean(actionButtonOnPress);
+  const isActionButtonLayoutEnd =
+    actionButtonLayout === BannerBaseActionButtonLayout.End;
+
+  const actionButton = shouldShowActionButton ? (
+    <Button
+      size={ButtonSize.Md}
+      onPress={actionButtonOnPress}
+      {...resolvedActionButtonProps}
+      variant={ButtonVariant.Secondary}
+    >
+      {actionButtonLabel}
+    </Button>
+  ) : null;
 
   return (
     <Box
@@ -100,19 +115,12 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
             children
           ))}
 
-        {shouldShowActionButton && (
-          <Box twClassName="mt-2">
-            <Button
-              size={ButtonSize.Md}
-              onPress={actionButtonOnPress}
-              {...resolvedActionButtonProps}
-              variant={ButtonVariant.Secondary}
-            >
-              {actionButtonLabel}
-            </Button>
-          </Box>
+        {shouldShowActionButton && !isActionButtonLayoutEnd && (
+          <Box twClassName="mt-2">{actionButton}</Box>
         )}
       </Box>
+
+      {shouldShowActionButton && isActionButtonLayoutEnd && actionButton}
 
       {shouldShowCloseButton && (
         <ButtonIcon

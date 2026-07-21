@@ -20,7 +20,7 @@ import {
 
 ## Props
 
-Inherits [ListItem](../ListItem/README.md) / [Content](../Content/README.md) props (`value`, `verticalAlignment`, `testID`, and other root `View` props). `isInteractive` and `children` are not supported. Secondary text uses **`description`** (ListItem), not `subtitle` ([HeaderStandard](../HeaderStandard/README.md) / [TitleSubpage](../TitleSubpage/README.md)).
+Inherits [ListItem](../ListItem/README.md) / [Content](../Content/README.md) props (`value`, `variant`, `testID`, and other root `View` props). `isInteractive` and `children` are not supported. Secondary text uses **`description`** (ListItem), not `subtitle` ([HeaderStandard](../HeaderStandard/README.md) / [TitleSubpage](../TitleSubpage/README.md)).
 
 ### `title`
 

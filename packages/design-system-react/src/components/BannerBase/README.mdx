@@ -6,6 +6,25 @@ import * as BannerBaseStories from './BannerBase.stories';
 
 BannerBase is a foundational banner container with optional title, description, action button, start accessory, and close affordance.
 
+```tsx
+import {
+  BannerBase,
+  Icon,
+  IconName,
+  IconSize,
+} from '@metamask/design-system-react';
+
+<BannerBase
+  title="Title is sentence case no period"
+  description="Description shouldn't repeat title. 1-3 lines."
+  actionButtonLabel="Action"
+  actionButtonOnClick={() => undefined}
+  onClose={() => undefined}
+  closeButtonProps={{ 'data-testid': 'banner-base-close-button' }}
+  startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
+/>;
+```
+
 <Canvas of={BannerBaseStories.Default} />
 
 ## Props
@@ -201,6 +220,56 @@ When provided, `actionButtonLabel` is required. Use `actionButtonProps` to pass 
 
 <Canvas of={BannerBaseStories.ActionButtonOnClick} />
 
+### `actionButtonLayout`
+
+Optional layout for the action button relative to the banner body.
+
+- `BannerBaseActionButtonLayout.Below` — under title / description / children (default). Prefer when the body is longer or wraps.
+- `BannerBaseActionButtonLayout.End` — right of the body, left of the close button. Prefer for short copy (roughly one-line title and one-line description).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>actionButtonLayout</code>
+      </td>
+      <td align="left">
+        <code>BannerBaseActionButtonLayout</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BannerBaseActionButtonLayout.Below</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  BannerBase,
+  BannerBaseActionButtonLayout,
+} from '@metamask/design-system-react';
+
+<BannerBase
+  title="End"
+  description="One-line description for short copy."
+  actionButtonLabel="Action"
+  actionButtonOnClick={() => undefined}
+  actionButtonLayout={BannerBaseActionButtonLayout.End}
+  onClose={() => undefined}
+/>;
+```
+
+<Canvas of={BannerBaseStories.ActionButtonLayout} />
+
 ### `onClose`
 
 Optional close callback. If passed, a close button is shown. Use `closeButtonProps` to pass additional non-behavioral props to the close `ButtonIcon`, including `data-testid`, accessibility props, and styling hooks when needed for testing.
@@ -232,7 +301,9 @@ Optional close callback. If passed, a close button is shown. Use `closeButtonPro
         <code>closeButtonProps</code>
       </td>
       <td align="left">
-        <code>Omit&lt;Partial&lt;ButtonIconProps&gt;, 'iconName' | 'onClick'&gt;</code>
+        <code>
+          Omit&lt;Partial&lt;ButtonIconProps&gt;, 'iconName' | 'onClick'&gt;
+        </code>
       </td>
       <td align="left">No</td>
       <td align="left">

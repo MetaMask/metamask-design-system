@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.36.0]
+
+### Added
+
+- Added `actionButtonLayout` to `BannerBase` (inherited by `BannerAlert`) with `BannerBaseActionButtonLayout.Below` (default) and `BannerBaseActionButtonLayout.End` to place the action button beside the body, left of close ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
+- Added `SliderMarkColor` for themed `Slider` mark colors that interpolate with the thumb ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+
+### Changed
+
+- **BREAKING:** Replaced `verticalAlignment` / `ContentVerticalAlignment` / `ListItemVerticalAlignment` on `Content` and `ListItem` with `variant` / `ContentVariant` / `ListItemVariant` (`OneLine`, `TwoLines`, `MultiLine`) for preset row heights, alignment, and secondary-slot gating ([#1384](https://github.com/MetaMask/metamask-design-system/pull/1384))
+  - See [Migration Guide](./MIGRATION.md#content-and-listitem-verticalalignment-replaced-by-variant)
+- **BREAKING:** Consolidated `Slider` mark configuration into a single `marks` prop; removed `rangeLabelSteps`, `formatStepLabel`, `stepToValue`, `tickThresholds`, `DEFAULT_RANGE_LABEL_STEPS`, and `DEFAULT_TICK_THRESHOLDS` ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+  - See [Migration Guide](./MIGRATION.md#slider-mark-api-consolidation)
+
+### Fixed
+
+- Fixed `Slider` drag jerking when the controlled `value` updates mid-gesture ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+
+## [0.35.0]
+
+### Added
+
+- Added `Slider` for controlled range input with pan/tap gestures, optional range dots and labels, and hooks for non-linear scales ([#1372](https://github.com/MetaMask/metamask-design-system/pull/1372))
+
+### Changed
+
+- Updated `FilterButton` to compose from `ButtonPrimary`, `ButtonSecondary`, and `ButtonTertiary` instead of hand-rolled styles, so selected-state text and icon colors stay consistent with button variants ([#1379](https://github.com/MetaMask/metamask-design-system/pull/1379))
+- Updated `ButtonBase` to merge `startIconProps.twClassName` and `endIconProps.twClassName` last, matching the existing `textProps.twClassName` pattern ([#1379](https://github.com/MetaMask/metamask-design-system/pull/1379))
+
+### Fixed
+
+- Fixed `ActionListItem` painting `bg-default` on elevated surfaces in pure-black mode; rows now inherit the parent background and use `bg-pressed` on press ([#1374](https://github.com/MetaMask/metamask-design-system/pull/1374))
+- Fixed `FilterButton` selected-state text appearing invisible (white-on-white) in dark mode ([#1379](https://github.com/MetaMask/metamask-design-system/pull/1379))
+
+## [0.34.0]
+
+### Added
+
+- Added `CandlestickFilled` to `IconName` ([#1373](https://github.com/MetaMask/metamask-design-system/pull/1373))
+
+### Changed
+
+- **BREAKING:** Updated peer dependencies to require React Native Reanimated 4 and `react-native-worklets`; Reanimated 3 is no longer supported ([#1216](https://github.com/MetaMask/metamask-design-system/pull/1216))
+  - See [Migration Guide](./MIGRATION.md#reanimated-4-worklets-peer-dependencies)
+
+## [0.33.0]
+
+### Changed
+
+- Updated `BottomSheetDialog` to use `background.alternative` and pure-black shadow tokens when pure-black mode is active via `usePureBlack` from `@metamask/design-system-twrnc-preset` ([#1307](https://github.com/MetaMask/metamask-design-system/pull/1307))
+
 ## [0.32.0]
 
 ### Added
@@ -556,7 +607,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.32.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.36.0...HEAD
+[0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.35.0...@metamask/design-system-react-native@0.36.0
+[0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.34.0...@metamask/design-system-react-native@0.35.0
+[0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.33.0...@metamask/design-system-react-native@0.34.0
+[0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.32.0...@metamask/design-system-react-native@0.33.0
 [0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.31.0...@metamask/design-system-react-native@0.32.0
 [0.31.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.2...@metamask/design-system-react-native@0.31.0
 [0.30.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.30.1...@metamask/design-system-react-native@0.30.2

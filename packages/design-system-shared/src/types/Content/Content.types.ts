@@ -1,15 +1,19 @@
 import type { ReactNode } from 'react';
 
 /**
- * Vertical alignment options for the Content row.
+ * Content layout variant (ADR-0003).
  */
-export const ContentVerticalAlignment = {
-  Top: 'top',
-  Center: 'center',
+export const ContentVariant = {
+  /** Title (+ optional value) only. 48px min row height, vertically centered. */
+  OneLine: 'one-line',
+  /** Title + description and/or value + subvalue. 72px min row height, vertically centered. */
+  TwoLines: 'two-lines',
+  /** Three or more lines of text. 88px min row height, top-aligned. */
+  MultiLine: 'multi-line',
 } as const;
 
-export type ContentVerticalAlignment =
-  (typeof ContentVerticalAlignment)[keyof typeof ContentVerticalAlignment];
+export type ContentVariant =
+  (typeof ContentVariant)[keyof typeof ContentVariant];
 
 /**
  * Content shared props (ADR-0004).
@@ -17,16 +21,17 @@ export type ContentVerticalAlignment =
  */
 export type ContentPropsShared = {
   /**
-   * Vertical alignment of the row (avatar, text columns, and value column).
+   * Layout variant controlling row min-height, vertical alignment, and which
+   * secondary slots render.
    *
-   * Prefer `center` when the row is one or two lines tall—the usual list-item case.
-   * Prefer `top` when the row is taller (for example three or more lines of text,
-   * or overall row height of 88dp or more) so the avatar and trailing content
-   * align with the first line.
+   * - `one-line` — 48px min height (incl. ListItem padding), centered;
+   *   `description` and `subvalue` are omitted.
+   * - `two-lines` — 72px min height, centered; all slots render.
+   * - `multi-line` — 88px min height, top-aligned; all slots render.
    *
-   * @default ContentVerticalAlignment.Center
+   * @default ContentVariant.TwoLines
    */
-  verticalAlignment?: ContentVerticalAlignment;
+  variant?: ContentVariant;
   /** Optional leading visual (e.g. avatar), rendered in a 40px-wide centered slot. */
   avatar?: ReactNode;
   /** Optional title (string or node). Default text: BodyMd, Medium, TextDefault. */

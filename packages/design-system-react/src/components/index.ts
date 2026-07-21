@@ -49,7 +49,7 @@ export {
 } from './BadgeWrapper';
 export type { BadgeWrapperCustomPosition } from './BadgeWrapper';
 
-export { BannerBase } from './BannerBase';
+export { BannerBase, BannerBaseActionButtonLayout } from './BannerBase';
 export type { BannerBaseProps } from './BannerBase';
 
 export { Blockies } from './temp-components/Blockies';
@@ -174,3 +174,5 @@ export type { ButtonFilterProps } from './ButtonFilter';
 
 export { Toast, Toaster, toast, ToastSeverity } from './Toast';
 export type { ToastOptions, ToastProps, ToasterProps } from './Toast';
+
+export { PureBlackProvider, usePureBlack } from './PureBlackProvider';

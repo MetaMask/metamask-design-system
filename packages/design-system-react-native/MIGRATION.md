@@ -4,7 +4,8 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.30.0 to 0.31.0](#from-version-0300-to-0310)
+- [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
+- [From version 0.33.0 to 0.34.0](#from-version-0330-to-0340)
 - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
 - [From version 0.28.0 to 0.29.0](#from-version-0280-to-0290)
 - [From version 0.27.0 to 0.28.0](#from-version-0270-to-0280)
@@ -46,6 +47,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
   - [From version 0.30.0 to 0.31.0](#from-version-0300-to-0310)
   - [From version 0.26.0 to 0.27.0](#from-version-0260-to-0270)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
@@ -63,6 +65,174 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.35.0 to 0.36.0
+
+<a id="from-version-0350-to-0360"></a>
+
+<a id="content-and-listitem-verticalalignment-replaced-by-variant"></a>
+
+#### `Content` and `ListItem`: `verticalAlignment` replaced by `variant`
+
+**`ContentVerticalAlignment`**, **`ListItemVerticalAlignment`**, and **`verticalAlignment`** are removed from **`Content`** and **`ListItem`**. Use **`ContentVariant`**, **`ListItemVariant`**, and **`variant`** instead.
+
+**What changed:**
+
+| Before (0.35.0)                                          | After (0.36.0)                        |
+| -------------------------------------------------------- | ------------------------------------- |
+| `ContentVerticalAlignment` / `ListItemVerticalAlignment` | `ContentVariant` / `ListItemVariant`  |
+| `verticalAlignment` prop                                 | `variant` prop                        |
+| `verticalAlignment={Center}` + secondary text            | `variant={ListItemVariant.TwoLines}`  |
+| `verticalAlignment={Center}` + title/value only          | `variant={ListItemVariant.OneLine}`   |
+| `verticalAlignment={Top}`                                | `variant={ListItemVariant.MultiLine}` |
+
+Variant min-heights (including **`ListItem`** **`py-3`** padding): **`OneLine`** 48px, **`TwoLines`** 72px, **`MultiLine`** 88px. **`OneLine`** omits **`description`** and **`subvalue`**.
+
+**Migration:**
+
+```tsx
+// Before (0.35.0)
+import {
+  ContentVerticalAlignment,
+  ListItem,
+} from '@metamask/design-system-react-native';
+
+<ListItem
+  verticalAlignment={ContentVerticalAlignment.Top}
+  title="Network"
+  description="Ethereum Mainnet"
+  value="1.234 ETH"
+  subvalue="~$2,500"
+/>;
+
+// After (0.36.0)
+import {
+  ListItem,
+  ListItemVariant,
+} from '@metamask/design-system-react-native';
+
+<ListItem
+  variant={ListItemVariant.MultiLine}
+  title="Network"
+  description="Ethereum Mainnet"
+  value="1.234 ETH"
+  subvalue="~$2,500"
+/>;
+```
+
+If you import **`ContentPropsShared`** or **`ContentVariant`** from **`@metamask/design-system-shared`**, apply the same rename there. See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#content-verticalalignment-replaced-by-variant).
+
+**Impact:**
+
+- Any import of **`ContentVerticalAlignment`**, **`ListItemVerticalAlignment`**, or usage of **`verticalAlignment`** on **`Content`** or **`ListItem`** must be updated.
+- **`ListItemVariant.OneLine`** omits **`description`** and **`subvalue`** even when passed.
+- **`ListItem`** applies variant-driven min-heights and vertical alignment on the root row; **`Content`** no longer sets its own min-height.
+
+<a id="slider-mark-api-consolidation"></a>
+
+#### `Slider`: mark props consolidated into `marks`
+
+`Slider` mark configuration is consolidated into a single `marks` prop. Legacy range/tick props and exports are removed.
+
+**What changed:**
+
+| Before (0.35.0)                                         | After (0.36.0)                                            |
+| ------------------------------------------------------- | --------------------------------------------------------- |
+| `rangeLabelSteps`                                       | `marks[].step`                                            |
+| `formatStepLabel`                                       | `marks[].label`                                           |
+| `stepToValue`                                           | `marks[].value`                                           |
+| `tickThresholds`                                        | `marks[].haptic` (defaults to `true` when `label` is set) |
+| `DEFAULT_RANGE_LABEL_STEPS` / `DEFAULT_TICK_THRESHOLDS` | removed                                                   |
+| —                                                       | `marks`, `SliderMarkColor`, `DEFAULT_MARKS`, `SliderMark` |
+
+**Migration:**
+
+```tsx
+// Before (0.35.0)
+import { Slider } from '@metamask/design-system-react-native';
+
+<Slider
+  value={leverage}
+  onValueChange={setLeverage}
+  rangeLabelSteps={[0, 50, 100]}
+  formatStepLabel={(step) => ({ 0: '1x', 50: '20x', 100: '40x' })[step] ?? ''}
+  stepToValue={(step) => ({ 0: 1, 50: 20, 100: 40 })[step] ?? leverage}
+  tickThresholds={[50]}
+  showRangeLabels
+/>;
+
+// After (0.36.0)
+import { Slider, SliderMarkColor } from '@metamask/design-system-react-native';
+
+<Slider
+  value={leverage}
+  onValueChange={setLeverage}
+  marks={[
+    { step: 0, label: '1x', value: 1, color: SliderMarkColor.SuccessDefault },
+    { step: 50, label: '20x', value: 20, haptic: true },
+    { step: 100, label: '40x', value: 40, color: SliderMarkColor.ErrorDefault },
+  ]}
+  showRangeLabels
+/>;
+```
+
+If you import **`SliderPropsShared`**, **`SliderMarkColor`**, or **`SliderMark`** from **`@metamask/design-system-shared`**, apply the same API there. See the [design-system-shared migration guide](../design-system-shared/MIGRATION.md#slider-mark-api-consolidation).
+
+**Impact:**
+
+- Any usage of **`rangeLabelSteps`**, **`formatStepLabel`**, **`stepToValue`**, or **`tickThresholds`** must migrate to **`marks`**.
+- Imports of **`DEFAULT_RANGE_LABEL_STEPS`** or **`DEFAULT_TICK_THRESHOLDS`** must switch to **`DEFAULT_MARKS`** (or an explicit `marks` array).
+- Optional **`marks[].color`** accepts **`SliderMarkColor`** tokens only; tokens resolve to hex internally for Reanimated. When omitted on all marks, default slider colors are unchanged. App code must not pass raw hex/rgb — the Perps leverage ramp’s temporary hardcoded colors should be tokenized rather than treated as a supported Slider pattern.
+
+### From version 0.33.0 to 0.34.0
+
+<a id="from-version-0330-to-0340"></a>
+
+<a id="reanimated-4-worklets-peer-dependencies"></a>
+
+#### React Native Reanimated 4 and Worklets peer dependencies
+
+`@metamask/design-system-react-native` now requires **React Native Reanimated 4** and **`react-native-worklets`**. Reanimated 3 is no longer supported.
+
+**What changed:**
+
+| Before (0.33.0)                                       | After (0.34.0)                    |
+| ----------------------------------------------------- | --------------------------------- |
+| `react-native-reanimated >=3.17.0` (no worklets peer) | `react-native-reanimated >=4.2.0` |
+| —                                                     | `react-native-worklets >=0.7.4`   |
+
+**Migration:**
+
+Upgrade Reanimated and Worklets together in your app before bumping the design system. Match the versions bundled with your Expo SDK when using Expo Go, or use a dev build when your JS and native versions differ.
+
+| Expo SDK | `react-native-reanimated` | `react-native-worklets` |
+| -------- | ------------------------- | ----------------------- |
+| 54       | ~4.1.1                    | 0.5.1                   |
+| 55       | 4.2.1                     | 0.7.4                   |
+| 56       | 4.3.1                     | 0.8.3                   |
+
+1. Install compatible versions (example for Expo SDK 55 / MetaMask Mobile platform upgrade):
+
+   ```bash
+   npx expo install react-native-reanimated@~4.2.1 react-native-worklets@0.7.4
+   ```
+
+2. Update Babel to use the Worklets plugin (replace the Reanimated 3 plugin if present):
+
+   ```js
+   // babel.config.js
+   module.exports = {
+     plugins: ['react-native-worklets/plugin'],
+   };
+   ```
+
+3. Rebuild native apps after upgrading (required for Worklets native code).
+
+**Impact:**
+
+- Apps still on Reanimated 3 must complete the Reanimated 4 migration before upgrading to `@metamask/design-system-react-native` 0.34.0 or newer.
+- `BottomSheetDialog` and `Toaster` use `scheduleOnRN` from `react-native-worklets`; both packages must be present at runtime.
+- When using Expo Go, JS and native Worklets/Reanimated versions must match the SDK bundle — use a dev build if you need newer JS versions than Expo Go provides.
 
 ### From version 0.30.0 to 0.31.0
 
@@ -4046,23 +4216,38 @@ The ListItem component in `@metamask/design-system-react-native` is a near-ident
 
 ##### Import Path
 
-| Mobile Pattern                                                                                  | Design System Migration                                                            |
-| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `import ListItem from '.../component-library/components/List/ListItem'`                         | `import { ListItem } from '@metamask/design-system-react-native'`                  |
-| `import { VerticalAlignment } from '.../component-library/components/List/ListItem'`            | `import { ListItemVerticalAlignment } from '@metamask/design-system-react-native'` |
-| `import { ListItemProps } from '.../component-library/components/List/ListItem/ListItem.types'` | `import type { ListItemProps } from '@metamask/design-system-react-native'`        |
+| Mobile Pattern                                                                                  | Design System Migration                                                     |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `import ListItem from '.../component-library/components/List/ListItem'`                         | `import { ListItem } from '@metamask/design-system-react-native'`           |
+| `import { VerticalAlignment } from '.../component-library/components/List/ListItem'`            | `import { ListItemVariant } from '@metamask/design-system-react-native'`    |
+| `import { ListItemProps } from '.../component-library/components/List/ListItem/ListItem.types'` | `import type { ListItemProps } from '@metamask/design-system-react-native'` |
 
 The mobile component uses a **default export**; the design system uses a **named export**.
 
-##### VerticalAlignment Enum Renamed
+##### `verticalAlignment` replaced by `variant`
 
-The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` from `@metamask/design-system-shared`. When using `ListItem`, import `ListItemVerticalAlignment` from `@metamask/design-system-react-native` (a runtime alias for the same const object). `ContentVerticalAlignment` is also exported from the package root for `Content` call sites. It is converted from a TypeScript `enum` to a const object (ADR-0003). Values change from PascalCase to lowercase.
+**`ListItemVerticalAlignment`** / **`ContentVerticalAlignment`** and **`verticalAlignment`** are removed. Use **`ListItemVariant`** / **`ContentVariant`** and **`variant`** instead.
 
-| Mobile Value                            | Design System Value                             | Notes                      |
-| --------------------------------------- | ----------------------------------------------- | -------------------------- |
-| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | casing changed             |
-| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | casing changed             |
-| `VerticalAlignment.Bottom` (`'Bottom'`) | —                                               | removed; use `Top` instead |
+| Previous                                                 | Replacement                           |
+| -------------------------------------------------------- | ------------------------------------- |
+| `verticalAlignment={Center}` + secondary text            | `variant={ListItemVariant.TwoLines}`  |
+| `verticalAlignment={Center}` + title/value only          | `variant={ListItemVariant.OneLine}`   |
+| `verticalAlignment={Top}`                                | `variant={ListItemVariant.MultiLine}` |
+| `ListItemVerticalAlignment` / `ContentVerticalAlignment` | `ListItemVariant` / `ContentVariant`  |
+
+Variant min-heights (including `py-3` padding): `OneLine` 48px, `TwoLines` 72px, `MultiLine` 88px. `OneLine` omits `description` and `subvalue`.
+
+When migrating from an older MMDS version that used **`verticalAlignment`**, see [From version 0.35.0 to 0.36.0](#content-and-listitem-verticalalignment-replaced-by-variant).
+
+##### VerticalAlignment Enum Renamed (historical)
+
+The mobile `VerticalAlignment` enum originally mapped to `ContentVerticalAlignment` (now removed). Use `variant` as in the table above.
+
+| Mobile Value                            | Design System Value (historical)                | Current replacement                     |
+| --------------------------------------- | ----------------------------------------------- | --------------------------------------- |
+| `VerticalAlignment.Top` (`'Top'`)       | `ListItemVerticalAlignment.Top` (`'top'`)       | `ListItemVariant.MultiLine`             |
+| `VerticalAlignment.Center` (`'Center'`) | `ListItemVerticalAlignment.Center` (`'center'`) | `ListItemVariant.TwoLines` or `OneLine` |
+| `VerticalAlignment.Bottom` (`'Bottom'`) | —                                               | removed; use `MultiLine`                |
 
 ##### Accessibility Attributes on Root
 
@@ -4130,7 +4315,7 @@ import { ListItem } from '@metamask/design-system-react-native';
 </ListItem>;
 ```
 
-##### ListItem with VerticalAlignment
+##### ListItem with variant
 
 Before (Mobile):
 
@@ -4153,16 +4338,16 @@ After (Design System):
 ```tsx
 import {
   ListItem,
-  ListItemVerticalAlignment,
+  ListItemVariant,
 } from '@metamask/design-system-react-native';
 
-<ListItem verticalAlignment={ListItemVerticalAlignment.Top} gap={8}>
-  <AvatarFavicon />
-  <View>
-    <Text>Title</Text>
-    <Text>Description</Text>
-  </View>
-</ListItem>;
+<ListItem
+  variant={ListItemVariant.MultiLine}
+  accessoryGap={8}
+  title="Title"
+  description="Description"
+  avatar={<AvatarFavicon />}
+/>;
 ```
 
 ##### ListItem with Accessories
@@ -4250,7 +4435,8 @@ The following mobile `component-library` sub-components build on `ListItem` but 
 #### API Differences
 
 - MMDS `ListItem` adds `twClassName` for Tailwind-based style overrides.
-- The mobile `VerticalAlignment` enum maps to `ContentVerticalAlignment` with lowercase values (`'top'`/`'center'` instead of `'Top'`/`'Center'`). `VerticalAlignment.Bottom` has no equivalent.
+- **`verticalAlignment`** / **`ListItemVerticalAlignment`** are removed; use **`variant`** / **`ListItemVariant`** (`one-line`, `two-lines`, `multi-line`).
+- Row min-heights are variant-driven (48px / 72px / 88px including `py-3`).
 - The mobile version sets `accessible accessibilityRole="none"` on the root element; MMDS does not.
 - The mobile version uses a default export; MMDS uses a named export.
 - `ListItemColumn`, `ListItemSelect`, and `ListItemMultiSelect` are not yet available in MMDS.

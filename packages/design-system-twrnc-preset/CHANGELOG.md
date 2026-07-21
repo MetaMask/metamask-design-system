@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0]
+
+### Added
+
+- Exported `getThemeColors` for resolving theme color tokens (used by themed `Slider` marks) ([#1385](https://github.com/MetaMask/metamask-design-system/pull/1385))
+
+## [0.7.0]
+
+### Added
+
+- Added `isPureBlack` prop to `ThemeProvider` and `usePureBlack` hook so React Native apps can apply `pureBlackDarkTheme` token values through twrnc classes ([#1306](https://github.com/MetaMask/metamask-design-system/pull/1306))
+
 ## [0.6.0]
 
 ### Changed
@@ -73,7 +85,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.6.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.8.0...HEAD
+[0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.7.0...@metamask/design-system-twrnc-preset@0.8.0
+[0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.6.0...@metamask/design-system-twrnc-preset@0.7.0
 [0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.5.0...@metamask/design-system-twrnc-preset@0.6.0
 [0.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.2...@metamask/design-system-twrnc-preset@0.5.0
 [0.4.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.4.1...@metamask/design-system-twrnc-preset@0.4.2

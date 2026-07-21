@@ -173,6 +173,7 @@ export const IsDisabled: Story = {
 export const MaxLength: Story = {
   args: {
     maxLength: 13,
+    placeholder: 'Max length 13 characters',
     value: 'Max length 13',
   },
   render: function Render(args) {

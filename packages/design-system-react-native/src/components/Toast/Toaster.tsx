@@ -13,13 +13,13 @@ import { Dimensions } from 'react-native';
 import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 import Animated, {
   cancelAnimation,
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
   withSpring,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 
 // Internal dependencies.
 import { Toast } from './Toast';
@@ -113,7 +113,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         getHiddenTranslateY(toastHeight.value, topOffset),
         TOAST_SPRING_CONFIG,
         () => {
-          runOnJS(resetState)();
+          scheduleOnRN(resetState);
         },
       );
     };
@@ -167,11 +167,9 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
           () => {
             translateYProgress.value = withDelay(
               TOAST_VISIBILITY_DURATION,
-              withSpring(
-                hiddenTranslateY,
-                TOAST_SPRING_CONFIG,
-                runOnJS(resetState),
-              ),
+              withSpring(hiddenTranslateY, TOAST_SPRING_CONFIG, () => {
+                scheduleOnRN(resetState);
+              }),
             );
           },
         );

@@ -1,4 +1,5 @@
 import {
+  BannerBaseActionButtonLayout,
   BoxAlignItems,
   BoxBackgroundColor,
   BoxFlexDirection,
@@ -37,6 +38,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
       actionButtonLabel,
       actionButtonOnClick,
       actionButtonProps,
+      actionButtonLayout = BannerBaseActionButtonLayout.Below,
       startAccessory,
       onClose,
       closeButtonProps,
@@ -55,6 +57,19 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
 
     const shouldShowCloseButton = Boolean(onClose);
     const shouldShowActionButton = Boolean(actionButtonOnClick);
+    const isActionButtonLayoutEnd =
+      actionButtonLayout === BannerBaseActionButtonLayout.End;
+
+    const actionButton = shouldShowActionButton ? (
+      <Button
+        size={ButtonSize.Md}
+        onClick={actionButtonOnClick}
+        {...resolvedActionButtonProps}
+        variant={ButtonVariant.Secondary}
+      >
+        {actionButtonLabel}
+      </Button>
+    ) : null;
 
     return (
       <Box
@@ -105,19 +120,12 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
               children
             ))}
 
-          {shouldShowActionButton && (
-            <Box className="mt-2">
-              <Button
-                size={ButtonSize.Md}
-                onClick={actionButtonOnClick}
-                {...resolvedActionButtonProps}
-                variant={ButtonVariant.Secondary}
-              >
-                {actionButtonLabel}
-              </Button>
-            </Box>
+          {shouldShowActionButton && !isActionButtonLayoutEnd && (
+            <Box className="mt-2">{actionButton}</Box>
           )}
         </Box>
+
+        {shouldShowActionButton && isActionButtonLayoutEnd && actionButton}
 
         {shouldShowCloseButton && (
           <ButtonIcon

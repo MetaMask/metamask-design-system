@@ -1,9 +1,10 @@
 import {
   Theme,
+  usePureBlack,
   useTailwind,
   useTheme,
 } from '@metamask/design-system-twrnc-preset';
-import { lightTheme, darkTheme } from '@metamask/design-tokens';
+import { lightTheme, resolveDarkTheme } from '@metamask/design-tokens';
 import { debounce } from 'lodash';
 import React, {
   forwardRef,
@@ -21,7 +22,6 @@ import {
 } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -30,6 +30,7 @@ import {
   useSafeAreaFrame,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 
 // Internal dependencies.
 import {
@@ -62,10 +63,11 @@ export const BottomSheetDialog = forwardRef<
   ) => {
     const tw = useTailwind();
     const currentTheme = useTheme();
+    const isPureBlack = usePureBlack();
     const shadowLg =
       currentTheme === Theme.Light
         ? lightTheme.shadows.size.lg
-        : darkTheme.shadows.size.lg;
+        : resolveDarkTheme(isPureBlack).shadows.size.lg;
 
     const { top: screenTopPadding, bottom: screenBottomPadding } =
       useSafeAreaInsets();
@@ -93,9 +95,9 @@ export const BottomSheetDialog = forwardRef<
           bottomOfDialogYValue.value,
           { duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION },
           () => {
-            runOnJS(onCloseCB)();
+            scheduleOnRN(onCloseCB);
             if (callback) {
-              runOnJS(callback)();
+              scheduleOnRN(callback);
             }
           },
         );
@@ -175,7 +177,7 @@ export const BottomSheetDialog = forwardRef<
           const isDismissed = finalYOffset === bottomOfDialogYValue.value;
 
           if (isDismissed) {
-            runOnJS(onCloseDialog)();
+            scheduleOnRN(onCloseDialog);
           } else {
             // Only animate dialog to a certain Y position instead
             currentYOffset.value = withTiming(finalYOffset, {
@@ -205,9 +207,9 @@ export const BottomSheetDialog = forwardRef<
           duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
         },
         () => {
-          runOnJS(onOpenCB)();
+          scheduleOnRN(onOpenCB);
           if (callback) {
-            runOnJS(callback)();
+            scheduleOnRN(callback);
           }
         },
       );
@@ -252,7 +254,8 @@ export const BottomSheetDialog = forwardRef<
     const sheetStyle = useMemo(
       () => [
         tw.style(
-          'bg-default rounded-t-3xl overflow-hidden border border-muted',
+          isPureBlack ? 'bg-alternative' : 'bg-default',
+          'rounded-t-3xl overflow-hidden border border-muted',
           twClassName,
         ),
         {
@@ -270,6 +273,7 @@ export const BottomSheetDialog = forwardRef<
 
       [
         tw,
+        isPureBlack,
         maxSheetHeight,
         screenBottomPadding,
         isFullscreen,

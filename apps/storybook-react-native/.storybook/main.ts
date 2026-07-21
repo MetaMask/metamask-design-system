@@ -5,6 +5,9 @@ import type { StorybookConfig } from '@storybook/react-native-web-vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import babel from '@rolldown/plugin-babel';
+import { designSystemBarrelImportsPlugin } from './vite-plugin-design-system-barrel-imports';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -19,7 +22,12 @@ const config: StorybookConfig = {
     '../stories/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/design-system-react-native/src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: [getAbsolutePath('@storybook/addon-docs')],
+  addons: [
+    getAbsolutePath('@chromatic-com/storybook'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-vitest'),
+  ],
   framework: {
     name: getAbsolutePath('@storybook/react-native-web-vite'),
     options: {
@@ -54,8 +62,11 @@ const config: StorybookConfig = {
       : [];
     rolldownPlugins.push(
       babel({
-        exclude: /node_modules\/(?!.*(react-native-reanimated|react-native-worklets))/,
-        plugins: [['react-native-worklets/plugin', { disableSourceMaps: true }]],
+        exclude:
+          /node_modules\/(?!.*(react-native-reanimated|react-native-worklets))/,
+        plugins: [
+          ['react-native-worklets/plugin', { disableSourceMaps: true }],
+        ],
         babelrc: false,
         configFile: false,
       }),
@@ -64,21 +75,29 @@ const config: StorybookConfig = {
     return {
       ...viteConfig,
       plugins: [
+        // Example stories import from the package barrel to mirror production usage, but the
+        // static build must not resolve those through `src/index.ts`. Rolldown otherwise emits
+        // a shared orchestrator chunk that inits Avatar/Badge (and other) modules before the
+        // components a story actually renders, which races on cold CDN preloads → React #130.
+        // This plugin rewrites barrel imports to component subpaths at build time only.
+        designSystemBarrelImportsPlugin(
+          path.resolve(
+            repoRoot,
+            'packages/design-system-react-native/src/components/index.ts',
+          ),
+        ),
         svgr({
           include: '**/*.svg',
         }),
         tsconfigPaths({
           ignoreConfigErrors: true,
-          projects: [path.resolve(repoRoot, 'apps/storybook-react-native/tsconfig.json')],
+          projects: [
+            path.resolve(repoRoot, 'apps/storybook-react-native/tsconfig.json'),
+          ],
         }),
         ...filteredPlugins,
       ],
-      assetsInclude: [
-        '**/*.woff2',
-        '**/*.woff',
-        '**/*.ttf',
-        '**/*.otf',
-      ],
+      assetsInclude: ['**/*.woff2', '**/*.woff', '**/*.ttf', '**/*.otf'],
       optimizeDeps: {
         ...viteConfig.optimizeDeps,
         exclude: [
@@ -103,15 +122,24 @@ const config: StorybookConfig = {
               )),
           {
             find: '@metamask/design-system-shared',
-            replacement: path.resolve(repoRoot, 'packages/design-system-shared/src'),
+            replacement: path.resolve(
+              repoRoot,
+              'packages/design-system-shared/src',
+            ),
           },
           {
             find: '@metamask/design-system-react-native',
-            replacement: path.resolve(repoRoot, 'packages/design-system-react-native/src'),
+            replacement: path.resolve(
+              repoRoot,
+              'packages/design-system-react-native/src',
+            ),
           },
           {
             find: '@metamask/design-system-twrnc-preset',
-            replacement: path.resolve(repoRoot, 'packages/design-system-twrnc-preset/src'),
+            replacement: path.resolve(
+              repoRoot,
+              'packages/design-system-twrnc-preset/src',
+            ),
           },
           {
             find: '@metamask/design-tokens',

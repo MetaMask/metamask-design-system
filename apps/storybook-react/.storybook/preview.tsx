@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import '../../../packages/design-tokens/dist/styles.css';
 import '../tailwind.css';
 
+import { PureBlackProvider } from '@metamask/design-system-react';
 import { Preview } from '@storybook/react-vite';
 import { StoryContext, StoryFn } from '@storybook/react-vite';
 
@@ -20,56 +21,137 @@ export const globalTypes = {
       icon: 'paintbrush',
     },
   },
+  isPureBlack: {
+    name: 'Pure black',
+    description: 'Use pure black dark theme (OLED)',
+    defaultValue: false,
+    toolbar: {
+      icon: 'contrast',
+      items: [
+        { value: false, title: 'Grey dark' },
+        { value: true, title: 'Pure black' },
+      ],
+      showName: true,
+    },
+  },
 };
+
+/** Storybook may serialize toolbar booleans as strings in URL/globals. */
+function parseIsPureBlack(value: unknown): boolean {
+  return value === true || value === 'true';
+}
+
+/**
+ * Storybook-only: mirrors extension `setTheme` on `document.documentElement`.
+ * Portaled UI (Modal, Popover) renders on `document.body` and inherits CSS
+ * variables from the document root, not the decorator wrapper.
+ */
+function applyStorybookDocumentTheme({
+  theme,
+  isPureBlack,
+}: {
+  theme: 'light' | 'dark';
+  isPureBlack: boolean;
+}) {
+  const root = document.documentElement;
+  root.setAttribute('data-theme', theme);
+
+  if (theme === 'dark' && isPureBlack) {
+    root.setAttribute('data-pure-black', 'true');
+  } else {
+    root.removeAttribute('data-pure-black');
+  }
+}
+
+function StorybookDocumentThemeSync({
+  theme,
+  isPureBlack,
+}: {
+  theme: 'light' | 'dark';
+  isPureBlack: boolean;
+}) {
+  useLayoutEffect(() => {
+    applyStorybookDocumentTheme({ theme, isPureBlack });
+
+    return () => {
+      document.documentElement.removeAttribute('data-theme');
+      document.documentElement.removeAttribute('data-pure-black');
+    };
+  }, [theme, isPureBlack]);
+
+  return null;
+}
 
 function withColorScheme(Story: StoryFn, context: StoryContext) {
   const storyColorScheme = context.parameters.colorScheme;
   const globalColorScheme = context.globals.colorScheme;
+  const isPureBlack = parseIsPureBlack(context.globals.isPureBlack);
 
   // Use story-level parameter if available, otherwise fall back to global
   const colorScheme = storyColorScheme || globalColorScheme;
 
-  function Wrapper({
+  const storyCanvas = (
+    <div
+      style={{
+        padding: '1rem',
+        backgroundColor: 'var(--color-background-default)',
+      }}
+    >
+      <Story {...context} />
+    </div>
+  );
+
+  function ScopedThemeWrapper({
     children,
-    ...props
-  }: { children: React.ReactNode } & Record<string, any>) {
-    return (
-      <div
-        {...props}
-        style={{
-          padding: '1rem',
-          backgroundColor: 'var(--color-background-default)',
-        }}
-      >
-        {children}
-      </div>
-    );
+    theme,
+  }: {
+    children: React.ReactNode;
+    theme: 'light' | 'dark';
+  }) {
+    if (theme === 'dark') {
+      return (
+        <div
+          data-theme="dark"
+          // Both mode: scoped wrapper must carry data-pure-black — context-only
+          // PureBlackProvider no longer sets DOM attributes (see #1312).
+          data-pure-black={isPureBlack ? 'true' : undefined}
+        >
+          <PureBlackProvider isPureBlack={isPureBlack}>
+            {children}
+          </PureBlackProvider>
+        </div>
+      );
+    }
+
+    return <div data-theme="light">{children}</div>;
   }
 
   if (colorScheme === 'light') {
     return (
-      <Wrapper className="light">
-        <Story {...context} />
-      </Wrapper>
+      <>
+        <StorybookDocumentThemeSync theme="light" isPureBlack={false} />
+        {storyCanvas}
+      </>
     );
   }
 
   if (colorScheme === 'dark') {
     return (
-      <Wrapper className="dark">
-        <Story {...context} />
-      </Wrapper>
+      <>
+        <StorybookDocumentThemeSync theme="dark" isPureBlack={isPureBlack} />
+        <PureBlackProvider isPureBlack={isPureBlack}>
+          {storyCanvas}
+        </PureBlackProvider>
+      </>
     );
   }
 
+  // Both mode: document root cannot represent two themes; use scoped wrappers.
+  // Portaled UI will not match the side-by-side preview (known limitation).
   return (
     <>
-      <Wrapper className="light">
-        <Story {...context} />
-      </Wrapper>
-      <Wrapper className="dark">
-        <Story {...context} />
-      </Wrapper>
+      <ScopedThemeWrapper theme="light">{storyCanvas}</ScopedThemeWrapper>
+      <ScopedThemeWrapper theme="dark">{storyCanvas}</ScopedThemeWrapper>
     </>
   );
 }

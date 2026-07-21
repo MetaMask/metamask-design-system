@@ -1,3 +1,4 @@
+import { ContentVariant, TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 import { View } from 'react-native';
@@ -5,6 +6,7 @@ import { View } from 'react-native';
 import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
 import { Icon, IconName } from '../Icon';
+import { Text } from '../Text';
 
 import { ListItemMultiSelect } from './ListItemMultiSelect';
 import type { ListItemMultiSelectProps } from './ListItemMultiSelect.types';
@@ -25,8 +27,14 @@ const meta: Meta<ListItemMultiSelectProps> = {
   args: {
     title: 'Label',
     description: 'Secondary text',
+    variant: ContentVariant.TwoLines,
   },
   argTypes: {
+    variant: {
+      control: 'select',
+      options: Object.keys(ContentVariant),
+      mapping: ContentVariant,
+    },
     title: { control: 'text' },
     description: { control: 'text' },
     value: { control: 'text' },
@@ -96,5 +104,70 @@ export const StartAccessory: Story = {
       description="Description"
       value="Value"
     />
+  ),
+};
+
+const listItemIcon = <Icon name={IconName.Setting} />;
+
+const getVariantLeadingProps = (variant: ContentVariant) =>
+  variant === ContentVariant.OneLine
+    ? {
+        avatar: undefined,
+        startAccessory: listItemIcon,
+        accessoryGap: 4 as const,
+      }
+    : {
+        avatar: listItemAvatar,
+      };
+
+const variantExamples: Record<
+  ContentVariant,
+  { title: string; description: string }
+> = {
+  [ContentVariant.OneLine]: {
+    title: 'One line',
+    description: 'Omitted in one-line variant',
+  },
+  [ContentVariant.TwoLines]: {
+    title: 'Two lines',
+    description: 'Secondary line',
+  },
+  [ContentVariant.MultiLine]: {
+    title: 'Multi line',
+    description: 'Secondary line with additional wrapped content below',
+  },
+};
+
+export const Variant: Story = {
+  render: (args: ListItemMultiSelectProps) => (
+    <View>
+      {Object.values(ContentVariant).map((variant) => {
+        const { title, description } = variantExamples[variant];
+
+        return (
+          <ListItemMultiSelectStory
+            key={variant}
+            {...args}
+            {...getVariantLeadingProps(variant)}
+            variant={variant}
+            title={title}
+            description={
+              variant === ContentVariant.MultiLine ? (
+                <>
+                  <Text variant={TextVariant.BodySm}>{description}</Text>
+                  <Text variant={TextVariant.BodySm}>Third line</Text>
+                </>
+              ) : (
+                description
+              )
+            }
+            value="Value"
+            subvalue={
+              variant === ContentVariant.OneLine ? 'Omitted' : 'Subvalue'
+            }
+          />
+        );
+      })}
+    </View>
   ),
 };
