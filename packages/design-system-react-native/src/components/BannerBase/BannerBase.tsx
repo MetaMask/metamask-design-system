@@ -119,9 +119,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
             children
           ))}
 
-        {hasActionButtonBelow && (
-          <Box twClassName="mt-2">{actionButton}</Box>
-        )}
+        {hasActionButtonBelow && <Box twClassName="mt-2">{actionButton}</Box>}
       </Box>
 
       {shouldShowActionButton && isActionButtonLayoutEnd && actionButton}
