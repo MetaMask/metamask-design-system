@@ -1,4 +1,7 @@
-import { ToastSeverity } from '@metamask/design-system-shared';
+import {
+  TextColor,
+  ToastSeverity,
+} from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
@@ -130,16 +133,52 @@ describe('Toast', () => {
     expect(screen.getByTestId('toast-root')).toHaveClass('mx-2');
   });
 
-  it('always applies rounded-xl to the toast surface', () => {
+  it('uses background default, md shadow, and 16px radius in light theme', () => {
+    render(
+      <div data-theme="light">
+        <Toast
+          data-testid="toast-root"
+          title="Light toast"
+          onClose={() => undefined}
+        />
+      </div>,
+    );
+
+    expect(screen.getByTestId('toast-root')).toHaveClass(
+      'bg-default',
+      'shadow-md',
+      'rounded-2xl',
+    );
+  });
+
+  it('uses background section and no shadow in dark theme', () => {
+    render(
+      <div data-theme="dark">
+        <Toast
+          data-testid="toast-root"
+          title="Dark toast"
+          onClose={() => undefined}
+        />
+      </div>,
+    );
+
+    const toast = screen.getByTestId('toast-root');
+    expect(toast).toHaveClass('bg-section', 'rounded-2xl');
+    expect(toast).not.toHaveClass('shadow-md');
+  });
+
+  it('applies text alternative color to description', () => {
     render(
       <Toast
-        data-testid="toast-root"
-        title="Rounded"
+        title="Toast message"
+        description="Description of toast"
         onClose={() => undefined}
       />,
     );
 
-    expect(screen.getByTestId('toast-root')).toHaveClass('rounded-xl');
+    expect(screen.getByText('Description of toast')).toHaveClass(
+      TextColor.TextAlternative,
+    );
   });
 
   it('forwards ref to the root element', () => {
