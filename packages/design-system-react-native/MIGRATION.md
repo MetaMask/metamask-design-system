@@ -80,11 +80,11 @@ Toast now slides in from the **top** of the screen (below the safe area), aligni
 
 **What changed:**
 
-| Before                  | After                |
-| ----------------------- | -------------------- |
-| `bottomOffset`          | `topOffset`          |
-| `customTopOffset`       | `topOffset`          |
-| `TOAST_BOTTOM_PADDING`  | `TOAST_TOP_PADDING`  |
+| Before                 | After               |
+| ---------------------- | ------------------- |
+| `bottomOffset`         | `topOffset`         |
+| `customTopOffset`      | `topOffset`         |
+| `TOAST_BOTTOM_PADDING` | `TOAST_TOP_PADDING` |
 
 - **`topOffset`** is optional extra offset from the **top** (in addition to the safe-area inset and default top padding), not from the bottom.
 - **`TOAST_TOP_PADDING`** replaces the exported **`TOAST_BOTTOM_PADDING`** constant. The default padding value also changes (36 → 8) to match top placement.
@@ -94,7 +94,10 @@ Toast now slides in from the **top** of the screen (below the safe area), aligni
 
 ```tsx
 // Before
-import { TOAST_BOTTOM_PADDING, toast } from '@metamask/design-system-react-native';
+import {
+  TOAST_BOTTOM_PADDING,
+  toast,
+} from '@metamask/design-system-react-native';
 
 toast({
   hasNoTimeout: false,
@@ -4783,11 +4786,11 @@ toast({
 
 Toasts appear from the **top** of the screen. The per-toast offset prop maps as follows:
 
-| Source API | Design System |
-| ---------- | ------------- |
-| Mobile `customBottomOffset` | `topOffset` |
-| Mobile `customTopOffset` | `topOffset` |
-| Design system `bottomOffset` (0.23.0–0.36.0) | `topOffset` |
+| Source API                                   | Design System |
+| -------------------------------------------- | ------------- |
+| Mobile `customBottomOffset`                  | `topOffset`   |
+| Mobile `customTopOffset`                     | `topOffset`   |
+| Design system `bottomOffset` (0.23.0–0.36.0) | `topOffset`   |
 
 `topOffset` is extra offset from the top (in addition to the safe-area inset and default top padding). The exported padding constant is **`TOAST_TOP_PADDING`** (replacing **`TOAST_BOTTOM_PADDING`**).
 
