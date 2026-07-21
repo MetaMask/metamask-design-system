@@ -59,6 +59,8 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
     const shouldShowActionButton = Boolean(actionButtonOnClick);
     const isActionButtonLayoutEnd =
       actionButtonLayout === BannerBaseActionButtonLayout.End;
+    const hasActionButtonBelow =
+      shouldShowActionButton && !isActionButtonLayoutEnd;
 
     const actionButton = shouldShowActionButton ? (
       <Button
@@ -78,8 +80,10 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
         alignItems={BoxAlignItems.Start}
         gap={4}
         backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        paddingVertical={3}
-        paddingHorizontal={4}
+        paddingTop={3}
+        paddingBottom={hasActionButtonBelow ? 4 : 3}
+        paddingLeft={4}
+        paddingRight={shouldShowCloseButton ? 2 : 4}
         className={twMerge('rounded-xl', className)}
         {...props}
       >
@@ -100,7 +104,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
             ))}
 
           {hasContent(description) && (
-            <Box>
+            <Box className={hasContent(title) ? 'mt-0.5' : undefined}>
               {isTextContent(description) ? (
                 <Text variant={TextVariant.BodySm} {...descriptionProps}>
                   {description}
@@ -120,7 +124,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
               children
             ))}
 
-          {shouldShowActionButton && !isActionButtonLayoutEnd && (
+          {hasActionButtonBelow && (
             <Box className="mt-2">{actionButton}</Box>
           )}
         </Box>
