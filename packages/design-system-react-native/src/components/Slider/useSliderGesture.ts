@@ -11,6 +11,7 @@ import {
 } from 'react-native-reanimated';
 
 import {
+  SELF_ECHO_GRACE_MS,
   THUMB_GRIP_ANIMATION_DURATION,
   THUMB_GRIP_SCALE,
 } from './Slider.constants';
@@ -37,7 +38,8 @@ import {
  *   touch X → clamp to track width → trackPercent → domain value → callbacks
  *
  * Flow when `value` prop changes (JS thread → UI thread via useAnimatedReaction):
- *   domain value → trackPercent → translateX (skipped while dragging)
+ *   domain value → trackPercent → translateX (skipped while dragging, and
+ *   briefly after a direct tap/pan/label commit to avoid stale self-echo flicker)
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
  *
@@ -77,6 +79,9 @@ export function useSliderGesture(
   const thumbScale = useSharedValue(1);
   const isDragging = useSharedValue(false);
   const propValue = useSharedValue(value);
+  // Timestamp of the most recent direct (worklet/label) position commit —
+  // used to suppress stale value-prop echoes after rapid taps/label presses.
+  const lastDirectCommitAt = useSharedValue(0);
   const previousTrackPercentRef = useRef(
     getTrackPercentFromValue(
       value,
@@ -137,6 +142,14 @@ export function useSliderGesture(
       }
 
       if (previousValue !== null && currentValue === previousValue) {
+        return;
+      }
+
+      // Skip echoes that arrive shortly after a direct commit — they may be
+      // stale relative to a newer tap/pan/label press already applied on the
+      // UI thread. Genuine external updates during this window are delayed
+      // until a later prop change (see SELF_ECHO_GRACE_MS).
+      if (Date.now() - lastDirectCommitAt.value < SELF_ECHO_GRACE_MS) {
         return;
       }
 
@@ -293,6 +306,7 @@ export function useSliderGesture(
       'worklet';
 
       translateX.value = position;
+      lastDirectCommitAt.value = Date.now();
       const { trackPercent, domainValue } = positionToDomainValue(position);
 
       runOnJS(emitValueChange)(domainValue);
@@ -324,6 +338,7 @@ export function useSliderGesture(
 
         const position = clampGesturePosition(event.x, sliderWidth.value);
         translateX.value = position;
+        lastDirectCommitAt.value = Date.now();
         const { trackPercent, domainValue } = positionToDomainValue(position);
 
         runOnJS(emitValueChange)(domainValue);
@@ -368,6 +383,7 @@ export function useSliderGesture(
     emitValueChange,
     isDisabled,
     isDragging,
+    lastDirectCommitAt,
     mapTrackPercentToValue,
     mapValueToTrackPercent,
     maximumValue,
@@ -394,6 +410,7 @@ export function useSliderGesture(
       }
 
       const newValue = getMarkValue(mark, minimumValue, maximumValue);
+      lastDirectCommitAt.value = Date.now();
       onValueChange(newValue);
       const trackPercent = getTrackPercentFromValue(
         newValue,
@@ -408,6 +425,7 @@ export function useSliderGesture(
     [
       checkThresholdCrossing,
       isDisabled,
+      lastDirectCommitAt,
       mapValueToTrackPercent,
       maximumValue,
       minimumValue,
