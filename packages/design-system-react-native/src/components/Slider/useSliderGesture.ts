@@ -61,13 +61,10 @@ type PropReconciliation = {
  * prop) are suppressed with a monotonically increasing commit generation — the
  * same sequence principle as React Native TextInput's `mostRecentEventCount`,
  * kept local so the public API stays a plain `value` number. Direct commits
- * record `{ value, generation }`; incoming props that match a recent emit while
- * newer commits are still in flight are acknowledged and must not rewind thumb
- * position or the haptic baseline. Once every local commit is acked, a prop
- * that revisits a historical emit is treated as a parent-driven update (e.g.
- * reset) — at that point it is indistinguishable from a lagged echo by value
- * alone, and applying it is the correct controlled-component behavior. Props
- * that do not match any recent emit are treated as external updates and
+ * record `{ value, generation }`; incoming props that match a recent emit are
+ * acknowledged and must not rewind thumb position or the haptic baseline
+ * (including late echoes that arrive after a newer commit was already acked).
+ * Props that do not match any recent emit are treated as external updates and
  * applied immediately.
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
@@ -160,36 +157,29 @@ export function useSliderGesture(
       }
 
       if (match) {
-        // Already-acked historical match while newer commits are still in
-        // flight — a lagged self-echo. Do not write propValue or the reaction
-        // will snap the thumb backward after a fast pan.
+        // Late echo of an already-acked commit — do not write propValue or the
+        // reaction will snap the thumb backward after a fast pan.
         if (match.generation <= ackedGenerationRef.current) {
-          const isFullySettled =
-            ackedGenerationRef.current === commitGenerationRef.current;
-          if (!isFullySettled) {
-            return { syncPropValue: false, syncBaseline: false };
-          }
-          // Fully settled: parent reset (or equivalent) to a value that
-          // happens to still be in commit history — fall through to external.
-        } else {
-          if (incoming === lastEmittedValueRef.current) {
-            ackedGenerationRef.current = lastEmittedGenerationRef.current;
-          } else {
-            ackedGenerationRef.current = match.generation;
-          }
-
-          hasInflightCommits.value =
-            ackedGenerationRef.current < commitGenerationRef.current;
-
-          // Sync propValue only when catching up to the latest emit (correct
-          // position). Intermediate echoes must not overwrite propValue.
-          const isLatestAck =
-            ackedGenerationRef.current === lastEmittedGenerationRef.current;
-          return { syncPropValue: isLatestAck, syncBaseline: false };
+          return { syncPropValue: false, syncBaseline: false };
         }
+
+        if (incoming === lastEmittedValueRef.current) {
+          ackedGenerationRef.current = lastEmittedGenerationRef.current;
+        } else {
+          ackedGenerationRef.current = match.generation;
+        }
+
+        hasInflightCommits.value =
+          ackedGenerationRef.current < commitGenerationRef.current;
+
+        // Sync propValue only when catching up to the latest emit (correct
+        // position). Intermediate echoes must not overwrite propValue.
+        const isLatestAck =
+          ackedGenerationRef.current === lastEmittedGenerationRef.current;
+        return { syncPropValue: isLatestAck, syncBaseline: false };
       }
 
-      // External update, parent transform, or settled reset to a historical value.
+      // Not a recent local emit — external update or parent transform.
       ackedGenerationRef.current = commitGenerationRef.current;
       lastEmittedValueRef.current = null;
       hasInflightCommits.value = false;

@@ -298,7 +298,7 @@ describe('useSliderGesture', () => {
     expect(onMark).not.toHaveBeenCalled();
   });
 
-  it('applies a parent reset to a previously committed value after settling', () => {
+  it('ignores a late stale echo after the latest commit was already acknowledged', () => {
     const onMark = jest.fn();
     const marks = [
       { step: 0, label: '0%', haptic: false },
@@ -323,17 +323,17 @@ describe('useSliderGesture', () => {
     expect(onMark).toHaveBeenCalled();
     onMark.mockClear();
 
-    // Parent caught up to the latest commit...
+    // Parent caught up to the latest commit first...
     rerender({ value: 75 });
-    // ...then intentionally resets to an earlier value that is still in the
-    // recent-commit history. Must sync thumb and haptic baseline.
+    // ...then a lagged intermediate echo arrives (common after fast pans).
+    // Must not rewind thumb position or the haptic baseline.
     rerender({ value: 40 });
 
     act(() => {
       result.current.handlePressStep(60);
     });
 
-    expect(onMark).toHaveBeenCalled();
+    expect(onMark).not.toHaveBeenCalled();
   });
 
   it('syncs thumb position when value prop changes', () => {
