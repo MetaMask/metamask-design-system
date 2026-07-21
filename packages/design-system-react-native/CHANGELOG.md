@@ -9,12 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.37.0]
 
-### Uncategorized
+### Changed
 
-- docs: Add Toast topOffset migration notes for next release ([#1395](https://github.com/MetaMask/metamask-design-system/pull/1395))
-- fix: Merge Toast descriptionProps defaults in JSX ([#1396](https://github.com/MetaMask/metamask-design-system/pull/1396))
-- feat: Add iOS-style top toast animation for React Native ([#1304](https://github.com/MetaMask/metamask-design-system/pull/1304))
-- fix: Polish React Native Toast background, description color and border radius ([#1391](https://github.com/MetaMask/metamask-design-system/pull/1391))
+- **BREAKING:** Updated `Toast` / `Toaster` to slide in from the top of the screen (below the safe area) with spring-based enter/exit motion ([#1304](https://github.com/MetaMask/metamask-design-system/pull/1304))
+  - Renamed `bottomOffset` and `customTopOffset` to `topOffset` (extra offset from the top, in addition to the safe-area inset and default top padding)
+  - Renamed exported `TOAST_BOTTOM_PADDING` to `TOAST_TOP_PADDING` and changed the default padding value from 36 to 8
+  - See [Migration Guide](./MIGRATION.md#toast-bottomoffset-to-topoffset)
+- Updated `Toast` surface styling for light/dark themes: light uses `background.default` with medium shadow; dark uses `background.section` with no shadow; border radius updated from 12px to 16px; description defaults to `TextColor.TextAlternative` ([#1391](https://github.com/MetaMask/metamask-design-system/pull/1391))
+
+### Fixed
+
+- Fixed `Toast` `descriptionProps` so partial consumer props merge with the default `TextAlternative` color instead of replacing it ([#1396](https://github.com/MetaMask/metamask-design-system/pull/1396))
 
 ## [0.36.0]
 
