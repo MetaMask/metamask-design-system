@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- docs: Add Toast topOffset migration notes for next release ([#1395](https://github.com/MetaMask/metamask-design-system/pull/1395))
+- fix: Merge Toast descriptionProps defaults in JSX ([#1396](https://github.com/MetaMask/metamask-design-system/pull/1396))
+- feat: Add iOS-style top toast animation for React Native ([#1304](https://github.com/MetaMask/metamask-design-system/pull/1304))
+- fix: Polish React Native Toast background, description color and border radius ([#1391](https://github.com/MetaMask/metamask-design-system/pull/1391))
+
 ## [0.36.0]
 
 ### Added
