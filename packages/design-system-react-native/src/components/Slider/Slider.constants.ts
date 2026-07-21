@@ -11,6 +11,20 @@ export const THUMB_TO_LABEL_GAP = 8;
 export const THUMB_GRIP_SCALE = 1.12;
 /** Duration (ms) for thumb grip scale in/out. */
 export const THUMB_GRIP_ANIMATION_DURATION = 100;
+/**
+ * Grace window (ms) after any direct (worklet-driven) position commit during
+ * which a `value`-prop echo is treated as potentially stale and skipped.
+ *
+ * A tap or range-label press commits the thumb position synchronously on the
+ * UI thread, then asynchronously round-trips through the JS thread
+ * (`onValueChange`/`onDragEnd` → consumer state update → re-render → `value`
+ * prop change → effect → `useAnimatedReaction`) to also sync `propValue`.
+ * If a second, newer commit happens before that round trip completes, the
+ * stale echo would otherwise snap the thumb backward for one frame before
+ * the newer echo corrects it. Keep this comfortably above a slow JS-thread
+ * round trip while staying under normal human tap cadence (~100–250ms).
+ */
+export const SELF_ECHO_GRACE_MS = 120;
 /** Matches root `py-2` vertical padding on the slider container. */
 export const SLIDER_VERTICAL_PADDING = 8;
 export const RANGE_LABEL_TOP =
