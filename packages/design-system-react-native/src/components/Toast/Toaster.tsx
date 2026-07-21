@@ -76,8 +76,12 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const animatedStyle = useAnimatedStyle(() => ({
       transform: [{ translateY: translateYProgress.value + topOffset }],
     }));
-    const baseStyle: StyleProp<ViewStyle> = useMemo(
-      () => [tw.style('absolute left-4 right-4 top-0'), animatedStyle],
+    const baseStyle = useMemo(
+      () =>
+        [
+          tw.style('absolute left-4 right-4 top-0'),
+          animatedStyle,
+        ] as StyleProp<ViewStyle>,
       [tw, animatedStyle],
     );
     const innerRef = useRef<ToasterRef | null>(null);
