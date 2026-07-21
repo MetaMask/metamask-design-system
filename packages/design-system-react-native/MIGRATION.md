@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
 - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
 - [From version 0.33.0 to 0.34.0](#from-version-0330-to-0340)
 - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
@@ -47,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
   - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
   - [From version 0.30.0 to 0.31.0](#from-version-0300-to-0310)
   - [From version 0.26.0 to 0.27.0](#from-version-0260-to-0270)
@@ -65,6 +67,64 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.x.0 to 0.x.0
+
+<a id="from-version-0x0-to-0x0"></a>
+
+<a id="toast-bottomoffset-to-topoffset"></a>
+
+#### Toast: top placement and `bottomOffset` / `TOAST_BOTTOM_PADDING` renames
+
+Toast now slides in from the **top** of the screen (below the safe area), aligning with iOS system banners and avoiding overlap with bottom actions. Two public names that reflected bottom placement are renamed accordingly.
+
+**What changed:**
+
+| Before                 | After               |
+| ---------------------- | ------------------- |
+| `bottomOffset`         | `topOffset`         |
+| `customTopOffset`      | `topOffset`         |
+| `TOAST_BOTTOM_PADDING` | `TOAST_TOP_PADDING` |
+
+- **`topOffset`** is optional extra offset from the **top** (in addition to the safe-area inset and default top padding), not from the bottom.
+- **`TOAST_TOP_PADDING`** replaces the exported **`TOAST_BOTTOM_PADDING`** constant. The default padding value also changes (36 → 8) to match top placement.
+- Enter/exit motion uses a spring (`withSpring`) instead of `withTiming`; call sites do not need to change for that alone.
+
+**Migration:**
+
+```tsx
+// Before
+import {
+  TOAST_BOTTOM_PADDING,
+  toast,
+} from '@metamask/design-system-react-native';
+
+toast({
+  hasNoTimeout: false,
+  title: 'Saved',
+  bottomOffset: 24,
+});
+
+const padding = TOAST_BOTTOM_PADDING;
+
+// After
+import { TOAST_TOP_PADDING, toast } from '@metamask/design-system-react-native';
+
+toast({
+  hasNoTimeout: false,
+  title: 'Saved',
+  topOffset: 24,
+});
+
+const padding = TOAST_TOP_PADDING;
+```
+
+**Impact:**
+
+- Any **`toast({ bottomOffset: ... })`**, **`toast({ customTopOffset: ... })`**, or **`showToast({ bottomOffset: ... })`** call site must rename the prop to **`topOffset`**. Re-evaluate the numeric value if it was tuned for bottom placement.
+- Any import of **`TOAST_BOTTOM_PADDING`** must switch to **`TOAST_TOP_PADDING`**.
+
+See [Toast Component](#toast-component) for the full mobile → design system mapping.
 
 ### From version 0.35.0 to 0.36.0
 
@@ -4688,7 +4748,7 @@ type ToastOptions = {
   startAccessory?: React.ReactNode;
   severity?: ToastSeverity;
   iconAlertProps?: ToastIconProps;
-  bottomOffset?: number;
+  topOffset?: number;
 };
 ```
 
@@ -4722,9 +4782,19 @@ toast({
 });
 ```
 
-##### `customBottomOffset` → `bottomOffset`
+##### `customBottomOffset` / `customTopOffset` / `bottomOffset` → `topOffset`
 
-The per-toast offset prop is renamed from `customBottomOffset` to `bottomOffset`.
+Toasts appear from the **top** of the screen. The per-toast offset prop maps as follows:
+
+| Source API                                   | Design System |
+| -------------------------------------------- | ------------- |
+| Mobile `customBottomOffset`                  | `topOffset`   |
+| Mobile `customTopOffset`                     | `topOffset`   |
+| Design system `bottomOffset` (0.23.0–0.36.0) | `topOffset`   |
+
+`topOffset` is extra offset from the top (in addition to the safe-area inset and default top padding). The exported padding constant is **`TOAST_TOP_PADDING`** (replacing **`TOAST_BOTTOM_PADDING`**).
+
+See [Toast: top placement and `bottomOffset` / `TOAST_BOTTOM_PADDING` renames](#toast-bottomoffset-to-topoffset) for the version-to-version migration.
 
 #### Error Behavior
 

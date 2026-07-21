@@ -5,7 +5,10 @@ import {
   ButtonSize,
   IconSize,
   mergeTwClassName,
+  TextColor,
 } from '@metamask/design-system-shared';
+import { Theme, useTheme } from '@metamask/design-system-twrnc-preset';
+import { lightTheme } from '@metamask/design-tokens';
 import React from 'react';
 
 // External dependencies.
@@ -54,11 +57,14 @@ export const Toast: React.FC<ToastProps> = ({
   iconAlertProps,
   severity = ToastSeverity.Default,
   startAccessory,
+  style,
   title,
   titleProps,
   twClassName,
   ...props
 }) => {
+  const theme = useTheme();
+  const isLightTheme = theme === Theme.Light;
   const actionProps =
     actionButtonLabel && actionButtonOnPress
       ? {
@@ -84,23 +90,31 @@ export const Toast: React.FC<ToastProps> = ({
     <BannerBase
       {...actionProps}
       {...props}
-      backgroundColor={BoxBackgroundColor.BackgroundSection}
+      backgroundColor={
+        isLightTheme
+          ? BoxBackgroundColor.BackgroundDefault
+          : BoxBackgroundColor.BackgroundSection
+      }
       borderColor={BoxBorderColor.BorderMuted}
       borderWidth={1}
       children={children}
       childrenWrapperProps={childrenWrapperProps}
       closeButtonProps={resolvedCloseButtonProps}
       description={description}
-      descriptionProps={descriptionProps}
+      descriptionProps={{
+        color: TextColor.TextAlternative,
+        ...descriptionProps,
+      }}
       onClose={onClose}
       startAccessory={renderSeverityAccessory({
         iconAlertProps,
         severity,
         startAccessory,
       })}
+      style={[isLightTheme ? lightTheme.shadows.size.md : undefined, style]}
       title={title}
       titleProps={titleProps}
-      twClassName={mergeTwClassName('rounded-xl', twClassName)}
+      twClassName={mergeTwClassName('rounded-2xl', twClassName)}
     />
   );
 };
