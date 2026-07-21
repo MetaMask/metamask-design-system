@@ -190,14 +190,11 @@ describe('Toast', () => {
   });
 
   it('uses background section and no shadow in dark theme', () => {
-    const tw = renderHook(
-      () => useTailwind(),
-      {
-        wrapper: ({ children }) => (
-          <ThemeProvider theme={Theme.Dark}>{children}</ThemeProvider>
-        ),
-      },
-    ).result.current;
+    const tw = renderHook(() => useTailwind(), {
+      wrapper: ({ children }) => (
+        <ThemeProvider theme={Theme.Dark}>{children}</ThemeProvider>
+      ),
+    }).result.current;
 
     render(
       <ThemeProvider theme={Theme.Dark}>
