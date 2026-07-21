@@ -11,7 +11,6 @@ import {
 } from 'react-native-reanimated';
 
 import {
-  SELF_ECHO_GRACE_MS,
   THUMB_GRIP_ANIMATION_DURATION,
   THUMB_GRIP_SCALE,
 } from './Slider.constants';
@@ -38,10 +37,16 @@ import {
  *   touch X → clamp to track width → trackPercent → domain value → callbacks
  *
  * Flow when `value` prop changes (JS thread → UI thread via useAnimatedReaction):
- *   domain value → trackPercent → translateX (skipped while dragging, and
- *   briefly after a direct tap/pan/label commit to avoid stale self-echo flicker).
- *   The same grace window also skips syncing `previousTrackPercentRef` from
- *   prop echoes so the haptic baseline cannot rewind behind the thumb.
+ *   domain value → trackPercent → translateX (skipped while dragging).
+ *
+ * Stale controlled self-echoes (gesture → onValueChange → parent state → value
+ * prop) are suppressed with an in-flight commit queue — the same sequence
+ * principle as React Native TextInput's `mostRecentEventCount`, kept local to
+ * the Slider so the public API stays a plain `value` number. Direct commits
+ * push the emitted domain value; incoming props that match an in-flight emit
+ * are acknowledged and do not rewind thumb position or the haptic baseline.
+ * Props that do not match any in-flight emit are treated as external updates
+ * and applied immediately.
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
  *
@@ -81,9 +86,9 @@ export function useSliderGesture(
   const thumbScale = useSharedValue(1);
   const isDragging = useSharedValue(false);
   const propValue = useSharedValue(value);
-  // Timestamp of the most recent direct (worklet/label) position commit —
-  // used to suppress stale value-prop echoes after rapid taps/label presses.
-  const lastDirectCommitAt = useSharedValue(0);
+  // True while at least one direct commit has not yet been acknowledged by a
+  // matching `value` prop echo — UI thread skips prop→thumb sync until then.
+  const hasInflightCommits = useSharedValue(false);
   const previousTrackPercentRef = useRef(
     getTrackPercentFromValue(
       value,
@@ -93,6 +98,58 @@ export function useSliderGesture(
     ),
   );
   const isDraggingRef = useRef(false);
+  // Domain values emitted by direct commits, awaiting prop acknowledgment.
+  const inflightCommitsRef = useRef<number[]>([]);
+  const lastEmittedValueRef = useRef<number | null>(null);
+
+  // --- In-flight commit tracking (sequence ack, not a time heuristic) ---
+
+  const recordDirectCommit = useCallback(
+    (domainValue: number) => {
+      inflightCommitsRef.current.push(domainValue);
+      lastEmittedValueRef.current = domainValue;
+      hasInflightCommits.value = true;
+    },
+    [hasInflightCommits],
+  );
+
+  /**
+   * Reconciles an incoming controlled `value` against in-flight local commits.
+   *
+   * @param incoming - Next `value` prop.
+   * @returns Whether thumb position / haptic baseline should sync from the prop.
+   */
+  const shouldApplyPropValue = useCallback(
+    (incoming: number): boolean => {
+      const inflight = inflightCommitsRef.current;
+      if (inflight.length === 0) {
+        return true;
+      }
+
+      // Caught up to the latest local commit — drop all intermediate emits.
+      if (incoming === lastEmittedValueRef.current) {
+        inflightCommitsRef.current = [];
+        lastEmittedValueRef.current = null;
+        hasInflightCommits.value = false;
+        return false;
+      }
+
+      // Stale intermediate echo — acknowledge through this value, keep newer.
+      const matchIndex = inflight.indexOf(incoming);
+      if (matchIndex >= 0) {
+        inflightCommitsRef.current = inflight.slice(matchIndex + 1);
+        hasInflightCommits.value = inflightCommitsRef.current.length > 0;
+        return false;
+      }
+
+      // Not an echo of anything we emitted — external update or parent transform.
+      inflightCommitsRef.current = [];
+      lastEmittedValueRef.current = null;
+      hasInflightCommits.value = false;
+      return true;
+    },
+    [hasInflightCommits],
+  );
 
   // --- Position sync (domain value → thumb pixels) ---
 
@@ -125,16 +182,10 @@ export function useSliderGesture(
   );
 
   useEffect(() => {
+    const shouldApply = shouldApplyPropValue(value);
     propValue.value = value;
-    if (isDraggingRef.current) {
-      return;
-    }
 
-    // Skip echoes that arrive shortly after a direct commit — they may be
-    // stale relative to a newer tap/pan/label press already applied. A lagged
-    // echo would rewind the haptic baseline while the thumb stays at the
-    // newer commit (`useAnimatedReaction` already skips those echoes).
-    if (Date.now() - lastDirectCommitAt.value < SELF_ECHO_GRACE_MS) {
+    if (isDraggingRef.current || !shouldApply) {
       return;
     }
 
@@ -145,11 +196,11 @@ export function useSliderGesture(
       mapValueToTrackPercent,
     );
   }, [
-    lastDirectCommitAt,
     mapValueToTrackPercent,
     maximumValue,
     minimumValue,
     propValue,
+    shouldApplyPropValue,
     value,
   ]);
 
@@ -164,11 +215,11 @@ export function useSliderGesture(
         return;
       }
 
-      // Skip echoes that arrive shortly after a direct commit — they may be
-      // stale relative to a newer tap/pan/label press already applied on the
-      // UI thread. Genuine external updates during this window are delayed
-      // until a later prop change (see SELF_ECHO_GRACE_MS).
-      if (Date.now() - lastDirectCommitAt.value < SELF_ECHO_GRACE_MS) {
+      // Skip while local commits are unacked — a matching echo may be stale
+      // relative to a newer tap/pan/label press already applied on the UI
+      // thread. External updates clear inflight on the JS thread before this
+      // reaction runs, so they are not blocked.
+      if (hasInflightCommits.value) {
         return;
       }
 
@@ -190,9 +241,10 @@ export function useSliderGesture(
 
   const emitValueChange = useCallback(
     (nextValue: number) => {
+      recordDirectCommit(nextValue);
       onValueChange(nextValue);
     },
-    [onValueChange],
+    [onValueChange, recordDirectCommit],
   );
 
   const emitDragEnd = useCallback(
@@ -325,7 +377,6 @@ export function useSliderGesture(
       'worklet';
 
       translateX.value = position;
-      lastDirectCommitAt.value = Date.now();
       const { trackPercent, domainValue } = positionToDomainValue(position);
 
       runOnJS(emitValueChange)(domainValue);
@@ -357,7 +408,6 @@ export function useSliderGesture(
 
         const position = clampGesturePosition(event.x, sliderWidth.value);
         translateX.value = position;
-        lastDirectCommitAt.value = Date.now();
         const { trackPercent, domainValue } = positionToDomainValue(position);
 
         runOnJS(emitValueChange)(domainValue);
@@ -402,7 +452,6 @@ export function useSliderGesture(
     emitValueChange,
     isDisabled,
     isDragging,
-    lastDirectCommitAt,
     mapTrackPercentToValue,
     mapValueToTrackPercent,
     maximumValue,
@@ -429,7 +478,7 @@ export function useSliderGesture(
       }
 
       const newValue = getMarkValue(mark, minimumValue, maximumValue);
-      lastDirectCommitAt.value = Date.now();
+      recordDirectCommit(newValue);
       onValueChange(newValue);
       const trackPercent = getTrackPercentFromValue(
         newValue,
@@ -444,12 +493,12 @@ export function useSliderGesture(
     [
       checkThresholdCrossing,
       isDisabled,
-      lastDirectCommitAt,
       mapValueToTrackPercent,
       maximumValue,
       minimumValue,
       onDragEnd,
       onValueChange,
+      recordDirectCommit,
       syncPositionFromValue,
       marks,
     ],

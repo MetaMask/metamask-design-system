@@ -194,7 +194,7 @@ describe('useSliderGesture', () => {
     expect(onMark).toHaveBeenCalled();
   });
 
-  it('does not rewind haptic baseline from a stale value-prop echo during the grace window', () => {
+  it('does not rewind haptic baseline from a stale in-flight value-prop echo', () => {
     const onMark = jest.fn();
     const marks = [
       { step: 0, label: '0%', haptic: false },
@@ -207,20 +207,89 @@ describe('useSliderGesture', () => {
     const { result, rerender } = renderHook(
       ({ value }: { value: number }) =>
         useSliderGesture(createParams({ value, onMark, marks })),
+      { initialProps: { value: 10 } },
+    );
+
+    // First commit below the haptic mark.
+    act(() => {
+      result.current.handlePressStep(40);
+    });
+    expect(onMark).not.toHaveBeenCalled();
+
+    // Newer commit above the mark — baseline becomes 75%.
+    act(() => {
+      result.current.handlePressStep(75);
+    });
+    expect(onMark).toHaveBeenCalled();
+    onMark.mockClear();
+
+    // Lagged echo of the older commit. Must not rewind the haptic baseline,
+    // or the next press above the mark would false-fire onMark.
+    rerender({ value: 40 });
+
+    act(() => {
+      result.current.handlePressStep(60);
+    });
+
+    expect(onMark).not.toHaveBeenCalled();
+  });
+
+  it('applies external value updates while local commits are still in flight', () => {
+    const onMark = jest.fn();
+    const marks = [
+      { step: 0, label: '0%', haptic: false },
+      { step: 10, label: '10%', value: 10, haptic: false },
+      { step: 50, label: '50%', value: 50, haptic: true },
+      { step: 60, label: '60%', value: 60, haptic: false },
+      { step: 75, label: '75%', value: 75, haptic: false },
+      { step: 100, label: '100%', haptic: false },
+    ];
+    const { result, rerender } = renderHook(
+      ({ value }: { value: number }) =>
+        useSliderGesture(createParams({ value, onMark, marks })),
       { initialProps: { value: 60 } },
     );
 
-    // Commit above the haptic mark — baseline becomes 75%, no crossing.
     act(() => {
       result.current.handlePressStep(75);
     });
     expect(onMark).not.toHaveBeenCalled();
     onMark.mockClear();
 
-    // Lagged stale echo from an older value below the mark. Thumb sync is
-    // already grace-skipped; baseline must not rewind either, or the next
-    // press above the mark would false-fire onMark.
-    rerender({ value: 40 });
+    // Programmatic update to a value we never emitted — must apply immediately
+    // (not be dropped the way a time-based grace window would).
+    rerender({ value: 10 });
+
+    act(() => {
+      result.current.handlePressStep(60);
+    });
+
+    expect(onMark).toHaveBeenCalled();
+  });
+
+  it('acknowledges a matching value-prop echo without changing onMark behavior', () => {
+    const onMark = jest.fn();
+    const marks = [
+      { step: 0, label: '0%', haptic: false },
+      { step: 50, label: '50%', value: 50, haptic: true },
+      { step: 75, label: '75%', value: 75, haptic: false },
+      { step: 60, label: '60%', value: 60, haptic: false },
+      { step: 100, label: '100%', haptic: false },
+    ];
+    const { result, rerender } = renderHook(
+      ({ value }: { value: number }) =>
+        useSliderGesture(createParams({ value, onMark, marks })),
+      { initialProps: { value: 60 } },
+    );
+
+    act(() => {
+      result.current.handlePressStep(75);
+    });
+    expect(onMark).not.toHaveBeenCalled();
+    onMark.mockClear();
+
+    // Echo of the latest commit — clears inflight, must not rewind baseline.
+    rerender({ value: 75 });
 
     act(() => {
       result.current.handlePressStep(60);
