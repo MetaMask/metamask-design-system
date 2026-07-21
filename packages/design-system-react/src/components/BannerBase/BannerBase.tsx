@@ -124,9 +124,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
               children
             ))}
 
-          {hasActionButtonBelow && (
-            <Box className="mt-2">{actionButton}</Box>
-          )}
+          {hasActionButtonBelow && <Box className="mt-2">{actionButton}</Box>}
         </Box>
 
         {shouldShowActionButton && isActionButtonLayoutEnd && actionButton}
