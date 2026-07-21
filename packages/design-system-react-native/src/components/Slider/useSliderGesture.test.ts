@@ -194,7 +194,7 @@ describe('useSliderGesture', () => {
     expect(onMark).toHaveBeenCalled();
   });
 
-  it('does not rewind haptic baseline from a stale value-prop echo during the grace window', () => {
+  it('does not rewind haptic baseline from a stale value-prop echo after a commit', () => {
     const onMark = jest.fn();
     const marks = [
       { step: 0, label: '0%', haptic: false },

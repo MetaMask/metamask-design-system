@@ -3,7 +3,6 @@ import { Gesture } from 'react-native-gesture-handler';
 import {
   Easing,
   runOnJS,
-  useAnimatedReaction,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -11,7 +10,6 @@ import {
 } from 'react-native-reanimated';
 
 import {
-  SELF_ECHO_GRACE_MS,
   THUMB_GRIP_ANIMATION_DURATION,
   THUMB_GRIP_SCALE,
 } from './Slider.constants';
@@ -37,11 +35,11 @@ import {
  * Flow during drag (UI thread):
  *   touch X → clamp to track width → trackPercent → domain value → callbacks
  *
- * Flow when `value` prop changes (JS thread → UI thread via useAnimatedReaction):
+ * Flow when `value` prop changes (JS thread):
  *   domain value → trackPercent → translateX (skipped while dragging, and
- *   briefly after a direct tap/pan/label commit to avoid stale self-echo flicker).
- *   The same grace window also skips syncing `previousTrackPercentRef` from
- *   prop echoes so the haptic baseline cannot rewind behind the thumb.
+ *   when the incoming value does not match the most recent commit, indicating
+ *   a stale echo from an older gesture). The same guard skips syncing
+ *   `previousTrackPercentRef` so the haptic baseline cannot rewind.
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
  *
@@ -80,10 +78,13 @@ export function useSliderGesture(
   const translateX = useSharedValue(0);
   const thumbScale = useSharedValue(1);
   const isDragging = useSharedValue(false);
-  const propValue = useSharedValue(value);
-  // Timestamp of the most recent direct (worklet/label) position commit —
-  // used to suppress stale value-prop echoes after rapid taps/label presses.
-  const lastDirectCommitAt = useSharedValue(0);
+  // Generation-based stale-echo suppression: each direct commit (tap, pan end,
+  // label press) records its committed value and marks an echo as pending. The
+  // useEffect that receives the value-prop change compares the incoming value to
+  // the last committed value; a mismatch while a commit is pending means the
+  // incoming change is a stale echo from an older commit and is skipped.
+  const lastCommittedValueRef = useRef<number>(value);
+  const hasPendingEchoRef = useRef(false);
   const previousTrackPercentRef = useRef(
     getTrackPercentFromValue(
       value,
@@ -125,66 +126,40 @@ export function useSliderGesture(
   );
 
   useEffect(() => {
-    propValue.value = value;
     if (isDraggingRef.current) {
       return;
     }
 
-    // Skip echoes that arrive shortly after a direct commit — they may be
-    // stale relative to a newer tap/pan/label press already applied. A lagged
-    // echo would rewind the haptic baseline while the thumb stays at the
-    // newer commit (`useAnimatedReaction` already skips those echoes).
-    if (Date.now() - lastDirectCommitAt.value < SELF_ECHO_GRACE_MS) {
-      return;
+    // Stale-echo guard: after a direct commit (tap, pan end, label press) we
+    // mark an echo as pending. The first value-prop change that matches the
+    // committed value is our echo — accept it and clear the flag. Any change
+    // that arrives while the flag is set but does NOT match is a stale echo
+    // from an older commit and is skipped (it would otherwise snap the thumb
+    // backward and corrupt the haptic baseline).
+    if (hasPendingEchoRef.current) {
+      if (value === lastCommittedValueRef.current) {
+        hasPendingEchoRef.current = false;
+      } else {
+        return;
+      }
     }
 
-    previousTrackPercentRef.current = getTrackPercentFromValue(
+    const trackPercent = getTrackPercentFromValue(
       value,
       minimumValue,
       maximumValue,
       mapValueToTrackPercent,
     );
+    previousTrackPercentRef.current = trackPercent;
+    translateX.value = trackPercentToPosition(trackPercent, sliderWidth.value);
   }, [
-    lastDirectCommitAt,
     mapValueToTrackPercent,
     maximumValue,
     minimumValue,
-    propValue,
+    sliderWidth,
+    translateX,
     value,
   ]);
-
-  useAnimatedReaction(
-    () => propValue.value,
-    (currentValue, previousValue) => {
-      if (isDragging.value) {
-        return;
-      }
-
-      if (previousValue !== null && currentValue === previousValue) {
-        return;
-      }
-
-      // Skip echoes that arrive shortly after a direct commit — they may be
-      // stale relative to a newer tap/pan/label press already applied on the
-      // UI thread. Genuine external updates during this window are delayed
-      // until a later prop change (see SELF_ECHO_GRACE_MS).
-      if (Date.now() - lastDirectCommitAt.value < SELF_ECHO_GRACE_MS) {
-        return;
-      }
-
-      const trackPercent = resolveValueToTrackPercent(
-        currentValue,
-        minimumValue,
-        maximumValue,
-        mapValueToTrackPercent,
-      );
-      translateX.value = trackPercentToPosition(
-        trackPercent,
-        sliderWidth.value,
-      );
-    },
-    [mapValueToTrackPercent, maximumValue, minimumValue],
-  );
 
   // --- JS-thread bridges (stable refs for runOnJS from worklets) ---
 
@@ -194,6 +169,13 @@ export function useSliderGesture(
     },
     [onValueChange],
   );
+
+  // Called via runOnJS from worklets before emitValueChange so the echo guard
+  // is primed before the value-prop change arrives on the JS thread.
+  const markCommit = useCallback((committedValue: number) => {
+    lastCommittedValueRef.current = committedValue;
+    hasPendingEchoRef.current = true;
+  }, []);
 
   const emitDragEnd = useCallback(
     (nextValue: number) => {
@@ -325,9 +307,11 @@ export function useSliderGesture(
       'worklet';
 
       translateX.value = position;
-      lastDirectCommitAt.value = Date.now();
       const { trackPercent, domainValue } = positionToDomainValue(position);
 
+      // markCommit must be scheduled before emitValueChange so the echo guard
+      // is set before the value-prop change round-trips back from the parent.
+      runOnJS(markCommit)(domainValue);
       runOnJS(emitValueChange)(domainValue);
       if (options.checkThreshold) {
         runOnJS(checkThresholdCrossing)(trackPercent);
@@ -357,7 +341,6 @@ export function useSliderGesture(
 
         const position = clampGesturePosition(event.x, sliderWidth.value);
         translateX.value = position;
-        lastDirectCommitAt.value = Date.now();
         const { trackPercent, domainValue } = positionToDomainValue(position);
 
         runOnJS(emitValueChange)(domainValue);
@@ -402,9 +385,9 @@ export function useSliderGesture(
     emitValueChange,
     isDisabled,
     isDragging,
-    lastDirectCommitAt,
     mapTrackPercentToValue,
     mapValueToTrackPercent,
+    markCommit,
     maximumValue,
     minimumValue,
     setDragging,
@@ -429,7 +412,8 @@ export function useSliderGesture(
       }
 
       const newValue = getMarkValue(mark, minimumValue, maximumValue);
-      lastDirectCommitAt.value = Date.now();
+      lastCommittedValueRef.current = newValue;
+      hasPendingEchoRef.current = true;
       onValueChange(newValue);
       const trackPercent = getTrackPercentFromValue(
         newValue,
@@ -444,7 +428,6 @@ export function useSliderGesture(
     [
       checkThresholdCrossing,
       isDisabled,
-      lastDirectCommitAt,
       mapValueToTrackPercent,
       maximumValue,
       minimumValue,
