@@ -52,7 +52,7 @@ export const Toast: React.FC<ToastProps> = ({
   childrenWrapperProps,
   closeButtonProps,
   description,
-  descriptionProps = { color: TextColor.TextAlternative },
+  descriptionProps,
   onClose,
   iconAlertProps,
   severity = ToastSeverity.Default,
@@ -101,7 +101,10 @@ export const Toast: React.FC<ToastProps> = ({
       childrenWrapperProps={childrenWrapperProps}
       closeButtonProps={resolvedCloseButtonProps}
       description={description}
-      descriptionProps={descriptionProps}
+      descriptionProps={{
+        color: TextColor.TextAlternative,
+        ...descriptionProps,
+      }}
       onClose={onClose}
       startAccessory={renderSeverityAccessory({
         iconAlertProps,
