@@ -39,12 +39,18 @@ const renderSeverityAccessory = ({
 };
 
 const resolveIsDarkTheme = (node: HTMLElement): boolean => {
-  const themeRoot = node.closest('[data-theme]') ?? document.documentElement;
+  // Prefer the closest explicit data-theme so a nested light surface inside a
+  // distant .dark ancestor keeps light toast polish (and matching CSS tokens).
+  const dataThemeRoot = node.closest('[data-theme]');
+  if (dataThemeRoot) {
+    return dataThemeRoot.getAttribute('data-theme') === 'dark';
+  }
 
-  return (
-    themeRoot.getAttribute('data-theme') === 'dark' ||
-    Boolean(node.closest('.dark'))
-  );
+  if (node.closest('.dark')) {
+    return true;
+  }
+
+  return document.documentElement.getAttribute('data-theme') === 'dark';
 };
 
 export const Toast = forwardRef<HTMLDivElement, ToastProps>(
