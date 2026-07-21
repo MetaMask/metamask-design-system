@@ -55,6 +55,8 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
   const shouldShowActionButton = Boolean(actionButtonOnPress);
   const isActionButtonLayoutEnd =
     actionButtonLayout === BannerBaseActionButtonLayout.End;
+  const hasActionButtonBelow =
+    shouldShowActionButton && !isActionButtonLayoutEnd;
 
   const actionButton = shouldShowActionButton ? (
     <Button
@@ -73,8 +75,10 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
       alignItems={BoxAlignItems.Start}
       gap={4}
       backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      paddingVertical={3}
-      paddingHorizontal={4}
+      paddingTop={3}
+      paddingBottom={hasActionButtonBelow ? 4 : 3}
+      paddingLeft={4}
+      paddingRight={shouldShowCloseButton ? 2 : 4}
       twClassName={mergeTwClassName('rounded-xl', twClassName)}
       {...props}
     >
@@ -95,7 +99,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
           ))}
 
         {hasContent(description) && (
-          <Box>
+          <Box twClassName={hasContent(title) ? 'mt-0.5' : undefined}>
             {isTextContent(description) ? (
               <Text variant={TextVariant.BodySm} {...descriptionProps}>
                 {description}
@@ -115,7 +119,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
             children
           ))}
 
-        {shouldShowActionButton && !isActionButtonLayoutEnd && (
+        {hasActionButtonBelow && (
           <Box twClassName="mt-2">{actionButton}</Box>
         )}
       </Box>
