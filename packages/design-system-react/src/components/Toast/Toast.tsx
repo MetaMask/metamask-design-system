@@ -82,7 +82,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
 
     useLayoutEffect(() => {
       if (!node) {
-        return;
+        return undefined;
       }
 
       const syncTheme = () => {

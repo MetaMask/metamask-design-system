@@ -1,7 +1,4 @@
-import {
-  TextColor,
-  ToastSeverity,
-} from '@metamask/design-system-shared';
+import { TextColor, ToastSeverity } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
