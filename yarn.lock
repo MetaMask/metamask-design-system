@@ -2717,9 +2717,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^1.4.8":
-  version: 1.4.8
-  resolution: "@figma/code-connect@npm:1.4.8"
+"@figma/code-connect@npm:^1.4.9":
+  version: 1.4.9
+  resolution: "@figma/code-connect@npm:1.4.9"
   dependencies:
     boxen: "npm:5.1.1"
     chalk: "npm:^4.1.2"
@@ -2745,7 +2745,7 @@ __metadata:
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/2395f2beb60222b676c5d6660125f0d5f772d7ed9336c88b5910f3cabe58f74dfc341a6fce662771aa1608ffcb13c4500e06c4d85057356a852c87380542c038
+  checksum: 10/539793ad6c83335f87ade9d3f275f816f65c8891bdef98aed6ba71e30ba6b468bb87f733ebce9372ed0e93c332e808857610e65f9b42d92568d9396bcdce69e2
   languageName: node
   linkType: hard
 
@@ -3375,7 +3375,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@figma/code-connect": "npm:^1.4.8"
+    "@figma/code-connect": "npm:^1.4.9"
     "@gorhom/bottom-sheet": "npm:^5.1.3"
     "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/design-system-shared": "workspace:^"
@@ -3427,7 +3427,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-react@workspace:packages/design-system-react"
   dependencies:
-    "@figma/code-connect": "npm:^1.4.8"
+    "@figma/code-connect": "npm:^1.4.9"
     "@floating-ui/react-dom": "npm:^2.1.2"
     "@jest/globals": "npm:^29.7.0"
     "@metamask/auto-changelog": "npm:^6.1.1"
@@ -3645,7 +3645,7 @@ __metadata:
     "@babel/core": "npm:^7.25.2"
     "@babel/plugin-transform-modules-commonjs": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@figma/code-connect": "npm:^1.4.8"
+    "@figma/code-connect": "npm:^1.4.9"
     "@lavamoat/allow-scripts": "npm:^3.2.1"
     "@metamask/create-release-branch": "npm:^4.2.1"
     "@metamask/eslint-config": "npm:^15.0.1"
