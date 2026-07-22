@@ -33,6 +33,20 @@ describe('KeyValueRow', () => {
       expect(screen.getByText('Label')).toHaveTextContent('Label');
       expect(screen.getByText('Value text')).toHaveTextContent('Value text');
     });
+
+    it('hides value when valueTextProps.isHidden is true', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Label"
+          value="$1,234.56"
+          valueTextProps={{ isHidden: true }}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.queryByText('$1,234.56')).toBeNull();
+      expect(screen.getByText('••••••')).toBeOnTheScreen();
+    });
   });
 
   describe('when keyLabel is a ReactNode', () => {

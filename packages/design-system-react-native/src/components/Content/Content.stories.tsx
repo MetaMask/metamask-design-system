@@ -143,6 +143,49 @@ export const Subvalue: Story = {
   ),
 };
 
+export const DescriptionProps: Story = {
+  render: (args: ContentProps) => (
+    <StoryWrapper>
+      <Content
+        {...args}
+        title="Account"
+        description="0x1234…abcd"
+        descriptionProps={{ isHidden: true }}
+        value={undefined}
+      />
+    </StoryWrapper>
+  ),
+};
+
+export const ValueProps: Story = {
+  render: (args: ContentProps) => (
+    <StoryWrapper>
+      <Content
+        {...args}
+        title="Balance"
+        value="$1,234.56"
+        valueProps={{ isHidden: true }}
+        description={undefined}
+      />
+    </StoryWrapper>
+  ),
+};
+
+export const SubvalueProps: Story = {
+  render: (args: ContentProps) => (
+    <StoryWrapper>
+      <Content
+        {...args}
+        title="Network"
+        value="1.234 ETH"
+        subvalue="~$2,500"
+        subvalueProps={{ isHidden: true }}
+        description={undefined}
+      />
+    </StoryWrapper>
+  ),
+};
+
 const listItemAvatarPlaceholder = (
   <Box twClassName="h-12 w-12 rounded-lg bg-primary-default" />
 );
