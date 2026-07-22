@@ -8,4 +8,4 @@ export type {
   ToasterProps,
   ToasterRef,
 } from './Toast.types';
-export { TOAST_BOTTOM_PADDING } from './Toast.constants';
+export { TOAST_TOP_PADDING } from './Toast.constants';

@@ -3579,17 +3579,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/eslint-config-nodejs@npm:^15.0.0":
-  version: 15.0.0
-  resolution: "@metamask/eslint-config-nodejs@npm:15.0.0"
+"@metamask/eslint-config-nodejs@npm:^15.0.1":
+  version: 15.0.1
+  resolution: "@metamask/eslint-config-nodejs@npm:15.0.1"
   dependencies:
     "@eslint/js": "npm:^9.11.0"
     globals: "npm:^15.9.0"
   peerDependencies:
-    "@metamask/eslint-config": ^15.0.0
+    "@metamask/eslint-config": "workspace:^"
     eslint: ^9.11.0
     eslint-plugin-n: ^17.10.3
-  checksum: 10/541a2df5a21e3e73abd8b5b175fd2c3604bfa8694d7e8e7e48891f01d38396267f1cf92cb88cb181ddd7931dee3c7bf39de59d2cb1f30971a245551d575674a1
+  checksum: 10/3934e69f966192ccb57c6bf234129f49ff8a034e6383af54497596780e422ccb1291264842c23def587d90d1484999a71d4a4a901fa20d3a922837e39da5f9ae
   languageName: node
   linkType: hard
 
@@ -3610,9 +3610,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/eslint-config@npm:^15.0.0":
-  version: 15.0.0
-  resolution: "@metamask/eslint-config@npm:15.0.0"
+"@metamask/eslint-config@npm:^15.0.1":
+  version: 15.0.1
+  resolution: "@metamask/eslint-config@npm:15.0.1"
   dependencies:
     "@eslint/js": "npm:^9.11.0"
     globals: "npm:^15.9.0"
@@ -3624,7 +3624,7 @@ __metadata:
     eslint-plugin-prettier: ^5.2.1
     eslint-plugin-promise: ^7.1.0
     prettier: ^3.3.3
-  checksum: 10/93eb41bd61f3f4a0cf930a3d83e8893455f4f03339e91b21ef5a2835d24532db7c2916138a3e1b64777b5fb95cbe4ac90107697ac6f962c11ea7a99955cc75e4
+  checksum: 10/b6d9c0a1573c46d62b41cf83f0eff226dd291f604441be7ed7a3f78aa4c173c2e805548626392452b572655e17261ce7da3227e2681b34a0e28dc9e8856c56ec
   languageName: node
   linkType: hard
 
@@ -3648,9 +3648,9 @@ __metadata:
     "@figma/code-connect": "npm:^1.4.8"
     "@lavamoat/allow-scripts": "npm:^3.2.1"
     "@metamask/create-release-branch": "npm:^4.2.1"
-    "@metamask/eslint-config": "npm:^15.0.0"
+    "@metamask/eslint-config": "npm:^15.0.1"
     "@metamask/eslint-config-jest": "npm:^15.0.0"
-    "@metamask/eslint-config-nodejs": "npm:^15.0.0"
+    "@metamask/eslint-config-nodejs": "npm:^15.0.1"
     "@metamask/eslint-config-typescript": "npm:^15.0.0"
     "@metamask/utils": "npm:^11.11.0"
     "@types/eslint-plugin-tailwindcss": "npm:^3"
