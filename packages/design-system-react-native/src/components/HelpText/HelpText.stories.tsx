@@ -32,13 +32,6 @@ const meta: Meta<HelpTextProps> = {
       description: 'The content of the help text.',
     },
   },
-  decorators: [
-    (Story) => (
-      <Box twClassName="p-4">
-        <Story />
-      </Box>
-    ),
-  ],
 };
 
 export default meta;

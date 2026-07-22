@@ -5,7 +5,7 @@ HelpText displays a helper or validation message below a form field. Use it to g
 ```tsx
 import { HelpText } from '@metamask/design-system-react-native';
 
-<HelpText>Default Example</HelpText>;
+<HelpText>Helper message</HelpText>;
 ```
 
 ## Props
