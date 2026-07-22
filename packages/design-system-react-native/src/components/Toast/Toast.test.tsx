@@ -229,4 +229,21 @@ describe('Toast', () => {
       tw.style(TextColor.TextAlternative),
     );
   });
+
+  it('merges descriptionProps without dropping the default color', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    render(
+      <Toast
+        description="Description of toast"
+        descriptionProps={{ testID: 'toast-description' }}
+        onClose={() => undefined}
+        title="Toast message"
+      />,
+    );
+
+    const description = screen.getByTestId('toast-description');
+    expect(description).toHaveStyle(tw.style(TextColor.TextAlternative));
+    expect(description).toHaveTextContent('Description of toast');
+  });
 });
