@@ -31,8 +31,10 @@ import {
 } from './Slider.utilities';
 
 /**
- * How many recently-acked commit generations to retain so late prop echoes
- * (common after fast pans) can still be recognized and ignored.
+ * Cap on remembered local updates used to spot late `value` echoes.
+ * Pan `onUpdate` records every intermediate position, so a fast drag can
+ * produce many entries; 256 is large enough for a long scrub without
+ * growing unbounded.
  */
 const RECENT_COMMIT_HISTORY_LIMIT = 256;
 
@@ -163,6 +165,12 @@ export function useSliderGesture(
           return { syncPropValue: false, syncBaseline: false };
         }
 
+        // If the value we get back is the latest one we sent up through
+        // onValueChange, we treat the parent as fully caught up and stop
+        // waiting on any older updates still in flight (those often get
+        // batched away during a fast pan anyway). If it's an older value
+        // instead, we only count that one as handled and keep waiting for
+        // the newer ones.
         if (incoming === lastEmittedValueRef.current) {
           ackedGenerationRef.current = lastEmittedGenerationRef.current;
         } else {
@@ -279,6 +287,9 @@ export function useSliderGesture(
 
   // --- JS-thread bridges (stable refs for runOnJS from worklets) ---
 
+  // Called from pan onUpdate as well as tap/end — each move is recorded on
+  // purpose so a lagged older `value` after a fast drag can still be ignored
+  // (see RECENT_COMMIT_HISTORY_LIMIT).
   const emitValueChange = useCallback(
     (nextValue: number) => {
       recordDirectCommit(nextValue);
