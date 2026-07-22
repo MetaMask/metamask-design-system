@@ -76,7 +76,7 @@ export const Content: React.FC<ContentProps> = ({
               endAccessory={descriptionEndAccessory}
               gap={1}
             >
-              <BoxColumn twClassName="flex-1 min-w-0">
+              <BoxColumn twClassName="min-w-0">
                 <TextOrChildren
                   textProps={{
                     variant: TextVariant.BodySm,
