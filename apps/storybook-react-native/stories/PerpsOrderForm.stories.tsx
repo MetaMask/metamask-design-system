@@ -39,21 +39,24 @@ type Story = StoryObj;
 
 const noopPress = () => undefined;
 
-const BTC_URI =
-  'https://assets.coingecko.com/coins/images/1/small/bitcoin.png';
+const BTC_URI = 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png';
 const ETH_URI =
   'https://assets.coingecko.com/coins/images/279/small/ethereum.png';
 
 type OrderType = 'market' | 'limit';
 type Direction = 'long' | 'short';
 
-/** Live price display used in HeaderSubpage description slot */
+// Live price display used in HeaderSubpage description slot
 const PriceDescription: React.FC<{
   price: string;
   change: string;
   isPositive: boolean;
 }> = ({ price, change, isPositive }) => (
-  <Box flexDirection={BoxFlexDirection.Row} alignItems={BoxAlignItems.Center} gap={2}>
+  <Box
+    flexDirection={BoxFlexDirection.Row}
+    alignItems={BoxAlignItems.Center}
+    gap={2}
+  >
     <Text variant={TextVariant.BodyMd} fontWeight={FontWeight.Medium}>
       {price}
     </Text>
@@ -66,13 +69,8 @@ const PriceDescription: React.FC<{
   </Box>
 );
 
-/**
- * Order form showing the KeyValueRow Input and Summary variant patterns
- * established across perps refactor PRs (PR #33014, #32926, #33243).
- *
- * Input variant — interactive rows the user taps to change a value.
- * Summary variant — read-only calculated rows shown below the input group.
- */
+// Order form: KeyValueRow.Input for user-editable fields, KeyValueRow.Summary for
+// calculated read-only values. Pattern from PRs #33014, #32926, #33243.
 const OrderFormContent: React.FC<{
   asset: string;
   assetUri: string;
@@ -242,7 +240,10 @@ const OrderFormContent: React.FC<{
                 >
                   $0.05
                 </Text>
-                <Text variant={TextVariant.BodyMd} color={TextColor.SuccessDefault}>
+                <Text
+                  variant={TextVariant.BodyMd}
+                  color={TextColor.SuccessDefault}
+                >
                   $0.03
                 </Text>
               </Box>
@@ -290,7 +291,7 @@ const OrderFormContent: React.FC<{
   );
 };
 
-/** Long BTC market order */
+// Long BTC market order
 const LongBTCMarket: React.FC = () => {
   const [orderType, setOrderType] = useState<OrderType>('market');
   const cycleOrderType = () =>
@@ -310,7 +311,7 @@ const LongBTCMarket: React.FC = () => {
   );
 };
 
-/** Short ETH market order — shows red action button and service interruption */
+// Short ETH market order — shows service interruption banner
 const ShortETHMarket: React.FC = () => {
   const [orderType, setOrderType] = useState<OrderType>('market');
   const cycleOrderType = () =>

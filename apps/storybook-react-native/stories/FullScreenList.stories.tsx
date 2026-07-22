@@ -137,9 +137,7 @@ const SettingsRow: React.FC<SettingsRowData> = ({
   <ListItem
     isInteractive
     onPress={noopPress}
-    avatar={
-      <Icon name={iconName} size={IconSize.Lg} color={iconColor} />
-    }
+    avatar={<Icon name={iconName} size={IconSize.Lg} color={iconColor} />}
     title={label}
     titleProps={{
       fontWeight: FontWeight.Medium,
@@ -155,7 +153,12 @@ const SettingsRow: React.FC<SettingsRowData> = ({
 // ---------------------------------------------------------------------------
 
 const NETWORKS: NetworkRowData[] = [
-  { name: 'Ethereum', rpcUrl: 'mainnet.infura.io', chainId: '1', isActive: true },
+  {
+    name: 'Ethereum',
+    rpcUrl: 'mainnet.infura.io',
+    chainId: '1',
+    isActive: true,
+  },
   { name: 'Polygon', rpcUrl: 'polygon-rpc.com', chainId: '137' },
   { name: 'Arbitrum One', rpcUrl: 'arb1.arbitrum.io', chainId: '42161' },
   { name: 'Optimism', rpcUrl: 'mainnet.optimism.io', chainId: '10' },
@@ -277,7 +280,10 @@ const MultiActionTemplate: React.FC = () => {
         contentContainerStyle={tw`pb-8`}
         showsVerticalScrollIndicator={false}
       >
-        <SectionHeader title="Enabled networks" accessibilityLabel="Enabled networks" />
+        <SectionHeader
+          title="Enabled networks"
+          accessibilityLabel="Enabled networks"
+        />
         {NETWORKS.map((network) => (
           <NetworkRow key={network.chainId} {...network} />
         ))}
@@ -335,9 +341,15 @@ const RootScreenTemplate: React.FC = () => {
           accessibilityLabel="Push notifications"
         />
         {[
-          { label: 'Account activity', description: 'Sends, receives, approvals' },
+          {
+            label: 'Account activity',
+            description: 'Sends, receives, approvals',
+          },
           { label: 'Price alerts', description: 'Significant price movements' },
-          { label: 'Snap notifications', description: 'Alerts from installed Snaps' },
+          {
+            label: 'Snap notifications',
+            description: 'Alerts from installed Snaps',
+          },
         ].map(({ label, description }) => (
           <ListItem
             key={label}
@@ -348,7 +360,10 @@ const RootScreenTemplate: React.FC = () => {
             description={description}
             descriptionProps={{ color: TextColor.TextAlternative }}
             endAccessory={
-              <Text variant={TextVariant.BodySm} color={TextColor.PrimaryDefault}>
+              <Text
+                variant={TextVariant.BodySm}
+                color={TextColor.PrimaryDefault}
+              >
                 On
               </Text>
             }
@@ -374,7 +389,10 @@ const RootScreenTemplate: React.FC = () => {
             description={description}
             descriptionProps={{ color: TextColor.TextAlternative }}
             endAccessory={
-              <Text variant={TextVariant.BodySm} color={TextColor.PrimaryDefault}>
+              <Text
+                variant={TextVariant.BodySm}
+                color={TextColor.PrimaryDefault}
+              >
                 On
               </Text>
             }

@@ -37,8 +37,7 @@ type Story = StoryObj;
 
 const noopPress = () => undefined;
 
-const BTC_URI =
-  'https://assets.coingecko.com/coins/images/1/small/bitcoin.png';
+const BTC_URI = 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png';
 const ETH_URI =
   'https://assets.coingecko.com/coins/images/279/small/ethereum.png';
 const SOL_URI =
@@ -123,7 +122,7 @@ const LOSERS: MarketRowData[] = [...MARKETS]
   .filter((m) => !m.isPositive)
   .sort((a, b) => parseFloat(a.change) - parseFloat(b.change));
 
-/** Compact leverage badge rendered as the title end accessory */
+// Compact leverage badge rendered as the title end accessory
 const LeverageBadge: React.FC<{ label: string }> = ({ label }) => (
   <Tag severity={TagSeverity.Neutral} twClassName="ml-1">
     {label}
@@ -180,7 +179,7 @@ const MarketRow: React.FC<MarketRowProps> = ({
   />
 );
 
-/** Top movers section with gainers/losers toggle */
+// Top movers section with gainers/losers toggle
 const TopMoversSection: React.FC = () => {
   const [direction, setDirection] = useState<'gainers' | 'losers'>('gainers');
   const rows = direction === 'gainers' ? GAINERS : LOSERS;
@@ -210,7 +209,7 @@ const TopMoversSection: React.FC = () => {
   );
 };
 
-/** Full market list with all metadata slots */
+// Full market list with all metadata slots
 const FullMarketListSection: React.FC = () => (
   <Box paddingBottom={3}>
     <SectionHeader
@@ -225,7 +224,7 @@ const FullMarketListSection: React.FC = () => (
   </Box>
 );
 
-/** Watchlist section demonstrating ButtonIcon add affordance */
+// Watchlist section demonstrating ButtonIcon add affordance
 const WatchlistSection: React.FC = () => (
   <Box paddingBottom={3}>
     <SectionHeader title="Watchlist" accessibilityLabel="Watchlist" />
@@ -240,7 +239,7 @@ const WatchlistSection: React.FC = () => (
   </Box>
 );
 
-/** Position row — ListItem used for open perpetual positions */
+// Position row — ListItem used for open perpetual positions
 const PositionRow: React.FC<{
   symbol: string;
   uri: string;
@@ -266,11 +265,7 @@ const PositionRow: React.FC<{
     isInteractive
     onPress={noopPress}
     avatar={
-      <AvatarToken
-        name={symbol}
-        src={{ uri }}
-        size={AvatarTokenSize.Lg}
-      />
+      <AvatarToken name={symbol} src={{ uri }} size={AvatarTokenSize.Lg} />
     }
     title={`${direction === 'long' ? 'Long' : 'Short'} ${symbol}`}
     titleProps={{ fontWeight: FontWeight.Medium }}

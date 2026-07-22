@@ -45,10 +45,7 @@ const CATEGORIES: { value: MarketCategory; label: string }[] = [
   { value: 'commodities', label: 'Commodities' },
 ];
 
-/**
- * Category filter pills — FilterButtonGroup + FilterButton pattern
- * established in PR #32616 (category pills) and PR #32451 (order book filters).
- */
+// Category filter pills — FilterButtonGroup + FilterButton (PRs #32616, #32451)
 const CategoryFilterPills: React.FC = () => {
   const [selected, setSelected] = useState<MarketCategory>('crypto');
 
@@ -61,11 +58,7 @@ const CategoryFilterPills: React.FC = () => {
         twClassName="gap-2"
       >
         {CATEGORIES.map(({ value, label }) => (
-          <FilterButton
-            key={value}
-            value={value}
-            size={FilterButtonSize.Md}
-          >
+          <FilterButton key={value} value={value} size={FilterButtonSize.Md}>
             {label}
           </FilterButton>
         ))}
@@ -74,12 +67,7 @@ const CategoryFilterPills: React.FC = () => {
   );
 };
 
-/**
- * Stats card showing 24h stats in a 2×2 KeyValueColumn grid.
- * Pattern from PR #33550 (PerpsMarketStatisticsCard → MMDS KeyValueColumn).
- *
- * The title accepts a ReactNode so a Tag can sit inline with the heading text.
- */
+// Stats card: 2×2 KeyValueColumn grid, Tag in SectionHeader title (PR #33550)
 const MarketStatsCard: React.FC<{
   symbol: string;
   dexName?: string;
@@ -192,12 +180,7 @@ const MarketStatsCard: React.FC<{
   );
 };
 
-/**
- * Full market stats screen combining:
- * - CategoryFilterPills (FilterButtonGroup)
- * - MarketStatsCard (KeyValueColumn 2×2 grid + Tag in title)
- * - BannerAlert for low liquidity warning
- */
+// Full stats screen: CategoryFilterPills + MarketStatsCard + BannerAlert
 const PerpsMarketStats: React.FC = () => {
   const tw = useTailwind();
 
@@ -262,10 +245,7 @@ export const Default: Story = {
   render: () => <PerpsMarketStats />,
 };
 
-/**
- * Isolated stat card — useful for reviewing the KeyValueColumn layout
- * and Tag-in-title pattern in isolation.
- */
+// Isolated stat card — KeyValueColumn layout and Tag-in-title pattern in isolation
 const IsolatedStatsCard: React.FC = () => {
   const tw = useTailwind();
   return (
@@ -289,9 +269,7 @@ export const StatsCardOnly: Story = {
   name: 'Stats card (KeyValueColumn + Tag)',
 };
 
-/**
- * Isolated filter pills — FilterButtonGroup + FilterButton in isolation.
- */
+// Isolated filter pills — FilterButtonGroup + FilterButton in isolation
 const IsolatedFilterPills: React.FC = () => {
   const tw = useTailwind();
   return (
