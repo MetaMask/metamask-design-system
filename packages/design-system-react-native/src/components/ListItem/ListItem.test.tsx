@@ -1,3 +1,4 @@
+import { ContentVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
@@ -39,12 +40,14 @@ describe('ListItem', () => {
       expect(getByText('Secondary')).toBeOnTheScreen();
     });
 
-    it('applies default padding on root Box', () => {
+    it('applies default padding and two-line min height on root Box', () => {
       const { getByTestId } = render(
         <ListItem title="Label" testID={ROOT_TEST_ID} />,
       );
 
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw.style('px-4 py-3'));
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+        tw.style('w-full px-4 py-3', 'min-h-[72px]', 'justify-center'),
+      );
     });
 
     describe('when style is provided', () => {
@@ -58,7 +61,7 @@ describe('ListItem', () => {
         );
 
         expect(getByTestId(ROOT_TEST_ID)).toHaveStyle([
-          tw.style('px-4 py-3'),
+          tw.style('w-full px-4 py-3', 'min-h-[72px]', 'justify-center'),
           { marginTop: 8 },
         ]);
       });
@@ -75,7 +78,12 @@ describe('ListItem', () => {
         );
 
         expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-          tw.style('px-4 py-3', 'rounded-lg'),
+          tw.style(
+            'w-full px-4 py-3',
+            'min-h-[72px]',
+            'justify-center',
+            'rounded-lg',
+          ),
         );
       });
     });
@@ -122,7 +130,7 @@ describe('ListItem', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw.style('w-full px-4 py-3'),
+        tw.style('w-full px-4 py-3', 'min-h-[72px]', 'justify-center'),
       );
     });
 
@@ -153,7 +161,12 @@ describe('ListItem', () => {
         );
 
         expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-          tw.style('w-full px-4 py-3', 'bg-pressed'),
+          tw.style(
+            'w-full px-4 py-3',
+            'min-h-[72px]',
+            'justify-center',
+            'bg-pressed',
+          ),
         );
       });
 
@@ -168,7 +181,7 @@ describe('ListItem', () => {
         );
 
         expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-          tw.style('w-full px-4 py-3'),
+          tw.style('w-full px-4 py-3', 'min-h-[72px]', 'justify-center'),
         );
       });
     });
@@ -186,7 +199,7 @@ describe('ListItem', () => {
         );
 
         expect(getByTestId(ROOT_TEST_ID)).toHaveStyle([
-          tw.style('w-full px-4 py-3'),
+          tw.style('w-full px-4 py-3', 'min-h-[72px]', 'justify-center'),
           { marginTop: 8 },
         ]);
       });
@@ -236,7 +249,12 @@ describe('ListItem', () => {
         );
 
         expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-          tw.style('w-full px-4 py-3', 'rounded-lg'),
+          tw.style(
+            'w-full px-4 py-3',
+            'min-h-[72px]',
+            'justify-center',
+            'rounded-lg',
+          ),
         );
       });
     });
@@ -252,6 +270,49 @@ describe('ListItem', () => {
 
       expect(getByText('Label')).toBeOnTheScreen();
       expect(getByTestId('below-content')).toBeOnTheScreen();
+    });
+  });
+
+  describe('variant', () => {
+    it('applies one-line min height and justify-center', () => {
+      const { getByTestId } = render(
+        <ListItem
+          title="Label"
+          variant={ContentVariant.OneLine}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+        tw.style('w-full px-4 py-3', 'min-h-[48px]', 'justify-center'),
+      );
+    });
+
+    it('applies multi-line min height and justify-start', () => {
+      const { getByTestId } = render(
+        <ListItem
+          title="Label"
+          variant={ContentVariant.MultiLine}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+        tw.style('w-full px-4 py-3', 'min-h-[88px]', 'justify-start'),
+      );
+    });
+
+    it('does not render description when variant is OneLine', () => {
+      const { getByText, queryByText } = render(
+        <ListItem
+          title="Title"
+          description="Secondary"
+          variant={ContentVariant.OneLine}
+        />,
+      );
+
+      expect(getByText('Title')).toBeOnTheScreen();
+      expect(queryByText('Secondary')).toBeNull();
     });
   });
 

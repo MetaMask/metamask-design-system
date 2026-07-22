@@ -49,7 +49,7 @@ export {
 } from './BadgeWrapper';
 export type { BadgeWrapperCustomPosition } from './BadgeWrapper';
 
-export { BannerBase } from './BannerBase';
+export { BannerBase, BannerBaseActionButtonLayout } from './BannerBase';
 export type { BannerBaseProps } from './BannerBase';
 
 export { Blockies } from './temp-components/Blockies';

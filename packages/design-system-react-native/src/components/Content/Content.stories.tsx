@@ -2,7 +2,7 @@ import {
   BoxBackgroundColor,
   ButtonBaseSize,
   ButtonVariant,
-  ContentVerticalAlignment,
+  ContentVariant,
   IconName,
   IconSize,
   TextVariant,
@@ -27,13 +27,13 @@ const meta: Meta<ContentProps> = {
     title: 'Label',
     description: 'Secondary text',
     value: 'Value',
-    verticalAlignment: ContentVerticalAlignment.Center,
+    variant: ContentVariant.TwoLines,
   },
   argTypes: {
-    verticalAlignment: {
+    variant: {
       control: 'select',
-      options: Object.keys(ContentVerticalAlignment),
-      mapping: ContentVerticalAlignment,
+      options: Object.keys(ContentVariant),
+      mapping: ContentVariant,
     },
     title: { control: 'text' },
     description: { control: 'text' },
@@ -143,25 +143,51 @@ export const Subvalue: Story = {
   ),
 };
 
-export const VerticalAlignment: Story = {
+const listItemAvatarPlaceholder = (
+  <Box twClassName="h-12 w-12 rounded-lg bg-primary-default" />
+);
+
+const contentLeadingIcon = (
+  <Box twClassName="h-6 items-center justify-center">
+    <Icon name={IconName.Setting} size={IconSize.Md} />
+  </Box>
+);
+
+export const Variant: Story = {
   render: (args: ContentProps) => (
     <StoryWrapper>
-      {Object.values(ContentVerticalAlignment).map((alignment) => (
-        <Content
-          key={alignment}
-          {...args}
-          verticalAlignment={alignment}
-          avatar={<Box twClassName="h-12 w-12 rounded-lg bg-primary-default" />}
-          title={alignment}
-          description={
-            <>
-              <Text variant={TextVariant.BodySm}>Secondary line</Text>
-              <Text variant={TextVariant.BodySm}>Third line</Text>
-            </>
-          }
-          value="Value"
-        />
-      ))}
+      <Content
+        {...args}
+        variant={ContentVariant.OneLine}
+        avatar={contentLeadingIcon}
+        title="One line"
+        description="Omitted in one-line variant"
+        value="Value"
+        subvalue="Omitted"
+      />
+      <Content
+        {...args}
+        variant={ContentVariant.TwoLines}
+        avatar={listItemAvatarPlaceholder}
+        title="Two lines"
+        description="Secondary line"
+        value="Value"
+        subvalue="Subvalue"
+      />
+      <Content
+        {...args}
+        variant={ContentVariant.MultiLine}
+        avatar={listItemAvatarPlaceholder}
+        title="Multi line"
+        description={
+          <>
+            <Text variant={TextVariant.BodySm}>Secondary line</Text>
+            <Text variant={TextVariant.BodySm}>Third line</Text>
+          </>
+        }
+        value="Value"
+        subvalue="Subvalue"
+      />
     </StoryWrapper>
   ),
 };

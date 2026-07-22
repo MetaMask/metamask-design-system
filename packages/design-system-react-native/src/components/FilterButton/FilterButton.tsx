@@ -1,16 +1,26 @@
 import {
+  ButtonVariant,
   FilterButtonSize,
   FilterButtonVariant,
   FilterButtonGroupContext,
+  mergeTwClassName,
 } from '@metamask/design-system-shared';
 import React, { useContext } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import { ButtonBase } from '../ButtonBase';
+import { Button } from '../Button';
 import { IconColor } from '../Icon';
 import { TextColor } from '../Text';
 
 import type { FilterButtonProps } from './FilterButton.types';
+
+const SELECTED_BUTTON_VARIANT_BY_FILTER_VARIANT: Record<
+  FilterButtonVariant,
+  ButtonVariant
+> = {
+  [FilterButtonVariant.Primary]: ButtonVariant.Primary,
+  [FilterButtonVariant.Secondary]: ButtonVariant.Secondary,
+};
 
 export const FilterButton = ({
   children,
@@ -43,22 +53,6 @@ export const FilterButton = ({
     ? filterButtonGroup.value === value
     : isSelected;
 
-  const getTextAndIconClassName = () => {
-    if (
-      effectiveVariant === FilterButtonVariant.Primary &&
-      effectiveIsSelected
-    ) {
-      return 'text-primary-inverse';
-    }
-    if (
-      effectiveVariant === FilterButtonVariant.Secondary &&
-      effectiveIsSelected
-    ) {
-      return 'text-default';
-    }
-    return '';
-  };
-
   const handlePress = (event: GestureResponderEvent) => {
     if (
       usesGroupSelection &&
@@ -71,56 +65,54 @@ export const FilterButton = ({
     onPress?.(event);
   };
 
+  const buttonVariant = effectiveIsSelected
+    ? SELECTED_BUTTON_VARIANT_BY_FILTER_VARIANT[effectiveVariant]
+    : ButtonVariant.Tertiary;
+
   return (
-    <ButtonBase
+    <Button
       {...buttonBaseRest}
+      variant={buttonVariant}
       size={effectiveSize}
       isFullWidth={effectiveIsFullWidth}
       isLoading={isLoading}
       children={children}
       onPress={handlePress}
-      textProps={{
-        ...(!effectiveIsSelected ? { color: TextColor.TextAlternative } : {}),
-        ...textProps,
-      }}
-      startIconProps={{
-        ...(!effectiveIsSelected ? { color: IconColor.IconAlternative } : {}),
-        ...startIconProps,
-      }}
-      endIconProps={{
-        ...(!effectiveIsSelected ? { color: IconColor.IconAlternative } : {}),
-        ...endIconProps,
-      }}
-      twClassName={(pressed) => {
-        if (
-          effectiveVariant === FilterButtonVariant.Primary &&
-          effectiveIsSelected
-        ) {
-          return `${pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default'} ${
-            typeof twClassName === 'function'
-              ? twClassName(pressed)
-              : twClassName
-          }`;
-        }
-
-        if (
-          effectiveVariant === FilterButtonVariant.Secondary &&
-          effectiveIsSelected
-        ) {
-          return `${pressed || isLoading ? 'bg-muted-pressed' : 'bg-muted'} ${
-            typeof twClassName === 'function'
-              ? twClassName(pressed)
-              : twClassName
-          }`;
-        }
-
-        return `${pressed || isLoading ? 'bg-pressed' : 'bg-transparent'} border-0 ${
-          typeof twClassName === 'function' ? twClassName(pressed) : twClassName
-        }`;
-      }}
-      textClassName={getTextAndIconClassName}
-      iconClassName={getTextAndIconClassName}
       style={style}
+      twClassName={twClassName}
+      textProps={
+        effectiveIsSelected
+          ? textProps
+          : {
+              ...textProps,
+              twClassName: mergeTwClassName(
+                TextColor.TextAlternative,
+                textProps?.twClassName,
+              ),
+            }
+      }
+      startIconProps={
+        effectiveIsSelected
+          ? startIconProps
+          : {
+              ...startIconProps,
+              twClassName: mergeTwClassName(
+                IconColor.IconAlternative,
+                startIconProps?.twClassName,
+              ),
+            }
+      }
+      endIconProps={
+        effectiveIsSelected
+          ? endIconProps
+          : {
+              ...endIconProps,
+              twClassName: mergeTwClassName(
+                IconColor.IconAlternative,
+                endIconProps?.twClassName,
+              ),
+            }
+      }
     />
   );
 };
