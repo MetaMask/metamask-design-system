@@ -2717,9 +2717,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^1.4.8":
-  version: 1.4.8
-  resolution: "@figma/code-connect@npm:1.4.8"
+"@figma/code-connect@npm:^1.4.9":
+  version: 1.4.9
+  resolution: "@figma/code-connect@npm:1.4.9"
   dependencies:
     boxen: "npm:5.1.1"
     chalk: "npm:^4.1.2"
@@ -2745,7 +2745,7 @@ __metadata:
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/2395f2beb60222b676c5d6660125f0d5f772d7ed9336c88b5910f3cabe58f74dfc341a6fce662771aa1608ffcb13c4500e06c4d85057356a852c87380542c038
+  checksum: 10/539793ad6c83335f87ade9d3f275f816f65c8891bdef98aed6ba71e30ba6b468bb87f733ebce9372ed0e93c332e808857610e65f9b42d92568d9396bcdce69e2
   languageName: node
   linkType: hard
 
@@ -3375,7 +3375,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@figma/code-connect": "npm:^1.4.8"
+    "@figma/code-connect": "npm:^1.4.9"
     "@gorhom/bottom-sheet": "npm:^5.1.3"
     "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/design-system-shared": "workspace:^"
@@ -3427,7 +3427,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-react@workspace:packages/design-system-react"
   dependencies:
-    "@figma/code-connect": "npm:^1.4.8"
+    "@figma/code-connect": "npm:^1.4.9"
     "@floating-ui/react-dom": "npm:^2.1.2"
     "@jest/globals": "npm:^29.7.0"
     "@metamask/auto-changelog": "npm:^6.1.1"
@@ -3565,17 +3565,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metamask/eslint-config-jest@npm:^15.0.0":
-  version: 15.0.0
-  resolution: "@metamask/eslint-config-jest@npm:15.0.0"
+"@metamask/eslint-config-jest@npm:^15.0.1":
+  version: 15.0.1
+  resolution: "@metamask/eslint-config-jest@npm:15.0.1"
   dependencies:
     "@eslint/js": "npm:^9.11.0"
     globals: "npm:^15.9.0"
   peerDependencies:
-    "@metamask/eslint-config": ^15.0.0
+    "@metamask/eslint-config": "workspace:^"
     eslint: ^9.11.0
     eslint-plugin-jest: ^28.8.3
-  checksum: 10/4728c6b80bed48b9e369ed538de2a1f099a74825f08e7a1c0c5df53901905ce6d54fb7c77da4454ed640af7fd873845ab0f084a4f370fe26ccb4455e683e6bba
+  checksum: 10/048abf263608bb25f7a19f5b7469e1dd908b774329ac1dc840b0d067eac8491ccbf7bea4d411571981f30924d87c66f2d62281210e55843b3f37142897305eab
   languageName: node
   linkType: hard
 
@@ -3593,20 +3593,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/eslint-config-typescript@npm:^15.0.0":
-  version: 15.0.0
-  resolution: "@metamask/eslint-config-typescript@npm:15.0.0"
+"@metamask/eslint-config-typescript@npm:^15.0.1":
+  version: 15.0.1
+  resolution: "@metamask/eslint-config-typescript@npm:15.0.1"
   dependencies:
     "@eslint/js": "npm:^9.11.0"
   peerDependencies:
-    "@metamask/eslint-config": ^15.0.0
+    "@metamask/eslint-config": "workspace:^"
     eslint: ^9.11.0
     eslint-import-resolver-typescript: ^3.6.3
     eslint-plugin-import-x: ^4.3.0
     eslint-plugin-jsdoc: ^50.2.4
     typescript: ">=4.8.4 <6"
     typescript-eslint: ^8.39.0
-  checksum: 10/5ff44e8970a67f87da92a65b8478d22374713ca94feb671ba462b87441ae8b47e427857b363b79b50e6078856c0f482c3965de7f2ee38fe0b40f8f4e27891540
+  checksum: 10/4238914d705e0acf88d1b8ac81c9cfee68993d3290971bfd48f0537ab06d975504ff470e691f1112015a894158076f399a9663f65cc31314b9a7949a473e9b8e
   languageName: node
   linkType: hard
 
@@ -3645,13 +3645,13 @@ __metadata:
     "@babel/core": "npm:^7.25.2"
     "@babel/plugin-transform-modules-commonjs": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@figma/code-connect": "npm:^1.4.8"
+    "@figma/code-connect": "npm:^1.4.9"
     "@lavamoat/allow-scripts": "npm:^3.2.1"
     "@metamask/create-release-branch": "npm:^4.2.1"
     "@metamask/eslint-config": "npm:^15.0.1"
-    "@metamask/eslint-config-jest": "npm:^15.0.0"
+    "@metamask/eslint-config-jest": "npm:^15.0.1"
     "@metamask/eslint-config-nodejs": "npm:^15.0.1"
-    "@metamask/eslint-config-typescript": "npm:^15.0.0"
+    "@metamask/eslint-config-typescript": "npm:^15.0.1"
     "@metamask/utils": "npm:^11.11.0"
     "@types/eslint-plugin-tailwindcss": "npm:^3"
     "@types/jest": "npm:^27.4.1"

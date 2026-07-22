@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text } from '../../Text';
+import { SensitiveText } from '../../SensitiveText';
 
 import type { TextOrChildrenProps } from './TextOrChildren.types';
 
@@ -9,7 +9,7 @@ export const TextOrChildren = ({
   textProps,
 }: TextOrChildrenProps) => {
   if (typeof children === 'string') {
-    return <Text {...textProps}>{children}</Text>;
+    return <SensitiveText {...textProps}>{children}</SensitiveText>;
   }
   return <>{children}</>;
 };

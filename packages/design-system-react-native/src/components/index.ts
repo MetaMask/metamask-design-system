@@ -162,6 +162,9 @@ export type {
   HeaderStandardCenterColumnProps,
 } from './temp-components/HeaderStandardCenterColumn';
 
+export { HelpText, HelpTextSeverity } from './HelpText';
+export type { HelpTextProps } from './HelpText';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 

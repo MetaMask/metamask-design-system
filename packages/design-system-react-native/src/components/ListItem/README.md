@@ -268,7 +268,7 @@ import { Box, ListItem } from '@metamask/design-system-react-native';
 
 ### `titleProps`, `descriptionProps`, `valueProps`, `subvalueProps`
 
-Props merged onto the `Text` component when the matching field is a string. Overrides default text styles.
+Props merged onto text when the matching field is a string. Overrides default text styles. For `descriptionProps`, `valueProps`, and `subvalueProps`, pass `isHidden` / `length` to mask string content via `SensitiveText`.
 
 See [Content/README.md](../Content/README.md) for types and examples.
 
