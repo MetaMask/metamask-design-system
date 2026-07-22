@@ -546,8 +546,7 @@ export function useSliderGesture(
       }
 
       const newValue = getMarkValue(mark, minimumValue, maximumValue);
-      recordDirectCommit(newValue);
-      onValueChange(newValue);
+      emitValueChange(newValue);
       const trackPercent = getTrackPercentFromValue(
         newValue,
         minimumValue,
@@ -560,13 +559,12 @@ export function useSliderGesture(
     },
     [
       checkThresholdCrossing,
+      emitValueChange,
       isDisabled,
       mapValueToTrackPercent,
       maximumValue,
       minimumValue,
       onDragEnd,
-      onValueChange,
-      recordDirectCommit,
       syncPositionFromValue,
       marks,
     ],
