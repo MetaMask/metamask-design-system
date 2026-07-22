@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
+- [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
 - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
 - [From version 0.33.0 to 0.34.0](#from-version-0330-to-0340)
 - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
@@ -48,7 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
+  - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
   - [From version 0.30.0 to 0.31.0](#from-version-0300-to-0310)
   - [From version 0.26.0 to 0.27.0](#from-version-0260-to-0270)
@@ -68,9 +68,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.x.0 to 0.x.0
+### From version 0.36.0 to 0.37.0
 
-<a id="from-version-0x0-to-0x0"></a>
+<a id="from-version-0360-to-0370"></a>
 
 <a id="toast-bottomoffset-to-topoffset"></a>
 
