@@ -4,6 +4,7 @@ import React from 'react';
 
 import { DEFAULT_MARKS } from './Slider.constants';
 import type { UseSliderGestureParams } from './Slider.types';
+import * as sliderUtilities from './Slider.utilities';
 import { buildColorStops } from './Slider.utilities';
 import { useSliderGesture } from './useSliderGesture';
 
@@ -334,6 +335,55 @@ describe('useSliderGesture', () => {
     });
 
     expect(onMark).not.toHaveBeenCalled();
+  });
+
+  it('handleLayout does not snap thumb to a lagged stale value-prop echo', () => {
+    const getTrackPercentSpy = jest.spyOn(
+      sliderUtilities,
+      'getTrackPercentFromValue',
+    );
+    const marks = [
+      { step: 0, label: '0%', haptic: false },
+      { step: 40, label: '40%', value: 40, haptic: false },
+      { step: 75, label: '75%', value: 75, haptic: false },
+      { step: 100, label: '100%', haptic: false },
+    ];
+    const { result, rerender } = renderHook(
+      ({ value }: { value: number }) =>
+        useSliderGesture(createParams({ value, marks })),
+      { initialProps: { value: 10 } },
+    );
+
+    act(() => {
+      result.current.handleLayout({
+        nativeEvent: { layout: { width: 100 } },
+      });
+    });
+    act(() => {
+      result.current.handlePressStep(40);
+    });
+    act(() => {
+      result.current.handlePressStep(75);
+    });
+    rerender({ value: 75 });
+    // Lagged intermediate echo — useEffect must not write this into propValue.
+    rerender({ value: 40 });
+
+    getTrackPercentSpy.mockClear();
+
+    act(() => {
+      result.current.handleLayout({
+        nativeEvent: { layout: { width: 200 } },
+      });
+    });
+
+    // Layout must remap the current thumb, not re-derive position from the
+    // stale echo (40) the way syncing from the raw `value` prop would.
+    expect(
+      getTrackPercentSpy.mock.calls.some(([nextValue]) => nextValue === 40),
+    ).toBe(false);
+
+    getTrackPercentSpy.mockRestore();
   });
 
   it('syncs thumb position when value prop changes', () => {

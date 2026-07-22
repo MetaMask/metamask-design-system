@@ -220,10 +220,27 @@ export function useSliderGesture(
   const handleLayout = useCallback(
     (event: { nativeEvent: { layout: { width: number } } }) => {
       const { width } = event.nativeEvent.layout;
+      const previousWidth = sliderWidth.value;
       sliderWidth.value = width;
-      syncPositionFromValue(value, width);
+
+      // After the first layout, never re-apply the raw `value` prop. A layout
+      // pass can land while props still hold a lagged stale controlled echo
+      // that useEffect intentionally kept out of `propValue`; syncing from
+      // that echo would snap the thumb backward. Remap the current thumb
+      // across the (possibly new) width instead.
+      if (previousWidth > 0) {
+        translateX.value = trackPercentToPosition(
+          positionToTrackPercent(translateX.value, previousWidth),
+          width,
+        );
+        return;
+      }
+
+      // First layout: `propValue` is initialized from `value` and only updated
+      // when reconcilePropValue allows it.
+      syncPositionFromValue(propValue.value, width);
     },
-    [sliderWidth, syncPositionFromValue, value],
+    [propValue, sliderWidth, syncPositionFromValue, translateX],
   );
 
   useEffect(() => {
