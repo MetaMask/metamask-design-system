@@ -1,5 +1,6 @@
 import {
   ContentVariant,
+  SensitiveTextLength,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -129,6 +130,20 @@ describe('Content', () => {
 
       expect(getByText('Desc')).toHaveStyle(tw.style('text-error-default'));
     });
+
+    it('hides description when descriptionProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <Content
+          title="Title"
+          description="Secondary"
+          descriptionProps={{ isHidden: true }}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(queryByText('Secondary')).toBeNull();
+      expect(getByText('••••••')).toBeOnTheScreen();
+    });
   });
 
   describe('value', () => {
@@ -165,6 +180,38 @@ describe('Content', () => {
       );
 
       expect(getByText('100')).toHaveStyle(tw.style('text-error-default'));
+    });
+
+    it('hides value when valueProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <Content
+          title="Label"
+          value="$1,234.56"
+          valueProps={{ isHidden: true }}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(queryByText('$1,234.56')).toBeNull();
+      expect(getByText('••••••')).toBeOnTheScreen();
+    });
+
+    it('hides value with custom length when valueProps.length is set', () => {
+      const { getByText } = render(
+        <Content
+          title="Label"
+          value="$1,234.56"
+          valueProps={{
+            isHidden: true,
+            length: SensitiveTextLength.Medium,
+          }}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(
+        getByText('•'.repeat(Number(SensitiveTextLength.Medium))),
+      ).toBeOnTheScreen();
     });
   });
 
@@ -217,6 +264,21 @@ describe('Content', () => {
       );
 
       expect(getByText('Balance')).toHaveStyle(tw.style('text-error-default'));
+    });
+
+    it('hides subvalue when subvalueProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <Content
+          title="Label"
+          value="100"
+          subvalue="+2.4%"
+          subvalueProps={{ isHidden: true }}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(queryByText('+2.4%')).toBeNull();
+      expect(getByText('••••••')).toBeOnTheScreen();
     });
   });
 

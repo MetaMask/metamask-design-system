@@ -98,11 +98,11 @@ Props merged onto the `Text` component when `title` is a string. Overrides defau
 
 ### `descriptionProps`
 
-Props merged onto the `Text` component when `description` is a string. Overrides default description text styles.
+Props merged onto `SensitiveText` when `description` is a string. Overrides default description text styles. Supports `isHidden` and `length` to mask the string.
 
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Partial<Omit<TextProps, 'children'>>` | No       | `undefined` |
+| TYPE                                            | REQUIRED | DEFAULT     |
+| ----------------------------------------------- | -------- | ----------- |
+| `Partial<Omit<SensitiveTextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
 <Content
@@ -110,15 +110,20 @@ Props merged onto the `Text` component when `description` is a string. Overrides
   description="Ethereum Mainnet"
   descriptionProps={{ color: TextColor.TextMuted }}
 />
+<Content
+  title="Account"
+  description="0x1234…abcd"
+  descriptionProps={{ isHidden: true }}
+/>
 ```
 
 ### `valueProps`
 
-Props merged onto the `Text` component when `value` is a string. Overrides default value text styles.
+Props merged onto `SensitiveText` when `value` is a string. Overrides default value text styles. Supports `isHidden` and `length` to mask the string.
 
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Partial<Omit<TextProps, 'children'>>` | No       | `undefined` |
+| TYPE                                            | REQUIRED | DEFAULT     |
+| ----------------------------------------------- | -------- | ----------- |
+| `Partial<Omit<SensitiveTextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
 <Content
@@ -126,15 +131,20 @@ Props merged onto the `Text` component when `value` is a string. Overrides defau
   value="100"
   valueProps={{ color: TextColor.SuccessDefault }}
 />
+<Content
+  title="Balance"
+  value="$1,234.56"
+  valueProps={{ isHidden: true }}
+/>
 ```
 
 ### `subvalueProps`
 
-Props merged onto the `Text` component when `subvalue` is a string. Overrides default subvalue text styles.
+Props merged onto `SensitiveText` when `subvalue` is a string. Overrides default subvalue text styles. Supports `isHidden` and `length` to mask the string.
 
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Partial<Omit<TextProps, 'children'>>` | No       | `undefined` |
+| TYPE                                            | REQUIRED | DEFAULT     |
+| ----------------------------------------------- | -------- | ----------- |
+| `Partial<Omit<SensitiveTextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
 <Content
@@ -142,6 +152,12 @@ Props merged onto the `Text` component when `subvalue` is a string. Overrides de
   value="$10.00"
   subvalue="+2.5%"
   subvalueProps={{ color: TextColor.SuccessDefault }}
+/>
+<Content
+  title="Amount"
+  value="$10.00"
+  subvalue="+2.5%"
+  subvalueProps={{ isHidden: true }}
 />
 ```
 
