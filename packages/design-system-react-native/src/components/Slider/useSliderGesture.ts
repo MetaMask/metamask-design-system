@@ -31,13 +31,43 @@ import {
 } from './Slider.utilities';
 
 /**
+ * Cap on remembered local updates used to spot late `value` echoes.
+ * Pan `onUpdate` records every intermediate position, so a fast drag can
+ * produce many entries; 256 is large enough for a long scrub without
+ * growing unbounded.
+ */
+const RECENT_COMMIT_HISTORY_LIMIT = 256;
+
+type CommitEntry = {
+  value: number;
+  generation: number;
+};
+
+type PropReconciliation = {
+  /** Write `value` into `propValue` for the UI-thread reaction. */
+  syncPropValue: boolean;
+  /** Update haptic baseline from the prop (external updates only). */
+  syncBaseline: boolean;
+};
+
+/**
  * Owns Slider gesture handling, animated thumb/fill position, and range-label taps.
  *
  * Flow during drag (UI thread):
  *   touch X → clamp to track width → trackPercent → domain value → callbacks
  *
  * Flow when `value` prop changes (JS thread → UI thread via useAnimatedReaction):
- *   domain value → trackPercent → translateX (skipped while dragging)
+ *   domain value → trackPercent → translateX (skipped while dragging).
+ *
+ * Stale controlled self-echoes (gesture → onValueChange → parent state → value
+ * prop) are suppressed with a monotonically increasing commit generation — the
+ * same sequence principle as React Native TextInput's `mostRecentEventCount`,
+ * kept local so the public API stays a plain `value` number. Direct commits
+ * record `{ value, generation }`; incoming props that match a recent emit are
+ * acknowledged and must not rewind thumb position or the haptic baseline
+ * (including late echoes that arrive after a newer commit was already acked).
+ * Props that do not match any recent emit are treated as external updates and
+ * applied immediately.
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
  *
@@ -77,6 +107,8 @@ export function useSliderGesture(
   const thumbScale = useSharedValue(1);
   const isDragging = useSharedValue(false);
   const propValue = useSharedValue(value);
+  // True while commitGeneration > ackedGeneration — UI thread skips prop→thumb.
+  const hasInflightCommits = useSharedValue(false);
   const previousTrackPercentRef = useRef(
     getTrackPercentFromValue(
       value,
@@ -86,6 +118,83 @@ export function useSliderGesture(
     ),
   );
   const isDraggingRef = useRef(false);
+  const commitGenerationRef = useRef(0);
+  const ackedGenerationRef = useRef(0);
+  const lastEmittedValueRef = useRef<number | null>(null);
+  const lastEmittedGenerationRef = useRef(0);
+  const recentCommitsRef = useRef<CommitEntry[]>([]);
+
+  // --- Commit generation tracking (sequence ack, not a time heuristic) ---
+
+  const recordDirectCommit = useCallback(
+    (domainValue: number) => {
+      commitGenerationRef.current += 1;
+      const generation = commitGenerationRef.current;
+      lastEmittedValueRef.current = domainValue;
+      lastEmittedGenerationRef.current = generation;
+      recentCommitsRef.current.push({ value: domainValue, generation });
+      if (recentCommitsRef.current.length > RECENT_COMMIT_HISTORY_LIMIT) {
+        recentCommitsRef.current.shift();
+      }
+      hasInflightCommits.value = true;
+    },
+    [hasInflightCommits],
+  );
+
+  /**
+   * Reconciles an incoming controlled `value` against recent local commits.
+   *
+   * @param incoming - Next `value` prop.
+   * @returns Whether to sync `propValue` / haptic baseline from the prop.
+   */
+  const reconcilePropValue = useCallback(
+    (incoming: number): PropReconciliation => {
+      const recent = recentCommitsRef.current;
+      let match: CommitEntry | undefined;
+      for (let index = recent.length - 1; index >= 0; index -= 1) {
+        if (recent[index].value === incoming) {
+          match = recent[index];
+          break;
+        }
+      }
+
+      if (match) {
+        // Late echo of an already-acked commit — do not write propValue or the
+        // reaction will snap the thumb backward after a fast pan.
+        if (match.generation <= ackedGenerationRef.current) {
+          return { syncPropValue: false, syncBaseline: false };
+        }
+
+        // If the value we get back is the latest one we sent up through
+        // onValueChange, we treat the parent as fully caught up and stop
+        // waiting on any older updates still in flight (those often get
+        // batched away during a fast pan anyway). If it's an older value
+        // instead, we only count that one as handled and keep waiting for
+        // the newer ones.
+        if (incoming === lastEmittedValueRef.current) {
+          ackedGenerationRef.current = lastEmittedGenerationRef.current;
+        } else {
+          ackedGenerationRef.current = match.generation;
+        }
+
+        hasInflightCommits.value =
+          ackedGenerationRef.current < commitGenerationRef.current;
+
+        // Sync propValue only when catching up to the latest emit (correct
+        // position). Intermediate echoes must not overwrite propValue.
+        const isLatestAck =
+          ackedGenerationRef.current === lastEmittedGenerationRef.current;
+        return { syncPropValue: isLatestAck, syncBaseline: false };
+      }
+
+      // Not a recent local emit — external update or parent transform.
+      ackedGenerationRef.current = commitGenerationRef.current;
+      lastEmittedValueRef.current = null;
+      hasInflightCommits.value = false;
+      return { syncPropValue: true, syncBaseline: true };
+    },
+    [hasInflightCommits],
+  );
 
   // --- Position sync (domain value → thumb pixels) ---
 
@@ -111,23 +220,56 @@ export function useSliderGesture(
   const handleLayout = useCallback(
     (event: { nativeEvent: { layout: { width: number } } }) => {
       const { width } = event.nativeEvent.layout;
+      const previousWidth = sliderWidth.value;
       sliderWidth.value = width;
-      syncPositionFromValue(value, width);
+
+      // After the first layout, never re-apply the raw `value` prop. A layout
+      // pass can land while props still hold a lagged stale controlled echo
+      // that useEffect intentionally kept out of `propValue`; syncing from
+      // that echo would snap the thumb backward. Remap the current thumb
+      // across the (possibly new) width instead.
+      if (previousWidth > 0) {
+        translateX.value = trackPercentToPosition(
+          positionToTrackPercent(translateX.value, previousWidth),
+          width,
+        );
+        return;
+      }
+
+      // First layout: `propValue` is initialized from `value` and only updated
+      // when reconcilePropValue allows it.
+      syncPositionFromValue(propValue.value, width);
     },
-    [sliderWidth, syncPositionFromValue, value],
+    [propValue, sliderWidth, syncPositionFromValue, translateX],
   );
 
   useEffect(() => {
-    propValue.value = value;
-    if (!isDraggingRef.current) {
-      previousTrackPercentRef.current = getTrackPercentFromValue(
-        value,
-        minimumValue,
-        maximumValue,
-        mapValueToTrackPercent,
-      );
+    const { syncPropValue, syncBaseline } = reconcilePropValue(value);
+
+    // Never push stale echoes into propValue — the animated reaction would
+    // otherwise move the thumb even when syncBaseline is false.
+    if (syncPropValue) {
+      propValue.value = value;
     }
-  }, [mapValueToTrackPercent, maximumValue, minimumValue, propValue, value]);
+
+    if (isDraggingRef.current || !syncBaseline) {
+      return;
+    }
+
+    previousTrackPercentRef.current = getTrackPercentFromValue(
+      value,
+      minimumValue,
+      maximumValue,
+      mapValueToTrackPercent,
+    );
+  }, [
+    mapValueToTrackPercent,
+    maximumValue,
+    minimumValue,
+    propValue,
+    reconcilePropValue,
+    value,
+  ]);
 
   useAnimatedReaction(
     () => propValue.value,
@@ -137,6 +279,12 @@ export function useSliderGesture(
       }
 
       if (previousValue !== null && currentValue === previousValue) {
+        return;
+      }
+
+      // Skip while newer local commits are unacked. Stale echoes are kept out
+      // of propValue on the JS thread; this is a second guard for races.
+      if (hasInflightCommits.value) {
         return;
       }
 
@@ -156,11 +304,15 @@ export function useSliderGesture(
 
   // --- JS-thread bridges (stable refs for runOnJS from worklets) ---
 
+  // Called from pan onUpdate as well as tap/end — each move is recorded on
+  // purpose so a lagged older `value` after a fast drag can still be ignored
+  // (see RECENT_COMMIT_HISTORY_LIMIT).
   const emitValueChange = useCallback(
     (nextValue: number) => {
+      recordDirectCommit(nextValue);
       onValueChange(nextValue);
     },
-    [onValueChange],
+    [onValueChange, recordDirectCommit],
   );
 
   const emitDragEnd = useCallback(
@@ -394,7 +546,7 @@ export function useSliderGesture(
       }
 
       const newValue = getMarkValue(mark, minimumValue, maximumValue);
-      onValueChange(newValue);
+      emitValueChange(newValue);
       const trackPercent = getTrackPercentFromValue(
         newValue,
         minimumValue,
@@ -407,12 +559,12 @@ export function useSliderGesture(
     },
     [
       checkThresholdCrossing,
+      emitValueChange,
       isDisabled,
       mapValueToTrackPercent,
       maximumValue,
       minimumValue,
       onDragEnd,
-      onValueChange,
       syncPositionFromValue,
       marks,
     ],
