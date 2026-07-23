@@ -211,20 +211,28 @@ import { KeyValueRow, TextVariant } from '@metamask/design-system-react-native';
 
 ### `valueTextProps`
 
-Optional props for `Text` when `value` is a string. Defaults: BodyMd, Medium, TextDefault, single-line truncation (`numberOfLines: 1`, `ellipsizeMode: 'tail'`).
+Optional props for `SensitiveText` when `value` is a string. Defaults: BodyMd, Medium, TextDefault, single-line truncation (`numberOfLines: 1`, `ellipsizeMode: 'tail'`). Supports `isHidden` and `length` to mask the value.
 
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<TextProps>` | No       | `undefined` |
+| TYPE                                            | REQUIRED | DEFAULT     |
+| ----------------------------------------------- | -------- | ----------- |
+| `Partial<Omit<SensitiveTextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
-import { KeyValueRow, TextVariant } from '@metamask/design-system-react-native';
+import {
+  KeyValueRow,
+  TextVariant,
+} from '@metamask/design-system-react-native';
 
 <KeyValueRow
   keyLabel="Amount"
   value="1.5 ETH"
   valueTextProps={{ variant: TextVariant.BodySm }}
-/>;
+/>
+<KeyValueRow
+  keyLabel="Balance"
+  value="$1,234.56"
+  valueTextProps={{ isHidden: true }}
+/>
 ```
 
 ### `twClassName`

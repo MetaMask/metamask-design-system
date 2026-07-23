@@ -1,3 +1,4 @@
+import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
@@ -32,6 +33,13 @@ const meta: Meta<BannerBaseProps> = {
     actionButtonLabel: {
       control: 'text',
       description: 'Optional action button label',
+    },
+    actionButtonLayout: {
+      control: 'select',
+      options: Object.keys(BannerBaseActionButtonLayout),
+      mapping: BannerBaseActionButtonLayout,
+      description:
+        'Layout for the action button relative to the banner body (Below or End)',
     },
     actionButtonProps: {
       control: 'object',
@@ -125,6 +133,35 @@ export const ActionButtonOnClick: Story = {
     },
     children:
       'Use actionButtonLabel for the text and the action handler prop for interaction.',
+  },
+};
+
+export const ActionButtonLayout: Story = {
+  render: (args) => (
+    <div className="space-y-2">
+      <BannerBase
+        {...args}
+        title="End"
+        description="One-line description for short copy."
+        actionButtonLayout={BannerBaseActionButtonLayout.End}
+        startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
+      />
+      <BannerBase
+        {...args}
+        title="Below"
+        description="Use Below when the body is longer or wraps across multiple lines so the action stays under the content."
+        actionButtonLayout={BannerBaseActionButtonLayout.Below}
+        startAccessory={<Icon name={IconName.Info} size={IconSize.Lg} />}
+      />
+    </div>
+  ),
+  args: {
+    actionButtonLabel: 'Action',
+    actionButtonOnClick: () => undefined,
+    onClose: () => undefined,
+    closeButtonProps: {
+      'data-testid': 'banner-base-close-button',
+    },
   },
 };
 

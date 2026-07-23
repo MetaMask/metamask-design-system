@@ -7,7 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { ScrollView } from 'react-native';
 
 import { Box } from '../../Box';
-import { Text, TextVariant, FontWeight } from '../../Text';
+import { Text, TextColor, TextVariant, FontWeight } from '../../Text';
 
 import { Jazzicon } from './Jazzicon';
 import type { JazziconProps } from './Jazzicon.types';

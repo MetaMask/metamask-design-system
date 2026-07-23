@@ -65,8 +65,10 @@ yarn create-component:react-native --name ComponentName --description "Brief des
 
 # Storybook
 yarn storybook                # React web (port 6006)
-yarn storybook:ios            # React Native iOS
-yarn storybook:android        # React Native Android
+yarn storybook:ios:build      # React Native iOS dev client (first time / native dep changes)
+yarn storybook:ios            # React Native iOS (Metro + dev client)
+yarn storybook:android:build  # React Native Android dev client (first time / native dep changes)
+yarn storybook:android        # React Native Android (Metro + dev client)
 
 # Dependencies
 yarn constraints --fix        # Fix dependency constraints
@@ -87,7 +89,7 @@ yarn dedupe                   # Deduplicate dependencies
 Storybook apps in `apps/` consume packages for development and testing:
 
 - `@metamask/storybook-react` - Web component development (`yarn storybook`)
-- `@metamask/storybook-react-native` - Mobile development (`yarn storybook:ios|android`)
+- `@metamask/storybook-react-native` - Mobile development (`yarn storybook:ios:build` then `yarn storybook:ios`)
 
 These platforms are for manual testing and component showcase. Visual regression testing is planned but not yet implemented.
 
