@@ -1,12 +1,10 @@
-import {
-  SelectButtonEndArrow,
-  SelectButtonSize,
-  SelectButtonVariant,
-} from '@metamask/design-system-shared';
+import { SelectButtonEndArrow } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
-import React from 'react';
+import React, { createRef } from 'react';
 import { View } from 'react-native';
+
+import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from '../SelectButton/SelectButton.constants';
 
 import { KeyValueSelect } from './KeyValueSelect';
 
@@ -50,7 +48,7 @@ describe('KeyValueSelect', () => {
       expect(queryByText('Select network')).toBeNull();
     });
 
-    it('maps valueStartAccessory to SelectButton startAccessory', () => {
+    it('renders valueStartAccessory', () => {
       const { getByTestId } = render(
         <KeyValueSelect
           keyLabel="Asset"
@@ -63,7 +61,7 @@ describe('KeyValueSelect', () => {
       expect(getByTestId('start-accessory')).toBeOnTheScreen();
     });
 
-    it('maps valueEndAccessory through selectButtonProps hideEndArrow', () => {
+    it('renders valueEndAccessory when end arrow is hidden', () => {
       const { getByTestId } = render(
         <KeyValueSelect
           keyLabel="Asset"
@@ -78,10 +76,32 @@ describe('KeyValueSelect', () => {
 
       expect(getByTestId('end-accessory')).toBeOnTheScreen();
     });
+
+    it('renders trailing arrow from selectButtonProps endArrowDirection', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          value="Ethereum"
+          selectButtonProps={{
+            placeholder: 'Select',
+            endArrowDirection: SelectButtonEndArrow.Right,
+            endArrowDirectionIconProps: { testID: 'end-arrow' },
+          }}
+          onPress={noopPress}
+        />,
+      );
+
+      expect(getByTestId('end-arrow')).toHaveProp(
+        'name',
+        MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME[
+          SelectButtonEndArrow.Right
+        ],
+      );
+    });
   });
 
   describe('when pressed', () => {
-    it('calls onPress', () => {
+    it('calls onPress from the root', () => {
       const onPress = jest.fn();
       const { getByTestId } = render(
         <KeyValueSelect
@@ -93,6 +113,22 @@ describe('KeyValueSelect', () => {
       );
 
       fireEvent.press(getByTestId(ROOT_TEST_ID));
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls outer onPress when pressing the select value label', () => {
+      const onPress = jest.fn();
+      const { getByText } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          value="Ethereum"
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={onPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      fireEvent.press(getByText('Ethereum'));
       expect(onPress).toHaveBeenCalledTimes(1);
     });
   });
@@ -130,57 +166,21 @@ describe('KeyValueSelect', () => {
     });
   });
 
-  describe('when composing SelectButton', () => {
-    it('sets pointerEvents to none and accessible to false on SelectButton', () => {
-      const { root } = render(
+  describe('when forwarding a ref', () => {
+    it('exposes the root Pressable via forwardRef', () => {
+      const ref = createRef<View>();
+
+      render(
         <KeyValueSelect
+          ref={ref}
           keyLabel="Network"
           selectButtonProps={{ placeholder: 'Select' }}
           onPress={noopPress}
         />,
       );
 
-      const selectButton = root.findByProps({ pointerEvents: 'none' });
-
-      expect(selectButton).toBeDefined();
-      expect(selectButton.props.accessible).toBe(false);
-    });
-
-    it('uses SelectButtonSize.Md and Secondary variant on SelectButton', () => {
-      const { root } = render(
-        <KeyValueSelect
-          keyLabel="Network"
-          value="Ethereum"
-          selectButtonProps={{ placeholder: 'Select' }}
-          onPress={noopPress}
-        />,
-      );
-
-      const selectButton = root.findByProps({ pointerEvents: 'none' });
-
-      expect(selectButton.props.size).toBe(SelectButtonSize.Md);
-      expect(selectButton.props.variant).toBe(SelectButtonVariant.Secondary);
-    });
-
-    it('forwards selectButtonProps to SelectButton', () => {
-      const { root } = render(
-        <KeyValueSelect
-          keyLabel="Network"
-          value="Ethereum"
-          selectButtonProps={{
-            placeholder: 'Select',
-            endArrowDirection: SelectButtonEndArrow.Right,
-          }}
-          onPress={noopPress}
-        />,
-      );
-
-      const selectButton = root.findByProps({ pointerEvents: 'none' });
-
-      expect(selectButton.props.endArrowDirection).toBe(
-        SelectButtonEndArrow.Right,
-      );
-      expect(selectButton.props.placeholder).toBe('Select');
+      expect(ref.current).not.toBeNull();
+      expect(ref.current).toBeInstanceOf(View);
     });
   });
 
