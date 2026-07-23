@@ -36,6 +36,10 @@ figma.connect(
           true: () => undefined,
           false: undefined,
         }),
+        onClose: figma.boolean('close', {
+          true: () => undefined,
+          false: undefined,
+        }),
       }),
     },
     example: ({ severity, bannerBase }) => (
@@ -45,7 +49,7 @@ figma.connect(
         description={bannerBase.description}
         actionButtonLabel={bannerBase.actionButton.label}
         actionButtonOnClick={bannerBase.actionButtonOnClick}
-        onClose={() => undefined}
+        onClose={bannerBase.onClose}
       />
     ),
   },
