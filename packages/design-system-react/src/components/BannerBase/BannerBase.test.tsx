@@ -1,3 +1,4 @@
+import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import type { ReactNode } from 'react';
@@ -82,6 +83,28 @@ describe('BannerBase', () => {
     expect(
       screen.queryByRole('button', { name: 'Action' }),
     ).not.toBeInTheDocument();
+  });
+
+  it('renders action button at the end when actionButtonLayout is End', () => {
+    const onAction = jest.fn();
+    render(
+      <BannerBase
+        title="End layout"
+        actionButtonLabel="Action"
+        actionButtonOnClick={onAction}
+        actionButtonLayout={BannerBaseActionButtonLayout.End}
+        onClose={() => undefined}
+      />,
+    );
+
+    const actionButton = screen.getByRole('button', { name: 'Action' });
+    const closeButton = screen.getByRole('button', { name: 'Close banner' });
+    expect(actionButton.compareDocumentPosition(closeButton)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+
+    fireEvent.click(actionButton);
+    expect(onAction).toHaveBeenCalledTimes(1);
   });
 
   it('renders close button and triggers onClose', () => {

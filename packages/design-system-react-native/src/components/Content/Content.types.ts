@@ -1,6 +1,7 @@
 import type { ContentPropsShared } from '@metamask/design-system-shared';
 
 import type { BoxProps } from '../Box/Box.types';
+import type { SensitiveTextProps } from '../SensitiveText';
 import type { TextProps } from '../Text/Text.types';
 
 /**
@@ -16,18 +17,21 @@ export type ContentProps = Omit<BoxProps, 'children'> &
      */
     titleProps?: Partial<Omit<TextProps, 'children'>>;
     /**
-     * Optional props for the description Text when `description` is a string.
+     * Optional props for the description SensitiveText when `description` is a string.
+     * Supports Text props plus `isHidden` / `length`.
      * Default: TextVariant.BodySm, FontWeight.Medium, TextColor.TextAlternative.
      */
-    descriptionProps?: Partial<Omit<TextProps, 'children'>>;
+    descriptionProps?: Partial<Omit<SensitiveTextProps, 'children'>>;
     /**
-     * Optional props for the value Text when `value` is a string.
+     * Optional props for the value SensitiveText when `value` is a string.
+     * Supports Text props plus `isHidden` / `length`.
      * Default: TextVariant.BodyMd, FontWeight.Medium, TextColor.TextDefault.
      */
-    valueProps?: Partial<Omit<TextProps, 'children'>>;
+    valueProps?: Partial<Omit<SensitiveTextProps, 'children'>>;
     /**
-     * Optional props for the subvalue Text when `subvalue` is a string.
+     * Optional props for the subvalue SensitiveText when `subvalue` is a string.
+     * Supports Text props plus `isHidden` / `length`.
      * Default: TextVariant.BodySm, FontWeight.Medium, TextColor.TextAlternative.
      */
-    subvalueProps?: Partial<Omit<TextProps, 'children'>>;
+    subvalueProps?: Partial<Omit<SensitiveTextProps, 'children'>>;
   };
