@@ -1,0 +1,112 @@
+import {
+  mergeTwClassName,
+  SelectButtonSize,
+  SelectButtonVariant,
+} from '@metamask/design-system-shared';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import React, { forwardRef } from 'react';
+import { Pressable } from 'react-native';
+import type {
+  PressableStateCallbackType,
+  StyleProp,
+  View,
+  ViewStyle,
+} from 'react-native';
+
+import { KeyValueRow } from '../KeyValueRow';
+import { SelectButton } from '../SelectButton';
+
+import type { KeyValueSelectProps } from './KeyValueSelect.types';
+
+const ROOT_TW_CLASS_NAME = 'w-full';
+
+/** Overrides KeyValueRow `pr-4` so SelectButton's `px-3` keeps a 16px trailing inset. */
+const KEY_VALUE_ROW_TW_CLASS_NAME = 'pr-1';
+
+export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
+  (
+    {
+      keyLabel,
+      keyStartAccessory,
+      keyEndAccessory,
+      keyTextProps,
+      keyEndButtonIconProps,
+      variant,
+      value,
+      valueStartAccessory,
+      valueEndAccessory,
+      valueTextProps,
+      selectButtonProps,
+      keyValueRowProps,
+      isDisabled = false,
+      twClassName,
+      style,
+      accessibilityRole,
+      ...pressableProps
+    },
+    ref,
+  ) => {
+    const tw = useTailwind();
+    const rootTwClassName = mergeTwClassName(ROOT_TW_CLASS_NAME, twClassName);
+    const { twClassName: keyValueRowTwClassName, ...restKeyValueRowProps } =
+      keyValueRowProps ?? {};
+    const resolvedKeyValueRowTwClassName = mergeTwClassName(
+      KEY_VALUE_ROW_TW_CLASS_NAME,
+      keyValueRowTwClassName,
+    );
+
+    const getPressableStyle = ({
+      pressed,
+    }: PressableStateCallbackType): StyleProp<ViewStyle> => {
+      const baseStyle = tw.style(rootTwClassName, pressed && 'bg-pressed');
+
+      if (!style) {
+        return baseStyle;
+      }
+
+      const userStyle =
+        typeof style === 'function' ? style({ pressed }) : style;
+
+      return [baseStyle, userStyle];
+    };
+
+    const renderSelectValue = () => (
+      <SelectButton
+        {...selectButtonProps}
+        value={value}
+        startAccessory={valueStartAccessory}
+        endAccessory={valueEndAccessory}
+        textProps={valueTextProps}
+        variant={SelectButtonVariant.Secondary}
+        isDisabled={isDisabled}
+        size={SelectButtonSize.Md}
+        pointerEvents="none"
+        accessible={false}
+      />
+    );
+
+    return (
+      <Pressable
+        ref={ref}
+        accessibilityRole={accessibilityRole ?? 'button'}
+        disabled={isDisabled}
+        style={getPressableStyle}
+        {...pressableProps}
+      >
+        <KeyValueRow
+          {...restKeyValueRowProps}
+          twClassName={resolvedKeyValueRowTwClassName}
+          keyLabel={keyLabel}
+          keyStartAccessory={keyStartAccessory}
+          keyEndAccessory={keyEndAccessory}
+          keyTextProps={keyTextProps}
+          keyEndButtonIconProps={keyEndButtonIconProps}
+          variant={variant}
+          value={renderSelectValue()}
+        />
+      </Pressable>
+    );
+  },
+);
+
+KeyValueSelect.displayName = 'KeyValueSelect';
