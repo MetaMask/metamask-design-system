@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react",
-  "version": "0.31.0",
+  "version": "0.34.0",
   "description": "Design system react ui components",
   "keywords": [
     "MetaMask",
@@ -56,7 +56,7 @@
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
-    "@figma/code-connect": "^1.4.8",
+    "@figma/code-connect": "^1.4.9",
     "@jest/globals": "^29.7.0",
     "@metamask/auto-changelog": "^6.1.1",
     "@metamask/design-system-tailwind-preset": "workspace:^",

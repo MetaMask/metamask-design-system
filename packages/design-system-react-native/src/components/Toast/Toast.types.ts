@@ -30,7 +30,7 @@ export type ToastSharedProps = Omit<BannerBaseProps, 'closeButtonProps'> & {
  */
 export type ToastOptions = ToastSharedProps & {
   hasNoTimeout?: boolean;
-  bottomOffset?: number;
+  topOffset?: number;
 };
 
 /**

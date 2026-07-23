@@ -1,4 +1,8 @@
-import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
+import {
+  ButtonBaseSize,
+  IconColor,
+  IconName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
@@ -517,6 +521,27 @@ describe('ButtonBase', () => {
 
       expect(getByText('No side content')).toBeOnTheScreen();
       expect(queryByTestId('start-icon')).toBeNull();
+    });
+
+    it('merges startIconProps.twClassName with iconClassName and shrink-0', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          startIconName={IconName.Add}
+          startIconProps={{
+            testID: 'start-icon',
+            twClassName: IconColor.IconAlternative,
+          }}
+          iconClassName={() => 'text-icon-default'}
+          testID="btn"
+        >
+          Label
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('start-icon')).toHaveStyle(
+        tw.style(IconColor.IconAlternative),
+      );
+      expect(getByTestId('start-icon')).toHaveStyle(tw.style('shrink-0'));
     });
   });
 

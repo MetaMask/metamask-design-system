@@ -1,0 +1,119 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as IconAlertStories from './IconAlert.stories';
+
+# IconAlert
+
+IconAlert maps a severity value to the correct alert [`Icon`](./../Icon/README.mdx) glyph and theme color for informational, success, warning, and error messaging.
+
+```tsx
+import { IconAlert, IconAlertSeverity } from '@metamask/design-system-react';
+
+<IconAlert severity={IconAlertSeverity.Info} />;
+```
+
+<Canvas of={IconAlertStories.Default} />
+
+## Props
+
+### `severity`
+
+The severity variant to display. Each value uses a fixed icon name and `IconColor` (callers cannot override `name` or `color` on the underlying `Icon`).
+
+Available severities:
+
+- `IconAlertSeverity.Info` — `IconName.Info`, `IconColor.PrimaryDefault`
+- `IconAlertSeverity.Success` — `IconName.Confirmation`, `IconColor.SuccessDefault`
+- `IconAlertSeverity.Warning` — `IconName.Danger`, `IconColor.WarningDefault`
+- `IconAlertSeverity.Danger` — `IconName.Error`, `IconColor.ErrorDefault`
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconAlertSeverity</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>-</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={IconAlertStories.Severity} />
+
+### `size`
+
+The size of the icon. Same behavior as [`Icon` `size`](./../Icon/README.mdx).
+
+Available sizes:
+
+- `IconSize.Xs` (12px)
+- `IconSize.Sm` (16px)
+- `IconSize.Md` (20px)
+- `IconSize.Lg` (24px)
+- `IconSize.Xl` (32px)
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>IconSize.Md</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={IconAlertStories.Size} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. Classes merge with the component's defaults using `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={IconAlertStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

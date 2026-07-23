@@ -1,4 +1,5 @@
 import {
+  BannerBaseActionButtonLayout,
   BoxAlignItems,
   BoxBackgroundColor,
   BoxFlexDirection,
@@ -37,6 +38,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
       actionButtonLabel,
       actionButtonOnClick,
       actionButtonProps,
+      actionButtonLayout = BannerBaseActionButtonLayout.Below,
       startAccessory,
       onClose,
       closeButtonProps,
@@ -55,6 +57,21 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
 
     const shouldShowCloseButton = Boolean(onClose);
     const shouldShowActionButton = Boolean(actionButtonOnClick);
+    const isActionButtonLayoutEnd =
+      actionButtonLayout === BannerBaseActionButtonLayout.End;
+    const hasActionButtonBelow =
+      shouldShowActionButton && !isActionButtonLayoutEnd;
+
+    const actionButton = shouldShowActionButton ? (
+      <Button
+        size={ButtonSize.Md}
+        onClick={actionButtonOnClick}
+        {...resolvedActionButtonProps}
+        variant={ButtonVariant.Secondary}
+      >
+        {actionButtonLabel}
+      </Button>
+    ) : null;
 
     return (
       <Box
@@ -63,8 +80,10 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
         alignItems={BoxAlignItems.Start}
         gap={4}
         backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        paddingVertical={3}
-        paddingHorizontal={4}
+        paddingTop={3}
+        paddingBottom={hasActionButtonBelow ? 4 : 3}
+        paddingLeft={4}
+        paddingRight={shouldShowCloseButton ? 2 : 4}
         className={twMerge('rounded-xl', className)}
         {...props}
       >
@@ -85,7 +104,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
             ))}
 
           {hasContent(description) && (
-            <Box>
+            <Box className={hasContent(title) ? 'mt-0.5' : undefined}>
               {isTextContent(description) ? (
                 <Text variant={TextVariant.BodySm} {...descriptionProps}>
                   {description}
@@ -105,19 +124,10 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
               children
             ))}
 
-          {shouldShowActionButton && (
-            <Box className="mt-2">
-              <Button
-                size={ButtonSize.Md}
-                onClick={actionButtonOnClick}
-                {...resolvedActionButtonProps}
-                variant={ButtonVariant.Secondary}
-              >
-                {actionButtonLabel}
-              </Button>
-            </Box>
-          )}
+          {hasActionButtonBelow && <Box className="mt-2">{actionButton}</Box>}
         </Box>
+
+        {shouldShowActionButton && isActionButtonLayoutEnd && actionButton}
 
         {shouldShowCloseButton && (
           <ButtonIcon

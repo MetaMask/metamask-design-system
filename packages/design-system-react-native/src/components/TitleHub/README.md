@@ -169,11 +169,11 @@ import {
 
 ### `amountProps`
 
-Optional props merged into the amount `Text` when `amount` is a string. Use for `testID` or typography overrides.
+Optional props merged into the amount `SensitiveText` when `amount` is a string. Use for `testID`, typography overrides, or `isHidden` / `length` to mask the amount.
 
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
+| TYPE                                            | REQUIRED | DEFAULT     |
+| ----------------------------------------------- | -------- | ----------- |
+| `Partial<Omit<SensitiveTextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
 import { TitleHub } from '@metamask/design-system-react-native';
@@ -182,7 +182,12 @@ import { TitleHub } from '@metamask/design-system-react-native';
   title="Send"
   amount="$4.42"
   amountProps={{ testID: 'title-hub-amount' }}
-/>;
+/>
+<TitleHub
+  title="Balance"
+  amount="$1,234.56"
+  amountProps={{ isHidden: true }}
+/>
 ```
 
 ### `amountWrapperProps`
@@ -237,11 +242,11 @@ import { TitleHub } from '@metamask/design-system-react-native';
 
 ### `bottomLabelProps`
 
-Optional props merged into the bottom label `Text` when `bottomLabel` is a string.
+Optional props merged into the bottom label `SensitiveText` when `bottomLabel` is a string. Supports `isHidden` / `length` to mask the label.
 
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
+| TYPE                                            | REQUIRED | DEFAULT     |
+| ----------------------------------------------- | -------- | ----------- |
+| `Partial<Omit<SensitiveTextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
 import { TitleHub } from '@metamask/design-system-react-native';
@@ -251,7 +256,13 @@ import { TitleHub } from '@metamask/design-system-react-native';
   amount="$4.42"
   bottomLabel="0.002 ETH"
   bottomLabelProps={{ testID: 'title-hub-bottom' }}
-/>;
+/>
+<TitleHub
+  title="Perps"
+  amount="$336.21"
+  bottomLabel="$336.21 available"
+  bottomLabelProps={{ isHidden: true }}
+/>
 ```
 
 ### `bottomLabelWrapperProps`

@@ -94,6 +94,7 @@ export const IconName = {
   Call: 'Call',
   Camera: 'Camera',
   Campaign: 'Campaign',
+  CandlestickFilled: 'CandlestickFilled',
   Candlestick: 'Candlestick',
   CardPos: 'CardPos',
   Card: 'Card',
