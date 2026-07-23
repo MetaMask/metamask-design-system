@@ -89,6 +89,9 @@ export { Icon } from './Icon';
 export { IconName, IconSize, IconColor } from './Icon';
 export type { IconProps } from './Icon';
 
+export { IconAlert, IconAlertSeverity } from './IconAlert';
+export type { IconAlertProps } from './IconAlert';
+
 export { Input } from './Input';
 export type { InputProps } from './Input';
 

@@ -1,6 +1,13 @@
-import { HelpTextSeverity, TextColor } from '@metamask/design-system-shared';
+import {
+  HelpTextSeverity,
+  IconSize,
+  TextColor,
+} from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
+import { ICON_ALERT_SEVERITY_MAP } from '../IconAlert/IconAlert.constants';
 
 import { HelpText } from './HelpText';
 import { MAP_HELPTEXT_SEVERITY_COLOR } from './HelpText.constants';
@@ -45,6 +52,50 @@ describe('HelpText', () => {
       const helpText = screen.getByTestId('help-text');
       expect(helpText).toHaveClass(TextColor.ErrorDefault);
       expect(helpText).not.toHaveClass(TextColor.SuccessDefault);
+    });
+  });
+
+  describe('ShowIcon', () => {
+    it('omits the icon by default', () => {
+      render(
+        <HelpText severity={HelpTextSeverity.Danger} data-testid="help-text">
+          No icon
+        </HelpText>,
+      );
+
+      expect(screen.queryByTestId('help-text-icon')).not.toBeInTheDocument();
+    });
+
+    it('omits the icon when showIcon is true but severity is omitted', () => {
+      render(
+        <HelpText showIcon data-testid="help-text">
+          No icon without severity
+        </HelpText>,
+      );
+
+      expect(screen.queryByTestId('help-text-icon')).not.toBeInTheDocument();
+    });
+
+    Object.values(HelpTextSeverity).forEach((severity) => {
+      it(`shows the ${severity} icon when showIcon is true`, () => {
+        render(
+          <HelpText severity={severity} showIcon data-testid="help-text">
+            With icon
+          </HelpText>,
+        );
+
+        const icon = screen.getByTestId('help-text-icon');
+        const { color } = ICON_ALERT_SEVERITY_MAP[severity];
+
+        expect(icon).toBeInTheDocument();
+        expect(icon).toHaveClass(
+          color,
+          TWCLASSMAP_ICON_SIZE_DIMENSION[IconSize.Sm],
+        );
+        expect(screen.getByTestId('help-text')).toHaveClass(
+          MAP_HELPTEXT_SEVERITY_COLOR[severity],
+        );
+      });
     });
   });
 
