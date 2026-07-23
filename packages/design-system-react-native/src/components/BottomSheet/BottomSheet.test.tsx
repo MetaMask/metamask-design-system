@@ -14,6 +14,7 @@ jest.mock('@metamask/design-system-twrnc-preset', () => ({
 // Capture callbacks wired by BottomSheet to BottomSheetDialog
 let capturedDialogOnClose: ((hasPendingAction?: boolean) => void) | undefined;
 let capturedDialogOnOpen: ((hasPendingAction?: boolean) => void) | undefined;
+let capturedDialogHasBorder: boolean | undefined;
 const mockCloseDialog = jest.fn();
 const mockOpenDialog = jest.fn();
 
@@ -25,10 +26,12 @@ jest.mock('../BottomSheetDialog', () => {
       (
         {
           children,
+          hasBorder,
           onClose,
           onOpen,
         }: {
           children?: unknown;
+          hasBorder?: boolean;
           onClose?: (hasPendingAction?: boolean) => void;
           onOpen?: (hasPendingAction?: boolean) => void;
         },
@@ -36,6 +39,7 @@ jest.mock('../BottomSheetDialog', () => {
       ) => {
         capturedDialogOnClose = onClose;
         capturedDialogOnOpen = onOpen;
+        capturedDialogHasBorder = hasBorder;
         useImperativeHandle(ref, () => ({
           onCloseDialog: (callback?: () => void) => {
             mockCloseDialog();
@@ -62,7 +66,27 @@ describe('BottomSheet', () => {
     mockOpenDialog.mockClear();
     capturedDialogOnClose = undefined;
     capturedDialogOnOpen = undefined;
-    capturedPanGestureHandlerProps = undefined;
+    capturedDialogHasBorder = undefined;
+  });
+
+  it('forwards hasBorder=false to the dialog by default', () => {
+    render(
+      <BottomSheet goBack={noop}>
+        <View />
+      </BottomSheet>,
+    );
+
+    expect(capturedDialogHasBorder).toBe(false);
+  });
+
+  it('forwards hasBorder to the dialog if provided', () => {
+    render(
+      <BottomSheet goBack={noop} hasBorder>
+        <View />
+      </BottomSheet>,
+    );
+
+    expect(capturedDialogHasBorder).toBe(true);
   });
 
   it('renders with testID on root element', () => {

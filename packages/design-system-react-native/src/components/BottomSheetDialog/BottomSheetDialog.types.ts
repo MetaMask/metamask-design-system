@@ -10,6 +10,12 @@ export type BottomSheetDialogProps = {
    */
   children?: React.ReactNode;
   /**
+   * Optional boolean to render a muted border around the dialog.
+   *
+   * @default false
+   */
+  hasBorder?: boolean;
+  /**
    * Optional prop to toggle full screen state of BottomSheetDialog.
    *
    * @default false

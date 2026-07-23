@@ -381,7 +381,38 @@ describe('BottomSheetDialog', () => {
 
     expect(mockStyle).toHaveBeenCalledWith(
       'bg-alternative',
-      'rounded-t-3xl overflow-hidden border border-muted',
+      'rounded-t-3xl overflow-hidden',
+      false,
+      undefined,
+    );
+  });
+
+  it('renders without border classes by default', () => {
+    render(
+      <BottomSheetDialog>
+        <Text>Borderless Sheet</Text>
+      </BottomSheetDialog>,
+    );
+
+    expect(mockStyle).toHaveBeenCalledWith(
+      'bg-default',
+      'rounded-t-3xl overflow-hidden',
+      false,
+      undefined,
+    );
+  });
+
+  it('renders border classes if hasBorder is true', () => {
+    render(
+      <BottomSheetDialog hasBorder>
+        <Text>Bordered Sheet</Text>
+      </BottomSheetDialog>,
+    );
+
+    expect(mockStyle).toHaveBeenCalledWith(
+      'bg-default',
+      'rounded-t-3xl overflow-hidden',
+      'border border-muted',
       undefined,
     );
   });

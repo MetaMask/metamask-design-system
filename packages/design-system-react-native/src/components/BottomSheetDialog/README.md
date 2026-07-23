@@ -29,6 +29,26 @@ Optional content to display inside the dialog.
 </BottomSheetDialog>
 ```
 
+### `hasBorder`
+
+Optional boolean to render a muted border around the dialog. The dialog renders without a border by default.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+// No border (default)
+<BottomSheetDialog>
+  <Text>Content</Text>
+</BottomSheetDialog>
+
+// With muted border
+<BottomSheetDialog hasBorder>
+  <Text>Content</Text>
+</BottomSheetDialog>
+```
+
 ### `isFullscreen`
 
 Optional prop to toggle full screen state of BottomSheetDialog. When enabled, the dialog expands to fill the maximum available height (screen height minus top safe area).
