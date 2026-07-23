@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(dsrn): add KeyValueSelect pressable row with SelectButton value ([#1410](https://github.com/MetaMask/metamask-design-system/pull/1410))
+- feat: add React IconAlert and HelpText showIcon ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
+
 ## [0.30.0]
 
 ### Added
