@@ -1,19 +1,18 @@
 /**
- * Motion tokens for sheet open / close / drag-dismiss.
+ * Motion tokens for sheet open / close / drag-dismiss / in-sheet nav.
  *
  * Springs are only for interactive settle (open, snap-back).
- * Surface exits use tweens on the iOS sheet curve.
+ * Surface exits and content nav use tweens on the two iOS curves.
  */
 
 /**
  * Sheet open / snap-back spring — critically damped, no bounce.
- *
- * Framer stiffness/damping (540/55) is not 1:1 with Reanimated's solver;
- * duration + dampingRatio: 1 maps to the same "settles fast, no bounce" intent.
+ * Matches Framer `stiffness: 540, damping: 55` (mass 1).
  */
 export const BOTTOMSHEETDIALOG_SPRING = {
-  duration: 380,
-  dampingRatio: 1,
+  stiffness: 540,
+  damping: 55,
+  mass: 1,
 } as const;
 
 /**
@@ -49,3 +48,43 @@ export const BOTTOMSHEETDIALOG_DRAG_DISMISS_VELOCITY = 800;
  * native sheets track 1:1, then spring or tween on release.
  */
 export const BOTTOMSHEETDIALOG_DRAG_ELASTIC_DOWN = 1;
+
+/**
+ * Content / surface ease — easeOutExpo-style: [0.16, 1, 0.3, 1].
+ */
+export const BOTTOMSHEETDIALOG_CONTENT_EASING = [0.16, 1, 0.3, 1] as const;
+
+/**
+ * In-sheet stack push / pop duration in ms (0.45s).
+ * Full-width slide; drill deeper left, back right.
+ */
+export const BOTTOMSHEETDIALOG_STACK_PUSH_DURATION = 450;
+
+/**
+ * In-sheet stack push curve — content ease, not the sheet dismiss curve.
+ */
+export const BOTTOMSHEETDIALOG_STACK_PUSH_EASING =
+  BOTTOMSHEETDIALOG_CONTENT_EASING;
+
+/**
+ * Incoming screen opacity: 0.22s easeOut, delayed 0.05s.
+ */
+export const BOTTOMSHEETDIALOG_STACK_OPACITY_IN_DURATION = 220;
+export const BOTTOMSHEETDIALOG_STACK_OPACITY_IN_DELAY = 50;
+
+/**
+ * Outgoing screen opacity: 0.08s easeIn (vanishes before the new screen lands).
+ */
+export const BOTTOMSHEETDIALOG_STACK_OPACITY_OUT_DURATION = 80;
+
+/**
+ * In-sheet content height resize — same 0.45s content ease as the slide
+ * so height and X move as one gesture (no layout-spring bounce).
+ */
+export const BOTTOMSHEETDIALOG_STACK_HEIGHT_DURATION = 450;
+
+/**
+ * Height resize expo-out curve: [0.16, 1, 0.3, 1].
+ */
+export const BOTTOMSHEETDIALOG_STACK_HEIGHT_EASING =
+  BOTTOMSHEETDIALOG_CONTENT_EASING;
