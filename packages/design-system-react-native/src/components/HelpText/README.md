@@ -32,6 +32,23 @@ Available severities:
 <HelpText severity={HelpTextSeverity.Danger}>Danger message</HelpText>
 ```
 
+### `showIcon`
+
+When `true` and `severity` is set, shows a leading `IconAlert` at `IconSize.Sm`. If `severity` is omitted, the icon is not shown.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+<HelpText severity={HelpTextSeverity.Info} showIcon>
+  Informational message
+</HelpText>
+<HelpText severity={HelpTextSeverity.Danger} showIcon>
+  Danger message
+</HelpText>
+```
+
 ### `color`
 
 Use `color` to set a custom text color when no `severity` applies. Ignored when `severity` is provided.

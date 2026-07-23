@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
 - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
 - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
 - [From version 0.33.0 to 0.34.0](#from-version-0330-to-0340)
@@ -48,6 +49,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
   - [From version 0.30.0 to 0.31.0](#from-version-0300-to-0310)
@@ -67,6 +69,48 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.37.0 to 0.38.0
+
+<a id="from-version-0370-to-0380"></a>
+
+<a id="keyvaluerow-default-horizontal-padding"></a>
+
+#### `KeyValueRow`: default horizontal padding (`px-4`)
+
+`KeyValueRow` now applies **`px-4`** (16px) horizontal padding by default so rows align with other full-width list surfaces without requiring a parent padding wrapper.
+
+**What changed:**
+
+| Before (0.37.0)                                  | After (0.38.0)                                                     |
+| ------------------------------------------------ | ------------------------------------------------------------------ |
+| No default horizontal padding on the row         | Default `px-4` on the outer row                                    |
+| Parents often added `paddingHorizontal` / `px-4` | Prefer relying on the row default; remove duplicate parent padding |
+
+**Migration:**
+
+```tsx
+// Before (0.37.0) — parent owned the horizontal inset
+import { Box, KeyValueRow } from '@metamask/design-system-react-native';
+
+<Box twClassName="px-4">
+  <KeyValueRow keyLabel="Network" value="Ethereum Mainnet" />
+</Box>;
+
+// After (0.38.0) — KeyValueRow owns the inset
+import { KeyValueRow } from '@metamask/design-system-react-native';
+
+<KeyValueRow keyLabel="Network" value="Ethereum Mainnet" />;
+
+// If you still need flush/edge content, override the default
+<KeyValueRow keyLabel="Network" value="Ethereum Mainnet" twClassName="px-0" />;
+```
+
+**Impact:**
+
+- Call sites that already wrap `KeyValueRow` in a `px-4` / `paddingHorizontal={4}` container will get **double** horizontal padding unless that wrapper padding is removed.
+- Call sites that intentionally used flush rows should set `twClassName="px-0"` (or another override) after upgrading.
+- `KeyValueSelect` continues to keep a 16px trailing content inset by merging `pr-1` onto the inner `KeyValueRow` (SelectButton already contributes 12px).
 
 ### From version 0.36.0 to 0.37.0
 
