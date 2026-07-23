@@ -1,0 +1,219 @@
+import {
+  SelectButtonEndArrow,
+  SelectButtonSize,
+  SelectButtonVariant,
+} from '@metamask/design-system-shared';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
+import React from 'react';
+import { View } from 'react-native';
+
+import { KeyValueSelect } from './KeyValueSelect';
+
+const ROOT_TEST_ID = 'key-value-select';
+const noopPress = () => undefined;
+const defaultSelectButtonProps = { placeholder: 'Select network' };
+
+describe('KeyValueSelect', () => {
+  let tw: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    tw = renderHook(() => useTailwind()).result.current;
+  });
+
+  describe('when rendering content', () => {
+    it('renders keyLabel and placeholder', () => {
+      const { getByText } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={defaultSelectButtonProps}
+          onPress={noopPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Network')).toBeOnTheScreen();
+      expect(getByText('Select network')).toBeOnTheScreen();
+    });
+
+    it('renders value when set', () => {
+      const { getByText, queryByText } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          value="Ethereum Mainnet"
+          selectButtonProps={defaultSelectButtonProps}
+          onPress={noopPress}
+        />,
+      );
+
+      expect(getByText('Ethereum Mainnet')).toBeOnTheScreen();
+      expect(queryByText('Select network')).toBeNull();
+    });
+
+    it('maps valueStartAccessory to SelectButton startAccessory', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Asset"
+          valueStartAccessory={<View testID="start-accessory" />}
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={noopPress}
+        />,
+      );
+
+      expect(getByTestId('start-accessory')).toBeOnTheScreen();
+    });
+
+    it('maps valueEndAccessory through selectButtonProps hideEndArrow', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Asset"
+          valueEndAccessory={<View testID="end-accessory" />}
+          selectButtonProps={{
+            placeholder: 'Select',
+            hideEndArrow: true,
+          }}
+          onPress={noopPress}
+        />,
+      );
+
+      expect(getByTestId('end-accessory')).toBeOnTheScreen();
+    });
+  });
+
+  describe('when pressed', () => {
+    it('calls onPress', () => {
+      const onPress = jest.fn();
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={onPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      fireEvent.press(getByTestId(ROOT_TEST_ID));
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('when isDisabled is true', () => {
+    it('does not call onPress', () => {
+      const onPress = jest.fn();
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          value="Ethereum"
+          isDisabled
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={onPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      fireEvent.press(getByTestId(ROOT_TEST_ID));
+      expect(onPress).not.toHaveBeenCalled();
+    });
+
+    it('disables the root Pressable', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          isDisabled
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={noopPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toBeDisabled();
+    });
+  });
+
+  describe('when composing SelectButton', () => {
+    it('sets pointerEvents to none and accessible to false on SelectButton', () => {
+      const { root } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={noopPress}
+        />,
+      );
+
+      const selectButton = root.findByProps({ pointerEvents: 'none' });
+
+      expect(selectButton).toBeDefined();
+      expect(selectButton.props.accessible).toBe(false);
+    });
+
+    it('uses SelectButtonSize.Md and Secondary variant on SelectButton', () => {
+      const { root } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          value="Ethereum"
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={noopPress}
+        />,
+      );
+
+      const selectButton = root.findByProps({ pointerEvents: 'none' });
+
+      expect(selectButton.props.size).toBe(SelectButtonSize.Md);
+      expect(selectButton.props.variant).toBe(SelectButtonVariant.Secondary);
+    });
+
+    it('forwards selectButtonProps to SelectButton', () => {
+      const { root } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          value="Ethereum"
+          selectButtonProps={{
+            placeholder: 'Select',
+            endArrowDirection: SelectButtonEndArrow.Right,
+          }}
+          onPress={noopPress}
+        />,
+      );
+
+      const selectButton = root.findByProps({ pointerEvents: 'none' });
+
+      expect(selectButton.props.endArrowDirection).toBe(
+        SelectButtonEndArrow.Right,
+      );
+      expect(selectButton.props.placeholder).toBe('Select');
+    });
+  });
+
+  describe('when rendering the root', () => {
+    it('applies full-width edge padding (16px leading, 4px trailing)', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={noopPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+        tw.style('w-full pl-4 pr-1'),
+      );
+    });
+
+    it('merges twClassName with default root padding', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          twClassName="rounded-lg"
+          onPress={noopPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+        tw.style('w-full pl-4 pr-1', 'rounded-lg'),
+      );
+    });
+  });
+});
