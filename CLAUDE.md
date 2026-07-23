@@ -14,7 +14,6 @@ Repository-specific conventions and patterns:
 - @.cursor/rules/component-enum-union-migration.md
 - @.cursor/rules/component-migration.md
 - @.cursor/rules/figma-integration.md
-- @.cursor/design-verification/README.md
 - @.cursor/rules/release-workflow.md
 
 See @docs/ai-agents.md for comprehensive strategy explanation.
