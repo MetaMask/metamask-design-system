@@ -215,5 +215,67 @@ describe('KeyValueSelect', () => {
         tw.style('w-full pl-4 pr-1', 'rounded-lg'),
       );
     });
+
+    it('applies bg-pressed when pressed', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={noopPress}
+          testOnly_pressed
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+        tw.style('w-full pl-4 pr-1', 'bg-pressed'),
+      );
+    });
+
+    it('merges user style with base pressable style', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={noopPress}
+          style={{ marginTop: 8 }}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle([
+        tw.style('w-full pl-4 pr-1'),
+        { marginTop: 8 },
+      ]);
+    });
+
+    it('merges user function style for pressed state', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={noopPress}
+          testOnly_pressed
+          style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ opacity: 0.5 });
+    });
+
+    it('merges user function style at rest', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          onPress={noopPress}
+          style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ opacity: 1 });
+    });
   });
 });
