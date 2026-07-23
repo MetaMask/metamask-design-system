@@ -15,6 +15,7 @@ import {
 import { BottomSheetDialog } from '../BottomSheetDialog';
 import type { BottomSheetDialogRef } from '../BottomSheetDialog';
 import { BottomSheetOverlay } from '../BottomSheetOverlay/BottomSheetOverlay';
+import type { BottomSheetOverlayRef } from '../BottomSheetOverlay/BottomSheetOverlay.types';
 
 import type {
   BottomSheetPostCallback,
@@ -27,6 +28,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     {
       children,
       onClose,
+      onCloseStart,
       onOpen,
       goBack,
       style,
@@ -43,6 +45,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     const { y: frameY } = useSafeAreaFrame();
     const postCallback = useRef<BottomSheetPostCallback | undefined>(undefined);
     const bottomSheetDialogRef = useRef<BottomSheetDialogRef>(null);
+    const bottomSheetOverlayRef = useRef<BottomSheetOverlayRef>(null);
     const didNavigateBackRef = useRef(false);
     const closeRequestedRef = useRef(false);
     const didRunPostCallbackRef = useRef(false);
@@ -76,6 +79,11 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         callback?.();
       }
     }, [goBack, onClose]);
+
+    const onCloseStartCB = useCallback(() => {
+      bottomSheetOverlayRef.current?.onCloseOverlay();
+      onCloseStart?.();
+    }, [onCloseStart]);
 
     // Dismiss the sheet when Android back button is pressed.
     useEffect(() => {
@@ -127,6 +135,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         {...props}
       >
         <BottomSheetOverlay
+          ref={bottomSheetOverlayRef}
           onPress={
             isInteractable
               ? () => bottomSheetDialogRef.current?.onCloseDialog()
@@ -136,6 +145,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         <BottomSheetDialog
           isInteractable={isInteractable}
           onClose={onCloseCB}
+          onCloseStart={onCloseStartCB}
           onOpen={onOpenCB}
           ref={bottomSheetDialogRef}
           isFullscreen={isFullscreen}

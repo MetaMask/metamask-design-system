@@ -54,6 +54,12 @@ jest.mock('react-native-reanimated', () => {
   return Reanimated;
 });
 
+jest.mock('react-native-worklets', () => ({
+  scheduleOnRN: (fn: (...args: unknown[]) => void, ...args: unknown[]) => {
+    fn(...args);
+  },
+}));
+
 describe('BottomSheetDialog', () => {
   afterEach(() => {
     mockThemeRef.current = 'light';
@@ -129,6 +135,31 @@ describe('BottomSheetDialog', () => {
 
     expect(onOpenMock).toHaveBeenCalled();
     expect(callbackMock).toHaveBeenCalled();
+  });
+
+  it('calls onCloseStart when onCloseDialog ref is called', () => {
+    const onCloseStartMock = jest.fn();
+    const TestComponent = () => {
+      const ref = useRef<BottomSheetDialogRef>(null);
+
+      useEffect(() => {
+        if (ref.current) {
+          act(() => {
+            ref.current?.onCloseDialog();
+          });
+        }
+      }, []);
+
+      return (
+        <BottomSheetDialog ref={ref} onCloseStart={onCloseStartMock}>
+          <Text>Test Child</Text>
+        </BottomSheetDialog>
+      );
+    };
+
+    render(<TestComponent />);
+
+    expect(onCloseStartMock).toHaveBeenCalled();
   });
 
   it('calls onClose when onCloseDialog ref is called', () => {

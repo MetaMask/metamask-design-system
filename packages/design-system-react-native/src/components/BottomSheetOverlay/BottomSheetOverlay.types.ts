@@ -19,3 +19,13 @@ export type BottomSheetOverlayProps = {
    */
   touchableOpacityProps?: Omit<TouchableOpacityProps, 'onPress' | 'style'>;
 } & ViewProps;
+
+/**
+ * Ref handle for imperative control of the BottomSheetOverlay.
+ */
+export type BottomSheetOverlayRef = {
+  /**
+   * Fade the overlay out. Optional callback runs after the fade completes.
+   */
+  onCloseOverlay: (callback?: () => void) => void;
+};

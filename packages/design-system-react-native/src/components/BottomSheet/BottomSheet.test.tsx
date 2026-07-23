@@ -14,8 +14,10 @@ jest.mock('@metamask/design-system-twrnc-preset', () => ({
 // Capture callbacks wired by BottomSheet to BottomSheetDialog
 let capturedDialogOnClose: ((hasPendingAction?: boolean) => void) | undefined;
 let capturedDialogOnOpen: ((hasPendingAction?: boolean) => void) | undefined;
+let capturedDialogOnCloseStart: (() => void) | undefined;
 const mockCloseDialog = jest.fn();
 const mockOpenDialog = jest.fn();
+const mockCloseOverlay = jest.fn();
 
 jest.mock('../BottomSheetDialog', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -26,19 +28,23 @@ jest.mock('../BottomSheetDialog', () => {
         {
           children,
           onClose,
+          onCloseStart,
           onOpen,
         }: {
           children?: unknown;
           onClose?: (hasPendingAction?: boolean) => void;
+          onCloseStart?: () => void;
           onOpen?: (hasPendingAction?: boolean) => void;
         },
         ref: unknown,
       ) => {
         capturedDialogOnClose = onClose;
+        capturedDialogOnCloseStart = onCloseStart;
         capturedDialogOnOpen = onOpen;
         useImperativeHandle(ref, () => ({
           onCloseDialog: (callback?: () => void) => {
             mockCloseDialog();
+            onCloseStart?.();
             onClose?.();
             callback?.();
           },
@@ -54,15 +60,47 @@ jest.mock('../BottomSheetDialog', () => {
   };
 });
 
+jest.mock('../BottomSheetOverlay/BottomSheetOverlay', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { forwardRef, useImperativeHandle } = require('react');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { TouchableOpacity: RNTouchableOpacity, View: RNView } = require('react-native');
+  return {
+    BottomSheetOverlay: forwardRef(
+      (
+        {
+          onPress,
+        }: {
+          onPress?: () => void;
+        },
+        ref: unknown,
+      ) => {
+        useImperativeHandle(ref, () => ({
+          onCloseOverlay: (callback?: () => void) => {
+            mockCloseOverlay();
+            callback?.();
+          },
+        }));
+        return (
+          <RNView>
+            {onPress ? <RNTouchableOpacity onPress={onPress} /> : null}
+          </RNView>
+        );
+      },
+    ),
+  };
+});
+
 const noop = () => undefined;
 
 describe('BottomSheet', () => {
   beforeEach(() => {
     mockCloseDialog.mockClear();
     mockOpenDialog.mockClear();
+    mockCloseOverlay.mockClear();
     capturedDialogOnClose = undefined;
+    capturedDialogOnCloseStart = undefined;
     capturedDialogOnOpen = undefined;
-    capturedPanGestureHandlerProps = undefined;
   });
 
   it('renders with testID on root element', () => {
@@ -171,6 +209,20 @@ describe('BottomSheet', () => {
     });
 
     expect(goBack).toHaveBeenCalledTimes(1);
+  });
+
+  it('fades overlay when dialog signals close start', () => {
+    render(
+      <BottomSheet goBack={noop}>
+        <View />
+      </BottomSheet>,
+    );
+
+    act(() => {
+      capturedDialogOnCloseStart?.();
+    });
+
+    expect(mockCloseOverlay).toHaveBeenCalledTimes(1);
   });
 
   describe('overlay interaction', () => {

@@ -15,6 +15,7 @@ import React, {
   useImperativeHandle,
 } from 'react';
 import {
+  AccessibilityInfo,
   LayoutChangeEvent,
   View,
   Platform,
@@ -22,8 +23,11 @@ import {
 } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
+  Easing,
+  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
   withTiming,
 } from 'react-native-reanimated';
 import {
@@ -34,14 +38,25 @@ import { scheduleOnRN } from 'react-native-worklets';
 
 // Internal dependencies.
 import {
-  DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
-  DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD,
-  DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION,
+  BOTTOMSHEETDIALOG_CLOSE_DURATION,
+  BOTTOMSHEETDIALOG_CLOSE_EASING,
+  BOTTOMSHEETDIALOG_DRAG_DISMISS_OFFSET,
+  BOTTOMSHEETDIALOG_DRAG_DISMISS_VELOCITY,
+  BOTTOMSHEETDIALOG_DRAG_ELASTIC_DOWN,
+  BOTTOMSHEETDIALOG_OFFSCREEN_FACTOR,
+  BOTTOMSHEETDIALOG_SPRING,
 } from './BottomSheetDialog.constants';
 import type {
   BottomSheetDialogRef,
   BottomSheetDialogProps,
 } from './BottomSheetDialog.types';
+
+const sheetCloseEasing = Easing.bezier(
+  BOTTOMSHEETDIALOG_CLOSE_EASING[0],
+  BOTTOMSHEETDIALOG_CLOSE_EASING[1],
+  BOTTOMSHEETDIALOG_CLOSE_EASING[2],
+  BOTTOMSHEETDIALOG_CLOSE_EASING[3],
+);
 
 export const BottomSheetDialog = forwardRef<
   BottomSheetDialogRef,
@@ -54,6 +69,7 @@ export const BottomSheetDialog = forwardRef<
       isInteractable = true,
       keyboardAvoidingViewEnabled = true,
       onClose,
+      onCloseStart,
       onOpen,
       style,
       twClassName,
@@ -80,7 +96,35 @@ export const BottomSheetDialog = forwardRef<
     const topOfDialogYValue = useSharedValue(0);
     const bottomOfDialogYValue = useSharedValue(screenHeight);
     const gestureStartYOffset = useSharedValue(0);
+    const reduceMotion = useSharedValue(false);
     const isMounted = useRef(false);
+
+    useEffect(() => {
+      let isActive = true;
+
+      // Promise.resolve: RN test mocks may return a bare boolean / undefined.
+      void Promise.resolve(AccessibilityInfo.isReduceMotionEnabled())
+        .then((enabled) => {
+          if (isActive) {
+            reduceMotion.value = Boolean(enabled);
+          }
+        })
+        .catch(() => {
+          // AccessibilityInfo can reject in non-native test environments.
+        });
+
+      const subscription = AccessibilityInfo.addEventListener(
+        'reduceMotionChanged',
+        (enabled) => {
+          reduceMotion.value = enabled;
+        },
+      );
+
+      return () => {
+        isActive = false;
+        subscription?.remove?.();
+      };
+    }, [reduceMotion]);
 
     const onOpenCB = useCallback(() => {
       onOpen?.();
@@ -88,12 +132,24 @@ export const BottomSheetDialog = forwardRef<
     const onCloseCB = useCallback(() => {
       onClose?.();
     }, [onClose]);
+    const onCloseStartCB = useCallback(() => {
+      onCloseStart?.();
+    }, [onCloseStart]);
 
     const onCloseDialog = useCallback(
       (callback?: () => void) => {
+        onCloseStartCB();
+
+        const closeConfig = reduceMotion.value
+          ? { duration: 0 }
+          : {
+              duration: BOTTOMSHEETDIALOG_CLOSE_DURATION,
+              easing: sheetCloseEasing,
+            };
+
         currentYOffset.value = withTiming(
           bottomOfDialogYValue.value,
-          { duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION },
+          closeConfig,
           () => {
             scheduleOnRN(onCloseCB);
             if (callback) {
@@ -103,7 +159,7 @@ export const BottomSheetDialog = forwardRef<
         );
         // Ref values do not affect deps.
       },
-      [onCloseCB],
+      [onCloseCB, onCloseStartCB],
     );
 
     const gestureHandler = useMemo(() => {
@@ -126,62 +182,55 @@ export const BottomSheetDialog = forwardRef<
           'worklet';
 
           const { translationY } = event;
-          currentYOffset.value = gestureStartYOffset.value + translationY;
-          // If gesture Y value goes above the bottom of Dialog Y value(bottom of dialog),
-          // which means the gesture is currently below the bottom of the dialog,
-          // sets it to bottom of Dialog Y value
-          if (currentYOffset.value >= bottomOfDialogYValue.value) {
-            currentYOffset.value = bottomOfDialogYValue.value;
-          }
-          // If gesture Y value goes below the top of Dialog Y value(top of dialog),
-          // which means the gesture is currently above the top of the dialog,
-          // sets it to top of Dialog Y value
-          if (currentYOffset.value <= topOfDialogYValue.value) {
+          // Top hard-stop (web dragElastic.top: 0). Downward tracks the finger
+          // 1:1 for a continuous drag; release decides dismiss vs snap-back.
+          if (translationY <= 0) {
             currentYOffset.value = topOfDialogYValue.value;
+          } else {
+            currentYOffset.value =
+              gestureStartYOffset.value +
+              translationY * BOTTOMSHEETDIALOG_DRAG_ELASTIC_DOWN;
           }
         })
         .onEnd((event) => {
           'worklet';
 
-          const { translationY, velocityY } = event;
-          // finalYOffset is used to animate the Y position of the Dialog after the gesture event
-          let finalYOffset: number;
-          // Measuring dismissing swipe action
-          const latestOffset = gestureStartYOffset.value + translationY;
-          // Check if the swipe distance reach the dismiss offset threshold,
-          // which is currently 60% of sheet height
-          const hasReachedDismissOffset =
-            latestOffset >
-            bottomOfDialogYValue.value *
-              DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD;
-          // Check if the gesture's vertical speed has reached the threshold to determine a swipe action
-          const hasReachedSwipeThreshold =
-            Math.abs(velocityY) >
-            DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION;
-          const isQuickDismissing = velocityY > 0;
+          const { velocityY } = event;
+          const dragOffset = currentYOffset.value - topOfDialogYValue.value;
+          const shouldDismiss =
+            dragOffset > BOTTOMSHEETDIALOG_DRAG_DISMISS_OFFSET ||
+            velocityY > BOTTOMSHEETDIALOG_DRAG_DISMISS_VELOCITY;
 
-          // If user is swiping
-          if (hasReachedSwipeThreshold) {
-            // Quick swipe takes priority
-            if (isQuickDismissing) {
-              finalYOffset = bottomOfDialogYValue.value;
-            } else {
-              finalYOffset = topOfDialogYValue.value;
-            }
-          } else if (hasReachedDismissOffset) {
-            finalYOffset = bottomOfDialogYValue.value;
+          if (shouldDismiss) {
+            // Keep dismiss on the UI thread — scheduleOnRN(onCloseDialog) stalls a
+            // frame and drops finger velocity, which is why RN felt less smooth
+            // than the web demo.
+            scheduleOnRN(onCloseStartCB);
+            const closeConfig = reduceMotion.value
+              ? { duration: 0 }
+              : {
+                  duration: BOTTOMSHEETDIALOG_CLOSE_DURATION,
+                  easing: sheetCloseEasing,
+                };
+            currentYOffset.value = withTiming(
+              bottomOfDialogYValue.value,
+              closeConfig,
+              (finished) => {
+                if (finished) {
+                  scheduleOnRN(onCloseCB);
+                }
+              },
+            );
+          } else if (reduceMotion.value) {
+            currentYOffset.value = withTiming(topOfDialogYValue.value, {
+              duration: 0,
+            });
           } else {
-            finalYOffset = topOfDialogYValue.value;
-          }
-
-          const isDismissed = finalYOffset === bottomOfDialogYValue.value;
-
-          if (isDismissed) {
-            scheduleOnRN(onCloseDialog);
-          } else {
-            // Only animate dialog to a certain Y position instead
-            currentYOffset.value = withTiming(finalYOffset, {
-              duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
+            // Snap-back inherits release velocity so it doesn't "die" then restart.
+            currentYOffset.value = withSpring(topOfDialogYValue.value, {
+              ...BOTTOMSHEETDIALOG_SPRING,
+              velocity: velocityY,
+              reduceMotion: ReduceMotion.System,
             });
           }
         });
@@ -191,28 +240,41 @@ export const BottomSheetDialog = forwardRef<
       isInteractable,
       currentYOffset,
       gestureStartYOffset,
-      bottomOfDialogYValue,
       topOfDialogYValue,
-      onCloseDialog,
+      bottomOfDialogYValue,
+      reduceMotion,
+      onCloseStartCB,
+      onCloseCB,
     ]);
 
     // Animate in sheet on initial render.
     const onOpenDialog = (callback?: () => void) => {
-      // Starts setting the Y position of the dialog to the bottom of the dialog
+      // Starts setting the Y position of the dialog offscreen (105%).
       currentYOffset.value = bottomOfDialogYValue.value;
-      // Animate the Y position to the top of the dialog, then call onOpenCB
-      currentYOffset.value = withTiming(
-        topOfDialogYValue.value,
-        {
-          duration: DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
-        },
-        () => {
-          scheduleOnRN(onOpenCB);
-          if (callback) {
-            scheduleOnRN(callback);
-          }
-        },
-      );
+
+      const onOpened = () => {
+        scheduleOnRN(onOpenCB);
+        if (callback) {
+          scheduleOnRN(callback);
+        }
+      };
+
+      if (reduceMotion.value) {
+        currentYOffset.value = withTiming(
+          topOfDialogYValue.value,
+          { duration: 0 },
+          onOpened,
+        );
+      } else {
+        currentYOffset.value = withSpring(
+          topOfDialogYValue.value,
+          {
+            ...BOTTOMSHEETDIALOG_SPRING,
+            reduceMotion: ReduceMotion.System,
+          },
+          onOpened,
+        );
+      }
     };
 
     const onDebouncedCloseDialog = useMemo(
@@ -232,7 +294,8 @@ export const BottomSheetDialog = forwardRef<
 
     const updateSheetHeight = (e: LayoutChangeEvent) => {
       const { height } = e.nativeEvent.layout;
-      bottomOfDialogYValue.value = height;
+      // Offscreen position at 105% of sheet height (matches web y: '105%').
+      bottomOfDialogYValue.value = height * BOTTOMSHEETDIALOG_OFFSCREEN_FACTOR;
 
       if (!isMounted.current) {
         isMounted.current = true;
@@ -304,19 +367,19 @@ export const BottomSheetDialog = forwardRef<
         enabled={keyboardAvoidingViewEnabled}
         {...props}
       >
-        <GestureDetector gesture={gestureHandler}>
-          <Animated.View
-            onLayout={updateSheetHeight}
-            style={combinedSheetStyle}
-          >
-            {isInteractable && (
-              <View style={tw.style('self-stretch items-center p-1')}>
-                <View style={tw.style('h-1 w-10 rounded-sm bg-border-muted')} />
+        <Animated.View onLayout={updateSheetHeight} style={combinedSheetStyle}>
+          {isInteractable && (
+            <GestureDetector gesture={gestureHandler}>
+              {/* Drag handle — only this starts drag (matches web handle-only dismiss) */}
+              <View style={tw.style('self-stretch items-center pt-3 pb-2')}>
+                <View
+                  style={tw.style('h-1 w-10 rounded-full bg-border-muted')}
+                />
               </View>
-            )}
-            {children}
-          </Animated.View>
-        </GestureDetector>
+            </GestureDetector>
+          )}
+          {children}
+        </Animated.View>
       </KeyboardAvoidingView>
     );
   },
