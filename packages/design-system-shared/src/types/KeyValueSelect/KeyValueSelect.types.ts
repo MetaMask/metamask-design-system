@@ -1,7 +1,5 @@
-import {
-  KeyValueRowVariant,
-  type KeyValueRowPropsShared,
-} from '../KeyValueRow/KeyValueRow.types';
+import { KeyValueRowVariant } from '../KeyValueRow/KeyValueRow.types';
+import type { KeyValueRowPropsShared } from '../KeyValueRow/KeyValueRow.types';
 import type { SelectButtonPropsShared } from '../SelectButton/SelectButton.types';
 
 /**
