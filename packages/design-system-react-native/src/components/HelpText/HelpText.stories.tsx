@@ -21,6 +21,11 @@ const meta: Meta<HelpTextProps> = {
       mapping: HelpTextSeverity,
       description: 'Optional semantic severity. When set, overrides `color`.',
     },
+    showIcon: {
+      control: 'boolean',
+      description:
+        'When true and `severity` is set, shows a leading IconAlert.',
+    },
     color: {
       control: 'select',
       options: Object.keys(TextColor),
@@ -41,6 +46,7 @@ type Story = StoryObj<HelpTextProps>;
 export const Default: Story = {
   args: {
     children: 'Helper message',
+    showIcon: false,
   },
 };
 
@@ -49,6 +55,18 @@ export const Severity: Story = {
     <Box flexDirection={BoxFlexDirection.Column} gap={2}>
       {Object.values(HelpTextSeverity).map((severity) => (
         <HelpText key={severity} severity={severity}>
+          {severity} severity message
+        </HelpText>
+      ))}
+    </Box>
+  ),
+};
+
+export const ShowIcon: Story = {
+  render: () => (
+    <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+      {Object.values(HelpTextSeverity).map((severity) => (
+        <HelpText key={severity} severity={severity} showIcon>
           {severity} severity message
         </HelpText>
       ))}
