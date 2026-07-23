@@ -179,11 +179,18 @@ export const KeyTextProps: Story = {
 
 export const ValueTextProps: Story = {
   render: () => (
-    <KeyValueRow
-      keyLabel="Amount"
-      value="1.5 ETH"
-      valueTextProps={{ variant: TextVariant.BodySm }}
-    />
+    <Box gap={4} twClassName="w-full">
+      <KeyValueRow
+        keyLabel="Amount"
+        value="1.5 ETH"
+        valueTextProps={{ variant: TextVariant.BodySm }}
+      />
+      <KeyValueRow
+        keyLabel="Balance"
+        value="$1,234.56"
+        valueTextProps={{ isHidden: true }}
+      />
+    </Box>
   ),
 };
 

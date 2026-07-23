@@ -52,7 +52,7 @@ export type {
   BadgeWrapperCustomPosition,
 } from './BadgeWrapper';
 
-export { BannerBase } from './BannerBase';
+export { BannerBase, BannerBaseActionButtonLayout } from './BannerBase';
 export type { BannerBaseProps } from './BannerBase';
 
 export { BottomSheet } from './BottomSheet';
@@ -103,7 +103,7 @@ export type { BoxColumnProps } from './BoxColumn';
 export { Card } from './Card';
 export type { CardProps } from './Card';
 
-export { Content, ContentVerticalAlignment } from './Content';
+export { Content, ContentVariant } from './Content';
 export type { ContentProps } from './Content';
 
 export { ButtonAnimated } from './temp-components/ButtonAnimated';
@@ -162,6 +162,9 @@ export type {
   HeaderStandardCenterColumnProps,
 } from './temp-components/HeaderStandardCenterColumn';
 
+export { HelpText, HelpTextSeverity } from './HelpText';
+export type { HelpTextProps } from './HelpText';
+
 export { Icon, IconColor, IconName, IconSize } from './Icon';
 export type { IconProps } from './Icon';
 
@@ -180,7 +183,7 @@ export type { KeyValueRowProps } from './KeyValueRow';
 export { Label } from './Label';
 export type { LabelProps } from './Label';
 
-export { ListItem, ListItemVerticalAlignment } from './ListItem';
+export { ListItem, ListItemVariant } from './ListItem';
 export type { ListItemProps } from './ListItem';
 
 export { ListItemSelect } from './ListItemSelect';
@@ -300,6 +303,9 @@ export type { SectionHeaderProps } from './SectionHeader';
 
 export { SegmentedControl, SegmentedControlSize } from './SegmentedControl';
 export type { SegmentedControlProps } from './SegmentedControl';
+
+export { Slider, SliderMarkColor, DEFAULT_MARKS } from './Slider';
+export type { SliderProps, SliderMark } from './Slider';
 
 export { Switch } from './Switch';
 export type { SwitchProps } from './Switch';

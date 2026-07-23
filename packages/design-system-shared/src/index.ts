@@ -33,10 +33,7 @@ export {
 } from './types/BadgeStatus';
 
 // Content types (ADR-0003 + ADR-0004)
-export {
-  ContentVerticalAlignment,
-  type ContentPropsShared,
-} from './types/Content';
+export { ContentVariant, type ContentPropsShared } from './types/Content';
 
 // ListItem types (ADR-0004)
 export { type ListItemPropsShared } from './types/ListItem';
@@ -56,8 +53,11 @@ export {
   type IconAlertPropsShared,
 } from './types/IconAlert';
 
-// BannerBase types (ADR-0004)
-export { type BannerBasePropsShared } from './types/BannerBase';
+// BannerBase types (ADR-0003 + ADR-0004)
+export {
+  BannerBaseActionButtonLayout,
+  type BannerBasePropsShared,
+} from './types/BannerBase';
 
 // TextOrChildren types (ADR-0004)
 export { type TextOrChildrenPropsShared } from './types/TextOrChildren';
@@ -247,6 +247,13 @@ export {
 
 // Switch types (ADR-0004)
 export { type SwitchPropsShared } from './types/Switch';
+
+// Slider types (ADR-0004)
+export {
+  SliderMarkColor,
+  type SliderPropsShared,
+  type SliderMark,
+} from './types/Slider';
 
 // FilterButtonGroup context (ADR-0003 + ADR-0004)
 export {
