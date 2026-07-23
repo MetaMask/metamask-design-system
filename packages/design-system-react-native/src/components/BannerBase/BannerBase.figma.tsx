@@ -10,9 +10,8 @@ import { BannerBase } from './BannerBase';
  * React Native implementation of BannerBase component.
  *
  * Figma props: title/description (TEXT), action (BOOLEAN), startAccessory /
- * endAccessory (SLOT). Code exposes close via `onClose` (not an endAccessory
- * node); gate `onClose` / `closeButtonProps` on the endAccessory SLOT so Dev
- * Mode omits the close control when that slot is off.
+ * endAccessory (SLOT). `onClose` is gated on the `close` boolean property
+ * (bound to the endAccessory layer's visibility in Figma).
  */
 
 figma.connect(
@@ -33,17 +32,15 @@ figma.connect(
         true: () => undefined,
         false: undefined,
       }),
-      onClose: figma.boolean('endAccessory', {
+      onClose: figma.boolean('close', {
         true: () => undefined,
         false: undefined,
       }),
-      closeButtonProps: figma.boolean('endAccessory', {
+      closeButtonProps: figma.boolean('close', {
         true: { testID: 'banner-base-close-button' },
         false: undefined,
       }),
-      // Prefer children over figma.slot() so Dev Mode inlines the nested Icon
-      // instead of emitting a nested StartAccessory() wrapper function.
-      startAccessory: figma.children('startAccessory'),
+      startAccessory: figma.slot('startAccessory').connectedInstances,
     },
     example: ({
       title,
