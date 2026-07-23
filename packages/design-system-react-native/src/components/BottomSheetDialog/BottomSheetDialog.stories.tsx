@@ -15,6 +15,7 @@ const meta: Meta<BottomSheetDialogProps> = {
   title: 'Components/BottomSheetDialog',
   component: BottomSheetDialog,
   argTypes: {
+    hasBottomBorder: { control: 'boolean' },
     isFullscreen: { control: 'boolean' },
     isInteractable: { control: 'boolean' },
     keyboardAvoidingViewEnabled: { control: 'boolean' },
@@ -37,12 +38,24 @@ type Story = StoryObj<BottomSheetDialogProps>;
 
 export const Default: Story = {
   args: {
+    hasBottomBorder: false,
     isFullscreen: false,
     isInteractable: true,
     keyboardAvoidingViewEnabled: true,
     children: (
       <Box twClassName="p-4">
         <Text>BottomSheetDialog content</Text>
+      </Box>
+    ),
+  },
+};
+
+export const HasBottomBorder: Story = {
+  args: {
+    hasBottomBorder: true,
+    children: (
+      <Box twClassName="p-4">
+        <Text>BottomSheetDialog with a bottom border</Text>
       </Box>
     ),
   },

@@ -78,6 +78,26 @@ Optional callback triggered when the sheet is fully opened.
 </BottomSheet>
 ```
 
+### `hasBottomBorder`
+
+Optional boolean that indicates if the sheet's bottom border is shown. The sheet always renders a muted border on its top and sides; the bottom edge is hidden by default.
+
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
+
+```tsx
+// No bottom border (default)
+<BottomSheet goBack={goBack}>
+  <Text>Content</Text>
+</BottomSheet>
+
+// With bottom border
+<BottomSheet goBack={goBack} hasBottomBorder>
+  <Text>Content</Text>
+</BottomSheet>
+```
+
 ### `isInteractable`
 
 Optional boolean indicating whether the sheet can be dismissed by swiping or tapping the overlay. When `false`, the drag handle is hidden and overlay taps are disabled.
