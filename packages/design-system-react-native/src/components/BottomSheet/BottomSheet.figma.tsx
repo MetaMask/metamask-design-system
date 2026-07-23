@@ -32,30 +32,28 @@ figma.connect(
         title: figma.string('title'),
       }),
     },
-    example: ({ isFullscreen, header }) => {
-      const goBack = () => undefined;
-
-      return (
-        <BottomSheet goBack={goBack} isFullscreen={isFullscreen}>
-          <BottomSheetHeader onClose={goBack}>{header.title}</BottomSheetHeader>
-          <Box twClassName="p-4">
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </Text>
-          </Box>
-          <BottomSheetFooter
-            secondaryButtonProps={{
-              children: 'Cancel',
-              onPress: goBack,
-            }}
-            primaryButtonProps={{
-              children: 'Confirm',
-              onPress: goBack,
-            }}
-          />
-        </BottomSheet>
-      );
-    },
+    example: ({ isFullscreen, header }) => (
+      <BottomSheet isFullscreen={isFullscreen} onClose={() => undefined}>
+        <BottomSheetHeader onClose={() => undefined}>
+          {header.title}
+        </BottomSheetHeader>
+        <Box twClassName="p-4">
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </Text>
+        </Box>
+        <BottomSheetFooter
+          secondaryButtonProps={{
+            children: 'Cancel',
+            onPress: () => undefined,
+          }}
+          primaryButtonProps={{
+            children: 'Confirm',
+            onPress: () => undefined,
+          }}
+        />
+      </BottomSheet>
+    ),
   },
 );
