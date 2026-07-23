@@ -34,6 +34,7 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
       valueEndAccessory,
       valueTextProps,
       selectButtonProps,
+      keyValueRowProps,
       isDisabled = false,
       twClassName,
       style,
@@ -84,6 +85,7 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
         {...pressableProps}
       >
         <KeyValueRow
+          {...keyValueRowProps}
           keyLabel={keyLabel}
           keyStartAccessory={keyStartAccessory}
           keyEndAccessory={keyEndAccessory}

@@ -1,5 +1,5 @@
 import {
-  KeyValueRowVariant,
+  KeyValueSelectVariant,
   SelectButtonEndArrow,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
@@ -30,9 +30,9 @@ const meta: Meta<KeyValueSelectProps> = {
     },
     variant: {
       control: 'select',
-      options: Object.keys(KeyValueRowVariant),
-      mapping: KeyValueRowVariant,
-      description: 'KeyValueRow height variant.',
+      options: Object.keys(KeyValueSelectVariant),
+      mapping: KeyValueSelectVariant,
+      description: 'KeyValueSelect height variant.',
     },
     isDisabled: {
       control: 'boolean',
@@ -61,9 +61,9 @@ export const Variant: Story = {
   render: () => (
     <Box gap={4}>
       {(
-        Object.entries(KeyValueRowVariant) as [
-          keyof typeof KeyValueRowVariant,
-          (typeof KeyValueRowVariant)[keyof typeof KeyValueRowVariant],
+        Object.entries(KeyValueSelectVariant) as [
+          keyof typeof KeyValueSelectVariant,
+          (typeof KeyValueSelectVariant)[keyof typeof KeyValueSelectVariant],
         ][]
       ).map(([key, rowVariant]) => (
         <KeyValueSelect
@@ -203,6 +203,18 @@ export const KeyTextProps: Story = {
       value="Details"
       keyTextProps={{ variant: TextVariant.BodySm }}
       selectButtonProps={{ placeholder: 'Select' }}
+      onPress={noopPress}
+    />
+  ),
+};
+
+export const KeyValueRowProps: Story = {
+  render: () => (
+    <KeyValueSelect
+      keyLabel="Network"
+      value="Ethereum Mainnet"
+      selectButtonProps={{ placeholder: 'Select network' }}
+      keyValueRowProps={{ twClassName: 'border-b border-border-muted' }}
       onPress={noopPress}
     />
   ),

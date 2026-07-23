@@ -103,8 +103,9 @@ export {
   type KeyValueRowPropsShared,
 } from './types/KeyValueRow';
 
-// KeyValueSelect types (ADR-0004)
+// KeyValueSelect types (ADR-0003 + ADR-0004)
 export {
+  KeyValueSelectVariant,
   type KeyValueSelectPropsShared,
   type KeyValueSelectSelectButtonPropsShared,
 } from './types/KeyValueSelect';

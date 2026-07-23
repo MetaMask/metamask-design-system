@@ -180,8 +180,9 @@ export type { KeyValueColumnProps } from './KeyValueColumn';
 export { KeyValueRow, KeyValueRowVariant } from './KeyValueRow';
 export type { KeyValueRowProps } from './KeyValueRow';
 
-export { KeyValueSelect } from './KeyValueSelect';
+export { KeyValueSelect, KeyValueSelectVariant } from './KeyValueSelect';
 export type {
+  KeyValueSelectKeyValueRowProps,
   KeyValueSelectProps,
   KeyValueSelectSelectButtonProps,
 } from './KeyValueSelect';

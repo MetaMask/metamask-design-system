@@ -1,6 +1,6 @@
 # KeyValueSelect
 
-KeyValueSelect is used to show a key on the left and a select value on the right in a pressable row. Use it for form and summary rows that open a picker or bottom sheet. Value-side props follow [KeyValueRow](../KeyValueRow/README.md) naming and map onto a secondary [SelectButton](../SelectButton/README.md). SelectButton-only options (placeholder and caret) use `selectButtonProps`. For a static key/value row, use KeyValueRow. For a standalone select control, use SelectButton.
+KeyValueSelect is used to show a key on the left and a select value on the right in a pressable row. Use it for form and summary rows that open a picker or bottom sheet. Value-side props follow [KeyValueRow](../KeyValueRow/README.md) naming and map onto a secondary [SelectButton](../SelectButton/README.md). SelectButton-only options (placeholder and caret) use `selectButtonProps`. Use `keyValueRowProps` for inner KeyValueRow shell props such as `testID` or `twClassName`. For a static key/value row, use KeyValueRow. For a standalone select control, use SelectButton.
 
 ```tsx
 import { KeyValueSelect } from '@metamask/design-system-react-native';
@@ -156,6 +156,31 @@ import {
 />;
 ```
 
+### `keyValueRowProps`
+
+Optional props forwarded to the inner [KeyValueRow](../KeyValueRow/README.md). Use this for row shell concerns such as `testID`, `twClassName`, `style`, and accessibility `ViewProps` that should apply to the row content rather than the outer Pressable.
+
+Owned KeyValueSelect content props (`keyLabel`, value-side props, `variant`, etc.) are not available here — set those on `KeyValueSelect` directly.
+
+| TYPE                             | REQUIRED | DEFAULT     |
+| -------------------------------- | -------- | ----------- |
+| `KeyValueSelectKeyValueRowProps` | No       | `undefined` |
+
+```tsx
+import { KeyValueSelect } from '@metamask/design-system-react-native';
+
+<KeyValueSelect
+  keyLabel="Network"
+  value="Ethereum Mainnet"
+  selectButtonProps={{ placeholder: 'Select network' }}
+  keyValueRowProps={{
+    testID: 'network-row',
+    twClassName: 'border-b border-border-muted',
+  }}
+  onPress={() => {}}
+/>;
+```
+
 ### `onPress`
 
 Callback fired when the row is pressed. Use this to open a picker or sheet.
@@ -180,22 +205,22 @@ Row height: compact summary (40px) or taller input context (48px).
 
 Available values:
 
-- `KeyValueRowVariant.Summary` — outer row `h-10` (40px).
-- `KeyValueRowVariant.Input` — outer row `h-12` (48px).
+- `KeyValueSelectVariant.Summary` — outer row `h-10` (40px).
+- `KeyValueSelectVariant.Input` — outer row `h-12` (48px).
 
-| TYPE                 | REQUIRED | DEFAULT                      |
-| -------------------- | -------- | ---------------------------- |
-| `KeyValueRowVariant` | No       | `KeyValueRowVariant.Summary` |
+| TYPE                    | REQUIRED | DEFAULT                         |
+| ----------------------- | -------- | ------------------------------- |
+| `KeyValueSelectVariant` | No       | `KeyValueSelectVariant.Summary` |
 
 ```tsx
 import {
-  KeyValueRowVariant,
   KeyValueSelect,
+  KeyValueSelectVariant,
 } from '@metamask/design-system-react-native';
 
 <KeyValueSelect
   keyLabel="Network"
-  variant={KeyValueRowVariant.Input}
+  variant={KeyValueSelectVariant.Input}
   selectButtonProps={{ placeholder: 'Select' }}
   onPress={() => {}}
 />;

@@ -100,6 +100,39 @@ describe('KeyValueSelect', () => {
     });
   });
 
+  describe('when keyValueRowProps is provided', () => {
+    it('forwards testID to the inner KeyValueRow', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          keyValueRowProps={{ testID: 'key-value-row' }}
+          onPress={noopPress}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByTestId('key-value-row')).toBeOnTheScreen();
+      expect(getByTestId(ROOT_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('forwards twClassName to the inner KeyValueRow', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          keyValueRowProps={{
+            testID: 'key-value-row',
+            twClassName: 'opacity-50',
+          }}
+          onPress={noopPress}
+        />,
+      );
+
+      expect(getByTestId('key-value-row')).toHaveStyle(tw.style('opacity-50'));
+    });
+  });
+
   describe('when pressed', () => {
     it('calls onPress from the root', () => {
       const onPress = jest.fn();
