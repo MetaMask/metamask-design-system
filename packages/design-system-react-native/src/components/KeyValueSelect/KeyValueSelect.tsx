@@ -18,7 +18,10 @@ import { SelectButton } from '../SelectButton';
 
 import type { KeyValueSelectProps } from './KeyValueSelect.types';
 
-const ROOT_TW_CLASS_NAME = 'w-full pl-4 pr-1';
+const ROOT_TW_CLASS_NAME = 'w-full';
+
+/** Overrides KeyValueRow `pr-4` so SelectButton's `px-3` keeps a 16px trailing inset. */
+const KEY_VALUE_ROW_TW_CLASS_NAME = 'pr-1';
 
 export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
   (
@@ -45,6 +48,12 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
   ) => {
     const tw = useTailwind();
     const rootTwClassName = mergeTwClassName(ROOT_TW_CLASS_NAME, twClassName);
+    const { twClassName: keyValueRowTwClassName, ...restKeyValueRowProps } =
+      keyValueRowProps ?? {};
+    const resolvedKeyValueRowTwClassName = mergeTwClassName(
+      KEY_VALUE_ROW_TW_CLASS_NAME,
+      keyValueRowTwClassName,
+    );
 
     const getPressableStyle = ({
       pressed,
@@ -85,7 +94,8 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
         {...pressableProps}
       >
         <KeyValueRow
-          {...keyValueRowProps}
+          {...restKeyValueRowProps}
+          twClassName={resolvedKeyValueRowTwClassName}
           keyLabel={keyLabel}
           keyStartAccessory={keyStartAccessory}
           keyEndAccessory={keyEndAccessory}

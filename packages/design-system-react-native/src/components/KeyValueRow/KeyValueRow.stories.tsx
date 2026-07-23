@@ -20,7 +20,7 @@ const meta: Meta<KeyValueRowProps> = {
   component: KeyValueRow,
   decorators: [
     (Story) => (
-      <Box twClassName="w-full" paddingHorizontal={4}>
+      <Box twClassName="w-full">
         <Story />
       </Box>
     ),

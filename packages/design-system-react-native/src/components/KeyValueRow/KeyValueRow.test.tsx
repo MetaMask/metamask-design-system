@@ -84,8 +84,14 @@ describe('KeyValueRow', () => {
       render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
 
       expect(screen.getByTestId('key-value-row')).toHaveStyle(
-        tw`h-10 flex-row items-center gap-4`,
+        tw`h-10 px-4 flex-row items-center gap-4`,
       );
+    });
+
+    it('applies default horizontal padding', () => {
+      render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
+
+      expect(screen.getByTestId('key-value-row')).toHaveStyle(tw`px-4`);
     });
 
     it('applies resolved h-12 when variant is Input', () => {

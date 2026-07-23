@@ -129,7 +129,23 @@ describe('KeyValueSelect', () => {
         />,
       );
 
-      expect(getByTestId('key-value-row')).toHaveStyle(tw.style('opacity-50'));
+      expect(getByTestId('key-value-row')).toHaveStyle(
+        tw.style('pl-4 pr-1', 'opacity-50'),
+      );
+    });
+
+    it('keeps SelectButton trailing inset via pr-1 on the inner KeyValueRow', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={{ placeholder: 'Select' }}
+          keyValueRowProps={{ testID: 'key-value-row' }}
+          onPress={noopPress}
+        />,
+      );
+
+      // KeyValueRow default px-4 + KeyValueSelect pr-1 → pl-4 pr-1
+      expect(getByTestId('key-value-row')).toHaveStyle(tw.style('pl-4 pr-1'));
     });
   });
 
@@ -218,7 +234,7 @@ describe('KeyValueSelect', () => {
   });
 
   describe('when rendering the root', () => {
-    it('applies full-width edge padding (16px leading, 4px trailing)', () => {
+    it('applies full-width pressable without horizontal padding', () => {
       const { getByTestId } = render(
         <KeyValueSelect
           keyLabel="Network"
@@ -228,12 +244,10 @@ describe('KeyValueSelect', () => {
         />,
       );
 
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw.style('w-full pl-4 pr-1'),
-      );
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw.style('w-full'));
     });
 
-    it('merges twClassName with default root padding', () => {
+    it('merges twClassName with default root width', () => {
       const { getByTestId } = render(
         <KeyValueSelect
           keyLabel="Network"
@@ -245,7 +259,7 @@ describe('KeyValueSelect', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw.style('w-full pl-4 pr-1', 'rounded-lg'),
+        tw.style('w-full', 'rounded-lg'),
       );
     });
 
@@ -261,7 +275,7 @@ describe('KeyValueSelect', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw.style('w-full pl-4 pr-1', 'bg-pressed'),
+        tw.style('w-full', 'bg-pressed'),
       );
     });
 
@@ -277,7 +291,7 @@ describe('KeyValueSelect', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle([
-        tw.style('w-full pl-4 pr-1'),
+        tw.style('w-full'),
         { marginTop: 8 },
       ]);
     });

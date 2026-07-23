@@ -345,7 +345,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Default root classes include `w-full pl-4 pr-1` so the pressable spans the full width with a 16px leading inset and a 4px trailing inset (SelectButton already contributes 12px of trailing padding).
+Default root classes include `w-full` so the pressable spans the full width for pressed feedback. Horizontal inset comes from the inner [KeyValueRow](../KeyValueRow/README.md) (`px-4`), with `pr-1` applied so SelectButton's trailing padding still totals 16px from the edge.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
