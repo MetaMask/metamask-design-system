@@ -14,11 +14,6 @@ figma.connect(
   BottomSheetOverlay,
   'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=16576-21410',
   {
-    props: {},
-    example: (props) => {
-      const handlePress = () => undefined;
-
-      return <BottomSheetOverlay onPress={handlePress} {...props} />;
-    },
+    example: () => <BottomSheetOverlay onPress={() => undefined} />,
   },
 );
