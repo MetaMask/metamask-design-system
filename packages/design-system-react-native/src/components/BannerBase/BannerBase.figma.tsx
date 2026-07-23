@@ -45,7 +45,7 @@ figma.connect(
       <BannerBase
         title={title}
         description={description}
-        actionButtonLabel={actionButton.label}
+        actionButtonLabel={actionButton?.label}
         actionButtonOnPress={actionButtonOnPress}
         onClose={() => undefined}
         closeButtonProps={{ testID: 'banner-base-close-button' }}
