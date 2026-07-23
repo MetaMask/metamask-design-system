@@ -11,7 +11,8 @@ import { BannerBase } from './BannerBase';
  *
  * Figma props: title/description (TEXT), action (BOOLEAN), startAccessory /
  * endAccessory (SLOT). Code exposes close via `onClose` (not an endAccessory
- * node), so close handlers match Storybook Default rather than the end SLOT.
+ * node); gate `onClose` / `closeButtonProps` on the endAccessory SLOT so Dev
+ * Mode omits the close control when that slot is off.
  */
 
 figma.connect(
@@ -21,14 +22,23 @@ figma.connect(
     props: {
       title: figma.string('title'),
       description: figma.string('description'),
+      // false fallback keeps `.label` safe without optional chaining (parser rejects `?.`)
       actionButton: figma.boolean('action', {
         true: figma.nestedProps('ButtonBase', {
           label: figma.string('label'),
         }),
-        false: undefined,
+        false: { label: undefined },
       }),
       actionButtonOnClick: figma.boolean('action', {
         true: () => undefined,
+        false: undefined,
+      }),
+      onClose: figma.boolean('endAccessory', {
+        true: () => undefined,
+        false: undefined,
+      }),
+      closeButtonProps: figma.boolean('endAccessory', {
+        true: { 'data-testid': 'banner-base-close-button' },
         false: undefined,
       }),
       // Prefer children over figma.slot() so Dev Mode inlines the nested Icon
@@ -40,15 +50,17 @@ figma.connect(
       description,
       actionButton,
       actionButtonOnClick,
+      onClose,
+      closeButtonProps,
       startAccessory,
     }) => (
       <BannerBase
         title={title}
         description={description}
-        actionButtonLabel={actionButton?.label}
+        actionButtonLabel={actionButton.label}
         actionButtonOnClick={actionButtonOnClick}
-        onClose={() => undefined}
-        closeButtonProps={{ 'data-testid': 'banner-base-close-button' }}
+        onClose={onClose}
+        closeButtonProps={closeButtonProps}
         startAccessory={startAccessory}
       />
     ),
