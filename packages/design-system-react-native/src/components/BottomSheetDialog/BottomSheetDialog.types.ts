@@ -34,6 +34,11 @@ export type BottomSheetDialogProps = {
    */
   onClose?: (hasPendingAction?: boolean) => void;
   /**
+   * Optional callback fired when a close animation begins (programmatic or drag).
+   * Used to start the backdrop fade in parallel with the sheet dismiss.
+   */
+  onCloseStart?: () => void;
+  /**
    * Optional callback that gets triggered when the sheet is opened.
    */
   onOpen?: (hasPendingAction?: boolean) => void;

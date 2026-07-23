@@ -29,9 +29,16 @@ const meta: Meta<BottomSheetProps> = {
 export default meta;
 type Story = StoryObj<BottomSheetProps>;
 
+/**
+ * Keep the sheet mounted until onClose fires so dismiss can animate.
+ * Header/footer/overlay must call ref.onCloseBottomSheet() — never setVisible(false) directly.
+ */
 const DefaultTemplate = (args: BottomSheetProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const goBack = () => setIsVisible(false);
+  const sheetRef = useRef<BottomSheetRef>(null);
+  const requestClose = () => {
+    sheetRef.current?.onCloseBottomSheet();
+  };
 
   return (
     <View style={{ flex: 1, width: '100%' }}>
@@ -43,8 +50,12 @@ const DefaultTemplate = (args: BottomSheetProps) => {
         Open BottomSheet
       </Button>
       {isVisible && (
-        <BottomSheet {...args} onClose={goBack}>
-          <BottomSheetHeader onClose={goBack}>BottomSheet</BottomSheetHeader>
+        <BottomSheet
+          {...args}
+          ref={sheetRef}
+          onClose={() => setIsVisible(false)}
+        >
+          <BottomSheetHeader onClose={requestClose}>BottomSheet</BottomSheetHeader>
           <Box twClassName="p-4">
             <Text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
@@ -52,8 +63,8 @@ const DefaultTemplate = (args: BottomSheetProps) => {
             </Text>
           </Box>
           <BottomSheetFooter
-            secondaryButtonProps={{ children: 'Cancel', onPress: goBack }}
-            primaryButtonProps={{ children: 'Confirm', onPress: goBack }}
+            secondaryButtonProps={{ children: 'Cancel', onPress: requestClose }}
+            primaryButtonProps={{ children: 'Confirm', onPress: requestClose }}
           />
         </BottomSheet>
       )}
@@ -117,8 +128,11 @@ export const ImperativeControl: Story = {
 
 const ScrollableListTemplate = (args: BottomSheetProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const sheetRef = useRef<BottomSheetRef>(null);
   const listGestureRef = useRef(null);
-  const goBack = () => setIsVisible(false);
+  const requestClose = () => {
+    sheetRef.current?.onCloseBottomSheet();
+  };
 
   return (
     <View style={{ flex: 1, width: '100%' }}>
@@ -132,11 +146,10 @@ const ScrollableListTemplate = (args: BottomSheetProps) => {
       {isVisible && (
         <BottomSheet
           {...args}
-          goBack={goBack}
-          shouldNavigateBack={false}
-          onClose={goBack}
+          ref={sheetRef}
+          onClose={() => setIsVisible(false)}
         >
-          <BottomSheetHeader onClose={goBack}>
+          <BottomSheetHeader onClose={requestClose}>
             Scrollable BottomSheet
           </BottomSheetHeader>
           <ScrollView
@@ -151,8 +164,8 @@ const ScrollableListTemplate = (args: BottomSheetProps) => {
             ))}
           </ScrollView>
           <BottomSheetFooter
-            secondaryButtonProps={{ children: 'Cancel', onPress: goBack }}
-            primaryButtonProps={{ children: 'Done', onPress: goBack }}
+            secondaryButtonProps={{ children: 'Cancel', onPress: requestClose }}
+            primaryButtonProps={{ children: 'Done', onPress: requestClose }}
           />
         </BottomSheet>
       )}

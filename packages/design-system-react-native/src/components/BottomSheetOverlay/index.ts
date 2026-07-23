@@ -1,2 +1,5 @@
 export { BottomSheetOverlay } from './BottomSheetOverlay';
-export type { BottomSheetOverlayProps } from './BottomSheetOverlay.types';
+export type {
+  BottomSheetOverlayProps,
+  BottomSheetOverlayRef,
+} from './BottomSheetOverlay.types';
