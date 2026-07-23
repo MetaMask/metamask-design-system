@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.34.0]
 
-### Uncategorized
+### Added
 
-- chore: Add Code Connect for BannerAlert ([#1362](https://github.com/MetaMask/metamask-design-system/pull/1362))
-- fix: update AvatarAccount Code Connect to correct node and add variant mapping ([#1412](https://github.com/MetaMask/metamask-design-system/pull/1412))
-- chore: Add Code Connect for BannerBase ([#1363](https://github.com/MetaMask/metamask-design-system/pull/1363))
-- feat: add React IconAlert and HelpText showIcon ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
-- chore(deps): bump @figma/code-connect from 1.4.8 to 1.4.9 ([#1407](https://github.com/MetaMask/metamask-design-system/pull/1407))
-- fix: Polish React BannerBase spacing for consistency ([#1394](https://github.com/MetaMask/metamask-design-system/pull/1394))
+- Added `IconAlert` for severity-mapped icon glyphs aligned with the React Native primitive ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
+- Added `showIcon` to `HelpText` (default `false`) to render a leading `IconAlert` when `severity` is set ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
+
+### Changed
+
+- Updated `BannerBase` spacing (padding, title/description gap, action button margin, and close button offset) to match Figma; inherited by `BannerAlert` and `Toast` ([#1394](https://github.com/MetaMask/metamask-design-system/pull/1394))
 
 ## [0.33.0]
 

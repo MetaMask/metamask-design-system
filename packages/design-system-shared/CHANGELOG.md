@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.31.0]
 
-### Uncategorized
+### Added
 
-- feat(dsrn): add KeyValueSelect pressable row with SelectButton value ([#1410](https://github.com/MetaMask/metamask-design-system/pull/1410))
-- feat: add React IconAlert and HelpText showIcon ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
+- Added `KeyValueSelectPropsShared`, `KeyValueSelectSelectButtonPropsShared`, and `KeyValueSelectVariant` for cross-platform `KeyValueSelect` support ([#1410](https://github.com/MetaMask/metamask-design-system/pull/1410))
+- Added `showIcon` to `HelpTextPropsShared` (default `false`) for an optional leading severity icon on `HelpText` ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
 
 ## [0.30.0]
 

@@ -9,19 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.38.0]
 
-### Uncategorized
+### Added
 
-- chore: Add Code Connect for BannerAlert ([#1362](https://github.com/MetaMask/metamask-design-system/pull/1362))
-- fix: update AvatarAccount Code Connect to correct node and add variant mapping ([#1412](https://github.com/MetaMask/metamask-design-system/pull/1412))
-- chore: Add Code Connect for BannerBase ([#1363](https://github.com/MetaMask/metamask-design-system/pull/1363))
-- feat(dsrn): add KeyValueSelect pressable row with SelectButton value ([#1410](https://github.com/MetaMask/metamask-design-system/pull/1410))
-- feat: add React IconAlert and HelpText showIcon ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
-- fix(dsrn): stop Slider thumb rewind on rapid taps and fast pans ([#1397](https://github.com/MetaMask/metamask-design-system/pull/1397))
-- feat: Add isHidden support to RN Content, TitleHub, and KeyValueRow ([#1406](https://github.com/MetaMask/metamask-design-system/pull/1406))
-- chore(deps): bump @figma/code-connect from 1.4.8 to 1.4.9 ([#1407](https://github.com/MetaMask/metamask-design-system/pull/1407))
-- feat(dsrn): add HelpText component ([#1405](https://github.com/MetaMask/metamask-design-system/pull/1405))
-- fix(dsrn): stop Content description from stretching end accessory ([#1404](https://github.com/MetaMask/metamask-design-system/pull/1404))
-- fix: Polish RN BannerBase spacing for consistency ([#1393](https://github.com/MetaMask/metamask-design-system/pull/1393))
+- Added `KeyValueSelect` for pressable key/value rows with a non-interactive `SelectButton` value (opens a picker or bottom sheet via `onPress`) ([#1410](https://github.com/MetaMask/metamask-design-system/pull/1410))
+- Added `HelpText` for field-level helper and validation copy with optional `HelpTextSeverity` coloring ([#1405](https://github.com/MetaMask/metamask-design-system/pull/1405))
+- Added `showIcon` to `HelpText` (default `false`) to render a leading `IconAlert` when `severity` is set ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
+- Added `isHidden` / `length` support on string slots for `Content`, `ListItem`, `TitleHub`, and `KeyValueRow` via `SensitiveText` (e.g. `valueProps`, `amountProps`, `valueTextProps`) ([#1406](https://github.com/MetaMask/metamask-design-system/pull/1406))
+
+### Changed
+
+- **BREAKING:** `KeyValueRow` now defaults to `px-4` (16px) horizontal padding so rows align with other full-width list surfaces without a parent padding wrapper ([#1410](https://github.com/MetaMask/metamask-design-system/pull/1410))
+  - Call sites that already wrap rows in `px-4` / `paddingHorizontal={4}` will double-pad unless that wrapper padding is removed
+  - Flush rows can override with `twClassName="px-0"`
+  - See [Migration Guide](./MIGRATION.md#from-version-0370-to-0380)
+- Updated `BannerBase` spacing (conditional bottom/right padding and title/description gap) to match Figma; inherited by `BannerAlert` and `Toast` ([#1393](https://github.com/MetaMask/metamask-design-system/pull/1393))
+
+### Fixed
+
+- Fixed `Slider` thumb rewind on rapid taps and fast pans ([#1397](https://github.com/MetaMask/metamask-design-system/pull/1397))
+- Fixed `Content` description stretching the end accessory when the description wraps ([#1404](https://github.com/MetaMask/metamask-design-system/pull/1404))
 
 ## [0.37.0]
 
