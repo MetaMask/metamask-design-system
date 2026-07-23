@@ -29,22 +29,22 @@ Optional content to display inside the dialog.
 </BottomSheetDialog>
 ```
 
-### `hasBorder`
+### `hasBottomBorder`
 
-Optional boolean to render a muted border around the dialog. The dialog renders without a border by default.
+Optional boolean that indicates if the sheet's bottom border is shown. The dialog always renders a muted border on its top and sides; the bottom edge is hidden by default.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-// No border (default)
+// No bottom border (default)
 <BottomSheetDialog>
   <Text>Content</Text>
 </BottomSheetDialog>
 
-// With muted border
-<BottomSheetDialog hasBorder>
+// With bottom border
+<BottomSheetDialog hasBottomBorder>
   <Text>Content</Text>
 </BottomSheetDialog>
 ```

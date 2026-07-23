@@ -78,22 +78,22 @@ Optional callback triggered when the sheet is fully opened.
 </BottomSheet>
 ```
 
-### `hasBorder`
+### `hasBottomBorder`
 
-Optional boolean to render a muted border around the sheet. The sheet renders without a border by default.
+Optional boolean that indicates if the sheet's bottom border is shown. The sheet always renders a muted border on its top and sides; the bottom edge is hidden by default.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
 ```tsx
-// No border (default)
+// No bottom border (default)
 <BottomSheet goBack={goBack}>
   <Text>Content</Text>
 </BottomSheet>
 
-// With muted border
-<BottomSheet goBack={goBack} hasBorder>
+// With bottom border
+<BottomSheet goBack={goBack} hasBottomBorder>
   <Text>Content</Text>
 </BottomSheet>
 ```

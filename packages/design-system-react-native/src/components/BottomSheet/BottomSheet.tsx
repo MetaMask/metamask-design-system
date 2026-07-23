@@ -31,7 +31,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
       goBack,
       style,
       twClassName,
-      hasBorder = false,
+      hasBottomBorder = false,
       isInteractable = true,
       isFullscreen = false,
       keyboardAvoidingViewEnabled = true,
@@ -135,7 +135,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
           }
         />
         <BottomSheetDialog
-          hasBorder={hasBorder}
+          hasBottomBorder={hasBottomBorder}
           isInteractable={isInteractable}
           onClose={onCloseCB}
           onOpen={onOpenCB}

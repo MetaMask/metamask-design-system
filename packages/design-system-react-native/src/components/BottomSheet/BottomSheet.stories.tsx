@@ -16,7 +16,7 @@ const meta: Meta<BottomSheetProps> = {
   title: 'Components/BottomSheet',
   component: BottomSheet,
   argTypes: {
-    hasBorder: { control: 'boolean' },
+    hasBottomBorder: { control: 'boolean' },
     isInteractable: { control: 'boolean' },
     isFullscreen: { control: 'boolean' },
     keyboardAvoidingViewEnabled: { control: 'boolean' },
@@ -65,17 +65,17 @@ const DefaultTemplate = (args: BottomSheetProps) => {
 export const Default: Story = {
   render: (args) => <DefaultTemplate {...args} />,
   args: {
-    hasBorder: false,
+    hasBottomBorder: false,
     isInteractable: true,
     isFullscreen: false,
     keyboardAvoidingViewEnabled: true,
   },
 };
 
-export const HasBorder: Story = {
+export const HasBottomBorder: Story = {
   render: (args) => <DefaultTemplate {...args} />,
   args: {
-    hasBorder: true,
+    hasBottomBorder: true,
     isInteractable: true,
     isFullscreen: false,
   },
