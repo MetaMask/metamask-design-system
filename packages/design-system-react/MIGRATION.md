@@ -3603,7 +3603,11 @@ import { TextFieldSearch } from '@metamask/design-system-react';
 // After (0.35.0) — now Lg by default; pass Md to preserve prior height
 import { TextFieldSearch, TextFieldSize } from '@metamask/design-system-react';
 
-<TextFieldSearch size={TextFieldSize.Md} value={query} onChange={handleChange} />;
+<TextFieldSearch
+  size={TextFieldSize.Md}
+  value={query}
+  onChange={handleChange}
+/>;
 ```
 
 **Impact:**
