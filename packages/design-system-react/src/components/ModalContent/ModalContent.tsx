@@ -110,6 +110,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
             className={twMerge(
               'flex max-h-full w-full rounded-lg shadow-lg motion-safe:animate-slide-up',
               TWCLASSMAP_MODAL_CONTENT_SIZE[size],
+              isPureBlack && 'border border-muted',
               modalDialogProps?.className,
             )}
           >
