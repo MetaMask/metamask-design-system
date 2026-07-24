@@ -9,9 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.35.0]
 
+### Changed
+
+- **BREAKING:** `TextFieldSearch` default `size` changed from `TextFieldSize.Md` to `TextFieldSize.Lg` to match Figma designs ([#1418](https://github.com/MetaMask/metamask-design-system/pull/1418))
+  - Consumers relying on the implicit `Md` height will now render a taller field; pass `size={TextFieldSize.Md}` to preserve the prior height
+  - See [Migration Guide](./MIGRATION.md#from-version-0340-to-0350)
+
 ### Fixed
 
-- Fixed `TextFieldSearch` layout to match Figma designs ([#1418](https://github.com/MetaMask/metamask-design-system/pull/1418))
 - Fixed `ModalContent` to apply `border-muted` correctly in pure-black mode ([#1419](https://github.com/MetaMask/metamask-design-system/pull/1419))
 
 ## [0.34.0]
