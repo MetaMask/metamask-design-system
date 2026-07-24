@@ -106,6 +106,7 @@ export const KeyValueRow = ({
       gap={4}
       style={[
         tw.style(
+          'px-4',
           variant === KeyValueRowVariant.Input ? 'h-12' : 'h-10',
           twClassName,
         ),

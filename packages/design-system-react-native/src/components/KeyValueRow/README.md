@@ -242,7 +242,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-The outer row always includes a height class from `variant` (`h-10` or `h-12`); your classes are merged with that base.
+The outer row always includes `px-4` (16px horizontal padding) and a height class from `variant` (`h-10` or `h-12`); your classes are merged with that base. Override horizontal padding with `twClassName` when needed (for example `px-0` or `pl-4 pr-1`).
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
