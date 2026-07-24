@@ -9,6 +9,51 @@ const noop = () => undefined;
 
 describe('TextFieldSearch', () => {
   describe('rendering', () => {
+    it('applies hover border class when enabled', () => {
+      render(
+        <TextFieldSearch
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass(
+        'hover:border-default',
+      );
+    });
+
+    it('does not apply hover border class when disabled', () => {
+      render(
+        <TextFieldSearch
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          isDisabled
+        />,
+      );
+
+      expect(screen.getByTestId(ROOT_TEST_ID)).not.toHaveClass(
+        'hover:border-default',
+      );
+    });
+
+    it('hides native webkit search decorations on the input', () => {
+      render(
+        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
+      );
+
+      const input = screen.getByRole('searchbox');
+      expect(input).toHaveClass(
+        '[&::-webkit-search-cancel-button]:hidden',
+        '[&::-webkit-search-decoration]:hidden',
+        '[&::-webkit-search-results-button]:hidden',
+        '[&::-webkit-search-results-decoration]:hidden',
+      );
+    });
+
     it('renders root container and inner search input', () => {
       render(
         <TextFieldSearch
@@ -62,6 +107,21 @@ describe('TextFieldSearch', () => {
   });
 
   describe('clear button', () => {
+    it('uses the default icon color', () => {
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value="hello"
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      // ButtonIcon sets text-icon-default on the button; the SVG inherits via text-inherit.
+      expect(screen.getByTestId(CLEAR_BUTTON_TEST_ID)).toHaveClass(
+        'text-icon-default',
+      );
+    });
+
     it('is hidden when value is empty', () => {
       render(
         <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
