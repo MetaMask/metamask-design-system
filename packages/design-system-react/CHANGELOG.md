@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.35.0]
+
 ### Uncategorized
 
 - fix(TextFieldSearch): align component with Figma designs ([#1418](https://github.com/MetaMask/metamask-design-system/pull/1418))
@@ -442,7 +444,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.34.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.0...HEAD
+[0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.34.0...@metamask/design-system-react@0.35.0
 [0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.33.0...@metamask/design-system-react@0.34.0
 [0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.32.0...@metamask/design-system-react@0.33.0
 [0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.31.0...@metamask/design-system-react@0.32.0
