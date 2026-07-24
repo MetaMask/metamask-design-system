@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat(dsrn): remove bottom border from BottomSheet ([#1413](https://github.com/MetaMask/metamask-design-system/pull/1413))
+
 ## [0.38.0]
 
 ### Added
