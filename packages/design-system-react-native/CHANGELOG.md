@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.38.1]
 
-### Uncategorized
+### Changed
 
-- feat(dsrn): remove bottom border from BottomSheet ([#1413](https://github.com/MetaMask/metamask-design-system/pull/1413))
+- Removed bottom border from `BottomSheet` to align with updated Figma designs ([#1413](https://github.com/MetaMask/metamask-design-system/pull/1413))
 
 ## [0.38.0]
 

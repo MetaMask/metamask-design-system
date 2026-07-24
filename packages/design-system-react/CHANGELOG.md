@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.35.0]
 
-### Uncategorized
+### Fixed
 
-- fix(TextFieldSearch): align component with Figma designs ([#1418](https://github.com/MetaMask/metamask-design-system/pull/1418))
-- fix(ModalContent): apply border-muted in pure black mode ([#1419](https://github.com/MetaMask/metamask-design-system/pull/1419))
+- Fixed `TextFieldSearch` layout to match Figma designs ([#1418](https://github.com/MetaMask/metamask-design-system/pull/1418))
+- Fixed `ModalContent` to apply `border-muted` correctly in pure-black mode ([#1419](https://github.com/MetaMask/metamask-design-system/pull/1419))
 
 ## [0.34.0]
 
