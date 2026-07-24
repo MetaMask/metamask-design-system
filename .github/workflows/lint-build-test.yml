@@ -90,7 +90,11 @@ jobs:
             # because that script expands to `eslint . --cache` — xargs
             # would append paths after the `.`, so scoping never takes effect.
             readarray -t CHANGED_DIRS < <(echo "$CHANGED_PATHS" | jq -r '.[]')
-            yarn exec eslint --cache "${CHANGED_DIRS[@]}"
+            if [[ ${#CHANGED_DIRS[@]} -gt 0 ]]; then
+              yarn exec eslint --cache "${CHANGED_DIRS[@]}"
+            else
+              echo "No packages changed — skipping ESLint."
+            fi
             yarn lint:misc --check
             yarn constraints
             yarn lint:dependencies
