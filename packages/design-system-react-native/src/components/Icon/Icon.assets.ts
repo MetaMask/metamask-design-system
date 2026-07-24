@@ -46,6 +46,7 @@ import CalendarSVG from './assets/calendar.svg';
 import CallSVG from './assets/call.svg';
 import CameraSVG from './assets/camera.svg';
 import CampaignSVG from './assets/campaign.svg';
+import CandlestickFilledSVG from './assets/candlestick-filled.svg';
 import CandlestickSVG from './assets/candlestick.svg';
 import CardPosSVG from './assets/card-pos.svg';
 import CardSVG from './assets/card.svg';
@@ -344,6 +345,7 @@ export const assetByIconName: AssetByIconName = {
   Call: CallSVG,
   Camera: CameraSVG,
   Campaign: CampaignSVG,
+  CandlestickFilled: CandlestickFilledSVG,
   Candlestick: CandlestickSVG,
   CardPos: CardPosSVG,
   Card: CardSVG,

@@ -2,7 +2,7 @@
 
 Content lays out the inner row for list items: an avatar, title and description on the left, and value and subvalue on the right. Use it when you need the row layout without `ListItem` padding, press handling, or row shell accessories.
 
-The root is a horizontal row (`min-h-[46px]`). For leading/trailing row accessories (`startAccessory`, `endAccessory`), use [ListItem](../ListItem/README.md).
+The root is a horizontal row with no padding or min-height floors. For padded list rows with variant-driven min-heights, use [ListItem](../ListItem/README.md).
 
 ```tsx
 import { Content } from '@metamask/design-system-react-native';
@@ -98,11 +98,11 @@ Props merged onto the `Text` component when `title` is a string. Overrides defau
 
 ### `descriptionProps`
 
-Props merged onto the `Text` component when `description` is a string. Overrides default description text styles.
+Props merged onto `SensitiveText` when `description` is a string. Overrides default description text styles. Supports `isHidden` and `length` to mask the string.
 
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Partial<Omit<TextProps, 'children'>>` | No       | `undefined` |
+| TYPE                                            | REQUIRED | DEFAULT     |
+| ----------------------------------------------- | -------- | ----------- |
+| `Partial<Omit<SensitiveTextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
 <Content
@@ -110,15 +110,20 @@ Props merged onto the `Text` component when `description` is a string. Overrides
   description="Ethereum Mainnet"
   descriptionProps={{ color: TextColor.TextMuted }}
 />
+<Content
+  title="Account"
+  description="0x1234…abcd"
+  descriptionProps={{ isHidden: true }}
+/>
 ```
 
 ### `valueProps`
 
-Props merged onto the `Text` component when `value` is a string. Overrides default value text styles.
+Props merged onto `SensitiveText` when `value` is a string. Overrides default value text styles. Supports `isHidden` and `length` to mask the string.
 
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Partial<Omit<TextProps, 'children'>>` | No       | `undefined` |
+| TYPE                                            | REQUIRED | DEFAULT     |
+| ----------------------------------------------- | -------- | ----------- |
+| `Partial<Omit<SensitiveTextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
 <Content
@@ -126,15 +131,20 @@ Props merged onto the `Text` component when `value` is a string. Overrides defau
   value="100"
   valueProps={{ color: TextColor.SuccessDefault }}
 />
+<Content
+  title="Balance"
+  value="$1,234.56"
+  valueProps={{ isHidden: true }}
+/>
 ```
 
 ### `subvalueProps`
 
-Props merged onto the `Text` component when `subvalue` is a string. Overrides default subvalue text styles.
+Props merged onto `SensitiveText` when `subvalue` is a string. Overrides default subvalue text styles. Supports `isHidden` and `length` to mask the string.
 
-| TYPE                                   | REQUIRED | DEFAULT     |
-| -------------------------------------- | -------- | ----------- |
-| `Partial<Omit<TextProps, 'children'>>` | No       | `undefined` |
+| TYPE                                            | REQUIRED | DEFAULT     |
+| ----------------------------------------------- | -------- | ----------- |
+| `Partial<Omit<SensitiveTextProps, 'children'>>` | No       | `undefined` |
 
 ```tsx
 <Content
@@ -142,6 +152,12 @@ Props merged onto the `Text` component when `subvalue` is a string. Overrides de
   value="$10.00"
   subvalue="+2.5%"
   subvalueProps={{ color: TextColor.SuccessDefault }}
+/>
+<Content
+  title="Amount"
+  value="$10.00"
+  subvalue="+2.5%"
+  subvalueProps={{ isHidden: true }}
 />
 ```
 
@@ -292,31 +308,34 @@ Optional node after the subvalue on the same line.
 />
 ```
 
-### `verticalAlignment`
+### `variant`
 
-Vertical alignment of the content row (`alignItems` on the inner `BoxRow`).
+Layout variant controlling alignment and which secondary slots render.
 
 Available values:
 
-- `ContentVerticalAlignment.Center` — default; use for one- or two-line rows
-- `ContentVerticalAlignment.Top` — use for taller rows (three+ lines or ~88dp+ height)
+- `ContentVariant.OneLine` — omits `description` and `subvalue`; vertically centered
+- `ContentVariant.TwoLines` — default; all slots; vertically centered
+- `ContentVariant.MultiLine` — all slots; top-aligned for three or more lines
 
-| TYPE                       | REQUIRED | DEFAULT                           |
-| -------------------------- | -------- | --------------------------------- |
-| `ContentVerticalAlignment` | No       | `ContentVerticalAlignment.Center` |
+When using `ListItem`, total row min-heights (48px / 72px / 88px including `py-3`) are applied on the ListItem shell.
+
+| TYPE             | REQUIRED | DEFAULT                   |
+| ---------------- | -------- | ------------------------- |
+| `ContentVariant` | No       | `ContentVariant.TwoLines` |
 
 ```tsx
 import {
   Content,
-  ContentVerticalAlignment,
+  ContentVariant,
 } from '@metamask/design-system-react-native';
 
-<Content title="Label" description="Line one\nLine two\nLine three" />
+<Content variant={ContentVariant.OneLine} title="Label" value="Value" />
 
 <Content
+  variant={ContentVariant.MultiLine}
   title="Label"
   description="Line one\nLine two\nLine three"
-  verticalAlignment={ContentVerticalAlignment.Top}
 />
 ```
 

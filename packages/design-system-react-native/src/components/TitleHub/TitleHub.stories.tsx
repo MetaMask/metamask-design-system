@@ -74,6 +74,12 @@ export const Amount: Story = {
   render: () => <TitleHub title="Perps" amount="$336.21" />,
 };
 
+export const AmountProps: Story = {
+  render: () => (
+    <TitleHub title="Perps" amount="$336.21" amountProps={{ isHidden: true }} />
+  ),
+};
+
 export const AmountEndAccessory: Story = {
   render: () => (
     <TitleHub
@@ -109,6 +115,17 @@ export const BottomLabel: Story = {
     bottomLabel: '$336.21 available',
     twClassName: '',
   },
+};
+
+export const BottomLabelProps: Story = {
+  render: () => (
+    <TitleHub
+      title="Perps"
+      amount="$336.21"
+      bottomLabel="$336.21 available"
+      bottomLabelProps={{ isHidden: true }}
+    />
+  ),
 };
 
 export const BottomLabelEndAccessory: Story = {

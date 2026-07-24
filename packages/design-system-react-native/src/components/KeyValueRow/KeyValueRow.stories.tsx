@@ -20,7 +20,7 @@ const meta: Meta<KeyValueRowProps> = {
   component: KeyValueRow,
   decorators: [
     (Story) => (
-      <Box twClassName="w-full" paddingHorizontal={4}>
+      <Box twClassName="w-full">
         <Story />
       </Box>
     ),
@@ -30,7 +30,8 @@ const meta: Meta<KeyValueRowProps> = {
     value: { control: 'text' },
     variant: {
       control: 'select',
-      options: [KeyValueRowVariant.Summary, KeyValueRowVariant.Input],
+      options: Object.keys(KeyValueRowVariant),
+      mapping: KeyValueRowVariant,
     },
   },
 };
@@ -49,54 +50,22 @@ export const Default: Story = {
   render: (args) => <KeyValueRow {...args} />,
 };
 
-const selectRowChevron = <Icon name={IconName.ArrowDown} size={IconSize.Sm} />;
-
 export const Variant: Story = {
   render: () => (
-    <Box gap={6} twClassName="w-full">
-      <Box>
+    <Box gap={4} twClassName="w-full">
+      {(
+        Object.entries(KeyValueRowVariant) as [
+          keyof typeof KeyValueRowVariant,
+          (typeof KeyValueRowVariant)[keyof typeof KeyValueRowVariant],
+        ][]
+      ).map(([key, rowVariant]) => (
         <KeyValueRow
-          keyLabel="To"
-          value="Account 1"
-          variant={KeyValueRowVariant.Input}
-          valueStartAccessory={
-            <AvatarAccount
-              address={SAMPLE_ADDRESS}
-              size={AvatarAccountSize.Xs}
-            />
-          }
-          valueEndAccessory={selectRowChevron}
-          twClassName="border-b border-border-muted"
+          key={key}
+          keyLabel={key}
+          value={`Value (${key})`}
+          variant={rowVariant}
         />
-        <KeyValueRow
-          keyLabel="Pay with"
-          value="Debit or credit"
-          variant={KeyValueRowVariant.Input}
-          valueStartAccessory={<Icon name={IconName.Card} size={IconSize.Sm} />}
-          valueEndAccessory={selectRowChevron}
-        />
-      </Box>
-      <Box>
-        <KeyValueRow
-          keyLabel="Transaction fees"
-          value="$2.59"
-          variant={KeyValueRowVariant.Summary}
-          keyEndButtonIconProps={{
-            iconName: IconName.Info,
-            onPress: () => undefined,
-          }}
-        />
-        <KeyValueRow
-          keyLabel="Est. time"
-          value="5 min"
-          variant={KeyValueRowVariant.Summary}
-        />
-        <KeyValueRow
-          keyLabel="Total"
-          value="$102.59"
-          variant={KeyValueRowVariant.Summary}
-        />
-      </Box>
+      ))}
     </Box>
   ),
 };
@@ -179,11 +148,18 @@ export const KeyTextProps: Story = {
 
 export const ValueTextProps: Story = {
   render: () => (
-    <KeyValueRow
-      keyLabel="Amount"
-      value="1.5 ETH"
-      valueTextProps={{ variant: TextVariant.BodySm }}
-    />
+    <Box gap={4} twClassName="w-full">
+      <KeyValueRow
+        keyLabel="Amount"
+        value="1.5 ETH"
+        valueTextProps={{ variant: TextVariant.BodySm }}
+      />
+      <KeyValueRow
+        keyLabel="Balance"
+        value="$1,234.56"
+        valueTextProps={{ isHidden: true }}
+      />
+    </Box>
   ),
 };
 

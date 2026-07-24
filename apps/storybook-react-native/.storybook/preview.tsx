@@ -66,6 +66,13 @@ const preview: Preview = {
       options: backgroundOptions,
     },
     layout: 'fullscreen',
+    // Automated a11y checks are disabled for React Native web stories because
+    // react-native-web renders View/Text as divs without HTML semantics, which
+    // produces false positives from axe. Use the a11y panel in Storybook UI for
+    // manual review instead.
+    a11y: {
+      test: 'off',
+    },
   },
   initialGlobals: {
     backgrounds: { value: 'light' },

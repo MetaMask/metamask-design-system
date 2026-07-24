@@ -1,6 +1,6 @@
 # Toast
 
-Toast is a component that slides up from the bottom of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
+Toast is a component that slides down from the top of the screen. It is typically used to show post-confirmation information such as account switches, network changes, or transaction confirmations.
 
 ```tsx
 import { Button, Toaster, toast } from '@metamask/design-system-react-native';
@@ -138,7 +138,7 @@ toast({
 - `startAccessory` - Optional leading accessory that overrides the severity icon.
 - `severity` - Optional semantic state used to choose the default icon. Defaults to `ToastSeverity.Default`, which shows no icon.
 - `iconAlertProps` - Optional props merged onto the default `IconAlert`.
-- `bottomOffset` - Optional offset from the bottom of the screen.
+- `topOffset` - Optional extra offset from the top of the screen.
 - `hasNoTimeout` - When `true`, the toast stays visible until dismissed.
 
 ## References

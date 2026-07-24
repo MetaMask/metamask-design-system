@@ -110,6 +110,22 @@ describe('Toaster', () => {
     expect(screen.queryByText('Test Label')).toBeNull();
   });
 
+  it('accepts topOffset option and hides on close', async () => {
+    render(<Toaster ref={toasterRef} />);
+
+    await showToastAndWait(toasterRef, {
+      hasNoTimeout: true,
+      title: 'Offset toast',
+      topOffset: 24,
+    });
+    expect(screen.getByText('Offset toast')).toBeDefined();
+
+    await act(async () => {
+      toasterRef.current?.closeToast();
+    });
+    expect(screen.queryByText('Offset toast')).toBeNull();
+  });
+
   it('does not render a severity icon by default', async () => {
     render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {

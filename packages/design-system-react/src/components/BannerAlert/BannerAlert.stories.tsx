@@ -1,3 +1,4 @@
+import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
@@ -40,6 +41,13 @@ const meta: Meta<BannerAlertProps> = {
     actionButtonLabel: {
       control: 'text',
       description: 'Optional action button label',
+    },
+    actionButtonLayout: {
+      control: 'select',
+      options: Object.keys(BannerBaseActionButtonLayout),
+      mapping: BannerBaseActionButtonLayout,
+      description:
+        'Layout for the action button relative to the banner body (Below or End)',
     },
     actionButtonOnClick: {
       action: 'actionButtonOnClick',
@@ -153,6 +161,30 @@ export const ActionButtonOnClick: Story = {
     },
     children:
       'Use actionButtonLabel for the text and actionButtonOnClick for interaction.',
+  },
+};
+
+export const ActionButtonLayout: Story = {
+  render: (args: BannerAlertProps) => (
+    <div className="space-y-2">
+      <BannerAlert
+        {...args}
+        title="End"
+        description="One-line description for short copy."
+        actionButtonLayout={BannerBaseActionButtonLayout.End}
+      />
+      <BannerAlert
+        {...args}
+        title="Below"
+        description="Use Below when the body is longer or wraps across multiple lines so the action stays under the content."
+        actionButtonLayout={BannerBaseActionButtonLayout.Below}
+      />
+    </div>
+  ),
+  args: {
+    actionButtonLabel: 'Action',
+    actionButtonOnClick: () => undefined,
+    onClose: () => undefined,
   },
 };
 

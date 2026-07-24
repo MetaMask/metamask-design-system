@@ -215,6 +215,36 @@ describe('FilterButton', () => {
         ),
       );
     });
+
+    it('applies primary inverse text color when primary variant is selected', () => {
+      const { getByText } = render(
+        <FilterButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={FilterButtonVariant.Primary}
+          isSelected
+          children="Label"
+        />,
+      );
+
+      expect(getByText('Label')).toHaveStyle(
+        tw.style(TextColor.PrimaryInverse),
+      );
+    });
+
+    it('applies default text color when secondary variant is selected', () => {
+      const { getByText } = render(
+        <FilterButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          variant={FilterButtonVariant.Secondary}
+          isSelected
+          children="Label"
+        />,
+      );
+
+      expect(getByText('Label')).toHaveStyle(tw.style(TextColor.TextDefault));
+    });
   });
 
   describe('when disabled', () => {

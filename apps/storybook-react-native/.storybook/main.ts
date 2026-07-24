@@ -22,7 +22,12 @@ const config: StorybookConfig = {
     '../stories/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/design-system-react-native/src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: [getAbsolutePath('@storybook/addon-docs')],
+  addons: [
+    getAbsolutePath('@chromatic-com/storybook'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-vitest'),
+  ],
   framework: {
     name: getAbsolutePath('@storybook/react-native-web-vite'),
     options: {

@@ -33,6 +33,20 @@ describe('KeyValueRow', () => {
       expect(screen.getByText('Label')).toHaveTextContent('Label');
       expect(screen.getByText('Value text')).toHaveTextContent('Value text');
     });
+
+    it('hides value when valueTextProps.isHidden is true', () => {
+      render(
+        <KeyValueRow
+          keyLabel="Label"
+          value="$1,234.56"
+          valueTextProps={{ isHidden: true }}
+          testID="key-value-row"
+        />,
+      );
+
+      expect(screen.queryByText('$1,234.56')).toBeNull();
+      expect(screen.getByText('••••••')).toBeOnTheScreen();
+    });
   });
 
   describe('when keyLabel is a ReactNode', () => {
@@ -70,8 +84,14 @@ describe('KeyValueRow', () => {
       render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
 
       expect(screen.getByTestId('key-value-row')).toHaveStyle(
-        tw`h-10 flex-row items-center gap-4`,
+        tw`h-10 flex-row items-center gap-4 px-4`,
       );
+    });
+
+    it('applies default horizontal padding', () => {
+      render(<KeyValueRow keyLabel="K" value="V" testID="key-value-row" />);
+
+      expect(screen.getByTestId('key-value-row')).toHaveStyle(tw`px-4`);
     });
 
     it('applies resolved h-12 when variant is Input', () => {
