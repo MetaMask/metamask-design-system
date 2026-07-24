@@ -92,7 +92,11 @@ jobs:
             echo "$CHANGED_PATHS" | jq -r '"- " + .[]'
             echo ""
             # Scope ESLint to changed directories; always run the fast checks.
-            echo "$CHANGED_PATHS" | jq -r '.[]' | xargs yarn lint:eslint
+            # We invoke eslint directly rather than via `yarn lint:eslint`
+            # because that script expands to `eslint . --cache` — xargs
+            # would append paths after the `.`, so scoping never takes effect.
+            readarray -t CHANGED_DIRS < <(echo "$CHANGED_PATHS" | jq -r '.[]')
+            yarn exec eslint --cache "${CHANGED_DIRS[@]}"
             yarn lint:misc --check
             yarn constraints
             yarn lint:dependencies
