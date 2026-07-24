@@ -310,7 +310,6 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
             );
           }),
       // Shared values and swipe JS wrappers are stable for the component lifetime.
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       [],
     );
 

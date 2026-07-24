@@ -641,7 +641,7 @@ describe('Toaster', () => {
     it('ignores stale spring-back resume after toast is replaced', async () => {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       const Reanimated = require('react-native-reanimated');
-      const springCallbacks: Array<(finished: boolean) => void> = [];
+      const springCallbacks: ((finished: boolean) => void)[] = [];
       const withSpringSpy = jest
         .spyOn(Reanimated, 'withSpring')
         .mockImplementation(
