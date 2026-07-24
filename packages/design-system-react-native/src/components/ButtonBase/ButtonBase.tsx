@@ -212,11 +212,14 @@ export const ButtonBase = ({
                   <Icon
                     name={finalStartIconName}
                     size={iconSize}
-                    twClassName={mergeTwClassName(
-                      'shrink-0',
-                      iconClassName ? iconClassName(pressed) : undefined,
-                    )}
                     {...startIconProps}
+                    twClassName={mergeTwClassName(
+                      mergeTwClassName(
+                        'shrink-0',
+                        iconClassName ? iconClassName(pressed) : undefined,
+                      ),
+                      startIconProps?.twClassName,
+                    )}
                   />
                 ) : (
                   startAccessory
@@ -227,11 +230,14 @@ export const ButtonBase = ({
                   <Icon
                     name={finalEndIconName}
                     size={iconSize}
-                    twClassName={mergeTwClassName(
-                      'shrink-0',
-                      iconClassName ? iconClassName(pressed) : undefined,
-                    )}
                     {...endIconProps}
+                    twClassName={mergeTwClassName(
+                      mergeTwClassName(
+                        'shrink-0',
+                        iconClassName ? iconClassName(pressed) : undefined,
+                      ),
+                      endIconProps?.twClassName,
+                    )}
                   />
                 ) : (
                   endAccessory

@@ -1,5 +1,6 @@
 import {
-  ContentVerticalAlignment,
+  ContentVariant,
+  SensitiveTextLength,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -129,6 +130,20 @@ describe('Content', () => {
 
       expect(getByText('Desc')).toHaveStyle(tw.style('text-error-default'));
     });
+
+    it('hides description when descriptionProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <Content
+          title="Title"
+          description="Secondary"
+          descriptionProps={{ isHidden: true }}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(queryByText('Secondary')).toBeNull();
+      expect(getByText('••••••')).toBeOnTheScreen();
+    });
   });
 
   describe('value', () => {
@@ -165,6 +180,38 @@ describe('Content', () => {
       );
 
       expect(getByText('100')).toHaveStyle(tw.style('text-error-default'));
+    });
+
+    it('hides value when valueProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <Content
+          title="Label"
+          value="$1,234.56"
+          valueProps={{ isHidden: true }}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(queryByText('$1,234.56')).toBeNull();
+      expect(getByText('••••••')).toBeOnTheScreen();
+    });
+
+    it('hides value with custom length when valueProps.length is set', () => {
+      const { getByText } = render(
+        <Content
+          title="Label"
+          value="$1,234.56"
+          valueProps={{
+            isHidden: true,
+            length: SensitiveTextLength.Medium,
+          }}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(
+        getByText('•'.repeat(Number(SensitiveTextLength.Medium))),
+      ).toBeOnTheScreen();
     });
   });
 
@@ -217,6 +264,21 @@ describe('Content', () => {
       );
 
       expect(getByText('Balance')).toHaveStyle(tw.style('text-error-default'));
+    });
+
+    it('hides subvalue when subvalueProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <Content
+          title="Label"
+          value="100"
+          subvalue="+2.4%"
+          subvalueProps={{ isHidden: true }}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(queryByText('+2.4%')).toBeNull();
+      expect(getByText('••••••')).toBeOnTheScreen();
     });
   });
 
@@ -355,29 +417,110 @@ describe('Content', () => {
     });
   });
 
-  describe('verticalAlignment', () => {
-    it('applies center alignment on flat BoxRow root by default', () => {
+  describe('variant', () => {
+    it('applies center alignment on root by default', () => {
       const { getByTestId } = render(
         <Content title="Label" testID={ROOT_TEST_ID} />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw`min-h-[46px] flex-row items-center gap-4`,
+        tw`flex-row items-center gap-4`,
       );
     });
 
-    it('applies top alignment on flat BoxRow root when verticalAlignment is Top', () => {
+    it('applies start alignment on root when variant is MultiLine', () => {
       const { getByTestId } = render(
         <Content
           title="Label"
-          verticalAlignment={ContentVerticalAlignment.Top}
+          variant={ContentVariant.MultiLine}
           testID={ROOT_TEST_ID}
         />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw`min-h-[46px] flex-row items-start gap-4`,
+        tw`flex-row items-start gap-4`,
       );
+    });
+
+    it('does not render description or subvalue when variant is OneLine', () => {
+      const { getByText, queryByText } = render(
+        <Content
+          title="Title"
+          description="Secondary"
+          value="100"
+          subvalue="Balance"
+          variant={ContentVariant.OneLine}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Title')).toBeOnTheScreen();
+      expect(getByText('100')).toBeOnTheScreen();
+      expect(queryByText('Secondary')).toBeNull();
+      expect(queryByText('Balance')).toBeNull();
+    });
+
+    it('renders description and subvalue when variant is TwoLines', () => {
+      const { getByText } = render(
+        <Content
+          title="Title"
+          description="Secondary"
+          value="100"
+          subvalue="Balance"
+          variant={ContentVariant.TwoLines}
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Secondary')).toBeOnTheScreen();
+      expect(getByText('Balance')).toBeOnTheScreen();
+    });
+
+    it('renders multi-line description nodes on screen', () => {
+      const { getByText } = render(
+        <Content
+          title="Title"
+          variant={ContentVariant.MultiLine}
+          description={
+            <>
+              <Text>Secondary line</Text>
+              <Text>Third line</Text>
+            </>
+          }
+          testID={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Secondary line')).toBeOnTheScreen();
+      expect(getByText('Third line')).toBeOnTheScreen();
+    });
+
+    describe('when __DEV__ is false', () => {
+      const originalDev = global.__DEV__;
+
+      afterEach(() => {
+        global.__DEV__ = originalDev;
+      });
+
+      it('does not warn when OneLine ignores description and subvalue', () => {
+        global.__DEV__ = false;
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => undefined);
+
+        render(
+          <Content
+            title="Title"
+            description="Secondary"
+            subvalue="Balance"
+            variant={ContentVariant.OneLine}
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(warnSpy).not.toHaveBeenCalled();
+        warnSpy.mockRestore();
+      });
     });
   });
 

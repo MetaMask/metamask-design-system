@@ -49,7 +49,7 @@ export {
 } from './BadgeWrapper';
 export type { BadgeWrapperCustomPosition } from './BadgeWrapper';
 
-export { BannerBase } from './BannerBase';
+export { BannerBase, BannerBaseActionButtonLayout } from './BannerBase';
 export type { BannerBaseProps } from './BannerBase';
 
 export { Blockies } from './temp-components/Blockies';
@@ -88,6 +88,9 @@ export type { HelpTextProps } from './HelpText';
 export { Icon } from './Icon';
 export { IconName, IconSize, IconColor } from './Icon';
 export type { IconProps } from './Icon';
+
+export { IconAlert, IconAlertSeverity } from './IconAlert';
+export type { IconAlertProps } from './IconAlert';
 
 export { Input } from './Input';
 export type { InputProps } from './Input';

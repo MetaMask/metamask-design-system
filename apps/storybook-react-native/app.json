@@ -16,6 +16,6 @@
         "backgroundColor": "#ffffff"
       }
     },
-    "plugins": []
+    "plugins": ["expo-dev-client"]
   }
 }

@@ -251,6 +251,40 @@ Optional click handler for the action button. When provided, `actionButtonLabel`
 
 <Canvas of={BannerAlertStories.ActionButtonOnClick} />
 
+### `actionButtonLayout`
+
+Optional layout for the action button relative to the banner body.
+
+- `BannerBaseActionButtonLayout.Below` — under title / description / children (default). Prefer when the body is longer or wraps.
+- `BannerBaseActionButtonLayout.End` — right of the body, left of the close button. Prefer for short copy (roughly one-line title and one-line description).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">PROP</th>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>actionButtonLayout</code>
+      </td>
+      <td align="left">
+        <code>BannerBaseActionButtonLayout</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BannerBaseActionButtonLayout.Below</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={BannerAlertStories.ActionButtonLayout} />
+
 ### `onClose`
 
 Optional callback that when provided renders a close icon in the top-right corner; `closeButtonProps` lets you adjust the icon’s accessibility label or classes.

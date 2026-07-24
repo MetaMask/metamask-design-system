@@ -108,8 +108,10 @@ Follow **Storybook controls (cross-platform)** above; mobile panels work best wi
 ```bash
 # Run Storybook
 yarn storybook                # React web (port 6006)
-yarn storybook:ios            # React Native iOS
-yarn storybook:android        # React Native Android
+yarn storybook:ios:build      # React Native iOS dev client (first time / native dep changes)
+yarn storybook:ios            # React Native iOS (Metro + dev client)
+yarn storybook:android:build  # React Native Android dev client (first time / native dep changes)
+yarn storybook:android        # React Native Android (Metro + dev client)
 
 # Build Storybook
 yarn build-storybook          # Build static site

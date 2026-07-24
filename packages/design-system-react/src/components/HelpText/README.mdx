@@ -50,6 +50,33 @@ Available severities:
 
 <Canvas of={HelpTextStories.Severity} />
 
+### `showIcon`
+
+When `true` and `severity` is set, shows a leading [`IconAlert`](./../IconAlert/README.mdx) at `IconSize.Sm`. If `severity` is omitted, the icon is not shown.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HelpTextStories.ShowIcon} />
+
 ### `color`
 
 Use `color` to set a custom text color when no `severity` applies. Ignored when `severity` is provided.

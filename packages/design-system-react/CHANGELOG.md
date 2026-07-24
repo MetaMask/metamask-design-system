@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.34.0]
+
+### Added
+
+- Added `IconAlert` for severity-mapped icon glyphs aligned with the React Native primitive ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
+- Added `showIcon` to `HelpText` (default `false`) to render a leading `IconAlert` when `severity` is set ([#1409](https://github.com/MetaMask/metamask-design-system/pull/1409))
+
+### Changed
+
+- Updated `BannerBase` spacing (padding, title/description gap, action button margin, and close button offset) to match Figma; inherited by `BannerAlert` and `Toast` ([#1394](https://github.com/MetaMask/metamask-design-system/pull/1394))
+
+## [0.33.0]
+
+### Added
+
+- Added `actionButtonLayout` to `BannerBase` (inherited by `BannerAlert`) with `BannerBaseActionButtonLayout.Below` (default) and `BannerBaseActionButtonLayout.End` to place the action button beside the body, left of close ([#1386](https://github.com/MetaMask/metamask-design-system/pull/1386))
+
+## [0.32.0]
+
+### Added
+
+- Added `CandlestickFilled` to `IconName` ([#1373](https://github.com/MetaMask/metamask-design-system/pull/1373))
+
 ## [0.31.0]
 
 ### Added
@@ -414,7 +437,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.31.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.34.0...HEAD
+[0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.33.0...@metamask/design-system-react@0.34.0
+[0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.32.0...@metamask/design-system-react@0.33.0
+[0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.31.0...@metamask/design-system-react@0.32.0
 [0.31.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.30.0...@metamask/design-system-react@0.31.0
 [0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.29.0...@metamask/design-system-react@0.30.0
 [0.29.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.28.0...@metamask/design-system-react@0.29.0

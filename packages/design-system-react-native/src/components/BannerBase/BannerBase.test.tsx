@@ -1,3 +1,4 @@
+import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 
@@ -70,6 +71,25 @@ describe('BannerBase', () => {
   it('does not render action button when actionButtonOnPress is not provided', () => {
     const { queryByText } = render(<BannerBase actionButtonLabel="Action" />);
     expect(queryByText('Action')).toBeNull();
+  });
+
+  it('renders action button at the end when actionButtonLayout is End', () => {
+    const onAction = jest.fn();
+    const { getByText, getByTestId } = render(
+      <BannerBase
+        title="End layout"
+        actionButtonLabel="Action"
+        actionButtonOnPress={onAction}
+        actionButtonLayout={BannerBaseActionButtonLayout.End}
+        onClose={() => undefined}
+        closeButtonProps={{ testID: closeButtonTestId }}
+      />,
+    );
+
+    expect(getByText('Action')).toBeDefined();
+    expect(getByTestId(closeButtonTestId)).toBeDefined();
+    fireEvent.press(getByText('Action'));
+    expect(onAction).toHaveBeenCalledTimes(1);
   });
 
   it('renders close button and triggers onClose', () => {
