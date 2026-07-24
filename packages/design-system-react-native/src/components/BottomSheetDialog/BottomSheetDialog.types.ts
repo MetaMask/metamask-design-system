@@ -10,12 +10,6 @@ export type BottomSheetDialogProps = {
    */
   children?: React.ReactNode;
   /**
-   * Optional boolean that indicates if the sheet's bottom border is shown.
-   *
-   * @default false
-   */
-  hasBottomBorder?: boolean;
-  /**
    * Optional prop to toggle full screen state of BottomSheetDialog.
    *
    * @default false

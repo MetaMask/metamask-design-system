@@ -50,7 +50,6 @@ export const BottomSheetDialog = forwardRef<
   (
     {
       children,
-      hasBottomBorder = false,
       isFullscreen = false,
       isInteractable = true,
       keyboardAvoidingViewEnabled = true,
@@ -256,8 +255,7 @@ export const BottomSheetDialog = forwardRef<
       () => [
         tw.style(
           isPureBlack ? 'bg-alternative' : 'bg-default',
-          'rounded-t-3xl overflow-hidden border border-muted',
-          !hasBottomBorder && 'border-b-0',
+          'rounded-t-3xl overflow-hidden border border-muted border-b-0',
           twClassName,
         ),
         {
@@ -276,7 +274,6 @@ export const BottomSheetDialog = forwardRef<
       [
         tw,
         isPureBlack,
-        hasBottomBorder,
         maxSheetHeight,
         screenBottomPadding,
         isFullscreen,
