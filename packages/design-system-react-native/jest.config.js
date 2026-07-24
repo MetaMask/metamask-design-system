@@ -57,6 +57,16 @@ module.exports = merge(baseConfig, {
       lines: 67,
       statements: 67,
     },
+    // Swipe-to-dismiss happy paths are covered via mocked pan handlers. The
+    // isDismissing early-return branches race with Reanimated's sync Jest mock
+    // (finished callbacks reset state before the next assertion), so those
+    // guards are verified via Storybook on device instead.
+    './src/components/Toast/Toaster.tsx': {
+      branches: 85,
+      functions: 100,
+      lines: 95,
+      statements: 95,
+    },
     // Pan/tap gesture worklets and useAnimatedReaction sync run on the UI
     // thread and are not invoked by Reanimated's Jest mock. Label-press,
     // layout, themed-style wiring, and tick lookup paths are covered in tests;
