@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 import { twMerge } from '../../utils/tw-merge';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { Icon, IconColor, IconName, IconSize } from '../Icon';
-import { TextField, TextFieldType } from '../TextField';
+import { TextField, TextFieldSize, TextFieldType } from '../TextField';
 
 import type { TextFieldSearchProps } from './TextFieldSearch.types';
 
@@ -49,9 +49,10 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
         value={value}
         isDisabled={isDisabled}
         type={TextFieldType.Search}
+        size={TextFieldSize.Lg}
         className={twMerge(
-          'rounded-full',
-          !isDisabled && !props.isError && 'hover:border-default',
+          'rounded-full bg-muted',
+          !isDisabled && !props.isError && 'hover:bg-muted-hover',
           className,
         )}
         inputProps={{

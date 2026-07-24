@@ -9,7 +9,7 @@ const noop = () => undefined;
 
 describe('TextFieldSearch', () => {
   describe('rendering', () => {
-    it('applies hover border class when enabled', () => {
+    it('applies muted background and hover background when enabled', () => {
       render(
         <TextFieldSearch
           data-testid={ROOT_TEST_ID}
@@ -20,11 +20,12 @@ describe('TextFieldSearch', () => {
       );
 
       expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass(
-        'hover:border-default',
+        'bg-muted',
+        'hover:bg-muted-hover',
       );
     });
 
-    it('does not apply hover border class when disabled', () => {
+    it('does not apply hover background class when disabled', () => {
       render(
         <TextFieldSearch
           data-testid={ROOT_TEST_ID}
@@ -36,7 +37,23 @@ describe('TextFieldSearch', () => {
       );
 
       expect(screen.getByTestId(ROOT_TEST_ID)).not.toHaveClass(
-        'hover:border-default',
+        'hover:bg-muted-hover',
+      );
+    });
+
+    it('does not apply hover background class when in error state', () => {
+      render(
+        <TextFieldSearch
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          isError
+        />,
+      );
+
+      expect(screen.getByTestId(ROOT_TEST_ID)).not.toHaveClass(
+        'hover:bg-muted-hover',
       );
     });
 
