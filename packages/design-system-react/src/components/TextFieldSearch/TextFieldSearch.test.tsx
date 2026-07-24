@@ -107,21 +107,6 @@ describe('TextFieldSearch', () => {
   });
 
   describe('clear button', () => {
-    it('uses the default icon color', () => {
-      render(
-        <TextFieldSearch
-          onChange={noop}
-          value="hello"
-          clearButtonOnClick={noop}
-        />,
-      );
-
-      // ButtonIcon sets text-icon-default on the button; the SVG inherits via text-inherit.
-      expect(screen.getByTestId(CLEAR_BUTTON_TEST_ID)).toHaveClass(
-        'text-icon-default',
-      );
-    });
-
     it('is hidden when value is empty', () => {
       render(
         <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,

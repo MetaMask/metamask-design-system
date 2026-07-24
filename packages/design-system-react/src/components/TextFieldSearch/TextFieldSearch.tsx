@@ -51,7 +51,7 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
         type={TextFieldType.Search}
         className={twMerge(
           'rounded-full',
-          !isDisabled && 'hover:border-default',
+          !isDisabled && !props.isError && 'hover:border-default',
           className,
         )}
         inputProps={{
