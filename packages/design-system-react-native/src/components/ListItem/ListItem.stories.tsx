@@ -1,10 +1,11 @@
-import { ContentVerticalAlignment } from '@metamask/design-system-shared';
+import { ContentVariant, TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
 import { Box } from '../Box';
 import { Icon, IconName } from '../Icon';
+import { Text } from '../Text';
 
 import type { ListItemProps } from './ListItem.types';
 
@@ -27,13 +28,13 @@ const meta: Meta<ListItemProps> = {
     title: 'Label',
     description: 'Secondary text',
     value: 'Value',
-    verticalAlignment: ContentVerticalAlignment.Center,
+    variant: ContentVariant.TwoLines,
   },
   argTypes: {
-    verticalAlignment: {
+    variant: {
       control: 'select',
-      options: Object.keys(ContentVerticalAlignment),
-      mapping: ContentVerticalAlignment,
+      options: Object.keys(ContentVariant),
+      mapping: ContentVariant,
     },
     title: { control: 'text' },
     description: { control: 'text' },
@@ -130,36 +131,66 @@ export const Avatar: Story = {
   ),
 };
 
-const verticalAlignmentExamples: Record<
-  ContentVerticalAlignment,
+const listItemIcon = <Icon name={IconName.Setting} />;
+
+const getVariantLeadingProps = (variant: ContentVariant) =>
+  variant === ContentVariant.OneLine
+    ? {
+        avatar: undefined,
+        startAccessory: listItemIcon,
+        accessoryGap: 4 as const,
+      }
+    : {
+        avatar: listItemAvatar,
+        startAccessory: undefined,
+        accessoryGap: 0 as const,
+      };
+
+const variantExamples: Record<
+  ContentVariant,
   { title: string; description: string }
 > = {
-  [ContentVerticalAlignment.Center]: {
-    title: 'Center',
-    description: 'Default for one- or two-line rows',
+  [ContentVariant.OneLine]: {
+    title: 'One line',
+    description: 'Omitted in one-line variant',
   },
-  [ContentVerticalAlignment.Top]: {
-    title: 'Top',
-    description:
-      'Use for three or more lines, or when row height is 88dp or more',
+  [ContentVariant.TwoLines]: {
+    title: 'Two lines',
+    description: 'Secondary line',
+  },
+  [ContentVariant.MultiLine]: {
+    title: 'Multi line',
+    description: 'Secondary line with additional wrapped content below',
   },
 };
 
-export const VerticalAlignment: Story = {
+export const Variant: Story = {
   render: (args: ListItemProps) => (
     <>
-      {Object.values(ContentVerticalAlignment).map((alignment) => {
-        const { title, description } = verticalAlignmentExamples[alignment];
+      {Object.values(ContentVariant).map((variant) => {
+        const { title, description } = variantExamples[variant];
 
         return (
           <ListItem
-            key={alignment}
+            key={variant}
             {...args}
-            verticalAlignment={alignment}
-            avatar={listItemAvatar}
+            {...getVariantLeadingProps(variant)}
+            variant={variant}
             title={title}
-            description={description}
+            description={
+              variant === ContentVariant.MultiLine ? (
+                <>
+                  <Text variant={TextVariant.BodySm}>{description}</Text>
+                  <Text variant={TextVariant.BodySm}>Third line</Text>
+                </>
+              ) : (
+                description
+              )
+            }
             value="Value"
+            subvalue={
+              variant === ContentVariant.OneLine ? 'Omitted' : 'Subvalue'
+            }
           />
         );
       })}

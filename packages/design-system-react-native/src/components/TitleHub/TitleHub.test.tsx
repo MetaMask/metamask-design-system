@@ -70,6 +70,19 @@ describe('TitleHub', () => {
 
       expect(getByTestId(AMOUNT_TEST_ID)).toBeOnTheScreen();
     });
+
+    it('hides amount when amountProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <TitleHub
+          title="Send"
+          amount="$4.42"
+          amountProps={{ isHidden: true }}
+        />,
+      );
+
+      expect(queryByText('$4.42')).toBeNull();
+      expect(getByText('••••••')).toBeOnTheScreen();
+    });
   });
 
   describe('when title is provided', () => {
@@ -187,6 +200,20 @@ describe('TitleHub', () => {
       );
 
       expect(getByTestId(BOTTOM_LABEL_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('hides bottomLabel when bottomLabelProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <TitleHub
+          title="Send"
+          amount="$4.42"
+          bottomLabel="0.002 ETH"
+          bottomLabelProps={{ isHidden: true }}
+        />,
+      );
+
+      expect(queryByText('0.002 ETH')).toBeNull();
+      expect(getByText('••••••')).toBeOnTheScreen();
     });
   });
 

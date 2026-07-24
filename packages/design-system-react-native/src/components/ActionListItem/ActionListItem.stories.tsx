@@ -32,18 +32,6 @@ const meta: Meta<ActionListItemProps> = {
     onPress: { action: 'pressed' },
     twClassName: { control: 'text' },
   },
-  decorators: [
-    (Story) => (
-      <Box
-        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
-        padding={4}
-      >
-        <Text variant={TextVariant.BodySm}>Content behind list item</Text>
-        <Box padding={2} />
-        <Story />
-      </Box>
-    ),
-  ],
 };
 
 export default meta;
@@ -96,4 +84,36 @@ export const TwClassName: Story = {
   args: {
     twClassName: 'rounded-lg',
   },
+};
+
+const BACKGROUND_EXAMPLES = [
+  {
+    label: 'Background default',
+    backgroundColor: BoxBackgroundColor.BackgroundDefault,
+  },
+  {
+    label: 'Background alternative',
+    backgroundColor: BoxBackgroundColor.BackgroundAlternative,
+  },
+  {
+    label: 'Background section',
+    backgroundColor: BoxBackgroundColor.BackgroundSection,
+  },
+  {
+    label: 'Background subsection',
+    backgroundColor: BoxBackgroundColor.BackgroundSubsection,
+  },
+] as const;
+
+export const Backgrounds: Story = {
+  render: (args) => (
+    <Box twClassName="gap-4">
+      {BACKGROUND_EXAMPLES.map(({ label, backgroundColor }) => (
+        <Box key={label} backgroundColor={backgroundColor} padding={4}>
+          <Text variant={TextVariant.BodySm}>{label}</Text>
+          <ActionListItem {...args} />
+        </Box>
+      ))}
+    </Box>
+  ),
 };

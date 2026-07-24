@@ -25,4 +25,10 @@ export type HelpTextPropsShared = {
    * Optional semantic severity. When set, overrides `color`.
    */
   severity?: HelpTextSeverity;
+  /**
+   * When true and `severity` is set, shows a leading IconAlert.
+   *
+   * @default false
+   */
+  showIcon?: boolean;
 };

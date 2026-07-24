@@ -46,6 +46,7 @@ import Calendar from './Calendar';
 import Call from './Call';
 import Camera from './Camera';
 import Campaign from './Campaign';
+import CandlestickFilled from './CandlestickFilled';
 import Candlestick from './Candlestick';
 import CardPos from './CardPos';
 import Card from './Card';
@@ -340,6 +341,7 @@ export const Icons = {
   Call,
   Camera,
   Campaign,
+  CandlestickFilled,
   Candlestick,
   CardPos,
   Card,

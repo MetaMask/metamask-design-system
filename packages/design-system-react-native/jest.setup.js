@@ -1,3 +1,12 @@
+jest.mock('react-native-worklets', () => {
+  const Worklets = require('react-native-worklets/lib/module/mock');
+
+  return {
+    ...Worklets,
+    scheduleOnRN: (fn, ...args) => fn(...args),
+  };
+});
+
 require('react-native-reanimated').setUpTests();
 
 jest.mock('react-native-svg', () => {

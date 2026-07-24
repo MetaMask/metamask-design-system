@@ -4,6 +4,7 @@ import type { ViewProps } from 'react-native';
 
 // Internal dependencies.
 import type { BoxRowProps } from '../BoxRow/BoxRow.types';
+import type { SensitiveTextProps } from '../SensitiveText';
 import type { TextProps } from '../Text/Text.types';
 
 /**
@@ -24,8 +25,9 @@ export type TitleHubProps = TitleHubPropsShared & {
   >;
   /**
    * Optional props merged into {@link BoxRow} `textProps` when `amount` is a string.
+   * Supports Text props plus `isHidden` / `length`.
    */
-  amountProps?: Omit<Partial<TextProps>, 'children'>;
+  amountProps?: Partial<Omit<SensitiveTextProps, 'children'>>;
   /**
    * Optional props spread onto the amount row {@link BoxRow}. Omits `children`, `endAccessory`, and `textProps` (TitleHub sets those via `amount`, `amountEndAccessory`, and `amountProps`).
    */
@@ -35,8 +37,9 @@ export type TitleHubProps = TitleHubPropsShared & {
   >;
   /**
    * Optional props merged into {@link BoxRow} `textProps` when `bottomLabel` is a string.
+   * Supports Text props plus `isHidden` / `length`.
    */
-  bottomLabelProps?: Omit<Partial<TextProps>, 'children'>;
+  bottomLabelProps?: Partial<Omit<SensitiveTextProps, 'children'>>;
   /**
    * Optional props spread onto the bottom label row {@link BoxRow}. Omits `children`, `endAccessory`, and `textProps` (TitleHub sets those via `bottomLabel`, `bottomLabelEndAccessory`, and `bottomLabelProps`).
    */

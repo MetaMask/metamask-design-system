@@ -93,6 +93,35 @@ When provided, `actionButtonLabel` is required. Use `actionButtonProps` to pass 
 />
 ```
 
+### `actionButtonLayout`
+
+Optional layout for the action button relative to the banner body.
+
+- `BannerBaseActionButtonLayout.Below` — under title / description / children (default). Prefer when the body is longer or wraps.
+- `BannerBaseActionButtonLayout.End` — right of the body, left of the close button. Prefer for short copy (roughly one-line title and one-line description).
+
+| PROP                 | TYPE                           | REQUIRED | DEFAULT                              |
+| -------------------- | ------------------------------ | -------- | ------------------------------------ |
+| `actionButtonLayout` | `BannerBaseActionButtonLayout` | No       | `BannerBaseActionButtonLayout.Below` |
+
+```tsx
+import {
+  BannerBase,
+  BannerBaseActionButtonLayout,
+} from '@metamask/design-system-react-native';
+
+<BannerBase
+  title="End"
+  description="One-line description for short copy."
+  actionButtonLabel="Action"
+  actionButtonOnPress={() => undefined}
+  actionButtonLayout={BannerBaseActionButtonLayout.End}
+  onClose={() => undefined}
+/>;
+```
+
+See the **ActionButtonLayout** story for Below and End examples.
+
 ### `onClose`
 
 Optional close callback. If passed, a close button is shown. Use `closeButtonProps` to pass additional non-behavioral props to the close `ButtonIcon`, including `testID`, accessibility props, and styling hooks when needed for testing.
