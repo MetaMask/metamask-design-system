@@ -79,6 +79,9 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const animationStartedRef = useRef(false);
     const visibleAtRef = useRef<number | null>(null);
     const hasNoTimeoutRef = useRef(false);
+    // Invalidates queued spring-back resumes after replace/dismiss. A completed
+    // spring cannot be cancelled, so scheduleOnRN(resume) can still run later.
+    const toastGenerationRef = useRef(0);
     const { top: topInset } = useSafeAreaInsets();
     const toastHeight = useSharedValue(screenHeight);
     const hiddenTranslateY = useSharedValue(-screenHeight);
@@ -86,6 +89,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const gestureStartY = useSharedValue(0);
     const translateYProgress = useSharedValue(-screenHeight);
     const isDismissing = useSharedValue(false);
+    const toastGeneration = useSharedValue(0);
     const topOffset = toastOptions?.topOffset ?? 0;
     hasNoTimeoutRef.current = Boolean(toastOptions?.hasNoTimeout);
     const animatedStyle = useAnimatedStyle(() => ({
@@ -108,6 +112,11 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       }
     };
 
+    const bumpToastGeneration = () => {
+      toastGenerationRef.current += 1;
+      toastGeneration.value = toastGenerationRef.current;
+    };
+
     const resetState = () => {
       animationStartedRef.current = false;
       visibleAtRef.current = null;
@@ -117,6 +126,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     };
 
     const startDismissAnimation = () => {
+      bumpToastGeneration();
       clearScheduledAutoDismiss();
       isDismissing.value = true;
       visibleAtRef.current = null;
@@ -165,6 +175,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     };
 
     const showToast = (options: ToastOptions) => {
+      bumpToastGeneration();
       let timeoutDuration = 0;
       const normalizedOptions = {
         hasNoTimeout: false,
@@ -210,7 +221,12 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       closeToastRef.current();
     };
 
-    const resumeAutoDismissFromSwipe = () => {
+    const resumeAutoDismissFromSwipe = (generation: number) => {
+      // Ignore resumes from a toast that was replaced or dismissed after the
+      // spring-back started (completed springs cannot be cancelled).
+      if (generation !== toastGenerationRef.current) {
+        return;
+      }
       resumeAutoDismissAfterSwipeRef.current();
     };
 
@@ -277,6 +293,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
               return;
             }
 
+            const generationAtSpringStart = toastGeneration.value;
             translateYProgress.value = withSpring(
               visibleTranslateY.value,
               TOAST_SPRING_CONFIG,
@@ -284,7 +301,10 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
                 // A new pan cancels this spring via cancelAnimation; only resume
                 // auto-dismiss when the spring-back completed naturally.
                 if (finished) {
-                  scheduleOnRN(resumeAutoDismissFromSwipe);
+                  scheduleOnRN(
+                    resumeAutoDismissFromSwipe,
+                    generationAtSpringStart,
+                  );
                 }
               },
             );

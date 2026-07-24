@@ -637,6 +637,79 @@ describe('Toaster', () => {
 
       expect(screen.queryByText('Closing toast')).toBeNull();
     });
+
+    it('ignores stale spring-back resume after toast is replaced', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const Reanimated = require('react-native-reanimated');
+      const springCallbacks: Array<(finished: boolean) => void> = [];
+      const withSpringSpy = jest
+        .spyOn(Reanimated, 'withSpring')
+        .mockImplementation(
+          (
+            toValue: number,
+            _config?: unknown,
+            callback?: (finished: boolean) => void,
+          ) => {
+            if (callback) {
+              springCallbacks.push(callback);
+            }
+            return toValue;
+          },
+        );
+
+      try {
+        render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+        await showToastAndWait(toasterRef, {
+          hasNoTimeout: false,
+          title: 'Timed toast',
+        });
+
+        await act(async () => {
+          triggerToastLayout(screen.getByTestId('toast-root'));
+        });
+
+        // Entrance withSpring deferred — finish it so the toast is visible.
+        await act(async () => {
+          const entranceCallback = springCallbacks.shift();
+          entranceCallback?.(true);
+        });
+
+        await act(async () => {
+          mockPanGestureHandlers.onStart?.();
+          mockPanGestureHandlers.onUpdate?.({ translationY: -10 });
+          mockPanGestureHandlers.onEnd?.({
+            translationY: -10,
+            velocityY: -100,
+          });
+        });
+
+        // Spring-back is deferred; replace with a persistent toast first.
+        await act(async () => {
+          toasterRef.current?.showToast({
+            hasNoTimeout: true,
+            title: 'Persistent toast',
+          });
+          jest.advanceTimersByTime(100);
+        });
+
+        await act(async () => {
+          triggerToastLayout(screen.getByTestId('toast-root'));
+        });
+
+        // Stale spring-back resume from the replaced toast.
+        await act(async () => {
+          const springBackCallback = springCallbacks.shift();
+          springBackCallback?.(true);
+          jest.runAllTimers();
+        });
+
+        expect(screen.queryByText('Timed toast')).toBeNull();
+        expect(screen.getByText('Persistent toast')).toBeOnTheScreen();
+      } finally {
+        withSpringSpy.mockRestore();
+      }
+    });
   });
 });
 
