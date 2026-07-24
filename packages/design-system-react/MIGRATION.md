@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
   - [From version 0.27.x to 0.28.0](#from-version-027x-to-0280)
   - [From version 0.25.0 to 0.26.0](#from-version-0250-to-0260)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
@@ -3580,6 +3581,40 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.x.0 to 0.x.0
+
+#### TextFieldSearch: default `size` changed from `TextFieldSize.Md` to `TextFieldSize.Lg`
+
+**What changed:**
+
+`TextFieldSearch` now hardcodes `size={TextFieldSize.Lg}` to align with the Figma design spec. Previously the component inherited `TextField`'s default of `TextFieldSize.Md`. Any consumer that relied on the implicit `Md` height will now render a taller field, which can cause layout shifts.
+
+**Migration:**
+
+If you need the previous `Md` height, pass `size` explicitly:
+
+```tsx
+// Before (0.34.x) — implicitly Md
+import { TextFieldSearch } from '@metamask/design-system-react';
+
+<TextFieldSearch value={query} onChange={handleChange} />;
+
+// After (0.35.0) — now Lg by default; pass Md to preserve prior height
+import { TextFieldSearch, TextFieldSize } from '@metamask/design-system-react';
+
+<TextFieldSearch
+  size={TextFieldSize.Md}
+  value={query}
+  onChange={handleChange}
+/>;
+```
+
+**Impact:**
+
+- Any `TextFieldSearch` without an explicit `size` prop will now render at the `Lg` height (48px) instead of `Md` (40px).
+- Layouts that depend on the field's height (fixed containers, grid rows, inline forms) may shift and should be reviewed.
+- Pass `size={TextFieldSize.Md}` to opt back into the previous height.
 
 ### From version 0.27.x to 0.28.0
 
