@@ -48,7 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
+  - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.27.x to 0.28.0](#from-version-027x-to-0280)
   - [From version 0.25.0 to 0.26.0](#from-version-0250-to-0260)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
@@ -3582,7 +3582,7 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
-### From version 0.x.0 to 0.x.0
+### From version 0.34.0 to 0.35.0
 
 #### TextFieldSearch: default `size` changed from `TextFieldSize.Md` to `TextFieldSize.Lg`
 
