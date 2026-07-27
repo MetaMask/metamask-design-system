@@ -32,18 +32,18 @@ figma.connect(
     },
     example: ({ isInteractable, hasHeader, header, hasFooter }) => (
       <BottomSheetDialog isInteractable={isInteractable}>
-        {hasHeader && (
+        {hasHeader ? (
           <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
             {header.title}
           </BottomSheetHeader>
-        )}
+        ) : null}
         <Box twClassName="p-4">
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </Text>
         </Box>
-        {hasFooter && (
+        {hasFooter ? (
           <BottomSheetFooter
             secondaryButtonProps={{
               children: 'Cancel',
@@ -54,7 +54,7 @@ figma.connect(
               onPress: () => undefined,
             }}
           />
-        )}
+        ) : null}
       </BottomSheetDialog>
     ),
   },
