@@ -43,7 +43,13 @@ figma.connect(
         { children: figma.string('label') },
       ),
     },
-    example: ({ isInteractable, header, children, primaryButton, secondaryButton }) => (
+    example: ({
+      isInteractable,
+      header,
+      children,
+      primaryButton,
+      secondaryButton,
+    }) => (
       <BottomSheetDialog isInteractable={isInteractable}>
         {/* Remove if BottomSheetHeader layer is not visible — Code Connect limitation */}
         <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
