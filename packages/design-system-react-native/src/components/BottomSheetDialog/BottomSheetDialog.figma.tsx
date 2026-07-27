@@ -16,34 +16,16 @@ figma.connect(
   {
     props: {
       isInteractable: figma.boolean('isInteractable'),
-      hasHeader: figma.boolean('show BottomSheetHeader (Figma Only)'),
-      header: figma.nestedProps('BottomSheetHeader', {
-        title: figma.string('title'),
-        onBack: figma.boolean('onBack', {
-          true: () => undefined,
-          false: undefined,
-        }),
-        onClose: figma.boolean('onClose', {
-          true: () => undefined,
-          false: undefined,
-        }),
-      }),
-      hasFooter: figma.boolean('show BottomSheetFooter (Figma Only)'),
-    },
-    example: ({ isInteractable, hasHeader, header, hasFooter }) => (
-      <BottomSheetDialog isInteractable={isInteractable}>
-        {hasHeader ? (
-          <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
-            {header.title}
+      header: figma.boolean('show BottomSheetHeader (Figma Only)', {
+        true: (
+          <BottomSheetHeader onClose={() => undefined}>
+            Header Title
           </BottomSheetHeader>
-        ) : null}
-        <Box twClassName="p-4">
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </Text>
-        </Box>
-        {hasFooter ? (
+        ),
+        false: undefined,
+      }),
+      footer: figma.boolean('show BottomSheetFooter (Figma Only)', {
+        true: (
           <BottomSheetFooter
             secondaryButtonProps={{
               children: 'Cancel',
@@ -54,7 +36,20 @@ figma.connect(
               onPress: () => undefined,
             }}
           />
-        ) : null}
+        ),
+        false: undefined,
+      }),
+    },
+    example: ({ isInteractable, header, footer }) => (
+      <BottomSheetDialog isInteractable={isInteractable}>
+        {header}
+        <Box twClassName="p-4">
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </Text>
+        </Box>
+        {footer}
       </BottomSheetDialog>
     ),
   },
