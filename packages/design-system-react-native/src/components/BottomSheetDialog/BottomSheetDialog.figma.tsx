@@ -32,22 +32,17 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
         false: undefined,
       }),
     }),
-    footer: figma.nestedProps('BottomSheetFooter', {
-      primaryButton: figma.nestedProps(
-        'childrenWrapper/primaryButton/_ButtonBase',
-        {
-          children: figma.string('label'),
-        },
-      ),
-      secondaryButton: figma.nestedProps(
-        'childrenWrapper/secondaryButton/_ButtonBase',
-        {
-          children: figma.string('label'),
-        },
-      ),
-    }),
+    // nestedProps cannot be nested — use full layer path from BottomSheetDialog root
+    primaryButton: figma.nestedProps(
+      'BottomSheetFooter/childrenWrapper/primaryButton/_ButtonBase',
+      { children: figma.string('label') },
+    ),
+    secondaryButton: figma.nestedProps(
+      'BottomSheetFooter/childrenWrapper/secondaryButton/_ButtonBase',
+      { children: figma.string('label') },
+    ),
   },
-  example: ({ isInteractable, header, footer }) => (
+  example: ({ isInteractable, header, primaryButton, secondaryButton }) => (
     <BottomSheetDialog isInteractable={isInteractable}>
       <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
         {header.title}
@@ -60,11 +55,11 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
       </Box>
       <BottomSheetFooter
         secondaryButtonProps={{
-          children: footer.secondaryButton.children,
+          children: secondaryButton.children,
           onPress: () => undefined,
         }}
         primaryButtonProps={{
-          children: footer.primaryButton.children,
+          children: primaryButton.children,
           onPress: () => undefined,
         }}
       />
@@ -115,22 +110,17 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
   },
   props: {
     isInteractable: figma.boolean('isInteractable'),
-    footer: figma.nestedProps('BottomSheetFooter', {
-      primaryButton: figma.nestedProps(
-        'childrenWrapper/primaryButton/_ButtonBase',
-        {
-          children: figma.string('label'),
-        },
-      ),
-      secondaryButton: figma.nestedProps(
-        'childrenWrapper/secondaryButton/_ButtonBase',
-        {
-          children: figma.string('label'),
-        },
-      ),
-    }),
+    // nestedProps cannot be nested — use full layer path from BottomSheetDialog root
+    primaryButton: figma.nestedProps(
+      'BottomSheetFooter/childrenWrapper/primaryButton/_ButtonBase',
+      { children: figma.string('label') },
+    ),
+    secondaryButton: figma.nestedProps(
+      'BottomSheetFooter/childrenWrapper/secondaryButton/_ButtonBase',
+      { children: figma.string('label') },
+    ),
   },
-  example: ({ isInteractable, footer }) => (
+  example: ({ isInteractable, primaryButton, secondaryButton }) => (
     <BottomSheetDialog isInteractable={isInteractable}>
       <Box twClassName="p-4">
         <Text>
@@ -140,11 +130,11 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
       </Box>
       <BottomSheetFooter
         secondaryButtonProps={{
-          children: footer.secondaryButton.children,
+          children: secondaryButton.children,
           onPress: () => undefined,
         }}
         primaryButtonProps={{
-          children: footer.primaryButton.children,
+          children: primaryButton.children,
           onPress: () => undefined,
         }}
       />
