@@ -13,17 +13,6 @@ import { BottomSheetDialog } from './BottomSheetDialog';
 const FIGMA_URL =
   'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=16571-1745';
 
-const footerProps = {
-  secondaryButtonProps: {
-    children: 'Cancel',
-    onPress: () => undefined,
-  },
-  primaryButtonProps: {
-    children: 'Confirm',
-    onPress: () => undefined,
-  },
-};
-
 // Header shown — maps nested title/onBack/onClose from BottomSheetHeader
 figma.connect(BottomSheetDialog, FIGMA_URL, {
   variant: { 'show BottomSheetHeader (Figma Only)': true },
@@ -41,7 +30,18 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
       }),
     }),
     footer: figma.boolean('show BottomSheetFooter (Figma Only)', {
-      true: <BottomSheetFooter {...footerProps} />,
+      true: (
+        <BottomSheetFooter
+          secondaryButtonProps={{
+            children: 'Cancel',
+            onPress: () => undefined,
+          }}
+          primaryButtonProps={{
+            children: 'Confirm',
+            onPress: () => undefined,
+          }}
+        />
+      ),
       false: undefined,
     }),
   },
@@ -67,7 +67,18 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
   props: {
     isInteractable: figma.boolean('isInteractable'),
     footer: figma.boolean('show BottomSheetFooter (Figma Only)', {
-      true: <BottomSheetFooter {...footerProps} />,
+      true: (
+        <BottomSheetFooter
+          secondaryButtonProps={{
+            children: 'Cancel',
+            onPress: () => undefined,
+          }}
+          primaryButtonProps={{
+            children: 'Confirm',
+            onPress: () => undefined,
+          }}
+        />
+      ),
       false: undefined,
     }),
   },
