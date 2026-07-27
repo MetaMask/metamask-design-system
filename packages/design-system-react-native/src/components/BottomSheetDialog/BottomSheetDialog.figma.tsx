@@ -16,6 +16,7 @@ figma.connect(
   {
     props: {
       isInteractable: figma.boolean('isInteractable'),
+      hasHeader: figma.boolean('show BottomSheetHeader (Figma Only)'),
       header: figma.nestedProps('BottomSheetHeader', {
         title: figma.string('title'),
         onBack: figma.boolean('onBack', {
@@ -27,28 +28,33 @@ figma.connect(
           false: undefined,
         }),
       }),
+      hasFooter: figma.boolean('show BottomSheetFooter (Figma Only)'),
     },
-    example: ({ isInteractable, header }) => (
+    example: ({ isInteractable, hasHeader, header, hasFooter }) => (
       <BottomSheetDialog isInteractable={isInteractable}>
-        <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
-          {header.title}
-        </BottomSheetHeader>
+        {hasHeader && (
+          <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
+            {header.title}
+          </BottomSheetHeader>
+        )}
         <Box twClassName="p-4">
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </Text>
         </Box>
-        <BottomSheetFooter
-          secondaryButtonProps={{
-            children: 'Cancel',
-            onPress: () => undefined,
-          }}
-          primaryButtonProps={{
-            children: 'Confirm',
-            onPress: () => undefined,
-          }}
-        />
+        {hasFooter && (
+          <BottomSheetFooter
+            secondaryButtonProps={{
+              children: 'Cancel',
+              onPress: () => undefined,
+            }}
+            primaryButtonProps={{
+              children: 'Confirm',
+              onPress: () => undefined,
+            }}
+          />
+        )}
       </BottomSheetDialog>
     ),
   },
