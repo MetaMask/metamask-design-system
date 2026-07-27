@@ -381,7 +381,21 @@ describe('BottomSheetDialog', () => {
 
     expect(mockStyle).toHaveBeenCalledWith(
       'bg-alternative',
-      'rounded-t-3xl overflow-hidden border border-muted',
+      'rounded-t-3xl overflow-hidden border border-muted border-b-0',
+      undefined,
+    );
+  });
+
+  it('renders without a bottom border', () => {
+    render(
+      <BottomSheetDialog>
+        <Text>Default Sheet</Text>
+      </BottomSheetDialog>,
+    );
+
+    expect(mockStyle).toHaveBeenCalledWith(
+      'bg-default',
+      'rounded-t-3xl overflow-hidden border border-muted border-b-0',
       undefined,
     );
   });

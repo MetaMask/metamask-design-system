@@ -129,6 +129,36 @@ describe('ModalContent', () => {
     );
   });
 
+  it('applies border-muted to the dialog when pure black is enabled', () => {
+    render(
+      <PureBlackProvider isPureBlack>
+        <Modal isOpen onClose={onClose}>
+          <ModalContent modalDialogProps={{ 'data-testid': 'dialog' }}>
+            content
+          </ModalContent>
+        </Modal>
+      </PureBlackProvider>,
+    );
+
+    const dialog = screen.getByTestId('dialog');
+    expect(dialog).toHaveClass('border');
+    expect(dialog).toHaveClass('border-muted');
+  });
+
+  it('does not apply border-muted to the dialog when pure black is disabled', () => {
+    render(
+      <PureBlackProvider isPureBlack={false}>
+        <Modal isOpen onClose={onClose}>
+          <ModalContent modalDialogProps={{ 'data-testid': 'dialog' }}>
+            content
+          </ModalContent>
+        </Modal>
+      </PureBlackProvider>,
+    );
+
+    expect(screen.getByTestId('dialog')).not.toHaveClass('border-muted');
+  });
+
   it('forwards ref to the outer positioning element', () => {
     const ref = createRef<HTMLDivElement>();
     render(
