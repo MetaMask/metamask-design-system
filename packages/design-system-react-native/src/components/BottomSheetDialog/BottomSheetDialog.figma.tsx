@@ -17,9 +17,12 @@ import { BottomSheetDialog } from './BottomSheetDialog';
  * - Do not use `figma.slot('BottomSheetContent')` — that emits a nested
  *   placeholder function in Dev Mode. Children match Storybook / BottomSheet
  *   composition instead (Header + content + Footer).
+ * - Do not map Header `startAccessory` / `endAccessory` via nested
+ *   `figma.boolean` here — those Figma props are SLOT-typed and break the
+ *   parent snippet. Header always shows `onClose` like Storybook Default /
+ *   BottomSheet Code Connect.
  * - Figma `BottomSheetHeader` is a show/hide boolean; the example always
- *   includes the header (same pattern as BottomSheet Code Connect) and maps
- *   nested title / back / close from BottomSheetHeader.
+ *   includes the header and maps nested title only.
  */
 
 figma.connect(
@@ -30,19 +33,11 @@ figma.connect(
       isInteractable: figma.boolean('isInteractable'),
       header: figma.nestedProps('BottomSheetHeader', {
         title: figma.string('title'),
-        onBack: figma.boolean('startAccessory', {
-          true: () => undefined,
-          false: undefined,
-        }),
-        onClose: figma.boolean('endAccessory', {
-          true: () => undefined,
-          false: undefined,
-        }),
       }),
     },
     example: ({ isInteractable, header }) => (
       <BottomSheetDialog isInteractable={isInteractable}>
-        <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
+        <BottomSheetHeader onClose={() => undefined}>
           {header.title}
         </BottomSheetHeader>
         <Box twClassName="p-4">
