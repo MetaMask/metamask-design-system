@@ -10,155 +10,64 @@ import { Text } from '../Text';
 
 import { BottomSheetDialog } from './BottomSheetDialog';
 
-const FIGMA_URL =
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=16571-1745';
-
-// Header shown, Footer shown
-figma.connect(BottomSheetDialog, FIGMA_URL, {
-  variant: {
-    'show BottomSheetHeader (Figma Only)': true,
-    'show BottomSheetFooter (Figma Only)': true,
-  },
-  props: {
-    isInteractable: figma.boolean('isInteractable'),
-    header: figma.nestedProps('BottomSheetHeader', {
-      title: figma.string('title'),
-      onBack: figma.boolean('onBack', {
-        true: () => undefined,
-        false: undefined,
+figma.connect(
+  BottomSheetDialog,
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=16571-1745',
+  {
+    props: {
+      isInteractable: figma.boolean('isInteractable'),
+      // figma.boolean + figma.nestedProps reflects live Figma values when shown;
+      // the false fallback keeps property access safe without optional chaining
+      // (Code Connect parser rejects ?.)
+      header: figma.boolean('show BottomSheetHeader (Figma Only)', {
+        true: figma.nestedProps('BottomSheetHeader', {
+          title: figma.string('title'),
+          onBack: figma.boolean('onBack', {
+            true: () => undefined,
+            false: undefined,
+          }),
+          onClose: figma.boolean('onClose', {
+            true: () => undefined,
+            false: undefined,
+          }),
+        }),
+        false: { title: undefined, onBack: undefined, onClose: undefined },
       }),
-      onClose: figma.boolean('onClose', {
-        true: () => undefined,
-        false: undefined,
-      }),
-    }),
-    // nestedProps cannot be nested — use full layer path from BottomSheetDialog root
-    primaryButton: figma.nestedProps(
-      'BottomSheetFooter/childrenWrapper/primaryButton/_ButtonBase',
-      { children: figma.string('label') },
-    ),
-    secondaryButton: figma.nestedProps(
-      'BottomSheetFooter/childrenWrapper/secondaryButton/_ButtonBase',
-      { children: figma.string('label') },
-    ),
-  },
-  example: ({ isInteractable, header, primaryButton, secondaryButton }) => (
-    <BottomSheetDialog isInteractable={isInteractable}>
-      <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
-        {header.title}
-      </BottomSheetHeader>
-      <Box twClassName="p-4">
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </Box>
-      <BottomSheetFooter
-        secondaryButtonProps={{
-          children: secondaryButton.children,
-          onPress: () => undefined,
-        }}
-        primaryButtonProps={{
-          children: primaryButton.children,
-          onPress: () => undefined,
-        }}
-      />
-    </BottomSheetDialog>
-  ),
-});
-
-// Header shown, Footer hidden
-figma.connect(BottomSheetDialog, FIGMA_URL, {
-  variant: {
-    'show BottomSheetHeader (Figma Only)': true,
-    'show BottomSheetFooter (Figma Only)': false,
-  },
-  props: {
-    isInteractable: figma.boolean('isInteractable'),
-    header: figma.nestedProps('BottomSheetHeader', {
-      title: figma.string('title'),
-      onBack: figma.boolean('onBack', {
-        true: () => undefined,
-        false: undefined,
-      }),
-      onClose: figma.boolean('onClose', {
-        true: () => undefined,
-        false: undefined,
-      }),
-    }),
-  },
-  example: ({ isInteractable, header }) => (
-    <BottomSheetDialog isInteractable={isInteractable}>
-      <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
-        {header.title}
-      </BottomSheetHeader>
-      <Box twClassName="p-4">
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </Box>
-    </BottomSheetDialog>
-  ),
-});
-
-// Header hidden, Footer shown
-figma.connect(BottomSheetDialog, FIGMA_URL, {
-  variant: {
-    'show BottomSheetHeader (Figma Only)': false,
-    'show BottomSheetFooter (Figma Only)': true,
-  },
-  props: {
-    isInteractable: figma.boolean('isInteractable'),
-    // nestedProps cannot be nested — use full layer path from BottomSheetDialog root
-    primaryButton: figma.nestedProps(
-      'BottomSheetFooter/childrenWrapper/primaryButton/_ButtonBase',
-      { children: figma.string('label') },
-    ),
-    secondaryButton: figma.nestedProps(
-      'BottomSheetFooter/childrenWrapper/secondaryButton/_ButtonBase',
-      { children: figma.string('label') },
+      // nestedProps cannot be nested — use the full layer path from the
+      // BottomSheetDialog root to reach the button instances inside BottomSheetFooter
+      primaryButton: figma.nestedProps(
+        'BottomSheetFooter/childrenWrapper/primaryButton/_ButtonBase',
+        { children: figma.string('label') },
+      ),
+      secondaryButton: figma.nestedProps(
+        'BottomSheetFooter/childrenWrapper/secondaryButton/_ButtonBase',
+        { children: figma.string('label') },
+      ),
+    },
+    example: ({ isInteractable, header, primaryButton, secondaryButton }) => (
+      <BottomSheetDialog isInteractable={isInteractable}>
+        {/* Remove BottomSheetHeader if not needed — Code Connect limitation */}
+        <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
+          {header.title}
+        </BottomSheetHeader>
+        <Box twClassName="p-4">
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </Text>
+        </Box>
+        {/* Remove BottomSheetFooter if not needed — Code Connect limitation */}
+        <BottomSheetFooter
+          secondaryButtonProps={{
+            children: secondaryButton.children,
+            onPress: () => undefined,
+          }}
+          primaryButtonProps={{
+            children: primaryButton.children,
+            onPress: () => undefined,
+          }}
+        />
+      </BottomSheetDialog>
     ),
   },
-  example: ({ isInteractable, primaryButton, secondaryButton }) => (
-    <BottomSheetDialog isInteractable={isInteractable}>
-      <Box twClassName="p-4">
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </Box>
-      <BottomSheetFooter
-        secondaryButtonProps={{
-          children: secondaryButton.children,
-          onPress: () => undefined,
-        }}
-        primaryButtonProps={{
-          children: primaryButton.children,
-          onPress: () => undefined,
-        }}
-      />
-    </BottomSheetDialog>
-  ),
-});
-
-// Header hidden, Footer hidden
-figma.connect(BottomSheetDialog, FIGMA_URL, {
-  variant: {
-    'show BottomSheetHeader (Figma Only)': false,
-    'show BottomSheetFooter (Figma Only)': false,
-  },
-  props: {
-    isInteractable: figma.boolean('isInteractable'),
-  },
-  example: ({ isInteractable }) => (
-    <BottomSheetDialog isInteractable={isInteractable}>
-      <Box twClassName="p-4">
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </Box>
-    </BottomSheetDialog>
-  ),
-});
+);
