@@ -7,10 +7,10 @@ import { BottomSheetFooter } from './BottomSheetFooter';
 
 import { ButtonsAlignment } from '.';
 
-const URL =
+const FIGMA_URL =
   'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=16571-1069';
 
-figma.connect(BottomSheetFooter, URL, {
+figma.connect(BottomSheetFooter, FIGMA_URL, {
   variant: { 'variant (Figma only)': 'both' },
   props: {
     buttonsAlignment: figma.enum('buttonAlignment', {
@@ -39,7 +39,7 @@ figma.connect(BottomSheetFooter, URL, {
   ),
 });
 
-figma.connect(BottomSheetFooter, URL, {
+figma.connect(BottomSheetFooter, FIGMA_URL, {
   variant: { 'variant (Figma only)': 'primary' },
   props: {
     primaryButton: figma.nestedProps('primaryButton/_ButtonBase', {
@@ -56,7 +56,7 @@ figma.connect(BottomSheetFooter, URL, {
   ),
 });
 
-figma.connect(BottomSheetFooter, URL, {
+figma.connect(BottomSheetFooter, FIGMA_URL, {
   variant: { 'variant (Figma only)': 'secondary' },
   props: {
     secondaryButton: figma.nestedProps('secondaryButton/_ButtonBase', {
