@@ -23,7 +23,10 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
     isInteractable: figma.boolean('isInteractable'),
     header: figma.nestedProps('BottomSheetHeader', {
       title: figma.string('title'),
-      onBack: figma.boolean('onBack', { true: () => undefined, false: undefined }),
+      onBack: figma.boolean('onBack', {
+        true: () => undefined,
+        false: undefined,
+      }),
       onClose: figma.boolean('onClose', {
         true: () => undefined,
         false: undefined,
@@ -79,7 +82,10 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
     isInteractable: figma.boolean('isInteractable'),
     header: figma.nestedProps('BottomSheetHeader', {
       title: figma.string('title'),
-      onBack: figma.boolean('onBack', { true: () => undefined, false: undefined }),
+      onBack: figma.boolean('onBack', {
+        true: () => undefined,
+        false: undefined,
+      }),
       onClose: figma.boolean('onClose', {
         true: () => undefined,
         false: undefined,
