@@ -5,8 +5,6 @@ import React from 'react';
 
 import { BottomSheetFooter } from '../BottomSheetFooter';
 import { BottomSheetHeader } from '../BottomSheetHeader';
-import { Box } from '../Box';
-import { Text } from '../Text';
 
 import { BottomSheetDialog } from './BottomSheetDialog';
 
@@ -35,6 +33,7 @@ figma.connect(
       }),
       // nestedProps cannot be nested — use the full layer path from the
       // BottomSheetDialog root to reach the button instances inside BottomSheetFooter
+      children: figma.slot('BottomSheetContent').connectedInstances,
       primaryButton: figma.nestedProps(
         'BottomSheetFooter/childrenWrapper/primaryButton/_ButtonBase',
         { children: figma.string('label') },
@@ -44,18 +43,13 @@ figma.connect(
         { children: figma.string('label') },
       ),
     },
-    example: ({ isInteractable, header, primaryButton, secondaryButton }) => (
+    example: ({ isInteractable, header, children, primaryButton, secondaryButton }) => (
       <BottomSheetDialog isInteractable={isInteractable}>
         {/* Remove if BottomSheetHeader layer is not visible — Code Connect limitation */}
         <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
           {header.title}
         </BottomSheetHeader>
-        <Box twClassName="p-4">
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </Text>
-        </Box>
+        {children}
         {/* Remove if BottomSheetFooter layer is not visible — Code Connect limitation */}
         <BottomSheetFooter
           secondaryButtonProps={{
