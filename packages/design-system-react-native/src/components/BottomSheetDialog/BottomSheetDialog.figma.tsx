@@ -16,16 +16,25 @@ const FIGMA_URL =
 const headerProps = {
   title: figma.string('title'),
   onBack: figma.boolean('onBack', { true: () => undefined, false: undefined }),
-  onClose: figma.boolean('onClose', { true: () => undefined, false: undefined }),
+  onClose: figma.boolean('onClose', {
+    true: () => undefined,
+    false: undefined,
+  }),
 };
 
 const footerNestedProps = {
-  primaryButton: figma.nestedProps('childrenWrapper/primaryButton/_ButtonBase', {
-    children: figma.string('label'),
-  }),
-  secondaryButton: figma.nestedProps('childrenWrapper/secondaryButton/_ButtonBase', {
-    children: figma.string('label'),
-  }),
+  primaryButton: figma.nestedProps(
+    'childrenWrapper/primaryButton/_ButtonBase',
+    {
+      children: figma.string('label'),
+    },
+  ),
+  secondaryButton: figma.nestedProps(
+    'childrenWrapper/secondaryButton/_ButtonBase',
+    {
+      children: figma.string('label'),
+    },
+  ),
 };
 
 // Header shown, Footer shown
