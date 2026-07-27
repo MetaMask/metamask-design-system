@@ -31,8 +31,14 @@ figma.connect(BottomSheetFooter, BOTTOM_SHEET_FOOTER_URL, {
   example: ({ buttonsAlignment, primaryButton, secondaryButton }) => (
     <BottomSheetFooter
       buttonsAlignment={buttonsAlignment}
-      primaryButtonProps={{ children: primaryButton.children, onPress: () => undefined }}
-      secondaryButtonProps={{ children: secondaryButton.children, onPress: () => undefined }}
+      primaryButtonProps={{
+        children: primaryButton.children,
+        onPress: () => undefined,
+      }}
+      secondaryButtonProps={{
+        children: secondaryButton.children,
+        onPress: () => undefined,
+      }}
     />
   ),
 });
@@ -55,7 +61,10 @@ figma.connect(BottomSheetFooter, BOTTOM_SHEET_FOOTER_URL, {
   example: ({ buttonsAlignment, primaryButton }) => (
     <BottomSheetFooter
       buttonsAlignment={buttonsAlignment}
-      primaryButtonProps={{ children: primaryButton.children, onPress: () => undefined }}
+      primaryButtonProps={{
+        children: primaryButton.children,
+        onPress: () => undefined,
+      }}
     />
   ),
 });
@@ -78,7 +87,10 @@ figma.connect(BottomSheetFooter, BOTTOM_SHEET_FOOTER_URL, {
   example: ({ buttonsAlignment, secondaryButton }) => (
     <BottomSheetFooter
       buttonsAlignment={buttonsAlignment}
-      secondaryButtonProps={{ children: secondaryButton.children, onPress: () => undefined }}
+      secondaryButtonProps={{
+        children: secondaryButton.children,
+        onPress: () => undefined,
+      }}
     />
   ),
 });
