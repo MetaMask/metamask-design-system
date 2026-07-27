@@ -46,7 +46,7 @@ figma.connect(
     },
     example: ({ isInteractable, header, primaryButton, secondaryButton }) => (
       <BottomSheetDialog isInteractable={isInteractable}>
-        {/* Remove BottomSheetHeader if not needed — Code Connect limitation */}
+        {/* Remove if BottomSheetHeader layer is not visible — Code Connect limitation */}
         <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
           {header.title}
         </BottomSheetHeader>
@@ -56,7 +56,7 @@ figma.connect(
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </Text>
         </Box>
-        {/* Remove BottomSheetFooter if not needed — Code Connect limitation */}
+        {/* Remove if BottomSheetFooter layer is not visible — Code Connect limitation */}
         <BottomSheetFooter
           secondaryButtonProps={{
             children: secondaryButton.children,
