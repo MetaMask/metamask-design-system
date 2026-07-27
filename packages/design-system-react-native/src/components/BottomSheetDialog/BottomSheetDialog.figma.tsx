@@ -13,30 +13,6 @@ import { BottomSheetDialog } from './BottomSheetDialog';
 const FIGMA_URL =
   'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=16571-1745';
 
-const headerProps = {
-  title: figma.string('title'),
-  onBack: figma.boolean('onBack', { true: () => undefined, false: undefined }),
-  onClose: figma.boolean('onClose', {
-    true: () => undefined,
-    false: undefined,
-  }),
-};
-
-const footerNestedProps = {
-  primaryButton: figma.nestedProps(
-    'childrenWrapper/primaryButton/_ButtonBase',
-    {
-      children: figma.string('label'),
-    },
-  ),
-  secondaryButton: figma.nestedProps(
-    'childrenWrapper/secondaryButton/_ButtonBase',
-    {
-      children: figma.string('label'),
-    },
-  ),
-};
-
 // Header shown, Footer shown
 figma.connect(BottomSheetDialog, FIGMA_URL, {
   variant: {
@@ -45,8 +21,28 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
   },
   props: {
     isInteractable: figma.boolean('isInteractable'),
-    header: figma.nestedProps('BottomSheetHeader', headerProps),
-    footer: figma.nestedProps('BottomSheetFooter', footerNestedProps),
+    header: figma.nestedProps('BottomSheetHeader', {
+      title: figma.string('title'),
+      onBack: figma.boolean('onBack', { true: () => undefined, false: undefined }),
+      onClose: figma.boolean('onClose', {
+        true: () => undefined,
+        false: undefined,
+      }),
+    }),
+    footer: figma.nestedProps('BottomSheetFooter', {
+      primaryButton: figma.nestedProps(
+        'childrenWrapper/primaryButton/_ButtonBase',
+        {
+          children: figma.string('label'),
+        },
+      ),
+      secondaryButton: figma.nestedProps(
+        'childrenWrapper/secondaryButton/_ButtonBase',
+        {
+          children: figma.string('label'),
+        },
+      ),
+    }),
   },
   example: ({ isInteractable, header, footer }) => (
     <BottomSheetDialog isInteractable={isInteractable}>
@@ -81,7 +77,14 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
   },
   props: {
     isInteractable: figma.boolean('isInteractable'),
-    header: figma.nestedProps('BottomSheetHeader', headerProps),
+    header: figma.nestedProps('BottomSheetHeader', {
+      title: figma.string('title'),
+      onBack: figma.boolean('onBack', { true: () => undefined, false: undefined }),
+      onClose: figma.boolean('onClose', {
+        true: () => undefined,
+        false: undefined,
+      }),
+    }),
   },
   example: ({ isInteractable, header }) => (
     <BottomSheetDialog isInteractable={isInteractable}>
@@ -106,7 +109,20 @@ figma.connect(BottomSheetDialog, FIGMA_URL, {
   },
   props: {
     isInteractable: figma.boolean('isInteractable'),
-    footer: figma.nestedProps('BottomSheetFooter', footerNestedProps),
+    footer: figma.nestedProps('BottomSheetFooter', {
+      primaryButton: figma.nestedProps(
+        'childrenWrapper/primaryButton/_ButtonBase',
+        {
+          children: figma.string('label'),
+        },
+      ),
+      secondaryButton: figma.nestedProps(
+        'childrenWrapper/secondaryButton/_ButtonBase',
+        {
+          children: figma.string('label'),
+        },
+      ),
+    }),
   },
   example: ({ isInteractable, footer }) => (
     <BottomSheetDialog isInteractable={isInteractable}>
