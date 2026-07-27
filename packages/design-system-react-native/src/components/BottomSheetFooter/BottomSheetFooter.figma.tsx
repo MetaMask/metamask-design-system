@@ -10,12 +10,9 @@ import { ButtonsAlignment } from '.';
 const BOTTOM_SHEET_FOOTER_URL =
   'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=16571-1069';
 
-// Both buttons visible
+// variant (Figma only) = both
 figma.connect(BottomSheetFooter, BOTTOM_SHEET_FOOTER_URL, {
-  variant: {
-    'show primaryButton (Figma Only)': true,
-    'show secondaryButton (Figma Only)': true,
-  },
+  variant: { 'variant (Figma only)': 'both' },
   props: {
     buttonsAlignment: figma.enum('buttonAlignment', {
       horizontal: ButtonsAlignment.Horizontal,
@@ -43,12 +40,9 @@ figma.connect(BottomSheetFooter, BOTTOM_SHEET_FOOTER_URL, {
   ),
 });
 
-// Primary button only
+// variant (Figma only) = primary
 figma.connect(BottomSheetFooter, BOTTOM_SHEET_FOOTER_URL, {
-  variant: {
-    'show primaryButton (Figma Only)': true,
-    'show secondaryButton (Figma Only)': false,
-  },
+  variant: { 'variant (Figma only)': 'primary' },
   props: {
     buttonsAlignment: figma.enum('buttonAlignment', {
       horizontal: ButtonsAlignment.Horizontal,
@@ -69,12 +63,9 @@ figma.connect(BottomSheetFooter, BOTTOM_SHEET_FOOTER_URL, {
   ),
 });
 
-// Secondary button only
+// variant (Figma only) = secondary
 figma.connect(BottomSheetFooter, BOTTOM_SHEET_FOOTER_URL, {
-  variant: {
-    'show primaryButton (Figma Only)': false,
-    'show secondaryButton (Figma Only)': true,
-  },
+  variant: { 'variant (Figma only)': 'secondary' },
   props: {
     buttonsAlignment: figma.enum('buttonAlignment', {
       horizontal: ButtonsAlignment.Horizontal,

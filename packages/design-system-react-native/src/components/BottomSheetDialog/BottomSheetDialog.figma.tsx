@@ -57,6 +57,7 @@ figma.connect(
         </BottomSheetHeader>
         {children}
         {/* Remove if BottomSheetFooter layer is not visible — Code Connect limitation */}
+        {/* Remove primaryButtonProps or secondaryButtonProps based on the variant (Figma only) value in the nested BottomSheetFooter — Code Connect limitation */}
         <BottomSheetFooter
           secondaryButtonProps={{
             children: secondaryButton.children,
