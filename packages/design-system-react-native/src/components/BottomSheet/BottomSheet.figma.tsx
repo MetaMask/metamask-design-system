@@ -35,12 +35,7 @@ figma.connect(
         { children: figma.string('label') },
       ),
     },
-    example: ({
-      isFullscreen,
-      header,
-      primaryButton,
-      secondaryButton,
-    }) => (
+    example: ({ isFullscreen, header, primaryButton, secondaryButton }) => (
       <BottomSheet isFullscreen={isFullscreen} onClose={() => undefined}>
         <BottomSheetHeader onBack={header.onBack} onClose={header.onClose}>
           {header.title}
