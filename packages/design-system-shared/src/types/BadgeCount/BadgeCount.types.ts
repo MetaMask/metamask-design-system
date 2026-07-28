@@ -8,7 +8,7 @@ export const BadgeCountSize = {
    */
   Md: 'md',
   /**
-   * Represents a large badge count (20px height).
+   * Represents a large badge count (22px height).
    */
   Lg: 'lg',
 } as const;

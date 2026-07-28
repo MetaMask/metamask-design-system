@@ -42,7 +42,7 @@ Available sizes:
 
 - `BadgeCountSize.Sm` (16px)
 - `BadgeCountSize.Md` (20px)
-- `BadgeCountSize.Lg` (24px)
+- `BadgeCountSize.Lg` (22px)
 
 | TYPE             | REQUIRED | DEFAULT             |
 | ---------------- | -------- | ------------------- |
