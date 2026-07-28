@@ -62,7 +62,6 @@ describe('BottomSheet', () => {
     mockOpenDialog.mockClear();
     capturedDialogOnClose = undefined;
     capturedDialogOnOpen = undefined;
-    capturedPanGestureHandlerProps = undefined;
   });
 
   it('renders with testID on root element', () => {

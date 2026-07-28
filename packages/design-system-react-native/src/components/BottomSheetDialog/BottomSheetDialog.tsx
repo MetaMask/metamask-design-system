@@ -255,7 +255,7 @@ export const BottomSheetDialog = forwardRef<
       () => [
         tw.style(
           isPureBlack ? 'bg-alternative' : 'bg-default',
-          'rounded-t-3xl overflow-hidden border border-muted',
+          'rounded-t-3xl overflow-hidden border border-muted border-b-0',
           twClassName,
         ),
         {

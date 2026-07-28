@@ -9,6 +9,68 @@ const noop = () => undefined;
 
 describe('TextFieldSearch', () => {
   describe('rendering', () => {
+    it('applies muted background and hover background when enabled', () => {
+      render(
+        <TextFieldSearch
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass(
+        'bg-muted',
+        'hover:bg-muted-hover',
+      );
+    });
+
+    it('does not apply hover background class when disabled', () => {
+      render(
+        <TextFieldSearch
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          isDisabled
+        />,
+      );
+
+      expect(screen.getByTestId(ROOT_TEST_ID)).not.toHaveClass(
+        'hover:bg-muted-hover',
+      );
+    });
+
+    it('does not apply hover background class when in error state', () => {
+      render(
+        <TextFieldSearch
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          isError
+        />,
+      );
+
+      expect(screen.getByTestId(ROOT_TEST_ID)).not.toHaveClass(
+        'hover:bg-muted-hover',
+      );
+    });
+
+    it('hides native webkit search decorations on the input', () => {
+      render(
+        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
+      );
+
+      const input = screen.getByRole('searchbox');
+      expect(input).toHaveClass(
+        '[&::-webkit-search-cancel-button]:hidden',
+        '[&::-webkit-search-decoration]:hidden',
+        '[&::-webkit-search-results-button]:hidden',
+        '[&::-webkit-search-results-decoration]:hidden',
+      );
+    });
+
     it('renders root container and inner search input', () => {
       render(
         <TextFieldSearch

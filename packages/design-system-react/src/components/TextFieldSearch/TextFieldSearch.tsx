@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 import { twMerge } from '../../utils/tw-merge';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { Icon, IconColor, IconName, IconSize } from '../Icon';
-import { TextField, TextFieldType } from '../TextField';
+import { TextField, TextFieldSize, TextFieldType } from '../TextField';
 
 import type { TextFieldSearchProps } from './TextFieldSearch.types';
 
@@ -17,6 +17,7 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
       startAccessory,
       isDisabled = false,
       className,
+      inputProps,
       ...props
     },
     ref,
@@ -27,7 +28,7 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
         ariaLabel="Clear"
         iconName={IconName.CircleX}
         size={ButtonIconSize.Md}
-        iconProps={{ color: IconColor.IconAlternative }}
+        iconProps={{ color: IconColor.IconDefault }}
         {...clearButtonProps}
         isDisabled={isDisabled || clearButtonProps?.isDisabled}
         onClick={clearButtonOnClick}
@@ -48,7 +49,19 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
         value={value}
         isDisabled={isDisabled}
         type={TextFieldType.Search}
-        className={twMerge('rounded-full', className)}
+        size={TextFieldSize.Lg}
+        className={twMerge(
+          'rounded-full bg-muted',
+          !isDisabled && !props.isError && 'hover:bg-muted-hover',
+          className,
+        )}
+        inputProps={{
+          ...inputProps,
+          className: twMerge(
+            '[&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden',
+            inputProps?.className,
+          ),
+        }}
         startAccessory={
           startAccessory ?? (
             <Icon

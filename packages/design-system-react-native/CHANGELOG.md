@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.38.1]
+
+### Changed
+
+- Removed bottom border from `BottomSheet` to align with updated Figma designs ([#1413](https://github.com/MetaMask/metamask-design-system/pull/1413))
+
 ## [0.38.0]
 
 ### Added
@@ -643,7 +649,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.1...HEAD
+[0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.0...@metamask/design-system-react-native@0.38.1
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.37.0...@metamask/design-system-react-native@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.36.0...@metamask/design-system-react-native@0.37.0
 [0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.35.0...@metamask/design-system-react-native@0.36.0
