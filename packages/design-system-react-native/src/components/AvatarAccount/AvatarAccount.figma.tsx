@@ -14,7 +14,7 @@ import { AvatarAccountSize, AvatarAccountVariant } from '.';
 
 figma.connect(
   AvatarAccount,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=9519-1552',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=18237-451',
   {
     props: {
       size: figma.enum('size', {
@@ -27,7 +27,7 @@ figma.connect(
       variant: figma.enum('variant', {
         blockies: AvatarAccountVariant.Blockies,
         jazzicon: AvatarAccountVariant.Jazzicon,
-        polycon: AvatarAccountVariant.Maskicon,
+        maskicon: AvatarAccountVariant.Maskicon,
       }),
     },
     example: (props) => (
