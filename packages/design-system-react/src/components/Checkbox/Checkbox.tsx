@@ -56,11 +56,11 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     );
 
     const baseBg = isSelected
-      ? 'bg-primary-default hover:bg-primary-default-hover active:bg-primary-default-pressed'
+      ? 'bg-icon-default hover:bg-icon-default-hover active:bg-icon-default-pressed'
       : 'bg-default hover:bg-default-hover active:bg-default-pressed';
     let baseBorder = 'border-default';
     if (isSelected) {
-      baseBorder = 'border-primary-default';
+      baseBorder = 'border-icon-default';
     } else if (isInvalid) {
       baseBorder = 'border-error-default';
     }
@@ -95,7 +95,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
           <div className={checkboxClasses} {...checkboxContainerProps}>
             <Icon
               name={IconName.Check}
-              color={IconColor.PrimaryInverse}
+              color={IconColor.IconInverse}
               size={IconSize.Sm}
               {...checkedIconProps}
               className={iconClasses}

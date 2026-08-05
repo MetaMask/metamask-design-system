@@ -85,19 +85,19 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
 
     const getCheckboxContainerStyle = useCallback(
       (pressed: boolean): string => {
-        const baseBg = isSelected ? 'bg-primary-default' : 'bg-default';
+        const baseBg = isSelected ? 'bg-icon-default' : 'bg-default';
         let baseBorder = 'border-default';
         if (isSelected) {
-          baseBorder = 'border-primary-default';
+          baseBorder = 'border-icon-default';
         } else if (isInvalid) {
           baseBorder = 'border-error-default';
         }
         const pressedBg = isSelected
-          ? 'bg-primary-default-pressed'
+          ? 'bg-icon-default-pressed'
           : 'bg-default-pressed';
         let pressedBorder = 'border-default';
         if (isSelected) {
-          pressedBorder = 'border-primary-default-pressed';
+          pressedBorder = 'border-icon-default-pressed';
         } else if (isInvalid) {
           pressedBorder = 'border-error-default';
         }
@@ -138,7 +138,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
               <Animated.View style={{ opacity: iconAnim }}>
                 <Icon
                   name={IconName.Check}
-                  color={IconColor.PrimaryInverse}
+                  color={IconColor.IconInverse}
                   size={IconSize.Sm}
                   {...checkedIconProps}
                 />

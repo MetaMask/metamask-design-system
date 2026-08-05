@@ -112,7 +112,7 @@ describe('Checkbox', () => {
     expect(styles).toStrictEqual(
       expect.arrayContaining([
         expect.objectContaining(
-          tw`flex size-[22px] items-center justify-center rounded border-2 border-primary-default bg-primary-default`,
+          tw`flex size-[22px] items-center justify-center rounded border-2 border-icon-default bg-icon-default`,
         ),
       ]),
     );
