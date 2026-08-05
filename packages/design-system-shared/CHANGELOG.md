@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.32.0]
+
 ### Uncategorized
 
 - fix: Checkbox monochromatic selected colors (React + React Native) ([#1426](https://github.com/MetaMask/metamask-design-system/pull/1426))
@@ -319,7 +321,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.31.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.32.0...HEAD
+[0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.31.0...@metamask/design-system-shared@0.32.0
 [0.31.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.30.0...@metamask/design-system-shared@0.31.0
 [0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.29.0...@metamask/design-system-shared@0.30.0
 [0.29.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.28.0...@metamask/design-system-shared@0.29.0
