@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated `Checkbox` selected state from primary blue to monochromatic icon colors (`bg-icon-default` / `border-icon-default` with `IconColor.IconInverse` checkmark), matching `ButtonFilter` active treatment
+- Updated `Checkbox` selected state from primary blue to monochromatic icon colors (`bg-icon-default` / `border-icon-default` with `IconColor.IconInverse` checkmark), matching `ButtonFilter` active treatment ([#1426](https://github.com/MetaMask/metamask-design-system/pull/1426))
 
 ## [0.38.1]
 
