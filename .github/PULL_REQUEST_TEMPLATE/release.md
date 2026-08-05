@@ -149,6 +149,8 @@ See migration guides for complete instructions:
 
 - [ ] I've followed [MetaMask Contributor Docs](https://github.com/MetaMask/contributor-docs)
 - [ ] I've reviewed the [Release Workflow](./.cursor/rules/release-workflow.md) cursor rule
+- [ ] PR title follows the pattern `Release <version>` (no `chore:` or other prefix)
+- [ ] Squash merge commit message will be exactly `Release <version>` (verify before merging)
 - [ ] All tests pass (`yarn build && yarn test && yarn lint`)
 - [ ] Changelog validation passes (`yarn changelog:validate`)
 
