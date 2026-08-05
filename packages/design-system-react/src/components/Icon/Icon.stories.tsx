@@ -140,6 +140,9 @@ export const Color: Story = {
       <div className="bg-default p-4">
         <Icon {...args} color={IconColor.IconMuted} />
       </div>
+      <div className="bg-icon-default p-4">
+        <Icon {...args} color={IconColor.IconInverse} />
+      </div>
       <div className="bg-overlay-default p-4">
         <Icon {...args} color={IconColor.OverlayInverse} />
       </div>
