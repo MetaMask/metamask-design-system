@@ -99,6 +99,33 @@ yarn figma:connect:publish:react-native           # React Native only
 
 See [`.cursor/rules/figma-integration.md`](../.cursor/rules/figma-integration.md) for complete command reference.
 
+## Continuous Integration
+
+Figma Code Connect is validated and published automatically via GitHub Actions when Code Connect files change:
+
+| Event              | Workflow behavior                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| **Pull request**   | Runs `yarn figma:connect:publish:dry-run` to validate Code Connect files against the Figma API |
+| **Push to `main`** | Runs `yarn figma:connect:publish` to publish Code Connect mappings to Figma Dev Mode           |
+
+The workflow only runs when files matching these paths change:
+
+- `packages/design-system-react/**/*.figma.tsx`
+- `packages/design-system-react-native/**/*.figma.tsx`
+- `packages/design-system-react/figma.config.json`
+- `packages/design-system-react-native/figma.config.json`
+
+### Required repository secret
+
+Add a `FIGMA_ACCESS_TOKEN` secret to the repository with the following scopes:
+
+- **Code Connect (Write)** — required for publishing and API validation
+- **File content (Read-only)** — required for reading component definitions
+
+Use a service account or bot token with access to the [MMDS Components Figma file](https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?m=auto), not a personal token tied to an individual contributor.
+
+On merge to `main`, CI publishes Code Connect mappings automatically. Continue to run `yarn figma:connect:publish:dry-run` locally when developing Code Connect files.
+
 ## Resources
 
 - [Figma Code Connect Documentation](https://www.figma.com/code-connect-docs/)
