@@ -92,7 +92,7 @@ runs:
       env:
         COMMIT_STARTS_WITH: ${{ inputs.commit-starts-with }}
       run: |
-        echo "::error::This pull request is a release, but the release check did not detect it as such. Please ensure that the commit message starts with one of the following prefixes: $COMMIT_STARTS_WITH."
+        echo "::error::This pull request is a release, but the release check did not detect it as such. Set the PR title (and squash merge commit message) to start with one of the following prefixes: $COMMIT_STARTS_WITH. Do not use a conventional-commit prefix such as chore:."
         exit 1
 
     - name: Get pull request number
@@ -149,6 +149,9 @@ runs:
         # Get all packages being released in this PR
         MERGE_BASE=$(git merge-base HEAD refs/remotes/origin/main)
         for package in "${PACKAGES[@]}"; do
+          if ! git show "$MERGE_BASE:$package" &>/dev/null; then
+            continue
+          fi
           MAIN_VERSION=$(git show "$MERGE_BASE:$package" | jq -r .version)
           HEAD_VERSION=$(jq -r .version "$package")
 
