@@ -25,6 +25,7 @@ import { scheduleOnRN } from 'react-native-worklets';
 import { Toast } from './Toast';
 import {
   TOAST_DISMISS_DISTANCE_THRESHOLD,
+  TOAST_DISMISS_MIN_DISTANCE,
   TOAST_DISMISS_VELOCITY_THRESHOLD,
   TOAST_SPRING_CONFIG,
   TOAST_SWIPE_ACTIVE_OFFSET_Y,
@@ -89,6 +90,9 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const gestureStartY = useSharedValue(0);
     const translateYProgress = useSharedValue(-screenHeight);
     const isDismissing = useSharedValue(false);
+    // True after onStart until onEnd/onFinalize recovers. Used so a failed pan
+    // (e.g. failOffsetX after activation) still springs back and resumes dismiss.
+    const isSwipeActive = useSharedValue(false);
     const toastGeneration = useSharedValue(0);
     const topOffset = toastOptions?.topOffset ?? 0;
     hasNoTimeoutRef.current = Boolean(toastOptions?.hasNoTimeout);
@@ -234,84 +238,106 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       clearScheduledAutoDismissRef.current();
     };
 
-    const swipeGesture = useMemo(
-      () =>
-        // These gesture callbacks need explicit 'worklet' directives because this
-        // package ships a pre-built dist compiled by ts-bridge (tsc), which emits the
-        // gesture chain as a namespaced call (react_native_gesture_handler_1.Gesture).
-        // The consumer's Reanimated/Worklets Babel plugin does run over dist, but its
-        // gesture auto-detection doesn't recognize that compiled namespaced form.
-        Gesture.Pan()
-          .activeOffsetY(TOAST_SWIPE_ACTIVE_OFFSET_Y)
-          .failOffsetX([-TOAST_SWIPE_FAIL_OFFSET_X, TOAST_SWIPE_FAIL_OFFSET_X])
-          .onStart(() => {
-            'worklet';
+    const swipeGesture = useMemo(() => {
+      // These gesture callbacks need explicit 'worklet' directives because this
+      // package ships a pre-built dist compiled by ts-bridge (tsc), which emits the
+      // gesture chain as a namespaced call (react_native_gesture_handler_1.Gesture).
+      // The consumer's Reanimated/Worklets Babel plugin does run over dist, but its
+      // gesture auto-detection doesn't recognize that compiled namespaced form.
+      const springBackAfterSwipe = () => {
+        'worklet';
 
-            // Don't interrupt an in-progress dismiss animation.
-            if (isDismissing.value) {
-              return;
+        const generationAtSpringStart = toastGeneration.value;
+        translateYProgress.value = withSpring(
+          visibleTranslateY.value,
+          TOAST_SPRING_CONFIG,
+          (finished) => {
+            // A new pan cancels this spring via cancelAnimation; only resume
+            // auto-dismiss when the spring-back completed naturally.
+            if (finished) {
+              scheduleOnRN(
+                resumeAutoDismissFromSwipe,
+                generationAtSpringStart,
+              );
             }
-            scheduleOnRN(clearScheduledAutoDismissFromSwipe);
-            cancelAnimation(translateYProgress);
-            gestureStartY.value = translateYProgress.value;
-          })
-          .onUpdate((event) => {
-            'worklet';
+          },
+        );
+      };
 
-            if (isDismissing.value) {
-              return;
-            }
-            const nextTranslateY = gestureStartY.value + event.translationY;
-            // Toast sits at the top; only allow dragging upward (more negative).
-            translateYProgress.value = Math.min(
-              nextTranslateY,
-              visibleTranslateY.value,
-            );
-          })
-          .onEnd((event) => {
-            'worklet';
+      return Gesture.Pan()
+        .activeOffsetY(TOAST_SWIPE_ACTIVE_OFFSET_Y)
+        .failOffsetX([-TOAST_SWIPE_FAIL_OFFSET_X, TOAST_SWIPE_FAIL_OFFSET_X])
+        .onStart(() => {
+          'worklet';
 
-            if (isDismissing.value) {
-              return;
-            }
-            const { translationY, velocityY } = event;
-            const dismissDistance = Math.max(
-              toastHeight.value * TOAST_DISMISS_DISTANCE_THRESHOLD,
-              24,
-            );
-            const hasReachedDismissOffset = translationY <= -dismissDistance;
-            const hasReachedSwipeThreshold =
-              Math.abs(velocityY) > TOAST_DISMISS_VELOCITY_THRESHOLD;
-            const isQuickDismissing = velocityY < 0;
+          // Don't interrupt an in-progress dismiss animation.
+          if (isDismissing.value) {
+            return;
+          }
+          isSwipeActive.value = true;
+          scheduleOnRN(clearScheduledAutoDismissFromSwipe);
+          cancelAnimation(translateYProgress);
+          gestureStartY.value = translateYProgress.value;
+        })
+        .onUpdate((event) => {
+          'worklet';
 
-            const shouldDismiss =
-              hasReachedDismissOffset ||
-              (hasReachedSwipeThreshold && isQuickDismissing);
+          if (isDismissing.value || !isSwipeActive.value) {
+            return;
+          }
+          const nextTranslateY = gestureStartY.value + event.translationY;
+          // Toast sits at the top; only allow dragging upward (more negative).
+          translateYProgress.value = Math.min(
+            nextTranslateY,
+            visibleTranslateY.value,
+          );
+        })
+        .onEnd((event) => {
+          'worklet';
 
-            if (shouldDismiss) {
-              scheduleOnRN(dismissToastFromSwipe);
-              return;
-            }
+          if (!isSwipeActive.value) {
+            return;
+          }
+          isSwipeActive.value = false;
 
-            const generationAtSpringStart = toastGeneration.value;
-            translateYProgress.value = withSpring(
-              visibleTranslateY.value,
-              TOAST_SPRING_CONFIG,
-              (finished) => {
-                // A new pan cancels this spring via cancelAnimation; only resume
-                // auto-dismiss when the spring-back completed naturally.
-                if (finished) {
-                  scheduleOnRN(
-                    resumeAutoDismissFromSwipe,
-                    generationAtSpringStart,
-                  );
-                }
-              },
-            );
-          }),
+          if (isDismissing.value) {
+            return;
+          }
+          const { translationY, velocityY } = event;
+          const dismissDistance = Math.max(
+            toastHeight.value * TOAST_DISMISS_DISTANCE_THRESHOLD,
+            TOAST_DISMISS_MIN_DISTANCE,
+          );
+          const hasReachedDismissOffset = translationY <= -dismissDistance;
+          const hasReachedSwipeThreshold =
+            Math.abs(velocityY) > TOAST_DISMISS_VELOCITY_THRESHOLD;
+          const isQuickDismissing = velocityY < 0;
+
+          const shouldDismiss =
+            hasReachedDismissOffset ||
+            (hasReachedSwipeThreshold && isQuickDismissing);
+
+          if (shouldDismiss) {
+            scheduleOnRN(dismissToastFromSwipe);
+            return;
+          }
+
+          springBackAfterSwipe();
+        })
+        .onFinalize(() => {
+          'worklet';
+
+          // onEnd is skipped when the pan fails/cancels after activation
+          // (e.g. horizontal travel past failOffsetX). Recover position and
+          // auto-dismiss so the toast is not left stuck mid-offset.
+          if (!isSwipeActive.value || isDismissing.value) {
+            return;
+          }
+          isSwipeActive.value = false;
+          springBackAfterSwipe();
+        });
       // Shared values and swipe JS wrappers are stable for the component lifetime.
-      [],
-    );
+    }, []);
 
     innerRef.current = {
       closeToast,

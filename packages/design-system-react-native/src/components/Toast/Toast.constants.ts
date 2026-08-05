@@ -26,6 +26,12 @@ export const TOAST_SPRING_CONFIG: WithSpringConfig = {
 export const TOAST_DISMISS_DISTANCE_THRESHOLD = 0.35;
 
 /**
+ * Minimum upward drag distance (px) required to dismiss, used as a floor
+ * when the height-based threshold would otherwise be too small.
+ */
+export const TOAST_DISMISS_MIN_DISTANCE = 24;
+
+/**
  * Upward velocity (px/s) required to dismiss via a quick swipe.
  */
 export const TOAST_DISMISS_VELOCITY_THRESHOLD = 800;
