@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.32.0]
 
-### Fixed
+### Added
 
-- Fixed Checkbox component icon colors to use monochromatic theme (added `IconColor.IconInverse` for selected state) ([#1426](https://github.com/MetaMask/metamask-design-system/pull/1426))
+- Added `IconColor.IconInverse` design token for monochromatic icon rendering in selected/active states ([#1426](https://github.com/MetaMask/metamask-design-system/pull/1426))
 
 ## [0.31.0]
 
