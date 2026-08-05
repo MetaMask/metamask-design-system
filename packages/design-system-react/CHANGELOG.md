@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: Checkbox monochromatic selected colors (React + React Native) ([#1426](https://github.com/MetaMask/metamask-design-system/pull/1426))
+- chore: Add Code Connect for BadgeWrapper and BadgeIcon ([#1424](https://github.com/MetaMask/metamask-design-system/pull/1424))
+- chore: Update Code Connect for BadgeCount, BadgeNetwork, and BadgeStatus ([#1425](https://github.com/MetaMask/metamask-design-system/pull/1425))
+- chore: Add Code Connect for AvatarGroup ([#1423](https://github.com/MetaMask/metamask-design-system/pull/1423))
+- chore: Add Code Connect for Avatar components ([#1422](https://github.com/MetaMask/metamask-design-system/pull/1422))
+
 ## [0.35.0]
 
 ### Changed
