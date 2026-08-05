@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.35.1]
+## [0.36.0]
+
+### Added
+
+- Added `IconColor.IconInverse` for monochromatic icon rendering in selected/active states ([#1426](https://github.com/MetaMask/metamask-design-system/pull/1426))
 
 ### Fixed
 
@@ -455,8 +459,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.1...HEAD
-[0.35.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.0...@metamask/design-system-react@0.35.1
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...HEAD
+[0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.0...@metamask/design-system-react@0.36.0
 [0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.34.0...@metamask/design-system-react@0.35.0
 [0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.33.0...@metamask/design-system-react@0.34.0
 [0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.32.0...@metamask/design-system-react@0.33.0

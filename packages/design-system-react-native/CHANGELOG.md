@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added swipe-to-dismiss gesture support to Toast component with configurable distance and velocity thresholds ([#1415](https://github.com/MetaMask/metamask-design-system/pull/1415))
+- Added `IconColor.IconInverse` for monochromatic icon rendering in selected/active states ([#1426](https://github.com/MetaMask/metamask-design-system/pull/1426))
 
 ### Fixed
 
