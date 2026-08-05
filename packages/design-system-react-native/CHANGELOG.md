@@ -7,16 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.39.0]
-
-### Added
-
-- Added swipe-to-dismiss gesture support to Toast component with configurable distance and velocity thresholds ([#1415](https://github.com/MetaMask/metamask-design-system/pull/1415))
-
-### Fixed
-
-- Fixed Checkbox selected state to use monochromatic icon colors instead of primary blue ([#1426](https://github.com/MetaMask/metamask-design-system/pull/1426))
-
 ## [0.38.1]
 
 ### Changed
@@ -659,8 +649,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.0...HEAD
-[0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.1...@metamask/design-system-react-native@0.39.0
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.1...HEAD
 [0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.0...@metamask/design-system-react-native@0.38.1
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.37.0...@metamask/design-system-react-native@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.36.0...@metamask/design-system-react-native@0.37.0
