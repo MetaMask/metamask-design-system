@@ -255,10 +255,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
             // A new pan cancels this spring via cancelAnimation; only resume
             // auto-dismiss when the spring-back completed naturally.
             if (finished) {
-              scheduleOnRN(
-                resumeAutoDismissFromSwipe,
-                generationAtSpringStart,
-              );
+              scheduleOnRN(resumeAutoDismissFromSwipe, generationAtSpringStart);
             }
           },
         );
