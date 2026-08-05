@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: Checkbox monochromatic selected colors (React + React Native) ([#1426](https://github.com/MetaMask/metamask-design-system/pull/1426))
+
 ## [0.31.0]
 
 ### Added
