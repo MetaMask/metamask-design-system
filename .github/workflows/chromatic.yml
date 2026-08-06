@@ -10,9 +10,6 @@ jobs:
   chromatic:
     name: Run Chromatic
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [24.x]
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
