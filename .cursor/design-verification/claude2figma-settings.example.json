@@ -1,0 +1,27 @@
+{
+  "_comment": "Reference settings from senlindesign/claude2figma for Claude Code. Cursor agents use design-verification skill instructions directly.",
+  "permissions": {
+    "allow": [
+      "mcp__figma__whoami",
+      "mcp__figma__get_metadata",
+      "mcp__figma__get_libraries",
+      "mcp__figma__use_figma",
+      "mcp__figma__get_screenshot",
+      "mcp__figma__search_design_system",
+      "mcp__figma__get_variable_defs"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "mcp__figma__use_figma",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'QA: Verify style/variable bindings on all returned node IDs.'"
+          }
+        ]
+      }
+    ]
+  }
+}
