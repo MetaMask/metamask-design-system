@@ -78,8 +78,10 @@ export { BottomSheetHeader } from './BottomSheetHeader';
 export type { BottomSheetHeaderProps } from './BottomSheetHeader';
 
 export { BottomSheetOverlay } from './BottomSheetOverlay';
-export type { BottomSheetOverlayProps } from './BottomSheetOverlay';
-
+export type {
+  BottomSheetOverlayProps,
+  BottomSheetOverlayRef,
+} from './BottomSheetOverlay';
 export { Blockies } from './temp-components/Blockies';
 export type { BlockiesProps } from './temp-components/Blockies';
 

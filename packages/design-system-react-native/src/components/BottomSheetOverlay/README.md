@@ -1,6 +1,6 @@
 # BottomSheetOverlay
 
-BottomSheetOverlay is used to create a semi-transparent backdrop that sits on top of page content. It provides visual focus on BottomSheet placed above it and prevents interaction with underlying content. The component includes a smooth fade-in animation when rendered.
+BottomSheetOverlay is used to create a semi-transparent backdrop that sits on top of page content. It provides visual focus on BottomSheet placed above it and prevents interaction with underlying content. The component fades in on mount and exposes `onCloseOverlay` via ref so the sheet can fade it out in parallel with dismiss.
 
 ```tsx
 import { BottomSheetOverlay } from '@metamask/design-system-react-native';
@@ -93,6 +93,22 @@ const styles = StyleSheet.create({
   style={styles.customOverlay}
   onPress={() => console.log('Pressed')}
 />;
+```
+
+## Imperative API (Ref)
+
+```tsx
+import { useRef } from 'react';
+import type { BottomSheetOverlayRef } from '@metamask/design-system-react-native';
+
+const overlayRef = useRef<BottomSheetOverlayRef>(null);
+
+// Fade out (e.g. when the sheet starts dismissing)
+overlayRef.current?.onCloseOverlay(() => {
+  console.log('overlay faded out');
+});
+
+<BottomSheetOverlay ref={overlayRef} />;
 ```
 
 ## References

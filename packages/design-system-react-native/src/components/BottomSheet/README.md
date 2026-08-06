@@ -51,18 +51,36 @@ Content to display inside the sheet.
 
 Optional callback triggered when the sheet is fully dismissed. Receives `hasPendingAction` indicating whether a post-close callback is queued.
 
+To avoid a hard cut when controlling visibility with state, keep the sheet mounted until this fires — call `ref.onCloseBottomSheet()` from header/footer, and only `setVisible(false)` inside `onClose`.
+
 | TYPE                                   | REQUIRED | DEFAULT     |
 | -------------------------------------- | -------- | ----------- |
 | `(hasPendingAction?: boolean) => void` | No       | `undefined` |
 
 ```tsx
-<BottomSheet
-  goBack={goBack}
-  onClose={(hasPendingAction) => console.log('closed', hasPendingAction)}
->
-  <Text>Content</Text>
-</BottomSheet>
+const sheetRef = useRef<BottomSheetRef>(null);
+const [visible, setVisible] = useState(true);
+
+{visible && (
+  <BottomSheet
+    ref={sheetRef}
+    goBack={goBack}
+    onClose={() => setVisible(false)}
+  >
+    <BottomSheetHeader onClose={() => sheetRef.current?.onCloseBottomSheet()}>
+      Title
+    </BottomSheetHeader>
+  </BottomSheet>
+)}
 ```
+
+### `onCloseStart`
+
+Optional callback fired when a close animation begins (programmatic or drag). The sheet uses this internally to fade the backdrop in parallel with the dismiss tween.
+
+| TYPE         | REQUIRED | DEFAULT     |
+| ------------ | -------- | ----------- |
+| `() => void` | No       | `undefined` |
 
 ### `onOpen`
 
