@@ -26,10 +26,15 @@ Jira pickup for epic **DSYS-302** (_Migrate Legacy Extension Components to MMDS 
 
 ### Priority queue (prefer these first)
 
-| Order | Issue    | Component         | Notes                           |
-| ----- | -------- | ----------------- | ------------------------------- |
-| 1     | DSYS-713 | **ListItem**      | RN + shared types already exist |
-| 2     | DSYS-751 | **SectionHeader** | RN + shared types already exist |
+ListItem depends on Content → BoxRow/BoxColumn. Ship deps before ListItem.
+
+| Order | Issue     | Component         | Notes                                        |
+| ----- | --------- | ----------------- | -------------------------------------------- |
+| 1     | DSYS-1041 | **BoxRow**        | Layout primitive; used by Content + ListItem |
+| 2     | DSYS-1042 | **BoxColumn**     | Layout primitive; used by Content            |
+| 3     | DSYS-1043 | **Content**       | Inner row layout; ListItem wraps this        |
+| 4     | DSYS-713  | **ListItem**      | After BoxRow + Content                       |
+| 5     | DSYS-751  | **SectionHeader** | RN + shared types already exist              |
 
 Then fall through to other unclaimed `parent = DSYS-302` To Do items by Rank.
 
@@ -50,13 +55,14 @@ parent = DSYS-302 AND statusCategory != "Done" AND assignee = currentUser() ORDE
 ### Interactive (IDE / manual run)
 
 1. Prefer **In Progress** assigned to you.
-2. Else prefer priority queue: **DSYS-713** then **DSYS-751** if still To Do.
+2. Else prefer priority queue in order: **DSYS-1041 → DSYS-1042 → DSYS-1043 → DSYS-713 → DSYS-751** if still To Do.
 3. Else first unassigned To Do from Rank order.
+4. Do **not** start ListItem (DSYS-713) while any of BoxRow/BoxColumn/Content blockers are still open (check Jira “is blocked by” links).
 
 ### Scheduled / cloud (“always take backlog”)
 
-1. If **DSYS-713** matches unclaimed To Do → take it.
-2. Else if **DSYS-751** matches unclaimed To Do → take it.
+1. Walk the priority queue in order; take the **first** unclaimed To Do still open.
+2. Skip ListItem if it is blocked by open BoxRow/BoxColumn/Content issues.
 3. Else first result of the unclaimed To Do JQL.
 4. If empty → stop (no PR).
 
@@ -161,9 +167,9 @@ Repository: MetaMask/metamask-design-system @ main (checkout must include .curso
 
 You are bringing React (design-system-react) to parity with existing React Native MMDS components for epic DSYS-302. Follow docs/ai-agents.md: use @ rules — do not invent patterns from memory.
 
-1) Read @.cursor/automations/react-parity-from-mobile.md for JQL, priority queue (DSYS-713 ListItem, then DSYS-751 SectionHeader), audit, and Storybook demo requirements.
+1) Read @.cursor/automations/react-parity-from-mobile.md for JQL, priority queue (BoxRow → BoxColumn → Content → ListItem → SectionHeader), audit, and Storybook demo requirements.
 
-2) Jira (atlassian MCP): claim one unclaimed To Do under parent = DSYS-302 (prefer DSYS-713, then DSYS-751, else Rank ASC). Assign + transition to In Progress. If none, exit with one line and optionally Slack that the backlog was empty.
+2) Jira (atlassian MCP): claim one unclaimed To Do under parent = DSYS-302 following the priority queue (DSYS-1041, DSYS-1042, DSYS-1043, DSYS-713, DSYS-751). Skip ListItem while BoxRow/BoxColumn/Content blockers are open. Assign + transition to In Progress. If none, exit with one line and optionally Slack that the backlog was empty.
 
 3) Audit BEFORE coding (component-migration Phase 1):
    - RN + shared types in this repo
