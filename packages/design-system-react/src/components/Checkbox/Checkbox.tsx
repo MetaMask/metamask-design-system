@@ -49,6 +49,14 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
 
     useImperativeHandle(ref, () => ({ toggle: handleClick }), [handleClick]);
 
+    const { className: inputClassName, ...restInputProps } = inputProps ?? {};
+    const {
+      className: checkboxContainerClassName,
+      ...restCheckboxContainerProps
+    } = checkboxContainerProps ?? {};
+    const { className: checkedIconClassName, ...restCheckedIconProps } =
+      checkedIconProps ?? {};
+
     const outerClassName = twMerge(
       'inline-flex items-center',
       isDisabled && 'cursor-not-allowed opacity-50',
@@ -65,22 +73,30 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       baseBorder = 'border-error-default';
     }
 
-    const checkboxClasses = twMerge(
-      'relative flex size-6 items-center justify-center rounded border-2 p-0 transition-transform active:scale-95 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary-default',
+    // Native input is the visible control (no opacity-0) for Selenium isDisplayed().
+    const inputClasses = twMerge(
+      'appearance-none size-6 shrink-0 cursor-pointer rounded border-2 p-0 transition-transform active:scale-95',
+      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
+      'disabled:cursor-not-allowed',
       baseBg,
       baseBorder,
-      checkboxContainerProps?.className,
+      inputClassName,
+    );
+
+    const wrapperClasses = twMerge(
+      'relative inline-flex size-6 items-center justify-center',
+      checkboxContainerClassName,
     );
 
     const iconClasses = twMerge(
-      'pointer-events-none transition-opacity',
+      'pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity',
       isSelected ? 'opacity-100' : 'opacity-0',
-      checkedIconProps?.className,
+      checkedIconClassName,
     );
 
     return (
       <label htmlFor={id} className={outerClassName} style={style} {...props}>
-        <div className="relative">
+        <div className={wrapperClasses} {...restCheckboxContainerProps}>
           <input
             type="checkbox"
             id={id}
@@ -89,18 +105,16 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
             aria-invalid={isInvalid}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
-            className="peer absolute inset-0 size-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
-            {...inputProps}
+            className={inputClasses}
+            {...restInputProps}
           />
-          <div className={checkboxClasses} {...checkboxContainerProps}>
-            <Icon
-              name={IconName.Check}
-              color={IconColor.IconInverse}
-              size={IconSize.Sm}
-              {...checkedIconProps}
-              className={iconClasses}
-            />
-          </div>
+          <Icon
+            name={IconName.Check}
+            color={IconColor.IconInverse}
+            size={IconSize.Sm}
+            {...restCheckedIconProps}
+            className={iconClasses}
+          />
         </div>
         {label ? (
           <Text

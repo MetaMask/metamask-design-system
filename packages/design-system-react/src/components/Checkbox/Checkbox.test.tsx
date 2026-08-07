@@ -76,29 +76,29 @@ describe('Checkbox', () => {
     expect(input).toBeDisabled();
   });
 
-  it('applies invalid border styles', () => {
+  it('applies invalid border styles to the input', () => {
     render(
       <Checkbox
         id="test-checkbox"
         onChange={jest.fn()}
         isSelected={false}
         isInvalid
-        checkboxContainerProps={{ 'data-testid': 'inner' }}
+        inputProps={{ 'data-testid': 'chk-input' }}
       />,
     );
-    expect(screen.getByTestId('inner')).toHaveClass('border-error-default');
+    expect(screen.getByTestId('chk-input')).toHaveClass('border-error-default');
   });
 
-  it('applies selected container styles', () => {
+  it('applies selected styles to the input', () => {
     render(
       <Checkbox
         id="test-checkbox"
         onChange={jest.fn()}
         isSelected
-        checkboxContainerProps={{ 'data-testid': 'inner' }}
+        inputProps={{ 'data-testid': 'chk-input' }}
       />,
     );
-    expect(screen.getByTestId('inner')).toHaveClass(
+    expect(screen.getByTestId('chk-input')).toHaveClass(
       'bg-icon-default',
       'border-icon-default',
     );
@@ -247,23 +247,36 @@ describe('Checkbox', () => {
     expect(screen.getByTestId('chk-input')).toHaveFocus();
   });
 
-  it('applies visible focus styles to the rendered checkbox when input is focused', () => {
+  it('applies focus-visible styles on the input', () => {
     render(
       <Checkbox
         id="test-checkbox"
         isSelected={false}
         onChange={jest.fn()}
         inputProps={{ 'data-testid': 'chk-input' }}
-        checkboxContainerProps={{ 'data-testid': 'inner' }}
       />,
     );
 
-    expect(screen.getByTestId('chk-input')).toHaveClass('peer');
-    expect(screen.getByTestId('inner')).toHaveClass(
-      'peer-focus-visible:outline',
-      'peer-focus-visible:outline-2',
-      'peer-focus-visible:outline-offset-2',
-      'peer-focus-visible:outline-primary-default',
+    expect(screen.getByTestId('chk-input')).toHaveClass(
+      'focus-visible:outline',
+      'focus-visible:outline-2',
+      'focus-visible:outline-offset-2',
+      'focus-visible:outline-primary-default',
     );
+  });
+
+  it('keeps the input Selenium-visible (no opacity-0)', () => {
+    render(
+      <Checkbox
+        id="test-checkbox"
+        isSelected={false}
+        onChange={jest.fn()}
+        inputProps={{ 'data-testid': 'chk-input' }}
+      />,
+    );
+
+    const input = screen.getByTestId('chk-input');
+    expect(input).toHaveClass('appearance-none');
+    expect(input).not.toHaveClass('opacity-0');
   });
 });
