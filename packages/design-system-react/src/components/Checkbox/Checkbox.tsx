@@ -75,7 +75,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
 
     // Native input is the visible control (no opacity-0) for Selenium isDisplayed().
     const inputClasses = twMerge(
-      'appearance-none size-6 shrink-0 cursor-pointer rounded border-2 p-0 transition-transform active:scale-95',
+      'size-6 shrink-0 cursor-pointer appearance-none rounded border-2 p-0 transition-transform active:scale-95',
       'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-default',
       'disabled:cursor-not-allowed',
       baseBg,
