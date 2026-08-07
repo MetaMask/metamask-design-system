@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added `Content` for inner list-row layout (avatar, title, description, value, subvalue) with shared `ContentVariant` API parity to React Native ([DSYS-1043](https://consensyssoftware.atlassian.net/browse/DSYS-1043))
+
 ## [0.35.1]
 
 ### Fixed
