@@ -61,6 +61,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.26.0",
+    "@babel/preset-flow": "^8.0.1",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.23.3",
     "@metamask/auto-changelog": "^6.1.1",
