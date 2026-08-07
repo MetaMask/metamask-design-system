@@ -70,6 +70,42 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
+### From version 0.39.0 to 0.40.0
+
+<a id="from-version-0390-to-0400"></a>
+
+#### `Card`: default surface and spacing
+
+`Card` now uses a section surface with no border and updated spacing to match Figma.
+
+What changed:
+
+| Before (0.39.0)                                | After (0.40.0)                     |
+| ---------------------------------------------- | ---------------------------------- |
+| `bg-default p-4 rounded border border-default` | `bg-section p-3 rounded-xl` (no border) |
+
+Migration:
+
+```tsx
+// To preserve the previous look, override the new defaults
+import { Card, Box } from '@metamask/design-system-react-native';
+
+<Card twClassName="bg-default p-4 rounded border border-default">
+  {children}
+</Card>;
+
+// If you prefer to separate spacing from the surface, add an inner Box
+<Card twClassName="bg-default rounded border border-default">
+  <Box twClassName="p-4">{children}</Box>
+</Card>;
+```
+
+Impact:
+
+- Existing cards will render with a softer section background and no border by default.
+- Padding decreases from 16px (`p-4`) to 12px (`p-3`); radius increases to 12px (`rounded-xl`).
+- If your design requires a border, add `border border-default` via `twClassName`.
+
 ### From version 0.37.0 to 0.38.0
 
 <a id="from-version-0370-to-0380"></a>

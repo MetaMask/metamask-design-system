@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- Updated `Card` default styles to match Figma: `bg-section` background, `p-3` (12px) padding, `rounded-xl` (12px) radius, and no default border
-
 ## [0.39.0]
 
 ### Added
