@@ -50,8 +50,9 @@ parent = DSYS-302 AND statusCategory != "Done" AND assignee = currentUser() ORDE
 ### Interactive (IDE / manual run)
 
 1. Prefer **In Progress** assigned to you.
-2. Else prefer priority queue: **DSYS-713** then **DSYS-751** if still To Do.
-3. Else first unassigned To Do from Rank order.
+2. Else prefer **To Do** assigned to you.
+3. Else prefer priority queue: **DSYS-713** then **DSYS-751** if still **To Do** and **unassigned**.
+4. Else first unassigned To Do from Rank order.
 
 ### Scheduled / cloud (“always take backlog”)
 
