@@ -33,7 +33,6 @@ export type CheckboxProps = Omit<
 
     /**
      * Optional props passed to the relative wrapper around the input and check icon.
-     * Visual appearance (border, background) is on the input via `inputProps`.
      */
     checkboxContainerProps?: (Omit<ComponentProps<'div'>, 'children'> & {
       className?: string;
