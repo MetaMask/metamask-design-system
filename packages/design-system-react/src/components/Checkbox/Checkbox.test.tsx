@@ -265,6 +265,38 @@ describe('Checkbox', () => {
     );
   });
 
+  it('scopes press animation to enabled state on the input', () => {
+    render(
+      <Checkbox
+        id="test-checkbox"
+        isSelected={false}
+        isDisabled
+        onChange={jest.fn()}
+        inputProps={{ 'data-testid': 'chk-input' }}
+      />,
+    );
+
+    expect(screen.getByTestId('chk-input')).toHaveClass(
+      'enabled:active:scale-95',
+    );
+  });
+
+  it('scopes check icon press animation to enabled peer state', () => {
+    render(
+      <Checkbox
+        id="test-checkbox"
+        isSelected
+        isDisabled
+        onChange={jest.fn()}
+        checkedIconProps={{ 'data-testid': 'chk-icon' }}
+      />,
+    );
+
+    expect(screen.getByTestId('chk-icon')).toHaveClass(
+      'peer-enabled:peer-active:scale-95',
+    );
+  });
+
   it('keeps the input Selenium-visible (no opacity-0)', () => {
     render(
       <Checkbox
