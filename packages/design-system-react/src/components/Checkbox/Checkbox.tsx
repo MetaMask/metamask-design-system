@@ -58,14 +58,14 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       checkedIconProps ?? {};
 
     const outerClassName = twMerge(
-      'inline-flex items-center',
+      'inline-flex items-center self-start',
       isDisabled && 'cursor-not-allowed opacity-50',
       className,
     );
 
     const baseBg = isSelected
-      ? 'bg-icon-default hover:bg-icon-default-hover active:bg-icon-default-pressed'
-      : 'bg-default hover:bg-default-hover active:bg-default-pressed';
+      ? 'bg-icon-default enabled:hover:bg-icon-default-hover enabled:active:bg-icon-default-pressed'
+      : 'bg-default enabled:hover:bg-default-hover enabled:active:bg-default-pressed';
     let baseBorder = 'border-default';
     if (isSelected) {
       baseBorder = 'border-icon-default';

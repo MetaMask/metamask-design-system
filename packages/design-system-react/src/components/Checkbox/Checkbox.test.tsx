@@ -120,6 +120,19 @@ describe('Checkbox', () => {
     );
   });
 
+  it('prevents label from stretching in flex containers', () => {
+    render(
+      <Checkbox
+        id="test-checkbox"
+        onChange={jest.fn()}
+        isSelected={false}
+        data-testid="chk-label"
+      />,
+    );
+
+    expect(screen.getByTestId('chk-label')).toHaveClass('self-start');
+  });
+
   it('merges className and style on label container', () => {
     render(
       <Checkbox
@@ -262,6 +275,23 @@ describe('Checkbox', () => {
       'focus-visible:outline-2',
       'focus-visible:outline-offset-2',
       'focus-visible:outline-primary-default',
+    );
+  });
+
+  it('scopes hover and press background to enabled state on the input', () => {
+    render(
+      <Checkbox
+        id="test-checkbox"
+        isSelected={false}
+        isDisabled
+        onChange={jest.fn()}
+        inputProps={{ 'data-testid': 'chk-input' }}
+      />,
+    );
+
+    expect(screen.getByTestId('chk-input')).toHaveClass(
+      'enabled:hover:bg-default-hover',
+      'enabled:active:bg-default-pressed',
     );
   });
 
