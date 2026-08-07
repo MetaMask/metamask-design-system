@@ -125,6 +125,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       animationStartedRef.current = false;
       visibleAtRef.current = null;
       isDismissing.value = false;
+      isSwipeActive.value = false;
       clearScheduledAutoDismiss();
       setToastOptions(undefined);
     };
@@ -195,6 +196,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
         animationStartedRef.current = false;
         visibleAtRef.current = null;
         isDismissing.value = false;
+        isSwipeActive.value = false;
         setToastOptions(undefined);
       }
       if (replacementTimerRef.current !== null) {
@@ -327,10 +329,17 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
           // onEnd is skipped when the pan fails/cancels after activation
           // (e.g. horizontal travel past failOffsetX). Recover position and
           // auto-dismiss so the toast is not left stuck mid-offset.
-          if (!isSwipeActive.value || isDismissing.value) {
+          if (!isSwipeActive.value) {
             return;
           }
+          // Clear before the dismiss check — same order as onEnd — so a pan
+          // cancelled mid-dismiss cannot leave isSwipeActive stuck true for a
+          // later toast (resetState alone is not enough if finalize races it).
           isSwipeActive.value = false;
+
+          if (isDismissing.value) {
+            return;
+          }
           springBackAfterSwipe();
         });
       // Shared values and swipe JS wrappers are stable for the component lifetime.
