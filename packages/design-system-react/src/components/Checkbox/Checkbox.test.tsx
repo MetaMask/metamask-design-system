@@ -99,8 +99,8 @@ describe('Checkbox', () => {
       />,
     );
     expect(screen.getByTestId('inner')).toHaveClass(
-      'bg-primary-default',
-      'border-primary-default',
+      'bg-icon-default',
+      'border-icon-default',
     );
   });
 

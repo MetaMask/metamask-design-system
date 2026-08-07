@@ -13,10 +13,6 @@ jobs:
     permissions:
       pull-requests: read
     steps:
-      - name: Checkout and setup environment
-        uses: MetaMask/action-checkout-and-setup@v1
-        with:
-          is-high-risk-environment: false
       - name: Run command
         uses: actions/github-script@v7
         with:

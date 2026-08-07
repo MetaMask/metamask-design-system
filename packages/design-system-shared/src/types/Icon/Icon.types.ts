@@ -9,6 +9,8 @@ export const IconColor = {
   IconAlternative: 'text-icon-alternative',
   /** For the weakest contrast neutral icons (not accessible) */
   IconMuted: 'text-icon-muted',
+  /** For elements used on top of icon/default fills (e.g. checkmark on monochromatic checkbox) */
+  IconInverse: 'text-icon-inverse',
   /** For elements used on top of overlay/alternative. Used for text, icon, or border */
   OverlayInverse: 'text-overlay-inverse',
   /** For interactive, active, and selected semantics. Used for text, background, icon, or border */
