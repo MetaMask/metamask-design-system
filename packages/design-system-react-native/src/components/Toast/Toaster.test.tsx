@@ -33,6 +33,7 @@ const mockPanGestureHandlers: {
   onStart?: () => void;
   onUpdate?: (event: { translationY: number }) => void;
   onEnd?: (event: { translationY: number; velocityY: number }) => void;
+  onFinalize?: () => void;
 } = {};
 
 jest.mock('react-native-gesture-handler', () => ({
@@ -57,6 +58,10 @@ jest.mock('react-native-gesture-handler', () => ({
         handler: (event: { translationY: number; velocityY: number }) => void,
       ) {
         mockPanGestureHandlers.onEnd = handler;
+        return this;
+      },
+      onFinalize(handler: () => void) {
+        mockPanGestureHandlers.onFinalize = handler;
         return this;
       },
     }),
@@ -105,6 +110,7 @@ const swipeToast = async ({
     mockPanGestureHandlers.onStart?.();
     mockPanGestureHandlers.onUpdate?.({ translationY });
     mockPanGestureHandlers.onEnd?.({ translationY, velocityY });
+    mockPanGestureHandlers.onFinalize?.();
     jest.runAllTimers();
   });
 };
@@ -118,6 +124,7 @@ describe('Toaster', () => {
     mockPanGestureHandlers.onStart = undefined;
     mockPanGestureHandlers.onUpdate = undefined;
     mockPanGestureHandlers.onEnd = undefined;
+    mockPanGestureHandlers.onFinalize = undefined;
     jest.useFakeTimers();
   });
 
@@ -560,6 +567,30 @@ describe('Toaster', () => {
       await swipeToast({ translationY: -10, velocityY: -100 });
 
       expect(screen.getByText('Incomplete swipe toast')).toBeOnTheScreen();
+    });
+
+    it('springs back when pan fails after activation (e.g. failOffsetX)', async () => {
+      render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: true,
+        title: 'Failed pan toast',
+      });
+
+      await act(async () => {
+        triggerToastLayout(screen.getByTestId('toast-root'));
+        jest.runAllTimers();
+      });
+
+      // Simulate failOffsetX: onEnd is skipped, only onFinalize runs.
+      await act(async () => {
+        mockPanGestureHandlers.onStart?.();
+        mockPanGestureHandlers.onUpdate?.({ translationY: -10 });
+        mockPanGestureHandlers.onFinalize?.();
+        jest.runAllTimers();
+      });
+
+      expect(screen.getByText('Failed pan toast')).toBeOnTheScreen();
     });
 
     it('still auto-dismisses after an incomplete swipe during entrance', async () => {
