@@ -1,6 +1,6 @@
 # Card
 
-Card is a container component used to group and display related content with a default border and background.
+Card is a container component used to group and display related content with a section background, 12px padding, and 12px border radius.
 
 ```tsx
 import { Card } from '@metamask/design-system-react-native';
@@ -103,7 +103,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <Card style={tw.style('bg-default', isActive && 'bg-success-default')}>
+    <Card style={tw.style('bg-section', isActive && 'bg-success-default')}>
       Conditional styling
     </Card>
   );
