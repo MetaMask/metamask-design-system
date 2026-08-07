@@ -57,12 +57,12 @@ ActionListItem
 
 Roughly **~8–10** layers to text. No `Content`, `BoxRow`, `BoxColumn`, `TextOrChildren`, or `SensitiveText`.
 
-| | ActionListItem | ListItem |
-| --- | --- | --- |
-| Layout | plain `Box` | `Content` + `BoxRow` / `BoxColumn` |
-| Text path | `Text` | `TextOrChildren` → `SensitiveText` → `Text` |
-| Depth (label + chevron) | ~half | ~2× |
-| Residual bloat | every `Box` = `Box`+`View`; optional accessory `Box` | multiplied by every helper |
+|                         | ActionListItem                                       | ListItem                                    |
+| ----------------------- | ---------------------------------------------------- | ------------------------------------------- |
+| Layout                  | plain `Box`                                          | `Content` + `BoxRow` / `BoxColumn`          |
+| Text path               | `Text`                                               | `TextOrChildren` → `SensitiveText` → `Text` |
+| Depth (label + chevron) | ~half                                                | ~2×                                         |
+| Residual bloat          | every `Box` = `Box`+`View`; optional accessory `Box` | multiplied by every helper                  |
 
 **Takeaway:** The UI does not require the Content stack. `ActionListItem` is closer to the complexity budget a list row should hit.
 
@@ -108,12 +108,12 @@ Escape hatch today: pass custom `ReactNode` and rebuild layout — abandons defa
 
 ## Implications
 
-| Question | Answer |
-| --- | --- |
-| Do `BoxRow`/`BoxColumn` bloat a component? | Yes when used as the default internal vocabulary for `Content` / `ListItem`. Fine as occasional composition helpers. |
-| Footgun level | Medium–high: silent defaults, text coupling, opaque nesting, inconsistent `textProps` (`SensitiveText` vs `Text`). |
-| Is `ListItem` list-safe for dense `FlatList`s? | Not as-is; prefer flattening before optimizing with memo alone. |
-| React parity risk | Copying RN stack to web locks the cost into two platforms. |
+| Question                                       | Answer                                                                                                               |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Do `BoxRow`/`BoxColumn` bloat a component?     | Yes when used as the default internal vocabulary for `Content` / `ListItem`. Fine as occasional composition helpers. |
+| Footgun level                                  | Medium–high: silent defaults, text coupling, opaque nesting, inconsistent `textProps` (`SensitiveText` vs `Text`).   |
+| Is `ListItem` list-safe for dense `FlatList`s? | Not as-is; prefer flattening before optimizing with memo alone.                                                      |
+| React parity risk                              | Copying RN stack to web locks the cost into two platforms.                                                           |
 
 ---
 
@@ -121,11 +121,11 @@ Escape hatch today: pass custom `ReactNode` and rebuild layout — abandons defa
 
 Priority queue today (automation): BoxRow → BoxColumn → Content → ListItem.
 
-| Option | Approach | Pros | Cons |
-| --- | --- | --- | --- |
-| **A. Copy RN stack** | Ship `BoxRow` / `BoxColumn` / `Content` / `ListItem` with same composition | Fastest code share; same mental model | Copies depth, footguns, and access gaps to web |
-| **B. Shared API, flatter impl** | Keep consumer props (`title`, accessories, `variant`, etc.); implement React (and ideally later RN) with direct `Box`/`div` + leaf text | API parity for Extension; better performance; fewer wrappers to expose | Two implementations; RN refactor follow-up |
-| **C. Divergent architecture** | React `ListItem` designed for performance; RN stays as-is short term | Unblocks React parity without waiting on RN rewrite | Cross-platform drift; docs/Figma must call out differences |
+| Option                          | Approach                                                                                                                                | Pros                                                                   | Cons                                                       |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **A. Copy RN stack**            | Ship `BoxRow` / `BoxColumn` / `Content` / `ListItem` with same composition                                                              | Fastest code share; same mental model                                  | Copies depth, footguns, and access gaps to web             |
+| **B. Shared API, flatter impl** | Keep consumer props (`title`, accessories, `variant`, etc.); implement React (and ideally later RN) with direct `Box`/`div` + leaf text | API parity for Extension; better performance; fewer wrappers to expose | Two implementations; RN refactor follow-up                 |
+| **C. Divergent architecture**   | React `ListItem` designed for performance; RN stays as-is short term                                                                    | Unblocks React parity without waiting on RN rewrite                    | Cross-platform drift; docs/Figma must call out differences |
 
 **Recommendation:** Prefer **B** for React parity.
 
