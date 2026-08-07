@@ -28,13 +28,31 @@ Jira pickup for epic **DSYS-302** (_Migrate Legacy Extension Components to MMDS 
 
 **Parity strategy (option B):** shared **consumer API** with RN; **flatter React implementation**. Do **not** port RN `BoxRow` / `BoxColumn` / `TextOrChildren` as React building blocks for Content/ListItem — they are RN composition helpers / depth footguns (see `packages/design-system-react-native/src/components/ListItem/PERFORMANCE_AUDIT.md`). No Mobile consumer usage of `BoxRow`/`BoxColumn` today.
 
-| Order | Issue     | Component         | Notes                                                                                 |
-| ----- | --------- | ----------------- | ------------------------------------------------------------------------------------- |
-| 1     | DSYS-1043 | **Content**       | Shared props; implement with direct `Box`/`Text` (no BoxRow/BoxColumn/TextOrChildren) |
-| 2     | DSYS-713  | **ListItem**      | After Content; same flatter approach                                                  |
-| 3     | DSYS-751  | **SectionHeader** | RN + shared types already exist                                                       |
+Walk this list top-down; take the first open unclaimed To Do.
 
-**Out of queue (canceled / deferred):** DSYS-1041 BoxRow, DSYS-1042 BoxColumn — RN-specific helpers; may optimize or remove later, not React parity blockers.
+| Order | Issue     | Component            |
+| ----- | --------- | -------------------- |
+| 1     | DSYS-1043 | **Content**          |
+| 2     | DSYS-713  | **ListItem**         |
+| 3     | DSYS-751  | **SectionHeader**    |
+| 4     | DSYS-750  | **SectionDivider**   |
+| 5     | DSYS-757  | **HeaderRoot**       |
+| 6     | DSYS-758  | **HeaderStandard**   |
+| 7     | DSYS-756  | **TitleSubpage**     |
+| 8     | DSYS-755  | **TitleStandard**    |
+| 9     | DSYS-752  | **TitleAlert**       |
+| 10    | DSYS-749  | **SelectButton**     |
+| 11    | DSYS-716  | **HeaderSearch**     |
+| 12    | DSYS-712  | **KeyValueRow**      |
+| 13    | DSYS-711  | **KeyValueColumn**   |
+| 14    | DSYS-715  | **Spinner**          |
+| 15    | DSYS-714  | **MainActionButton** |
+
+**Notes**
+
+- Content before ListItem (ListItem composes Content). Prefer HeaderRoot before HeaderStandard when both are open.
+- For Content/ListItem: implement with direct `Box`/`Text` (no BoxRow/BoxColumn/TextOrChildren).
+- **Out of queue (canceled):** DSYS-1041 BoxRow, DSYS-1042 BoxColumn.
 
 Then fall through to other unclaimed `parent = DSYS-302` To Do items by Rank.
 
@@ -55,17 +73,16 @@ parent = DSYS-302 AND statusCategory != "Done" AND assignee = currentUser() ORDE
 ### Interactive (IDE / manual run)
 
 1. Prefer **In Progress** assigned to you.
-2. Else prefer priority queue in order: **DSYS-1043 → DSYS-713 → DSYS-751** if still To Do.
+2. Else prefer the **priority queue** above in order (first still To Do).
 3. Else first unassigned To Do from Rank order.
-4. Prefer Content before ListItem when both are open (ListItem composes Content).
+4. Prefer Content before ListItem, and HeaderRoot before HeaderStandard, when both are open.
 
 ### Scheduled / cloud (“always take backlog”)
 
 1. Walk the priority queue in order; take the **first** unclaimed To Do still open.
-2. Prefer Content (DSYS-1043) before ListItem (DSYS-713) when both are unclaimed.
-3. Else first result of the unclaimed To Do JQL.
-4. If empty → stop (no PR).
-5. **Skip** canceled/deferred helper tickets (BoxRow/BoxColumn/TextOrChildren ports).
+2. Else first result of the unclaimed To Do JQL.
+3. If empty → stop (no PR).
+4. **Skip** canceled/deferred helper tickets (BoxRow/BoxColumn/TextOrChildren ports).
 
 **Jira:** Enable Atlassian/Jira MCP on the automation so the agent can search, assign, and transition.
 
@@ -171,9 +188,9 @@ Repository: MetaMask/metamask-design-system @ main (checkout must include .curso
 
 You are bringing React (design-system-react) to parity with existing React Native MMDS components for epic DSYS-302. Follow docs/ai-agents.md: use @ rules — do not invent patterns from memory.
 
-1) Read @.cursor/automations/react-parity-from-mobile.md for JQL, priority queue (Content → ListItem → SectionHeader), flatter-impl strategy, audit, and Storybook demo requirements.
+1) Read @.cursor/automations/react-parity-from-mobile.md for JQL, priority queue (15 components starting Content → ListItem → … → MainActionButton), flatter-impl strategy, audit, and Storybook demo requirements.
 
-2) Jira (atlassian MCP): claim one unclaimed To Do under parent = DSYS-302 following the priority queue (DSYS-1043, DSYS-713, DSYS-751). Prefer Content before ListItem. Skip canceled BoxRow/BoxColumn tickets. Assign + transition to In Progress. If none, exit with one line and optionally Slack that the backlog was empty.
+2) Jira (atlassian MCP): claim one unclaimed To Do under parent = DSYS-302 by walking the priority queue in that file (first open). Skip canceled BoxRow/BoxColumn tickets. Assign + transition to In Progress. If none, exit with one line and optionally Slack that the backlog was empty.
 
 3) Audit BEFORE coding (component-migration Phase 1):
    - RN + shared types in this repo (API/props — not internal RN helper composition)
