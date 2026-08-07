@@ -19,7 +19,7 @@ const meta: Meta<CardProps> = {
   decorators: [
     (Story) => (
       <Box
-        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
+        backgroundColor={BoxBackgroundColor.BackgroundDefault}
         padding={4}
       >
         <Text>Content behind card</Text>

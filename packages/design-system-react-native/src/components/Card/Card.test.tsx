@@ -86,7 +86,7 @@ describe('Card', () => {
     const card = getByTestId('card');
     const styles = flattenStyles(card.props.style);
     expect(styles[0]).toStrictEqual(
-      tw.style('p-4 rounded border border-default bg-default'),
+      tw.style('p-3 rounded-xl bg-section'),
     );
   });
 
@@ -99,10 +99,7 @@ describe('Card', () => {
     const card = getByTestId('card');
     const styles = flattenStyles(card.props.style);
     expect(styles[0]).toStrictEqual(
-      tw.style(
-        'p-4 rounded border border-default bg-default',
-        'p-8 rounded-lg',
-      ),
+      tw.style('p-3 rounded-xl bg-section', 'p-8 rounded-lg'),
     );
   });
 
@@ -115,7 +112,7 @@ describe('Card', () => {
     const card = getByTestId('card');
     const styles = flattenStyles(card.props.style);
     expect(styles[0]).toStrictEqual(
-      tw.style('p-4 rounded border border-default bg-default'),
+      tw.style('p-3 rounded-xl bg-section'),
     );
     expect(styles[1]).toStrictEqual({ margin: 8 });
   });

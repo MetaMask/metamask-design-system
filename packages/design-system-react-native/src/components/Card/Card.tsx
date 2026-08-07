@@ -15,7 +15,7 @@ export const Card = ({
   const tw = useTailwind();
 
   const cardStyle = [
-    tw.style('p-4 rounded border border-default bg-default', twClassName),
+    tw.style('p-3 rounded-xl bg-section', twClassName),
     style,
   ];
 
