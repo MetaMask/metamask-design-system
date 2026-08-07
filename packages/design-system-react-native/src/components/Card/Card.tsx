@@ -14,10 +14,7 @@ export const Card = ({
 }: CardProps) => {
   const tw = useTailwind();
 
-  const cardStyle = [
-    tw.style('p-3 rounded-xl bg-section', twClassName),
-    style,
-  ];
+  const cardStyle = [tw.style('p-3 rounded-xl bg-section', twClassName), style];
 
   if (onPress) {
     return (
