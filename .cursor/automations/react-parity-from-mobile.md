@@ -61,10 +61,11 @@ parent = DSYS-302 AND statusCategory != "Done" AND assignee = currentUser() ORDE
 
 ### Scheduled / cloud (“always take backlog”)
 
-1. Walk the priority queue in order; take the **first** unclaimed To Do still open.
-2. Skip ListItem if it is blocked by open BoxRow/BoxColumn/Content issues.
-3. Else first result of the unclaimed To Do JQL.
-4. If empty → stop (no PR).
+1. Walk the priority queue in order; for each item:
+   - If it is **ListItem (DSYS-713)** and BoxRow/BoxColumn/Content blockers are open, **skip and continue** to the next item.
+   - If the issue is **unclaimed** and **To Do**, **take it** and stop.
+2. If none selected from the priority queue, take the **first unclaimed To Do** from the Rank-ordered JQL above.
+3. If empty → stop (no PR).
 
 **Jira:** Enable Atlassian/Jira MCP on the automation so the agent can search, assign, and transition.
 
