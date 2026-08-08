@@ -104,6 +104,9 @@ export type { JazziconProps } from './temp-components/Jazzicon';
 export { Label } from './Label';
 export type { LabelProps } from './Label';
 
+export { ListItem, ListItemVariant } from './ListItem';
+export type { ListItemProps } from './ListItem';
+
 export { Maskicon } from './temp-components/Maskicon';
 export type { MaskiconProps } from './temp-components/Maskicon';
 
