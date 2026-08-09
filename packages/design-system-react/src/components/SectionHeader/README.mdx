@@ -1,0 +1,420 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as SectionHeaderStories from './SectionHeader.stories';
+
+# SectionHeader
+
+SectionHeader introduces a horizontal section heading with optional leading and trailing controls and an optional accessory beside the title. When `isInteractive` is `true`, the entire header becomes clickable.
+
+```tsx
+import { SectionHeader } from '@metamask/design-system-react';
+
+<SectionHeader title="Assets" />;
+```
+
+<Canvas of={SectionHeaderStories.Default} />
+
+## Props
+
+### `title`
+
+The section title for the inner row. When `title` is a string, it is rendered with `TextVariant.HeadingMd` and `TextColor.TextDefault` (merged with `titleProps`). Pass a `ReactNode` for custom content. The inner row renders only when `title` is renderable (`null`, `undefined`, `false`, and `''` are not); a renderable `titleAccessory` without a renderable `title` does not show the inner row.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">—</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SectionHeader } from '@metamask/design-system-react';
+
+<SectionHeader title="Tokens" />;
+```
+
+### `titleAccessory`
+
+Optional node to the right of `title` in the **inner** title row. Only visible when `title` is renderable. Use for metadata or actions tied to the title itself (for example an info icon beside "Tokens"). **Do not** use for trailing row icons such as chevrons or navigation arrows; use `endIconName` / `endIconProps` or `endAccessory` on the **outer** header row instead.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionHeaderStories.TitleAccessory} />
+
+### `children`
+
+Optional full-width content rendered below the header row. Use for subtitles or other supporting content.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionHeaderStories.Children} />
+
+## Accessory slots
+
+`SectionHeader` has two horizontal rows of concern:
+
+| Slot                 | Props                                                              | Use for                                                                   |
+| -------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| **Inner title row**  | `titleAccessory`                                                   | Inline metadata beside the title (info icon, badge, short label)          |
+| **Outer header row** | `startIconName` / `startAccessory`, `endIconName` / `endAccessory` | Leading avatars or icons; trailing chevrons, actions, or custom end nodes |
+
+When implementing designs or stories, map Figma trailing chevrons (`>`, `ArrowRight`) to `endIconName` (and `endIconProps`), not `titleAccessory`—even when the chevron appears visually close to the title.
+
+```tsx
+// Correct — trailing chevron on the outer row
+<SectionHeader
+  title="How it works"
+  endIconName={IconName.ArrowRight}
+  endIconProps={{ size: IconSize.Sm }}
+/>
+
+// Incorrect — chevron belongs on the outer row, not the title row
+<SectionHeader
+  title="How it works"
+  titleAccessory={<Icon name={IconName.ArrowRight} size={IconSize.Sm} />}
+/>
+```
+
+### `startIconName`
+
+Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconDefault`; override with `startIconProps`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionHeaderStories.StartIconName} />
+
+### `endIconName`
+
+Optional icon name for the end of the **outer** header row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconAlternative`; override with `endIconProps`. Use for trailing chevrons, disclosure arrows, and other row-level affordances. **Do not** place these icons in `titleAccessory`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconName</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionHeaderStories.EndIconName} />
+
+### `startAccessory`
+
+Optional custom node before the title row on the **outer** row. Used when no start icon name is resolved.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionHeaderStories.StartAccessory} />
+
+### `endAccessory`
+
+Optional custom node after the title row on the **outer** row. Used when no end icon name is resolved.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionHeaderStories.EndAccessory} />
+
+### `titleProps`
+
+Optional props merged into the inner row `Text` when `title` is a string. Documented in Storybook controls via usage; pass-through object props are omitted from interactive `argTypes`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;TextProps&gt;, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SectionHeader } from '@metamask/design-system-react';
+
+<SectionHeader
+  title="Assets"
+  titleProps={{ 'data-testid': 'section-title' }}
+/>;
+```
+
+### `titleWrapperProps`
+
+Optional props spread onto the inner title row `Box` (excluding `children`, which SectionHeader sets).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;BoxProps&gt;, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SectionHeader } from '@metamask/design-system-react';
+
+<SectionHeader
+  title="Assets"
+  titleWrapperProps={{ 'data-testid': 'section-title-row' }}
+/>;
+```
+
+### `startIconProps`
+
+Optional props merged into the start `Icon` when a start icon is shown.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;IconProps&gt;, 'name'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `endIconProps`
+
+Optional props merged into the end `Icon` when an end icon is shown.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;IconProps&gt;, 'name'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `isInteractive`
+
+When `true`, the root becomes focusable and clickable so the full row is tappable. Pressed feedback uses `active:opacity-70`. An `IconName.ArrowRight` end icon is rendered by default unless `endIconName` or `endAccessory` is provided. `role` defaults to `button` and `tabIndex` defaults to `0` when not provided. Use `onClick` for activation. When `disabled` is set, clicks and keyboard activation are ignored and `aria-disabled` is set.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionHeaderStories.IsInteractive} />
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the **outer** wrapper. These classes are merged with the component's default classes using `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SectionHeader } from '@metamask/design-system-react';
+
+// Add additional styles
+<SectionHeader className="mt-4" title="Assets" />
+
+// Override default styles
+<SectionHeader className="px-6" title="Assets" />
+```
+
+<Controls of={SectionHeaderStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
