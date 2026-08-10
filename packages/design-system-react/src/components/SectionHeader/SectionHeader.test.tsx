@@ -376,8 +376,8 @@ describe('SectionHeader', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveClass('cursor-pointer');
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('hover:bg-hover');
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('active:bg-pressed');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('hover:opacity-80');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('active:opacity-80');
       expect(getByTestId(ROOT_TEST_ID)).toHaveClass('px-4');
     });
 

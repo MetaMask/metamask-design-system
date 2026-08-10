@@ -20,8 +20,7 @@ import type { SectionHeaderProps } from './SectionHeader.types';
 /**
  * Horizontal section header: optional start/end icons or accessories, and a
  * title row with optional inline accessory. When `isInteractive` is `true`,
- * the root is focusable and clickable with hover and pressed background
- * feedback.
+ * the root is focusable and clickable with 80% opacity on hover and press.
  *
  * Implemented with direct `Box` / `Text` / `Icon` (no `BoxRow`).
  */
@@ -152,7 +151,7 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
       'px-4 pb-2 pt-3',
       isInteractive &&
         !isDisabled &&
-        'cursor-pointer hover:bg-hover active:bg-pressed',
+        'cursor-pointer hover:opacity-80 active:opacity-80',
       className,
     );
 

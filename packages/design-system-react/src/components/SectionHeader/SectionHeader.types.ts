@@ -19,7 +19,7 @@ type TitleWrapperProps = Omit<BoxProps, 'children' | 'asChild'> & {
  * Extends {@link SectionHeaderPropsShared} with React `Text` / `Icon` /
  * `Box` passthroughs and `className` / `style` via {@link BoxProps}.
  * When `isInteractive` is `true`, the root is a focusable, clickable `Box`
- * with `role="button"` and `hover:bg-hover` / `active:bg-pressed` feedback.
+ * with `role="button"` and `hover:opacity-80` / `active:opacity-80` feedback.
  *
  * `title` is omitted from {@link BoxProps} because the DOM `title` attribute
  * conflicts with the SectionHeader `title` ReactNode prop.
