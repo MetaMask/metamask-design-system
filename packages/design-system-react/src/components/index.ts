@@ -179,3 +179,6 @@ export { Toast, Toaster, toast, ToastSeverity } from './Toast';
 export type { ToastOptions, ToastProps, ToasterProps } from './Toast';
 
 export { PureBlackProvider, usePureBlack } from './PureBlackProvider';
+
+export { SectionDivider } from './SectionDivider';
+export type { SectionDividerProps } from './SectionDivider';
