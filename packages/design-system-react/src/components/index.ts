@@ -194,3 +194,6 @@ export {
   SelectButtonVariant,
 } from './SelectButton';
 export type { SelectButtonProps } from './SelectButton';
+
+export { SectionDivider } from './SectionDivider';
+export type { SectionDividerProps } from './SectionDivider';
