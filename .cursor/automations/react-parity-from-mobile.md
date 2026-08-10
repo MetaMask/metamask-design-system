@@ -47,6 +47,14 @@ Walk this list top-down; take the first open unclaimed To Do.
 | 13    | DSYS-711  | **KeyValueColumn**   |
 | 14    | DSYS-715  | **Spinner**          |
 | 15    | DSYS-714  | **MainActionButton** |
+| 16    | TBD       | **ListItemSelect**   |
+| 17    | TBD       | **ListItemMultiSelect** |
+| 18    | TBD       | **KeyValueSelect**   |
+| 19    | TBD       | **HeaderSubpage**    |
+| 20    | TBD       | **Skeleton**         |
+| 21    | TBD       | **FilterButton**     |
+| 22    | TBD       | **FilterButtonGroup** |
+| 23    | TBD       | **SegmentedControl** |
 
 **Notes**
 
@@ -188,7 +196,7 @@ Repository: MetaMask/metamask-design-system @ main (checkout must include .curso
 
 You are bringing React (design-system-react) to parity with existing React Native MMDS components for epic DSYS-302. Follow docs/ai-agents.md: use @ rules — do not invent patterns from memory.
 
-1) Read @.cursor/automations/react-parity-from-mobile.md for JQL, priority queue (15 components starting Content → ListItem → … → MainActionButton), flatter-impl strategy, audit, and Storybook demo requirements.
+1) Read @.cursor/automations/react-parity-from-mobile.md for JQL, the priority queue (starting Content → ListItem → …), flatter-impl strategy, audit, and Storybook demo requirements.
 
 2) Jira (atlassian MCP): claim one unclaimed To Do under parent = DSYS-302 by walking the priority queue in that file (first open). Skip canceled BoxRow/BoxColumn tickets. Assign + transition to In Progress. If none, exit with one line and optionally Slack that the backlog was empty.
 
