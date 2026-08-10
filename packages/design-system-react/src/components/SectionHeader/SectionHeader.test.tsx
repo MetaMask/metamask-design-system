@@ -365,7 +365,7 @@ describe('SectionHeader', () => {
       );
     });
 
-    it('applies interactive pressed classes on root', () => {
+    it('applies interactive hover and pressed classes on root', () => {
       const { getByTestId } = render(
         <SectionHeader
           title="Section"
@@ -376,7 +376,8 @@ describe('SectionHeader', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveClass('cursor-pointer');
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('active:opacity-70');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('hover:bg-hover');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('active:bg-pressed');
       expect(getByTestId(ROOT_TEST_ID)).toHaveClass('px-4');
     });
 

@@ -50,7 +50,7 @@ const meta: Meta<SectionHeaderProps> = {
     isInteractive: {
       control: 'boolean',
       description:
-        'When true, the full row is clickable with pressed opacity feedback',
+        'When true, the full row is clickable with hover and pressed background feedback',
     },
   },
   decorators: [
