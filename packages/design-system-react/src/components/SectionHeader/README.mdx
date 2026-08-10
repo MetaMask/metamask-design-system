@@ -103,10 +103,41 @@ Optional full-width content rendered below the header row. Use for subtitles or 
 
 `SectionHeader` has two horizontal rows of concern:
 
-| Slot                 | Props                                                              | Use for                                                                   |
-| -------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| **Inner title row**  | `titleAccessory`                                                   | Inline metadata beside the title (info icon, badge, short label)          |
-| **Outer header row** | `startIconName` / `startAccessory`, `endIconName` / `endAccessory` | Leading avatars or icons; trailing chevrons, actions, or custom end nodes |
+<table>
+  <thead>
+    <tr>
+      <th align="left">SLOT</th>
+      <th align="left">PROPS</th>
+      <th align="left">USE FOR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <strong>Inner title row</strong>
+      </td>
+      <td align="left">
+        <code>titleAccessory</code>
+      </td>
+      <td align="left">
+        Inline metadata beside the title (info icon, badge, short label)
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <strong>Outer header row</strong>
+      </td>
+      <td align="left">
+        <code>startIconName</code> / <code>startAccessory</code>,{' '}
+        <code>endIconName</code> / <code>endAccessory</code>
+      </td>
+      <td align="left">
+        Leading avatars or icons; trailing chevrons, actions, or custom end
+        nodes
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 When implementing designs or stories, map Figma trailing chevrons (`>`, `ArrowRight`) to `endIconName` (and `endIconProps`), not `titleAccessory`—even when the chevron appears visually close to the title.
 
