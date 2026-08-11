@@ -4,7 +4,7 @@ import * as SectionDividerStories from './SectionDivider.stories';
 
 # SectionDivider
 
-SectionDivider is a horizontal rule built on the root [Box](../Box/Box.tsx). It stretches on the cross axis by default, uses a 1px muted **top-only** border (`border-t` and `border-muted`) so the line reads as a single hairline on a zero-height box, and applies vertical margin from the design scale.
+SectionDivider is a horizontal rule built on the root [Box](../Box/Box.tsx) and rendered as a semantic `<hr />`. It stretches on the cross axis by default, uses a 1px muted **top-only** border (`border-t` and `border-muted`) so the line reads as a single hairline on a zero-height box, and applies vertical margin from the design scale.
 
 ```tsx
 import { SectionDivider } from '@metamask/design-system-react';
@@ -16,7 +16,7 @@ import { SectionDivider } from '@metamask/design-system-react';
 
 ## Props
 
-`SectionDividerProps` matches [Box](../Box/Box.types.ts) and standard `div` props. Override defaults with any `Box` prop (for example `marginVertical={0}` or `borderWidth={0}`) or with `className` / `style`.
+`SectionDividerProps` matches [Box](../Box/Box.types.ts) and standard `hr` props. Override defaults with any `Box` prop (for example `marginVertical={0}` or `borderWidth={0}`) or with `className` / `style`.
 
 ### Defaults
 
