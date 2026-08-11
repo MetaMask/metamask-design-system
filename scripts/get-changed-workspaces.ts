@@ -92,11 +92,36 @@ function hasRootFileChanged(
   workspaces: Workspace[],
   changedFiles: string[],
 ): boolean {
-  return changedFiles.some(
-    (file) =>
-      !IGNORED_ROOT_FILES.has(file) &&
-      !workspaces.some(({ location }) => file.startsWith(`${location}/`)),
-  );
+  // Only treat changes that impact the monorepo root configuration or CI as "root changes".
+  // - Root-level config files (except explicitly ignored ones)
+  // - Files under scripts/ (shared CI and tooling)
+  // - Workflow files under .github/workflows/
+  const ROOT_IMPACTING_DIR_PREFIXES = ['scripts/', '.github/workflows/'];
+
+  return changedFiles.some((file) => {
+    if (IGNORED_ROOT_FILES.has(file)) {
+      return false;
+    }
+
+    // Root-level files (no path separators) that aren't ignored impact the root.
+    const isRootFile = !file.includes('/');
+    if (isRootFile) {
+      return true;
+    }
+
+    // Certain root-scoped directories always impact all packages.
+    if (ROOT_IMPACTING_DIR_PREFIXES.some((prefix) => file.startsWith(prefix))) {
+      return true;
+    }
+
+    // Changes inside non-private workspaces are not root changes.
+    if (workspaces.some(({ location }) => file.startsWith(`${location}/`))) {
+      return false;
+    }
+
+    // Other non-workspace paths (e.g., apps/, docs/) should NOT force a full run.
+    return false;
+  });
 }
 
 async function computeChangedWorkspaces({
