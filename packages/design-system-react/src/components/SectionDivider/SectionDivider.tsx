@@ -11,7 +11,7 @@ import type { SectionDividerProps } from './SectionDivider.types';
  * a 1px muted **top-only** border so the line reads as a single hairline, and
  * applies vertical margin from the design scale.
  */
-export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
+export const SectionDivider = forwardRef<HTMLHRElement, SectionDividerProps>(
   (
     { borderWidth, borderColor, marginVertical, className, style, ...rest },
     ref,
@@ -28,13 +28,18 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
 
     return (
       <Box
-        ref={ref}
+        // Render a semantic <hr /> while preserving Box API and class mappings
+        asChild
+        // Cast is safe: Box forwards the ref to the child when asChild is used
+        ref={ref as unknown as React.Ref<HTMLDivElement>}
         borderColor={borderColor ?? BoxBorderColor.BorderMuted}
         marginVertical={marginVertical ?? 5}
-        className={twMerge('self-stretch', borderTopClass, className)}
+        className={twMerge('self-stretch border-0', borderTopClass, className)}
         style={style}
         {...rest}
-      />
+      >
+        <hr />
+      </Box>
     );
   },
 );
