@@ -5,6 +5,7 @@ import {
   Box,
   BoxAlignItems,
   BoxBackgroundColor,
+  BoxBorderColor,
   BoxFlexDirection,
   BoxJustifyContent,
 } from '../Box';
@@ -95,6 +96,8 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
             ref={modalDialogRef as React.Ref<HTMLDivElement>}
             asChild
             backgroundColor={BoxBackgroundColor.BackgroundElevated1}
+            borderColor={BoxBorderColor.BorderAlternative}
+            borderWidth={1}
             justifyContent={BoxJustifyContent.Start}
             alignItems={BoxAlignItems.Stretch}
             flexDirection={BoxFlexDirection.Column}
@@ -102,7 +105,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
             paddingBottom={4}
             {...modalDialogProps}
             className={twMerge(
-              'flex max-h-full w-full rounded-lg border border-alternative shadow-lg motion-safe:animate-slide-up',
+              'flex max-h-full w-full rounded-lg shadow-lg motion-safe:animate-slide-up',
               TWCLASSMAP_MODAL_CONTENT_SIZE[size],
               modalDialogProps?.className,
             )}
