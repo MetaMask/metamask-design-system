@@ -1,6 +1,6 @@
 # BottomSheetDialog
 
-BottomSheetDialog is used to represent the animated content area within a BottomSheet. It provides swipe-to-dismiss gesture handling, keyboard avoidance, and smooth slide-in/slide-out animations. This is a foundation component and should be used within BottomSheet.
+BottomSheetDialog is used to represent the animated content area within a BottomSheet. It provides handle-only swipe-to-dismiss, keyboard avoidance, spring open / tween dismiss animations, and reduce-motion support. This is a foundation component and should be used within BottomSheet.
 
 ```tsx
 import { BottomSheetDialog } from './BottomSheetDialog';
@@ -99,6 +99,20 @@ Optional callback that gets triggered when the sheet close animation completes.
 
 ```tsx
 <BottomSheetDialog onClose={() => console.log('Sheet closed')}>
+  <Text>Content</Text>
+</BottomSheetDialog>
+```
+
+### `onCloseStart`
+
+Optional callback fired when a close animation begins (programmatic close or drag-to-dismiss). Used by `BottomSheet` to fade the backdrop in parallel with the sheet.
+
+| TYPE       | REQUIRED | DEFAULT     |
+| ---------- | -------- | ----------- |
+| `function` | No       | `undefined` |
+
+```tsx
+<BottomSheetDialog onCloseStart={() => console.log('Close started')}>
   <Text>Content</Text>
 </BottomSheetDialog>
 ```

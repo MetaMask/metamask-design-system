@@ -10,6 +10,10 @@ import {
   BoxBackgroundColor,
   BoxFlexDirection,
   BoxFlexWrap,
+  BottomSheet,
+  BottomSheetFooter,
+  BottomSheetHeader,
+  type BottomSheetRef,
   Button,
   ButtonSize,
   ButtonVariant,
@@ -37,8 +41,8 @@ import {
 } from '@metamask/design-system-react-native';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
-import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 
 const meta: Meta = {
   title: 'Examples/Wallet Home',
@@ -319,17 +323,24 @@ const PerpetualRow: React.FC<PerpetualRowProps> = ({
 const WalletHome: React.FC = () => {
   const tw = useTailwind();
   const [isBalanceHidden, setIsBalanceHidden] = useState(false);
+  const [isBuySellSheetVisible, setIsBuySellSheetVisible] = useState(false);
+  const buySellSheetRef = useRef<BottomSheetRef>(null);
+  // Animate dismiss first; unmount only after onClose (avoids hard cut).
+  const requestCloseBuySellSheet = () => {
+    buySellSheetRef.current?.onCloseBottomSheet();
+  };
 
   const toggleBalanceVisibility = () => {
     setIsBalanceHidden((hidden) => !hidden);
   };
 
   return (
-    <ScrollView style={tw`flex-1 bg-default`}>
-      <Box
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        twClassName="w-full pb-4"
-      >
+    <View style={tw`flex-1 bg-default`}>
+      <ScrollView style={tw`flex-1`}>
+        <Box
+          backgroundColor={BoxBackgroundColor.BackgroundDefault}
+          twClassName="w-full pb-4"
+        >
         {/* Header */}
         <HeaderRoot
           endButtonIconProps={[
@@ -398,7 +409,7 @@ const WalletHome: React.FC = () => {
             iconName={IconName.AttachMoney}
             label="Buy"
             twClassName="flex-1"
-            onPress={noopPress}
+            onPress={() => setIsBuySellSheetVisible(true)}
           />
           <MainActionButton
             iconName={IconName.SwapVertical}
@@ -593,7 +604,33 @@ const WalletHome: React.FC = () => {
           ))}
         </ScrollView>
       </Box>
-    </ScrollView>
+      </ScrollView>
+      {isBuySellSheetVisible && (
+        <BottomSheet
+          ref={buySellSheetRef}
+          onClose={() => setIsBuySellSheetVisible(false)}
+        >
+          <BottomSheetHeader onClose={requestCloseBuySellSheet}>
+            Buy/Sell
+          </BottomSheetHeader>
+          <Box twClassName="gap-2 p-4">
+            <Text>
+              Choose how you want to buy or sell crypto with your DeFi Account.
+            </Text>
+          </Box>
+          <BottomSheetFooter
+            secondaryButtonProps={{
+              children: 'Sell',
+              onPress: requestCloseBuySellSheet,
+            }}
+            primaryButtonProps={{
+              children: 'Buy',
+              onPress: requestCloseBuySellSheet,
+            }}
+          />
+        </BottomSheet>
+      )}
+    </View>
   );
 };
 
