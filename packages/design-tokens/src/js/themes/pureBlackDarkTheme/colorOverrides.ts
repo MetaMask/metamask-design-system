@@ -11,7 +11,7 @@ import type { DeepPartial } from '../utils/deepMerge';
  */
 export const pureBlackDarkColorOverrides = {
   background: {
-    default: '#000000',
+    default: brandColor.black,
     alternative: '#0d0d0f',
     section: '#18181b',
     subsection: '#222226',

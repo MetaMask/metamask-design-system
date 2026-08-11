@@ -10,7 +10,7 @@
   /* Background default should be the darkest shade, 0 elevation.
   Section is +1 elevation, subsection is +2 elevation.
   Alternative should be deprecated. */
-  --color-background-default: #000000;
+  --color-background-default: var(--brand-colors-black);
   --color-background-section: #18181b;
   --color-background-subsection: #222226;
   --color-background-alternative: #0d0d0f;

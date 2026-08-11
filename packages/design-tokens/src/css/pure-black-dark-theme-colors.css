@@ -14,7 +14,7 @@
 .dark [data-pure-black='true'],
 [data-pure-black='true'] .dark,
 [data-theme='dark'] [data-pure-black='true'] .dark {
-  --color-background-default: #000000;
+  --color-background-default: var(--brand-colors-black);
   --color-background-alternative: #0d0d0f;
   --color-background-section: #18181b;
   --color-background-subsection: #222226;

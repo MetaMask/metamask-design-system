@@ -4,7 +4,7 @@ import type { ThemeColors } from '../types';
 export const colors: ThemeColors = {
   background: {
     /** For default neutral surface (#000000) */
-    default: '#000000',
+    default: brandColor.black,
     /** For sunken neutral surface below background/default. (#0d0d0f) */
     alternative: '#0d0d0f',
     /** For section bg usually over background/default (#18181b) */
