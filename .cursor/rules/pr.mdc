@@ -87,6 +87,12 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
 - Bug fixes → "Resolves issue with..."
 - New features → "Implements new functionality for..."
 
+**Changelog policy (always apply)**:
+
+- Do not modify any `packages/**/CHANGELOG.md` files in normal feature/fix/chore/docs PRs.
+- Changelogs are updated only on release branches created via `yarn create-release-branch` per `@.cursor/rules/release-workflow.md`.
+- If the diff includes changes to `CHANGELOG.md`, either revert them or convert the work into a release PR instead.
+
 **Example auto-generated descriptions**:
 
 - For Avatar Figma files: "Adds Figma Code Connect integration for Avatar components, ensuring design-to-code alignment between React and React Native implementations."
