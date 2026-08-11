@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.35.2]
+
+### Fixed
+
+- Fixed `Checkbox` so the native `<input>` is the visible, clickable control instead of an `opacity-0` overlay; use `inputProps` for `data-testid` so Selenium E2E tests can find and click the control ([#1437](https://github.com/MetaMask/metamask-design-system/pull/1437))
+
 ## [0.35.1]
 
 ### Fixed
@@ -455,7 +461,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.2...HEAD
+[0.35.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.1...@metamask/design-system-react@0.35.2
 [0.35.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.0...@metamask/design-system-react@0.35.1
 [0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.34.0...@metamask/design-system-react@0.35.0
 [0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.33.0...@metamask/design-system-react@0.34.0
