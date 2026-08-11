@@ -1,10 +1,9 @@
 import {
   Theme,
-  usePureBlack,
   useTailwind,
   useTheme,
 } from '@metamask/design-system-twrnc-preset';
-import { lightTheme, resolveDarkTheme } from '@metamask/design-tokens';
+import { darkTheme, lightTheme } from '@metamask/design-tokens';
 import { debounce } from 'lodash';
 import React, {
   forwardRef,
@@ -63,11 +62,10 @@ export const BottomSheetDialog = forwardRef<
   ) => {
     const tw = useTailwind();
     const currentTheme = useTheme();
-    const isPureBlack = usePureBlack();
     const shadowLg =
       currentTheme === Theme.Light
         ? lightTheme.shadows.size.lg
-        : resolveDarkTheme(isPureBlack).shadows.size.lg;
+        : darkTheme.shadows.size.lg;
 
     const { top: screenTopPadding, bottom: screenBottomPadding } =
       useSafeAreaInsets();

@@ -11,7 +11,6 @@ import { BottomSheetDialog } from './BottomSheetDialog';
 import type { BottomSheetDialogRef } from './BottomSheetDialog.types';
 
 const mockThemeRef = { current: 'light' };
-const mockIsPureBlackRef = { current: false };
 const mockStyle = jest.fn((...args: string[]) => args);
 
 jest.mock('react-native-gesture-handler', () => ({
@@ -42,7 +41,6 @@ jest.mock('@metamask/design-system-twrnc-preset', () => ({
     style: mockStyle,
   }),
   useTheme: () => mockThemeRef.current,
-  usePureBlack: () => mockIsPureBlackRef.current,
 }));
 
 jest.mock('react-native-reanimated', () => {
@@ -57,7 +55,6 @@ jest.mock('react-native-reanimated', () => {
 describe('BottomSheetDialog', () => {
   afterEach(() => {
     mockThemeRef.current = 'light';
-    mockIsPureBlackRef.current = false;
     mockStyle.mockClear();
   });
 
