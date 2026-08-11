@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.39.1]
 
-### Uncategorized
+### Fixed
 
-- fix: Align swipe dismiss constants and finalize handling ([#1427](https://github.com/MetaMask/metamask-design-system/pull/1427))
+- Fixed `Toast` swipe-to-dismiss so a pan that fails after activation (for example when horizontal movement exceeds the fail offset) springs back to its visible position and resumes auto-dismiss instead of staying mid-offset ([#1427](https://github.com/MetaMask/metamask-design-system/pull/1427))
 
 ## [0.39.0]
 
