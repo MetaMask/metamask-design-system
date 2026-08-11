@@ -7,7 +7,6 @@ import { HeaderRoot } from './HeaderRoot';
 const CONTAINER_TEST_ID = 'header-root-container';
 const LEFT_CHILDREN_TEST_ID = 'header-root-left-children';
 const END_ACCESSORY_TEST_ID = 'header-root-end-accessory';
-const END_BUTTON_TEST_ID = 'header-root-end-button';
 
 describe('HeaderRoot', () => {
   describe('rendering', () => {
@@ -40,7 +39,9 @@ describe('HeaderRoot', () => {
       );
 
       expect(getByTestId('header-root-title-node')).toBeInTheDocument();
-      expect(queryByTestId('header-root-title-string-props')).not.toBeInTheDocument();
+      expect(
+        queryByTestId('header-root-title-string-props'),
+      ).not.toBeInTheDocument();
     });
 
     it('forwards titleProps to the title Text when title is a string', () => {
@@ -183,7 +184,7 @@ describe('HeaderRoot', () => {
 
     it('renders a ButtonIcon when endButtonIconProps has one item', () => {
       const onClick = jest.fn();
-      const { getByTestId } = render(
+      const { getByRole } = render(
         <HeaderRoot
           title="Title"
           endButtonIconProps={[
@@ -191,18 +192,17 @@ describe('HeaderRoot', () => {
               iconName: IconName.Close,
               ariaLabel: 'Close',
               onClick,
-              'data-testid': END_BUTTON_TEST_ID,
             },
           ]}
         />,
       );
 
-      expect(getByTestId(END_BUTTON_TEST_ID)).toBeInTheDocument();
+      expect(getByRole('button', { name: 'Close' })).toBeInTheDocument();
     });
 
     it('calls onClick when an end ButtonIcon is clicked', () => {
       const onClick = jest.fn();
-      const { getByTestId } = render(
+      const { getByRole } = render(
         <HeaderRoot
           title="Title"
           endButtonIconProps={[
@@ -210,19 +210,18 @@ describe('HeaderRoot', () => {
               iconName: IconName.Close,
               ariaLabel: 'Close',
               onClick,
-              'data-testid': END_BUTTON_TEST_ID,
             },
           ]}
         />,
       );
 
-      fireEvent.click(getByTestId(END_BUTTON_TEST_ID));
+      fireEvent.click(getByRole('button', { name: 'Close' }));
 
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
     it('renders multiple ButtonIcons from endButtonIconProps', () => {
-      const { getByTestId } = render(
+      const { getByRole } = render(
         <HeaderRoot
           title="Title"
           endButtonIconProps={[
@@ -230,20 +229,18 @@ describe('HeaderRoot', () => {
               iconName: IconName.Close,
               ariaLabel: 'Close',
               onClick: jest.fn(),
-              'data-testid': 'end-button-close',
             },
             {
               iconName: IconName.Search,
               ariaLabel: 'Search',
               onClick: jest.fn(),
-              'data-testid': 'end-button-search',
             },
           ]}
         />,
       );
 
-      expect(getByTestId('end-button-close')).toBeInTheDocument();
-      expect(getByTestId('end-button-search')).toBeInTheDocument();
+      expect(getByRole('button', { name: 'Close' })).toBeInTheDocument();
+      expect(getByRole('button', { name: 'Search' })).toBeInTheDocument();
     });
 
     it('does not render end ButtonIcons when endButtonIconProps is empty', () => {
@@ -255,7 +252,7 @@ describe('HeaderRoot', () => {
     });
 
     it('prioritizes endAccessory over endButtonIconProps', () => {
-      const { getByTestId, queryByTestId } = render(
+      const { getByTestId, queryByRole } = render(
         <HeaderRoot
           title="Title"
           endAccessory={
@@ -266,14 +263,13 @@ describe('HeaderRoot', () => {
               iconName: IconName.Close,
               ariaLabel: 'Close',
               onClick: jest.fn(),
-              'data-testid': END_BUTTON_TEST_ID,
             },
           ]}
         />,
       );
 
       expect(getByTestId(END_ACCESSORY_TEST_ID)).toBeInTheDocument();
-      expect(queryByTestId(END_BUTTON_TEST_ID)).not.toBeInTheDocument();
+      expect(queryByRole('button', { name: 'Close' })).not.toBeInTheDocument();
     });
   });
 });
