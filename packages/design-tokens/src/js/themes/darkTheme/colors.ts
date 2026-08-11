@@ -12,13 +12,15 @@ export const colors: ThemeColors = {
     /** For subsection bg usually over background/section (#222226) */
     subsection: '#222226',
     /**
-     * Temporary elevated surface (alt/default switches). Pure-black
-     * background.alternative value.
+     * One level above `background.default`. Use for surfaces over a
+     * scrim/overlay (e.g. Modal, BottomSheet). Stepped fill so panels
+     * separate from the base.
      */
     'elevated-1': '#0d0d0f',
     /**
-     * Temporary elevated surface (section/default switches). Pure-black
-     * background.section value.
+     * Two levels above the base surface. Can sit on `background.default` or
+     * `background.elevated-1`. Use for floating UI (e.g. Toast, Menu,
+     * Popover, Tooltip). Stepped fill so panels separate from the base.
      */
     'elevated-2': '#18181b',
     /** For muted neutral surface (#e2e2ff1b) */
@@ -67,7 +69,11 @@ export const colors: ThemeColors = {
     default: brandColor.grey500,
     /** Muted color for borders (#e2e2ff26) */
     muted: '#e2e2ff26',
-    /** Temporary elevated-surface border; matches muted in pure black */
+    /**
+     * Border for elevated surfaces. Subtle edge so elevated panels read
+     * against `background.default`. Prefer with `background.elevated-1` /
+     * `elevated-2` when a hairline is needed (e.g. Modal).
+     */
     alternative: '#e2e2ff26',
   },
   overlay: {

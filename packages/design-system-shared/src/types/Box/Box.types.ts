@@ -73,9 +73,15 @@ export const BoxBackgroundColor = {
   BackgroundSection: 'bg-section',
   /** Subsection background color */
   BackgroundSubsection: 'bg-subsection',
-  /** Temporary elevated surface (replaces alt/default theme switches) */
+  /**
+   * One level above bg-default. Surfaces over a scrim/overlay
+   * (e.g. Modal, BottomSheet).
+   */
   BackgroundElevated1: 'bg-elevated-1',
-  /** Temporary elevated surface (replaces section/default theme switches) */
+  /**
+   * Two levels above base; can sit on bg-default or bg-elevated-1.
+   * Floating UI (e.g. Toast, Menu, Popover, Tooltip).
+   */
   BackgroundElevated2: 'bg-elevated-2',
   /** Muted background color */
   BackgroundMuted: 'bg-muted',
@@ -140,7 +146,10 @@ export const BoxBorderColor = {
   BorderDefault: 'border-default',
   /** Muted border color */
   BorderMuted: 'border-muted',
-  /** Temporary elevated-surface border (replaces muted/transparent theme switches) */
+  /**
+   * Border for elevated surfaces. Transparent in light; subtle edge in
+   * dark. Prefer with bg-elevated-1 / bg-elevated-2 (e.g. Modal).
+   */
   BorderAlternative: 'border-alternative',
   /** Primary default border color */
   PrimaryDefault: 'border-primary-default',

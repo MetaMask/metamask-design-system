@@ -7,13 +7,16 @@
   /* Background default should be the darkest shade, 0 elevation.
   Section is +1 elevation, subsection is +2 elevation.
   Alternative should be deprecated. */
-  --color-background-default: var(--brand-colors-grey-grey000);
+  --color-background-default: var(--brand-colors-white);
   --color-background-section: var(--brand-colors-grey-grey050);
   --color-background-subsection: var(--brand-colors-grey-grey000);
   --color-background-alternative: var(--brand-colors-grey-grey050);
-  /* Temporary elevated surfaces (Stage 1 pure-black cleanup). */
-  --color-background-elevated-1: var(--brand-colors-grey-grey000);
-  --color-background-elevated-2: var(--brand-colors-grey-grey000);
+  /* Elevated +1 over bg-default. Scrim/overlay surfaces (Modal, BottomSheet).
+  Light matches bg-default; elevation comes from overlay/shadow. */
+  --color-background-elevated-1: var(--brand-colors-white);
+  /* Elevated +2 over base or elevated-1. Floating UI (Toast, Menu, Popover, Tooltip).
+  Light matches bg-default. */
+  --color-background-elevated-2: var(--brand-colors-white);
 
   /* Applied to interactive elements, such as buttons. 
   For light mode, we use 8% increments of opacity to offer
@@ -55,6 +58,7 @@
   maintains sufficient contrast on bg-default and bg-section.*/
   --color-border-default: var(--brand-colors-grey-grey400);
   --color-border-muted: #b4b4b566;
+  /* Border for elevated surfaces. Transparent in light. */
   --color-border-alternative: transparent;
 
   /* Derived from the background hue, 264.5, for consistency.

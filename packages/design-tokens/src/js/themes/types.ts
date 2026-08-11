@@ -32,15 +32,18 @@ export type ThemeColors = {
     /** For subsection bg usually over background/section */
     subsection: string;
     /**
-     * Temporary elevated surface for components that previously switched
-     * between background.alternative (dark/pure-black) and background.default
-     * (light). Prefer this over theme conditionals. Dark value assumes pure black.
+     * One level above the base surface (`background.default`). Use for
+     * surfaces that sit over a scrim/overlay — e.g. Modal, BottomSheet.
+     * In light, matches `background.default` (elevation comes from
+     * overlay/shadow); in dark, a stepped fill so panels separate from
+     * the base.
      */
     'elevated-1': string;
     /**
-     * Temporary elevated surface for components that previously switched
-     * between background.section (dark) and background.default (light).
-     * Prefer this over theme conditionals. Dark value assumes pure black.
+     * Two levels above the base surface. Can sit on `background.default`
+     * or on `background.elevated-1`. Use for floating UI — e.g. Toast,
+     * Menu, Popover, Tooltip. In light, matches `background.default`; in
+     * dark, a stepped fill.
      */
     'elevated-2': string;
     /** For muted neutral surface */
@@ -90,9 +93,10 @@ export type ThemeColors = {
     /** Muted color for borders */
     muted: string;
     /**
-     * Temporary border for elevated surfaces that previously switched between
-     * border.muted (dark/pure-black) and transparent (light). Dark value
-     * assumes pure black.
+     * Border for elevated surfaces. Transparent in light; a subtle edge in
+     * dark so elevated panels read against `background.default`. Prefer with
+     * `background.elevated-1` / `elevated-2` when a hairline is needed
+     * (e.g. Modal).
      */
     alternative: string;
   };

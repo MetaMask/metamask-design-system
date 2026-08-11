@@ -1,7 +1,7 @@
 {
   "background": {
     "default": {
-      "value": "{grey.000}",
+      "value": "{white}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
       "description": "For default neutral surface."
@@ -25,16 +25,16 @@
       "description": "For subsection bg usually over background/section."
     },
     "elevated-1": {
-      "value": "{grey.000}",
+      "value": "{white}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
-      "description": "Temporary elevated surface (replaces background-alternative / background-default theme switches). Dark value assumes pure black."
+      "description": "One level above background.default. Use for surfaces over a scrim/overlay (e.g. Modal, BottomSheet). In light, matches background.default (elevation from overlay/shadow); in dark, a stepped fill so panels separate from the base."
     },
     "elevated-2": {
-      "value": "{grey.000}",
+      "value": "{white}",
       "type": "color",
       "parent": "Theme Colors/Light mode",
-      "description": "Temporary elevated surface (replaces background-section / background-default theme switches). Dark value assumes pure black."
+      "description": "Two levels above the base surface. Can sit on background.default or background.elevated-1. Use for floating UI (e.g. Toast, Menu, Popover, Tooltip). In light, matches background.default; in dark, a stepped fill."
     },
     "muted": {
       "value": "#b4b4b528",
@@ -166,7 +166,7 @@
       "value": "transparent",
       "type": "color",
       "parent": "Theme Colors/Light mode",
-      "description": "Temporary border for elevated surfaces (replaces border-muted / transparent theme switches). Dark value assumes pure black; light is transparent."
+      "description": "Border for elevated surfaces. Transparent in light; a subtle edge in dark so elevated panels read against background.default. Prefer with background.elevated-1 / elevated-2 when a hairline is needed (e.g. Modal)."
     }
   },
   "overlay": {

@@ -4,7 +4,7 @@ import type { ThemeColors } from '../types';
 export const colors: ThemeColors = {
   background: {
     /** For default neutral surface (#FFFFFF) */
-    default: brandColor.grey000,
+    default: brandColor.white,
     /** For sunken neutral surface below background/default (#F3F5F9) */
     alternative: brandColor.grey050,
     /** For section bg usually over background/default (#F3F5F9) */
@@ -12,15 +12,17 @@ export const colors: ThemeColors = {
     /** For subsection bg usually over background/section (#FFFFFF) */
     subsection: brandColor.grey000,
     /**
-     * Temporary elevated surface (alt/default switches). Light matches
-     * background.default.
+     * One level above `background.default`. Use for surfaces over a
+     * scrim/overlay (e.g. Modal, BottomSheet). Matches `background.default`
+     * in light — elevation comes from overlay/shadow, not fill.
      */
-    'elevated-1': brandColor.grey000,
+    'elevated-1': brandColor.white,
     /**
-     * Temporary elevated surface (section/default switches). Light matches
-     * background.default.
+     * Two levels above the base surface. Can sit on `background.default` or
+     * `background.elevated-1`. Use for floating UI (e.g. Toast, Menu,
+     * Popover, Tooltip). Matches `background.default` in light.
      */
-    'elevated-2': brandColor.grey000,
+    'elevated-2': brandColor.white,
     /** For muted neutral surface (#b4b4b528) */
     muted: '#b4b4b528',
     /** Hover state surface for background/default */
@@ -67,7 +69,10 @@ export const colors: ThemeColors = {
     default: brandColor.grey400,
     /** Muted color for borders (#b4b4b566) */
     muted: '#b4b4b566',
-    /** Temporary elevated-surface border; transparent in light */
+    /**
+     * Border for elevated surfaces. Transparent in light; use with
+     * `background.elevated-1` / `elevated-2` when a hairline is needed.
+     */
     alternative: 'transparent',
   },
   overlay: {
