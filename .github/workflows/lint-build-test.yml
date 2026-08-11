@@ -153,12 +153,10 @@ jobs:
   test-scripts:
     name: Test scripts
     runs-on: ubuntu-latest
-    if: needs.prepare.outputs.package-names != '[]'
     needs: prepare
     strategy:
       matrix:
         node-version: [24.x]
-        package-name: ${{ fromJson(needs.prepare.outputs.package-names) }}
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
@@ -177,10 +175,11 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    if: needs.prepare.outputs.package-names != '[]'
     needs: prepare
     strategy:
       matrix:
-        package-name: ${{ fromJson(needs.prepare.outputs.child-workspace-package-names) }}
+        package-name: ${{ fromJson(needs.prepare.outputs.package-names) }}
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@v1
