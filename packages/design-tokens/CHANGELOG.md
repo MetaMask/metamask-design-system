@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- Promoted pure black (OLED) color values into canonical `darkTheme` / dark CSS tokens so default dark mode matches `pureBlackDarkTheme`; `background.default` uses brand `black` ([TMCU-987](https://consensyssoftware.atlassian.net/browse/TMCU-987))
-
 ## [8.7.0]
 
 ### Added
