@@ -99,11 +99,7 @@ export const HeaderRoot = forwardRef<HTMLDivElement, HeaderRootProps>(
       >
         {leftSection}
         {endSectionContent ? (
-          <Box
-            flexDirection={BoxFlexDirection.Row}
-            gap={2}
-            className="ml-auto"
-          >
+          <Box flexDirection={BoxFlexDirection.Row} gap={2} className="ml-auto">
             {endSectionContent}
           </Box>
         ) : null}

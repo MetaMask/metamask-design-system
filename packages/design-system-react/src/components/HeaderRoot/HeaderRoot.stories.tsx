@@ -11,9 +11,9 @@ import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
 
-import README from './README.mdx';
 import { HeaderRoot } from './HeaderRoot';
 import type { HeaderRootProps } from './HeaderRoot.types';
+import README from './README.mdx';
 
 const noopClick = () => undefined;
 
