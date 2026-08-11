@@ -7,6 +7,10 @@
  * Canonical: `[data-theme='dark'][data-pure-black='true']` on the document root
  * (extension `setTheme`, Storybook document sync). Descendant selectors support
  * scoped wrappers (e.g. Storybook "Both" mode side-by-side previews).
+ *
+ * TODO(TMCU-987): Delete this file (and its import) once clients remove
+ * PureBlackProvider / data-pure-black wiring. Values are already folded into
+ * dark-theme-colors.css.
  */
 [data-theme='dark'][data-pure-black='true'],
 .dark[data-pure-black='true'],
@@ -14,7 +18,7 @@
 .dark [data-pure-black='true'],
 [data-pure-black='true'] .dark,
 [data-theme='dark'] [data-pure-black='true'] .dark {
-  --color-background-default: #000000;
+  --color-background-default: var(--brand-colors-black);
   --color-background-alternative: #0d0d0f;
   --color-background-section: #18181b;
   --color-background-subsection: #222226;

@@ -5,10 +5,14 @@ import type { DeepPartial } from '../utils/deepMerge';
 /**
  * Token deltas applied on top of darkTheme to produce pureBlackDarkTheme.
  * Only values that differ from grey dark are listed here.
+ *
+ * TODO(TMCU-987): Remove this file (and pureBlackDarkTheme / resolveDarkTheme)
+ * once clients remove PureBlackProvider. Canonical darkTheme already uses these
+ * same OLED values; this override object is provisional scaffolding only.
  */
 export const pureBlackDarkColorOverrides = {
   background: {
-    default: '#000000',
+    default: brandColor.black,
     alternative: '#0d0d0f',
     section: '#18181b',
     subsection: '#222226',
