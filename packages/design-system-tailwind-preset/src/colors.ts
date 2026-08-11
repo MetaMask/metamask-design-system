@@ -8,6 +8,8 @@ export const colors = {
     'alternative-pressed': 'var(--color-background-alternative-pressed)',
     section: 'var(--color-background-section)',
     subsection: 'var(--color-background-subsection)',
+    'elevated-1': 'var(--color-background-elevated-1)',
+    'elevated-2': 'var(--color-background-elevated-2)',
     muted: 'var(--color-background-muted)',
     'muted-hover': 'var(--color-background-muted-hover)',
     'muted-pressed': 'var(--color-background-muted-pressed)',
@@ -22,6 +24,7 @@ export const colors = {
   border: {
     default: 'var(--color-border-default)',
     muted: 'var(--color-border-muted)',
+    alternative: 'var(--color-border-alternative)',
   },
   icon: {
     default: 'var(--color-icon-default)',

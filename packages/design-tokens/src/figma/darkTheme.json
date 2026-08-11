@@ -24,6 +24,18 @@
       "parent": "Theme Colors/Dark mode",
       "description": "For subsection bg usually over background/section."
     },
+    "elevated-1": {
+      "value": "#0d0d0f",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Temporary elevated surface (replaces background-alternative / background-default theme switches). Dark value assumes pure black."
+    },
+    "elevated-2": {
+      "value": "#18181b",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Temporary elevated surface (replaces background-section / background-default theme switches). Dark value assumes pure black."
+    },
     "muted": {
       "value": "#e2e2ff1b",
       "type": "color",
@@ -149,6 +161,12 @@
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for borders."
+    },
+    "alternative": {
+      "value": "#e2e2ff26",
+      "type": "color",
+      "parent": "Theme Colors/Dark mode",
+      "description": "Temporary border for elevated surfaces (replaces border-muted / transparent theme switches). Dark value assumes pure black; light is transparent."
     }
   },
   "overlay": {

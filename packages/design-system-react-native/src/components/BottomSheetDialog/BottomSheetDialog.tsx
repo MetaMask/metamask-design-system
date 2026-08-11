@@ -254,7 +254,7 @@ export const BottomSheetDialog = forwardRef<
     const sheetStyle = useMemo(
       () => [
         tw.style(
-          isPureBlack ? 'bg-alternative' : 'bg-default',
+          'bg-elevated-1',
           'rounded-t-3xl overflow-hidden border border-muted border-b-0',
           twClassName,
         ),
@@ -273,7 +273,6 @@ export const BottomSheetDialog = forwardRef<
 
       [
         tw,
-        isPureBlack,
         maxSheetHeight,
         screenBottomPadding,
         isFullscreen,

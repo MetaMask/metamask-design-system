@@ -369,18 +369,15 @@ describe('BottomSheetDialog', () => {
     expect(getByText('Dark Theme')).toBeDefined();
   });
 
-  it('uses alternative background class when pure black is enabled', () => {
-    mockThemeRef.current = 'dark';
-    mockIsPureBlackRef.current = true;
-
+  it('uses elevated-1 background class', () => {
     render(
       <BottomSheetDialog>
-        <Text>Pure Black Sheet</Text>
+        <Text>Elevated Sheet</Text>
       </BottomSheetDialog>,
     );
 
     expect(mockStyle).toHaveBeenCalledWith(
-      'bg-alternative',
+      'bg-elevated-1',
       'rounded-t-3xl overflow-hidden border border-muted border-b-0',
       undefined,
     );
@@ -394,7 +391,7 @@ describe('BottomSheetDialog', () => {
     );
 
     expect(mockStyle).toHaveBeenCalledWith(
-      'bg-default',
+      'bg-elevated-1',
       'rounded-t-3xl overflow-hidden border border-muted border-b-0',
       undefined,
     );

@@ -11,6 +11,9 @@
   --color-background-section: var(--brand-colors-grey-grey050);
   --color-background-subsection: var(--brand-colors-grey-grey000);
   --color-background-alternative: var(--brand-colors-grey-grey050);
+  /* Temporary elevated surfaces (Stage 1 pure-black cleanup). */
+  --color-background-elevated-1: var(--brand-colors-grey-grey000);
+  --color-background-elevated-2: var(--brand-colors-grey-grey000);
 
   /* Applied to interactive elements, such as buttons. 
   For light mode, we use 8% increments of opacity to offer
@@ -52,6 +55,7 @@
   maintains sufficient contrast on bg-default and bg-section.*/
   --color-border-default: var(--brand-colors-grey-grey400);
   --color-border-muted: #b4b4b566;
+  --color-border-alternative: transparent;
 
   /* Derived from the background hue, 264.5, for consistency.
   Opacity for default is 36%, alternative is 57%. Default is meant

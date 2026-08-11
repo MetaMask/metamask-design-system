@@ -22,6 +22,9 @@
   --color-background-section: var(--brand-colors-grey-grey050);
   --color-background-subsection: var(--brand-colors-grey-grey000);
   --color-background-alternative: var(--brand-colors-grey-grey050);
+  /* Temporary elevated surfaces (Stage 1 pure-black cleanup). */
+  --color-background-elevated-1: var(--brand-colors-grey-grey000);
+  --color-background-elevated-2: var(--brand-colors-grey-grey000);
 
   /* Applied to interactive elements, such as buttons. 
   For light mode, we use 8% increments of opacity to offer
@@ -63,6 +66,7 @@
   maintains sufficient contrast on bg-default and bg-section.*/
   --color-border-default: var(--brand-colors-grey-grey400);
   --color-border-muted: #b4b4b566;
+  --color-border-alternative: transparent;
 
   /* Derived from the background hue, 264.5, for consistency.
   Opacity for default is 36%, alternative is 57%. Default is meant
@@ -192,6 +196,9 @@
   --color-background-section: var(--brand-colors-grey-grey050);
   --color-background-subsection: var(--brand-colors-grey-grey000);
   --color-background-alternative: var(--brand-colors-grey-grey050);
+  /* Temporary elevated surfaces (Stage 1 pure-black cleanup). */
+  --color-background-elevated-1: var(--brand-colors-grey-grey000);
+  --color-background-elevated-2: var(--brand-colors-grey-grey000);
   --color-background-muted: #b4b4b528;
   --color-background-muted-hover: #b4b4b53d;
   --color-background-muted-pressed: #b4b4b552;
@@ -212,6 +219,7 @@
   --color-icon-inverse: var(--brand-colors-grey-grey000);
   --color-border-default: var(--brand-colors-grey-grey400);
   --color-border-muted: #b4b4b566;
+  --color-border-alternative: transparent;
   --color-overlay-default: #0a0d135c;
   --color-overlay-alternative: #0a0d1392;
   --color-overlay-inverse: var(--brand-colors-grey-grey000);
@@ -284,6 +292,9 @@
   --color-background-section: #18181b;
   --color-background-subsection: #222226;
   --color-background-alternative: #0d0d0f;
+  /* Temporary elevated surfaces (Stage 1 pure-black cleanup; OLED values). */
+  --color-background-elevated-1: #0d0d0f;
+  --color-background-elevated-2: #18181b;
 
   /* Applied to interactive elements, such as buttons.
   Cool-tinted white opacities so muted surfaces inherit the OLED hue. */
@@ -319,6 +330,7 @@
   /* Contrast of border-default: 3:3 on bg-default, 3.0 on section. */
   --color-border-default: var(--brand-colors-grey-grey500);
   --color-border-muted: #e2e2ff26;
+  --color-border-alternative: #e2e2ff26;
 
   /* Derived from the same hue as bg-default for visual
   consistency. Ensures we don't have too much "red".
@@ -466,6 +478,12 @@
 @utility bg-subsection {
   background-color: var(--color-background-subsection);
 }
+@utility bg-elevated-1 {
+  background-color: var(--color-background-elevated-1);
+}
+@utility bg-elevated-2 {
+  background-color: var(--color-background-elevated-2);
+}
 @utility bg-muted {
   background-color: var(--color-background-muted);
 }
@@ -488,6 +506,9 @@
 }
 @utility border-muted {
   border-color: var(--color-border-muted);
+}
+@utility border-alternative {
+  border-color: var(--color-border-alternative);
 }
 
 /* Legacy typography classnames parity with the old preset */

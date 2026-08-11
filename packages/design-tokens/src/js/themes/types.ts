@@ -31,6 +31,18 @@ export type ThemeColors = {
     section: string;
     /** For subsection bg usually over background/section */
     subsection: string;
+    /**
+     * Temporary elevated surface for components that previously switched
+     * between background.alternative (dark/pure-black) and background.default
+     * (light). Prefer this over theme conditionals. Dark value assumes pure black.
+     */
+    'elevated-1': string;
+    /**
+     * Temporary elevated surface for components that previously switched
+     * between background.section (dark) and background.default (light).
+     * Prefer this over theme conditionals. Dark value assumes pure black.
+     */
+    'elevated-2': string;
     /** For muted neutral surface */
     muted: string;
     /** Hover state surface for background/default */
@@ -77,6 +89,12 @@ export type ThemeColors = {
     default: string;
     /** Muted color for borders */
     muted: string;
+    /**
+     * Temporary border for elevated surfaces that previously switched between
+     * border.muted (dark/pure-black) and transparent (light). Dark value
+     * assumes pure black.
+     */
+    alternative: string;
   };
   overlay: {
     /** Default color for overlays(scrim) */

@@ -11,6 +11,16 @@ export const colors: ThemeColors = {
     section: brandColor.grey050,
     /** For subsection bg usually over background/section (#FFFFFF) */
     subsection: brandColor.grey000,
+    /**
+     * Temporary elevated surface (alt/default switches). Light matches
+     * background.default.
+     */
+    'elevated-1': brandColor.grey000,
+    /**
+     * Temporary elevated surface (section/default switches). Light matches
+     * background.default.
+     */
+    'elevated-2': brandColor.grey000,
     /** For muted neutral surface (#b4b4b528) */
     muted: '#b4b4b528',
     /** Hover state surface for background/default */
@@ -57,6 +67,8 @@ export const colors: ThemeColors = {
     default: brandColor.grey400,
     /** Muted color for borders (#b4b4b566) */
     muted: '#b4b4b566',
+    /** Temporary elevated-surface border; transparent in light */
+    alternative: 'transparent',
   },
   overlay: {
     /** Default color for overlays (scrim) (#0a0d135c) */

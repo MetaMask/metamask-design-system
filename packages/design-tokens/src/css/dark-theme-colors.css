@@ -17,6 +17,9 @@
   --color-background-section: #18181b;
   --color-background-subsection: #222226;
   --color-background-alternative: #0d0d0f;
+  /* Temporary elevated surfaces (Stage 1 pure-black cleanup; OLED values). */
+  --color-background-elevated-1: #0d0d0f;
+  --color-background-elevated-2: #18181b;
 
   /* Applied to interactive elements, such as buttons.
   Cool-tinted white opacities so muted surfaces inherit the OLED hue. */
@@ -52,6 +55,7 @@
   /* Contrast of border-default: 3:3 on bg-default, 3.0 on section. */
   --color-border-default: var(--brand-colors-grey-grey500);
   --color-border-muted: #e2e2ff26;
+  --color-border-alternative: #e2e2ff26;
 
   /* Derived from the same hue as bg-default for visual
   consistency. Ensures we don't have too much "red".

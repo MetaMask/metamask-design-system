@@ -73,6 +73,10 @@ export const BoxBackgroundColor = {
   BackgroundSection: 'bg-section',
   /** Subsection background color */
   BackgroundSubsection: 'bg-subsection',
+  /** Temporary elevated surface (replaces alt/default theme switches) */
+  BackgroundElevated1: 'bg-elevated-1',
+  /** Temporary elevated surface (replaces section/default theme switches) */
+  BackgroundElevated2: 'bg-elevated-2',
   /** Muted background color */
   BackgroundMuted: 'bg-muted',
   /** Primary default background color */
@@ -136,6 +140,8 @@ export const BoxBorderColor = {
   BorderDefault: 'border-default',
   /** Muted border color */
   BorderMuted: 'border-muted',
+  /** Temporary elevated-surface border (replaces muted/transparent theme switches) */
+  BorderAlternative: 'border-alternative',
   /** Primary default border color */
   PrimaryDefault: 'border-primary-default',
   /** Primary alternative border color */
