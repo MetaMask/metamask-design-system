@@ -95,12 +95,12 @@ describe('SectionDivider', () => {
 
   describe('ref forwarding', () => {
     it('exposes the underlying element on ref', () => {
-      const ref = createRef<HTMLDivElement>();
+      const ref = createRef<HTMLHRElement>();
 
       render(<SectionDivider ref={ref} data-testid={ROOT_TEST_ID} />);
 
       expect(ref.current).not.toBeNull();
-      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+      expect(ref.current).toBeInstanceOf(HTMLHRElement);
     });
   });
 });
