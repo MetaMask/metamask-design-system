@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: make Checkbox native input Selenium-visible ([#1437](https://github.com/MetaMask/metamask-design-system/pull/1437))
+
 ## [0.35.1]
 
 ### Fixed

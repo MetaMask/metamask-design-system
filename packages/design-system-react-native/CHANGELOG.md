@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: Align swipe dismiss constants and finalize handling ([#1427](https://github.com/MetaMask/metamask-design-system/pull/1427))
+
 ## [0.39.0]
 
 ### Added
