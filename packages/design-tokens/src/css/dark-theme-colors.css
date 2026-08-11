@@ -1,59 +1,56 @@
 /**
  * Dark Theme Colors
+ *
+ * Canonical dark theme values match pure black (OLED) surfaces.
+ * Provisional `[data-pure-black]` overrides remain in
+ * `pure-black-dark-theme-colors.css` until client providers are removed.
  */
 [data-theme='dark'],
 .dark {
   /* Background default should be the darkest shade, 0 elevation.
   Section is +1 elevation, subsection is +2 elevation.
   Alternative should be deprecated. */
-  --color-background-default: var(--brand-colors-grey-grey900);
-  --color-background-section: var(--brand-colors-grey-grey800);
-  --color-background-subsection: var(--brand-colors-grey-grey700);
-  --color-background-alternative: var(--brand-colors-grey-grey1000);
+  --color-background-default: #000000;
+  --color-background-section: #18181b;
+  --color-background-subsection: #222226;
+  --color-background-alternative: #0d0d0f;
 
   /* Applied to interactive elements, such as buttons.
-  For dark mode, we apply pure white with 4% opacity so these
-  tokens inherit the background hue of 264.5. */
-  --color-background-muted: #ffffff0a;
-  --color-background-muted-hover: #ffffff14;
-  --color-background-muted-pressed: #ffffff1f;
+  Cool-tinted white opacities so muted surfaces inherit the OLED hue. */
+  --color-background-muted: #e2e2ff1b;
+  --color-background-muted-hover: #e2e2ff26;
+  --color-background-muted-pressed: #e2e2ff30;
 
   /* Ensures visual consistency with section and subsection. */
-  --color-background-default-hover: var(--brand-colors-grey-grey800);
-  --color-background-default-pressed: var(--brand-colors-grey-grey700);
+  --color-background-default-hover: #18181b;
+  --color-background-default-pressed: #222226;
 
   /* Hover state surface for background/alternative (#0d0d0e) */
   --color-background-alternative-hover: #0d0d0e;
   --color-background-alternative-pressed: #161617;
 
-  /* These have opacities of pure white for general usage. 
-  We set 8% for hover and 12% for pressed so these tokens pick up
-  background hues and are consistent with +1 and +2 elevations.*/
-  --color-background-hover: #ffffff0a;
-  --color-background-pressed: #ffffff1f;
+  /* General purpose hover / pressed tints. */
+  --color-background-hover: #e2e2ff1b;
+  --color-background-pressed: #e2e2ff30;
 
-  /* These are our content colors. 
-  Contrast ratio of alternative: 7.4 on default, 8.5 on section. 
-  Contrast ratio of muted: 2.0 on default, 1.8 on section.*/
+  /* These are our content colors. */
   --color-text-default: var(--brand-colors-grey-grey000);
   --color-text-alternative: var(--brand-colors-grey-grey300);
-  --color-text-muted: var(--brand-colors-grey-grey600);
+  --color-text-muted: var(--brand-colors-grey-grey500);
 
   --color-icon-default: var(--brand-colors-grey-grey000);
   --color-icon-default-hover: #f0f0f0;
   --color-icon-default-pressed: #d0d0d0;
 
   --color-icon-alternative: var(--brand-colors-grey-grey300);
-  --color-icon-muted: var(--brand-colors-grey-grey600);
-  --color-icon-inverse: var(--brand-colors-grey-grey900);
+  --color-icon-muted: var(--brand-colors-grey-grey500);
+  --color-icon-inverse: #0d0d0f;
 
-  /* Contrast of border-default: 3:3 on bg-default, 3.0 on section.
-  We use 8% opacify of pure white for border-muted so it maintains
-  sufficient contrast on bg-default and bg-section.*/
+  /* Contrast of border-default: 3:3 on bg-default, 3.0 on section. */
   --color-border-default: var(--brand-colors-grey-grey500);
-  --color-border-muted: #ffffff14;
+  --color-border-muted: #e2e2ff26;
 
-  /* Derived from the same hue as bg-default, 264.5, for visual
+  /* Derived from the same hue as bg-default for visual
   consistency. Ensures we don't have too much "red".
   Opacities are 72% and 84% for default and alternative. */
   --color-overlay-default: #030304b8;
@@ -66,8 +63,8 @@
   --color-primary-alternative: var(--brand-colors-blue-blue200);
   /* Muted color for primary semantic elements (#8b99ff26) */
   --color-primary-muted: #8b99ff26;
-  /* For elements placed on top of primary/default (#121314) */
-  --color-primary-inverse: var(--brand-colors-grey-grey900);
+  /* For elements placed on top of primary/default (#0d0d0f) */
+  --color-primary-inverse: #0d0d0f;
   /* Hover state surface for primary/default (#9eaaff) */
   --color-primary-default-hover: #9eaaff;
   /* Pressed state surface for primary/default (#c7ceff) */
@@ -82,8 +79,8 @@
   --color-error-alternative: var(--brand-colors-red-red200);
   /* Muted color for error semantic (#ff758426) */
   --color-error-muted: #ff758426;
-  /* For elements placed on top of error/default (#121314) */
-  --color-error-inverse: var(--brand-colors-grey-grey900);
+  /* For elements placed on top of error/default (#0d0d0f) */
+  --color-error-inverse: #0d0d0f;
   /* Hover state surface for error/default (#ff8a96) */
   --color-error-default-hover: #ff8a96;
   /* Pressed state surface for error/default (#ffb2bb) */
@@ -96,8 +93,8 @@
   --color-warning-default: var(--brand-colors-yellow-yellow200);
   /* Muted color option for warning semantic (#f0b03426) */
   --color-warning-muted: #f0b03426;
-  /* For elements placed on top of warning/default (#121314) */
-  --color-warning-inverse: var(--brand-colors-grey-grey900);
+  /* For elements placed on top of warning/default (#0d0d0f) */
+  --color-warning-inverse: #0d0d0f;
   /* Hover state surface for warning/default (#f3be59) */
   --color-warning-default-hover: #f3be59;
   /* Pressed state surface for warning/default (#f6cd7f) */
@@ -110,8 +107,8 @@
   --color-success-default: var(--brand-colors-lime-lime100);
   /* Muted color for positive semantic (#baf24a26) */
   --color-success-muted: #baf24a26;
-  /* For elements placed on top of success/default (#121314) */
-  --color-success-inverse: var(--brand-colors-grey-grey900);
+  /* For elements placed on top of success/default (#0d0d0f) */
+  --color-success-inverse: #0d0d0f;
   /* Hover state surface for success/default (#c9f570) */
   --color-success-default-hover: #c9f570;
   /* Pressed state surface for success/default (#d7f796) */
@@ -124,8 +121,8 @@
   --color-info-default: var(--brand-colors-blue-blue300);
   /* Muted color for informational semantic (#8b99ff26) */
   --color-info-muted: #8b99ff26;
-  /* For elements placed on top of info/default (#121314) */
-  --color-info-inverse: var(--brand-colors-grey-grey900);
+  /* For elements placed on top of info/default (#0d0d0f) */
+  --color-info-inverse: #0d0d0f;
   /* Expressive color in light orange (#ffa680) */
   --color-accent01-light: var(--brand-colors-orange-orange200);
   /* Expressive color in orange (#ff5c16) */
@@ -152,8 +149,8 @@
   --color-accent04-dark: var(--brand-colors-indigo-indigo800);
   /* For Flask primary accent color (#d27dff) */
   --color-flask-default: var(--brand-colors-purple-purple300);
-  /* For elements placed on top of flask/default (#121314) */
-  --color-flask-inverse: var(--brand-colors-grey-grey900);
+  /* For elements placed on top of flask/default (#0d0d0f) */
+  --color-flask-inverse: #0d0d0f;
   /* For neutral drop shadow color (black-40%) */
   --color-shadow-default: #00000066;
   /* For primary drop shadow color (#8b99ff33) */

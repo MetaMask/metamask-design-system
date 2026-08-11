@@ -3,40 +3,40 @@ import type { ThemeColors } from '../types';
 
 export const colors: ThemeColors = {
   background: {
-    /** For default neutral surface (#222325) */
-    default: brandColor.grey900,
-    /** For sunken neutral surface below background/default. (#121314) */
-    alternative: brandColor.grey1000,
-    /** For section bg usually over background/default (#31333A) */
-    section: brandColor.grey800,
-    /** For subsection bg usually over background/section (#222325) */
-    subsection: brandColor.grey700,
-    /** For muted neutral surface (#ffffff0a) */
-    muted: '#ffffff0a',
-    /** Hover state surface for background/default */
-    defaultHover: '#1c1d1f',
-    /** Pressed state surface for background/default */
-    defaultPressed: '#252628',
+    /** For default neutral surface (#000000) */
+    default: '#000000',
+    /** For sunken neutral surface below background/default. (#0d0d0f) */
+    alternative: '#0d0d0f',
+    /** For section bg usually over background/default (#18181b) */
+    section: '#18181b',
+    /** For subsection bg usually over background/section (#222226) */
+    subsection: '#222226',
+    /** For muted neutral surface (#e2e2ff1b) */
+    muted: '#e2e2ff1b',
+    /** Hover state surface for background/default (#18181b) */
+    defaultHover: '#18181b',
+    /** Pressed state surface for background/default (#222226) */
+    defaultPressed: '#222226',
     /** Hover state surface for background/alternative (#0d0d0e) */
     alternativeHover: '#0d0d0e',
     /** Pressed state surface for background/alternative (#161617) */
     alternativePressed: '#161617',
-    /** Hover state surface for background/muted (#ffffff14) */
-    mutedHover: '#ffffff14',
-    /** Pressed state surface for background/muted (#ffffff1f) */
-    mutedPressed: '#ffffff1f',
-    /** General purpose hover state tint (#ffffff0a) */
-    hover: '#ffffff0a',
-    /** General purpose pressed state tint (#ffffff1f) */
-    pressed: '#ffffff1f',
+    /** Hover state surface for background/muted (#e2e2ff26) */
+    mutedHover: '#e2e2ff26',
+    /** Pressed state surface for background/muted (#e2e2ff30) */
+    mutedPressed: '#e2e2ff30',
+    /** General purpose hover state tint (#e2e2ff1b) */
+    hover: '#e2e2ff1b',
+    /** General purpose pressed state tint (#e2e2ff30) */
+    pressed: '#e2e2ff30',
   },
   text: {
     /** Default color for text (#FFFFFF) */
     default: brandColor.grey000,
     /** Softer color for text (#858B9A) */
     alternative: brandColor.grey300,
-    /** Muted color for text (Not accessible) (#686E7D) */
-    muted: brandColor.grey600,
+    /** Muted color for text (Not accessible) (#66676A) */
+    muted: brandColor.grey500,
   },
   icon: {
     /** Default color for icons (#FFFFFF) */
@@ -47,16 +47,16 @@ export const colors: ThemeColors = {
     defaultPressed: '#d0d0d0',
     /** Softer color for icons (#858B9A) */
     alternative: brandColor.grey300,
-    /** Muted color for icons (Not accessible) (#686E7D) */
-    muted: brandColor.grey600,
-    /** For elements placed on top of icon.default fill (#121314) */
-    inverse: brandColor.grey900,
+    /** Muted color for icons (Not accessible) (#66676A) */
+    muted: brandColor.grey500,
+    /** For elements placed on top of icon.default fill (#0d0d0f) */
+    inverse: '#0d0d0f',
   },
   border: {
     /** Default color for borders */
     default: brandColor.grey500,
-    /** Muted color for borders (#ffffff14) */
-    muted: '#ffffff14',
+    /** Muted color for borders (#e2e2ff26) */
+    muted: '#e2e2ff26',
   },
   overlay: {
     /** Default color for overlays (scrim) (#030304b8) */
@@ -73,8 +73,8 @@ export const colors: ThemeColors = {
     alternative: brandColor.blue200,
     /** Muted color for primary semantic elements (#8b99ff26) */
     muted: '#8b99ff26',
-    /** For elements placed on top of primary/default (#121314) */
-    inverse: brandColor.grey900,
+    /** For elements placed on top of primary/default (#0d0d0f) */
+    inverse: '#0d0d0f',
     /** Hover state surface for primary/default (#9eaaff) */
     defaultHover: '#9eaaff',
     /** Pressed state surface for primary/default (#c7ceff) */
@@ -91,8 +91,8 @@ export const colors: ThemeColors = {
     alternative: brandColor.red200,
     /** Muted color for error semantic (#FF758426) */
     muted: '#ff758426',
-    /** For elements placed on top of error/default fill (#121314) */
-    inverse: brandColor.grey900,
+    /** For elements placed on top of error/default fill (#0d0d0f) */
+    inverse: '#0d0d0f',
 
     /** Hover state surface for error/default (#ff8a96) */
     defaultHover: '#ff8a96',
@@ -109,8 +109,8 @@ export const colors: ThemeColors = {
     default: brandColor.yellow200,
     /** Muted color option for warning semantic (#f0b03426) */
     muted: '#f0b03426',
-    /** For elements placed on top of warning/default fill (#121314) */
-    inverse: brandColor.grey900,
+    /** For elements placed on top of warning/default fill (#0d0d0f) */
+    inverse: '#0d0d0f',
     /** Hover state surface for warning/default (#f3be59) */
     defaultHover: '#f3be59',
     /** Pressed state surface for warning/default (#f6cd7f) */
@@ -126,8 +126,8 @@ export const colors: ThemeColors = {
     default: brandColor.lime100,
     /** Muted color for positive semantic (#baf24a26) */
     muted: '#baf24a26',
-    /** For elements placed on top of success/default fill (#121314) */
-    inverse: brandColor.grey900,
+    /** For elements placed on top of success/default fill (#0d0d0f) */
+    inverse: '#0d0d0f',
     /** Hover state surface for success/default (#c9f570) */
     defaultHover: '#c9f570',
     /** Pressed state surface for success/default (#d7f796) */
@@ -143,8 +143,8 @@ export const colors: ThemeColors = {
     default: brandColor.blue300,
     /** Muted color for informational semantic (#8b99ff26) */
     muted: '#8b99ff26',
-    /** For elements placed on top of info/default (#121314) */
-    inverse: brandColor.grey900,
+    /** For elements placed on top of info/default (#0d0d0f) */
+    inverse: '#0d0d0f',
   },
   accent01: {
     /** Expressive color in light orange (#ffa680) */
@@ -181,8 +181,8 @@ export const colors: ThemeColors = {
   flask: {
     /** For Flask primary accent color (#D27DFF) */
     default: brandColor.purple300,
-    /** For elements placed on top of flask/default fill (#121314) */
-    inverse: brandColor.grey900,
+    /** For elements placed on top of flask/default fill (#0d0d0f) */
+    inverse: '#0d0d0f',
   },
   shadow: {
     /** For neutral drop shadow color (#00000066) */
