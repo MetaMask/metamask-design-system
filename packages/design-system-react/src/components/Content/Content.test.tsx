@@ -529,6 +529,41 @@ describe('Content', () => {
     });
   });
 
+  describe('right column alignment', () => {
+    it('does not stretch value and subvalue rows to full width', () => {
+      const { getByText } = render(
+        <Content
+          title="Amount"
+          value="1.23456789 ETH"
+          subvalue="~$1"
+          data-testid={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('1.23456789 ETH').parentElement).not.toHaveClass(
+        'w-full',
+      );
+      expect(getByText('~$1').parentElement?.parentElement).not.toHaveClass(
+        'w-full',
+      );
+    });
+
+    it('keeps title and description rows full width', () => {
+      const { getByText } = render(
+        <Content
+          title="Title"
+          description="Secondary"
+          data-testid={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(getByText('Title').parentElement).toHaveClass('w-full');
+      expect(getByText('Secondary').parentElement?.parentElement).toHaveClass(
+        'w-full',
+      );
+    });
+  });
+
   describe('root layout', () => {
     it('passes data-testid to the root Box', () => {
       const { getByTestId } = render(

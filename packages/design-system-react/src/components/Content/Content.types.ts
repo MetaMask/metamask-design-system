@@ -1,8 +1,8 @@
 import type { ContentPropsShared } from '@metamask/design-system-shared';
 
-import type { BoxProps } from '../Box/Box.types';
+import type { BoxProps } from '../Box';
 import type { SensitiveTextProps } from '../SensitiveText';
-import type { TextProps } from '../Text/Text.types';
+import type { TextProps } from '../Text';
 
 /**
  * Content component props (React platform-specific).

@@ -1,5 +1,4 @@
 import {
-  BoxBackgroundColor,
   ButtonSize,
   ButtonVariant,
   ContentVariant,
@@ -44,16 +43,6 @@ const meta: Meta<ContentProps> = {
     value: { control: 'text' },
     subvalue: { control: 'text' },
   },
-  decorators: [
-    (Story) => (
-      <Box
-        className="w-full p-4"
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      >
-        <Story />
-      </Box>
-    ),
-  ],
 };
 
 export default meta;
@@ -94,6 +83,14 @@ export const Subvalue: Story = {
         title="Network"
         value="1.234 ETH"
         subvalue="~$2,500"
+        description={undefined}
+      />
+      {/* Shorter subvalue under longer value — verifies right-column alignment */}
+      <Content
+        {...args}
+        title="Amount"
+        value="1.23456789 ETH"
+        subvalue="~$1"
         description={undefined}
       />
       <Content

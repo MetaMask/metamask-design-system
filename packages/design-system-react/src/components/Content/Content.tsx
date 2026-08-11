@@ -57,18 +57,21 @@ const TextRow = ({
   startAccessory,
   endAccessory,
   alignItems = BoxAlignItems.Center,
+  className,
   children,
 }: {
   startAccessory?: ReactNode;
   endAccessory?: ReactNode;
   alignItems?: BoxAlignItems;
+  /** Title/description rows use `w-full`; value/subvalue omit it so the right column can end-align. */
+  className?: string;
   children: ReactNode;
 }) => (
   <Box
     flexDirection={BoxFlexDirection.Row}
     alignItems={alignItems}
     gap={1}
-    className="w-full min-w-0"
+    className={twMerge('min-w-0', className)}
   >
     {startAccessory}
     {children}
@@ -121,6 +124,7 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(
 
     const titleRow = title ? (
       <TextRow
+        className="w-full"
         startAccessory={titleStartAccessory}
         endAccessory={titleEndAccessory}
       >
@@ -138,6 +142,7 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(
 
     const descriptionRow = showDescription ? (
       <TextRow
+        className="w-full"
         startAccessory={descriptionStartAccessory}
         endAccessory={descriptionEndAccessory}
         alignItems={alignItems}
