@@ -1,10 +1,10 @@
 import { darkTheme } from '../darkTheme';
 import type { Theme } from '../types';
-import { deepMerge } from '../utils/deepMerge';
 
-import { pureBlackDarkColorOverrides } from './colorOverrides';
-
-export const pureBlackDarkTheme: Theme = {
-  ...darkTheme,
-  colors: deepMerge(darkTheme.colors, pureBlackDarkColorOverrides),
-};
+/**
+ * Alias of canonical darkTheme (OLED values).
+ *
+ * TODO(TMCU-987): Remove this export once clients stop importing
+ * pureBlackDarkTheme / resolveDarkTheme(true).
+ */
+export const pureBlackDarkTheme: Theme = darkTheme;

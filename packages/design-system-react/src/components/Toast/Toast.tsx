@@ -79,7 +79,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
         ref={ref}
         {...resolvedActionProps}
         {...props}
-        backgroundColor={BoxBackgroundColor.BackgroundSection}
+        backgroundColor={BoxBackgroundColor.BackgroundElevated2}
         borderColor={BoxBorderColor.BorderMuted}
         borderWidth={1}
         className={twMerge('rounded-xl', className)}

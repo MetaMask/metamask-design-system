@@ -23,13 +23,14 @@ export const globalTypes = {
   },
   isPureBlack: {
     name: 'Pure black',
-    description: 'Use pure black dark theme (OLED)',
+    description:
+      'Legacy OLED toggle — now identical to dark (canonical darkTheme is pure black). Kept for client provider wiring until TMCU-987 cleanup.',
     defaultValue: false,
     toolbar: {
       icon: 'contrast',
       items: [
-        { value: false, title: 'Grey dark' },
-        { value: true, title: 'Pure black' },
+        { value: false, title: 'Dark (OLED)' },
+        { value: true, title: 'Pure black (same as dark)' },
       ],
       showName: true,
     },
