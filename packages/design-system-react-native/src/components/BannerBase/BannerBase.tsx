@@ -138,9 +138,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
   return (
     <Box
       flexDirection={BoxFlexDirection.Row}
-      alignItems={
-        isCenterAligned ? BoxAlignItems.Center : BoxAlignItems.Start
-      }
+      alignItems={isCenterAligned ? BoxAlignItems.Center : BoxAlignItems.Start}
       gap={4}
       backgroundColor={BoxBackgroundColor.BackgroundDefault}
       paddingTop={3}

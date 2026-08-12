@@ -1,13 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-import React from 'react';
-
-// External dependencies.
 import {
   BannerBaseActionButtonLayout,
   FontWeight,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
+import type { Meta, StoryObj } from '@storybook/react-native';
+import React from 'react';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
@@ -111,10 +109,7 @@ export const Spacing: Story = {
         >
           Single line
         </Text>
-        <Toast
-          severity={ToastSeverity.Success}
-          title="Added to Watchlist"
-        />
+        <Toast severity={ToastSeverity.Success} title="Added to Watchlist" />
       </Box>
       <Box twClassName="gap-2">
         <Text

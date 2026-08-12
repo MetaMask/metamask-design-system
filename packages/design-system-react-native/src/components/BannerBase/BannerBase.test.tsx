@@ -147,7 +147,11 @@ describe('BannerBase', () => {
       />,
     );
 
-    fireEvent(getByText('Added to Watchlist').parent!, 'layout', {
+    const titleParent = getByText('Added to Watchlist').parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
       nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 24 } },
     });
 
@@ -169,7 +173,11 @@ describe('BannerBase', () => {
     );
 
     // Title + gap + one-line description ≈ 24 + 2 + 22
-    fireEvent(getByText('Deposit completed').parent!, 'layout', {
+    const titleParent = getByText('Deposit completed').parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
       nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 48 } },
     });
 
@@ -191,7 +199,11 @@ describe('BannerBase', () => {
     );
 
     // Title + gap + two-line description exceeds the compact stack budget
-    fireEvent(getByText("Don't miss out").parent!, 'layout', {
+    const titleParent = getByText("Don't miss out").parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
       nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 70 } },
     });
 

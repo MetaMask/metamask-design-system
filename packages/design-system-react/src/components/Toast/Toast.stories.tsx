@@ -99,10 +99,7 @@ export const Spacing: Story = {
         >
           Single line
         </Text>
-        <Toast
-          severity={ToastSeverity.Success}
-          title="Added to Watchlist"
-        />
+        <Toast severity={ToastSeverity.Success} title="Added to Watchlist" />
       </Box>
       <Box className="flex flex-col gap-2">
         <Text

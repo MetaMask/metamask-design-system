@@ -124,12 +124,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
         hasDescription,
       });
       setIsCompactContent(height > 0 && height <= maxCompactHeight);
-    }, [
-      hasActionButtonBelow,
-      hasDescription,
-      hasTitle,
-      hasUnmeasuredContent,
-    ]);
+    }, [hasActionButtonBelow, hasDescription, hasTitle, hasUnmeasuredContent]);
 
     useLayoutEffect(() => {
       measureContent();
