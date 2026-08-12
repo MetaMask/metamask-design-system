@@ -384,6 +384,22 @@ describe('Toaster', () => {
     expect(screen.queryByText('Close button test')).toBeNull();
   });
 
+  it('hides the close button when showCloseButton is false', async () => {
+    render(<Toaster ref={toasterRef} />);
+    await showToastAndWait(toasterRef, {
+      closeButtonProps: {
+        testID: 'dismiss-toast-button',
+      },
+      hasNoTimeout: true,
+      showCloseButton: false,
+      title: 'No close button',
+    });
+
+    expect(screen.getByText('No close button')).toBeDefined();
+    expect(screen.queryByTestId('dismiss-toast-button')).toBeNull();
+    expect(screen.queryByLabelText('Close toast')).toBeNull();
+  });
+
   it('cancels animation when replacing toast with hasNoTimeout false', async () => {
     render(<Toaster ref={toasterRef} />);
 

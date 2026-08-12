@@ -131,3 +131,36 @@ export const ActionButtonOnPress: Story = {
     title: 'Privacy policy update',
   },
 };
+
+export const ShowCloseButton: Story = {
+  render: () => (
+    <>
+      <Box twClassName="gap-2">
+        <Button
+          onPress={() => {
+            toast({
+              description: 'showCloseButton defaults to true.',
+              severity: ToastSeverity.Success,
+              title: 'Close button visible',
+            });
+          }}
+        >
+          With close button
+        </Button>
+        <Button
+          onPress={() => {
+            toast({
+              description: 'Dismiss via swipe or auto-timeout.',
+              severity: ToastSeverity.Success,
+              showCloseButton: false,
+              title: 'Close button hidden',
+            });
+          }}
+        >
+          Without close button
+        </Button>
+      </Box>
+      <Toaster />
+    </>
+  ),
+};

@@ -217,6 +217,25 @@ describe('Toaster', () => {
     expect(screen.queryByText('Closeable')).not.toBeInTheDocument();
   });
 
+  it('hides the close button when showCloseButton is false', async () => {
+    render(<Toaster ref={toasterRef} />);
+
+    await showToastAndFlush(toasterRef, {
+      closeButtonProps: {
+        'data-testid': 'dismiss-toast-button',
+      },
+      hasNoTimeout: true,
+      showCloseButton: false,
+      title: 'No close button',
+    });
+
+    expect(screen.getByText('No close button')).toBeInTheDocument();
+    expect(screen.queryByTestId('dismiss-toast-button')).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /close toast/iu }),
+    ).not.toBeInTheDocument();
+  });
+
   it('replaces existing toast when showToast is called again', async () => {
     render(<Toaster ref={toasterRef} />);
 
