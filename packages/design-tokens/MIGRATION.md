@@ -24,17 +24,19 @@ OLED pure-black dark theme values are now canonical on `darkTheme`, and new elev
 - `background.default` changes from `#222325` to `#000000`
 - Section, alternative, muted, border, and hover/pressed values shift to the OLED palette
 
-**Pure-black helpers (breaking behavior, compatible signatures):**
+**Pure-black helpers (compatible signatures, no visual change on OLED path):**
 
 - `resolveDarkTheme(isPureBlack)` always returns `darkTheme`; the `isPureBlack` argument is ignored
 - `@metamask/design-system-twrnc-preset` `getThemeColors(theme, isPureBlack)` ignores `isPureBlack`
 - `pureBlackThemeColors` is deprecated and aliases `darkTheme` colors
+- Callers already on pure-black / OLED mode receive the same token values; remove redundant provider wiring
 
-**New elevated surface tokens (additive):**
+**New elevated surface tokens (additive, semantic unification):**
 
-- `background.elevated1` — one level above base; use for surfaces over scrims (modals, bottom sheets)
-- `background.elevated2` — two levels above base; use for floating UI (toasts, menus, popovers)
-- `border.alternative` — hairline border for elevated surfaces in dark mode
+- `background.elevated1` — one level above base; use for surfaces over scrims (modals, bottom sheets). In light, matches `background.default`; in dark on OLED, matches `background.alternative`
+- `background.elevated2` — two levels above base; use for floating UI (toasts, menus, popovers). In light, matches `background.default`; in dark on OLED, matches `background.section`
+- `border.alternative` — hairline border for elevated surfaces in dark mode; on OLED, matches `border.muted`
+- These tokens replace theme-conditional swaps (e.g. `isPureBlack ? alternative : default`) with a single semantic class per surface type
 
 ### Migration
 
@@ -123,9 +125,9 @@ const theme = darkTheme;
 
 ### Impact
 
-- **Apps already on pure-black / OLED mode:** Minimal visual change; remove redundant provider wiring
-- **Apps on default dark theme without pure-black:** Background and elevation colors will change on upgrade; review dark-mode UI and visual regression snapshots
-- **Custom styling tied to old grey900-based hierarchy:** Update to use `background.elevated1`, `background.elevated2`, and `border.alternative` for stepped surfaces
+- **Apps already on pure-black / OLED mode (MetaMask extension and mobile):** No visual change from design-tokens 9.0.0 or design-system component updates; remove redundant `PureBlackProvider`, `data-pure-black`, and `isPureBlack` wiring and adopt elevated tokens in custom UI
+- **Apps on legacy default dark theme without pure-black:** Background and elevation colors will change on upgrade; review dark-mode UI and visual regression snapshots
+- **Custom styling tied to old grey900-based hierarchy:** Update to use `background.elevated1`, `background.elevated2`, and `border.alternative` for stepped surfaces instead of branching on pure-black mode
 
 ## Tailwind CSS v3 to v4
 

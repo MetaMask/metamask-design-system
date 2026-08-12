@@ -15,10 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^9.0.0`, which promotes OLED pure-black values into canonical `darkTheme` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+- Updated peer dependency to `@metamask/design-tokens@^9.0.0` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - Required coordination bump; visual impact comes from the design-tokens 9.0.0 dark theme change for apps not already on OLED pure-black
   - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
-- **BREAKING:** Updated `ModalContent` to use `BackgroundElevated1` and `BorderAlternative` instead of branching on pure-black mode; dark-theme dialog surfaces and borders render differently for consumers not already on OLED pure-black ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
-- **BREAKING:** Updated `Toast` to use `BackgroundElevated2` instead of `BackgroundSection` ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Updated `ModalContent` to use `BackgroundElevated1` and `BorderAlternative` instead of branching on pure-black mode ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+  - `elevated1` and `border.alternative` resolve to the same values as the previous pure-black path (`background.alternative`, `border.muted`); appearance is unchanged for OLED pure-black consumers
+- Updated `Toast` to use `BackgroundElevated2` instead of `BackgroundSection` ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+  - Dark theme unchanged (`elevated2` matches `background.section`); light theme changes from `background.section` (`#F3F5F9`) to `background.elevated2` / `background.default` (`#FFFFFF`)
 - Design-system components no longer branch on `usePureBlack()` for surface styling; consumers should remove `PureBlackProvider` / `data-pure-black` wiring and use elevated tokens (`bg-elevated1`, `bg-elevated2`, `border-alternative`) instead ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444), [#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
   - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
 

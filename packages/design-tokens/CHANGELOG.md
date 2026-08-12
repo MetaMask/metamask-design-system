@@ -18,9 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **BREAKING:** Updated canonical `darkTheme` to use OLED pure-black surface values (previously only available via `pureBlackDarkTheme` or `data-pure-black` overrides) ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
   - `background.default` changes from `#222325` to `#000000`; section, alternative, muted, and border values shift to the OLED palette
+  - Apps already on pure-black / OLED dark mode (e.g. MetaMask extension and mobile) already use these values and should see no visual change
+  - Apps on legacy default dark without pure-black overrides will see dark-theme UI changes on upgrade
   - See [Migration Guide](./MIGRATION.md#from-version-8x-to-900)
-- **BREAKING:** `resolveDarkTheme()` now always returns canonical `darkTheme`; the `isPureBlack` parameter is ignored but retained for call-site compatibility ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
-  - See [Migration Guide](./MIGRATION.md#from-version-8x-to-900)
+- `resolveDarkTheme()` now always returns canonical `darkTheme`; the `isPureBlack` parameter is ignored but retained for call-site compatibility ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - No additional visual impact for callers already passing `isPureBlack=true`; see [Migration Guide](./MIGRATION.md#from-version-8x-to-900)
 
 ## [8.7.0]
 

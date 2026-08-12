@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^9.0.0`, which promotes OLED pure-black values into canonical `darkTheme` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+- Updated peer dependency to `@metamask/design-tokens@^9.0.0` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - Required coordination bump; visual impact comes from the design-tokens 9.0.0 dark theme change for apps not already on OLED pure-black
   - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
 
 ## [0.10.0]
