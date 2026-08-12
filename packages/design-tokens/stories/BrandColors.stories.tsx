@@ -51,16 +51,18 @@ export const CSS: Story = {
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {/* Mapping through each brand color and rendering a ColorSwatch component for it */}
-        {Object.values(cssBrandColors).map(({ color, name }) => (
-          <ColorSwatch
-            key={name}
-            color={color}
-            backgroundColor={name}
-            textBackgroundColor="transparent"
-            textColor={getContrastYIQ(color, color)}
-            name={name}
-          />
-        ))}
+        {Object.values(cssBrandColors).map(
+          ({ color, resolvedColor, name }) => (
+            <ColorSwatch
+              key={name}
+              color={color}
+              backgroundColor={name}
+              textBackgroundColor="transparent"
+              textColor={getContrastYIQ(resolvedColor, resolvedColor)}
+              name={name}
+            />
+          ),
+        )}
       </div>
     );
   },

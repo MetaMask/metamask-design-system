@@ -68,13 +68,13 @@ export const CSSLightTheme = {
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {Object.entries(lightThemeColors).map(
-          ([name, { color, name: colorName }]) => (
+          ([name, { color, resolvedColor, name: colorName }]) => (
             <ColorSwatch
               key={name}
               color={color}
               textBackgroundColor="transparent"
               textColor={getContrastYIQ(
-                color,
+                resolvedColor,
                 lightThemeJS.colors.background.default, // TODO Use CSS instead of JS object once CSS object is cleaned up
               )}
               backgroundColor={colorName}
@@ -104,7 +104,7 @@ export const CSSDarkTheme = {
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {Object.entries(darkThemeColors).map(
-          ([name, { color, name: colorName }]) => (
+          ([name, { color, resolvedColor, name: colorName }]) => (
             <ColorSwatch
               key={name}
               color={color}
@@ -112,7 +112,7 @@ export const CSSDarkTheme = {
               backgroundColor={colorName}
               borderColor="var(--color-border-muted)"
               textBackgroundColor="transparent"
-              textColor={getContrastYIQ(color, backgroundDefault)}
+              textColor={getContrastYIQ(resolvedColor, backgroundDefault)}
             />
           ),
         )}

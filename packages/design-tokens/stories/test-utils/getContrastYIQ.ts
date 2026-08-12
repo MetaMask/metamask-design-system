@@ -1,8 +1,24 @@
 /**
+ * Expands 3/4-digit hex to 6/8-digit form. Leaves other color strings unchanged.
+ *
+ * @param value - A CSS color string.
+ * @returns Long-form hex when given short hex; otherwise the original value.
+ */
+const expandShortHex = (value: string): string => {
+  const match = /^#([0-9a-f]{3,4})$/iu.exec(value.trim());
+  if (!match?.[1]) {
+    return value.trim();
+  }
+
+  return `#${[...match[1]].map((char) => `${char}${char}`).join('')}`;
+};
+
+/**
  * Determines the appropriate contrast text color (black or white) based on the given background color.
  * The function takes into account the alpha transparency of the hex color, blending it with the background color if necessary.
  *
- * @param hexcolor - The hex color code which may include alpha transparency (e.g., '#RRGGBBAA').
+ * @param hexcolor - The hex color code which may include alpha transparency
+ * (e.g. `#RGB`, `#RGBA`, `#RRGGBB`, `#RRGGBBAA`).
  * @param backgroundColor - The hex color code of the default background color hexcolor will appear on (e.g., '#RRGGBB').
  * @returns Returns 'black' if the contrast is better with black text, otherwise returns 'white'.
  */
@@ -11,7 +27,8 @@ export const getContrastYIQ = (
   backgroundColor: string,
 ): string => {
   // Remove the '#' from the hex color if present
-  const modifiedHexcolor = hexcolor.replace('#', '');
+  const modifiedHexcolor = expandShortHex(hexcolor).replace('#', '');
+  const normalizedBackground = expandShortHex(backgroundColor);
 
   // Variables to store the red, green, blue, and alpha values
   let red: number;
@@ -34,9 +51,9 @@ export const getContrastYIQ = (
   }
 
   // Extract the RGB values from the background color
-  const bgR = parseInt(backgroundColor.slice(1, 3), 16);
-  const bgG = parseInt(backgroundColor.slice(3, 5), 16);
-  const bgB = parseInt(backgroundColor.slice(5, 7), 16);
+  const bgR = parseInt(normalizedBackground.slice(1, 3), 16);
+  const bgG = parseInt(normalizedBackground.slice(3, 5), 16);
+  const bgB = parseInt(normalizedBackground.slice(5, 7), 16);
 
   // Blend the text color with the background color based on the alpha value
   red = Math.round(red * a + (1 - a) * bgR);
