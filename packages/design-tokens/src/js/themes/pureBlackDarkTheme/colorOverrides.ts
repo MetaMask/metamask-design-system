@@ -1,55 +1,13 @@
-import { brandColor } from '../../brandColor';
 import type { ThemeColors } from '../types';
 import type { DeepPartial } from '../utils/deepMerge';
 
 /**
- * Token deltas applied on top of darkTheme to produce pureBlackDarkTheme.
- * Only values that differ from grey dark are listed here.
+ * Former OLED deltas applied on top of darkTheme.
  *
- * TODO(TMCU-987): Remove this file (and pureBlackDarkTheme / resolveDarkTheme)
- * once clients remove PureBlackProvider. Canonical darkTheme already uses these
- * same OLED values; this override object is provisional scaffolding only.
+ * Canonical darkTheme already uses these OLED values, so this object is
+ * intentionally empty — pureBlackDarkTheme is an alias of darkTheme until
+ * clients remove PureBlackProvider / data-pure-black wiring (TMCU-987).
  */
 export const pureBlackDarkColorOverrides = {
-  background: {
-    default: brandColor.black,
-    alternative: '#0d0d0f',
-    section: '#18181b',
-    subsection: '#222226',
-    muted: '#e2e2ff1b',
-    defaultHover: '#18181b',
-    defaultPressed: '#222226',
-    mutedHover: '#e2e2ff26',
-    mutedPressed: '#e2e2ff30',
-    hover: '#e2e2ff1b',
-    pressed: '#e2e2ff30',
-  },
-  text: {
-    muted: brandColor.grey500,
-  },
-  icon: {
-    muted: brandColor.grey500,
-    inverse: '#0d0d0f',
-  },
-  border: {
-    muted: '#e2e2ff26',
-  },
-  primary: {
-    inverse: '#0d0d0f',
-  },
-  error: {
-    inverse: '#0d0d0f',
-  },
-  warning: {
-    inverse: '#0d0d0f',
-  },
-  success: {
-    inverse: '#0d0d0f',
-  },
-  info: {
-    inverse: '#0d0d0f',
-  },
-  flask: {
-    inverse: '#0d0d0f',
-  },
+  // Keep empty while the provisional pure-black API remains for clients.
 } satisfies DeepPartial<ThemeColors>;

@@ -1,9 +1,11 @@
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
+import {
+  BoxBackgroundColor,
+  BoxBorderColor,
+} from '@metamask/design-system-shared';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { Modal } from '../Modal';
-import { PureBlackProvider } from '../PureBlackProvider';
 
 import { ModalContent } from './ModalContent';
 import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from './ModalContent.constants';
@@ -113,50 +115,19 @@ describe('ModalContent', () => {
     expect(dialog).toHaveClass('max-w-[360px]', 'rounded-lg');
   });
 
-  it('uses alternative background on the dialog when pure black is enabled', () => {
+  it('uses elevated1 background and alternative border on the dialog', () => {
     render(
-      <PureBlackProvider isPureBlack>
-        <Modal isOpen onClose={onClose}>
-          <ModalContent modalDialogProps={{ 'data-testid': 'dialog' }}>
-            content
-          </ModalContent>
-        </Modal>
-      </PureBlackProvider>,
-    );
-
-    expect(screen.getByTestId('dialog')).toHaveClass(
-      BoxBackgroundColor.BackgroundAlternative,
-    );
-  });
-
-  it('applies border-muted to the dialog when pure black is enabled', () => {
-    render(
-      <PureBlackProvider isPureBlack>
-        <Modal isOpen onClose={onClose}>
-          <ModalContent modalDialogProps={{ 'data-testid': 'dialog' }}>
-            content
-          </ModalContent>
-        </Modal>
-      </PureBlackProvider>,
+      <Modal isOpen onClose={onClose}>
+        <ModalContent modalDialogProps={{ 'data-testid': 'dialog' }}>
+          content
+        </ModalContent>
+      </Modal>,
     );
 
     const dialog = screen.getByTestId('dialog');
+    expect(dialog).toHaveClass(BoxBackgroundColor.BackgroundElevated1);
     expect(dialog).toHaveClass('border');
-    expect(dialog).toHaveClass('border-muted');
-  });
-
-  it('does not apply border-muted to the dialog when pure black is disabled', () => {
-    render(
-      <PureBlackProvider isPureBlack={false}>
-        <Modal isOpen onClose={onClose}>
-          <ModalContent modalDialogProps={{ 'data-testid': 'dialog' }}>
-            content
-          </ModalContent>
-        </Modal>
-      </PureBlackProvider>,
-    );
-
-    expect(screen.getByTestId('dialog')).not.toHaveClass('border-muted');
+    expect(dialog).toHaveClass(BoxBorderColor.BorderAlternative);
   });
 
   it('forwards ref to the outer positioning element', () => {
