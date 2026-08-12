@@ -19,6 +19,6 @@ describe('resolveDarkTheme', () => {
 describe('pureBlackDarkTheme', () => {
   it('is an alias of darkTheme after the OLED fold', () => {
     expect(pureBlackDarkTheme).toBe(darkTheme);
-    expect(pureBlackDarkTheme.colors).toEqual(darkTheme.colors);
+    expect(pureBlackDarkTheme.colors).toStrictEqual(darkTheme.colors);
   });
 });
