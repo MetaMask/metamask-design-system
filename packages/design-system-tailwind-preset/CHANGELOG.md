@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added `background.elevated1`, `background.elevated2`, and `border.alternative` Tailwind color utilities mapped to new design tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
 
+### Changed
+
+- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^9.0.0`, which promotes OLED pure-black values into canonical `darkTheme` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+
 ## [0.10.0]
 
 ### Changed

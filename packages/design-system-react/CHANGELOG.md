@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^9.0.0`, which promotes OLED pure-black values into canonical `darkTheme` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
 - **BREAKING:** Updated `ModalContent` to use `BackgroundElevated1` and `BorderAlternative` instead of branching on pure-black mode; dark-theme dialog surfaces and borders render differently for consumers not already on OLED pure-black ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
 - **BREAKING:** Updated `Toast` to use `BackgroundElevated2` instead of `BackgroundSection` ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
 - Design-system components no longer branch on `usePureBlack()` for surface styling; consumers should remove `PureBlackProvider` / `data-pure-black` wiring and use elevated tokens (`bg-elevated1`, `bg-elevated2`, `border-alternative`) instead ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444), [#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))

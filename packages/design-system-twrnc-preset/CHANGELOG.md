@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^9.0.0`, which promotes OLED pure-black values into canonical `darkTheme` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
 - **BREAKING:** `getThemeColors()` no longer varies by `isPureBlack`; OLED values are now canonical on the dark theme ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
   - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
 - **BREAKING:** `pureBlackThemeColors` is deprecated and now aliases dark theme colors ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
