@@ -230,7 +230,9 @@ describe('Toaster', () => {
     });
 
     expect(screen.getByText('No close button')).toBeInTheDocument();
-    expect(screen.queryByTestId('dismiss-toast-button')).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('dismiss-toast-button'),
+    ).not.toBeInTheDocument();
     expect(
       screen.queryByRole('button', { name: /close toast/iu }),
     ).not.toBeInTheDocument();
