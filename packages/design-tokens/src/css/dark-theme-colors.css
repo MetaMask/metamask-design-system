@@ -1,12 +1,11 @@
 /**
  * Dark Theme Colors
  *
- * Canonical dark theme values match pure black (OLED) surfaces.
+ * Canonical dark theme values are OLED / pure black surfaces.
  *
- * TODO(TMCU-987): Remove the provisional note below once PureBlackProvider,
- * pureBlackDarkTheme overrides, and pure-black-dark-theme-colors.css are deleted.
- * Provisional `[data-pure-black]` overrides remain in
- * `pure-black-dark-theme-colors.css` until client providers are removed.
+ * TODO(TMCU-987): Remove PureBlackProvider, pureBlackDarkTheme,
+ * resolveDarkTheme, and the empty pure-black-dark-theme-colors.css import once
+ * clients drop data-pure-black wiring.
  */
 [data-theme='dark'],
 .dark {

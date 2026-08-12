@@ -59,6 +59,7 @@ describe('Theme Color Resolution', () => {
         const cleanKey = key
           .replace(/\*/gu, '')
           .replace(/-([a-z])/gu, (_, p1) => p1.toUpperCase())
+          .replace(/-(\d)/gu, '$1')
           .replace(/\s*\(strong\)\s*/gu, '');
         it(`ensures ${category}.${cleanKey} matches defined color`, () => {
           const definedColor = (definedColors as any)[category][

@@ -38,14 +38,14 @@ export type ThemeColors = {
      * overlay/shadow); in dark, a stepped fill so panels separate from
      * the base.
      */
-    'elevated-1': string;
+    elevated1: string;
     /**
      * Two levels above the base surface. Can sit on `background.default`
-     * or on `background.elevated-1`. Use for floating UI — e.g. Toast,
+     * or on `background.elevated1`. Use for floating UI — e.g. Toast,
      * Menu, Popover, Tooltip. In light, matches `background.default`; in
      * dark, a stepped fill.
      */
-    'elevated-2': string;
+    elevated2: string;
     /** For muted neutral surface */
     muted: string;
     /** Hover state surface for background/default */
@@ -95,7 +95,7 @@ export type ThemeColors = {
     /**
      * Border for elevated surfaces. Transparent in light; a subtle edge in
      * dark so elevated panels read against `background.default`. Prefer with
-     * `background.elevated-1` / `elevated-2` when a hairline is needed
+     * `background.elevated1` / `elevated2` when a hairline is needed
      * (e.g. Modal).
      */
     alternative: string;

@@ -16,13 +16,13 @@ export const colors: ThemeColors = {
      * scrim/overlay (e.g. Modal, BottomSheet). Stepped fill so panels
      * separate from the base.
      */
-    'elevated-1': '#0d0d0f',
+    elevated1: '#0d0d0f',
     /**
      * Two levels above the base surface. Can sit on `background.default` or
-     * `background.elevated-1`. Use for floating UI (e.g. Toast, Menu,
+     * `background.elevated1`. Use for floating UI (e.g. Toast, Menu,
      * Popover, Tooltip). Stepped fill so panels separate from the base.
      */
-    'elevated-2': '#18181b',
+    elevated2: '#18181b',
     /** For muted neutral surface (#e2e2ff1b) */
     muted: '#e2e2ff1b',
     /** Hover state surface for background/default (#18181b) */
@@ -71,8 +71,8 @@ export const colors: ThemeColors = {
     muted: '#e2e2ff26',
     /**
      * Border for elevated surfaces. Subtle edge so elevated panels read
-     * against `background.default`. Prefer with `background.elevated-1` /
-     * `elevated-2` when a hairline is needed (e.g. Modal).
+     * against `background.default`. Prefer with `background.elevated1` /
+     * `elevated2` when a hairline is needed (e.g. Modal).
      */
     alternative: '#e2e2ff26',
   },

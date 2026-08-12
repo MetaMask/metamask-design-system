@@ -16,13 +16,13 @@ export const colors: ThemeColors = {
      * scrim/overlay (e.g. Modal, BottomSheet). Matches `background.default`
      * in light — elevation comes from overlay/shadow, not fill.
      */
-    'elevated-1': brandColor.white,
+    elevated1: brandColor.white,
     /**
      * Two levels above the base surface. Can sit on `background.default` or
-     * `background.elevated-1`. Use for floating UI (e.g. Toast, Menu,
+     * `background.elevated1`. Use for floating UI (e.g. Toast, Menu,
      * Popover, Tooltip). Matches `background.default` in light.
      */
-    'elevated-2': brandColor.white,
+    elevated2: brandColor.white,
     /** For muted neutral surface (#b4b4b528) */
     muted: '#b4b4b528',
     /** Hover state surface for background/default */
@@ -71,7 +71,7 @@ export const colors: ThemeColors = {
     muted: '#b4b4b566',
     /**
      * Border for elevated surfaces. Transparent in light; use with
-     * `background.elevated-1` / `elevated-2` when a hairline is needed.
+     * `background.elevated1` / `elevated2` when a hairline is needed.
      */
     alternative: 'transparent',
   },
