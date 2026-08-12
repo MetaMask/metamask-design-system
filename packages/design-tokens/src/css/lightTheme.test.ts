@@ -12,7 +12,9 @@ describe('Light Theme Colors CSS', () => {
     if (Object.prototype.hasOwnProperty.call(lightTheme, section)) {
       for (const key in lightTheme[section]) {
         if (Object.prototype.hasOwnProperty.call(lightTheme[section], key)) {
-          const variableName = `--color-${section}-${key.replace(/_/gu, '-')}`;
+          const variableName = `--color-${section}-${key
+            .replace(/_/gu, '-')
+            .replace(/([a-zA-Z])(\d)/gu, '$1-$2')}`;
           const { value } = lightTheme[section][key];
 
           let cssValue: string;

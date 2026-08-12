@@ -12,7 +12,9 @@ describe('Dark Theme Colors CSS', () => {
     if (Object.prototype.hasOwnProperty.call(darkTheme, section)) {
       for (const key in darkTheme[section]) {
         if (Object.prototype.hasOwnProperty.call(darkTheme[section], key)) {
-          const variableName = `--color-${section}-${key.replace(/_/gu, '-')}`;
+          const variableName = `--color-${section}-${key
+            .replace(/_/gu, '-')
+            .replace(/([a-zA-Z])(\d)/gu, '$1-$2')}`;
           const { value } = darkTheme[section][key];
 
           let cssValue: string;

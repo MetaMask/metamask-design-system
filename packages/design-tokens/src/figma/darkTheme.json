@@ -24,17 +24,17 @@
       "parent": "Theme Colors/Dark mode",
       "description": "For subsection bg usually over background/section."
     },
-    "elevated-1": {
+    "elevated1": {
       "value": "#0d0d0f",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "One level above background.default. Use for surfaces over a scrim/overlay (e.g. Modal, BottomSheet). In light, matches background.default (elevation from overlay/shadow); in dark, a stepped fill so panels separate from the base."
     },
-    "elevated-2": {
+    "elevated2": {
       "value": "#18181b",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "Two levels above the base surface. Can sit on background.default or background.elevated-1. Use for floating UI (e.g. Toast, Menu, Popover, Tooltip). In light, matches background.default; in dark, a stepped fill."
+      "description": "Two levels above the base surface. Can sit on background.default or background.elevated1. Use for floating UI (e.g. Toast, Menu, Popover, Tooltip). In light, matches background.default; in dark, a stepped fill."
     },
     "muted": {
       "value": "#e2e2ff1b",
@@ -166,7 +166,7 @@
       "value": "#e2e2ff26",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
-      "description": "Border for elevated surfaces. Transparent in light; a subtle edge in dark so elevated panels read against background.default. Prefer with background.elevated-1 / elevated-2 when a hairline is needed (e.g. Modal)."
+      "description": "Border for elevated surfaces. Transparent in light; a subtle edge in dark so elevated panels read against background.default. Prefer with background.elevated1 / elevated2 when a hairline is needed (e.g. Modal)."
     }
   },
   "overlay": {
