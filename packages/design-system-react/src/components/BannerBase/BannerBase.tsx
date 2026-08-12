@@ -10,7 +10,6 @@ import {
   IconName,
   TextVariant,
 } from '@metamask/design-system-shared';
-import { typography } from '@metamask/design-tokens';
 import React, {
   forwardRef,
   useCallback,
@@ -27,10 +26,10 @@ import { Text } from '../Text';
 
 import type { BannerBaseProps } from './BannerBase.types';
 
-/** BodyMd line height — title block. */
-const BODY_MD_LINE_HEIGHT = typography.sBodyMD.lineHeight;
-/** BodySm line height — description block. */
-const BODY_SM_LINE_HEIGHT = typography.sBodySM.lineHeight;
+/** BodyMd line height — title block (`typography.sBodyMD.lineHeight`). */
+const BODY_MD_LINE_HEIGHT = 24;
+/** BodySm line height — description block (`typography.sBodySM.lineHeight`). */
+const BODY_SM_LINE_HEIGHT = 22;
 /** `mt-0.5` between title and description. */
 const TITLE_DESCRIPTION_GAP = 2;
 /** Sub-pixel / font rounding allowance when comparing stack height. */

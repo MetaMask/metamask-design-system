@@ -49,7 +49,6 @@
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.2",
     "@metamask/design-system-shared": "workspace:^",
-    "@metamask/design-tokens": "workspace:^",
     "@metamask/jazzicon": "^2.0.0",
     "@radix-ui/react-slot": "^1.1.0",
     "blo": "^2.0.0",
