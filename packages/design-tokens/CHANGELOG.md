@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [8.8.0]
+## [9.0.0]
 
 ### Added
 
@@ -16,8 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated canonical `darkTheme` to use OLED pure-black surface values (previously only available via `pureBlackDarkTheme` or `data-pure-black` overrides) ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
-- `resolveDarkTheme()` now always returns canonical `darkTheme`; the `isPureBlack` parameter is ignored but retained for call-site compatibility ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+- **BREAKING:** Updated canonical `darkTheme` to use OLED pure-black surface values (previously only available via `pureBlackDarkTheme` or `data-pure-black` overrides) ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - `background.default` changes from `#222325` to `#000000`; section, alternative, muted, and border values shift to the OLED palette
+  - See [Migration Guide](./MIGRATION.md#from-version-8x-to-900)
+- **BREAKING:** `resolveDarkTheme()` now always returns canonical `darkTheme`; the `isPureBlack` parameter is ignored but retained for call-site compatibility ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - See [Migration Guide](./MIGRATION.md#from-version-8x-to-900)
 
 ## [8.7.0]
 
@@ -465,8 +468,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.8.0...HEAD
-[8.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...@metamask/design-tokens@8.8.0
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@9.0.0...HEAD
+[9.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...@metamask/design-tokens@9.0.0
 [8.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.6.0...@metamask/design-tokens@8.7.0
 [8.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.5.0...@metamask/design-tokens@8.6.0
 [8.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.4.0...@metamask/design-tokens@8.5.0

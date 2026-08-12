@@ -2,6 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 8.x to 9.0.0](#from-version-8x-to-900)
 - [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
 - [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
@@ -10,6 +11,121 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 8.x to 9.0.0
+
+OLED pure-black dark theme values are now canonical on `darkTheme`, and new elevated surface tokens replace the temporary pure-black provider pattern.
+
+### What changed
+
+**Canonical dark theme values (breaking):**
+
+- `darkTheme` now uses OLED pure-black surface values that were previously only available via `pureBlackDarkTheme` or `data-pure-black` CSS overrides
+- `background.default` changes from `#222325` to `#000000`
+- Section, alternative, muted, border, and hover/pressed values shift to the OLED palette
+
+**Pure-black helpers (breaking behavior, compatible signatures):**
+
+- `resolveDarkTheme(isPureBlack)` always returns `darkTheme`; the `isPureBlack` argument is ignored
+- `@metamask/design-system-twrnc-preset` `getThemeColors(theme, isPureBlack)` ignores `isPureBlack`
+- `pureBlackThemeColors` is deprecated and aliases `darkTheme` colors
+
+**New elevated surface tokens (additive):**
+
+- `background.elevated1` — one level above base; use for surfaces over scrims (modals, bottom sheets)
+- `background.elevated2` — two levels above base; use for floating UI (toasts, menus, popovers)
+- `border.alternative` — hairline border for elevated surfaces in dark mode
+
+### Migration
+
+**Remove pure-black provider wiring:**
+
+```tsx
+// Before (8.x) — web
+<html data-pure-black={isPureBlack || undefined}>
+  <PureBlackProvider isPureBlack={isPureBlack}>{children}</PureBlackProvider>
+</html>;
+
+// After (9.0.0) — web
+// Remove data-pure-black and PureBlackProvider; darkTheme is already OLED pure-black
+{
+  children;
+}
+```
+
+```tsx
+// Before (8.x) — React Native
+<ThemeProvider theme={Theme.Dark} isPureBlack={isPureBlack}>
+  {children}
+</ThemeProvider>
+
+// After (9.0.0) — React Native
+<ThemeProvider theme={Theme.Dark}>
+  {children}
+</ThemeProvider>
+```
+
+**Replace isPureBlack branching with elevated tokens:**
+
+```tsx
+// Before (8.x)
+import {
+  BoxBackgroundColor,
+  usePureBlack,
+} from '@metamask/design-system-react';
+
+const isPureBlack = usePureBlack();
+
+<Box
+  backgroundColor={
+    isPureBlack
+      ? BoxBackgroundColor.BackgroundAlternative
+      : BoxBackgroundColor.BackgroundDefault
+  }
+/>;
+
+// After (9.0.0)
+import {
+  BoxBackgroundColor,
+  BoxBorderColor,
+} from '@metamask/design-system-react';
+
+<Box
+  backgroundColor={BoxBackgroundColor.BackgroundElevated1}
+  borderColor={BoxBorderColor.BorderAlternative}
+  borderWidth={1}
+/>;
+```
+
+```tsx
+// Before (8.x) — React Native custom surface
+const isPureBlack = usePureBlack();
+tw.style(isPureBlack ? 'bg-alternative' : 'bg-default');
+
+// After (9.0.0)
+tw.style('bg-elevated1');
+```
+
+**Update resolveDarkTheme / getThemeColors call sites:**
+
+```tsx
+// Before (8.x)
+import { resolveDarkTheme } from '@metamask/design-tokens';
+
+const theme = resolveDarkTheme(isPureBlack);
+
+// After (9.0.0)
+import { darkTheme } from '@metamask/design-tokens';
+
+const theme = darkTheme;
+// resolveDarkTheme(isPureBlack) still compiles but isPureBlack is ignored
+```
+
+### Impact
+
+- **Apps already on pure-black / OLED mode:** Minimal visual change; remove redundant provider wiring
+- **Apps on default dark theme without pure-black:** Background and elevation colors will change on upgrade; review dark-mode UI and visual regression snapshots
+- **Custom styling tied to old grey900-based hierarchy:** Update to use `background.elevated1`, `background.elevated2`, and `border.alternative` for stepped surfaces
 
 ## Tailwind CSS v3 to v4
 
