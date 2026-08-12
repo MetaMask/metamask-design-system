@@ -82,6 +82,9 @@ export type { CheckboxProps } from './Checkbox';
 export { HeaderBase } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
+export { HeaderRoot } from './HeaderRoot';
+export type { HeaderRootProps } from './HeaderRoot';
+
 export { HelpText, HelpTextSeverity } from './HelpText';
 export type { HelpTextProps } from './HelpText';
 
