@@ -1,5 +1,5 @@
 import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import type { ReactNode } from 'react';
 
@@ -245,6 +245,83 @@ describe('BannerBase', () => {
     expect(screen.getByTestId('banner-base').className).toContain(
       'items-start',
     );
+  });
+
+  it('re-measures on ResizeObserver callbacks and disconnects on unmount', () => {
+    const observe = jest.fn();
+    const disconnect = jest.fn();
+    let resizeCallback: ResizeObserverCallback = () => undefined;
+
+    class MockResizeObserver {
+      constructor(callback: ResizeObserverCallback) {
+        resizeCallback = callback;
+      }
+
+      observe = observe;
+
+      disconnect = disconnect;
+
+      unobserve = jest.fn();
+    }
+
+    Object.defineProperty(window, 'ResizeObserver', {
+      configurable: true,
+      writable: true,
+      value: MockResizeObserver,
+    });
+
+    const getBoundingClientRect = jest
+      .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
+      .mockReturnValue({
+        height: 24,
+        width: 200,
+        top: 0,
+        left: 0,
+        bottom: 24,
+        right: 200,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      } as DOMRect);
+
+    const { unmount } = render(
+      <BannerBase
+        data-testid="banner-base"
+        onClose={() => undefined}
+        title="Added to Watchlist"
+      />,
+    );
+
+    expect(screen.getByTestId('banner-base').className).toContain(
+      'items-center',
+    );
+    expect(observe).toHaveBeenCalledTimes(1);
+
+    getBoundingClientRect.mockReturnValue({
+      height: 70,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 70,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    act(() => {
+      resizeCallback(
+        [] as unknown as ResizeObserverEntry[],
+        {} as ResizeObserver,
+      );
+    });
+
+    expect(screen.getByTestId('banner-base').className).toContain(
+      'items-start',
+    );
+
+    unmount();
+    expect(disconnect).toHaveBeenCalledTimes(1);
   });
 
   it('applies custom className to the root container', () => {

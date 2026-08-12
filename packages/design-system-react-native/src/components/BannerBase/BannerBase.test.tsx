@@ -232,7 +232,7 @@ describe('BannerBase', () => {
   it('top-aligns content when an action button is below', () => {
     const tw = renderHook(() => useTailwind()).result.current;
 
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <BannerBase
         actionButtonLabel="Action"
         actionButtonOnPress={() => undefined}
@@ -241,6 +241,14 @@ describe('BannerBase', () => {
         title="Action banner"
       />,
     );
+
+    const titleParent = getByText('Action banner').parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 24 } },
+    });
 
     expect(getByTestId('banner-base')).toHaveStyle(
       tw.style(BoxAlignItems.Start),
