@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.0]
+
+### Added
+
+- Added `background.elevated1`, `background.elevated2`, and `border.alternative` Tailwind color utilities mapped to new design tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+
+### Changed
+
+- Updated peer dependency to `@metamask/design-tokens@^9.0.0` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - Required coordination bump; visual impact comes from the design-tokens 9.0.0 dark theme change for apps not already on OLED pure-black
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+
 ## [0.10.0]
 
 ### Changed
@@ -91,7 +103,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.10.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.11.0...HEAD
+[0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.10.0...@metamask/design-system-tailwind-preset@0.11.0
 [0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.9.0...@metamask/design-system-tailwind-preset@0.10.0
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.8.0...@metamask/design-system-tailwind-preset@0.9.0
 [0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.7.0...@metamask/design-system-tailwind-preset@0.8.0

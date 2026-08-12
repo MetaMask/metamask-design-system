@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.40.0]
+
+### Added
+
+- Added `BoxBackgroundColor.BackgroundElevated1`, `BoxBackgroundColor.BackgroundElevated2`, and `BoxBorderColor.BorderAlternative` via `@metamask/design-system-shared` ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+
+### Changed
+
+- Updated peer dependency to `@metamask/design-tokens@^9.0.0` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - Required coordination bump; visual impact comes from the design-tokens 9.0.0 dark theme change for apps not already on OLED pure-black
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+- Updated `BottomSheetDialog` to use `bg-elevated1` instead of branching on pure-black mode ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+  - `elevated1` resolves to the same value as the previous pure-black path (`background.alternative`, `#0d0d0f`); appearance is unchanged for OLED pure-black consumers
+- Updated `Toast` to use `BackgroundElevated2` instead of theme-conditional `BackgroundDefault` / `BackgroundSection` ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+  - `elevated2` maps to `background.default` in light and `background.section` in dark, matching the previous branch; appearance is unchanged
+- Design-system components no longer branch on `usePureBlack()` for surface styling; consumers should remove `ThemeProvider` `isPureBlack` wiring and use elevated tokens (`bg-elevated1`, `bg-elevated2`, `border-alternative`) instead ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444), [#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+
 ## [0.39.1]
 
 ### Fixed
@@ -665,7 +683,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.40.0...HEAD
+[0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.1...@metamask/design-system-react-native@0.40.0
 [0.39.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.0...@metamask/design-system-react-native@0.39.1
 [0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.1...@metamask/design-system-react-native@0.39.0
 [0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.0...@metamask/design-system-react-native@0.38.1
