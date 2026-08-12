@@ -13,7 +13,7 @@ import { Theme } from './Theme.types';
  *
  * @example
  * toKebab('defaultHover');  // → 'default-hover'
- * toKebab('elevated1');     // → 'elevated-1'
+ * toKebab('elevated1');     // → 'elevated1' (digits stay attached, like accent01)
  * toKebab('RGBValue');      // → 'r-g-b-value'
  */
 const toKebab = (str: string): string =>
@@ -22,8 +22,6 @@ const toKebab = (str: string): string =>
     .replace(/([a-z0-9])([A-Z])/gu, '$1-$2')
     // place a dash between upper → upper+lower transitions (e.g. "RGBValue")
     .replace(/([A-Z])([A-Z][a-z])/gu, '$1-$2')
-    // place a dash between letter → digit (e.g. elevated1 → elevated-1)
-    .replace(/([a-zA-Z])(\d)/gu, '$1-$2')
     .toLowerCase();
 
 /**

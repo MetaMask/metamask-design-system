@@ -366,7 +366,7 @@ describe('BottomSheetDialog', () => {
     expect(getByText('Dark Theme')).toBeDefined();
   });
 
-  it('uses elevated-1 background class', () => {
+  it('uses elevated1 background class', () => {
     render(
       <BottomSheetDialog>
         <Text>Elevated Sheet</Text>
@@ -374,7 +374,7 @@ describe('BottomSheetDialog', () => {
     );
 
     expect(mockStyle).toHaveBeenCalledWith(
-      'bg-elevated-1',
+      'bg-elevated1',
       'rounded-t-3xl overflow-hidden border border-muted border-b-0',
       undefined,
     );
@@ -388,7 +388,7 @@ describe('BottomSheetDialog', () => {
     );
 
     expect(mockStyle).toHaveBeenCalledWith(
-      'bg-elevated-1',
+      'bg-elevated1',
       'rounded-t-3xl overflow-hidden border border-muted border-b-0',
       undefined,
     );

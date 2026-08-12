@@ -13,10 +13,10 @@
   --color-background-alternative: var(--brand-colors-grey-grey050);
   /* Elevated +1 over bg-default. Scrim/overlay surfaces (Modal, BottomSheet).
   Light matches bg-default; elevation comes from overlay/shadow. */
-  --color-background-elevated-1: var(--brand-colors-white);
-  /* Elevated +2 over base or elevated-1. Floating UI (Toast, Menu, Popover, Tooltip).
+  --color-background-elevated1: var(--brand-colors-white);
+  /* Elevated +2 over base or elevated1. Floating UI (Toast, Menu, Popover, Tooltip).
   Light matches bg-default. */
-  --color-background-elevated-2: var(--brand-colors-white);
+  --color-background-elevated2: var(--brand-colors-white);
 
   /* Applied to interactive elements, such as buttons. 
   For light mode, we use 8% increments of opacity to offer

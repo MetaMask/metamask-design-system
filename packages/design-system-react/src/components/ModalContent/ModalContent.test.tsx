@@ -115,7 +115,7 @@ describe('ModalContent', () => {
     expect(dialog).toHaveClass('max-w-[360px]', 'rounded-lg');
   });
 
-  it('uses elevated-1 background and alternative border on the dialog', () => {
+  it('uses elevated1 background and alternative border on the dialog', () => {
     render(
       <Modal isOpen onClose={onClose}>
         <ModalContent modalDialogProps={{ 'data-testid': 'dialog' }}>

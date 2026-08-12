@@ -36,7 +36,7 @@ PureBlackProvider.displayName = 'PureBlackProvider';
 /**
  * Returns whether pure-black dark mode is active in the current subtree.
  *
- * Prefer semantic tokens (`bg-elevated-1`, `border-alternative`, etc.) over
+ * Prefer semantic tokens (`bg-elevated1`, `border-alternative`, etc.) over
  * branching on this flag in design-system components. On React Native, use
  * `usePureBlack` from `@metamask/design-system-twrnc-preset` instead.
  *

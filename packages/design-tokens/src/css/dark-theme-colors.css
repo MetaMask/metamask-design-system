@@ -18,10 +18,10 @@
   --color-background-alternative: #0d0d0f;
   /* Elevated +1 over bg-default. Scrim/overlay surfaces (Modal, BottomSheet).
   Stepped fill so panels separate from the base. */
-  --color-background-elevated-1: #0d0d0f;
-  /* Elevated +2 over base or elevated-1. Floating UI (Toast, Menu, Popover, Tooltip).
+  --color-background-elevated1: #0d0d0f;
+  /* Elevated +2 over base or elevated1. Floating UI (Toast, Menu, Popover, Tooltip).
   Stepped fill so panels separate from the base. */
-  --color-background-elevated-2: #18181b;
+  --color-background-elevated2: #18181b;
 
   /* Applied to interactive elements, such as buttons.
   Cool-tinted white opacities so muted surfaces inherit the OLED hue. */

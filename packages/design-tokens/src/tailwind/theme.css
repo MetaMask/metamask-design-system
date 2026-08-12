@@ -24,10 +24,10 @@
   --color-background-alternative: var(--brand-colors-grey-grey050);
   /* Elevated +1 over bg-default. Scrim/overlay surfaces (Modal, BottomSheet).
   Light matches bg-default; elevation comes from overlay/shadow. */
-  --color-background-elevated-1: var(--brand-colors-white);
-  /* Elevated +2 over base or elevated-1. Floating UI (Toast, Menu, Popover, Tooltip).
+  --color-background-elevated1: var(--brand-colors-white);
+  /* Elevated +2 over base or elevated1. Floating UI (Toast, Menu, Popover, Tooltip).
   Light matches bg-default. */
-  --color-background-elevated-2: var(--brand-colors-white);
+  --color-background-elevated2: var(--brand-colors-white);
 
   /* Applied to interactive elements, such as buttons. 
   For light mode, we use 8% increments of opacity to offer
@@ -202,10 +202,10 @@
   --color-background-alternative: var(--brand-colors-grey-grey050);
   /* Elevated +1 over bg-default. Scrim/overlay surfaces (Modal, BottomSheet).
   Light matches bg-default; elevation comes from overlay/shadow. */
-  --color-background-elevated-1: var(--brand-colors-white);
-  /* Elevated +2 over base or elevated-1. Floating UI (Toast, Menu, Popover, Tooltip).
+  --color-background-elevated1: var(--brand-colors-white);
+  /* Elevated +2 over base or elevated1. Floating UI (Toast, Menu, Popover, Tooltip).
   Light matches bg-default. */
-  --color-background-elevated-2: var(--brand-colors-white);
+  --color-background-elevated2: var(--brand-colors-white);
   --color-background-muted: #b4b4b528;
   --color-background-muted-hover: #b4b4b53d;
   --color-background-muted-pressed: #b4b4b552;
@@ -302,10 +302,10 @@
   --color-background-alternative: #0d0d0f;
   /* Elevated +1 over bg-default. Scrim/overlay surfaces (Modal, BottomSheet).
   Stepped fill so panels separate from the base. */
-  --color-background-elevated-1: #0d0d0f;
-  /* Elevated +2 over base or elevated-1. Floating UI (Toast, Menu, Popover, Tooltip).
+  --color-background-elevated1: #0d0d0f;
+  /* Elevated +2 over base or elevated1. Floating UI (Toast, Menu, Popover, Tooltip).
   Stepped fill so panels separate from the base. */
-  --color-background-elevated-2: #18181b;
+  --color-background-elevated2: #18181b;
 
   /* Applied to interactive elements, such as buttons.
   Cool-tinted white opacities so muted surfaces inherit the OLED hue. */
@@ -490,11 +490,11 @@
 @utility bg-subsection {
   background-color: var(--color-background-subsection);
 }
-@utility bg-elevated-1 {
-  background-color: var(--color-background-elevated-1);
+@utility bg-elevated1 {
+  background-color: var(--color-background-elevated1);
 }
-@utility bg-elevated-2 {
-  background-color: var(--color-background-elevated-2);
+@utility bg-elevated2 {
+  background-color: var(--color-background-elevated2);
 }
 @utility bg-muted {
   background-color: var(--color-background-muted);
