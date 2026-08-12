@@ -9,9 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.0]
 
-### Uncategorized
+### Added
 
-- feat: add temporary elevated and border-alternative tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Added `bg-elevated1`, `bg-elevated2`, and `border-alternative` twrnc color classes from new design tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+
+### Changed
+
+- `getThemeColors()` no longer varies by `isPureBlack`; OLED values are now canonical on the dark theme ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+- `pureBlackThemeColors` is deprecated and now aliases dark theme colors ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
 
 ## [0.8.0]
 

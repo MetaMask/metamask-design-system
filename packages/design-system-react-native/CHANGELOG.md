@@ -9,9 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.40.0]
 
-### Uncategorized
+### Added
 
-- feat: add temporary elevated and border-alternative tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Added `BoxBackgroundColor.BackgroundElevated1`, `BoxBackgroundColor.BackgroundElevated2`, and `BoxBorderColor.BorderAlternative` via `@metamask/design-system-shared` ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+
+### Changed
+
+- Updated `BottomSheetDialog` to use `bg-elevated1` instead of branching on pure-black mode ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Updated `Toast` to use `BackgroundElevated2` in both light and dark themes ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Design-system components no longer branch on `usePureBlack()` for surface styling; consumers should remove `ThemeProvider` `isPureBlack` wiring and use elevated tokens (`bg-elevated1`, `bg-elevated2`, `border-alternative`) instead ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444), [#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
 
 ## [0.39.1]
 

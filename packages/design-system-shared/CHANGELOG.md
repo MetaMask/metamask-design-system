@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.33.0]
 
-### Uncategorized
+### Added
 
-- feat: add temporary elevated and border-alternative tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Added `BoxBackgroundColor.BackgroundElevated1` and `BoxBackgroundColor.BackgroundElevated2` for stepped surface elevation over scrims and floating UI ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Added `BoxBorderColor.BorderAlternative` for hairline borders on elevated surfaces ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
 
 ## [0.32.0]
 

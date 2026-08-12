@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.11.0]
 
-### Uncategorized
+### Added
 
-- feat: add temporary elevated and border-alternative tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Added `background.elevated1`, `background.elevated2`, and `border.alternative` Tailwind color utilities mapped to new design tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
 
 ## [0.10.0]
 

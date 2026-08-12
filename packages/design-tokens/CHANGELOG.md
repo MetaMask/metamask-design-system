@@ -9,10 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.8.0]
 
-### Uncategorized
+### Added
 
-- feat: add temporary elevated and border-alternative tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
-- chore: promote pure black OLED values into canonical darkTheme ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+- Added `background.elevated1` and `background.elevated2` for stepped surface elevation over scrims and floating UI (e.g. modals, toasts, menus) ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Added `border.alternative` for hairline borders on elevated surfaces in dark mode ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+
+### Changed
+
+- Updated canonical `darkTheme` to use OLED pure-black surface values (previously only available via `pureBlackDarkTheme` or `data-pure-black` overrides) ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+- `resolveDarkTheme()` now always returns canonical `darkTheme`; the `isPureBlack` parameter is ignored but retained for call-site compatibility ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
 
 ## [8.7.0]
 
