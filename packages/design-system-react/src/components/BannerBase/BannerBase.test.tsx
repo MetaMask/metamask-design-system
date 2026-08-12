@@ -204,6 +204,58 @@ describe('BannerBase', () => {
     );
   });
 
+  it('center-aligns a description-only compact stack', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: 22,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 22,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    render(
+      <BannerBase
+        data-testid="banner-base"
+        description="15.02 USDC is available in your account"
+        onClose={() => undefined}
+      />,
+    );
+
+    expect(screen.getByTestId('banner-base').className).toContain(
+      'items-center',
+    );
+  });
+
+  it('treats a missing content height as not compact', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: undefined,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as unknown as DOMRect);
+
+    render(
+      <BannerBase
+        data-testid="banner-base"
+        onClose={() => undefined}
+        title="Added to Watchlist"
+      />,
+    );
+
+    expect(screen.getByTestId('banner-base').className).toContain(
+      'items-start',
+    );
+  });
+
   it('top-aligns content when the text column exceeds a compact stack', () => {
     jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
       height: 70,

@@ -186,6 +186,32 @@ describe('BannerBase', () => {
     );
   });
 
+  it('center-aligns a description-only compact stack', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    const { getByTestId, getByText } = render(
+      <BannerBase
+        description="15.02 USDC is available in your account"
+        onClose={() => undefined}
+        testID="banner-base"
+      />,
+    );
+
+    const descriptionParent = getByText(
+      '15.02 USDC is available in your account',
+    ).parent;
+    if (!descriptionParent) {
+      throw new Error('Expected description content parent');
+    }
+    fireEvent(descriptionParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 22 } },
+    });
+
+    expect(getByTestId('banner-base')).toHaveStyle(
+      tw.style(BoxAlignItems.Center),
+    );
+  });
+
   it('top-aligns content when description wraps to multiple lines', () => {
     const tw = renderHook(() => useTailwind()).result.current;
 
