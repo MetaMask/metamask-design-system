@@ -1,4 +1,4 @@
-import { ToastSeverity } from '@metamask/design-system-shared';
+import { TextColor, ToastSeverity } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
@@ -130,16 +130,88 @@ describe('Toast', () => {
     expect(screen.getByTestId('toast-root')).toHaveClass('mx-2');
   });
 
-  it('always applies rounded-xl to the toast surface', () => {
+  it('uses background default, md shadow, and 16px radius in light theme', () => {
+    render(
+      <div data-theme="light">
+        <Toast
+          data-testid="toast-root"
+          title="Light toast"
+          onClose={() => undefined}
+        />
+      </div>,
+    );
+
+    expect(screen.getByTestId('toast-root')).toHaveClass(
+      'bg-default',
+      'shadow-md',
+      'rounded-2xl',
+    );
+  });
+
+  it('uses background section and no shadow in dark theme', () => {
+    render(
+      <div data-theme="dark">
+        <Toast
+          data-testid="toast-root"
+          title="Dark toast"
+          onClose={() => undefined}
+        />
+      </div>,
+    );
+
+    const toast = screen.getByTestId('toast-root');
+    expect(toast).toHaveClass('bg-section', 'rounded-2xl');
+    expect(toast).not.toHaveClass('shadow-md');
+  });
+
+  it('uses background section when nested under a .dark ancestor', () => {
+    render(
+      <div className="dark">
+        <Toast
+          data-testid="toast-root"
+          title="Dark class toast"
+          onClose={() => undefined}
+        />
+      </div>,
+    );
+
+    const toast = screen.getByTestId('toast-root');
+    expect(toast).toHaveClass('bg-section', 'rounded-2xl');
+    expect(toast).not.toHaveClass('shadow-md');
+  });
+
+  it('keeps light polish when data-theme=light is nested inside .dark', () => {
+    render(
+      <div className="dark">
+        <div data-theme="light">
+          <Toast
+            data-testid="toast-root"
+            title="Nested light toast"
+            onClose={() => undefined}
+          />
+        </div>
+      </div>,
+    );
+
+    expect(screen.getByTestId('toast-root')).toHaveClass(
+      'bg-default',
+      'shadow-md',
+      'rounded-2xl',
+    );
+  });
+
+  it('applies text alternative color to description', () => {
     render(
       <Toast
-        data-testid="toast-root"
-        title="Rounded"
+        title="Toast message"
+        description="Description of toast"
         onClose={() => undefined}
       />,
     );
 
-    expect(screen.getByTestId('toast-root')).toHaveClass('rounded-xl');
+    expect(screen.getByText('Description of toast')).toHaveClass(
+      TextColor.TextAlternative,
+    );
   });
 
   it('forwards ref to the root element', () => {
@@ -148,5 +220,14 @@ describe('Toast', () => {
     render(<Toast ref={ref} title="Ref test" onClose={() => undefined} />);
 
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
+
+  it('forwards a callback ref to the root element', () => {
+    const ref = jest.fn();
+
+    render(<Toast ref={ref} title="Callback ref" onClose={() => undefined} />);
+
+    expect(ref).toHaveBeenCalled();
+    expect(ref.mock.calls[0]?.[0]).toBeInstanceOf(HTMLDivElement);
   });
 });
