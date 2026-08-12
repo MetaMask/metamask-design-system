@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.36.0]
+
 ### Uncategorized
 
 - feat: add temporary elevated and border-alternative tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
@@ -465,7 +467,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.2...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...HEAD
+[0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.2...@metamask/design-system-react@0.36.0
 [0.35.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.1...@metamask/design-system-react@0.35.2
 [0.35.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.0...@metamask/design-system-react@0.35.1
 [0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.34.0...@metamask/design-system-react@0.35.0

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.8.0]
+
 ### Uncategorized
 
 - feat: add temporary elevated and border-alternative tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
@@ -458,7 +460,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.8.0...HEAD
+[8.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...@metamask/design-tokens@8.8.0
 [8.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.6.0...@metamask/design-tokens@8.7.0
 [8.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.5.0...@metamask/design-tokens@8.6.0
 [8.5.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.4.0...@metamask/design-tokens@8.5.0

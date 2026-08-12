@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.40.0]
+
 ### Uncategorized
 
 - feat: add temporary elevated and border-alternative tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
@@ -669,7 +671,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.40.0...HEAD
+[0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.1...@metamask/design-system-react-native@0.40.0
 [0.39.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.0...@metamask/design-system-react-native@0.39.1
 [0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.1...@metamask/design-system-react-native@0.39.0
 [0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.0...@metamask/design-system-react-native@0.38.1
