@@ -76,7 +76,7 @@ Use `title` for the primary message. Use `titleProps` to access the title `Text`
 import { toast } from '@metamask/design-system-react';
 
 toast({
-  title: 'We will notify you.',
+  title: 'Added to Watchlist',
 });
 ```
 
@@ -138,11 +138,29 @@ toast({
 
 Use `actionButtonOnClick` together with `actionButtonLabel` when the toast needs a secondary action. Use `actionButtonProps` to access the rendered button element when you need to set a `data-testid`, accessibility props, or other button overrides.
 
+Use `actionButtonLayout` to place the action to the **Right** (`BannerBaseActionButtonLayout.End`) or **Bottom** (`BannerBaseActionButtonLayout.Below`, default). Prefer Right for short copy; Bottom when the body is longer or wraps.
+
 <Canvas of={ToastStories.ActionButton} sourceState="none" />
 
 ```tsx
-import { toast } from '@metamask/design-system-react';
+import {
+  BannerBaseActionButtonLayout,
+  toast,
+  ToastSeverity,
+} from '@metamask/design-system-react';
 
+// Right (trailing)
+toast({
+  title: 'Added to Watchlist',
+  actionButtonLabel: 'Undo',
+  actionButtonLayout: BannerBaseActionButtonLayout.End,
+  actionButtonOnClick: () => {
+    console.log('Undo clicked');
+  },
+  severity: ToastSeverity.Success,
+});
+
+// Bottom (default)
 toast({
   title: 'Privacy policy update',
   description: 'Review how Consensys handles your data.',

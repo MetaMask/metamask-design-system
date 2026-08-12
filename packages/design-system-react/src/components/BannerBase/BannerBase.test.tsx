@@ -8,6 +8,10 @@ import { BannerBase } from './BannerBase';
 describe('BannerBase', () => {
   const closeButtonTestId = 'banner-base-close-button';
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('renders title and description strings', () => {
     render(
       <BannerBase title="Sample title" description="Sample description" />,
@@ -99,6 +103,7 @@ describe('BannerBase', () => {
 
     const actionButton = screen.getByRole('button', { name: 'Action' });
     const closeButton = screen.getByRole('button', { name: 'Close banner' });
+    expect(actionButton.parentElement?.className).toContain('self-center');
     expect(actionButton.compareDocumentPosition(closeButton)).toBe(
       Node.DOCUMENT_POSITION_FOLLOWING,
     );
@@ -126,7 +131,10 @@ describe('BannerBase', () => {
   it('merges structural and custom close button className values', () => {
     render(
       <BannerBase
+        actionButtonLabel="Action"
+        actionButtonOnClick={() => undefined}
         onClose={() => undefined}
+        title="Title"
         closeButtonProps={{
           className: 'rotate-45',
           'data-testid': closeButtonTestId,
@@ -137,6 +145,106 @@ describe('BannerBase', () => {
     const closeButton = screen.getByTestId(closeButtonTestId);
     expect(closeButton.className).toContain('-mt-1');
     expect(closeButton.className).toContain('rotate-45');
+  });
+
+  it('center-aligns content and skips close button offset for a single content block', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: 24,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 24,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    render(
+      <BannerBase
+        data-testid="banner-base"
+        onClose={() => undefined}
+        title="Added to Watchlist"
+        closeButtonProps={{ 'data-testid': closeButtonTestId }}
+      />,
+    );
+
+    expect(screen.getByTestId('banner-base').className).toContain(
+      'items-center',
+    );
+    expect(screen.getByTestId(closeButtonTestId).className).not.toContain(
+      '-mt-1',
+    );
+  });
+
+  it('center-aligns content when description is a single line', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: 48,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 48,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    render(
+      <BannerBase
+        data-testid="banner-base"
+        description="15.02 USDC is available in your account"
+        onClose={() => undefined}
+        title="Deposit completed"
+      />,
+    );
+
+    expect(screen.getByTestId('banner-base').className).toContain(
+      'items-center',
+    );
+  });
+
+  it('top-aligns content when the text column exceeds a compact stack', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: 70,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 70,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    render(
+      <BannerBase
+        data-testid="banner-base"
+        description="Severity controls the default start accessory icon."
+        onClose={() => undefined}
+        title="Success"
+      />,
+    );
+
+    expect(screen.getByTestId('banner-base').className).toContain(
+      'items-start',
+    );
+  });
+
+  it('top-aligns content when an action button is below', () => {
+    render(
+      <BannerBase
+        actionButtonLabel="Action"
+        actionButtonOnClick={() => undefined}
+        data-testid="banner-base"
+        onClose={() => undefined}
+        title="Action banner"
+      />,
+    );
+
+    expect(screen.getByTestId('banner-base').className).toContain(
+      'items-start',
+    );
   });
 
   it('applies custom className to the root container', () => {

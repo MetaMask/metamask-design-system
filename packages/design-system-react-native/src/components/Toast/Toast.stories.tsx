@@ -2,10 +2,18 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 // External dependencies.
+import {
+  BannerBaseActionButtonLayout,
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
+
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { IconSize } from '../Icon';
 import { Spinner } from '../temp-components/Spinner';
+import { Text } from '../Text';
 
 // Internal dependencies.
 import { Toast } from './Toast';
@@ -88,14 +96,79 @@ export const Default: Story = {
 
 export const Title: Story = {
   args: {
-    title: 'We will notify you.',
+    title: 'Added to Watchlist',
   },
+};
+
+export const Spacing: Story = {
+  render: () => (
+    <Box twClassName="gap-4">
+      <Box twClassName="gap-2">
+        <Text
+          color={TextColor.TextAlternative}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          Single line
+        </Text>
+        <Toast
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+      <Box twClassName="gap-2">
+        <Text
+          color={TextColor.TextAlternative}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          With action button
+        </Text>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.End}
+          actionButtonOnPress={() => undefined}
+          description="You can remove it anytime."
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+      <Box twClassName="gap-2">
+        <Text
+          color={TextColor.TextAlternative}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          With description
+        </Text>
+        <Toast
+          description="15.02 USDC is available in your account"
+          severity={ToastSeverity.Success}
+          title="Deposit completed"
+        />
+      </Box>
+      <Box twClassName="gap-2">
+        <Text
+          color={TextColor.TextAlternative}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          Multi-line description
+        </Text>
+        <Toast
+          description="Enable notifications to stay informed on campaigns and never miss important updates about your account."
+          severity={ToastSeverity.Success}
+          title="Don't miss out"
+        />
+      </Box>
+    </Box>
+  ),
 };
 
 export const Description: Story = {
   args: {
-    description: 'Enable notifications to stay informed on campaigns',
-    title: "Don't miss out",
+    description: '15.02 USDC is available in your account',
+    title: 'Deposit completed',
   },
 };
 
@@ -123,11 +196,41 @@ export const StartAccessory: Story = {
 };
 
 export const ActionButtonOnPress: Story = {
-  args: {
-    actionButtonLabel: 'Read more',
-    description: 'Review how Consensys handles your data.',
-    actionButtonOnPress: () => undefined,
-    severity: ToastSeverity.Default,
-    title: 'Privacy policy update',
-  },
+  render: () => (
+    <Box twClassName="gap-4">
+      <Box twClassName="gap-2">
+        <Text
+          color={TextColor.TextAlternative}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          Right
+        </Text>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.End}
+          actionButtonOnPress={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+      <Box twClassName="gap-2">
+        <Text
+          color={TextColor.TextAlternative}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          Bottom
+        </Text>
+        <Toast
+          actionButtonLabel="Read more"
+          actionButtonLayout={BannerBaseActionButtonLayout.Below}
+          actionButtonOnPress={() => undefined}
+          description="Review how Consensys handles your data."
+          severity={ToastSeverity.Default}
+          title="Privacy policy update"
+        />
+      </Box>
+    </Box>
+  ),
 };
