@@ -57,8 +57,7 @@ const matchesThemeSelector = (
     );
   }
 
-  const isDarkBase =
-    trimmed === "[data-theme='dark']" || trimmed === '.dark';
+  const isDarkBase = trimmed === "[data-theme='dark']" || trimmed === '.dark';
   const isPureBlackRule = trimmed.includes('data-pure-black');
 
   if (isPureBlack) {
