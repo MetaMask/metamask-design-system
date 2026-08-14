@@ -182,7 +182,10 @@ export const Spacing: Story = {
             >
               Titles only
             </Text>
-            <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            <Text
+              color={TextColor.TextAlternative}
+              variant={TextVariant.BodySm}
+            >
               Content should center align if there is no description
             </Text>
           </Box>
@@ -206,7 +209,10 @@ export const Spacing: Story = {
             >
               With descriptions
             </Text>
-            <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            <Text
+              color={TextColor.TextAlternative}
+              variant={TextVariant.BodySm}
+            >
               Content is top aligned if the description line length is more than
               one line. This is to ensure the content remains visually balanced.
             </Text>
@@ -233,7 +239,10 @@ export const Spacing: Story = {
             >
               With action buttons
             </Text>
-            <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            <Text
+              color={TextColor.TextAlternative}
+              variant={TextVariant.BodySm}
+            >
               Action buttons should help users perform actions associated with
               the toast.
             </Text>
