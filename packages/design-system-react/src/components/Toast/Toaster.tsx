@@ -57,6 +57,7 @@ const subscribeToToastStore = (listener: ToastStoreListener) => {
 
 const getToastProps = ({
   hasNoTimeout: _hasNoTimeout,
+  showCloseButton: _showCloseButton,
   ...toastProps
 }: ToastOptions): ToastProps => toastProps;
 
@@ -227,11 +228,18 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       return null;
     }
 
+    const { showCloseButton = true } = toastOptions;
     const {
       onClose: toastOnClose,
       className: toastClassName,
       ...toastProps
     } = getToastProps(toastOptions);
+    const handleClose = showCloseButton
+      ? () => {
+          clearStoreToastOptions();
+          toastOnClose?.();
+        }
+      : undefined;
 
     return (
       <div
@@ -256,10 +264,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
           <Toast
             {...toastProps}
             className={toastClassName}
-            onClose={() => {
-              clearStoreToastOptions();
-              toastOnClose?.();
-            }}
+            onClose={handleClose}
           />
         </div>
       </div>
