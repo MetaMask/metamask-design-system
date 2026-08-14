@@ -62,7 +62,7 @@ const Demo = () => {
 
 Call `toast.dismiss()` to dismiss the currently visible toast.
 
-Use `closeButtonProps` to access the close button element when you need to set a `data-testid` or override its accessibility label. With the `toast(...)` / `<Toaster />` flow the close button is shown because `<Toaster />` wires `onClose` internally; for direct `<Toast />` rendering, provide `onClose` to render it.
+Use `closeButtonProps` to access the close button element when you need to set a `data-testid` or override its accessibility label. With the `toast(...)` / `<Toaster />` flow the close button is shown by default. Pass `showCloseButton: false` to hide it (auto-dismiss and `toast.dismiss()` still work). For direct `<Toast />` rendering, provide `onClose` to render the close button.
 
 If `toast(...)` is called before `<Toaster />` mounts, the latest toast renders after mount. If `toast.dismiss()` is called before mount, it clears the pending toast.
 
@@ -197,6 +197,7 @@ toast({
 - `children`, `childrenWrapperProps` - Optional extra content rendered below the description.
 - `actionButtonLabel`, `actionButtonOnClick`, `actionButtonProps` - Optional action button content and handler.
 - `onClose` - Optional callback invoked when the close button is clicked. Also renders the close button on direct `<Toast />`.
+- `showCloseButton` - Imperative `toast(...)` only. When `false`, hides the close button. Defaults to `true`.
 - `closeButtonProps` - Optional non-behavioural props merged onto the close `ButtonIcon` when it is rendered.
 - `startAccessory` - Optional leading accessory that overrides the severity icon.
 - `severity` - Optional semantic state used to choose the default icon. Defaults to `ToastSeverity.Default`, which shows no icon.

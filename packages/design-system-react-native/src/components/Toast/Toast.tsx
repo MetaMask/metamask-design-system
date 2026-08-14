@@ -90,11 +90,7 @@ export const Toast: React.FC<ToastProps> = ({
     <BannerBase
       {...actionProps}
       {...props}
-      backgroundColor={
-        isLightTheme
-          ? BoxBackgroundColor.BackgroundDefault
-          : BoxBackgroundColor.BackgroundSection
-      }
+      backgroundColor={BoxBackgroundColor.BackgroundElevated2}
       borderColor={BoxBorderColor.BorderMuted}
       borderWidth={1}
       children={children}

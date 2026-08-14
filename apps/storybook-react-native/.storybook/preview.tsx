@@ -16,9 +16,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // context.globals.backgrounds.value (which returns the key) both work correctly.
 const backgroundOptions = {
   light: { name: 'light', value: lightTheme.colors.background.default },
-  dark: { name: 'dark', value: darkTheme.colors.background.default },
+  dark: { name: 'dark (OLED)', value: darkTheme.colors.background.default },
   pureBlack: {
-    name: 'pure black',
+    // Same token values as dark after the OLED fold; kept for provider wiring.
+    name: 'pure black (same as dark)',
     value: pureBlackDarkTheme.colors.background.default,
   },
 };

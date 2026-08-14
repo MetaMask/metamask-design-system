@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0]
+
+### Added
+
+- Added `bg-elevated1`, `bg-elevated2`, and `border-alternative` twrnc color classes from new design tokens ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+
+### Changed
+
+- Updated peer dependency to `@metamask/design-tokens@^9.0.0` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - Required coordination bump; visual impact comes from the design-tokens 9.0.0 dark theme change for apps not already on OLED pure-black
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+- `getThemeColors()` no longer varies by `isPureBlack`; OLED values are now canonical on the dark theme ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - No visual change for callers already passing `isPureBlack=true`
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+- `pureBlackThemeColors` is deprecated and now aliases dark theme colors ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+
 ## [0.8.0]
 
 ### Added
@@ -85,7 +101,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.8.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.9.0...HEAD
+[0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.8.0...@metamask/design-system-twrnc-preset@0.9.0
 [0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.7.0...@metamask/design-system-twrnc-preset@0.8.0
 [0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.6.0...@metamask/design-system-twrnc-preset@0.7.0
 [0.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.5.0...@metamask/design-system-twrnc-preset@0.6.0

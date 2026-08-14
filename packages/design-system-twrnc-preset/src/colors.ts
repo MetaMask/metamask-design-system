@@ -1,8 +1,4 @@
-import {
-  darkTheme,
-  lightTheme,
-  pureBlackDarkTheme,
-} from '@metamask/design-tokens';
+import { darkTheme, lightTheme } from '@metamask/design-tokens';
 
 import { Theme } from './Theme.types';
 
@@ -17,6 +13,7 @@ import { Theme } from './Theme.types';
  *
  * @example
  * toKebab('defaultHover');  // → 'default-hover'
+ * toKebab('elevated1');     // → 'elevated1' (digits stay attached, like accent01)
  * toKebab('RGBValue');      // → 'r-g-b-value'
  */
 const toKebab = (str: string): string =>
@@ -79,15 +76,18 @@ export const themeColors: Record<Theme, Record<string, string>> = {
   [Theme.Dark]: flattenColors(darkTheme.colors),
 };
 
-export const pureBlackThemeColors = flattenColors(pureBlackDarkTheme.colors);
+/** @deprecated OLED values are canonical on dark; same as `themeColors[Theme.Dark]`. */
+export const pureBlackThemeColors = themeColors[Theme.Dark];
 
+/**
+ * Resolves flattened theme colors.
+ *
+ * @param theme - Light or dark theme.
+ * @param _isPureBlack - Unused; kept for client call-site compatibility
+ * (OLED values are now canonical on dark).
+ * @returns Flattened color map for the theme.
+ */
 export const getThemeColors = (
   theme: Theme,
-  isPureBlack = false,
-): Record<string, string> => {
-  if (theme === Theme.Dark && isPureBlack) {
-    return pureBlackThemeColors;
-  }
-
-  return themeColors[theme];
-};
+  _isPureBlack = false,
+): Record<string, string> => themeColors[theme];
