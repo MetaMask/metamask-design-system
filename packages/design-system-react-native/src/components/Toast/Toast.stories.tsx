@@ -294,11 +294,11 @@ export const IncorrectUsage: Story = {
             fontWeight={FontWeight.Regular}
             variant={TextVariant.HeadingSm}
           >
-            Do not render action button at the end if description length > 1.
+            {`Do not render action button at the end if description length > 1.`}
           </Text>
           <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
-            This results in suboptimal spacing. If description length > 1, the
-            action button should be placed below.
+            {`This results in suboptimal spacing. If description length > 1, the
+            action button should be placed below.`}
           </Text>
         </Box>
         <Toast

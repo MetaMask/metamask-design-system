@@ -238,6 +238,137 @@ describe('BannerBase', () => {
     );
   });
 
+  it('center-aligns a children-only stack', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    const { getByTestId, getByText } = render(
+      <BannerBase onClose={() => undefined} testID="banner-base">
+        This is a success banner.
+      </BannerBase>,
+    );
+
+    const childrenParent = getByText('This is a success banner.').parent;
+    if (!childrenParent) {
+      throw new Error('Expected children content parent');
+    }
+    fireEvent(childrenParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 48 } },
+    });
+
+    expect(getByTestId('banner-base')).toHaveStyle(
+      tw.style(BoxAlignItems.Center),
+    );
+  });
+
+  it('center-aligns content when children is a single line', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    const { getByTestId, getByText } = render(
+      <BannerBase
+        onClose={() => undefined}
+        testID="banner-base"
+        title="Success"
+      >
+        This is a success banner.
+      </BannerBase>,
+    );
+
+    // Title + one-line children ≈ 24 + 24
+    const titleParent = getByText('Success').parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 48 } },
+    });
+
+    expect(getByTestId('banner-base')).toHaveStyle(
+      tw.style(BoxAlignItems.Center),
+    );
+  });
+
+  it('center-aligns content when description and children are a single line', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    const { getByTestId, getByText } = render(
+      <BannerBase
+        description="15.02 USDC is available in your account"
+        onClose={() => undefined}
+        testID="banner-base"
+      >
+        This is a success banner.
+      </BannerBase>,
+    );
+
+    // Description + one-line children ≈ 22 + 24
+    const descriptionParent = getByText(
+      '15.02 USDC is available in your account',
+    ).parent;
+    if (!descriptionParent) {
+      throw new Error('Expected description content parent');
+    }
+    fireEvent(descriptionParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 46 } },
+    });
+
+    expect(getByTestId('banner-base')).toHaveStyle(
+      tw.style(BoxAlignItems.Center),
+    );
+  });
+
+  it('top-aligns content when children wraps to multiple lines', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    const { getByTestId, getByText } = render(
+      <BannerBase
+        onClose={() => undefined}
+        testID="banner-base"
+        title="Success"
+      >
+        This is a success banner with extra copy that wraps across multiple
+        lines.
+      </BannerBase>,
+    );
+
+    const titleParent = getByText('Success').parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 72 } },
+    });
+
+    expect(getByTestId('banner-base')).toHaveStyle(
+      tw.style(BoxAlignItems.Start),
+    );
+  });
+
+  it('top-aligns content when children is a custom React node', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    const { getByTestId, getByText } = render(
+      <BannerBase
+        onClose={() => undefined}
+        testID="banner-base"
+        title="Success"
+      >
+        <Text>This is a success banner.</Text>
+      </BannerBase>,
+    );
+
+    const titleParent = getByText('Success').parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 48 } },
+    });
+
+    expect(getByTestId('banner-base')).toHaveStyle(
+      tw.style(BoxAlignItems.Start),
+    );
+  });
+
   it('top-aligns content when description wraps to multiple lines', () => {
     const tw = renderHook(() => useTailwind()).result.current;
 

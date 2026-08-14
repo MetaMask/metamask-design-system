@@ -40,9 +40,11 @@ const hasContent = (content: React.ReactNode) =>
 const getCompactContentMaxHeight = ({
   hasTitle,
   hasDescription,
+  hasChildren,
 }: {
   hasTitle: boolean;
   hasDescription: boolean;
+  hasChildren: boolean;
 }) => {
   let maxHeight = 0;
 
@@ -54,6 +56,9 @@ const getCompactContentMaxHeight = ({
       maxHeight += TITLE_DESCRIPTION_GAP;
     }
     maxHeight += BODY_SM_LINE_HEIGHT;
+  }
+  if (hasChildren) {
+    maxHeight += BODY_MD_LINE_HEIGHT;
   }
 
   return maxHeight + COMPACT_HEIGHT_TOLERANCE;
@@ -93,24 +98,24 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
   const hasTitle = hasContent(title);
   const hasDescription = hasContent(description);
   const hasChildren = hasContent(children);
-  // Custom nodes and children can't be measured reliably — keep top-aligned.
+  // Custom nodes can't be measured reliably — keep top-aligned.
   const hasUnmeasuredContent =
-    hasChildren ||
     (hasTitle && !isTextContent(title)) ||
-    (hasDescription && !isTextContent(description));
+    (hasDescription && !isTextContent(description)) ||
+    (hasChildren && !isTextContent(children));
 
-  // Title + description: default top-aligned until both blocks measure as
-  // single-line. Title-only / description-only always center (including wraps).
-  // Avoids multiline title+description stacks sticking centered when layout
-  // callbacks are delayed or skipped.
+  // Multiple text blocks: default top-aligned until the stack measures as
+  // single-line per block. A single title, description, or children block
+  // always centers (including wraps). Avoids multiline stacks sticking
+  // centered when layout callbacks are delayed or skipped.
   const [isCompactContent, setIsCompactContent] = useState(false);
   const isSingleTextBlock =
-    (hasTitle && !hasDescription) || (!hasTitle && hasDescription);
+    [hasTitle, hasDescription, hasChildren].filter(Boolean).length === 1;
 
   const isCenterAligned =
     !hasActionButtonBelow &&
     !hasUnmeasuredContent &&
-    (hasTitle || hasDescription) &&
+    (hasTitle || hasDescription || hasChildren) &&
     (isSingleTextBlock || isCompactContent);
 
   const handleContentLayout = (event: LayoutChangeEvent) => {
@@ -123,6 +128,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
     const maxCompactHeight = getCompactContentMaxHeight({
       hasTitle,
       hasDescription,
+      hasChildren,
     });
     setIsCompactContent(height <= maxCompactHeight);
   };

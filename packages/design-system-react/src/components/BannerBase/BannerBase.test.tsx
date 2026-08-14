@@ -256,6 +256,121 @@ describe('BannerBase', () => {
     );
   });
 
+  it('center-aligns a children-only stack', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: 48,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 48,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    render(
+      <BannerBase data-testid="banner-base" onClose={() => undefined}>
+        This is a success banner.
+      </BannerBase>,
+    );
+
+    expect(screen.getByTestId('banner-base')).toHaveClass('items-center');
+  });
+
+  it('center-aligns content when children is a single line', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: 48,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 48,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    render(
+      <BannerBase
+        data-testid="banner-base"
+        onClose={() => undefined}
+        title="Success"
+      >
+        This is a success banner.
+      </BannerBase>,
+    );
+
+    expect(screen.getByTestId('banner-base')).toHaveClass('items-center');
+  });
+
+  it('center-aligns content when description and children are a single line', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: 46,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 46,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    render(
+      <BannerBase
+        data-testid="banner-base"
+        description="15.02 USDC is available in your account"
+        onClose={() => undefined}
+      >
+        This is a success banner.
+      </BannerBase>,
+    );
+
+    expect(screen.getByTestId('banner-base')).toHaveClass('items-center');
+  });
+
+  it('top-aligns content when children wraps to multiple lines', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: 72,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 72,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    render(
+      <BannerBase
+        data-testid="banner-base"
+        onClose={() => undefined}
+        title="Success"
+      >
+        This is a success banner with extra copy that wraps across multiple
+        lines.
+      </BannerBase>,
+    );
+
+    expect(screen.getByTestId('banner-base')).toHaveClass('items-start');
+  });
+
+  it('top-aligns content when children is a custom React node', () => {
+    const customChildren: ReactNode = <span>This is a success banner.</span>;
+    const customChildrenProps = {
+      children: customChildren,
+      'data-testid': 'banner-base',
+      onClose: () => undefined,
+      title: 'Success',
+    } as unknown as React.ComponentProps<typeof BannerBase>;
+
+    render(<BannerBase {...customChildrenProps} />);
+
+    expect(screen.getByTestId('banner-base')).toHaveClass('items-start');
+  });
+
   it('treats a missing content height as not compact for title and description', () => {
     jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
       height: undefined,
