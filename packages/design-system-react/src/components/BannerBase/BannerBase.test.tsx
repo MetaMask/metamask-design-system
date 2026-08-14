@@ -230,7 +230,33 @@ describe('BannerBase', () => {
     );
   });
 
-  it('treats a missing content height as not compact', () => {
+  it('center-aligns a wrapping title-only stack', () => {
+    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+      height: 48,
+      width: 200,
+      top: 0,
+      left: 0,
+      bottom: 48,
+      right: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    } as DOMRect);
+
+    render(
+      <BannerBase
+        data-testid="banner-base"
+        onClose={() => undefined}
+        title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
+      />,
+    );
+
+    expect(screen.getByTestId('banner-base').className).toContain(
+      'items-center',
+    );
+  });
+
+  it('treats a missing content height as not compact for title and description', () => {
     jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
       height: undefined,
       width: 200,
@@ -246,6 +272,7 @@ describe('BannerBase', () => {
     render(
       <BannerBase
         data-testid="banner-base"
+        description="Supporting details"
         onClose={() => undefined}
         title="Added to Watchlist"
       />,
@@ -339,8 +366,9 @@ describe('BannerBase', () => {
     const { unmount } = render(
       <BannerBase
         data-testid="banner-base"
+        description="15.02 USDC is available in your account"
         onClose={() => undefined}
-        title="Added to Watchlist"
+        title="Deposit completed"
       />,
     );
 

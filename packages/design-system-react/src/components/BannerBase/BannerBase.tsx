@@ -108,11 +108,14 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
       (hasDescription && !isTextContent(description));
 
     const contentRef = useRef<HTMLDivElement | null>(null);
-    // Default top-aligned until the text column measures as a compact stack.
+    // Title + description: default top-aligned until both blocks measure as
+    // single-line. Title-only / description-only always center (including wraps).
     const [isCompactContent, setIsCompactContent] = useState(false);
+    const isSingleTextBlock =
+      (hasTitle && !hasDescription) || (!hasTitle && hasDescription);
 
     const measureContent = useCallback(() => {
-      if (hasUnmeasuredContent || hasActionButtonBelow) {
+      if (hasUnmeasuredContent || hasActionButtonBelow || isSingleTextBlock) {
         setIsCompactContent(false);
         return;
       }
@@ -123,7 +126,13 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
         hasDescription,
       });
       setIsCompactContent(height > 0 && height <= maxCompactHeight);
-    }, [hasActionButtonBelow, hasDescription, hasTitle, hasUnmeasuredContent]);
+    }, [
+      hasActionButtonBelow,
+      hasDescription,
+      hasTitle,
+      hasUnmeasuredContent,
+      isSingleTextBlock,
+    ]);
 
     useLayoutEffect(() => {
       measureContent();
@@ -145,8 +154,8 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
     const isCenterAligned =
       !hasActionButtonBelow &&
       !hasUnmeasuredContent &&
-      isCompactContent &&
-      (hasTitle || hasDescription);
+      (hasTitle || hasDescription) &&
+      (isSingleTextBlock || isCompactContent);
 
     const actionButton = shouldShowActionButton ? (
       <Button

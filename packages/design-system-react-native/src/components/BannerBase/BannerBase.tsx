@@ -99,19 +99,22 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
     (hasTitle && !isTextContent(title)) ||
     (hasDescription && !isTextContent(description));
 
-  // Default top-aligned until the text column measures as a compact
-  // (single-line-per-block) stack. Avoids multiline toasts sticking centered
-  // when layout callbacks are delayed or skipped.
+  // Title + description: default top-aligned until both blocks measure as
+  // single-line. Title-only / description-only always center (including wraps).
+  // Avoids multiline title+description stacks sticking centered when layout
+  // callbacks are delayed or skipped.
   const [isCompactContent, setIsCompactContent] = useState(false);
+  const isSingleTextBlock =
+    (hasTitle && !hasDescription) || (!hasTitle && hasDescription);
 
   const isCenterAligned =
     !hasActionButtonBelow &&
     !hasUnmeasuredContent &&
-    isCompactContent &&
-    (hasTitle || hasDescription);
+    (hasTitle || hasDescription) &&
+    (isSingleTextBlock || isCompactContent);
 
   const handleContentLayout = (event: LayoutChangeEvent) => {
-    if (hasUnmeasuredContent || hasActionButtonBelow) {
+    if (hasUnmeasuredContent || hasActionButtonBelow || isSingleTextBlock) {
       setIsCompactContent(false);
       return;
     }

@@ -212,6 +212,32 @@ describe('BannerBase', () => {
     );
   });
 
+  it('center-aligns a wrapping title-only stack', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    const { getByTestId, getByText } = render(
+      <BannerBase
+        onClose={() => undefined}
+        testID="banner-base"
+        title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
+      />,
+    );
+
+    const titleParent = getByText(
+      'Your deposit of 20.50 USDC into Account 1 is been confirmed.',
+    ).parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 48 } },
+    });
+
+    expect(getByTestId('banner-base')).toHaveStyle(
+      tw.style(BoxAlignItems.Center),
+    );
+  });
+
   it('top-aligns content when description wraps to multiple lines', () => {
     const tw = renderHook(() => useTailwind()).result.current;
 

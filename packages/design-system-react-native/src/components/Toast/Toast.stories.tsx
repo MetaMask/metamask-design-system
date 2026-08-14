@@ -6,6 +6,7 @@ import {
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
+import { ScrollView } from 'react-native';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
@@ -100,63 +101,104 @@ export const Title: Story = {
 
 export const Spacing: Story = {
   render: () => (
-    <Box twClassName="gap-4">
-      <Box twClassName="gap-2">
-        <Text
-          color={TextColor.TextAlternative}
-          fontWeight={FontWeight.Regular}
-          variant={TextVariant.HeadingSm}
-        >
-          Single line
-        </Text>
-        <Toast severity={ToastSeverity.Success} title="Added to Watchlist" />
+    <ScrollView>
+      <Box twClassName="gap-4">
+        <Box twClassName="gap-2">
+          <Text
+            color={TextColor.TextAlternative}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            Single line
+          </Text>
+          <Toast
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Added to Watchlist"
+          />
+        </Box>
+        <Box twClassName="gap-2">
+          <Text
+            color={TextColor.TextAlternative}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            Long title
+          </Text>
+          <Toast
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
+          />
+        </Box>
+        <Box twClassName="gap-2">
+          <Text
+            color={TextColor.TextAlternative}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            With action button
+          </Text>
+          <Toast
+            actionButtonLabel="Undo"
+            actionButtonLayout={BannerBaseActionButtonLayout.End}
+            actionButtonOnPress={() => undefined}
+            description="You can remove it anytime."
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Added to Watchlist"
+          />
+        </Box>
+        <Box twClassName="gap-2">
+          <Text
+            color={TextColor.TextAlternative}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            With action button below
+          </Text>
+          <Toast
+            actionButtonLabel="Undo"
+            actionButtonLayout={BannerBaseActionButtonLayout.Below}
+            actionButtonOnPress={() => undefined}
+            description="You can remove it anytime."
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Added to Watchlist"
+          />
+        </Box>
+        <Box twClassName="gap-2">
+          <Text
+            color={TextColor.TextAlternative}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            With description
+          </Text>
+          <Toast
+            description="15.02 USDC is available in your account"
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Deposit completed"
+          />
+        </Box>
+        <Box twClassName="gap-2">
+          <Text
+            color={TextColor.TextAlternative}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            Multi-line description
+          </Text>
+          <Toast
+            description="Enable notifications to stay informed on campaigns and never miss important updates about your account."
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Don't miss out"
+          />
+        </Box>
       </Box>
-      <Box twClassName="gap-2">
-        <Text
-          color={TextColor.TextAlternative}
-          fontWeight={FontWeight.Regular}
-          variant={TextVariant.HeadingSm}
-        >
-          With action button
-        </Text>
-        <Toast
-          actionButtonLabel="Undo"
-          actionButtonLayout={BannerBaseActionButtonLayout.End}
-          actionButtonOnPress={() => undefined}
-          description="You can remove it anytime."
-          severity={ToastSeverity.Success}
-          title="Added to Watchlist"
-        />
-      </Box>
-      <Box twClassName="gap-2">
-        <Text
-          color={TextColor.TextAlternative}
-          fontWeight={FontWeight.Regular}
-          variant={TextVariant.HeadingSm}
-        >
-          With description
-        </Text>
-        <Toast
-          description="15.02 USDC is available in your account"
-          severity={ToastSeverity.Success}
-          title="Deposit completed"
-        />
-      </Box>
-      <Box twClassName="gap-2">
-        <Text
-          color={TextColor.TextAlternative}
-          fontWeight={FontWeight.Regular}
-          variant={TextVariant.HeadingSm}
-        >
-          Multi-line description
-        </Text>
-        <Toast
-          description="Enable notifications to stay informed on campaigns and never miss important updates about your account."
-          severity={ToastSeverity.Success}
-          title="Don't miss out"
-        />
-      </Box>
-    </Box>
+    </ScrollView>
   ),
 };
 

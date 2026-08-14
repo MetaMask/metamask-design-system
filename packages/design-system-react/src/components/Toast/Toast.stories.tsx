@@ -99,7 +99,25 @@ export const Spacing: Story = {
         >
           Single line
         </Text>
-        <Toast severity={ToastSeverity.Success} title="Added to Watchlist" />
+          <Toast
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Added to Watchlist"
+          />
+      </Box>
+      <Box className="flex flex-col gap-2">
+        <Text
+          color={TextColor.TextAlternative}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          Long title
+        </Text>
+        <Toast
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
+        />
       </Box>
       <Box className="flex flex-col gap-2">
         <Text
@@ -114,6 +132,25 @@ export const Spacing: Story = {
           actionButtonLayout={BannerBaseActionButtonLayout.End}
           actionButtonOnClick={() => undefined}
           description="You can remove it anytime."
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+      <Box className="flex flex-col gap-2">
+        <Text
+          color={TextColor.TextAlternative}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          With action button below
+        </Text>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.Below}
+          actionButtonOnClick={() => undefined}
+          description="You can remove it anytime."
+          onClose={() => undefined}
           severity={ToastSeverity.Success}
           title="Added to Watchlist"
         />
@@ -128,6 +165,7 @@ export const Spacing: Story = {
         </Text>
         <Toast
           description="15.02 USDC is available in your account"
+          onClose={() => undefined}
           severity={ToastSeverity.Success}
           title="Deposit completed"
         />
@@ -142,6 +180,7 @@ export const Spacing: Story = {
         </Text>
         <Toast
           description="Enable notifications to stay informed on campaigns and never miss important updates about your account."
+          onClose={() => undefined}
           severity={ToastSeverity.Success}
           title="Don't miss out"
         />
