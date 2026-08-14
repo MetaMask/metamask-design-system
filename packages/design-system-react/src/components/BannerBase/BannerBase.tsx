@@ -85,6 +85,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
       onClose,
       closeButtonProps,
       className,
+      backgroundColor = BoxBackgroundColor.BackgroundDefault,
       ...props
     },
     ref,
@@ -185,7 +186,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
           isCenterAligned ? BoxAlignItems.Center : BoxAlignItems.Start
         }
         gap={4}
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
+        backgroundColor={backgroundColor}
         paddingTop={3}
         paddingBottom={hasActionButtonBelow ? 4 : 3}
         paddingLeft={4}

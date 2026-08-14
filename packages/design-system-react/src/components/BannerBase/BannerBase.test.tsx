@@ -376,7 +376,9 @@ describe('BannerBase', () => {
 
   it('keeps top alignment for custom node children when alignItems is passed through', () => {
     const customChildren: ReactNode = (
-      <span>Children can include richer content and can be any React node.</span>
+      <span>
+        Children can include richer content and can be any React node.
+      </span>
     );
     const customChildrenProps = {
       alignItems: BoxAlignItems.Center,

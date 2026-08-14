@@ -79,6 +79,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
   onClose,
   closeButtonProps,
   twClassName,
+  backgroundColor = BoxBackgroundColor.BackgroundDefault,
   ...props
 }) => {
   const resolvedActionButtonProps = actionButtonProps ?? {};
@@ -150,7 +151,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
       flexDirection={BoxFlexDirection.Row}
       alignItems={isCenterAligned ? BoxAlignItems.Center : BoxAlignItems.Start}
       gap={4}
-      backgroundColor={BoxBackgroundColor.BackgroundDefault}
+      backgroundColor={backgroundColor}
       paddingTop={3}
       paddingBottom={hasActionButtonBelow ? 4 : 3}
       paddingLeft={4}

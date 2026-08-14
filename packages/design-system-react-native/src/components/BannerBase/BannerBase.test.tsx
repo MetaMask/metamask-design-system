@@ -379,7 +379,9 @@ describe('BannerBase', () => {
         testID="banner-base"
         title="Children as rich content"
       >
-        <Text>Children can include richer content and can be any React node.</Text>
+        <Text>
+          Children can include richer content and can be any React node.
+        </Text>
       </BannerBase>,
     );
 
