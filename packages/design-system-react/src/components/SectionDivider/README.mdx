@@ -1,0 +1,200 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as SectionDividerStories from './SectionDivider.stories';
+
+# SectionDivider
+
+SectionDivider is a horizontal rule built on the root [Box](../Box/Box.tsx) and rendered as a semantic `<hr />`. It stretches on the cross axis by default, uses a 1px muted **top-only** border (`border-t` and `border-muted`) so the line reads as a single hairline on a zero-height box, and applies vertical margin from the design scale.
+
+```tsx
+import { SectionDivider } from '@metamask/design-system-react';
+
+<SectionDivider />;
+```
+
+<Canvas of={SectionDividerStories.Default} />
+
+## Props
+
+`SectionDividerProps` matches [Box](../Box/Box.types.ts) and standard `hr` props. Override defaults with any `Box` prop (for example `marginVertical={0}` or `borderWidth={0}`) or with `className` / `style`.
+
+### Defaults
+
+| Concern         | Default                                                                                |
+| --------------- | -------------------------------------------------------------------------------------- |
+| Width           | `self-stretch` via `className` (full width in typical column layouts)                  |
+| Border width    | `borderWidth={1}` → `border-t` (`0`–`8` map to `border-t-0`, `border-t`, `border-t-*`) |
+| Border color    | `BoxBorderColor.BorderMuted` → `border-muted`                                          |
+| Vertical margin | `marginVertical={5}` → `my-5` (20px)                                                   |
+
+```tsx
+import {
+  Box,
+  BoxFlexDirection,
+  SectionDivider,
+  Text,
+  TextVariant,
+} from '@metamask/design-system-react';
+
+export const SectionsExample = () => (
+  <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+    <Text variant={TextVariant.BodyMd}>Section A</Text>
+    <SectionDivider />
+    <Text variant={TextVariant.BodyMd}>Section B</Text>
+  </Box>
+);
+```
+
+### `borderWidth`
+
+Maps to a **top-only** border class so the divider stays a single hairline. Does not use Box’s all-sides `borderWidth` mapping.
+
+Available values: `0`, `1`, `2`, `4`, `8`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBorderWidth</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>1</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionDividerStories.BorderWidth} />
+
+### `borderColor`
+
+Border color token applied via Box.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxBorderColor</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>BoxBorderColor.BorderMuted</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionDividerStories.BorderColor} />
+
+### `marginVertical`
+
+Vertical margin from the design spacing scale.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxSpacing</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>5</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={SectionDividerStories.MarginVertical} />
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SectionDivider } from '@metamask/design-system-react';
+
+// Add additional styles
+<SectionDivider className="opacity-50" />
+
+// Override default styles
+<SectionDivider className="self-center" />
+```
+
+### `style`
+
+Use the `style` prop for dynamic inline styles that cannot be achieved with `className` alone. Prefer `className` with Tailwind classes for static styles.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={SectionDividerStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
