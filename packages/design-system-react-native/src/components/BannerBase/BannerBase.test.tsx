@@ -369,6 +369,33 @@ describe('BannerBase', () => {
     );
   });
 
+  it('keeps top alignment for custom node children when alignItems is passed through', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    const { getByTestId, getByText } = render(
+      <BannerBase
+        alignItems={BoxAlignItems.Center}
+        onClose={() => undefined}
+        testID="banner-base"
+        title="Children as rich content"
+      >
+        <Text>Children can include richer content and can be any React node.</Text>
+      </BannerBase>,
+    );
+
+    const titleParent = getByText('Children as rich content').parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 48 } },
+    });
+
+    expect(getByTestId('banner-base')).toHaveStyle(
+      tw.style(BoxAlignItems.Start),
+    );
+  });
+
   it('top-aligns content when description wraps to multiple lines', () => {
     const tw = renderHook(() => useTailwind()).result.current;
 

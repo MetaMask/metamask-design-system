@@ -1,4 +1,7 @@
-import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
+import {
+  BannerBaseActionButtonLayout,
+  BoxAlignItems,
+} from '@metamask/design-system-shared';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import type { ReactNode } from 'react';
@@ -364,6 +367,23 @@ describe('BannerBase', () => {
       'data-testid': 'banner-base',
       onClose: () => undefined,
       title: 'Success',
+    } as unknown as React.ComponentProps<typeof BannerBase>;
+
+    render(<BannerBase {...customChildrenProps} />);
+
+    expect(screen.getByTestId('banner-base')).toHaveClass('items-start');
+  });
+
+  it('keeps top alignment for custom node children when alignItems is passed through', () => {
+    const customChildren: ReactNode = (
+      <span>Children can include richer content and can be any React node.</span>
+    );
+    const customChildrenProps = {
+      alignItems: BoxAlignItems.Center,
+      children: customChildren,
+      'data-testid': 'banner-base',
+      onClose: () => undefined,
+      title: 'Children as rich content',
     } as unknown as React.ComponentProps<typeof BannerBase>;
 
     render(<BannerBase {...customChildrenProps} />);

@@ -146,6 +146,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
 
   return (
     <Box
+      {...props}
       flexDirection={BoxFlexDirection.Row}
       alignItems={isCenterAligned ? BoxAlignItems.Center : BoxAlignItems.Start}
       gap={4}
@@ -155,7 +156,6 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
       paddingLeft={4}
       paddingRight={shouldShowCloseButton ? 2 : 4}
       twClassName={mergeTwClassName('rounded-xl', twClassName)}
-      {...props}
     >
       {startAccessory}
 

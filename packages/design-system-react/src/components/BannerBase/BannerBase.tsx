@@ -178,6 +178,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
 
     return (
       <Box
+        {...props}
         ref={ref}
         flexDirection={BoxFlexDirection.Row}
         alignItems={
@@ -190,7 +191,6 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
         paddingLeft={4}
         paddingRight={shouldShowCloseButton ? 2 : 4}
         className={twMerge('rounded-xl', className)}
-        {...props}
       >
         {startAccessory}
 
