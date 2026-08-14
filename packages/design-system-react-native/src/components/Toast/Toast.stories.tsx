@@ -99,127 +99,6 @@ export const Title: Story = {
   },
 };
 
-export const Spacing: Story = {
-  render: () => (
-    <ScrollView>
-      <Box twClassName="gap-4">
-        <Box twClassName="gap-2">
-          <Text
-            color={TextColor.TextAlternative}
-            fontWeight={FontWeight.Regular}
-            variant={TextVariant.HeadingSm}
-          >
-            Single line
-          </Text>
-          <Toast
-            onClose={() => undefined}
-            severity={ToastSeverity.Success}
-            title="Added to Watchlist"
-          />
-        </Box>
-        <Box twClassName="gap-2">
-          <Text
-            color={TextColor.TextAlternative}
-            fontWeight={FontWeight.Regular}
-            variant={TextVariant.HeadingSm}
-          >
-            Long title
-          </Text>
-          <Toast
-            onClose={() => undefined}
-            severity={ToastSeverity.Success}
-            title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
-          />
-        </Box>
-        <Box twClassName="gap-2">
-          <Text
-            color={TextColor.TextAlternative}
-            fontWeight={FontWeight.Regular}
-            variant={TextVariant.HeadingSm}
-          >
-            With action button
-          </Text>
-          <Toast
-            actionButtonLabel="Undo"
-            actionButtonLayout={BannerBaseActionButtonLayout.End}
-            actionButtonOnPress={() => undefined}
-            description="You can remove it anytime."
-            onClose={() => undefined}
-            severity={ToastSeverity.Success}
-            title="Added to Watchlist"
-          />
-        </Box>
-        <Box twClassName="gap-2">
-          <Text
-            color={TextColor.TextAlternative}
-            fontWeight={FontWeight.Regular}
-            variant={TextVariant.HeadingSm}
-          >
-            Right + 2 line description
-          </Text>
-          <Toast
-            actionButtonLabel="Undo"
-            actionButtonLayout={BannerBaseActionButtonLayout.End}
-            actionButtonOnPress={() => undefined}
-            description="Your token has been saved for easy access. You may remove this anytime."
-            onClose={() => undefined}
-            severity={ToastSeverity.Success}
-            title="Added to Watchlist"
-          />
-        </Box>
-        <Box twClassName="gap-2">
-          <Text
-            color={TextColor.TextAlternative}
-            fontWeight={FontWeight.Regular}
-            variant={TextVariant.HeadingSm}
-          >
-            With action button below
-          </Text>
-          <Toast
-            actionButtonLabel="Undo"
-            actionButtonLayout={BannerBaseActionButtonLayout.Below}
-            actionButtonOnPress={() => undefined}
-            description="You can remove it anytime."
-            onClose={() => undefined}
-            severity={ToastSeverity.Success}
-            title="Added to Watchlist"
-          />
-        </Box>
-        <Box twClassName="gap-2">
-          <Text
-            color={TextColor.TextAlternative}
-            fontWeight={FontWeight.Regular}
-            variant={TextVariant.HeadingSm}
-          >
-            With description
-          </Text>
-          <Toast
-            description="15.02 USDC is available in your account"
-            onClose={() => undefined}
-            severity={ToastSeverity.Success}
-            title="Deposit completed"
-          />
-        </Box>
-        <Box twClassName="gap-2">
-          <Text
-            color={TextColor.TextAlternative}
-            fontWeight={FontWeight.Regular}
-            variant={TextVariant.HeadingSm}
-          >
-            Multi-line description
-          </Text>
-          <Toast
-            description="Enable notifications to stay informed on campaigns and never miss important updates about your account."
-            onClose={() => undefined}
-            severity={ToastSeverity.Success}
-            title="Don't miss out"
-          />
-        </Box>
-      </Box>
-    </ScrollView>
-  ),
-};
-
 export const Description: Story = {
   args: {
     description: '15.02 USDC is available in your account',
@@ -255,7 +134,7 @@ export const ActionButtonOnPress: Story = {
     <Box twClassName="gap-4">
       <Box twClassName="gap-2">
         <Text
-          color={TextColor.TextAlternative}
+          color={TextColor.TextDefault}
           fontWeight={FontWeight.Regular}
           variant={TextVariant.HeadingSm}
         >
@@ -271,7 +150,7 @@ export const ActionButtonOnPress: Story = {
       </Box>
       <Box twClassName="gap-2">
         <Text
-          color={TextColor.TextAlternative}
+          color={TextColor.TextDefault}
           fontWeight={FontWeight.Regular}
           variant={TextVariant.HeadingSm}
         >
@@ -289,3 +168,150 @@ export const ActionButtonOnPress: Story = {
     </Box>
   ),
 };
+
+export const Spacing: Story = {
+  render: () => (
+    <ScrollView>
+      <Box twClassName="gap-8">
+        <Box twClassName="gap-4">
+          <Box twClassName="gap-1">
+            <Text
+              color={TextColor.TextDefault}
+              fontWeight={FontWeight.Regular}
+              variant={TextVariant.HeadingSm}
+            >
+              Titles only
+            </Text>
+            <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+              Content should center align if there is no description
+            </Text>
+          </Box>
+          <Toast
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Added to Watchlist"
+          />
+          <Toast
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
+          />
+        </Box>
+        <Box twClassName="gap-4">
+          <Box twClassName="gap-1">
+            <Text
+              color={TextColor.TextDefault}
+              fontWeight={FontWeight.Regular}
+              variant={TextVariant.HeadingSm}
+            >
+              With descriptions
+            </Text>
+            <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+              Content is top aligned if the description line length is more than
+              one line. This is to ensure the content remains visually balanced.
+            </Text>
+          </Box>
+          <Toast
+            description="15.02 USDC is available in your account"
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Deposit completed"
+          />
+          <Toast
+            description="Enable notifications to stay informed on campaigns and never miss important updates about your account."
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Don't miss out"
+          />
+        </Box>
+        <Box twClassName="gap-4">
+          <Box twClassName="gap-1">
+            <Text
+              color={TextColor.TextDefault}
+              fontWeight={FontWeight.Regular}
+              variant={TextVariant.HeadingSm}
+            >
+              With action buttons
+            </Text>
+            <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+              Action buttons should help users perform actions associated with
+              the toast.
+            </Text>
+          </Box>
+          <Toast
+            actionButtonLabel="Undo"
+            actionButtonLayout={BannerBaseActionButtonLayout.End}
+            actionButtonOnPress={() => undefined}
+            description="You can remove it anytime."
+            severity={ToastSeverity.Success}
+            title="Added to Watchlist"
+          />
+          <Toast
+            actionButtonLabel="Undo"
+            actionButtonLayout={BannerBaseActionButtonLayout.Below}
+            actionButtonOnPress={() => undefined}
+            description="Your token has been saved for easy access. You may remove this anytime."
+            onClose={() => undefined}
+            severity={ToastSeverity.Success}
+            title="Added to Watchlist"
+          />
+        </Box>
+      </Box>
+    </ScrollView>
+  ),
+};
+
+export const IncorrectUsage: Story = {
+  render: () => (
+    <Box twClassName="gap-8">
+      <Box twClassName="gap-4">
+        <Box twClassName="gap-1">
+          <Text
+            color={TextColor.TextDefault}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            Do not render close and end action buttons together.
+          </Text>
+          <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            This results in a cluttered UI
+          </Text>
+        </Box>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.End}
+          actionButtonOnPress={() => undefined}
+          description="You can remove it anytime."
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+      <Box twClassName="gap-4">
+        <Box twClassName="gap-1">
+          <Text
+            color={TextColor.TextDefault}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            Do not render action button at the end if description length > 1.
+          </Text>
+          <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            This results in suboptimal spacing. If description length > 1, the
+            action button should be placed below.
+          </Text>
+        </Box>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.End}
+          actionButtonOnPress={() => undefined}
+          description="Your token has been saved for easy access. You may remove this anytime."
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+    </Box>
+  ),
+};
+
