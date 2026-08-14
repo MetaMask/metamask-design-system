@@ -8,7 +8,10 @@ import React, { useContext, useMemo } from 'react';
  * Controlled component: the app owns when pure black is active (e.g. feature
  * flag and resolved dark theme) and passes `isPureBlack`. CSS token overrides
  * come from `data-pure-black` on the document root (see extension `setTheme`);
- * this provider supplies `usePureBlack()` for components that branch in JS.
+ * this provider supplies `usePureBlack()` for any remaining JS consumers.
+ *
+ * Design-system components no longer branch on pure black for surfaces —
+ * use elevated / border-alternative tokens instead (TMCU-1282).
  *
  * @param options - Component props
  * @param options.children - Child components to render
@@ -33,9 +36,9 @@ PureBlackProvider.displayName = 'PureBlackProvider';
 /**
  * Returns whether pure-black dark mode is active in the current subtree.
  *
- * Use for component logic that depends on the active dark palette (e.g. elevated
- * surfaces in Modal). On React Native, use `usePureBlack` from
- * `@metamask/design-system-twrnc-preset` instead.
+ * Prefer semantic tokens (`bg-elevated1`, `border-alternative`, etc.) over
+ * branching on this flag in design-system components. On React Native, use
+ * `usePureBlack` from `@metamask/design-system-twrnc-preset` instead.
  *
  * @returns True when wrapped by `PureBlackProvider` with `isPureBlack` enabled
  */

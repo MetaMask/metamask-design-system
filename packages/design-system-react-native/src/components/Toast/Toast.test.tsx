@@ -170,7 +170,7 @@ describe('Toast', () => {
     expect(screen.getByTestId('toast-root')).toHaveStyle(tw.style('mx-2'));
   });
 
-  it('uses background default, md shadow, and 16px radius in light theme', () => {
+  it('uses elevated2 background, md shadow, and 16px radius in light theme', () => {
     const tw = renderHook(() => useTailwind()).result.current;
 
     render(
@@ -182,14 +182,14 @@ describe('Toast', () => {
     );
 
     expect(screen.getByTestId('toast-root')).toHaveStyle(
-      tw.style('bg-default rounded-2xl'),
+      tw.style('bg-elevated2 rounded-2xl'),
     );
     expect(screen.getByTestId('toast-root')).toHaveStyle(
       lightTheme.shadows.size.md,
     );
   });
 
-  it('uses background section and no shadow in dark theme', () => {
+  it('uses elevated2 background and no shadow in dark theme', () => {
     const tw = renderHook(() => useTailwind(), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={Theme.Dark}>{children}</ThemeProvider>
@@ -207,7 +207,7 @@ describe('Toast', () => {
     );
 
     expect(screen.getByTestId('toast-root')).toHaveStyle(
-      tw.style('bg-section rounded-2xl'),
+      tw.style('bg-elevated2 rounded-2xl'),
     );
     expect(screen.getByTestId('toast-root')).not.toHaveStyle(
       lightTheme.shadows.size.md,

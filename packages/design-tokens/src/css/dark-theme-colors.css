@@ -1,12 +1,11 @@
 /**
  * Dark Theme Colors
  *
- * Canonical dark theme values match pure black (OLED) surfaces.
+ * Canonical dark theme values are OLED / pure black surfaces.
  *
- * TODO(TMCU-987): Remove the provisional note below once PureBlackProvider,
- * pureBlackDarkTheme overrides, and pure-black-dark-theme-colors.css are deleted.
- * Provisional `[data-pure-black]` overrides remain in
- * `pure-black-dark-theme-colors.css` until client providers are removed.
+ * TODO(TMCU-987): Remove PureBlackProvider, pureBlackDarkTheme,
+ * resolveDarkTheme, and the empty pure-black-dark-theme-colors.css import once
+ * clients drop data-pure-black wiring.
  */
 [data-theme='dark'],
 .dark {
@@ -17,6 +16,12 @@
   --color-background-section: #18181b;
   --color-background-subsection: #222226;
   --color-background-alternative: #0d0d0f;
+  /* Elevated +1 over bg-default. Scrim/overlay surfaces (Modal, BottomSheet).
+  Stepped fill so panels separate from the base. */
+  --color-background-elevated1: #0d0d0f;
+  /* Elevated +2 over base or elevated1. Floating UI (Toast, Menu, Popover, Tooltip).
+  Stepped fill so panels separate from the base. */
+  --color-background-elevated2: #18181b;
 
   /* Applied to interactive elements, such as buttons.
   Cool-tinted white opacities so muted surfaces inherit the OLED hue. */
@@ -52,6 +57,8 @@
   /* Contrast of border-default: 3:3 on bg-default, 3.0 on section. */
   --color-border-default: var(--brand-colors-grey-grey500);
   --color-border-muted: #e2e2ff26;
+  /* Border for elevated surfaces. Subtle edge against bg-default. */
+  --color-border-alternative: #e2e2ff26;
 
   /* Derived from the same hue as bg-default for visual
   consistency. Ensures we don't have too much "red".
