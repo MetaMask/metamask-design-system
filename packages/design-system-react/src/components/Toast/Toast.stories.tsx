@@ -143,6 +143,24 @@ export const Spacing: Story = {
           fontWeight={FontWeight.Regular}
           variant={TextVariant.HeadingSm}
         >
+          Right + 2 line description
+        </Text>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.End}
+          actionButtonOnClick={() => undefined}
+          description="Your token has been saved for easy access. You may remove this anytime."
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+      <Box className="flex flex-col gap-2">
+        <Text
+          color={TextColor.TextAlternative}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
           With action button below
         </Text>
         <Toast
