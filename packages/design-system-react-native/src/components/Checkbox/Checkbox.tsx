@@ -85,16 +85,14 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
 
     const getCheckboxContainerStyle = useCallback(
       (pressed: boolean): string => {
-        const baseBg = isSelected ? 'bg-icon-default' : 'bg-default';
+        const baseBg = isSelected ? 'bg-icon-default' : 'bg-transparent';
         let baseBorder = 'border-default';
         if (isSelected) {
           baseBorder = 'border-icon-default';
         } else if (isInvalid) {
           baseBorder = 'border-error-default';
         }
-        const pressedBg = isSelected
-          ? 'bg-icon-default-pressed'
-          : 'bg-default-pressed';
+        const pressedBg = isSelected ? 'bg-icon-default-pressed' : 'bg-transparent';
         let pressedBorder = 'border-default';
         if (isSelected) {
           pressedBorder = 'border-icon-default-pressed';

@@ -65,7 +65,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
 
     const baseBg = isSelected
       ? 'bg-icon-default enabled:hover:bg-icon-default-hover enabled:active:bg-icon-default-pressed'
-      : 'bg-default enabled:hover:bg-default-hover enabled:active:bg-default-pressed';
+      : 'bg-transparent';
     let baseBorder = 'border-default';
     if (isSelected) {
       baseBorder = 'border-icon-default';

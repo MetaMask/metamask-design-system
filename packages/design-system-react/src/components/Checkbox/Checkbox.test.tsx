@@ -278,7 +278,7 @@ describe('Checkbox', () => {
     );
   });
 
-  it('scopes hover and press background to enabled state on the input', () => {
+  it('has transparent background when unselected', () => {
     render(
       <Checkbox
         id="test-checkbox"
@@ -289,10 +289,7 @@ describe('Checkbox', () => {
       />,
     );
 
-    expect(screen.getByTestId('chk-input')).toHaveClass(
-      'enabled:hover:bg-default-hover',
-      'enabled:active:bg-default-pressed',
-    );
+    expect(screen.getByTestId('chk-input')).toHaveClass('bg-transparent');
   });
 
   it('scopes press animation to enabled state on the input', () => {
