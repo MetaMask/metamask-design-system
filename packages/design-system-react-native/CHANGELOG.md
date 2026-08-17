@@ -7,11 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- Consumers must remove `ThemeProvider` `isPureBlack` wiring when upgrading `@metamask/design-system-twrnc-preset` ([TMCU-987](https://consensyssoftware.atlassian.net/browse/TMCU-987))
-  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
-
 ## [0.40.0]
 
 ### Added

@@ -7,12 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Removed
-
-- **BREAKING:** Removed provisional pure-black scaffolding now that OLED values are canonical on `darkTheme` ([TMCU-987](https://consensyssoftware.atlassian.net/browse/TMCU-987))
-  - Removed `pureBlackDarkTheme`, `resolveDarkTheme()`, and `pure-black-dark-theme-colors.css`
-  - See [Migration Guide](./MIGRATION.md#from-version-9x-to-1000)
-
 ## [9.0.0]
 
 ### Added
