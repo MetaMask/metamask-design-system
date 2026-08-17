@@ -131,7 +131,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
       hasDescription,
       hasChildren,
     });
-    setIsCompactContent(height <= maxCompactHeight);
+    setIsCompactContent(height > 0 && height <= maxCompactHeight);
   };
 
   const actionButton = shouldShowActionButton ? (

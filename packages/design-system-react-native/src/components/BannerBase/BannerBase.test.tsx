@@ -424,6 +424,31 @@ describe('BannerBase', () => {
     );
   });
 
+  it('treats a zero content height as not compact for title and description', () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    const { getByTestId, getByText } = render(
+      <BannerBase
+        description="Supporting details"
+        onClose={() => undefined}
+        testID="banner-base"
+        title="Added to Watchlist"
+      />,
+    );
+
+    const titleParent = getByText('Added to Watchlist').parent;
+    if (!titleParent) {
+      throw new Error('Expected title content parent');
+    }
+    fireEvent(titleParent, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 200, height: 0 } },
+    });
+
+    expect(getByTestId('banner-base')).toHaveStyle(
+      tw.style(BoxAlignItems.Start),
+    );
+  });
+
   it('top-aligns by default before content layout is measured', () => {
     const tw = renderHook(() => useTailwind()).result.current;
 
