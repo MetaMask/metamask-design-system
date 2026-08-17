@@ -58,7 +58,7 @@
   "devDependencies": {
     "@figma/code-connect": "^1.4.9",
     "@jest/globals": "^29.7.0",
-    "@metamask/auto-changelog": "^6.1.1",
+    "@metamask/auto-changelog": "^6.2.0",
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@metamask/utils": "^11.11.0",
     "@svgr/cli": "^8.1.0",
