@@ -92,7 +92,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
         } else if (isInvalid) {
           baseBorder = 'border-error-default';
         }
-        const pressedBg = isSelected ? 'bg-icon-default-pressed' : 'bg-transparent';
+        const pressedBg = isSelected ? 'bg-icon-default-pressed' : 'bg-pressed';
         let pressedBorder = 'border-default';
         if (isSelected) {
           pressedBorder = 'border-icon-default-pressed';
