@@ -76,18 +76,11 @@ export const themeColors: Record<Theme, Record<string, string>> = {
   [Theme.Dark]: flattenColors(darkTheme.colors),
 };
 
-/** @deprecated OLED values are canonical on dark; same as `themeColors[Theme.Dark]`. */
-export const pureBlackThemeColors = themeColors[Theme.Dark];
-
 /**
  * Resolves flattened theme colors.
  *
  * @param theme - Light or dark theme.
- * @param _isPureBlack - Unused; kept for client call-site compatibility
- * (OLED values are now canonical on dark).
  * @returns Flattened color map for the theme.
  */
-export const getThemeColors = (
-  theme: Theme,
-  _isPureBlack = false,
-): Record<string, string> => themeColors[theme];
+export const getThemeColors = (theme: Theme): Record<string, string> =>
+  themeColors[theme];

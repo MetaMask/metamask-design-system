@@ -39,13 +39,11 @@ const expandShortHex = (value: string): string => {
  *
  * @param selector - A single selector from a style rule.
  * @param theme - Light or dark theme.
- * @param isPureBlack - When true with dark theme, include pure-black override rules.
  * @returns True when the selector should be read for this theme.
  */
 const matchesThemeSelector = (
   selector: string,
   theme: 'light' | 'dark',
-  isPureBlack: boolean,
 ): boolean => {
   const trimmed = selector.trim();
 
@@ -57,14 +55,7 @@ const matchesThemeSelector = (
     );
   }
 
-  const isDarkBase = trimmed === "[data-theme='dark']" || trimmed === '.dark';
-  const isPureBlackRule = trimmed.includes('data-pure-black');
-
-  if (isPureBlack) {
-    return isDarkBase || isPureBlackRule;
-  }
-
-  return isDarkBase;
+  return trimmed === "[data-theme='dark']" || trimmed === '.dark';
 };
 
 /**
@@ -75,13 +66,11 @@ const matchesThemeSelector = (
  *
  * @param varPrefix - The prefix of the CSS variables to retrieve.
  * @param theme - The theme to retrieve variables for ('light' or 'dark').
- * @param isPureBlack - When true with dark theme, apply pure-black CSS variable overrides.
  * @returns An object containing the retrieved CSS variables.
  */
 export const getCSSVariablesFromStylesheet = (
   varPrefix: string,
   theme: 'light' | 'dark' = 'light',
-  isPureBlack = false,
 ): Color => {
   const cssVariables: Color = {};
 
@@ -90,9 +79,6 @@ export const getCSSVariablesFromStylesheet = (
   if (theme === 'dark') {
     tempDiv.setAttribute('data-theme', 'dark');
     tempDiv.classList.add('dark');
-    if (isPureBlack) {
-      tempDiv.setAttribute('data-pure-black', 'true');
-    }
   } else {
     tempDiv.setAttribute('data-theme', 'light');
     tempDiv.classList.add('light');
@@ -126,7 +112,7 @@ export const getCSSVariablesFromStylesheet = (
     .filter((cssRule: CSSRule) => {
       const selectors = (cssRule as CSSStyleRule).selectorText.split(',');
       return selectors.some((selector) =>
-        matchesThemeSelector(selector, theme, isPureBlack),
+        matchesThemeSelector(selector, theme),
       );
     })
     .forEach((cssRule: CSSRule) => {

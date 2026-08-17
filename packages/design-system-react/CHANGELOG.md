@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- **BREAKING:** Removed `PureBlackProvider` and `usePureBlack` ([TMCU-987](https://consensyssoftware.atlassian.net/browse/TMCU-987))
+  - Dark theme is already OLED; use elevated tokens for stepped surfaces
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
+
 ## [0.36.0]
 
 ### Added

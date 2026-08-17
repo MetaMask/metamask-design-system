@@ -2,10 +2,6 @@
  * Dark Theme Colors
  *
  * Canonical dark theme values are OLED / pure black surfaces.
- *
- * TODO(TMCU-987): Remove PureBlackProvider, pureBlackDarkTheme,
- * resolveDarkTheme, and the empty pure-black-dark-theme-colors.css import once
- * clients drop data-pure-black wiring.
  */
 [data-theme='dark'],
 .dark {
