@@ -2,6 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 9.x to 10.0.0](#from-version-9x-to-1000)
 - [From version 8.x to 9.0.0](#from-version-8x-to-900)
 - [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
@@ -11,6 +12,90 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 9.x to 10.0.0
+
+Provisional pure-black scaffolding is removed. Canonical `darkTheme` already uses OLED values (since 9.0.0); elevated tokens remain the way to style stepped surfaces.
+
+### What changed
+
+**Removed from `@metamask/design-tokens`:**
+
+- `pureBlackDarkTheme`
+- `resolveDarkTheme()`
+- `pure-black-dark-theme-colors.css` / `[data-pure-black]` CSS override path
+
+**Removed from design-system packages:**
+
+- `@metamask/design-system-react` `PureBlackProvider` / `usePureBlack`
+- `@metamask/design-system-shared` `PureBlackContext` and related types
+- `@metamask/design-system-twrnc-preset` `ThemeProvider` `isPureBlack` prop, `usePureBlack`, and `pureBlackThemeColors`
+- `getThemeColors(theme, isPureBlack)` / `generateTailwindConfig(theme, isPureBlack)` second arguments
+
+### Migration
+
+```tsx
+// Before
+import {
+  darkTheme,
+  pureBlackDarkTheme,
+  resolveDarkTheme,
+} from '@metamask/design-tokens';
+import { PureBlackProvider, usePureBlack } from '@metamask/design-system-react';
+
+<html data-pure-black={isPureBlack || undefined}>
+  <PureBlackProvider isPureBlack={isPureBlack}>{children}</PureBlackProvider>
+</html>;
+
+const theme = resolveDarkTheme(isPureBlack);
+// or
+const theme = isPureBlack ? pureBlackDarkTheme : darkTheme;
+```
+
+```tsx
+// After
+import { darkTheme } from '@metamask/design-tokens';
+
+{
+  children;
+}
+
+const theme = darkTheme;
+```
+
+```tsx
+// Before — React Native
+import {
+  ThemeProvider,
+  usePureBlack,
+  getThemeColors,
+} from '@metamask/design-system-twrnc-preset';
+
+<ThemeProvider theme={Theme.Dark} isPureBlack={isPureBlack}>
+  {children}
+</ThemeProvider>;
+
+getThemeColors(theme, isPureBlack);
+```
+
+```tsx
+// After — React Native
+import {
+  ThemeProvider,
+  getThemeColors,
+} from '@metamask/design-system-twrnc-preset';
+
+<ThemeProvider theme={Theme.Dark}>{children}</ThemeProvider>;
+
+getThemeColors(theme);
+```
+
+Use `background.elevated1`, `background.elevated2`, and `border.alternative` (or `bg-elevated1` / `bg-elevated2` / `border-alternative`) instead of branching on pure-black mode. See [From version 8.x to 9.0.0](#from-version-8x-to-900) for elevated-token examples.
+
+### Impact
+
+- **MetaMask extension / mobile:** After client provider wiring is removed, bump to these package versions with no additional visual change expected for dark mode
+- **Other consumers still importing removed APIs:** Update imports as above; TypeScript will fail until call sites are cleaned up
 
 ## From version 8.x to 9.0.0
 
