@@ -2,7 +2,6 @@ import React, { useLayoutEffect } from 'react';
 import '../../../packages/design-tokens/dist/styles.css';
 import '../tailwind.css';
 
-import { PureBlackProvider } from '@metamask/design-system-react';
 import { Preview } from '@storybook/react-vite';
 import { StoryContext, StoryFn } from '@storybook/react-vite';
 
@@ -21,64 +20,25 @@ export const globalTypes = {
       icon: 'paintbrush',
     },
   },
-  isPureBlack: {
-    name: 'Pure black',
-    description:
-      'Legacy OLED toggle — now identical to dark (canonical darkTheme is pure black). Kept for client provider wiring until TMCU-987 cleanup.',
-    defaultValue: false,
-    toolbar: {
-      icon: 'contrast',
-      items: [
-        { value: false, title: 'Dark (OLED)' },
-        { value: true, title: 'Pure black (same as dark)' },
-      ],
-      showName: true,
-    },
-  },
 };
 
-/** Storybook may serialize toolbar booleans as strings in URL/globals. */
-function parseIsPureBlack(value: unknown): boolean {
-  return value === true || value === 'true';
-}
-
 /**
- * Storybook-only: mirrors extension `setTheme` on `document.documentElement`.
+ * Storybook-only: mirrors client theme switching on `document.documentElement`.
  * Portaled UI (Modal, Popover) renders on `document.body` and inherits CSS
  * variables from the document root, not the decorator wrapper.
  */
-function applyStorybookDocumentTheme({
-  theme,
-  isPureBlack,
-}: {
-  theme: 'light' | 'dark';
-  isPureBlack: boolean;
-}) {
-  const root = document.documentElement;
-  root.setAttribute('data-theme', theme);
-
-  if (theme === 'dark' && isPureBlack) {
-    root.setAttribute('data-pure-black', 'true');
-  } else {
-    root.removeAttribute('data-pure-black');
-  }
+function applyStorybookDocumentTheme(theme: 'light' | 'dark') {
+  document.documentElement.setAttribute('data-theme', theme);
 }
 
-function StorybookDocumentThemeSync({
-  theme,
-  isPureBlack,
-}: {
-  theme: 'light' | 'dark';
-  isPureBlack: boolean;
-}) {
+function StorybookDocumentThemeSync({ theme }: { theme: 'light' | 'dark' }) {
   useLayoutEffect(() => {
-    applyStorybookDocumentTheme({ theme, isPureBlack });
+    applyStorybookDocumentTheme(theme);
 
     return () => {
       document.documentElement.removeAttribute('data-theme');
-      document.documentElement.removeAttribute('data-pure-black');
     };
-  }, [theme, isPureBlack]);
+  }, [theme]);
 
   return null;
 }
@@ -86,7 +46,6 @@ function StorybookDocumentThemeSync({
 function withColorScheme(Story: StoryFn, context: StoryContext) {
   const storyColorScheme = context.parameters.colorScheme;
   const globalColorScheme = context.globals.colorScheme;
-  const isPureBlack = parseIsPureBlack(context.globals.isPureBlack);
 
   // Use story-level parameter if available, otherwise fall back to global
   const colorScheme = storyColorScheme || globalColorScheme;
@@ -109,28 +68,13 @@ function withColorScheme(Story: StoryFn, context: StoryContext) {
     children: React.ReactNode;
     theme: 'light' | 'dark';
   }) {
-    if (theme === 'dark') {
-      return (
-        <div
-          data-theme="dark"
-          // Both mode: scoped wrapper must carry data-pure-black — context-only
-          // PureBlackProvider no longer sets DOM attributes (see #1312).
-          data-pure-black={isPureBlack ? 'true' : undefined}
-        >
-          <PureBlackProvider isPureBlack={isPureBlack}>
-            {children}
-          </PureBlackProvider>
-        </div>
-      );
-    }
-
-    return <div data-theme="light">{children}</div>;
+    return <div data-theme={theme}>{children}</div>;
   }
 
   if (colorScheme === 'light') {
     return (
       <>
-        <StorybookDocumentThemeSync theme="light" isPureBlack={false} />
+        <StorybookDocumentThemeSync theme="light" />
         {storyCanvas}
       </>
     );
@@ -139,10 +83,8 @@ function withColorScheme(Story: StoryFn, context: StoryContext) {
   if (colorScheme === 'dark') {
     return (
       <>
-        <StorybookDocumentThemeSync theme="dark" isPureBlack={isPureBlack} />
-        <PureBlackProvider isPureBlack={isPureBlack}>
-          {storyCanvas}
-        </PureBlackProvider>
+        <StorybookDocumentThemeSync theme="dark" />
+        {storyCanvas}
       </>
     );
   }

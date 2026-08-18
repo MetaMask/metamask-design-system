@@ -3,7 +3,7 @@ export { ThemeProvider } from './ThemeProvider';
 export { Theme } from './Theme.types';
 
 // Hooks
-export { useTailwind, useTheme, usePureBlack } from './hooks';
+export { useTailwind, useTheme } from './hooks';
 
 // Theme colors
 export { getThemeColors } from './colors';
