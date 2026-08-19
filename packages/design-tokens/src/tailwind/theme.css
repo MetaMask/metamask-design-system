@@ -287,9 +287,6 @@
  * Dark Theme Colors
  *
  * Canonical dark theme values match pure black (OLED) surfaces.
- *
- * TODO(TMCU-987): Drop the OLED migration note above once PureBlackProvider and
- * empty pure-black override scaffolding are removed in the follow-up cleanup.
  */
 [data-theme='dark'],
 .dark {
