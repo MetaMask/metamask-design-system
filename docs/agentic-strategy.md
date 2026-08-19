@@ -204,7 +204,7 @@ Know  →  Make  →  Gate  →  See  →  Measure
 | **Make**     | Component creation, designer → PR, consumer UI, Replit, Code Connect, upgrades                                                         | Capture only. Replit is a test, not a bet.                                  |
 | **Gate**     | PR review, deterministic lint, Figma parity, Joao graph, Bugbot DS section, auto-approve later                                         | Capture the inventory. Bugbot Ext/Mobile = first cheap Gate task next week. |
 | **See**      | Chromatic, before/after Storybook, `yarn mm`                                                                                           | Parallel; already useful.                                                   |
-| **Measure**  | Usage, overrides, deprecated, custom, pattern drift                                                                                    | Feeds golden paths.                                                         |
+| **Measure**  | [design-system-metrics](https://github.com/MetaMask/design-system-metrics) dashboard, overrides, custom, pattern drift, parity. See §9 | Counts imports today. Quality is unmeasured — the real gap.                 |
 | **Sequence** | Now / next / later, skills vs MCP, three surfaces, human in the loop                                                                   | The anti-overwhelm column.                                                  |
 
 ---
@@ -394,7 +394,105 @@ This is also the work that unblocks _other people_ reviewing DS PRs — not only
 
 ---
 
-## 9. Sequencing — now / next / later
+## 9. Measure — how we track this
+
+Tracking is **two** questions that keep getting answered by one dashboard:
+
+1. **Are we doing the work?** → Jira.
+2. **What is the state of the codebase?** → [design-system-metrics](https://github.com/MetaMask/design-system-metrics) ([dashboard](https://metamask.github.io/design-system-metrics/#/migration)).
+3. **Is the UI actually better?** → nothing measures this today.
+
+(3) is the gap, and it is the same gap as everywhere else in this doc. We count what is cheap to count (imports) instead of what we care about (right component, right pattern, visual parity). Counting imports is not wrong — it is just a **proxy**, and it is being read as the goal.
+
+### 9.1 What the dashboard measures today
+
+| Metric                  | Mobile (18 Aug) | What it actually counts                          |
+| ----------------------- | --------------- | ------------------------------------------------ |
+| MMDS components         | 81 (49/49)      | Exports in the MMDS packages                     |
+| MMDS instances          | 8,019 (+116)    | Import sites of MMDS components                  |
+| Deprecated components   | 46              | Legacy components being tracked                  |
+| Deprecated instances    | 1,654 (−25)     | Import sites of legacy components                |
+| Migration progress      | 82.90%          | MMDS ÷ (MMDS + deprecated). **Custom excluded.** |
+| 6-month trend           | chart           | The above, weekly                                |
+| Code owner adoption     | chart           | Per-team split — the most useful view            |
+| Props audit / untracked | JSON            | API adoption, components with no `@deprecated`   |
+
+Pipeline: git submodules of extension / mobile / design-system, scanned weekly (Friday CI PR), config partly generated from `@deprecated` JSDoc.
+
+**It is partly stale.** `ARCHITECTURE.md` phases 3–5 (auto `sync-config`, props-audit fix, untracked reorientation) are still open. `@deprecated` coverage was ~31% extension / ~18% mobile in April, so a large slice of legacy usage is simply not tracked. `migration-targets.json` was retired but still sits in the repo. Any narrative built on these numbers should say that out loud.
+
+### 9.2 Why "MMDS instances up, deprecated down" is the wrong primary
+
+Goodhart's law, in five specific shapes. This is the risk raised in the confirmations thread.
+
+1. **One-to-one swaps carry pattern debt _into_ MMDS.** Three hand-rolled `Text` components that should be one `Banner` become three MMDS `Text` components. Deprecation count improves. The pattern problem is now written in MMDS-based code, which is worse than before because it looks sanctioned.
+2. **DS-authored migrations become the reference implementation.** When an engineer sees a migration merged by a design-system engineer, they reasonably assume it is the recommended MMDS pattern. A one-to-one swap accidentally becomes guidance we would later argue against.
+3. **Polish looks like regression.** Replacing three MMDS components with one correct higher-level component makes the MMDS instance count **drop**. That is the right outcome and a red chart.
+4. **Discovery looks like regression.** Tagging custom implementations raises the deprecated count. That is finding debt, not creating it.
+5. **The formula hides the biggest category.** `MMDS ÷ (MMDS + deprecated)` excludes custom one-offs entirely. A codebase could reach 100% migrated and still be mostly hand-rolled UI. The thing we most want to reduce is invisible to the headline number.
+
+### 9.3 Fixes to the measurement itself
+
+Cheap changes, mostly to the metrics repo and how we narrate it:
+
+- **Demote "MMDS instances up."** It is the vanity number and it is in the hero position. Lead with deprecated-and-custom **down**.
+- **Make custom / hand-rolled a first-class third category** in the denominator. Then three `Text` → one `Banner` shows as custom-pattern-down instead of MMDS-instance-down. This single change removes the perverse incentive in (3).
+- **Count sites, not instances,** where we can — screens or files migrated. A screen is either on-system or it is not; an import count is not.
+- **Split discovery from regression in the UI.** "Newly tracked this week" as its own annotated delta, so tagging custom code never reads as going backwards.
+- **Annotate the timeline with phase.** Number-driven pass vs polish pass. A dip during polish should be legible as planned, and the annotation has to land _before_ the dip.
+- **Every weekly report carries one before/after example.** A number with no picture is how we got here.
+
+### 9.4 What we do not measure yet (and could)
+
+This is where the agentic work pays for itself. These are computable, not vibes — but most of them depend on the pattern layer in §8 existing first.
+
+| Signal                  | How it becomes a number                                                                                                                          | Depends on               |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
+| **Pattern correctness** | Sites where a documented pattern exists but was not used                                                                                         | §8 pattern docs          |
+| **Composition depth**   | Ratio of feature composites to raw primitives (lots of bare `Text`/`Box` = hand-rolling)                                                         | Nothing — computable now |
+| **Override rate**       | Local Tailwind / style overrides on MMDS components. High = component gap or wrong component                                                     | Partly lintable today    |
+| **System gaps**         | Count of `TODO: @MetaMask/design-system-engineers` from the non-blocking process                                                                 | Nothing — computable now |
+| **Three-way parity**    | Component exists in Figma **and** React **and** RN, with Code Connect present                                                                    | Code Connect map         |
+| **API adoption**        | Props audit — already generated, not used in the narrative                                                                                       | Exists                   |
+| **Friction**            | Review wait on migration PRs, revert / hotfix rate, visual bugs caught in release validation, Slack questions we stop answering (Miro's measure) | GitHub + Slack           |
+
+Two of these are worth pulling forward because they need nothing new: **composition depth** and **TODO overrides**. Both describe quality, both are countable from a scan we already run.
+
+"Back to our roots of Figma / React / React Native alignment" is the parity row. It is currently an aspiration; it could be a chart.
+
+### 9.5 The confirmations migration — a process problem, not a metric problem
+
+From the sync with Brian. The current approach is moving the dashboard the right way while creating three risks.
+
+**Scope.** Because each PR is scoped to one deprecated component, there is no room to step back and ask "is this the right component or pattern for this use case?" You cannot ask a pattern question inside a `Text`-replacement diff.
+
+**Reviewability.** The migration PRs are L / XL and carry no visual assets. That is likely why issues escape review — the stablecoin lending bottom sheet rendering over the confirmation screen surfaced in 8.7.0 release validation, not in review. Adding visuals by hand for every affected area is a significant cost on Brian; expecting the confirmations team to manually verify everything is neither fair nor scalable. Both roads end badly: merge without visual validation, or stall. Four PRs sat two days waiting for review.
+
+**Reinforcement.** See §9.2 (2) — a DS-authored one-to-one swap reads as recommended practice.
+
+Proposal:
+
+1. **Continue the number-driven pass** for now to meet adoption targets. Brian is aligned; this is explicitly short-term.
+2. **Protect time for a dedicated polish phase** for confirmations, modelled on Brian's perps work: page-by-page, visual before/after, pattern alignment rather than component swaps. Perps left both the codebase and the design system better; confirmations deserves the same treatment.
+3. **Scope polish PRs by screen or flow, not by component.** That makes visual review possible and makes the pattern question natural.
+4. **Automate the visual evidence.** This is the strongest argument for the See track: `visual-collect` (§3.3.1) is not a nice-to-have, it is what makes a large migration reviewable at all. Manual capture is unaffordable for Brian and manual verification is unfair to confirmations.
+5. **Set expectations before the polish phase**, not after the chart dips: during polish, MMDS instance counts may fall and deprecated counts may rise as custom code gets tagged. Both can be success.
+6. **Give the polish phase its own acceptance criteria** beyond component counts — design consistency, pattern correctness, UX outcomes.
+
+### 9.6 Who owns which question
+
+| Question                       | Where it lives                                                           | Do not ask          |
+| ------------------------------ | ------------------------------------------------------------------------ | ------------------- |
+| Are we doing the work?         | Jira: epic per surface, **polish phase as its own epic** with its own AC | the dashboard       |
+| What is the state of the code? | metrics dashboard, weekly                                                | it to judge quality |
+| Was _this change_ correct?     | gate: ESLint → Bugbot → graph, plus visual evidence                      | a trend chart       |
+| Is the system getting better?  | quarterly narrative with examples                                        | a single number     |
+
+The dashboard counts imports. That is all it can do, and it does it well. Quality has to come from the gate and from examples.
+
+---
+
+## 10. Sequencing — now / next / later
 
 Constraint from Andy: iterative value, not "dive into the deep end." Each phase should help humans even if we never auto-approve.
 
@@ -402,7 +500,7 @@ Constraint from Andy: iterative value, not "dive into the deep end." Each phase 
 
 **This week's deliverable:** this doc + FigJam, a recommended first wedge, and a check inventory. Share with Didier. Do not open Ext/Mobile/orchestration PRs yet.
 
-Research still needed (see §13):
+Research still needed (see §14):
 
 - Read agent-orchestration `_template` + `docs/adding-a-graph.md` and decide the first MMDS workflow plugin.
 - Confirm whether Storybook MCP is used anywhere in consumer repos today.
@@ -452,7 +550,7 @@ Taste / Replit / LoRA stay on a **design-prototyping** track. They raise contrib
 
 ---
 
-## 10. Auto-approve vs auto-merge vs human-in-the-loop
+## 11. Auto-approve vs auto-merge vs human-in-the-loop
 
 These got conflated in the engineering monthly and in the designer workshop.
 
@@ -466,13 +564,13 @@ Jason's clarification: he thought auto-merge was already ready; he does **not** 
 
 ---
 
-## 11. Vision, Replit, and design-system relevance (Jason, 18 Aug)
+## 12. Vision, Replit, and design-system relevance (Jason, 18 Aug)
 
 Capture from a talk with Jason Culbertson (design director). Focus here is vision, Replit, and why MMDS has to show up as agent-readable context. Font / open-source tangent parked — not this week.
 
 This is still **prototyping-track**, not a merge gate. Do not let it displace Storybook MCP / Bugbot next week. It _does_ change what “Know” has to look like: if Replit cannot see the system, the first prototype will be off-system, and we will spend the next four hours of taste work undoing that.
 
-### 11.1 Vision (why this matters)
+### 12.1 Vision (why this matters)
 
 Jason’s first slide: **features are no longer a moat.** Anyone can build anything. If something works, everyone copies it. Startups used to outbuild bigger companies; that is less true now. The question is how we win.
 
@@ -499,7 +597,7 @@ If we get (1) for free from agents, humans spend time on (2) and (3).
 
 Jason is already working almost entirely in an IDE / simulator, often **without Figma**. Referrals and sweepstakes each ~4 hours. The first pass was good enough that the team only had tiny copy crits. That only works if the skills (and the DS file) are in the chat.
 
-### 11.2 Replit — get it on the design system
+### 12.2 Replit — get it on the design system
 
 The bottleneck Jason named: **he constantly has to tell the agent to go look at the design system.** If the system were simply a markdown file the agent always has, following it would get much better. His words: take Storybook and turn it into markdown.
 
@@ -516,7 +614,7 @@ ChatGPT felt better than Cursor _because_ he has a dozen design skills in ChatGP
 
 Replit outcomes we already named still apply: **production accelerator / design-intent artifact / DS-gap detector**. Validate. Do not assume a Replit build is production-ready.
 
-### 11.3 Design-system relevance (what we owe this)
+### 12.3 Design-system relevance (what we owe this)
 
 Jason is asking MMDS for the **missing attachable context**: something the agent follows without being reminded. That is an instruction + live API, not a pasted catalog.
 
@@ -535,7 +633,7 @@ How Jason builds a taste skill (suggest this to Brian too):
 2. At the end of each project: “update the skill with what you learned.”
 3. Eventually theme-wide: avoid everything we already know is wrong.
 
-### 11.4 Files landed (18 Aug) — read, do not ship
+### 12.4 Files landed (18 Aug) — read, do not ship
 
 Captured as-is under [`docs/agentic-capture/`](./agentic-capture/):
 
@@ -575,7 +673,7 @@ Still waiting: principles + manifesto (Jason / Gul). Font / OSS parked.
 
 ---
 
-## 12. Topics the 1:1 did not cover (additions)
+## 13. Topics the 1:1 did not cover (additions)
 
 - **Evaluation harness.** We cannot claim "as good as George" without a set of historical PRs (approve / request-changes) to score the agent against. This is a prerequisite for auto-approve, not a nice-to-have.
 - **Author vs consumer vs prototype** (see §6). Easy to accidentally build one skill that is wrong for all three.
@@ -591,7 +689,7 @@ Still waiting: principles + manifesto (Jason / Gul). Font / OSS parked.
 
 ---
 
-## 13. Open questions
+## 14. Open questions
 
 ### Product / sequencing
 
@@ -620,7 +718,7 @@ Still waiting: principles + manifesto (Jason / Gul). Font / OSS parked.
 
 ---
 
-## 14. Captured tasks (action from week of 25 Aug)
+## 15. Captured tasks (action from week of 25 Aug)
 
 Nothing below is started this week. This week is capture + Didier point of view only.
 
@@ -637,10 +735,23 @@ Nothing below is started this week. This week is capture + Didier point of view 
 - [ ] **DSYS-1054** — RN Storybook MCP + first pattern MDX + thin MCP-first `ui-development` skills
 - [ ] Read `agent-orchestration` `_template` / `adding-a-graph.md` with Norbert; decide if a thin Storybook-only graph is the case study
 - [ ] Diff MetaMask Skills `ui-development` vs current package exports (staleness delta) to size the skill shrink
+- [ ] **Confirmations polish phase** — Jira epic of its own, page-by-page, own acceptance criteria (§9.5). Agree with Andy / Brian in Monday's sync.
+- [ ] **Reframe the metrics narrative before the polish dip** — deprecated/custom down as primary, not MMDS instances up (§9.3)
+
+### Measurement (metrics repo — small, high leverage)
+
+- [ ] Add **custom / hand-rolled** as a third category so composition is not punished (§9.3)
+- [ ] Split "newly tracked" from "regression" in the dashboard deltas
+- [ ] Phase annotations on the timeline (number pass vs polish pass)
+- [ ] Two quality signals that need nothing new: **composition depth** and **`TODO: @MetaMask/design-system-engineers` count** (§9.4)
+- [ ] Finish `ARCHITECTURE.md` phases 3–5 (auto `sync-config` from `@deprecated`, props-audit fix, untracked reorientation); remove retired `migration-targets.json`
+- [ ] State `@deprecated` coverage (~31% ext / ~18% mobile in April) wherever the % is quoted
 
 ### Parked (do not start next week unless the above is moving)
 
-- [ ] First `mmds-pr-review` orchestration plugin
+- [ ] First `mmds-ui-gate` orchestration plugin
+- [ ] `visual-collect` — the thing that makes L/XL migration PRs reviewable (§9.5)
+- [ ] Three-way parity chart: Figma + React + RN + Code Connect (§9.4)
 - [ ] Hosted Storybook MCP endpoint
 - [ ] This-repo `BUGBOT.md`
 - [ ] Replit: attach a shared DS markdown / instruction for mobile work (Jason has admin). Same file as a Cursor skill.
@@ -653,7 +764,7 @@ Nothing below is started this week. This week is capture + Didier point of view 
 
 ---
 
-## 15. People
+## 16. People
 
 | Person         | Role on this                                              |
 | -------------- | --------------------------------------------------------- |
@@ -670,7 +781,7 @@ Nothing below is started this week. This week is capture + Didier point of view 
 
 ---
 
-## 16. Working notes
+## 17. Working notes
 
 Use this section as a scratch pad while researching. Promote anything durable into the sections above.
 
@@ -746,4 +857,17 @@ Use this section as a scratch pad while researching. Promote anything durable in
 - Use for Gate + See (checkout, screenshots, MCP, scored runs). Not for Create. Not a second ESLint.
 - Trigger is ours. Open-source: internal-only trigger until guardrails exist. Auto-approve later, not the first graph.
 - Contacts: Norbert (full-time), Mariona / Priya (scores + judge). Local CLI works now.
-  )
+
+### 19 Aug — tracking / measurement (metrics repo + Brian sync)
+
+- Tracking is Jira (are we doing the work) + dashboard (state of the code). Neither answers "is the UI better." That third question is the gap. See §9.
+- [design-system-metrics](https://github.com/MetaMask/design-system-metrics) counts **imports**. Useful, but a proxy. `ARCHITECTURE.md` phases 3–5 still open; `@deprecated` coverage ~31% ext / ~18% mobile in April, so tracked ≠ all legacy usage.
+- Migration % = MMDS ÷ (MMDS + deprecated). **Custom one-offs are excluded** — the biggest category of off-system UI does not move the headline number at all.
+- Five Goodhart shapes: one-to-one swaps carry pattern debt into MMDS; DS-authored swaps become the reference implementation; polish makes MMDS counts drop; tagging custom code makes deprecated counts rise; custom is invisible.
+- Fix the metric, not just the narrative: custom as a third category, count sites not instances, split discovery from regression, annotate phases, one before/after per weekly report.
+- Two quality signals need nothing new: **composition depth** (composites vs raw primitives) and **`TODO: @MetaMask/design-system-engineers` count**.
+- Confirmations: continue the number pass short-term (Brian aligned), then a protected polish phase modelled on perps — page-by-page, visual before/after, pattern alignment. Scope polish PRs by screen, not by component.
+- L/XL component-scoped PRs with no visual assets are the review problem. Stablecoin lending bottom sheet surfaced in 8.7.0 release validation, not review. Four PRs waited two days. Manual capture is unaffordable for Brian; manual verification is unfair to confirmations. This is the case for `visual-collect`.
+- Set the expectation about the polish dip **before** it happens, with Andy and Didier.
+- "Back to our roots of Figma / React / RN alignment" is measurable: parity + Code Connect presence per component.
+- Raise in Monday's weekly sync.
