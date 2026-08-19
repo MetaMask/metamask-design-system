@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Switched raster images in `ImageOrSvg` (used by `AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, and `BadgeNetwork`) from React Native `Image` to `expo-image` so remote icons are disk-cached by URI
+- Switched raster images in `ImageOrSvg` (used by `AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, and `BadgeNetwork`) from React Native `Image` to `expo-image` so remote icons are disk-cached by URI ([#1454](https://github.com/MetaMask/metamask-design-system/pull/1454))
   - Aligns with MetaMask Mobile [PR #35001](https://github.com/MetaMask/metamask-mobile/pull/35001)
   - Adds `expo-image` (`>=3.0.0`) as a required peer dependency
   - Uses `contentFit="contain"` instead of `resizeMode="contain"`
