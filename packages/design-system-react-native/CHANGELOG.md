@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Switched raster images in `ImageOrSvg` (used by `AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, and `BadgeNetwork`) from React Native `Image` to `expo-image` so remote icons are disk-cached by URI
+  - Aligns with MetaMask Mobile [PR #35001](https://github.com/MetaMask/metamask-mobile/pull/35001)
+  - Adds `expo-image` (`>=3.0.0`) as a required peer dependency
+  - Uses `contentFit="contain"` instead of `resizeMode="contain"`
+  - `onImageLoad` / `onImageError` now receive `expo-image` event payloads (`ImageLoadEventData` / `ImageErrorEventData`) instead of React Native `NativeSyntheticEvent`
+  - See [Migration Guide](./MIGRATION.md#installing-expo-image)
+
 ## [0.40.0]
 
 ### Added
