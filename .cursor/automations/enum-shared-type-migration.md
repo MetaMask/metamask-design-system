@@ -108,7 +108,7 @@ DSYS-468 tasks are **internal refactors** of components already in the monorepo 
 ### Guardrails (agent must not skip)
 
 - ❌ Do **not** use `@.cursor/rules/component-migration.md` for this epic (extension/mobile → monorepo only).
-- ✅ Do use `@CLAUDE.md` for **monorepo commands** (always run from repo root: `yarn workspace …` patterns as documented).
+- ✅ Do use `@AGENTS.md` for **monorepo commands** (always run from repo root: `yarn workspace …` patterns as documented).
 - ✅ Do follow each rule’s **Verification** / checklist sections literally — rules are Layer 2 in [docs/ai-agents.md](../../docs/ai-agents.md).
 
 ### Layer 2 rules — read in order (do not duplicate their content here)
@@ -124,7 +124,7 @@ DSYS-468 tasks are **internal refactors** of components already in the monorepo 
 
 ### Verification (after edits)
 
-From repository root (per `CLAUDE.md`):
+From repository root (per `AGENTS.md`):
 
 ```bash
 yarn build && yarn test && yarn lint
@@ -146,14 +146,14 @@ You are in the MetaMask design-system monorepo. Follow docs/ai-agents.md: refere
 1) Jira (Consensys): JQL parent = DSYS-468 AND status = "To Do" AND assignee is EMPTY ORDER BY Rank ASC → first issue, or exit with a one-line message if empty. Assign/transition to In Progress per workflow.
 
 2) Read and follow in order (full checklists inside each file):
-   @CLAUDE.md
+   @AGENTS.md
    @.cursor/rules/component-enum-union-migration.md
    @.cursor/rules/component-architecture.md
    @.cursor/rules/testing.md
    @.cursor/rules/component-documentation.md (if stories/docs change)
    Do NOT use @.cursor/rules/component-migration.md for this epic.
 
-3) Verify from repo root: yarn build && yarn test && yarn lint (per CLAUDE.md).
+3) Verify from repo root: yarn build && yarn test && yarn lint (per AGENTS.md).
 
 4) Open PR per @.cursor/rules/pr.mdc and .github/pull_request_template.md; put Jira key in title/body.
 ```

@@ -17,23 +17,27 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 ```
 .
-├── CLAUDE.md                   # Layer 1: Entry point (40-120 lines)
-├── .cursor/rules/              # Layer 2: Focused rules (200-400 lines each)
-│   └── *.md                   # Individual rule files
+├── AGENTS.md                   # Layer 1: Shared entry point (40-120 lines)
+├── CLAUDE.md                   # Claude Code loader: @AGENTS.md plus Claude-only imports
+├── .cursor/rules/              # Layer 2: Focused rules
+│   ├── *.mdc                  # Cursor project rules (alwaysApply / globs / description)
+│   └── *.md                   # Detailed checklists (Claude Code @-imports; other agents Read)
 └── docs/                       # Layer 3: High-level guides
     └── ai-agents.md           # This file - strategy explanation
 ```
 
-## Layer 1: CLAUDE.md (Entry Point)
+## Layer 1: AGENTS.md (Entry Point)
 
-**Purpose:** Entry point loaded by Claude Code at session start.
+**Purpose:** Shared instructions auto-loaded by Cursor, Codex, Copilot, and similar agents.
 
-**Content:**
+**Claude Code:** Does **not** read `AGENTS.md` directly. `CLAUDE.md` must import it with `@AGENTS.md` ([Anthropic memory docs](https://code.claude.com/docs/en/memory#agentsmd)). Keep Claude-only notes (path-scoped imports, `CLAUDE.local.md`) in `CLAUDE.md` below that import.
 
-- Critical invariants (never break these)
+**Content (in `AGENTS.md`):**
+
+- Critical invariants (never break these) — written inline, not only as a pointer to another file
 - Essential commands
 - Monorepo structure overview
-- Reference to cursor rules using @ file imports notation `@.cursor/rules/*.md`
+- Paths to Layer 2 rules (agents open the matching file; Claude Code also `@`-imports them from `CLAUDE.md`)
 
 **Size:** 40-120 lines (keeps context efficient)
 
@@ -41,9 +45,9 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 **Why so short?**
 
-- Claude Code best practices recommend keeping CLAUDE.md concise
+- Claude Code and Cursor both recommend a concise always-loaded file
 - Agents can miss key rules in verbose files
-- Use explicit `@.cursor/rules/` references for detailed rules
+- Put detailed workflows in `.cursor/rules/`
 
 ## Layer 2: .cursor/rules/ (Focused Rules)
 
@@ -116,10 +120,10 @@ The three-layer model provides static guidance (rules, conventions, and process)
 
 [Cursor Automations](https://cursor.com/docs/cloud-agent/automations) should follow the **same principles** as interactive agents in this repo (see [Key Principles](#key-principles) below):
 
-- **Reference over duplication** — Automation prompts should `@`-mention `@CLAUDE.md` and specific `@.cursor/rules/*.md` files instead of pasting long paraphrased workflows. Rules stay the single source of truth.
+- **Reference over duplication** — Automation prompts should `@`-mention `@AGENTS.md` and specific `@.cursor/rules/*.md` files instead of pasting long paraphrased workflows. Rules stay the single source of truth.
 - **Checklists over narratives** — Implementation steps live in the rules (Do/Don’t, verification); the prompt only sequences _which_ rules apply and _when_ (e.g. after Jira pickup).
 - **Context efficiency** — Keep the scheduled prompt short; agents pull detail from rules and golden-path file paths inside those rules.
-- **Verification** — Always run commands from repo root as in `CLAUDE.md` (e.g. `yarn build`, `yarn test`, `yarn lint`).
+- **Verification** — Always run commands from repo root as in `AGENTS.md` (e.g. `yarn build`, `yarn test`, `yarn lint`).
 
 Repo-specific automation specs (Jira epic, JQL, PR identity notes) live under `.cursor/automations/`. Keep specs **in git** on purpose: the Cursor Automations UI has **no native version control**—the repo is where you review, diff, and roll forward or back; the UI prompt is a **mirror** (link or copy-paste) of that spec.
 
@@ -131,33 +135,36 @@ Cloud Agents can **read** any markdown in the repo, including `.cursor/rules/*.m
 
 What _is_ auto-loaded as markdown instructions:
 
-- `CLAUDE.md` (and `AGENTS.md` if present)
+- `AGENTS.md` (Cursor, Codex, Copilot, and similar)
+- `CLAUDE.md` (Claude Code always; Cursor may also load it — keep it a thin `@AGENTS.md` import so content is not duplicated)
 - `.cursor/rules/*.mdc` according to `alwaysApply` / `globs` / `description`
 - User rules and Team rules from the Cursor dashboard
 
-`.cursor/rules/*.md` files remain useful as `@` references from `CLAUDE.md`, but the agent only sees their contents if it opens them. In this repo, `release-workflow.md` already said not to edit changelogs in feature PRs; Cloud Agents did not get that file injected, so they missed it.
+`.cursor/rules/*.md` files are not Cursor project rules. Claude Code can `@`-import them from `CLAUDE.md` (imports expand at launch). Cursor Cloud Agents only see those files if they open them. Put must-not-miss invariants **inline in `AGENTS.md`** and, for Cursor, in an `alwaysApply: true` `.mdc` file.
 
-**How to make a convention apply to Cloud Agents without relying on them opening a file:**
+**How to make a convention apply to all agents without relying on them opening a file:**
 
-1. Put it in `.cursor/rules/*.mdc` with `alwaysApply: true` (keep it short), **and** add a one-line invariant to `CLAUDE.md` (always loaded).
-2. Merge to the branch Cloud Agents start from (usually `main`). A rule on a feature branch does not apply to the next agent that boots from `main`.
-3. Optional, org-wide: add an [enforced Team Rule](https://cursor.com/dashboard/team-content).
-4. Optional, this environment only: Cloud Agent environment instructions at [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents). Prefer git-tracked project rules so they are reviewable.
+1. Write the invariant **inline** in `AGENTS.md` (loaded by Cursor / Codex / Copilot).
+2. Keep `CLAUDE.md` as `@AGENTS.md` plus any Claude-only notes so Claude Code gets the same text.
+3. For Cursor's project-rules system, also add `.cursor/rules/*.mdc` with `alwaysApply: true` (keep it short).
+4. Merge to the branch agents start from (usually `main`).
+5. Optional, org-wide: add an [enforced Team Rule](https://cursor.com/dashboard/team-content).
 
 **Usage:**
 
 1. Open Cursor in this repo
-2. Always-apply `.mdc` rules and `CLAUDE.md` are injected into Agent and Cloud Agent sessions
+2. Always-apply `.mdc` rules and `AGENTS.md` are injected into Agent and Cloud Agent sessions
 3. Other `.mdc` rules attach via globs, intelligent description match, or `@`-mention
-4. `.cursor/rules/*.md` is not auto-injected; agents may still `Read` those files when they choose to
+4. `.cursor/rules/*.md` is not auto-injected by Cursor; agents may still `Read` those files when they choose to
 
 ### Claude Code
 
 **Session start:**
 
-- Claude reads `CLAUDE.md` automatically
-- `CLAUDE.md` explicitly references individual rule files in `@.cursor/rules/`
-- Rules persist throughout conversation
+- Claude reads `CLAUDE.md` automatically, **not** `AGENTS.md`
+- This repo's `CLAUDE.md` starts with `@AGENTS.md` so Claude Code loads the shared entry point
+- `@.cursor/rules/*.md` imports in `CLAUDE.md` expand at launch (max four hops)
+- `CLAUDE.local.md` remains the gitignored personal overlay
 
 **Usage:**
 
