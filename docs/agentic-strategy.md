@@ -9,7 +9,7 @@
 **Owner:** George  
 **North star:** agents reach for MMDS when they create UI, and what lives in the design-system team's head becomes quality gates — the same way ESLint already encodes “no hex.” Create and gate share a knowledge layer. Dig into one at a time. We are not the merge blockers.
 
-Related (narrower) doc: [AI Agent Documentation Strategy](./ai-agents.md) covers how *this* monorepo documents itself for agents. Long source files (Jason’s skills, research extracts) live under `docs/agentic-capture/`.
+Related (narrower) doc: [AI Agent Documentation Strategy](./ai-agents.md) covers how _this_ monorepo documents itself for agents. Long source files (Jason’s skills, research extracts) live under `docs/agentic-capture/`.
 
 ---
 
@@ -17,17 +17,17 @@ Related (narrower) doc: [AI Agent Documentation Strategy](./ai-agents.md) covers
 
 We are not the merge blockers. The [non-blocking platform PR process](./non-blocking-platform-pr-process.md) already says that. The gap is: a lot of what makes UI “good” still lives in the design-system team’s head. Some of that is already a gate (`color-no-hex`, no new `component-library` imports). Most of it is not. Create that is off-system makes those gates into undo. Internal DS tooling and visual evidence are adjacent, not the same initiative.
 
-**Frame as create vs gate.** Same knowledge (components, patterns, principles, taste). Different moment. Dig into one at a time. The engineer-sit-down story is the *narrative* for create, not the taxonomy — designer create is the same job on different tools.
+**Frame as create vs gate.** Same knowledge (components, patterns, principles, taste). Different moment. Dig into one at a time. The engineer-sit-down story is the _narrative_ for create, not the taxonomy — designer create is the same job on different tools.
 
-| Problem | Who is stuck | What “good” looks like | First lever |
-| --- | --- | --- | --- |
-| **1. Create — product engineer** | Ext / Mobile / platform engineer (or their agent) turning Figma, Replit, or a PRD into production UI | Agent reaches for MMDS first. Flags anything in the source that is not system-aligned. | Queryable components + patterns + principles + taste. Thin always-on instruction. |
-| **2. Create — designer** | Designer turning a PRD or idea into a Figma flow or Replit prototype | Figma: they (and Figma AI) can find MMDS components and patterns. Replit: attached MMDS libraries + the same docs. | Library + pattern layer in Figma; same instruction + package in Replit. Check designs after. |
-| **3. Gate** | Anyone shipping UI that should have been caught the way ESLint catches hex | What is in the DS team’s head is a quality gate. Prefer declarative (lint, fitness, tokens). Use Bugbot / an agent only for what is not writable as a rule yet. | Encode the next rules. Ext/Mobile `BUGBOT.md` for the judgment remainder. Do not re-flag what ESLint already fails. |
-| **4. Internal DS tooling** | This team, building the system | Audits, component-creation AI, authoring rules in *this* repo. Different audience than (1)–(3). | Keep separate. Do not ship consumer skills from authoring prompts. |
-| **5. Visual evidence** | Anyone shipping UI | Dependable, repeatable visual regression and asset gathering. Useful for any UI change, not only DS. | Parallel track (See). Do not wait for (1)–(3) to be solved. |
+| Problem                          | Who is stuck                                                                                         | What “good” looks like                                                                                                                                          | First lever                                                                                                         |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **1. Create — product engineer** | Ext / Mobile / platform engineer (or their agent) turning Figma, Replit, or a PRD into production UI | Agent reaches for MMDS first. Flags anything in the source that is not system-aligned.                                                                          | Queryable components + patterns + principles + taste. Thin always-on instruction.                                   |
+| **2. Create — designer**         | Designer turning a PRD or idea into a Figma flow or Replit prototype                                 | Figma: they (and Figma AI) can find MMDS components and patterns. Replit: attached MMDS libraries + the same docs.                                              | Library + pattern layer in Figma; same instruction + package in Replit. Check designs after.                        |
+| **3. Gate**                      | Anyone shipping UI that should have been caught the way ESLint catches hex                           | What is in the DS team’s head is a quality gate. Prefer declarative (lint, fitness, tokens). Use Bugbot / an agent only for what is not writable as a rule yet. | Encode the next rules. Ext/Mobile `BUGBOT.md` for the judgment remainder. Do not re-flag what ESLint already fails. |
+| **4. Internal DS tooling**       | This team, building the system                                                                       | Audits, component-creation AI, authoring rules in _this_ repo. Different audience than (1)–(3).                                                                 | Keep separate. Do not ship consumer skills from authoring prompts.                                                  |
+| **5. Visual evidence**           | Anyone shipping UI                                                                                   | Dependable, repeatable visual regression and asset gathering. Useful for any UI change, not only DS.                                                            | Parallel track (See). Do not wait for (1)–(3) to be solved.                                                         |
 
-(1) and (2) are one problem, two chairs. (3) is encode-the-head, not “become the CODEOWNER.” Auto-approve is a *side effect* of enough gates, not the goal. (4) and (5) share tools and people; they are not why we are in the room.
+(1) and (2) are one problem, two chairs. (3) is encode-the-head, not “become the CODEOWNER.” Auto-approve is a _side effect_ of enough gates, not the goal. (4) and (5) share tools and people; they are not why we are in the room.
 
 What they share (**Know**): what components exist, which pattern to pick, principles, taste. Build that once. Staff Make and Gate separately.
 
@@ -48,7 +48,7 @@ Create should not invent UI. Gate should catch the same classes of miss a DS eng
 **Out of scope (owned elsewhere)**
 
 - Security / offensive-content / supply-chain review of PRs. Work with Ola and the AI working group; do not take that on here.
-- Org-wide auto-approve policy. We define the DS confidence bar that would *feed* that policy.
+- Org-wide auto-approve policy. We define the DS confidence bar that would _feed_ that policy.
 
 ---
 
@@ -58,39 +58,39 @@ A lot of the building blocks are already shipped. The strategy is mostly about *
 
 ### 3.1 Quality gates already in CI
 
-| Check | Where | Type | Notes |
-| --- | --- | --- | --- |
-| Lint / ESLint | This repo, extension, mobile | Deterministic | Includes Tailwind and `@metamask/eslint-plugin-design-tokens` (`color-no-hex`, `prefer-theme-color-classnames`, `no-deprecated-classnames`) |
-| Unit + component tests | This repo | Deterministic | Jest + Testing Library |
-| Storybook a11y tests | This repo (`yarn test:storybook`) | Deterministic | Interaction + axe on stories |
-| Chromatic | This repo, React web only | Visual / human-reviewed | Blocks merge until visual diffs are accepted. RN is not covered. |
-| Fitness functions | Extension (`development/fitness-functions`) | Deterministic | e.g. `prevent-deprecated-imports` — no new imports of legacy `component-library` / `ui/*` |
-| AI PR risk analysis | Extension (and others) via [MetaMask/ai-analyzer](https://github.com/MetaMask/ai-analyzer) | Agent | Labels PRs `risk:low` … `risk:critical`. Ola-owned. `merge_safe` is only true at `low`. This is the "OLAR / risk assessment" piece from the 1:1. |
-| CODEOWNERS | This repo: `@MetaMask/design-system-engineers` on `*` | Human | Current hard gate |
-| Cursor Bugbot | Extension, Mobile (this repo: default only) | Agent comments on the **diff** | Customized via `.cursor/BUGBOT.md`. Ext/Mobile: tests, coding, performance — **not DS**. Does not read MetaMask Skills. |
+| Check                  | Where                                                                                      | Type                           | Notes                                                                                                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Lint / ESLint          | This repo, extension, mobile                                                               | Deterministic                  | Includes Tailwind and `@metamask/eslint-plugin-design-tokens` (`color-no-hex`, `prefer-theme-color-classnames`, `no-deprecated-classnames`)      |
+| Unit + component tests | This repo                                                                                  | Deterministic                  | Jest + Testing Library                                                                                                                           |
+| Storybook a11y tests   | This repo (`yarn test:storybook`)                                                          | Deterministic                  | Interaction + axe on stories                                                                                                                     |
+| Chromatic              | This repo, React web only                                                                  | Visual / human-reviewed        | Blocks merge until visual diffs are accepted. RN is not covered.                                                                                 |
+| Fitness functions      | Extension (`development/fitness-functions`)                                                | Deterministic                  | e.g. `prevent-deprecated-imports` — no new imports of legacy `component-library` / `ui/*`                                                        |
+| AI PR risk analysis    | Extension (and others) via [MetaMask/ai-analyzer](https://github.com/MetaMask/ai-analyzer) | Agent                          | Labels PRs `risk:low` … `risk:critical`. Ola-owned. `merge_safe` is only true at `low`. This is the "OLAR / risk assessment" piece from the 1:1. |
+| CODEOWNERS             | This repo: `@MetaMask/design-system-engineers` on `*`                                      | Human                          | Current hard gate                                                                                                                                |
+| Cursor Bugbot          | Extension, Mobile (this repo: default only)                                                | Agent comments on the **diff** | Customized via `.cursor/BUGBOT.md`. Ext/Mobile: tests, coding, performance — **not DS**. Does not read MetaMask Skills.                          |
 
 ### 3.2 Agent / skill surfaces
 
-| Surface | Repo | Role today | Risk |
-| --- | --- | --- | --- |
-| Cursor rules + `CLAUDE.md` | This monorepo | Authoring conventions. Source of truth for *how we build components here*. | Healthy. See [ai-agents.md](./ai-agents.md). |
-| MetaMask Skills `domains/ui` | [MetaMask/skills](https://github.com/MetaMask/skills) | Consumer-repo UI guidance (`ui-development`, `component-scaffold`). Installed into extension / mobile via `yarn skills`. | **Goes stale on every MMDS release.** Already happened. Duplicates knowledge that should live in Storybook / the monorepo. |
-| Personal / team skills | `~/.cursor/skills` | Review, migration, upgrade, visual-regression-collect, release validation. | High-signal but not distributed. Not the product. |
-| Design pipeline | [MetaMask/metamask-design-pipeline](https://github.com/MetaMask/metamask-design-pipeline) | Jason's prototype loop: tokens + 23-item audit + LoRA taste scorer. | Parallel "taste" system. Relevant to Replit / designer prototyping, not PR approval. |
-| Storybook MCP | This repo, `http://localhost:6006/mcp` | Live component docs, props, stories, story tests, preview URLs. | **Local-only today.** Consumers and CI agents cannot see it unless we publish an endpoint. |
-| Figma MCP + Code Connect | Figma + `.figma.tsx` in this repo | Design ↔ code mapping. | Only as good as Figma. Many components are not up to date. Many PRs will never have a Figma file. |
+| Surface                      | Repo                                                                                      | Role today                                                                                                               | Risk                                                                                                                       |
+| ---------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Cursor rules + `CLAUDE.md`   | This monorepo                                                                             | Authoring conventions. Source of truth for _how we build components here_.                                               | Healthy. See [ai-agents.md](./ai-agents.md).                                                                               |
+| MetaMask Skills `domains/ui` | [MetaMask/skills](https://github.com/MetaMask/skills)                                     | Consumer-repo UI guidance (`ui-development`, `component-scaffold`). Installed into extension / mobile via `yarn skills`. | **Goes stale on every MMDS release.** Already happened. Duplicates knowledge that should live in Storybook / the monorepo. |
+| Personal / team skills       | `~/.cursor/skills`                                                                        | Review, migration, upgrade, visual-regression-collect, release validation.                                               | High-signal but not distributed. Not the product.                                                                          |
+| Design pipeline              | [MetaMask/metamask-design-pipeline](https://github.com/MetaMask/metamask-design-pipeline) | Jason's prototype loop: tokens + 23-item audit + LoRA taste scorer.                                                      | Parallel "taste" system. Relevant to Replit / designer prototyping, not PR approval.                                       |
+| Storybook MCP                | This repo, `http://localhost:6006/mcp`                                                    | Live component docs, props, stories, story tests, preview URLs.                                                          | **Local-only today.** Consumers and CI agents cannot see it unless we publish an endpoint.                                 |
+| Figma MCP + Code Connect     | Figma + `.figma.tsx` in this repo                                                         | Design ↔ code mapping.                                                                                                  | Only as good as Figma. Many components are not up to date. Many PRs will never have a Figma file.                          |
 
 ### 3.3 Joao's stack (the thing we are evaluating as the orchestration layer)
 
 Three related repos, not one:
 
-| Repo | What it is | Why it matters |
-| --- | --- | --- |
+| Repo                                                                            | What it is                                                                                                                                                                    | Why it matters                                                                                                                                                 |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [MetaMask/agent-orchestration](https://github.com/MetaMask/agent-orchestration) | Generic LangGraph framework. A workflow is a plugin folder: state, node profiles (prompt, tools, skills, MCP), edges, deterministic bootstrap. New graph ≈ copy `_template/`. | This is what Joao asked us to use as the case study. **First (only) workflow today:** Extension PR visual-validation (`planValidation` → `executeValidation`). |
-| [MetaMask/agent-runner](https://github.com/MetaMask/agent-runner) | Executor each graph node calls (Claude Agent SDK + Langfuse). | Orchestration does not inherit Cursor's MCP/skills. Each node must declare them. |
-| [MetaMask/ai-analyzer](https://github.com/MetaMask/ai-analyzer) | GitHub Action for PR analysis. Pluggable modes. Built-in: `pr-risk-analysis`. Repos can add custom modes + `skills/*.md`. | Already in the Extension pipeline. Different job than orchestration: cheap-ish PR labeling, not a multi-node graph. |
+| [MetaMask/agent-runner](https://github.com/MetaMask/agent-runner)               | Executor each graph node calls (Claude Agent SDK + Langfuse).                                                                                                                 | Orchestration does not inherit Cursor's MCP/skills. Each node must declare them.                                                                               |
+| [MetaMask/ai-analyzer](https://github.com/MetaMask/ai-analyzer)                 | GitHub Action for PR analysis. Pluggable modes. Built-in: `pr-risk-analysis`. Repos can add custom modes + `skills/*.md`.                                                     | Already in the Extension pipeline. Different job than orchestration: cheap-ish PR labeling, not a multi-node graph.                                            |
 
-Joao's guidance (from the 1:1): **do not put new deterministic rules in fitness functions** — add them as nodes in orchestration. We still need a view on *existing* deterministic tools (ESLint, Chromatic, a11y). Those already work and cost ~zero tokens. See §5.
+Joao's guidance (from the 1:1): **do not put new deterministic rules in fitness functions** — add them as nodes in orchestration. We still need a view on _existing_ deterministic tools (ESLint, Chromatic, a11y). Those already work and cost ~zero tokens. See §5.
 
 Contacts while Joao is on leave: **Norbert Elter** (full-time on this) and **Mariona Farell**. Priya / Mariona own scoring and LLM-as-judge.
 
@@ -118,8 +118,8 @@ Today there is **one** plugin: Extension `pr-visual-validation` (`planValidation
 
 **Create vs gate.** This tooling is almost entirely **Gate and See**. It does not help someone sitting down in Figma or Replit. That stays local instruction + Storybook. Do not make “generate UI” the first graph.
 
-| Already a gate (keep) | Graph node (code) | Graph node (agent) | Not this tool |
-| --- | --- | --- | --- |
+| Already a gate (keep)                  | Graph node (code)                                            | Graph node (agent)                                          | Not this tool                                       |
+| -------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------- | --------------------------------------------------- |
 | ESLint, fitness, Chromatic, story a11y | Diff inventory, skip-if-no-UI, upload evidence, post comment | Right component / pattern, Figma vs screenshot, TODO vs gap | Authoring UI from a PRD, Replit attach, First Draft |
 
 Andy asked about auto-approve via AI Analyzer. Joao: trigger is ours (label, Slack, Analyzer, Cursor). Open-source PRs need an internal-only trigger until we trust prompt-injection guardrails. Auto-approve is a side effect, not the first plugin.
@@ -127,13 +127,14 @@ Andy asked about auto-approve via AI Analyzer. Joao: trigger is ours (label, Sla
 #### What we could create
 
 1. **`mmds-ui-gate`** — first plugin I would copy `_template/` for. Product PR that touches UI. Skip if it does not.
+
    - **inventory** (code): changed files, `@metamask/design-system-*` vs leftover `component-library`.
    - **storybook** (agent + MCP): live docs for those components.
    - **pattern** (agent): right component / composition? Flag restyles. Suggest a TODO, do not block.
    - **verdict** (code): structured comment + evidence URLs.
    - Does not re-run `color-no-hex`.
 
-2. **A node on *his* graph** — cheapest way to use what he built. His plugin already plans tests and takes Extension screenshots. We add **`figmaCompare`**: if the PR links a file, compare those shots to MMDS instances. No Figma → skip and say so. Andy named this in the meeting.
+2. **A node on _his_ graph** — cheapest way to use what he built. His plugin already plans tests and takes Extension screenshots. We add **`figmaCompare`**: if the PR links a file, compare those shots to MMDS instances. No Figma → skip and say so. Andy named this in the meeting.
 
 3. **`visual-collect`** — the See problem. Dependable before/after Storybook or `yarn mm` shots, upload to Norbert’s S3, public URLs on the PR. Any UI change, not only DS. Closest cousin of the plugin that already exists.
 
@@ -143,12 +144,12 @@ Andy asked about auto-approve via AI Analyzer. Joao: trigger is ours (label, Sla
 
 #### How it sits next to the other pieces
 
-| Layer | Job | Example |
-| --- | --- | --- |
-| Declarative | Already a gate | ESLint, fitness functions, Chromatic |
-| Bugbot | Cheap always-on comment on the diff | Next week’s thin DS section |
-| **Joao graph** | Multi-step, needs tools, we want traces | `mmds-ui-gate`, `figmaCompare`, `visual-collect` |
-| Human | New primitive, taste, first designer PRs | Still us |
+| Layer          | Job                                      | Example                                          |
+| -------------- | ---------------------------------------- | ------------------------------------------------ |
+| Declarative    | Already a gate                           | ESLint, fitness functions, Chromatic             |
+| Bugbot         | Cheap always-on comment on the diff      | Next week’s thin DS section                      |
+| **Joao graph** | Multi-step, needs tools, we want traces  | `mmds-ui-gate`, `figmaCompare`, `visual-collect` |
+| Human          | New primitive, taste, first designer PRs | Still us                                         |
 
 Joao’s “don’t put new rules in fitness functions” means: if the check needs a repo, MCP, or a plan, make it a **node**. It does not mean rip out ESLint.
 
@@ -163,12 +164,12 @@ Someone opens an Extension PR that restyles a Button with extra Tailwind instead
 
 #### What not to do next week
 
-Do not stand up the first DS plugin before Storybook MCP is reachable from a runner. A graph that cannot query the system will hallucinate the catalog — same failure as stale MetaMask Skills. Next week stays: Bugbot section + DSYS-1054. When Norbert says the Ext visual graph is running, the first orchestration experiment is a `figmaCompare` or inventory node on *his* plugin, not a four-node DS masterpiece.
+Do not stand up the first DS plugin before Storybook MCP is reachable from a runner. A graph that cannot query the system will hallucinate the catalog — same failure as stale MetaMask Skills. Next week stays: Bugbot section + DSYS-1054. When Norbert says the Ext visual graph is running, the first orchestration experiment is a `figmaCompare` or inventory node on _his_ plugin, not a four-node DS masterpiece.
 
 ### 3.4 Existing DS process this agent must respect
 
 - [Non-blocking platform PR process](./non-blocking-platform-pr-process.md): MMDS is not a merge blocker for reasonable scoped UI. Overrides get a `TODO: @MetaMask/design-system-engineers` and a Slack thread. A DS agent that auto-rejects every override would fight this process.
-- Designer onboarding (Amanda + George's Cursor workshop): designers *will* raise PRs. Their top fear is "will this auto-merge / will I break something?" Human review is a **feature** for them right now.
+- Designer onboarding (Amanda + George's Cursor workshop): designers _will_ raise PRs. Their top fear is "will this auto-merge / will I break something?" Human review is a **feature** for them right now.
 
 ---
 
@@ -176,13 +177,13 @@ Do not stand up the first DS plugin before Storybook MCP is reachable from a run
 
 Skills, Bugbot, and CI are easy to conflate.
 
-| Actor | When | Looks at MetaMask/skills? | Looks at “built with MMDS”? |
-| --- | --- | --- | --- |
-| `yarn skills` + Cursor / Claude | Authoring | Yes (installed markdown) | Only if the human/agent follows the skill |
-| Lint / fitness functions | CI | No | Only the deterministic bits (hex, some deprecated imports) |
-| AI Analyzer | CI | Almost never. One Mobile exception: flaky-test skill, not UI | No. Risk / blast radius only |
-| Cursor Bugbot | PR comments | No | No, unless we add a DS section to Ext/Mobile `BUGBOT.md` |
-| CODEOWNERS / humans | Review | No | Yes — judgment that is not a gate yet. We are not the merge blocker. |
+| Actor                           | When        | Looks at MetaMask/skills?                                    | Looks at “built with MMDS”?                                          |
+| ------------------------------- | ----------- | ------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `yarn skills` + Cursor / Claude | Authoring   | Yes (installed markdown)                                     | Only if the human/agent follows the skill                            |
+| Lint / fitness functions        | CI          | No                                                           | Only the deterministic bits (hex, some deprecated imports)           |
+| AI Analyzer                     | CI          | Almost never. One Mobile exception: flaky-test skill, not UI | No. Risk / blast radius only                                         |
+| Cursor Bugbot                   | PR comments | No                                                           | No, unless we add a DS section to Ext/Mobile `BUGBOT.md`             |
+| CODEOWNERS / humans             | Review      | No                                                           | Yes — judgment that is not a gate yet. We are not the merge blocker. |
 
 PRs are **not** checked against the skills repo. Skills shape what an agent writes. They do not fail a merge.
 
@@ -197,20 +198,20 @@ Know  →  Make  →  Gate  →  See  →  Measure
               Sequence says what we do now vs later
 ```
 
-| Job | Examples | This week vs next |
-| --- | --- | --- |
-| **Know** | Token/component/pattern docs, taste, Storybook MCP, thin skills. [DSYS-1054](https://consensyssoftware.atlassian.net/browse/DSYS-1054) | Foundation. Keep mapping; implement next week. |
-| **Make** | Component creation, designer → PR, consumer UI, Replit, Code Connect, upgrades | Capture only. Replit is a test, not a bet. |
-| **Gate** | PR review, deterministic lint, Figma parity, Joao graph, Bugbot DS section, auto-approve later | Capture the inventory. Bugbot Ext/Mobile = first cheap Gate task next week. |
-| **See** | Chromatic, before/after Storybook, `yarn mm` | Parallel; already useful. |
-| **Measure** | Usage, overrides, deprecated, custom, pattern drift | Feeds golden paths. |
-| **Sequence** | Now / next / later, skills vs MCP, three surfaces, human in the loop | The anti-overwhelm column. |
+| Job          | Examples                                                                                                                               | This week vs next                                                           |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **Know**     | Token/component/pattern docs, taste, Storybook MCP, thin skills. [DSYS-1054](https://consensyssoftware.atlassian.net/browse/DSYS-1054) | Foundation. Keep mapping; implement next week.                              |
+| **Make**     | Component creation, designer → PR, consumer UI, Replit, Code Connect, upgrades                                                         | Capture only. Replit is a test, not a bet.                                  |
+| **Gate**     | PR review, deterministic lint, Figma parity, Joao graph, Bugbot DS section, auto-approve later                                         | Capture the inventory. Bugbot Ext/Mobile = first cheap Gate task next week. |
+| **See**      | Chromatic, before/after Storybook, `yarn mm`                                                                                           | Parallel; already useful.                                                   |
+| **Measure**  | Usage, overrides, deprecated, custom, pattern drift                                                                                    | Feeds golden paths.                                                         |
+| **Sequence** | Now / next / later, skills vs MCP, three surfaces, human in the loop                                                                   | The anti-overwhelm column.                                                  |
 
 ---
 
 ## 4. The metaphor: a DS engineer as an agent
 
-Andy’s question is still useful as a **rubric for what to encode**, not as “become the CODEOWNER”: *what would you mention on this UI that is not already a gate?*
+Andy’s question is still useful as a **rubric for what to encode**, not as “become the CODEOWNER”: _what would you mention on this UI that is not already a gate?_
 
 That is a better design question than "what skills should we write?" Map each item to the cheapest check: declarative first (ESLint, fitness, tokens), Bugbot / agent only when a rule is not writable yet, human for new primitives and taste.
 
@@ -225,13 +226,13 @@ Split into things a machine can decide vs things that still need judgment.
 3. No SASS in new UI.
 4. Component-first: Box / Text / DS components over raw `div` + classes when a prop exists.
 5. Types, lint, unit tests, story a11y tests pass.
-6. Chromatic: no *unreviewed* visual diffs (web).
+6. Chromatic: no _unreviewed_ visual diffs (web).
 7. Public API / changelog / changeset present when required.
 8. No new hardcoded spacing that has a token equivalent (partially lintable).
 
 **Judgment (agent, with evidence)**
 
-9. Is this the *right* component / pattern, not just a valid one? (Button vs ButtonHero vs TextButton; Modal vs BottomSheet; override vs new variant.)
+9. Is this the _right_ component / pattern, not just a valid one? (Button vs ButtonHero vs TextButton; Modal vs BottomSheet; override vs new variant.)
 10. Does the composition match documented patterns (and Brian / Amanda / George tribal knowledge once written down)?
 11. If Figma exists and is current: does code match? If not: fallback confidence from stories + tokens + visual evidence.
 12. Accessibility beyond axe: focus order, naming, empty / error / loading states.
@@ -250,7 +251,7 @@ Split into things a machine can decide vs things that still need judgment.
 
 ## 5. Where each check should live
 
-The 1:1 tension: Andy initially pictured deterministic rules in fitness functions *outside* the AI analyzer; Joao said put them *inside* orchestration as nodes.
+The 1:1 tension: Andy initially pictured deterministic rules in fitness functions _outside_ the AI analyzer; Joao said put them _inside_ orchestration as nodes.
 
 **Proposed divide** (to pressure-test this week):
 
@@ -289,9 +290,9 @@ The 1:1 tension: Andy initially pictured deterministic rules in fitness function
 
 **Add new structured checks as orchestration nodes** when they need a repo checkout, MCP, or a multi-step plan (Storybook MCP query, visual plan, Figma compare). That follows Joao and keeps us in the shared framework.
 
-**Do not put tribal patterns only in MetaMask Skills.** MetaMask Skills is a *distribution* channel. The source of truth should be this monorepo (rules, stories, pattern docs) and agents should *read* it — via Storybook MCP, or a thin pointer skill that says "query Storybook," not a copied component list.
+**Do not put tribal patterns only in MetaMask Skills.** MetaMask Skills is a _distribution_ channel. The source of truth should be this monorepo (rules, stories, pattern docs) and agents should _read_ it — via Storybook MCP, or a thin pointer skill that says "query Storybook," not a copied component list.
 
-AI analyzer stays as the **org risk label**. We may later add a custom `mmds-review` *mode* there for a cheap PR comment, but the deep DS graph belongs in agent-orchestration.
+AI analyzer stays as the **org risk label**. We may later add a custom `mmds-review` _mode_ there for a cheap PR comment, but the deep DS graph belongs in agent-orchestration.
 
 **Captured easy win (do not ship this week): DS section on Extension and Mobile `BUGBOT.md`.** Bugbot already comments on those PRs. Neither file mentions MMDS. Add a thin router on changed UI lines only: installed package export index → leftover `component-library` → feature composite; compose don't restyle; gaps get a TODO, not a block. Do **not** paste `ui-development` or a component catalog (that is how skills went stale). Do **not** re-flag hex / deprecated imports that ESLint or fitness functions already fail. Comments stay non-blocking. Two PRs, same section, different package names. This repo's missing `BUGBOT.md` is a smaller follow-up (only catches DS-team PRs).
 
@@ -301,11 +302,11 @@ AI analyzer stays as the **org risk label**. We may later add a custom `mmds-rev
 
 The same "DS agent" is asked to do three different jobs. Skills and graphs should be named accordingly.
 
-| Surface | Who | Job | Source of truth |
-| --- | --- | --- | --- |
-| **Authoring** | DS engineers, designers contributing to MMDS | Build / change components in this monorepo | `.cursor/rules/`, stories, Chromatic, Code Connect |
-| **Consuming** | Extension / mobile / other product engineers | Use the *installed* package correctly | Installed package exports + **published** Storybook MCP + eslint-plugin + fitness functions. Not a hardcoded component list in MetaMask Skills. |
-| **Prototyping** | Designers in Cursor / Replit / design-pipeline | Explore UI that looks like MetaMask | Tokens + pattern docs + (later) Jason's taste / LoRA loop |
+| Surface         | Who                                            | Job                                        | Source of truth                                                                                                                                 |
+| --------------- | ---------------------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Authoring**   | DS engineers, designers contributing to MMDS   | Build / change components in this monorepo | `.cursor/rules/`, stories, Chromatic, Code Connect                                                                                              |
+| **Consuming**   | Extension / mobile / other product engineers   | Use the _installed_ package correctly      | Installed package exports + **published** Storybook MCP + eslint-plugin + fitness functions. Not a hardcoded component list in MetaMask Skills. |
+| **Prototyping** | Designers in Cursor / Replit / design-pipeline | Explore UI that looks like MetaMask        | Tokens + pattern docs + (later) Jason's taste / LoRA loop                                                                                       |
 
 Authoring and consuming have different failure modes. A consumer agent that reads this repo's source will hallucinate unreleased APIs. A consumer agent that only has a stale MetaMask Skills catalog will miss new components (the current pain).
 
@@ -313,7 +314,7 @@ Authoring and consuming have different failure modes. A consumer agent that read
 
 Do **not** lead with “the engineer’s chair” as the whole strategy. That is the story for create. Designer create is the same job. Gate is a second problem: turn tribal knowledge into checks, the way ESLint already did for hex. We are not the PR blockers. Internal tooling and visual evidence sit beside both.
 
-**Create** needs the agent to pick patterns *before* code exists. **Gate** checks the result after — preferably declarative, agent only when a rule is not writable yet. If create is off-system, gate becomes undo. Dig into one at a time; do not staff both as one initiative.
+**Create** needs the agent to pick patterns _before_ code exists. **Gate** checks the result after — preferably declarative, agent only when a rule is not writable yet. If create is off-system, gate becomes undo. Dig into one at a time; do not staff both as one initiative.
 
 George’s first diagram is on the FigJam (left). Clearer version is the section **Create — clearer** to its right. Same story: one Know, different attachment per surface. Gate only on the client.
 
@@ -331,20 +332,20 @@ Idea/PRD ─┬─ Designer ─┬─ Figma  (Know: library + patterns → UI �
 
 Three inputs into production UI. Figma and Replit only help if they were already on-system. A PRD has no pixels — the agent must pull patterns.
 
-| Input | Aligned only if | Create path | Review still needed |
-| --- | --- | --- | --- |
-| **Figma** | Designer placed 🦊 MMDS + icon library instances, tokens bound. [Check designs](https://help.figma.com/hc/en-us/articles/39592284074263-Check-designs-in-Figma) for hex / detach / wrong library. | Code Connect + Figma MCP → installed package. Do not recreate from a screenshot of detached frames. | Yes. Figma can be stale or mixed (see Card 🚧). |
-| **Replit** | Instruction + taste + Storybook MCP / installed package attached. | Port, don’t paste. Validate. Three outcomes: accelerator / intent artifact / DS-gap detector. | Yes. Never assume production-ready. |
-| **PRD** (Jira, Confluence, Slack) | Always — there is no visual to trust. | Query Storybook / pattern docs: what is this, which pattern, which components. Jason’s loop + Astryx 3-step (pattern → skeleton → component). | Yes. First draft will miss edge states. |
+| Input                             | Aligned only if                                                                                                                                                                                   | Create path                                                                                                                                   | Review still needed                             |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **Figma**                         | Designer placed 🦊 MMDS + icon library instances, tokens bound. [Check designs](https://help.figma.com/hc/en-us/articles/39592284074263-Check-designs-in-Figma) for hex / detach / wrong library. | Code Connect + Figma MCP → installed package. Do not recreate from a screenshot of detached frames.                                           | Yes. Figma can be stale or mixed (see Card 🚧). |
+| **Replit**                        | Instruction + taste + Storybook MCP / installed package attached.                                                                                                                                 | Port, don’t paste. Validate. Three outcomes: accelerator / intent artifact / DS-gap detector.                                                 | Yes. Never assume production-ready.             |
+| **PRD** (Jira, Confluence, Slack) | Always — there is no visual to trust.                                                                                                                                                             | Query Storybook / pattern docs: what is this, which pattern, which components. Jason’s loop + Astryx 3-step (pattern → skeleton → component). | Yes. First draft will miss edge states.         |
 
 **Figma AI will not use MMDS by default.** Sitting in [🦊 MMDS Components](https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN) does not change that.
 
-| Figma feature | What it actually uses | Use for |
-| --- | --- | --- |
-| **First Draft** (Actions → AI) | Figma’s own libraries (Simple Design System, wireframes). Not 🦊 MMDS. [Forum still asking for custom libraries.](https://forum.figma.com/suggest-a-feature-11/when-will-figma-ai-allow-you-to-connect-your-own-library-37491) | Explore. Then rebuild with MMDS instances. |
-| **Figma Make** | Generic React unless a **Make kit** has the npm package (`@metamask/design-system-react`) + guidelines. [Make does not reliably resolve Figma library components](https://forum.figma.com/suggest-a-feature-11/figma-make-not-using-my-library-components-42235) even when subscribed — styles maybe, components often not. | Prototype in code. Same as Replit: kit first or it is off-system. |
-| **Check designs** | Not AI. Deterministic. Tokens / type / radius / spacing, detached components, wrong library. Flags components; you swap them. Org/Enterprise. | **Review** of a file that already exists. Closest Figma cousin of our Gate. |
-| **Figma MCP / us** | `search_design_system` on 🦊 MMDS Components — Button, ButtonIcon, etc. with descriptions and keywords. | Create in Figma *with* the library, or implement from instances. |
+| Figma feature                  | What it actually uses                                                                                                                                                                                                                                                                                                       | Use for                                                                     |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **First Draft** (Actions → AI) | Figma’s own libraries (Simple Design System, wireframes). Not 🦊 MMDS. [Forum still asking for custom libraries.](https://forum.figma.com/suggest-a-feature-11/when-will-figma-ai-allow-you-to-connect-your-own-library-37491)                                                                                              | Explore. Then rebuild with MMDS instances.                                  |
+| **Figma Make**                 | Generic React unless a **Make kit** has the npm package (`@metamask/design-system-react`) + guidelines. [Make does not reliably resolve Figma library components](https://forum.figma.com/suggest-a-feature-11/figma-make-not-using-my-library-components-42235) even when subscribed — styles maybe, components often not. | Prototype in code. Same as Replit: kit first or it is off-system.           |
+| **Check designs**              | Not AI. Deterministic. Tokens / type / radius / spacing, detached components, wrong library. Flags components; you swap them. Org/Enterprise.                                                                                                                                                                               | **Review** of a file that already exists. Closest Figma cousin of our Gate. |
+| **Figma MCP / us**             | `search_design_system` on 🦊 MMDS Components — Button, ButtonIcon, etc. with descriptions and keywords.                                                                                                                                                                                                                     | Create in Figma _with_ the library, or implement from instances.            |
 
 The Card 🚧 page (`13812:1238`) is the create-side pattern problem in miniature: AvatarToken + Button instances mixed with custom frames and a deprecated Tag. Patterns are not a published, queryable layer yet. Designers compose by hand. Agents have nothing to copy (Astryx: grade the examples).
 
@@ -362,13 +363,13 @@ George's point from the 1:1, which should be a first-class decision:
 
 1. **Canonical:** stories + READMEs in this monorepo. Patterns documented next to the component (and a dedicated pattern set — see §8).
 2. **Query layer:** Storybook MCP (local for maintainers; **published endpoint** for consumers and CI).
-3. **MetaMask Skills `ui-development`:** shrink to a pointer + decision tree ("check the installed export index, then Storybook MCP, then component-library only if not exported") plus *non-API* rules (no SASS, hierarchy, TODO process). Delete the duplicated component catalog as it rots.
+3. **MetaMask Skills `ui-development`:** shrink to a pointer + decision tree ("check the installed export index, then Storybook MCP, then component-library only if not exported") plus _non-API_ rules (no SASS, hierarchy, TODO process). Delete the duplicated component catalog as it rots.
 4. **Orchestration nodes:** declare Storybook MCP on the node profile (Joao's model: MCP is per-node, not inherited from Cursor).
 
 **Dependencies we do not have yet**
 
 - Hosted Storybook MCP (today: `localhost:6006/mcp` only). Astryx hosts theirs; that is the v1 gap, not a custom protocol.
-- A generated consumer router (`AGENTS.md` / Replit instruction) from the *installed* package + MCP URL. Re-run on bump. Do not hand-maintain a catalog (Astryx `init --features agents`).
+- A generated consumer router (`AGENTS.md` / Replit instruction) from the _installed_ package + MCP URL. Re-run on bump. Do not hand-maintain a catalog (Astryx `init --features agents`).
 - Pattern docs that are actually agent-usable (not just stories of props).
 - A freshness check: if Storybook is down, the agent must degrade, not invent. A CLI `--dense` fallback is later, not v1.
 
@@ -376,7 +377,7 @@ George's point from the 1:1, which should be a first-class decision:
 
 ## 8. Design patterns ("what's in Brian's head")
 
-This is the highest-leverage *content* gap. Checks without patterns just enforce syntax.
+This is the highest-leverage _content_ gap. Checks without patterns just enforce syntax.
 
 We need agent-friendly docs for things like:
 
@@ -389,7 +390,7 @@ We need agent-friendly docs for things like:
 
 **Where to put them:** in the monorepo, next to stories, in a consistent shape (purpose, when to use, when not, composition, anti-patterns). That is what Storybook MCP can then serve. MetaMask Skills should not be the home.
 
-This is also the work that unblocks *other people* reviewing DS PRs — not only agents.
+This is also the work that unblocks _other people_ reviewing DS PRs — not only agents.
 
 ---
 
@@ -407,7 +408,7 @@ Research still needed (see §13):
 - Confirm whether Storybook MCP is used anywhere in consumer repos today.
 - Inventory MetaMask Skills `ui-development` vs current package exports (staleness delta).
 - Talk to Norbert on how a new graph is registered and triggered (Cursor Automation vs GitHub Action).
-- Align with Jason on *where the friction actually is* (review wait vs missing components vs upgrade pain vs designer confidence).
+- Align with Jason on _where the friction actually is_ (review wait vs missing components vs upgrade pain vs designer confidence).
 
 **Recommended first wedge (hypothesis — confirm this week):**
 
@@ -417,7 +418,7 @@ Why first:
 
 - Unlocks every later agent (authoring, consuming, orchestration, Replit).
 - Stops the MetaMask Skills rot immediately.
-- Helps designers and product engineers *this month*, with no auto-approve required.
+- Helps designers and product engineers _this month_, with no auto-approve required.
 - Visual regression and Figma parity are more valuable once agents can see the real API.
 
 Why not "first orchestration graph" first: we do not yet have a stable, queryable source of truth to hand the graph. A graph over stale MetaMask Skills would encode the wrong system.
@@ -447,7 +448,7 @@ Only after we can measure the agent against human DS reviews:
 - Never auto-merge designer or external PRs as the first step. Auto-approve ≠ auto-merge. Designers asked for a human.
 - Consumer-repo auto-approve of DS-shaped changes is a further step and needs the org risk label (`risk:low`) **and** the DS verdict.
 
-Taste / Replit / LoRA stay on a **design-prototyping** track. They raise contribution quality *into* the pipeline; they are not a merge gate.
+Taste / Replit / LoRA stay on a **design-prototyping** track. They raise contribution quality _into_ the pipeline; they are not a merge gate.
 
 ---
 
@@ -455,10 +456,10 @@ Taste / Replit / LoRA stay on a **design-prototyping** track. They raise contrib
 
 These got conflated in the engineering monthly and in the designer workshop.
 
-| Term | Meaning | DS stance |
-| --- | --- | --- |
-| Auto-approve | A bot CODEOWNER approve when gates pass | Eventual, small / low-risk, internal first |
-| Auto-merge | Merge without a person | **Not** the near-term goal. Designers do not want this yet. |
+| Term              | Meaning                                   | DS stance                                                               |
+| ----------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
+| Auto-approve      | A bot CODEOWNER approve when gates pass   | Eventual, small / low-risk, internal first                              |
+| Auto-merge        | Merge without a person                    | **Not** the near-term goal. Designers do not want this yet.             |
 | Human-in-the-loop | Engineer reviews; agent prepares evidence | Default for now. This is how we onboard designers and build confidence. |
 
 Jason's clarification: he thought auto-merge was already ready; he does **not** need it immediately. The valuable near-term move is still getting designers into the codebase with a human safety net.
@@ -469,7 +470,7 @@ Jason's clarification: he thought auto-merge was already ready; he does **not** 
 
 Capture from a talk with Jason Culbertson (design director). Focus here is vision, Replit, and why MMDS has to show up as agent-readable context. Font / open-source tangent parked — not this week.
 
-This is still **prototyping-track**, not a merge gate. Do not let it displace Storybook MCP / Bugbot next week. It *does* change what “Know” has to look like: if Replit cannot see the system, the first prototype will be off-system, and we will spend the next four hours of taste work undoing that.
+This is still **prototyping-track**, not a merge gate. Do not let it displace Storybook MCP / Bugbot next week. It _does_ change what “Know” has to look like: if Replit cannot see the system, the first prototype will be off-system, and we will spend the next four hours of taste work undoing that.
 
 ### 11.1 Vision (why this matters)
 
@@ -483,10 +484,10 @@ His answer is **taste + thinking**, not pixels:
 
 Two documents, not one (Gul’s feedback):
 
-| Doc | Job |
-| --- | --- |
-| Design principles | Tactical. How we make the thing. Historically generic — “you could slap any company logo on them.” |
-| Manifesto / how we win | Unique POV. How craft and design help us stand out. High craft *and* bold. Jason + Gul; not shared yet. |
+| Doc                    | Job                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------- |
+| Design principles      | Tactical. How we make the thing. Historically generic — “you could slap any company logo on them.”      |
+| Manifesto / how we win | Unique POV. How craft and design help us stand out. High craft _and_ bold. Jason + Gul; not shared yet. |
 
 Three **craft levels**, decided with Gul at kickoff of every project:
 
@@ -511,7 +512,7 @@ Concrete idea (he has admin):
 - He already has a **motion skill in Replit for sheets**. Same pattern for other motion / pattern skills → consistency across the product.
 - His loop: dump Jira + Confluence + Slack into a new chat titled as the project → “understand this, tell me what it should be” → build from `main` in the simulator → 2–4 hours of taste on top, using skills (including the Apple one).
 
-ChatGPT felt better than Cursor *because* he has a dozen design skills in ChatGPT and almost none in Cursor. Distribution of the same files matters as much as quality.
+ChatGPT felt better than Cursor _because_ he has a dozen design skills in ChatGPT and almost none in Cursor. Distribution of the same files matters as much as quality.
 
 Replit outcomes we already named still apply: **production accelerator / design-intent artifact / DS-gap detector**. Validate. Do not assume a Replit build is production-ready.
 
@@ -521,12 +522,12 @@ Jason is asking MMDS for the **missing attachable context**: something the agent
 
 That is the same decision as DSYS-1054 / §7, just for a different surface:
 
-| Layer | What it carries | Where it lives |
-| --- | --- | --- |
-| DS “what / how” | Components, tokens, stories, APIs | Storybook (and a markdown / MCP projection Replit + Cursor can read) |
-| Taste / thinking | Why, when, avoid-list, MetaMask feel | A **MetaMask design taste** skill — Jason + Brian, not “Jason’s taste” |
-| Patterns | Filters, headers, bottom sheets, lists… | Storybook MDX (Brian’s FigJam is a draft). Mining chat history may be a faster first pass than redrawing FigJam. |
-| Principles + manifesto | Tactical bar + how we win | Jason / Gul docs, once shared |
+| Layer                  | What it carries                         | Where it lives                                                                                                   |
+| ---------------------- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| DS “what / how”        | Components, tokens, stories, APIs       | Storybook (and a markdown / MCP projection Replit + Cursor can read)                                             |
+| Taste / thinking       | Why, when, avoid-list, MetaMask feel    | A **MetaMask design taste** skill — Jason + Brian, not “Jason’s taste”                                           |
+| Patterns               | Filters, headers, bottom sheets, lists… | Storybook MDX (Brian’s FigJam is a draft). Mining chat history may be a faster first pass than redrawing FigJam. |
+| Principles + manifesto | Tactical bar + how we win               | Jason / Gul docs, once shared                                                                                    |
 
 How Jason builds a taste skill (suggest this to Brian too):
 
@@ -538,10 +539,10 @@ How Jason builds a taste skill (suggest this to Brian too):
 
 Captured as-is under [`docs/agentic-capture/`](./agentic-capture/):
 
-| File | What it actually is |
-| --- | --- |
+| File                                                                   | What it actually is                                                                                       |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | [metamask-design-taste.md](./agentic-capture/metamask-design-taste.md) | Living team standard. Critique **and** implementation. Trigger includes “use the MetaMask design system.” |
-| [apple-design.md](./agentic-capture/apple-design.md) | WWDC fluid-interface thinking **translated for the web** (CSS, Pointer Events, Motion). Not an HIG dump. |
+| [apple-design.md](./agentic-capture/apple-design.md)                   | WWDC fluid-interface thinking **translated for the web** (CSS, Pointer Events, Motion). Not an HIG dump.  |
 
 **What to keep (theme-wide)**
 
@@ -564,7 +565,7 @@ Rewards / referrals / sweepstakes specifics: campaign eligibility vs enrollment 
 
 **DS relevance**
 
-The taste skill already *tells* the agent to reuse the real component and token system. It does not *contain* that system. Jason’s missing skill is still a DS markdown / Storybook projection it can read. Do not paste a component catalog into the taste file.
+The taste skill already _tells_ the agent to reuse the real component and token system. It does not _contain_ that system. Jason’s missing skill is still a DS markdown / Storybook projection it can read. Do not paste a component catalog into the taste file.
 
 Apple skill snippets are **web**. Mobile Replit / RN will use the thinking (interruptible sheets, velocity, rubber-band, reduced motion), not the CSS. Jason’s existing Replit motion skill for sheets is the same family.
 
@@ -582,11 +583,11 @@ Still waiting: principles + manifesto (Jason / Gul). Font / OSS parked.
 - **RN visual gap.** Chromatic is web-only. Mobile still depends on `yarn mm` / simulator skills / Joao's extension-oriented graph.
 - **Non-blocking TODO process.** An agent that does not know this will over-block product teams.
 - **Existing eslint-plugin-design-tokens.** Already the right home for "no hex / no default Tailwind colors."
-- **Preview packages / upgrade skills.** `upgrade-design-system` and preview aliases already help adoption. An agent that reviews *upgrades* is a different graph than one that reviews *new UI*.
+- **Preview packages / upgrade skills.** `upgrade-design-system` and preview aliases already help adoption. An agent that reviews _upgrades_ is a different graph than one that reviews _new UI_.
 - **Cost.** Deterministic checks are free. Orchestration nodes cost tokens and need Langfuse. Bias new rules to the cheap layer.
-- **Trigger.** Cursor Automation vs GitHub Action vs both. Joao's framework is designed so Cursor only *starts* a Node process.
+- **Trigger.** Cursor Automation vs GitHub Action vs both. Joao's framework is designed so Cursor only _starts_ a Node process.
 - **Governance.** Who can change node profiles / pattern docs? Same CODEOWNERS as the system they encode.
-- **ai-analyzer custom mode vs new orchestration graph.** We should pick one home for the DS *verdict* so we do not run two agents that disagree.
+- **ai-analyzer custom mode vs new orchestration graph.** We should pick one home for the DS _verdict_ so we do not run two agents that disagree.
 
 ---
 
@@ -594,14 +595,14 @@ Still waiting: principles + manifesto (Jason / Gul). Font / OSS parked.
 
 ### Product / sequencing
 
-1. Is the first wedge **Storybook MCP + pattern docs** (George's current lean) or **first orchestration graph** (Joao case-study lean)? Can we do a thin graph that *only* calls Storybook MCP as the case study?
+1. Is the first wedge **Storybook MCP + pattern docs** (George's current lean) or **first orchestration graph** (Joao case-study lean)? Can we do a thin graph that _only_ calls Storybook MCP as the case study?
 2. What did Jason mean by the real friction — review wait, missing primitives, upgrade lag, or designer confidence? **Partial answer (18 Aug):** on Replit the friction is “I have to keep telling it to look at the design system.” A DS markdown / Storybook projection is the ask.
 3. Auto-approve target when we get there: this monorepo, extension DS-touching PRs, or designer papercuts?
 
 ### Architecture
 
-4. Confirm Joao's "don't use fitness functions" applies to *new* rules only. We should not rip out ESLint or `prevent-deprecated-imports`.
-5. Should the DS verdict be an **agent-orchestration plugin**, an **ai-analyzer custom mode**, or orchestration that *writes* a label ai-analyzer already understands?
+4. Confirm Joao's "don't use fitness functions" applies to _new_ rules only. We should not rip out ESLint or `prevent-deprecated-imports`.
+5. Should the DS verdict be an **agent-orchestration plugin**, an **ai-analyzer custom mode**, or orchestration that _writes_ a label ai-analyzer already understands?
 6. Where does a published Storybook MCP get hosted (GitHub Pages storybook, Chromatic, dedicated service)?
 7. MetaMask Skills: pointer skill now, or wait until MCP is published?
 
@@ -609,7 +610,7 @@ Still waiting: principles + manifesto (Jason / Gul). Font / OSS parked.
 
 8. Who drafts the first pattern set with Brian / Amanda — and what is the first five decisions to write down?
 9. Do we treat Figma as required for new components going forward, or permanently optional with a fallback path?
-9a. Taste + Apple files landed in `docs/agentic-capture/`. Park next to Know, or start a Replit instruction next month? Still capture-only until week of 25 Aug. Who strips Rewards residue before it is called theme-wide?
+   9a. Taste + Apple files landed in `docs/agentic-capture/`. Park next to Know, or start a Replit instruction next month? Still capture-only until week of 25 Aug. Who strips Rewards residue before it is called theme-wide?
 
 ### People / process
 
@@ -654,18 +655,18 @@ Nothing below is started this week. This week is capture + Didier point of view 
 
 ## 15. People
 
-| Person | Role on this |
-| --- | --- |
-| George | Owns the plan and DS-side design |
-| Andy | Protects time; partner on sequencing and Didier share |
-| Didier | Alignment on "this is what accelerates MMDS adoption" |
-| Joao Tavares | Framework author; on paternity leave |
-| Norbert Elter | Full-time on orchestration; primary technical counterpart |
-| Mariona Farell | Orchestration / AI initiative while Joao is out |
-| Ola | AI analyzer / PR risk |
-| Jason | Taste, prototyping, bottleneck challenge |
-| Brian / Amanda | Pattern knowledge to encode; designer onboarding |
-| Josh (Earn) | Replit / reuse-code thread |
+| Person         | Role on this                                              |
+| -------------- | --------------------------------------------------------- |
+| George         | Owns the plan and DS-side design                          |
+| Andy           | Protects time; partner on sequencing and Didier share     |
+| Didier         | Alignment on "this is what accelerates MMDS adoption"     |
+| Joao Tavares   | Framework author; on paternity leave                      |
+| Norbert Elter  | Full-time on orchestration; primary technical counterpart |
+| Mariona Farell | Orchestration / AI initiative while Joao is out           |
+| Ola            | AI analyzer / PR risk                                     |
+| Jason          | Taste, prototyping, bottleneck challenge                  |
+| Brian / Amanda | Pattern knowledge to encode; designer onboarding          |
+| Josh (Earn)    | Replit / reuse-code thread                                |
 
 ---
 
@@ -678,7 +679,7 @@ Use this section as a scratch pad while researching. Promote anything durable in
 - 1:1 with Andy captured above.
 - George still needs a first-pass on agent-orchestration (last touch was the Joao conversation).
 - MetaMask Skills freshness is already a live pain; Storybook-as-source-of-truth is the leading mitigation.
-- Auto-merge is explicitly *not* what designers want right now.
+- Auto-merge is explicitly _not_ what designers want right now.
 - Pure Black is closed; this is the only focus this week.
 
 ### 18 Aug — later the same day
@@ -713,7 +714,7 @@ Use this section as a scratch pad while researching. Promote anything durable in
 ### 18 Aug — Astryx (facebook/astryx)
 
 - AI-operable DS. Their MCP is hosted `search` + `get`. We keep Storybook MCP for v1. Do not build a second MCP.
-- Steal: host Storybook MCP; generate a thin AGENTS.md / Replit router from the *installed* version (not a catalog); dense answers; intent keywords; 3 smoke questions; yarn alias so agents don’t invent paths.
+- Steal: host Storybook MCP; generate a thin AGENTS.md / Replit router from the _installed_ version (not a catalog); dense answers; intent keywords; 3 smoke questions; yarn alias so agents don’t invent paths.
 - Later: templates worth copying (“AI is a copycat”), vibe tests, CLI fallback if Storybook is down.
 - Notes: [astryx.md](./agentic-capture/astryx.md).
 
@@ -736,7 +737,7 @@ Use this section as a scratch pad while researching. Promote anything durable in
 - We are not the merge blockers. Non-blocking process already exists.
 - The second problem is not “CODEOWNER wait.” It is: turn what is in the DS team’s head into quality gates, like ESLint.
 - Prefer declarative. Bugbot / agent only for what cannot be a rule yet. Auto-approve is a side effect, not the goal.
-- Andy’s “approve to the same standard as you” is still a useful *rubric for what to encode*, not a request to become the CODEOWNER.
+- Andy’s “approve to the same standard as you” is still a useful _rubric for what to encode_, not a request to become the CODEOWNER.
 
 ### 18 Aug — Joao meeting (orchestration)
 
@@ -745,4 +746,4 @@ Use this section as a scratch pad while researching. Promote anything durable in
 - Use for Gate + See (checkout, screenshots, MCP, scored runs). Not for Create. Not a second ESLint.
 - Trigger is ours. Open-source: internal-only trigger until guardrails exist. Auto-approve later, not the first graph.
 - Contacts: Norbert (full-time), Mariona / Priya (scores + judge). Local CLI works now.
-)
+  )

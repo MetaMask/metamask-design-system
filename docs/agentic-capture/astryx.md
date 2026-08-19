@@ -6,7 +6,7 @@
 **MCP they ship:** `https://astryx.atmeta.com/mcp` — two tools: `search(query)`, `get(name)`  
 **Our v1:** Storybook MCP (`localhost:6006/mcp` today). Do **not** stand up an Astryx-style custom MCP for MMDS.
 
-Astryx is Meta’s internal system (8 years, 13k+ apps) rebuilt and open-sourced June 2026 as an AI-operable React + StyleX kit. The interesting part is not the components. It is how they made **one source of truth** readable by agents: CLI = docs, generated `AGENTS.md` from the *installed* version, hosted MCP, templates worth copying, vibe tests.
+Astryx is Meta’s internal system (8 years, 13k+ apps) rebuilt and open-sourced June 2026 as an AI-operable React + StyleX kit. The interesting part is not the components. It is how they made **one source of truth** readable by agents: CLI = docs, generated `AGENTS.md` from the _installed_ version, hosted MCP, templates worth copying, vibe tests.
 
 Storybook MCP already does the query job (list / get docs / stories / preview / tests). Use Astryx as a **checklist of surfaces around that query layer**.
 
@@ -14,23 +14,23 @@ Storybook MCP already does the query job (list / get docs / stories / preview / 
 
 ## What they actually built (agent surface)
 
-| Surface | What it does | MMDS equivalent today |
-| --- | --- | --- |
-| Hosted MCP (2 tools) | NL search + get full docs | Storybook MCP: `list-all-documentation`, `get-documentation`, stories, preview, tests. **Richer for authors. Weaker on intent search. Local only.** |
-| CLI as the docs | `astryx component Button`, `docs tokens`, `search`, `--json`, `--dense` | No consumer CLI. `yarn mm` is visual capture, not docs. Storybook site is the human docs. |
-| `init --features agents` | Writes `AGENTS.md` / `.cursorrules` / `CLAUDE.md` from **this install**. Re-run after bump. | MetaMask Skills hand-maintained catalog. Goes stale. Cursor rules in *this* repo are authoring-only. |
-| 3-step workflow in that file | template list → skeleton → component docs | No page templates for agents. Brian patterns / Storybook MDX are the intended stand-in. |
-| Always-on rules in that file | No raw `div`, no `style={{}}`, tokens not magic values | eslint-plugin-design-tokens + CLAUDE.md (authoring). Consumers do not get this attached. |
-| npm script alias | `astryx` points at the real binary so agents do not invent paths | Agents guess `localhost:6006/mcp` or invent skill catalogs. |
-| Knowledge-check prompt | 3 questions with 0% pass rate without docs | No smoke eval. |
-| Templates + `astryx build` | NL → closest page / block / component. Designers grade templates. “AI is a copycat.” | Golden paths / pattern MDX — planned, not queryable. |
-| `{Name}.doc.mjs` next to source | Structured `ComponentDoc` (props, features, examples). Feeds CLI + MCP + Storybook. | Stories + README. No structured machine doc object. |
-| Vibe tests | 21 prompts, screenshots, 10-turn degradation curve | Parked eval harness. |
-| `upgrade` + refresh agent file | Codemods **and** regenerate AGENTS.md | `upgrade-design-system` skill. Does not refresh consumer agent docs. |
-| `doctor` | Diagnose setup, suggest fixes | None. |
-| Night Watch Figma library | Figma stays in sync on every dot release | Figma drift is a known Gate risk. |
+| Surface                         | What it does                                                                                | MMDS equivalent today                                                                                                                               |
+| ------------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hosted MCP (2 tools)            | NL search + get full docs                                                                   | Storybook MCP: `list-all-documentation`, `get-documentation`, stories, preview, tests. **Richer for authors. Weaker on intent search. Local only.** |
+| CLI as the docs                 | `astryx component Button`, `docs tokens`, `search`, `--json`, `--dense`                     | No consumer CLI. `yarn mm` is visual capture, not docs. Storybook site is the human docs.                                                           |
+| `init --features agents`        | Writes `AGENTS.md` / `.cursorrules` / `CLAUDE.md` from **this install**. Re-run after bump. | MetaMask Skills hand-maintained catalog. Goes stale. Cursor rules in _this_ repo are authoring-only.                                                |
+| 3-step workflow in that file    | template list → skeleton → component docs                                                   | No page templates for agents. Brian patterns / Storybook MDX are the intended stand-in.                                                             |
+| Always-on rules in that file    | No raw `div`, no `style={{}}`, tokens not magic values                                      | eslint-plugin-design-tokens + CLAUDE.md (authoring). Consumers do not get this attached.                                                            |
+| npm script alias                | `astryx` points at the real binary so agents do not invent paths                            | Agents guess `localhost:6006/mcp` or invent skill catalogs.                                                                                         |
+| Knowledge-check prompt          | 3 questions with 0% pass rate without docs                                                  | No smoke eval.                                                                                                                                      |
+| Templates + `astryx build`      | NL → closest page / block / component. Designers grade templates. “AI is a copycat.”        | Golden paths / pattern MDX — planned, not queryable.                                                                                                |
+| `{Name}.doc.mjs` next to source | Structured `ComponentDoc` (props, features, examples). Feeds CLI + MCP + Storybook.         | Stories + README. No structured machine doc object.                                                                                                 |
+| Vibe tests                      | 21 prompts, screenshots, 10-turn degradation curve                                          | Parked eval harness.                                                                                                                                |
+| `upgrade` + refresh agent file  | Codemods **and** regenerate AGENTS.md                                                       | `upgrade-design-system` skill. Does not refresh consumer agent docs.                                                                                |
+| `doctor`                        | Diagnose setup, suggest fixes                                                               | None.                                                                                                                                               |
+| Night Watch Figma library       | Figma stays in sync on every dot release                                                    | Figma drift is a known Gate risk.                                                                                                                   |
 
-Their own line: *the docs site is a consumer of the CLI, not the other way around.* Nothing to go stale because there is no second copy.
+Their own line: _the docs site is a consumer of the CLI, not the other way around._ Nothing to go stale because there is no second copy.
 
 ---
 
@@ -71,13 +71,13 @@ These do not require an Astryx MCP.
 
 ## How this sits next to IDS / Jason
 
-| Idea | Astryx | Us |
-| --- | --- | --- |
-| Jason: attach the DS | Generated AGENTS.md + hosted MCP | Thin instruction + **hosted** Storybook MCP |
-| Indeed: don’t dump markdown | CLI `--json` / `--dense`; MCP get | Storybook MCP, not a Storybook→md catalog |
-| Miro: two tools + routing line | `search` + `get` + init file | Storybook list/get + one router file |
-| Primer: public MCP | Hosted URL | Host Storybook |
-| “AI is a copycat” | Grade templates | Grade Brian’s pattern stories before agents copy them |
+| Idea                           | Astryx                            | Us                                                    |
+| ------------------------------ | --------------------------------- | ----------------------------------------------------- |
+| Jason: attach the DS           | Generated AGENTS.md + hosted MCP  | Thin instruction + **hosted** Storybook MCP           |
+| Indeed: don’t dump markdown    | CLI `--json` / `--dense`; MCP get | Storybook MCP, not a Storybook→md catalog             |
+| Miro: two tools + routing line | `search` + `get` + init file      | Storybook list/get + one router file                  |
+| Primer: public MCP             | Hosted URL                        | Host Storybook                                        |
+| “AI is a copycat”              | Grade templates                   | Grade Brian’s pattern stories before agents copy them |
 
 ---
 

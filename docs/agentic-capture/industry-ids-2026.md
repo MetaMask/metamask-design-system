@@ -13,17 +13,17 @@ Talks themselves are behind the recordings pass. What follows is only what is fr
 
 These are not new initiatives. They are the same jobs we already mapped (Know → Make → Gate), said in industry language.
 
-| Claim | Who | MMDS translation |
-| --- | --- | --- |
-| A design system is **infrastructure**, an API that lets AI build the product safely — not a Figma library | Romina Kavcic | Didier / Andy pitch line. Same as Q3 Speed: trusted context. |
-| **AI is a new user.** Docs written for humans are not enough. | Diana Wolosin (Indeed), Spotify Encore, Miro | Storybook MCP + thin skills, not a prose dump. |
-| **Context > probability.** Without our encoded decisions, agents collapse to the internet average. | Jesse Gardner (NY State), Jan Six | Jason’s “used the DS and still sucked.” Taste + patterns + tokens. |
-| **Plant seeds, not trees.** Naming, token structure, component descriptions first. Automation second. | Romina | Confirms this week = capture, next week = DSYS-1054, not a graph. |
-| **Trust levels, not full autonomy.** Intern suggests → junior does mechanical fixes. Some decisions never leave human review. | Romina, Jan Six (Primer agents may **only create issues**) | Auto-approve is a destination. Designers do not want auto-merge. Jan is even stricter than we are. |
-| If the system is not **where the agent already is** (Cursor, Claude, Replit), teams bypass it. | Spotify, Miro (“somebody else was going to do it without us”) | Jason’s Replit ask. Presence, not a prettier Storybook site. |
-| **The invisible system is bigger than the visible one.** If the agent cannot see it, it hallucinates. | Jan Six | Brian’s patterns, Amanda/George review taste, do-not-use rules. |
+| Claim                                                                                                                         | Who                                                           | MMDS translation                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| A design system is **infrastructure**, an API that lets AI build the product safely — not a Figma library                     | Romina Kavcic                                                 | Didier / Andy pitch line. Same as Q3 Speed: trusted context.                                       |
+| **AI is a new user.** Docs written for humans are not enough.                                                                 | Diana Wolosin (Indeed), Spotify Encore, Miro                  | Storybook MCP + thin skills, not a prose dump.                                                     |
+| **Context > probability.** Without our encoded decisions, agents collapse to the internet average.                            | Jesse Gardner (NY State), Jan Six                             | Jason’s “used the DS and still sucked.” Taste + patterns + tokens.                                 |
+| **Plant seeds, not trees.** Naming, token structure, component descriptions first. Automation second.                         | Romina                                                        | Confirms this week = capture, next week = DSYS-1054, not a graph.                                  |
+| **Trust levels, not full autonomy.** Intern suggests → junior does mechanical fixes. Some decisions never leave human review. | Romina, Jan Six (Primer agents may **only create issues**)    | Auto-approve is a destination. Designers do not want auto-merge. Jan is even stricter than we are. |
+| If the system is not **where the agent already is** (Cursor, Claude, Replit), teams bypass it.                                | Spotify, Miro (“somebody else was going to do it without us”) | Jason’s Replit ask. Presence, not a prettier Storybook site.                                       |
+| **The invisible system is bigger than the visible one.** If the agent cannot see it, it hallucinates.                         | Jan Six                                                       | Brian’s patterns, Amanda/George review taste, do-not-use rules.                                    |
 
-Romina’s budget sentence: *“An API that allows AI to build your product safely.”* AI generates code. Design systems generate **understanding**. Only one of those is now cheap.
+Romina’s budget sentence: _“An API that allows AI to build your product safely.”_ AI generates code. Design systems generate **understanding**. Only one of those is now cheap.
 
 ---
 
@@ -43,9 +43,9 @@ Docs say one thing, tokens another, components a third. Humans get annoyed. Agen
 
 Jason’s ask: “take Storybook, turn it into a markdown file.” Indeed already measured that:
 
-| Format | Tokens / query | Result |
-| --- | --- | --- |
-| Markdown / MDX as-is | ~30k | 82% coverage, hallucinations |
+| Format                   | Tokens / query    | Result                                                               |
+| ------------------------ | ----------------- | -------------------------------------------------------------------- |
+| Markdown / MDX as-is     | ~30k              | 82% coverage, hallucinations                                         |
 | Structured JSON metadata | ~80% fewer tokens | Higher accuracy, **5× cheaper** ($300 vs $1,500 / yr in their bench) |
 
 Diana’s rule: **JSON for MCP (contract). Markdown for LLM (rules, taste, why).** Indeed parsed 77 components from MDX → JSON, 1,056 prompts, 8 MCP configs. Pipeline retriggers on MDX updates. 4,300 AI prototypes in 4 months.
@@ -111,7 +111,7 @@ Free recap: [How Miro Made Their Design System AI-Ready](https://www.intodesigns
 - `wrap-up` skill: lint + a11y + i18n checklist + PR template. First bug-bash: 17 PRs in an hour.
 - Client-rendered docs sites cannot be crawled. Links must be markdown, not React indexes.
 - Stop measuring MCP call count (it falls when routing is frictionless). Measure **questions you no longer answer** and outside contributions.
-- Line to keep: *“You don’t need a perfect system. You need a system that is legible enough to teach.”*
+- Line to keep: _“You don’t need a perfect system. You need a system that is legible enough to teach.”_
 
 ### Jan Six — GitHub Primer
 
@@ -160,15 +160,15 @@ Free: [When the Output Becomes the Material](https://yeseniaperezcruz.substack.c
 
 ### Others (talk bullets only — no full free essay)
 
-| Speaker | Useful bit |
-| --- | --- |
-| Sebastian Rousseau (WhatsApp Web) | 1 designer + 1 engineer. Claude Code finds every button not on-system. Ships papercuts via a point-and-click → VS Code plugin. |
-| Freya Stockman (Relevance AI) | 39 PRs. Tagged `don't.md` so agents stop shipping lazy code. Figma flows → markdown so context survives new terminals. |
-| Nate Baldwin (Adobe Spectrum) | Branch-and-burn Cursor explorations. Plan then implement. Throwaway branches to find hidden requirements. |
-| Laura Fehre (Figma) | Split docs into small markdown files. One monolith blows the window. Annotate token frequency + alternative names. |
-| Cristian Morales Achiardi | W3C token JSON + Style Dictionary as the immortal source. Four layers: tokenization, intent, indexing, strategies. Cheap Claude health report vs paid inventory tools. |
-| Davy Fung (Atlassian) | Token drift Figma vs packages via Plugin API in week one. |
-| Casandra / Christoph / Raquel | 48h Figma plugin with a **Figma Plugin Developer skill**. Plan / agent / ask / debug on purpose. |
+| Speaker                           | Useful bit                                                                                                                                                             |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sebastian Rousseau (WhatsApp Web) | 1 designer + 1 engineer. Claude Code finds every button not on-system. Ships papercuts via a point-and-click → VS Code plugin.                                         |
+| Freya Stockman (Relevance AI)     | 39 PRs. Tagged `don't.md` so agents stop shipping lazy code. Figma flows → markdown so context survives new terminals.                                                 |
+| Nate Baldwin (Adobe Spectrum)     | Branch-and-burn Cursor explorations. Plan then implement. Throwaway branches to find hidden requirements.                                                              |
+| Laura Fehre (Figma)               | Split docs into small markdown files. One monolith blows the window. Annotate token frequency + alternative names.                                                     |
+| Cristian Morales Achiardi         | W3C token JSON + Style Dictionary as the immortal source. Four layers: tokenization, intent, indexing, strategies. Cheap Claude health report vs paid inventory tools. |
+| Davy Fung (Atlassian)             | Token drift Figma vs packages via Plugin API in week one.                                                                                                              |
+| Casandra / Christoph / Raquel     | 48h Figma plugin with a **Figma Plugin Developer skill**. Plan / agent / ask / debug on purpose.                                                                       |
 
 ---
 
