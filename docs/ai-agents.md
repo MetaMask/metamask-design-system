@@ -66,7 +66,6 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 **Current Rule Files**
 
-- `changelog.mdc` - **Always apply.** Do not edit package `CHANGELOG.md` except on `release/*` branches
 - `component-architecture.md` - Component architectural patterns (ADR-0003/0004, layered architecture, cross-platform)
 - `component-creation.md` - Component scaffolding HOW-TO guide
 - `component-migration.md` - Extension/mobile component migration (priority workflow)
@@ -140,21 +139,20 @@ What _is_ auto-loaded as markdown instructions:
 - `.cursor/rules/*.mdc` according to `alwaysApply` / `globs` / `description`
 - User rules and Team rules from the Cursor dashboard
 
-`.cursor/rules/*.md` files are not Cursor project rules. Claude Code can `@`-import them from `CLAUDE.md` (imports expand at launch). Cursor Cloud Agents only see those files if they open them. Put must-not-miss invariants **inline in `AGENTS.md`** and, for Cursor, in an `alwaysApply: true` `.mdc` file.
+`.cursor/rules/*.md` files are not Cursor project rules. Claude Code can `@`-import them from `CLAUDE.md` (imports expand at launch). Cursor Cloud Agents only see those files if they open them. Put must-not-miss invariants **inline in `AGENTS.md`**.
 
 **How to make a convention apply to all agents without relying on them opening a file:**
 
 1. Write the invariant **inline** in `AGENTS.md` (loaded by Cursor / Codex / Copilot).
 2. Keep `CLAUDE.md` as `@AGENTS.md` plus any Claude-only notes so Claude Code gets the same text.
-3. For Cursor's project-rules system, also add `.cursor/rules/*.mdc` with `alwaysApply: true` (keep it short).
-4. Merge to the branch agents start from (usually `main`).
-5. Optional, org-wide: add an [enforced Team Rule](https://cursor.com/dashboard/team-content).
+3. Merge to the branch agents start from (usually `main`).
+4. Optional, org-wide: add an [enforced Team Rule](https://cursor.com/dashboard/team-content).
 
 **Usage:**
 
 1. Open Cursor in this repo
-2. Always-apply `.mdc` rules and `AGENTS.md` are injected into Agent and Cloud Agent sessions
-3. Other `.mdc` rules attach via globs, intelligent description match, or `@`-mention
+2. `AGENTS.md` is injected into Agent and Cloud Agent sessions
+3. `.cursor/rules/*.mdc` files attach via `alwaysApply` / globs / description if you add any
 4. `.cursor/rules/*.md` is not auto-injected by Cursor; agents may still `Read` those files when they choose to
 
 ### Claude Code

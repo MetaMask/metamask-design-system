@@ -18,7 +18,7 @@ AI-first workflow for creating release PRs with proper version bumps, changelogs
 - ✅ **Edit package `CHANGELOG.md` files only on release branches** created by `yarn create-release-branch`
 - ✅ **Run `yarn constraints --fix && yarn && yarn dedupe`** after release spec
 - ❌ **NO manual peer dependency updates** - handled automatically by yarn workspaces (causes errors)
-- ❌ **NO package `CHANGELOG.md` edits in normal feature/fix PRs** - document breaking changes in `MIGRATION.md` instead and let the release branch collect changelog entries. Always-on agent guardrail: @.cursor/rules/changelog.mdc
+- ❌ **NO package `CHANGELOG.md` edits in normal feature/fix PRs** - document breaking changes in `MIGRATION.md` instead and let the release branch collect changelog entries
 
 ### Changelog Quality
 

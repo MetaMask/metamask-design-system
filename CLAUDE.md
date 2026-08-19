@@ -2,9 +2,8 @@
 
 ## Documentation for AI Agents
 
-Claude Code expands these `@` imports at session start. Cursor injects `.mdc` project rules separately; other agents should open the matching file when the task is relevant.
+Claude Code expands these `@` imports at session start. Other agents should open the matching file when the task is relevant.
 
-@.cursor/rules/changelog.mdc
 @.cursor/rules/styling.md
 @.cursor/rules/testing.md
 @.cursor/rules/component-documentation.md
