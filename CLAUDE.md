@@ -2,10 +2,15 @@
 
 Design tokens and components for MetaMask extension (React) and mobile (React Native).
 
+## Critical invariants
+
+- **Do not edit package `CHANGELOG.md` files in feature/fix PRs.** Changelogs are generated and edited only on `release/*` branches (`yarn create-release-branch`). Put consumer-facing notes in the PR description; put breaking-change guidance in `MIGRATION.md`. See @.cursor/rules/changelog.mdc and @.cursor/rules/release-workflow.md
+
 ## Documentation for AI Agents
 
 Repository-specific conventions and patterns:
 
+- @.cursor/rules/changelog.mdc
 - @.cursor/rules/styling.md
 - @.cursor/rules/testing.md
 - @.cursor/rules/component-documentation.md

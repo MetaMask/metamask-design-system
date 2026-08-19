@@ -1,0 +1,16 @@
+---
+description: Never edit package CHANGELOG.md except on release branches
+alwaysApply: true
+---
+
+# Changelog edits
+
+Package `CHANGELOG.md` files are **release artifacts**, not feature-PR files.
+
+- **NEVER** edit `packages/*/CHANGELOG.md` in feature, fix, chore, or docs PRs.
+- **NEVER** run `yarn changelog:update` unless the current branch is `release/*`.
+- Changelog entries are generated and edited only on `release/*` branches created by `yarn create-release-branch`.
+- Put consumer-facing notes in the **pull request description**. For breaking changes, update `MIGRATION.md`.
+- If a changelog was already edited on a non-release branch, revert it.
+
+See @.cursor/rules/release-workflow.md and @docs/contributing.md

@@ -62,6 +62,7 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 **Current Rule Files**
 
+- `changelog.mdc` - **Always apply.** Do not edit package `CHANGELOG.md` except on `release/*` branches
 - `component-architecture.md` - Component architectural patterns (ADR-0003/0004, layered architecture, cross-platform)
 - `component-creation.md` - Component scaffolding HOW-TO guide
 - `component-migration.md` - Extension/mobile component migration (priority workflow)
@@ -70,6 +71,7 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 - `component-documentation.md` - Storybook and README standards
 - `figma-integration.md` - Code Connect
 - `testing.md` - Jest, Testing Library, accessibility, style assertions
+- `release-workflow.md` - Release PRs, changelog quality, `MIGRATION.md` (loaded when doing a release)
 
 **Planned Rule Files**
 
@@ -121,18 +123,22 @@ The three-layer model provides static guidance (rules, conventions, and process)
 
 Repo-specific automation specs (Jira epic, JQL, PR identity notes) live under `.cursor/automations/`. Keep specs **in git** on purpose: the Cursor Automations UI has **no native version control**—the repo is where you review, diff, and roll forward or back; the UI prompt is a **mirror** (link or copy-paste) of that spec.
 
-### Cursor
+### Cursor (Desktop and Cloud Agents)
 
-**Automatic loading:**
+[Cursor project rules](https://cursor.com/docs/context/rules) are **only** `.cursor/rules/*.mdc` files with YAML frontmatter (`alwaysApply`, `globs`, `description`). Plain `.md` files in that folder are **ignored** by Cursor's rules system (they remain useful as `@` references from `CLAUDE.md` for Claude Code, if the agent reads them).
 
-- Cursor automatically loads all files in `.cursor/rules/`
-- Rules guide code generation and suggestions throughout session
+**How to make a rule apply to Cloud Agents:**
+
+1. Put it in `.cursor/rules/*.mdc` with `alwaysApply: true` (keep it short), **and** add a one-line invariant to `CLAUDE.md` (Cloud Agents always load that file).
+2. Merge the rule to the branch Cloud Agents start from (usually `main`). A rule on a feature branch does not apply to the next agent that boots from `main`.
+3. Optional, org-wide: add an [enforced Team Rule](https://cursor.com/dashboard/team-content) in the Cursor dashboard. Team Rules apply across repos without waiting on a merge; use them for standards that are not repo-specific.
+4. Optional, this environment only: Cloud Agent environment instructions at [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents). Prefer git-tracked project rules so they are reviewable.
 
 **Usage:**
 
 1. Open Cursor in this repo
-2. Start coding - rules apply automatically
-3. All `.cursor/rules/*.md` files are loaded automatically
+2. Always-apply `.mdc` rules and `CLAUDE.md` are injected into Agent and Cloud Agent sessions
+3. Other `.mdc` rules attach via globs, intelligent description match, or `@`-mention
 
 ### Claude Code
 
