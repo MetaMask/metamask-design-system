@@ -3394,6 +3394,7 @@ __metadata:
     "@types/react-test-renderer": "npm:^19.1.0"
     babel-jest: "npm:^29.7.0"
     deepmerge: "npm:^4.2.2"
+    expo-image: "npm:~3.0.11"
     jest: "npm:^29.7.0"
     react: "npm:19.1.0"
     react-native: "npm:0.81.5"
@@ -3413,6 +3414,7 @@ __metadata:
     "@metamask/design-system-twrnc-preset": ^0.9.0
     "@metamask/design-tokens": ^9.0.0
     "@metamask/utils": ^11.11.0
+    expo-image: ">=3.0.0"
     lodash: ^4.17.21
     react: ">=18.2.0"
     react-native: ">=0.76.0"
@@ -3728,6 +3730,7 @@ __metadata:
     expo-asset: "npm:~12.0.12"
     expo-dev-client: "npm:~6.0.21"
     expo-font: "npm:~14.0.11"
+    expo-image: "npm:~3.0.11"
     expo-status-bar: "npm:~3.0.9"
     lodash: "npm:^4.17.21"
     playwright: "npm:^1.52.0"
@@ -9643,6 +9646,21 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10/80acffecdbd49a2ba1d7ecd8727f355bf47c39873d92f5959ff3bf7fd1de3e6ac10ebe2a77b8238287c3f2b7d033df40b562505fec370f82d9444400e19d7518
+  languageName: node
+  linkType: hard
+
+"expo-image@npm:~3.0.11":
+  version: 3.0.11
+  resolution: "expo-image@npm:3.0.11"
+  peerDependencies:
+    expo: "*"
+    react: "*"
+    react-native: "*"
+    react-native-web: "*"
+  peerDependenciesMeta:
+    react-native-web:
+      optional: true
+  checksum: 10/61d438f9feae0db952f0374050bdbb007002c2aa163270cf7c4ecb8c6b6f6c367bb4f5bf054347ed674ea0318bff6cb51b12eb36c8c8f8e5da6641ba985ac450
   languageName: node
   linkType: hard
 

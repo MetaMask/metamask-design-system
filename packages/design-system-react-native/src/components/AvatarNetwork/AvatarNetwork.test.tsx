@@ -24,7 +24,7 @@ describe('AvatarNetwork Component', () => {
     expect(imageOrSvg.props.style[0].width).toBe('100%');
     expect(imageOrSvg.props.style[0].height).toBe('100%');
 
-    expect(imageOrSvg.props.resizeMode).toBe('contain');
+    expect(imageOrSvg.props.contentFit).toBe('contain');
   });
 
   it('updates fallback text on image error when fallbackText is provided', () => {

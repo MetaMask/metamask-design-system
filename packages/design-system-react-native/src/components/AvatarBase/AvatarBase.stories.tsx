@@ -50,7 +50,7 @@ export const Default: Story = {
           width="100%"
           height="100%"
           imageProps={{
-            resizeMode: 'contain',
+            contentFit: 'contain',
           }}
         />
       }
@@ -97,7 +97,7 @@ export const Shape: Story = {
                 width="100%"
                 height="100%"
                 imageProps={{
-                  resizeMode: 'contain',
+                  contentFit: 'contain',
                 }}
               />
             }
@@ -113,7 +113,7 @@ export const Shape: Story = {
                 width="100%"
                 height="100%"
                 imageProps={{
-                  resizeMode: 'contain',
+                  contentFit: 'contain',
                 }}
               />
             }
@@ -129,7 +129,7 @@ export const Shape: Story = {
                 width="100%"
                 height="100%"
                 imageProps={{
-                  resizeMode: 'contain',
+                  contentFit: 'contain',
                 }}
               />
             }
@@ -145,7 +145,7 @@ export const Shape: Story = {
                 width="100%"
                 height="100%"
                 imageProps={{
-                  resizeMode: 'contain',
+                  contentFit: 'contain',
                 }}
               />
             }
@@ -161,7 +161,7 @@ export const Shape: Story = {
                 width="100%"
                 height="100%"
                 imageProps={{
-                  resizeMode: 'contain',
+                  contentFit: 'contain',
                 }}
               />
             }
@@ -192,7 +192,7 @@ export const Children: Story = {
             width="100%"
             height="100%"
             imageProps={{
-              resizeMode: 'contain',
+              contentFit: 'contain',
             }}
           />
         }
@@ -204,7 +204,7 @@ export const Children: Story = {
             width="100%"
             height="100%"
             imageProps={{
-              resizeMode: 'contain',
+              contentFit: 'contain',
             }}
           />
         }
@@ -216,7 +216,7 @@ export const Children: Story = {
             width="100%"
             height="100%"
             imageProps={{
-              resizeMode: 'contain',
+              contentFit: 'contain',
             }}
           />
         }
