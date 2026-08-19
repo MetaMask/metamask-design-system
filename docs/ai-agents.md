@@ -125,13 +125,23 @@ Repo-specific automation specs (Jira epic, JQL, PR identity notes) live under `.
 
 ### Cursor (Desktop and Cloud Agents)
 
-[Cursor project rules](https://cursor.com/docs/context/rules) are **only** `.cursor/rules/*.mdc` files with YAML frontmatter (`alwaysApply`, `globs`, `description`). Plain `.md` files in that folder are **ignored** by Cursor's rules system (they remain useful as `@` references from `CLAUDE.md` for Claude Code, if the agent reads them).
+Cloud Agents can **read** any markdown in the repo, including `.cursor/rules/*.md`. That is not the same as those files being **injected as Project Rules**.
 
-**How to make a rule apply to Cloud Agents:**
+[Cursor project rules](https://cursor.com/docs/rules.md) (the files the rules system auto-includes in context) are `.cursor/rules/*.mdc` with YAML frontmatter (`alwaysApply`, `globs`, `description`). Official docs: a plain `.md` file in that folder is ignored by the **rules system**. [Cloud Agent best practices](https://cursor.com/docs/cloud-agent/best-practices.md) also describe repo rules as `.cursor/rules/*.mdc`.
 
-1. Put it in `.cursor/rules/*.mdc` with `alwaysApply: true` (keep it short), **and** add a one-line invariant to `CLAUDE.md` (Cloud Agents always load that file).
-2. Merge the rule to the branch Cloud Agents start from (usually `main`). A rule on a feature branch does not apply to the next agent that boots from `main`.
-3. Optional, org-wide: add an [enforced Team Rule](https://cursor.com/dashboard/team-content) in the Cursor dashboard. Team Rules apply across repos without waiting on a merge; use them for standards that are not repo-specific.
+What _is_ auto-loaded as markdown instructions:
+
+- `CLAUDE.md` (and `AGENTS.md` if present)
+- `.cursor/rules/*.mdc` according to `alwaysApply` / `globs` / `description`
+- User rules and Team rules from the Cursor dashboard
+
+`.cursor/rules/*.md` files remain useful as `@` references from `CLAUDE.md`, but the agent only sees their contents if it opens them. In this repo, `release-workflow.md` already said not to edit changelogs in feature PRs; Cloud Agents did not get that file injected, so they missed it.
+
+**How to make a convention apply to Cloud Agents without relying on them opening a file:**
+
+1. Put it in `.cursor/rules/*.mdc` with `alwaysApply: true` (keep it short), **and** add a one-line invariant to `CLAUDE.md` (always loaded).
+2. Merge to the branch Cloud Agents start from (usually `main`). A rule on a feature branch does not apply to the next agent that boots from `main`.
+3. Optional, org-wide: add an [enforced Team Rule](https://cursor.com/dashboard/team-content).
 4. Optional, this environment only: Cloud Agent environment instructions at [Cloud Agents → Environments](https://cursor.com/dashboard/cloud-agents). Prefer git-tracked project rules so they are reviewable.
 
 **Usage:**
@@ -139,6 +149,7 @@ Repo-specific automation specs (Jira epic, JQL, PR identity notes) live under `.
 1. Open Cursor in this repo
 2. Always-apply `.mdc` rules and `CLAUDE.md` are injected into Agent and Cloud Agent sessions
 3. Other `.mdc` rules attach via globs, intelligent description match, or `@`-mention
+4. `.cursor/rules/*.md` is not auto-injected; agents may still `Read` those files when they choose to
 
 ### Claude Code
 
