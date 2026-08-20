@@ -871,3 +871,71 @@ Use this section as a scratch pad while researching. Promote anything durable in
 - Set the expectation about the polish dip **before** it happens, with Andy and Didier.
 - "Back to our roots of Figma / React / RN alignment" is measurable: parity + Code Connect presence per component.
 - Raise in Monday's weekly sync.
+
+### 19 Aug — inbox sweep
+
+- Fresh-eyes pass over the doc. Inventory (§3) is the strongest part. The framing layers are stacked three deep and read as decided — see §18.
+- Gaps dumped raw into §18. Nothing promoted, nothing framed.
+
+---
+
+## 18. Inbox — raw, unplaced
+
+Unsorted. Written down so it is not lost, **not** organised into the frames above. Promote when a frame actually earns it.
+
+### 18.1 Framing debt (the doc's own problem)
+
+Three framings are layered on top of each other and each was added as if it were a capture:
+
+| Framing                                                  | Where    |
+| -------------------------------------------------------- | -------- |
+| Six jobs (Know / Make / Gate / See / Measure / Sequence) | §3.6     |
+| Three surfaces / five facets                             | §6, §6.1 |
+| Create vs gate                                           | §1, §6.1 |
+
+They overlap heavily. Several statements also carry more confidence than the gathering supports — "do not collapse them" (§6), "the wrong primary" (§9.2). **Option:** quarantine all three into one _framing attempts, undecided_ section so the inventory stands alone and new facets are not bent to fit. Not done yet.
+
+### 18.2 Tooling we already own but have not inventoried
+
+- **`~/.cursor/skills/design-system-ops`** — ~40 design-system skills installed locally. Someone has already built a taxonomy of DS agent jobs: `token-audit`, `token-compliance`, `component-audit`, `component-api-validator`, `drift-detection`, `adoption-report`, `docs-coverage`, `naming-audit`, `theme-audit`, `figma-variable-audit`, `codemod-generator`, `deprecation-process`, `governance-encoder`, `metadata-schema-generator`, `context-engine-builder`, `component-decision-tree`, `codebase-index`, `ai-component-description`, `version-bump-advisor`, `stakeholder-brief`, `system-health`, `triage`. Today §3.2 has this as a single line ("high-signal but not distributed").
+  - Open: build vs adopt. Which of these are we about to reinvent? `governance-encoder`, `metadata-schema-generator` and `component-decision-tree` sound like the "encode Brian's head" job (§8). `codebase-index` sounds like the Storybook MCP job (§7).
+- **Motion / taste cluster** in `~/.agents/skills` — `animate`, `animate-expo`, `animation-vocabulary`, `apple-design`, `emil-design-eng`, `find-animation-opportunities`, `improve-animations`. The Apple / taste files are already in `docs/agentic-capture/`. The motion ones are not. **MMDS has no motion or animation guidance layer at all.** Open: is motion a DS domain or not? If yes it is a Know gap, not a tooling gap.
+- Personal skills already doing gate-shaped work with no distribution path: `review-pr`, `self-review-pr`, `review-component-migration`, `release-validation`, `visual-regression-collect(-extension)`, `record-storybook-ios`, `upgrade-design-system(-preview)`.
+
+### 18.3 The design side is nearly empty
+
+§3.2 lists Figma MCP + Code Connect and stops. Also connected today: a **Figma Console MCP** — `audit_design_system`, `lint_design`, `check_design_parity`, `generate_component_doc`, `audit_component_accessibility`, variable CRUD + batch, `export_tokens` / `import_tokens`, `diff_versions`, `blame_node`, `generate_changelog`, annotations. Separate from the official Figma MCP.
+
+Given designer-create is an open problem (§6.1) and the Card 🚧 page is the evidence (§8), this is the largest blank in the landscape. Unknowns: is it dependable, does it work on the MMDS Components file, does it need admin, is it a person's laptop or something we can share.
+
+### 18.4 Timing — everything we have fires at PR time or later
+
+- **Cursor Hooks are not mentioned anywhere in this doc.** Hooks fire while someone is typing. Cheapest possible feedback, no PR involved, no tokens. If gate = "encode the head," a hook is the earliest place a gate can live.
+- Order of surfaces by cost and latency, roughly: hook → ESLint → Bugbot → orchestration graph → human. We have only reasoned about the last three.
+
+### 18.5 Codemods as the missing migration lever
+
+The confirmations story (§9.5) is partly "humans hand-swapping instances." Nothing anywhere proposes automating the mechanical swap so humans only do the pattern work. `codemod-generator` exists locally (§18.2). This is the same pass that would raise `@deprecated` coverage.
+
+### 18.6 Measurement blind spots (beyond §9.4)
+
+- **Figma library analytics** — component insert counts and **detach rate**. Detach is the design-side equivalent of override rate (§9.4). Zero design-side numbers exist today; the whole of §9 is code-side.
+- **Runtime / product telemetry** — nobody has proposed prioritising migration by actual user traffic. We rank by instance count, not by what people touch.
+- **Version lag** — how many MMDS releases behind Extension and Mobile actually are. Adoption of a stale version is not the same as adoption.
+- **Support load** — volume and _type_ of DS questions in Slack. The cheapest signal of a Know gap and we do not log it.
+
+### 18.7 Unowned jobs
+
+- **`@deprecated` tag authoring.** Coverage at ~31% ext / ~18% mobile (§9.1) is not a tooling gap — nobody owns writing the tags, in what format, at what point in the release. The entire metrics pipeline reads from them.
+- **When the agent is wrong.** No appeal path, no owner for tuning, no record of false positives. This is the thing that decides whether people trust the gate or route around it.
+- **Token / run cost.** No budget per PR, no idea what a graph run costs.
+- **Component API quality.** `props-audit` is mechanical. Nobody judges whether an API is _good_.
+
+### 18.8 Check categories never raised as gate candidates
+
+RTL / localisation · theme + dark mode coverage · bundle size · component render performance · naming drift across Figma / React / RN · Figma file hygiene as a precondition for Code Connect being trustworthy.
+
+### 18.9 People-side
+
+- **Onboarding new DS engineers** is the same encode-the-head problem with a different beneficiary. Never mentioned. `engineering-onboarding` and `designer-onboarding` skills exist locally.
+- Designer-authored PRs: who reviews them, and does a gate help or scare them (§3.4 touches the fear, not the ownership).
