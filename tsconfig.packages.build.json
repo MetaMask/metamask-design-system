@@ -21,6 +21,7 @@
     "**/jest.config.ts",
     "**/*.stories.ts",
     "**/*.stories.tsx",
-    "**/*.figma.tsx"
+    "**/*.figma.tsx",
+    "**/*.figma.ts"
   ]
 }
