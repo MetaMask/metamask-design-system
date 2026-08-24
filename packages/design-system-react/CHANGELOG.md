@@ -16,8 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated `BannerBase` to center-align compact content (title-only, description-only, or title with a single-line description or string children) and top-align multi-line stacks, custom React node children, or below-action layouts; inherited by `BannerAlert` and `Toast` ([#1447](https://github.com/MetaMask/metamask-design-system/pull/1447))
-- Removed `PureBlackProvider`, `usePureBlack`, and `data-pure-black` wiring; use semantic elevated tokens (`BackgroundElevated1`, `BackgroundElevated2`, `BorderAlternative`) instead ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
-  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+- **BREAKING:** Removed `PureBlackProvider` and `usePureBlack` exports ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - Remove `PureBlackProvider` wrapping and `data-pure-black` on the document root
+  - Use semantic elevated tokens (`BackgroundElevated1`, `BackgroundElevated2`, `BorderAlternative`) for stepped surfaces instead of pure-black branching
+  - See [Migration Guide](./MIGRATION.md#from-version-0360-to-0370)
 
 ### Fixed
 
