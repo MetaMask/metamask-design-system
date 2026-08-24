@@ -1,9 +1,16 @@
-import { ToastSeverity } from '@metamask/design-system-shared';
+import {
+  BannerBaseActionButtonLayout,
+  FontWeight,
+  TextColor,
+  TextVariant,
+  ToastSeverity,
+} from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { Box } from '../Box';
 import { Button } from '../Button';
+import { Text } from '../Text';
 
 import README from './README.mdx';
 import { Toast } from './Toast';
@@ -77,14 +84,14 @@ export const Default: Story = {
 
 export const Title: Story = {
   args: {
-    title: 'We will notify you.',
+    title: 'Added to Watchlist',
   },
 };
 
 export const Description: Story = {
   args: {
-    title: "Don't miss out",
-    description: 'Enable notifications to stay informed on campaigns.',
+    title: 'Deposit completed',
+    description: '15.02 USDC is available in your account',
   },
 };
 
@@ -112,13 +119,187 @@ export const StartAccessory: Story = {
 };
 
 export const ActionButton: Story = {
-  args: {
-    title: 'Privacy policy update',
-    description: 'Review how Consensys handles your data.',
-    actionButtonLabel: 'Read more',
-    actionButtonOnClick: () => undefined,
-    severity: ToastSeverity.Default,
-  },
+  render: () => (
+    <Box className="flex flex-col gap-4">
+      <Box className="flex flex-col gap-2">
+        <Text
+          color={TextColor.TextDefault}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          Right
+        </Text>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.End}
+          actionButtonOnClick={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+      <Box className="flex flex-col gap-2">
+        <Text
+          color={TextColor.TextDefault}
+          fontWeight={FontWeight.Regular}
+          variant={TextVariant.HeadingSm}
+        >
+          Bottom
+        </Text>
+        <Toast
+          actionButtonLabel="Read more"
+          actionButtonLayout={BannerBaseActionButtonLayout.Below}
+          actionButtonOnClick={() => undefined}
+          description="Review how Consensys handles your data."
+          severity={ToastSeverity.Default}
+          title="Privacy policy update"
+        />
+      </Box>
+    </Box>
+  ),
+};
+
+export const Spacing: Story = {
+  render: () => (
+    <Box className="flex flex-col gap-8">
+      <Box className="flex flex-col gap-4">
+        <Box className="flex flex-col gap-1">
+          <Text
+            color={TextColor.TextDefault}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            Titles only
+          </Text>
+          <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            Content should center align if there is no description
+          </Text>
+        </Box>
+        <Toast
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+        <Toast
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
+        />
+      </Box>
+      <Box className="flex flex-col gap-4">
+        <Box className="flex flex-col gap-1">
+          <Text
+            color={TextColor.TextDefault}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            With descriptions
+          </Text>
+          <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            Content is top aligned if the description line length is more than
+            one line. This is to ensure the content remains visually balanced.
+          </Text>
+        </Box>
+        <Toast
+          description="15.02 USDC is available in your account"
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Deposit completed"
+        />
+        <Toast
+          description="Enable notifications to stay informed on campaigns and never miss important updates about your account."
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Don't miss out"
+        />
+      </Box>
+      <Box className="flex flex-col gap-4">
+        <Box className="flex flex-col gap-1">
+          <Text
+            color={TextColor.TextDefault}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            With action buttons
+          </Text>
+          <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            Action buttons should help users perform actions associated with the
+            toast.
+          </Text>
+        </Box>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.End}
+          actionButtonOnClick={() => undefined}
+          description="You can remove it anytime."
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.Below}
+          actionButtonOnClick={() => undefined}
+          description="Your token has been saved for easy access. You may remove this anytime."
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+    </Box>
+  ),
+};
+
+export const IncorrectUsage: Story = {
+  render: () => (
+    <Box className="flex flex-col gap-8">
+      <Box className="flex flex-col gap-4">
+        <Box className="flex flex-col gap-1">
+          <Text
+            color={TextColor.TextDefault}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            Do not render close and end action buttons together.
+          </Text>
+          <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            This results in a cluttered UI
+          </Text>
+        </Box>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.End}
+          actionButtonOnClick={() => undefined}
+          description="You can remove it anytime."
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+      <Box className="flex flex-col gap-4">
+        <Box className="flex flex-col gap-1">
+          <Text
+            color={TextColor.TextDefault}
+            fontWeight={FontWeight.Regular}
+            variant={TextVariant.HeadingSm}
+          >
+            {`Do not render action button at the end if description length > 1.`}
+          </Text>
+          <Text color={TextColor.TextAlternative} variant={TextVariant.BodySm}>
+            {`This results in suboptimal spacing. If description length > 1, the
+            action button should be placed below.`}
+          </Text>
+        </Box>
+        <Toast
+          actionButtonLabel="Undo"
+          actionButtonLayout={BannerBaseActionButtonLayout.End}
+          actionButtonOnClick={() => undefined}
+          description="Your token has been saved for easy access. You may remove this anytime."
+          onClose={() => undefined}
+          severity={ToastSeverity.Success}
+          title="Added to Watchlist"
+        />
+      </Box>
+    </Box>
+  ),
 };
 
 export const OnClose: Story = {
