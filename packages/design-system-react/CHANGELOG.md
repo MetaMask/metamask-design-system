@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.37.0]
+
+### Added
+
+- Added `showCloseButton` to `ToastOptions` for the imperative `toast(...)` API (default `true`); when `false`, the close button is hidden while auto-dismiss and `toast.dismiss()` still work ([#1446](https://github.com/MetaMask/metamask-design-system/pull/1446))
+
+### Changed
+
+- Updated `BannerBase` to center-align compact content (title-only, description-only, or title with a single-line description or string children) and top-align multi-line stacks, custom React node children, or below-action layouts; inherited by `BannerAlert` and `Toast` ([#1447](https://github.com/MetaMask/metamask-design-system/pull/1447))
+- Removed `PureBlackProvider`, `usePureBlack`, and `data-pure-black` wiring; use semantic elevated tokens (`BackgroundElevated1`, `BackgroundElevated2`, `BorderAlternative`) instead ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+
+### Fixed
+
+- Fixed `Checkbox` unselected state to use a transparent background instead of `background.default` ([#1451](https://github.com/MetaMask/metamask-design-system/pull/1451))
+
 ## [0.36.0]
 
 ### Added
@@ -479,7 +495,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...HEAD
+[0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...@metamask/design-system-react@0.37.0
 [0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.2...@metamask/design-system-react@0.36.0
 [0.35.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.1...@metamask/design-system-react@0.35.2
 [0.35.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.0...@metamask/design-system-react@0.35.1
