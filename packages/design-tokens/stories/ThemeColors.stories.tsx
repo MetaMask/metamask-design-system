@@ -1,7 +1,6 @@
-import { usePureBlack } from '@metamask/design-system-react';
 import React from 'react';
 
-import { lightTheme as lightThemeJS, resolveDarkTheme } from '../src';
+import { darkTheme as darkThemeJS, lightTheme as lightThemeJS } from '../src';
 
 import { ColorSwatch, ColorSwatchGroup } from './components';
 import {
@@ -92,14 +91,8 @@ export const CSSLightTheme = {
 
 export const CSSDarkTheme = {
   render: () => {
-    const isPureBlack = usePureBlack();
-    const darkThemeColors = getCSSVariablesFromStylesheet(
-      '--color-',
-      'dark',
-      isPureBlack,
-    );
-    const backgroundDefault =
-      resolveDarkTheme(isPureBlack).colors.background.default;
+    const darkThemeColors = getCSSVariablesFromStylesheet('--color-', 'dark');
+    const backgroundDefault = darkThemeJS.colors.background.default;
 
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
@@ -151,9 +144,7 @@ export const JSLightTheme = {
 
 export const JSDarkTheme = {
   render: () => {
-    const isPureBlack = usePureBlack();
-    const darkTheme = resolveDarkTheme(isPureBlack);
-    const colors = getJSColors(darkTheme.colors);
+    const colors = getJSColors(darkThemeJS.colors);
 
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
@@ -164,7 +155,7 @@ export const JSDarkTheme = {
             textBackgroundColor="transparent"
             textColor={getContrastYIQ(
               color,
-              darkTheme.colors.background.default,
+              darkThemeJS.colors.background.default,
             )}
             name={name}
           />
