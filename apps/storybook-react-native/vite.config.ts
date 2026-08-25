@@ -1,8 +1,6 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 
-// Do not add @vitejs/plugin-react here — @storybook/react-native-web-vite already
-// registers it. A second copy injects react-refresh twice and breaks the preview iframe.
 export default defineConfig({
   optimizeDeps: {
     include: [
