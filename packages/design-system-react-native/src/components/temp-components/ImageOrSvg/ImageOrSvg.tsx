@@ -22,7 +22,6 @@ export const ImageOrSvg = ({
         source={src}
         style={[{ width, height } as any, style]}
         contentFit="contain"
-        cachePolicy="disk"
         onLoad={onImageLoad}
         onError={onImageError}
         {...imageProps}
@@ -85,7 +84,6 @@ export const ImageOrSvg = ({
       source={src as any}
       style={[{ width, height } as any, style]}
       contentFit="contain"
-      cachePolicy="disk"
       onLoad={onImageLoad}
       onError={onImageError}
       {...imageProps}
