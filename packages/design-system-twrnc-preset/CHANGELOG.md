@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.0]
+
+### Changed
+
+- **BREAKING:** Removed `ThemeProvider` `isPureBlack` prop, `usePureBlack` hook, and `pureBlackThemeColors` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - `getThemeColors()` and `generateTailwindConfig()` no longer accept an `isPureBlack` second argument
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
+- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^10.0.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+
 ## [0.9.0]
 
 ### Added
@@ -101,7 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.9.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.10.0...HEAD
+[0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.9.0...@metamask/design-system-twrnc-preset@0.10.0
 [0.9.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.8.0...@metamask/design-system-twrnc-preset@0.9.0
 [0.8.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.7.0...@metamask/design-system-twrnc-preset@0.8.0
 [0.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.6.0...@metamask/design-system-twrnc-preset@0.7.0

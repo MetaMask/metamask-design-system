@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
+- [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
 - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
 - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
 - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
@@ -50,7 +50,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
+  - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
   - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
@@ -72,9 +72,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.x.0 to 0.x.0
+### From version 0.41.0 to 0.42.0
 
-<a id="from-version-0x0-to-0x0"></a>
+<a id="from-version-0410-to-0420"></a>
 
 <a id="imageorsvg-expo-image"></a>
 

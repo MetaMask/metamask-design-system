@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0]
+
+### Changed
+
+- **BREAKING:** Removed provisional pure-black scaffolding ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - Removed `pureBlackDarkTheme`, `resolveDarkTheme()`, and `pure-black-dark-theme-colors.css` / `[data-pure-black]` CSS override path
+  - Canonical `darkTheme` already uses OLED values since 9.0.0; use `background.elevated1`, `background.elevated2`, and `border.alternative` for stepped surfaces
+  - See [Migration Guide](./MIGRATION.md#from-version-9x-to-1000)
+
 ## [9.0.0]
 
 ### Added
@@ -470,7 +479,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@9.0.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@10.0.0...HEAD
+[10.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@9.0.0...@metamask/design-tokens@10.0.0
 [9.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...@metamask/design-tokens@9.0.0
 [8.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.6.0...@metamask/design-tokens@8.7.0
 [8.6.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.5.0...@metamask/design-tokens@8.6.0

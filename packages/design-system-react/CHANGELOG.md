@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.38.0]
+
+### Changed
+
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^10.0.0` and `@metamask/design-system-tailwind-preset@^0.12.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - Coordinates with `@metamask/design-tokens@10.0.0` PureBlack API removals and `@metamask/design-system-tailwind-preset@0.12.0` peer alignment; no additional React API changes beyond what 0.37.0 already shipped
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
+
+### Fixed
+
+- Updated `Popover` default surface and arrow to `BackgroundElevated2` so floating UI is elevated above base surfaces ([#1458](https://github.com/MetaMask/metamask-design-system/pull/1458))
+
 ## [0.37.0]
 
 ### Added
@@ -497,7 +509,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...HEAD
+[0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...@metamask/design-system-react@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...@metamask/design-system-react@0.37.0
 [0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.2...@metamask/design-system-react@0.36.0
 [0.35.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.1...@metamask/design-system-react@0.35.2
