@@ -15,16 +15,30 @@ export const ImageOrSvg = ({
   imageProps,
   svgProps,
 }: ImageOrSvgProps) => {
+  // Determine how to set content fitting semantics:
+  // - If consumer supplies contentFit, use it.
+  // - Else if consumer supplies resizeMode, omit contentFit so resizeMode takes effect.
+  // - Else default to contentFit="contain".
+  const {
+    contentFit: imagePropsContentFit,
+    resizeMode,
+    ...restImageProps
+  } = imageProps ?? {};
+  const shouldPassContentFit =
+    imagePropsContentFit !== undefined || !resizeMode;
+  const finalContentFit = imagePropsContentFit ?? 'contain';
+
   // CASE 1: local image (src is a number)
   if (typeof src === 'number') {
     return (
       <Image
         source={src}
         style={[{ width, height } as any, style]}
-        contentFit="contain"
+        {...(shouldPassContentFit ? { contentFit: finalContentFit } : {})}
         onLoad={onImageLoad}
         onError={onImageError}
-        {...imageProps}
+        resizeMode={resizeMode}
+        {...restImageProps}
       />
     );
   }
@@ -83,10 +97,11 @@ export const ImageOrSvg = ({
     <Image
       source={src as any}
       style={[{ width, height } as any, style]}
-      contentFit="contain"
+      {...(shouldPassContentFit ? { contentFit: finalContentFit } : {})}
       onLoad={onImageLoad}
       onError={onImageError}
-      {...imageProps}
+      resizeMode={resizeMode}
+      {...restImageProps}
     />
   );
 };
