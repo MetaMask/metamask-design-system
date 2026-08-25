@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix(react): update Popover background color to bg-elevated2 ([#1458](https://github.com/MetaMask/metamask-design-system/pull/1458))
+- chore(deps-dev): bump @metamask/auto-changelog from 6.2.0 to 6.2.1 ([#1456](https://github.com/MetaMask/metamask-design-system/pull/1456))
+
 ## [0.37.0]
 
 ### Added

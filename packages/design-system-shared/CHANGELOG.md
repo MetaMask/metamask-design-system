@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore(deps-dev): bump @metamask/auto-changelog from 6.2.0 to 6.2.1 ([#1456](https://github.com/MetaMask/metamask-design-system/pull/1456))
+- chore(deps-dev): bump @metamask/auto-changelog from 6.1.1 to 6.2.0 ([#1452](https://github.com/MetaMask/metamask-design-system/pull/1452))
+- chore: remove PureBlack providers and provisional OLED scaffolding ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+
 ## [0.33.0]
 
 ### Added
