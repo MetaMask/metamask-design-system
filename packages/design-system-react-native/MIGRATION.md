@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
 - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
 - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
 - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
@@ -49,7 +50,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [Installing expo-image](#installing-expo-image)
+  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
   - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
@@ -71,9 +72,13 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### Installing `expo-image`
+### From version 0.x.0 to 0.x.0
 
-<a id="installing-expo-image"></a>
+<a id="from-version-0x0-to-0x0"></a>
+
+<a id="imageorsvg-expo-image"></a>
+
+#### `ImageOrSvg`: raster images use `expo-image`
 
 Raster images in `ImageOrSvg` (and therefore `AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, and `BadgeNetwork`) now render with [`expo-image`](https://docs.expo.dev/versions/latest/sdk/image/) so remote URIs are cached on disk. This matches MetaMask Mobile ([PR #35001](https://github.com/MetaMask/metamask-mobile/pull/35001)).
 
