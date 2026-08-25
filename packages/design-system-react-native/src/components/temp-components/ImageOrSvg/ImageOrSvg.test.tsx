@@ -30,6 +30,7 @@ describe('ImageOrSvg Component', () => {
     expect(element).toBeTruthy();
     expect(element.props.source).toBe(1);
     expect(element.type).toBe('Image');
+    expect(element.props.contentFit).toBe('contain');
   });
 
   it('renders a remote image as <Image> when HEAD returns non-SVG content', async () => {

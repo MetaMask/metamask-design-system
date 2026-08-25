@@ -3394,6 +3394,7 @@ __metadata:
     "@types/react-test-renderer": "npm:^19.1.0"
     babel-jest: "npm:^29.7.0"
     deepmerge: "npm:^4.2.2"
+    expo-image: "npm:~3.0.11"
     jest: "npm:^29.7.0"
     react: "npm:19.1.0"
     react-native: "npm:0.81.5"
@@ -3413,6 +3414,7 @@ __metadata:
     "@metamask/design-system-twrnc-preset": ^0.9.0
     "@metamask/design-tokens": ^9.0.0
     "@metamask/utils": ^11.11.0
+    expo-image: ">=3.0.0"
     lodash: ^4.17.21
     react: ">=18.2.0"
     react-native: ">=0.76.0"
@@ -3728,6 +3730,8 @@ __metadata:
     expo-asset: "npm:~12.0.12"
     expo-dev-client: "npm:~6.0.21"
     expo-font: "npm:~14.0.11"
+    expo-image: "npm:~3.0.11"
+    expo-splash-screen: "npm:~31.0.13"
     expo-status-bar: "npm:~3.0.9"
     lodash: "npm:^4.17.21"
     playwright: "npm:^1.52.0"
@@ -9646,6 +9650,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-image@npm:~3.0.11":
+  version: 3.0.11
+  resolution: "expo-image@npm:3.0.11"
+  peerDependencies:
+    expo: "*"
+    react: "*"
+    react-native: "*"
+    react-native-web: "*"
+  peerDependenciesMeta:
+    react-native-web:
+      optional: true
+  checksum: 10/61d438f9feae0db952f0374050bdbb007002c2aa163270cf7c4ecb8c6b6f6c367bb4f5bf054347ed674ea0318bff6cb51b12eb36c8c8f8e5da6641ba985ac450
+  languageName: node
+  linkType: hard
+
 "expo-json-utils@npm:~0.15.0":
   version: 0.15.0
   resolution: "expo-json-utils@npm:0.15.0"
@@ -9706,6 +9725,17 @@ __metadata:
   version: 1.0.6
   resolution: "expo-server@npm:1.0.6"
   checksum: 10/eda5a44250eaad66994f9ee79b163e45c4b80703746040d1b782e23865d875e86d8d915d822d388999f0bd1a57eae52e72f2ce4fdfa9132ec595189542fd6204
+  languageName: node
+  linkType: hard
+
+"expo-splash-screen@npm:~31.0.13":
+  version: 31.0.13
+  resolution: "expo-splash-screen@npm:31.0.13"
+  dependencies:
+    "@expo/prebuild-config": "npm:^54.0.8"
+  peerDependencies:
+    expo: "*"
+  checksum: 10/09fe3f313d946af6e4052f79e8b6578b61af895ca6621ded6708bdf955946aed1a17716f1e3aa8608bfa47e3b2fc5207c25aa8e368e2ebdce929716e54afc6d7
   languageName: node
   linkType: hard
 

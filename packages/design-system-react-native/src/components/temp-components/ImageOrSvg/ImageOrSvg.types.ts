@@ -1,11 +1,9 @@
 import type {
-  ImageErrorEvent,
+  ImageErrorEventData,
   ImageLoadEventData,
-  NativeSyntheticEvent,
-  StyleProp,
-  ImageStyle,
   ImageProps,
-} from 'react-native';
+} from 'expo-image';
+import type { StyleProp, ImageStyle } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
 /**
@@ -25,11 +23,11 @@ export type ImageOrSvgBaseProps = {
   /**
    * Optional prop to set callback triggered when the image has loaded successfully.
    */
-  onImageLoad?: (event: NativeSyntheticEvent<ImageLoadEventData>) => void;
+  onImageLoad?: (event: ImageLoadEventData) => void;
   /**
    * Optional prop to set callback triggered when there is an error rendering the image.
    */
-  onImageError?: (errorEvent: ImageErrorEvent) => void;
+  onImageError?: (errorEvent: ImageErrorEventData) => void;
   /**
    * Optional prop to set callback triggered when there is an error rendering the SVG.
    */

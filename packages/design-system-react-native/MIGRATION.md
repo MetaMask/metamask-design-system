@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
 - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
 - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
 - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
@@ -49,6 +50,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.x.0 to 0.x.0](#from-version-0x0-to-0x0)
   - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
@@ -69,6 +71,57 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.x.0 to 0.x.0
+
+<a id="from-version-0x0-to-0x0"></a>
+
+<a id="imageorsvg-expo-image"></a>
+
+#### `ImageOrSvg`: raster images use `expo-image`
+
+Raster images in `ImageOrSvg` (and therefore `AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, and `BadgeNetwork`) now render with [`expo-image`](https://docs.expo.dev/versions/latest/sdk/image/) so remote URIs are cached on disk. This matches MetaMask Mobile ([PR #35001](https://github.com/MetaMask/metamask-mobile/pull/35001)).
+
+Install the new peer dependency:
+
+```bash
+yarn add expo-image
+```
+
+or
+
+```bash
+npm install expo-image
+```
+
+#### Breaking Changes
+
+- **`imageProps.resizeMode` overrides no longer apply.** `ImageOrSvg` defaults to `contentFit="contain"`, and avatar components (`AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, `BadgeNetwork`) merge `contentFit: 'contain'` into `imageOrSvgProps.imageProps`. In `expo-image`, `contentFit` takes precedence when both props are present, so passing `resizeMode` through `imageOrSvgProps` is ignored. Use `contentFit` instead.
+- **`onImageLoad` and `onImageError` payloads changed.** Callbacks now receive `expo-image` event objects (`ImageLoadEventData` / `ImageErrorEventData`), not React Native `NativeSyntheticEvent` wrappers. If you read `event.nativeEvent.error`, switch to `event.error`.
+
+#### Migration Steps
+
+**Before:**
+
+```tsx
+<AvatarNetwork
+  src={{ uri: 'https://example.com/network.png' }}
+  imageOrSvgProps={{
+    imageProps: { resizeMode: 'cover' },
+  }}
+/>
+```
+
+**After:**
+
+```tsx
+<AvatarNetwork
+  src={{ uri: 'https://example.com/network.png' }}
+  imageOrSvgProps={{
+    imageProps: { contentFit: 'cover' },
+  }}
+/>
+```
 
 ### From version 0.37.0 to 0.38.0
 

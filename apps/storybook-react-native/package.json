@@ -26,6 +26,8 @@
     "expo-asset": "~12.0.12",
     "expo-dev-client": "~6.0.21",
     "expo-font": "~14.0.11",
+    "expo-image": "~3.0.11",
+    "expo-splash-screen": "~31.0.13",
     "expo-status-bar": "~3.0.9",
     "lodash": "^4.17.21",
     "react": "19.1.0",

@@ -1,5 +1,5 @@
+import { Image } from 'expo-image';
 import React, { useState, useCallback, useEffect } from 'react';
-import { Image } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 
 import type { ImageOrSvgProps } from './ImageOrSvg.types';
@@ -21,7 +21,7 @@ export const ImageOrSvg = ({
       <Image
         source={src}
         style={[{ width, height } as any, style]}
-        resizeMode="contain"
+        contentFit="contain"
         onLoad={onImageLoad}
         onError={onImageError}
         {...imageProps}
@@ -76,11 +76,14 @@ export const ImageOrSvg = ({
       />
     );
   }
+  // expo-image caches by URI on disk by default, unlike react-native's
+  // plain `Image`, which otherwise re-fetches the same remote icon every
+  // time this component remounts (e.g. on list re-renders).
   return (
     <Image
       source={src as any}
       style={[{ width, height } as any, style]}
-      resizeMode="contain"
+      contentFit="contain"
       onLoad={onImageLoad}
       onError={onImageError}
       {...imageProps}
