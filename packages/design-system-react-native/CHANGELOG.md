@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `imageProps.resizeMode` overrides no longer apply; use `contentFit` instead
   - `onImageLoad` and `onImageError` receive `expo-image` event payloads instead of React Native `NativeSyntheticEvent` wrappers
   - See [Migration Guide](./MIGRATION.md#from-version-0410-to-0420)
-- Updated peer dependencies to `@metamask/design-tokens@^10.0.0` and `@metamask/design-system-twrnc-preset@^0.10.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^10.0.0` and `@metamask/design-system-twrnc-preset@^0.10.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
   - Coordinates with deferred PureBlack scaffolding removals now published in those packages
   - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
 

@@ -7,12 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.37.1]
+## [0.38.0]
 
 ### Changed
 
-- Updated peer dependency to `@metamask/design-tokens@^10.0.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
-  - Coordinates with `@metamask/design-tokens@10.0.0` PureBlack API removals; no additional React API changes in this patch
+- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^10.0.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - Coordinates with `@metamask/design-tokens@10.0.0` PureBlack API removals; no additional React API changes beyond what 0.37.0 already shipped
   - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
 
 ### Fixed
@@ -509,8 +509,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.1...HEAD
-[0.37.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...@metamask/design-system-react@0.37.1
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...HEAD
+[0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...@metamask/design-system-react@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...@metamask/design-system-react@0.37.0
 [0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.2...@metamask/design-system-react@0.36.0
 [0.35.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.1...@metamask/design-system-react@0.35.2

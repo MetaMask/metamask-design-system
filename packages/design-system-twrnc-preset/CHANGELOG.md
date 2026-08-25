@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING:** Removed `ThemeProvider` `isPureBlack` prop, `usePureBlack` hook, and `pureBlackThemeColors` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
   - `getThemeColors()` and `generateTailwindConfig()` no longer accept an `isPureBlack` second argument
   - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
-- Updated peer dependency to `@metamask/design-tokens@^10.0.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^10.0.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
 
 ## [0.9.0]
 
