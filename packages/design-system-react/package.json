@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react",
-  "version": "0.36.0",
+  "version": "0.37.0",
   "description": "Design system react ui components",
   "keywords": [
     "MetaMask",
@@ -58,7 +58,7 @@
   "devDependencies": {
     "@figma/code-connect": "^1.4.9",
     "@jest/globals": "^29.7.0",
-    "@metamask/auto-changelog": "^6.2.0",
+    "@metamask/auto-changelog": "^6.2.1",
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@metamask/utils": "^11.11.0",
     "@svgr/cli": "^8.1.0",

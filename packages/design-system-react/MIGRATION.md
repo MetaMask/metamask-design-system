@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.27.x to 0.28.0](#from-version-027x-to-0280)
   - [From version 0.25.0 to 0.26.0](#from-version-0250-to-0260)
@@ -3581,6 +3582,58 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.36.0 to 0.37.0
+
+<a id="from-version-0360-to-0370"></a>
+
+#### PureBlackProvider and usePureBlack removed
+
+**What changed:**
+
+- Removed `PureBlackProvider` and `usePureBlack` exports from `@metamask/design-system-react`
+- OLED pure-black dark theme values remain canonical on `darkTheme` (since `@metamask/design-tokens@9.0.0`); elevated tokens replace pure-black branching for stepped surfaces
+
+**Migration:**
+
+```tsx
+// Before (0.36.x)
+import {
+  PureBlackProvider,
+  usePureBlack,
+  Box,
+  BoxBackgroundColor,
+} from '@metamask/design-system-react';
+
+<html data-pure-black={isPureBlack || undefined}>
+  <PureBlackProvider isPureBlack={isPureBlack}>{children}</PureBlackProvider>
+</html>;
+
+const isPureBlack = usePureBlack();
+<Box
+  backgroundColor={
+    isPureBlack
+      ? BoxBackgroundColor.BackgroundAlternative
+      : BoxBackgroundColor.BackgroundDefault
+  }
+/>;
+
+// After (0.37.0)
+import { Box, BoxBackgroundColor } from '@metamask/design-system-react';
+
+{
+  children;
+}
+
+<Box backgroundColor={BoxBackgroundColor.BackgroundElevated1} />;
+```
+
+**Impact:**
+
+- Call sites importing `PureBlackProvider` or `usePureBlack` will fail at compile time until removed
+- Remove `data-pure-black` from the document root; dark theme CSS already uses OLED values
+- For stepped surfaces (modals, toasts, menus), use `BackgroundElevated1`, `BackgroundElevated2`, and `BorderAlternative` instead of branching on pure-black mode
+- See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000) for related removals in other packages
 
 ### From version 0.34.0 to 0.35.0
 

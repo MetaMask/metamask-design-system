@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.41.0]
+
+### Added
+
+- Added `showCloseButton` to `ToastOptions` for the imperative `toast(...)` API (default `true`); when `false`, the close button is hidden while swipe-to-dismiss, auto-dismiss, and `toast.dismiss()` still work ([#1446](https://github.com/MetaMask/metamask-design-system/pull/1446))
+
+### Changed
+
+- Updated `BannerBase` to center-align compact content (title-only, description-only, or title with a single-line description or string children) and top-align multi-line stacks, custom React node children, or below-action layouts; inherited by `BannerAlert` and `Toast` ([#1447](https://github.com/MetaMask/metamask-design-system/pull/1447))
+
+### Fixed
+
+- Fixed `Checkbox` unselected state to use a transparent background instead of `background.default` ([#1451](https://github.com/MetaMask/metamask-design-system/pull/1451))
+
 ## [0.40.0]
 
 ### Added
@@ -683,7 +697,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.40.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.41.0...HEAD
+[0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.40.0...@metamask/design-system-react-native@0.41.0
 [0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.1...@metamask/design-system-react-native@0.40.0
 [0.39.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.0...@metamask/design-system-react-native@0.39.1
 [0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.38.1...@metamask/design-system-react-native@0.39.0
