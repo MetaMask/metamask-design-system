@@ -1,9 +1,9 @@
-import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import path from 'path';
 
+// Do not add @vitejs/plugin-react here — @storybook/react-native-web-vite already
+// registers it. A second copy injects react-refresh twice and breaks the preview iframe.
 export default defineConfig({
-  plugins: [react()],
   optimizeDeps: {
     include: [
       'react',
@@ -30,6 +30,7 @@ export default defineConfig({
         __dirname,
         '../../packages/design-tokens/src',
       ),
+      'expo-image': path.resolve(__dirname, '.storybook/expo-image-shim.ts'),
     },
   },
   assetsInclude: ['**/*.woff2', '**/*.woff', '**/*.ttf', '**/*.otf'],
