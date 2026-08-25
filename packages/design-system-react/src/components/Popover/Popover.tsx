@@ -159,7 +159,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const popoverContent = (
       <Box
-        backgroundColor={BoxBackgroundColor.BackgroundDefault}
+        backgroundColor={BoxBackgroundColor.BackgroundElevated2}
         borderColor={BoxBorderColor.BorderMuted}
         borderWidth={1}
         padding={4}
@@ -193,7 +193,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             }}
           >
             <Box
-              backgroundColor={BoxBackgroundColor.BackgroundDefault}
+              backgroundColor={BoxBackgroundColor.BackgroundElevated2}
               borderColor={BoxBorderColor.BorderMuted}
               borderWidth={1}
               data-testid="popover-arrow-visual"

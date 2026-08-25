@@ -9,6 +9,8 @@ import {
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef, useState } from 'react';
 
+import { BoxBackgroundColor, BoxBorderColor } from '../Box';
+
 import { Popover } from './Popover';
 import { PopoverPosition, PopoverRole } from './Popover.types';
 
@@ -132,6 +134,21 @@ describe('Popover', () => {
   });
 
   describe('className and style', () => {
+    it('uses elevated2 background and muted border on popover root and arrow visual', () => {
+      render(
+        <Popover data-testid="popover" isOpen hasArrow>
+          x
+        </Popover>,
+      );
+      const root = screen.getByTestId('popover');
+      expect(root).toHaveClass(BoxBackgroundColor.BackgroundElevated2);
+      expect(root).toHaveClass(BoxBorderColor.BorderMuted);
+
+      const arrowVisual = screen.getByTestId('popover-arrow-visual');
+      expect(arrowVisual).toHaveClass(BoxBackgroundColor.BackgroundElevated2);
+      expect(arrowVisual).toHaveClass(BoxBorderColor.BorderMuted);
+    });
+
     it('merges consumer className with internal classes', () => {
       render(
         <Popover data-testid="popover" isOpen className="z-10">
