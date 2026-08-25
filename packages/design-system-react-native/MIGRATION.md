@@ -94,18 +94,34 @@ or
 npm install expo-image
 ```
 
-`imageProps.resizeMode` still works (deprecated by `expo-image`), but prefer `contentFit`:
+#### Breaking Changes
+
+- **`imageProps.resizeMode` overrides no longer apply.** `ImageOrSvg` defaults to `contentFit="contain"`, and avatar components (`AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, `BadgeNetwork`) merge `contentFit: 'contain'` into `imageOrSvgProps.imageProps`. In `expo-image`, `contentFit` takes precedence when both props are present, so passing `resizeMode` through `imageOrSvgProps` is ignored. Use `contentFit` instead.
+- **`onImageLoad` and `onImageError` payloads changed.** Callbacks now receive `expo-image` event objects (`ImageLoadEventData` / `ImageErrorEventData`), not React Native `NativeSyntheticEvent` wrappers. If you read `event.nativeEvent.error`, switch to `event.error`.
+
+#### Migration Steps
+
+**Before:**
 
 ```tsx
 <AvatarNetwork
   src={{ uri: 'https://example.com/network.png' }}
   imageOrSvgProps={{
-    imageProps: { contentFit: 'contain' },
+    imageProps: { resizeMode: 'cover' },
   }}
 />
 ```
 
-`onImageLoad` and `onImageError` now receive `expo-image` event objects, not React Native `NativeSyntheticEvent` wrappers. If you read `event.nativeEvent.error`, switch to `event.error`.
+**After:**
+
+```tsx
+<AvatarNetwork
+  src={{ uri: 'https://example.com/network.png' }}
+  imageOrSvgProps={{
+    imageProps: { contentFit: 'cover' },
+  }}
+/>
+```
 
 ### From version 0.37.0 to 0.38.0
 
