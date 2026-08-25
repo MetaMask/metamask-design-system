@@ -9,10 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.42.0]
 
-### Uncategorized
+### Changed
 
-- feat: cache avatar raster images with expo-image ([#1454](https://github.com/MetaMask/metamask-design-system/pull/1454))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.2.0 to 6.2.1 ([#1456](https://github.com/MetaMask/metamask-design-system/pull/1456))
+- **BREAKING:** Raster images in `ImageOrSvg` (used by `AvatarToken`, `AvatarNetwork`, `AvatarFavicon`, and `BadgeNetwork`) now use `expo-image` so remote URIs are disk-cached ([#1454](https://github.com/MetaMask/metamask-design-system/pull/1454))
+  - Adds `expo-image` (`>=3.0.0`) as a required peer dependency
+  - `imageProps.resizeMode` overrides no longer apply; use `contentFit` instead
+  - `onImageLoad` and `onImageError` receive `expo-image` event payloads instead of React Native `NativeSyntheticEvent` wrappers
+  - See [Migration Guide](./MIGRATION.md#from-version-0410-to-0420)
+- Updated peer dependencies to `@metamask/design-tokens@^10.0.0` and `@metamask/design-system-twrnc-preset@^0.10.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - Coordinates with deferred PureBlack scaffolding removals now published in those packages
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
 
 ## [0.41.0]
 

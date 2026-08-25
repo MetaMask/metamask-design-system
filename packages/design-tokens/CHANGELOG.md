@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [10.0.0]
 
-### Uncategorized
+### Changed
 
-- chore(deps-dev): bump @metamask/auto-changelog from 6.2.0 to 6.2.1 ([#1456](https://github.com/MetaMask/metamask-design-system/pull/1456))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.1.1 to 6.2.0 ([#1452](https://github.com/MetaMask/metamask-design-system/pull/1452))
-- chore: remove PureBlack providers and provisional OLED scaffolding ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
-- fix: show authored CSS token values in Storybook swatches ([#1448](https://github.com/MetaMask/metamask-design-system/pull/1448))
+- **BREAKING:** Removed provisional pure-black scaffolding ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - Removed `pureBlackDarkTheme`, `resolveDarkTheme()`, and `pure-black-dark-theme-colors.css` / `[data-pure-black]` CSS override path
+  - Canonical `darkTheme` already uses OLED values since 9.0.0; use `background.elevated1`, `background.elevated2`, and `border.alternative` for stepped surfaces
+  - See [Migration Guide](./MIGRATION.md#from-version-9x-to-1000)
 
 ## [9.0.0]
 
