@@ -144,7 +144,7 @@ export const IsLoading: Story = {
               endIconName={IconName.ArrowRight}
               variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
               isLoading
-              loadingText="With Loading Text"
+              loadingText="Loading..."
             >
               {variantKey}
             </ButtonStory>

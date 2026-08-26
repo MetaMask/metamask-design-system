@@ -16,7 +16,7 @@ const Demo = () => {
           });
         }}
       >
-        Show Toast
+        Show toast
       </Button>
       <Toaster />
     </>
@@ -42,7 +42,7 @@ const Demo = () => {
           });
         }}
       >
-        Show Toast
+        Show toast
       </Button>
       <Toaster />
     </>

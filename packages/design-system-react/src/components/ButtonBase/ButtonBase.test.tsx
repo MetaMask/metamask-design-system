@@ -56,14 +56,14 @@ describe('ButtonBase', () => {
     render(
       <ButtonBase
         isLoading
-        loadingText="Please wait..."
+        loadingText="Loading..."
         loadingIconProps={{ 'data-testid': 'loading-spinner' }}
       >
         Submit
       </ButtonBase>,
     );
     expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
-    const loadingTexts = screen.getAllByText('Please wait...');
+    const loadingTexts = screen.getAllByText('Loading...');
     expect(loadingTexts).toHaveLength(2);
     const widthPlaceholder = screen
       .getByRole('button')
@@ -437,7 +437,7 @@ describe('ButtonBase', () => {
       render(
         <ButtonBase
           isLoading
-          loadingText="Please wait"
+          loadingText="Loading..."
           loadingIconProps={{ 'data-testid': 'loading-spinner' }}
         >
           Submit

@@ -143,11 +143,11 @@ describe('BannerBase', () => {
       <BannerBase
         onClose={() => undefined}
         testID="banner-base"
-        title="Added to Watchlist"
+        title="Added to watchlist"
       />,
     );
 
-    const titleParent = getByText('Added to Watchlist').parent;
+    const titleParent = getByText('Added to watchlist').parent;
     if (!titleParent) {
       throw new Error('Expected title content parent');
     }
@@ -432,11 +432,11 @@ describe('BannerBase', () => {
         description="Supporting details"
         onClose={() => undefined}
         testID="banner-base"
-        title="Added to Watchlist"
+        title="Added to watchlist"
       />,
     );
 
-    const titleParent = getByText('Added to Watchlist').parent;
+    const titleParent = getByText('Added to watchlist').parent;
     if (!titleParent) {
       throw new Error('Expected title content parent');
     }

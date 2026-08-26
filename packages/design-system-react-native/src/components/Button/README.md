@@ -201,7 +201,7 @@ Text to display when the button is in loading state.
 <Button
   variant={ButtonVariant.Primary}
   isLoading
-  loadingText="Please wait..."
+  loadingText="Loading..."
   onPress={() => {}}
 >
   Submit

@@ -167,7 +167,7 @@ describe('BannerBase', () => {
       <BannerBase
         data-testid="banner-base"
         onClose={() => undefined}
-        title="Added to Watchlist"
+        title="Added to watchlist"
         closeButtonProps={{ 'data-testid': closeButtonTestId }}
       />,
     );
@@ -411,7 +411,7 @@ describe('BannerBase', () => {
         data-testid="banner-base"
         description="Supporting details"
         onClose={() => undefined}
-        title="Added to Watchlist"
+        title="Added to watchlist"
       />,
     );
 

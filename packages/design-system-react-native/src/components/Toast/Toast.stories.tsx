@@ -81,7 +81,7 @@ export const Default: Story = {
             });
           }}
         >
-          Show Toast
+          Show toast
         </Button>
         <Toaster />
       </>
@@ -95,7 +95,7 @@ export const Default: Story = {
 
 export const Title: Story = {
   args: {
-    title: 'Added to Watchlist',
+    title: 'Added to watchlist',
   },
 };
 
@@ -145,7 +145,7 @@ export const ActionButtonOnPress: Story = {
           actionButtonLayout={BannerBaseActionButtonLayout.End}
           actionButtonOnPress={() => undefined}
           severity={ToastSeverity.Success}
-          title="Added to Watchlist"
+          title="Added to watchlist"
         />
       </Box>
       <Box twClassName="gap-2">
@@ -192,7 +192,7 @@ export const Spacing: Story = {
           <Toast
             onClose={() => undefined}
             severity={ToastSeverity.Success}
-            title="Added to Watchlist"
+            title="Added to watchlist"
           />
           <Toast
             onClose={() => undefined}
@@ -253,7 +253,7 @@ export const Spacing: Story = {
             actionButtonOnPress={() => undefined}
             description="You can remove it anytime."
             severity={ToastSeverity.Success}
-            title="Added to Watchlist"
+            title="Added to watchlist"
           />
           <Toast
             actionButtonLabel="Undo"
@@ -262,7 +262,7 @@ export const Spacing: Story = {
             description="Your token has been saved for easy access. You may remove this anytime."
             onClose={() => undefined}
             severity={ToastSeverity.Success}
-            title="Added to Watchlist"
+            title="Added to watchlist"
           />
         </Box>
       </Box>
@@ -293,7 +293,7 @@ export const IncorrectUsage: Story = {
           description="You can remove it anytime."
           onClose={() => undefined}
           severity={ToastSeverity.Success}
-          title="Added to Watchlist"
+          title="Added to watchlist"
         />
       </Box>
       <Box twClassName="gap-4">
@@ -317,7 +317,7 @@ export const IncorrectUsage: Story = {
           description="Your token has been saved for easy access. You may remove this anytime."
           onClose={() => undefined}
           severity={ToastSeverity.Success}
-          title="Added to Watchlist"
+          title="Added to watchlist"
         />
       </Box>
     </Box>

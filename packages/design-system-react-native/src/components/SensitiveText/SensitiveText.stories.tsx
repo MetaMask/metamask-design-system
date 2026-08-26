@@ -28,7 +28,7 @@ export const Default: Story = {
     length: SensitiveTextLength.Short,
     variant: TextVariant.BodyMd,
     color: TextColor.TextDefault,
-    children: 'Sensitive Information',
+    children: 'Sensitive information',
   },
 };
 
@@ -36,10 +36,10 @@ export const IsHidden: Story = {
   render: () => (
     <>
       <SensitiveText variant={TextVariant.BodyMd}>
-        Visible: Sensitive Information
+        Visible: Sensitive information
       </SensitiveText>
       <SensitiveText variant={TextVariant.BodyMd} isHidden>
-        Hidden: Sensitive Information
+        Hidden: Sensitive information
       </SensitiveText>
     </>
   ),

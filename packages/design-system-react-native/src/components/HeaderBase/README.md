@@ -5,7 +5,7 @@ HeaderBase is a reusable header component with optional start/end accessories an
 ```tsx
 import { HeaderBase } from '@metamask/design-system-react-native';
 
-<HeaderBase>Page Title</HeaderBase>;
+<HeaderBase>Page title</HeaderBase>;
 ```
 
 ## Props
@@ -22,12 +22,12 @@ The title of the header. Pass a string for automatic Text rendering with the cor
 
 ```tsx
 // String title (auto-renders as Text with correct variant)
-<HeaderBase>Page Title</HeaderBase>
+<HeaderBase>Page title</HeaderBase>
 
 // Custom ReactNode title
 <HeaderBase>
   <Box twClassName="items-center">
-    <Text variant={TextVariant.HeadingSm}>Custom Title</Text>
+    <Text variant={TextVariant.HeadingSm}>Custom title</Text>
     <Text variant={TextVariant.BodySm}>Subtitle</Text>
   </Box>
 </HeaderBase>
@@ -51,7 +51,7 @@ Content displayed before the title. Takes priority over `startButtonIconProps` i
     />
   }
 >
-  Page Title
+  Page title
 </HeaderBase>
 ```
 
@@ -73,7 +73,7 @@ Content displayed after the title. Takes priority over `endButtonIconProps` if b
     />
   }
 >
-  Page Title
+  Page title
 </HeaderBase>
 ```
 
@@ -92,7 +92,7 @@ ButtonIcon props to render a ButtonIcon as the start accessory. Only used if `st
     onPress: handleBack,
   }}
 >
-  Page Title
+  Page title
 </HeaderBase>
 ```
 
@@ -112,7 +112,7 @@ Array of ButtonIcon props to render multiple ButtonIcons as end accessories. Ren
     { iconName: IconName.Close, onPress: handleClose },
   ]}
 >
-  Page Title
+  Page title
 </HeaderBase>
 ```
 
@@ -125,7 +125,7 @@ Adds the device's safe area top inset as margin to ensure the header is visible 
 | `boolean` | No       | `false` |
 
 ```tsx
-<HeaderBase includesTopInset>Page Title</HeaderBase>
+<HeaderBase includesTopInset>Page title</HeaderBase>
 ```
 
 ### `twClassName`
@@ -161,7 +161,7 @@ Props passed to the `Text` element when `children` is a string. This is the pref
 | `Omit<Partial<TextProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
-<HeaderBase textProps={{ testID: 'my-header-title' }}>Page Title</HeaderBase>
+<HeaderBase textProps={{ testID: 'my-header-title' }}>Page title</HeaderBase>
 ```
 
 ## Migration from MetaMask Mobile Component Library

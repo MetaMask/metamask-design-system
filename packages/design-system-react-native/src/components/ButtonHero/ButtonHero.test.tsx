@@ -109,12 +109,12 @@ describe('ButtonHero', () => {
 
   it('displays loading text when provided', () => {
     const { getByText } = render(
-      <ButtonHero isLoading loadingText="Please wait...">
+      <ButtonHero isLoading loadingText="Loading...">
         Submit
       </ButtonHero>,
     );
 
-    expect(getByText('Please wait...')).toBeDefined();
+    expect(getByText('Loading...')).toBeDefined();
   });
 
   it('uses light theme primary background color', () => {

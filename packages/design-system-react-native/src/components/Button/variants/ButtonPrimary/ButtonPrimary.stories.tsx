@@ -96,7 +96,7 @@ export const IsLoading: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonPrimary isLoading>ButtonPrimary</ButtonPrimary>
-      <ButtonPrimary isLoading loadingText="With Loading Text">
+      <ButtonPrimary isLoading loadingText="Loading...">
         ButtonPrimary
       </ButtonPrimary>
     </View>

@@ -64,12 +64,12 @@ describe('ButtonHero Component', () => {
 
   it('displays loading text when loading', () => {
     render(
-      <ButtonHero isLoading loadingText="Please wait...">
+      <ButtonHero isLoading loadingText="Loading...">
         Submit
       </ButtonHero>,
     );
 
-    expect(screen.getAllByText('Please wait...')).toHaveLength(2);
+    expect(screen.getAllByText('Loading...')).toHaveLength(2);
     const widthPlaceholder = screen
       .getByRole('button')
       .querySelector('span.invisible');

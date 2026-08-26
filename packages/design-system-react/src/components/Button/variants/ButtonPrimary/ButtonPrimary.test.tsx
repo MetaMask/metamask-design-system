@@ -144,12 +144,12 @@ describe('ButtonPrimary', () => {
 
   it('renders loading text when provided', () => {
     render(
-      <ButtonPrimary isLoading loadingText="Please wait...">
+      <ButtonPrimary isLoading loadingText="Loading...">
         Submit
       </ButtonPrimary>,
     );
 
-    expect(screen.getAllByText('Please wait...')).toHaveLength(2);
+    expect(screen.getAllByText('Loading...')).toHaveLength(2);
     const widthPlaceholder = screen
       .getByRole('button')
       .querySelector('span.invisible');

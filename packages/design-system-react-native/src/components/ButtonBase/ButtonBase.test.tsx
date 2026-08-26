@@ -376,7 +376,7 @@ describe('ButtonBase', () => {
     });
 
     it('renders loadingText in the spinner', () => {
-      const text = 'Please wait…';
+      const text = 'Loading...';
 
       const { getByText } = render(
         <ButtonBase isLoading loadingText={text}>
@@ -698,7 +698,7 @@ describe('ButtonBase', () => {
 
     it('marks loading state and prefers loadingText as label when provided', () => {
       const { getByTestId } = render(
-        <ButtonBase testID="btn" isLoading loadingText="Please wait">
+        <ButtonBase testID="btn" isLoading loadingText="Loading...">
           Loading Button
         </ButtonBase>,
       );
@@ -710,9 +710,9 @@ describe('ButtonBase', () => {
           busy: true,
         }),
       );
-      expect(btn.props.accessibilityLabel).toBe('Please wait');
+      expect(btn.props.accessibilityLabel).toBe('Loading...');
       expect(btn.props.accessibilityHint).toBe(
-        'Button is currently loading, please wait',
+        'Button is currently loading',
       );
       expect(btn).toBeDisabled();
     });
@@ -742,7 +742,7 @@ describe('ButtonBase', () => {
 
       expect(btn.props.accessibilityLabel).toBe('Button');
       expect(btn.props.accessibilityHint).toBe(
-        'Button is currently loading, please wait',
+        'Button is currently loading',
       );
       expect(btn.props.accessibilityState).toStrictEqual(
         expect.objectContaining({

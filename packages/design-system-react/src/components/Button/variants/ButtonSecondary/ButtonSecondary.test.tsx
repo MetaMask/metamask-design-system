@@ -127,12 +127,12 @@ describe('ButtonSecondary', () => {
 
   it('renders loading text when provided', () => {
     render(
-      <ButtonSecondary isLoading loadingText="Please wait...">
+      <ButtonSecondary isLoading loadingText="Loading...">
         Submit
       </ButtonSecondary>,
     );
 
-    expect(screen.getAllByText('Please wait...')).toHaveLength(2); // Both visible and screen reader text
+    expect(screen.getAllByText('Loading...')).toHaveLength(2); // Both visible and screen reader text
     const widthPlaceholder = screen
       .getByRole('button')
       .querySelector('span.invisible');
