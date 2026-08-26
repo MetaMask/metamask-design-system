@@ -711,9 +711,7 @@ describe('ButtonBase', () => {
         }),
       );
       expect(btn.props.accessibilityLabel).toBe('Loading...');
-      expect(btn.props.accessibilityHint).toBe(
-        'Button is currently loading',
-      );
+      expect(btn.props.accessibilityHint).toBe('Button is currently loading');
       expect(btn).toBeDisabled();
     });
 
@@ -741,9 +739,7 @@ describe('ButtonBase', () => {
       const btn = getByTestId('btn');
 
       expect(btn.props.accessibilityLabel).toBe('Button');
-      expect(btn.props.accessibilityHint).toBe(
-        'Button is currently loading',
-      );
+      expect(btn.props.accessibilityHint).toBe('Button is currently loading');
       expect(btn.props.accessibilityState).toStrictEqual(
         expect.objectContaining({
           disabled: true,
