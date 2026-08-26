@@ -1904,32 +1904,42 @@ import { AvatarToken, AvatarTokenSize } from '@metamask/design-system-react';
 
 The extension [`multichain/avatar-group`](https://github.com/MetaMask/metamask-extension/tree/main/ui/components/multichain/avatar-group) component maps to `AvatarGroup` in the design system. It is **not** part of the extension `component-library` barrel (see [extension `index.ts`](https://github.com/MetaMask/metamask-extension/blob/main/ui/components/component-library/index.ts)); consumers import it from `ui/components/multichain/avatar-group` today and should migrate to `@metamask/design-system-react`.
 
-**MMDS** requires a **required `variant`** (`AvatarGroupVariant`) and **`avatarPropsArr`** (typed avatar props per variant) instead of the extension’s **`avatarType` + `members`** shape. The **`max` prop** defaults to `4`, **`size`** to `AvatarGroupSize.Md` (extension defaults to `AvatarTokenSize.Xs`). **`isReverse`** and **`overflowTextProps`** are new. The extension’s **`isTagOverlay`** (overflow as inline `Text` vs overlay `AvatarBase`) and **Box `StyleUtilityProps`** are not carried forward; MMDS always renders the `+N` overflow in an `AvatarBase` badge (similar to `isTagOverlay={true}`). Use `className` / `style` for layout overrides.
+**MMDS** requires a **required `variant`** (`AvatarGroupVariant`) and **`avatarPropsArr`** (typed avatar props per variant) instead of the extension’s **`avatarType` + `members`** shape. The **`max` prop** defaults to `4`, **`size`** to `AvatarGroupSize.Md` (extension defaults to `AvatarTokenSize.Xs`). **`isReverse`** controls stack direction (see [Stack order](#stack-order-isreverse)); **`overflowTextProps`** customizes the overflow badge. The extension’s **`isTagOverlay`** (overflow as inline `Text` vs overlay `AvatarBase`) and **Box `StyleUtilityProps`** are not carried forward; MMDS always renders the `+N` overflow in an `AvatarBase` badge (similar to `isTagOverlay={true}`). MMDS also applies **`hasBorder`** on stacked avatars by default. Use `className` / `style` for layout overrides. Preserve `data-testid` on the root if your E2E selectors depend on it (`data-testid="avatar-group"` is forwarded via standard div props).
 
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
 
 #### Breaking Changes (Extension)
 
-| Extension API                                                                 | MMDS API                                                                | Change Type              | Notes                                                                                      |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------ |
-| `import { AvatarGroup } from '.../multichain/avatar-group'`                   | `import { AvatarGroup } from '@metamask/design-system-react'`           | import path              | drop local multichain wrapper                                                              |
-| `avatarType?: AvatarType` (`TOKEN` / `ACCOUNT` / `NETWORK`)                   | `variant: AvatarGroupVariant` (required)                                | restructured             | one variant per group; MMDS also supports `Favicon`                                        |
-| `members: { avatarValue; symbol? }[]`                                         | `avatarPropsArr: Avatar*Props[]`                                        | restructured             | map `avatarValue` → `src` or `address`; `symbol` → `name`                                  |
-| `limit` (default `4`)                                                         | `max?` (default `4`)                                                    | renamed                  | same intent                                                                                |
-| `size?: AvatarTokenSize` (default `Xs`; only honored for `TOKEN`)             | `size?: AvatarGroupSize` (default `Md`; applies to all children)        | default and scope changed | account/network stacks were hardcoded to `Xs` in the extension — set `size` explicitly     |
-| `variant?: AvatarAccountVariant` (group-level, `ACCOUNT` only)                | per-item `variant` on `AvatarAccountProps` in `avatarPropsArr`            | moved                    | e.g. `AvatarAccountVariant.Maskicon` on each account item                                    |
-| `isTagOverlay?: boolean`                                                      | (overflow always in `AvatarBase`)                                       | removed                  | separate `Text` overflow label is not supported; use `overflowTextProps` to style badge  |
-| Box `StyleUtilityProps` (`display`, `gap`, `alignItems`, …) on root          | `className` / `style` on root `div`                                     | removed as first-class   | e.g. `gap={1}` → Tailwind `gap-1` on `className`                                           |
-| (n/a)                                                                         | `isReverse?`, `overflowTextProps?`                                      | new                      | stack direction and overflow badge styling                                                 |
+| Extension API                                                       | MMDS API                                                         | Change Type               | Notes                                                                                                  |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `import { AvatarGroup } from '.../multichain/avatar-group'`         | `import { AvatarGroup } from '@metamask/design-system-react'`    | import path               | drop local multichain wrapper                                                                          |
+| `avatarType?: AvatarType` (`TOKEN` / `ACCOUNT` / `NETWORK`)         | `variant: AvatarGroupVariant` (required)                         | restructured              | one variant per group; MMDS also supports `Favicon`                                                    |
+| `members: { avatarValue; symbol? }[]`                               | `avatarPropsArr: Avatar*Props[]`                                 | restructured              | map `avatarValue` → `src` or `address`; `symbol` → `name`                                              |
+| `limit` (default `4`)                                               | `max?` (default `4`)                                             | renamed                   | same intent                                                                                            |
+| `size?: AvatarTokenSize` (default `Xs`; only honored for `TOKEN`)   | `size?: AvatarGroupSize` (default `Md`; applies to all children) | default and scope changed | account/network stacks were hardcoded to `Xs` in the extension — set `size` explicitly                 |
+| `variant?: AvatarAccountVariant` (group-level, `ACCOUNT` only)      | per-item `variant` on `AvatarAccountProps` in `avatarPropsArr`   | moved                     | e.g. `AvatarAccountVariant.Maskicon` on each account item                                              |
+| `isTagOverlay?: boolean`                                            | (overflow always in `AvatarBase`)                                | removed                   | separate `Text` overflow label is not supported; use `overflowTextProps` to style badge                |
+| Box `StyleUtilityProps` (`display`, `gap`, `alignItems`, …) on root | `className` / `style` on root `div`                              | removed as first-class    | e.g. `gap={1}` → Tailwind `gap-1` on `className`                                                       |
+| `members.slice(0, limit).reverse()` before render (always reversed) | `isReverse?` (default `false`; forward order)                    | behavior changed          | pass `isReverse={true}` for pixel parity with the extension wrapper; forward order is the MMDS default |
+
+#### Stack order (`isReverse`)
+
+The extension wrapper **always reverses** visible members before rendering:
+
+```ts
+const visibleMembers = members.slice(0, limit).reverse();
+```
+
+MMDS renders `avatarPropsArr` in forward order by default (`isReverse={false}`). When migrating TOKEN or NETWORK stacks, pass **`isReverse={true}`** if you need the same left-to-right stacking as the deprecated wrapper. New MMDS call sites (for example `defi-protocol-cell-v2.tsx` in the extension) use forward order intentionally.
 
 #### Extension `AvatarType` → MMDS `AvatarGroupVariant` + item props
 
-| Extension `avatarType`   | MMDS `variant` on `AvatarGroup` | `avatarPropsArr` item mapping                                      |
-| ------------------------ | ------------------------------- | ------------------------------------------------------------------ |
-| `AvatarType.TOKEN`       | `AvatarGroupVariant.Token`      | `{ src: member.avatarValue, name: member.symbol }`                 |
-| `AvatarType.ACCOUNT`     | `AvatarGroupVariant.Account`    | `{ address: member.avatarValue, variant: AvatarAccountVariant.* }` |
-| `AvatarType.NETWORK`     | `AvatarGroupVariant.Network`    | `{ src: member.avatarValue, name: member.symbol ?? '' }`            |
-| (no extension equivalent) | `AvatarGroupVariant.Favicon`   | `{ src, name }` per `AvatarFaviconProps`                           |
+| Extension `avatarType`    | MMDS `variant` on `AvatarGroup` | `avatarPropsArr` item mapping                                      |
+| ------------------------- | ------------------------------- | ------------------------------------------------------------------ |
+| `AvatarType.TOKEN`        | `AvatarGroupVariant.Token`      | `{ src: member.avatarValue, name: member.symbol }`                 |
+| `AvatarType.ACCOUNT`      | `AvatarGroupVariant.Account`    | `{ address: member.avatarValue, variant: AvatarAccountVariant.* }` |
+| `AvatarType.NETWORK`      | `AvatarGroupVariant.Network`    | `{ src: member.avatarValue, name: member.symbol ?? '' }`           |
+| (no extension equivalent) | `AvatarGroupVariant.Favicon`    | `{ src, name }` per `AvatarFaviconProps`                           |
 
 #### Migration Example
 
