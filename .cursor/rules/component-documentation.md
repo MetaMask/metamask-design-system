@@ -35,6 +35,12 @@ Documentation standards for Storybook stories and README files for React and Rea
 - `This implementation stays agnostic so you own composition when you need extra chrome.`
 - `We changed this in the latest review round so badges are no longer clipped.`
 
+### User-facing copy
+
+- **ALWAYS** follow @.cursor/rules/content-guidelines.mdc for sample strings in stories, constants, README examples, and default alt / loading / accessibility copy
+- **ALWAYS** use sentence case unless the string is an approved exception (proper nouns, abbreviations, Secret Recovery Phrase)
+- **NEVER** use title case for buttons, headers, labels, or empty-state actions (`"Start Trading"` → `"Start trading"`)
+
 ### Storybook Stories
 
 **Story Structure:**
@@ -156,6 +162,7 @@ After adding/updating component documentation, verify:
 - [ ] README includes: description, usage, props documentation
 - [ ] README description is consumer-facing and explains what the component is, when to use it, and the default usage pattern
 - [ ] README avoids implementation-history, review-process context, and unnecessary internal details
+- [ ] Sample user-facing copy in README examples and stories follows @.cursor/rules/content-guidelines.mdc
 - [ ] Web README uses Canvas blocks for interactive examples
 - [ ] Cross-platform: documentation is identical across web/native
 - [ ] Stories file exports meta with proper argTypes

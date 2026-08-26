@@ -13,6 +13,7 @@ Claude Code expands these `@` imports at session start. Other agents should open
 @.cursor/rules/component-migration.md
 @.cursor/rules/figma-integration.md
 @.cursor/rules/release-workflow.md
+@.cursor/rules/content-guidelines.mdc
 
 See `docs/ai-agents.md` for the full strategy.
 

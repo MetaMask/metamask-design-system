@@ -1,0 +1,338 @@
+---
+description: MetaMask content design rules for user-facing strings — capitalization, punctuation, tone, terminology, and per-component patterns
+globs:
+  - packages/design-system-react/src/**/*.{stories.tsx,constants.ts,tsx,ts,mdx}
+  - packages/design-system-react-native/src/**/*.{stories.tsx,constants.ts,tsx,ts,md}
+  - packages/design-system-react/scripts/create-component/**/*.{tsx,ts,mdx}
+  - packages/design-system-react-native/scripts/create-component/**/*.{tsx,ts,md}
+alwaysApply: false
+---
+
+# Content guidelines
+
+> Source of truth: MetaMask Content Design Style Guide (internal). This rule encodes the decisions from that guide for AI-assisted development in this design system.
+
+**Applies to** user-facing sample copy in stories, constants, README/MDX examples, default `loadingText` / alt / accessibility strings, and tests that assert those strings.
+
+**Does not apply to** Storybook meta `title` / story `name` (sidebar labels), TypeScript identifiers, JSDoc that describes APIs, `CHANGELOG.md`, or historical examples in `MIGRATION.md`.
+
+---
+
+## Capitalization
+
+**Default: sentence case.** Capitalize only the first word of a string and any words that qualify as exceptions below.
+
+### ✅ Title case is correct for
+
+| Category | Examples |
+|----------|---------|
+| Special terms | Secret Recovery Phrase, Private Key |
+| MetaMask product names | MetaMask, MetaMask Card, Metal Card, Virtual Card, Snaps, Perps, Predictions, Rewards (the product) |
+| Other proper nouns | Ethereum, OpenSea, Ledger, Apple, Google, Consensys |
+| Network names | Ethereum Mainnet, Polygon Mainnet, Arbitrum One |
+| Abbreviations | NFT, API, DAO, DeFi, ETH, BTC, SOL |
+
+### ❌ Title case is wrong for
+
+Everything else — including titles, subtitles, button labels, menu items, settings labels, section headers, screen headers, tags, and feature names that are not trademarked.
+
+```
+❌ "Turn on Device Authentication"
+✅ "Turn on device authentication"
+
+❌ "Enable NFT Autodetection"
+✅ "Turn on NFT autodetection"   ← NFT stays caps; "autodetection" does not
+
+❌ "Sample Banner Alert Title"
+✅ "Sample banner alert title"
+
+❌ "Start Trading"
+✅ "Start trading"
+```
+
+Golden path already following this: `packages/design-system-react/src/components/BannerAlert/BannerAlert.stories.tsx` (`title: 'Title is sentence case no period'`).
+
+---
+
+## Punctuation
+
+### Periods
+
+Use a period when the string is a **complete sentence**. Do not use a period on labels, headings, button text, tags, tab labels, or any string that is not a complete sentence.
+
+```
+✅ "Your transaction couldn't be completed, so it was canceled."  ← body copy, complete sentence
+✅ "Network fee"                                                   ← label, no period
+✅ "Turn on notifications"                                         ← button, no period
+❌ "Network fee."
+❌ "Turn on notifications."
+❌ "Incorrect password. Try again"  ← second sentence needs a period too
+✅ "Incorrect password. Try again."
+```
+
+**Never** use a period after "Learn more" as a link label.
+
+### Exclamation points
+
+Use sparingly — only for genuinely exciting moments (new feature announcements). Never in errors, alerts, or confirmations.
+
+```
+❌ "Done!"   ❌ "Complete!"   ❌ "Error!"
+✅ "The Ethereum Merge is here!"  ← rare, high-impact
+```
+
+### Ellipsis
+
+Only in address abbreviations (`0x0000...0000`) and loading/in-progress states. Do not use to trail off a sentence.
+
+```
+✅ "Turning on notifications..."   ← loading state
+✅ "0x0000...0000"                 ← address format
+❌ "Are you sure you want to proceed…"
+```
+
+### Ampersands
+
+Never use `&` when "and" works. Never use `+` in place of either.
+
+```
+❌ "Security & privacy"
+✅ "Security and privacy"
+```
+
+### Commas
+
+Use the serial (Oxford) comma in lists of three or more.
+
+```
+✅ "Tokens, NFTs, and DeFi"
+❌ "Tokens, NFTs and DeFi"
+```
+
+### Colons
+
+Do not use colons in labels or headings. Use sparingly in body copy.
+
+---
+
+## Per-component rules
+
+Use these patterns for sample copy in this repo. Prop names match `@metamask/design-system-react` and `@metamask/design-system-react-native`.
+
+### Buttons (`Button`, `ButtonPrimary`, `ButtonSecondary`, `ButtonTertiary`, `ButtonHero`, `ButtonBase`, `ButtonSemantic`, `TextButton`, `ButtonFilter`, `FilterButton`, `MainActionButton`)
+
+- Sentence case, 1–3 words, imperative verb first
+- No punctuation
+- `loadingText` uses ellipsis: `"Turning on..."` — never `"Please wait..."`
+
+```
+✅ "Turn on"  ✅ "Save"  ✅ "Turn on notifications"
+❌ "Turn On Notifications"  ❌ "Submit."  ❌ "Click to continue"
+```
+
+### Form labels (`Label`)
+
+- Sentence case
+- No colon, no period
+
+```
+✅ "Email address"
+❌ "Email Address"
+```
+
+### Placeholders (`TextField`, `TextFieldSearch`, `TextArea`, `Input`, `FormTextField`)
+
+- Sentence case
+- Imperative verb starters: "Enter", "Search"
+- Ellipsis only for genuinely open-ended input; prefer specificity
+
+```
+✅ "Search tokens, sites, URLs"
+✅ "Enter amount"
+❌ "Enter Amount..."
+```
+
+### Help text / error text (`HelpText`)
+
+- Sentence case
+- Full sentences end with a period; short phrases do not
+- Errors: say what happened, then what to do. No "Error:" prefix.
+
+```
+✅ "Incorrect password. Try again."
+❌ "Error: You entered an invalid password."
+```
+
+### Banners (`BannerAlert`, `BannerBase`)
+
+- `title`: sentence case, no period
+- `description`: sentence case, period if complete sentence
+- `actionButtonLabel`: sentence case, no period
+
+### Toast
+
+- Sentence case throughout
+- Label segments combine into one sentence ending with a period: `"Added"` + bold `"Mainnet"` + `" network."`
+- `description`: full sentence, period
+- `actionButtonLabel`: sentence case, no period, no exclamation point, never "Click here"
+
+### Modals (`Modal`, `ModalHeader`, `ModalBody`, `ModalFooter`) — React web
+
+- Header title: sentence case, no period
+- Body: sentence case, period if complete sentence
+- Footer button labels: sentence case, no period
+
+### Bottom sheets (`BottomSheet`, `BottomSheetHeader`, `BottomSheetFooter`) — React Native
+
+- `title` / header children: sentence case, no period
+- Footer button labels: sentence case, no period
+
+### Screen headers (`HeaderBase`, `HeaderStandard`, `HeaderStandardAnimated`, `HeaderRoot`, `HeaderSearch`, `HeaderSubpage`)
+
+- Sentence case — this includes multi-word screen titles
+- No period
+
+```
+✅ "Account settings"
+❌ "Account Settings"
+```
+
+### Section headers (`SectionHeader`)
+
+- Sentence case
+- No period
+
+```
+✅ "Your positions"  ✅ "Tokens"
+❌ "Your Positions"
+```
+
+### Tags (`Tag`)
+
+- Sentence case at source — do not pre-uppercase the string if the component applies `textTransform`
+- No period
+
+### List items (`ActionListItem`, `ListItem`)
+
+- `label`: sentence case, no period
+- `description`: sentence case, no period
+
+### Key-value rows (`KeyValueRow`, `KeyValueSelect`, `KeyValueColumn`)
+
+- Field labels: sentence case, no period
+- Tooltip title: sentence case, no period
+- Tooltip content: full sentence, period
+
+### Checkboxes / radio buttons (`Checkbox`, `RadioButton`)
+
+- `label`: sentence case, no period
+
+### Empty states (`TabEmptyState`)
+
+- `description`: sentence case, `"No X found"` pattern, no period
+- `actionButtonText`: sentence case, verb phrase, no period
+
+```
+✅ description: "No perpetual positions found"
+✅ actionButtonText: "Start trading"
+❌ actionButtonText: "Start Trading"
+```
+
+### Titles (`TitleStandard`, `TitleSubpage`, `TitleHub`, `TitleAlert`)
+
+- Sentence case, no period
+
+---
+
+## Voice and tone
+
+### Active voice
+
+```
+✅ "We're investigating the problem."
+❌ "The problem is being investigated."
+```
+
+### Point of view
+
+- User's things: **your** (never "my")
+- MetaMask: **we / our**
+- Never first-person singular (I, me, my) for MetaMask
+
+```
+✅ "Connect your accounts"   ✅ "We're here to help"
+❌ "Connect my accounts"     ❌ "I need help"
+```
+
+### Contractions
+
+Use them. They feel more human.
+
+```
+✅ "We're here to help"   ✅ "Don't worry, you can edit this later"
+❌ "We are here to help"  ❌ "Do not worry"
+```
+
+### Words to avoid
+
+| Avoid | Reason | Instead |
+|-------|--------|---------|
+| "successfully" | The success state is the success | "File uploaded" |
+| "please" | UI isn't asking a favor | "Enter a name" / "Loading..." |
+| "click here" / "tap to…" | Directional, not descriptive | Name the destination |
+| "!" in errors or system copy | Reads as alarm | Remove it |
+| "fiat" | Confusing to general users | "local currency" |
+| "gas fee" / "gas fees" | Deprecated term | "network fee" / "network fees" |
+| "dapp" | Jargon | "site" (unless technical context) |
+| "native currency" | Technical | "network currency" |
+| "token allowance" | Technical | "spending cap" |
+| "cryptocurrency" | Unnecessary | "crypto" |
+| "coins" | Imprecise | "tokens" |
+| "delete wallet" | Alarming | "reset wallet" |
+
+---
+
+## Terminology reference
+
+| Use | Not |
+|-----|-----|
+| Secret Recovery Phrase | seed phrase, SRP (never abbreviate in product) |
+| network fee | gas fee, gas fees |
+| network currency | native currency |
+| spending cap | token allowance |
+| site | dapp (unless writing for technical audience) |
+| crypto | cryptocurrency |
+| tokens | coins |
+| reset wallet | delete wallet, erase wallet |
+| local currency | fiat |
+| smart account | smart contract account |
+| back up (verb) / backup (noun) | — |
+| MetaMask Card | MetaMask card |
+| card (lowercase) | Card (when referring to the physical/virtual card, not the product name) |
+| Snaps | snaps, SNAPS, dApps (when referring to the MetaMask Snaps platform) |
+| Perps (product) / perps (generic) | — |
+| Predictions (product) / predictions (generic) | — |
+| Rewards (product) / rewards (generic) | — |
+
+### Date and number formatting
+
+- Dates: `Jun 16 at 5:55 p.m.` — never ordinals (no "16th"), never 24-hour time
+- Day abbreviations: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+- Month abbreviations: Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec
+- Large amounts: `$500K`, `$20M`, `$100B` — always uppercase letter
+- Number ranges: `1-20` (hyphen, no spaces)
+- Addresses: `0x0000...0000`
+- Decimals: comma as separator (`100,000`) — localization handles regional variants
+
+---
+
+## Verification
+
+When adding or editing user-facing strings:
+
+- [ ] Sample copy in stories, constants, and README examples is sentence case (except approved exceptions)
+- [ ] Buttons, labels, headers, tags, and `loadingText` have no trailing period
+- [ ] Complete sentences in body/description/help text end with a period
+- [ ] No "please", "click here", "successfully", "gas fee", or "dapp" in product copy
+- [ ] Tests that assert those strings were updated to match
+- [ ] Default alt text and accessibility strings follow the same rules

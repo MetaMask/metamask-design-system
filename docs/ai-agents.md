@@ -75,6 +75,7 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 - `figma-integration.md` - Code Connect
 - `testing.md` - Jest, Testing Library, accessibility, style assertions
 - `release-workflow.md` - Release PRs, changelog quality, `MIGRATION.md` (loaded when doing a release)
+- `content-guidelines.mdc` - Sentence case, punctuation, tone, and terminology for user-facing copy
 
 **Planned Rule Files**
 
