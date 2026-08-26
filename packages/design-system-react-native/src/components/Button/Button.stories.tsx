@@ -73,7 +73,7 @@ const ButtonStory: React.FC<ButtonProps> = ({ isInverse, ...props }) => {
 export const Default: Story = {
   args: {
     variant: ButtonVariant.Primary,
-    children: 'Sample Button Text',
+    children: 'Sample button text',
     size: ButtonSize.Lg,
     isLoading: false,
     loadingText: 'Loading',
@@ -164,7 +164,7 @@ export const WithStartAccessory: Story = {
           startIconName={IconName.ArrowLeft}
           variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
         >
-          With Start Accessory
+          With start accessory
         </ButtonStory>
       ))}
     </View>
@@ -180,7 +180,7 @@ export const WithEndAccessory: Story = {
           endIconName={IconName.ArrowRight}
           variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
         >
-          With End Accessory
+          With end accessory
         </ButtonStory>
       ))}
     </View>
@@ -197,7 +197,7 @@ export const WithStartAndEndAccessory: Story = {
           endIconName={IconName.ArrowRight}
           variant={ButtonVariant[variantKey as keyof typeof ButtonVariant]}
         >
-          With Start and End Accessory
+          With Start and end accessory
         </ButtonStory>
       ))}
     </View>

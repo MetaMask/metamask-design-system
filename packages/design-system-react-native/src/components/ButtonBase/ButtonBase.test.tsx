@@ -685,7 +685,7 @@ describe('ButtonBase', () => {
     it('marks disabled state when isDisabled', () => {
       const { getByTestId } = render(
         <ButtonBase testID="btn" isDisabled>
-          Disabled Button
+          Disabled button
         </ButtonBase>,
       );
       const btn = getByTestId('btn');
@@ -699,7 +699,7 @@ describe('ButtonBase', () => {
     it('marks loading state and prefers loadingText as label when provided', () => {
       const { getByTestId } = render(
         <ButtonBase testID="btn" isLoading loadingText="Loading...">
-          Loading Button
+          Loading button
         </ButtonBase>,
       );
       const btn = getByTestId('btn');

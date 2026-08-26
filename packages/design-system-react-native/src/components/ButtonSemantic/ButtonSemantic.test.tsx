@@ -32,11 +32,11 @@ describe('ButtonSemantic', () => {
           severity={ButtonSemanticSeverity.Danger}
           onPress={mockOnPress}
         >
-          Danger Button
+          Danger button
         </ButtonSemantic>,
       );
 
-      expect(getByText('Danger Button')).toBeDefined();
+      expect(getByText('Danger button')).toBeDefined();
     });
 
     it.each([
@@ -94,11 +94,11 @@ describe('ButtonSemantic', () => {
           onPress={mockOnPress}
           isDisabled
         >
-          Disabled Button
+          Disabled button
         </ButtonSemantic>,
       );
 
-      fireEvent.press(getByText('Disabled Button'));
+      fireEvent.press(getByText('Disabled button'));
 
       expect(mockOnPress).not.toHaveBeenCalled();
     });
@@ -141,11 +141,11 @@ describe('ButtonSemantic', () => {
           onPress={mockOnPress}
           isDisabled
         >
-          Disabled Button
+          Disabled button
         </ButtonSemantic>,
       );
 
-      expect(getByText('Disabled Button')).toBeDefined();
+      expect(getByText('Disabled button')).toBeDefined();
     });
   });
 

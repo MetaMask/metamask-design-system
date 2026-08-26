@@ -105,13 +105,13 @@ type Story = StoryObj<typeof ButtonSecondary>;
 
 export const Default: Story = {
   args: {
-    children: 'Secondary Button',
+    children: 'Secondary button',
   },
 };
 
 export const IsDanger: Story = {
   args: {
-    children: 'Danger Button',
+    children: 'Danger button',
     isDanger: true,
   },
 };
@@ -120,10 +120,10 @@ export const IsInverse: Story = {
   render: (args) => (
     <div className="flex gap-2 rounded bg-primary-default p-4">
       <ButtonSecondary {...args} isInverse>
-        Inverse Button
+        Inverse button
       </ButtonSecondary>
       <ButtonSecondary {...args} isInverse isDanger>
-        Inverse Danger Button
+        Inverse Danger button
       </ButtonSecondary>
     </div>
   ),
@@ -147,28 +147,28 @@ export const Size: Story = {
 
 export const IsFullWidth: Story = {
   args: {
-    children: 'Full Width Button',
+    children: 'Full width button',
     isFullWidth: true,
   },
 };
 
 export const StartIconName: Story = {
   args: {
-    children: 'With Start Icon',
+    children: 'With start icon',
     startIconName: IconName.AddSquare,
   },
 };
 
 export const EndIconName: Story = {
   args: {
-    children: 'With End Icon',
+    children: 'With end icon',
     endIconName: IconName.AddSquare,
   },
 };
 
 export const IsLoading: Story = {
   args: {
-    children: 'Loading Button',
+    children: 'Loading button',
     isLoading: true,
     loadingText: 'Loading...',
   },
@@ -176,7 +176,7 @@ export const IsLoading: Story = {
 
 export const IsDisabled: Story = {
   args: {
-    children: 'Disabled Button',
+    children: 'Disabled button',
     isDisabled: true,
   },
 };

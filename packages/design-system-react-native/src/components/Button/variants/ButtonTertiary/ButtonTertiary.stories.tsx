@@ -66,7 +66,7 @@ const ButtonTertiaryStory: React.FC<ButtonTertiaryProps> = ({
 
 export const Default: Story = {
   args: {
-    children: 'Sample ButtonTertiary Text',
+    children: 'Sample ButtonTertiary text',
     size: ButtonSize.Lg,
     isLoading: false,
     loadingText: 'Loading',
@@ -105,21 +105,21 @@ export const IsLoading: Story = {
 
 export const WithStartAccessory: Story = {
   args: {
-    children: 'Start Acccessory',
+    children: 'Start accessory',
     startIconName: IconName.Add,
   },
 };
 
 export const WithEndAccessory: Story = {
   args: {
-    children: 'End Accessory',
+    children: 'End accessory',
     endIconName: IconName.AddSquare,
   },
 };
 
 export const WithStartAndEndAccessory: Story = {
   args: {
-    children: 'Start and End Accessory',
+    children: 'Start and end accessory',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
   },

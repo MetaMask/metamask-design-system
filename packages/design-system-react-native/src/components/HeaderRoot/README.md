@@ -11,7 +11,7 @@ HeaderRoot is a header with a left section and an end section(`endAccessory` or 
 import { HeaderRoot, IconName } from '@metamask/design-system-react-native';
 
 <HeaderRoot
-  title="Screen Title"
+  title="Screen title"
   endButtonIconProps={[{ iconName: IconName.Close, onPress: handleClose }]}
 />;
 ```

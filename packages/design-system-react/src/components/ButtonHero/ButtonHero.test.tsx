@@ -39,7 +39,7 @@ describe('ButtonHero Component', () => {
     const handleClick = jest.fn();
     render(
       <ButtonHero isDisabled onClick={handleClick}>
-        Disabled Button
+        Disabled button
       </ButtonHero>,
     );
 
@@ -51,7 +51,7 @@ describe('ButtonHero Component', () => {
   it('applies loading styles while preserving hero-specific classes', () => {
     render(
       <ButtonHero isLoading loadingText="Loading...">
-        Loading Button
+        Loading button
       </ButtonHero>,
     );
 

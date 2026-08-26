@@ -79,7 +79,7 @@ describe('ButtonHero', () => {
     const handlePress = jest.fn();
     const { getByRole } = render(
       <ButtonHero isDisabled onPress={handlePress}>
-        Disabled Button
+        Disabled button
       </ButtonHero>,
     );
 
@@ -94,7 +94,7 @@ describe('ButtonHero', () => {
         loadingText="Loading..."
         loadingWrapperProps={{ testID: 'spinner-container' }}
       >
-        Loading Button
+        Loading button
       </ButtonHero>,
     );
 
@@ -213,7 +213,7 @@ describe('ButtonHero', () => {
   it('supports isFullWidth prop', () => {
     const { getByRole } = render(
       <ButtonHero isFullWidth testID="full-width-btn">
-        Full Width
+        Full width
       </ButtonHero>,
     );
 
@@ -227,7 +227,7 @@ describe('ButtonHero', () => {
         startIconName={IconName.Add}
         startIconProps={{ testID: 'start-icon' }}
       >
-        With Start Icon
+        With start icon
       </ButtonHero>,
     );
 
@@ -240,7 +240,7 @@ describe('ButtonHero', () => {
         endIconName={IconName.ArrowRight}
         endIconProps={{ testID: 'end-icon' }}
       >
-        With End Icon
+        With end icon
       </ButtonHero>,
     );
 

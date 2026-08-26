@@ -131,14 +131,14 @@ describe('ButtonBase', () => {
   });
 
   it('applies disabled state', () => {
-    render(<ButtonBase isDisabled>Disabled Button</ButtonBase>);
+    render(<ButtonBase isDisabled>Disabled button</ButtonBase>);
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
   });
 
   it('applies full width class when isFullWidth is true', () => {
-    render(<ButtonBase isFullWidth>Full Width Button</ButtonBase>);
+    render(<ButtonBase isFullWidth>Full width button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('w-full');
   });
 
@@ -183,7 +183,7 @@ describe('ButtonBase', () => {
   });
 
   it('disables the button when isLoading is true', () => {
-    render(<ButtonBase isLoading>Loading Button</ButtonBase>);
+    render(<ButtonBase isLoading>Loading button</ButtonBase>);
 
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
@@ -192,7 +192,7 @@ describe('ButtonBase', () => {
 
   it('applies disabled styles for both isDisabled and isLoading states', () => {
     const { rerender } = render(
-      <ButtonBase isDisabled>Disabled Button</ButtonBase>,
+      <ButtonBase isDisabled>Disabled button</ButtonBase>,
     );
 
     let button = screen.getByRole('button');
@@ -205,7 +205,7 @@ describe('ButtonBase', () => {
         loadingText="Loading"
         loadingTextProps={{ className: 'custom-text-class' }}
       >
-        Loading Button
+        Loading button
       </ButtonBase>,
     );
     button = screen.getByRole('button');
@@ -347,13 +347,13 @@ describe('ButtonBase', () => {
     });
 
     it('applies aria-disabled when isDisabled is true', () => {
-      render(<ButtonBase isDisabled>Disabled Button</ButtonBase>);
+      render(<ButtonBase isDisabled>Disabled button</ButtonBase>);
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-disabled', 'true');
     });
 
     it('applies aria-busy when isLoading is true', () => {
-      render(<ButtonBase isLoading>Loading Button</ButtonBase>);
+      render(<ButtonBase isLoading>Loading button</ButtonBase>);
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-busy', 'true');
     });
@@ -452,7 +452,7 @@ describe('ButtonBase', () => {
 
     it('sets proper tabindex for disabled buttons', () => {
       const { rerender } = render(
-        <ButtonBase isDisabled>Disabled Button</ButtonBase>,
+        <ButtonBase isDisabled>Disabled button</ButtonBase>,
       );
       let button = screen.getByRole('button');
       expect(button).toHaveAttribute('tabindex', '-1');

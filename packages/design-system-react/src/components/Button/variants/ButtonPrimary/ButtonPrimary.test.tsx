@@ -6,7 +6,7 @@ import { ButtonPrimary } from './ButtonPrimary';
 
 describe('ButtonPrimary', () => {
   it('renders with primary button styles by default', () => {
-    render(<ButtonPrimary>Primary Button</ButtonPrimary>);
+    render(<ButtonPrimary>Primary button</ButtonPrimary>);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
@@ -18,7 +18,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('renders with danger styles when isDanger is true', () => {
-    render(<ButtonPrimary isDanger>Danger Button</ButtonPrimary>);
+    render(<ButtonPrimary isDanger>Danger button</ButtonPrimary>);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
@@ -30,7 +30,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('renders with inverse styles when isInverse is true', () => {
-    render(<ButtonPrimary isInverse>Inverse Button</ButtonPrimary>);
+    render(<ButtonPrimary isInverse>Inverse button</ButtonPrimary>);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
@@ -50,7 +50,7 @@ describe('ButtonPrimary', () => {
   it('renders with inverse danger styles when both isInverse and isDanger are true', () => {
     render(
       <ButtonPrimary isInverse isDanger>
-        Inverse Danger Button
+        Inverse Danger button
       </ButtonPrimary>,
     );
 
@@ -64,7 +64,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('applies disabled styles while preserving variant-specific classes', () => {
-    render(<ButtonPrimary isDisabled>Disabled Button</ButtonPrimary>);
+    render(<ButtonPrimary isDisabled>Disabled button</ButtonPrimary>);
 
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
@@ -79,7 +79,7 @@ describe('ButtonPrimary', () => {
   it('applies loading styles while preserving variant-specific classes', () => {
     render(
       <ButtonPrimary isLoading loadingText="Loading...">
-        Loading Button
+        Loading button
       </ButtonPrimary>,
     );
 
@@ -157,7 +157,7 @@ describe('ButtonPrimary', () => {
   });
 
   it('applies full width class correctly', () => {
-    render(<ButtonPrimary isFullWidth>Full Width</ButtonPrimary>);
+    render(<ButtonPrimary isFullWidth>Full width</ButtonPrimary>);
     expect(screen.getByRole('button')).toHaveClass('w-full');
   });
 
@@ -175,7 +175,7 @@ describe('ButtonPrimary', () => {
 
   describe('loading state', () => {
     it('applies correct loading styles and removes hover/active states', () => {
-      render(<ButtonPrimary isLoading>Loading Button</ButtonPrimary>);
+      render(<ButtonPrimary isLoading>Loading button</ButtonPrimary>);
 
       const button = screen.getByRole('button');
 
@@ -194,7 +194,7 @@ describe('ButtonPrimary', () => {
     it('applies correct loading styles for danger variant', () => {
       render(
         <ButtonPrimary isLoading isDanger>
-          Loading Button
+          Loading button
         </ButtonPrimary>,
       );
 
@@ -206,7 +206,7 @@ describe('ButtonPrimary', () => {
     it('applies correct loading styles for inverse variant', () => {
       render(
         <ButtonPrimary isLoading isInverse>
-          Loading Button
+          Loading button
         </ButtonPrimary>,
       );
 
@@ -218,7 +218,7 @@ describe('ButtonPrimary', () => {
     it('applies correct loading styles for inverse danger variant', () => {
       render(
         <ButtonPrimary isLoading isInverse isDanger>
-          Loading Button
+          Loading button
         </ButtonPrimary>,
       );
 
