@@ -53,3 +53,15 @@ const [searchText, setSearchText] = useState('');
   placeholder="Search..."
 />;
 ```
+
+## Content guidelines
+
+- Sentence case
+- Imperative verb starters: "Enter", "Search"
+- Ellipsis only for genuinely open-ended input; prefer specificity
+
+```
+✅ "Search tokens, sites, URLs"
+✅ "Enter amount"
+❌ "Enter Amount..."
+```
