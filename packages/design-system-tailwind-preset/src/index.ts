@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 
+import { borderRadius } from './border-radius';
 import { colors } from './colors';
 import { shadows, shadowPlugin } from './shadows';
 import { typography } from './typography';
@@ -8,6 +9,7 @@ const tailwindConfig: Config = {
   content: [],
   theme: {
     extend: {
+      borderRadius,
       colors: {
         ...colors,
       },

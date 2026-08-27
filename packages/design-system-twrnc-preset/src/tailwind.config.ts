@@ -1,6 +1,7 @@
 import { brandColor } from '@metamask/design-tokens';
 import type { TwConfig } from 'twrnc';
 
+import { borderRadiusTailwindConfig } from './border-radius';
 import { getThemeColors } from './colors';
 import type { Theme } from './Theme.types';
 import { typographyTailwindConfig } from './typography';
@@ -105,6 +106,13 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
       },
       lineHeight: {
         ...typographyTailwindConfig.lineHeight,
+      },
+      extend: {
+        // Added alongside the default Tailwind radius scale so consumers can
+        // adopt radius tokens without a coordinated rename.
+        borderRadius: {
+          ...borderRadiusTailwindConfig,
+        },
       },
     },
   };

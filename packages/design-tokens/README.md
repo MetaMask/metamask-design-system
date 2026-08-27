@@ -63,6 +63,42 @@ const createStyles = (theme) =>
   });
 ```
 
+### Corner radius
+
+These are Tailwind's radius values — no steps are added or changed. What the
+design system adds is a naming convention: each step is named after its value.
+Radii do not change between themes, so they are exported on their own rather
+than through `lightTheme` / `darkTheme`.
+
+| Token               | Tailwind class | CSS variable    | Value  |
+| ------------------- | -------------- | --------------- | ------ |
+| `borderRadius.none` | `rounded-none` | `--radius-none` | 0      |
+| `borderRadius[2]`   | `rounded-2`    | `--radius-2`    | 2px    |
+| `borderRadius[4]`   | `rounded-4`    | `--radius-4`    | 4px    |
+| `borderRadius[6]`   | `rounded-6`    | `--radius-6`    | 6px    |
+| `borderRadius[8]`   | `rounded-8`    | `--radius-8`    | 8px    |
+| `borderRadius[12]`  | `rounded-12`   | `--radius-12`   | 12px   |
+| `borderRadius[16]`  | `rounded-16`   | `--radius-16`   | 16px   |
+| `borderRadius[24]`  | `rounded-24`   | `--radius-24`   | 24px   |
+| `borderRadius.full` | `rounded-full` | `--radius-full` | 9999px |
+
+Both presets add the numeric class names as aliases, so `rounded-8` and
+`rounded-lg` are the same 8px and Tailwind's own names keep working. Prefer the
+numeric ones: they state their value, and they mean the same thing across
+Tailwind versions, where `rounded-sm` is 2px in v3 and 4px in v4.
+
+Use `borderRadius.full` for circles and capsules: a radius larger than half the
+shortest side rounds the shape fully.
+
+```js
+import { borderRadius } from '@metamask/design-tokens';
+
+StyleSheet.create({
+  card: { borderRadius: borderRadius[8] },
+  avatar: { borderRadius: borderRadius.full },
+});
+```
+
 ## Tooling
 
 To prevent color tech debt and ensure themability, accessibility, and consistency of the MetaMask brand, we recommend using [@metamask/eslint-plugin-design-tokens](https://github.com/MetaMask/eslint-plugin-design-tokens). This ESLint plugin helps enforce the usage of design tokens in your codebase.

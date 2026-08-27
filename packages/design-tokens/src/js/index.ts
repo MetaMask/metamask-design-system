@@ -15,3 +15,7 @@ export type { ThemeTypography } from './typography';
 
 // Animations
 export { AnimationDuration } from './animations';
+
+// Border radius
+export { borderRadius } from './borderRadius';
+export type { BorderRadiusToken } from './borderRadius';

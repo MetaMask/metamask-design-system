@@ -58,6 +58,34 @@ function MyComponent() {
 }
 ```
 
+### Corner radius
+
+The preset adds numeric aliases for Tailwind's radius scale. No values change:
+`rounded-8` and `rounded-lg` are both 8px, and Tailwind's own names keep
+working.
+
+`rounded-none`, `rounded-2`, `rounded-4`, `rounded-6`, `rounded-8`,
+`rounded-12`, `rounded-16`, `rounded-24`, `rounded-full`.
+
+Prefer the numeric names. They state their value, and they mean the same thing
+across Tailwind versions — `rounded-sm` is 2px in v3 and 4px in v4.
+
+Corner-specific variants work as usual: `rounded-t-24`, `rounded-tl-2`.
+
+Use `rounded-full` for circles and capsules — a radius larger than half the
+shortest side rounds the shape fully.
+
+`StyleSheet` styles cannot use classes, so import the values rather than
+hardcoding them:
+
+```tsx
+import { borderRadius } from '@metamask/design-tokens';
+
+const styles = StyleSheet.create({
+  card: { borderRadius: borderRadius[8] },
+});
+```
+
 ### Tailwind Config for IntelliSense
 
 To get Tailwind IntelliSense and ESLint plugin support, use the config generator:
