@@ -294,3 +294,9 @@ Migrating from the legacy `KeyValueRow` in `app/component-library/components-tem
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- `field.label.text`: sentence case, no period
+- Tooltip `title`: sentence case, no period
+- Tooltip `content`: full sentence ending with a period
