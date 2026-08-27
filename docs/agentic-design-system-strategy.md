@@ -42,11 +42,11 @@ The tooling should read from sources maintained as part of MMDS rather than sepa
 
 ### Now, next, later
 
-| Horizon   | Focus                                                                                 | What it gives us                                                                   |
-| :-------- | :------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------- |
-| **Now**   | Align the core system and create one current source of guidance that agents can query | Cursor first drafts use current MMDS guidance, and custom UI becomes measurable    |
-| **Next**  | Extend Create and Review across Figma, Replit, Mobile, and Extension                  | Each creation path has a clear handoff, and every UI pull request gets checked     |
-| **Later** | Automate recurring system and product audits                                          | We track drift over time and build the evidence needed for higher-trust automation |
+| Horizon                         | Focus                                                           | What it includes                                                                                                                                                                                                                                                                                                                                | What it gives us                                                                                                 |
+| :------------------------------ | :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| **Now — Establish and measure** | Build the shared knowledge path and establish quality baselines | Point MetaMask Skills to Storybook MCP for React; create the equivalent React Native path; begin Figma, React, and React Native alignment work; expand Code Connect; audit MMDS and product usage; define the post-Bugbot Review approach with Ola; and investigate delivery options for Figma and Replit                                       | Coding agents can query current MMDS guidance, and we can measure both internal MMDS alignment and product drift |
+| **Next — Operationalize**       | Make Create, Review, and Audit part of normal delivery          | Enable the gateway by default in Extension and Mobile; run MMDS-focused review through the QA Analyzer or selected Review runtime; load relevant MetaMask Skills for each UI pull request; run recurring audits; establish Figma and Replit workflows using environment-specific delivery; and improve patterns and documentation from findings | UI creation and review use the same MMDS knowledge, while audits continuously expose gaps                        |
+| **Later — Improve and repair**  | Build a trusted feedback and remediation loop                   | Let agents create issues or pull requests for alignment gaps, Code Connect gaps, documentation gaps, and product drift; score outcomes; automate low-risk fixes; and retain human approval for changes that need judgment                                                                                                                       | The system moves from detecting drift to safely correcting it                                                    |
 
 ---
 
@@ -160,27 +160,37 @@ All three paths should provide:
 
 A designer or engineer opens a pull request. The same knowledge now runs as checks. Deterministic gates run first for lint and tokens. Agent judgment handles what a rule cannot express, such as choosing the right component or pattern. The findings appear as non-blocking comments.
 
+MetaMask Skills provides instructions and routes the reviewer to current sources. It does not need to be the Review runtime. The QA Analyzer, Agent Orchestration, or another selected tool can run the review and return findings. For UI changes, the design system skill should be required while other relevant skills are selected from the change and its risk.
+
 A human still approves and merges every pull request. These checks can move us toward higher-trust automation, but design system checks are only one part of approval. Auto-approval would also require organization-level gates such as risk labels and security review.
 
 ### Audit
 
 > **Diagram placeholder — Audit loop**
 >
-> Replace this block with the diagram showing Mobile and Extension feeding design system metrics, which create Jira tickets.
+> Replace this block with a diagram showing the MMDS alignment, product usage, and agent infrastructure audits. Show alignment and product findings becoming Jira tickets, and infrastructure findings improving the agent system.
 
-Recurring audits scan Mobile and Extension for incorrect or missing design system usage. This makes custom UI visible, including UI that import counts and diff-based checks cannot find.
+Audit begins while we build the foundation. It establishes the baseline, measures alignment work, and tells us where to invest next.
 
-Audit findings feed the technical-debt backlog as Jira tickets. Those tickets close the loop back to Create.
+It has three scopes:
+
+1. **MMDS alignment audit:** measures parity across Figma, React, and React Native, including naming, variants, states, behavior, tokens, documentation, Code Connect coverage, and intentional platform exceptions.
+2. **Product usage audit:** scans Mobile and Extension for MMDS adoption, custom UI, overrides, composition depth, and documented pattern coverage. It also finds successful product patterns that should become part of MMDS.
+3. **Agent infrastructure audit:** checks whether skills fetch current guidance, MCP services are reachable and current, UI pull requests receive Review checks, and findings are accurate enough to trust.
+
+MMDS alignment and product usage findings feed the technical-debt backlog as Jira tickets. Those tickets close the loop back to Create. Infrastructure findings improve the delivery and Review system itself.
 
 ## 5. How knowledge reaches the agent
 
 This section describes the technical strategy.
 
-### The gateway model
+### The gateway model for coding agents
 
 MetaMask Skills currently contains a hand-written list of components and their uses. The list was written in June 2025 and has barely changed. It becomes wrong within weeks of a release. This is the clearest example of knowledge being copied into a tool.
 
 The fix is to stop shipping component knowledge inside the skill. The skill becomes a thin and stable router. It tells the agent to query the design system before building UI. Storybook MCP answers the query using a JSON manifest published from documentation maintained in the MMDS monorepo.
+
+Storybook MCP is a preferred delivery method for coding agents, not the strategy itself. The requirement is that every environment receives the same current MMDS knowledge through the best method it supports. Figma and Replit may need generated skills, native integrations, or other adapters when they cannot query Storybook MCP directly.
 
 > **Technical diagram placeholder — gateway model**
 >
@@ -288,13 +298,14 @@ Create makes current MMDS knowledge available before UI decisions are made. It a
 
 ### Review
 
-| Do                                                                                           | Enables                                                             | Cost of waiting                                                    | Dependencies                                                           |
-| :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------ | :----------------------------------------------------------------- | :--------------------------------------------------------------------- |
-| Move and extend the design token ESLint plugin to cover spacing, radii, and arbitrary values | A current token quality floor without model cost                    | Token problems continue to land                                    | MMDS monorepo ownership                                                |
-| Add design system review rules as local skills in Extension and Mobile                       | Design system judgment at authoring time without new infrastructure | Feedback remains dependent on people                               | Consumer repository adoption                                           |
-| Run the custom UI detector and override-sprawl signal on each diff                           | New custom UI is flagged and component gaps become data             | Custom UI continues to accumulate                                  | Foundation detector                                                    |
-| Check documented patterns on each diff                                                       | Review covers product patterns, not only syntax                     | Teams continue to debate patterns manually                         | Agent-readable pattern documentation                                   |
-| Build an orchestration graph: inventory → docs → pattern → visual → verdict                  | Traced and scored review runs with visual evidence                  | Higher trust remains a guess; large migrations stay hard to review | Agent Orchestration, visual collection, and historical review examples |
+| Do                                                                                                               | Enables                                                            | Cost of waiting                                                    | Dependencies                                                           |
+| :--------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------- | :----------------------------------------------------------------- | :--------------------------------------------------------------------- |
+| Move and extend the design token ESLint plugin to cover spacing, radii, and arbitrary values                     | A current token quality floor without model cost                   | Token problems continue to land                                    | MMDS monorepo ownership                                                |
+| Define the post-Bugbot Review runtime with Ola                                                                   | A clear path for running MetaMask Skills and returning findings    | Design system Review remains tied to a tool that is winding down   | QA Analyzer and Agent Orchestration decisions                          |
+| Make relevant MetaMask Skills available to the Review runtime and require the design system skill for UI changes | Design system judgment runs alongside other change-specific checks | Reviews use incomplete context or focus only on design system risk | Review runtime integration and UI change detection                     |
+| Run the custom UI detector and override-sprawl signal on each diff                                               | New custom UI is flagged and component gaps become data            | Custom UI continues to accumulate                                  | Foundation detector                                                    |
+| Check documented patterns on each diff                                                                           | Review covers product patterns, not only syntax                    | Teams continue to debate patterns manually                         | Agent-readable pattern documentation                                   |
+| Build an orchestration graph: inventory → docs → pattern → visual → verdict                                      | Traced and scored review runs with visual evidence                 | Higher trust remains a guess; large migrations stay hard to review | Agent Orchestration, visual collection, and historical review examples |
 
 #### What Review unlocks
 
@@ -302,30 +313,37 @@ Review gives every UI pull request the same quality floor. It separates determin
 
 ### Audit
 
-| Do                                                                          | Enables                                                               | Cost of waiting                                              | Dependencies                                                    |
-| :-------------------------------------------------------------------------- | :-------------------------------------------------------------------- | :----------------------------------------------------------- | :-------------------------------------------------------------- |
-| Add custom UI as a first-class category and split discovery from regression | Composition is not mistaken for regression                            | Weekly charts remain easy to misread                         | Changes to design-system-metrics                                |
-| Run the custom UI detector across Mobile and Extension                      | Existing technical debt becomes tickets and closes the loop to Create | Only new diffs are checked; existing drift remains invisible | Foundation detector and consumer access                         |
-| Measure composition depth and design-system-engineer TODO counts            | Two quality signals using existing code                               | Quality remains anecdotal                                    | Agreed definitions and queries                                  |
-| Measure documented pattern coverage                                         | A product-level quality signal                                        | Adoption continues to be measured through imports            | Agent-readable pattern documentation and a denominator decision |
+Audit starts in Now because it provides the baseline for the alignment and infrastructure work.
+
+| Do                                                                                              | Enables                                                                      | Cost of waiting                                                  | Dependencies                                               |
+| :---------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------- | :--------------------------------------------------------------- | :--------------------------------------------------------- |
+| Build an MMDS alignment audit across Figma, React, and React Native                             | Measurable parity, Code Connect coverage, and documented platform exceptions | Alignment progress remains subjective                            | Shared component inventory and alignment criteria          |
+| Run the product usage audit across Mobile and Extension                                         | Existing custom UI and product drift become visible and actionable           | Only new diffs are checked; existing drift remains invisible     | Consumer access and the custom UI detector                 |
+| Audit agent infrastructure for MCP freshness, skill usage, Review coverage, and finding quality | We know whether agents receive and apply current guidance                    | Tooling can appear complete while agents still use stale context | Instrumentation in MCP, skills, and the Review runtime     |
+| Add custom UI as a first-class category and split discovery from regression                     | Composition is not mistaken for regression                                   | Weekly charts remain easy to misread                             | Changes to design-system-metrics                           |
+| Convert actionable alignment and product findings into Jira tickets                             | Audit closes the loop back to Create                                         | Findings remain reports rather than completed work               | Ownership and backlog workflow                             |
+| Measure composition depth, override rate, TODO counts, and documented pattern coverage          | Product quality and MMDS gaps become measurable                              | Adoption continues to be measured mainly through imports         | Agreed definitions, pattern documentation, and denominator |
 
 #### Audit signals
 
-Audit measures the state and quality of UI already in the product. These are operating signals for the Audit system. They are not the top-level success measures for the whole strategy.
+These are operating signals for the Audit system. They are not the top-level success measures for the whole strategy.
 
-| Signal            | Question it answers                                                                     |
-| :---------------- | :-------------------------------------------------------------------------------------- |
-| Pattern coverage  | Are surfaces built from documented patterns or assembled without them?                  |
-| Composition depth | Are composite components used, or are primitives rebuilt by hand?                       |
-| Override rate     | Are teams choosing the right components, and where do components have gaps?             |
-| Custom UI         | How much UI is outside MMDS, and is it intentional?                                     |
-| Three-way parity  | How closely do Figma, React, and React Native agree, and where is Code Connect present? |
+| Scope                | Signal                        | Question it answers                                                                                        |
+| :------------------- | :---------------------------- | :--------------------------------------------------------------------------------------------------------- |
+| MMDS alignment       | Three-way component alignment | Do shared components agree across Figma, React, and React Native, or have a documented platform exception? |
+| MMDS alignment       | Code Connect coverage         | Can a designer or agent move reliably between Figma components and code implementations?                   |
+| Product usage        | Pattern coverage              | Are surfaces built from documented patterns or assembled without them?                                     |
+| Product usage        | Composition depth             | Are composite components used, or are primitives rebuilt by hand?                                          |
+| Product usage        | Override rate                 | Are teams choosing the right components, and where do components have gaps?                                |
+| Product usage        | Custom UI                     | How much UI is outside MMDS, and is it intentional?                                                        |
+| Agent infrastructure | Knowledge freshness           | Do agents receive guidance from the current MMDS release?                                                  |
+| Agent infrastructure | Review coverage and quality   | Do UI pull requests receive checks, and are the findings accurate and useful?                              |
 
 Near-term reporting should make custom UI a first-class category, split discovery from regression, and distinguish migration passes from polish passes. Each weekly report should include one before-and-after example.
 
 #### What Audit unlocks
 
-Audit makes existing drift visible and converts findings into work. It gives the strategy evidence about product quality, missing MMDS patterns, and platform parity.
+Audit makes internal and product drift visible from the start. It converts findings into work and shows whether the agent infrastructure is delivering current, useful guidance.
 
 ## 8. Decisions and investigations
 
@@ -346,6 +364,7 @@ These investigations inform delivery but do not block the strategy:
 - Whether CI and orchestration runners can reach Storybook MCP through Context Forge.
 - How the existing risk analyzer and labels should account for design system risk.
 - How the Agent Orchestration framework can run design system Review and Audit workflows.
+- Whether an MMDS alignment audit skill can compare Figma, React, React Native, and Code Connect automatically.
 
 ## 9. Appendix
 
