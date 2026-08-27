@@ -246,3 +246,7 @@ Migrating from `app/component-library/components/Checkbox` in MetaMask Mobile? S
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- `label`: sentence case, no period
