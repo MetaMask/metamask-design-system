@@ -166,3 +166,8 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Sentence case at source — `TagColored` applies `textTransform: uppercase` via CSS, so the source string does not need to be uppercase
+- No period
