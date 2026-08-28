@@ -71,7 +71,7 @@ export const Severity: Story = {
   render: (args) => (
     <Box gap={4}>
       <ButtonSemantic {...args} severity={ButtonSemanticSeverity.Success}>
-        Success Button
+        Success button
       </ButtonSemantic>
       <ButtonSemantic {...args} severity={ButtonSemanticSeverity.Danger}>
         Danger button

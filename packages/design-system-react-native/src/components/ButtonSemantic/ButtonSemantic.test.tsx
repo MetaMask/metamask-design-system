@@ -19,11 +19,11 @@ describe('ButtonSemantic', () => {
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
         >
-          Success Button
+          Success button
         </ButtonSemantic>,
       );
 
-      expect(getByText('Success Button')).toBeDefined();
+      expect(getByText('Success button')).toBeDefined();
     });
 
     it('renders with Danger severity', () => {

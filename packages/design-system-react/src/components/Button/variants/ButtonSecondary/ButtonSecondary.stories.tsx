@@ -123,7 +123,7 @@ export const IsInverse: Story = {
         Inverse button
       </ButtonSecondary>
       <ButtonSecondary {...args} isInverse isDanger>
-        Inverse Danger button
+        Inverse danger button
       </ButtonSecondary>
     </div>
   ),

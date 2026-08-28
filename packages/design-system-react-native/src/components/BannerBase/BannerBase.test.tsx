@@ -219,13 +219,11 @@ describe('BannerBase', () => {
       <BannerBase
         onClose={() => undefined}
         testID="banner-base"
-        title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
+        title="USDC deposited into Account 1"
       />,
     );
 
-    const titleParent = getByText(
-      'Your deposit of 20.50 USDC into Account 1 is been confirmed.',
-    ).parent;
+    const titleParent = getByText('USDC deposited into Account 1').parent;
     if (!titleParent) {
       throw new Error('Expected title content parent');
     }

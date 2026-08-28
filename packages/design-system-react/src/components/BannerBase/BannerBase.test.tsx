@@ -250,7 +250,7 @@ describe('BannerBase', () => {
       <BannerBase
         data-testid="banner-base"
         onClose={() => undefined}
-        title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
+        title="USDC deposited into Account 1"
       />,
     );
 

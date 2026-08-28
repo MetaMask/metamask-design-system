@@ -50,7 +50,7 @@ describe('ButtonPrimary', () => {
   it('renders with inverse danger styles when both isInverse and isDanger are true', () => {
     render(
       <ButtonPrimary isInverse isDanger>
-        Inverse Danger button
+        Inverse danger button
       </ButtonPrimary>,
     );
 

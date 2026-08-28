@@ -44,7 +44,7 @@ describe('ButtonSecondary', () => {
   it('renders with inverse danger styles when both isInverse and isDanger are true', () => {
     render(
       <ButtonSecondary isInverse isDanger>
-        Inverse Danger button
+        Inverse danger button
       </ButtonSecondary>,
     );
 
