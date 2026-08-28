@@ -16,11 +16,11 @@ import { ButtonFilter } from './ButtonFilter';
 
 figma.connect(
   ButtonFilter,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=19241-1857',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=19259-2942',
   {
     props: {
       children: figma.string('label'),
-      isActive: figma.boolean('isActive', {
+      isActive: figma.enum('isActive', {
         true: true,
         false: undefined,
       }),

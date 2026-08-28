@@ -20,7 +20,7 @@ import { ButtonHeroSize } from '.';
 
 figma.connect(
   ButtonHero,
-  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=9309-7848',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=19259-2861',
   {
     props: {
       buttonBase: figma.nestedProps('ButtonBase', {
