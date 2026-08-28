@@ -23,12 +23,11 @@ figma.connect(
   'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=9309-7848',
   {
     props: {
-      // Extract size and label from nested ButtonBase component
       buttonBase: figma.nestedProps('ButtonBase', {
         size: figma.enum('size', {
-          Sm: ButtonHeroSize.Sm,
+          Lg: undefined,
           Md: ButtonHeroSize.Md,
-          Lg: ButtonHeroSize.Lg,
+          Sm: ButtonHeroSize.Sm,
         }),
         label: figma.string('label'),
         startIconName: figma.boolean('startIcon (Figma Only)', {
@@ -46,18 +45,23 @@ figma.connect(
           false: undefined,
         }),
       }),
-      isLoading: figma.boolean('isLoading'),
-      isDisabled: figma.boolean('isDisabled'),
+      isLoading: figma.boolean('isLoading', {
+        true: true,
+        false: undefined,
+      }),
+      isDisabled: figma.boolean('isDisabled', {
+        true: true,
+        false: undefined,
+      }),
     },
-    example: ({ buttonBase, isLoading, isDisabled, loadingText, ...props }) => (
+    example: ({ buttonBase, loadingText, isLoading, isDisabled }) => (
       <ButtonHero
         size={buttonBase.size}
+        startIconName={buttonBase.startIconName}
+        endIconName={buttonBase.endIconName}
         isLoading={isLoading}
         loadingText={loadingText.text}
         isDisabled={isDisabled}
-        startIconName={buttonBase.startIconName}
-        endIconName={buttonBase.endIconName}
-        {...props}
       >
         {buttonBase.label}
       </ButtonHero>
