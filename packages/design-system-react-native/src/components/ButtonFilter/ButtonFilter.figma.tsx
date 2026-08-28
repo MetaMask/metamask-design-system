@@ -16,7 +16,7 @@ import { ButtonFilter } from './ButtonFilter';
 
 figma.connect(
   ButtonFilter,
-  'https://www.figma.com/design/2n1zkGJ0z04x5JgqMS1tyZ/refactor--Buttons?node-id=19220-15',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=19241-1857',
   {
     props: {
       children: figma.string('label'),
