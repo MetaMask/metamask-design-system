@@ -103,7 +103,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       inputProps ?? {};
 
     const containerClassName = twMerge(
-      'inline-flex items-center rounded-lg border bg-default transition-colors',
+      'inline-flex items-center rounded-8 border bg-default transition-colors',
       SIZE_CLASS[size],
       startAccessory ? 'pl-4' : 'pl-0',
       endAccessory ? 'pr-4' : 'pr-0',

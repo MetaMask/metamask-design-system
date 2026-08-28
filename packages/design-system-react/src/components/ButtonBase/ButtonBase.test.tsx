@@ -34,7 +34,7 @@ describe('ButtonBase', () => {
 
   it('applies size-based border radius for default large button', () => {
     render(<ButtonBase>Rounded</ButtonBase>);
-    expect(screen.getByRole('button')).toHaveClass('rounded-xl');
+    expect(screen.getByRole('button')).toHaveClass('rounded-12');
   });
 
   it('renders as child component when asChild is true', () => {

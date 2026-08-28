@@ -72,7 +72,7 @@ export const TextField = forwardRef<View, TextFieldProps>(
             'flex-row',
             'items-center',
             'gap-3',
-            'rounded-lg',
+            'rounded-8',
             'h-12',
             'border',
             'px-4',

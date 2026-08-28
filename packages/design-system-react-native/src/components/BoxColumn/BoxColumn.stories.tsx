@@ -84,7 +84,7 @@ export const TopAndBottomAccessories: Story = {
       <View style={tw`p-4`}>
         <BoxColumn
           {...args}
-          topAccessory={<Box twClassName="w-5 h-5 rounded bg-icon-default" />}
+          topAccessory={<Box twClassName="w-5 h-5 rounded-4 bg-icon-default" />}
           bottomAccessory={<ButtonIcon iconName={IconName.Info} />}
         >
           {args.children}

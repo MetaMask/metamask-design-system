@@ -83,7 +83,7 @@ import { Card } from '@metamask/design-system-react-native';
 </Card>
 
 // Override default styles
-<Card twClassName="p-8 rounded-lg">
+<Card twClassName="p-8 rounded-8">
   <Text>Card with larger padding and border radius</Text>
 </Card>
 ```

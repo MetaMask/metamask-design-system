@@ -118,7 +118,7 @@ export const IsDanger: Story = {
 
 export const IsInverse: Story = {
   render: (args) => (
-    <div className="flex gap-2 rounded bg-primary-default p-4">
+    <div className="flex gap-2 rounded-4 bg-primary-default p-4">
       <ButtonPrimary {...args} isInverse>
         Inverse Button
       </ButtonPrimary>

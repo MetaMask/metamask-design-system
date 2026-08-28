@@ -156,7 +156,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
       paddingBottom={hasActionButtonBelow ? 4 : 3}
       paddingLeft={4}
       paddingRight={shouldShowCloseButton ? 2 : 4}
-      twClassName={mergeTwClassName('rounded-xl', twClassName)}
+      twClassName={mergeTwClassName('rounded-12', twClassName)}
     >
       {startAccessory}
 

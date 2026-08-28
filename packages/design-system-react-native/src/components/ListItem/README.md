@@ -260,7 +260,7 @@ Optional React children rendered below the `Content` block on the padded root.
 import { Box, ListItem } from '@metamask/design-system-react-native';
 
 <ListItem title="Summary">
-  <Box twClassName="mt-2 rounded bg-background-muted px-3 py-2">
+  <Box twClassName="mt-2 rounded-4 bg-background-muted px-3 py-2">
     Expanded details
   </Box>
 </ListItem>;
@@ -300,7 +300,7 @@ import { ListItem } from '@metamask/design-system-react-native';
 </ListItem>
 
 // Add layout chrome without changing row background
-<ListItem title="Label" twClassName="rounded-lg border border-muted">
+<ListItem title="Label" twClassName="rounded-8 border border-muted">
   Bordered row
 </ListItem>
 ```

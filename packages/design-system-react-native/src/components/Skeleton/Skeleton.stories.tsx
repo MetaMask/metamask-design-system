@@ -84,7 +84,7 @@ export const HideChildren: Story = {
 };
 
 export const TwClassName: Story = {
-  render: () => <Skeleton height={32} width={300} twClassName="rounded-lg" />,
+  render: () => <Skeleton height={32} width={300} twClassName="rounded-8" />,
 };
 
 export const AutoPlayDisabled: Story = {

@@ -126,7 +126,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the dialog container. 
 | `string` | No       | `undefined` |
 
 ```tsx
-<BottomSheetDialog twClassName="rounded-t-xl">
+<BottomSheetDialog twClassName="rounded-t-12">
   <Text>Custom styled dialog</Text>
 </BottomSheetDialog>
 ```

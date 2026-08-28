@@ -39,7 +39,7 @@ describe('Tag', () => {
     );
 
     const tag = screen.getByTestId('tag');
-    expect(tag).toHaveClass('mt-2', 'rounded-md', 'inline-flex');
+    expect(tag).toHaveClass('mt-2', 'rounded-6', 'inline-flex');
   });
 
   describe('severity', () => {

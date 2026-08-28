@@ -273,7 +273,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { TextField } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<TextField value="" twClassName="rounded-lg" placeholder="With extra rounding" />
+<TextField value="" twClassName="rounded-8" placeholder="With extra rounding" />
 
 // Override default styles
 <TextField

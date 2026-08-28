@@ -185,7 +185,7 @@ export const ConditionalTitleAlert = ({ emphasis }: { emphasis: boolean }) => {
       severity={IconAlertSeverity.Warning}
       title="High price impact"
       style={tw.style(
-        'rounded-lg',
+        'rounded-8',
         emphasis && 'border-2 border-warning-default',
       )}
     />

@@ -75,7 +75,7 @@ export const TextArea = forwardRef<TextInput, TextAreaProps>(
         textAlignVertical="top"
         style={[
           tw.style(
-            'rounded-lg',
+            'rounded-8',
             'min-h-24',
             'border',
             'px-4',

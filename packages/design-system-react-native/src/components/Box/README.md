@@ -50,16 +50,12 @@ Border color of the box.
 <Box borderColor={BorderColor.BorderDefault}>Box with border</Box>
 ```
 
-### `borderRadius`
+### Corner radius
 
-Border radius of the box.
-
-| TYPE           | REQUIRED | DEFAULT             |
-| -------------- | -------- | ------------------- |
-| `BorderRadius` | No       | `BorderRadius.None` |
+`Box` has no `borderRadius` prop. Apply a radius class through `twClassName`.
 
 ```tsx
-<Box borderRadius={BorderRadius.MD}>Box with rounded corners</Box>
+<Box twClassName="rounded-8">Box with rounded corners</Box>
 ```
 
 ### `padding`

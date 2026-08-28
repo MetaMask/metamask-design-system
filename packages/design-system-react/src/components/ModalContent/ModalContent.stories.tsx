@@ -145,7 +145,7 @@ export const IgnoreOutsideClickAttr: Story = {
             borderColor={BoxBorderColor.BorderDefault}
             borderWidth={1}
             padding={4}
-            className="fixed bottom-4 right-4 z-[1051] w-[200px] rounded shadow-md"
+            className="fixed bottom-4 right-4 z-[1051] w-[200px] rounded-4 shadow-md"
             {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}
           >
             <Text>Popover-like sibling</Text>

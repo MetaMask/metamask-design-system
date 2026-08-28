@@ -183,7 +183,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the `TextInput`. These
 import { TextArea } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<TextArea value="" twClassName="rounded-lg" placeholder="Extra rounding" />
+<TextArea value="" twClassName="rounded-8" placeholder="Extra rounding" />
 
 // Override default styles
 <TextArea

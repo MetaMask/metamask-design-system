@@ -233,7 +233,7 @@ describe('BottomSheetDialog', () => {
 
   it('renders with custom twClassName', () => {
     const { getByText } = render(
-      <BottomSheetDialog twClassName="rounded-t-xl">
+      <BottomSheetDialog twClassName="rounded-t-12">
         <Text>Styled Content</Text>
       </BottomSheetDialog>,
     );
@@ -375,7 +375,7 @@ describe('BottomSheetDialog', () => {
 
     expect(mockStyle).toHaveBeenCalledWith(
       'bg-elevated1',
-      'rounded-t-3xl overflow-hidden border border-muted border-b-0',
+      'rounded-t-24 overflow-hidden border border-muted border-b-0',
       undefined,
     );
   });
@@ -389,7 +389,7 @@ describe('BottomSheetDialog', () => {
 
     expect(mockStyle).toHaveBeenCalledWith(
       'bg-elevated1',
-      'rounded-t-3xl overflow-hidden border border-muted border-b-0',
+      'rounded-t-24 overflow-hidden border border-muted border-b-0',
       undefined,
     );
   });

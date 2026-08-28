@@ -79,7 +79,7 @@ const ButtonFilterGroupStory = ({
         borderColor={BoxBorderColor.BorderMuted}
         borderWidth={1}
         padding={4}
-        twClassName="rounded-lg"
+        twClassName="rounded-8"
       >
         <Text>{FILTER_CONTENT[activeFilter]}</Text>
       </Box>

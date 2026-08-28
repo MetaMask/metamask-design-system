@@ -86,13 +86,13 @@ describe('Card', () => {
     const card = getByTestId('card');
     const styles = flattenStyles(card.props.style);
     expect(styles[0]).toStrictEqual(
-      tw.style('p-4 rounded border border-default bg-default'),
+      tw.style('p-4 rounded-4 border border-default bg-default'),
     );
   });
 
   it('applies twClassName', () => {
     const { getByTestId } = render(
-      <Card testID="card" twClassName="p-8 rounded-lg">
+      <Card testID="card" twClassName="p-8 rounded-8">
         <Text>Content</Text>
       </Card>,
     );
@@ -100,8 +100,8 @@ describe('Card', () => {
     const styles = flattenStyles(card.props.style);
     expect(styles[0]).toStrictEqual(
       tw.style(
-        'p-4 rounded border border-default bg-default',
-        'p-8 rounded-lg',
+        'p-4 rounded-4 border border-default bg-default',
+        'p-8 rounded-8',
       ),
     );
   });
@@ -115,7 +115,7 @@ describe('Card', () => {
     const card = getByTestId('card');
     const styles = flattenStyles(card.props.style);
     expect(styles[0]).toStrictEqual(
-      tw.style('p-4 rounded border border-default bg-default'),
+      tw.style('p-4 rounded-4 border border-default bg-default'),
     );
     expect(styles[1]).toStrictEqual({ margin: 8 });
   });

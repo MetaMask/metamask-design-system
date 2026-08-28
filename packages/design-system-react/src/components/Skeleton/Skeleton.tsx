@@ -30,13 +30,13 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
       <div
         ref={ref}
         aria-hidden="true"
-        className={twMerge('relative overflow-hidden rounded', className)}
+        className={twMerge('relative overflow-hidden rounded-4', className)}
         style={{ height, width, ...style }}
         {...props}
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded bg-icon-alternative motion-safe:animate-skeleton-pulse"
+          className="pointer-events-none absolute inset-0 rounded-4 bg-icon-alternative motion-safe:animate-skeleton-pulse"
         />
         {hasChildren && (
           <div

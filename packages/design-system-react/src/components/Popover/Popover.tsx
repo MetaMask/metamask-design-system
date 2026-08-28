@@ -168,7 +168,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         data-popper-placement={placement}
         data-popper-reference-hidden={referenceHiddenValue}
         className={twMerge(
-          'rounded-lg shadow-md',
+          'rounded-8 shadow-md',
           referenceHidden &&
             'data-[popper-reference-hidden=true]:pointer-events-none data-[popper-reference-hidden=true]:invisible',
           className,
@@ -197,7 +197,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               borderColor={BoxBorderColor.BorderMuted}
               borderWidth={1}
               data-testid="popover-arrow-visual"
-              className="visible absolute left-1/2 top-1/2 -ml-1 -mt-1 size-2 rounded-tl-sm border-b-transparent border-r-transparent"
+              className="visible absolute left-1/2 top-1/2 -ml-1 -mt-1 size-2 rounded-tl-2 border-b-transparent border-r-transparent"
               style={arrowPlacementStyle.visual}
             />
           </Box>

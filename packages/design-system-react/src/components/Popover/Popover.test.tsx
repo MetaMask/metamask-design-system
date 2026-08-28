@@ -157,7 +157,7 @@ describe('Popover', () => {
       );
       const root = screen.getByTestId('popover');
       expect(root).toHaveClass('z-10');
-      expect(root).toHaveClass('rounded-lg');
+      expect(root).toHaveClass('rounded-8');
       expect(root).toHaveClass('shadow-md');
     });
 

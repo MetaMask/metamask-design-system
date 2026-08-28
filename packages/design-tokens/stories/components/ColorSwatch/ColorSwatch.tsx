@@ -42,7 +42,7 @@ export const ColorSwatch: FunctionComponent<ColorSwatchProps> = ({
 }) => {
   return (
     <div
-      className="flex h-32 flex-col-reverse rounded-lg border-2"
+      className="flex h-32 flex-col-reverse rounded-8 border-2"
       style={{
         backgroundColor: backgroundColor ?? color,
         borderColor,
@@ -50,7 +50,7 @@ export const ColorSwatch: FunctionComponent<ColorSwatchProps> = ({
       {...props}
     >
       <Text
-        className="rounded-b-md p-2"
+        className="rounded-b-6 p-2"
         variant={TextVariant.BodySm}
         style={{
           backgroundColor: textBackgroundColor,

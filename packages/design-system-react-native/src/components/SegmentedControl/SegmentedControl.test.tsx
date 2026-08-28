@@ -71,7 +71,7 @@ describe('SegmentedControl', () => {
 
       expect(getByTestId(GROUP_TEST_ID)).toHaveStyle(
         tw.style(
-          'self-start flex-row items-center gap-1 border border-muted p-1 rounded-xl',
+          'self-start flex-row items-center gap-1 border border-muted p-1 rounded-12',
         ),
       );
     });
@@ -87,7 +87,7 @@ describe('SegmentedControl', () => {
 
         expect(getByTestId(GROUP_TEST_ID)).toHaveStyle(
           tw.style(
-            'self-start flex-row items-center gap-1 border border-muted p-1 rounded-xl px-4',
+            'self-start flex-row items-center gap-1 border border-muted p-1 rounded-12 px-4',
           ),
         );
       });
@@ -95,9 +95,9 @@ describe('SegmentedControl', () => {
 
     describe('when size is provided', () => {
       it.each([
-        [SegmentedControlSize.Sm, 'rounded-xl'],
-        [SegmentedControlSize.Md, 'rounded-2xl'],
-        [SegmentedControlSize.Lg, 'rounded-2xl'],
+        [SegmentedControlSize.Sm, 'rounded-12'],
+        [SegmentedControlSize.Md, 'rounded-16'],
+        [SegmentedControlSize.Lg, 'rounded-16'],
       ] as const)(
         'applies %s container border radius',
         (size, borderRadiusClass) => {

@@ -30,7 +30,7 @@ export const BadgeCount = ({
       {...props}
       style={[
         tw.style(
-          'bg-error-default rounded-lg items-center justify-center self-start',
+          'bg-error-default rounded-8 items-center justify-center self-start',
           TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[size],
           twClassName,
         ),

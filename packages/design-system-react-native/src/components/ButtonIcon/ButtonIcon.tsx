@@ -46,7 +46,7 @@ export const ButtonIcon = ({
       : 'text-icon-default';
 
   const borderRadiusClass =
-    variant === ButtonIconVariant.Default ? 'rounded-lg' : 'rounded-full';
+    variant === ButtonIconVariant.Default ? 'rounded-8' : 'rounded-full';
 
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);

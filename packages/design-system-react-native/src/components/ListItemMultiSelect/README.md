@@ -88,7 +88,7 @@ import { ListItemMultiSelect } from '@metamask/design-system-react-native';
 <ListItemMultiSelect
   title="USDC"
   isSelected
-  twClassName="rounded-lg"
+  twClassName="rounded-8"
   onPress={() => {}}
 />;
 ```

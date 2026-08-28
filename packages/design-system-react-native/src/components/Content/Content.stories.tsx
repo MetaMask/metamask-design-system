@@ -187,7 +187,7 @@ export const SubvalueProps: Story = {
 };
 
 const listItemAvatarPlaceholder = (
-  <Box twClassName="h-12 w-12 rounded-lg bg-primary-default" />
+  <Box twClassName="h-12 w-12 rounded-8 bg-primary-default" />
 );
 
 const contentLeadingIcon = (
