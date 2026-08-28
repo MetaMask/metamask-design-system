@@ -25,7 +25,7 @@ figma.connect(
     props: {
       buttonBase: figma.nestedProps('ButtonBase', {
         size: figma.enum('size', {
-          Lg: undefined,
+          Lg: ButtonHeroSize.Lg,
           Md: ButtonHeroSize.Md,
           Sm: ButtonHeroSize.Sm,
         }),
