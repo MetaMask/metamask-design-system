@@ -115,7 +115,7 @@ import { ImageOrSvg } from '@metamask/design-system-react-native';
 // Override default styles
 <ImageOrSvg
   src={{ uri: 'https://example.com/image.png' }}
-  twClassName="!rounded-lg"
+  twClassName="!rounded-8"
 />
 ```
 

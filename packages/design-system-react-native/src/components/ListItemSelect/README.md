@@ -118,7 +118,7 @@ import { ListItemSelect } from '@metamask/design-system-react-native';
 <ListItemSelect
   title="Ethereum"
   isSelected
-  twClassName="rounded-lg"
+  twClassName="rounded-8"
   onPress={() => {}}
 />;
 ```

@@ -57,7 +57,7 @@ const WalletHome: React.FC = () => {
       {/* Container Expanded View */}
       <Box
         backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        className="mx-auto w-full md:max-w-xl md:rounded-3xl md:py-4"
+        className="mx-auto w-full md:max-w-xl md:rounded-24 md:py-4"
       >
         {/* Header */}
         <Box
@@ -123,19 +123,19 @@ const WalletHome: React.FC = () => {
           padding={4}
           className="md:px-8"
         >
-          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
+          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-8 bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
             <Icon name={IconName.Bank} className="mb-2" />
             Buy/Sell
           </ButtonBase>
-          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
+          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-8 bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
             <Icon name={IconName.SwapHorizontal} className="mb-2" />
             Swap
           </ButtonBase>
-          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
+          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-8 bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
             <Icon name={IconName.Receive} className="mb-2" />
             Receive
           </ButtonBase>
-          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-lg bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
+          <ButtonBase className="h-auto flex-1 flex-col justify-center rounded-8 bg-muted py-4 hover:bg-muted-hover active:bg-muted-pressed">
             <Icon name={IconName.Send} className="mb-2" />
             Send
           </ButtonBase>

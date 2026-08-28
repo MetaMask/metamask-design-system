@@ -69,7 +69,7 @@ import { Maskicon } from '@metamask/design-system-react-native';
 // Override default styles
 <Maskicon
   address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-  twClassName="!rounded-lg"
+  twClassName="!rounded-8"
 />
 ```
 

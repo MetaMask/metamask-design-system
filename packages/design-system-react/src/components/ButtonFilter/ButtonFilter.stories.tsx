@@ -84,7 +84,7 @@ const ButtonFilterGroupStory = ({
         backgroundColor={BoxBackgroundColor.BackgroundMuted}
         borderColor={BoxBorderColor.BorderMuted}
         borderWidth={1}
-        className="rounded-lg"
+        className="rounded-8"
         padding={4}
       >
         <Text>{FILTER_CONTENT[activeFilter]}</Text>

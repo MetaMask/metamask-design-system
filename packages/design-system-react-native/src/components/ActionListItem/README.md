@@ -204,7 +204,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 ```tsx
 <ActionListItem
   label="Settings"
-  twClassName="rounded-lg"
+  twClassName="rounded-8"
   onPress={handlePress}
 />
 ```

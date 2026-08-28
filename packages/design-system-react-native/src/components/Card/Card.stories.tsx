@@ -52,7 +52,7 @@ export const OnPress: Story = {
 
 export const TwClassName: Story = {
   render: (args) => (
-    <Card {...args} twClassName="p-8 rounded-lg">
+    <Card {...args} twClassName="p-8 rounded-8">
       <Text>Card with custom Tailwind classes</Text>
     </Card>
   ),

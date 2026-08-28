@@ -182,7 +182,7 @@ describe('Toast', () => {
     );
 
     expect(screen.getByTestId('toast-root')).toHaveStyle(
-      tw.style('bg-elevated2 rounded-2xl'),
+      tw.style('bg-elevated2 rounded-16'),
     );
     expect(screen.getByTestId('toast-root')).toHaveStyle(
       lightTheme.shadows.size.md,
@@ -207,7 +207,7 @@ describe('Toast', () => {
     );
 
     expect(screen.getByTestId('toast-root')).toHaveStyle(
-      tw.style('bg-elevated2 rounded-2xl'),
+      tw.style('bg-elevated2 rounded-16'),
     );
     expect(screen.getByTestId('toast-root')).not.toHaveStyle(
       lightTheme.shadows.size.md,

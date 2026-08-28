@@ -9,7 +9,7 @@
  *
  * @example
  * mergeTwClassName('bg-background-muted', twClassName)
- * Returns: 'bg-background-muted rounded-lg' when `twClassName` is `'rounded-lg'`
+ * Returns: 'bg-background-muted rounded-8' when `twClassName` is `'rounded-8'`
  *
  * @example
  * mergeTwClassName('px-2', undefined)

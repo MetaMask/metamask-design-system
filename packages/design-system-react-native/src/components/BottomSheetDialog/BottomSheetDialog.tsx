@@ -253,7 +253,7 @@ export const BottomSheetDialog = forwardRef<
       () => [
         tw.style(
           'bg-elevated1',
-          'rounded-t-3xl overflow-hidden border border-muted border-b-0',
+          'rounded-t-24 overflow-hidden border border-muted border-b-0',
           twClassName,
         ),
         {
@@ -308,7 +308,7 @@ export const BottomSheetDialog = forwardRef<
           >
             {isInteractable && (
               <View style={tw.style('self-stretch items-center p-1')}>
-                <View style={tw.style('h-1 w-10 rounded-sm bg-border-muted')} />
+                <View style={tw.style('h-1 w-10 rounded-2 bg-border-muted')} />
               </View>
             )}
             {children}

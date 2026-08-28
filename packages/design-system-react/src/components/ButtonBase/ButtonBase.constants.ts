@@ -17,9 +17,9 @@ export const TWCLASSMAP_BUTTONBASE_BORDER_RADIUS: Record<
   ButtonBaseSize,
   string
 > = {
-  [ButtonBaseSize.Sm]: 'rounded-lg', // 8px.
-  [ButtonBaseSize.Md]: 'rounded-xl', // 12px.
-  [ButtonBaseSize.Lg]: 'rounded-xl', // 12px.
+  [ButtonBaseSize.Sm]: 'rounded-8', // 8px.
+  [ButtonBaseSize.Md]: 'rounded-12', // 12px.
+  [ButtonBaseSize.Lg]: 'rounded-12', // 12px.
 };
 
 export const MAP_BUTTONBASE_SIZE_ICONSIZE: Record<ButtonBaseSize, IconSize> = {

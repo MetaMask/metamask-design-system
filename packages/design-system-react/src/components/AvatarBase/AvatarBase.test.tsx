@@ -118,7 +118,7 @@ describe('AvatarBase', () => {
         data-testid="avatar"
       />,
     );
-    expect(screen.getByTestId('avatar')).toHaveClass('rounded-lg');
+    expect(screen.getByTestId('avatar')).toHaveClass('rounded-8');
   });
 
   it('applies correct border radius for all square sizes', () => {

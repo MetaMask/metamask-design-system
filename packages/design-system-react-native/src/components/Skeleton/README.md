@@ -143,7 +143,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the skeleton container
 ```tsx
 import { Skeleton } from '@metamask/design-system-react-native';
 
-<Skeleton height={32} width={300} twClassName="rounded-lg" />;
+<Skeleton height={32} width={300} twClassName="rounded-8" />;
 ```
 
 ### `style`

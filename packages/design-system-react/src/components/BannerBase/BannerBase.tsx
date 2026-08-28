@@ -191,7 +191,7 @@ export const BannerBase = forwardRef<HTMLDivElement, BannerBaseProps>(
         paddingBottom={hasActionButtonBelow ? 4 : 3}
         paddingLeft={4}
         paddingRight={shouldShowCloseButton ? 2 : 4}
-        className={twMerge('rounded-xl', className)}
+        className={twMerge('rounded-12', className)}
       >
         {startAccessory}
 

@@ -112,7 +112,7 @@ describe('ModalContent', () => {
     const dialog = screen.getByTestId('dialog');
     expect(dialog).toHaveClass('opacity-75');
     // Default classes are still present after merge.
-    expect(dialog).toHaveClass('max-w-[360px]', 'rounded-lg');
+    expect(dialog).toHaveClass('max-w-[360px]', 'rounded-8');
   });
 
   it('uses elevated1 background and alternative border on the dialog', () => {

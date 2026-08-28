@@ -82,7 +82,7 @@ export const Description: Story = {
 
 export const TwClassName: Story = {
   args: {
-    twClassName: 'rounded-lg',
+    twClassName: 'rounded-8',
   },
 };
 

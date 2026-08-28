@@ -129,7 +129,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the `BottomSheetDialog
 | `string` | No       | `undefined` |
 
 ```tsx
-<BottomSheet goBack={goBack} twClassName="rounded-t-xl">
+<BottomSheet goBack={goBack} twClassName="rounded-t-12">
   <Text>Custom styled sheet</Text>
 </BottomSheet>
 ```

@@ -84,7 +84,9 @@ export const StartAndEndAccessories: Story = {
       <View style={tw`p-4`}>
         <BoxRow
           {...args}
-          startAccessory={<Box twClassName="w-5 h-5 rounded bg-icon-default" />}
+          startAccessory={
+            <Box twClassName="w-5 h-5 rounded-4 bg-icon-default" />
+          }
           endAccessory={<ButtonIcon iconName={IconName.Info} />}
         >
           {args.children}

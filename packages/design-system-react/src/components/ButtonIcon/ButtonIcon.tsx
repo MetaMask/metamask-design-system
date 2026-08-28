@@ -37,7 +37,7 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
       // Variant styles
       variant === ButtonIconVariant.Default && [
-        'rounded-lg bg-transparent',
+        'rounded-8 bg-transparent',
         isInteractive && 'hover:bg-hover active:bg-pressed',
         'text-icon-default',
       ],

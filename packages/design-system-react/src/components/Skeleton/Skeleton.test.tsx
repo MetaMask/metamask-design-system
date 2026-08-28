@@ -78,7 +78,7 @@ describe('Skeleton', () => {
       'opacity-50',
       'relative',
       'overflow-hidden',
-      'rounded',
+      'rounded-4',
     );
   });
 

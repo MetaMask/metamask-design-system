@@ -81,7 +81,7 @@ import { Jazzicon } from '@metamask/design-system-react-native';
 // Override default styles
 <Jazzicon
   seed={123}
-  twClassName="!rounded-lg"
+  twClassName="!rounded-8"
 />
 ```
 
@@ -94,11 +94,13 @@ Use the `style` prop to customize the component's appearance with React Native s
 | `StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
+import { borderRadius } from '@metamask/design-tokens';
+
 const styles = StyleSheet.create({
   custom: {
     marginVertical: 8,
     marginHorizontal: 16,
-    borderRadius: 10,
+    borderRadius: borderRadius[8],
   },
 });
 

@@ -74,7 +74,7 @@ const Backgrounds: React.FC = () => {
       <Box
         flexDirection={BoxFlexDirection.Column}
         gap={4}
-        className="rounded-2xl"
+        className="rounded-16"
       >
         <Text variant={TextVariant.HeadingMd}>Background Default</Text>
         <TextComponents />
@@ -86,7 +86,7 @@ const Backgrounds: React.FC = () => {
           padding={4}
           flexDirection={BoxFlexDirection.Column}
           gap={4}
-          className="rounded-2xl"
+          className="rounded-16"
         >
           <Text variant={TextVariant.HeadingMd}>Background Section</Text>
           <TextComponents />
@@ -97,7 +97,7 @@ const Backgrounds: React.FC = () => {
             padding={4}
             flexDirection={BoxFlexDirection.Column}
             gap={4}
-            className="rounded-2xl"
+            className="rounded-16"
           >
             <Text variant={TextVariant.HeadingMd}>Background Subsection</Text>
             <TextComponents />

@@ -23,7 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     ref,
   ) => {
     const mergedClassName = twMerge(
-      'w-full rounded border bg-default text-default outline-none transition-colors',
+      'w-full rounded-4 border bg-default text-default outline-none transition-colors',
       'border-transparent',
       !isStateStylesDisabled &&
         'focus:border-primary-default focus:outline-none',

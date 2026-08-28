@@ -72,7 +72,7 @@ describe('TextArea', () => {
         />,
       );
 
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`min-h-24 rounded-lg`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`min-h-24 rounded-8`);
     });
   });
 

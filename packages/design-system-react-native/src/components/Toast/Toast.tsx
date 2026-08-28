@@ -110,7 +110,7 @@ export const Toast: React.FC<ToastProps> = ({
       style={[isLightTheme ? lightTheme.shadows.size.md : undefined, style]}
       title={title}
       titleProps={titleProps}
-      twClassName={mergeTwClassName('rounded-2xl', twClassName)}
+      twClassName={mergeTwClassName('rounded-16', twClassName)}
     />
   );
 };

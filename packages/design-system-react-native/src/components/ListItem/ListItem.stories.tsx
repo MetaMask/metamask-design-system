@@ -63,7 +63,7 @@ export const IsInteractive: Story = {
 export const Children: Story = {
   render: (args: ListItemProps) => (
     <ListItem {...args} title="Row title" description="Primary row">
-      <Box twClassName="mt-2 rounded bg-background-muted px-3 py-2">
+      <Box twClassName="mt-2 rounded-4 bg-background-muted px-3 py-2">
         <Icon name={IconName.Info} />
       </Box>
     </ListItem>

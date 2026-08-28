@@ -49,7 +49,7 @@ type Story = StoryObj<ScrollStoryArgs>;
 const SampleContent = ({ itemCount = 20 }: { itemCount?: number }) => (
   <>
     {Array.from({ length: itemCount }).map((_, index) => (
-      <Box key={index} twClassName="p-4 mb-2 bg-muted rounded-lg mx-4">
+      <Box key={index} twClassName="p-4 mb-2 bg-muted rounded-8 mx-4">
         <Text variant={TextVariant.BodyMd}>Item {index + 1}</Text>
         <Text variant={TextVariant.BodySm}>
           This is sample content to demonstrate scrolling behavior.

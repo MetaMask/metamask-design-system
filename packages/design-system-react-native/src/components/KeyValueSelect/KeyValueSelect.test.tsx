@@ -252,14 +252,14 @@ describe('KeyValueSelect', () => {
         <KeyValueSelect
           keyLabel="Network"
           selectButtonProps={{ placeholder: 'Select' }}
-          twClassName="rounded-lg"
+          twClassName="rounded-8"
           onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw.style('w-full', 'rounded-lg'),
+        tw.style('w-full', 'rounded-8'),
       );
     });
 

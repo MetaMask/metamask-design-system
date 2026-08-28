@@ -24,7 +24,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     ref,
   ) => {
     const textAreaClassName = twMerge(
-      'm-0 block min-h-24 w-full rounded-lg border bg-muted px-4 py-3 text-default outline-none transition-colors',
+      'm-0 block min-h-24 w-full rounded-8 border bg-muted px-4 py-3 text-default outline-none transition-colors',
       'text-s-body-md font-regular leading-s-body-md tracking-s-body-md md:text-l-body-md md:leading-l-body-md md:tracking-l-body-md',
       'placeholder:text-alternative',
       CLASSMAP_TEXTAREA_RESIZE[resize],

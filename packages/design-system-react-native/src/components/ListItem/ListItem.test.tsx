@@ -72,7 +72,7 @@ describe('ListItem', () => {
         const { getByTestId } = render(
           <ListItem
             title="Label"
-            twClassName="rounded-lg"
+            twClassName="rounded-8"
             testID={ROOT_TEST_ID}
           />,
         );
@@ -82,7 +82,7 @@ describe('ListItem', () => {
             'w-full px-4 py-3',
             'min-h-[72px]',
             'justify-center',
-            'rounded-lg',
+            'rounded-8',
           ),
         );
       });
@@ -243,7 +243,7 @@ describe('ListItem', () => {
             isInteractive
             title="Label"
             onPress={jest.fn()}
-            twClassName="rounded-lg"
+            twClassName="rounded-8"
             testID={ROOT_TEST_ID}
           />,
         );
@@ -253,7 +253,7 @@ describe('ListItem', () => {
             'w-full px-4 py-3',
             'min-h-[72px]',
             'justify-center',
-            'rounded-lg',
+            'rounded-8',
           ),
         );
       });

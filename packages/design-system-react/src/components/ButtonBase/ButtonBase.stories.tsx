@@ -131,7 +131,7 @@ export const Children: Story = {
   render: (args) => (
     <div className="flex gap-2">
       <ButtonBase {...args}>Children</ButtonBase>
-      <ButtonBase {...args} className="h-auto rounded-lg py-2">
+      <ButtonBase {...args} className="h-auto rounded-8 py-2">
         <div className="flex flex-col items-center gap-2">
           <Icon name={IconName.Arrow2UpRight} />
           <Text asChild>

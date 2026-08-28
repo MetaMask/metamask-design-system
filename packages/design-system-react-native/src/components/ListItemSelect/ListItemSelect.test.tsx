@@ -127,14 +127,14 @@ describe('ListItemSelect', () => {
         <ListItemSelect
           title="Label"
           isSelected
-          twClassName="rounded-lg"
+          twClassName="rounded-8"
           onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
-        tw.style('bg-background-muted', 'rounded-lg'),
+        tw.style('bg-background-muted', 'rounded-8'),
       );
     });
 
@@ -143,13 +143,13 @@ describe('ListItemSelect', () => {
         <ListItemSelect
           title="Label"
           isSelected={false}
-          twClassName="rounded-lg"
+          twClassName="rounded-8"
           onPress={noopPress}
           testID={ROOT_TEST_ID}
         />,
       );
 
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw.style('rounded-lg'));
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw.style('rounded-8'));
     });
   });
 });

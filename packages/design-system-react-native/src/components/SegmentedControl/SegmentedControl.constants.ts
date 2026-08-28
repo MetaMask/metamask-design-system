@@ -4,9 +4,9 @@ export const TWCLASSMAP_SEGMENTEDCONTROL_BORDER_RADIUS: Record<
   SegmentedControlSize,
   string
 > = {
-  [SegmentedControlSize.Sm]: 'rounded-xl',
-  [SegmentedControlSize.Md]: 'rounded-2xl',
-  [SegmentedControlSize.Lg]: 'rounded-2xl',
+  [SegmentedControlSize.Sm]: 'rounded-12',
+  [SegmentedControlSize.Md]: 'rounded-16',
+  [SegmentedControlSize.Lg]: 'rounded-16',
 };
 
 export const getSegmentedControlBorderRadiusTwClass = (

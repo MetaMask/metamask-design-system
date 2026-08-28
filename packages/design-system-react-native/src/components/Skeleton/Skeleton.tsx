@@ -59,7 +59,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   return (
     <View
       style={[
-        tw.style('rounded overflow-hidden', twClassName),
+        tw.style('rounded-4 overflow-hidden', twClassName),
         height !== undefined && { height },
         width !== undefined && { width },
         style,
@@ -69,7 +69,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
       <Animated.View
         {...animatedViewProps}
         style={[
-          tw.style('absolute inset-0 rounded bg-icon-alternative'),
+          tw.style('absolute inset-0 rounded-4 bg-icon-alternative'),
           { opacity: opacityAnim },
           animatedViewProps?.style,
         ]}

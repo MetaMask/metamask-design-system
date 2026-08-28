@@ -130,7 +130,7 @@ describe('Toast', () => {
     expect(screen.getByTestId('toast-root')).toHaveClass('mx-2');
   });
 
-  it('always applies rounded-xl to the toast surface', () => {
+  it('always applies rounded-12 to the toast surface', () => {
     render(
       <Toast
         data-testid="toast-root"
@@ -139,7 +139,7 @@ describe('Toast', () => {
       />,
     );
 
-    expect(screen.getByTestId('toast-root')).toHaveClass('rounded-xl');
+    expect(screen.getByTestId('toast-root')).toHaveClass('rounded-12');
   });
 
   it('forwards ref to the root element', () => {

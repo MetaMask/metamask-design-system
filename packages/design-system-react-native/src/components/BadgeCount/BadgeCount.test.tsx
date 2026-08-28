@@ -17,7 +17,7 @@ describe('BadgeCount', () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
       const computedExpectedOuter = tw.style(
-        'items-center justify-center self-start rounded-lg bg-error-default',
+        'items-center justify-center self-start rounded-8 bg-error-default',
         TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal],
       );
       const expectedTextProps = {
@@ -64,7 +64,7 @@ describe('BadgeCount', () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
       const computedExpectedOuter = tw.style(
-        'items-center justify-center self-start rounded-lg bg-error-default',
+        'items-center justify-center self-start rounded-8 bg-error-default',
         TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal],
       );
       return (
@@ -98,7 +98,7 @@ describe('BadgeCount', () => {
       const tw = useTailwind();
       const sizeVal = BadgeCountSize.Md;
       const computedExpectedOuter = tw.style(
-        'items-center justify-center self-start rounded-lg bg-error-default',
+        'items-center justify-center self-start rounded-8 bg-error-default',
         TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[sizeVal],
       );
       const expectedTextProps = {
@@ -168,7 +168,7 @@ describe('BadgeCount', () => {
     const TestComponent = () => {
       const tw = useTailwind();
       const computedExpectedOuter = tw.style(
-        'items-center justify-center self-start rounded-lg bg-error-default',
+        'items-center justify-center self-start rounded-8 bg-error-default',
         TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[customSize],
       );
       const expectedTextProps = {

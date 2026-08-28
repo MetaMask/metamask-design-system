@@ -315,7 +315,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>NoWrap</Text>
         </Box>
@@ -323,7 +323,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Items</Text>
         </Box>
@@ -331,7 +331,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Stay</Text>
         </Box>
@@ -339,7 +339,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>In</Text>
         </Box>
@@ -347,7 +347,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Line</Text>
         </Box>
@@ -367,7 +367,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Wrap</Text>
         </Box>
@@ -375,7 +375,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Items</Text>
         </Box>
@@ -383,7 +383,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>To</Text>
         </Box>
@@ -391,7 +391,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>New</Text>
         </Box>
@@ -399,7 +399,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Line</Text>
         </Box>
@@ -419,7 +419,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>WrapReverse</Text>
         </Box>
@@ -427,7 +427,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Items</Text>
         </Box>
@@ -435,7 +435,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Reverse</Text>
         </Box>
@@ -443,7 +443,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Order</Text>
         </Box>
@@ -451,7 +451,7 @@ export const FlexWrap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Wrap</Text>
         </Box>
@@ -476,7 +476,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 0</Text>
         </Box>
@@ -484,7 +484,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>No</Text>
         </Box>
@@ -492,7 +492,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -510,7 +510,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 1</Text>
         </Box>
@@ -518,7 +518,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Small</Text>
         </Box>
@@ -526,7 +526,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -544,7 +544,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 2</Text>
         </Box>
@@ -552,7 +552,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Small</Text>
         </Box>
@@ -560,7 +560,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -578,7 +578,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 3</Text>
         </Box>
@@ -586,7 +586,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Medium</Text>
         </Box>
@@ -594,7 +594,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -612,7 +612,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 4</Text>
         </Box>
@@ -620,7 +620,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Medium</Text>
         </Box>
@@ -628,7 +628,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -646,7 +646,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 5</Text>
         </Box>
@@ -654,7 +654,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Large</Text>
         </Box>
@@ -662,7 +662,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -680,7 +680,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 6</Text>
         </Box>
@@ -688,7 +688,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Large</Text>
         </Box>
@@ -696,7 +696,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -714,7 +714,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 7</Text>
         </Box>
@@ -722,7 +722,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>XL</Text>
         </Box>
@@ -730,7 +730,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -748,7 +748,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 8</Text>
         </Box>
@@ -756,7 +756,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>XL</Text>
         </Box>
@@ -764,7 +764,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -782,7 +782,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 9</Text>
         </Box>
@@ -790,7 +790,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>XXL</Text>
         </Box>
@@ -798,7 +798,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -816,7 +816,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 10</Text>
         </Box>
@@ -824,7 +824,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>XXL</Text>
         </Box>
@@ -832,7 +832,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -850,7 +850,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 11</Text>
         </Box>
@@ -858,7 +858,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>XXXL</Text>
         </Box>
@@ -866,7 +866,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>
@@ -884,7 +884,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap 12</Text>
         </Box>
@@ -892,7 +892,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>XXXL</Text>
         </Box>
@@ -900,7 +900,7 @@ export const Gap: Story = {
           backgroundColor={BoxBackgroundColor.PrimaryMuted}
           paddingHorizontal={2}
           paddingVertical={1}
-          className="rounded"
+          className="rounded-4"
         >
           <Text>Gap</Text>
         </Box>

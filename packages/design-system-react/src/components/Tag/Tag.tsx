@@ -84,7 +84,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
     );
 
     const mergedClassName = twMerge(
-      'inline-flex gap-0.5 self-start rounded-md',
+      'inline-flex gap-0.5 self-start rounded-6',
       finalStartIconName ? 'pl-1' : 'pl-1.5',
       finalEndIconName ? 'pr-1' : 'pr-1.5',
       className,

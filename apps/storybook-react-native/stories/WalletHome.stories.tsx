@@ -80,7 +80,7 @@ type TopTraderCardProps = {
 };
 
 const TopTraderCard: React.FC<TopTraderCardProps> = ({ address, profit }) => (
-  <Card twClassName="w-40 shrink-0 border-0 bg-section p-3 rounded-xl">
+  <Card twClassName="w-40 shrink-0 border-0 bg-section p-3 rounded-12">
     <Box
       flexDirection={BoxFlexDirection.Row}
       alignItems={BoxAlignItems.Center}

@@ -2,6 +2,7 @@ import {
   extractAccountAddress,
   generateIconSeed,
 } from '@metamask/design-system-shared';
+import { borderRadius } from '@metamask/design-tokens';
 import React from 'react';
 import { View } from 'react-native';
 import type { ViewStyle } from 'react-native';
@@ -23,7 +24,7 @@ export const Jazzicon = ({ testID, address, ...props }: JazziconProps) => {
         // @ts-expect-error The underlying PRNG supports the seed being an array but the component is typed wrong.
         seed={seed}
         containerStyle={{
-          borderRadius: 0, // Override circular border radius to make it square
+          borderRadius: borderRadius.none, // Override circular border radius to make it square
           ...(props.containerStyle as ViewStyle),
         }}
       />
