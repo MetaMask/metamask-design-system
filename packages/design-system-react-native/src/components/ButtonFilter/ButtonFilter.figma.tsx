@@ -20,10 +20,7 @@ figma.connect(
   {
     props: {
       children: figma.string('label'),
-      isActive: figma.enum('isActive', {
-        true: true,
-        false: undefined,
-      }),
+      isActive: figma.boolean('isActive'),
     },
     example: ({ children, isActive }) => (
       <ButtonFilter isActive={isActive} onPress={() => undefined}>
