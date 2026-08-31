@@ -47,3 +47,7 @@ const [activeFilter, setActiveFilter] = useState('All');
 ## Migration from MetaMask Mobile Component Library
 
 Migrating from the legacy `ButtonFilter` in `app/component-library/components-temp/ButtonFilter`? See the [ButtonFilter migration guide](../../../MIGRATION.md#buttonfilter-component) for import changes and `textClassName` behavior differences.
+
+## Content guidelines
+
+- `children`: sentence case, 1–3 words, imperative verb first, no punctuation

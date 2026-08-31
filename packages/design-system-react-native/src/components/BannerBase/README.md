@@ -194,4 +194,4 @@ For detailed migration instructions from the Mobile component-library, see the [
 
 - `title`: sentence case, no period
 - `description`: sentence case, period if a complete sentence
-- `actionButtonProps.label`: sentence case, no period
+- `actionButtonLabel`: sentence case, no period

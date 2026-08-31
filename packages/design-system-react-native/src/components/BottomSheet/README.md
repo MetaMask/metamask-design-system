@@ -184,3 +184,7 @@ sheetRef.current?.onCloseBottomSheet(() => {
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Header `children`: sentence case, no period
