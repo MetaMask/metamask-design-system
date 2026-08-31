@@ -275,7 +275,7 @@ export const CustomPosition: Story = {
 export const Badge: Story = {
   render: () => (
     <View style={{ gap: 20, padding: 12 }}>
-      {/* Mobile wallet token rows. */}
+      {/* Token examples. */}
       <View style={{ flexDirection: 'row', gap: 16 }}>
         {Object.values(AvatarTokenSize).map((size) => (
           <BadgeWrapper
@@ -290,7 +290,7 @@ export const Badge: Story = {
           </BadgeWrapper>
         ))}
       </View>
-      {/* Mobile rectangular asset/account rows. */}
+      {/* Account examples. */}
       <View style={{ flexDirection: 'row', gap: 16 }}>
         {Object.values(AvatarAccountSize).map((size) => (
           <BadgeWrapper
@@ -308,7 +308,7 @@ export const Badge: Story = {
           </BadgeWrapper>
         ))}
       </View>
-      {/* Mobile wallet notification badge. */}
+      {/* Notification badge examples. */}
       <View style={{ flexDirection: 'row', gap: 16 }}>
         {Object.values(ButtonIconSize).map((size) => (
           <BadgeWrapper
@@ -325,7 +325,7 @@ export const Badge: Story = {
           </BadgeWrapper>
         ))}
       </View>
-      {/* Mobile status indicator example. */}
+      {/* Status indicator example. */}
       <BadgeWrapper
         position={BadgeWrapperPosition.TopRight}
         positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
