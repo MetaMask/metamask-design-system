@@ -262,7 +262,7 @@ export const Badge: Story = {
             key={`status-${size}`}
             position={BadgeWrapperPosition.TopRight}
             positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
-            badge={<BadgeStatus status={BadgeStatusStatus.New} />}
+            badge={<BadgeStatus status={BadgeStatusStatus.Attention} />}
           >
             <ButtonIcon
               iconName={IconName.Menu}

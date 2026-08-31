@@ -10,7 +10,8 @@ import { twMerge } from '../../utils/tw-merge';
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 
 const STATIC_BADGE_SIZE = 16;
-const CIRCULAR_ANCHOR_EDGE_INSET = 4;
+const CIRCULAR_ANCHOR_EDGE_INSET = '7%';
+const RECTANGULAR_ANCHOR_EDGE_INSET = '11%';
 
 export const BadgeWrapper = forwardRef<HTMLDivElement, BadgeWrapperProps>(
   (
@@ -30,28 +31,23 @@ export const BadgeWrapper = forwardRef<HTMLDivElement, BadgeWrapperProps>(
     },
     ref,
   ) => {
-    const finalPositions: React.CSSProperties = (() => {
-      if (customPosition) {
-        return customPosition as CSSProperties;
-      }
-
-      const edgeInset =
-        positionAnchorShape === BadgeWrapperPositionAnchorShape.Circular
-          ? CIRCULAR_ANCHOR_EDGE_INSET
-          : 0;
-      const isTop =
-        position === BadgeWrapperPosition.TopRight ||
-        position === BadgeWrapperPosition.TopLeft;
-      const isLeft =
-        position === BadgeWrapperPosition.TopLeft ||
-        position === BadgeWrapperPosition.BottomLeft;
-
-      return {
-        ...(isTop ? { top: edgeInset } : { bottom: edgeInset }),
-        ...(isLeft ? { left: edgeInset } : { right: edgeInset }),
-        transform: `translate(${(isLeft ? -8 : 8) + positionXOffset}px, ${(isTop ? -8 : 8) + positionYOffset}px)`,
-      };
-    })();
+    const isTop =
+      position === BadgeWrapperPosition.TopRight ||
+      position === BadgeWrapperPosition.TopLeft;
+    const isLeft =
+      position === BadgeWrapperPosition.TopLeft ||
+      position === BadgeWrapperPosition.BottomLeft;
+    const edgeInset =
+      positionAnchorShape === BadgeWrapperPositionAnchorShape.Circular
+        ? CIRCULAR_ANCHOR_EDGE_INSET
+        : RECTANGULAR_ANCHOR_EDGE_INSET;
+    const finalPositions: React.CSSProperties = customPosition
+      ? (customPosition as CSSProperties)
+      : {
+          ...(isTop ? { top: edgeInset } : { bottom: edgeInset }),
+          ...(isLeft ? { left: edgeInset } : { right: edgeInset }),
+          transform: `translate(${(isLeft ? -8 : 8) + positionXOffset}px, ${(isTop ? -8 : 8) + positionYOffset}px)`,
+        };
 
     const containerClassName = twMerge(
       'relative inline-flex self-start',

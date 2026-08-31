@@ -32,7 +32,7 @@ describe('BadgeWrapper', () => {
     // Ensure the parent element exists
     expect(badgeEl.parentElement).toBeInTheDocument();
     // Apply styles check only after confirming parent exists
-    expect(badgeEl.parentElement).toHaveStyle({ bottom: '4px', right: '4px' });
+    expect(badgeEl.parentElement).toHaveStyle({ bottom: '7%', right: '7%' });
   });
 
   it('applies BottomLeft position correctly', () => {
@@ -46,7 +46,7 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ bottom: '4px', left: '4px' });
+    expect(badgeEl.parentElement).toHaveStyle({ bottom: '7%', left: '7%' });
   });
 
   it('applies TopLeft position correctly', () => {
@@ -60,7 +60,7 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ top: '4px', left: '4px' });
+    expect(badgeEl.parentElement).toHaveStyle({ top: '7%', left: '7%' });
   });
 
   it('applies TopRight position correctly', () => {
@@ -74,7 +74,7 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ top: '4px', right: '4px' });
+    expect(badgeEl.parentElement).toHaveStyle({ top: '7%', right: '7%' });
   });
 
   it('respects positionXOffset and positionYOffset', () => {
@@ -89,7 +89,7 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ bottom: '4px', right: '4px' });
+    expect(badgeEl.parentElement).toHaveStyle({ bottom: '7%', right: '7%' });
   });
 
   it('uses Rectangular anchor shape (no extra shape offset)', () => {
@@ -105,7 +105,10 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ bottom: '0px', right: '0px' });
+    expect(badgeEl.parentElement).toHaveStyle({
+      bottom: '11%',
+      right: '11%',
+    });
   });
 
   it('overrides with customPosition when provided', () => {
@@ -170,8 +173,8 @@ describe('BadgeWrapper', () => {
     const badgeDiv = badgeEl.parentElement!;
 
     expect(badgeDiv).toHaveStyle({
-      bottom: '4px',
-      right: '4px',
+      bottom: '7%',
+      right: '7%',
       width: '16px',
       height: '16px',
       transform: 'translate(8px, 8px)',

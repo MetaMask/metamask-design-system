@@ -4,10 +4,13 @@ import {
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
-import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
+
+const CIRCULAR_BADGE_OVERLAP = -8;
+const RECTANGULAR_BADGE_OVERLAP = -6;
 
 export const BadgeWrapper = ({
   children,
@@ -24,35 +27,26 @@ export const BadgeWrapper = ({
   ...props
 }: BadgeWrapperProps) => {
   const tw = useTailwind();
-  const finalPositions: StyleProp<ViewStyle> = (() => {
-    if (customPosition) {
-      return customPosition as StyleProp<ViewStyle>;
-    }
-    const edgeInset: DimensionValue =
-      positionAnchorShape === BadgeWrapperPositionAnchorShape.Circular ? 4 : 0;
-    const isTop =
-      position === BadgeWrapperPosition.TopRight ||
-      position === BadgeWrapperPosition.TopLeft;
-    const isLeft =
-      position === BadgeWrapperPosition.TopLeft ||
-      position === BadgeWrapperPosition.BottomLeft;
-    const halfBadgeSize = 8;
-
-    return {
-      ...(isTop ? { top: edgeInset } : { bottom: edgeInset }),
-      ...(isLeft ? { left: edgeInset } : { right: edgeInset }),
-      transform: [
-        {
-          translateX:
-            (isLeft ? -halfBadgeSize : halfBadgeSize) + positionXOffset,
-        },
-        {
-          translateY:
-            (isTop ? -halfBadgeSize : halfBadgeSize) + positionYOffset,
-        },
-      ],
-    };
-  })();
+  const isTop =
+    position === BadgeWrapperPosition.TopRight ||
+    position === BadgeWrapperPosition.TopLeft;
+  const isLeft =
+    position === BadgeWrapperPosition.TopLeft ||
+    position === BadgeWrapperPosition.BottomLeft;
+  const badgeOverlap =
+    positionAnchorShape === BadgeWrapperPositionAnchorShape.Circular
+      ? CIRCULAR_BADGE_OVERLAP
+      : RECTANGULAR_BADGE_OVERLAP;
+  const finalPositions: StyleProp<ViewStyle> = customPosition
+    ? (customPosition as StyleProp<ViewStyle>)
+    : {
+        ...(isTop ? { top: badgeOverlap } : { bottom: badgeOverlap }),
+        ...(isLeft ? { left: badgeOverlap } : { right: badgeOverlap }),
+        transform: [
+          { translateX: positionXOffset },
+          { translateY: positionYOffset },
+        ],
+      };
 
   return (
     <View
@@ -64,12 +58,6 @@ export const BadgeWrapper = ({
         {...badgeContainerProps}
         style={[
           tw.style('absolute'),
-          {
-            width: 16,
-            height: 16,
-            alignItems: 'center',
-            justifyContent: 'center',
-          },
           finalPositions,
           badgeContainerProps?.style,
         ]}
