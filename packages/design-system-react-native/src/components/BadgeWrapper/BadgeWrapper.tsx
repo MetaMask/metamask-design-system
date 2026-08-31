@@ -3,51 +3,75 @@ import {
   BadgeWrapperPositionAnchorShape,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useCallback, useState, useMemo, useRef } from 'react';
-import type { LayoutChangeEvent } from 'react-native';
+import React, { useMemo } from 'react';
+import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 
-// Below this, a measurement is treated as noise rather than a real resize.
-const STABLE_SIZE_THRESHOLD_PX = 1;
+// How far a circle inscribed in a square sits from the square's corner,
+// as a fraction of its side. Used to pull the badge in from the anchor's
+// bounding-box corner to where a circular anchor actually curves.
+const CIRCULAR_ANCHOR_CORNER_OFFSET_RATIO = (2 - Math.sqrt(2)) / 4;
+const CIRCULAR_ANCHOR_CORNER_OFFSET_PERCENT: DimensionValue = `${
+  CIRCULAR_ANCHOR_CORNER_OFFSET_RATIO * 100
+}%` as DimensionValue;
 
 /**
- * Tracks a measured element's rounded width/height via `onLayout`.
+ * Computes the badge's position style using percentage insets and a
+ * percentage-based transform, so the layout engine can resolve everything
+ * in one pass. No `onLayout` measuring, so no extra render pass and no
+ * jump once a measurement comes back.
  *
- * `BadgeWrapper` positions an element based on its own measured size, so
- * applying that position can shift the next measurement by a sub-pixel
- * amount, which can flip-flop forever without this guard. Rounding alone
- * isn't enough to prevent that: two raw values close enough together to be
- * noise can still round to different integers if they straddle a `.5`
- * boundary. Instead this only accepts a new size once it has moved a full
- * pixel away from the last accepted raw measurement (starting from
- * `-Infinity`, so the first real measurement is always accepted), which
- * absorbs sub-pixel noise regardless of where it falls, while still
- * reacting to genuine size changes.
- *
- * @returns A `[width, height, onLayout]` tuple.
+ * @param options - The options for computing the position style.
+ * @param options.position - Where the badge should sit relative to the anchor.
+ * @param options.positionAnchorShape - The shape of the anchor element.
+ * @param options.positionXOffset - Additional horizontal pixel offset.
+ * @param options.positionYOffset - Additional vertical pixel offset.
+ * @param options.customPosition - Bypasses this calculation entirely.
+ * @returns The style to apply to the badge's absolutely-positioned container.
  */
-const useStableMeasuredSize = () => {
-  const [width, setWidth] = useState<number>(0);
-  const [height, setHeight] = useState<number>(0);
-  const lastAcceptedRawRef = useRef({ width: -Infinity, height: -Infinity });
+const getBadgePositionStyle = ({
+  position,
+  positionAnchorShape,
+  positionXOffset,
+  positionYOffset,
+  customPosition,
+}: Pick<
+  BadgeWrapperProps,
+  | 'position'
+  | 'positionAnchorShape'
+  | 'positionXOffset'
+  | 'positionYOffset'
+  | 'customPosition'
+>): StyleProp<ViewStyle> => {
+  if (customPosition) {
+    return customPosition;
+  }
 
-  const onLayout = useCallback((event: LayoutChangeEvent) => {
-    const { width: rawWidth, height: rawHeight } = event.nativeEvent.layout;
-    const lastAccepted = lastAcceptedRawRef.current;
-    const hasMoved =
-      Math.abs(rawWidth - lastAccepted.width) >= STABLE_SIZE_THRESHOLD_PX ||
-      Math.abs(rawHeight - lastAccepted.height) >= STABLE_SIZE_THRESHOLD_PX;
-    if (!hasMoved) {
-      return;
-    }
-    lastAcceptedRawRef.current = { width: rawWidth, height: rawHeight };
-    setWidth(Math.round(rawWidth));
-    setHeight(Math.round(rawHeight));
-  }, []);
+  const shapeOffset: DimensionValue =
+    positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
+      ? 0
+      : CIRCULAR_ANCHOR_CORNER_OFFSET_PERCENT;
+  const isTop =
+    position === BadgeWrapperPosition.TopRight ||
+    position === BadgeWrapperPosition.TopLeft;
+  const isLeft =
+    position === BadgeWrapperPosition.TopLeft ||
+    position === BadgeWrapperPosition.BottomLeft;
 
-  return [width, height, onLayout] as const;
+  return {
+    ...(isTop ? { top: shapeOffset } : { bottom: shapeOffset }),
+    ...(isLeft ? { left: shapeOffset } : { right: shapeOffset }),
+    // Centers the badge on that corner point using its own size (percentage
+    // translate), then nudges it by any pixel offsets.
+    transform: [
+      { translateY: isTop ? '-50%' : '50%' },
+      { translateY: positionYOffset },
+      { translateX: isLeft ? '-50%' : '50%' },
+      { translateX: positionXOffset },
+    ],
+  };
 };
 
 export const BadgeWrapper = ({
@@ -65,79 +89,33 @@ export const BadgeWrapper = ({
   ...props
 }: BadgeWrapperProps) => {
   const tw = useTailwind();
-  // Fetching the dimensions of the anchor and badge element to properly position the badge
-  const [anchorWidth, anchorHeight, getAnchorSize] = useStableMeasuredSize();
-  const [badgeWidth, badgeHeight, getBadgeSize] = useStableMeasuredSize();
 
-  const finalPositions = useMemo(() => {
-    if (customPosition) {
-      return customPosition;
-    }
-    // 0.1464 is a mathematical coeeficient to move
-    // from a 0,0 corner of a rectangular shape to the closest "corner"
-    // of a circular shape anchor element
-    const anchorShapeXOffset =
-      positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
-        ? 0
-        : anchorWidth * 0.1464;
-    const anchorShapeYOffset =
-      positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
-        ? 0
-        : anchorHeight * 0.1464;
-    // This is to center the badge in the corner of the anchor element
-    const badgeCenteringXOffset = badgeWidth / 2;
-    const badgeCenteringYOffset = badgeHeight / 2;
-
-    const finalXOffset =
-      anchorShapeXOffset - badgeCenteringXOffset + positionXOffset;
-    const finalYOffset =
-      anchorShapeYOffset - badgeCenteringYOffset + positionYOffset;
-    switch (position) {
-      case BadgeWrapperPosition.TopRight:
-        return {
-          top: finalYOffset,
-          right: finalXOffset,
-        };
-      case BadgeWrapperPosition.BottomLeft:
-        return {
-          bottom: finalYOffset,
-          left: finalXOffset,
-        };
-      case BadgeWrapperPosition.TopLeft:
-        return {
-          top: finalYOffset,
-          left: finalXOffset,
-        };
-      case BadgeWrapperPosition.BottomRight:
-      default:
-        return {
-          bottom: finalYOffset,
-          right: finalXOffset,
-        };
-    }
-  }, [
-    position,
-    positionAnchorShape,
-    anchorWidth,
-    anchorHeight,
-    badgeWidth,
-    badgeHeight,
-    positionXOffset,
-    positionYOffset,
-    customPosition,
-  ]);
+  const badgePositionStyle = useMemo(
+    () =>
+      getBadgePositionStyle({
+        position,
+        positionAnchorShape,
+        positionXOffset,
+        positionYOffset,
+        customPosition,
+      }),
+    [
+      position,
+      positionAnchorShape,
+      positionXOffset,
+      positionYOffset,
+      customPosition,
+    ],
+  );
 
   return (
     <View
       {...props}
       style={[tw.style('relative self-start', twClassName), style]}
     >
-      <View onLayout={getAnchorSize} {...childrenContainerProps}>
-        {children}
-      </View>
+      <View {...childrenContainerProps}>{children}</View>
       <View
-        onLayout={getBadgeSize}
-        style={[tw.style('absolute'), { ...finalPositions }]}
+        style={[tw.style('absolute'), badgePositionStyle]}
         {...badgeContainerProps}
       >
         {badge}
