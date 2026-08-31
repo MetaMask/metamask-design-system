@@ -170,6 +170,32 @@ describe('BadgeWrapper', () => {
     expect(wrapper).toHaveStyle({ margin: '7px' });
   });
 
+  it('merges badge container className and style', () => {
+    render(
+      <BadgeWrapper
+        badgeContainerProps={{
+          id: 'badge-container',
+          className: 'bg-default',
+          style: { margin: 7 },
+        }}
+        badge={<div />}
+      >
+        <div />
+      </BadgeWrapper>,
+    );
+
+    const badgeContainer = document.getElementById('badge-container');
+    expect(badgeContainer).toBeInTheDocument();
+    expect(badgeContainer).toHaveClass(
+      'absolute',
+      'inline-flex',
+      'items-center',
+      'justify-center',
+      'bg-default',
+    );
+    expect(badgeContainer).toHaveStyle({ margin: '7px' });
+  });
+
   it('forwards ref to the container div', () => {
     const ref = createRef<HTMLDivElement>();
     render(

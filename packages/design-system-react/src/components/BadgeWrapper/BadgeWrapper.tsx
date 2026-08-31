@@ -64,7 +64,10 @@ export const BadgeWrapper = forwardRef<HTMLDivElement, BadgeWrapperProps>(
 
         <div
           {...badgeContainerProps}
-          className="absolute inline-flex items-center justify-center"
+          className={twMerge(
+            'absolute inline-flex items-center justify-center',
+            badgeContainerProps?.className,
+          )}
           style={{
             ...finalPositions,
             ...(badgeContainerProps?.style as CSSProperties),
