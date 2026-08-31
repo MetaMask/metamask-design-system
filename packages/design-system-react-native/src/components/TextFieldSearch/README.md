@@ -57,11 +57,10 @@ const [searchText, setSearchText] = useState('');
 ## Content guidelines
 
 - Sentence case
-- Imperative verb starters: "Enter", "Search"
+- Imperative verb starters: "Search"
 - Ellipsis only for genuinely open-ended input; prefer specificity
 
 ```
-✅ "Search tokens, sites, URLs"
-✅ "Enter amount"
-❌ "Enter Amount..."
+✅ "Search tokens, sites, and URLs"
+❌ "Search Tokens, Sites, And URLs..."
 ```

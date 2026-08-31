@@ -169,5 +169,4 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 
 ## Content guidelines
 
-- Sentence case at source — `TagColored` applies `textTransform: uppercase` via CSS, so the source string does not need to be uppercase
-- No period
+- `children` string: sentence case, no period

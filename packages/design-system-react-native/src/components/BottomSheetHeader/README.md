@@ -161,5 +161,4 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 
 ## Content guidelines
 
-- `title`: sentence case, no period
-- Footer button labels: sentence case, no period
+- `children` (header title): sentence case, no period

@@ -297,6 +297,5 @@ Migrating from the legacy `KeyValueRow` in `app/component-library/components-tem
 
 ## Content guidelines
 
-- `field.label.text`: sentence case, no period
-- Tooltip `title`: sentence case, no period
-- Tooltip `content`: full sentence ending with a period
+- `keyLabel` string: sentence case, no period
+- `value` string: sentence case, no period
