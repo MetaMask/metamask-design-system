@@ -13,7 +13,6 @@ import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
 import { AvatarToken } from '../AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
 import { BadgeCount } from '../BadgeCount';
-import { BadgeIcon } from '../BadgeIcon';
 import { BadgeNetwork } from '../BadgeNetwork';
 import { BadgeStatus, BadgeStatusStatus } from '../BadgeStatus';
 import { ButtonIcon } from '../ButtonIcon';
@@ -256,30 +255,23 @@ export const Badge: Story = {
           </BadgeWrapper>
         ))}
       </div>
-      {/* Status indicator example. */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.TopRight}
-        positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
-        badge={<BadgeStatus status={BadgeStatusStatus.New} />}
-      >
-        <ButtonIcon
-          iconName={IconName.Menu}
-          size={ButtonIconSize.Md}
-          ariaLabel="Open menu"
-        />
-      </BadgeWrapper>
-      {/* Icon badge example. */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.BottomRight}
-        positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
-        badge={<BadgeIcon iconName={IconName.Snaps} />}
-      >
-        <ButtonIcon
-          iconName={IconName.Menu}
-          size={ButtonIconSize.Md}
-          ariaLabel="Open menu"
-        />
-      </BadgeWrapper>
+      {/* Status indicator examples. */}
+      <div className="flex flex-row gap-4">
+        {Object.values(ButtonIconSize).map((size) => (
+          <BadgeWrapper
+            key={`status-${size}`}
+            position={BadgeWrapperPosition.TopRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+            badge={<BadgeStatus status={BadgeStatusStatus.New} />}
+          >
+            <ButtonIcon
+              iconName={IconName.Menu}
+              size={size}
+              ariaLabel={`Open menu (${size})`}
+            />
+          </BadgeWrapper>
+        ))}
+      </div>
     </div>
   ),
 };

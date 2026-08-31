@@ -13,7 +13,6 @@ import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
 import { AvatarToken } from '../AvatarToken';
 import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
 import { BadgeCount } from '../BadgeCount';
-import { BadgeIcon } from '../BadgeIcon';
 import { BadgeNetwork } from '../BadgeNetwork';
 import { BadgeStatus, BadgeStatusStatus } from '../BadgeStatus';
 import { ButtonIcon } from '../ButtonIcon';
@@ -326,30 +325,23 @@ export const Badge: Story = {
           </BadgeWrapper>
         ))}
       </View>
-      {/* Status indicator example. */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.TopRight}
-        positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
-        badge={<BadgeStatus status={BadgeStatusStatus.New} />}
-      >
-        <ButtonIcon
-          iconName={IconName.Menu}
-          size={ButtonIconSize.Md}
-          accessibilityLabel="Open menu"
-        />
-      </BadgeWrapper>
-      {/* Icon badge example. */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.BottomRight}
-        positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
-        badge={<BadgeIcon iconName={IconName.Snaps} />}
-      >
-        <ButtonIcon
-          iconName={IconName.Menu}
-          size={ButtonIconSize.Md}
-          accessibilityLabel="Open menu"
-        />
-      </BadgeWrapper>
+      {/* Status indicator examples. */}
+      <View style={{ flexDirection: 'row', gap: 16 }}>
+        {Object.values(ButtonIconSize).map((size) => (
+          <BadgeWrapper
+            key={`status-${size}`}
+            position={BadgeWrapperPosition.TopRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+            badge={<BadgeStatus status={BadgeStatusStatus.New} />}
+          >
+            <ButtonIcon
+              iconName={IconName.Menu}
+              size={size}
+              accessibilityLabel={`Open menu (${size})`}
+            />
+          </BadgeWrapper>
+        ))}
+      </View>
     </View>
   ),
 };
