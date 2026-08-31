@@ -4,13 +4,13 @@ import {
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
 
-const CIRCULAR_BADGE_OVERLAP = -8;
-const RECTANGULAR_BADGE_OVERLAP = -6;
+const CIRCULAR_ANCHOR_EDGE_INSET: DimensionValue = '7%';
+const RECTANGULAR_ANCHOR_EDGE_INSET: DimensionValue = '11%';
 
 export const BadgeWrapper = ({
   children,
@@ -33,16 +33,18 @@ export const BadgeWrapper = ({
   const isLeft =
     position === BadgeWrapperPosition.TopLeft ||
     position === BadgeWrapperPosition.BottomLeft;
-  const badgeOverlap =
+  const edgeInset =
     positionAnchorShape === BadgeWrapperPositionAnchorShape.Circular
-      ? CIRCULAR_BADGE_OVERLAP
-      : RECTANGULAR_BADGE_OVERLAP;
+      ? CIRCULAR_ANCHOR_EDGE_INSET
+      : RECTANGULAR_ANCHOR_EDGE_INSET;
   const finalPositions: StyleProp<ViewStyle> = customPosition
     ? (customPosition as StyleProp<ViewStyle>)
     : {
-        ...(isTop ? { top: badgeOverlap } : { bottom: badgeOverlap }),
-        ...(isLeft ? { left: badgeOverlap } : { right: badgeOverlap }),
+        ...(isTop ? { top: edgeInset } : { bottom: edgeInset }),
+        ...(isLeft ? { left: edgeInset } : { right: edgeInset }),
         transform: [
+          { translateX: isLeft ? '-50%' : '50%' },
+          { translateY: isTop ? '-50%' : '50%' },
           { translateX: positionXOffset },
           { translateY: positionYOffset },
         ],

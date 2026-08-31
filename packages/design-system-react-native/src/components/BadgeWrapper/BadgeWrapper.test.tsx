@@ -27,29 +27,48 @@ describe('BadgeWrapper', () => {
   });
 
   it.each([
-    [BadgeWrapperPosition.TopRight, { top: -8, right: -8 }],
-    [BadgeWrapperPosition.BottomRight, { bottom: -8, right: -8 }],
-    [BadgeWrapperPosition.BottomLeft, { bottom: -8, left: -8 }],
-    [BadgeWrapperPosition.TopLeft, { top: -8, left: -8 }],
-  ])('uses static circular position for %s', (position, edgeStyle) => {
-    const { getByTestId } = render(
-      <BadgeWrapper
-        testID="wrapper"
-        position={position}
-        badgeContainerProps={{ testID: 'badge-container' }}
-        badge={<Text>Badge</Text>}
-      >
-        <Text>Anchor</Text>
-      </BadgeWrapper>,
-    );
+    [
+      BadgeWrapperPosition.TopRight,
+      { top: '7%', right: '7%' },
+      [{ translateX: '50%' }, { translateY: '-50%' }],
+    ],
+    [
+      BadgeWrapperPosition.BottomRight,
+      { bottom: '7%', right: '7%' },
+      [{ translateX: '50%' }, { translateY: '50%' }],
+    ],
+    [
+      BadgeWrapperPosition.BottomLeft,
+      { bottom: '7%', left: '7%' },
+      [{ translateX: '-50%' }, { translateY: '50%' }],
+    ],
+    [
+      BadgeWrapperPosition.TopLeft,
+      { top: '7%', left: '7%' },
+      [{ translateX: '-50%' }, { translateY: '-50%' }],
+    ],
+  ])(
+    'uses percentage circular position for %s',
+    (position, edgeStyle, transform) => {
+      const { getByTestId } = render(
+        <BadgeWrapper
+          testID="wrapper"
+          position={position}
+          badgeContainerProps={{ testID: 'badge-container' }}
+          badge={<Text>Badge</Text>}
+        >
+          <Text>Anchor</Text>
+        </BadgeWrapper>,
+      );
 
-    expect(getByTestId('badge-container')).toHaveStyle({
-      ...edgeStyle,
-      transform: [{ translateX: 0 }, { translateY: 0 }],
-    });
-  });
+      expect(getByTestId('badge-container')).toHaveStyle({
+        ...edgeStyle,
+        transform: [...transform, { translateX: 0 }, { translateY: 0 }],
+      });
+    },
+  );
 
-  it('uses static overlap for rectangular anchors', () => {
+  it('uses percentage edge inset for rectangular anchors', () => {
     const { getByTestId } = render(
       <BadgeWrapper
         testID="wrapper"
@@ -63,8 +82,8 @@ describe('BadgeWrapper', () => {
     );
 
     expect(getByTestId('badge-container')).toHaveStyle({
-      bottom: -6,
-      right: -6,
+      bottom: '11%',
+      right: '11%',
     });
   });
 
@@ -83,7 +102,12 @@ describe('BadgeWrapper', () => {
     );
 
     expect(getByTestId('badge-container')).toHaveStyle({
-      transform: [{ translateX: 3 }, { translateY: -4 }],
+      transform: [
+        { translateX: '50%' },
+        { translateY: '50%' },
+        { translateX: 3 },
+        { translateY: -4 },
+      ],
     });
   });
 
