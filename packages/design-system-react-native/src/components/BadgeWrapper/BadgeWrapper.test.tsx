@@ -649,6 +649,195 @@ describe('BadgeWrapper', () => {
     expect(badgeContainer.props.style[1]).toStrictEqual(expectedBadgeStyle[1]);
   });
 
+  it('ignores a subsequent onLayout call whose raw size rounds to the same integer as before', () => {
+    // Regression test for an infinite measure -> reposition -> re-measure
+    // loop: `finalPositions` derives the badge container's own position from
+    // `badgeWidth`/`badgeHeight`, and that position is applied to the same
+    // `View` that `onLayout` measures. Repositioning by a sub-pixel amount
+    // can change how the native layout engine rounds the next measured
+    // size, so unrounded raw values could previously flip-flop forever
+    // between two adjacent sub-pixel values (e.g. 12.19/11.81 swapping with
+    // 11.81/12.19), triggering `setState` (and a real reposition) on every
+    // single layout pass and pegging the JS thread. These two raw sizes are
+    // real values captured from that infinite loop; both round to (12, 12),
+    // so the second call must be a no-op and the position must still
+    // reflect the rounded size from the first layout.
+    const TestComponent = () => (
+      <BadgeWrapper
+        testID="wrapper"
+        position={BadgeWrapperPosition.TopRight}
+        badge={<Text testID="badgeElement">Badge</Text>}
+      >
+        <Text testID="anchorChild">Anchor</Text>
+      </BadgeWrapper>
+    );
+
+    const { getByTestId } = render(<TestComponent />);
+    let wrapper = getByTestId('wrapper');
+    const anchorContainer = wrapper.props.children[0];
+    const badgeContainer = wrapper.props.children[1];
+
+    act(() => {
+      anchorContainer.props.onLayout({
+        nativeEvent: { layout: { width: 100, height: 50 } },
+      });
+      badgeContainer.props.onLayout({
+        nativeEvent: {
+          layout: { width: 12.19, height: 11.81 },
+        },
+      });
+    });
+
+    act(() => {
+      badgeContainer.props.onLayout({
+        nativeEvent: {
+          layout: { width: 11.81, height: 12.19 },
+        },
+      });
+    });
+
+    wrapper = getByTestId('wrapper');
+    const updatedBadgeContainer = wrapper.props.children[1];
+    const positions = updatedBadgeContainer.props.style[1];
+    expect(positions).toStrictEqual({
+      top: 50 * 0.1464 - 12 / 2,
+      right: 100 * 0.1464 - 12 / 2,
+    });
+  });
+
+  it('ignores a subsequent anchor onLayout call whose raw size rounds to the same integer as before', () => {
+    // Same regression as the badge-side test above, but for the anchor
+    // measurement path.
+    const TestComponent = () => (
+      <BadgeWrapper
+        testID="wrapper"
+        position={BadgeWrapperPosition.TopRight}
+        badge={<Text testID="badgeElement">Badge</Text>}
+      >
+        <Text testID="anchorChild">Anchor</Text>
+      </BadgeWrapper>
+    );
+
+    const { getByTestId } = render(<TestComponent />);
+    let wrapper = getByTestId('wrapper');
+    const anchorContainer = wrapper.props.children[0];
+    const badgeContainer = wrapper.props.children[1];
+
+    act(() => {
+      anchorContainer.props.onLayout({
+        nativeEvent: { layout: { width: 100.4, height: 49.6 } },
+      });
+      badgeContainer.props.onLayout({
+        nativeEvent: { layout: { width: 20, height: 20 } },
+      });
+    });
+
+    act(() => {
+      anchorContainer.props.onLayout({
+        nativeEvent: { layout: { width: 99.6, height: 50.4 } },
+      });
+    });
+
+    wrapper = getByTestId('wrapper');
+    const updatedBadgeContainer = wrapper.props.children[1];
+    const positions = updatedBadgeContainer.props.style[1];
+    // Both raw anchor sizes round to (100, 50), so the second call must be a
+    // no-op and the position must still reflect the rounded size from the
+    // first layout.
+    expect(positions).toStrictEqual({
+      top: 50 * 0.1464 - 20 / 2,
+      right: 100 * 0.1464 - 20 / 2,
+    });
+  });
+
+  it('ignores sub-pixel noise even when it straddles a rounding boundary (e.g. 12.3 / 12.7)', () => {
+    // Rounding alone isn't a sufficient guard: two raw values close enough
+    // together to be noise can still round to different integers if they
+    // straddle an `n.5` boundary (12.3 rounds to 12, 12.7 rounds to 13).
+    // The fix has to compare against the last accepted raw measurement, not
+    // just the previous rounded value, or this case would still loop.
+    const TestComponent = () => (
+      <BadgeWrapper
+        testID="wrapper"
+        position={BadgeWrapperPosition.TopRight}
+        badge={<Text testID="badgeElement">Badge</Text>}
+      >
+        <Text testID="anchorChild">Anchor</Text>
+      </BadgeWrapper>
+    );
+
+    const { getByTestId } = render(<TestComponent />);
+    let wrapper = getByTestId('wrapper');
+    const anchorContainer = wrapper.props.children[0];
+    const badgeContainer = wrapper.props.children[1];
+
+    act(() => {
+      anchorContainer.props.onLayout({
+        nativeEvent: { layout: { width: 100, height: 50 } },
+      });
+      badgeContainer.props.onLayout({
+        nativeEvent: {
+          layout: { width: 12.3, height: 12.3 },
+        },
+      });
+    });
+
+    act(() => {
+      badgeContainer.props.onLayout({
+        nativeEvent: {
+          layout: { width: 12.7, height: 12.7 },
+        },
+      });
+    });
+
+    wrapper = getByTestId('wrapper');
+    const updatedBadgeContainer = wrapper.props.children[1];
+    const positions = updatedBadgeContainer.props.style[1];
+    expect(positions).toStrictEqual({
+      top: 50 * 0.1464 - 12 / 2,
+      right: 100 * 0.1464 - 12 / 2,
+    });
+  });
+
+  it('accepts a sub-1px first measurement instead of treating it as noise', () => {
+    // The hysteresis guard compares each measurement to the last *accepted*
+    // one. Before there is one, a badge whose very first real size is under
+    // 1px should still be accepted, not stuck at the initial 0.
+    const TestComponent = () => (
+      <BadgeWrapper
+        testID="wrapper"
+        position={BadgeWrapperPosition.TopRight}
+        badge={<Text testID="badgeElement">Badge</Text>}
+      >
+        <Text testID="anchorChild">Anchor</Text>
+      </BadgeWrapper>
+    );
+
+    const { getByTestId } = render(<TestComponent />);
+    let wrapper = getByTestId('wrapper');
+    const anchorContainer = wrapper.props.children[0];
+    const badgeContainer = wrapper.props.children[1];
+
+    act(() => {
+      anchorContainer.props.onLayout({
+        nativeEvent: { layout: { width: 100, height: 50 } },
+      });
+      badgeContainer.props.onLayout({
+        nativeEvent: {
+          layout: { width: 0.6, height: 0.6 },
+        },
+      });
+    });
+
+    wrapper = getByTestId('wrapper');
+    const updatedBadgeContainer = wrapper.props.children[1];
+    const positions = updatedBadgeContainer.props.style[1];
+    expect(positions).toStrictEqual({
+      top: 50 * 0.1464 - 1 / 2,
+      right: 100 * 0.1464 - 1 / 2,
+    });
+  });
+
   it('applies additional container style and forwards extra props', () => {
     // Since BadgeWrapper renders:
     // <View style={[tw`relative self-start`, style]} {...props}>
