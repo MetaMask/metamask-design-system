@@ -3,17 +3,14 @@ import {
   BadgeWrapperPositionAnchorShape,
 } from '@metamask/design-system-shared';
 import type { CSSProperties } from 'react';
-import React, {
-  forwardRef,
-  useState,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
+
+const STATIC_BADGE_SIZE = 16;
+const CIRCULAR_ANCHOR_EDGE_INSET = 4;
 
 export const BadgeWrapper = forwardRef<HTMLDivElement, BadgeWrapperProps>(
   (
@@ -33,72 +30,28 @@ export const BadgeWrapper = forwardRef<HTMLDivElement, BadgeWrapperProps>(
     },
     ref,
   ) => {
-    const [anchorWidth, setAnchorWidth] = useState(0);
-    const [anchorHeight, setAnchorHeight] = useState(0);
-    const [badgeWidth, setBadgeWidth] = useState(0);
-    const [badgeHeight, setBadgeHeight] = useState(0);
-
-    const anchorRef = useRef<HTMLDivElement | null>(null);
-    const badgeRef = useRef<HTMLDivElement | null>(null);
-
-    // Measure both elements once on mount
-    useLayoutEffect(() => {
-      if (anchorRef.current) {
-        const { width, height } = anchorRef.current.getBoundingClientRect();
-        setAnchorWidth(width);
-        setAnchorHeight(height);
-      }
-      if (badgeRef.current) {
-        const { width, height } = badgeRef.current.getBoundingClientRect();
-        setBadgeWidth(width);
-        setBadgeHeight(height);
-      }
-    }, []); // empty deps → run only after first render
-
-    const finalPositions = useMemo<React.CSSProperties>(() => {
+    const finalPositions: React.CSSProperties = (() => {
       if (customPosition) {
         return customPosition as CSSProperties;
       }
 
-      const anchorShapeXOffset =
-        positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
-          ? 0
-          : anchorWidth * 0.1464;
-      const anchorShapeYOffset =
-        positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
-          ? 0
-          : anchorHeight * 0.1464;
+      const edgeInset =
+        positionAnchorShape === BadgeWrapperPositionAnchorShape.Circular
+          ? CIRCULAR_ANCHOR_EDGE_INSET
+          : 0;
+      const isTop =
+        position === BadgeWrapperPosition.TopRight ||
+        position === BadgeWrapperPosition.TopLeft;
+      const isLeft =
+        position === BadgeWrapperPosition.TopLeft ||
+        position === BadgeWrapperPosition.BottomLeft;
 
-      const badgeCenteringXOffset = badgeWidth / 2;
-      const badgeCenteringYOffset = badgeHeight / 2;
-
-      const finalXOffset =
-        anchorShapeXOffset - badgeCenteringXOffset + positionXOffset;
-      const finalYOffset =
-        anchorShapeYOffset - badgeCenteringYOffset + positionYOffset;
-
-      switch (position) {
-        case BadgeWrapperPosition.TopRight:
-          return { top: finalYOffset, right: finalXOffset };
-        case BadgeWrapperPosition.TopLeft:
-          return { top: finalYOffset, left: finalXOffset };
-        case BadgeWrapperPosition.BottomLeft:
-          return { bottom: finalYOffset, left: finalXOffset };
-        case BadgeWrapperPosition.BottomRight:
-        default:
-          return { bottom: finalYOffset, right: finalXOffset };
-      }
-    }, [
-      position,
-      positionAnchorShape,
-      anchorWidth,
-      anchorHeight,
-      badgeWidth,
-      badgeHeight,
-      positionXOffset,
-      positionYOffset,
-      customPosition,
-    ]);
+      return {
+        ...(isTop ? { top: edgeInset } : { bottom: edgeInset }),
+        ...(isLeft ? { left: edgeInset } : { right: edgeInset }),
+        transform: `translate(${(isLeft ? -8 : 8) + positionXOffset}px, ${(isTop ? -8 : 8) + positionYOffset}px)`,
+      };
+    })();
 
     const containerClassName = twMerge(
       'relative inline-flex self-start',
@@ -107,19 +60,19 @@ export const BadgeWrapper = forwardRef<HTMLDivElement, BadgeWrapperProps>(
 
     return (
       <div ref={ref} className={containerClassName} style={style} {...props}>
-        <div
-          className="inline-flex"
-          ref={anchorRef}
-          {...childrenContainerProps}
-        >
+        <div className="inline-flex" {...childrenContainerProps}>
           {children}
         </div>
 
         <div
-          ref={badgeRef}
-          className="absolute"
-          style={finalPositions}
           {...badgeContainerProps}
+          className="absolute inline-flex size-4 items-center justify-center"
+          style={{
+            width: STATIC_BADGE_SIZE,
+            height: STATIC_BADGE_SIZE,
+            ...finalPositions,
+            ...(badgeContainerProps?.style as CSSProperties),
+          }}
         >
           {badge}
         </div>
