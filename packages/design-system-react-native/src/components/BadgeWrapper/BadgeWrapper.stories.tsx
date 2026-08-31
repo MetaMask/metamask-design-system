@@ -317,7 +317,11 @@ export const Badge: Story = {
             positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
             badge={<BadgeCount count={8} />}
           >
-            <ButtonIcon iconName={IconName.Menu} size={size} />
+            <ButtonIcon
+              iconName={IconName.Menu}
+              size={size}
+              accessibilityLabel={`Open menu (${size})`}
+            />
           </BadgeWrapper>
         ))}
       </View>
@@ -327,7 +331,11 @@ export const Badge: Story = {
         positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
         badge={<BadgeStatus status={BadgeStatusStatus.New} />}
       >
-        <ButtonIcon iconName={IconName.Menu} size={ButtonIconSize.Md} />
+        <ButtonIcon
+          iconName={IconName.Menu}
+          size={ButtonIconSize.Md}
+          accessibilityLabel="Open menu"
+        />
       </BadgeWrapper>
     </View>
   ),
