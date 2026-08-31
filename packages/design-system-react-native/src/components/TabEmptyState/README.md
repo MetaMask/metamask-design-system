@@ -170,3 +170,14 @@ Migrating from the legacy `TabEmptyState` in `app/component-library/components-t
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- `description`: sentence case, "No X found" pattern, no period
+- `actionButtonText`: sentence case, verb phrase, no period
+
+```
+✅ description: "No perpetual positions found"
+✅ actionButtonText: "Start trading"
+❌ actionButtonText: "Start Trading"
+```

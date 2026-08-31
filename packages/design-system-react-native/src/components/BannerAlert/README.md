@@ -153,3 +153,9 @@ export const ConditionalBanner = ({ active }: { active: boolean }) => {
   );
 };
 ```
+
+## Content guidelines
+
+- `title`: sentence case, no period
+- `description`: sentence case, period if a complete sentence
+- `actionButtonProps.label`: sentence case, no period
