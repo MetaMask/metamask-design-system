@@ -59,7 +59,7 @@ export const BadgeWrapper = ({
       <View
         {...badgeContainerProps}
         style={[
-          tw.style('absolute'),
+          tw.style('absolute items-center justify-center'),
           finalPositions,
           badgeContainerProps?.style,
         ]}
