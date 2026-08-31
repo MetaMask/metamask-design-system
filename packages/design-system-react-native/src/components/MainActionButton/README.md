@@ -109,5 +109,6 @@ React Native style object for the outer pressable. Use the callback form (`({ pr
 
 ## Content guidelines
 
-- `children`: sentence case, 1–3 words, imperative verb first, no punctuation
-- `loadingText`: use an ellipsis, such as `"Turning on..."`
+- `label`: sentence case, concise action label, no period
+- Use for primary quick actions such as `Buy`, `Send`, `Receive`, `Scan`, or `Swap`
+- Do not use sentence punctuation or loading text

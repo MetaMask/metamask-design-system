@@ -187,4 +187,9 @@ sheetRef.current?.onCloseBottomSheet(() => {
 
 ## Content guidelines
 
-- Header `children`: sentence case, no period
+Compose a bottom sheet with `BottomSheetHeader`, body content, and `BottomSheetFooter`.
+
+- `BottomSheetHeader` children: sentence case, no period
+- `BottomSheet` children: sentence case for string body content; complete sentences end with a period
+- `BottomSheetFooter` button labels (`primaryButtonProps.children`, `secondaryButtonProps.children`): sentence case, no period
+- Use the guidance for any nested components used in the body

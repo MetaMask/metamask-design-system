@@ -246,5 +246,5 @@ Other `Box` props are also forwarded to the root (for example `accessibilityLabe
 
 ## Content guidelines
 
-- Search field placeholder: sentence case with imperative starters such as `"Search"`
+- `textFieldSearchProps.placeholder`: sentence case with imperative starters such as `"Search"`
 - Button labels: sentence case, no period

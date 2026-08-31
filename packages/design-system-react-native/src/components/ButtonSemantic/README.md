@@ -150,5 +150,6 @@ Use the `style` prop to customize the component's appearance with React Native s
 
 ## Content guidelines
 
-- `children`: sentence case, 1–3 words, imperative verb first, no punctuation
-- `loadingText`: use an ellipsis, such as `"Turning on..."`
+- Use concise action labels that describe the outcome, such as `Long`, `Short`, `Buy`, `Sell`, `Yes`, or `No`.
+- `children`: sentence case, no period
+- `loadingText`: sentence case with an ellipsis, such as `"Placing order..."`
