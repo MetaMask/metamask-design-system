@@ -1,16 +1,21 @@
 import {
   BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
+  AvatarTokenSize,
+  ButtonIconSize,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
 import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
 import { AvatarNetwork } from '../AvatarNetwork';
+import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
+import { AvatarToken } from '../AvatarToken';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
 import { BadgeCount } from '../BadgeCount';
-import { BadgeIcon } from '../BadgeIcon';
 import { BadgeNetwork } from '../BadgeNetwork';
 import { BadgeStatus, BadgeStatusStatus } from '../BadgeStatus';
+import { ButtonIcon } from '../ButtonIcon';
 import { IconName } from '../Icon';
 
 import { BadgeWrapper } from './BadgeWrapper';
@@ -269,49 +274,68 @@ export const CustomPosition: Story = {
 
 export const Badge: Story = {
   render: () => (
-    <View style={{ padding: 12, gap: 20 }}>
-      {/* BadgeCount example */}
+    <View style={{ gap: 20, padding: 12 }}>
+      {/* Token examples. */}
+      <View style={{ flexDirection: 'row', gap: 16 }}>
+        {Object.values(AvatarTokenSize).map((size) => (
+          <BadgeWrapper
+            key={`token-${size}`}
+            position={BadgeWrapperPosition.BottomRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+            badge={
+              <BadgeNetwork name="ETH" src={SAMPLE_AVATARNETWORK_URIS[3]} />
+            }
+          >
+            <AvatarToken size={size} src={SAMPLE_AVATARTOKEN_URIS[1]} />
+          </BadgeWrapper>
+        ))}
+      </View>
+      {/* Account examples. */}
+      <View style={{ flexDirection: 'row', gap: 16 }}>
+        {Object.values(AvatarAccountSize).map((size) => (
+          <BadgeWrapper
+            key={`account-${size}`}
+            position={BadgeWrapperPosition.BottomRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Rectangular}
+            badge={
+              <BadgeNetwork name="ETH" src={SAMPLE_AVATARNETWORK_URIS[3]} />
+            }
+          >
+            <AvatarAccount
+              size={size}
+              address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+            />
+          </BadgeWrapper>
+        ))}
+      </View>
+      {/* Notification badge examples. */}
+      <View style={{ flexDirection: 'row', gap: 16 }}>
+        {Object.values(ButtonIconSize).map((size) => (
+          <BadgeWrapper
+            key={`notification-${size}`}
+            position={BadgeWrapperPosition.TopRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+            badge={<BadgeCount count={8} />}
+          >
+            <ButtonIcon
+              iconName={IconName.Menu}
+              size={size}
+              accessibilityLabel={`Open menu (${size})`}
+            />
+          </BadgeWrapper>
+        ))}
+      </View>
+      {/* Status indicator example. */}
       <BadgeWrapper
         position={BadgeWrapperPosition.TopRight}
-        badge={<BadgeCount count={8} />}
+        positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+        badge={<BadgeStatus status={BadgeStatusStatus.New} />}
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-      </BadgeWrapper>
-      {/* BadgeIcon example */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.BottomRight}
-        badge={<BadgeIcon iconName={IconName.Snaps} />}
-      >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-      </BadgeWrapper>
-      {/* BadgeNetwork example */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.BottomRight}
-        badge={
-          <BadgeNetwork
-            name="ETH"
-            src={{
-              uri: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg',
-            }}
-          />
-        }
-      >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-      </BadgeWrapper>
-      {/* BadgeStatus example */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.BottomRight}
-        badge={<BadgeStatus status={BadgeStatusStatus.Active} />}
-      >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-      </BadgeWrapper>
-      <BadgeWrapper
-        position={BadgeWrapperPosition.TopRight}
-        badge={
-          <BadgeStatus status={BadgeStatusStatus.Attention} hasBorder={false} />
-        }
-      >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <ButtonIcon
+          iconName={IconName.Menu}
+          size={ButtonIconSize.Md}
+          accessibilityLabel="Open menu"
+        />
       </BadgeWrapper>
     </View>
   ),
