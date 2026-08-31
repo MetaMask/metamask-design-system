@@ -1,6 +1,8 @@
 import {
   BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
+  AvatarTokenSize,
+  ButtonIconSize,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
@@ -8,10 +10,12 @@ import React from 'react';
 import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
 import { AvatarNetwork } from '../AvatarNetwork';
 import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
+import { AvatarToken } from '../AvatarToken';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
 import { BadgeCount } from '../BadgeCount';
-import { BadgeIcon } from '../BadgeIcon';
 import { BadgeNetwork } from '../BadgeNetwork';
 import { BadgeStatus, BadgeStatusStatus } from '../BadgeStatus';
+import { ButtonIcon } from '../ButtonIcon';
 import { IconName } from '../Icon';
 
 import { BadgeWrapper } from './BadgeWrapper';
@@ -201,41 +205,59 @@ export const CustomPosition: Story = {
 export const Badge: Story = {
   render: () => (
     <div className="flex flex-col gap-5 p-4">
-      {/* BadgeCount example */}
+      {/* Mobile wallet token rows. */}
+      <div className="flex flex-row gap-4">
+        {Object.values(AvatarTokenSize).map((size) => (
+          <BadgeWrapper
+            key={`token-${size}`}
+            position={BadgeWrapperPosition.BottomRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+            badge={
+              <BadgeNetwork name="ETH" src={SAMPLE_AVATARNETWORK_URIS[3]} />
+            }
+          >
+            <AvatarToken size={size} src={SAMPLE_AVATARTOKEN_URIS[1]} />
+          </BadgeWrapper>
+        ))}
+      </div>
+      {/* Mobile rectangular asset/account rows. */}
+      <div className="flex flex-row gap-4">
+        {Object.values(AvatarAccountSize).map((size) => (
+          <BadgeWrapper
+            key={`account-${size}`}
+            position={BadgeWrapperPosition.BottomRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Rectangular}
+            badge={
+              <BadgeNetwork name="ETH" src={SAMPLE_AVATARNETWORK_URIS[3]} />
+            }
+          >
+            <AvatarAccount
+              size={size}
+              address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
+            />
+          </BadgeWrapper>
+        ))}
+      </div>
+      {/* Mobile wallet notification badge. */}
+      <div className="flex flex-row gap-4">
+        {Object.values(ButtonIconSize).map((size) => (
+          <BadgeWrapper
+            key={`notification-${size}`}
+            position={BadgeWrapperPosition.TopRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+            badge={<BadgeCount count={8} />}
+          >
+            <ButtonIcon iconName={IconName.Menu} size={size} />
+          </BadgeWrapper>
+        ))}
+      </div>
+      {/* Mobile status indicator example. */}
       <BadgeWrapper
         position={BadgeWrapperPosition.TopRight}
-        badge={<BadgeCount count={8} />}
+        positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+        badge={<BadgeStatus status={BadgeStatusStatus.New} />}
       >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-      </BadgeWrapper>
-      {/* BadgeIcon example */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.BottomRight}
-        badge={<BadgeIcon iconName={IconName.Snaps} />}
-      >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-      </BadgeWrapper>
-      {/* BadgeNetwork example */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.BottomRight}
-        badge={<BadgeNetwork name="ETH" src={SAMPLE_AVATARNETWORK_URIS[3]} />}
-      >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-      </BadgeWrapper>
-      {/* BadgeStatus example */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.BottomRight}
-        badge={<BadgeStatus status={BadgeStatusStatus.Active} />}
-      >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
-      </BadgeWrapper>
-      <BadgeWrapper
-        position={BadgeWrapperPosition.TopRight}
-        badge={
-          <BadgeStatus status={BadgeStatusStatus.Attention} hasBorder={false} />
-        }
-      >
-        <AvatarAccount address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8" />
+        <ButtonIcon iconName={IconName.Menu} size={ButtonIconSize.Md} />
       </BadgeWrapper>
     </div>
   ),
