@@ -1,0 +1,183 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as CardStories from './Card.stories';
+
+# Card
+
+Card is a container that groups related content on a surface. It provides padding, border, and background only — no title, icon, or actions of its own.
+
+Use it to separate a block of content from the page background. Place any content in `children`. For richer layouts (headers, rows, footers), compose those pieces inside the card rather than extending Card itself.
+
+```tsx
+import { Card, Text } from '@metamask/design-system-react';
+
+<Card>
+  <Text>Card content</Text>
+</Card>;
+```
+
+<Canvas of={CardStories.Default} />
+
+## Props
+
+### `children`
+
+The content to display inside the card.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={CardStories.Children} />
+
+### `onClick`
+
+Optional click handler. When provided, the card renders as a `<button>` so it is keyboard-accessible. Omit `onClick` for a static card.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>MouseEventHandler&lt;HTMLButtonElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Card onClick={() => undefined}>
+  <Text>Pressable card</Text>
+</Card>
+```
+
+<Canvas of={CardStories.OnClick} />
+
+### `asChild`
+
+Merge Card styles onto a child element instead of rendering a `div` or `button`. Use this when the card should be a link or another semantic element.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Card asChild>
+  <a href="/activity">Card content</a>
+</Card>
+```
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Card className="mt-4">Card content</Card>
+
+<Card className="p-8">Card content</Card>
+```
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Card style={{ marginTop: dynamicValue }}>Card content</Card>
+```
+
+## Component API
+
+<Controls of={CardStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
