@@ -25,25 +25,11 @@ yarn storybook:ios
 
 ## AI Integration (Storybook MCP)
 
-### Local development
-
 When Storybook is running locally, an MCP endpoint is available at:
 
 ```text
 http://localhost:6006/mcp
 ```
-
-Configured in `.cursor/mcp.json` for local Cursor sessions.
-
-### Org MCP and published manifest
-
-**Metamask-storybook-mcp** (Context Forge) uses the same component metadata as the published manifest:
-
-```text
-https://metamask.github.io/metamask-design-system/manifests/components.json
-```
-
-Use the manifest when MCP is unavailable (for example Cloud Agents without org MCP auth). See `docs/agent-mcp-setup.md`.
 
 This endpoint helps AI agents work with the design system by exposing:
 

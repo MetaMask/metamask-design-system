@@ -19,7 +19,6 @@ Repository-specific conventions and patterns. Open the matching file when the ta
 - `.cursor/rules/component-enum-union-migration.md`
 - `.cursor/rules/component-migration.md`
 - `.cursor/rules/figma-integration.md`
-- `.cursor/rules/consumer-audit.md`
 - `.cursor/rules/release-workflow.md`
 - `.cursor/rules/content-guidelines.mdc`
 
@@ -27,25 +26,20 @@ See `docs/ai-agents.md` for the full strategy.
 
 ## Consumer product codebases
 
-MMDS packages serve two **product** repositories (not this monorepo):
+MMDS packages serve Extension and Mobile (not this monorepo):
 
-| Platform  | Repository                                     | Product UI scan (metrics-aligned)                                               | MMDS package                           |
+| Platform  | Repository                                     | Product UI scan                                                                 | MMDS package                           |
 | --------- | ---------------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------- |
 | Extension | https://github.com/MetaMask/metamask-extension | `ui/**/*.{js,tsx}` — exclude legacy `ui/components/component-library/`          | `@metamask/design-system-react`        |
 | Mobile    | https://github.com/MetaMask/metamask-mobile    | `app/components/**/*.{js,jsx,ts,tsx}` — exclude legacy `app/component-library/` | `@metamask/design-system-react-native` |
 
-Legacy `component-library/` folders are migration **sources**, not adoption audit targets. Flag imports from them in product UI as deprecated usage.
+Legacy `component-library/` folders are migration **sources**, not audit targets. Flag imports from them in product UI as deprecated usage.
+
+When asked to **audit** usage, alignment, or gaps, scan **both** platforms above. Look for misalignments and emergent patterns: custom UI, repeated compositions, and use cases where product intent is not met by current MMDS components or APIs. APIs may differ; judge whether MMDS achieves the same intent for the use case. Findings may inform new components, patterns, or API changes in this repo.
+
+**MMDS component reference:** Local — `apps/storybook-react/storybook-static/manifests/components.json` after `yarn build-storybook`, or `http://localhost:6006/manifests/components.json` while `yarn storybook` is running. Published — https://metamask.github.io/metamask-design-system/manifests/components.json
 
 **MMDS Figma (canonical):** https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=0-1 (`fileKey`: `1D6tnzXqWgnUC3spaAOELN`)
-
-## Audit trigger
-
-When asked to audit component **usage**, **adoption**, **drift**, or **alignment**:
-
-1. Scan **both** extension and mobile product UI (paths above).
-2. Use [design-system-metrics](https://github.com/MetaMask/design-system-metrics) baselines when available.
-3. Use **Metamask-storybook-mcp** or https://metamask.github.io/metamask-design-system/manifests/components.json for canonical MMDS APIs.
-4. Follow `.cursor/rules/consumer-audit.md` and `docs/agent-mcp-setup.md` for MCP fallbacks.
 
 ## Monorepo Structure
 
