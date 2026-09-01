@@ -40,10 +40,10 @@ app/components/Views/Wallet/...
 
 Match [design-system-metrics `config.json`](https://github.com/MetaMask/design-system-metrics/blob/main/config.json):
 
-| Platform  | Repository | Scan glob | Ignored legacy folder |
-| --------- | ---------- | --------- | --------------------- |
-| Extension | [metamask-extension](https://github.com/MetaMask/metamask-extension) | `ui/**/*.{js,tsx}` | `ui/components/component-library/` |
-| Mobile    | [metamask-mobile](https://github.com/MetaMask/metamask-mobile) | `app/components/**/*.{js,jsx,ts,tsx}` | `app/component-library/` |
+| Platform  | Repository                                                           | Scan glob                             | Ignored legacy folder              |
+| --------- | -------------------------------------------------------------------- | ------------------------------------- | ---------------------------------- |
+| Extension | [metamask-extension](https://github.com/MetaMask/metamask-extension) | `ui/**/*.{js,tsx}`                    | `ui/components/component-library/` |
+| Mobile    | [metamask-mobile](https://github.com/MetaMask/metamask-mobile)       | `app/components/**/*.{js,jsx,ts,tsx}` | `app/component-library/`           |
 
 ### MMDS knowledge sources (in order)
 
@@ -65,15 +65,15 @@ Use **Figma MCP** (read) or **Figma Console MCP** (write-back after human approv
 
 ### Classification
 
-| Category | Meaning |
-| -------- | ------- |
-| **MMDS usage** | Import from `@metamask/design-system-react` or `@metamask/design-system-react-native` |
-| **Legacy usage** | Import from `component-library` or deprecated relative paths in product UI |
+| Category                  | Meaning                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------ |
+| **MMDS usage**            | Import from `@metamask/design-system-react` or `@metamask/design-system-react-native`      |
+| **Legacy usage**          | Import from `component-library` or deprecated relative paths in product UI                 |
 | **Untracked / custom UI** | Local or third-party components with no MMDS equivalent (metrics: `discover-untracked.js`) |
-| **Accidental drift** | MMDS should have been used |
-| **Intentional deviation** | Product chose not to use applicable MMDS after option was clear |
-| **System gap** | Repeated need MMDS does not support well |
-| **Platform exception** | Documented Figma / React / React Native difference |
+| **Accidental drift**      | MMDS should have been used                                                                 |
+| **Intentional deviation** | Product chose not to use applicable MMDS after option was clear                            |
+| **System gap**            | Repeated need MMDS does not support well                                                   |
+| **Platform exception**    | Documented Figma / React / React Native difference                                         |
 
 ### Do not auto-route work
 

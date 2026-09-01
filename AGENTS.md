@@ -29,10 +29,10 @@ See `docs/ai-agents.md` for the full strategy.
 
 MMDS packages serve two **product** repositories (not this monorepo):
 
-| Platform  | Repository | Product UI scan (metrics-aligned) | MMDS package |
-| --------- | ---------- | ----------------------------------- | -------------- |
-| Extension | https://github.com/MetaMask/metamask-extension | `ui/**/*.{js,tsx}` — exclude legacy `ui/components/component-library/` | `@metamask/design-system-react` |
-| Mobile    | https://github.com/MetaMask/metamask-mobile | `app/components/**/*.{js,jsx,ts,tsx}` — exclude legacy `app/component-library/` | `@metamask/design-system-react-native` |
+| Platform  | Repository                                     | Product UI scan (metrics-aligned)                                               | MMDS package                           |
+| --------- | ---------------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------- |
+| Extension | https://github.com/MetaMask/metamask-extension | `ui/**/*.{js,tsx}` — exclude legacy `ui/components/component-library/`          | `@metamask/design-system-react`        |
+| Mobile    | https://github.com/MetaMask/metamask-mobile    | `app/components/**/*.{js,jsx,ts,tsx}` — exclude legacy `app/component-library/` | `@metamask/design-system-react-native` |
 
 Legacy `component-library/` folders are migration **sources**, not adoption audit targets. Flag imports from them in product UI as deprecated usage.
 

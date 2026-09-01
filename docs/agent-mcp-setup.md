@@ -4,12 +4,12 @@ How AI agents reach MMDS component knowledge, Storybook tools, and Figma during 
 
 ## Overview
 
-| Need | Primary | Fallback |
-| ---- | ------- | -------- |
-| Component APIs, stories, docs | **Metamask-storybook-mcp** (org MCP) | Published [components manifest](https://metamask.github.io/metamask-design-system/manifests/components.json) |
-| Local maintainer development | `http://localhost:6006/mcp` (`yarn storybook`) | Manifest URL |
-| Figma read / Code Connect | **Figma** MCP (Cursor org settings) | Figma REST API with token (automations) |
-| Figma write-back | **Figma Console MCP** | Manual design updates |
+| Need                          | Primary                                        | Fallback                                                                                                     |
+| ----------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Component APIs, stories, docs | **Metamask-storybook-mcp** (org MCP)           | Published [components manifest](https://metamask.github.io/metamask-design-system/manifests/components.json) |
+| Local maintainer development  | `http://localhost:6006/mcp` (`yarn storybook`) | Manifest URL                                                                                                 |
+| Figma read / Code Connect     | **Figma** MCP (Cursor org settings)            | Figma REST API with token (automations)                                                                      |
+| Figma write-back              | **Figma Console MCP**                          | Manual design updates                                                                                        |
 
 ## Metamask-storybook-mcp and Context Forge
 

@@ -2,8 +2,8 @@
 
 Repo `.cursor/mcp.json` configures **local** Storybook MCP for maintainers running `yarn storybook`.
 
-| Server | Config | When to use |
-| ------ | ------ | ----------- |
+| Server          | Config                      | When to use           |
+| --------------- | --------------------------- | --------------------- |
 | `storybook-mcp` | `http://localhost:6006/mcp` | Local IDE development |
 
 **Org-hosted MCP** (Context Forge) is not defined here:
