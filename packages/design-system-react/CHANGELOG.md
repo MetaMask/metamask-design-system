@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: prevent BadgeWrapper layout loop ([#1474](https://github.com/MetaMask/metamask-design-system/pull/1474))
+- test: update BadgeWrapper stories ([#1473](https://github.com/MetaMask/metamask-design-system/pull/1473))
+- docs: add Content guidelines sections to component READMEs ([#1466](https://github.com/MetaMask/metamask-design-system/pull/1466))
+- docs(react): fix AvatarGroup migration guide for extension ([#1460](https://github.com/MetaMask/metamask-design-system/pull/1460))
+
 ## [0.38.0]
 
 ### Changed
