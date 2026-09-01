@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgMerge = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><g transform="scale(0.09375)"><path d="M208 112a32.05 32.05 0 0 0-30.69 23l-42.21-6a8 8 0 0 1-4.95-2.71L94.43 84.55A32 32 0 1 0 72 87v82a32 32 0 1 0 16 0v-67.37l30 35a24 24 0 0 0 14.83 8.14l44 6.28A32 32 0 1 0 208 112M64 56a16 16 0 1 1 16 16 16 16 0 0 1-16-16m32 144a16 16 0 1 1-16-16 16 16 0 0 1 16 16m112-40a16 16 0 1 1 16-16 16 16 0 0 1-16 16" /></g></svg>;
+const SvgMerge = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><g transform="rotate(180 12 12) scale(0.09375)"><path d="M192 40v64a8 8 0 0 1-2.34 5.66L136 163.31v49.38l18.34-18.35a8 8 0 0 1 11.32 11.32l-32 32a8 8 0 0 1-11.32 0l-32-32a8 8 0 0 1 11.32-11.32L120 212.69v-49.38L66.34 109.66A8 8 0 0 1 64 104V40a8 8 0 0 1 16 0v60.69l48 48 48-48V40a8 8 0 0 1 16 0" /></g></svg>;
 const ForwardRef = forwardRef(SvgMerge);
 export default ForwardRef;
