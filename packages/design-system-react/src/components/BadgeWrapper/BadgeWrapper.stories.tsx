@@ -255,18 +255,23 @@ export const Badge: Story = {
           </BadgeWrapper>
         ))}
       </div>
-      {/* Status indicator example. */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.TopRight}
-        positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
-        badge={<BadgeStatus status={BadgeStatusStatus.New} />}
-      >
-        <ButtonIcon
-          iconName={IconName.Menu}
-          size={ButtonIconSize.Md}
-          ariaLabel="Open menu"
-        />
-      </BadgeWrapper>
+      {/* Status indicator examples. */}
+      <div className="flex flex-row gap-4">
+        {Object.values(ButtonIconSize).map((size) => (
+          <BadgeWrapper
+            key={`status-${size}`}
+            position={BadgeWrapperPosition.TopRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+            badge={<BadgeStatus status={BadgeStatusStatus.Attention} />}
+          >
+            <ButtonIcon
+              iconName={IconName.Menu}
+              size={size}
+              ariaLabel={`Open menu (${size})`}
+            />
+          </BadgeWrapper>
+        ))}
+      </div>
     </div>
   ),
 };

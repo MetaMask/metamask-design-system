@@ -325,18 +325,23 @@ export const Badge: Story = {
           </BadgeWrapper>
         ))}
       </View>
-      {/* Status indicator example. */}
-      <BadgeWrapper
-        position={BadgeWrapperPosition.TopRight}
-        positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
-        badge={<BadgeStatus status={BadgeStatusStatus.New} />}
-      >
-        <ButtonIcon
-          iconName={IconName.Menu}
-          size={ButtonIconSize.Md}
-          accessibilityLabel="Open menu"
-        />
-      </BadgeWrapper>
+      {/* Status indicator examples. */}
+      <View style={{ flexDirection: 'row', gap: 16 }}>
+        {Object.values(ButtonIconSize).map((size) => (
+          <BadgeWrapper
+            key={`status-${size}`}
+            position={BadgeWrapperPosition.TopRight}
+            positionAnchorShape={BadgeWrapperPositionAnchorShape.Circular}
+            badge={<BadgeStatus status={BadgeStatusStatus.Attention} />}
+          >
+            <ButtonIcon
+              iconName={IconName.Menu}
+              size={size}
+              accessibilityLabel={`Open menu (${size})`}
+            />
+          </BadgeWrapper>
+        ))}
+      </View>
     </View>
   ),
 };
