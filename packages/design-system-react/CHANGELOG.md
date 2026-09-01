@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.38.1]
+
 ### Uncategorized
 
 - fix: prevent BadgeWrapper layout loop ([#1474](https://github.com/MetaMask/metamask-design-system/pull/1474))
@@ -516,7 +518,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...HEAD
+[0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...@metamask/design-system-react@0.38.1
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...@metamask/design-system-react@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...@metamask/design-system-react@0.37.0
 [0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.2...@metamask/design-system-react@0.36.0
