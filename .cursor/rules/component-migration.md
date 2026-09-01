@@ -70,7 +70,9 @@ Use this workflow when:
 
 ### Phase 1: Audit
 
-**For both Extension and Mobile component-library:**
+For **product adoption** in extension/mobile UI (MMDS usage, custom components, drift), use @.cursor/rules/consumer-audit.md — not this section.
+
+**For both Extension and Mobile component-library (migration source APIs):**
 
 1. **Locate component** and document:
 

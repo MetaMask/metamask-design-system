@@ -73,6 +73,7 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 - `styling.md` - Design tokens, Tailwind, component-first
 - `component-documentation.md` - Storybook and README standards
 - `figma-integration.md` - Code Connect
+- `consumer-audit.md` - Extension/mobile product UI adoption audits
 - `testing.md` - Jest, Testing Library, accessibility, style assertions
 - `release-workflow.md` - Release PRs, changelog quality, `MIGRATION.md` (loaded when doing a release)
 - `content-guidelines.mdc` - Sentence case, punctuation, tone, and terminology for user-facing copy
@@ -98,6 +99,16 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 - `ai-agents.md` - This file, strategy explanation
 - `reviewing-release-prs.md` - Release process
 - `package-migration-process-guide.md` - Infrequent migrations
+- `agent-mcp-setup.md` - Storybook MCP, Context Forge, manifest, and Figma MCP for agents
+
+## Consumer adoption audits
+
+Product UI audits target **extension** and **mobile** consumer repos — not legacy `component-library/` folders (those are migration sources).
+
+- **Checklist:** `.cursor/rules/consumer-audit.md`
+- **Quantitative baseline:** [design-system-metrics](https://github.com/MetaMask/design-system-metrics) (weekly scans; same globs as the audit rule)
+- **MMDS component truth:** Metamask-storybook-mcp (Context Forge) or https://metamask.github.io/metamask-design-system/manifests/components.json
+- **MCP setup:** `docs/agent-mcp-setup.md` (local vs Cloud Agent vs manifest fallback)
 
 ## Storybook MCP as Dynamic Context
 
@@ -109,10 +120,22 @@ The three-layer model provides static guidance (rules, conventions, and process)
 - Story-level examples that reduce prop/API hallucination
 - Optional story test execution and preview tooling when addon toolsets are enabled
 
+### Published manifest (always-on fallback)
+
+GitHub Pages hosts the Storybook components manifest (same source Metamask-storybook-mcp uses):
+
+https://metamask.github.io/metamask-design-system/manifests/components.json
+
+Use this when Context Forge / Metamask-storybook-mcp is unavailable (common on Cloud Agents without org MCP auth). See `docs/agent-mcp-setup.md`.
+
+### Org MCP (Context Forge)
+
+**Metamask-storybook-mcp** is hosted via Context Forge for MetaMask Cursor users. Repo `.cursor/mcp.json` only configures **local** Storybook (`http://localhost:6006/mcp`). Cloud Agents rely on dashboard MCP enablement or the published manifest.
+
 ### Maintainers vs consumers
 
 - **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation.
-- **Consumers (downstream repos):** Storybook MCP provides the highest value. Agents can discover components and props from a running or published Storybook without reading this repo's source.
+- **Consumers (downstream repos):** Storybook MCP or the published manifest provides the highest value. Agents can discover components and props without reading this repo's source.
 
 ## How AI Agents Use This
 

@@ -12,6 +12,7 @@ Claude Code expands these `@` imports at session start. Other agents should open
 @.cursor/rules/component-enum-union-migration.md
 @.cursor/rules/component-migration.md
 @.cursor/rules/figma-integration.md
+@.cursor/rules/consumer-audit.md
 @.cursor/rules/release-workflow.md
 @.cursor/rules/content-guidelines.mdc
 
