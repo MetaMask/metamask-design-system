@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.42.1]
 
-### Uncategorized
+### Changed
 
-- fix: prevent BadgeWrapper layout loop ([#1474](https://github.com/MetaMask/metamask-design-system/pull/1474))
-- test: update BadgeWrapper stories ([#1473](https://github.com/MetaMask/metamask-design-system/pull/1473))
-- docs: add Content guidelines sections to component READMEs ([#1466](https://github.com/MetaMask/metamask-design-system/pull/1466))
+- Added content guidelines to component documentation, including sentence case, punctuation, and prop-specific examples ([#1466](https://github.com/MetaMask/metamask-design-system/pull/1466))
+
+### Fixed
+
+- Fixed a `BadgeWrapper` layout feedback loop that could cause continuous layout updates and high CPU usage ([#1474](https://github.com/MetaMask/metamask-design-system/pull/1474))
 
 ## [0.42.0]
 
