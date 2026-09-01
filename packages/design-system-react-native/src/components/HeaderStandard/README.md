@@ -5,7 +5,7 @@ HeaderStandard is a header component with a centered title and optional back and
 ```tsx
 import { HeaderStandard } from '@metamask/design-system-react-native';
 
-<HeaderStandard title="Page Title" onBack={handleBack} onClose={handleClose} />;
+<HeaderStandard title="Page title" onBack={handleBack} onClose={handleClose} />;
 ```
 
 ## Props
@@ -164,12 +164,12 @@ Tailwind classes merged onto the root [HeaderBase](../HeaderBase/README.md) cont
 <HeaderStandard title="Settings" onBack={() => navigation.goBack()} />
 
 <HeaderStandard
-  title="Modal Title"
+  title="Modal title"
   onClose={() => setModalVisible(false)}
 />
 
 <HeaderStandard
-  title="Page Title"
+  title="Page title"
   subtitle="Subtitle text"
   onBack={handleBack}
   onClose={handleClose}
