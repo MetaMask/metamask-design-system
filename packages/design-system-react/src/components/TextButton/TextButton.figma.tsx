@@ -54,7 +54,7 @@ figma.connect(
         endIconName={endIconName}
         {...props}
       >
-        Text Button
+        Text button
       </TextButton>
     ),
   },

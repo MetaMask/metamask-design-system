@@ -39,7 +39,7 @@ export const Default: Story = {
   args: {
     icon: <Icon name={IconName.Add} size={IconSize.Xl} />,
     description: 'No perpetual positions found',
-    actionButtonText: 'Start Trading',
+    actionButtonText: 'Start trading',
   },
 };
 
@@ -65,7 +65,7 @@ export const OnAction: Story = {
     <TabEmptyState
       {...args}
       description="No results found"
-      actionButtonText="Try Again"
+      actionButtonText="Try again"
       onAction={() => {
         console.log('Action pressed');
       }}

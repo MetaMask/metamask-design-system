@@ -27,7 +27,7 @@ figma.connect(
     },
     example: ({ size, ...props }) => (
       <TextButton {...props} variant={size} onPress={() => undefined}>
-        Text Button
+        Text button
       </TextButton>
     ),
   },
