@@ -49,7 +49,7 @@ The content to display inside the card.
 
 ### `onClick`
 
-Optional click handler. When provided, the card renders as a `<button>` so it is keyboard-accessible. Omit `onClick` for a static card.
+Optional click handler. When provided without `asChild`, the card renders as a `<button>` so it is keyboard-accessible. With `asChild`, the handler is merged onto the child. Omit `onClick` for a static card.
 
 <table>
   <thead>
@@ -62,7 +62,7 @@ Optional click handler. When provided, the card renders as a `<button>` so it is
   <tbody>
     <tr>
       <td align="left">
-        <code>MouseEventHandler&lt;HTMLButtonElement&gt;</code>
+        <code>MouseEventHandler&lt;HTMLElement&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -82,7 +82,7 @@ Optional click handler. When provided, the card renders as a `<button>` so it is
 
 ### `asChild`
 
-Merge Card styles onto a child element instead of rendering a `div` or `button`. Use this when the card should be a link or another semantic element.
+Merge Card styles onto a child element instead of rendering a `div` or `button`. Use this when the card should be a link or another semantic element. If `onClick` is also passed, it is merged onto that child.
 
 <table>
   <thead>

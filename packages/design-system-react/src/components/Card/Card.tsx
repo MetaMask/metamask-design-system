@@ -9,7 +9,7 @@ import { Box } from '../Box';
 
 import type { CardProps } from './Card.types';
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(
+export const Card = forwardRef<HTMLDivElement | HTMLButtonElement, CardProps>(
   (
     {
       children,
@@ -30,10 +30,11 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       isPressable && 'w-full cursor-pointer appearance-none text-start',
       className,
     );
+    const boxRef = ref as React.Ref<HTMLDivElement>;
 
     const boxProps = {
       ...props,
-      ref,
+      ref: boxRef,
       padding,
       borderWidth,
       borderColor,
@@ -43,7 +44,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 
     if (asChild) {
       return (
-        <Box asChild {...boxProps}>
+        <Box asChild onClick={onClick} {...boxProps}>
           {children}
         </Box>
       );

@@ -9,10 +9,11 @@ import type { BoxProps } from '../Box';
  * props and React-specific platform concerns.
  */
 export type CardProps = CardPropsShared &
-  Omit<BoxProps, 'children' | 'onClick'> & {
+  Omit<BoxProps, 'children' | 'onClick' | 'ref'> & {
     /**
-     * Optional click handler. When provided, the card renders as a button
-     * so it is keyboard-accessible.
+     * Optional click handler. When provided without `asChild`, the card
+     * renders as a button so it is keyboard-accessible. With `asChild`,
+     * the handler is merged onto the child element.
      */
-    onClick?: MouseEventHandler<HTMLButtonElement>;
+    onClick?: MouseEventHandler<HTMLElement>;
   };

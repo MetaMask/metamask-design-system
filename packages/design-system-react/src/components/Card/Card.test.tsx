@@ -80,11 +80,40 @@ describe('Card', () => {
     expect(card).toHaveClass('p-4', 'rounded', 'border-default', 'bg-default');
   });
 
+  it('forwards onClick onto the child when asChild is true', async () => {
+    const user = userEvent.setup();
+    const onClick = jest.fn();
+
+    render(
+      <Card asChild onClick={onClick}>
+        <a href="#activity" data-testid="card">
+          Card content
+        </a>
+      </Card>,
+    );
+
+    await user.click(screen.getByTestId('card'));
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
   it('forwards ref to the root element', () => {
     const ref = createRef<HTMLDivElement>();
 
     render(<Card ref={ref}>Card content</Card>);
 
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
+
+  it('forwards ref to the button when onClick is provided', () => {
+    const ref = createRef<HTMLButtonElement>();
+
+    render(
+      <Card ref={ref} onClick={jest.fn()}>
+        Pressable card
+      </Card>,
+    );
+
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 });
