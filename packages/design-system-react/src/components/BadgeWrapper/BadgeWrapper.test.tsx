@@ -8,26 +8,6 @@ import React, { createRef } from 'react';
 import { BadgeWrapper } from './BadgeWrapper';
 
 describe('BadgeWrapper', () => {
-  beforeEach(() => {
-    jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
-      width: 0,
-      height: 0,
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      x: 0,
-      y: 0,
-      toJSON: () => {
-        // Empty implementation needed for mock
-        return '';
-      },
-    });
-  });
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
   it('renders the wrapper, anchor, and badge elements', () => {
     render(
       <BadgeWrapper
@@ -52,7 +32,11 @@ describe('BadgeWrapper', () => {
     // Ensure the parent element exists
     expect(badgeEl.parentElement).toBeInTheDocument();
     // Apply styles check only after confirming parent exists
-    expect(badgeEl.parentElement).toHaveStyle({ bottom: '0px', right: '0px' });
+    expect(badgeEl.parentElement).toHaveStyle({
+      bottom: '7%',
+      right: '7%',
+      transform: 'translate(50%, 50%)',
+    });
   });
 
   it('applies BottomLeft position correctly', () => {
@@ -66,7 +50,11 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ bottom: '0px', left: '0px' });
+    expect(badgeEl.parentElement).toHaveStyle({
+      bottom: '7%',
+      left: '7%',
+      transform: 'translate(-50%, 50%)',
+    });
   });
 
   it('applies TopLeft position correctly', () => {
@@ -80,7 +68,11 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ top: '0px', left: '0px' });
+    expect(badgeEl.parentElement).toHaveStyle({
+      top: '7%',
+      left: '7%',
+      transform: 'translate(-50%, -50%)',
+    });
   });
 
   it('applies TopRight position correctly', () => {
@@ -94,7 +86,11 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ top: '0px', right: '0px' });
+    expect(badgeEl.parentElement).toHaveStyle({
+      top: '7%',
+      right: '7%',
+      transform: 'translate(50%, -50%)',
+    });
   });
 
   it('respects positionXOffset and positionYOffset', () => {
@@ -109,7 +105,11 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ bottom: '10px', right: '5px' });
+    expect(badgeEl.parentElement).toHaveStyle({
+      bottom: '7%',
+      right: '7%',
+      transform: 'translate(calc(50% + 5px), calc(50% + 10px))',
+    });
   });
 
   it('uses Rectangular anchor shape (no extra shape offset)', () => {
@@ -125,7 +125,11 @@ describe('BadgeWrapper', () => {
     );
     const badgeEl = screen.getByTestId('badge');
     expect(badgeEl.parentElement).toBeInTheDocument();
-    expect(badgeEl.parentElement).toHaveStyle({ bottom: '4px', right: '3px' });
+    expect(badgeEl.parentElement).toHaveStyle({
+      bottom: '11%',
+      right: '11%',
+      transform: 'translate(calc(50% + 3px), calc(50% + 4px))',
+    });
   });
 
   it('overrides with customPosition when provided', () => {
@@ -166,6 +170,32 @@ describe('BadgeWrapper', () => {
     expect(wrapper).toHaveStyle({ margin: '7px' });
   });
 
+  it('merges badge container className and style', () => {
+    render(
+      <BadgeWrapper
+        badgeContainerProps={{
+          id: 'badge-container',
+          className: 'bg-default',
+          style: { margin: 7 },
+        }}
+        badge={<div />}
+      >
+        <div />
+      </BadgeWrapper>,
+    );
+
+    const badgeContainer = document.getElementById('badge-container');
+    expect(badgeContainer).toBeInTheDocument();
+    expect(badgeContainer).toHaveClass(
+      'absolute',
+      'inline-flex',
+      'items-center',
+      'justify-center',
+      'bg-default',
+    );
+    expect(badgeContainer).toHaveStyle({ margin: '7px' });
+  });
+
   it('forwards ref to the container div', () => {
     const ref = createRef<HTMLDivElement>();
     render(
@@ -176,41 +206,7 @@ describe('BadgeWrapper', () => {
     expect(ref.current?.tagName).toBe('DIV');
   });
 
-  it('calculates finalPositions correctly', () => {
-    jest.restoreAllMocks();
-    const anchorRect = {
-      width: 100,
-      height: 50,
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      x: 0,
-      y: 0,
-      toJSON: () => {
-        // Empty implementation needed for mock
-        return '';
-      },
-    };
-    const badgeRect = {
-      width: 20,
-      height: 10,
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      x: 0,
-      y: 0,
-      toJSON: () => {
-        // Empty implementation needed for mock
-        return '';
-      },
-    };
-    jest
-      .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
-      .mockReturnValueOnce(anchorRect)
-      .mockReturnValueOnce(badgeRect);
-
+  it('uses percentage badge transforms without fixed dimensions', () => {
     render(
       <BadgeWrapper badge={<div data-testid="badge-m" />}>
         <div data-testid="anchor-m" />
@@ -223,16 +219,12 @@ describe('BadgeWrapper', () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const badgeDiv = badgeEl.parentElement!;
 
-    // Computed offsets:
-    // anchorShapeXOffset = 100 * .1464 = 14.64
-    // badgeCenteringXOffset = 20/2 = 10
-    // finalXOffset = 14.64 - 10 = 4.64
-    // anchorShapeYOffset = 50 * .1464 = 7.32
-    // badgeCenteringYOffset = 10/2 = 5
-    // finalYOffset = 7.32 - 5 = 2.32
-    const bottom = parseFloat(badgeDiv.style.bottom);
-    const right = parseFloat(badgeDiv.style.right);
-    expect(bottom).toBeCloseTo(2.32, 2);
-    expect(right).toBeCloseTo(4.64, 2);
+    expect(badgeDiv).toHaveStyle({
+      bottom: '7%',
+      right: '7%',
+      transform: 'translate(50%, 50%)',
+    });
+
+    expect(badgeDiv).not.toHaveStyle({ width: '16px', height: '16px' });
   });
 });
