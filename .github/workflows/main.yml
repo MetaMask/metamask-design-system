@@ -81,7 +81,7 @@ jobs:
         id: detect
         shell: bash
         run: |
-          PATTERN='^packages/design-system-react(-native)?/(.*/)?[^/]+\.figma\.tsx$|^packages/design-system-react(-native)?/figma\.config\.json$'
+          PATTERN='^packages/design-system-react(-native)?/(.*/)?[^/]+\.figma\.(tsx|ts)$|^packages/design-system-react(-native)?/figma\.config\.json$'
 
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             git fetch origin "${{ github.base_ref }}"

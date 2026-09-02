@@ -112,6 +112,8 @@ The workflow only runs when files matching these paths change:
 
 - `packages/design-system-react/**/*.figma.tsx`
 - `packages/design-system-react-native/**/*.figma.tsx`
+- `packages/design-system-react/**/*.figma.ts`
+- `packages/design-system-react-native/**/*.figma.ts`
 - `packages/design-system-react/figma.config.json`
 - `packages/design-system-react-native/figma.config.json`
 

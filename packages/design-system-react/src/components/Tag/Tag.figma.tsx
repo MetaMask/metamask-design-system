@@ -16,6 +16,7 @@ import { Tag } from './Tag';
  *
  * - **`state (Figma only)`** is visual-only in Figma; `Tag` has no matching prop.
  * - **`showStartIcon` / `showEndIcon`** map to `startIconName` / `endIconName` with placeholder `IconName.Tag`.
+ * Changing this file runs Code Connect dry-run in CI and publish on merge to `main`.
  */
 figma.connect(
   Tag,
