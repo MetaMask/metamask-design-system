@@ -60,7 +60,7 @@ figma.connect(
               });
             }}
           >
-            Show Toast
+            Show toast
           </Button>
         </>
       );

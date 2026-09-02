@@ -140,12 +140,12 @@ export const IsDanger: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="flex gap-2">
-        <Button isDanger>Primary Danger</Button>
+        <Button isDanger>Primary danger</Button>
         <Button variant={ButtonVariant.Secondary} isDanger>
-          Secondary Danger
+          Secondary danger
         </Button>
         <Button variant={ButtonVariant.Tertiary} isDanger>
-          Tertiary Danger
+          Tertiary danger
         </Button>
       </div>
     </div>
@@ -156,23 +156,23 @@ export const IsInverse: Story = {
   render: () => (
     <div className="space-y-4 bg-primary-default p-4">
       <div className="flex gap-2">
-        <Button isInverse>Primary Inverse</Button>
+        <Button isInverse>Primary inverse</Button>
         <Button variant={ButtonVariant.Secondary} isInverse>
-          Secondary Inverse
+          Secondary inverse
         </Button>
         <Button variant={ButtonVariant.Tertiary} isInverse>
-          Tertiary Inverse
+          Tertiary inverse
         </Button>
       </div>
       <div className="flex gap-2">
         <Button isDanger isInverse>
-          Primary Danger Inverse
+          Primary danger inverse
         </Button>
         <Button variant={ButtonVariant.Secondary} isDanger isInverse>
-          Secondary Danger Inverse
+          Secondary danger inverse
         </Button>
         <Button variant={ButtonVariant.Tertiary} isDanger isInverse>
-          Tertiary Danger Inverse
+          Tertiary danger inverse
         </Button>
       </div>
     </div>
@@ -181,14 +181,14 @@ export const IsInverse: Story = {
 
 export const StartIconName: Story = {
   args: {
-    children: 'With Start Icon',
+    children: 'With start icon',
     startIconName: IconName.AddSquare,
   },
 };
 
 export const EndIconName: Story = {
   args: {
-    children: 'With End Icon',
+    children: 'With end icon',
     endIconName: IconName.AddSquare,
   },
 };
@@ -238,12 +238,12 @@ export const IsDisabled: Story = {
 export const IsFullWidth: Story = {
   render: () => (
     <div className="space-y-4">
-      <Button isFullWidth>Full Width Primary</Button>
+      <Button isFullWidth>Full width primary</Button>
       <Button variant={ButtonVariant.Secondary} isFullWidth>
-        Full Width Secondary
+        Full width secondary
       </Button>
       <Button variant={ButtonVariant.Tertiary} isFullWidth>
-        Full Width Tertiary
+        Full width tertiary
       </Button>
     </div>
   ),
