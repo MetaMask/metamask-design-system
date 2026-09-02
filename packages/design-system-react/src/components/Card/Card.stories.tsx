@@ -63,3 +63,11 @@ export const OnClick: Story = {
     </Card>
   ),
 };
+
+export const AsChild: Story = {
+  render: () => (
+    <Card asChild>
+      <a href="#activity">Card content</a>
+    </Card>
+  ),
+};
