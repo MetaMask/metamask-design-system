@@ -1,5 +1,5 @@
 ---
-description: MetaMask content design rules for user-facing strings — capitalization, punctuation, tone, terminology, and per-component patterns
+description: MetaMask content design rules for user-facing strings — capitalization, punctuation, voice, tone, and terminology. Component-specific copy rules live in each component's README (read via Storybook MCP).
 globs:
   - packages/design-system-react/src/**/*.{stories.tsx,constants.ts,tsx,ts,mdx}
   - packages/design-system-react-native/src/**/*.{stories.tsx,constants.ts,tsx,ts,md}
@@ -15,6 +15,8 @@ alwaysApply: false
 **Applies to** user-facing sample copy in stories, constants, README/MDX examples, default `loadingText` / alt / accessibility strings, and tests that assert those strings.
 
 **Does not apply to** Storybook meta `title` / story `name` (sidebar labels), TypeScript identifiers, JSDoc that describes APIs, `CHANGELOG.md`, or historical examples in `MIGRATION.md`.
+
+**Component-specific copy rules** (prop-level guidance for `title`, `description`, button labels, etc.) live in each component's `README.md` / `README.mdx`. Read them via Storybook MCP before writing or reviewing copy for a specific component.
 
 ---
 
@@ -115,135 +117,6 @@ Do not use colons in labels or headings. Use sparingly in body copy.
 
 ---
 
-## Per-component rules
-
-Use these patterns for sample copy in this repo. Prop names match `@metamask/design-system-react` and `@metamask/design-system-react-native`.
-
-### Buttons (`Button`, `ButtonPrimary`, `ButtonSecondary`, `ButtonTertiary`, `ButtonHero`, `ButtonBase`, `ButtonSemantic`, `TextButton`, `ButtonFilter`, `FilterButton`, `MainActionButton`)
-
-- Sentence case, 1–3 words, imperative verb first
-- No punctuation
-- `loadingText` uses ellipsis: `"Turning on..."` — never `"Please wait..."`
-
-```
-✅ "Turn on"  ✅ "Save"  ✅ "Turn on notifications"
-❌ "Turn On Notifications"  ❌ "Submit."  ❌ "Click to continue"
-```
-
-### Form labels (`Label`)
-
-- Sentence case
-- No colon, no period
-
-```
-✅ "Email address"
-❌ "Email Address"
-```
-
-### Placeholders (`TextField`, `TextFieldSearch`, `TextArea`, `Input`, `FormTextField`)
-
-- Sentence case
-- Imperative verb starters: "Enter", "Search"
-- Ellipsis only for genuinely open-ended input; prefer specificity
-
-```
-✅ "Search tokens, sites, URLs"
-✅ "Enter amount"
-❌ "Enter Amount..."
-```
-
-### Help text / error text (`HelpText`)
-
-- Sentence case
-- Full sentences end with a period; short phrases do not
-- Errors: say what happened, then what to do. No "Error:" prefix.
-
-```
-✅ "Incorrect password. Try again."
-❌ "Error: You entered an invalid password."
-```
-
-### Banners (`BannerAlert`, `BannerBase`)
-
-- `title`: sentence case, no period
-- `description`: sentence case, period if complete sentence
-- `actionButtonLabel`: sentence case, no period
-
-### Toast
-
-- Sentence case throughout
-- Label segments combine into one sentence ending with a period: `"Added"` + bold `"Mainnet"` + `" network."`
-- `description`: full sentence, period
-- `actionButtonLabel`: sentence case, no period, no exclamation point, never "Click here"
-
-### Modals (`Modal`, `ModalHeader`, `ModalBody`, `ModalFooter`) — React web
-
-- Header title: sentence case, no period
-- Body: sentence case, period if complete sentence
-- Footer button labels: sentence case, no period
-
-### Bottom sheets (`BottomSheet`, `BottomSheetHeader`, `BottomSheetFooter`) — React Native
-
-- `title` / header children: sentence case, no period
-- Footer button labels: sentence case, no period
-
-### Screen headers (`HeaderBase`, `HeaderStandard`, `HeaderStandardAnimated`, `HeaderRoot`, `HeaderSearch`, `HeaderSubpage`)
-
-- Sentence case — this includes multi-word screen titles
-- No period
-
-```
-✅ "Account settings"
-❌ "Account Settings"
-```
-
-### Section headers (`SectionHeader`)
-
-- Sentence case
-- No period
-
-```
-✅ "Your positions"  ✅ "Tokens"
-❌ "Your Positions"
-```
-
-### Tags (`Tag`)
-
-- Sentence case at source — do not pre-uppercase the string if the component applies `textTransform`
-- No period
-
-### List items (`ActionListItem`, `ListItem`)
-
-- `label`: sentence case, no period
-- `description`: sentence case, no period
-
-### Key-value rows (`KeyValueRow`, `KeyValueSelect`, `KeyValueColumn`)
-
-- Field labels: sentence case, no period
-- Tooltip title: sentence case, no period
-- Tooltip content: full sentence, period
-
-### Checkboxes / radio buttons (`Checkbox`, `RadioButton`)
-
-- `label`: sentence case, no period
-
-### Empty states (`TabEmptyState`)
-
-- `description`: sentence case, `"No X found"` pattern, no period
-- `actionButtonText`: sentence case, verb phrase, no period
-
-```
-✅ description: "No perpetual positions found"
-✅ actionButtonText: "Start trading"
-❌ actionButtonText: "Start Trading"
-```
-
-### Titles (`TitleStandard`, `TitleSubpage`, `TitleHub`, `TitleAlert`)
-
-- Sentence case, no period
-
----
-
 ## Voice and tone
 
 ### Active voice
@@ -336,3 +209,4 @@ When adding or editing user-facing strings:
 - [ ] No "please", "click here", "successfully", "gas fee", or "dapp" in product copy
 - [ ] Tests that assert those strings were updated to match
 - [ ] Default alt text and accessibility strings follow the same rules
+- [ ] Component-specific prop rules checked against the component README via Storybook MCP

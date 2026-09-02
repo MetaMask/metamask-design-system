@@ -242,12 +242,12 @@ describe('Toaster', () => {
     const onActionPress = jest.fn();
     render(<Toaster ref={toasterRef} />);
     await showToastAndWait(toasterRef, {
-      actionButtonLabel: 'Click here',
+      actionButtonLabel: 'View details',
       hasNoTimeout: true,
       actionButtonOnPress: onActionPress,
       title: 'With action',
     });
-    const actionButton = screen.getByText('Click here');
+    const actionButton = screen.getByText('View details');
     expect(actionButton).toBeDefined();
 
     await act(async () => {

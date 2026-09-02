@@ -1,6 +1,6 @@
 {
   "name": "@metamask/metamask-design-system",
-  "version": "62.0.0",
+  "version": "63.0.0",
   "private": true,
   "description": "The MetaMask Design System monorepo",
   "repository": {
@@ -91,7 +91,7 @@
     "@babel/preset-typescript": "^7.23.3",
     "@figma/code-connect": "^1.4.9",
     "@lavamoat/allow-scripts": "^3.2.1",
-    "@metamask/create-release-branch": "^4.2.1",
+    "@metamask/create-release-branch": "^4.2.2",
     "@metamask/eslint-config": "^15.0.1",
     "@metamask/eslint-config-jest": "^15.0.1",
     "@metamask/eslint-config-nodejs": "^15.0.1",

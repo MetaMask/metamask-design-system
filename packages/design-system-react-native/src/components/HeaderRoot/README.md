@@ -11,7 +11,7 @@ HeaderRoot is a header with a left section and an end section(`endAccessory` or 
 import { HeaderRoot, IconName } from '@metamask/design-system-react-native';
 
 <HeaderRoot
-  title="Screen Title"
+  title="Screen title"
   endButtonIconProps={[{ iconName: IconName.Close, onPress: handleClose }]}
 />;
 ```
@@ -188,3 +188,13 @@ import { HeaderRoot } from '@metamask/design-system-react-native';
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Sentence case — applies to all multi-word screen titles
+- No period
+
+```
+✅ "Account settings"
+❌ "Account Settings"
+```

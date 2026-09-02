@@ -5,7 +5,7 @@ Label is used to describe the purpose of a form field. It renders a standardized
 ```tsx
 import { Label } from '@metamask/design-system-react-native';
 
-<Label>Email Address</Label>;
+<Label>Email address</Label>;
 ```
 
 ## Props
@@ -36,8 +36,8 @@ Optional enum to select between typography variants. The Label defaults to `Text
 import { Label } from '@metamask/design-system-react-native';
 import { TextVariant } from '@metamask/design-system-react-native';
 
-<Label variant={TextVariant.BodySm}>Small Label</Label>
-<Label>Default Label (BodyMd)</Label>
+<Label variant={TextVariant.BodySm}>Small label</Label>
+<Label>Default label (BodyMd)</Label>
 ```
 
 ### `twClassName`
@@ -58,7 +58,7 @@ import { Label } from '@metamask/design-system-react-native';
 <Label twClassName="mb-2">Label with margin</Label>
 
 // Override default styles
-<Label twClassName="text-error-default">Required Field</Label>
+<Label twClassName="text-error-default">Required field</Label>
 ```
 
 ### `style`
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 });
 
 export const StyleExample = () => (
-  <Label style={styles.custom}>Styled Label</Label>
+  <Label style={styles.custom}>Styled label</Label>
 );
 ```
 
@@ -88,3 +88,8 @@ For detailed migration instructions from the Mobile component-library, see the [
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Sentence case
+- No colon, no period

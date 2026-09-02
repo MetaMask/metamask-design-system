@@ -294,3 +294,8 @@ Migrating from the legacy `KeyValueRow` in `app/component-library/components-tem
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- `keyLabel` string: sentence case, no period
+- `value` string: sentence case, no period

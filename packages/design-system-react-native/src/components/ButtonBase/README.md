@@ -74,7 +74,7 @@ Whether the button is disabled.
 
 ```tsx
 <ButtonBase isDisabled onPress={() => {}}>
-  Disabled Button
+  Disabled button
 </ButtonBase>
 ```
 
@@ -145,3 +145,14 @@ Migrating from the legacy `ButtonBase` in `app/component-library/components/Butt
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Sentence case, 1–3 words, imperative verb first
+- No punctuation
+- `loadingText` prop uses an ellipsis: `"Turning on..."`
+
+```
+✅ "Turn on"  ✅ "Save"  ✅ "Turn on notifications"
+❌ "Turn On Notifications"  ❌ "Submit."
+```
