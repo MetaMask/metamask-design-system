@@ -7,7 +7,7 @@ import { Button } from './Button';
 describe('Button', () => {
   describe('Variants', () => {
     it('renders primary button by default', () => {
-      render(<Button>Primary Button</Button>);
+      render(<Button>Primary button</Button>);
 
       const button = screen.getByRole('button');
       expect(button).toHaveClass(
@@ -20,7 +20,7 @@ describe('Button', () => {
 
     it('renders secondary button when variant is Secondary', () => {
       render(
-        <Button variant={ButtonVariant.Secondary}>Secondary Button</Button>,
+        <Button variant={ButtonVariant.Secondary}>Secondary button</Button>,
       );
 
       const button = screen.getByRole('button');
@@ -56,7 +56,7 @@ describe('Button', () => {
   describe('Common Features', () => {
     it('applies danger styles correctly for each variant', () => {
       const { rerender } = render(
-        <Button isDanger>Primary Danger Button</Button>,
+        <Button isDanger>Primary danger button</Button>,
       );
 
       let button = screen.getByRole('button');
@@ -64,7 +64,7 @@ describe('Button', () => {
 
       rerender(
         <Button variant={ButtonVariant.Secondary} isDanger>
-          Secondary Danger Button
+          Secondary danger button
         </Button>,
       );
       button = screen.getByRole('button');
@@ -77,7 +77,7 @@ describe('Button', () => {
 
       rerender(
         <Button variant={ButtonVariant.Tertiary} isDanger>
-          Tertiary Danger Button
+          Tertiary danger button
         </Button>,
       );
       button = screen.getByRole('button');
@@ -86,7 +86,7 @@ describe('Button', () => {
 
     it('applies inverse styles correctly for Primary and Secondary variants', () => {
       const { rerender } = render(
-        <Button isInverse>Primary Inverse Button</Button>,
+        <Button isInverse>Primary inverse button</Button>,
       );
 
       let button = screen.getByRole('button');
@@ -94,7 +94,7 @@ describe('Button', () => {
 
       rerender(
         <Button variant={ButtonVariant.Secondary} isInverse>
-          Secondary Inverse Button
+          Secondary inverse button
         </Button>,
       );
       button = screen.getByRole('button');
@@ -216,7 +216,7 @@ describe('Button', () => {
 
     it('applies full width correctly for all variants', () => {
       const { rerender } = render(
-        <Button isFullWidth>Primary Full Width</Button>,
+        <Button isFullWidth>Primary full width</Button>,
       );
 
       let button = screen.getByRole('button');
@@ -224,7 +224,7 @@ describe('Button', () => {
 
       rerender(
         <Button variant={ButtonVariant.Secondary} isFullWidth>
-          Secondary Full Width
+          Secondary full width
         </Button>,
       );
       button = screen.getByRole('button');
@@ -232,7 +232,7 @@ describe('Button', () => {
 
       rerender(
         <Button variant={ButtonVariant.Tertiary} isFullWidth>
-          Tertiary Full Width
+          Tertiary full width
         </Button>,
       );
       button = screen.getByRole('button');
@@ -243,7 +243,7 @@ describe('Button', () => {
   describe('Focus Styling', () => {
     describe('Primary Button Focus', () => {
       it('applies correct focus outline for non-inverse primary button', () => {
-        render(<Button>Primary Button</Button>);
+        render(<Button>Primary button</Button>);
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
@@ -255,7 +255,7 @@ describe('Button', () => {
       });
 
       it('applies correct focus outline for inverse primary button', () => {
-        render(<Button isInverse>Primary Inverse Button</Button>);
+        render(<Button isInverse>Primary inverse button</Button>);
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
@@ -267,7 +267,7 @@ describe('Button', () => {
       });
 
       it('applies correct focus outline for danger primary button', () => {
-        render(<Button isDanger>Primary Danger Button</Button>);
+        render(<Button isDanger>Primary danger button</Button>);
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
           'focus-visible:ring-0',
@@ -282,7 +282,7 @@ describe('Button', () => {
     describe('Secondary Button Focus', () => {
       it('applies correct focus outline for non-inverse secondary button', () => {
         render(
-          <Button variant={ButtonVariant.Secondary}>Secondary Button</Button>,
+          <Button variant={ButtonVariant.Secondary}>Secondary button</Button>,
         );
         const button = screen.getByRole('button');
         expect(button).toHaveClass(
@@ -297,7 +297,7 @@ describe('Button', () => {
       it('applies correct focus outline for inverse secondary button', () => {
         render(
           <Button variant={ButtonVariant.Secondary} isInverse>
-            Secondary Inverse Button
+            Secondary inverse button
           </Button>,
         );
         const button = screen.getByRole('button');
@@ -313,7 +313,7 @@ describe('Button', () => {
       it('applies correct focus outline for danger secondary button', () => {
         render(
           <Button variant={ButtonVariant.Secondary} isDanger>
-            Secondary Danger Button
+            Secondary danger button
           </Button>,
         );
         const button = screen.getByRole('button');
@@ -345,7 +345,7 @@ describe('Button', () => {
       it('applies correct focus outline for inverse tertiary button', () => {
         render(
           <Button variant={ButtonVariant.Tertiary} isInverse>
-            Tertiary Inverse Button
+            Tertiary inverse button
           </Button>,
         );
         const button = screen.getByRole('button');
@@ -361,7 +361,7 @@ describe('Button', () => {
       it('applies correct focus outline for danger tertiary button', () => {
         render(
           <Button variant={ButtonVariant.Tertiary} isDanger>
-            Tertiary Danger Button
+            Tertiary danger button
           </Button>,
         );
         const button = screen.getByRole('button');

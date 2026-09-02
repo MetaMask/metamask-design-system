@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.38.1]
+
+### Changed
+
+- Added content guidelines to component documentation, including sentence case, punctuation, and prop-specific examples ([#1466](https://github.com/MetaMask/metamask-design-system/pull/1466))
+- Updated the `AvatarGroup` migration guide with extension-specific prop mappings and migration examples ([#1460](https://github.com/MetaMask/metamask-design-system/pull/1460))
+
+### Fixed
+
+- Fixed a `BadgeWrapper` layout feedback loop that could cause continuous layout updates and high CPU usage ([#1474](https://github.com/MetaMask/metamask-design-system/pull/1474))
+
 ## [0.38.0]
 
 ### Changed
@@ -509,7 +520,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...HEAD
+[0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...@metamask/design-system-react@0.38.1
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...@metamask/design-system-react@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...@metamask/design-system-react@0.37.0
 [0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.2...@metamask/design-system-react@0.36.0
