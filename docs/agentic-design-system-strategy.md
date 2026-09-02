@@ -266,7 +266,7 @@ False positives feed back into patterns, documentation, or Review context. A cod
 
 Deterministic checks may block from the start. Inferred checks begin as advisory. Each inferred check must reach at least 90% precision across 50 findings before it can block. Where possible, a trusted inferred check should become a deterministic rule and be tested against historical changes.
 
-A human still approves and merges every pull request. Reliable MMDS assurance is one requirement for future low-risk auto-approval, but this strategy does not authorize automatic approval or merge.
+A human still approves and merges every pull request. Reliable MMDS assurance is one requirement for future low-risk auto-approval, but this strategy does not authorize automatic approval or merge. A related draft, [UX papercut auto-approval pilot](./ux-papercut-auto-approval-pilot.md), explores a fail-closed path where a trusted GitHub App may submit the required approval for narrowly scoped presentation-only changes after shadow calibration. In that pilot a human still merges, including by enabling GitHub Auto-merge.
 
 ```mermaid
 flowchart TB
@@ -630,9 +630,11 @@ Test whether an MMDS Audit skill can compare:
 - Agents do not merge product changes.
 - Judgment-based checks remain advisory until they meet the trust threshold.
 - Reliable MMDS assurance can support future organization-level auto-approval, but it is not sufficient on its own.
+- See [UX papercut auto-approval pilot](./ux-papercut-auto-approval-pilot.md) for a proposed fail-closed approval pilot that keeps human merge (and allows GitHub Auto-merge as human merge intent).
 
 ## 11. Appendix
 
+- [UX papercut auto-approval pilot](./ux-papercut-auto-approval-pilot.md)
 - [MMDS Agentic Strategy FigJam](https://www.figma.com/board/3ijfD8P0KHe1M5ubwhk27k/MMDS-Agentic-Strategy)
 - [Patterns FigJam](https://www.figma.com/board/CDy0suxFcEjMu68vaGjiKQ/Patterns)
 - [Into Design Systems — Agentic Design Systems](https://www.intodesignsystems.com/agentic-design-systems)
