@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgUnpin = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path fillRule="evenodd" d="M3.507 2.047 2.093 3.46 8.48 9.847H5.65l-1.414 1.415 3.536 3.535L3.53 19.04v1.414h1.414l4.243-4.243 3.535 3.536 1.415-1.414v-2.829l6.385 6.386 1.414-1.414zm5.786 9.816.6-.601 2.83 2.828-.602.601v1.626l-4.454-4.454z" clipRule="evenodd" /><path d="m16.965 12.676 2.121-2.121.708.707 1.414-1.415-7.071-7.07-1.415 1.414.708.707-2.122 2.121 1.414 1.414 2.122-2.121 2.828 2.828-2.121 2.122z" /></svg>;
+const SvgUnpin = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M7.805 3.75a.75.75 0 0 1 .75-.75H18a.75.75 0 0 1 0 1.5h-.606l1.758 9.966a.75.75 0 0 1-.607.868 1 1 0 0 1-.132.012.75.75 0 0 1-.737-.62L15.87 4.5H8.558a.75.75 0 0 1-.753-.75m12.2 17.055a.75.75 0 0 1-1.06-.05l-3.186-3.505H12.75v5.25a.75.75 0 0 1-1.5 0v-5.25h-7.5a.75.75 0 0 1 0-1.5h.87l1.59-9-2.265-2.496a.75.75 0 1 1 1.11-1.008l15 16.5a.75.75 0 0 1-.05 1.059m-5.61-5.055-6.91-7.601-1.34 7.601Z" /></svg>;
 const ForwardRef = forwardRef(SvgUnpin);
 export default ForwardRef;

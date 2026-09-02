@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgSave = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M5 21V5q0-.824.588-1.412C6.176 2.999 6.45 3 7 3h10q.824 0 1.413.588C19.002 4.175 19 4.45 19 5v16l-7-3zm2-3.05 5-2.15 5 2.15V5H7z" /></svg>;
+const SvgSave = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="m20.56 6.75-3.31-3.31A1.49 1.49 0 0 0 16.19 3H4.5A1.5 1.5 0 0 0 3 4.5v15A1.5 1.5 0 0 0 4.5 21h15a1.5 1.5 0 0 0 1.5-1.5V7.81a1.49 1.49 0 0 0-.44-1.06M15.75 19.5h-7.5v-5.25h7.5Zm3.75 0h-2.25v-5.25a1.5 1.5 0 0 0-1.5-1.5h-7.5a1.5 1.5 0 0 0-1.5 1.5v5.25H4.5v-15h11.69l3.31 3.31ZM15 6.75a.75.75 0 0 1-.75.75H9A.75.75 0 0 1 9 6h5.25a.75.75 0 0 1 .75.75" /></svg>;
 const ForwardRef = forwardRef(SvgSave);
 export default ForwardRef;
