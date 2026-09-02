@@ -25,16 +25,16 @@ The [agentic design system strategy](./agentic-design-system-strategy.md) alread
 
 ## 2. Authority model
 
-| Actor | May do | Must not do |
-| :---- | :----- | :---------- |
-| Author (internal, with label permission) | Add `auto-approve-candidate` to request evaluation | Prove safety by labeling |
-| Product CI | Produce check results and artifacts at the head SHA | Approve or merge |
-| Trusted eligibility classifier | Deterministically classify allowed changed nodes/paths from protected policy | Use LLM judgment as a grant |
-| AI analyzer modes | Produce risk / UX / MMDS evidence and vetoes | Submit `APPROVE` |
-| MetaMask Skills | Provide review rubrics and knowledge routing | Own gate thresholds or CI allowlists |
-| GitHub App (existing or purpose-built) | Independently re-fetch evidence and approve or dismiss for that SHA | Call the merge API |
-| Human engineer | Merge, or enable GitHub Auto-merge after approval | Be removed from the merge decision in this pilot |
-| Merge queue | Enforce mergeability after human merge intent | Decide eligibility |
+| Actor                                    | May do                                                                       | Must not do                                      |
+| :--------------------------------------- | :--------------------------------------------------------------------------- | :----------------------------------------------- |
+| Author (internal, with label permission) | Add `auto-approve-candidate` to request evaluation                           | Prove safety by labeling                         |
+| Product CI                               | Produce check results and artifacts at the head SHA                          | Approve or merge                                 |
+| Trusted eligibility classifier           | Deterministically classify allowed changed nodes/paths from protected policy | Use LLM judgment as a grant                      |
+| AI analyzer modes                        | Produce risk / UX / MMDS evidence and vetoes                                 | Submit `APPROVE`                                 |
+| MetaMask Skills                          | Provide review rubrics and knowledge routing                                 | Own gate thresholds or CI allowlists             |
+| GitHub App (existing or purpose-built)   | Independently re-fetch evidence and approve or dismiss for that SHA          | Call the merge API                               |
+| Human engineer                           | Merge, or enable GitHub Auto-merge after approval                            | Be removed from the merge decision in this pilot |
+| Merge queue                              | Enforce mergeability after human merge intent                                | Decide eligibility                               |
 
 ### Human merge and GitHub Auto-merge
 
@@ -108,26 +108,26 @@ Every criterion returns one of:
 
 ### Deterministic (must all pass)
 
-| Criterion | Notes |
-| :------- | :---- |
-| Nomination label present | `auto-approve-candidate` at evaluation time |
-| Internal non-fork, non-draft, default base branch | Exact head SHA |
-| Required CI allowlist green | Explicit job names; skipped / neutral / missing fail closed |
-| Path and changed-node allowlist | Presentation-only envelope |
-| No dependency or lockfile changes | |
-| No workflow, analyzer config, or policy-path changes | Self-evaluation prevention |
-| No blocking or bypass labels | |
-| Review threads and Bugbot findings clear | Open, unresolved, or post-decision findings fail or re-evaluate |
-| Before/after evidence present | Platform-appropriate; author evidence is a claim until automated capture exists |
+| Criterion                                            | Notes                                                                           |
+| :--------------------------------------------------- | :------------------------------------------------------------------------------ |
+| Nomination label present                             | `auto-approve-candidate` at evaluation time                                     |
+| Internal non-fork, non-draft, default base branch    | Exact head SHA                                                                  |
+| Required CI allowlist green                          | Explicit job names; skipped / neutral / missing fail closed                     |
+| Path and changed-node allowlist                      | Presentation-only envelope                                                      |
+| No dependency or lockfile changes                    |                                                                                 |
+| No workflow, analyzer config, or policy-path changes | Self-evaluation prevention                                                      |
+| No blocking or bypass labels                         |                                                                                 |
+| Review threads and Bugbot findings clear             | Open, unresolved, or post-decision findings fail or re-evaluate                 |
+| Before/after evidence present                        | Platform-appropriate; author evidence is a claim until automated capture exists |
 
 ### Inferred (veto only until calibrated)
 
-| Check | Role in pilot |
-| :---- | :------------ |
-| PR risk analysis | Veto on elevated risk / not merge-safe |
-| MMDS constraint review | Veto on clear MMDS policy violations visible in the diff |
-| Visual / papercut review | Veto or advisory until precision is measured |
-| Design taste | Advisory only until calibrated |
+| Check                    | Role in pilot                                            |
+| :----------------------- | :------------------------------------------------------- |
+| PR risk analysis         | Veto on elevated risk / not merge-safe                   |
+| MMDS constraint review   | Veto on clear MMDS policy violations visible in the diff |
+| Visual / papercut review | Veto or advisory until precision is measured             |
+| Design taste             | Advisory only until calibrated                           |
 
 MMDS review in current analyzer CI remains **constraint-level**: MMDS by default, Tailwind over new SCSS where Extension policy requires it, no new raw primitives where policy forbids them, no arbitrary colors. It does **not** yet have Storybook MCP or consumer `node_modules` design-system packages in the analyzer job. In-depth API and pattern review against Storybook docs is out of scope until a version-matched knowledge path exists.
 
@@ -163,14 +163,14 @@ flowchart LR
   Human --> Queue
 ```
 
-| Layer | Owns | Does not own |
-| :---- | :--- | :----------- |
-| Product CI | Required check allowlist at SHA, artifacts | Approval |
-| Trusted classifier | Path/node eligibility from protected policy | LLM judgment |
-| Analyzer modes | `pr-risk-analysis` plus proposed `ux-papercut-review` as evidence | `APPROVE` |
-| MetaMask Skills | Thin review rubric; load UI, visual, and taste skills | Gate thresholds, CI job lists |
-| GitHub App | Independent re-fetch, approve, dismiss | Merge |
-| Merge queue | Mergeability after human merge intent | Eligibility |
+| Layer              | Owns                                                              | Does not own                  |
+| :----------------- | :---------------------------------------------------------------- | :---------------------------- |
+| Product CI         | Required check allowlist at SHA, artifacts                        | Approval                      |
+| Trusted classifier | Path/node eligibility from protected policy                       | LLM judgment                  |
+| Analyzer modes     | `pr-risk-analysis` plus proposed `ux-papercut-review` as evidence | `APPROVE`                     |
+| MetaMask Skills    | Thin review rubric; load UI, visual, and taste skills             | Gate thresholds, CI job lists |
+| GitHub App         | Independent re-fetch, approve, dismiss                            | Merge                         |
+| Merge queue        | Mergeability after human merge intent                             | Eligibility                   |
 
 ### Analyzer and platform gaps to call out
 
@@ -226,11 +226,11 @@ Humans label expected eligibility **before** the policy runs. Implementation sta
 
 ## 9. Governance
 
-| Partner | Responsibility |
-| :------ | :------------- |
-| Product engineering | Approval policy and accepted risk |
-| AI Platform / QA | Analyzer runtime and evidence quality |
-| MMDS | MMDS constraint-check quality and skill routing |
+| Partner               | Responsibility                                  |
+| :-------------------- | :---------------------------------------------- |
+| Product engineering   | Approval policy and accepted risk               |
+| AI Platform / QA      | Analyzer runtime and evidence quality           |
+| MMDS                  | MMDS constraint-check quality and skill routing |
 | GitHub administrators | App inventory, permissions, repository controls |
 
 ### Open decisions before build
