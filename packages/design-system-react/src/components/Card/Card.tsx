@@ -16,6 +16,7 @@ export const Card = forwardRef<HTMLDivElement | HTMLButtonElement, CardProps>(
       className,
       onClick,
       asChild,
+      flexDirection,
       padding = 4,
       borderWidth = 1,
       borderColor = BoxBorderColor.BorderDefault,
@@ -26,9 +27,14 @@ export const Card = forwardRef<HTMLDivElement | HTMLButtonElement, CardProps>(
   ) => {
     const isPressable = Boolean(onClick) && !asChild;
     const mergedClassName = twMerge(
+      // Box only emits a display class when flexDirection is set, and this
+      // className overrides Box's own classes, so skip `block` in that case.
+      !flexDirection && 'block',
       'rounded text-default',
+      // A button or an asChild child shrinks to fit its content, unlike a div.
+      (isPressable || asChild) && 'w-full',
       isPressable &&
-        'w-full cursor-pointer appearance-none text-start hover:bg-hover active:bg-pressed',
+        'cursor-pointer appearance-none text-start hover:bg-hover active:bg-pressed',
       className,
     );
     const boxRef = ref as React.Ref<HTMLDivElement>;
@@ -36,6 +42,7 @@ export const Card = forwardRef<HTMLDivElement | HTMLButtonElement, CardProps>(
     const boxProps = {
       ...props,
       ref: boxRef,
+      flexDirection,
       padding,
       borderWidth,
       borderColor,

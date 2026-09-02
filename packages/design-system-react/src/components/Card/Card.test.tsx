@@ -1,3 +1,4 @@
+import { BoxFlexDirection } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
@@ -22,6 +23,26 @@ describe('Card', () => {
       'bg-default',
       'text-default',
     );
+  });
+
+  it('renders a block-level surface without stretching to fill a flex parent', () => {
+    render(<Card data-testid="card">Card content</Card>);
+
+    const card = screen.getByTestId('card');
+    expect(card).toHaveClass('block');
+    expect(card).not.toHaveClass('w-full');
+  });
+
+  it('keeps the flex display when flexDirection is provided', () => {
+    render(
+      <Card data-testid="card" flexDirection={BoxFlexDirection.Row}>
+        Card content
+      </Card>,
+    );
+
+    const card = screen.getByTestId('card');
+    expect(card).toHaveClass('flex', 'flex-row');
+    expect(card).not.toHaveClass('block');
   });
 
   it('allows the text color to be overridden via className', () => {
@@ -117,6 +138,18 @@ describe('Card', () => {
       'bg-default',
       'text-default',
     );
+  });
+
+  it('makes an inline child a full-width block surface when asChild is true', () => {
+    render(
+      <Card asChild>
+        <a href="#activity" data-testid="card">
+          Card content
+        </a>
+      </Card>,
+    );
+
+    expect(screen.getByTestId('card')).toHaveClass('block', 'w-full');
   });
 
   it('forwards onClick onto the child when asChild is true', async () => {
