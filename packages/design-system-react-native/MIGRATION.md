@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version X.XX.X to X.XX.X](#from-version-xxx-to-xxx)
 - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
 - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
 - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -50,6 +51,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version X.XX.X to X.XX.X](#from-version-xxx-to-xxx)
   - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
   - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -71,6 +73,18 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version X.XX.X to X.XX.X
+
+<a id="from-version-xxx-to-xxx"></a>
+
+<a id="iconname-unused-icons-removed"></a>
+
+#### `IconName`: unused icons removed
+
+111 unused icons are removed from **`IconName`** (shared with `@metamask/design-system-shared`). See the [shared package migration guide](../design-system-shared/MIGRATION.md#iconname-unused-icons-removed) for the full removed list and suggested replacements.
+
+**Impact:** TypeScript will fail on any remaining references to the removed icon names.
 
 ### From version 0.41.0 to 0.42.0
 
