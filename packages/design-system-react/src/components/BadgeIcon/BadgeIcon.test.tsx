@@ -9,7 +9,9 @@ import { BadgeIcon } from './BadgeIcon';
 
 describe('BadgeIcon', () => {
   it('renders with default props', () => {
-    render(<BadgeIcon iconName={IconName.UserCircle} data-testid="badge-icon" />);
+    render(
+      <BadgeIcon iconName={IconName.UserCircle} data-testid="badge-icon" />,
+    );
     const badgeIcon = screen.getByTestId('badge-icon');
     expect(badgeIcon).toBeInTheDocument();
     expect(badgeIcon).toHaveClass(

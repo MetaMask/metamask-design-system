@@ -32,10 +32,10 @@ This guide provides detailed instructions for migrating your project from one ve
 
 Replace any usage of a removed name with a remaining `IconName` that matches the product intent. Common substitutions used in this repo:
 
-| Removed           | Suggested replacement |
-| ----------------- | --------------------- |
-| `IconName.User`   | `IconName.UserCircle` |
-| `IconName.SecurityAlert` | `IconName.Warning` |
+| Removed                  | Suggested replacement |
+| ------------------------ | --------------------- |
+| `IconName.User`          | `IconName.UserCircle` |
+| `IconName.SecurityAlert` | `IconName.Warning`    |
 
 **Impact:**
 
