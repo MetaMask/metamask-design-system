@@ -105,7 +105,9 @@ jobs:
     needs:
       - check-workflows
       - detect-figma-code-connect-changes
-    if: needs.detect-figma-code-connect-changes.outputs.changed == 'true'
+    if: >
+      needs.detect-figma-code-connect-changes.result == 'success' &&
+      needs.detect-figma-code-connect-changes.outputs.changed == 'true'
     uses: ./.github/workflows/figma-code-connect.yml
     with:
       publish: ${{ github.event_name == 'push' }}
@@ -147,6 +149,7 @@ jobs:
       - lint-build-test
       - test-storybook
       - chromatic
+      - detect-figma-code-connect-changes
       - figma-code-connect
     outputs:
       passed: ${{ steps.set-output.outputs.passed }}
@@ -161,6 +164,7 @@ jobs:
             "lint-build-test:${{ needs.lint-build-test.result }}"
             "test-storybook:${{ needs.test-storybook.result }}"
             "chromatic:${{ needs.chromatic.result }}"
+            "detect-figma-code-connect-changes:${{ needs.detect-figma-code-connect-changes.result }}"
           )
 
           for entry in "${REQUIRED[@]}"; do
