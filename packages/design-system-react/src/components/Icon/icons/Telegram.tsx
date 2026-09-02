@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgTelegram = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M20.295 3.813s1.85-.721 1.696 1.03c-.052.722-.514 3.247-.874 5.978l-1.233 8.09s-.103 1.186-1.028 1.392-2.313-.721-2.57-.928c-.205-.154-3.854-2.473-5.14-3.607-.359-.309-.77-.927.052-1.649l5.397-5.153c.616-.618 1.233-2.061-1.337-.309l-7.195 4.896s-.822.515-2.364.051l-3.34-1.03s-1.234-.774.873-1.547c5.14-2.422 11.461-4.895 17.063-7.214" /></svg>;
+const SvgTelegram = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M21.458 2.455a.84.84 0 0 0-.86-.147L1.6 9.743a1.333 1.333 0 0 0 .228 2.551l4.923.967v5.489a1.49 1.49 0 0 0 .938 1.39 1.49 1.49 0 0 0 1.641-.35l2.374-2.461 3.766 3.296a1.5 1.5 0 0 0 .985.375 1.5 1.5 0 0 0 .469-.074 1.49 1.49 0 0 0 1-1.09L21.728 3.28a.84.84 0 0 0-.27-.826M15.726 5.83l-8.4 6.015-4.65-.912ZM8.25 18.75v-4.451l2.324 2.038Zm8.206.75-7.751-6.797L19.86 4.707Z" /></svg>;
 const ForwardRef = forwardRef(SvgTelegram);
 export default ForwardRef;

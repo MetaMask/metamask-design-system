@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgThumbUp = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M18 21H7V8l7-7 1.25 1.25q.175.175.288.475c.112.3.112.392.112.575v.35L14.55 8H21q.8 0 1.4.6c.6.6.6.867.6 1.4v2q0 .175-.05.375c-.05.2-.067.258-.1.375l-3 7.05q-.225.5-.75.85c-.525.35-.717.35-1.1.35m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM7 8v2H4v9h3v2H2V8z" /></svg>;
+const SvgThumbUp = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M21.938 7.511a2.25 2.25 0 0 0-1.688-.761H15v-1.5a3.75 3.75 0 0 0-3.75-3.75.75.75 0 0 0-.671.414L7.037 9H3a1.5 1.5 0 0 0-1.5 1.5v8.25a1.5 1.5 0 0 0 1.5 1.5h16.125a2.25 2.25 0 0 0 2.233-1.969l1.125-9a2.25 2.25 0 0 0-.546-1.77M3 10.5h3.75v8.25H3Zm17.994-1.406-1.125 9a.75.75 0 0 1-.744.656H8.25V9.927l3.442-6.884A2.25 2.25 0 0 1 13.5 5.25V7.5a.75.75 0 0 0 .75.75h6a.75.75 0 0 1 .744.844" /></svg>;
 const ForwardRef = forwardRef(SvgThumbUp);
 export default ForwardRef;

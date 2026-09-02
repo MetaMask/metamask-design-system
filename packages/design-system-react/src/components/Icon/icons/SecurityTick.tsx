@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgSecurityTick = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M10.95 15.55 16.6 9.9l-1.425-1.425L10.95 12.7l-2.1-2.1-1.425 1.425zM12 22q-3.476-.874-5.737-3.987C4.002 14.898 4 13.633 4 11.1V5l8-3 8 3v6.1q0 3.8-2.262 6.913C15.476 21.124 14.317 21.417 12 22m0-2.1q2.6-.825 4.3-3.3c1.7-2.475 1.7-3.483 1.7-5.5V6.375l-6-2.25-6 2.25V11.1q0 3.025 1.7 5.5c1.7 2.475 2.567 2.75 4.3 3.3" /></svg>;
+const SvgSecurityTick = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M19.5 3.75h-15A1.5 1.5 0 0 0 3 5.25v5.25c0 4.943 2.393 7.938 4.4 9.58 2.162 1.768 4.312 2.368 4.406 2.394a.75.75 0 0 0 .394 0c.093-.026 2.241-.626 4.406-2.394C18.607 18.438 21 15.443 21 10.5V5.25a1.5 1.5 0 0 0-1.5-1.5m0 6.75c0 3.475-1.28 6.296-3.806 8.383A12.1 12.1 0 0 1 12 20.964a12 12 0 0 1-3.649-2.044C5.796 16.83 4.5 13.997 4.5 10.5V5.25h15ZM7.72 13.28a.75.75 0 0 1 1.06-1.06l1.72 1.72 4.72-4.72a.75.75 0 0 1 1.06 1.06l-5.25 5.25a.75.75 0 0 1-1.06 0Z" /></svg>;
 const ForwardRef = forwardRef(SvgSecurityTick);
 export default ForwardRef;
