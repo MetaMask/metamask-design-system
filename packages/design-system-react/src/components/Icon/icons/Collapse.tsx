@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgCollapse = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><g transform="scale(0.09375)"><path d="M213.66 53.66 163.31 104H192a8 8 0 0 1 0 16H144a8 8 0 0 1-8-8V64a8 8 0 0 1 16 0v28.69l50.34-50.35a8 8 0 0 1 11.32 11.32ZM112 136H64a8 8 0 0 0 0 16h28.69L42.34 202.34a8 8 0 0 0 11.32 11.32L104 163.31V192a8 8 0 0 0 16 0v-48a8 8 0 0 0-8-8" /></g></svg>;
+const SvgCollapse = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="m20.03 5.03-4.72 4.72H18a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75V6a.75.75 0 0 1 1.5 0v2.69l4.72-4.72a.75.75 0 0 1 1.06 1.06m-9.53 7.72H6a.75.75 0 0 0 0 1.5h2.69l-4.72 4.72a.75.75 0 0 0 1.06 1.06l4.72-4.72V18a.75.75 0 0 0 1.5 0v-4.5a.75.75 0 0 0-.75-.75" /></svg>;
 const ForwardRef = forwardRef(SvgCollapse);
 export default ForwardRef;

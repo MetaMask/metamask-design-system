@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgUserCircle = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><g transform="scale(0.09375)"><path d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24M74.08 197.5a64 64 0 0 1 107.84 0 87.83 87.83 0 0 1-107.84 0M96 120a32 32 0 1 1 32 32 32 32 0 0 1-32-32m97.76 66.41a79.66 79.66 0 0 0-36.06-28.75 48 48 0 1 0-59.4 0 79.66 79.66 0 0 0-36.06 28.75 88 88 0 1 1 131.52 0" /></g></svg>;
+const SvgUserCircle = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M12 2.25A9.75 9.75 0 1 0 21.75 12 9.76 9.76 0 0 0 12 2.25M6.945 18.516a6 6 0 0 1 10.11 0 8.234 8.234 0 0 1-10.11 0M9 11.25a3 3 0 1 1 3 3 3 3 0 0 1-3-3m9.165 6.226a7.47 7.47 0 0 0-3.38-2.695 4.5 4.5 0 1 0-5.57 0 7.47 7.47 0 0 0-3.38 2.695 8.25 8.25 0 1 1 12.33 0" /></svg>;
 const ForwardRef = forwardRef(SvgUserCircle);
 export default ForwardRef;

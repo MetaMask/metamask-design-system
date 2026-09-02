@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgSecurity = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><g transform="scale(0.09375)"><path d="M208 40H48a16 16 0 0 0-16 16v56c0 52.72 25.52 84.67 46.93 102.19 23.06 18.86 46 25.27 47 25.53a8 8 0 0 0 4.2 0c1-.26 23.91-6.67 47-25.53C198.48 196.67 224 164.72 224 112V56a16 16 0 0 0-16-16m0 72c0 37.07-13.66 67.16-40.6 89.42A129.3 129.3 0 0 1 128 223.62a128.25 128.25 0 0 1-38.92-21.81C61.82 179.51 48 149.3 48 112V56h160z" /></g></svg>;
+const SvgSecurity = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M19.5 3.75h-15A1.5 1.5 0 0 0 3 5.25v5.25c0 4.943 2.393 7.938 4.4 9.58 2.162 1.768 4.312 2.37 4.406 2.394a.75.75 0 0 0 .394 0c.093-.025 2.241-.626 4.406-2.394C18.607 18.438 21 15.443 21 10.5V5.25a1.5 1.5 0 0 0-1.5-1.5m0 6.75c0 3.475-1.28 6.296-3.806 8.383A12.1 12.1 0 0 1 12 20.964a12 12 0 0 1-3.649-2.044C5.796 16.83 4.5 13.997 4.5 10.5V5.25h15Z" /></svg>;
 const ForwardRef = forwardRef(SvgSecurity);
 export default ForwardRef;

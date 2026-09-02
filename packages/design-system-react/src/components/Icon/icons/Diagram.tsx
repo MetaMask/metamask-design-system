@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgDiagram = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><g transform="scale(0.09375)"><path d="M232 208a8 8 0 0 1-8 8H32a8 8 0 0 1-8-8V48a8 8 0 0 1 16 0v94.37L90.73 98a8 8 0 0 1 10.07-.38l58.81 44.11L218.73 90a8 8 0 1 1 10.54 12l-64 56a8 8 0 0 1-10.07.38L96.39 114.29 40 163.63V200h184a8 8 0 0 1 8 8" /></g></svg>;
+const SvgDiagram = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M21.75 19.5a.75.75 0 0 1-.75.75H3a.75.75 0 0 1-.75-.75v-15a.75.75 0 0 1 1.5 0v8.847l4.756-4.16a.75.75 0 0 1 .944-.035l5.513 4.135 5.543-4.85a.75.75 0 1 1 .988 1.126l-6 5.25a.75.75 0 0 1-.944.035l-5.513-4.133L3.75 15.34v3.41H21a.75.75 0 0 1 .75.75" /></svg>;
 const ForwardRef = forwardRef(SvgDiagram);
 export default ForwardRef;
