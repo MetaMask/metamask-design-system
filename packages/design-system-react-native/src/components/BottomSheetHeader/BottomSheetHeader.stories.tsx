@@ -35,7 +35,7 @@ type Story = StoryObj<BottomSheetHeaderProps>;
 
 export const Default: Story = {
   args: {
-    children: 'BottomSheetHeader Title',
+    children: 'Sheet title',
   },
 };
 

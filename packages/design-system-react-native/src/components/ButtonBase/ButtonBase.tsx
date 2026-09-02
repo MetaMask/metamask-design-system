@@ -89,7 +89,7 @@ export const ButtonBase = ({
     }
 
     if (isLoading) {
-      return 'Button is currently loading, please wait';
+      return 'Button is currently loading';
     }
 
     return undefined;

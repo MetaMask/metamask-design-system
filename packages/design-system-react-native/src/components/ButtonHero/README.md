@@ -28,7 +28,7 @@ import { ButtonHero } from '@metamask/design-system-react-native';
 | `React.ReactNode` | Yes      | `undefined` |
 
 ```tsx
-<ButtonHero>Primary Action</ButtonHero>
+<ButtonHero>Primary action</ButtonHero>
 ```
 
 ### `size`
@@ -62,7 +62,7 @@ ButtonHero can be set to take up the full width of its container.
 | `boolean` | No       | `false` |
 
 ```tsx
-<ButtonHero isFullWidth>Full Width Button</ButtonHero>
+<ButtonHero isFullWidth>Full width button</ButtonHero>
 ```
 
 ### `startIconName`
@@ -76,7 +76,7 @@ ButtonHero can display an icon at the start of the button.
 ```tsx
 import { ButtonHero, IconName } from '@metamask/design-system-react-native';
 
-<ButtonHero startIconName={IconName.AddSquare}>Start Icon</ButtonHero>;
+<ButtonHero startIconName={IconName.AddSquare}>Start icon</ButtonHero>;
 ```
 
 ### `endIconName`
@@ -90,7 +90,7 @@ ButtonHero can display an icon at the end of the button.
 ```tsx
 import { ButtonHero, IconName } from '@metamask/design-system-react-native';
 
-<ButtonHero endIconName={IconName.ArrowRight}>End Icon</ButtonHero>;
+<ButtonHero endIconName={IconName.ArrowRight}>End icon</ButtonHero>;
 ```
 
 ### `isDisabled`
@@ -102,7 +102,7 @@ Whether the button is disabled.
 | `boolean` | No       | `false` |
 
 ```tsx
-<ButtonHero isDisabled>Disabled Button</ButtonHero>
+<ButtonHero isDisabled>Disabled button</ButtonHero>
 ```
 
 ### `isLoading`
@@ -115,7 +115,7 @@ Whether the button is in a loading state.
 
 ```tsx
 <ButtonHero isLoading loadingText="Loading...">
-  Loading Button
+  Loading button
 </ButtonHero>
 ```
 
