@@ -42,6 +42,8 @@ This endpoint helps AI agents work with the design system by exposing:
 
 Maintainers can use these tools while authoring stories in this repo. Consumer repositories get the most value by connecting their agent clients to this endpoint (local) or a published Storybook MCP endpoint.
 
+React Native components are **composed** into this Storybook UI but are **not** part of this MCP index. Use the React Native web endpoint (`http://localhost:6007/mcp`) documented in `apps/storybook-react-native/README.md`.
+
 ## Accessibility Testing
 
 Our Storybook setup includes accessibility testing capabilities. See [Accessibility Testing Documentation](../../docs/accessibility-testing.md).

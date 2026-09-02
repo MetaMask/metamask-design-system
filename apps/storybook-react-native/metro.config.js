@@ -19,4 +19,10 @@ defaultConfig.resolver.sourceExts = [
   'svg',
 ];
 
-module.exports = withStorybook(defaultConfig);
+module.exports = withStorybook(defaultConfig, {
+  // On-device MCP (Storybook React Native v10.3+). Documentation tools work
+  // with experimental_mcp alone; websockets are required for select-story.
+  // See https://storybookjs-react-native.mintlify.app/guides/mcp-integration
+  websockets: 'auto',
+  experimental_mcp: true,
+});

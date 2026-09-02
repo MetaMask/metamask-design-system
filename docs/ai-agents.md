@@ -109,6 +109,18 @@ The three-layer model provides static guidance (rules, conventions, and process)
 - Story-level examples that reduce prop/API hallucination
 - Optional story test execution and preview tooling when addon toolsets are enabled
 
+### Endpoints
+
+| Storybook                                                                          | Dev MCP                     | Manifests (local / GitHub Pages)                                                                                                             |
+| ---------------------------------------------------------------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| React web (`yarn storybook`)                                                       | `http://localhost:6006/mcp` | `http://localhost:6006/manifests/components.json` · [published](https://metamask.github.io/metamask-design-system/manifests/components.json) |
+| React Native web (`yarn workspace @metamask/storybook-react-native storybook:web`) | `http://localhost:6007/mcp` | `http://localhost:6007/manifests/components.json` · nested at `/react-native/manifests/` on Pages                                            |
+| React Native on-device (Metro)                                                     | `http://localhost:7007/mcp` | Generated at runtime by `@storybook/react-native` (`experimental_mcp`)                                                                       |
+
+Composed refs in the React host Storybook do **not** merge React Native components into the `6006` MCP index. Query `6007` (or `7007` on device) for DSRN.
+
+React Native component READMEs stay Markdown (`.md`). MDX + Canvas docs are not supported on-device; shared stories must not import `.mdx` until that changes upstream.
+
 ### Maintainers vs consumers
 
 - **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation.

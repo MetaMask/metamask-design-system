@@ -49,6 +49,7 @@
     "@rolldown/plugin-babel": "^0.2.3",
     "@storybook/addon-a11y": "^10.4.6",
     "@storybook/addon-docs": "^10.4.6",
+    "@storybook/addon-mcp": "^0.6.0",
     "@storybook/addon-ondevice-actions": "10.4.7",
     "@storybook/addon-ondevice-backgrounds": "10.4.7",
     "@storybook/addon-ondevice-controls": "10.4.7",

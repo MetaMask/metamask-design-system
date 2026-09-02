@@ -37,7 +37,7 @@ Legacy `component-library/` folders are migration **sources**, not audit targets
 
 When asked to **audit** usage, alignment, or gaps, scan **both** platforms above. Look for misalignments and emergent patterns: custom UI, repeated compositions, and use cases where product intent is not met by current MMDS components or APIs. APIs may differ; judge whether MMDS achieves the same intent for the use case. Findings may inform new components, patterns, or API changes in this repo.
 
-**MMDS component reference:** Local — `apps/storybook-react/storybook-static/manifests/components.json` after `yarn build-storybook`, or `http://localhost:6006/manifests/components.json` while `yarn storybook` is running. Published — https://metamask.github.io/metamask-design-system/manifests/components.json
+**MMDS component reference:** Local — `apps/storybook-react/storybook-static/manifests/components.json` after `yarn build-storybook`, or `http://localhost:6006/manifests/components.json` while `yarn storybook` is running. React Native web: `http://localhost:6007/manifests/components.json` (`yarn workspace @metamask/storybook-react-native storybook:web`). Published — https://metamask.github.io/metamask-design-system/manifests/components.json (RN nested at `/react-native/manifests/`).
 
 **MMDS Figma (canonical):** https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=0-1 (`fileKey`: `1D6tnzXqWgnUC3spaAOELN`)
 
@@ -88,6 +88,7 @@ yarn create-component:react-native --name ComponentName --description "Brief des
 
 # Storybook
 yarn storybook                # React web (port 6006)
+yarn workspace @metamask/storybook-react-native storybook:web  # React Native web (port 6007)
 yarn storybook:ios:build      # React Native iOS dev client (first time / native dep changes)
 yarn storybook:ios            # React Native iOS (Metro + dev client)
 yarn storybook:android:build  # React Native Android dev client (first time / native dep changes)

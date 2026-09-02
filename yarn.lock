@@ -3711,6 +3711,7 @@ __metadata:
     "@rolldown/plugin-babel": "npm:^0.2.3"
     "@storybook/addon-a11y": "npm:^10.4.6"
     "@storybook/addon-docs": "npm:^10.4.6"
+    "@storybook/addon-mcp": "npm:^0.6.0"
     "@storybook/addon-ondevice-actions": "npm:10.4.7"
     "@storybook/addon-ondevice-backgrounds": "npm:10.4.7"
     "@storybook/addon-ondevice-controls": "npm:10.4.7"

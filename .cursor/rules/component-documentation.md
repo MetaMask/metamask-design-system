@@ -7,7 +7,7 @@ Documentation standards for Storybook stories and README files for React and Rea
 ### README Structure
 
 - **React Web**: Use `.mdx` format with Storybook Canvas integration
-- **React Native**: Use `.md` format with comprehensive static examples
+- **React Native**: Use `.md` format with comprehensive static examples. Do not convert these to MDX for Storybook yet — on-device Storybook cannot render MDX, and shared CSF stories that import `.mdx` break Metro. React Native **web** Storybook can render MDX via `@storybook/addon-docs`, but that must stay web-only (not imported from native stories).
 - **ALWAYS** follow templates exactly: @docs/component-readme-examples/
 - **Cross-platform**: Keep documentation identical across web/native (same sections, descriptions, examples)
 
@@ -114,6 +114,7 @@ Follow **Storybook controls (cross-platform)** above; mobile panels work best wi
 ```bash
 # Run Storybook
 yarn storybook                # React web (port 6006)
+yarn workspace @metamask/storybook-react-native storybook:web  # React Native web (port 6007)
 yarn storybook:ios:build      # React Native iOS dev client (first time / native dep changes)
 yarn storybook:ios            # React Native iOS (Metro + dev client)
 yarn storybook:android:build  # React Native Android dev client (first time / native dep changes)
@@ -126,8 +127,10 @@ yarn build-storybook          # Build static site
 yarn test:storybook           # Run Storybook accessibility tests
 
 # MCP-assisted Storybook workflows (requires Storybook running)
-# MCP endpoint: http://localhost:6006/mcp
-# Tools: preview-stories, run-story-tests
+# React web MCP: http://localhost:6006/mcp
+# React Native web MCP: http://localhost:6007/mcp
+# React Native on-device MCP: http://localhost:7007/mcp (Metro; experimental)
+# Tools: preview-stories, run-story-tests (web); select-story (on-device + websockets)
 ```
 
 ## Golden Path Examples

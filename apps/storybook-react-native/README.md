@@ -54,6 +54,42 @@ yarn workspace @metamask/storybook-react-native storybook:web
 yarn workspace @metamask/storybook-react-native build-storybook
 ```
 
+## AI Integration (Storybook MCP)
+
+React Native Storybook exposes MCP on two paths. Composition into React Storybook (`http://localhost:6006`) does **not** include React Native entries in that host's MCP manifests, so agents that need DSRN components should connect to the React Native endpoints below.
+
+### React Native web (browser Storybook)
+
+When `yarn workspace @metamask/storybook-react-native storybook:web` is running:
+
+```text
+http://localhost:6007/mcp
+```
+
+This is the same `@storybook/addon-mcp` setup as `@metamask/storybook-react`. Static builds also emit `manifests/components.json` and `manifests/docs.json` (nested under `/react-native/` on GitHub Pages).
+
+Tools include `list-all-documentation`, `get-documentation`, `get-documentation-for-story`, `get-storybook-story-instructions`, `preview-stories`, and `run-story-tests` (when supported).
+
+### On-device (Metro)
+
+When Metro is running for this app (`yarn storybook:ios` / `yarn storybook:android`), `@storybook/react-native` serves an experimental MCP endpoint on the channel server (Storybook React Native v10.3+, `experimental_mcp: true` in `metro.config.js`):
+
+```text
+http://localhost:7007/mcp
+```
+
+Documentation query tools work with MCP alone. `select-story` (push the selected story to connected devices) requires WebSockets, which this app enables via `websockets: 'auto'`.
+
+Do not expose the Metro MCP port on public networks. This app is a Storybook development client, not a production mobile build.
+
+### MDX READMEs
+
+Do **not** convert React Native component `README.md` files to MDX and import them from shared CSF stories yet.
+
+- **On-device** (`@storybook/react-native`): MDX and autodocs are not supported. Maintainers document this as missing, not as a bug ([issue 341](https://github.com/storybookjs/react-native/issues/341), [discussion 293](https://github.com/storybookjs/react-native/discussions/293), [issue 617](https://github.com/storybookjs/react-native/issues/617)). On-device docs stay markdown notes (`@storybook/addon-ondevice-notes`).
+- **React Native web** (`@storybook/react-native-web-vite`): MDX and `@storybook/addon-docs` **are** supported. Importing `README.mdx` from the same `*.stories.tsx` files used on device still breaks Metro unless every `.mdx` import is mocked.
+- Keep native READMEs as `.md` for GitHub/npm consumers. Use CSF stories plus MCP manifests for agent discovery until on-device MDX exists or we split web-only doc files that native never imports.
+
 ## Run Storybook tests
 
 Component stories are tested in the browser via Vitest and Playwright (same approach as `@metamask/storybook-react`):
