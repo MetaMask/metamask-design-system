@@ -21,9 +21,6 @@ const meta: Meta<CardProps> = {
     children: {
       control: 'text',
     },
-    onClick: {
-      action: 'clicked',
-    },
   },
   decorators: [
     (Story) => (
@@ -57,13 +54,13 @@ export const Children: Story = {
 };
 
 export const OnClick: Story = {
+  argTypes: {
+    onClick: {
+      action: 'clicked',
+    },
+  },
   render: (args) => (
-    <Card
-      {...args}
-      onClick={(event) => {
-        args.onClick?.(event);
-      }}
-    >
+    <Card {...args}>
       <Text>Pressable card</Text>
     </Card>
   ),

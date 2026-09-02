@@ -13,7 +13,6 @@ const meta: Meta<CardProps> = {
   argTypes: {
     children: { control: 'text' },
     twClassName: { control: 'text' },
-    onPress: { action: 'pressed' },
   },
   decorators: [
     (Story) => (
@@ -37,8 +36,11 @@ export const Default: Story = {
 };
 
 export const OnPress: Story = {
+  argTypes: {
+    onPress: { action: 'pressed' },
+  },
   render: (args) => (
-    <Card {...args} onPress={() => console.log('pressed')}>
+    <Card {...args}>
       <Text>Pressable card</Text>
     </Card>
   ),
