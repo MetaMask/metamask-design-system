@@ -123,7 +123,7 @@ type Story = StoryObj<typeof ButtonBase>;
 
 export const Default: Story = {
   args: {
-    children: 'Button Base',
+    children: 'Button base',
   },
 };
 
@@ -304,35 +304,35 @@ export const Spacing: Story = {
 
 export const IsFullWidth: Story = {
   args: {
-    children: 'Full Width Button',
+    children: 'Full width button',
     isFullWidth: true,
   },
 };
 
 export const StartIconName: Story = {
   args: {
-    children: 'With Start Icon',
+    children: 'With start icon',
     startIconName: IconName.AddSquare,
   },
 };
 
 export const EndIconName: Story = {
   args: {
-    children: 'With End Icon',
+    children: 'With end icon',
     endIconName: IconName.AddSquare,
   },
 };
 
 export const StartAccessory: Story = {
   args: {
-    children: 'With Start Accessory',
+    children: 'With start accessory',
     startAccessory: '→',
   },
 };
 
 export const EndAccessory: Story = {
   args: {
-    children: 'With End Accessory',
+    children: 'With end accessory',
     endAccessory: '←',
   },
 };
@@ -475,7 +475,7 @@ export const AccessibilityLoadingStates: Story = {
   render: (args) => (
     <div className="flex flex-col gap-4 p-4">
       <div className="space-y-2">
-        <Text variant={TextVariant.HeadingSm}>Loading State Announcements</Text>
+        <Text variant={TextVariant.HeadingSm}>Loading state announcements</Text>
         <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Screen readers will announce loading states to users
         </Text>
@@ -499,10 +499,10 @@ export const AccessibilityLoadingStates: Story = {
         </Text>
         <div className="flex gap-2">
           <ButtonBase {...args} isDisabled>
-            Disabled Button
+            Disabled button
           </ButtonBase>
           <ButtonBase {...args} isLoading>
-            Loading Button
+            Loading button
           </ButtonBase>
         </div>
       </div>
@@ -550,7 +550,7 @@ export const AccessibilityKeyboardNavigation: Story = {
 
 export const IsDisabled: Story = {
   args: {
-    children: 'Disabled Button',
+    children: 'Disabled button',
     isDisabled: true,
   },
 };

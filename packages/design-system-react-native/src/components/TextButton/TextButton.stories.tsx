@@ -31,7 +31,7 @@ type Story = StoryObj<TextButtonProps>;
 
 export const Default: Story = {
   args: {
-    children: 'Sample TextButton',
+    children: 'Sample text button',
     onPress: () => undefined,
     suppressHighlighting: true,
   },
@@ -60,7 +60,7 @@ export const InlineWithText: Story = {
   render: () => (
     <Text>
       Pre TextButton text{' '}
-      <TextButton onPress={() => undefined}>Text Button</TextButton> Post
+      <TextButton onPress={() => undefined}>Text button</TextButton> Post
       TextButton text
     </Text>
   ),
