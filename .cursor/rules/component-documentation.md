@@ -114,6 +114,7 @@ Follow **Storybook controls (cross-platform)** above; mobile panels work best wi
 ```bash
 # Run Storybook
 yarn storybook                # React web (port 6006)
+yarn storybook:react-native   # React Native Metro + MCP (port 7007)
 yarn storybook:ios:build      # React Native iOS dev client (first time / native dep changes)
 yarn storybook:ios            # React Native iOS (Metro + dev client)
 yarn storybook:android:build  # React Native Android dev client (first time / native dep changes)
@@ -125,9 +126,11 @@ yarn build-storybook          # Build static site
 # Test accessibility
 yarn test:storybook           # Run Storybook accessibility tests
 
-# MCP-assisted Storybook workflows (requires Storybook running)
-# MCP endpoint: http://localhost:6006/mcp
-# Tools: preview-stories, run-story-tests
+# MCP-assisted Storybook workflows (requires the matching Storybook server)
+# React: http://localhost:6006/mcp
+# React Native: http://localhost:7007/mcp
+# React tools include preview-stories and run-story-tests
+# React Native tools include documentation, story instructions, and select-story
 ```
 
 ## Golden Path Examples
