@@ -20,7 +20,20 @@ describe('Card', () => {
       'border',
       'border-default',
       'bg-default',
+      'text-default',
     );
+  });
+
+  it('allows the text color to be overridden via className', () => {
+    render(
+      <Card data-testid="card" className="text-muted">
+        Card content
+      </Card>,
+    );
+
+    const card = screen.getByTestId('card');
+    expect(card).toHaveClass('text-muted');
+    expect(card).not.toHaveClass('text-default');
   });
 
   it('merges className with default classes', () => {
@@ -68,6 +81,26 @@ describe('Card', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
+  it('applies pressable surface styles when onClick is provided', () => {
+    render(<Card onClick={jest.fn()}>Pressable card</Card>);
+
+    expect(screen.getByRole('button', { name: 'Pressable card' })).toHaveClass(
+      'cursor-pointer',
+      'hover:bg-hover',
+      'active:bg-pressed',
+    );
+  });
+
+  it('does not apply pressable surface styles when onClick is omitted', () => {
+    render(<Card data-testid="card">Card content</Card>);
+
+    expect(screen.getByTestId('card')).not.toHaveClass(
+      'cursor-pointer',
+      'hover:bg-hover',
+      'active:bg-pressed',
+    );
+  });
+
   it('merges props onto the child when asChild is true', () => {
     render(
       <Card asChild>
@@ -77,7 +110,13 @@ describe('Card', () => {
 
     const card = screen.getByTestId('card');
     expect(card.tagName).toBe('ARTICLE');
-    expect(card).toHaveClass('p-4', 'rounded', 'border-default', 'bg-default');
+    expect(card).toHaveClass(
+      'p-4',
+      'rounded',
+      'border-default',
+      'bg-default',
+      'text-default',
+    );
   });
 
   it('forwards onClick onto the child when asChild is true', async () => {

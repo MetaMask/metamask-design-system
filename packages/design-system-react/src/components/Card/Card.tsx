@@ -26,8 +26,9 @@ export const Card = forwardRef<HTMLDivElement | HTMLButtonElement, CardProps>(
   ) => {
     const isPressable = Boolean(onClick) && !asChild;
     const mergedClassName = twMerge(
-      'rounded',
-      isPressable && 'w-full cursor-pointer appearance-none text-start',
+      'rounded text-default',
+      isPressable &&
+        'w-full cursor-pointer appearance-none text-start hover:bg-hover active:bg-pressed',
       className,
     );
     const boxRef = ref as React.Ref<HTMLDivElement>;

@@ -12,8 +12,9 @@ export type CardProps = CardPropsShared &
   Omit<BoxProps, 'children' | 'onClick' | 'ref'> & {
     /**
      * Optional click handler. When provided without `asChild`, the card
-     * renders as a button so it is keyboard-accessible. With `asChild`,
-     * the handler is merged onto the child element.
+     * renders as a button so it is keyboard-accessible and shows hover
+     * and pressed surface styles. With `asChild`, the handler is merged
+     * onto the child element.
      */
     onClick?: MouseEventHandler<HTMLElement>;
   };

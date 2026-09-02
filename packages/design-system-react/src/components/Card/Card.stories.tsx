@@ -58,7 +58,12 @@ export const Children: Story = {
 
 export const OnClick: Story = {
   render: (args) => (
-    <Card {...args}>
+    <Card
+      {...args}
+      onClick={(event) => {
+        args.onClick?.(event);
+      }}
+    >
       <Text>Pressable card</Text>
     </Card>
   ),

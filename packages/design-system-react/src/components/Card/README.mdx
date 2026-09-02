@@ -4,7 +4,7 @@ import * as CardStories from './Card.stories';
 
 # Card
 
-Card is a container that groups related content on a surface. It provides padding, border, and background only — no title, icon, or actions of its own.
+Card is a container that groups related content on a surface. It provides padding, border, background, and the default text color only — no title, icon, or actions of its own.
 
 Use it to separate a block of content from the page background. Place any content in `children`. For richer layouts (headers, rows, footers), compose those pieces inside the card rather than extending Card itself.
 
@@ -49,7 +49,7 @@ The content to display inside the card.
 
 ### `onClick`
 
-Optional click handler. When provided without `asChild`, the card renders as a `<button>` so it is keyboard-accessible. With `asChild`, the handler is merged onto the child. Omit `onClick` for a static card.
+Optional click handler. When provided without `asChild`, the card renders as a `<button>` so it is keyboard-accessible, with hover and pressed surface styles. With `asChild`, the handler is merged onto the child. Omit `onClick` for a static card.
 
 <table>
   <thead>
