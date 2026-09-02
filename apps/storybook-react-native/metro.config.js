@@ -19,4 +19,7 @@ defaultConfig.resolver.sourceExts = [
   'svg',
 ];
 
-module.exports = withStorybook(defaultConfig);
+module.exports = withStorybook(defaultConfig, {
+  websockets: 'auto',
+  experimental_mcp: true,
+});
