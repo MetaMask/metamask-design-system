@@ -39,7 +39,10 @@ figma.connect(
       }),
     },
     example: ({ leftSection, endSection }) => (
-      <HeaderRoot title={leftSection.title} endAccessory={endSection.endButtons}>
+      <HeaderRoot
+        title={leftSection.title}
+        endAccessory={endSection.endButtons}
+      >
         {leftSection.selectButton}
       </HeaderRoot>
     ),
