@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
+  - [From version X.XX.X to X.XX.X](#from-version-xxx-to-xxx)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
   - [From version 0.22.0 to 0.23.0](#from-version-0220-to-0230)
@@ -12,6 +13,34 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
+
+### From version X.XX.X to X.XX.X
+
+<a id="from-version-xxx-to-xxx"></a>
+
+<a id="iconname-unused-icons-removed"></a>
+
+#### `IconName`: unused icons removed
+
+111 unused icon names are removed from **`IconName`**. The shared SVG assets and generated React / React Native icon outputs were regenerated without them.
+
+**Removed names:**
+
+`AddCard`, `AlternateEmail`, `ArrowCircleDown`, `ArrowCircleUp`, `ArrowDoubleLeft`, `ArrowDropDownCircle`, `Attachment`, `BankAssured`, `Bold`, `Briefcase`, `Bulb`, `Cake`, `CardPos`, `Clear`, `Cloud`, `CloudDownload`, `CloudUpload`, `CodeCircle`, `CorporateFare`, `CreditCheck`, `CurrencyFranc`, `CurrencyLira`, `CurrencyPound`, `CurrencyYuan`, `Dark`, `DarkFilled`, `Description`, `Draft`, `EcoLeaf`, `EditSquare`, `EncryptedAdd`, `Eraser`, `ExpandVertical`, `ExploreFilled`, `FirstPage`, `FlashSlash`, `Flower`, `Folder`, `Graph`, `Group`, `HardDrive`, `HashTag`, `Heart`, `HeartFilled`, `Inventory`, `Joystick`, `KeepFilled`, `LastPage`, `Light`, `LightFilled`, `LockedFilled`, `Login`, `Map`, `Mic`, `MinusSquare`, `Money`, `MountainFlag`, `MusicNote`, `PageInfo`, `Palette`, `PasswordCheck`, `Pending`, `PersonCancel`, `PieChart`, `PlusAndMinus`, `PolicyAlert`, `Print`, `PriorityHigh`, `PrivacyTip`, `Publish`, `Report`, `SaveFilled`, `Saving`, `ScanFocus`, `SecurityAlert`, `SecurityCross`, `SecurityUser`, `SentimentDissatisfied`, `SentimentNeutral`, `SentimentSatisfied`, `SentimentVerySatisfied`, `SettingFilled`, `ShoppingBag`, `ShoppingCart`, `SignalCellular`, `Slash`, `SnapsPlus`, `SnapsRound`, `Sort`, `SortByAlpha`, `Square`, `Start`, `Storefront`, `Student`, `TabClose`, `TableRow`, `Tablet`, `Tooltip`, `Translate`, `Undo`, `Unfold`, `UnlockedFilled`, `UploadFile`, `User`, `Verified`, `ViewColumn`, `ViewInAr`, `VolumeOff`, `VolumeUp`, `WalletFilled`, `Widgets`
+
+**Migration:**
+
+Replace any usage of a removed name with a remaining `IconName` that matches the product intent. Common substitutions used in this repo:
+
+| Removed                  | Suggested replacement |
+| ------------------------ | --------------------- |
+| `IconName.User`          | `IconName.UserCircle` |
+| `IconName.SecurityAlert` | `IconName.Warning`    |
+
+**Impact:**
+
+- TypeScript will fail on any remaining references to the removed `IconName` members.
+- `@metamask/design-system-react` and `@metamask/design-system-react-native` consumers must update in the same release that bumps `@metamask/design-system-shared`.
 
 ### From version 0.29.0 to 0.30.0
 
