@@ -96,7 +96,38 @@ flowchart TD
 - Deleted or weakened tests, blanket snapshot regeneration, lint suppressions, coverage exemptions.
 - Fork PRs, drafts, conflicted PRs, and PRs not targeting the default integration branch.
 
-Line count may be used as a **pilot scope cap**. It is not a safety proof. Classification must use AST / changed-node allowlists, not a “JSX and no functions” regex. JSX can still introduce handlers, conditionals, navigation, and unsafe links without a new function declaration.
+Use the existing product **size labels** as a **pilot scope cap**, not a safety proof. Classification must still use AST / changed-node allowlists, not a “JSX and no functions” regex. JSX can still introduce handlers, conditionals, navigation, and unsafe links without a new function declaration.
+
+### Size scale (`size-XS` / `size-S`)
+
+Both products apply size labels from [`MetaMask/github-tools` `pr-line-check`](https://github.com/MetaMask/github-tools/blob/main/.github/actions/pr-line-check/action.yml), invoked by:
+
+- [Mobile `check-pr-max-lines.yml`](https://github.com/MetaMask/metamask-mobile/blob/main/.github/workflows/check-pr-max-lines.yml)
+- [Extension `check-pr-max-lines.yml`](https://github.com/MetaMask/metamask-extension/blob/main/.github/workflows/check-pr-max-lines.yml)
+
+The action sums GitHub `additions + deletions` per changed file, then drops files whose path matches a repo-specific ignore regex. Neither product overrides the default buckets:
+
+| Label     | Counted lines (`additions + deletions`) |
+| :-------- | :-------------------------------------- |
+| `size-XS` | ≤ 10                                    |
+| `size-S`  | ≤ 100                                   |
+| `size-M`  | ≤ 500                                   |
+| `size-L`  | ≤ 1000                                  |
+| `size-XL` | \> 1000 or uncountable file list        |
+
+What is ignored:
+
+| Product   | Ignored path pattern                                                        | Tests counted?                                          |
+| :-------- | :-------------------------------------------------------------------------- | :------------------------------------------------------ |
+| Mobile    | `(\.lock\|\.snap\|\.md\|\.svg\|\.yaml)`                                     | Yes. `.test.ts(x)` and stories count; snapshots do not. |
+| Extension | `(\.lock\|\.snap\|lavamoat\/.*policy\.json)$\|\.(agents\|claude\|cursor)\/` | Yes. Snapshots and lockfiles do not; tests still do.    |
+
+Implications for this pilot:
+
+- **Do not treat `size-S` as “presentation-only.”** Seed example [Mobile #35208](https://github.com/MetaMask/metamask-mobile/pull/35208) is `size-S` and `risk:low` but is a feature-flag and analytics change.
+- **`size-XS` / `size-S` is a cheaper replacement for a raw 50-line cap**, not a production-only count. [Mobile #34574](https://github.com/MetaMask/metamask-mobile/pull/34574) is +10/−1 production and +53 test lines; snapshots would be ignored, but the test file is still counted, so it is `size-S`.
+- Require `size-XS` or `size-S` on the current SHA as a **fail-closed first-pass gate**. Missing size label is `unknown`. `size-M` and larger fail.
+- If replay shows too many false negatives from test files, add a **separate production-line metric** in the eligibility classifier. Do not change product `pr-line-check` ignore lists solely for this pilot.
 
 ## 5. Criteria model
 
@@ -114,6 +145,7 @@ Every criterion returns one of:
 | Internal non-fork, non-draft, default base branch    | Exact head SHA                                                                  |
 | Required CI allowlist green                          | Explicit job names; skipped / neutral / missing fail closed                     |
 | Path and changed-node allowlist                      | Presentation-only envelope                                                      |
+| Size label is `size-XS` or `size-S`                  | Applied by product `pr-line-check`; missing label is unknown                    |
 | No dependency or lockfile changes                    |                                                                                 |
 | No workflow, analyzer config, or policy-path changes | Self-evaluation prevention                                                      |
 | No blocking or bypass labels                         |                                                                                 |
@@ -178,10 +210,12 @@ These are known gaps for partners, not work this markdown implements:
 
 - Consumer analyzer config and custom modes can load from the PR checkout today. Approval policy must come from a trusted source (release, base branch, or central store).
 - Current risk-gate `neutral` conclusions must not be reused as an approval pass.
+- Scope skip currently marks skipped PRs as `merge_safe: true`. Skipped analysis must be `unknown` or a veto for papercut eligibility, never an approval pass.
 - PR metadata helpers exist but are not fully wired into analysis context.
 - PR comment tools lack reliable review-thread resolution state.
 - No structured check-run allowlist tool is available to the analyzer agent.
 - Storybook MCP and installed design-system package types are not available in current analyzer workflows.
+- There is no eligibility engine, fixture schema, or replay CLI yet. The first analyzer PR should add an offline `papercut-eligibility` module with trusted policy JSON, pure criterion evaluators, seed fixtures from this document, and a confusion-matrix CLI. It must not post reviews, labels, or check runs, must not call an LLM, and must not wire into `action.yml`. Path/AST classification can stub as `unknown` until a trusted classifier exists.
 
 ### Skills shape
 
@@ -207,6 +241,58 @@ Before building actuators, curate at least **50 pull requests per product** (Mob
 - findings posted after first evaluation.
 
 Humans label expected eligibility **before** the policy runs. Implementation starts only after replay results are reviewed.
+
+### Initial seed findings
+
+A preliminary GitHub sample produced three useful groups. These are benchmark candidates, not final gold labels: historical CI, review-thread state, author trust, and evidence freshness still need reconstruction.
+
+#### Likely positive examples
+
+| PR                                                                            | Observed scope   | Why it fits                                                                               | Seed verdict           |
+| :---------------------------------------------------------------------------- | :--------------- | :---------------------------------------------------------------------------------------- | :--------------------- |
+| [Extension #42497](https://github.com/MetaMask/metamask-extension/pull/42497) | 1 file · +1/−5   | Existing design-system background prop only                                               | Strong positive        |
+| [Extension #41766](https://github.com/MetaMask/metamask-extension/pull/41766) | 3 files · +9/−6  | Tokenized hover class plus snapshot; no handler change                                    | Positive with AST rule |
+| [Mobile #34574](https://github.com/MetaMask/metamask-mobile/pull/34574)       | 2 files · +63/−2 | Only +10/−1 production lines; MMDS `Box` and `twClassName`; remaining additions are tests | Strong positive        |
+
+#### Good-looking candidates that should fail closed
+
+| PR                                                                            | Why it looks safe                        | Disqualifier                                                                    |
+| :---------------------------------------------------------------------------- | :--------------------------------------- | :------------------------------------------------------------------------------ |
+| [Extension #39556](https://github.com/MetaMask/metamask-extension/pull/39556) | Looks ideal: one spacing fix             | Changes SCSS; conflicts with Extension's no-new-or-modified-SCSS direction      |
+| [Extension #41690](https://github.com/MetaMask/metamask-extension/pull/41690) | One-line layout correction               | Adds inline style instead of an approved class or design-system prop            |
+| [Extension #39271](https://github.com/MetaMask/metamask-extension/pull/39271) | Explicit `ux-papercuts` label, QA Passed | SRP surface, 14 files, SCSS, 199 changed lines, `INVALID-PR-TEMPLATE`           |
+| [Extension #41540](https://github.com/MetaMask/metamask-extension/pull/41540) | Title ends with “style updates”          | Adds click behavior, a hook, copy, and a 31-file refactor (+559/−98)            |
+| [Extension #45004](https://github.com/MetaMask/metamask-extension/pull/45004) | Only two files and six added lines       | SRP state-dependent behavior, SCSS, `risk:medium`, and a skipped benchmark gate |
+| [Mobile #35208](https://github.com/MetaMask/metamask-mobile/pull/35208)       | `size-S` and `risk:low`                  | Feature-flag and analytics contract; not a presentation-only UI change          |
+| [Mobile #34434](https://github.com/MetaMask/metamask-mobile/pull/34434)       | A visual iOS text-flow fix               | Changes interactive semantics from a pressable view to text                     |
+| [Mobile #34738](https://github.com/MetaMask/metamask-mobile/pull/34738)       | Two-line copy and test update            | Copy is shadow-only in the first live phase, not auto-approval eligible         |
+
+#### Boundary probes
+
+Keep these separate from pass/fail until pilot owners decide the corresponding policy.
+
+| PR                                                                            | Positive signals                                 | Decision it forces                                                                                                 |
+| :---------------------------------------------------------------------------- | :----------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| [Mobile #34833](https://github.com/MetaMask/metamask-mobile/pull/34833)       | Six production lines; strong visual evidence     | Whether edits to existing legacy `.styles.ts` layers are categorically blocked                                     |
+| [Mobile #35237](https://github.com/MetaMask/metamask-mobile/pull/35237)       | Layout-only production change with focused tests | `risk:high` plus a legacy style object; useful false-negative challenge case                                       |
+| [Extension #45907](https://github.com/MetaMask/metamask-extension/pull/45907) | One SVG file; `risk:low`                         | Visual assets are outside the current allowlist and would need deterministic SVG sanitization and brand validation |
+
+### Criteria refinements from the seed
+
+1. **Product size labels ignore snapshots and lockfiles, but still count tests.** Mobile also ignores `.md`, `.svg`, and `.yaml`. They are not a production-only metric. Mobile #34574 is `size-S` because of test lines, even though production is +10/−1.
+2. **Labels nominate or veto; they do not grant.** `ux-papercuts`, `size-S`, and `risk:low` all appear on ineligible examples. `size-XS` / `size-S` is a scope cap, not eligibility.
+3. **Encode MMDS drift checks deterministically where possible.** New inline style and new or modified SCSS can be detected without an LLM.
+4. **Define visual-only conditional changes precisely.** If class or visual-prop expressions based on existing state are allowed, the AST rule must reject new state, handlers, branches, and side effects.
+5. **Treat legacy styling as an explicit policy decision.** Categorically blocking `.styles.ts` and SCSS is safer but may create many false negatives in real papercuts.
+6. **Do not infer evidence from template headings.** A “Before/after” or “Video” section is not proof that usable media is attached and current for the head SHA.
+
+### Token-efficient collection method
+
+1. Search merged PR metadata using labels and title terms, returning only number, title, URL, labels, and timestamps.
+2. Batch-fetch changed file names and line counts for a shortlist with one GitHub GraphQL request.
+3. Apply deterministic path, size, label, dependency, workflow, and sensitive-surface exclusions.
+4. Fetch full diffs, check runs, review threads, and media only for survivors and deliberately selected negative lookalikes.
+5. Store the final human gold label, criterion-level pass/fail/unknown results, and exclusion reason as replay fixtures.
 
 ## 8. Rollout
 
@@ -247,11 +333,12 @@ Humans label expected eligibility **before** the policy runs. Implementation sta
 - Implementing analyzer modes, GitHub App workflows, or skills PRs in this document.
 - System-initiated merge without human merge intent.
 - Using Storybook MCP or consumer `node_modules` as Review knowledge until those paths exist in the runtime.
-- Treating `ux-papercut` or line count as sufficient safety evidence.
+- Treating `ux-papercut`, `size-S`, or raw line count as sufficient safety evidence.
 
 ## 11. Recommended next steps
 
 1. Socialize this proposal with AI Platform Engineering, QA, Mobile, and Extension partners.
 2. Inventory existing GitHub Apps against the approval permission profile.
-3. Start the historical benchmark checklist for both products.
-4. After partner agreement, open implementation work in the analyzer, product workflows, and MetaMask Skills as separate deliverables.
+3. Adjudicate the initial benchmark seed and expand it to at least 50 PRs per product.
+4. Build an offline analyzer replay harness that emits criterion-level pass/fail/unknown results without approval authority.
+5. After partner agreement and successful replay, open product workflow, GitHub App, and MetaMask Skills work as separate deliverables.
