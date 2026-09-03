@@ -127,7 +127,7 @@ export const BottomAccessory: Story = {
           alignItems={BoxAlignItems.Center}
           gap={1}
         >
-          <Icon name={IconName.SecurityAlert} size={IconSize.Xs} />
+          <Icon name={IconName.Warning} size={IconSize.Xs} />
           <Text variant={TextVariant.BodySm}>
             MetaMask support will never ask for your phrase.
           </Text>

@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version X.XX.X to X.XX.X](#from-version-xxx-to-xxx)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.27.x to 0.28.0](#from-version-027x-to-0280)
@@ -1033,7 +1034,7 @@ import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react';
 ```tsx
 import { BadgeIcon, IconName } from '@metamask/design-system-react';
 
-<BadgeIcon iconName={IconName.User} />;
+<BadgeIcon iconName={IconName.UserCircle} />;
 ```
 
 ### BadgeNetwork Component
@@ -3628,6 +3629,18 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version X.XX.X to X.XX.X
+
+<a id="from-version-xxx-to-xxx"></a>
+
+<a id="iconname-unused-icons-removed"></a>
+
+#### `IconName`: unused icons removed
+
+111 unused icons are removed from **`IconName`** (shared with `@metamask/design-system-shared`). See the [shared package migration guide](../design-system-shared/MIGRATION.md#iconname-unused-icons-removed) for the full removed list and suggested replacements.
+
+**Impact:** TypeScript will fail on any remaining references to the removed icon names.
 
 ### From version 0.36.0 to 0.37.0
 
