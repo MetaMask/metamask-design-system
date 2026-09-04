@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgStarFilled = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="m5.825 21 1.625-7.025L2 9.25l7.2-.625L12 2l2.8 6.625 7.2.625-5.45 4.725L18.175 21 12 17.275z" /></svg>;
+const SvgStarFilled = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="m21.965 10.767-4.22 3.64 1.286 5.445a1.537 1.537 0 0 1-2.297 1.67L12 18.608l-4.737 2.914a1.537 1.537 0 0 1-2.294-1.67l1.29-5.445-4.219-3.64a1.543 1.543 0 0 1 .874-2.704l5.531-.447 2.134-5.163a1.534 1.534 0 0 1 2.838 0l2.132 5.163 5.532.447a1.543 1.543 0 0 1 .878 2.705Z" /></svg>;
 const ForwardRef = forwardRef(SvgStarFilled);
 export default ForwardRef;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgTrash = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M7 21q-.824 0-1.412-.587C5 19.826 5 19.55 5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .824-.587 1.413c-.587.589-.863.587-1.413.587zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2z" /></svg>;
+const SvgTrash = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M20.25 4.5H16.5v-.75a2.25 2.25 0 0 0-2.25-2.25h-4.5A2.25 2.25 0 0 0 7.5 3.75v.75H3.75a.75.75 0 0 0 0 1.5h.75v13.5A1.5 1.5 0 0 0 6 21h12a1.5 1.5 0 0 0 1.5-1.5V6h.75a.75.75 0 0 0 0-1.5M9 3.75A.75.75 0 0 1 9.75 3h4.5a.75.75 0 0 1 .75.75v.75H9Zm9 15.75H6V6h12Zm-7.5-9.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0m4.5 0v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0" /></svg>;
 const ForwardRef = forwardRef(SvgTrash);
 export default ForwardRef;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgStar = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="m8.85 16.825 3.15-1.9 3.15 1.925-.825-3.6 2.775-2.4-3.65-.325-1.45-3.4-1.45 3.375-3.65.325 2.775 2.425zM5.825 21l1.625-7.025L2 9.25l7.2-.625L12 2l2.8 6.625 7.2.625-5.45 4.725L18.175 21 12 17.275z" /></svg>;
+const SvgStar = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M22.423 9.118a1.54 1.54 0 0 0-1.337-1.056l-5.531-.446-2.136-5.164a1.534 1.534 0 0 0-2.837 0L8.448 7.615l-5.534.447a1.543 1.543 0 0 0-.879 2.706l4.22 3.64-1.286 5.444a1.536 1.536 0 0 0 2.297 1.67L12 18.608l4.737 2.914a1.537 1.537 0 0 0 2.294-1.67l-1.29-5.445 4.219-3.64a1.54 1.54 0 0 0 .463-1.649m-1.438.513-4.566 3.937a.75.75 0 0 0-.24.742l1.395 5.888a.035.035 0 0 1-.016.045c-.016.013-.021.01-.035 0l-5.13-3.155a.75.75 0 0 0-.786 0l-5.13 3.156c-.014.009-.018.012-.035 0a.035.035 0 0 1-.016-.045l1.395-5.887a.75.75 0 0 0-.24-.742L3.015 9.633c-.011-.01-.022-.018-.012-.047s.017-.025.03-.027l5.993-.484a.75.75 0 0 0 .63-.463l2.308-5.589c.008-.016.01-.023.033-.023s.026.008.033.023l2.314 5.589a.75.75 0 0 0 .633.461l5.992.484c.014 0 .023 0 .031.027s0 .038-.015.047" /></svg>;
 const ForwardRef = forwardRef(SvgStar);
 export default ForwardRef;
