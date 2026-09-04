@@ -1,0 +1,45 @@
+name: Figma Code Connect
+
+on:
+  workflow_call:
+    inputs:
+      publish:
+        description: 'Publish Code Connect mappings to Figma (true on main push, false on PR dry-run)'
+        required: true
+        type: boolean
+    secrets:
+      FIGMA_ACCESS_TOKEN:
+        required: true
+
+jobs:
+  figma-code-connect:
+    name: ${{ inputs.publish && 'Publish Code Connect' || 'Validate Code Connect' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24.x]
+    steps:
+      - name: Checkout and setup environment
+        uses: MetaMask/action-checkout-and-setup@v1
+        with:
+          is-high-risk-environment: ${{ inputs.publish }}
+
+      - name: Dry run Code Connect publish
+        if: ${{ !inputs.publish }}
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+        run: yarn figma:connect:publish:dry-run
+
+      - name: Publish Code Connect to Figma
+        if: ${{ inputs.publish }}
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+        run: yarn figma:connect:publish
+
+      - name: Require clean working directory
+        shell: bash
+        run: |
+          if ! git diff --exit-code; then
+            echo "Working tree dirty at end of job"
+            exit 1
+          fi
