@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgSecuritySearch = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={16} transform="scale(.09375)"><path d="M214.24 134.68c1.14-7.07 1.76-14.62 1.76-22.68V56a8 8 0 0 0-8-8H48a8 8 0 0 0-8 8v56c0 96 88 120 88 120s9.83-2.68 22.92-9.84" /><circle cx={182} cy={178} r={34} /><path d="m206.04 202.04 18.39 18.39" /></g></svg>;
+const SvgSecuritySearch = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M19.5 3.75h-15A1.5 1.5 0 0 0 3 5.25v5.25c0 4.943 2.393 7.938 4.4 9.58 2.162 1.768 4.312 2.37 4.406 2.394a.75.75 0 0 0 .394 0c.093-.025 2.241-.626 4.406-2.394C18.607 18.438 21 15.443 21 10.5V5.25a1.5 1.5 0 0 0-1.5-1.5m0 6.75c0 3.475-1.28 6.296-3.806 8.383A12.1 12.1 0 0 1 12 20.964a12 12 0 0 1-3.649-2.044C5.796 16.83 4.5 13.997 4.5 10.5V5.25h15Z" /><path d="M15.125 11.656a3.938 3.938 0 1 1-7.875 0 3.938 3.938 0 1 1 7.875 0m-1.5 0a2.438 2.438 0 1 0-4.875 0 2.438 2.438 0 1 0 4.875 0m.877 2.254 2.028 2.028a.75.75 0 0 1-1.06 1.06l-2.03-2.027a.75.75 0 0 1 1.062-1.061" /></svg>;
 const ForwardRef = forwardRef(SvgSecuritySearch);
 export default ForwardRef;
