@@ -147,7 +147,7 @@ export type { MyComponentProps } from './MyComponent.types';
 
 - ✅ Replace template div/View with Box primitive
 - ✅ Use Text component (not raw span/Text)
-- ✅ Use design token const objects (BoxBackgroundColor, BoxBorderRadius, TextVariant)
+- ✅ Use design token const objects (BoxBackgroundColor, TextVariant) and radius token classes (`rounded-8`)
 - ✅ Forward refs using `forwardRef`
 - ✅ Set displayName: `MyComponent.displayName = 'MyComponent';`
 
@@ -159,7 +159,7 @@ export const MyComponent = forwardRef<RefType, MyComponentProps>(
     <Box
       ref={ref}
       backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      borderRadius={BoxBorderRadius.Md}
+      className="rounded-6"
       {...props}
     >
       <Text variant={TextVariant.BodyMd}>{children}</Text>

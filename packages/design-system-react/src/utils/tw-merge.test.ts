@@ -48,6 +48,31 @@ describe('twMerge utility', () => {
     });
   });
 
+  // Classes are passed as separate arguments rather than one string so the
+  // Tailwind classname-order autofixer cannot reorder them and invert the
+  // expected winner.
+  describe('border radius conflicts', () => {
+    it.each([
+      ['rounded-8', 'rounded-12'],
+      ['rounded-8', 'rounded-full'],
+      ['rounded-full', 'rounded-none'],
+      ['rounded-24', 'rounded-2'],
+      ['rounded-t-24', 'rounded-t-12'],
+      ['rounded-tl-2', 'rounded-tl-8'],
+      // Aliases and Tailwind's own names have to resolve against each other.
+      ['rounded-lg', 'rounded-16'],
+      ['rounded-16', 'rounded-lg'],
+    ])('%s is overridden by a later %s', (base, override) => {
+      expect(twMerge(base, override)).toBe(override);
+    });
+
+    it('keeps a corner override alongside an all-corner radius', () => {
+      expect(twMerge('rounded-8', 'rounded-t-12')).toBe(
+        'rounded-8 rounded-t-12',
+      );
+    });
+  });
+
   describe('complex class combinations', () => {
     it('should handle multiple property conflicts simultaneously', () => {
       const result = twMerge('text-l-heading-lg font-bold text-alternative');

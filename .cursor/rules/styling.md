@@ -20,10 +20,9 @@ Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Nati
 
 // ✅ Correct
 <Box
-  borderRadius={BoxBorderRadius.Lg}
   backgroundColor={BoxBackgroundColor.BackgroundAlternative}
   p={4}
-  className="flex-1" // No flex-1 prop exists, so className is fine
+  className="rounded-8 flex-1" // No radius or flex-1 prop exists, so className is fine
 >
   <Text variant={TextVariant.BodyMd}>Content</Text>
 </Box>
@@ -39,10 +38,9 @@ Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Nati
 
 // ✅ Correct
 <Box
-  borderRadius={BoxBorderRadius.Lg}
   backgroundColor={BoxBackgroundColor.BackgroundAlternative}
   p={4}
-  twClassName="flex-1" // No flex-1 prop exists, so twClassName is fine
+  twClassName="rounded-8 flex-1" // No radius or flex-1 prop exists, so twClassName is fine
 >
   <Text variant={TextVariant.BodyMd}>Content</Text>
 </Box>
@@ -50,9 +48,9 @@ Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Nati
 
 ### Design Tokens Only
 
-- **ALWAYS** use design token generated classes (bg-default, text-error-default)
+- **ALWAYS** use design token generated classes (bg-default, text-error-default, rounded-8)
 - **NEVER** use default Tailwind colors (bg-blue-500, text-gray-700)
-- **NEVER** use arbitrary values (bg-[#4459ff], p-[16px]) unless critical
+- **NEVER** use arbitrary values (bg-[#4459ff], p-[16px], rounded-[10px]) unless critical
 - **ALWAYS** use Text component for typography, never Tailwind text classes
 
 **React Web:**
@@ -92,6 +90,33 @@ Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Nati
   </Text>
 </Box>
 ```
+
+### Corner Radius
+
+- **ALWAYS** use the numeric radius names. Tailwind's `rounded-sm`/`md`/`lg`/
+  `xl`/`2xl`/`3xl` still resolve to the same values, but a numeric name states
+  its own value and does not change meaning between Tailwind versions.
+
+| Class          | Tailwind equivalent | Value  |
+| -------------- | ------------------- | ------ |
+| `rounded-none` | `rounded-none`      | 0      |
+| `rounded-2`    | `rounded-sm`        | 2px    |
+| `rounded-4`    | `rounded`           | 4px    |
+| `rounded-6`    | `rounded-md`        | 6px    |
+| `rounded-8`    | `rounded-lg`        | 8px    |
+| `rounded-12`   | `rounded-xl`        | 12px   |
+| `rounded-16`   | `rounded-2xl`       | 16px   |
+| `rounded-24`   | `rounded-3xl`       | 24px   |
+| `rounded-full` | `rounded-full`      | 9999px |
+
+Corner-specific variants work as usual: `rounded-t-24`, `rounded-tl-2`.
+
+- **ALWAYS** use `rounded-full` for circles and capsules. A radius larger than
+  half the shortest side rounds the shape fully.
+- **ONLY** compute a radius (`size / 2`) when the diameter is dynamic and lives
+  in the same expression.
+- For styles that cannot use classes, import the values instead of hardcoding
+  them: `import { borderRadius } from '@metamask/design-tokens'`.
 
 ### Platform-Specific Props
 
@@ -351,6 +376,7 @@ After styling changes, verify:
 - [ ] Component props used where available
 - [ ] className/twClassName only when no equivalent prop exists
 - [ ] No default Tailwind colors (bg-blue-500, text-gray-700)
+- [ ] No default Tailwind radius classes (rounded-lg, rounded-full) — use radius tokens
 - [ ] No arbitrary values (unless documented as necessary)
 - [ ] No inline styles mixed with Tailwind classes
 - [ ] Platform-specific prop used (className for web, twClassName for native)

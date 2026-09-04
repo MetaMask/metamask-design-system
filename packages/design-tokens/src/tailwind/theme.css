@@ -1,6 +1,7 @@
 @import '../css/brand-colors.css';
 @import '../css/typography.css';
 @import '../css/shadow.css';
+@import '../css/border-radius.css';
 
 @theme {
   --font-size-*: initial;
@@ -186,6 +187,17 @@
   --shadow-sm: 0 2px 8px 0 #0000001a;
   --shadow-md: 0 2px 16px 0 #0000001a;
   --shadow-lg: 0 2px 40px 0 #0000001a;
+
+  /* Numeric aliases for Tailwind's radius scale. No new values: rounded-8 and
+  rounded-lg are both 8px. Numeric names state their own value and are stable
+  across Tailwind versions, where rounded-sm is 2px in v3 and 4px in v4. */
+  --radius-2: 2px;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
 }
 
 /**

@@ -6,8 +6,10 @@ export {
   typography,
   fontFamilies,
   AnimationDuration,
+  borderRadius,
 } from './js';
 export type {
+  BorderRadiusToken,
   BrandColor,
   Theme,
   ThemeColors,

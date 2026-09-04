@@ -1,0 +1,206 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
+import * as BorderRadiusStories from './BorderRadius.stories';
+
+# Border radius
+
+MetaMask uses Tailwind's radius scale. No values are added or changed — what the
+design system adds is a naming convention: each step is named after its value,
+so `rounded-8` is 8px.
+
+Tailwind's own names still work and always will. `rounded-8` and `rounded-lg`
+are the same 8px.
+
+<Canvas of={BorderRadiusStories.DefaultStory} />
+
+## Why alias at all
+
+A numeric name states its value, so nothing can drift between the class and a
+comment next to it.
+
+More usefully, numeric names are stable across Tailwind versions. `rounded-sm`
+is 2px in Tailwind v3 and 4px in v4, so the same class silently changes meaning
+on upgrade. `rounded-8` cannot.
+
+## Scale
+
+<Canvas of={BorderRadiusStories.Scale} />
+
+<table>
+  <thead>
+    <tr>
+      <th>Preferred</th>
+      <th>Tailwind equivalent</th>
+      <th>JS</th>
+      <th>CSS</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>rounded-none</code>
+      </td>
+      <td>
+        <code>rounded-none</code>
+      </td>
+      <td>
+        <code>borderRadius.none</code>
+      </td>
+      <td>
+        <code>var(--radius-none)</code>
+      </td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>
+        <code>rounded-2</code>
+      </td>
+      <td>
+        <code>rounded-sm</code>
+      </td>
+      <td>
+        <code>borderRadius[2]</code>
+      </td>
+      <td>
+        <code>var(--radius-2)</code>
+      </td>
+      <td>2px</td>
+    </tr>
+    <tr>
+      <td>
+        <code>rounded-4</code>
+      </td>
+      <td>
+        <code>rounded</code>
+      </td>
+      <td>
+        <code>borderRadius[4]</code>
+      </td>
+      <td>
+        <code>var(--radius-4)</code>
+      </td>
+      <td>4px</td>
+    </tr>
+    <tr>
+      <td>
+        <code>rounded-6</code>
+      </td>
+      <td>
+        <code>rounded-md</code>
+      </td>
+      <td>
+        <code>borderRadius[6]</code>
+      </td>
+      <td>
+        <code>var(--radius-6)</code>
+      </td>
+      <td>6px</td>
+    </tr>
+    <tr>
+      <td>
+        <code>rounded-8</code>
+      </td>
+      <td>
+        <code>rounded-lg</code>
+      </td>
+      <td>
+        <code>borderRadius[8]</code>
+      </td>
+      <td>
+        <code>var(--radius-8)</code>
+      </td>
+      <td>8px</td>
+    </tr>
+    <tr>
+      <td>
+        <code>rounded-12</code>
+      </td>
+      <td>
+        <code>rounded-xl</code>
+      </td>
+      <td>
+        <code>borderRadius[12]</code>
+      </td>
+      <td>
+        <code>var(--radius-12)</code>
+      </td>
+      <td>12px</td>
+    </tr>
+    <tr>
+      <td>
+        <code>rounded-16</code>
+      </td>
+      <td>
+        <code>rounded-2xl</code>
+      </td>
+      <td>
+        <code>borderRadius[16]</code>
+      </td>
+      <td>
+        <code>var(--radius-16)</code>
+      </td>
+      <td>16px</td>
+    </tr>
+    <tr>
+      <td>
+        <code>rounded-24</code>
+      </td>
+      <td>
+        <code>rounded-3xl</code>
+      </td>
+      <td>
+        <code>borderRadius[24]</code>
+      </td>
+      <td>
+        <code>var(--radius-24)</code>
+      </td>
+      <td>24px</td>
+    </tr>
+    <tr>
+      <td>
+        <code>rounded-full</code>
+      </td>
+      <td>
+        <code>rounded-full</code>
+      </td>
+      <td>
+        <code>borderRadius.full</code>
+      </td>
+      <td>
+        <code>var(--radius-full)</code>
+      </td>
+      <td>9999px</td>
+    </tr>
+  </tbody>
+</table>
+
+`none` and `full` keep Tailwind's names: those say something the numbers cannot,
+and are already the established spelling.
+
+## Circles and capsules
+
+Use `rounded-full`. A radius larger than half the shortest side rounds the shape
+fully, so a single class covers every avatar, badge and chip regardless of size.
+
+Only compute a radius (`size / 2`) when the diameter is dynamic and lives in the
+same expression.
+
+## Corners
+
+Corner-specific variants work as they do for any Tailwind radius utility.
+
+<Canvas of={BorderRadiusStories.Corners} />
+
+## Usage outside Tailwind
+
+React Native `StyleSheet` styles and other non-Tailwind styles should import the
+values rather than hardcode them.
+
+```tsx
+import { borderRadius } from '@metamask/design-tokens';
+
+StyleSheet.create({
+  card: { borderRadius: borderRadius[8] },
+  avatar: { borderRadius: borderRadius.full },
+});
+```

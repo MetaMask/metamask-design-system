@@ -27,6 +27,7 @@ export const getDesignTokenVariables = async (
     'dark-theme-colors.css',
     'typography.css',
     'shadow.css',
+    'border-radius.css',
   ];
 
   // Initialize a Set to store all variables
