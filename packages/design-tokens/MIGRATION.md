@@ -2,6 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
 - [From version 8.x to 9.0.0](#from-version-8x-to-900)
 - [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
@@ -12,6 +13,62 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 10.x to 11.0.0
+
+The default typeface changes from Geist to Inter. Consumers must bundle the Inter font files; the token values alone do not ship font binaries.
+
+### What changed
+
+- `--font-family-default` is now `'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'Geist', ...`)
+- `fontFamilies.default` is now `'Inter'` (was `'Geist'`)
+- The Figma token `global.fontFamilies.default` is now `Inter`
+
+`--font-family-accent` (MM Sans) and `--font-family-hero` (MM Poly) are unchanged. No font size, line height, weight, or letter spacing token changed, so the typography scale keeps its existing values. Semantic bold remains `600`, which maps to the Inter SemiBold cut.
+
+### Migration
+
+Replace the Geist font files with the six Inter cuts and update your `@font-face` declarations. Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
+
+```css
+/* Before */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/Geist/Geist-Regular.woff2') format('woff2');
+}
+```
+
+```css
+/* After */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/Inter/Inter-Regular.woff2') format('woff2');
+}
+```
+
+Six cuts are required to cover the scale, matching the Geist set they replace:
+
+| Weight | Style  | File                   |
+| ------ | ------ | ---------------------- |
+| 400    | normal | `Inter-Regular`        |
+| 400    | italic | `Inter-RegularItalic`  |
+| 500    | normal | `Inter-Medium`         |
+| 500    | italic | `Inter-MediumItalic`   |
+| 600    | normal | `Inter-SemiBold`       |
+| 600    | italic | `Inter-SemiBoldItalic` |
+
+Use the `18pt` optical size from the Inter static family. If you generate these files yourself, note that the upstream release names them `Inter_18pt-Regular.ttf` with the PostScript name `Inter18pt-Regular`; React Native resolves fonts by PostScript name, so normalize them to `Inter-Regular` and so on. See the React Native migration guide for details.
+
+### Impact
+
+- **Web consumers:** Swap the font binaries and `@font-face` rules. Because the family is selected by CSS variable, no component or utility class changes are needed.
+- **React Native consumers:** Font family names are resolved per weight and style. See [`@metamask/design-system-react-native`](../design-system-react-native/MIGRATION.md#default-typeface-geist-to-inter).
+- **Anyone hardcoding `'Geist'`:** Search for the literal string outside token references and update it.
+- Expect minor reflow. Inter's metrics are close to Geist's but not identical, so text may wrap differently at tight widths.
 
 ## From version 9.x to 10.0.0
 

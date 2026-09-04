@@ -3634,6 +3634,40 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 <a id="from-version-xxx-to-xxx"></a>
 
+<a id="default-typeface-geist-to-inter"></a>
+
+#### Default typeface: Geist to Inter
+
+`FontFamily.Default` now resolves to Inter instead of Geist. This comes from `@metamask/design-tokens`, where `--font-family-default` changed value. The `font-default` utility class, the `FontFamily` enum, and every `Text` prop are unchanged — only the typeface behind them is different.
+
+**Migration:**
+
+Bundle the Inter font files in place of Geist and update your `@font-face` declarations to declare the family as `'Inter'`. Six cuts are required: regular, medium, and semibold, each with an italic. Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
+
+```css
+/* Before */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/Geist/Geist-SemiBold.woff2') format('woff2');
+}
+```
+
+```css
+/* After */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/Inter/Inter-SemiBold.woff2') format('woff2');
+}
+```
+
+See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-10x-to-1100) for the full cut list.
+
+**Impact:** No code changes are required beyond swapping the font assets. Expect minor reflow, since Inter's metrics differ slightly from Geist's and text may wrap differently at tight widths.
+
 <a id="iconname-unused-icons-removed"></a>
 
 #### `IconName`: unused icons removed
