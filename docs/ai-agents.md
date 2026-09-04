@@ -111,7 +111,7 @@ The three-layer model provides static guidance (rules, conventions, and process)
 
 ### Maintainers vs consumers
 
-- **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation.
+- **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation. Use the React endpoint at `http://localhost:6006/mcp` for `@metamask/design-system-react` and the React Native endpoint at `http://localhost:7007/mcp` for `@metamask/design-system-react-native`.
 - **Consumers (downstream repos):** Storybook MCP provides the highest value. Agents can discover components and props from a running or published Storybook without reading this repo's source.
 
 ## How AI Agents Use This
