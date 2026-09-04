@@ -78,6 +78,64 @@ This guide provides detailed instructions for migrating your project from one ve
 
 <a id="from-version-xxx-to-xxx"></a>
 
+<a id="default-typeface-geist-to-inter"></a>
+
+#### Default typeface: Geist to Inter
+
+`FontFamily.Default` now resolves to Inter instead of Geist. Unlike web, React Native resolves fonts by **PostScript name**, so `@metamask/design-system-twrnc-preset` maps each weight and style to a distinct font name. Those names changed:
+
+| twrnc class                   | Before                 | After                  |
+| ----------------------------- | ---------------------- | ---------------------- |
+| `font-default-regular`        | `Geist-Regular`        | `Inter-Regular`        |
+| `font-default-regular-italic` | `Geist-RegularItalic`  | `Inter-RegularItalic`  |
+| `font-default-medium`         | `Geist-Medium`         | `Inter-Medium`         |
+| `font-default-medium-italic`  | `Geist-MediumItalic`   | `Inter-MediumItalic`   |
+| `font-default-bold`           | `Geist-SemiBold`       | `Inter-SemiBold`       |
+| `font-default-bold-italic`    | `Geist-SemiBoldItalic` | `Inter-SemiBoldItalic` |
+
+`accent-*` (MM Sans) and `hero-*` (MM Poly) are unchanged, as is the `Text` component API.
+
+**Migration:**
+
+Bundle the six Inter cuts and register them under the new names. Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
+
+```tsx
+// Before
+useFonts({
+  'Geist-Regular': require('./fonts/Geist/Geist-Regular.otf'),
+  'Geist-RegularItalic': require('./fonts/Geist/Geist-RegularItalic.otf'),
+  'Geist-Medium': require('./fonts/Geist/Geist-Medium.otf'),
+  'Geist-MediumItalic': require('./fonts/Geist/Geist-MediumItalic.otf'),
+  'Geist-SemiBold': require('./fonts/Geist/Geist-SemiBold.otf'),
+  'Geist-SemiBoldItalic': require('./fonts/Geist/Geist-SemiBoldItalic.otf'),
+});
+```
+
+```tsx
+// After
+useFonts({
+  'Inter-Regular': require('./fonts/Inter/Inter-Regular.ttf'),
+  'Inter-RegularItalic': require('./fonts/Inter/Inter-RegularItalic.ttf'),
+  'Inter-Medium': require('./fonts/Inter/Inter-Medium.ttf'),
+  'Inter-MediumItalic': require('./fonts/Inter/Inter-MediumItalic.ttf'),
+  'Inter-SemiBold': require('./fonts/Inter/Inter-SemiBold.ttf'),
+  'Inter-SemiBoldItalic': require('./fonts/Inter/Inter-SemiBoldItalic.ttf'),
+});
+```
+
+**Normalize the PostScript names before bundling.** The upstream Inter release ships the static cuts as `Inter_18pt-Regular.ttf` with the internal PostScript name `Inter18pt-Regular`, which will not match the names above. iOS resolves by PostScript name and will silently fall back to the system font if it does not match. Rewrite the name table so the PostScript name (name ID 6) is `Inter-Regular`, `Inter-SemiBoldItalic`, and so on. For example, with [fontTools](https://github.com/fonttools/fonttools):
+
+```python
+from fontTools.ttLib import TTFont
+
+font = TTFont('Inter_18pt-Regular.ttf')
+for platform_id, encoding_id, language_id in [(3, 1, 0x409), (1, 0, 0)]:
+    font['name'].setName('Inter-Regular', 6, platform_id, encoding_id, language_id)
+font.save('Inter-Regular.ttf')
+```
+
+**Impact:** Text renders with the system fallback until the fonts are re-registered under the new names, so this must ship together with the asset swap. Expect minor reflow, since Inter's metrics differ slightly from Geist's.
+
 <a id="iconname-unused-icons-removed"></a>
 
 #### `IconName`: unused icons removed
