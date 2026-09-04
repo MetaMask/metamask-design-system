@@ -86,7 +86,8 @@ module.exports = merge(baseConfig, {
     '\\.d\\.ts$',
     '\\.constants\\.ts$', // ignore all .constants.ts files
     '\\.dev\\.ts$', // ignore all .dev.ts files
-    '\\.figma\\.tsx', // Figma code connect files
+    '\\.figma\\.tsx', // Figma code connect files (legacy parser)
+    '\\.figma\\.ts$', // Figma code connect template files
     '\\.types\\.ts$', // type-only modules across the package; must not export runtime values
     'Icon.assets.ts', // Exclude Icon.assets file
     'Blockies.utilities.ts', // Exclude Blockies.utilities file

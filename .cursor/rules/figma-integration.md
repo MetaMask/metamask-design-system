@@ -8,23 +8,54 @@ Connect design system components to Figma for automatic code snippet display in 
 
 ### File Location and Naming
 
-- **ALWAYS** colocate `.figma.tsx` files with their components
-- **ALWAYS** use naming convention: `ComponentName.figma.tsx`
+- **ALWAYS** colocate Code Connect files with their components
+- **PREFER** the Template API format: `ComponentName.figma.ts` (new files)
+- Legacy parser files use `ComponentName.figma.tsx` and continue to work during migration (DSYS-1002)
 - **ALWAYS** create Code Connect files for BOTH React and React Native platforms
 
 ```
-// ✅ Correct file structure
+// ✅ Correct file structure (Template API — preferred for new files)
 src/components/
 ├── Button/
 │   ├── Button.tsx
-│   ├── Button.figma.tsx        ← React Code Connect
+│   ├── Button.figma.ts         ← Template API Code Connect
 │   └── ...
 
-packages/design-system-react/src/components/Button/Button.figma.tsx
-packages/design-system-react-native/src/components/Button/Button.figma.tsx
+packages/design-system-react/src/components/Button/Button.figma.ts
+packages/design-system-react-native/src/components/Button/Button.figma.ts
 ```
 
-### Required File Structure
+### Template API File Structure (preferred)
+
+New Code Connect files should use the Template API (`.figma.ts`). See AvatarAccount for a complete example.
+
+```tsx
+/// <reference types="@figma/code-connect/figma-types" />
+// url=https://www.figma.com/design/[fileKey]/...?node-id=[nodeId]
+// component=ComponentName
+
+import figma from 'figma';
+
+const instance = figma.selectedInstance;
+
+const size = instance.getEnum('size', {
+  Sm: figma.helpers.react.identifier('ButtonSize.Sm'),
+  Md: figma.helpers.react.identifier('ButtonSize.Md'),
+});
+
+export default {
+  id: 'ComponentName',
+  imports: [
+    "import { ComponentName, ButtonSize } from '@metamask/design-system-react';",
+  ],
+  example: figma.code`<ComponentName size={${size}} />`,
+  metadata: { nestable: true },
+};
+```
+
+### Legacy Parser File Structure (`figma.connect`)
+
+Existing `.figma.tsx` files use the legacy parser format below. Migrate with `npx figma connect migrate` when touching them.
 
 - **ALWAYS** include eslint disable comment for 'figma' import (first line)
 - **ALWAYS** include auto-generated comment documenting purpose
@@ -37,7 +68,7 @@ import figma from '@figma/code-connect';
 import React from 'react';
 import { Button } from './Button';
 
-// ✅ Correct - All required elements
+// ✅ Correct - All required elements (legacy parser)
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
 import React from 'react';
@@ -399,10 +430,12 @@ yarn figma:connect:unpublish:react-native    # Unpublish React Native
 
 **Complete examples demonstrating best practices:**
 
-- **Simple component**: @packages/design-system-react/src/components/AvatarAccount/AvatarAccount.figma.tsx
-- **Complex component**: @packages/design-system-react/src/components/Button/Button.figma.tsx
-- **Stateful component**: @packages/design-system-react/src/components/Checkbox/Checkbox.figma.tsx
-- **React Native example**: @packages/design-system-react-native/src/components/Button/Button.figma.tsx
+- **Simple component (Template API)**: @packages/design-system-react/src/components/AvatarAccount/AvatarAccount.figma.ts
+- **Complex component (legacy parser)**: @packages/design-system-react/src/components/Button/Button.figma.tsx
+- **Stateful component (legacy parser)**: @packages/design-system-react/src/components/Checkbox/Checkbox.figma.tsx
+- **React Native example (Template API)**: @packages/design-system-react-native/src/components/AvatarAccount/AvatarAccount.figma.ts
+
+> **Migration note (DSYS-1002):** Prefer the new Template API (`.figma.ts`) for new Code Connect files. Legacy `figma.connect()` / `.figma.tsx` files still work until parser support ends (August 17, 2026). See [Templates Migration Guide](https://developers.figma.com/docs/code-connect/templates-migration-guide/).
 
 These examples show:
 
@@ -422,22 +455,21 @@ These examples show:
 
 Code Connect files are automatically excluded from builds and tests:
 
-- **TypeScript**: `tsconfig.packages.build.json` excludes `**/*.figma.tsx`
-- **Jest Coverage**: `jest.config.js` ignores `\.figma\.tsx` files
+- **TypeScript**: `tsconfig.packages.build.json` excludes `**/*.figma.tsx` and `**/*.figma.ts`
+- **Jest Coverage**: `jest.config.js` ignores `\.figma\.tsx` and `\.figma\.ts` files
 
-No additional configuration needed when adding new `.figma.tsx` files.
+No additional configuration needed when adding new Code Connect files.
 
 ## Verification
 
 After creating or updating Code Connect files, verify:
 
-- [ ] `.figma.tsx` file colocated with component
-- [ ] Eslint disable comment present (first line)
-- [ ] Auto-generated comment included
-- [ ] All imports correct (component, enums, React, figma)
-- [ ] Enum values used in mappings (not string literals)
+- [ ] Code Connect file colocated with component (`.figma.ts` Template API preferred)
+- [ ] Template API: `// url=` metadata comment and `import figma from 'figma'` present
+- [ ] Legacy parser: Eslint disable comment present (first line) if using `.figma.tsx`
+- [ ] Enum / const identifiers used in mappings (not string literals)
 - [ ] Realistic example props provided
-- [ ] All required props included in example
+- [ ] Imports array includes component and referenced prop const objects
 - [ ] Both React and React Native have Code Connect files
 - [ ] Dry run passes: `yarn figma:connect:publish:dry-run`
 - [ ] Successfully published: `yarn figma:connect:publish`
