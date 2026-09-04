@@ -198,6 +198,9 @@ export {
 // Checkbox types (ADR-0004)
 export { type CheckboxPropsShared } from './types/Checkbox';
 
+// Card types (ADR-0004)
+export { type CardPropsShared } from './types/Card';
+
 // Tag types (ADR-0003 + ADR-0004)
 export { TagSeverity, type TagPropsShared } from './types/Tag';
 
