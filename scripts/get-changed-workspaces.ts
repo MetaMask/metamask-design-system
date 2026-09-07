@@ -199,10 +199,41 @@ async function main(): Promise<void> {
     headRef,
   });
 
+  // Build ESLint target paths:
+  // - Always include changed public workspace locations
+  // - Additionally include any top-level app directories under `apps/` that changed
+  //   (apps are private workspaces and excluded from `yarn workspaces --no-private`)
+  let locations = workspaces.map(({ location }) => location);
+  try {
+    const changedFiles = await getChangedFiles(mergeBase, headRef);
+    const appDirs = Array.from(
+      new Set(
+        changedFiles
+          .filter((file) => file.startsWith('apps/'))
+          .map((file) => {
+            const parts = file.split('/');
+            // Expect at least ["apps", "<appName>", ...]
+            return parts.length >= 2 ? `apps/${parts[1]}` : 'apps';
+          }),
+      ),
+    );
+    // De-duplicate while preserving order: workspace locations first, then apps
+    const seen = new Set<string>();
+    locations = [...locations, ...appDirs].filter((dir) => {
+      if (seen.has(dir)) {
+        return false;
+      }
+      seen.add(dir);
+      return true;
+    });
+  } catch {
+    // Best-effort enrichment; ignore failures and fall back to workspace-only locations.
+  }
+
   console.log(
     JSON.stringify({
       names: workspaces.map(({ name }) => name),
-      locations: workspaces.map(({ location }) => location),
+      locations,
       hasRootChange,
     }),
   );
