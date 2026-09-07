@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.39.0]
+
+### Changed
+
+- **BREAKING:** Removed 111 unused icons from `IconName` to reduce icon bundle size ([#1481](https://github.com/MetaMask/metamask-design-system/pull/1481))
+  - TypeScript will fail on remaining references to removed `IconName` members
+  - See [Migration Guide](./MIGRATION.md#from-version-0381-to-0390)
+
+### Fixed
+
+- Fixed `BadgeNetwork` Xs size border radius to match Figma ([#1480](https://github.com/MetaMask/metamask-design-system/pull/1480))
+
 ## [0.38.1]
 
 ### Changed
@@ -520,7 +532,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.39.0...HEAD
+[0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...@metamask/design-system-react@0.39.0
 [0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...@metamask/design-system-react@0.38.1
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...@metamask/design-system-react@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...@metamask/design-system-react@0.37.0
