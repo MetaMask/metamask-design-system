@@ -7,7 +7,7 @@ import { TabEmptyState } from '@metamask/design-system-react-native';
 
 <TabEmptyState
   description="No items found"
-  actionButtonText="Add Item"
+  actionButtonText="Add item"
   onAction={() => console.log('pressed')}
 />;
 ```
@@ -69,7 +69,7 @@ Optional label for the action button. The button is only rendered when both `act
 
 ```tsx
 <TabEmptyState
-  actionButtonText="Try Again"
+  actionButtonText="Try again"
   onAction={() => console.log('pressed')}
 />
 ```
@@ -84,7 +84,7 @@ Optional props to pass to the action `Button` component. Use this for a separate
 
 ```tsx
 <TabEmptyState
-  actionButtonText="Add Item"
+  actionButtonText="Add item"
   onAction={() => {}}
   actionButtonProps={{ testID: 'action-button' }}
 />
@@ -170,3 +170,14 @@ Migrating from the legacy `TabEmptyState` in `app/component-library/components-t
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- `description`: sentence case, "No X found" pattern, no period
+- `actionButtonText`: sentence case, verb phrase, no period
+
+```
+✅ description: "No perpetual positions found"
+✅ actionButtonText: "Start trading"
+❌ actionButtonText: "Start Trading"
+```

@@ -126,3 +126,14 @@ export default App;
 - `ButtonTertiary` supports TailwindCSS classes via the `twClassName` prop for custom styling.
 - The button automatically adjusts its styles based on the `isDanger` and `isInverse` props.
 - Use the `isLoading` state to display a spinner and loading text, enhancing user feedback for asynchronous actions.
+
+## Content guidelines
+
+- Sentence case, 1–3 words, imperative verb first
+- No punctuation
+- `loadingText` prop uses an ellipsis: `"Turning on..."`
+
+```
+✅ "Turn on"  ✅ "Save"  ✅ "Turn on notifications"
+❌ "Turn On Notifications"  ❌ "Submit."
+```

@@ -127,3 +127,14 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Sentence case
+- Full sentences end with a period; short phrases do not
+- Errors: say what happened, then what to do — no "Error:" prefix
+
+```
+✅ "Incorrect password. Try again."
+❌ "Error: You entered an invalid password."
+```

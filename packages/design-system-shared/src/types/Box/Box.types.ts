@@ -73,6 +73,16 @@ export const BoxBackgroundColor = {
   BackgroundSection: 'bg-section',
   /** Subsection background color */
   BackgroundSubsection: 'bg-subsection',
+  /**
+   * One level above bg-default. Surfaces over a scrim/overlay
+   * (e.g. Modal, BottomSheet).
+   */
+  BackgroundElevated1: 'bg-elevated1',
+  /**
+   * Two levels above base; can sit on bg-default or bg-elevated1.
+   * Floating UI (e.g. Toast, Menu, Popover, Tooltip).
+   */
+  BackgroundElevated2: 'bg-elevated2',
   /** Muted background color */
   BackgroundMuted: 'bg-muted',
   /** Primary default background color */
@@ -136,6 +146,11 @@ export const BoxBorderColor = {
   BorderDefault: 'border-default',
   /** Muted border color */
   BorderMuted: 'border-muted',
+  /**
+   * Border for elevated surfaces. Transparent in light; subtle edge in
+   * dark. Prefer with bg-elevated1 / bg-elevated2 (e.g. Modal).
+   */
+  BorderAlternative: 'border-alternative',
   /** Primary default border color */
   PrimaryDefault: 'border-primary-default',
   /** Primary alternative border color */

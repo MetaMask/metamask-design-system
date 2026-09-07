@@ -1,9 +1,7 @@
-import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import path from 'path';
 
 export default defineConfig({
-  plugins: [react()],
   optimizeDeps: {
     include: [
       'react',
@@ -30,6 +28,7 @@ export default defineConfig({
         __dirname,
         '../../packages/design-tokens/src',
       ),
+      'expo-image': path.resolve(__dirname, '.storybook/expo-image-shim.ts'),
     },
   },
   assetsInclude: ['**/*.woff2', '**/*.woff', '**/*.ttf', '**/*.otf'],

@@ -278,20 +278,20 @@ describe('Checkbox', () => {
     );
   });
 
-  it('scopes hover and press background to enabled state on the input', () => {
+  it('has transparent background with hover/pressed states when unselected', () => {
     render(
       <Checkbox
         id="test-checkbox"
         isSelected={false}
-        isDisabled
         onChange={jest.fn()}
         inputProps={{ 'data-testid': 'chk-input' }}
       />,
     );
 
     expect(screen.getByTestId('chk-input')).toHaveClass(
-      'enabled:hover:bg-default-hover',
-      'enabled:active:bg-default-pressed',
+      'bg-transparent',
+      'enabled:hover:bg-hover',
+      'enabled:active:bg-pressed',
     );
   });
 

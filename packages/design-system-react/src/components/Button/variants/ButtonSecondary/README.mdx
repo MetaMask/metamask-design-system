@@ -10,7 +10,7 @@ Consumers should use `Button` with `variant={ButtonVariant.Secondary}` instead o
 ```tsx
 import { Button, ButtonVariant } from '@metamask/design-system-react';
 
-<Button variant={ButtonVariant.Secondary}>Secondary Button</Button>;
+<Button variant={ButtonVariant.Secondary}>Secondary button</Button>;
 ```
 
 <Canvas of={ButtonSecondaryStories.Default} />
@@ -299,3 +299,14 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Sentence case, 1–3 words, imperative verb first
+- No punctuation
+- `loadingText` prop uses an ellipsis: `"Turning on..."`
+
+```
+✅ "Turn on"  ✅ "Save"  ✅ "Turn on notifications"
+❌ "Turn On Notifications"  ❌ "Submit."
+```

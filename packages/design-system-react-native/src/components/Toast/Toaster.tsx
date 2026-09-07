@@ -59,6 +59,7 @@ const getToastProps = ({
   onClose: _onClose,
   topOffset: _topOffset,
   twClassName: _twClassName,
+  showCloseButton: _showCloseButton,
   ...toastProps
 }: ToastOptions): Omit<ToastProps, 'twClassName'> => toastProps;
 
@@ -365,14 +366,23 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       return null;
     }
 
-    const { onClose: toastOnClose, twClassName: toastTwClassName } =
-      toastOptions;
+    const {
+      onClose: toastOnClose,
+      showCloseButton = true,
+      twClassName: toastTwClassName,
+    } = toastOptions;
     const toastProps = getToastProps(toastOptions);
     const { actionButtonLabel, actionButtonOnPress, ...restToastProps } =
       toastProps;
     const toastTwClassNames = [twClassName, toastTwClassName]
       .filter(Boolean)
       .join(' ');
+    const handleClose = showCloseButton
+      ? () => {
+          closeToast();
+          toastOnClose?.();
+        }
+      : undefined;
 
     const onAnimatedViewLayout = (e: LayoutChangeEvent) => {
       const { height } = e.nativeEvent.layout;
@@ -420,19 +430,13 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
               {...toastProps}
               actionButtonLabel={actionButtonLabel}
               actionButtonOnPress={actionButtonOnPress}
-              onClose={() => {
-                closeToast();
-                toastOnClose?.();
-              }}
+              onClose={handleClose}
               twClassName={toastTwClassNames}
             />
           ) : (
             <Toast
               {...restToastProps}
-              onClose={() => {
-                closeToast();
-                toastOnClose?.();
-              }}
+              onClose={handleClose}
               twClassName={toastTwClassNames}
             />
           )}

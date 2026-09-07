@@ -4,13 +4,25 @@ import type { ThemeColors } from '../types';
 export const colors: ThemeColors = {
   background: {
     /** For default neutral surface (#FFFFFF) */
-    default: brandColor.grey000,
+    default: brandColor.white,
     /** For sunken neutral surface below background/default (#F3F5F9) */
     alternative: brandColor.grey050,
     /** For section bg usually over background/default (#F3F5F9) */
     section: brandColor.grey050,
     /** For subsection bg usually over background/section (#FFFFFF) */
     subsection: brandColor.grey000,
+    /**
+     * One level above `background.default`. Use for surfaces over a
+     * scrim/overlay (e.g. Modal, BottomSheet). Matches `background.default`
+     * in light — elevation comes from overlay/shadow, not fill.
+     */
+    elevated1: brandColor.white,
+    /**
+     * Two levels above the base surface. Can sit on `background.default` or
+     * `background.elevated1`. Use for floating UI (e.g. Toast, Menu,
+     * Popover, Tooltip). Matches `background.default` in light.
+     */
+    elevated2: brandColor.white,
     /** For muted neutral surface (#b4b4b528) */
     muted: '#b4b4b528',
     /** Hover state surface for background/default */
@@ -57,6 +69,11 @@ export const colors: ThemeColors = {
     default: brandColor.grey400,
     /** Muted color for borders (#b4b4b566) */
     muted: '#b4b4b566',
+    /**
+     * Border for elevated surfaces. Transparent in light; use with
+     * `background.elevated1` / `elevated2` when a hairline is needed.
+     */
+    alternative: 'transparent',
   },
   overlay: {
     /** Default color for overlays (scrim) (#0a0d135c) */

@@ -11,7 +11,6 @@ import { BottomSheetDialog } from './BottomSheetDialog';
 import type { BottomSheetDialogRef } from './BottomSheetDialog.types';
 
 const mockThemeRef = { current: 'light' };
-const mockIsPureBlackRef = { current: false };
 const mockStyle = jest.fn((...args: string[]) => args);
 
 jest.mock('react-native-gesture-handler', () => ({
@@ -42,7 +41,6 @@ jest.mock('@metamask/design-system-twrnc-preset', () => ({
     style: mockStyle,
   }),
   useTheme: () => mockThemeRef.current,
-  usePureBlack: () => mockIsPureBlackRef.current,
 }));
 
 jest.mock('react-native-reanimated', () => {
@@ -57,7 +55,6 @@ jest.mock('react-native-reanimated', () => {
 describe('BottomSheetDialog', () => {
   afterEach(() => {
     mockThemeRef.current = 'light';
-    mockIsPureBlackRef.current = false;
     mockStyle.mockClear();
   });
 
@@ -369,18 +366,15 @@ describe('BottomSheetDialog', () => {
     expect(getByText('Dark Theme')).toBeDefined();
   });
 
-  it('uses alternative background class when pure black is enabled', () => {
-    mockThemeRef.current = 'dark';
-    mockIsPureBlackRef.current = true;
-
+  it('uses elevated1 background class', () => {
     render(
       <BottomSheetDialog>
-        <Text>Pure Black Sheet</Text>
+        <Text>Elevated Sheet</Text>
       </BottomSheetDialog>,
     );
 
     expect(mockStyle).toHaveBeenCalledWith(
-      'bg-alternative',
+      'bg-elevated1',
       'rounded-t-3xl overflow-hidden border border-muted border-b-0',
       undefined,
     );
@@ -394,7 +388,7 @@ describe('BottomSheetDialog', () => {
     );
 
     expect(mockStyle).toHaveBeenCalledWith(
-      'bg-default',
+      'bg-elevated1',
       'rounded-t-3xl overflow-hidden border border-muted border-b-0',
       undefined,
     );

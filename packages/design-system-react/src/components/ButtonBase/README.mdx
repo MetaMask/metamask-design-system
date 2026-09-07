@@ -9,7 +9,7 @@ ButtonBase is a labeled element that a user can click or tap to initiate an acti
 ```tsx
 import { ButtonBase } from '@metamask/design-system-react';
 
-<ButtonBase onClick={() => {}}>Button Base</ButtonBase>;
+<ButtonBase onClick={() => {}}>Button base</ButtonBase>;
 ```
 
 <Canvas of={ButtonBaseStories.Default} />
@@ -459,3 +459,14 @@ Migrating from `ui/components/component-library/button-base` in MetaMask Extensi
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Sentence case, 1–3 words, imperative verb first
+- No punctuation
+- `loadingText` prop uses an ellipsis: `"Turning on..."`
+
+```
+✅ "Turn on"  ✅ "Save"  ✅ "Turn on notifications"
+❌ "Turn On Notifications"  ❌ "Submit."
+```

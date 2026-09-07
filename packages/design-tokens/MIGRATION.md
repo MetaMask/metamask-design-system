@@ -2,6 +2,8 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 9.x to 10.0.0](#from-version-9x-to-1000)
+- [From version 8.x to 9.0.0](#from-version-8x-to-900)
 - [Tailwind CSS v3 to v4](#tailwind-css-v3-to-v4)
 - [From version 8.2.2 to 8.3.0](#from-version-822-to-830)
 - [From version 7.0.0 to 8.0.0](#from-version-700-to-800)
@@ -10,6 +12,207 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 9.x to 10.0.0
+
+Provisional pure-black scaffolding is removed. Canonical `darkTheme` already uses OLED values (since 9.0.0); elevated tokens remain the way to style stepped surfaces.
+
+### What changed
+
+**Removed from `@metamask/design-tokens`:**
+
+- `pureBlackDarkTheme`
+- `resolveDarkTheme()`
+- `pure-black-dark-theme-colors.css` / `[data-pure-black]` CSS override path
+
+**Removed from design-system packages:**
+
+- `@metamask/design-system-react` `PureBlackProvider` / `usePureBlack`
+- `@metamask/design-system-shared` `PureBlackContext` and related types
+- `@metamask/design-system-twrnc-preset` `ThemeProvider` `isPureBlack` prop, `usePureBlack`, and `pureBlackThemeColors`
+- `getThemeColors(theme, isPureBlack)` / `generateTailwindConfig(theme, isPureBlack)` second arguments
+
+### Migration
+
+```tsx
+// Before
+import {
+  darkTheme,
+  pureBlackDarkTheme,
+  resolveDarkTheme,
+} from '@metamask/design-tokens';
+import { PureBlackProvider, usePureBlack } from '@metamask/design-system-react';
+
+<html data-pure-black={isPureBlack || undefined}>
+  <PureBlackProvider isPureBlack={isPureBlack}>{children}</PureBlackProvider>
+</html>;
+
+const theme = resolveDarkTheme(isPureBlack);
+// or
+const theme = isPureBlack ? pureBlackDarkTheme : darkTheme;
+```
+
+```tsx
+// After
+import { darkTheme } from '@metamask/design-tokens';
+
+{
+  children;
+}
+
+const theme = darkTheme;
+```
+
+```tsx
+// Before — React Native
+import {
+  ThemeProvider,
+  usePureBlack,
+  getThemeColors,
+} from '@metamask/design-system-twrnc-preset';
+
+<ThemeProvider theme={Theme.Dark} isPureBlack={isPureBlack}>
+  {children}
+</ThemeProvider>;
+
+getThemeColors(theme, isPureBlack);
+```
+
+```tsx
+// After — React Native
+import {
+  ThemeProvider,
+  getThemeColors,
+} from '@metamask/design-system-twrnc-preset';
+
+<ThemeProvider theme={Theme.Dark}>{children}</ThemeProvider>;
+
+getThemeColors(theme);
+```
+
+Use `background.elevated1`, `background.elevated2`, and `border.alternative` (or `bg-elevated1` / `bg-elevated2` / `border-alternative`) instead of branching on pure-black mode. See [From version 8.x to 9.0.0](#from-version-8x-to-900) for elevated-token examples.
+
+### Impact
+
+- **MetaMask extension / mobile:** After client provider wiring is removed, bump to these package versions with no additional visual change expected for dark mode
+- **Other consumers still importing removed APIs:** Update imports as above; TypeScript will fail until call sites are cleaned up
+
+## From version 8.x to 9.0.0
+
+OLED pure-black dark theme values are now canonical on `darkTheme`, and new elevated surface tokens replace the temporary pure-black provider pattern.
+
+### What changed
+
+**Canonical dark theme values (breaking):**
+
+- `darkTheme` now uses OLED pure-black surface values that were previously only available via `pureBlackDarkTheme` or `data-pure-black` CSS overrides
+- `background.default` changes from `#222325` to `#000000`
+- Section, alternative, muted, border, and hover/pressed values shift to the OLED palette
+
+**Pure-black helpers (compatible signatures, no visual change on OLED path):**
+
+- `resolveDarkTheme(isPureBlack)` always returns `darkTheme`; the `isPureBlack` argument is ignored
+- `@metamask/design-system-twrnc-preset` `getThemeColors(theme, isPureBlack)` ignores `isPureBlack`
+- `pureBlackThemeColors` is deprecated and aliases `darkTheme` colors
+- Callers already on pure-black / OLED mode receive the same token values; remove redundant provider wiring
+
+**New elevated surface tokens (additive, semantic unification):**
+
+- `background.elevated1` — one level above base; use for surfaces over scrims (modals, bottom sheets). In light, matches `background.default`; in dark on OLED, matches `background.alternative`
+- `background.elevated2` — two levels above base; use for floating UI (toasts, menus, popovers). In light, matches `background.default`; in dark on OLED, matches `background.section`
+- `border.alternative` — hairline border for elevated surfaces in dark mode; on OLED, matches `border.muted`
+- These tokens replace theme-conditional swaps (e.g. `isPureBlack ? alternative : default`) with a single semantic class per surface type
+
+### Migration
+
+**Remove pure-black provider wiring:**
+
+```tsx
+// Before (8.x) — web
+<html data-pure-black={isPureBlack || undefined}>
+  <PureBlackProvider isPureBlack={isPureBlack}>{children}</PureBlackProvider>
+</html>;
+
+// After (9.0.0) — web
+// Remove data-pure-black and PureBlackProvider; darkTheme is already OLED pure-black
+{
+  children;
+}
+```
+
+```tsx
+// Before (8.x) — React Native
+<ThemeProvider theme={Theme.Dark} isPureBlack={isPureBlack}>
+  {children}
+</ThemeProvider>
+
+// After (9.0.0) — React Native
+<ThemeProvider theme={Theme.Dark}>
+  {children}
+</ThemeProvider>
+```
+
+**Replace isPureBlack branching with elevated tokens:**
+
+```tsx
+// Before (8.x)
+import {
+  BoxBackgroundColor,
+  usePureBlack,
+} from '@metamask/design-system-react';
+
+const isPureBlack = usePureBlack();
+
+<Box
+  backgroundColor={
+    isPureBlack
+      ? BoxBackgroundColor.BackgroundAlternative
+      : BoxBackgroundColor.BackgroundDefault
+  }
+/>;
+
+// After (9.0.0)
+import {
+  BoxBackgroundColor,
+  BoxBorderColor,
+} from '@metamask/design-system-react';
+
+<Box
+  backgroundColor={BoxBackgroundColor.BackgroundElevated1}
+  borderColor={BoxBorderColor.BorderAlternative}
+  borderWidth={1}
+/>;
+```
+
+```tsx
+// Before (8.x) — React Native custom surface
+const isPureBlack = usePureBlack();
+tw.style(isPureBlack ? 'bg-alternative' : 'bg-default');
+
+// After (9.0.0)
+tw.style('bg-elevated1');
+```
+
+**Update resolveDarkTheme / getThemeColors call sites:**
+
+```tsx
+// Before (8.x)
+import { resolveDarkTheme } from '@metamask/design-tokens';
+
+const theme = resolveDarkTheme(isPureBlack);
+
+// After (9.0.0)
+import { darkTheme } from '@metamask/design-tokens';
+
+const theme = darkTheme;
+// resolveDarkTheme(isPureBlack) still compiles but isPureBlack is ignored
+```
+
+### Impact
+
+- **Apps already on pure-black / OLED mode (MetaMask extension and mobile):** No visual change from design-tokens 9.0.0 or design-system component updates; remove redundant `PureBlackProvider`, `data-pure-black`, and `isPureBlack` wiring and adopt elevated tokens in custom UI
+- **Apps on legacy default dark theme without pure-black:** Background and elevation colors will change on upgrade; review dark-mode UI and visual regression snapshots
+- **Custom styling tied to old grey900-based hierarchy:** Update to use `background.elevated1`, `background.elevated2`, and `border.alternative` for stepped surfaces instead of branching on pure-black mode
 
 ## Tailwind CSS v3 to v4
 

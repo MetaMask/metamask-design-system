@@ -3302,20 +3302,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/action-utils@npm:^1.0.0":
-  version: 1.1.1
-  resolution: "@metamask/action-utils@npm:1.1.1"
+"@metamask/action-utils@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@metamask/action-utils@npm:2.0.0"
   dependencies:
     "@types/semver": "npm:^7.3.6"
     glob: "npm:^7.1.7"
     semver: "npm:^7.3.5"
-  checksum: 10/de6ac6a3f92f58fd343c5e59f85ab32b26c60e4cd5ec781b541c0e2432b1dc70f442095442bcc1a03b1164ac61708d5855293992f3e0e8265abc93c4024bdbb4
+  checksum: 10/9d0ef99cf7be9314a4996108760acb30071dff9e14f090ff6b8c1a1996effb9b9ef1ba5238dc5cd9c0c5396830a66b60621ef9213457606dc011822154188708
   languageName: node
   linkType: hard
 
-"@metamask/auto-changelog@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "@metamask/auto-changelog@npm:6.1.1"
+"@metamask/auto-changelog@npm:^6.1.1, @metamask/auto-changelog@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "@metamask/auto-changelog@npm:6.2.1"
   dependencies:
     "@octokit/rest": "npm:^20.0.0"
     diff: "npm:^5.0.0"
@@ -3332,15 +3332,15 @@ __metadata:
       optional: true
   bin:
     auto-changelog: dist/cli.mjs
-  checksum: 10/cae26d9435b86899af583fb3c7e3d35b6330fb19ae376bf8382ffee48db53a2b46f10032ece53477d8f7818ebb8721304e4f39f21273e71e25fd28d72f3e246f
+  checksum: 10/88f5bc63ef5003b3e4f88ebf018229ce5e701283cadee1dcbd37f869541a1102ba6a8a96fd54993863e3578c8b79f0c6e0242e4afd08c58d5db529bc75dbaf2c
   languageName: node
   linkType: hard
 
-"@metamask/create-release-branch@npm:^4.2.1":
-  version: 4.2.1
-  resolution: "@metamask/create-release-branch@npm:4.2.1"
+"@metamask/create-release-branch@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "@metamask/create-release-branch@npm:4.2.2"
   dependencies:
-    "@metamask/action-utils": "npm:^1.0.0"
+    "@metamask/action-utils": "npm:^2.0.0"
     "@metamask/auto-changelog": "npm:^6.1.1"
     "@metamask/utils": "npm:^9.0.0"
     debug: "npm:^4.3.4"
@@ -3363,7 +3363,7 @@ __metadata:
       optional: true
   bin:
     create-release-branch: bin/create-release-branch.js
-  checksum: 10/76b3f904e6cceeb7f42d2120b6b816fb14a190678ab79a8a6a9033e7a872a083254bc36b153c9e773b9d821ed30f0d302b18adc0f83795cc5dfcec2bb166ada6
+  checksum: 10/35b1e671c53cf0c1c03bb076fe33684bdc4eee55935feb0be4f681d4682c57dd68a953585fb6cac8707117218716156ade715db5484d9ade4e25ec79aeba27c1
   languageName: node
   linkType: hard
 
@@ -3377,11 +3377,11 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.3"
     "@figma/code-connect": "npm:^1.4.9"
     "@gorhom/bottom-sheet": "npm:^5.1.3"
-    "@metamask/auto-changelog": "npm:^6.1.1"
+    "@metamask/auto-changelog": "npm:^6.2.1"
     "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.11.0"
+    "@metamask/utils": "npm:^11.12.1"
     "@react-native/babel-preset": "npm:0.81.5"
     "@react-native/typescript-config": "npm:0.81.5"
     "@storybook/react-native": "npm:10.4.7"
@@ -3394,6 +3394,7 @@ __metadata:
     "@types/react-test-renderer": "npm:^19.1.0"
     babel-jest: "npm:^29.7.0"
     deepmerge: "npm:^4.2.2"
+    expo-image: "npm:~3.0.11"
     jest: "npm:^29.7.0"
     react: "npm:19.1.0"
     react-native: "npm:0.81.5"
@@ -3410,9 +3411,10 @@ __metadata:
     tsx: "npm:^4.20.6"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-system-twrnc-preset": ^0.8.0
-    "@metamask/design-tokens": ^8.2.0
-    "@metamask/utils": ^11.11.0
+    "@metamask/design-system-twrnc-preset": ^0.10.0
+    "@metamask/design-tokens": ^10.0.0
+    "@metamask/utils": ^11.12.1
+    expo-image: ">=3.0.0"
     lodash: ^4.17.21
     react: ">=18.2.0"
     react-native: ">=0.76.0"
@@ -3430,11 +3432,11 @@ __metadata:
     "@figma/code-connect": "npm:^1.4.9"
     "@floating-ui/react-dom": "npm:^2.1.2"
     "@jest/globals": "npm:^29.7.0"
-    "@metamask/auto-changelog": "npm:^6.1.1"
+    "@metamask/auto-changelog": "npm:^6.2.1"
     "@metamask/design-system-shared": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/jazzicon": "npm:^2.0.0"
-    "@metamask/utils": "npm:^11.11.0"
+    "@metamask/utils": "npm:^11.12.1"
     "@radix-ui/react-slot": "npm:^1.1.0"
     "@svgr/cli": "npm:^8.1.0"
     "@testing-library/dom": "npm:^10.0.0"
@@ -3460,9 +3462,9 @@ __metadata:
     tsx: "npm:^4.20.6"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-system-tailwind-preset": ^0.10.0
-    "@metamask/design-tokens": ^8.1.0
-    "@metamask/utils": ^11.11.0
+    "@metamask/design-system-tailwind-preset": ^0.12.0
+    "@metamask/design-tokens": ^10.0.0
+    "@metamask/utils": ^11.12.1
     react: ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
   languageName: unknown
@@ -3472,8 +3474,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-shared@workspace:packages/design-system-shared"
   dependencies:
-    "@metamask/auto-changelog": "npm:^6.1.1"
-    "@metamask/utils": "npm:^11.11.0"
+    "@metamask/auto-changelog": "npm:^6.2.1"
+    "@metamask/utils": "npm:^11.12.1"
     "@svgr/core": "npm:^8.1.0"
     "@svgr/plugin-jsx": "npm:^8.1.0"
     "@svgr/plugin-svgo": "npm:^8.1.0"
@@ -3497,7 +3499,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-system-tailwind-preset@workspace:packages/design-system-tailwind-preset"
   dependencies:
-    "@metamask/auto-changelog": "npm:^6.1.1"
+    "@metamask/auto-changelog": "npm:^6.2.1"
     "@ts-bridge/cli": "npm:^0.6.3"
     "@types/jest": "npm:^27.4.1"
     "@types/node": "npm:^16.18.54"
@@ -3507,7 +3509,7 @@ __metadata:
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^8.0.0
+    "@metamask/design-tokens": ^10.0.0
     tailwindcss: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -3520,7 +3522,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.25.9"
     "@babel/preset-typescript": "npm:^7.23.3"
-    "@metamask/auto-changelog": "npm:^6.1.1"
+    "@metamask/auto-changelog": "npm:^6.2.1"
     "@metamask/design-tokens": "workspace:^"
     "@testing-library/react-native": "npm:^13.3.3"
     "@ts-bridge/cli": "npm:^0.6.3"
@@ -3539,7 +3541,7 @@ __metadata:
     twrnc: "npm:^4.5.1"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^8.0.0
+    "@metamask/design-tokens": ^10.0.0
     react: ">=18.2.0"
   languageName: unknown
   linkType: soft
@@ -3548,7 +3550,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@metamask/design-tokens@workspace:packages/design-tokens"
   dependencies:
-    "@metamask/auto-changelog": "npm:^6.1.1"
+    "@metamask/auto-changelog": "npm:^6.2.1"
     "@metamask/design-system-react": "workspace:^"
     "@metamask/design-system-shared": "workspace:^"
     "@ts-bridge/cli": "npm:^0.6.3"
@@ -3647,12 +3649,12 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.3"
     "@figma/code-connect": "npm:^1.4.9"
     "@lavamoat/allow-scripts": "npm:^3.2.1"
-    "@metamask/create-release-branch": "npm:^4.2.1"
+    "@metamask/create-release-branch": "npm:^4.2.2"
     "@metamask/eslint-config": "npm:^15.0.1"
     "@metamask/eslint-config-jest": "npm:^15.0.1"
     "@metamask/eslint-config-nodejs": "npm:^15.0.1"
     "@metamask/eslint-config-typescript": "npm:^15.0.1"
-    "@metamask/utils": "npm:^11.11.0"
+    "@metamask/utils": "npm:^11.12.1"
     "@types/eslint-plugin-tailwindcss": "npm:^3"
     "@types/jest": "npm:^27.4.1"
     "@types/lodash": "npm:^4.14.191"
@@ -3690,6 +3692,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@metamask/scure-bip39@npm:^2.0.3":
+  version: 2.1.1
+  resolution: "@metamask/scure-bip39@npm:2.1.1"
+  dependencies:
+    "@noble/hashes": "npm:~1.3.2"
+    "@scure/base": "npm:~1.1.3"
+  checksum: 10/785d75e52f85103af7556c25d3dbba6da52ee9e61c31e95786bfbab0e18b9899a367bf714c71dd311c04161c45ba14354bd6fb4fbeb42cb26b7bd2f35c582f73
+  languageName: node
+  linkType: hard
+
 "@metamask/storybook-react-native@workspace:apps/storybook-react-native":
   version: 0.0.0-use.local
   resolution: "@metamask/storybook-react-native@workspace:apps/storybook-react-native"
@@ -3701,7 +3713,7 @@ __metadata:
     "@metamask/design-system-react-native": "workspace:^"
     "@metamask/design-system-twrnc-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.11.0"
+    "@metamask/utils": "npm:^11.12.1"
     "@playwright/test": "npm:^1.52.0"
     "@react-native-async-storage/async-storage": "npm:2.2.0"
     "@react-native-community/datetimepicker": "npm:^8.5.1"
@@ -3728,6 +3740,8 @@ __metadata:
     expo-asset: "npm:~12.0.12"
     expo-dev-client: "npm:~6.0.21"
     expo-font: "npm:~14.0.11"
+    expo-image: "npm:~3.0.11"
+    expo-splash-screen: "npm:~31.0.13"
     expo-status-bar: "npm:~3.0.9"
     lodash: "npm:^4.17.21"
     playwright: "npm:^1.52.0"
@@ -3758,7 +3772,7 @@ __metadata:
     "@metamask/design-system-react": "workspace:^"
     "@metamask/design-system-tailwind-preset": "workspace:^"
     "@metamask/design-tokens": "workspace:^"
-    "@metamask/utils": "npm:^11.11.0"
+    "@metamask/utils": "npm:^11.12.1"
     "@playwright/test": "npm:^1.52.0"
     "@storybook/addon-a11y": "npm:^10.4.6"
     "@storybook/addon-docs": "npm:^10.4.6"
@@ -3799,11 +3813,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/utils@npm:^11.11.0":
-  version: 11.11.0
-  resolution: "@metamask/utils@npm:11.11.0"
+"@metamask/utils@npm:^11.12.1":
+  version: 11.12.1
+  resolution: "@metamask/utils@npm:11.12.1"
   dependencies:
     "@ethereumjs/tx": "npm:^4.2.0"
+    "@metamask/scure-bip39": "npm:^2.0.3"
     "@metamask/superstruct": "npm:^3.1.0"
     "@noble/hashes": "npm:^1.3.1"
     "@scure/base": "npm:^1.1.3"
@@ -3814,7 +3829,7 @@ __metadata:
     pony-cause: "npm:^2.1.10"
     semver: "npm:^7.5.4"
     uuid: "npm:^9.0.1"
-  checksum: 10/c4381b9e451a9616bde84ac659bc0d1848ef06b6e605f877bfa065b78c8ed5015706683ea88a3387de5eaeb3a50d1af9af0994f04f9e06258d992598fe2be3bf
+  checksum: 10/2d91b1d5338929f7a7c0e272ea564426d229e4d5bc33f7b124043245b3d14afb0f01ca15fcee70c434fa1cd537eb82c537ea575489a8672a10ea3da6ae74da81
   languageName: node
   linkType: hard
 
@@ -3874,6 +3889,13 @@ __metadata:
   version: 1.6.1
   resolution: "@noble/hashes@npm:1.6.1"
   checksum: 10/74d9ad7b1437a22ba3b877584add3367587fbf818113152f293025d20d425aa74c191d18d434797312f2270458bc9ab3241c34d14ec6115fb16438b3248f631f
+  languageName: node
+  linkType: hard
+
+"@noble/hashes@npm:~1.3.2":
+  version: 1.3.3
+  resolution: "@noble/hashes@npm:1.3.3"
+  checksum: 10/1025ddde4d24630e95c0818e63d2d54ee131b980fe113312d17ed7468bc18f54486ac86c907685759f8a7e13c2f9b9e83ec7b67d1cc20836f36b5e4a65bb102d
   languageName: node
   linkType: hard
 
@@ -4899,7 +4921,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@scure/base@npm:~1.1.6":
+"@scure/base@npm:~1.1.3, @scure/base@npm:~1.1.6":
   version: 1.1.9
   resolution: "@scure/base@npm:1.1.9"
   checksum: 10/f0ab7f687bbcdee2a01377fe3cd808bf63977999672751295b6a92625d5322f4754a96d40f6bd579bc367aad48ecf8a4e6d0390e70296e6ded1076f52adb16bb
@@ -9646,6 +9668,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-image@npm:~3.0.11":
+  version: 3.0.11
+  resolution: "expo-image@npm:3.0.11"
+  peerDependencies:
+    expo: "*"
+    react: "*"
+    react-native: "*"
+    react-native-web: "*"
+  peerDependenciesMeta:
+    react-native-web:
+      optional: true
+  checksum: 10/61d438f9feae0db952f0374050bdbb007002c2aa163270cf7c4ecb8c6b6f6c367bb4f5bf054347ed674ea0318bff6cb51b12eb36c8c8f8e5da6641ba985ac450
+  languageName: node
+  linkType: hard
+
 "expo-json-utils@npm:~0.15.0":
   version: 0.15.0
   resolution: "expo-json-utils@npm:0.15.0"
@@ -9706,6 +9743,17 @@ __metadata:
   version: 1.0.6
   resolution: "expo-server@npm:1.0.6"
   checksum: 10/eda5a44250eaad66994f9ee79b163e45c4b80703746040d1b782e23865d875e86d8d915d822d388999f0bd1a57eae52e72f2ce4fdfa9132ec595189542fd6204
+  languageName: node
+  linkType: hard
+
+"expo-splash-screen@npm:~31.0.13":
+  version: 31.0.13
+  resolution: "expo-splash-screen@npm:31.0.13"
+  dependencies:
+    "@expo/prebuild-config": "npm:^54.0.8"
+  peerDependencies:
+    expo: "*"
+  checksum: 10/09fe3f313d946af6e4052f79e8b6578b61af895ca6621ded6708bdf955946aed1a17716f1e3aa8608bfa47e3b2fc5207c25aa8e368e2ebdce929716e54afc6d7
   languageName: node
   linkType: hard
 

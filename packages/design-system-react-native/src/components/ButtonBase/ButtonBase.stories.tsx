@@ -319,7 +319,7 @@ export const IsLoading: Story = {
       <ButtonBase {...args} isLoading>
         ButtonBase
       </ButtonBase>
-      <ButtonBase {...args} isLoading loadingText="With Loading Text">
+      <ButtonBase {...args} isLoading loadingText="Loading...">
         ButtonBase
       </ButtonBase>
     </Box>

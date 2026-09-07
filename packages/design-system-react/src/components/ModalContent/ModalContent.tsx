@@ -5,12 +5,12 @@ import {
   Box,
   BoxAlignItems,
   BoxBackgroundColor,
+  BoxBorderColor,
   BoxFlexDirection,
   BoxJustifyContent,
 } from '../Box';
 import { useModalContext } from '../Modal';
 import { ModalFocus } from '../ModalFocus';
-import { usePureBlack } from '../PureBlackProvider';
 
 import {
   MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR,
@@ -39,7 +39,6 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
       restoreFocus,
       autoFocus,
     } = useModalContext();
-    const isPureBlack = usePureBlack();
     const modalDialogRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
@@ -96,11 +95,9 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
           <Box
             ref={modalDialogRef as React.Ref<HTMLDivElement>}
             asChild
-            backgroundColor={
-              isPureBlack
-                ? BoxBackgroundColor.BackgroundAlternative
-                : BoxBackgroundColor.BackgroundDefault
-            }
+            backgroundColor={BoxBackgroundColor.BackgroundElevated1}
+            borderColor={BoxBorderColor.BorderAlternative}
+            borderWidth={1}
             justifyContent={BoxJustifyContent.Start}
             alignItems={BoxAlignItems.Stretch}
             flexDirection={BoxFlexDirection.Column}
@@ -110,7 +107,6 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
             className={twMerge(
               'flex max-h-full w-full rounded-lg shadow-lg motion-safe:animate-slide-up',
               TWCLASSMAP_MODAL_CONTENT_SIZE[size],
-              isPureBlack && 'border border-muted',
               modalDialogProps?.className,
             )}
           >

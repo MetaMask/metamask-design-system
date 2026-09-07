@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.35.0]
+
+### Changed
+
+- **BREAKING:** Removed 111 unused icons from `IconName` to reduce the shared icon bundle size ([#1481](https://github.com/MetaMask/metamask-design-system/pull/1481))
+  - SVG assets and generated React / React Native icon outputs no longer include these names
+  - TypeScript will fail on remaining references to removed `IconName` members
+  - See [Migration Guide](./MIGRATION.md#from-version-0340-to-0350)
+
+## [0.34.0]
+
+### Changed
+
+- **BREAKING:** Removed `PureBlackContext`, `PureBlackContextValue`, and `PureBlackProviderProps` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
+
+## [0.33.0]
+
+### Added
+
+- Added `BoxBackgroundColor.BackgroundElevated1` and `BoxBackgroundColor.BackgroundElevated2` for stepped surface elevation over scrims and floating UI ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+- Added `BoxBorderColor.BorderAlternative` for hairline borders on elevated surfaces ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+
 ## [0.32.0]
 
 ### Added
@@ -321,7 +344,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.32.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.35.0...HEAD
+[0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.34.0...@metamask/design-system-shared@0.35.0
+[0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.33.0...@metamask/design-system-shared@0.34.0
+[0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.32.0...@metamask/design-system-shared@0.33.0
 [0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.31.0...@metamask/design-system-shared@0.32.0
 [0.31.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.30.0...@metamask/design-system-shared@0.31.0
 [0.30.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.29.0...@metamask/design-system-shared@0.30.0

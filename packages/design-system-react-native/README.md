@@ -17,13 +17,13 @@ or
 This package requires the following peer dependencies to be installed in your project:
 
 ```bash
-yarn add react@>=18.2.0 react-native@>=0.72.0
+yarn add react@>=18.2.0 react-native@>=0.72.0 expo-image@>=3.0.0
 ```
 
 or
 
 ```bash
-npm install react@>=18.2.0 react-native@>=0.72.0
+npm install react@>=18.2.0 react-native@>=0.72.0 expo-image@>=3.0.0
 ```
 
 **Note:** This package is compatible with React Native 0.72.0 and newer versions, including 0.76.x.

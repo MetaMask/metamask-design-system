@@ -48,6 +48,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
+  - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.27.x to 0.28.0](#from-version-027x-to-0280)
   - [From version 0.25.0 to 0.26.0](#from-version-0250-to-0260)
@@ -1032,7 +1034,7 @@ import { BadgeCount, BadgeCountSize } from '@metamask/design-system-react';
 ```tsx
 import { BadgeIcon, IconName } from '@metamask/design-system-react';
 
-<BadgeIcon iconName={IconName.User} />;
+<BadgeIcon iconName={IconName.UserCircle} />;
 ```
 
 ### BadgeNetwork Component
@@ -1901,51 +1903,97 @@ import { AvatarToken, AvatarTokenSize } from '@metamask/design-system-react';
 
 ### AvatarGroup Component
 
-`AvatarGroup` is **not exported** from the extension `component-library` (see [extension `index.ts`](https://github.com/MetaMask/metamask-extension/blob/main/ui/components/component-library/index.ts)). Use this section for **MetaMask Mobile** and any app that used the standalone `AvatarGroup` molecule.
+The extension [`multichain/avatar-group`](https://github.com/MetaMask/metamask-extension/tree/main/ui/components/multichain/avatar-group) component maps to `AvatarGroup` in the design system. It is **not** part of the extension `component-library` barrel (see [extension `index.ts`](https://github.com/MetaMask/metamask-extension/blob/main/ui/components/component-library/index.ts)); consumers import it from `ui/components/multichain/avatar-group` today and should migrate to `@metamask/design-system-react`.
 
-**MMDS** requires a **required `variant`** (const object + union `AvatarGroupVariant`) and **`avatarPropsArr`** (not `avatarPropsList`). The **`max` prop** defaults to 4, **`size`** to `AvatarGroupSize.Md`. **`isReverse`** and **`overflowTextProps`** are new. Mobile’s **`spaceBetweenAvatars`**, **`includesBorder` stack override**, and the **`+N` size default of `AvatarSize.Xs`** are not part of the MMDS `AvatarGroup` public API; recreate spacing and borders with layout/`twClassName` if needed.
+**MMDS** requires a **required `variant`** (`AvatarGroupVariant`) and **`avatarPropsArr`** (typed avatar props per variant) instead of the extension’s **`avatarType` + `members`** shape. The **`max` prop** defaults to `4`, **`size`** to `AvatarGroupSize.Md` (extension defaults to `AvatarTokenSize.Xs`). **`isReverse`** controls stack direction (see [Stack order](#stack-order-isreverse)); **`overflowTextProps`** customizes the overflow badge. The extension’s **`isTagOverlay`** (overflow as inline `Text` vs overlay `AvatarBase`) and **Box `StyleUtilityProps`** are not carried forward; MMDS always renders the `+N` overflow in an `AvatarBase` badge (similar to `isTagOverlay={true}`). MMDS also applies **`hasBorder`** on stacked avatars by default. Use `className` / `style` for layout overrides. Preserve `data-testid` on the root if your E2E selectors depend on it (`data-testid="avatar-group"` is forwarded via standard div props).
 
-#### Breaking Changes (vs Mobile `AvatarGroup`)
+Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
 
-| Mobile API                                                          | MMDS API                                                                | Change Type              | Notes                                                           |
-| ------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------- |
-| `avatarPropsList: AvatarProps[]` (discriminated by inner `variant`) | `variant` + `avatarPropsArr: Avatar*Props[]` (single variant per group) | restructured             | pick one of Account / Favicon / Network / Token for the group   |
-| `size?: AvatarSize` (default `Xs` in mobile types)                  | `size?: AvatarGroupSize` (alias of `AvatarBaseSize`, default `Md`)      | default and type changed | verify visual overlap                                           |
-| `maxStackedAvatars?`                                                | `max?`                                                                  | renamed                  | same intent (default `4`)                                       |
-| `includesBorder?`                                                   | (not on `AvatarGroup`)                                                  | removed                  | set `hasBorder` on children via props if the design requires it |
-| `spaceBetweenAvatars?`                                              | (no direct prop)                                                        | removed                  | use wrapper layout / utilities                                  |
-| (n/a)                                                               | `isReverse?`, `overflowTextProps?`                                      | new                      | stack direction and overflow label styling                      |
+#### Breaking Changes (Extension)
 
-#### Mobile variant → MMDS `AvatarGroupVariant` + item props
+| Extension API                                                       | MMDS API                                                         | Change Type               | Notes                                                                                                  |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `import { AvatarGroup } from '.../multichain/avatar-group'`         | `import { AvatarGroup } from '@metamask/design-system-react'`    | import path               | drop local multichain wrapper                                                                          |
+| `avatarType?: AvatarType` (`TOKEN` / `ACCOUNT` / `NETWORK`)         | `variant: AvatarGroupVariant` (required)                         | restructured              | one variant per group; MMDS also supports `Favicon`                                                    |
+| `members: { avatarValue; symbol? }[]`                               | `avatarPropsArr: Avatar*Props[]`                                 | restructured              | map `avatarValue` → `src` or `address`; `symbol` → `name`                                              |
+| `limit` (default `4`)                                               | `max?` (default `4`)                                             | renamed                   | same intent                                                                                            |
+| `size?: AvatarTokenSize` (default `Xs`; only honored for `TOKEN`)   | `size?: AvatarGroupSize` (default `Md`; applies to all children) | default and scope changed | account/network stacks were hardcoded to `Xs` in the extension — set `size` explicitly                 |
+| `variant?: AvatarAccountVariant` (group-level, `ACCOUNT` only)      | per-item `variant` on `AvatarAccountProps` in `avatarPropsArr`   | moved                     | e.g. `AvatarAccountVariant.Maskicon` on each account item                                              |
+| `isTagOverlay?: boolean`                                            | (overflow always in `AvatarBase`)                                | removed                   | separate `Text` overflow label is not supported; use `overflowTextProps` to style badge                |
+| Box `StyleUtilityProps` (`display`, `gap`, `alignItems`, …) on root | `className` / `style` on root `div`                              | removed as first-class    | e.g. `gap={1}` → Tailwind `gap-1` on `className`                                                       |
+| `members.slice(0, limit).reverse()` before render (always reversed) | `isReverse?` (default `false`; forward order)                    | behavior changed          | pass `isReverse={true}` for pixel parity with the extension wrapper; forward order is the MMDS default |
 
-| Mobile `Avatar` variant (on each item) | MMDS `variant` on `AvatarGroup` | `avatarPropsArr` item type                   |
-| -------------------------------------- | ------------------------------- | -------------------------------------------- |
-| `AvatarVariant.Account`                | `AvatarGroupVariant.Account`    | `AvatarAccountProps`                         |
-| `AvatarVariant.Favicon`                | `AvatarGroupVariant.Favicon`    | `AvatarFaviconProps`                         |
-| `AvatarVariant.Network`                | `AvatarGroupVariant.Network`    | `AvatarNetworkProps`                         |
-| `AvatarVariant.Token`                  | `AvatarGroupVariant.Token`      | `AvatarTokenProps`                           |
-| `AvatarVariant.Icon`                   | (no `AvatarGroup` branch)       | use separate layout or multiple `AvatarIcon` |
+#### Stack order (`isReverse`)
 
-#### Migration Example (Mobile)
+The extension wrapper **always reverses** visible members before rendering:
 
-##### Before (Mobile)
+```ts
+const visibleMembers = members.slice(0, limit).reverse();
+```
+
+MMDS renders `avatarPropsArr` in forward order by default (`isReverse={false}`). When migrating TOKEN or NETWORK stacks, pass **`isReverse={true}`** if you need the same left-to-right stacking as the deprecated wrapper. New MMDS call sites (for example `defi-protocol-cell-v2.tsx` in the extension) use forward order intentionally.
+
+#### Extension `AvatarType` → MMDS `AvatarGroupVariant` + item props
+
+| Extension `avatarType`    | MMDS `variant` on `AvatarGroup` | `avatarPropsArr` item mapping                                      |
+| ------------------------- | ------------------------------- | ------------------------------------------------------------------ |
+| `AvatarType.TOKEN`        | `AvatarGroupVariant.Token`      | `{ src: member.avatarValue, name: member.symbol }`                 |
+| `AvatarType.ACCOUNT`      | `AvatarGroupVariant.Account`    | `{ address: member.avatarValue, variant: AvatarAccountVariant.* }` |
+| `AvatarType.NETWORK`      | `AvatarGroupVariant.Network`    | `{ src: member.avatarValue, name: member.symbol ?? '' }`           |
+| (no extension equivalent) | `AvatarGroupVariant.Favicon`    | `{ src, name }` per `AvatarFaviconProps`                           |
+
+#### Migration Example
+
+##### Before (Extension)
 
 ```tsx
-import AvatarGroup from '.../Avatars/AvatarGroup';
-import {
-  AvatarSize,
-  AvatarVariant,
-  AvatarAccountType,
-} from '.../Avatars/Avatar/Avatar.types';
+import { AvatarGroup } from '../../multichain/avatar-group';
+import { AvatarType } from '../../multichain/avatar-group/avatar-group.types';
+import { AvatarTokenSize } from '@metamask/design-system-react';
 
 <AvatarGroup
-  size={AvatarSize.Md}
-  maxStackedAvatars={3}
-  avatarPropsList={addresses.map((accountAddress) => ({
-    variant: AvatarVariant.Account,
-    accountAddress,
-    type: AvatarAccountType.JazzIcon,
+  limit={3}
+  size={AvatarTokenSize.Xs}
+  avatarType={AvatarType.TOKEN}
+  members={tokens.map((token) => ({
+    avatarValue: token.iconUrl,
+    symbol: token.symbol,
   }))}
+/>;
+```
+
+##### After (Design System)
+
+```tsx
+import {
+  AvatarGroup,
+  AvatarGroupVariant,
+  AvatarGroupSize,
+} from '@metamask/design-system-react';
+
+<AvatarGroup
+  variant={AvatarGroupVariant.Token}
+  max={3}
+  size={AvatarGroupSize.Xs}
+  avatarPropsArr={tokens.map((token) => ({
+    src: token.iconUrl,
+    name: token.symbol,
+  }))}
+/>;
+```
+
+##### Before (Extension — accounts)
+
+```tsx
+import { AvatarGroup } from '../../multichain/avatar-group';
+import { AvatarType } from '../../multichain/avatar-group/avatar-group.types';
+import { AvatarAccountVariant } from '@metamask/design-system-react';
+
+<AvatarGroup
+  limit={3}
+  avatarType={AvatarType.ACCOUNT}
+  variant={AvatarAccountVariant.Jazzicon}
+  members={addresses.map((address) => ({ avatarValue: address }))}
 />;
 ```
 
@@ -1961,8 +2009,8 @@ import {
 
 <AvatarGroup
   variant={AvatarGroupVariant.Account}
-  size={AvatarGroupSize.Md}
   max={3}
+  size={AvatarGroupSize.Xs}
   avatarPropsArr={addresses.map((address) => ({
     address,
     variant: AvatarAccountVariant.Jazzicon,
@@ -2978,7 +3026,7 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 | `onPressEscKey?: () => void`                                                                               | `onPressEscKey?: () => void`                                               | unchanged   | Escape-key callback                                                                                                                                                                                               |
 | `onClickOutside?: () => void`                                                                              | `onClickOutside?: () => void`                                              | unchanged   | click-outside callback (ignores clicks on the reference element)                                                                                                                                                  |
 | `as?: React.ElementType` / `PolymorphicComponentPropWithRef`                                               | removed                                                                    | removed     | always renders a `<div>`. Wrap or compose if you need a different element                                                                                                                                         |
-| Box style-utility props (`backgroundColor`, `padding`, `borderRadius`, …)                                  | removed from public API                                                    | removed     | the popover surface uses fixed design tokens (`BoxBackgroundColor.BackgroundDefault`, `BoxBorderColor.BorderMuted`, `padding={4}`, `rounded-lg`, `shadow-md`). Override via `className`                           |
+| Box style-utility props (`backgroundColor`, `padding`, `borderRadius`, …)                                  | removed from public API                                                    | removed     | the popover surface uses fixed design tokens (`BoxBackgroundColor.BackgroundElevated2`, `BoxBorderColor.BorderMuted`, `padding={4}`, `rounded-lg`, `shadow-md`). Override via `className`                         |
 | `.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`, `.mm-popover--open` SCSS class hooks | removed                                                                    | removed     | the SCSS file is gone; styling is Tailwind + inline styles. Use `className` and `arrowProps.className` for overrides                                                                                              |
 
 ##### Default and Behavior Changes
@@ -2986,7 +3034,7 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 | Concern                                | Extension Behavior                                                                                                                                                                     | Design System Behavior                                                                                                                                                                                                                                                        |
 | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Positioning library                    | `react-popper` declared as a direct dependency of the extension                                                                                                                        | `@floating-ui/react-dom` is used internally by `@metamask/design-system-react` — consumers do not install or import it directly                                                                                                                                               |
-| Surface styling                        | Box props applied inside the component (`backgroundColor.backgroundDefault`, `borderRadius.LG`, `borderColor.borderMuted`, `padding={4}`) plus `mm-popover` SCSS hook for `box-shadow` | Same visual: `BoxBackgroundColor.BackgroundDefault`, `BoxBorderColor.BorderMuted`, `borderWidth={1}`, `padding={4}`, `rounded-lg`, `shadow-md` Tailwind utilities applied internally                                                                                          |
+| Surface styling                        | Box props applied inside the component (`backgroundColor.backgroundDefault`, `borderRadius.LG`, `borderColor.borderMuted`, `padding={4}`) plus `mm-popover` SCSS hook for `box-shadow` | Same visual: `BoxBackgroundColor.BackgroundElevated2`, `BoxBorderColor.BorderMuted`, `borderWidth={1}`, `padding={4}`, `rounded-lg`, `shadow-md` Tailwind utilities applied internally                                                                                        |
 | Arrow rendering                        | Outer 40×40 invisible container with an `::before` pseudo-element drawing the visible 8×8 notch; rotation via SCSS attribute selectors keyed off `data-popper-placement`               | Same outer container but the visible notch is a real `<Box>` child instead of a pseudo-element. Rotation is computed from the resolved placement and applied as inline `transform`                                                                                            |
 | Reference-hidden visibility            | `.mm-popover--reference-hidden[data-popper-reference-hidden="true"] { visibility: hidden; pointer-events: none; }`                                                                     | Tailwind `data-[popper-reference-hidden=true]:invisible data-[popper-reference-hidden=true]:pointer-events-none` applied when `referenceHidden` is `true`                                                                                                                     |
 | `keydown` listener cleanup             | Registered with `{ capture: true }` but removed without options — listener accumulates across re-renders                                                                               | Registered and removed with matching `{ capture: true }` options (no listener leak)                                                                                                                                                                                           |
@@ -3581,6 +3629,84 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.38.1 to 0.39.0
+
+<a id="from-version-0381-to-0390"></a>
+
+<a id="iconname-unused-icons-removed"></a>
+
+#### `IconName`: unused icons removed
+
+111 unused icons are removed from **`IconName`** (shared with `@metamask/design-system-shared`) to reduce icon bundle size. See the [shared package migration guide](../design-system-shared/MIGRATION.md#from-version-0340-to-0350) for the full removed list and suggested replacements.
+
+**Migration:**
+
+```tsx
+// Before (0.38.1)
+import { Icon, IconName } from '@metamask/design-system-react';
+
+<Icon name={IconName.User} />;
+
+// After (0.39.0)
+import { Icon, IconName } from '@metamask/design-system-react';
+
+<Icon name={IconName.UserCircle} />;
+```
+
+**Impact:** TypeScript will fail on any remaining references to the removed icon names.
+
+### From version 0.36.0 to 0.37.0
+
+<a id="from-version-0360-to-0370"></a>
+
+#### PureBlackProvider and usePureBlack removed
+
+**What changed:**
+
+- Removed `PureBlackProvider` and `usePureBlack` exports from `@metamask/design-system-react`
+- OLED pure-black dark theme values remain canonical on `darkTheme` (since `@metamask/design-tokens@9.0.0`); elevated tokens replace pure-black branching for stepped surfaces
+
+**Migration:**
+
+```tsx
+// Before (0.36.x)
+import {
+  PureBlackProvider,
+  usePureBlack,
+  Box,
+  BoxBackgroundColor,
+} from '@metamask/design-system-react';
+
+<html data-pure-black={isPureBlack || undefined}>
+  <PureBlackProvider isPureBlack={isPureBlack}>{children}</PureBlackProvider>
+</html>;
+
+const isPureBlack = usePureBlack();
+<Box
+  backgroundColor={
+    isPureBlack
+      ? BoxBackgroundColor.BackgroundAlternative
+      : BoxBackgroundColor.BackgroundDefault
+  }
+/>;
+
+// After (0.37.0)
+import { Box, BoxBackgroundColor } from '@metamask/design-system-react';
+
+{
+  children;
+}
+
+<Box backgroundColor={BoxBackgroundColor.BackgroundElevated1} />;
+```
+
+**Impact:**
+
+- Call sites importing `PureBlackProvider` or `usePureBlack` will fail at compile time until removed
+- Remove `data-pure-black` from the document root; dark theme CSS already uses OLED values
+- For stepped surfaces (modals, toasts, menus), use `BackgroundElevated1`, `BackgroundElevated2`, and `BorderAlternative` instead of branching on pure-black mode
+- See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000) for related removals in other packages
 
 ### From version 0.34.0 to 0.35.0
 

@@ -226,7 +226,7 @@ export const BottomAccessory: Story = {
           alignItems={BoxAlignItems.Center}
           gap={1}
         >
-          <Icon name={IconName.SecurityAlert} size={IconSize.Sm} />
+          <Icon name={IconName.Warning} size={IconSize.Sm} />
           <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
             Stablecoin prices can deviate from $1. Verify the asset and network
             before you trade.

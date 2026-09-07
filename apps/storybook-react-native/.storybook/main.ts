@@ -145,6 +145,10 @@ const config: StorybookConfig = {
             find: '@metamask/design-tokens',
             replacement: path.resolve(repoRoot, 'packages/design-tokens/src'),
           },
+          {
+            find: 'expo-image',
+            replacement: path.resolve(__dirname, 'expo-image-shim.ts'),
+          },
         ],
       },
       server: {

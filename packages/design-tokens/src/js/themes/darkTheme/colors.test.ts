@@ -31,10 +31,13 @@ function resolveColorReferences(
       const match = theme[key].match(/\{(.+?)\}/u);
       if (match) {
         const [colorFamily, shade] = match[1].split('.');
-        if (colors[colorFamily]?.[shade]) {
+        if (shade && colors[colorFamily]?.[shade]) {
           theme[key] = colors[colorFamily][shade].value.toLowerCase();
-        } else if (rootTheme?.[colorFamily]?.[shade]?.value) {
+        } else if (shade && rootTheme?.[colorFamily]?.[shade]?.value) {
           theme[key] = rootTheme[colorFamily][shade].value.toLowerCase();
+        } else if (!shade && colors[colorFamily]?.value) {
+          // Shade-less brand tokens (e.g. black, white)
+          theme[key] = colors[colorFamily].value.toLowerCase();
         }
       }
     } else if (typeof theme[key] === 'string' && theme[key].startsWith('#')) {
@@ -56,6 +59,7 @@ describe('Theme Color Resolution', () => {
         const cleanKey = key
           .replace(/\*/gu, '')
           .replace(/-([a-z])/gu, (_, p1) => p1.toUpperCase())
+          .replace(/-(\d)/gu, '$1')
           .replace(/\s*\(strong\)\s*/gu, '');
         it(`ensures ${category}.${cleanKey} matches defined color`, () => {
           const definedColor = (definedColors as any)[category][

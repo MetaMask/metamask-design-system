@@ -27,7 +27,7 @@ const meta: Meta<ModalBodyProps> = {
     },
   },
   args: {
-    children: 'Modal Body',
+    children: 'Modal body',
   },
   render: (args) => (
     <ModalBody {...args}>
