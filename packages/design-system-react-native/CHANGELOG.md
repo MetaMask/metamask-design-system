@@ -9,17 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.43.0]
 
-### Uncategorized
+### Changed
 
-- ci: automate Figma Code Connect validation and publishing ([#1369](https://github.com/MetaMask/metamask-design-system/pull/1369))
-- chore(deps): bump @metamask/utils from 11.11.0 to 11.12.0 ([#1490](https://github.com/MetaMask/metamask-design-system/pull/1490))
-- chore: Add Code Connect for HeaderSearch ([#1486](https://github.com/MetaMask/metamask-design-system/pull/1486))
-- chore: Add Code Connect for SelectButton ([#1487](https://github.com/MetaMask/metamask-design-system/pull/1487))
-- chore: Remove 111 unused icons from the shared set ([#1481](https://github.com/MetaMask/metamask-design-system/pull/1481))
-- fix: align BadgeNetwork Xs border radius with Figma ([#1480](https://github.com/MetaMask/metamask-design-system/pull/1480))
-- chore: Add Code Connect for Card ([#1470](https://github.com/MetaMask/metamask-design-system/pull/1470))
-- chore: Add and update Code Connect for Button components ([#1468](https://github.com/MetaMask/metamask-design-system/pull/1468))
-- Add IconAlert Figma Code Connect (React + React Native) ([#1477](https://github.com/MetaMask/metamask-design-system/pull/1477))
+- **BREAKING:** Removed 111 unused icons from `IconName` to reduce icon bundle size ([#1481](https://github.com/MetaMask/metamask-design-system/pull/1481))
+  - TypeScript will fail on remaining references to removed `IconName` members
+  - See [Migration Guide](./MIGRATION.md#from-version-0421-to-0430)
+
+### Fixed
+
+- Fixed `BadgeNetwork` Xs size border radius to match Figma ([#1480](https://github.com/MetaMask/metamask-design-system/pull/1480))
 
 ## [0.42.1]
 

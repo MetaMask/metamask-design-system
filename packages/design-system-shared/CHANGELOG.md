@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.35.0]
 
-### Uncategorized
+### Changed
 
-- chore(deps): bump @metamask/utils from 11.11.0 to 11.12.0 ([#1490](https://github.com/MetaMask/metamask-design-system/pull/1490))
-- chore: Remove 111 unused icons from the shared set ([#1481](https://github.com/MetaMask/metamask-design-system/pull/1481))
+- **BREAKING:** Removed 111 unused icons from `IconName` to reduce the shared icon bundle size ([#1481](https://github.com/MetaMask/metamask-design-system/pull/1481))
+  - SVG assets and generated React / React Native icon outputs no longer include these names
+  - TypeScript will fail on remaining references to removed `IconName` members
+  - See [Migration Guide](./MIGRATION.md#from-version-0340-to-0350)
 
 ## [0.34.0]
 
