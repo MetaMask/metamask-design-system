@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.39.0]
+
 ### Uncategorized
 
 - ci: automate Figma Code Connect validation and publishing ([#1369](https://github.com/MetaMask/metamask-design-system/pull/1369))
@@ -529,7 +531,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.39.0...HEAD
+[0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...@metamask/design-system-react@0.39.0
 [0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...@metamask/design-system-react@0.38.1
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...@metamask/design-system-react@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...@metamask/design-system-react@0.37.0

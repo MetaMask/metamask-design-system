@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.43.0]
+
 ### Uncategorized
 
 - ci: automate Figma Code Connect validation and publishing ([#1369](https://github.com/MetaMask/metamask-design-system/pull/1369))
@@ -732,7 +734,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.43.0...HEAD
+[0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.1...@metamask/design-system-react-native@0.43.0
 [0.42.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.0...@metamask/design-system-react-native@0.42.1
 [0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.41.0...@metamask/design-system-react-native@0.42.0
 [0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.40.0...@metamask/design-system-react-native@0.41.0

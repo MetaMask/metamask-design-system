@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.35.0]
+
 ### Uncategorized
 
 - chore(deps): bump @metamask/utils from 11.11.0 to 11.12.0 ([#1490](https://github.com/MetaMask/metamask-design-system/pull/1490))
@@ -340,7 +342,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.34.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.35.0...HEAD
+[0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.34.0...@metamask/design-system-shared@0.35.0
 [0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.33.0...@metamask/design-system-shared@0.34.0
 [0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.32.0...@metamask/design-system-shared@0.33.0
 [0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.31.0...@metamask/design-system-shared@0.32.0
