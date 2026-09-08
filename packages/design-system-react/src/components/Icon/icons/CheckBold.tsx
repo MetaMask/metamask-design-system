@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgCheckBold = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="m9.55 18.686-6.5-6.5 2.25-2.25 4.25 4.25 9.15-9.15 2.25 2.25z" /></svg>;
+const SvgCheckBold = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="m21.796 7.546-12 12a1.125 1.125 0 0 1-1.594 0l-5.25-5.25a1.127 1.127 0 1 1 1.594-1.594L9 17.156 20.204 5.954a1.127 1.127 0 0 1 1.594 1.594Z" /></svg>;
 const ForwardRef = forwardRef(SvgCheckBold);
 export default ForwardRef;

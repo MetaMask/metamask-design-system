@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgCustomize = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M11 21v-6h2v2h8v2h-8v2zm-8-2v-2h6v2zm4-4v-2H3v-2h4V9h2v6zm4-2v-2h10v2zm4-4V3h2v2h4v2h-4v2zM3 7V5h10v2z" /></svg>;
+const SvgCustomize = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M3.75 8.25h3.094a3 3 0 0 0 5.812 0h7.594a.75.75 0 0 0 0-1.5h-7.594a3 3 0 0 0-5.812 0H3.75a.75.75 0 0 0 0 1.5m6-2.25a1.5 1.5 0 1 1-1.5 1.5A1.5 1.5 0 0 1 9.75 6m10.5 9.75h-1.594a3 3 0 0 0-5.812 0H3.75a.75.75 0 0 0 0 1.5h9.094a3 3 0 0 0 5.812 0h1.594a.75.75 0 0 0 0-1.5M15.75 18a1.5 1.5 0 1 1 1.5-1.5 1.5 1.5 0 0 1-1.5 1.5" /></svg>;
 const ForwardRef = forwardRef(SvgCustomize);
 export default ForwardRef;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgMobile = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M7 23q-.824 0-1.412-.587C5 21.826 5 21.55 5 21V3q0-.824.588-1.412C6.176.999 6.45 1 7 1h10q.824 0 1.413.587C19.002 2.175 19 2.45 19 3v18q0 .824-.587 1.413c-.587.589-.863.587-1.413.587zm0-3v1h10v-1zm0-2h10V6H7zM7 4h10V3H7z" /></svg>;
+const SvgMobile = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M16.5 1.5h-9a2.25 2.25 0 0 0-2.25 2.25v16.5A2.25 2.25 0 0 0 7.5 22.5h9a2.25 2.25 0 0 0 2.25-2.25V3.75A2.25 2.25 0 0 0 16.5 1.5M6.75 6h10.5v12H6.75Zm.75-3h9a.75.75 0 0 1 .75.75v.75H6.75v-.75A.75.75 0 0 1 7.5 3m9 18h-9a.75.75 0 0 1-.75-.75v-.75h10.5v.75a.75.75 0 0 1-.75.75" /></svg>;
 const ForwardRef = forwardRef(SvgMobile);
 export default ForwardRef;
