@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
+  - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
@@ -13,6 +14,25 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
+
+### From version 0.35.0 to 0.36.0
+
+<a id="from-version-0350-to-0360"></a>
+
+<a id="iconname-accessibility-removed"></a>
+
+#### `IconName.Accessibility` removed
+
+`IconName.Accessibility` is removed from the shared icon set. It was unused in MetaMask extension and mobile product UI.
+
+**What changed:**
+
+- Removed `IconName.Accessibility`
+- Regenerated shared SVG assets and platform icon outputs without that glyph
+
+**Migration:**
+
+Replace any remaining usage with another `IconName` that matches the product intent. TypeScript will fail on any remaining `IconName.Accessibility` references.
 
 ### From version 0.34.0 to 0.35.0
 
