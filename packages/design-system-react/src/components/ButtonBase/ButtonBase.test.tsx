@@ -32,9 +32,17 @@ describe('ButtonBase', () => {
     expect(screen.getByRole('button')).toHaveClass('px-4');
   });
 
-  it('applies size-based border radius for default large button', () => {
-    render(<ButtonBase>Rounded</ButtonBase>);
-    expect(screen.getByRole('button')).toHaveClass('rounded-xl');
+  it('applies fully rounded pill border radius across sizes', () => {
+    const { rerender } = render(
+      <ButtonBase size={ButtonBaseSize.Sm}>Rounded</ButtonBase>,
+    );
+    expect(screen.getByRole('button')).toHaveClass('rounded-full');
+
+    rerender(<ButtonBase size={ButtonBaseSize.Md}>Rounded</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('rounded-full');
+
+    rerender(<ButtonBase>Rounded</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('rounded-full');
   });
 
   it('renders as child component when asChild is true', () => {

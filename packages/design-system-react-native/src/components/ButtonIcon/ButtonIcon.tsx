@@ -45,9 +45,6 @@ export const ButtonIcon = ({
       ? 'text-primary-inverse'
       : 'text-icon-default';
 
-  const borderRadiusClass =
-    variant === ButtonIconVariant.Default ? 'rounded-lg' : 'rounded-full';
-
   const onPressInHandler = (event: GestureResponderEvent) => {
     setIsPressed(true);
     onPressIn?.(event);
@@ -68,9 +65,8 @@ export const ButtonIcon = ({
       {...props}
       style={[
         tw.style(
-          'items-center justify-center',
+          'items-center justify-center rounded-full',
           TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
-          borderRadiusClass,
           backgroundColor,
           isDisabled ? 'opacity-50' : 'opacity-100',
           twClassName,

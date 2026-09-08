@@ -13,14 +13,7 @@ export const TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION: Record<
   [ButtonBaseSize.Lg]: 'h-12', // size (48px).
 };
 
-export const TWCLASSMAP_BUTTONBASE_BORDER_RADIUS: Record<
-  ButtonBaseSize,
-  string
-> = {
-  [ButtonBaseSize.Sm]: 'rounded-lg', // 8px.
-  [ButtonBaseSize.Md]: 'rounded-xl', // 12px.
-  [ButtonBaseSize.Lg]: 'rounded-xl', // 12px.
-};
+export const TWCLASS_BUTTONBASE_BORDER_RADIUS = 'rounded-full';
 
 export const MAP_BUTTONBASE_SIZE_ICONSIZE: Record<ButtonBaseSize, IconSize> = {
   [ButtonBaseSize.Sm]: IconSize.Sm,
@@ -36,10 +29,6 @@ export const MAP_BUTTONBASE_SIZE_TEXT_VARIANT: Record<
   [ButtonBaseSize.Md]: TextVariant.BodyMd,
   [ButtonBaseSize.Lg]: TextVariant.BodyMd,
 };
-
-export const getButtonBaseBorderRadiusTwClass = (
-  size: ButtonBaseSize,
-): string => TWCLASSMAP_BUTTONBASE_BORDER_RADIUS[size];
 
 export const getButtonBaseHorizontalPaddingTwClasses = (
   buttonSize: ButtonBaseSize,

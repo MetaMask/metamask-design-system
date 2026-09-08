@@ -17,8 +17,8 @@ import { Spinner } from '../temp-components/Spinner';
 import {
   MAP_BUTTONBASE_SIZE_ICONSIZE,
   MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
-  getButtonBaseBorderRadiusTwClass,
   getButtonBaseHorizontalPaddingTwClasses,
+  TWCLASS_BUTTONBASE_BORDER_RADIUS,
   TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
 } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
@@ -133,8 +133,8 @@ export const ButtonBase = ({
           'flex-row items-center justify-center',
           // Visual styling
           'bg-muted overflow-hidden',
-          // Conditional Border Radius and Horizontal Spacing based on requirements
-          getButtonBaseBorderRadiusTwClass(size),
+          // Pill shape and conditional horizontal spacing based on requirements
+          TWCLASS_BUTTONBASE_BORDER_RADIUS,
           getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
           // Size
           TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],

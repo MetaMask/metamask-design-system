@@ -79,7 +79,7 @@ Whether the button is disabled.
 
 ### `variant`
 
-The visual variant of the button. Use `ButtonIconVariant.Default` for transparent with default icon color, `ButtonIconVariant.Filled` for muted background with rounded-full, or `ButtonIconVariant.Floating` for the floating/contained style.
+The visual variant of the button. All variants are fully rounded. Use `ButtonIconVariant.Default` for transparent with default icon color, `ButtonIconVariant.Filled` for a muted background, or `ButtonIconVariant.Floating` for the floating/contained style.
 
 | TYPE                | REQUIRED | DEFAULT                     |
 | ------------------- | -------- | --------------------------- |
