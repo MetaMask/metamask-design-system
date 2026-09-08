@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.44.0]
+
+### Changed
+
+- Updated `Icon` artwork to Phosphor-based glyphs for the brand migration, keeping existing `IconName` values, `viewBox="0 0 24 24"`, and `currentColor` fills ([#1475](https://github.com/MetaMask/metamask-design-system/pull/1475), [#1482](https://github.com/MetaMask/metamask-design-system/pull/1482), [#1493](https://github.com/MetaMask/metamask-design-system/pull/1493))
+  - `AppleLogo`, `Bridge`, and `MetamaskFoxOutline` are unchanged
+- Bumped `@metamask/utils` from `^11.12.0` to `^11.12.1` ([#1492](https://github.com/MetaMask/metamask-design-system/pull/1492))
+
 ## [0.43.0]
 
 ### Changed
@@ -732,7 +740,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.43.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.44.0...HEAD
+[0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.43.0...@metamask/design-system-react-native@0.44.0
 [0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.1...@metamask/design-system-react-native@0.43.0
 [0.42.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.0...@metamask/design-system-react-native@0.42.1
 [0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.41.0...@metamask/design-system-react-native@0.42.0
