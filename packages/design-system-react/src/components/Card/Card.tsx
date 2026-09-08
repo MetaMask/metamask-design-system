@@ -35,7 +35,10 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
       onKeyDown?.(event);
 
+      // Only activate when the card itself has focus. A keydown bubbling up
+      // from an interactive child must keep that child's own behavior.
       if (
+        event.target !== event.currentTarget ||
         event.defaultPrevented ||
         (event.key !== 'Enter' && event.key !== ' ')
       ) {

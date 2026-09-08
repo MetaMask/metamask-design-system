@@ -226,6 +226,40 @@ describe('Card', () => {
       expect(onClick).not.toHaveBeenCalled();
     });
 
+    it('does not hijack Enter from an interactive child', () => {
+      const onClick = jest.fn();
+
+      render(
+        <Card onClick={onClick}>
+          <button type="button">Inner button</button>
+        </Card>,
+      );
+
+      const notPrevented = fireEvent.keyDown(screen.getByText('Inner button'), {
+        key: 'Enter',
+      });
+
+      expect(notPrevented).toBe(true);
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('does not hijack Space from an interactive child', () => {
+      const onClick = jest.fn();
+
+      render(
+        <Card onClick={onClick}>
+          <a href="#activity">Inner link</a>
+        </Card>,
+      );
+
+      const notPrevented = fireEvent.keyDown(screen.getByText('Inner link'), {
+        key: ' ',
+      });
+
+      expect(notPrevented).toBe(true);
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
     it('allows the role to be overridden', () => {
       render(
         <Card data-testid="card" onClick={jest.fn()} role="link">

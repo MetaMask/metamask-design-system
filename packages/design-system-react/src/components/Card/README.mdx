@@ -51,7 +51,9 @@ The content to display inside the card.
 
 Optional click handler. When provided without `asChild`, the card stays a `div` and gains button affordances: `role="button"`, `tabIndex`, activation with Enter and Space, and hover and pressed surface styles. It stays a `div` rather than becoming a `button` so block-level content such as a `p` is still valid inside the card. With `asChild`, the handler is merged onto the child. Omit `onClick` for a static card.
 
-For a card that navigates, prefer `asChild` with an `a` so the element carries its own semantics.
+Use `onClick` only when the whole card is a single action and its content is not interactive. Keyboard activation applies only when the card itself has focus, so links and buttons inside the card keep their own behavior, but a screen reader announces the card as one button and reads its whole content as the label.
+
+For a card that navigates, prefer `asChild` with an `a`, which accepts block-level content and carries its own semantics. For a card that holds its own links or buttons, leave `onClick` off and let those controls be the actions.
 
 <table>
   <thead>
