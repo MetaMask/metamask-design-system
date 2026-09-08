@@ -9,12 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.44.0]
 
-### Uncategorized
+### Changed
 
-- feat: Update remaining MMDS icons to Phosphor ([#1493](https://github.com/MetaMask/metamask-design-system/pull/1493))
-- feat: Update MMDS Mobile icons to Phosphor ([#1475](https://github.com/MetaMask/metamask-design-system/pull/1475))
-- feat: Update MMDS Extension icons to Phosphor ([#1482](https://github.com/MetaMask/metamask-design-system/pull/1482))
-- chore(deps): bump @metamask/utils from 11.12.0 to 11.12.1 ([#1492](https://github.com/MetaMask/metamask-design-system/pull/1492))
+- Updated `Icon` artwork to Phosphor-based glyphs for the brand migration, keeping existing `IconName` values, `viewBox="0 0 24 24"`, and `currentColor` fills ([#1475](https://github.com/MetaMask/metamask-design-system/pull/1475), [#1482](https://github.com/MetaMask/metamask-design-system/pull/1482), [#1493](https://github.com/MetaMask/metamask-design-system/pull/1493))
+  - `AppleLogo`, `Bridge`, and `MetamaskFoxOutline` are unchanged
+- Bumped `@metamask/utils` from `^11.12.0` to `^11.12.1` ([#1492](https://github.com/MetaMask/metamask-design-system/pull/1492))
 
 ## [0.43.0]
 
