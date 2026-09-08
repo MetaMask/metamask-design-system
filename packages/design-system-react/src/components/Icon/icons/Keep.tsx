@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgKeep = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="m16 12 2 2v2h-5v6l-1 1-1-1v-6H6v-2l2-2V5H7V3h10v2h-1zm-7.15 2h6.3L14 12.85V5h-4v7.85z" /></svg>;
+const SvgKeep = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="m22.061 7.628-5.69-5.688a1.5 1.5 0 0 0-2.121 0L9.222 6.983c-1-.313-3.281-.69-5.662 1.232a1.5 1.5 0 0 0-.121 2.23l4.53 4.528-4 3.996a.75.75 0 0 0 1.062 1.062l3.996-4 4.527 4.527a1.5 1.5 0 0 0 1.062.442h.106a1.5 1.5 0 0 0 1.09-.593c1.842-2.447 1.665-4.437 1.237-5.625l5.013-5.032a1.5 1.5 0 0 0 0-2.122M21 8.69l-5.37 5.387a.75.75 0 0 0-.139.864c.887 1.775-.169 3.618-.875 4.558L4.5 9.383c1.133-.914 2.216-1.155 3.045-1.155a3.8 3.8 0 0 1 1.53.303.75.75 0 0 0 .868-.141L15.311 3 21 8.689Z" /></svg>;
 const ForwardRef = forwardRef(SvgKeep);
 export default ForwardRef;
