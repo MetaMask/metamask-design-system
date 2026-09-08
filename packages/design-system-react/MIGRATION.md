@@ -48,7 +48,6 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version X.XX.X to X.XX.X](#from-version-xxxx-to-xxxx)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
@@ -3630,18 +3629,6 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
-
-### From version X.XX.X to X.XX.X
-
-<a id="from-version-xxxx-to-xxxx"></a>
-
-<a id="iconname-accessibility-removed"></a>
-
-#### `IconName.Accessibility` removed
-
-`IconName.Accessibility` is removed from **`IconName`** (shared with `@metamask/design-system-shared`). See the [shared package migration guide](../design-system-shared/MIGRATION.md#from-version-xxxx-to-xxxx).
-
-**Impact:** TypeScript will fail on any remaining `IconName.Accessibility` references.
 
 ### From version 0.38.1 to 0.39.0
 
