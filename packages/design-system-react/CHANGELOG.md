@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: Update remaining MMDS icons to Phosphor ([#1493](https://github.com/MetaMask/metamask-design-system/pull/1493))
+- feat: Update MMDS Mobile icons to Phosphor ([#1475](https://github.com/MetaMask/metamask-design-system/pull/1475))
+- feat: Update MMDS Extension icons to Phosphor ([#1482](https://github.com/MetaMask/metamask-design-system/pull/1482))
+- chore(deps): bump @metamask/utils from 11.12.0 to 11.12.1 ([#1492](https://github.com/MetaMask/metamask-design-system/pull/1492))
+
 ## [0.39.0]
 
 ### Changed
