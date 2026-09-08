@@ -1,4 +1,3 @@
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
@@ -24,12 +23,7 @@ const meta: Meta<CardProps> = {
   },
   decorators: [
     (Story) => (
-      <Box
-        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
-        padding={4}
-      >
-        <Text>Content behind card</Text>
-        <Box padding={2} />
+      <Box className="w-full p-4">
         <Story />
       </Box>
     ),
@@ -61,7 +55,7 @@ export const OnClick: Story = {
   },
   render: (args) => (
     <Card {...args}>
-      <Text>Pressable card</Text>
+      <Text>Clickable card</Text>
     </Card>
   ),
 };

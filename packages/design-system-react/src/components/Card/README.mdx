@@ -49,7 +49,9 @@ The content to display inside the card.
 
 ### `onClick`
 
-Optional click handler. When provided without `asChild`, the card renders as a `<button>` so it is keyboard-accessible, with hover and pressed surface styles. With `asChild`, the handler is merged onto the child. Omit `onClick` for a static card.
+Optional click handler. When provided without `asChild`, the card stays a `div` and gains button affordances: `role="button"`, `tabIndex`, activation with Enter and Space, and hover and pressed surface styles. It stays a `div` rather than becoming a `button` so block-level content such as a `p` is still valid inside the card. With `asChild`, the handler is merged onto the child. Omit `onClick` for a static card.
+
+For a card that navigates, prefer `asChild` with an `a` so the element carries its own semantics.
 
 <table>
   <thead>
@@ -62,7 +64,7 @@ Optional click handler. When provided without `asChild`, the card renders as a `
   <tbody>
     <tr>
       <td align="left">
-        <code>MouseEventHandler&lt;HTMLElement&gt;</code>
+        <code>MouseEventHandler&lt;HTMLDivElement&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -74,7 +76,7 @@ Optional click handler. When provided without `asChild`, the card renders as a `
 
 ```tsx
 <Card onClick={() => undefined}>
-  <Text>Pressable card</Text>
+  <Text>Clickable card</Text>
 </Card>
 ```
 
@@ -82,7 +84,7 @@ Optional click handler. When provided without `asChild`, the card renders as a `
 
 ### `asChild`
 
-Merge Card styles onto a child element instead of rendering a `div` or `button`. Use this when the card should be a link or another semantic element. If `onClick` is also passed, it is merged onto that child. The child is made a full-width block so an inline element such as an `a` still forms a card-sized surface.
+Merge Card styles onto a child element instead of rendering a `div`. Use this when the card should be a link, a button, or another semantic element, since the child brings its own role, focus behavior, and keyboard activation. If `onClick` is also passed, it is merged onto that child. The child is made a full-width block so an inline element such as an `a` still forms a card-sized surface.
 
 <table>
   <thead>
