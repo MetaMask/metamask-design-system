@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.44.0]
+
 ### Uncategorized
 
 - feat: Update remaining MMDS icons to Phosphor ([#1493](https://github.com/MetaMask/metamask-design-system/pull/1493))
@@ -739,7 +741,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.43.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.44.0...HEAD
+[0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.43.0...@metamask/design-system-react-native@0.44.0
 [0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.1...@metamask/design-system-react-native@0.43.0
 [0.42.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.0...@metamask/design-system-react-native@0.42.1
 [0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.41.0...@metamask/design-system-react-native@0.42.0
