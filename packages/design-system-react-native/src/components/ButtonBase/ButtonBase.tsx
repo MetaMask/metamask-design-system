@@ -18,7 +18,6 @@ import {
   MAP_BUTTONBASE_SIZE_ICONSIZE,
   MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
   getButtonBaseHorizontalPaddingTwClasses,
-  TWCLASS_BUTTONBASE_BORDER_RADIUS,
   TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
 } from './ButtonBase.constants';
 import type { ButtonBaseProps } from './ButtonBase.types';
@@ -130,11 +129,9 @@ export const ButtonBase = ({
         // Build button container styles
         const buttonStyles = tw.style(
           // Base layout - flex container for button content
-          'flex-row items-center justify-center',
+          'flex-row items-center justify-center rounded-full',
           // Visual styling
           'bg-muted overflow-hidden',
-          // Pill shape and conditional horizontal spacing based on requirements
-          TWCLASS_BUTTONBASE_BORDER_RADIUS,
           getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
           // Size
           TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],

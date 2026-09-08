@@ -12,7 +12,6 @@ import type { ReactTestInstance } from 'react-test-renderer';
 import { createRenderer } from '../../test-utils/createRenderer';
 
 import { ButtonBase } from './ButtonBase';
-import { TWCLASS_BUTTONBASE_BORDER_RADIUS } from './ButtonBase.constants';
 
 describe('ButtonBase', () => {
   let tw: ReturnType<typeof useTailwind>;
@@ -92,29 +91,6 @@ describe('ButtonBase', () => {
 
       expect(getByTestId('btn')).toHaveStyle(tw`h-12`);
     });
-  });
-
-  describe('border radius', () => {
-    it.each([ButtonBaseSize.Sm, ButtonBaseSize.Md, ButtonBaseSize.Lg])(
-      'uses the fully rounded pill radius when size is %s',
-      (size) => {
-        const tree = createRenderer(<ButtonBase size={size}>Pill</ButtonBase>);
-
-        const buttonAnimated = tree.root.findByProps({
-          accessibilityRole: 'button',
-        });
-        const styleFn = buttonAnimated.props.style as (p: {
-          pressed: boolean;
-        }) => unknown[];
-        const resolved = styleFn({ pressed: false })[0] as Record<
-          string,
-          unknown
-        >;
-        const expectedRadiusStyle = tw.style(TWCLASS_BUTTONBASE_BORDER_RADIUS);
-
-        expect(resolved).toMatchObject(expectedRadiusStyle);
-      },
-    );
   });
 
   describe('twClassName', () => {

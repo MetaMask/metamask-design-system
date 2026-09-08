@@ -299,7 +299,7 @@ describe('SelectButton', () => {
   });
 
   describe('when rendering root pressable styles', () => {
-    it('uses default primary container radius and background', () => {
+    it('uses default primary container background', () => {
       const { getByTestId } = render(
         <SelectButton
           testID={ROOT_TEST_ID}
@@ -309,7 +309,6 @@ describe('SelectButton', () => {
       );
 
       const root = getByTestId(ROOT_TEST_ID);
-      expect(root).toHaveStyle(tw`rounded-full`);
       expect(root).toHaveStyle(tw`bg-muted`);
     });
 

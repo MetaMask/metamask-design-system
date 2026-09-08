@@ -299,9 +299,9 @@ Controls the height of the button. Use `SelectButtonSize` values to keep the typ
 
 Available values:
 
-- `SelectButtonSize.Sm` — 32px height, fully rounded pill corners.
-- `SelectButtonSize.Md` — 40px height, fully rounded pill corners.
-- `SelectButtonSize.Lg` — 48px height, fully rounded pill corners.
+- `SelectButtonSize.Sm` — 32px height.
+- `SelectButtonSize.Md` — 40px height.
+- `SelectButtonSize.Lg` — 48px height.
 
 | TYPE               | REQUIRED | DEFAULT               |
 | ------------------ | -------- | --------------------- |

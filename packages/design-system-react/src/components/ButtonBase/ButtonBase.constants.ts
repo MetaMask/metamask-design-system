@@ -13,8 +13,6 @@ export const TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION: Record<
   [ButtonBaseSize.Lg]: 'h-12', // size (48px).
 };
 
-export const TWCLASS_BUTTONBASE_BORDER_RADIUS = 'rounded-full';
-
 export const MAP_BUTTONBASE_SIZE_ICONSIZE: Record<ButtonBaseSize, IconSize> = {
   [ButtonBaseSize.Sm]: IconSize.Sm,
   [ButtonBaseSize.Md]: IconSize.Sm,
