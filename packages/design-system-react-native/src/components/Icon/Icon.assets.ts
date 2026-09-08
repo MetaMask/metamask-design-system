@@ -2,6 +2,7 @@
 // This is a generated file
 // DO NOT EDIT — run `yarn generate:icons` from the repo root
 // /////////////////////////////////////////////////////
+import AccessibilitySVG from './assets/accessibility.svg';
 import ActivitySVG from './assets/activity.svg';
 import AddCircleSVG from './assets/add-circle.svg';
 import AddSquareSVG from './assets/add-square.svg';
@@ -189,6 +190,7 @@ import type { AssetByIconName } from './Icon.types';
  * Asset stored by icon name
  */
 export const assetByIconName: AssetByIconName = {
+  Accessibility: AccessibilitySVG,
   Activity: ActivitySVG,
   AddCircle: AddCircleSVG,
   AddSquare: AddSquareSVG,

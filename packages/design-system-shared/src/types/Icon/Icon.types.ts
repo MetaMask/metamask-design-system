@@ -52,6 +52,7 @@ export type IconColor = (typeof IconColor)[keyof typeof IconColor];
  * Run `yarn generate:icons` from the repo root to regenerate.
  */
 export const IconName = {
+  Accessibility: 'Accessibility',
   Activity: 'Activity',
   AddCircle: 'AddCircle',
   AddSquare: 'AddSquare',

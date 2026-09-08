@@ -2,6 +2,7 @@
 // Run `yarn generate:icons` from the repo root to regenerate
 import type { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';
 
+import Accessibility from './Accessibility';
 import Activity from './Activity';
 import AddCircle from './AddCircle';
 import AddSquare from './AddSquare';
@@ -185,6 +186,7 @@ import Wifi from './Wifi';
 import X from './X';
 
 export const Icons = {
+  Accessibility,
   Activity,
   AddCircle,
   AddSquare,
