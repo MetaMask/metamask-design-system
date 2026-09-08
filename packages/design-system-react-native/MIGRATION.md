@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.43.0 to 0.44.0](#from-version-0430-to-0440)
+- [From version X.XX.X to X.XX.X](#from-version-xxxx-to-xxxx)
 - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
 - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
 - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
@@ -52,7 +52,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.43.0 to 0.44.0](#from-version-0430-to-0440)
+  - [From version X.XX.X to X.XX.X](#from-version-xxxx-to-xxxx)
   - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
   - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
   - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
@@ -76,15 +76,15 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.43.0 to 0.44.0
+### From version X.XX.X to X.XX.X
 
-<a id="from-version-0430-to-0440"></a>
+<a id="from-version-xxxx-to-xxxx"></a>
 
 <a id="iconname-accessibility-removed"></a>
 
 #### `IconName.Accessibility` removed
 
-`IconName.Accessibility` is removed from **`IconName`** (shared with `@metamask/design-system-shared`). See the [shared package migration guide](../design-system-shared/MIGRATION.md#from-version-0350-to-0360).
+`IconName.Accessibility` is removed from **`IconName`** (shared with `@metamask/design-system-shared`). See the [shared package migration guide](../design-system-shared/MIGRATION.md#from-version-xxxx-to-xxxx).
 
 **Impact:** TypeScript will fail on any remaining `IconName.Accessibility` references.
 

@@ -5,7 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
-  - [From version 0.35.0 to 0.36.0](#from-version-0350-to-0360)
+  - [From version X.XX.X to X.XX.X](#from-version-xxxx-to-xxxx)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
@@ -15,9 +15,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.35.0 to 0.36.0
+### From version X.XX.X to X.XX.X
 
-<a id="from-version-0350-to-0360"></a>
+<a id="from-version-xxxx-to-xxxx"></a>
 
 <a id="iconname-accessibility-removed"></a>
 
