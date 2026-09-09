@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
 - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
 - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
 - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
@@ -51,6 +52,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
   - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
   - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
   - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
@@ -74,9 +76,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.42.1 to 0.43.0
+### From version 0.44.0 to 0.45.0
 
-<a id="from-version-0421-to-0430"></a>
+<a id="from-version-0440-to-0450"></a>
 
 <a id="default-typeface-geist-to-inter"></a>
 
@@ -102,7 +104,9 @@ Copy the six Inter `.ttf` files from [`apps/storybook-react-native/fonts/Inter`]
 Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
 
 ```tsx
-// Before
+// Before (0.44.0)
+import { useFonts } from 'expo-font';
+
 useFonts({
   'Geist-Regular': require('./fonts/Geist/Geist-Regular.otf'),
   'Geist-RegularItalic': require('./fonts/Geist/Geist-RegularItalic.otf'),
@@ -114,7 +118,9 @@ useFonts({
 ```
 
 ```tsx
-// After
+// After (0.45.0)
+import { useFonts } from 'expo-font';
+
 useFonts({
   'Inter-Regular': require('./fonts/Inter/Inter-Regular.ttf'),
   'Inter-RegularItalic': require('./fonts/Inter/Inter-RegularItalic.ttf'),
@@ -126,6 +132,10 @@ useFonts({
 ```
 
 **Impact:** Text renders with the system fallback until the fonts are re-registered under the new names, so this must ship together with the asset swap. Expect minor reflow, since Inter's metrics differ slightly from Geist's.
+
+### From version 0.42.1 to 0.43.0
+
+<a id="from-version-0421-to-0430"></a>
 
 <a id="iconname-unused-icons-removed"></a>
 
