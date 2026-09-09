@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: replace Geist with Inter as the default typeface ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+
 ## [0.10.0]
 
 ### Changed

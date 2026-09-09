@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: replace Geist with Inter as the default typeface ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+- revert: Revert telegram icon to official logo design ([#1500](https://github.com/MetaMask/metamask-design-system/pull/1500))
+
 ## [0.40.0]
 
 ### Changed
