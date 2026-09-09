@@ -126,7 +126,7 @@ export const brandColor: BrandColor = {
   // Orange
   orange500: '#c3420d',
   // Orange
-  orange600: '#932d06',
+  orange600: '#330022',
   // Orange
   orange700: '#28001a',
   // Orange

@@ -123,7 +123,7 @@ export type BrandColor = {
   orange400: string;
   /** orange/orange500: #c3420d */
   orange500: string;
-  /** orange/orange600: #932d06 */
+  /** orange/orange600: #330022 */
   orange600: string;
   /** orange/orange700: #28001a */
   orange700: string;
