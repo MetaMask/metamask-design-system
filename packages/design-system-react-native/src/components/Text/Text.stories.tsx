@@ -123,7 +123,7 @@ export const FontWeightStory: Story = {
 export const FontFamilyStory: Story = {
   render: () => (
     <View>
-      <Text fontFamily={FontFamily.Default}>Default (Geist)</Text>
+      <Text fontFamily={FontFamily.Default}>Default (Inter)</Text>
       <Text fontFamily={FontFamily.Accent}>Accent (MM Sans)</Text>
       <Text fontFamily={FontFamily.Hero}>Hero (MM Poly)</Text>
     </View>

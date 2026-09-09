@@ -47,7 +47,7 @@ export const FontFamily: StoryFn<typeof Text> = () => {
   };
   return (
     <>
-      <Text style={styles.default}>Geist</Text>
+      <Text style={styles.default}>Inter</Text>
       <Text style={styles.accent}>MM Sans</Text>
       <Text style={styles.hero}>MM Poly</Text>
     </>

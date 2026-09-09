@@ -9,47 +9,47 @@
   scrollbar-color: var(--color-icon-muted) transparent;
 }
 
-/* Geist */
+/* Inter */
 @font-face {
-  font-family: 'Geist';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  src: url('fonts/Geist/Geist-Regular.woff2') format('woff2');
+  src: url('fonts/Inter/Inter-Regular.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Geist';
+  font-family: 'Inter';
   font-style: italic;
   font-weight: 400;
-  src: url('fonts/Geist/Geist-RegularItalic.woff2') format('woff2');
+  src: url('fonts/Inter/Inter-RegularItalic.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Geist';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  src: url('fonts/Geist/Geist-Medium.woff2') format('woff2');
+  src: url('fonts/Inter/Inter-Medium.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Geist';
+  font-family: 'Inter';
   font-style: italic;
   font-weight: 500;
-  src: url('fonts/Geist/Geist-MediumItalic.woff2') format('woff2');
+  src: url('fonts/Inter/Inter-MediumItalic.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Geist';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
-  src: url('fonts/Geist/Geist-SemiBold.woff2') format('woff2');
+  src: url('fonts/Inter/Inter-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Geist';
+  font-family: 'Inter';
   font-style: italic;
   font-weight: 600;
-  src: url('fonts/Geist/Geist-SemiBoldItalic.woff2') format('woff2');
+  src: url('fonts/Inter/Inter-SemiBoldItalic.woff2') format('woff2');
 }
 
 /* MM Sans */
