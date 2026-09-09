@@ -123,16 +123,30 @@ useFonts({
 });
 ```
 
-**Normalize the PostScript names before bundling.** The upstream Inter release ships the static cuts as `Inter_18pt-Regular.ttf` with the internal PostScript name `Inter18pt-Regular`, which will not match the names above. iOS resolves by PostScript name and will silently fall back to the system font if it does not match. Rewrite the name table so the PostScript name (name ID 6) is `Inter-Regular`, `Inter-SemiBoldItalic`, and so on. For example, with [fontTools](https://github.com/fonttools/fonttools):
+**Normalize the name tables before bundling.** The upstream Inter release ships the static cuts as `Inter_18pt-Regular.ttf` with the internal PostScript name `Inter18pt-Regular`, which will not match the names above. iOS resolves by PostScript name and will silently fall back to the system font if it does not match.
+
+Each cut needs its family name (name ID 1) to be identical to its PostScript name (name ID 6), which makes it a standalone single-style family. Upstream groups the cuts into shared families such as `Inter SemiBold`, where the upright and italic faces both live under one family name — iOS then has two candidates for `fontFamily: 'Inter-SemiBold'` and may resolve the wrong one. When the two names match, family lookup and PostScript lookup return the same single face. Rewrite the name table with [fontTools](https://github.com/fonttools/fonttools):
 
 ```python
 from fontTools.ttLib import TTFont
 
+POSTSCRIPT_NAME = 'Inter-Regular'
+
 font = TTFont('Inter_18pt-Regular.ttf')
+name_table = font['name']
 for platform_id, encoding_id, language_id in [(3, 1, 0x409), (1, 0, 0)]:
-    font['name'].setName('Inter-Regular', 6, platform_id, encoding_id, language_id)
+    name_table.setName(POSTSCRIPT_NAME, 1, platform_id, encoding_id, language_id)
+    name_table.setName('Regular', 2, platform_id, encoding_id, language_id)
+    name_table.setName(POSTSCRIPT_NAME, 4, platform_id, encoding_id, language_id)
+    name_table.setName(POSTSCRIPT_NAME, 6, platform_id, encoding_id, language_id)
+# Apple platforms report name ID 16 as the family when it is present, so
+# dropping 16/17 (and the WWS pair) is what makes name ID 1 take effect.
+for name_id in (16, 17, 21, 22):
+    name_table.removeNames(nameID=name_id)
 font.save('Inter-Regular.ttf')
 ```
+
+The italic cuts keep their italic angle and italic flags; only the naming changes. `Text` selects an italic by font family rather than by `fontStyle`, so nothing depends on style linking within a family.
 
 **Impact:** Text renders with the system fallback until the fonts are re-registered under the new names, so this must ship together with the asset swap. Expect minor reflow, since Inter's metrics differ slightly from Geist's.
 
