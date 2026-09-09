@@ -33,9 +33,9 @@ export type FontStyle = (typeof FontStyle)[keyof typeof FontStyle];
 export const FontFamily = {
   /** Default: Geist */
   Default: 'default',
-  /** Accent: MM Sans */
+  /** Accent: Oswald */
   Accent: 'accent',
-  /** Hero: MM Poly */
+  /** Hero: Oswald */
   Hero: 'hero',
 } as const;
 
@@ -184,8 +184,8 @@ export type TextPropsShared = {
   /**
    * Optional prop to adjust the font family.
    * Default: Geist
-   * Accent: MM Sans
-   * Hero: MM Poly
+   * Accent: Oswald
+   * Hero: Oswald
    */
   fontFamily?: FontFamily;
   /**

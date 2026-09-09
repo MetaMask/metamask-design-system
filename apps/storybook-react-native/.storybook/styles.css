@@ -46,19 +46,14 @@ body {
 }
 
 @font-face {
-  font-family: 'MMSans-Regular';
-  src: url('/fonts/MMSans/MMSans-Regular.woff2') format('woff2');
+  font-family: 'Oswald-Regular';
+  src: url('/fonts/Oswald/Oswald-Regular.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'MMSans-Medium';
-  src: url('/fonts/MMSans/MMSans-Medium.woff2') format('woff2');
+  font-family: 'Oswald-Medium';
+  src: url('/fonts/Oswald/Oswald-Medium.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'MMSans-Bold';
-  src: url('/fonts/MMSans/MMSans-Bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'MMPoly-Regular';
-  src: url('/fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
+  font-family: 'Oswald-SemiBold';
+  src: url('/fonts/Oswald/Oswald-SemiBold.woff2') format('woff2');
 }

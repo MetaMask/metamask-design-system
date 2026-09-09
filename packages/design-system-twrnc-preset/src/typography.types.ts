@@ -88,6 +88,8 @@ export type TypographyTailwindConfigProps = {
     'accent-medium': string;
     'accent-bold': string;
     'hero-regular': string;
+    'hero-medium': string;
+    'hero-bold': string;
   };
   letterSpacing: Record<TypographyVariant, string>;
   lineHeight: Record<TypographyVariant, string>; // Make sure to include units - "40px" instead of "40"

@@ -4,8 +4,8 @@
 :root {
   /* font family */
   --font-family-default: 'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-accent: 'Oswald', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-hero: 'Oswald', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   /* font sizes */
   --font-size-base: 16px;
   --font-size-1: 0.625rem;

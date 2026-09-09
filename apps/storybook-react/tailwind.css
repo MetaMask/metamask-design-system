@@ -52,46 +52,24 @@
   src: url('fonts/Geist/Geist-SemiBoldItalic.woff2') format('woff2');
 }
 
-/* MM Sans */
+/* Oswald */
 @font-face {
-  font-family: 'MMSans';
+  font-family: 'Oswald';
   font-style: normal;
   font-weight: 400;
-  src: url('fonts/MMSans/MMSans-Regular.woff2') format('woff2');
+  src: url('fonts/Oswald/Oswald-Regular.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'MMSans';
+  font-family: 'Oswald';
   font-style: normal;
   font-weight: 500;
-  src: url('fonts/MMSans/MMSans-Medium.woff2') format('woff2');
+  src: url('fonts/Oswald/Oswald-Medium.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'MMSans';
+  font-family: 'Oswald';
   font-style: normal;
   font-weight: 600;
-  src: url('fonts/MMSans/MMSans-Bold.woff2') format('woff2');
-}
-
-/* MM Poly */
-@font-face {
-  font-family: 'MMPoly';
-  font-style: normal;
-  font-weight: 400;
-  src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'MMPoly';
-  font-style: normal;
-  font-weight: 500;
-  src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'MMPoly';
-  font-style: normal;
-  font-weight: 600;
-  src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
+  src: url('fonts/Oswald/Oswald-SemiBold.woff2') format('woff2');
 }

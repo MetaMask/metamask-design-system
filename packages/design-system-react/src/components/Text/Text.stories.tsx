@@ -53,7 +53,7 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontFamily),
       mapping: FontFamily,
       description:
-        'Optional prop to adjust the font family. Default: Geist, Accent: MM Sans, Hero: MM Poly',
+        'Optional prop to adjust the font family. Default: Geist, Accent: Oswald, Hero: Oswald',
     },
     fontStyle: {
       control: 'select',
@@ -241,8 +241,8 @@ export const FontFamilyStory: Story = {
   render: () => (
     <div className="space-y-4">
       <Text fontFamily={FontFamily.Default}>Default (Geist)</Text>
-      <Text fontFamily={FontFamily.Accent}>Accent (MM Sans)</Text>
-      <Text fontFamily={FontFamily.Hero}>Hero (MM Poly)</Text>
+      <Text fontFamily={FontFamily.Accent}>Accent (Oswald)</Text>
+      <Text fontFamily={FontFamily.Hero}>Hero (Oswald)</Text>
     </div>
   ),
   name: 'Font Family',

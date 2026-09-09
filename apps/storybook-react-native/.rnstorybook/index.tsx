@@ -20,10 +20,9 @@ function App() {
     'Geist-MediumItalic': require('../fonts/Geist/Geist-MediumItalic.otf'),
     'Geist-SemiBold': require('../fonts/Geist/Geist-SemiBold.otf'),
     'Geist-SemiBoldItalic': require('../fonts/Geist/Geist-SemiBoldItalic.otf'),
-    'MMPoly-Regular': require('../fonts/MMPoly/MMPoly-Regular.otf'),
-    'MMSans-Regular': require('../fonts/MMSans/MMSans-Regular.otf'),
-    'MMSans-Medium': require('../fonts/MMSans/MMSans-Medium.otf'),
-    'MMSans-Bold': require('../fonts/MMSans/MMSans-Bold.otf'),
+    'Oswald-Regular': require('../fonts/Oswald/Oswald-Regular.ttf'),
+    'Oswald-Medium': require('../fonts/Oswald/Oswald-Medium.ttf'),
+    'Oswald-SemiBold': require('../fonts/Oswald/Oswald-SemiBold.ttf'),
   });
 
   if (!fontsLoaded) {
