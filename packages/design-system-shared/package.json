@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-shared",
-  "version": "0.34.0",
+  "version": "0.36.0",
   "description": "Shared types for design system libraries",
   "keywords": [
     "MetaMask",
@@ -47,7 +47,7 @@
     "publish:preview": "yarn npm publish --tag preview"
   },
   "dependencies": {
-    "@metamask/utils": "^11.11.0"
+    "@metamask/utils": "^11.12.1"
   },
   "devDependencies": {
     "@metamask/auto-changelog": "^6.2.1",

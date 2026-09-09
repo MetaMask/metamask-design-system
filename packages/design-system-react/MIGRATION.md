@@ -48,7 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version X.XX.X to X.XX.X](#from-version-xxx-to-xxx)
+  - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.27.x to 0.28.0](#from-version-027x-to-0280)
@@ -3630,9 +3630,9 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
-### From version X.XX.X to X.XX.X
+### From version 0.38.1 to 0.39.0
 
-<a id="from-version-xxx-to-xxx"></a>
+<a id="from-version-0381-to-0390"></a>
 
 <a id="default-typeface-geist-to-inter"></a>
 
@@ -3672,7 +3672,21 @@ See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-versi
 
 #### `IconName`: unused icons removed
 
-111 unused icons are removed from **`IconName`** (shared with `@metamask/design-system-shared`). See the [shared package migration guide](../design-system-shared/MIGRATION.md#iconname-unused-icons-removed) for the full removed list and suggested replacements.
+111 unused icons are removed from **`IconName`** (shared with `@metamask/design-system-shared`) to reduce icon bundle size. See the [shared package migration guide](../design-system-shared/MIGRATION.md#from-version-0340-to-0350) for the full removed list and suggested replacements.
+
+**Migration:**
+
+```tsx
+// Before (0.38.1)
+import { Icon, IconName } from '@metamask/design-system-react';
+
+<Icon name={IconName.User} />;
+
+// After (0.39.0)
+import { Icon, IconName } from '@metamask/design-system-react';
+
+<Icon name={IconName.UserCircle} />;
+```
 
 **Impact:** TypeScript will fail on any remaining references to the removed icon names.
 

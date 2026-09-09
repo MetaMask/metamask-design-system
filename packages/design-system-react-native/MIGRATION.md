@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version X.XX.X to X.XX.X](#from-version-xxx-to-xxx)
+- [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
 - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
 - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
 - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -51,7 +51,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version X.XX.X to X.XX.X](#from-version-xxx-to-xxx)
+  - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
   - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
   - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -74,9 +74,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version X.XX.X to X.XX.X
+### From version 0.42.1 to 0.43.0
 
-<a id="from-version-xxx-to-xxx"></a>
+<a id="from-version-0421-to-0430"></a>
 
 <a id="default-typeface-geist-to-inter"></a>
 
@@ -131,7 +131,21 @@ useFonts({
 
 #### `IconName`: unused icons removed
 
-111 unused icons are removed from **`IconName`** (shared with `@metamask/design-system-shared`). See the [shared package migration guide](../design-system-shared/MIGRATION.md#iconname-unused-icons-removed) for the full removed list and suggested replacements.
+111 unused icons are removed from **`IconName`** (shared with `@metamask/design-system-shared`) to reduce icon bundle size. See the [shared package migration guide](../design-system-shared/MIGRATION.md#from-version-0340-to-0350) for the full removed list and suggested replacements.
+
+**Migration:**
+
+```tsx
+// Before (0.42.1)
+import { Icon, IconName } from '@metamask/design-system-react-native';
+
+<Icon name={IconName.User} />;
+
+// After (0.43.0)
+import { Icon, IconName } from '@metamask/design-system-react-native';
+
+<Icon name={IconName.UserCircle} />;
+```
 
 **Impact:** TypeScript will fail on any remaining references to the removed icon names.
 

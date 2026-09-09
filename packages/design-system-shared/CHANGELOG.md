@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.36.0]
+
+### Changed
+
+- Updated shared `Icon` artwork to Phosphor-based glyphs for the brand migration, keeping existing `IconName` values, `viewBox="0 0 24 24"`, and `currentColor` fills ([#1475](https://github.com/MetaMask/metamask-design-system/pull/1475), [#1482](https://github.com/MetaMask/metamask-design-system/pull/1482), [#1493](https://github.com/MetaMask/metamask-design-system/pull/1493))
+  - `AppleLogo`, `Bridge`, and `MetamaskFoxOutline` are unchanged
+- Bumped `@metamask/utils` from `^11.12.0` to `^11.12.1` ([#1492](https://github.com/MetaMask/metamask-design-system/pull/1492))
+
+## [0.35.0]
+
+### Changed
+
+- **BREAKING:** Removed 111 unused icons from `IconName` to reduce the shared icon bundle size ([#1481](https://github.com/MetaMask/metamask-design-system/pull/1481))
+  - SVG assets and generated React / React Native icon outputs no longer include these names
+  - TypeScript will fail on remaining references to removed `IconName` members
+  - See [Migration Guide](./MIGRATION.md#from-version-0340-to-0350)
+
 ## [0.34.0]
 
 ### Changed
@@ -335,7 +352,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.34.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.36.0...HEAD
+[0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.35.0...@metamask/design-system-shared@0.36.0
+[0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.34.0...@metamask/design-system-shared@0.35.0
 [0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.33.0...@metamask/design-system-shared@0.34.0
 [0.33.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.32.0...@metamask/design-system-shared@0.33.0
 [0.32.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.31.0...@metamask/design-system-shared@0.32.0
