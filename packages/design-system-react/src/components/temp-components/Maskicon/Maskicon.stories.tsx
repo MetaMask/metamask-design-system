@@ -11,6 +11,17 @@ import { Text } from '../../Text';
 
 import { Maskicon } from './Maskicon';
 import type { MaskiconProps } from './Maskicon.types';
+import {
+  createMaskiconSVG,
+  getMaskiconColorFamily,
+  type MaskiconColorFamilyName,
+  MASKICON_COLOR_FAMILY_NAMES,
+  MASKICON_COMPLEMENTARY_PAIRS,
+  MASKICON_NEUTRAL_PAIRS,
+  MASKICON_TONAL_PAIRS,
+  sdbmHash,
+  seedToString,
+} from './Maskicon.utilities';
 import README from './README.mdx';
 
 const meta: Meta<MaskiconProps> = {
@@ -243,6 +254,102 @@ export const Size: Story = {
       <Maskicon address={sampleAccountAddresses[2]} size={32} />
       <Maskicon address={sampleAccountAddresses[3]} size={48} />
       <Maskicon address={sampleAccountAddresses[4]} size={64} />
+    </Box>
+  ),
+};
+
+const ALL_MASKICON_COLOR_PAIRS = [
+  ...MASKICON_NEUTRAL_PAIRS,
+  ...MASKICON_TONAL_PAIRS,
+  ...MASKICON_COMPLEMENTARY_PAIRS,
+];
+
+function findSeedForColorPairIndex(index: number): number {
+  for (let seed = 0; seed < 100000; seed++) {
+    const hashVal = sdbmHash(seedToString(seed));
+    if (Math.abs(hashVal) % ALL_MASKICON_COLOR_PAIRS.length === index) {
+      return seed;
+    }
+  }
+  throw new Error(`No seed found for Maskicon color pair index ${index}`);
+}
+
+function svgToDataUri(svg: string): string {
+  return `data:image/svg+xml,${encodeURIComponent(svg.replace(/\s+/gu, ' ').trim())}`;
+}
+
+function hexRelativeLuminance(hex: string): number {
+  const channel = (offset: number): number => {
+    const value = Number.parseInt(hex.slice(offset, offset + 2), 16) / 255;
+    return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  };
+
+  return 0.2126 * channel(1) + 0.7152 * channel(3) + 0.0722 * channel(5);
+}
+
+function buildColorPairGallery(
+  familyNames: readonly MaskiconColorFamilyName[],
+) {
+  return familyNames.flatMap((name) =>
+    ALL_MASKICON_COLOR_PAIRS.flatMap(([background, foreground], index) => {
+      if (getMaskiconColorFamily(background, foreground) !== name) {
+        return [];
+      }
+
+      const seed = findSeedForColorPairIndex(index);
+      return [
+        {
+          index,
+          background,
+          foreground,
+          svg: createMaskiconSVG(seed, 64),
+        },
+      ];
+    }).sort(
+      (a, b) =>
+        hexRelativeLuminance(b.background) - hexRelativeLuminance(a.background),
+    ),
+  );
+}
+
+const HUE_PAIR_GALLERY = buildColorPairGallery(
+  MASKICON_COLOR_FAMILY_NAMES.filter((name) => name !== 'Mixed'),
+);
+const MIXED_PAIR_GALLERY = buildColorPairGallery(['Mixed']);
+
+function ColorPairRow({
+  items,
+}: {
+  items: ReturnType<typeof buildColorPairGallery>;
+}) {
+  return (
+    <Box className="flex flex-row flex-nowrap items-start gap-4 overflow-x-auto">
+      {items.map((item) => (
+        <Box
+          key={item.index}
+          className="flex shrink-0 flex-col items-center gap-2"
+        >
+          <img
+            alt={`Maskicon color pair ${item.index + 1}`}
+            width={64}
+            height={64}
+            src={svgToDataUri(item.svg)}
+          />
+          <Box className="flex flex-col items-center">
+            <Text variant={TextVariant.BodyXs}>{item.background}</Text>
+            <Text variant={TextVariant.BodyXs}>{item.foreground}</Text>
+          </Box>
+        </Box>
+      ))}
+    </Box>
+  );
+}
+
+export const ColorPairs: Story = {
+  render: () => (
+    <Box className="flex flex-col gap-6">
+      <ColorPairRow items={HUE_PAIR_GALLERY} />
+      <ColorPairRow items={MIXED_PAIR_GALLERY} />
     </Box>
   ),
 };
