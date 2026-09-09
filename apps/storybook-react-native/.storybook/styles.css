@@ -47,13 +47,22 @@ body {
 
 @font-face {
   font-family: 'Oswald-Regular';
-  src: url('/fonts/Oswald/Oswald-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-variation-settings: 'wght' 400;
+  src: url('/fonts/Oswald/Oswald-Variable.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Oswald-Medium';
-  src: url('/fonts/Oswald/Oswald-Medium.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-variation-settings: 'wght' 500;
+  src: url('/fonts/Oswald/Oswald-Variable.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Oswald-SemiBold';
-  src: url('/fonts/Oswald/Oswald-SemiBold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-variation-settings: 'wght' 600;
+  src: url('/fonts/Oswald/Oswald-Variable.woff2') format('woff2');
 }

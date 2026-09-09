@@ -56,20 +56,6 @@
 @font-face {
   font-family: 'Oswald';
   font-style: normal;
-  font-weight: 400;
-  src: url('fonts/Oswald/Oswald-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 500;
-  src: url('fonts/Oswald/Oswald-Medium.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 600;
-  src: url('fonts/Oswald/Oswald-SemiBold.woff2') format('woff2');
+  font-weight: 200 700;
+  src: url('fonts/Oswald/Oswald-Variable.woff2') format('woff2');
 }
