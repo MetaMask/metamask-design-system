@@ -3642,7 +3642,7 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 **Migration:**
 
-Bundle the Inter font files in place of Geist and update your `@font-face` declarations to declare the family as `'Inter'`. Six cuts are required: regular, medium, and semibold, each with an italic. Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
+Copy the Inter `.woff2` files from [`apps/storybook-react/fonts/Inter`](../../apps/storybook-react/fonts/Inter) and update your `@font-face` declarations to declare the family as `'Inter'`. Six cuts are required: regular, medium, and semibold, each with an italic. Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
 
 ```css
 /* Before */

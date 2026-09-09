@@ -97,7 +97,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **Migration:**
 
-Bundle the six Inter cuts and register them under the new names. Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
+Copy the six Inter `.ttf` files from [`apps/storybook-react-native/fonts/Inter`](../../apps/storybook-react-native/fonts/Inter) and register them under the names below.
+
+Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
 
 ```tsx
 // Before
@@ -122,31 +124,6 @@ useFonts({
   'Inter-SemiBoldItalic': require('./fonts/Inter/Inter-SemiBoldItalic.ttf'),
 });
 ```
-
-**Normalize the name tables before bundling.** The upstream Inter release ships the static cuts as `Inter_18pt-Regular.ttf` with the internal PostScript name `Inter18pt-Regular`, which will not match the names above. iOS resolves by PostScript name and will silently fall back to the system font if it does not match.
-
-Each cut needs its family name (name ID 1) to be identical to its PostScript name (name ID 6), which makes it a standalone single-style family. Upstream groups the cuts into shared families such as `Inter SemiBold`, where the upright and italic faces both live under one family name — iOS then has two candidates for `fontFamily: 'Inter-SemiBold'` and may resolve the wrong one. When the two names match, family lookup and PostScript lookup return the same single face. Rewrite the name table with [fontTools](https://github.com/fonttools/fonttools):
-
-```python
-from fontTools.ttLib import TTFont
-
-POSTSCRIPT_NAME = 'Inter-Regular'
-
-font = TTFont('Inter_18pt-Regular.ttf')
-name_table = font['name']
-for platform_id, encoding_id, language_id in [(3, 1, 0x409), (1, 0, 0)]:
-    name_table.setName(POSTSCRIPT_NAME, 1, platform_id, encoding_id, language_id)
-    name_table.setName('Regular', 2, platform_id, encoding_id, language_id)
-    name_table.setName(POSTSCRIPT_NAME, 4, platform_id, encoding_id, language_id)
-    name_table.setName(POSTSCRIPT_NAME, 6, platform_id, encoding_id, language_id)
-# Apple platforms report name ID 16 as the family when it is present, so
-# dropping 16/17 (and the WWS pair) is what makes name ID 1 take effect.
-for name_id in (16, 17, 21, 22):
-    name_table.removeNames(nameID=name_id)
-font.save('Inter-Regular.ttf')
-```
-
-The italic cuts keep their italic angle and italic flags; only the naming changes. `Text` selects an italic by font family rather than by `fontStyle`, so nothing depends on style linking within a family.
 
 **Impact:** Text renders with the system fallback until the fonts are re-registered under the new names, so this must ship together with the asset swap. Expect minor reflow, since Inter's metrics differ slightly from Geist's.
 

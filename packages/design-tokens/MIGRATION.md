@@ -28,7 +28,7 @@ The default typeface changes from Geist to Inter. Consumers must bundle the Inte
 
 ### Migration
 
-Replace the Geist font files with the six Inter cuts and update your `@font-face` declarations. Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
+Replace the Geist font files with the six Inter cuts and update your `@font-face` declarations. Copy web files from [`apps/storybook-react/fonts/Inter`](../../apps/storybook-react/fonts/Inter) (`.woff2`) and React Native files from [`apps/storybook-react-native/fonts/Inter`](../../apps/storybook-react-native/fonts/Inter) (`.ttf`). Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
 
 ```css
 /* Before */
@@ -60,8 +60,6 @@ Six cuts are required to cover the scale, matching the Geist set they replace:
 | 500    | italic | `Inter-MediumItalic`   |
 | 600    | normal | `Inter-SemiBold`       |
 | 600    | italic | `Inter-SemiBoldItalic` |
-
-Use the `18pt` optical size from the Inter static family. If you generate these files yourself, note that the upstream release names them `Inter_18pt-Regular.ttf` with the PostScript name `Inter18pt-Regular`; React Native resolves fonts by PostScript name, so normalize each cut so that both its PostScript name and its family name are `Inter-Regular` and so on. See the React Native migration guide for details.
 
 ### Impact
 
