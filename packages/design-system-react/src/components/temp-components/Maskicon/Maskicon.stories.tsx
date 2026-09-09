@@ -14,7 +14,6 @@ import type { MaskiconProps } from './Maskicon.types';
 import {
   createMaskiconSVG,
   getMaskiconColorFamily,
-  type MaskiconColorFamilyName,
   MASKICON_COLOR_FAMILY_NAMES,
   MASKICON_COMPLEMENTARY_PAIRS,
   MASKICON_NEUTRAL_PAIRS,
@@ -22,6 +21,7 @@ import {
   sdbmHash,
   seedToString,
 } from './Maskicon.utilities';
+import type { MaskiconColorFamilyName } from './Maskicon.utilities';
 import README from './README.mdx';
 
 const meta: Meta<MaskiconProps> = {
