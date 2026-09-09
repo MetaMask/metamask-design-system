@@ -79,6 +79,9 @@ export type { ButtonIconProps } from './ButtonIcon';
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
+export { Content, ContentVariant } from './Content';
+export type { ContentProps } from './Content';
+
 export { HeaderBase } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
@@ -100,6 +103,9 @@ export type { JazziconProps } from './temp-components/Jazzicon';
 
 export { Label } from './Label';
 export type { LabelProps } from './Label';
+
+export { ListItem, ListItemVariant } from './ListItem';
+export type { ListItemProps } from './ListItem';
 
 export { Maskicon } from './temp-components/Maskicon';
 export type { MaskiconProps } from './temp-components/Maskicon';
