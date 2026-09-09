@@ -9,10 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.45.0]
 
-### Uncategorized
+### Changed
 
-- feat: replace Geist with Inter as the default typeface ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
-- revert: Revert telegram icon to official logo design ([#1500](https://github.com/MetaMask/metamask-design-system/pull/1500))
+- **BREAKING:** Default typeface is now Inter instead of Geist ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+  - `FontFamily.Default` and the `Text` API are unchanged; twrnc default font names changed from `Geist-*` to `Inter-*`
+  - Peer dependencies updated to `@metamask/design-tokens@^11.0.0` and `@metamask/design-system-twrnc-preset@^0.11.0`
+  - Re-register Inter `.ttf` files under the new PostScript names or text falls back to the system font
+  - See [Migration Guide](./MIGRATION.md#from-version-0440-to-0450)
+- Restored the Telegram `Icon` artwork to the official logo ([#1500](https://github.com/MetaMask/metamask-design-system/pull/1500))
 
 ## [0.44.0]
 

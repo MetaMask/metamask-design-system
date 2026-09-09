@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.13.0]
 
+### Changed
+
+- **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^11.0.0` ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+  - Required coordination bump with `@metamask/design-tokens@11.0.0`; preset utilities are unchanged
+  - Default typeface change is in design-tokens (`--font-family-default` is now Inter)
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-10x-to-1100)
+
 ## [0.12.0]
 
 ### Changed

@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.11.0]
 
-### Uncategorized
+### Changed
 
-- feat: replace Geist with Inter as the default typeface ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+- **BREAKING:** Default font PostScript names are now `Inter-*` instead of `Geist-*` ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+  - `font-default-regular` maps to `Inter-Regular`, with matching updates for medium, semibold, and italic cuts
+  - Peer dependency updated to `@metamask/design-tokens@^11.0.0`
+  - See [React Native Migration Guide](../design-system-react-native/MIGRATION.md#from-version-0440-to-0450)
 
 ## [0.10.0]
 
