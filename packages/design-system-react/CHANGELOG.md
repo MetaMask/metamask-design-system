@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.41.0]
+
 ### Uncategorized
 
 - feat: replace Geist with Inter as the default typeface ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
@@ -545,7 +547,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.40.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.41.0...HEAD
+[0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.40.0...@metamask/design-system-react@0.41.0
 [0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.39.0...@metamask/design-system-react@0.40.0
 [0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...@metamask/design-system-react@0.39.0
 [0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...@metamask/design-system-react@0.38.1
