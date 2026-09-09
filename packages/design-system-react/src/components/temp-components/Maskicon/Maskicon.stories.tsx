@@ -335,10 +335,12 @@ function ColorPairRow({
             height={64}
             src={svgToDataUri(item.svg)}
           />
+          {/* Temporarily hide hex labels
           <Box className="flex flex-col items-center">
             <Text variant={TextVariant.BodyXs}>{item.background}</Text>
             <Text variant={TextVariant.BodyXs}>{item.foreground}</Text>
           </Box>
+          */}
         </Box>
       ))}
     </Box>

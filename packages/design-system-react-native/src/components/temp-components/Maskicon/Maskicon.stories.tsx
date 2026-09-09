@@ -354,10 +354,12 @@ function ColorPairRow({
         {items.map((item) => (
           <Box key={item.index} alignItems={BoxAlignItems.Center} gap={2}>
             <SvgXml xml={item.svg} width={64} height={64} />
+            {/* Temporarily hide hex labels
             <Box alignItems={BoxAlignItems.Center}>
               <Text variant={TextVariant.BodyXs}>{item.background}</Text>
               <Text variant={TextVariant.BodyXs}>{item.foreground}</Text>
             </Box>
+            */}
           </Box>
         ))}
       </Box>

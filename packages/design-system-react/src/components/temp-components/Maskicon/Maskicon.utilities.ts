@@ -15,15 +15,15 @@ export const MASKICON_NEUTRAL_PAIRS = [
 ];
 
 export const MASKICON_TONAL_PAIRS = [
-  ['#28001A', '#FA4B00'],
+  ['#330022', '#FA4B00'],
   ['#013330', '#B9F302'],
   ['#002139', '#73A6FF'],
   ['#360853', '#C66EF5'],
 ];
 
 export const MASKICON_COMPLEMENTARY_PAIRS = [
-  ['#28001A', '#73A6FF'],
-  ['#28001A', '#B4D0FF'],
+  ['#330022', '#73A6FF'],
+  ['#330022', '#B4D0FF'],
   ['#013330', '#C66EF5'],
   ['#013330', '#E1A9FF'],
   ['#002139', '#B9F302'],
@@ -37,7 +37,7 @@ const colorPairs = MASKICON_NEUTRAL_PAIRS.concat(MASKICON_TONAL_PAIRS).concat(
 );
 
 const MASKICON_COLOR_FAMILY_HEXES = {
-  Orange: new Set(['#FA4B00', '#FFC0A5', '#28001A']),
+  Orange: new Set(['#FA4B00', '#FFC0A5', '#330022']),
   Purple: new Set(['#C66EF5', '#E1A9FF', '#360853']),
   Lime: new Set(['#B9F302', '#E3FF89', '#013330']),
   Blue: new Set(['#73A6FF', '#B4D0FF', '#002139']),
