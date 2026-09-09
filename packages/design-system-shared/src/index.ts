@@ -276,6 +276,9 @@ export {
   type SelectButtonPropsShared,
 } from './types/SelectButton';
 
+// HeaderRoot types (ADR-0004)
+export { type HeaderRootPropsShared } from './types/HeaderRoot';
+
 // SectionHeader types (ADR-0004)
 export { type SectionHeaderPropsShared } from './types/SectionHeader';
 
