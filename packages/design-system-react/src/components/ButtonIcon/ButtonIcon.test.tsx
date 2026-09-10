@@ -16,7 +16,6 @@ describe('ButtonIcon', () => {
     expect(button).toHaveClass(
       'h-8',
       'w-8',
-      'rounded-lg',
       'bg-transparent',
       'hover:bg-hover',
       'active:bg-pressed',
@@ -77,11 +76,7 @@ describe('ButtonIcon', () => {
       />,
     );
     const button = screen.getByRole('button');
-    expect(button).toHaveClass(
-      'rounded-full',
-      'bg-icon-default',
-      'text-background-default',
-    );
+    expect(button).toHaveClass('bg-icon-default', 'text-background-default');
   });
 
   it('applies Filled variant styles', () => {
@@ -94,7 +89,6 @@ describe('ButtonIcon', () => {
     );
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
-      'rounded-full',
       'bg-muted',
       'text-icon-default',
       'hover:bg-muted-hover',

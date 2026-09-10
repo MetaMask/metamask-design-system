@@ -9,7 +9,6 @@ import { Text, FontWeight, TextColor } from '../Text';
 import {
   MAP_BUTTONBASE_SIZE_ICONSIZE,
   MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
-  getButtonBaseBorderRadiusTwClass,
   getButtonBaseHorizontalPaddingTwClasses,
   TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
 } from './ButtonBase.constants';
@@ -164,9 +163,8 @@ export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
 
     const mergedClassName = twMerge(
       // Base styles
-      'inline-flex items-center justify-center',
-      getButtonBaseBorderRadiusTwClass(size),
-      getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
+      'inline-flex items-center justify-center rounded-full',
+      getButtonBaseHorizontalPaddingTwClasses(hasStart, hasEnd),
       hasAccessories && 'gap-x-1',
       'font-medium text-default',
       'bg-muted',
