@@ -1,0 +1,302 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as HeaderSubpageStories from './HeaderSubpage.stories';
+
+# HeaderSubpage
+
+Subpage navigation header built on `HeaderBase` with optional back/close button shortcuts. Provides a consistent header pattern for secondary screens and modal-style navigation flows.
+
+```tsx
+import { HeaderSubpage } from '@metamask/design-system-react';
+
+<HeaderSubpage onBack={() => navigate(-1)}>
+  <Text variant={TextVariant.HeadingSm}>Page title</Text>
+</HeaderSubpage>;
+```
+
+<Canvas of={HeaderSubpageStories.Default} />
+
+## Props
+
+### `children`
+
+The content rendered in the center column of the header. Typically a title or title with description.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderSubpageStories.WithDescription} />
+
+### `onBack`
+
+Callback when the back button is pressed. If provided, a back button will be rendered as the start accessory.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderSubpageStories.OnBack} />
+
+### `onClose`
+
+Callback when the close button is pressed. If provided, a close button will be added to the end accessories.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderSubpageStories.OnClose} />
+
+### Back and close together
+
+You can use both `onBack` and `onClose` together to provide navigation controls on both sides of the header.
+
+<Canvas of={HeaderSubpageStories.BackAndClose} />
+
+### `backButtonProps`
+
+Additional props to pass to the back ButtonIcon. If provided (even without `onBack`), a back button will be rendered with these props spread.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'} ariaLabel?: string {'}'}</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `closeButtonProps`
+
+Additional props to pass to the close ButtonIcon. If provided (even without `onClose`), a close button will be added with these props spread.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'} ariaLabel?: string {'}'}</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `endButtonIconProps`
+
+Optional array of ButtonIcon props to render as additional end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonIconProps[]</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderSubpageStories.EndButtonIconProps} />
+
+### `startAccessory`
+
+Optional content before the children content. Takes priority over `startButtonIconProps` and back shortcuts.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderSubpageStories.CustomStartAccessory} />
+
+### `endAccessory`
+
+Optional content after the children content. Takes priority over `endButtonIconProps` and close shortcuts.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderSubpageStories.CustomEndAccessory} />
+
+### `className`
+
+Use the `className` prop to add custom CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<HeaderSubpage className="border-b border-muted" onBack={() => {}}>
+  Title
+</HeaderSubpage>
+```
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>React.CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Component API
+
+<Controls of={HeaderSubpageStories.Default} />
+
+## References
+
+- [HeaderBase](/docs/react-components-headerbase--docs) - The underlying layout component
+- [ButtonIcon](/docs/react-components-buttonicon--docs) - Used for back/close buttons
