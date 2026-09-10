@@ -11,7 +11,7 @@ import {
 // Maskicon SVG Creation
 // /////////////////////////////////////////////////////
 // Color Palettes
-const neutralPairs = [
+export const MASKICON_NEUTRAL_PAIRS = [
   ['#FF5C16', '#FCFCFC'],
   ['#FF5C16', '#131416'],
   ['#D075FF', '#FCFCFC'],
@@ -30,7 +30,7 @@ const neutralPairs = [
   ['#131416', '#89B0FF'],
 ];
 
-const tonalPairs = [
+export const MASKICON_TONAL_PAIRS = [
   ['#FFA680', '#FF5C16'],
   ['#661800', '#FF5C16'],
   ['#EAC2FF', '#D075FF'],
@@ -57,7 +57,7 @@ const tonalPairs = [
   ['#CCE7FF', '#190066'],
 ];
 
-const complementaryPairs = [
+export const MASKICON_COMPLEMENTARY_PAIRS = [
   ['#EAC2FF', '#013330'],
   ['#013330', '#EAC2FF'],
   ['#CCE7FF', '#661800'],
@@ -70,7 +70,48 @@ const complementaryPairs = [
   ['#013330', '#CCE7FF'],
 ];
 
-const colorPairs = neutralPairs.concat(tonalPairs).concat(complementaryPairs);
+const colorPairs = MASKICON_NEUTRAL_PAIRS.concat(MASKICON_TONAL_PAIRS).concat(
+  MASKICON_COMPLEMENTARY_PAIRS,
+);
+
+const MASKICON_COLOR_FAMILY_HEXES = {
+  Orange: new Set(['#FF5C16', '#FFA680', '#661800']),
+  Purple: new Set(['#D075FF', '#EAC2FF', '#3D065F']),
+  Lime: new Set(['#BAF24A', '#E5FFC3', '#013330']),
+  Blue: new Set(['#89B0FF', '#CCE7FF', '#190066']),
+} as const;
+
+export const MASKICON_COLOR_FAMILY_NAMES = [
+  'Orange',
+  'Purple',
+  'Lime',
+  'Blue',
+  'Mixed',
+] as const;
+
+export type MaskiconColorFamilyName =
+  (typeof MASKICON_COLOR_FAMILY_NAMES)[number];
+
+const MASKICON_HUE_FAMILY_NAMES = ['Orange', 'Purple', 'Lime', 'Blue'] as const;
+
+/**
+ * Returns the hue family for a Maskicon color pair.
+ *
+ * @param background Background hex color
+ * @param foreground Foreground hex color
+ * @returns The matching family name, or Mixed when two hues are combined
+ */
+export function getMaskiconColorFamily(
+  background: string,
+  foreground: string,
+): MaskiconColorFamilyName {
+  const families = MASKICON_HUE_FAMILY_NAMES.filter((name) => {
+    const hexes = MASKICON_COLOR_FAMILY_HEXES[name];
+    return hexes.has(background) || hexes.has(foreground);
+  });
+
+  return families.length === 1 ? families[0] : 'Mixed';
+}
 
 /**
  * SDBM hash function
