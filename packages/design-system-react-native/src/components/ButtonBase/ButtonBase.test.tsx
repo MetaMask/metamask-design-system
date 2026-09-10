@@ -93,6 +93,55 @@ describe('ButtonBase', () => {
     });
   });
 
+  describe('horizontal padding', () => {
+    it.each([ButtonBaseSize.Sm, ButtonBaseSize.Md, ButtonBaseSize.Lg])(
+      'applies the same label-only padding at size %s',
+      (size) => {
+        const { getByTestId } = render(
+          <ButtonBase size={size} testID="btn">
+            Label
+          </ButtonBase>,
+        );
+
+        expect(getByTestId('btn')).toHaveStyle(tw`px-4`);
+      },
+    );
+
+    it('insets the leading side when there is a start accessory', () => {
+      const { getByTestId } = render(
+        <ButtonBase startIconName={IconName.Add} testID="btn">
+          Start
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('btn')).toHaveStyle(tw`pl-3 pr-4`);
+    });
+
+    it('insets the trailing side when there is an end accessory', () => {
+      const { getByTestId } = render(
+        <ButtonBase endIconName={IconName.Add} testID="btn">
+          End
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('btn')).toHaveStyle(tw`pl-4 pr-3`);
+    });
+
+    it('insets both sides when there are start and end accessories', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          startIconName={IconName.Add}
+          endIconName={IconName.ArrowRight}
+          testID="btn"
+        >
+          Both
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('btn')).toHaveStyle(tw`px-3`);
+    });
+  });
+
   describe('twClassName', () => {
     it('merges static classes onto the button', () => {
       const { getByTestId } = render(

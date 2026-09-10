@@ -132,7 +132,7 @@ export const ButtonBase = ({
           'flex-row items-center justify-center rounded-full',
           // Visual styling
           'bg-muted overflow-hidden',
-          getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
+          getButtonBaseHorizontalPaddingTwClasses(hasStart, hasEnd),
           // Size
           TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],
           // State-based opacity

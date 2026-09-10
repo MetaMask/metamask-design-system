@@ -29,18 +29,19 @@ export const MAP_BUTTONBASE_SIZE_TEXT_VARIANT: Record<
 };
 
 export const getButtonBaseHorizontalPaddingTwClasses = (
-  buttonSize: ButtonBaseSize,
   hasStart: boolean,
   hasEnd: boolean,
 ): string => {
-  if (buttonSize !== ButtonBaseSize.Lg || (hasStart && hasEnd)) {
+  // Icons sit closer to the edge than a label, so each accessory pulls its own
+  // side in from 16px to 12px.
+  if (hasStart && hasEnd) {
     return 'px-3';
-  }
-  if (!hasStart && !hasEnd) {
-    return 'px-4';
   }
   if (hasStart) {
     return 'pl-3 pr-4';
   }
-  return 'pl-4 pr-3';
+  if (hasEnd) {
+    return 'pl-4 pr-3';
+  }
+  return 'px-4';
 };

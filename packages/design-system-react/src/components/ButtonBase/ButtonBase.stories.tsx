@@ -163,7 +163,8 @@ export const Spacing: Story = {
       <div className="space-y-2">
         <Text variant={TextVariant.HeadingSm}>Label only</Text>
         <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          Horizontal padding follows button size when no icons are shown.
+          Every size uses the same 16px horizontal padding when no icons are
+          shown.
         </Text>
         <div className="flex flex-wrap gap-2">
           <ButtonBase {...args} size={ButtonBaseSize.Sm}>
