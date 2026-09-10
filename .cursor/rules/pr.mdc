@@ -18,7 +18,7 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
    - Fill in the Description section with a clear summary
    - Identify any related issues if mentioned in commits
    - Suggest manual testing steps based on changes
-   - Note if screenshots/recordings would be helpful
+   - Collect Storybook before/after screenshots for visual UI changes (see Visual evidence below)
    - Pre-check relevant checklist items
 
 3. **Smart content generation**:
@@ -26,7 +26,7 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
    - **Description**: Write 2-3 sentences explaining what changed and why
    - **Related issues**: Look for issue references in commit messages
    - **Manual testing steps**: Generate realistic testing steps based on the components changed
-   - **Screenshots/Recordings**: Suggest if UI/visual changes are detected
+   - **Screenshots/Recordings**: For visual UI changes, run `.cursor/skills/visual-regression-collect/SKILL.md` and embed GitHub-attached PNGs. Do not leave this section as a placeholder.
    - **Checklist items**: Auto-check items that are clearly satisfied
 
 4. **Component-specific intelligence**:
@@ -37,19 +37,27 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
    - For build/config changes: Note infrastructure updates
    - For documentation: Mention docs updates
 
-5. **Create the PR using GitHub CLI**:
+5. **Visual evidence (required for UI changes)**:
+
+   - Follow `.cursor/skills/visual-regression-collect/SKILL.md` before considering the PR complete.
+   - Capture Storybook before/after for **every visual dependent**, not only files in the diff (primitives such as `ButtonBase` affect `Button`, `ButtonHero`, `ButtonFilter`, `SelectButton`, and so on; see [PR #1494](https://github.com/MetaMask/metamask-design-system/pull/1494)).
+   - Crop tightly around the changed UI (component bounding box + 8–16px). Do not attach a full-screen shot of a small component such as Badge.
+   - Attach PNGs with `gh --attach` (v2.99.0+). Never paste Cursor artifact URLs.
+   - If the PR already exists and UI changed, recapture and `gh pr edit --body-file ... --attach ...` so Screenshots/Recordings shows the latest set.
+
+6. **Create the PR using GitHub CLI**:
 
    - Generate a concise PR title based on the changes (e.g., "feat: add Avatar Figma Code Connect integration")
    - Create a secure temporary file with a unique name using a UUID or random string (e.g., `pr-description-[uuid].md`)
    - Ensure the `.cursor/temp/` directory exists, create it if needed
-   - Save the generated description to the temporary file
-   - Execute: `gh pr create --title "[generated-title]" --body-file .cursor/temp/pr-description-[unique-id].md --draft`
-   - If successful, display: "✅ Draft PR created successfully: [PR-URL]"
+   - Save the generated description to the temporary file (Markdown image refs must use the same local PNG paths passed to `--attach`)
+   - Execute: `gh pr create --title "[generated-title]" --body-file .cursor/temp/pr-description-[unique-id].md --draft` plus one `--attach 'path/to/file.png#Alt text'` per screenshot
+   - If successful, display: "Draft PR created successfully: [PR-URL]"
    - Provide next steps: "Review the description and run `gh pr ready` when ready for review"
    - Clean up temporary file after successful PR creation
    - If PR creation fails, ensure the temporary file is deleted to prevent accumulation
 
-6. **Display the generated description and PR creation status**:
+7. **Display the generated description and PR creation status**:
 
 ```markdown
 ## **Description**
@@ -66,7 +74,7 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
 
 ## **Screenshots/Recordings**
 
-[Indicate if needed based on UI changes]
+[GitHub-attached before/after Storybook captures of every visual dependent, or "Not applicable" for non-visual PRs]
 
 ## **Pre-merge author checklist**
 
@@ -98,7 +106,7 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
 - Always create PR as draft initially using `--draft` flag
 - Use semantic PR titles following conventional commits (feat:, fix:, chore:, etc.)
 - Generate unique temporary filenames using UUIDs or random strings to avoid conflicts
-- Show the GitHub CLI command being executed: `gh pr create --title "..." --body-file .cursor/temp/pr-description-[unique-id].md --draft`
+- Show the GitHub CLI command being executed: `gh pr create --title "..." --body-file .cursor/temp/pr-description-[unique-id].md --draft` with `--attach` flags when screenshots exist
 - After successful creation, display: "✅ Draft PR created successfully: [PR-URL]"
 - Provide next steps: "Review the description and run `gh pr ready` when ready for review"
 - If `gh` command fails, display the generated description and provide manual instructions

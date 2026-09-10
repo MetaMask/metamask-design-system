@@ -22,6 +22,8 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 ├── .cursor/rules/              # Layer 2: Focused rules
 │   ├── *.mdc                  # Cursor project rules (alwaysApply / globs / description)
 │   └── *.md                   # Detailed checklists (Claude Code @-imports; other agents Read)
+├── .cursor/skills/             # On-demand workflows (see Project skills below)
+├── .cursor/automations/        # Cursor Automations prompt specs (git source of truth)
 └── docs/                       # Layer 3: High-level guides
     └── ai-agents.md           # This file - strategy explanation
 ```
@@ -47,7 +49,7 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 - Claude Code and Cursor both recommend a concise always-loaded file
 - Agents can miss key rules in verbose files
-- Put detailed workflows in `.cursor/rules/`
+- Put detailed workflows in `.cursor/rules/` (conventions) or `.cursor/skills/` (multi-step procedures invoked on demand)
 
 ## Layer 2: .cursor/rules/ (Focused Rules)
 
@@ -85,8 +87,27 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 - **Context efficient:** Every line prevents a mistake
 - **Actionable:** Tell agents what to do, not theory
-- **Reference-based:** Rules point to canonical code examples in the codebase rather than duplicating them
+- **Reference over duplication:** Rules point to canonical code examples in the codebase rather than duplicating them
 - **Maintainable:** Checklists easier to update than narratives
+
+## Project skills (`.cursor/skills/`)
+
+**Purpose:** Multi-step procedures the agent should follow when a matching task starts (create a UI PR, collect screenshots, refresh visual assets). Not standing conventions — those stay in `.cursor/rules/`.
+
+**Location:** `.cursor/skills/<skill-name>/SKILL.md`, committed in this repo.
+
+| Kind | Path | Who sees it |
+| --- | --- | --- |
+| Project skill | `.cursor/skills/` in git | Cursor Desktop and Cloud Agents on a checkout that includes the files |
+| Personal skill | `~/.cursor/skills/` | Local machine only. Cloud agents do **not** load this folder. |
+
+Put MMDS workflows in **project** skills so cloud agents get them. Do not rely on laptop-only skills for this repo.
+
+**Do not** `@`-import skills from `CLAUDE.md`. They are large and should load when the description matches or the user asks, not on every session. Put must-not-miss invariants (e.g. UI PRs need GitHub-attached screenshots) **inline in `AGENTS.md`**.
+
+**Current skills**
+
+- `visual-regression-collect` — Storybook before/after for UI PRs and visual-asset requests; `gh --attach`; tight crop; expand to visual dependents
 
 ## Layer 3: docs/ (High-Level Guides)
 
@@ -139,6 +160,7 @@ What _is_ auto-loaded as markdown instructions:
 - `CLAUDE.md` (Claude Code always; Cursor may also load it — keep it a thin `@AGENTS.md` import so content is not duplicated)
 - `.cursor/rules/*.mdc` according to `alwaysApply` / `globs` / `description`
 - User rules and Team rules from the Cursor dashboard
+- Project skills in `.cursor/skills/` when the skill description matches the task (not every turn)
 
 `.cursor/rules/*.md` files are not Cursor project rules. Claude Code can `@`-import them from `CLAUDE.md` (imports expand at launch). Cursor Cloud Agents only see those files if they open them. Put must-not-miss invariants **inline in `AGENTS.md`**.
 
@@ -154,7 +176,8 @@ What _is_ auto-loaded as markdown instructions:
 1. Open Cursor in this repo
 2. `AGENTS.md` is injected into Agent and Cloud Agent sessions
 3. `.cursor/rules/*.mdc` files attach via `alwaysApply` / globs / description if you add any
-4. `.cursor/rules/*.md` is not auto-injected by Cursor; agents may still `Read` those files when they choose to
+4. `.cursor/skills/*/SKILL.md` attaches when the task matches the skill description
+5. `.cursor/rules/*.md` is not auto-injected by Cursor; agents may still `Read` those files when they choose to
 
 ### Claude Code
 
