@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: use fully rounded pill shape for ButtonBase and ButtonIcon ([#1494](https://github.com/MetaMask/metamask-design-system/pull/1494))
+- feat(react,react-native): deprecate ButtonFilter in favor of FilterButton ([#1509](https://github.com/MetaMask/metamask-design-system/pull/1509))
+
 ## [0.46.0]
 
 ### Added
