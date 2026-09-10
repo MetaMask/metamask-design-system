@@ -27,7 +27,7 @@ Skip changelog-only, types-only, tests-only, docs-only, CI, and non-visual refac
 
 - **Never** put `cursor.com/agents/.../artifacts` (or any other Cursor-hosted image URL) in a PR, issue, or comment.
 - **Never** push a screenshots git branch or `raw.githubusercontent.com` image links.
-- **Always** attach local PNGs with `gh --attach` (`gh` >= 2.99.0). GitHub rewrites local Markdown paths to `user-attachments` URLs.
+- **Always** attach local PNGs with `gh --attach` (`gh` >= 2.99.0). This is the [GitHub CLI media upload](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/) shipped in CLI 2.99.0. GitHub rewrites local Markdown paths to `user-attachments` URLs.
 - **Never** screenshot only the files in the diff. Capture **every surface the change visually affects** (composition consumers, both platforms). See [Expand to dependents](#expand-to-dependents).
 - **Never** commit sandbox/showcase stories or PNGs to the feature branch.
 - **Always** crop tightly around the changed UI. Do not post a full-viewport or full-canvas screenshot of a small component. See [Tight crop](#tight-crop).
@@ -103,6 +103,8 @@ If the story’s default layout is a huge padded canvas, temporarily wrap the in
 Wrong: full page of one Badge. Right: Badge filling most of a ~200px-wide PNG, before and after side by side.
 
 ## Attach with GitHub CLI
+
+GitHub CLI 2.99.0 added a repeatable `--attach` flag that uploads local PNG/JPEG/GIF/WebP (and video) and rewrites matching Markdown paths to GitHub-hosted media. See [GitHub CLI: Media in issues, pull requests, and comments](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/) and [Attaching files with GitHub CLI](https://docs.github.com/en/github-cli/github-cli/attaching-files-with-github-cli).
 
 ```bash
 gh --version   # require >= 2.99.0; otherwise brew upgrade gh and stop

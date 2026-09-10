@@ -107,7 +107,7 @@ Put MMDS workflows in **project** skills so cloud agents get them. Do not rely o
 
 **Current skills**
 
-- `visual-regression-collect` — Storybook before/after for UI PRs and visual-asset requests; `gh --attach`; tight crop; expand to visual dependents
+- `visual-regression-collect` — Storybook before/after for UI PRs and visual-asset requests; `gh --attach` ([CLI 2.99.0 media](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/)); tight crop; expand to visual dependents
 
 ## Layer 3: docs/ (High-Level Guides)
 

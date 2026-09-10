@@ -6,7 +6,7 @@ Design tokens and components for MetaMask extension (React) and mobile (React Na
 
 - **Do not edit package `CHANGELOG.md` files in feature/fix PRs.** Changelogs are generated and edited only on `release/*` branches (`yarn create-release-branch`). Do not run `yarn changelog:update` unless you are on a release branch. Put consumer-facing notes in the PR description; put breaking-change guidance in `MIGRATION.md`.
 - **User-facing copy uses sentence case** unless it is an approved exception (proper nouns, abbreviations, Secret Recovery Phrase). See `.cursor/rules/content-guidelines.mdc`.
-- **UI PRs include Storybook before/after screenshots** of every visual dependent (not only files in the diff), attached with `gh --attach`. Never paste Cursor artifact URLs. Follow `.cursor/skills/visual-regression-collect/SKILL.md`.
+- **UI PRs include Storybook before/after screenshots** of every visual dependent (not only files in the diff), attached with `gh --attach` ([CLI 2.99.0 media upload](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/)). Never paste Cursor artifact URLs. Follow `.cursor/skills/visual-regression-collect/SKILL.md`.
 
 ## Documentation for AI Agents
 

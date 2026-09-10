@@ -42,7 +42,7 @@ When the user types `@pr`, automatically generate a comprehensive pull request d
    - Follow `.cursor/skills/visual-regression-collect/SKILL.md` before considering the PR complete.
    - Capture Storybook before/after for **every visual dependent**, not only files in the diff (primitives such as `ButtonBase` affect `Button`, `ButtonHero`, `ButtonFilter`, `SelectButton`, and so on; see [PR #1494](https://github.com/MetaMask/metamask-design-system/pull/1494)).
    - Crop tightly around the changed UI (component bounding box + 8–16px). Do not attach a full-screen shot of a small component such as Badge.
-   - Attach PNGs with `gh --attach` (v2.99.0+). Never paste Cursor artifact URLs.
+   - Attach PNGs with `gh --attach` (v2.99.0+, [changelog](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/)). Never paste Cursor artifact URLs.
    - If the PR already exists and UI changed, recapture and `gh pr edit --body-file ... --attach ...` so Screenshots/Recordings shows the latest set.
 
 6. **Create the PR using GitHub CLI**:
