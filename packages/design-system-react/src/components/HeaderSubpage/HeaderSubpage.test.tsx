@@ -272,11 +272,7 @@ describe('HeaderSubpage', () => {
 
       it('renders close ButtonIcon without closeButtonProps', () => {
         const onClose = jest.fn();
-        render(
-          <HeaderSubpage onClose={onClose}>
-            Title
-          </HeaderSubpage>,
-        );
+        render(<HeaderSubpage onClose={onClose}>Title</HeaderSubpage>);
 
         const closeButton = screen.getByRole('button', { name: 'Close' });
         expect(closeButton).toBeInTheDocument();
