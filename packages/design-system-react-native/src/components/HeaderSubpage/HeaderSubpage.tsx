@@ -1,15 +1,20 @@
 // Third party dependencies.
-import { mergeTwClassName } from '@metamask/design-system-shared';
+import {
+  BoxAlignItems,
+  mergeTwClassName,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
+import { Box } from '../Box';
+import { BoxRow } from '../BoxRow';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import type { ButtonIconProps } from '../ButtonIcon';
+import { Content } from '../Content';
 import { IconName } from '../Icon';
-import { ListItem } from '../ListItem';
 
 // Internal dependencies.
 import type { HeaderSubpageProps } from './HeaderSubpage.types';
@@ -43,7 +48,25 @@ export const HeaderSubpage: React.FC<HeaderSubpageProps> = ({
   style,
   accessoryGap = 2,
   testID,
-  ...listItemProps
+  variant,
+  avatar,
+  title,
+  titleProps,
+  titleStartAccessory,
+  titleEndAccessory,
+  description,
+  descriptionProps,
+  descriptionStartAccessory,
+  descriptionEndAccessory,
+  value,
+  valueProps,
+  valueStartAccessory,
+  valueEndAccessory,
+  subvalue,
+  subvalueProps,
+  subvalueStartAccessory,
+  subvalueEndAccessory,
+  ...boxProps
 }) => {
   const tw = useTailwind();
   const insets = useSafeAreaInsets();
@@ -107,19 +130,64 @@ export const HeaderSubpage: React.FC<HeaderSubpageProps> = ({
     return undefined;
   }, [endAccessory, resolvedEndButtonIconProps, tw]);
 
-  return (
-    <ListItem
-      {...listItemProps}
-      testID={testID}
+  const hasRowAccessories =
+    Boolean(resolvedStartAccessory) || Boolean(resolvedEndAccessory);
+
+  const content = (
+    <Content
+      twClassName={hasRowAccessories ? 'flex-1 min-w-0' : undefined}
+      variant={variant}
+      avatar={avatar}
+      title={title}
+      titleProps={titleProps}
+      titleStartAccessory={titleStartAccessory}
+      titleEndAccessory={titleEndAccessory}
+      description={description}
+      descriptionProps={descriptionProps}
+      descriptionStartAccessory={descriptionStartAccessory}
+      descriptionEndAccessory={descriptionEndAccessory}
+      value={value}
+      valueProps={valueProps}
+      valueStartAccessory={valueStartAccessory}
+      valueEndAccessory={valueEndAccessory}
+      subvalue={subvalue}
+      subvalueProps={subvalueProps}
+      subvalueStartAccessory={subvalueStartAccessory}
+      subvalueEndAccessory={subvalueEndAccessory}
+    />
+  );
+
+  const headerContent = hasRowAccessories ? (
+    <BoxRow
       startAccessory={resolvedStartAccessory}
       endAccessory={resolvedEndAccessory}
-      accessoryGap={accessoryGap}
-      twClassName={mergeTwClassName(
-        'h-14 px-2 py-0 justify-center',
-        twClassName,
-      )}
-      style={[includesTopInset && { marginTop: insets.top }, style]}
-    />
+      alignItems={BoxAlignItems.Center}
+      gap={accessoryGap}
+    >
+      {content}
+    </BoxRow>
+  ) : (
+    content
+  );
+
+  const rootTwClassName = mergeTwClassName(
+    'h-14 px-2 py-0 justify-center',
+    twClassName,
+  );
+
+  return (
+    <Box
+      {...boxProps}
+      testID={testID}
+      twClassName={rootTwClassName}
+      style={[
+        tw.style(rootTwClassName),
+        includesTopInset && { marginTop: insets.top },
+        style,
+      ]}
+    >
+      {headerContent}
+    </Box>
   );
 };
 

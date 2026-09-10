@@ -1,6 +1,6 @@
 # HeaderSubpage
 
-HeaderSubpage is a subpage navigation row with optional back and close actions. It composes [ListItem](../ListItem/README.md) for left-aligned identity content (avatar, title, description) and applies header shell styling (`h-14`, optional safe-area inset). Use [HeaderStandard](../HeaderStandard/README.md) for centered-title headers. Use [TitleSubpage](../TitleSubpage/README.md) for the rich title block below this row (amount, bottom label, and similar).
+HeaderSubpage is a subpage navigation row with optional back and close actions. It composes [Content](../Content/README.md) for left-aligned identity content (avatar, title, description) with [BoxRow](../BoxRow/README.md) for row accessories, and applies header shell styling (`h-14`, optional safe-area inset). Use [HeaderStandard](../HeaderStandard/README.md) for centered-title headers. Use [TitleSubpage](../TitleSubpage/README.md) for the rich title block below this row (amount, bottom label, and similar).
 
 ```tsx
 import {
@@ -20,7 +20,7 @@ import {
 
 ## Props
 
-Inherits [ListItem](../ListItem/README.md) / [Content](../Content/README.md) props (`value`, `variant`, `testID`, and other root `View` props). `isInteractive` and `children` are not supported. Secondary text uses **`description`** (ListItem), not `subtitle` ([HeaderStandard](../HeaderStandard/README.md) / [TitleSubpage](../TitleSubpage/README.md)).
+Inherits [Box](../Box/README.md) and [Content](../Content/README.md) props (`value`, `variant`, `testID`, and other root `View` props). Secondary text uses **`description`** (Content), not `subtitle` ([HeaderStandard](../HeaderStandard/README.md) / [TitleSubpage](../TitleSubpage/README.md)).
 
 ### `title`
 
@@ -227,7 +227,7 @@ Custom end content. Takes priority over `endButtonIconProps` and close shortcuts
 
 ### `includesTopInset`
 
-When `true`, applies the device top safe-area inset as `marginTop` on the root ListItem so the header clears the notch.
+When `true`, applies the device top safe-area inset as `marginTop` on the root Box so the header clears the notch.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -256,7 +256,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-Default shell classes include `h-14 px-2 py-0 justify-center` (overriding ListItem padding for header density).
+Default shell classes include `h-14 px-2 py-0 justify-center`.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |

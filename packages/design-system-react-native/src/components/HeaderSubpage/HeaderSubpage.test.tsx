@@ -89,7 +89,7 @@ describe('HeaderSubpage', () => {
     });
 
     describe('when testID is provided', () => {
-      it('forwards testID to root ListItem', () => {
+      it('forwards testID to root Box', () => {
         const { getByTestId } = render(
           <HeaderSubpage title="Test Title" testID={CONTAINER_TEST_ID} />,
         );
@@ -412,7 +412,7 @@ describe('HeaderSubpage', () => {
   });
 
   describe('twClassName', () => {
-    it('merges default header shell classes on root ListItem', () => {
+    it('merges default header shell classes on root Box', () => {
       const { getByTestId } = render(
         <HeaderSubpage title="Title" testID={CONTAINER_TEST_ID} />,
       );
@@ -442,7 +442,7 @@ describe('HeaderSubpage', () => {
   });
 
   describe('style', () => {
-    it('merges caller style with root ListItem styles', () => {
+    it('merges caller style with root Box styles', () => {
       const customStyle = { backgroundColor: 'red' };
       const { getByTestId } = render(
         <HeaderSubpage
