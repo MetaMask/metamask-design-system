@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.37.0]
 
-### Uncategorized
+### Added
 
-- feat(icons): add HeartStraight and HeartStraightFilled ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
-- feat: replace Geist with Inter as the default typeface ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
-- revert: Revert telegram icon to official logo design ([#1500](https://github.com/MetaMask/metamask-design-system/pull/1500))
+- Added `HeartStraight` and `HeartStraightFilled` to `IconName` ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
+
+### Changed
+
+- Restored the Telegram `Icon` artwork to the official logo ([#1500](https://github.com/MetaMask/metamask-design-system/pull/1500))
 
 ## [0.36.0]
 

@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.46.0]
 
-### Uncategorized
+### Added
 
-- feat(icons): add HeartStraight and HeartStraightFilled ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
+- Added `HeartStraight` and `HeartStraightFilled` to `IconName` ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
 
 ## [0.45.0]
 

@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.42.0]
 
-### Uncategorized
+### Added
 
-- feat(icons): add HeartStraight and HeartStraightFilled ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
-- fix(react): stop ButtonIcon shrinking in flex containers ([#1502](https://github.com/MetaMask/metamask-design-system/pull/1502))
+- Added `HeartStraight` and `HeartStraightFilled` to `IconName` ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
+
+### Fixed
+
+- Fixed `ButtonIcon` shrinking when placed in a flex container ([#1502](https://github.com/MetaMask/metamask-design-system/pull/1502))
 
 ## [0.41.0]
 
