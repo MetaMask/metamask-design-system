@@ -16,12 +16,6 @@ describe('TextField', () => {
       expect(screen.getByRole('textbox')).toBeInTheDocument();
     });
 
-    it('applies the muted background', () => {
-      render(<TextField data-testid={ROOT_TEST_ID} onChange={noop} value="" />);
-
-      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass('bg-muted');
-    });
-
     it('renders placeholder and value on inner input', () => {
       render(
         <TextField

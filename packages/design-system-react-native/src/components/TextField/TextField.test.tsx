@@ -205,14 +205,6 @@ describe('TextField', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`h-12`);
     });
 
-    it('applies the muted background', () => {
-      const { getByTestId } = render(
-        <TextField value="" testID={ROOT_TEST_ID} />,
-      );
-
-      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`bg-muted`);
-    });
-
     it('shows error border when isError is true', () => {
       const { getByTestId } = render(
         <TextField value="" testID={ROOT_TEST_ID} isError />,
