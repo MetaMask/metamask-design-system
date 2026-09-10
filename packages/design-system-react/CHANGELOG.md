@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.42.0]
+
+### Added
+
+- Added `HeartStraight` and `HeartStraightFilled` to `IconName` ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
+
+### Fixed
+
+- Fixed `ButtonIcon` shrinking when placed in a flex container ([#1502](https://github.com/MetaMask/metamask-design-system/pull/1502))
+
 ## [0.41.0]
 
 ### Changed
@@ -551,7 +561,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.41.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.42.0...HEAD
+[0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.41.0...@metamask/design-system-react@0.42.0
 [0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.40.0...@metamask/design-system-react@0.41.0
 [0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.39.0...@metamask/design-system-react@0.40.0
 [0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...@metamask/design-system-react@0.39.0
