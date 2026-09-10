@@ -50,10 +50,15 @@ Primitive and token changes leak into other components. Example: [PR #1494](http
 
 ### How many shots
 
-| Fan-out                                         | What to capture                                                                                                                                                                         |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1–8 affected components                         | Default story each (plus Size / Variant if that is what changed). Light and dark when the diff is color/token. Hosted main works for **before** when those stories already exist.       |
-| More than 8, or a primitive with many consumers | One **temporary showcase** story per platform that mounts all dependents in a grid (identical file on before and after), **plus** 1–2 detail stories for the primitive and any opt-out. |
+**Default: use stories that already exist.** Resolve their IDs, capture hosted main (before) and local/PR preview (after). Do not invent a sandbox story for a single component or a small set of dependents — writing props, checking out base, and reloading Storybook costs more agent tokens than opening a few iframes.
+
+| Situation                                                                                                                                        | What to capture                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1–5 affected components with existing stories                                                                                                    | Those stories only (Default, plus Size / Variant if that is what changed). Light and dark when the diff is color/token.                           |
+| 6+ dependents, **or** a shared primitive/token where the review value is the blast radius, **or** the user asks for a composed / all-in-one shot | One **temporary showcase** grid per platform (identical sandbox on before and after), **plus** 1–2 detail shots of the primitive and any opt-out. |
+| Affected component has no story                                                                                                                  | Temporary sandbox for that component only (or after-only if it is brand new on the PR).                                                           |
+
+Showcase when the composed frame is worth more than N separate PNGs — e.g. [PR #1494](https://github.com/MetaMask/metamask-design-system/pull/1494) (`ButtonBase` radius) where reviewers needed `Button`, `ButtonHero`, `ButtonFilter`, `TextButton`, `SelectButton`, and `SegmentedControl` in one glance. Skip the showcase for a lone `BadgeNetwork` radius tweak; crop its existing story tightly instead.
 
 Showcase story path (delete after capture; never commit):
 
@@ -175,10 +180,10 @@ Cloud agents use the VM browser against GitHub Pages, PR preview, or Storybook i
 
 ## Golden path (PR #1494)
 
-Diff touched `ButtonBase` and `ButtonIcon` (and RN `SegmentedControl` to stay concentric). Correct capture set:
+Diff touched `ButtonBase` and `ButtonIcon` (and RN `SegmentedControl` to stay concentric). Many dependents → escalate to showcase (not one story per consumer):
 
 - Web showcase grid (local base → local PR head, same sandbox file): `ButtonBase`, `Button` variants/sizes, `ButtonHero`, `ButtonFilter`, `TextButton`, `ButtonIcon`
 - RN showcase grid (same local-base / local-head pattern): those plus `ButtonSemantic`, `SelectButton`, `SegmentedControl`
 - Detail: `ButtonBase` / `ButtonIcon` / RN `SegmentedControl` sizes — before may use hosted main for these existing stories
 
-Wrong: only `ButtonBase` Default on web; a full-viewport PNG of a small control such as Badge; or a showcase “before” from hosted main (the sandbox story is not published there).
+Wrong: only `ButtonBase` Default on web; a full-viewport PNG of a small control such as Badge; a showcase “before” from hosted main; or writing a sandbox when a few existing stories would have been enough.
