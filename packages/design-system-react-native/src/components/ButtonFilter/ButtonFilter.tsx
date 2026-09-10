@@ -5,13 +5,25 @@ import { ButtonBase } from '../ButtonBase';
 
 import type { ButtonFilterProps } from './ButtonFilter.types';
 
-export const ButtonFilter: React.FC<ButtonFilterProps> = ({
-  isActive = false,
-  twClassName,
-  textProps,
-  style,
-  ...props
-}) => {
+/**
+ * @deprecated Use `FilterButton` instead. This component will be removed
+ * in a future major version of the design system.
+ *
+ * @param props - Component props.
+ * @param props.isActive - Whether the filter is in the active state.
+ * @param props.twClassName - Tailwind override classes for the container.
+ * @param props.textProps - Props forwarded to the internal text element.
+ * @param props.style - Style overrides applied to the container.
+ * @returns The rendered filter button element.
+ */
+export const ButtonFilter: React.FC<ButtonFilterProps> = (props) => {
+  const {
+    isActive = false,
+    twClassName,
+    textProps,
+    style,
+    ...restProps
+  } = props;
   const tw = useTailwind();
 
   const mergedStyle = [
@@ -30,6 +42,10 @@ export const ButtonFilter: React.FC<ButtonFilterProps> = ({
   };
 
   return (
-    <ButtonBase textProps={mergedTextProps} style={mergedStyle} {...props} />
+    <ButtonBase
+      textProps={mergedTextProps}
+      style={mergedStyle}
+      {...restProps}
+    />
   );
 };
