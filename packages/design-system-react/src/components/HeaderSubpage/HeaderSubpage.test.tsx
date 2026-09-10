@@ -1,8 +1,4 @@
-import {
-  IconName,
-  TextColor,
-  TextVariant,
-} from '@metamask/design-system-shared';
+import { IconName } from '@metamask/design-system-shared';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
@@ -35,12 +31,11 @@ describe('HeaderSubpage', () => {
         render(
           <HeaderSubpage
             title="Test Title"
-            titleProps={{ color: TextColor.TextAlternative }}
+            titleProps={{ 'data-testid': 'custom-title' }}
           />,
         );
 
-        const title = screen.getByText('Test Title');
-        expect(title).toHaveClass('text-alternative');
+        expect(screen.getByTestId('custom-title')).toBeInTheDocument();
       });
     });
 
@@ -67,12 +62,11 @@ describe('HeaderSubpage', () => {
           <HeaderSubpage
             title="Title"
             description="Test Description"
-            descriptionProps={{ variant: TextVariant.BodyMd }}
+            descriptionProps={{ 'data-testid': 'custom-description' }}
           />,
         );
 
-        const description = screen.getByText('Test Description');
-        expect(description).toHaveClass('text-s-body-md');
+        expect(screen.getByTestId('custom-description')).toBeInTheDocument();
       });
     });
 
@@ -596,9 +590,11 @@ describe('HeaderSubpage', () => {
     it('forwards ref to root element', () => {
       const ref = createRef<HTMLDivElement>();
       render(
-        <HeaderSubpage title="Title" ref={ref} data-testid={CONTAINER_TEST_ID}>
-          Title
-        </HeaderSubpage>,
+        <HeaderSubpage
+          title="Title"
+          ref={ref}
+          data-testid={CONTAINER_TEST_ID}
+        />,
       );
 
       expect(ref.current).toBe(screen.getByTestId(CONTAINER_TEST_ID));

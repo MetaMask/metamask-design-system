@@ -19,7 +19,10 @@ type NavigationButtonIconProps = Partial<Omit<ButtonIconProps, 'iconName'>> & {
  * Provides a consistent header pattern for secondary screens and modal-style
  * navigation flows. Matches the React Native HeaderSubpage identity API.
  */
-export type HeaderSubpageProps = Omit<ComponentProps<'div'>, 'title'> & {
+export type HeaderSubpageProps = Omit<
+  ComponentProps<'div'>,
+  'title' | 'children'
+> & {
   /**
    * Optional leading visual (e.g. avatar), rendered before the title stack.
    */

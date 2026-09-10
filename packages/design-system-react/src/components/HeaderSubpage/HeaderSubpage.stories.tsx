@@ -128,6 +128,7 @@ export const CustomEndAccessory: Story = {
 
 export const TitleOnly: Story = {
   args: {
+    avatar: undefined,
     title: 'Settings',
     onBack: () => console.log('Back pressed'),
   },
@@ -154,6 +155,8 @@ export const TitleEndAccessory: Story = {
 
 export const NoContent: Story = {
   args: {
+    avatar: undefined,
+    title: undefined,
     onBack: () => console.log('Back pressed'),
     onClose: () => console.log('Close pressed'),
   },
