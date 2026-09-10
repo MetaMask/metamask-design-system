@@ -7,7 +7,7 @@ import { TabEmptyState } from '@metamask/design-system-react-native';
 
 <TabEmptyState
   description="No items found"
-  actionButtonText="Add Item"
+  actionButtonText="Add item"
   onAction={() => console.log('pressed')}
 />;
 ```
@@ -69,7 +69,7 @@ Optional label for the action button. The button is only rendered when both `act
 
 ```tsx
 <TabEmptyState
-  actionButtonText="Try Again"
+  actionButtonText="Try again"
   onAction={() => console.log('pressed')}
 />
 ```
@@ -84,7 +84,7 @@ Optional props to pass to the action `Button` component. Use this for a separate
 
 ```tsx
 <TabEmptyState
-  actionButtonText="Add Item"
+  actionButtonText="Add item"
   onAction={() => {}}
   actionButtonProps={{ testID: 'action-button' }}
 />

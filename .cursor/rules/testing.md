@@ -72,6 +72,12 @@ Optional slots (accessories, labels, custom rows) are usually **strings or eleme
 - **PREFER** `toBeOnTheScreen()` for presence checks over `toBeDefined()` / `toBeTruthy()`
 - **PREFER** specific assertions (`toHaveTextContent`, `toBeDisabled`, `toHaveStyle`)
 
+### Style Behavior Coverage
+
+- **DO NOT** add tests solely to assert unconditional default classes or styles. Test them only when required for coverage.
+- **ALWAYS** remove tests for conditional style behavior when that condition is removed; do not replace them with assertions for the new unconditional default unless coverage requires it.
+- **ALWAYS** remove or update documentation that describes style logic or variants that no longer exist.
+
 ### React Web Style Assertions
 
 - **ALWAYS** use `toHaveClass()` for Tailwind class assertions

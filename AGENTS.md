@@ -6,6 +6,7 @@ Design tokens and components for MetaMask extension (React) and mobile (React Na
 
 - **Do not edit package `CHANGELOG.md` files in feature/fix PRs.** Changelogs are generated and edited only on `release/*` branches (`yarn create-release-branch`). Do not run `yarn changelog:update` unless you are on a release branch. Put consumer-facing notes in the PR description; put breaking-change guidance in `MIGRATION.md`.
 - **User-facing copy uses sentence case** unless it is an approved exception (proper nouns, abbreviations, Secret Recovery Phrase). See `.cursor/rules/content-guidelines.mdc`.
+- **UI PRs include Storybook before/after screenshots** of every visual dependent (not only files in the diff), attached with `gh --attach` ([CLI 2.99.0 media upload](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/)). Never paste Cursor artifact URLs. Follow `.cursor/skills/visual-regression-collect/SKILL.md`.
 
 ## Documentation for AI Agents
 
@@ -22,7 +23,28 @@ Repository-specific conventions and patterns. Open the matching file when the ta
 - `.cursor/rules/release-workflow.md`
 - `.cursor/rules/content-guidelines.mdc`
 
+**Project skills** live in `.cursor/skills/` (committed). Cursor Desktop and Cloud Agents discover them from the git checkout. Do not put MMDS workflows in `~/.cursor/skills` — cloud agents never see that folder.
+
+- `.cursor/skills/visual-regression-collect/SKILL.md` — Storybook before/after for UI PRs and visual-asset requests
+
 See `docs/ai-agents.md` for the full strategy.
+
+## Consumer product codebases
+
+MMDS packages serve Extension and Mobile (not this monorepo):
+
+| Platform  | Repository                                     | Product UI scan                                                                 | MMDS package                           |
+| --------- | ---------------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------- |
+| Extension | https://github.com/MetaMask/metamask-extension | `ui/**/*.{js,tsx}` — exclude legacy `ui/components/component-library/`          | `@metamask/design-system-react`        |
+| Mobile    | https://github.com/MetaMask/metamask-mobile    | `app/components/**/*.{js,jsx,ts,tsx}` — exclude legacy `app/component-library/` | `@metamask/design-system-react-native` |
+
+Legacy `component-library/` folders are migration **sources**, not audit targets. Flag imports from them in product UI as deprecated usage.
+
+When asked to **audit** usage, alignment, or gaps, scan **both** platforms above. Look for misalignments and emergent patterns: custom UI, repeated compositions, and use cases where product intent is not met by current MMDS components or APIs. APIs may differ; judge whether MMDS achieves the same intent for the use case. Findings may inform new components, patterns, or API changes in this repo.
+
+**MMDS component reference:** Local — `apps/storybook-react/storybook-static/manifests/components.json` after `yarn build-storybook`, or `http://localhost:6006/manifests/components.json` while `yarn storybook` is running. Published — https://metamask.github.io/metamask-design-system/manifests/components.json
+
+**MMDS Figma (canonical):** https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=0-1 (`fileKey`: `1D6tnzXqWgnUC3spaAOELN`)
 
 ## Monorepo Structure
 
@@ -71,6 +93,7 @@ yarn create-component:react-native --name ComponentName --description "Brief des
 
 # Storybook
 yarn storybook                # React web (port 6006)
+yarn workspace @metamask/storybook-react-native storybook:web  # React Native web (port 6007)
 yarn storybook:ios:build      # React Native iOS dev client (first time / native dep changes)
 yarn storybook:ios            # React Native iOS (Metro + dev client)
 yarn storybook:android:build  # React Native Android dev client (first time / native dep changes)
@@ -97,7 +120,7 @@ Storybook apps in `apps/` consume packages for development and testing:
 - `@metamask/storybook-react` - Web component development (`yarn storybook`)
 - `@metamask/storybook-react-native` - Mobile development (`yarn storybook:ios:build` then `yarn storybook:ios`)
 
-These platforms are for manual testing and component showcase. Visual regression testing is planned but not yet implemented.
+These platforms are for manual testing and component showcase. React visual diffs also run in Chromatic; agent-collected Storybook before/after for PRs is `.cursor/skills/visual-regression-collect/SKILL.md`.
 
 **Import using package names, never file paths:**
 

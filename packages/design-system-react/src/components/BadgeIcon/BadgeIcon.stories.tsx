@@ -47,7 +47,7 @@ export const IconNameStory: Story = {
   render: () => (
     <div className="flex gap-2">
       <BadgeIcon iconName={IconName.Arrow2UpRight} />
-      <BadgeIcon iconName={IconName.User} />
+      <BadgeIcon iconName={IconName.UserCircle} />
       <BadgeIcon iconName={IconName.Setting} />
       <BadgeIcon iconName={IconName.Search} />
     </div>

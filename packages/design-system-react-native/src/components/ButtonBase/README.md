@@ -74,7 +74,7 @@ Whether the button is disabled.
 
 ```tsx
 <ButtonBase isDisabled onPress={() => {}}>
-  Disabled Button
+  Disabled button
 </ButtonBase>
 ```
 

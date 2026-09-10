@@ -52,7 +52,7 @@ const meta: Meta<SensitiveTextProps> = {
     length: SensitiveTextLength.Short,
     variant: TextVariant.BodyMd,
     color: TextColor.TextDefault,
-    children: 'Sensitive Information',
+    children: 'Sensitive information',
   },
 };
 

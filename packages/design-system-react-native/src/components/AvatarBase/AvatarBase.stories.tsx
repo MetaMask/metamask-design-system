@@ -222,7 +222,7 @@ export const Children: Story = {
         }
       </AvatarBase>
       <AvatarBase>
-        <Icon name={IconName.User} />
+        <Icon name={IconName.UserCircle} />
       </AvatarBase>
     </View>
   ),

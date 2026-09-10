@@ -7,6 +7,60 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.47.0]
+
+### Changed
+
+- Updated `ButtonBase` and `ButtonIcon` to use fully rounded pill shapes across sizes and variants ([#1494](https://github.com/MetaMask/metamask-design-system/pull/1494))
+- Deprecated `ButtonFilter` in favor of `FilterButton` ([#1509](https://github.com/MetaMask/metamask-design-system/pull/1509))
+
+## [0.46.0]
+
+### Added
+
+- Added `HeartStraight` and `HeartStraightFilled` to `IconName` ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
+
+## [0.45.0]
+
+### Changed
+
+- **BREAKING:** Default typeface is now Inter instead of Geist ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+  - `FontFamily.Default` and the `Text` API are unchanged; twrnc default font names changed from `Geist-*` to `Inter-*`
+  - Peer dependencies updated to `@metamask/design-tokens@^11.0.0` and `@metamask/design-system-twrnc-preset@^0.11.0`
+  - Re-register Inter `.ttf` files under the new PostScript names or text falls back to the system font
+  - See [Migration Guide](./MIGRATION.md#from-version-0440-to-0450)
+- Restored the Telegram `Icon` artwork to the official logo ([#1500](https://github.com/MetaMask/metamask-design-system/pull/1500))
+
+## [0.44.0]
+
+### Changed
+
+- Updated `Icon` artwork to Phosphor-based glyphs for the brand migration, keeping existing `IconName` values, `viewBox="0 0 24 24"`, and `currentColor` fills ([#1475](https://github.com/MetaMask/metamask-design-system/pull/1475), [#1482](https://github.com/MetaMask/metamask-design-system/pull/1482), [#1493](https://github.com/MetaMask/metamask-design-system/pull/1493))
+  - `AppleLogo`, `Bridge`, and `MetamaskFoxOutline` are unchanged
+- Bumped `@metamask/utils` from `^11.12.0` to `^11.12.1` ([#1492](https://github.com/MetaMask/metamask-design-system/pull/1492))
+
+## [0.43.0]
+
+### Changed
+
+- **BREAKING:** Removed 111 unused icons from `IconName` to reduce icon bundle size ([#1481](https://github.com/MetaMask/metamask-design-system/pull/1481))
+  - TypeScript will fail on remaining references to removed `IconName` members
+  - See [Migration Guide](./MIGRATION.md#from-version-0421-to-0430)
+
+### Fixed
+
+- Fixed `BadgeNetwork` Xs size border radius to match Figma ([#1480](https://github.com/MetaMask/metamask-design-system/pull/1480))
+
+## [0.42.1]
+
+### Changed
+
+- Added content guidelines to component documentation, including sentence case, punctuation, and prop-specific examples ([#1466](https://github.com/MetaMask/metamask-design-system/pull/1466))
+
+### Fixed
+
+- Fixed a `BadgeWrapper` layout feedback loop that could cause continuous layout updates and high CPU usage ([#1474](https://github.com/MetaMask/metamask-design-system/pull/1474))
+
 ## [0.42.0]
 
 ### Changed
@@ -710,7 +764,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.47.0...HEAD
+[0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.46.0...@metamask/design-system-react-native@0.47.0
+[0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.45.0...@metamask/design-system-react-native@0.46.0
+[0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.44.0...@metamask/design-system-react-native@0.45.0
+[0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.43.0...@metamask/design-system-react-native@0.44.0
+[0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.1...@metamask/design-system-react-native@0.43.0
+[0.42.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.42.0...@metamask/design-system-react-native@0.42.1
 [0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.41.0...@metamask/design-system-react-native@0.42.0
 [0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.40.0...@metamask/design-system-react-native@0.41.0
 [0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.39.1...@metamask/design-system-react-native@0.40.0

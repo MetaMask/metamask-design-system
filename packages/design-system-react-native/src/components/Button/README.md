@@ -143,7 +143,7 @@ Whether to show the button with inverted colors for use on colored backgrounds (
 
 ```tsx
 <Button variant={ButtonVariant.Primary} isInverse onPress={() => {}}>
-  Inverse Button
+  Inverse button
 </Button>
 ```
 
@@ -171,7 +171,7 @@ Whether the button should take up the full width of its container.
 
 ```tsx
 <Button variant={ButtonVariant.Primary} isFullWidth onPress={() => {}}>
-  Full Width Button
+  Full width button
 </Button>
 ```
 
@@ -185,7 +185,7 @@ Whether the button is in a loading state, showing a spinner.
 
 ```tsx
 <Button variant={ButtonVariant.Primary} isLoading onPress={() => {}}>
-  Loading Button
+  Loading button
 </Button>
 ```
 
@@ -201,7 +201,7 @@ Text to display when the button is in loading state.
 <Button
   variant={ButtonVariant.Primary}
   isLoading
-  loadingText="Please wait..."
+  loadingText="Loading..."
   onPress={() => {}}
 >
   Submit

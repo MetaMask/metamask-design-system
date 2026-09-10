@@ -71,7 +71,7 @@ describe('SegmentedControl', () => {
 
       expect(getByTestId(GROUP_TEST_ID)).toHaveStyle(
         tw.style(
-          'self-start flex-row items-center gap-1 border border-muted p-1 rounded-xl',
+          'self-start flex-row items-center gap-1 border border-muted p-1',
         ),
       );
     });
@@ -87,33 +87,13 @@ describe('SegmentedControl', () => {
 
         expect(getByTestId(GROUP_TEST_ID)).toHaveStyle(
           tw.style(
-            'self-start flex-row items-center gap-1 border border-muted p-1 rounded-xl px-4',
+            'self-start flex-row items-center gap-1 border border-muted p-1 px-4',
           ),
         );
       });
     });
 
     describe('when size is provided', () => {
-      it.each([
-        [SegmentedControlSize.Sm, 'rounded-xl'],
-        [SegmentedControlSize.Md, 'rounded-2xl'],
-        [SegmentedControlSize.Lg, 'rounded-2xl'],
-      ] as const)(
-        'applies %s container border radius',
-        (size, borderRadiusClass) => {
-          const { getByTestId } = renderSegmentedControl(
-            { size },
-            <FilterButton value="a" onPress={noopPress}>
-              A
-            </FilterButton>,
-          );
-
-          expect(getByTestId(GROUP_TEST_ID)).toHaveStyle(
-            tw.style(borderRadiusClass),
-          );
-        },
-      );
-
       it('propagates size to child filter buttons', () => {
         const { getByTestId } = renderSegmentedControl({
           size: SegmentedControlSize.Md,

@@ -4,6 +4,8 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
+- [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
 - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
 - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
 - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -50,6 +52,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
+  - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
   - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
   - [From version 0.37.0 to 0.38.0](#from-version-0370-to-0380)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -71,6 +75,89 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.44.0 to 0.45.0
+
+<a id="from-version-0440-to-0450"></a>
+
+<a id="default-typeface-geist-to-inter"></a>
+
+#### Default typeface: Geist to Inter
+
+`FontFamily.Default` now resolves to Inter instead of Geist. Unlike web, React Native resolves fonts by **PostScript name**, so `@metamask/design-system-twrnc-preset` maps each weight and style to a distinct font name. Those names changed:
+
+| twrnc class                   | Before                 | After                  |
+| ----------------------------- | ---------------------- | ---------------------- |
+| `font-default-regular`        | `Geist-Regular`        | `Inter-Regular`        |
+| `font-default-regular-italic` | `Geist-RegularItalic`  | `Inter-RegularItalic`  |
+| `font-default-medium`         | `Geist-Medium`         | `Inter-Medium`         |
+| `font-default-medium-italic`  | `Geist-MediumItalic`   | `Inter-MediumItalic`   |
+| `font-default-bold`           | `Geist-SemiBold`       | `Inter-SemiBold`       |
+| `font-default-bold-italic`    | `Geist-SemiBoldItalic` | `Inter-SemiBoldItalic` |
+
+`accent-*` (MM Sans) and `hero-*` (MM Poly) are unchanged, as is the `Text` component API.
+
+**Migration:**
+
+Copy the six Inter `.ttf` files from [`apps/storybook-react-native/fonts/Inter`](../../apps/storybook-react-native/fonts/Inter) and register them under the names below.
+
+Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
+
+```tsx
+// Before (0.44.0)
+import { useFonts } from 'expo-font';
+
+useFonts({
+  'Geist-Regular': require('./fonts/Geist/Geist-Regular.otf'),
+  'Geist-RegularItalic': require('./fonts/Geist/Geist-RegularItalic.otf'),
+  'Geist-Medium': require('./fonts/Geist/Geist-Medium.otf'),
+  'Geist-MediumItalic': require('./fonts/Geist/Geist-MediumItalic.otf'),
+  'Geist-SemiBold': require('./fonts/Geist/Geist-SemiBold.otf'),
+  'Geist-SemiBoldItalic': require('./fonts/Geist/Geist-SemiBoldItalic.otf'),
+});
+```
+
+```tsx
+// After (0.45.0)
+import { useFonts } from 'expo-font';
+
+useFonts({
+  'Inter-Regular': require('./fonts/Inter/Inter-Regular.ttf'),
+  'Inter-RegularItalic': require('./fonts/Inter/Inter-RegularItalic.ttf'),
+  'Inter-Medium': require('./fonts/Inter/Inter-Medium.ttf'),
+  'Inter-MediumItalic': require('./fonts/Inter/Inter-MediumItalic.ttf'),
+  'Inter-SemiBold': require('./fonts/Inter/Inter-SemiBold.ttf'),
+  'Inter-SemiBoldItalic': require('./fonts/Inter/Inter-SemiBoldItalic.ttf'),
+});
+```
+
+**Impact:** Text renders with the system fallback until the fonts are re-registered under the new names, so this must ship together with the asset swap. Expect minor reflow, since Inter's metrics differ slightly from Geist's.
+
+### From version 0.42.1 to 0.43.0
+
+<a id="from-version-0421-to-0430"></a>
+
+<a id="iconname-unused-icons-removed"></a>
+
+#### `IconName`: unused icons removed
+
+111 unused icons are removed from **`IconName`** (shared with `@metamask/design-system-shared`) to reduce icon bundle size. See the [shared package migration guide](../design-system-shared/MIGRATION.md#from-version-0340-to-0350) for the full removed list and suggested replacements.
+
+**Migration:**
+
+```tsx
+// Before (0.42.1)
+import { Icon, IconName } from '@metamask/design-system-react-native';
+
+<Icon name={IconName.User} />;
+
+// After (0.43.0)
+import { Icon, IconName } from '@metamask/design-system-react-native';
+
+<Icon name={IconName.UserCircle} />;
+```
+
+**Impact:** TypeScript will fail on any remaining references to the removed icon names.
 
 ### From version 0.41.0 to 0.42.0
 

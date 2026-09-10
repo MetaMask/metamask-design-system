@@ -9,7 +9,7 @@ import { TextButton } from './TextButton';
 
 describe('TextButton', () => {
   it('renders with text button styles by default', () => {
-    render(<TextButton>Text Button</TextButton>);
+    render(<TextButton>Text button</TextButton>);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass(
@@ -22,7 +22,7 @@ describe('TextButton', () => {
   });
 
   it('renders with inverse styles when isInverse is true', () => {
-    render(<TextButton isInverse>Inverse Button</TextButton>);
+    render(<TextButton isInverse>Inverse button</TextButton>);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass('text-primary-inverse');
@@ -42,7 +42,7 @@ describe('TextButton', () => {
   });
 
   it('applies disabled styles while preserving variant-specific classes', () => {
-    render(<TextButton isDisabled>Disabled Button</TextButton>);
+    render(<TextButton isDisabled>Disabled button</TextButton>);
 
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
@@ -90,13 +90,13 @@ describe('TextButton', () => {
       <Text variant={TextVariant.BodyLg}>
         Text with{' '}
         <TextButton textProps={{ className: 'font-inherit' }}>
-          Text Button
+          Text button
         </TextButton>{' '}
         inside
       </Text>,
     );
 
-    const text = screen.getByText('Text Button');
+    const text = screen.getByText('Text button');
     expect(text).toHaveClass('font-inherit');
   });
 });

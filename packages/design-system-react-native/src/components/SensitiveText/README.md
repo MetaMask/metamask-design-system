@@ -65,7 +65,7 @@ The text content to display or hide.
 | `ReactNode` | Yes      | `undefined` |
 
 ```tsx
-<SensitiveText isHidden>Sensitive Information</SensitiveText>
+<SensitiveText isHidden>Sensitive information</SensitiveText>
 ```
 
 ### `twClassName`

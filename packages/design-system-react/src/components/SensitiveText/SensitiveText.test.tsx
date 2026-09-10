@@ -7,16 +7,16 @@ import { SensitiveText } from './SensitiveText';
 describe('SensitiveText', () => {
   describe('isHidden', () => {
     it('renders the children when false', () => {
-      render(<SensitiveText>Sensitive Information</SensitiveText>);
+      render(<SensitiveText>Sensitive information</SensitiveText>);
 
-      expect(screen.getByText('Sensitive Information')).toBeInTheDocument();
+      expect(screen.getByText('Sensitive information')).toBeInTheDocument();
     });
 
     it('replaces children with bullets when true', () => {
-      render(<SensitiveText isHidden>Sensitive Information</SensitiveText>);
+      render(<SensitiveText isHidden>Sensitive information</SensitiveText>);
 
       expect(
-        screen.queryByText('Sensitive Information'),
+        screen.queryByText('Sensitive information'),
       ).not.toBeInTheDocument();
       expect(screen.getByText('••••••')).toBeInTheDocument();
     });

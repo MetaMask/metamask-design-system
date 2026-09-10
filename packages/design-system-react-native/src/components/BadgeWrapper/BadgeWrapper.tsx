@@ -3,11 +3,14 @@ import {
   BadgeWrapperPositionAnchorShape,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useCallback, useState, useMemo } from 'react';
-import type { LayoutChangeEvent } from 'react-native';
+import React from 'react';
+import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
 import type { BadgeWrapperProps } from './BadgeWrapper.types';
+
+const CIRCULAR_ANCHOR_EDGE_INSET: DimensionValue = '7%';
+const RECTANGULAR_ANCHOR_EDGE_INSET: DimensionValue = '11%';
 
 export const BadgeWrapper = ({
   children,
@@ -24,93 +27,42 @@ export const BadgeWrapper = ({
   ...props
 }: BadgeWrapperProps) => {
   const tw = useTailwind();
-  const [anchorWidth, setAnchorWidth] = useState<number>(0);
-  const [anchorHeight, setAnchorHeight] = useState<number>(0);
-  const [badgeWidth, setbadgeWidth] = useState<number>(0);
-  const [badgeHeight, setbadgeHeight] = useState<number>(0);
-
-  // Fetching the dimensions of the anchor and bagde element to properly position the badge
-  const getAnchorSize = useCallback((event: LayoutChangeEvent) => {
-    const { width, height } = event.nativeEvent.layout;
-    setAnchorWidth(width);
-    setAnchorHeight(height);
-  }, []);
-  const getBadgeSize = useCallback((event: LayoutChangeEvent) => {
-    const { width, height } = event.nativeEvent.layout;
-    setbadgeWidth(width);
-    setbadgeHeight(height);
-  }, []);
-
-  const finalPositions = useMemo(() => {
-    if (customPosition) {
-      return customPosition;
-    }
-    // 0.1464 is a mathematical coeeficient to move
-    // from a 0,0 corner of a rectangular shape to the closest "corner"
-    // of a circular shape anchor element
-    const anchorShapeXOffset =
-      positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
-        ? 0
-        : anchorWidth * 0.1464;
-    const anchorShapeYOffset =
-      positionAnchorShape === BadgeWrapperPositionAnchorShape.Rectangular
-        ? 0
-        : anchorHeight * 0.1464;
-    // This is to center the badge in the corner of the anchor element
-    const badgeCenteringXOffset = badgeWidth / 2;
-    const badgeCenteringYOffset = badgeHeight / 2;
-
-    const finalXOffset =
-      anchorShapeXOffset - badgeCenteringXOffset + positionXOffset;
-    const finalYOffset =
-      anchorShapeYOffset - badgeCenteringYOffset + positionYOffset;
-    switch (position) {
-      case BadgeWrapperPosition.TopRight:
-        return {
-          top: finalYOffset,
-          right: finalXOffset,
-        };
-      case BadgeWrapperPosition.BottomLeft:
-        return {
-          bottom: finalYOffset,
-          left: finalXOffset,
-        };
-      case BadgeWrapperPosition.TopLeft:
-        return {
-          top: finalYOffset,
-          left: finalXOffset,
-        };
-      case BadgeWrapperPosition.BottomRight:
-      default:
-        return {
-          bottom: finalYOffset,
-          right: finalXOffset,
-        };
-    }
-  }, [
-    position,
-    positionAnchorShape,
-    anchorWidth,
-    anchorHeight,
-    badgeWidth,
-    badgeHeight,
-    positionXOffset,
-    positionYOffset,
-    customPosition,
-  ]);
+  const isTop =
+    position === BadgeWrapperPosition.TopRight ||
+    position === BadgeWrapperPosition.TopLeft;
+  const isLeft =
+    position === BadgeWrapperPosition.TopLeft ||
+    position === BadgeWrapperPosition.BottomLeft;
+  const edgeInset =
+    positionAnchorShape === BadgeWrapperPositionAnchorShape.Circular
+      ? CIRCULAR_ANCHOR_EDGE_INSET
+      : RECTANGULAR_ANCHOR_EDGE_INSET;
+  const finalPositions: StyleProp<ViewStyle> = customPosition
+    ? (customPosition as StyleProp<ViewStyle>)
+    : {
+        ...(isTop ? { top: edgeInset } : { bottom: edgeInset }),
+        ...(isLeft ? { left: edgeInset } : { right: edgeInset }),
+        transform: [
+          { translateX: isLeft ? '-50%' : '50%' },
+          { translateY: isTop ? '-50%' : '50%' },
+          { translateX: positionXOffset },
+          { translateY: positionYOffset },
+        ],
+      };
 
   return (
     <View
       {...props}
-      style={[tw.style('relative self-start', twClassName), style]}
+      style={[tw.style('relative flex-row self-start', twClassName), style]}
     >
-      <View onLayout={getAnchorSize} {...childrenContainerProps}>
-        {children}
-      </View>
+      <View {...childrenContainerProps}>{children}</View>
       <View
-        onLayout={getBadgeSize}
-        style={[tw.style('absolute'), { ...finalPositions }]}
         {...badgeContainerProps}
+        style={[
+          tw.style('absolute items-center justify-center'),
+          finalPositions,
+          badgeContainerProps?.style,
+        ]}
       >
         {badge}
       </View>

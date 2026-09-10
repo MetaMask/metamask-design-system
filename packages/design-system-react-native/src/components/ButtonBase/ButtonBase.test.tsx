@@ -12,7 +12,6 @@ import type { ReactTestInstance } from 'react-test-renderer';
 import { createRenderer } from '../../test-utils/createRenderer';
 
 import { ButtonBase } from './ButtonBase';
-import { getButtonBaseBorderRadiusTwClass } from './ButtonBase.constants';
 
 describe('ButtonBase', () => {
   let tw: ReturnType<typeof useTailwind>;
@@ -94,27 +93,52 @@ describe('ButtonBase', () => {
     });
   });
 
-  describe('border radius', () => {
-    it('uses size-based radius classes from constants', () => {
-      const tree = createRenderer(
-        <ButtonBase size={ButtonBaseSize.Lg}>Large</ButtonBase>,
+  describe('horizontal padding', () => {
+    it.each([ButtonBaseSize.Sm, ButtonBaseSize.Md, ButtonBaseSize.Lg])(
+      'applies the same label-only padding at size %s',
+      (size) => {
+        const { getByTestId } = render(
+          <ButtonBase size={size} testID="btn">
+            Label
+          </ButtonBase>,
+        );
+
+        expect(getByTestId('btn')).toHaveStyle(tw`px-4`);
+      },
+    );
+
+    it('insets the leading side when there is a start accessory', () => {
+      const { getByTestId } = render(
+        <ButtonBase startIconName={IconName.Add} testID="btn">
+          Start
+        </ButtonBase>,
       );
 
-      const buttonAnimated = tree.root.findByProps({
-        accessibilityRole: 'button',
-      });
-      const styleFn = buttonAnimated.props.style as (p: {
-        pressed: boolean;
-      }) => unknown[];
-      const resolved = styleFn({ pressed: false })[0] as Record<
-        string,
-        unknown
-      >;
-      const expectedRadiusStyle = tw.style(
-        getButtonBaseBorderRadiusTwClass(ButtonBaseSize.Lg),
+      expect(getByTestId('btn')).toHaveStyle(tw`pl-3 pr-4`);
+    });
+
+    it('insets the trailing side when there is an end accessory', () => {
+      const { getByTestId } = render(
+        <ButtonBase endIconName={IconName.Add} testID="btn">
+          End
+        </ButtonBase>,
       );
 
-      expect(resolved).toMatchObject(expectedRadiusStyle);
+      expect(getByTestId('btn')).toHaveStyle(tw`pl-4 pr-3`);
+    });
+
+    it('insets both sides when there are start and end accessories', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          startIconName={IconName.Add}
+          endIconName={IconName.ArrowRight}
+          testID="btn"
+        >
+          Both
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('btn')).toHaveStyle(tw`px-3`);
     });
   });
 
@@ -376,7 +400,7 @@ describe('ButtonBase', () => {
     });
 
     it('renders loadingText in the spinner', () => {
-      const text = 'Please wait…';
+      const text = 'Loading...';
 
       const { getByText } = render(
         <ButtonBase isLoading loadingText={text}>
@@ -685,7 +709,7 @@ describe('ButtonBase', () => {
     it('marks disabled state when isDisabled', () => {
       const { getByTestId } = render(
         <ButtonBase testID="btn" isDisabled>
-          Disabled Button
+          Disabled button
         </ButtonBase>,
       );
       const btn = getByTestId('btn');
@@ -698,8 +722,8 @@ describe('ButtonBase', () => {
 
     it('marks loading state and prefers loadingText as label when provided', () => {
       const { getByTestId } = render(
-        <ButtonBase testID="btn" isLoading loadingText="Please wait">
-          Loading Button
+        <ButtonBase testID="btn" isLoading loadingText="Loading...">
+          Loading button
         </ButtonBase>,
       );
       const btn = getByTestId('btn');
@@ -710,10 +734,8 @@ describe('ButtonBase', () => {
           busy: true,
         }),
       );
-      expect(btn.props.accessibilityLabel).toBe('Please wait');
-      expect(btn.props.accessibilityHint).toBe(
-        'Button is currently loading, please wait',
-      );
+      expect(btn.props.accessibilityLabel).toBe('Loading...');
+      expect(btn.props.accessibilityHint).toBe('Button is currently loading');
       expect(btn).toBeDisabled();
     });
 
@@ -741,9 +763,7 @@ describe('ButtonBase', () => {
       const btn = getByTestId('btn');
 
       expect(btn.props.accessibilityLabel).toBe('Button');
-      expect(btn.props.accessibilityHint).toBe(
-        'Button is currently loading, please wait',
-      );
+      expect(btn.props.accessibilityHint).toBe('Button is currently loading');
       expect(btn.props.accessibilityState).toStrictEqual(
         expect.objectContaining({
           disabled: true,

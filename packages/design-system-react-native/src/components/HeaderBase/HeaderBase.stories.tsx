@@ -38,14 +38,14 @@ export default HeaderBaseMeta;
 
 export const Default = {
   args: {
-    children: 'Header Title',
+    children: 'Header title',
   },
 };
 
 export const TwClassName = {
   render: () => (
     <HeaderBase twClassName="bg-info-default px-4">
-      Header with Custom Styles
+      Header with custom styles
     </HeaderBase>
   ),
 };
@@ -58,7 +58,7 @@ export const StartButtonIconProps = {
         onPress: () => console.log('Back pressed'),
       }}
     >
-      With Start Button
+      With start button
     </HeaderBase>
   ),
 };
@@ -73,7 +73,7 @@ export const EndButtonIconProps = {
         },
       ]}
     >
-      With End Button
+      With end button
     </HeaderBase>
   ),
 };
@@ -96,7 +96,7 @@ export const MultipleEndButtonIconProps = {
         },
       ]}
     >
-      Multiple End Buttons
+      Multiple end buttons
     </HeaderBase>
   ),
 };
@@ -112,7 +112,7 @@ export const StartAccessory = {
         />
       }
     >
-      With Start Accessory
+      With start accessory
     </HeaderBase>
   ),
 };
@@ -128,7 +128,7 @@ export const EndAccessory = {
         />
       }
     >
-      With End Accessory
+      With end accessory
     </HeaderBase>
   ),
 };
@@ -151,7 +151,7 @@ export const BothAccessories = {
         />
       }
     >
-      Both Accessories
+      Both accessories
     </HeaderBase>
   ),
 };
@@ -165,7 +165,7 @@ export const Children = {
       }}
     >
       <Box twClassName="items-center">
-        <Text variant={TextVariant.HeadingSm}>Custom Title</Text>
+        <Text variant={TextVariant.HeadingSm}>Custom title</Text>
         <Text variant={TextVariant.BodySm}>Subtitle text</Text>
       </Box>
     </HeaderBase>

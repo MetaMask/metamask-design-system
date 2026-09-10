@@ -11,7 +11,7 @@ describe('SensitiveText', () => {
   it('renders correctly', () => {
     const { getByTestId } = render(
       <SensitiveText testID="sensitive-text">
-        Sensitive Information
+        Sensitive information
       </SensitiveText>,
     );
     expect(getByTestId('sensitive-text')).toBeDefined();
@@ -26,16 +26,16 @@ describe('SensitiveText', () => {
 
   it('displays the text when isHidden is false', () => {
     const { getByText } = render(
-      <SensitiveText>Sensitive Information</SensitiveText>,
+      <SensitiveText>Sensitive information</SensitiveText>,
     );
-    expect(getByText('Sensitive Information')).toBeDefined();
+    expect(getByText('Sensitive information')).toBeDefined();
   });
 
   it('hides the text when isHidden is true', () => {
     const { queryByText, getByText } = render(
-      <SensitiveText isHidden>Sensitive Information</SensitiveText>,
+      <SensitiveText isHidden>Sensitive information</SensitiveText>,
     );
-    expect(queryByText('Sensitive Information')).toBeNull();
+    expect(queryByText('Sensitive information')).toBeNull();
     expect(getByText('••••••')).toBeDefined();
   });
 
@@ -98,10 +98,10 @@ describe('SensitiveText', () => {
     const tw = renderHook(() => useTailwind()).result.current;
     const { getByText } = render(
       <SensitiveText color={TextColor.TextDefault}>
-        Sensitive Information
+        Sensitive information
       </SensitiveText>,
     );
-    const textElement = getByText('Sensitive Information');
+    const textElement = getByText('Sensitive information');
     const styles = [textElement.props.style].flat();
     const color = styles.find(
       (s: Record<string, unknown>) => s?.color !== undefined,

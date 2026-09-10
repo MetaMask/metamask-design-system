@@ -7,7 +7,7 @@ describe('BottomSheetHeader', () => {
   describe('rendering', () => {
     it('renders correctly with default props', () => {
       const { getByTestId } = render(
-        <BottomSheetHeader testID="header">Header Title</BottomSheetHeader>,
+        <BottomSheetHeader testID="header">Header title</BottomSheetHeader>,
       );
       expect(getByTestId('header')).toBeOnTheScreen();
     });
@@ -38,7 +38,7 @@ describe('BottomSheetHeader', () => {
           onBack={() => null}
           backButtonProps={{ testID: 'back-button' }}
         >
-          Header Title
+          Header title
         </BottomSheetHeader>,
       );
       expect(getByTestId('back-button')).toBeOnTheScreen();
@@ -51,7 +51,7 @@ describe('BottomSheetHeader', () => {
           onBack={onBack}
           backButtonProps={{ testID: 'back-button' }}
         >
-          Header Title
+          Header title
         </BottomSheetHeader>,
       );
 
@@ -62,7 +62,7 @@ describe('BottomSheetHeader', () => {
     it('does not render back button when onBack is not provided', () => {
       const { queryByTestId } = render(
         <BottomSheetHeader backButtonProps={{ testID: 'back-button' }}>
-          Header Title
+          Header title
         </BottomSheetHeader>,
       );
       expect(queryByTestId('back-button')).toBeNull();
@@ -76,7 +76,7 @@ describe('BottomSheetHeader', () => {
           onClose={() => null}
           closeButtonProps={{ testID: 'close-button' }}
         >
-          Header Title
+          Header title
         </BottomSheetHeader>,
       );
       expect(getByTestId('close-button')).toBeOnTheScreen();
@@ -89,7 +89,7 @@ describe('BottomSheetHeader', () => {
           onClose={onClose}
           closeButtonProps={{ testID: 'close-button' }}
         >
-          Header Title
+          Header title
         </BottomSheetHeader>,
       );
 
@@ -100,7 +100,7 @@ describe('BottomSheetHeader', () => {
     it('does not render close button when onClose is not provided', () => {
       const { queryByTestId } = render(
         <BottomSheetHeader closeButtonProps={{ testID: 'close-button' }}>
-          Header Title
+          Header title
         </BottomSheetHeader>,
       );
       expect(queryByTestId('close-button')).toBeNull();
@@ -125,7 +125,7 @@ describe('BottomSheetHeader', () => {
             accessibilityLabel: 'Close modal',
           }}
         >
-          Header Title
+          Header title
         </BottomSheetHeader>,
       );
 

@@ -167,7 +167,7 @@ describe('BannerBase', () => {
       <BannerBase
         data-testid="banner-base"
         onClose={() => undefined}
-        title="Added to Watchlist"
+        title="Added to watchlist"
         closeButtonProps={{ 'data-testid': closeButtonTestId }}
       />,
     );
@@ -250,7 +250,7 @@ describe('BannerBase', () => {
       <BannerBase
         data-testid="banner-base"
         onClose={() => undefined}
-        title="Your deposit of 20.50 USDC into Account 1 is been confirmed."
+        title="USDC deposited into Account 1"
       />,
     );
 
@@ -411,7 +411,7 @@ describe('BannerBase', () => {
         data-testid="banner-base"
         description="Supporting details"
         onClose={() => undefined}
-        title="Added to Watchlist"
+        title="Added to watchlist"
       />,
     );
 

@@ -67,7 +67,7 @@ export const IconNameStory: Story = {
   render: () => (
     <div className="flex gap-2">
       <AvatarIcon iconName={IconName.Arrow2UpRight} />
-      <AvatarIcon iconName={IconName.User} />
+      <AvatarIcon iconName={IconName.UserCircle} />
       <AvatarIcon iconName={IconName.Setting} />
       <AvatarIcon iconName={IconName.Search} />
     </div>
@@ -78,11 +78,11 @@ export const IconNameStory: Story = {
 export const Size: Story = {
   render: () => (
     <div className="flex items-center gap-2">
-      <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Xs} />
-      <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Sm} />
-      <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Md} />
-      <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Lg} />
-      <AvatarIcon iconName={IconName.User} size={AvatarIconSize.Xl} />
+      <AvatarIcon iconName={IconName.UserCircle} size={AvatarIconSize.Xs} />
+      <AvatarIcon iconName={IconName.UserCircle} size={AvatarIconSize.Sm} />
+      <AvatarIcon iconName={IconName.UserCircle} size={AvatarIconSize.Md} />
+      <AvatarIcon iconName={IconName.UserCircle} size={AvatarIconSize.Lg} />
+      <AvatarIcon iconName={IconName.UserCircle} size={AvatarIconSize.Xl} />
     </div>
   ),
 };
@@ -91,7 +91,7 @@ export const Severity: Story = {
   render: () => (
     <div className="flex gap-2">
       <AvatarIcon
-        iconName={IconName.User}
+        iconName={IconName.UserCircle}
         severity={AvatarIconSeverity.Neutral}
       />
       <AvatarIcon iconName={IconName.Info} severity={AvatarIconSeverity.Info} />
@@ -115,11 +115,11 @@ export const HasBorder: Story = {
   render: () => (
     <div className="flex gap-2 bg-primary-muted p-2">
       <AvatarIcon
-        iconName={IconName.User}
+        iconName={IconName.UserCircle}
         severity={AvatarIconSeverity.Neutral}
       />
       <AvatarIcon
-        iconName={IconName.User}
+        iconName={IconName.UserCircle}
         severity={AvatarIconSeverity.Neutral}
         hasBorder
       />
