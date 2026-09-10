@@ -87,6 +87,8 @@ import GiftSVG from './assets/gift.svg';
 import GlobalSearchSVG from './assets/global-search.svg';
 import GlobalSVG from './assets/global.svg';
 import HardwareSVG from './assets/hardware.svg';
+import HeartStraightFilledSVG from './assets/heart-straight-filled.svg';
+import HeartStraightSVG from './assets/heart-straight.svg';
 import HierarchySVG from './assets/hierarchy.svg';
 import HomeFilledSVG from './assets/home-filled.svg';
 import HomeSVG from './assets/home.svg';
@@ -275,6 +277,8 @@ export const assetByIconName: AssetByIconName = {
   GlobalSearch: GlobalSearchSVG,
   Global: GlobalSVG,
   Hardware: HardwareSVG,
+  HeartStraightFilled: HeartStraightFilledSVG,
+  HeartStraight: HeartStraightSVG,
   Hierarchy: HierarchySVG,
   HomeFilled: HomeFilledSVG,
   Home: HomeSVG,
