@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.43.0]
 
-### Uncategorized
+### Changed
 
-- feat: use fully rounded pill shape for ButtonBase and ButtonIcon ([#1494](https://github.com/MetaMask/metamask-design-system/pull/1494))
-- feat(react,react-native): deprecate ButtonFilter in favor of FilterButton ([#1509](https://github.com/MetaMask/metamask-design-system/pull/1509))
-- fix(react): use muted background for TextField ([#1506](https://github.com/MetaMask/metamask-design-system/pull/1506))
+- Updated `ButtonBase` and `ButtonIcon` to use fully rounded pill shapes across sizes and variants ([#1494](https://github.com/MetaMask/metamask-design-system/pull/1494))
+- Deprecated `ButtonFilter` in favor of `FilterButton` ([#1509](https://github.com/MetaMask/metamask-design-system/pull/1509))
+- Changed the `TextField` background from the default background to the muted background ([#1506](https://github.com/MetaMask/metamask-design-system/pull/1506))
 
 ## [0.42.0]
 
