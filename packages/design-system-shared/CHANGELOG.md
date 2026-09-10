@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.37.0]
+
+### Added
+
+- Added `HeartStraight` and `HeartStraightFilled` to `IconName` ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
+
+### Changed
+
+- Restored the Telegram `Icon` artwork to the official logo ([#1500](https://github.com/MetaMask/metamask-design-system/pull/1500))
+
 ## [0.36.0]
 
 ### Changed
@@ -352,7 +362,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.36.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.37.0...HEAD
+[0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.36.0...@metamask/design-system-shared@0.37.0
 [0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.35.0...@metamask/design-system-shared@0.36.0
 [0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.34.0...@metamask/design-system-shared@0.35.0
 [0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.33.0...@metamask/design-system-shared@0.34.0
