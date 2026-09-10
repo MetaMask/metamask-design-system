@@ -269,6 +269,21 @@ describe('HeaderSubpage', () => {
 
         expect(onClose).toHaveBeenCalledTimes(1);
       });
+
+      it('renders close ButtonIcon without closeButtonProps', () => {
+        const onClose = jest.fn();
+        render(
+          <HeaderSubpage onClose={onClose}>
+            Title
+          </HeaderSubpage>,
+        );
+
+        const closeButton = screen.getByRole('button', { name: 'Close' });
+        expect(closeButton).toBeInTheDocument();
+
+        fireEvent.click(closeButton);
+        expect(onClose).toHaveBeenCalledTimes(1);
+      });
     });
 
     describe('when closeButtonProps is provided', () => {
