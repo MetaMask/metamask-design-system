@@ -29,7 +29,7 @@ Skip changelog-only, types-only, tests-only, docs-only, CI, and non-visual refac
 - **Never** push a screenshots git branch or `raw.githubusercontent.com` image links.
 - **Always** attach local PNGs with `gh --attach` (`gh` >= 2.99.0). This is the [GitHub CLI media upload](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/) shipped in CLI 2.99.0. GitHub rewrites local Markdown paths to `user-attachments` URLs.
 - **Never** screenshot only the files in the diff. Capture **every surface the change visually affects** (composition consumers, both platforms). See [Expand to dependents](#expand-to-dependents).
-- **Never** commit sandbox/showcase stories or PNGs to the feature branch.
+- **Never** commit sandbox/showcase stories or PNGs to the feature branch. Sandbox **before** shots use local Storybook on the base branch — never hosted main (the story is not published there).
 - **Always** crop tightly around the changed UI. Do not post a full-viewport or full-canvas screenshot of a small component. See [Tight crop](#tight-crop).
 - React Native captures use **web** Storybook (`storybook:web` / static `/react-native`), not iOS/Android simulators.
 
@@ -50,33 +50,43 @@ Primitive and token changes leak into other components. Example: [PR #1494](http
 
 ### How many shots
 
-| Fan-out                                         | What to capture                                                                                                                                                                      |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1–8 affected components                         | Default story each (plus Size / Variant if that is what changed). Light and dark when the diff is color/token.                                                                       |
-| More than 8, or a primitive with many consumers | One **temporary showcase** story per platform that mounts all dependents in a grid (same layout on before and after), **plus** 1–2 detail stories for the primitive and any opt-out. |
+| Fan-out                                         | What to capture                                                                                                                                                                         |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1–8 affected components                         | Default story each (plus Size / Variant if that is what changed). Light and dark when the diff is color/token. Hosted main works for **before** when those stories already exist.       |
+| More than 8, or a primitive with many consumers | One **temporary showcase** story per platform that mounts all dependents in a grid (identical file on before and after), **plus** 1–2 detail stories for the primitive and any opt-out. |
 
-Showcase story path (delete after capture):
+Showcase story path (delete after capture; never commit):
 
 - React: `packages/design-system-react/src/components/VisualRegressionSandbox/VisualRegressionSandbox.stories.tsx`
 - RN: `packages/design-system-react-native/src/components/VisualRegressionSandbox/VisualRegressionSandbox.stories.tsx`
 
-Use realistic default props from existing stories. Do not commit these files.
+Use realistic default props from existing stories.
+
+**Showcase before cannot use hosted main.** That story is uncommitted, so it is absent from GitHub Pages. For showcase grids:
+
+1. Save the current branch name.
+2. Check out the PR base (`main`), write the sandbox story, start local Storybook, capture **before**.
+3. Check out the PR head, write the **same** sandbox story (same layout and props), capture **after**.
+4. Delete the sandbox, restore the original branch, and verify a clean tree.
+
+Detail shots of stories that already exist on `main` can still use hosted main for before.
 
 ## Capture sources
 
 Do **not** wait for PR Storybook CI.
 
-| Pass                | Source                                                                                                                                              |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Before**          | Hosted main iframe: `https://metamask.github.io/metamask-design-system/iframe.html?id={storyId}&viewMode=story` and `/react-native/iframe.html?...` |
-| **After**           | PR CloudFront preview **only if** the PR already has a Storybook Links comment with a live URL                                                      |
-| **After (default)** | Local `yarn storybook` (port 6006) and `yarn workspace @metamask/storybook-react-native storybook:web` (port 6007)                                  |
+| Pass                            | Source                                                                                                                                              | When                                                                   |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| **Before (existing stories)**   | Hosted main iframe: `https://metamask.github.io/metamask-design-system/iframe.html?id={storyId}&viewMode=story` and `/react-native/iframe.html?...` | Story ID exists in hosted `index.json`                                 |
+| **Before (sandbox / showcase)** | Local Storybook on the **base** branch with the temporary sandbox story written                                                                     | High fan-out showcase, or any story that does not exist on hosted main |
+| **After**                       | PR CloudFront preview **only if** the PR already has a Storybook Links comment **and** the story exists in that build                               | Prefer for existing stories when the preview is already live           |
+| **After (default / sandbox)**   | Local `yarn storybook` (port 6006) and `yarn workspace @metamask/storybook-react-native storybook:web` (port 6007) on the **PR** branch             | Default for after; **required** for sandbox showcase                   |
 
 Resolve story IDs from `index.json` / `stories.json` (hosted or `http://localhost:6006/index.json`). Do not invent IDs.
 
 Capture the **iframe** only (no Storybook chrome). Wait until `#storybook-root > *` exists. Then crop to the component — see [Tight crop](#tight-crop). Optional: outline the component (not the canvas) with `3px solid hotpink`.
 
-New stories (not on hosted main): after-only, labeled “new story”. Never post a broken before image.
+New component stories that exist only on the PR branch (not a temporary sandbox): after-only, labeled “new story”. Never post a broken before image. Sandbox showcases are not “new stories” — always capture both passes locally as above.
 
 If pixel-diff vs before is empty (or below a tiny threshold), skip that story in the PR body.
 
@@ -117,7 +127,7 @@ Write Markdown that references **local paths**. `gh` rewrites those paths when t
 ```markdown
 ## **Screenshots/Recordings**
 
-A showcase of every component this change visually affects (not only files in the diff), captured on hosted `main` (before) and this branch (after).
+A showcase of every component this change visually affects (not only files in the diff). Existing stories: before = hosted `main`, after = this branch. Showcase grids: before = local Storybook on base, after = local Storybook on this branch (same temporary sandbox story).
 
 ### React web — consumers
 
@@ -167,8 +177,8 @@ Cloud agents use the VM browser against GitHub Pages, PR preview, or Storybook i
 
 Diff touched `ButtonBase` and `ButtonIcon` (and RN `SegmentedControl` to stay concentric). Correct capture set:
 
-- Web showcase: `ButtonBase`, `Button` variants/sizes, `ButtonHero`, `ButtonFilter`, `TextButton`, `ButtonIcon`
-- RN showcase: those plus `ButtonSemantic`, `SelectButton`, `SegmentedControl`
-- Detail: `ButtonBase` / `ButtonIcon`; RN `SegmentedControl` sizes
+- Web showcase grid (local base → local PR head, same sandbox file): `ButtonBase`, `Button` variants/sizes, `ButtonHero`, `ButtonFilter`, `TextButton`, `ButtonIcon`
+- RN showcase grid (same local-base / local-head pattern): those plus `ButtonSemantic`, `SelectButton`, `SegmentedControl`
+- Detail: `ButtonBase` / `ButtonIcon` / RN `SegmentedControl` sizes — before may use hosted main for these existing stories
 
-Wrong: only `ButtonBase` Default on web, or a full-viewport PNG of a small control such as Badge.
+Wrong: only `ButtonBase` Default on web; a full-viewport PNG of a small control such as Badge; or a showcase “before” from hosted main (the sandbox story is not published there).
