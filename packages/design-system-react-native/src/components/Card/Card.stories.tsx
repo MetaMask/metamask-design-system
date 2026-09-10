@@ -1,4 +1,3 @@
-import { BoxBackgroundColor } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
@@ -14,16 +13,10 @@ const meta: Meta<CardProps> = {
   argTypes: {
     children: { control: 'text' },
     twClassName: { control: 'text' },
-    onPress: { action: 'pressed' },
   },
   decorators: [
     (Story) => (
-      <Box
-        backgroundColor={BoxBackgroundColor.BackgroundAlternative}
-        padding={4}
-      >
-        <Text>Content behind card</Text>
-        <Box padding={2} />
+      <Box twClassName="w-full p-4">
         <Story />
       </Box>
     ),
@@ -43,8 +36,11 @@ export const Default: Story = {
 };
 
 export const OnPress: Story = {
+  argTypes: {
+    onPress: { action: 'pressed' },
+  },
   render: (args) => (
-    <Card {...args} onPress={() => console.log('pressed')}>
+    <Card {...args}>
       <Text>Pressable card</Text>
     </Card>
   ),
