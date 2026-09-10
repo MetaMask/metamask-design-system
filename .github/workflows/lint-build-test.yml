@@ -91,9 +91,12 @@ jobs:
             # would append paths after the `.`, so scoping never takes effect.
             readarray -t CHANGED_DIRS < <(echo "$CHANGED_PATHS" | jq -r '.[]')
             if [[ ${#CHANGED_DIRS[@]} -gt 0 ]]; then
-              yarn exec eslint --cache "${CHANGED_DIRS[@]}"
+              # Changed paths include directories that hold no lintable files
+              # (e.g. `docs/`) and directories deleted by the PR, both of which
+              # make ESLint exit non-zero without this flag.
+              yarn exec eslint --cache --no-error-on-unmatched-pattern "${CHANGED_DIRS[@]}"
             else
-              echo "No packages changed — skipping ESLint."
+              echo "No changed paths to lint — skipping ESLint."
             fi
             yarn lint:misc --check
             yarn constraints

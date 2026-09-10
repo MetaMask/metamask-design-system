@@ -30,10 +30,19 @@ type DependencyGraph = {
   dependants: Record<string, Set<Workspace>>;
 };
 
-async function getAllWorkspaces(): Promise<Workspace[]> {
+async function listWorkspaces({
+  includePrivate,
+}: {
+  includePrivate: boolean;
+}): Promise<Workspace[]> {
   const { stdout } = await execa(
     'yarn',
-    ['workspaces', 'list', '--no-private', '--json'],
+    [
+      'workspaces',
+      'list',
+      ...(includePrivate ? [] : ['--no-private']),
+      '--json',
+    ],
     { cwd: ROOT_WORKSPACE },
   );
 
@@ -42,6 +51,13 @@ async function getAllWorkspaces(): Promise<Workspace[]> {
     .split('\n')
     .map((line) => JSON.parse(line))
     .filter(({ location }: Workspace) => location !== '.');
+}
+
+function findWorkspaceForFile(
+  workspaces: Workspace[],
+  file: string,
+): Workspace | undefined {
+  return workspaces.find(({ location }) => file.startsWith(`${location}/`));
 }
 
 async function getChangedFiles(
@@ -88,10 +104,7 @@ async function buildDependantGraph(
   return { dependants };
 }
 
-function hasRootFileChanged(
-  workspaces: Workspace[],
-  changedFiles: string[],
-): boolean {
+function hasRootFileChanged(changedFiles: string[]): boolean {
   // Only treat changes that impact the monorepo root configuration or CI as "root changes".
   // - Root-level config files (except explicitly ignored ones)
   // - Files under scripts/ (shared CI and tooling)
@@ -114,12 +127,8 @@ function hasRootFileChanged(
       return true;
     }
 
-    // Changes inside non-private workspaces are not root changes.
-    if (workspaces.some(({ location }) => file.startsWith(`${location}/`))) {
-      return false;
-    }
-
-    // Other non-workspace paths (e.g., apps/, docs/) should NOT force a full run.
+    // Everything else lives under a workspace or another nested directory
+    // (e.g. `apps/`, `docs/`), which should not force a full run.
     return false;
   });
 }
@@ -130,29 +139,35 @@ async function computeChangedWorkspaces({
 }: {
   mergeBase: string;
   headRef: string;
-}): Promise<{ workspaces: Workspace[]; hasRootChange: boolean }> {
-  const [changedFiles, workspaces] = await Promise.all([
+}): Promise<{
+  workspaces: Workspace[];
+  lintLocations: string[];
+  hasRootChange: boolean;
+}> {
+  // The published packages drive the test and changelog matrices, while the
+  // full list (which also covers private workspaces such as `apps/*`) is what
+  // maps a changed file back to the directory ESLint should be pointed at.
+  const [changedFiles, workspaces, allWorkspaces] = await Promise.all([
     getChangedFiles(mergeBase, headRef),
-    getAllWorkspaces(),
+    listWorkspaces({ includePrivate: false }),
+    listWorkspaces({ includePrivate: true }),
   ]);
 
   // yarn.lock changes: fall back to a full run. We don't parse the lockfile
   // to find affected workspaces (unlike core), since we only have a handful
   // of packages and the safe default is fine.
   if (changedFiles.includes('yarn.lock')) {
-    return { workspaces, hasRootChange: true };
+    return { workspaces, lintLocations: [], hasRootChange: true };
   }
 
   // Any non-ignored root-level file change triggers a full run.
-  if (hasRootFileChanged(workspaces, changedFiles)) {
-    return { workspaces, hasRootChange: true };
+  if (hasRootFileChanged(changedFiles)) {
+    return { workspaces, lintLocations: [], hasRootChange: true };
   }
 
   const result = new Set<Workspace>(
     changedFiles.flatMap((file) => {
-      const workspace = workspaces.find(({ location }) =>
-        file.startsWith(`${location}/`),
-      );
+      const workspace = findWorkspaceForFile(workspaces, file);
       return workspace ? [workspace] : [];
     }),
   );
@@ -173,7 +188,23 @@ async function computeChangedWorkspaces({
     }
   }
 
-  return { workspaces: Array.from(result), hasRootChange: false };
+  // ESLint has to see every changed file, not just the published packages that
+  // get rebuilt and retested. A file maps to its own workspace when it has one
+  // (including private workspaces like `apps/*`) and otherwise to its top-level
+  // directory, so changes under `apps/` or `docs/` are still linted.
+  const lintLocations = new Set(
+    Array.from(result, ({ location }) => location),
+  );
+  for (const file of changedFiles) {
+    const workspace = findWorkspaceForFile(allWorkspaces, file);
+    lintLocations.add(workspace ? workspace.location : file.split('/')[0]);
+  }
+
+  return {
+    workspaces: Array.from(result),
+    lintLocations: Array.from(lintLocations),
+    hasRootChange: false,
+  };
 }
 
 async function main(): Promise<void> {
@@ -194,46 +225,16 @@ async function main(): Promise<void> {
 
   const { mergeBase, headRef } = argv;
 
-  const { workspaces, hasRootChange } = await computeChangedWorkspaces({
-    mergeBase,
-    headRef,
-  });
-
-  // Build ESLint target paths:
-  // - Always include changed public workspace locations
-  // - Additionally include any top-level app directories under `apps/` that changed
-  //   (apps are private workspaces and excluded from `yarn workspaces --no-private`)
-  let locations = workspaces.map(({ location }) => location);
-  try {
-    const changedFiles = await getChangedFiles(mergeBase, headRef);
-    const appDirs = Array.from(
-      new Set(
-        changedFiles
-          .filter((file) => file.startsWith('apps/'))
-          .map((file) => {
-            const parts = file.split('/');
-            // Expect at least ["apps", "<appName>", ...]
-            return parts.length >= 2 ? `apps/${parts[1]}` : 'apps';
-          }),
-      ),
-    );
-    // De-duplicate while preserving order: workspace locations first, then apps
-    const seen = new Set<string>();
-    locations = [...locations, ...appDirs].filter((dir) => {
-      if (seen.has(dir)) {
-        return false;
-      }
-      seen.add(dir);
-      return true;
+  const { workspaces, lintLocations, hasRootChange } =
+    await computeChangedWorkspaces({
+      mergeBase,
+      headRef,
     });
-  } catch {
-    // Best-effort enrichment; ignore failures and fall back to workspace-only locations.
-  }
 
   console.log(
     JSON.stringify({
       names: workspaces.map(({ name }) => name),
-      locations,
+      locations: lintLocations,
       hasRootChange,
     }),
   );
