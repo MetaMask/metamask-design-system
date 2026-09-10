@@ -2,6 +2,7 @@ import type { ComponentProps, ReactNode } from 'react';
 
 import type { BoxProps } from '../Box';
 import type { ButtonIconProps } from '../ButtonIcon';
+import type { TextProps } from '../Text';
 
 /**
  * Props for back/close ButtonIcons that override iconName and make ariaLabel optional.
@@ -16,14 +17,35 @@ type NavigationButtonIconProps = Partial<Omit<ButtonIconProps, 'iconName'>> & {
  *
  * Subpage navigation header with optional back/close button shortcuts.
  * Provides a consistent header pattern for secondary screens and modal-style
- * navigation flows. Content is left-aligned after the start accessory.
+ * navigation flows. Matches the React Native HeaderSubpage identity API.
  */
-export type HeaderSubpageProps = ComponentProps<'div'> & {
+export type HeaderSubpageProps = Omit<ComponentProps<'div'>, 'title'> & {
   /**
-   * The content rendered in the header row. Takes up remaining space after
-   * start/end accessories and is left-aligned.
+   * Optional leading visual (e.g. avatar), rendered before the title stack.
    */
-  children?: ReactNode;
+  avatar?: ReactNode;
+  /**
+   * Optional title (string or node).
+   * Default text styling: BodyMd, Medium, TextDefault.
+   */
+  title?: ReactNode;
+  /**
+   * Props passed to the title Text component when title is a string.
+   */
+  titleProps?: Partial<TextProps>;
+  /**
+   * Optional node rendered after the title (e.g. badges).
+   */
+  titleEndAccessory?: ReactNode;
+  /**
+   * Optional description (string or node).
+   * Default text styling: BodySm, Medium, TextAlternative.
+   */
+  description?: ReactNode;
+  /**
+   * Props passed to the description Text component when description is a string.
+   */
+  descriptionProps?: Partial<TextProps>;
   /**
    * Callback when the back button is pressed.
    * If provided, a back button will be rendered as the start accessory.
@@ -60,12 +82,12 @@ export type HeaderSubpageProps = ComponentProps<'div'> & {
     [key: `data-${string}`]: string | undefined;
   })[];
   /**
-   * Optional content before the children content.
+   * Optional content before the identity content.
    * Takes priority over `startButtonIconProps` and back shortcuts.
    */
   startAccessory?: ReactNode;
   /**
-   * Optional content after the children content.
+   * Optional content after the identity content.
    * Takes priority over `endButtonIconProps` and close shortcuts.
    */
   endAccessory?: ReactNode;

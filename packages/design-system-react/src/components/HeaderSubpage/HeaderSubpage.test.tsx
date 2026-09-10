@@ -1,7 +1,10 @@
+import {
+  IconName,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
-
-import { IconName } from '../Icon';
 
 import { HeaderSubpage } from './HeaderSubpage';
 
@@ -14,25 +17,127 @@ const CUSTOM_START_BUTTON_TEST_ID = 'header-subpage-custom-start-button';
 const END_SEARCH_BUTTON_TEST_ID = 'header-subpage-end-search';
 
 describe('HeaderSubpage', () => {
-  describe('content', () => {
-    describe('when children are provided', () => {
-      it('renders children correctly', () => {
-        render(<HeaderSubpage>Test Title</HeaderSubpage>);
+  describe('identity content', () => {
+    describe('when title is provided', () => {
+      it('renders title as string', () => {
+        render(<HeaderSubpage title="Test Title" />);
 
         expect(screen.getByText('Test Title')).toBeInTheDocument();
+      });
+
+      it('renders title as node', () => {
+        render(<HeaderSubpage title={<span>Custom Title Node</span>} />);
+
+        expect(screen.getByText('Custom Title Node')).toBeInTheDocument();
+      });
+
+      it('applies titleProps to string title', () => {
+        render(
+          <HeaderSubpage
+            title="Test Title"
+            titleProps={{ color: TextColor.TextAlternative }}
+          />,
+        );
+
+        const title = screen.getByText('Test Title');
+        expect(title).toHaveClass('text-alternative');
+      });
+    });
+
+    describe('when description is provided', () => {
+      it('renders description as string', () => {
+        render(<HeaderSubpage title="Title" description="Test Description" />);
+
+        expect(screen.getByText('Test Description')).toBeInTheDocument();
+      });
+
+      it('renders description as node', () => {
+        render(
+          <HeaderSubpage
+            title="Title"
+            description={<span>Custom Description Node</span>}
+          />,
+        );
+
+        expect(screen.getByText('Custom Description Node')).toBeInTheDocument();
+      });
+
+      it('applies descriptionProps to string description', () => {
+        render(
+          <HeaderSubpage
+            title="Title"
+            description="Test Description"
+            descriptionProps={{ variant: TextVariant.BodyMd }}
+          />,
+        );
+
+        const description = screen.getByText('Test Description');
+        expect(description).toHaveClass('text-s-body-md');
+      });
+    });
+
+    describe('when avatar is provided', () => {
+      it('renders avatar', () => {
+        render(
+          <HeaderSubpage
+            avatar={<span data-testid="avatar">Avatar</span>}
+            title="Title"
+          />,
+        );
+
+        expect(screen.getByTestId('avatar')).toBeInTheDocument();
+      });
+    });
+
+    describe('when titleEndAccessory is provided', () => {
+      it('renders titleEndAccessory after title', () => {
+        render(
+          <HeaderSubpage
+            title="Title"
+            titleEndAccessory={<span data-testid="badge">Badge</span>}
+          />,
+        );
+
+        expect(screen.getByTestId('badge')).toBeInTheDocument();
+        expect(screen.getByText('Title')).toBeInTheDocument();
+      });
+
+      it('renders titleEndAccessory without title when description is provided', () => {
+        render(
+          <HeaderSubpage
+            description="Description"
+            titleEndAccessory={<span data-testid="badge">Badge</span>}
+          />,
+        );
+
+        expect(screen.getByTestId('badge')).toBeInTheDocument();
+        expect(screen.getByText('Description')).toBeInTheDocument();
       });
     });
 
     describe('when data-testid is provided', () => {
       it('forwards data-testid to root element', () => {
-        render(
-          <HeaderSubpage data-testid={CONTAINER_TEST_ID}>
-            Test Title
-          </HeaderSubpage>,
-        );
+        render(<HeaderSubpage title="Title" data-testid={CONTAINER_TEST_ID} />);
 
         expect(screen.getByTestId(CONTAINER_TEST_ID)).toBeInTheDocument();
       });
+    });
+  });
+
+  describe('flex spacer behavior', () => {
+    it('maintains layout when no identity content is provided', () => {
+      render(
+        <HeaderSubpage
+          onBack={jest.fn()}
+          onClose={jest.fn()}
+          data-testid={CONTAINER_TEST_ID}
+        />,
+      );
+
+      const backButton = screen.getByRole('button', { name: 'Go back' });
+      const closeButton = screen.getByRole('button', { name: 'Close' });
+      expect(backButton).toBeInTheDocument();
+      expect(closeButton).toBeInTheDocument();
     });
   });
 
@@ -41,11 +146,10 @@ describe('HeaderSubpage', () => {
       it('renders back ButtonIcon', () => {
         render(
           <HeaderSubpage
+            title="Title"
             onBack={jest.fn()}
             backButtonProps={{ 'data-testid': BACK_BUTTON_TEST_ID }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(BACK_BUTTON_TEST_ID)).toBeInTheDocument();
@@ -55,11 +159,10 @@ describe('HeaderSubpage', () => {
         const onBack = jest.fn();
         render(
           <HeaderSubpage
+            title="Title"
             onBack={onBack}
             backButtonProps={{ 'data-testid': BACK_BUTTON_TEST_ID }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         fireEvent.click(screen.getByTestId(BACK_BUTTON_TEST_ID));
@@ -72,13 +175,12 @@ describe('HeaderSubpage', () => {
       it('renders back ButtonIcon', () => {
         render(
           <HeaderSubpage
+            title="Title"
             backButtonProps={{
               onClick: jest.fn(),
               'data-testid': BACK_BUTTON_TEST_ID,
             }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(BACK_BUTTON_TEST_ID)).toBeInTheDocument();
@@ -88,10 +190,9 @@ describe('HeaderSubpage', () => {
         const onClick = jest.fn();
         render(
           <HeaderSubpage
+            title="Title"
             backButtonProps={{ onClick, 'data-testid': BACK_BUTTON_TEST_ID }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         fireEvent.click(screen.getByTestId(BACK_BUTTON_TEST_ID));
@@ -104,11 +205,10 @@ describe('HeaderSubpage', () => {
         const onClick = jest.fn();
         render(
           <HeaderSubpage
+            title="Title"
             onBack={onBack}
             backButtonProps={{ onClick, 'data-testid': BACK_BUTTON_TEST_ID }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         fireEvent.click(screen.getByTestId(BACK_BUTTON_TEST_ID));
@@ -120,13 +220,12 @@ describe('HeaderSubpage', () => {
       it('uses custom ariaLabel when provided', () => {
         render(
           <HeaderSubpage
+            title="Title"
             backButtonProps={{
               ariaLabel: 'Navigate back',
               'data-testid': BACK_BUTTON_TEST_ID,
             }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(BACK_BUTTON_TEST_ID)).toHaveAttribute(
@@ -138,11 +237,10 @@ describe('HeaderSubpage', () => {
       it('uses default ariaLabel when not provided', () => {
         render(
           <HeaderSubpage
+            title="Title"
             onBack={jest.fn()}
             backButtonProps={{ 'data-testid': BACK_BUTTON_TEST_ID }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(BACK_BUTTON_TEST_ID)).toHaveAttribute(
@@ -156,15 +254,14 @@ describe('HeaderSubpage', () => {
       it('renders custom start ButtonIcon', () => {
         render(
           <HeaderSubpage
+            title="Title"
             startButtonIconProps={{
               iconName: IconName.Menu,
               ariaLabel: 'Menu',
               onClick: jest.fn(),
               'data-testid': CUSTOM_START_BUTTON_TEST_ID,
             }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(
@@ -175,6 +272,7 @@ describe('HeaderSubpage', () => {
       it('takes priority over onBack', () => {
         render(
           <HeaderSubpage
+            title="Title"
             onBack={jest.fn()}
             backButtonProps={{ 'data-testid': BACK_BUTTON_TEST_ID }}
             startButtonIconProps={{
@@ -183,9 +281,7 @@ describe('HeaderSubpage', () => {
               onClick: jest.fn(),
               'data-testid': CUSTOM_START_BUTTON_TEST_ID,
             }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(
@@ -201,6 +297,7 @@ describe('HeaderSubpage', () => {
       it('takes priority over startButtonIconProps', () => {
         render(
           <HeaderSubpage
+            title="Title"
             startAccessory={
               <span data-testid={START_ACCESSORY_TEST_ID}>Start</span>
             }
@@ -210,9 +307,7 @@ describe('HeaderSubpage', () => {
               onClick: jest.fn(),
               'data-testid': CUSTOM_START_BUTTON_TEST_ID,
             }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(START_ACCESSORY_TEST_ID)).toBeInTheDocument();
@@ -224,7 +319,7 @@ describe('HeaderSubpage', () => {
 
     describe('when no start props are provided', () => {
       it('omits start accessory', () => {
-        render(<HeaderSubpage>Title</HeaderSubpage>);
+        render(<HeaderSubpage title="Title" />);
 
         expect(
           screen.queryByTestId(BACK_BUTTON_TEST_ID),
@@ -244,11 +339,10 @@ describe('HeaderSubpage', () => {
       it('renders close ButtonIcon', () => {
         render(
           <HeaderSubpage
+            title="Title"
             onClose={jest.fn()}
             closeButtonProps={{ 'data-testid': CLOSE_BUTTON_TEST_ID }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(CLOSE_BUTTON_TEST_ID)).toBeInTheDocument();
@@ -258,11 +352,10 @@ describe('HeaderSubpage', () => {
         const onClose = jest.fn();
         render(
           <HeaderSubpage
+            title="Title"
             onClose={onClose}
             closeButtonProps={{ 'data-testid': CLOSE_BUTTON_TEST_ID }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         fireEvent.click(screen.getByTestId(CLOSE_BUTTON_TEST_ID));
@@ -272,7 +365,7 @@ describe('HeaderSubpage', () => {
 
       it('renders close ButtonIcon without closeButtonProps', () => {
         const onClose = jest.fn();
-        render(<HeaderSubpage onClose={onClose}>Title</HeaderSubpage>);
+        render(<HeaderSubpage title="Title" onClose={onClose} />);
 
         const closeButton = screen.getByRole('button', { name: 'Close' });
         expect(closeButton).toBeInTheDocument();
@@ -286,13 +379,12 @@ describe('HeaderSubpage', () => {
       it('renders close ButtonIcon', () => {
         render(
           <HeaderSubpage
+            title="Title"
             closeButtonProps={{
               onClick: jest.fn(),
               'data-testid': CLOSE_BUTTON_TEST_ID,
             }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(CLOSE_BUTTON_TEST_ID)).toBeInTheDocument();
@@ -303,11 +395,10 @@ describe('HeaderSubpage', () => {
         const onClick = jest.fn();
         render(
           <HeaderSubpage
+            title="Title"
             onClose={onClose}
             closeButtonProps={{ onClick, 'data-testid': CLOSE_BUTTON_TEST_ID }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         fireEvent.click(screen.getByTestId(CLOSE_BUTTON_TEST_ID));
@@ -319,13 +410,12 @@ describe('HeaderSubpage', () => {
       it('uses custom ariaLabel when provided', () => {
         render(
           <HeaderSubpage
+            title="Title"
             closeButtonProps={{
               ariaLabel: 'Dismiss',
               'data-testid': CLOSE_BUTTON_TEST_ID,
             }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(CLOSE_BUTTON_TEST_ID)).toHaveAttribute(
@@ -337,11 +427,10 @@ describe('HeaderSubpage', () => {
       it('uses default ariaLabel when not provided', () => {
         render(
           <HeaderSubpage
+            title="Title"
             onClose={jest.fn()}
             closeButtonProps={{ 'data-testid': CLOSE_BUTTON_TEST_ID }}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(CLOSE_BUTTON_TEST_ID)).toHaveAttribute(
@@ -355,6 +444,7 @@ describe('HeaderSubpage', () => {
       it('renders end ButtonIcons', () => {
         render(
           <HeaderSubpage
+            title="Title"
             endButtonIconProps={[
               {
                 iconName: IconName.Search,
@@ -363,9 +453,7 @@ describe('HeaderSubpage', () => {
                 'data-testid': END_SEARCH_BUTTON_TEST_ID,
               },
             ]}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(
@@ -376,6 +464,7 @@ describe('HeaderSubpage', () => {
       it('appends icons after close shortcut', () => {
         render(
           <HeaderSubpage
+            title="Title"
             onClose={jest.fn()}
             closeButtonProps={{ 'data-testid': CLOSE_BUTTON_TEST_ID }}
             endButtonIconProps={[
@@ -386,9 +475,7 @@ describe('HeaderSubpage', () => {
                 'data-testid': END_SEARCH_BUTTON_TEST_ID,
               },
             ]}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(CLOSE_BUTTON_TEST_ID)).toBeInTheDocument();
@@ -398,7 +485,7 @@ describe('HeaderSubpage', () => {
       });
 
       it('omits end accessory when array is empty', () => {
-        render(<HeaderSubpage endButtonIconProps={[]}>Title</HeaderSubpage>);
+        render(<HeaderSubpage title="Title" endButtonIconProps={[]} />);
 
         expect(
           screen.queryByTestId(CLOSE_BUTTON_TEST_ID),
@@ -413,12 +500,11 @@ describe('HeaderSubpage', () => {
       it('takes priority over close shortcuts', () => {
         render(
           <HeaderSubpage
+            title="Title"
             onClose={jest.fn()}
             closeButtonProps={{ 'data-testid': CLOSE_BUTTON_TEST_ID }}
             endAccessory={<span data-testid={END_ACCESSORY_TEST_ID}>End</span>}
-          >
-            Title
-          </HeaderSubpage>,
+          />,
         );
 
         expect(screen.getByTestId(END_ACCESSORY_TEST_ID)).toBeInTheDocument();
@@ -430,7 +516,7 @@ describe('HeaderSubpage', () => {
 
     describe('when no end props are provided', () => {
       it('omits end accessory', () => {
-        render(<HeaderSubpage>Title</HeaderSubpage>);
+        render(<HeaderSubpage title="Title" />);
 
         expect(
           screen.queryByTestId(CLOSE_BUTTON_TEST_ID),
@@ -446,11 +532,10 @@ describe('HeaderSubpage', () => {
     it('merges caller classes with default classes', () => {
       render(
         <HeaderSubpage
+          title="Title"
           className="border-b border-muted"
           data-testid={CONTAINER_TEST_ID}
-        >
-          Title
-        </HeaderSubpage>,
+        />,
       );
 
       const container = screen.getByTestId(CONTAINER_TEST_ID);
@@ -466,9 +551,11 @@ describe('HeaderSubpage', () => {
   describe('accessoryGap', () => {
     it('uses default gap of 2 (8px)', () => {
       render(
-        <HeaderSubpage onBack={jest.fn()} data-testid={CONTAINER_TEST_ID}>
-          Title
-        </HeaderSubpage>,
+        <HeaderSubpage
+          title="Title"
+          onBack={jest.fn()}
+          data-testid={CONTAINER_TEST_ID}
+        />,
       );
 
       const container = screen.getByTestId(CONTAINER_TEST_ID);
@@ -478,12 +565,11 @@ describe('HeaderSubpage', () => {
     it('allows custom gap value', () => {
       render(
         <HeaderSubpage
+          title="Title"
           onBack={jest.fn()}
           accessoryGap={4}
           data-testid={CONTAINER_TEST_ID}
-        >
-          Title
-        </HeaderSubpage>,
+        />,
       );
 
       const container = screen.getByTestId(CONTAINER_TEST_ID);
@@ -495,9 +581,11 @@ describe('HeaderSubpage', () => {
     it('applies inline styles to root element', () => {
       const customStyle = { backgroundColor: 'red' };
       render(
-        <HeaderSubpage style={customStyle} data-testid={CONTAINER_TEST_ID}>
-          Title
-        </HeaderSubpage>,
+        <HeaderSubpage
+          title="Title"
+          style={customStyle}
+          data-testid={CONTAINER_TEST_ID}
+        />,
       );
 
       expect(screen.getByTestId(CONTAINER_TEST_ID)).toHaveStyle(customStyle);
@@ -508,7 +596,7 @@ describe('HeaderSubpage', () => {
     it('forwards ref to root element', () => {
       const ref = createRef<HTMLDivElement>();
       render(
-        <HeaderSubpage ref={ref} data-testid={CONTAINER_TEST_ID}>
+        <HeaderSubpage title="Title" ref={ref} data-testid={CONTAINER_TEST_ID}>
           Title
         </HeaderSubpage>,
       );

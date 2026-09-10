@@ -1,10 +1,19 @@
+import {
+  BoxAlignItems,
+  BoxFlexDirection,
+  ButtonIconSize,
+  FontWeight,
+  IconName,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import React, { forwardRef, useMemo } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import { Box } from '../Box';
+import { ButtonIcon } from '../ButtonIcon';
 import type { ButtonIconProps } from '../ButtonIcon';
-import { IconName } from '../Icon';
+import { Text } from '../Text';
 
 import type { HeaderSubpageProps } from './HeaderSubpage.types';
 
@@ -26,6 +35,12 @@ const renderEndButtonIcons = (endButtonIconProps: ButtonIconProps[]) =>
 export const HeaderSubpage = forwardRef<HTMLDivElement, HeaderSubpageProps>(
   (
     {
+      avatar,
+      title,
+      titleProps,
+      titleEndAccessory,
+      description,
+      descriptionProps,
       onBack,
       backButtonProps,
       onClose,
@@ -36,7 +51,6 @@ export const HeaderSubpage = forwardRef<HTMLDivElement, HeaderSubpageProps>(
       endAccessory,
       accessoryGap = 2,
       className,
-      children,
       ...props
     },
     ref,
@@ -108,6 +122,52 @@ export const HeaderSubpage = forwardRef<HTMLDivElement, HeaderSubpageProps>(
       return undefined;
     }, [endAccessory, resolvedEndButtonIconProps]);
 
+    const renderTitle = () => {
+      if (!title) {
+        return null;
+      }
+
+      if (typeof title === 'string') {
+        return (
+          <Text
+            variant={TextVariant.BodyMd}
+            fontWeight={FontWeight.Medium}
+            color={TextColor.TextDefault}
+            ellipsis
+            {...titleProps}
+          >
+            {title}
+          </Text>
+        );
+      }
+
+      return title;
+    };
+
+    const renderDescription = () => {
+      if (!description) {
+        return null;
+      }
+
+      if (typeof description === 'string') {
+        return (
+          <Text
+            variant={TextVariant.BodySm}
+            fontWeight={FontWeight.Medium}
+            color={TextColor.TextAlternative}
+            ellipsis
+            {...descriptionProps}
+          >
+            {description}
+          </Text>
+        );
+      }
+
+      return description;
+    };
+
+    const hasIdentityContent = avatar || title || description;
+
     return (
       <Box
         ref={ref}
@@ -118,7 +178,32 @@ export const HeaderSubpage = forwardRef<HTMLDivElement, HeaderSubpageProps>(
         {...props}
       >
         {resolvedStartAccessory}
-        {children && <div className="min-w-0 flex-1">{children}</div>}
+        <Box className="min-w-0 flex-1">
+          {hasIdentityContent && (
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              gap={4}
+            >
+              {avatar}
+              {(title || description) && (
+                <Box className="min-w-0 flex-1">
+                  {(title || titleEndAccessory) && (
+                    <Box
+                      flexDirection={BoxFlexDirection.Row}
+                      alignItems={BoxAlignItems.Center}
+                      gap={2}
+                    >
+                      {renderTitle()}
+                      {titleEndAccessory}
+                    </Box>
+                  )}
+                  {renderDescription()}
+                </Box>
+              )}
+            </Box>
+          )}
+        </Box>
         {resolvedEndAccessory}
       </Box>
     );

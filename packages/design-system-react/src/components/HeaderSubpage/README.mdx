@@ -4,23 +4,26 @@ import * as HeaderSubpageStories from './HeaderSubpage.stories';
 
 # HeaderSubpage
 
-Subpage navigation header with optional back/close button shortcuts. Provides a consistent header pattern for secondary screens and modal-style navigation flows. Content is left-aligned after the start accessory.
+Subpage navigation header with optional back/close button shortcuts. Provides a consistent header pattern for secondary screens and modal-style navigation flows. Matches the React Native HeaderSubpage identity API.
 
 ```tsx
 import { HeaderSubpage } from '@metamask/design-system-react';
 
-<HeaderSubpage onBack={() => navigate(-1)}>
-  <Text variant={TextVariant.HeadingSm}>Page title</Text>
-</HeaderSubpage>;
+<HeaderSubpage
+  avatar={<AvatarToken src="..." name="Ethereum" />}
+  title="Ethereum"
+  description="ETH"
+  onBack={() => navigate(-1)}
+/>;
 ```
 
 <Canvas of={HeaderSubpageStories.Default} />
 
 ## Props
 
-### `children`
+### `avatar`
 
-The content rendered in the center column of the header. Typically a title or title with description.
+Optional leading visual (e.g. avatar), rendered before the title stack.
 
 <table>
   <thead>
@@ -43,7 +46,86 @@ The content rendered in the center column of the header. Typically a title or ti
   </tbody>
 </table>
 
-<Canvas of={HeaderSubpageStories.WithDescription} />
+### `title`
+
+Optional title (string or node). When a string is provided, default text styling is applied: BodyMd, Medium, TextDefault.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderSubpageStories.TitleOnly} />
+
+### `description`
+
+Optional description (string or node). When a string is provided, default text styling is applied: BodySm, Medium, TextAlternative.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderSubpageStories.Description} />
+
+### `titleEndAccessory`
+
+Optional node rendered after the title (e.g. badges).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderSubpageStories.TitleEndAccessory} />
 
 ### `onBack`
 
@@ -104,6 +186,12 @@ Callback when the close button is pressed. If provided, a close button will be a
 You can use both `onBack` and `onClose` together to provide navigation controls on both sides of the header.
 
 <Canvas of={HeaderSubpageStories.BackAndClose} />
+
+### No content
+
+When no identity content is provided, the header maintains proper layout with back/close buttons on opposite edges.
+
+<Canvas of={HeaderSubpageStories.NoContent} />
 
 ### `backButtonProps`
 
@@ -184,7 +272,7 @@ Optional array of ButtonIcon props to render as additional end accessories. Rend
 
 ### `startAccessory`
 
-Optional content before the children content. Takes priority over `startButtonIconProps` and back shortcuts.
+Optional content before the identity content. Takes priority over `startButtonIconProps` and back shortcuts.
 
 <table>
   <thead>
@@ -211,7 +299,7 @@ Optional content before the children content. Takes priority over `startButtonIc
 
 ### `endAccessory`
 
-Optional content after the children content. Takes priority over `endButtonIconProps` and close shortcuts.
+Optional content after the identity content. Takes priority over `endButtonIconProps` and close shortcuts.
 
 <table>
   <thead>
@@ -262,9 +350,7 @@ Use the `className` prop to add custom CSS classes to the component. These class
 </table>
 
 ```tsx
-<HeaderSubpage className="border-b border-muted" onBack={() => {}}>
-  Title
-</HeaderSubpage>
+<HeaderSubpage className="border-b border-muted" title="Settings" onBack={() => {}} />
 ```
 
 ### `style`
@@ -300,3 +386,4 @@ The `style` prop should primarily be used for dynamic inline styles that cannot 
 
 - [ButtonIcon](/docs/react-components-buttonicon--docs) - Used for back/close buttons
 - [Box](/docs/react-components-box--docs) - Used for layout
+- [Text](/docs/react-components-text--docs) - Used for title and description text
