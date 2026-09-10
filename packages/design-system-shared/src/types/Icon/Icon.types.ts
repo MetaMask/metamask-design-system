@@ -137,6 +137,8 @@ export const IconName = {
   GlobalSearch: 'GlobalSearch',
   Global: 'Global',
   Hardware: 'Hardware',
+  HeartStraightFilled: 'HeartStraightFilled',
+  HeartStraight: 'HeartStraight',
   Hierarchy: 'Hierarchy',
   HomeFilled: 'HomeFilled',
   Home: 'Home',

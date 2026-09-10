@@ -87,6 +87,8 @@ import Gift from './Gift';
 import GlobalSearch from './GlobalSearch';
 import Global from './Global';
 import Hardware from './Hardware';
+import HeartStraightFilled from './HeartStraightFilled';
+import HeartStraight from './HeartStraight';
 import Hierarchy from './Hierarchy';
 import HomeFilled from './HomeFilled';
 import Home from './Home';
@@ -271,6 +273,8 @@ export const Icons = {
   GlobalSearch,
   Global,
   Hardware,
+  HeartStraightFilled,
+  HeartStraight,
   Hierarchy,
   HomeFilled,
   Home,
