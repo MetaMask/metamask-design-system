@@ -15,34 +15,34 @@ body {
  * @font-face declarations for react-native-web Storybook.
  *
  * react-native-web applies fontFamily as an inline style using the exact
- * PostScript name (e.g. 'Geist-Regular'), NOT 'Geist' + font-weight.
- * The TWRNC preset maps e.g. font-default-regular -> { fontFamily: 'Geist-Regular' }.
+ * PostScript name (e.g. 'Inter-Regular'), NOT 'Inter' + font-weight.
+ * The TWRNC preset maps e.g. font-default-regular -> { fontFamily: 'Inter-Regular' }.
  * Each @font-face must use the matching PostScript name so the browser resolves it.
  */
 
 @font-face {
-  font-family: 'Geist-Regular';
-  src: url('/fonts/Geist/Geist-Regular.woff2') format('woff2');
+  font-family: 'Inter-Regular';
+  src: url('/fonts/Inter/Inter-Regular.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Geist-RegularItalic';
-  src: url('/fonts/Geist/Geist-RegularItalic.woff2') format('woff2');
+  font-family: 'Inter-RegularItalic';
+  src: url('/fonts/Inter/Inter-RegularItalic.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Geist-Medium';
-  src: url('/fonts/Geist/Geist-Medium.woff2') format('woff2');
+  font-family: 'Inter-Medium';
+  src: url('/fonts/Inter/Inter-Medium.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Geist-MediumItalic';
-  src: url('/fonts/Geist/Geist-MediumItalic.woff2') format('woff2');
+  font-family: 'Inter-MediumItalic';
+  src: url('/fonts/Inter/Inter-MediumItalic.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Geist-SemiBold';
-  src: url('/fonts/Geist/Geist-SemiBold.woff2') format('woff2');
+  font-family: 'Inter-SemiBold';
+  src: url('/fonts/Inter/Inter-SemiBold.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Geist-SemiBoldItalic';
-  src: url('/fonts/Geist/Geist-SemiBoldItalic.woff2') format('woff2');
+  font-family: 'Inter-SemiBoldItalic';
+  src: url('/fonts/Inter/Inter-SemiBoldItalic.woff2') format('woff2');
 }
 
 @font-face {

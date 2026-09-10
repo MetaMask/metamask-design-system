@@ -32,7 +32,7 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
 
     const mergedClassName = twMerge(
       // Base styles
-      'inline-flex items-center justify-center p-0',
+      'inline-flex shrink-0 items-center justify-center p-0',
       // Size styles
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
       // Variant styles

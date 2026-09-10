@@ -42,7 +42,7 @@ export type FontStyle = 'normal' | 'italic';
  * {
  *   fontSize: {
  *     'display-md': {
- *       fontFamily: 'Geist-SemiBold',
+ *       fontFamily: 'Inter-SemiBold',
  *       fontSize: '32',
  *       letterSpacing: '0',
  *       lineHeight: '40px',
@@ -50,13 +50,13 @@ export type FontStyle = 'normal' | 'italic';
  *   },
  *   fontFamily: {
  *     sans: [
- *       'Geist',
+ *       'Inter',
  *       'Helvetica Neue',
  *       'Helvetica',
  *       'Arial',
  *       'sans-serif',
  *     ],
- *     'display-md': 'Geist',
+ *     'display-md': 'Inter',
  *   },
  *   letterSpacing: {
  *     'display-md': '0',
