@@ -7,9 +7,7 @@ import type { ButtonIconProps } from '../ButtonIcon';
  * Props for back/close ButtonIcons that override iconName and make ariaLabel optional.
  * The component provides default ariaLabels ("Go back", "Close").
  */
-type NavigationButtonIconProps = Partial<
-  Omit<ButtonIconProps, 'iconName'>
-> & {
+type NavigationButtonIconProps = Partial<Omit<ButtonIconProps, 'iconName'>> & {
   [key: `data-${string}`]: string | undefined;
 };
 

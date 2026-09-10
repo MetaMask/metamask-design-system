@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { Box, BoxAlignItems } from '../Box';
+import { Box } from '../Box';
 import { IconName } from '../Icon';
 import { Text, TextVariant, FontWeight, TextColor } from '../Text';
 
@@ -71,27 +71,35 @@ export const Default: Story = {};
 
 export const WithDescription: Story = {
   args: {
-    children: <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />,
+    children: (
+      <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />
+    ),
   },
 };
 
 export const OnBack: Story = {
   args: {
-    children: <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />,
+    children: (
+      <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />
+    ),
     onBack: () => console.log('Back pressed'),
   },
 };
 
 export const OnClose: Story = {
   args: {
-    children: <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />,
+    children: (
+      <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />
+    ),
     onClose: () => console.log('Close pressed'),
   },
 };
 
 export const BackAndClose: Story = {
   args: {
-    children: <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />,
+    children: (
+      <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />
+    ),
     onBack: () => console.log('Back pressed'),
     onClose: () => console.log('Close pressed'),
   },
@@ -99,7 +107,9 @@ export const BackAndClose: Story = {
 
 export const EndButtonIconProps: Story = {
   args: {
-    children: <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />,
+    children: (
+      <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />
+    ),
     onBack: () => console.log('Back pressed'),
     onClose: () => console.log('Close pressed'),
     endButtonIconProps: [
@@ -114,7 +124,9 @@ export const EndButtonIconProps: Story = {
 
 export const CustomStartAccessory: Story = {
   args: {
-    children: <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />,
+    children: (
+      <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />
+    ),
     startAccessory: (
       <Text variant={TextVariant.BodyMd} fontWeight={FontWeight.Medium}>
         Custom
@@ -126,7 +138,9 @@ export const CustomStartAccessory: Story = {
 
 export const CustomEndAccessory: Story = {
   args: {
-    children: <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />,
+    children: (
+      <StoryHeaderContent title={ETH_TITLE} description={ETH_DESCRIPTION} />
+    ),
     onBack: () => console.log('Back pressed'),
     endAccessory: (
       <Text variant={TextVariant.BodyMd} fontWeight={FontWeight.Medium}>

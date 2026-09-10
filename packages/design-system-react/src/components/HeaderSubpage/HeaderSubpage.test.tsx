@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { IconName } from '../Icon';
 
@@ -455,10 +455,7 @@ describe('HeaderSubpage', () => {
   describe('accessoryGap', () => {
     it('uses default gap of 2 (8px)', () => {
       render(
-        <HeaderSubpage
-          onBack={jest.fn()}
-          data-testid={CONTAINER_TEST_ID}
-        >
+        <HeaderSubpage onBack={jest.fn()} data-testid={CONTAINER_TEST_ID}>
           Title
         </HeaderSubpage>,
       );
@@ -498,7 +495,7 @@ describe('HeaderSubpage', () => {
 
   describe('ref forwarding', () => {
     it('forwards ref to root element', () => {
-      const ref = React.createRef<HTMLDivElement>();
+      const ref = createRef<HTMLDivElement>();
       render(
         <HeaderSubpage ref={ref} data-testid={CONTAINER_TEST_ID}>
           Title
