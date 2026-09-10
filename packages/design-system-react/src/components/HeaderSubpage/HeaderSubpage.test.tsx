@@ -443,7 +443,43 @@ describe('HeaderSubpage', () => {
       );
 
       const container = screen.getByTestId(CONTAINER_TEST_ID);
-      expect(container).toHaveClass('h-14', 'px-2', 'border-b', 'border-muted');
+      expect(container).toHaveClass(
+        'min-h-14',
+        'px-2',
+        'border-b',
+        'border-muted',
+      );
+    });
+  });
+
+  describe('accessoryGap', () => {
+    it('uses default gap of 2 (8px)', () => {
+      render(
+        <HeaderSubpage
+          onBack={jest.fn()}
+          data-testid={CONTAINER_TEST_ID}
+        >
+          Title
+        </HeaderSubpage>,
+      );
+
+      const container = screen.getByTestId(CONTAINER_TEST_ID);
+      expect(container).toHaveClass('gap-2');
+    });
+
+    it('allows custom gap value', () => {
+      render(
+        <HeaderSubpage
+          onBack={jest.fn()}
+          accessoryGap={4}
+          data-testid={CONTAINER_TEST_ID}
+        >
+          Title
+        </HeaderSubpage>,
+      );
+
+      const container = screen.getByTestId(CONTAINER_TEST_ID);
+      expect(container).toHaveClass('gap-4');
     });
   });
 

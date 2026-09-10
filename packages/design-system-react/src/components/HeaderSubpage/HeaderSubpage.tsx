@@ -1,10 +1,9 @@
 import React, { forwardRef, useMemo } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Box } from '../Box';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import type { ButtonIconProps } from '../ButtonIcon';
-import { HeaderBase } from '../HeaderBase';
 import { IconName } from '../Icon';
 
 import type { HeaderSubpageProps } from './HeaderSubpage.types';
@@ -35,11 +34,9 @@ export const HeaderSubpage = forwardRef<HTMLDivElement, HeaderSubpageProps>(
       endButtonIconProps,
       startAccessory,
       endAccessory,
+      accessoryGap = 2,
       className,
       children,
-      childrenWrapperProps,
-      startAccessoryWrapperProps,
-      endAccessoryWrapperProps,
       ...props
     },
     ref,
@@ -112,18 +109,18 @@ export const HeaderSubpage = forwardRef<HTMLDivElement, HeaderSubpageProps>(
     }, [endAccessory, resolvedEndButtonIconProps]);
 
     return (
-      <HeaderBase
+      <Box
         ref={ref}
-        className={twMerge('h-14 px-2', className)}
-        startAccessory={resolvedStartAccessory}
-        endAccessory={resolvedEndAccessory}
-        childrenWrapperProps={childrenWrapperProps}
-        startAccessoryWrapperProps={startAccessoryWrapperProps}
-        endAccessoryWrapperProps={endAccessoryWrapperProps}
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Center}
+        gap={accessoryGap}
+        className={twMerge('min-h-14 px-2', className)}
         {...props}
       >
-        {children}
-      </HeaderBase>
+        {resolvedStartAccessory}
+        {children && <div className="min-w-0 flex-1">{children}</div>}
+        {resolvedEndAccessory}
+      </Box>
     );
   },
 );
