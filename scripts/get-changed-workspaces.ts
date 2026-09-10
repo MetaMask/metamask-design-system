@@ -192,9 +192,7 @@ async function computeChangedWorkspaces({
   // get rebuilt and retested. A file maps to its own workspace when it has one
   // (including private workspaces like `apps/*`) and otherwise to its top-level
   // directory, so changes under `apps/` or `docs/` are still linted.
-  const lintLocations = new Set(
-    Array.from(result, ({ location }) => location),
-  );
+  const lintLocations = new Set(Array.from(result, ({ location }) => location));
   for (const file of changedFiles) {
     const workspace = findWorkspaceForFile(allWorkspaces, file);
     lintLocations.add(workspace ? workspace.location : file.split('/')[0]);
