@@ -96,10 +96,10 @@ Engineers can reference `.cursor/rules/` directly when needed, but the primary i
 
 **Location:** `.cursor/skills/<skill-name>/SKILL.md`, committed in this repo.
 
-| Kind | Path | Who sees it |
-| --- | --- | --- |
-| Project skill | `.cursor/skills/` in git | Cursor Desktop and Cloud Agents on a checkout that includes the files |
-| Personal skill | `~/.cursor/skills/` | Local machine only. Cloud agents do **not** load this folder. |
+| Kind           | Path                     | Who sees it                                                           |
+| -------------- | ------------------------ | --------------------------------------------------------------------- |
+| Project skill  | `.cursor/skills/` in git | Cursor Desktop and Cloud Agents on a checkout that includes the files |
+| Personal skill | `~/.cursor/skills/`      | Local machine only. Cloud agents do **not** load this folder.         |
 
 Put MMDS workflows in **project** skills so cloud agents get them. Do not rely on laptop-only skills for this repo.
 

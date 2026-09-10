@@ -45,14 +45,14 @@ Primitive and token changes leak into other components. Example: [PR #1494](http
    ```
 
 3. Include **both** React and React Native when the same primitive exists on both.
-4. Include stories that show **opt-outs** (e.g. `TextButton` still `rounded-none`) so reviewers see what did *not* change.
+4. Include stories that show **opt-outs** (e.g. `TextButton` still `rounded-none`) so reviewers see what did _not_ change.
 5. Token / global style changes: pick representative stories for the token category (color, radius, typography) plus any component whose stories document that token. Do not screenshot the entire Storybook.
 
 ### How many shots
 
-| Fan-out | What to capture |
-| --- | --- |
-| 1–8 affected components | Default story each (plus Size / Variant if that is what changed). Light and dark when the diff is color/token. |
+| Fan-out                                         | What to capture                                                                                                                                                                      |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1–8 affected components                         | Default story each (plus Size / Variant if that is what changed). Light and dark when the diff is color/token.                                                                       |
 | More than 8, or a primitive with many consumers | One **temporary showcase** story per platform that mounts all dependents in a grid (same layout on before and after), **plus** 1–2 detail stories for the primitive and any opt-out. |
 
 Showcase story path (delete after capture):
@@ -66,11 +66,11 @@ Use realistic default props from existing stories. Do not commit these files.
 
 Do **not** wait for PR Storybook CI.
 
-| Pass | Source |
-| --- | --- |
-| **Before** | Hosted main iframe: `https://metamask.github.io/metamask-design-system/iframe.html?id={storyId}&viewMode=story` and `/react-native/iframe.html?...` |
-| **After** | PR CloudFront preview **only if** the PR already has a Storybook Links comment with a live URL |
-| **After (default)** | Local `yarn storybook` (port 6006) and `yarn workspace @metamask/storybook-react-native storybook:web` (port 6007) |
+| Pass                | Source                                                                                                                                              |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Before**          | Hosted main iframe: `https://metamask.github.io/metamask-design-system/iframe.html?id={storyId}&viewMode=story` and `/react-native/iframe.html?...` |
+| **After**           | PR CloudFront preview **only if** the PR already has a Storybook Links comment with a live URL                                                      |
+| **After (default)** | Local `yarn storybook` (port 6006) and `yarn workspace @metamask/storybook-react-native storybook:web` (port 6007)                                  |
 
 Resolve story IDs from `index.json` / `stories.json` (hosted or `http://localhost:6006/index.json`). Do not invent IDs.
 
