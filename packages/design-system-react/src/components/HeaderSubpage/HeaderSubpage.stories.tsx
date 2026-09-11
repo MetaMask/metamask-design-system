@@ -98,21 +98,21 @@ export const EndButtonIconProps: Story = {
   },
 };
 
-export const CustomStartAccessory: Story = {
+export const StartAccessory: Story = {
   args: {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
     startAccessory: (
       <Text variant={TextVariant.BodyMd} fontWeight={FontWeight.Medium}>
-        Custom
+        Edit
       </Text>
     ),
     onClose: () => console.log('Close pressed'),
   },
 };
 
-export const CustomEndAccessory: Story = {
+export const EndAccessory: Story = {
   args: {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
@@ -120,7 +120,7 @@ export const CustomEndAccessory: Story = {
     onBack: () => console.log('Back pressed'),
     endAccessory: (
       <Text variant={TextVariant.BodyMd} fontWeight={FontWeight.Medium}>
-        Done
+        Save
       </Text>
     ),
   },

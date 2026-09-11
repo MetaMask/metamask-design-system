@@ -177,7 +177,7 @@ Props passed to the description Text component when `description` is a string. U
 
 ### `onBack`
 
-Callback when the back button is pressed. If provided, a back button will be rendered as the start accessory.
+Callback when the back button is pressed. If provided, a back button will be rendered as the start accessory. The button uses a default English `ariaLabel` of "Go back"; override via `backButtonProps.ariaLabel` for localization.
 
 <table>
   <thead>
@@ -204,7 +204,7 @@ Callback when the back button is pressed. If provided, a back button will be ren
 
 ### `onClose`
 
-Callback when the close button is pressed. If provided, a close button will be added to the end accessories.
+Callback when the close button is pressed. If provided, a close button will be added to the end accessories. The button uses a default English `ariaLabel` of "Close"; override via `closeButtonProps.ariaLabel` for localization.
 
 <table>
   <thead>
@@ -368,7 +368,7 @@ Optional content before the identity content. Takes priority over `startButtonIc
   </tbody>
 </table>
 
-<Canvas of={HeaderSubpageStories.CustomStartAccessory} />
+<Canvas of={HeaderSubpageStories.StartAccessory} />
 
 ### `endAccessory`
 
@@ -395,7 +395,7 @@ Optional content after the identity content. Takes priority over `endButtonIconP
   </tbody>
 </table>
 
-<Canvas of={HeaderSubpageStories.CustomEndAccessory} />
+<Canvas of={HeaderSubpageStories.EndAccessory} />
 
 ### `accessoryGap`
 
