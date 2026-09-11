@@ -94,6 +94,7 @@ import HomeFilledSVG from './assets/home-filled.svg';
 import HomeSVG from './assets/home.svg';
 import ImageSVG from './assets/image.svg';
 import InfoSVG from './assets/info.svg';
+import InfinitySVG from './assets/infinity.svg';
 import KeepSVG from './assets/keep.svg';
 import KeySVG from './assets/key.svg';
 import LinkSVG from './assets/link.svg';
@@ -284,6 +285,7 @@ export const assetByIconName: AssetByIconName = {
   Home: HomeSVG,
   Image: ImageSVG,
   Info: InfoSVG,
+  Infinity: InfinitySVG,
   Keep: KeepSVG,
   Key: KeySVG,
   Link: LinkSVG,
