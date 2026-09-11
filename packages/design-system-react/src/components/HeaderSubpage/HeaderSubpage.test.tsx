@@ -588,7 +588,7 @@ describe('HeaderSubpage', () => {
 
   describe('ref forwarding', () => {
     it('forwards ref to root element', () => {
-      const ref = createRef<HTMLDivElement>();
+      const ref = createRef<HTMLElement>();
       render(
         <HeaderSubpage
           title="Title"

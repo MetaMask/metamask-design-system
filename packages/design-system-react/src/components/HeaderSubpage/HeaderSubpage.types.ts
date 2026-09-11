@@ -20,7 +20,7 @@ type NavigationButtonIconProps = Partial<Omit<ButtonIconProps, 'iconName'>> & {
  * navigation flows. Matches the React Native HeaderSubpage identity API.
  */
 export type HeaderSubpageProps = Omit<
-  ComponentProps<'div'>,
+  ComponentProps<'header'>,
   'title' | 'children'
 > & {
   /**

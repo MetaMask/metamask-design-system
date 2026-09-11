@@ -10,7 +10,7 @@ import {
 import React, { forwardRef, useMemo } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Box } from '../Box';
+import { Box, TWCLASSMAP_BOX_GAP } from '../Box';
 import { ButtonIcon } from '../ButtonIcon';
 import type { ButtonIconProps } from '../ButtonIcon';
 import { Text } from '../Text';
@@ -32,7 +32,7 @@ const renderEndButtonIcons = (endButtonIconProps: ButtonIconProps[]) =>
       />
     ));
 
-export const HeaderSubpage = forwardRef<HTMLDivElement, HeaderSubpageProps>(
+export const HeaderSubpage = forwardRef<HTMLElement, HeaderSubpageProps>(
   (
     {
       avatar,
@@ -169,12 +169,13 @@ export const HeaderSubpage = forwardRef<HTMLDivElement, HeaderSubpageProps>(
     const hasIdentityContent = avatar || title || description;
 
     return (
-      <Box
+      <header
         ref={ref}
-        flexDirection={BoxFlexDirection.Row}
-        alignItems={BoxAlignItems.Center}
-        gap={accessoryGap}
-        className={twMerge('min-h-14 px-2', className)}
+        className={twMerge(
+          'flex min-h-14 flex-row items-center px-2',
+          TWCLASSMAP_BOX_GAP[accessoryGap],
+          className,
+        )}
         {...props}
       >
         {resolvedStartAccessory}
@@ -205,7 +206,7 @@ export const HeaderSubpage = forwardRef<HTMLDivElement, HeaderSubpageProps>(
           )}
         </Box>
         {resolvedEndAccessory}
-      </Box>
+      </header>
     );
   },
 );

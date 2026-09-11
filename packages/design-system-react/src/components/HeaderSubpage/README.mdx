@@ -4,7 +4,7 @@ import * as HeaderSubpageStories from './HeaderSubpage.stories';
 
 # HeaderSubpage
 
-Subpage navigation header with optional back/close button shortcuts. Provides a consistent header pattern for secondary screens and modal-style navigation flows. Matches the React Native HeaderSubpage identity API.
+A left-aligned navigation header for secondary pages that need identity content such as an avatar, title, or description alongside navigation actions. Use HeaderSubpage for subpage headers; use HeaderBase or ModalHeader when the title should be centered.
 
 ```tsx
 import { HeaderSubpage } from '@metamask/design-system-react';
@@ -125,6 +125,56 @@ Optional node rendered after the title (e.g. badges).
 
 <Canvas of={HeaderSubpageStories.TitleEndAccessory} />
 
+### `titleProps`
+
+Props passed to the title Text component when `title` is a string. Useful for passing `data-testid` and other supported Text props.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `descriptionProps`
+
+Props passed to the description Text component when `description` is a string. Useful for passing `data-testid` and other supported Text props.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ### `onBack`
 
 Callback when the back button is pressed. If provided, a back button will be rendered as the start accessory.
@@ -241,6 +291,31 @@ Additional props to pass to the close ButtonIcon. If provided (even without `onC
   </tbody>
 </table>
 
+### `startButtonIconProps`
+
+Optional ButtonIcon props to render as the start accessory. Only used if `startAccessory` is not provided and no back button shortcuts are active.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonIconProps</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ### `endButtonIconProps`
 
 Optional array of ButtonIcon props to render as additional end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided.
@@ -270,7 +345,7 @@ Optional array of ButtonIcon props to render as additional end accessories. Rend
 
 ### `startAccessory`
 
-Optional content before the identity content. Takes priority over `startButtonIconProps` and back shortcuts.
+Optional content before the identity content. Takes priority over `startButtonIconProps` and back shortcuts. Use this escape hatch when you need complete control over the start slot content.
 
 <table>
   <thead>
@@ -297,7 +372,7 @@ Optional content before the identity content. Takes priority over `startButtonIc
 
 ### `endAccessory`
 
-Optional content after the identity content. Takes priority over `endButtonIconProps` and close shortcuts.
+Optional content after the identity content. Takes priority over `endButtonIconProps` and close shortcuts. Use this escape hatch when you need complete control over the end slot content.
 
 <table>
   <thead>
@@ -321,6 +396,31 @@ Optional content after the identity content. Takes priority over `endButtonIconP
 </table>
 
 <Canvas of={HeaderSubpageStories.CustomEndAccessory} />
+
+### `accessoryGap`
+
+Gap between start/end accessories and the content. Uses spacing scale (1 = 4px, 2 = 8px, etc.).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>2</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### `className`
 
