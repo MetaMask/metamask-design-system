@@ -4,11 +4,12 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "./src",
+    "module": "ES2020",
     "jsx": "react-native",
     "types": ["react-native", "jest"],
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node16"
+    "moduleResolution": "bundler"
   },
   "references": [
     { "path": "../design-system-shared/tsconfig.build.json" },

@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import type { RefObject } from 'react';
 import { Dimensions } from 'react-native';
-import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   cancelAnimation,
@@ -101,11 +101,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       transform: [{ translateY: translateYProgress.value + topOffset }],
     }));
     const baseStyle = useMemo(
-      () =>
-        [
-          tw.style('absolute left-4 right-4 top-0'),
-          animatedStyle,
-        ] as StyleProp<ViewStyle>,
+      () => [tw.style('absolute left-4 right-4 top-0'), animatedStyle],
       [tw, animatedStyle],
     );
     const innerRef = useRef<ToasterRef | null>(null);

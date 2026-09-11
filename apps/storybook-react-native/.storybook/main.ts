@@ -52,8 +52,8 @@ const config: StorybookConfig = {
     //      segment), so the plugin never fires during the transform phase.
     //   2. Running Babel on the pre-bundled giant file is also much slower.
     //
-    // `disableSourceMaps: true` is belt-and-suspenders alongside the
-    // react-native-worklets patch that strips `?v=...` from readFileSync paths.
+    // `disableSourceMaps: true` avoids Rolldown source-map path issues during
+    // dep pre-bundling of worklet-transformed modules.
     //
     // Tracked upstream: https://github.com/dannyhw/vite-plugin-rnw/issues/13
     const rolldownOptions = viteConfig.optimizeDeps?.rolldownOptions ?? {};
