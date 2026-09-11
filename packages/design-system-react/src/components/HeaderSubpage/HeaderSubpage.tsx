@@ -10,7 +10,8 @@ import {
 import React, { forwardRef, useMemo } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
-import { Box, TWCLASSMAP_BOX_GAP } from '../Box';
+import { Box } from '../Box';
+import { TWCLASSMAP_BOX_GAP } from '../Box/Box.constants';
 import { ButtonIcon } from '../ButtonIcon';
 import type { ButtonIconProps } from '../ButtonIcon';
 import { Text } from '../Text';

@@ -32,6 +32,24 @@ const meta: Meta<HeaderSubpageProps> = {
     docs: {
       page: README,
     },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'landmark-no-duplicate-banner',
+            // Storybook renders light + dark themes simultaneously,
+            // duplicating the <header> "banner" landmark. A single
+            // HeaderSubpage is correct in production.
+            enabled: false,
+          },
+          {
+            id: 'landmark-unique',
+            // Same reason — duplicated by the theme decorator.
+            enabled: false,
+          },
+        ],
+      },
+    },
   },
   args: {
     avatar: ETH_AVATAR,
