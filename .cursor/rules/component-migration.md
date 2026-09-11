@@ -70,7 +70,11 @@ Use this workflow when:
 
 ### Phase 1: Audit
 
-**For both Extension and Mobile component-library:**
+Phase 1 has **two** parts. For DSYS-302 React parity, complete **both** before scaffolding, and land the consumer audit as an **Extension Audit PR** first (see `@.cursor/automations/react-parity-from-mobile.md`).
+
+#### 1A. API audit (named / library counterparts)
+
+**For both Extension and Mobile component-library (when a counterpart exists):**
 
 1. **Locate component** and document:
 
@@ -94,6 +98,21 @@ Use this workflow when:
    - Which props are platform-specific? (onClick/onPress, className/twClassName)
    - Are there naming conflicts? (disabled vs isDisabled)
    - What's the unified API that serves both platforms?
+
+#### 1B. Consumer replaceability audit (required when no Extension namesake)
+
+Many RN components have **no** legacy Extension component with the same name. Still audit Extension for **replaceable patterns** using the RN component as a fingerprint.
+
+1. **Fingerprint from RN/shared** — purpose, canonical shapes (static / interactive / accessories / children), default typography and interaction from README + stories.
+2. **Search Extension** (`ui/`):
+   - Name / near-name / local helpers
+   - Structural compositions matching the fingerprint (e.g. heading row above a list; title + chevron disclosure; title + “View all”)
+   - Exclude page chrome, nav headers, and list rows unless the fingerprint says otherwise
+3. **Score candidates** — High / Medium / Low with proposed MMDS props mapping.
+4. **Mark intentional divergences** — Extension patterns that should **not** be unified with Mobile (product/design decision); discuss on the Audit PR + Slack.
+5. **Capture before evidence** — demo VM / computer use screenshots of in-app candidates when possible; otherwise file + route/testid + snippet.
+6. **Open an Extension Audit PR** as the handoff object (candidate table, screenshots, design questions, recommended pilots). Do **not** implement React parity until that audit is confirmed (Slack thread reply for DSYS-302).
+7. **Later reuse the same Audit PR** for preview-package pilot replacements and after screenshots.
 
 ### Prop Alignment Principles
 
