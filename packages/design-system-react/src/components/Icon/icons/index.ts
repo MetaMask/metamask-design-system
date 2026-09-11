@@ -94,6 +94,7 @@ import HomeFilled from './HomeFilled';
 import Home from './Home';
 import Image from './Image';
 import Info from './Info';
+import Infinity from './Infinity';
 import Keep from './Keep';
 import Key from './Key';
 import Link from './Link';
@@ -280,6 +281,7 @@ export const Icons = {
   Home,
   Image,
   Info,
+  Infinity,
   Keep,
   Key,
   Link,
