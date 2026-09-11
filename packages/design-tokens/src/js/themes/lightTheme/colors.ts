@@ -160,35 +160,35 @@ export const colors: ThemeColors = {
     inverse: brandColor.grey000,
   },
   accent01: {
-    /** Expressive color in light orange (#ffa680) */
+    /** Expressive color in light orange (#ffc0a5) */
     light: brandColor.orange200,
-    /** Expressive color in orange (#ff5c16) */
+    /** Expressive color in orange (#fa4b00) */
     normal: brandColor.orange400,
-    /** Expressive color in dark orange (#661800) */
+    /** Expressive color in dark orange (#28001a) */
     dark: brandColor.orange700,
   },
   accent02: {
-    /** Expressive color in light purple (#eac2ff) */
+    /** Expressive color in light purple (#e1a9ff) */
     light: brandColor.purple100,
-    /** Expressive color in purple (#d075ff) */
+    /** Expressive color in purple (#c66ef5) */
     normal: brandColor.purple300,
-    /** Expressive color in dark purple (#3d065f) */
+    /** Expressive color in dark purple (#360853) */
     dark: brandColor.purple800,
   },
   accent03: {
-    /** Expressive color in light lime (#e5ffc3) */
+    /** Expressive color in light lime (#e3ff89) */
     light: brandColor.lime050,
-    /** Expressive color in lime (#baf24a) */
+    /** Expressive color in lime (#b9f302) */
     normal: brandColor.lime100,
     /** Expressive color in dark lime (#013330) */
     dark: brandColor.lime700,
   },
   accent04: {
-    /** Expressive color in light indigo (#cce7ff) */
+    /** Expressive color in light indigo (#b4d0ff) */
     light: brandColor.indigo100,
-    /** Expressive color in indigo (#89b0ff) */
+    /** Expressive color in indigo (#73a6ff) */
     normal: brandColor.indigo200,
-    /** Expressive color in dark indigo (#190066) */
+    /** Expressive color in dark indigo (#002139) */
     dark: brandColor.indigo800,
   },
   flask: {

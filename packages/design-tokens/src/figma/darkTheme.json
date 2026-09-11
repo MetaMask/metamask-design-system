@@ -341,7 +341,7 @@
       "description": "For positive semantic elements: success, confirm, complete, safe..."
     },
     "muted": {
-      "value": "#BAF24A26",
+      "value": "#B9F30226",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Muted color for positive semantic."
@@ -365,13 +365,13 @@
       "description": "Pressed state surface for success/default."
     },
     "muted-hover": {
-      "value": "#BAF24A33",
+      "value": "#B9F30233",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Hover state surface for success/muted."
     },
     "muted-pressed": {
-      "value": "#BAF24A40",
+      "value": "#B9F30240",
       "type": "color",
       "parent": "Theme Colors/Dark mode",
       "description": "Pressed state surface for success/muted."

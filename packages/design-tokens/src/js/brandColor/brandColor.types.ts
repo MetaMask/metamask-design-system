@@ -115,17 +115,17 @@ export type BrandColor = {
   yellow025: string;
   /** orange/orange100: #ffd4c1 */
   orange100: string;
-  /** orange/orange200: #ffa680 */
+  /** orange/orange200: #ffc0a5 */
   orange200: string;
   /** orange/orange300: #ff7940 */
   orange300: string;
-  /** orange/orange400: #ff5c16 */
+  /** orange/orange400: #fa4b00 */
   orange400: string;
   /** orange/orange500: #c3420d */
   orange500: string;
-  /** orange/orange600: #932d06 */
+  /** orange/orange600: #330022 */
   orange600: string;
-  /** orange/orange700: #661800 */
+  /** orange/orange700: #28001a */
   orange700: string;
   /** orange/orange800: #451100 */
   orange800: string;
@@ -135,11 +135,11 @@ export type BrandColor = {
   orange050: string;
   /** orange/orange025: #fff8f5 */
   orange025: string;
-  /** purple/purple100: #eac2ff */
+  /** purple/purple100: #e1a9ff */
   purple100: string;
   /** purple/purple200: #dfa4ff */
   purple200: string;
-  /** purple/purple300: #d075ff */
+  /** purple/purple300: #c66ef5 */
   purple300: string;
   /** purple/purple400: #b864f5 */
   purple400: string;
@@ -149,7 +149,7 @@ export type BrandColor = {
   purple600: string;
   /** purple/purple700: #6c2ab2 */
   purple700: string;
-  /** purple/purple800: #3d065f */
+  /** purple/purple800: #360853 */
   purple800: string;
   /** purple/purple900: #280a00 */
   purple900: string;
@@ -157,7 +157,7 @@ export type BrandColor = {
   purple050: string;
   /** purple/purple025: #fcf6ff */
   purple025: string;
-  /** lime/lime100: #baf24a */
+  /** lime/lime100: #b9f302 */
   lime100: string;
   /** lime/lime200: #95ca45 */
   lime200: string;
@@ -177,15 +177,15 @@ export type BrandColor = {
   lime900: string;
   /** lime/lime025: #effed9 */
   lime025: string;
-  /** lime/lime050: #e5ffc3 */
+  /** lime/lime050: #e3ff89 */
   lime050: string;
   /** indigo/indigo025: #f3faff */
   indigo025: string;
   /** indigo/indigo050: #ebf5ff */
   indigo050: string;
-  /** indigo/indigo100: #cce7ff */
+  /** indigo/indigo100: #b4d0ff */
   indigo100: string;
-  /** indigo/indigo200: #89b0ff */
+  /** indigo/indigo200: #73a6ff */
   indigo200: string;
   /** indigo/indigo300: #7e9ff0 */
   indigo300: string;
@@ -197,7 +197,7 @@ export type BrandColor = {
   indigo600: string;
   /** indigo/indigo700: #2e2082 */
   indigo700: string;
-  /** indigo/indigo800: #190066 */
+  /** indigo/indigo800: #002139 */
   indigo800: string;
   /** indigo/indigo900: #13004a */
   indigo900: string;
