@@ -11,66 +11,73 @@ import {
 // Maskicon SVG Creation
 // /////////////////////////////////////////////////////
 // Color Palettes
-const neutralPairs = [
-  ['#FF5C16', '#FCFCFC'],
-  ['#FF5C16', '#131416'],
-  ['#D075FF', '#FCFCFC'],
-  ['#D075FF', '#131416'],
-  ['#BAF24A', '#FCFCFC'],
-  ['#BAF24A', '#131416'],
-  ['#89B0FF', '#FCFCFC'],
-  ['#89B0FF', '#131416'],
-  ['#FCFCFC', '#FF5C16'],
-  ['#131416', '#FF5C16'],
-  ['#FCFCFC', '#D075FF'],
-  ['#131416', '#D075FF'],
-  ['#FCFCFC', '#BAF24A'],
-  ['#131416', '#BAF24A'],
-  ['#FCFCFC', '#89B0FF'],
-  ['#131416', '#89B0FF'],
+export const MASKICON_NEUTRAL_PAIRS = [
+  ['#FA4B00', '#000000'],
+  ['#B9F302', '#000000'],
+  ['#73A6FF', '#000000'],
+  ['#C66EF5', '#000000'],
 ];
 
-const tonalPairs = [
-  ['#FFA680', '#FF5C16'],
-  ['#661800', '#FF5C16'],
-  ['#EAC2FF', '#D075FF'],
-  ['#3D065F', '#D075FF'],
-  ['#E5FFC3', '#BAF24A'],
-  ['#013330', '#BAF24A'],
-  ['#CCE7FF', '#89B0FF'],
-  ['#190066', '#89B0FF'],
-  ['#FF5C16', '#FFA680'],
-  ['#FF5C16', '#661800'],
-  ['#D075FF', '#EAC2FF'],
-  ['#D075FF', '#3D065F'],
-  ['#BAF24A', '#E5FFC3'],
-  ['#BAF24A', '#013330'],
-  ['#89B0FF', '#CCE7FF'],
-  ['#89B0FF', '#190066'],
-  ['#661800', '#FFA680'],
-  ['#FFA680', '#661800'],
-  ['#3D065F', '#EAC2FF'],
-  ['#EAC2FF', '#3D065F'],
-  ['#013330', '#E5FFC3'],
-  ['#E5FFC3', '#013330'],
-  ['#190066', '#CCE7FF'],
-  ['#CCE7FF', '#190066'],
+export const MASKICON_TONAL_PAIRS = [
+  ['#330022', '#FA4B00'],
+  ['#013330', '#B9F302'],
+  ['#002139', '#73A6FF'],
+  ['#360853', '#C66EF5'],
 ];
 
-const complementaryPairs = [
-  ['#EAC2FF', '#013330'],
-  ['#013330', '#EAC2FF'],
-  ['#CCE7FF', '#661800'],
-  ['#661800', '#CCE7FF'],
-  ['#E5FFC3', '#3D065F'],
-  ['#3D065F', '#E5FFC3'],
-  ['#FFA680', '#190066'],
-  ['#190066', '#FFA680'],
-  ['#CCE7FF', '#013330'],
-  ['#013330', '#CCE7FF'],
+export const MASKICON_COMPLEMENTARY_PAIRS = [
+  ['#330022', '#73A6FF'],
+  ['#330022', '#B4D0FF'],
+  ['#013330', '#C66EF5'],
+  ['#013330', '#E1A9FF'],
+  ['#002139', '#B9F302'],
+  ['#002139', '#E3FF89'],
+  ['#360853', '#FA4B00'],
+  ['#360853', '#FFC0A5'],
 ];
 
-const colorPairs = neutralPairs.concat(tonalPairs).concat(complementaryPairs);
+const colorPairs = MASKICON_NEUTRAL_PAIRS.concat(MASKICON_TONAL_PAIRS).concat(
+  MASKICON_COMPLEMENTARY_PAIRS,
+);
+
+const MASKICON_COLOR_FAMILY_HEXES = {
+  Orange: new Set(['#FA4B00', '#FFC0A5', '#330022']),
+  Purple: new Set(['#C66EF5', '#E1A9FF', '#360853']),
+  Lime: new Set(['#B9F302', '#E3FF89', '#013330']),
+  Blue: new Set(['#73A6FF', '#B4D0FF', '#002139']),
+} as const;
+
+export const MASKICON_COLOR_FAMILY_NAMES = [
+  'Orange',
+  'Purple',
+  'Lime',
+  'Blue',
+  'Mixed',
+] as const;
+
+export type MaskiconColorFamilyName =
+  (typeof MASKICON_COLOR_FAMILY_NAMES)[number];
+
+const MASKICON_HUE_FAMILY_NAMES = ['Orange', 'Purple', 'Lime', 'Blue'] as const;
+
+/**
+ * Returns the hue family for a Maskicon color pair.
+ *
+ * @param background Background hex color
+ * @param foreground Foreground hex color
+ * @returns The matching family name, or Mixed when two hues are combined
+ */
+export function getMaskiconColorFamily(
+  background: string,
+  foreground: string,
+): MaskiconColorFamilyName {
+  const families = MASKICON_HUE_FAMILY_NAMES.filter((name) => {
+    const hexes = MASKICON_COLOR_FAMILY_HEXES[name];
+    return hexes.has(background) || hexes.has(foreground);
+  });
+
+  return families.length === 1 ? families[0] : 'Mixed';
+}
 
 /**
  * SDBM hash function
