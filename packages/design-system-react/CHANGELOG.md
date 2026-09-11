@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.43.0]
+
+### Changed
+
+- Updated `ButtonBase` and `ButtonIcon` to use fully rounded pill shapes across sizes and variants ([#1494](https://github.com/MetaMask/metamask-design-system/pull/1494))
+- Deprecated `ButtonFilter` in favor of `FilterButton` ([#1509](https://github.com/MetaMask/metamask-design-system/pull/1509))
+- Changed the `TextField` background from the default background to the muted background ([#1506](https://github.com/MetaMask/metamask-design-system/pull/1506))
+
+## [0.42.0]
+
+### Added
+
+- Added `HeartStraight` and `HeartStraightFilled` to `IconName` ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
+
+### Fixed
+
+- Fixed `ButtonIcon` shrinking when placed in a flex container ([#1502](https://github.com/MetaMask/metamask-design-system/pull/1502))
+
+## [0.41.0]
+
+### Changed
+
+- **BREAKING:** Default typeface is now Inter instead of Geist ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+  - `FontFamily.Default`, the `font-default` utility, and `Text` props are unchanged; only the typeface behind them changed
+  - Peer dependencies updated to `@metamask/design-tokens@^11.0.0` and `@metamask/design-system-tailwind-preset@^0.13.0`
+  - Swap Geist `@font-face` files for Inter; expect minor reflow from metric differences
+  - See [Migration Guide](./MIGRATION.md#from-version-0400-to-0410)
+- Restored the Telegram `Icon` artwork to the official logo ([#1500](https://github.com/MetaMask/metamask-design-system/pull/1500))
+
 ## [0.40.0]
 
 ### Changed
@@ -540,7 +569,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.40.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.43.0...HEAD
+[0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.42.0...@metamask/design-system-react@0.43.0
+[0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.41.0...@metamask/design-system-react@0.42.0
+[0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.40.0...@metamask/design-system-react@0.41.0
 [0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.39.0...@metamask/design-system-react@0.40.0
 [0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...@metamask/design-system-react@0.39.0
 [0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...@metamask/design-system-react@0.38.1

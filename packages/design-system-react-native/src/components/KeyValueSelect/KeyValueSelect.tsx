@@ -20,7 +20,7 @@ import type { KeyValueSelectProps } from './KeyValueSelect.types';
 
 const ROOT_TW_CLASS_NAME = 'w-full';
 
-/** Overrides KeyValueRow `pr-4` so SelectButton's `px-3` keeps a 16px trailing inset. */
+/** Overrides KeyValueRow `pr-4` so SelectButton's `pr-3` keeps a 16px trailing inset. */
 const KEY_VALUE_ROW_TW_CLASS_NAME = 'pr-1';
 
 export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(

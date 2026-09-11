@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
@@ -3629,6 +3630,44 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.40.0 to 0.41.0
+
+<a id="from-version-0400-to-0410"></a>
+
+<a id="default-typeface-geist-to-inter"></a>
+
+#### Default typeface: Geist to Inter
+
+`FontFamily.Default` now resolves to Inter instead of Geist. This comes from `@metamask/design-tokens`, where `--font-family-default` changed value. The `font-default` utility class, the `FontFamily` enum, and every `Text` prop are unchanged — only the typeface behind them is different.
+
+**Migration:**
+
+Copy the Inter `.woff2` files from [`apps/storybook-react/fonts/Inter`](../../apps/storybook-react/fonts/Inter) and update your `@font-face` declarations to declare the family as `'Inter'`. Six cuts are required: regular, medium, and semibold, each with an italic. Inter is available under the [SIL Open Font License](https://github.com/rsms/inter).
+
+```css
+/* Before (0.40.0) */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/Geist/Geist-SemiBold.woff2') format('woff2');
+}
+```
+
+```css
+/* After (0.41.0) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/Inter/Inter-SemiBold.woff2') format('woff2');
+}
+```
+
+See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-10x-to-1100) for the full cut list.
+
+**Impact:** No component code changes are required beyond swapping the font assets. Expect minor reflow, since Inter's metrics differ slightly from Geist's and text may wrap differently at tight widths.
 
 ### From version 0.38.1 to 0.39.0
 

@@ -184,3 +184,12 @@ sheetRef.current?.onCloseBottomSheet(() => {
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+Compose a bottom sheet with `BottomSheetHeader`, body content, and `BottomSheetFooter`.
+
+- `BottomSheetHeader` children: sentence case, no period
+- `BottomSheet` children: sentence case for string body content; complete sentences end with a period
+- `BottomSheetFooter` button labels (`primaryButtonProps.children`, `secondaryButtonProps.children`): sentence case, no period
+- Use the guidance for any nested components used in the body
