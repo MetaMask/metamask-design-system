@@ -144,6 +144,7 @@ export const IconName = {
   Home: 'Home',
   Image: 'Image',
   Info: 'Info',
+  Infinity: 'Infinity',
   Keep: 'Keep',
   Key: 'Key',
   Link: 'Link',
