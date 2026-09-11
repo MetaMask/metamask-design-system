@@ -177,3 +177,6 @@ export type { ButtonFilterProps } from './ButtonFilter';
 
 export { Toast, Toaster, toast, ToastSeverity } from './Toast';
 export type { ToastOptions, ToastProps, ToasterProps } from './Toast';
+
+export { HeaderSubpage } from './HeaderSubpage';
+export type { HeaderSubpageProps } from './HeaderSubpage';
