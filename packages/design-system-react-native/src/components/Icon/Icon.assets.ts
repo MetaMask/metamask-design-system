@@ -93,6 +93,7 @@ import HierarchySVG from './assets/hierarchy.svg';
 import HomeFilledSVG from './assets/home-filled.svg';
 import HomeSVG from './assets/home.svg';
 import ImageSVG from './assets/image.svg';
+import InfinitySVG from './assets/infinity.svg';
 import InfoSVG from './assets/info.svg';
 import KeepSVG from './assets/keep.svg';
 import KeySVG from './assets/key.svg';
@@ -283,6 +284,7 @@ export const assetByIconName: AssetByIconName = {
   HomeFilled: HomeFilledSVG,
   Home: HomeSVG,
   Image: ImageSVG,
+  Infinity: InfinitySVG,
   Info: InfoSVG,
   Keep: KeepSVG,
   Key: KeySVG,

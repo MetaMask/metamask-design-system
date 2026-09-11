@@ -93,6 +93,7 @@ import Hierarchy from './Hierarchy';
 import HomeFilled from './HomeFilled';
 import Home from './Home';
 import Image from './Image';
+import Infinity from './Infinity';
 import Info from './Info';
 import Keep from './Keep';
 import Key from './Key';
@@ -279,6 +280,7 @@ export const Icons = {
   HomeFilled,
   Home,
   Image,
+  Infinity,
   Info,
   Keep,
   Key,

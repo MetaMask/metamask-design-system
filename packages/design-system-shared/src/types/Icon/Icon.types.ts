@@ -143,6 +143,7 @@ export const IconName = {
   HomeFilled: 'HomeFilled',
   Home: 'Home',
   Image: 'Image',
+  Infinity: 'Infinity',
   Info: 'Info',
   Keep: 'Keep',
   Key: 'Key',
