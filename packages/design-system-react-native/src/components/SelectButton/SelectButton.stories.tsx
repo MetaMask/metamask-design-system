@@ -139,7 +139,7 @@ export const IsFullWidth: Story = {
         contentWrapperProps={{ twClassName: 'w-full justify-between' }}
         textProps={{ twClassName: 'text-left grow px-1' }}
         startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
-        placeholder="Full-width left-aligned select button"
+        placeholder="Full width"
       />
     </SelectButtonStoryWrapper>
   ),

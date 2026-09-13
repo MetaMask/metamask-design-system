@@ -299,7 +299,7 @@ describe('SelectButton', () => {
   });
 
   describe('when rendering root pressable styles', () => {
-    it('supports a full-width button', () => {
+    it('supports a full-width button with left-aligned content', () => {
       const { getByTestId, getByText } = render(
         <SelectButton
           testID={ROOT_TEST_ID}
