@@ -34,10 +34,7 @@ export const SelectButton = ({
   const labelContent = value ?? placeholder;
   const resolvedTextProps = {
     ...textProps,
-    twClassName: mergeTwClassName(
-      isFullWidth ? 'text-left grow px-1' : 'text-left',
-      textProps?.twClassName,
-    ),
+    twClassName: mergeTwClassName('text-left', textProps?.twClassName),
   };
 
   let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;

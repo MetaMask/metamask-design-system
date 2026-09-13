@@ -310,7 +310,7 @@ describe('SelectButton', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`w-full`);
-      expect(getByText('Label')).toHaveStyle(tw.style('text-left grow px-1'));
+      expect(getByText('Label')).toHaveStyle(tw.style('text-left'));
     });
 
     it('uses default primary container background', () => {
