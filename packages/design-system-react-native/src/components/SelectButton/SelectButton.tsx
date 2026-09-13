@@ -54,6 +54,7 @@ export const SelectButton = ({
       {...buttonBaseRest}
       size={size}
       isDisabled={isDisabled}
+      isFullWidth={isFullWidth}
       isLoading={isLoading}
       children={labelContent}
       textProps={{
