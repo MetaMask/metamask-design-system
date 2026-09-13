@@ -1,4 +1,5 @@
 import {
+  mergeTwClassName,
   SelectButtonEndArrow,
   SelectButtonSize,
   SelectButtonVariant,
@@ -30,6 +31,24 @@ export const SelectButton = ({
   ...buttonBaseRest
 }: SelectButtonProps) => {
   const labelContent = value ?? placeholder;
+  const resolvedContentWrapperProps = isFullWidth
+    ? {
+        ...buttonBaseRest.contentWrapperProps,
+        twClassName: mergeTwClassName(
+          'w-full justify-between',
+          buttonBaseRest.contentWrapperProps?.twClassName,
+        ),
+      }
+    : buttonBaseRest.contentWrapperProps;
+  const resolvedTextProps = isFullWidth
+    ? {
+        ...textProps,
+        twClassName: mergeTwClassName(
+          'text-left grow px-1',
+          textProps?.twClassName,
+        ),
+      }
+    : textProps;
 
   let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;
   if (hideEndArrow) {
@@ -53,8 +72,9 @@ export const SelectButton = ({
         ...(variant === SelectButtonVariant.Tertiary
           ? { color: TextColor.TextAlternative }
           : {}),
-        ...textProps,
+        ...resolvedTextProps,
       }}
+      contentWrapperProps={resolvedContentWrapperProps}
       startAccessory={startAccessory}
       endAccessory={resolvedEndArrowDirection ? undefined : endAccessory}
       endIconName={

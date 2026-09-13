@@ -305,8 +305,6 @@ describe('SelectButton', () => {
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           isFullWidth
-          contentWrapperProps={{ twClassName: 'w-full justify-between' }}
-          textProps={{ twClassName: 'text-left grow px-1' }}
           placeholder="Label"
         />,
       );

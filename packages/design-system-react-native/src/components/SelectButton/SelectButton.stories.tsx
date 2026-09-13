@@ -131,8 +131,6 @@ export const IsFullWidth: Story = {
       <SelectButton
         onPress={noopPress}
         isFullWidth
-        contentWrapperProps={{ twClassName: 'w-full justify-between' }}
-        textProps={{ twClassName: 'text-left grow px-1' }}
         startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
         placeholder="Full width"
       />
