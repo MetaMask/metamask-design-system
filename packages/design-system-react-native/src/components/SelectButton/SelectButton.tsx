@@ -23,6 +23,7 @@ export const SelectButton = ({
   endAccessory,
   hideEndArrow = false,
   isDisabled = false,
+  isFullWidth = false,
   endArrowDirectionIconProps,
   variant = SelectButtonVariant.Primary,
   isLoading = false,
