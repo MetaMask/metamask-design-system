@@ -130,6 +130,18 @@ export const TextProps: Story = {
   ),
 };
 
+export const FullWidthLeftAligned: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper>
+      <SelectButton
+        onPress={noopPress}
+        isFullWidth
+        placeholder="Full-width select button"
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
 export const EndArrowDirectionIconProps: Story = {
   render: () => (
     <SelectButtonStoryWrapper gap={4}>
