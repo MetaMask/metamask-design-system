@@ -127,13 +127,17 @@ export const Size: Story = {
 
 export const IsFullWidth: Story = {
   render: () => (
-    <SelectButtonStoryWrapper>
-      <SelectButton
-        onPress={noopPress}
-        isFullWidth
-        startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
-        placeholder="Full width"
-      />
+    <SelectButtonStoryWrapper gap={4}>
+      {Object.values(SelectButtonVariant).map((variant) => (
+        <SelectButton
+          key={variant}
+          onPress={noopPress}
+          isFullWidth
+          variant={variant}
+          startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
+          placeholder={`${variant} full width`}
+        />
+      ))}
     </SelectButtonStoryWrapper>
   ),
 };
