@@ -10,9 +10,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { AvatarToken } from '../AvatarToken';
-import { Icon } from '../Icon';
 import { Box } from '../Box';
 import { ButtonIcon } from '../ButtonIcon';
+import { Icon } from '../Icon';
 import { Text } from '../Text';
 
 import { HeaderSubpage } from './HeaderSubpage';
