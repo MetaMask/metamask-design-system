@@ -130,7 +130,7 @@ export const TextProps: Story = {
   ),
 };
 
-export const FullWidthLeftAligned: Story = {
+export const IsFullWidth: Story = {
   render: () => (
     <SelectButtonStoryWrapper>
       <SelectButton
