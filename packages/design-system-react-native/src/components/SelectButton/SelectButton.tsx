@@ -6,6 +6,7 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
+import { Box } from '../Box';
 import { ButtonBase } from '../ButtonBase';
 import { IconColor } from '../Icon';
 import { TextColor } from '../Text';
@@ -31,24 +32,13 @@ export const SelectButton = ({
   ...buttonBaseRest
 }: SelectButtonProps) => {
   const labelContent = value ?? placeholder;
-  const resolvedContentWrapperProps = isFullWidth
-    ? {
-        ...buttonBaseRest.contentWrapperProps,
-        twClassName: mergeTwClassName(
-          'w-full justify-between',
-          buttonBaseRest.contentWrapperProps?.twClassName,
-        ),
-      }
-    : buttonBaseRest.contentWrapperProps;
-  const resolvedTextProps = isFullWidth
-    ? {
-        ...textProps,
-        twClassName: mergeTwClassName(
-          'text-left grow px-1',
-          textProps?.twClassName,
-        ),
-      }
-    : textProps;
+  const resolvedTextProps = {
+    ...textProps,
+    twClassName: mergeTwClassName(
+      'text-left grow px-1',
+      textProps?.twClassName,
+    ),
+  };
 
   let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;
   if (hideEndArrow) {
@@ -74,9 +64,13 @@ export const SelectButton = ({
           : {}),
         ...resolvedTextProps,
       }}
-      contentWrapperProps={resolvedContentWrapperProps}
+      contentWrapperProps={buttonBaseRest.contentWrapperProps}
       startAccessory={startAccessory}
-      endAccessory={resolvedEndArrowDirection ? undefined : endAccessory}
+      endAccessory={
+        resolvedEndArrowDirection || !endAccessory ? undefined : (
+          <Box twClassName="ml-auto">{endAccessory}</Box>
+        )
+      }
       endIconName={
         resolvedEndArrowDirection
           ? MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME[
@@ -87,6 +81,10 @@ export const SelectButton = ({
       endIconProps={
         resolvedEndArrowDirection
           ? {
+              twClassName: mergeTwClassName(
+                'ml-auto',
+                endArrowDirectionIconProps?.twClassName,
+              ),
               ...(variant === SelectButtonVariant.Tertiary
                 ? { color: IconColor.IconAlternative }
                 : {}),
