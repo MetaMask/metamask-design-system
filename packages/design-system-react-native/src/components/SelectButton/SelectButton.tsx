@@ -6,7 +6,6 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Box } from '../Box';
 import { ButtonBase } from '../ButtonBase';
 import { IconColor } from '../Icon';
 import { TextColor } from '../Text';
@@ -35,8 +34,20 @@ export const SelectButton = ({
   const labelContent = value ?? placeholder;
   const resolvedTextProps = {
     ...textProps,
-    twClassName: mergeTwClassName('text-left', textProps?.twClassName),
+    twClassName: mergeTwClassName(
+      isFullWidth ? 'text-left flex-1' : 'text-left',
+      textProps?.twClassName,
+    ),
   };
+  const resolvedContentWrapperProps = isFullWidth
+    ? {
+        ...buttonBaseRest.contentWrapperProps,
+        twClassName: mergeTwClassName(
+          'w-full',
+          buttonBaseRest.contentWrapperProps?.twClassName,
+        ),
+      }
+    : buttonBaseRest.contentWrapperProps;
 
   let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;
   if (hideEndArrow) {
@@ -63,13 +74,9 @@ export const SelectButton = ({
           : {}),
         ...resolvedTextProps,
       }}
-      contentWrapperProps={buttonBaseRest.contentWrapperProps}
+      contentWrapperProps={resolvedContentWrapperProps}
       startAccessory={startAccessory}
-      endAccessory={
-        resolvedEndArrowDirection || !endAccessory ? undefined : (
-          <Box twClassName="ml-auto">{endAccessory}</Box>
-        )
-      }
+      endAccessory={resolvedEndArrowDirection ? undefined : endAccessory}
       endIconName={
         resolvedEndArrowDirection
           ? MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME[
@@ -80,10 +87,6 @@ export const SelectButton = ({
       endIconProps={
         resolvedEndArrowDirection
           ? {
-              twClassName: mergeTwClassName(
-                'ml-auto',
-                endArrowDirectionIconProps?.twClassName,
-              ),
               ...(variant === SelectButtonVariant.Tertiary
                 ? { color: IconColor.IconAlternative }
                 : {}),
