@@ -69,7 +69,7 @@ Optional title (string or node). When a string is provided, default text styling
   </tbody>
 </table>
 
-<Canvas of={HeaderSubpageStories.TitleOnly} />
+<Canvas of={HeaderSubpageStories.Title} />
 
 ### `description`
 
@@ -129,6 +129,16 @@ Optional node rendered after the title (e.g. badges).
 
 Props passed to the title Text component when `title` is a string. Useful for passing `data-testid` and other supported Text props.
 
+```tsx
+<HeaderSubpage
+  title="Ethereum"
+  titleProps={{
+    'data-testid': 'header-title',
+    ellipsis: true,
+  }}
+/>
+```
+
 <table>
   <thead>
     <tr>
@@ -149,11 +159,21 @@ Props passed to the title Text component when `title` is a string. Useful for pa
     </tr>
   </tbody>
 </table>
+
+<Canvas of={HeaderSubpageStories.TitleProps} />
 
 ### `descriptionProps`
 
 Props passed to the description Text component when `description` is a string. Useful for passing `data-testid` and other supported Text props.
 
+```tsx
+<HeaderSubpage
+  title="Ethereum"
+  description="ETH"
+  descriptionProps={{ 'data-testid': 'header-description' }}
+/>
+```
+
 <table>
   <thead>
     <tr>
@@ -174,6 +194,8 @@ Props passed to the description Text component when `description` is a string. U
     </tr>
   </tbody>
 </table>
+
+<Canvas of={HeaderSubpageStories.DescriptionProps} />
 
 ### `onBack`
 
