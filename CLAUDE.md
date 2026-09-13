@@ -15,6 +15,8 @@ Claude Code expands these `@` imports at session start. Other agents should open
 @.cursor/rules/release-workflow.md
 @.cursor/rules/content-guidelines.mdc
 
+Do **not** `@`-import `.cursor/skills/` here. Skills are on-demand workflows (see `docs/ai-agents.md`). Claude Code still gets the UI-screenshot invariant from `@AGENTS.md`.
+
 See `docs/ai-agents.md` for the full strategy.
 
 ## Personal Overrides

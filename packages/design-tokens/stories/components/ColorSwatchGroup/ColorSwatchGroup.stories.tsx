@@ -23,8 +23,8 @@ export const Default: Story = {
             type: 'color',
           },
           white010: {
-            value: '#FCFCFC',
-            description: '(HEX: #FCFCFC)',
+            value: '#F5F5F5',
+            description: '(HEX: #F5F5F5)',
             type: 'color',
           },
         },

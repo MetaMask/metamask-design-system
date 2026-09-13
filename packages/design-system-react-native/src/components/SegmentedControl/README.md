@@ -79,13 +79,13 @@ const [value, setValue] = useState('a');
 
 ### `size`
 
-Size of the control and all child **`FilterButton`** segments. Also sets the container border radius.
+Size of the control and all child **`FilterButton`** segments.
 
 Available sizes:
 
-- `SegmentedControlSize.Sm` (32px segment height, 12px container radius)
-- `SegmentedControlSize.Md` (40px segment height, 16px container radius)
-- `SegmentedControlSize.Lg` (48px segment height, 16px container radius)
+- `SegmentedControlSize.Sm` (32px segment height)
+- `SegmentedControlSize.Md` (40px segment height)
+- `SegmentedControlSize.Lg` (48px segment height)
 
 | TYPE                   | REQUIRED | DEFAULT                   |
 | ---------------------- | -------- | ------------------------- |

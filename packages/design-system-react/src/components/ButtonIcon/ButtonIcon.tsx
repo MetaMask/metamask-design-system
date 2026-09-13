@@ -32,21 +32,18 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
 
     const mergedClassName = twMerge(
       // Base styles
-      'inline-flex shrink-0 items-center justify-center p-0',
+      'inline-flex shrink-0 items-center justify-center rounded-full p-0',
       // Size styles
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[size],
       // Variant styles
       variant === ButtonIconVariant.Default && [
-        'rounded-lg bg-transparent',
+        'bg-transparent',
         isInteractive && 'hover:bg-hover active:bg-pressed',
         'text-icon-default',
       ],
-      variant === ButtonIconVariant.Floating && [
-        'rounded-full',
+      variant === ButtonIconVariant.Floating &&
         'bg-icon-default text-background-default',
-      ],
       variant === ButtonIconVariant.Filled && [
-        'rounded-full',
         'bg-muted text-icon-default',
         isInteractive && 'hover:bg-muted-hover active:bg-muted-pressed',
       ],
