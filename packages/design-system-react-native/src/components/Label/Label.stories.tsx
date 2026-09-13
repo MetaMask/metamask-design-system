@@ -28,6 +28,6 @@ type Story = StoryObj<LabelProps>;
 
 export const Default: Story = {
   args: {
-    children: 'Sample Label Text',
+    children: 'Sample label text',
   },
 };

@@ -6,14 +6,14 @@ import { ButtonTertiary } from './ButtonTertiary';
 
 describe('ButtonTertiary', () => {
   it('renders with button tertiary styles by default', () => {
-    render(<ButtonTertiary>Button Tertiary</ButtonTertiary>);
+    render(<ButtonTertiary>Button tertiary</ButtonTertiary>);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass('bg-transparent', 'text-default');
   });
 
   it('renders with danger styles when isDanger is true', () => {
-    render(<ButtonTertiary isDanger>Danger Button Tertiary</ButtonTertiary>);
+    render(<ButtonTertiary isDanger>Danger button Tertiary</ButtonTertiary>);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass('bg-transparent', 'text-error-default');
@@ -27,7 +27,7 @@ describe('ButtonTertiary', () => {
 
   it('applies disabled styles while preserving variant-specific classes', () => {
     render(
-      <ButtonTertiary isDisabled>Disabled Button Tertiary</ButtonTertiary>,
+      <ButtonTertiary isDisabled>Disabled button tertiary</ButtonTertiary>,
     );
 
     const button = screen.getByRole('button');
@@ -97,7 +97,7 @@ describe('ButtonTertiary', () => {
   });
 
   it('applies full width class correctly', () => {
-    render(<ButtonTertiary isFullWidth>Full Width</ButtonTertiary>);
+    render(<ButtonTertiary isFullWidth>Full width</ButtonTertiary>);
     expect(screen.getByRole('button')).toHaveClass('w-full');
   });
 
@@ -114,7 +114,7 @@ describe('ButtonTertiary', () => {
     });
 
     it('does not apply interactive styles when disabled', () => {
-      render(<ButtonTertiary isDisabled>Disabled Button</ButtonTertiary>);
+      render(<ButtonTertiary isDisabled>Disabled button</ButtonTertiary>);
 
       const button = screen.getByRole('button');
       expect(button).not.toHaveClass('hover:bg-hover');
@@ -122,7 +122,7 @@ describe('ButtonTertiary', () => {
     });
 
     it('does not apply interactive styles when loading', () => {
-      render(<ButtonTertiary isLoading>Loading Button</ButtonTertiary>);
+      render(<ButtonTertiary isLoading>Loading button</ButtonTertiary>);
 
       const button = screen.getByRole('button');
       expect(button).not.toHaveClass('hover:bg-hover');
@@ -240,7 +240,7 @@ describe('ButtonTertiary', () => {
   describe('loading states', () => {
     it('applies correct loading styles for all variants', () => {
       const { rerender } = render(
-        <ButtonTertiary isLoading>Loading Button</ButtonTertiary>,
+        <ButtonTertiary isLoading>Loading button</ButtonTertiary>,
       );
 
       // Default loading
@@ -252,7 +252,7 @@ describe('ButtonTertiary', () => {
       // Danger loading
       rerender(
         <ButtonTertiary isLoading isDanger>
-          Loading Button
+          Loading button
         </ButtonTertiary>,
       );
       button = screen.getByRole('button');
@@ -265,7 +265,7 @@ describe('ButtonTertiary', () => {
       // Inverse loading
       rerender(
         <ButtonTertiary isLoading isInverse>
-          Loading Button
+          Loading button
         </ButtonTertiary>,
       );
       button = screen.getByRole('button');
@@ -274,7 +274,7 @@ describe('ButtonTertiary', () => {
       // Inverse danger loading
       rerender(
         <ButtonTertiary isLoading isInverse isDanger>
-          Loading Button
+          Loading button
         </ButtonTertiary>,
       );
       button = screen.getByRole('button');

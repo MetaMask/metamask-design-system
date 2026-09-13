@@ -6,13 +6,13 @@ import { Label } from './Label';
 describe('Label', () => {
   it('renders correctly', () => {
     const { getByTestId } = render(
-      <Label testID="label">Sample Label Text</Label>,
+      <Label testID="label">Sample label text</Label>,
     );
     expect(getByTestId('label')).toBeDefined();
   });
 
   it('renders children content', () => {
-    const { getByText } = render(<Label>Sample Label Text</Label>);
-    expect(getByText('Sample Label Text')).toBeDefined();
+    const { getByText } = render(<Label>Sample label text</Label>);
+    expect(getByText('Sample label text')).toBeDefined();
   });
 });

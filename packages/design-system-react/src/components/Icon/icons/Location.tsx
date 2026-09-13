@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgLocation = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M12 12q.824 0 1.413-.587C14 10.825 14 10.55 14 10s-.196-1.02-.587-1.412S12.55 8 12 8s-1.02.196-1.412.588S10 9.45 10 10s.196 1.02.588 1.413S11.45 12 12 12m0 7.35q3.05-2.8 4.525-5.087C18 11.976 18 11.383 18 10.2q0-2.725-1.737-4.462C14.525 4 13.683 4 12 4s-3.104.58-4.262 1.738S6 8.383 6 10.2q0 1.775 1.475 4.063C8.95 16.55 9.967 17.483 12 19.35M12 22q-4.024-3.425-6.012-6.362C3.999 12.7 4 11.866 4 10.2q0-3.75 2.413-5.975C8.825 2 9.883 2 12 2q3.176 0 5.588 2.225C19.999 6.45 20 7.7 20 10.2q0 2.5-1.987 5.438C16.025 18.575 14.683 19.717 12 22" /></svg>;
+const SvgLocation = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M12 6a3.75 3.75 0 1 0 3.75 3.75A3.75 3.75 0 0 0 12 6m0 6a2.25 2.25 0 1 1 2.25-2.25A2.25 2.25 0 0 1 12 12m0-10.5a8.26 8.26 0 0 0-8.25 8.25c0 2.944 1.36 6.064 3.938 9.023a23.8 23.8 0 0 0 3.885 3.591.75.75 0 0 0 .861 0 23.8 23.8 0 0 0 3.879-3.59c2.573-2.96 3.937-6.08 3.937-9.024A8.26 8.26 0 0 0 12 1.5m0 19.313c-1.55-1.22-6.75-5.696-6.75-11.063a6.75 6.75 0 0 1 13.5 0c0 5.365-5.2 9.844-6.75 11.063" /></svg>;
 const ForwardRef = forwardRef(SvgLocation);
 export default ForwardRef;

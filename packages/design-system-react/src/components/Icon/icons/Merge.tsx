@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgMerge = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M6.4 21 5 19.6l4.825-4.85q.575-.575.875-1.3t.3-1.525v-5.1L9.4 8.4 8 7l4-4 4 4-1.4 1.4L13 6.825v5.1a3.95 3.95 0 0 0 1.175 2.825L19 19.6 17.6 21 12 15.4z" /></svg>;
+const SvgMerge = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M6 20.25v-6a.75.75 0 0 1 .22-.53l5.03-5.03V4.06L9.53 5.78a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1-1.06 1.06l-1.72-1.72v4.63l5.03 5.03a.75.75 0 0 1 .22.53v6a.75.75 0 0 1-1.5 0v-5.69l-4.5-4.5-4.5 4.5v5.69a.75.75 0 0 1-1.5 0" /></svg>;
 const ForwardRef = forwardRef(SvgMerge);
 export default ForwardRef;

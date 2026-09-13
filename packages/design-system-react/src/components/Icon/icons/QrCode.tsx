@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgQrCode = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M3 11V3h8v8zm2-2h4V5H5zM3 21v-8h8v8zm2-2h4v-4H5zm8-8V3h8v8zm2-2h4V5h-4zm4 12v-2h2v2zm-6-6v-2h2v2zm2 2v-2h2v2zm-2 2v-2h2v2zm2 2v-2h2v2zm2-2v-2h2v2zm0-4v-2h2v2zm2 2v-2h2v2z" /></svg>;
+const SvgQrCode = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M9.75 3.75h-4.5a1.5 1.5 0 0 0-1.5 1.5v4.5a1.5 1.5 0 0 0 1.5 1.5h4.5a1.5 1.5 0 0 0 1.5-1.5v-4.5a1.5 1.5 0 0 0-1.5-1.5m0 6h-4.5v-4.5h4.5zm0 3h-4.5a1.5 1.5 0 0 0-1.5 1.5v4.5a1.5 1.5 0 0 0 1.5 1.5h4.5a1.5 1.5 0 0 0 1.5-1.5v-4.5a1.5 1.5 0 0 0-1.5-1.5m0 6h-4.5v-4.5h4.5zm9-15h-4.5a1.5 1.5 0 0 0-1.5 1.5v4.5a1.5 1.5 0 0 0 1.5 1.5h4.5a1.5 1.5 0 0 0 1.5-1.5v-4.5a1.5 1.5 0 0 0-1.5-1.5m0 6h-4.5v-4.5h4.5zm-6 6.75v-3a.75.75 0 0 1 1.5 0v3a.75.75 0 0 1-1.5 0m7.5-1.5a.75.75 0 0 1-.75.75h-2.25v3.75a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1 0-1.5h2.25V13.5a.75.75 0 0 1 1.5 0v.75h2.25a.75.75 0 0 1 .75.75m0 3v1.5a.75.75 0 0 1-1.5 0V18a.75.75 0 0 1 1.5 0" /></svg>;
 const ForwardRef = forwardRef(SvgQrCode);
 export default ForwardRef;

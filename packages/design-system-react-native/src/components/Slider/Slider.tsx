@@ -6,7 +6,6 @@ import {
 } from '@metamask/design-system-shared';
 import {
   getThemeColors,
-  usePureBlack,
   useTailwind,
   useTheme,
 } from '@metamask/design-system-twrnc-preset';
@@ -62,12 +61,8 @@ export const Slider = ({
 }: SliderProps) => {
   const tw = useTailwind();
   const theme = useTheme();
-  const isPureBlack = usePureBlack();
 
-  const palette = useMemo(
-    () => getThemeColors(theme, isPureBlack),
-    [isPureBlack, theme],
-  );
+  const palette = useMemo(() => getThemeColors(theme), [theme]);
 
   const themedColors = useMemo(() => {
     const hasThemedColors = hasThemedMarkColors(marks);

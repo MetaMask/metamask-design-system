@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgBookmark = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" ref={ref} {...props}><path d="M6 22q-.824 0-1.412-.587C4 20.826 4 20.55 4 20V4q0-.824.588-1.412C5.176 1.999 5.45 2 6 2h12q.824 0 1.413.588C20.002 3.175 20 3.45 20 4v16q0 .824-.587 1.413c-.587.589-.863.587-1.413.587zm0-2h12V4h-2v7l-2.5-1.5L11 11V4H6z" /></svg>;
+const SvgBookmark = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M17.25 3H6.75a1.5 1.5 0 0 0-1.5 1.5V21a.75.75 0 0 0 1.148.636L12 18.134l5.603 3.502A.75.75 0 0 0 18.75 21V4.5a1.5 1.5 0 0 0-1.5-1.5m0 1.5v10.647l-4.853-3.033a.75.75 0 0 0-.795 0L6.75 15.146V4.5Zm-4.853 12.114a.75.75 0 0 0-.795 0L6.75 19.647v-2.732l5.25-3.28 5.25 3.28v2.732Z" /></svg>;
 const ForwardRef = forwardRef(SvgBookmark);
 export default ForwardRef;

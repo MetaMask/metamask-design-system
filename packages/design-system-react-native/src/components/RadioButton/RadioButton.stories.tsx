@@ -62,7 +62,7 @@ export const IsReadOnly: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <RadioButtonStory label="Editable" />
-      <RadioButtonStory isReadOnly isChecked label="Read Only" />
+      <RadioButtonStory isReadOnly isChecked label="Read only" />
     </View>
   ),
 };

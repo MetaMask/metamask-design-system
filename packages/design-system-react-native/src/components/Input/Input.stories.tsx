@@ -51,7 +51,7 @@ type Story = StoryObj<InputProps>;
 export const Default: Story = {
   args: {
     value: '',
-    placeholder: 'Sample Placeholder',
+    placeholder: 'Sample placeholder',
   },
   render: (args) => <ControlledInput {...args} />,
 };

@@ -2,7 +2,7 @@ import type { RadioButtonProps } from './RadioButton.types';
 
 // Sample props for stories and tests
 export const SAMPLE_RADIOBUTTON_PROPS: RadioButtonProps = {
-  label: 'Sample RadioButton Label',
+  label: 'Sample radio button label',
   isChecked: false,
   isDisabled: false,
   isReadOnly: false,

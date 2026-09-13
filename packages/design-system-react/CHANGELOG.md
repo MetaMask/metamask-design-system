@@ -7,6 +7,120 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.43.0]
+
+### Changed
+
+- Updated `ButtonBase` and `ButtonIcon` to use fully rounded pill shapes across sizes and variants ([#1494](https://github.com/MetaMask/metamask-design-system/pull/1494))
+- Deprecated `ButtonFilter` in favor of `FilterButton` ([#1509](https://github.com/MetaMask/metamask-design-system/pull/1509))
+- Changed the `TextField` background from the default background to the muted background ([#1506](https://github.com/MetaMask/metamask-design-system/pull/1506))
+
+## [0.42.0]
+
+### Added
+
+- Added `HeartStraight` and `HeartStraightFilled` to `IconName` ([#1503](https://github.com/MetaMask/metamask-design-system/pull/1503))
+
+### Fixed
+
+- Fixed `ButtonIcon` shrinking when placed in a flex container ([#1502](https://github.com/MetaMask/metamask-design-system/pull/1502))
+
+## [0.41.0]
+
+### Changed
+
+- **BREAKING:** Default typeface is now Inter instead of Geist ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+  - `FontFamily.Default`, the `font-default` utility, and `Text` props are unchanged; only the typeface behind them changed
+  - Peer dependencies updated to `@metamask/design-tokens@^11.0.0` and `@metamask/design-system-tailwind-preset@^0.13.0`
+  - Swap Geist `@font-face` files for Inter; expect minor reflow from metric differences
+  - See [Migration Guide](./MIGRATION.md#from-version-0400-to-0410)
+- Restored the Telegram `Icon` artwork to the official logo ([#1500](https://github.com/MetaMask/metamask-design-system/pull/1500))
+
+## [0.40.0]
+
+### Changed
+
+- Updated `Icon` artwork to Phosphor-based glyphs for the brand migration, keeping existing `IconName` values, `viewBox="0 0 24 24"`, and `currentColor` fills ([#1475](https://github.com/MetaMask/metamask-design-system/pull/1475), [#1482](https://github.com/MetaMask/metamask-design-system/pull/1482), [#1493](https://github.com/MetaMask/metamask-design-system/pull/1493))
+  - `AppleLogo`, `Bridge`, and `MetamaskFoxOutline` are unchanged
+- Bumped `@metamask/utils` from `^11.12.0` to `^11.12.1` ([#1492](https://github.com/MetaMask/metamask-design-system/pull/1492))
+
+## [0.39.0]
+
+### Changed
+
+- **BREAKING:** Removed 111 unused icons from `IconName` to reduce icon bundle size ([#1481](https://github.com/MetaMask/metamask-design-system/pull/1481))
+  - TypeScript will fail on remaining references to removed `IconName` members
+  - See [Migration Guide](./MIGRATION.md#from-version-0381-to-0390)
+
+### Fixed
+
+- Fixed `BadgeNetwork` Xs size border radius to match Figma ([#1480](https://github.com/MetaMask/metamask-design-system/pull/1480))
+
+## [0.38.1]
+
+### Changed
+
+- Added content guidelines to component documentation, including sentence case, punctuation, and prop-specific examples ([#1466](https://github.com/MetaMask/metamask-design-system/pull/1466))
+- Updated the `AvatarGroup` migration guide with extension-specific prop mappings and migration examples ([#1460](https://github.com/MetaMask/metamask-design-system/pull/1460))
+
+### Fixed
+
+- Fixed a `BadgeWrapper` layout feedback loop that could cause continuous layout updates and high CPU usage ([#1474](https://github.com/MetaMask/metamask-design-system/pull/1474))
+
+## [0.38.0]
+
+### Changed
+
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^10.0.0` and `@metamask/design-system-tailwind-preset@^0.12.0` ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - Coordinates with `@metamask/design-tokens@10.0.0` PureBlack API removals and `@metamask/design-system-tailwind-preset@0.12.0` peer alignment; no additional React API changes beyond what 0.37.0 already shipped
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-9x-to-1000)
+
+### Fixed
+
+- Updated `Popover` default surface and arrow to `BackgroundElevated2` so floating UI is elevated above base surfaces ([#1458](https://github.com/MetaMask/metamask-design-system/pull/1458))
+
+## [0.37.0]
+
+### Added
+
+- Added `showCloseButton` to `ToastOptions` for the imperative `toast(...)` API (default `true`); when `false`, the close button is hidden while auto-dismiss and `toast.dismiss()` still work ([#1446](https://github.com/MetaMask/metamask-design-system/pull/1446))
+
+### Changed
+
+- Updated `BannerBase` to center-align compact content (title-only, description-only, or title with a single-line description or string children) and top-align multi-line stacks, custom React node children, or below-action layouts; inherited by `BannerAlert` and `Toast` ([#1447](https://github.com/MetaMask/metamask-design-system/pull/1447))
+- **BREAKING:** Removed `PureBlackProvider` and `usePureBlack` exports ([#1450](https://github.com/MetaMask/metamask-design-system/pull/1450))
+  - Remove `PureBlackProvider` wrapping and `data-pure-black` on the document root
+  - Use semantic elevated tokens (`BackgroundElevated1`, `BackgroundElevated2`, `BorderAlternative`) for stepped surfaces instead of pure-black branching
+  - See [Migration Guide](./MIGRATION.md#from-version-0360-to-0370)
+
+### Fixed
+
+- Fixed `Checkbox` unselected state to use a transparent background instead of `background.default` ([#1451](https://github.com/MetaMask/metamask-design-system/pull/1451))
+
+## [0.36.0]
+
+### Added
+
+- Added `BoxBackgroundColor.BackgroundElevated1`, `BoxBackgroundColor.BackgroundElevated2`, and `BoxBorderColor.BorderAlternative` via `@metamask/design-system-shared` ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+
+### Changed
+
+- Updated peer dependency to `@metamask/design-tokens@^9.0.0` ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444))
+  - Required coordination bump; visual impact comes from the design-tokens 9.0.0 dark theme change for apps not already on OLED pure-black
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+- Updated `ModalContent` to use `BackgroundElevated1` and `BorderAlternative` instead of branching on pure-black mode ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+  - `elevated1` and `border.alternative` resolve to the same values as the previous pure-black path (`background.alternative`, `border.muted`); appearance is unchanged for OLED pure-black consumers
+- Updated `Toast` to use `BackgroundElevated2` instead of `BackgroundSection` ([#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+  - Dark theme unchanged (`elevated2` matches `background.section`); light theme changes from `background.section` (`#F3F5F9`) to `background.elevated2` / `background.default` (`#FFFFFF`)
+- Design-system components no longer branch on `usePureBlack()` for surface styling; consumers should remove `PureBlackProvider` / `data-pure-black` wiring and use elevated tokens (`bg-elevated1`, `bg-elevated2`, `border-alternative`) instead ([#1444](https://github.com/MetaMask/metamask-design-system/pull/1444), [#1445](https://github.com/MetaMask/metamask-design-system/pull/1445))
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-8x-to-900)
+
+## [0.35.2]
+
+### Fixed
+
+- Fixed `Checkbox` so the native `<input>` is the visible, clickable control instead of an `opacity-0` overlay; use `inputProps` for `data-testid` so Selenium E2E tests can find and click the control ([#1437](https://github.com/MetaMask/metamask-design-system/pull/1437))
+
 ## [0.35.1]
 
 ### Fixed
@@ -455,7 +569,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.43.0...HEAD
+[0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.42.0...@metamask/design-system-react@0.43.0
+[0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.41.0...@metamask/design-system-react@0.42.0
+[0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.40.0...@metamask/design-system-react@0.41.0
+[0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.39.0...@metamask/design-system-react@0.40.0
+[0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.1...@metamask/design-system-react@0.39.0
+[0.38.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.38.0...@metamask/design-system-react@0.38.1
+[0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.37.0...@metamask/design-system-react@0.38.0
+[0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.36.0...@metamask/design-system-react@0.37.0
+[0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.2...@metamask/design-system-react@0.36.0
+[0.35.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.1...@metamask/design-system-react@0.35.2
 [0.35.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.35.0...@metamask/design-system-react@0.35.1
 [0.35.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.34.0...@metamask/design-system-react@0.35.0
 [0.34.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.33.0...@metamask/design-system-react@0.34.0

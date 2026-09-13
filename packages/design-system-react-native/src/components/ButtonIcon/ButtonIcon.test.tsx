@@ -17,7 +17,7 @@ describe('ButtonIcon', () => {
     const expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
-      'rounded-lg bg-transparent opacity-100',
+      'bg-transparent opacity-100',
     );
 
     const { getByTestId } = render(
@@ -49,7 +49,7 @@ describe('ButtonIcon', () => {
     let expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Xs],
-      'rounded-lg bg-transparent opacity-100',
+      'bg-transparent opacity-100',
     );
     expect(btn).toHaveStyle(expected);
 
@@ -64,7 +64,7 @@ describe('ButtonIcon', () => {
     expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Sm],
-      'rounded-lg bg-transparent opacity-100',
+      'bg-transparent opacity-100',
     );
     expect(btn).toHaveStyle(expected);
 
@@ -79,7 +79,7 @@ describe('ButtonIcon', () => {
     expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Lg],
-      'rounded-lg bg-transparent opacity-100',
+      'bg-transparent opacity-100',
     );
     expect(btn).toHaveStyle(expected);
   });
@@ -90,7 +90,7 @@ describe('ButtonIcon', () => {
     const expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
-      'rounded-lg bg-transparent opacity-50',
+      'bg-transparent opacity-50',
     );
 
     const { getByTestId } = render(
@@ -112,7 +112,7 @@ describe('ButtonIcon', () => {
     const expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
-      'rounded-full bg-icon-default opacity-100',
+      'bg-icon-default opacity-100',
     );
 
     const { getByTestId } = render(
@@ -132,7 +132,7 @@ describe('ButtonIcon', () => {
     const expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
-      'rounded-full bg-muted opacity-100',
+      'bg-muted opacity-100',
     );
 
     const { getByTestId } = render(
@@ -152,7 +152,7 @@ describe('ButtonIcon', () => {
     const expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
-      'rounded-full bg-muted-pressed opacity-100',
+      'bg-muted-pressed opacity-100',
     );
 
     const { getByTestId } = render(
@@ -173,7 +173,7 @@ describe('ButtonIcon', () => {
     const expected = tw.style(
       'items-center justify-center',
       TWCLASSMAP_BUTTONICON_SIZE_DIMENSION[ButtonIconSize.Md],
-      'rounded-lg bg-transparent opacity-100',
+      'bg-transparent opacity-100',
       'text-primary-default',
     );
 

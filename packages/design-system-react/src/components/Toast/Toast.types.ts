@@ -46,6 +46,12 @@ export type ToastOptions = ToastProps & {
    * Defaults to false.
    */
   hasNoTimeout?: boolean;
+  /**
+   * When `false`, hides the close button on the imperative toast.
+   * Auto-dismiss and `toast.dismiss()` still work.
+   * Defaults to `true`.
+   */
+  showCloseButton?: boolean;
 };
 
 /**

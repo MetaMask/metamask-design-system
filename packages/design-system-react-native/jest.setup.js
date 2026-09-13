@@ -9,6 +9,14 @@ jest.mock('react-native-worklets', () => {
 
 require('react-native-reanimated').setUpTests();
 
+jest.mock('expo-image', () => {
+  const { Image } = require('react-native');
+
+  return {
+    Image,
+  };
+});
+
 jest.mock('react-native-svg', () => {
   const React = require('react');
   const { View } = require('react-native');

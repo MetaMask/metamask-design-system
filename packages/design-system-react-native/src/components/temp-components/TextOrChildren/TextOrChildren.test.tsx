@@ -15,11 +15,11 @@ describe('TextOrChildren', () => {
   it('hides string children when textProps.isHidden is true', () => {
     const { getByText, queryByText } = render(
       <TextOrChildren textProps={{ isHidden: true }}>
-        Sensitive Information
+        Sensitive information
       </TextOrChildren>,
     );
 
-    expect(queryByText('Sensitive Information')).toBeNull();
+    expect(queryByText('Sensitive information')).toBeNull();
     expect(getByText('••••••')).toBeDefined();
   });
 
@@ -28,7 +28,7 @@ describe('TextOrChildren', () => {
       <TextOrChildren
         textProps={{ isHidden: true, length: SensitiveTextLength.Medium }}
       >
-        Sensitive Information
+        Sensitive information
       </TextOrChildren>,
     );
 

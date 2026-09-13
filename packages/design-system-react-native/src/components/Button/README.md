@@ -143,7 +143,7 @@ Whether to show the button with inverted colors for use on colored backgrounds (
 
 ```tsx
 <Button variant={ButtonVariant.Primary} isInverse onPress={() => {}}>
-  Inverse Button
+  Inverse button
 </Button>
 ```
 
@@ -171,7 +171,7 @@ Whether the button should take up the full width of its container.
 
 ```tsx
 <Button variant={ButtonVariant.Primary} isFullWidth onPress={() => {}}>
-  Full Width Button
+  Full width button
 </Button>
 ```
 
@@ -185,7 +185,7 @@ Whether the button is in a loading state, showing a spinner.
 
 ```tsx
 <Button variant={ButtonVariant.Primary} isLoading onPress={() => {}}>
-  Loading Button
+  Loading button
 </Button>
 ```
 
@@ -201,7 +201,7 @@ Text to display when the button is in loading state.
 <Button
   variant={ButtonVariant.Primary}
   isLoading
-  loadingText="Please wait..."
+  loadingText="Loading..."
   onPress={() => {}}
 >
   Submit
@@ -275,3 +275,14 @@ Migrating from `app/component-library/components/Buttons/Button` in MetaMask Mob
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Sentence case, 1–3 words, imperative verb first
+- No punctuation
+- `loadingText` prop uses an ellipsis: `"Turning on..."`
+
+```
+✅ "Turn on"  ✅ "Save"  ✅ "Turn on notifications"
+❌ "Turn On Notifications"  ❌ "Submit."
+```

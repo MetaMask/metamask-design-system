@@ -17,7 +17,6 @@ import { Spinner } from '../temp-components/Spinner';
 import {
   MAP_BUTTONBASE_SIZE_ICONSIZE,
   MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
-  getButtonBaseBorderRadiusTwClass,
   getButtonBaseHorizontalPaddingTwClasses,
   TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
 } from './ButtonBase.constants';
@@ -89,7 +88,7 @@ export const ButtonBase = ({
     }
 
     if (isLoading) {
-      return 'Button is currently loading, please wait';
+      return 'Button is currently loading';
     }
 
     return undefined;
@@ -130,12 +129,10 @@ export const ButtonBase = ({
         // Build button container styles
         const buttonStyles = tw.style(
           // Base layout - flex container for button content
-          'flex-row items-center justify-center',
+          'flex-row items-center justify-center rounded-full',
           // Visual styling
           'bg-muted overflow-hidden',
-          // Conditional Border Radius and Horizontal Spacing based on requirements
-          getButtonBaseBorderRadiusTwClass(size),
-          getButtonBaseHorizontalPaddingTwClasses(size, hasStart, hasEnd),
+          getButtonBaseHorizontalPaddingTwClasses(hasStart, hasEnd),
           // Size
           TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION[size],
           // State-based opacity

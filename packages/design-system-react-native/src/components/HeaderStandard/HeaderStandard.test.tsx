@@ -24,15 +24,15 @@ describe('HeaderStandard', () => {
 
   describe('title and subtitle', () => {
     it('renders with title', () => {
-      const { getByText } = render(<HeaderStandard title="Test Title" />);
+      const { getByText } = render(<HeaderStandard title="Test title" />);
 
-      expect(getByText('Test Title')).toBeOnTheScreen();
+      expect(getByText('Test title')).toBeOnTheScreen();
     });
 
     it('renders title with testID when provided via titleProps', () => {
       const { getByTestId } = render(
         <HeaderStandard
-          title="Test Title"
+          title="Test title"
           titleProps={{ testID: TITLE_TEST_ID }}
         />,
       );
@@ -42,7 +42,7 @@ describe('HeaderStandard', () => {
 
     it('renders container with testID when provided', () => {
       const { getByTestId } = render(
-        <HeaderStandard title="Test Title" testID={CONTAINER_TEST_ID} />,
+        <HeaderStandard title="Test title" testID={CONTAINER_TEST_ID} />,
       );
 
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
@@ -50,45 +50,45 @@ describe('HeaderStandard', () => {
 
     it('renders custom children instead of title', () => {
       const { getByText, queryByText } = render(
-        <HeaderStandard title="Ignored Title">
-          <Text>Custom Content</Text>
+        <HeaderStandard title="Ignored title">
+          <Text>Custom content</Text>
         </HeaderStandard>,
       );
 
-      expect(getByText('Custom Content')).toBeOnTheScreen();
-      expect(queryByText('Ignored Title')).not.toBeOnTheScreen();
+      expect(getByText('Custom content')).toBeOnTheScreen();
+      expect(queryByText('Ignored title')).not.toBeOnTheScreen();
     });
 
     it('renders children when both title and children provided', () => {
       const { getByText, queryByText } = render(
-        <HeaderStandard title="Title Text">
-          <Text>Children Text</Text>
+        <HeaderStandard title="Title text">
+          <Text>Children text</Text>
         </HeaderStandard>,
       );
 
-      expect(getByText('Children Text')).toBeOnTheScreen();
-      expect(queryByText('Title Text')).not.toBeOnTheScreen();
+      expect(getByText('Children text')).toBeOnTheScreen();
+      expect(queryByText('Title text')).not.toBeOnTheScreen();
     });
 
     it('renders subtitle when provided', () => {
       const { getByText } = render(
-        <HeaderStandard title="Test Title" subtitle="Test Subtitle" />,
+        <HeaderStandard title="Test title" subtitle="Test subtitle" />,
       );
 
-      expect(getByText('Test Subtitle')).toBeOnTheScreen();
+      expect(getByText('Test subtitle')).toBeOnTheScreen();
     });
 
     it('does not render subtitle when not provided', () => {
-      const { queryByText } = render(<HeaderStandard title="Test Title" />);
+      const { queryByText } = render(<HeaderStandard title="Test title" />);
 
-      expect(queryByText('Test Subtitle')).not.toBeOnTheScreen();
+      expect(queryByText('Test subtitle')).not.toBeOnTheScreen();
     });
 
     it('renders subtitle with testID when provided via subtitleProps', () => {
       const { getByTestId } = render(
         <HeaderStandard
-          title="Test Title"
-          subtitle="Test Subtitle"
+          title="Test title"
+          subtitle="Test subtitle"
           subtitleProps={{ testID: 'subtitle-test-id' }}
         />,
       );
@@ -98,38 +98,38 @@ describe('HeaderStandard', () => {
 
     it('renders both title and subtitle together', () => {
       const { getByText } = render(
-        <HeaderStandard title="Main Title" subtitle="Supporting Text" />,
+        <HeaderStandard title="Main title" subtitle="Supporting text" />,
       );
 
-      expect(getByText('Main Title')).toBeOnTheScreen();
-      expect(getByText('Supporting Text')).toBeOnTheScreen();
+      expect(getByText('Main title')).toBeOnTheScreen();
+      expect(getByText('Supporting text')).toBeOnTheScreen();
     });
 
     it('renders title when passed as React node', () => {
       const TITLE_NODE_TEST_ID = 'custom-title-node';
       const { getByTestId, getByText } = render(
         <HeaderStandard
-          title={<Text testID={TITLE_NODE_TEST_ID}>Custom Title Node</Text>}
+          title={<Text testID={TITLE_NODE_TEST_ID}>Custom title node</Text>}
         />,
       );
 
       expect(getByTestId(TITLE_NODE_TEST_ID)).toBeOnTheScreen();
-      expect(getByText('Custom Title Node')).toBeOnTheScreen();
+      expect(getByText('Custom title node')).toBeOnTheScreen();
     });
 
     it('renders subtitle when passed as React node', () => {
       const SUBTITLE_NODE_TEST_ID = 'custom-subtitle-node';
       const { getByTestId, getByText } = render(
         <HeaderStandard
-          title="Page Title"
+          title="Page title"
           subtitle={
-            <Text testID={SUBTITLE_NODE_TEST_ID}>Custom Subtitle Node</Text>
+            <Text testID={SUBTITLE_NODE_TEST_ID}>Custom subtitle node</Text>
           }
         />,
       );
 
       expect(getByTestId(SUBTITLE_NODE_TEST_ID)).toBeOnTheScreen();
-      expect(getByText('Custom Subtitle Node')).toBeOnTheScreen();
+      expect(getByText('Custom subtitle node')).toBeOnTheScreen();
     });
 
     it('renders both title and subtitle as React nodes', () => {
@@ -137,8 +137,8 @@ describe('HeaderStandard', () => {
       const SUBTITLE_NODE_TEST_ID = 'subtitle-node';
       const { getByTestId } = render(
         <HeaderStandard
-          title={<Text testID={TITLE_NODE_TEST_ID}>Node Title</Text>}
-          subtitle={<Text testID={SUBTITLE_NODE_TEST_ID}>Node Subtitle</Text>}
+          title={<Text testID={TITLE_NODE_TEST_ID}>Node title</Text>}
+          subtitle={<Text testID={SUBTITLE_NODE_TEST_ID}>Node subtitle</Text>}
         />,
       );
 
@@ -158,7 +158,7 @@ describe('HeaderStandard', () => {
     it('does not render subtitle row when subtitle is an empty string', () => {
       const { getByTestId, queryByTestId } = render(
         <HeaderStandard
-          title="Only Title"
+          title="Only title"
           titleProps={{ testID: TITLE_TEST_ID }}
           subtitle=""
           subtitleProps={{ testID: SUBTITLE_ROW_TEST_ID }}

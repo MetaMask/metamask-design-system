@@ -123,7 +123,7 @@ export const OnBack: Story = {
 
 export const OnClose: Story = {
   args: {
-    title: 'Modal Title',
+    title: 'Modal title',
     onClose: () => undefined,
   },
   render: (args) => <ScrollDemo {...args} />,

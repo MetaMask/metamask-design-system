@@ -18,14 +18,14 @@ describe('TabEmptyState', () => {
       <TabEmptyState
         testID="tab-empty-state"
         description="No items found"
-        actionButtonText="Add Item"
+        actionButtonText="Add item"
         onAction={mockOnAction}
       />,
     );
 
     expect(getByTestId('tab-empty-state')).toBeDefined();
     expect(getByText('No items found')).toBeDefined();
-    expect(getByText('Add Item')).toBeDefined();
+    expect(getByText('Add item')).toBeDefined();
   });
 
   it('renders description when provided', () => {
@@ -50,24 +50,24 @@ describe('TabEmptyState', () => {
 
   it('renders action button when both actionButtonText and onAction are provided', () => {
     const { getByText } = render(
-      <TabEmptyState actionButtonText="Add Item" onAction={mockOnAction} />,
+      <TabEmptyState actionButtonText="Add item" onAction={mockOnAction} />,
     );
 
-    expect(getByText('Add Item')).toBeDefined();
+    expect(getByText('Add item')).toBeDefined();
   });
 
   it('does not render action button when only actionButtonText is provided', () => {
     const { queryByText } = render(
-      <TabEmptyState actionButtonText="Add Item" />,
+      <TabEmptyState actionButtonText="Add item" />,
     );
 
-    expect(queryByText('Add Item')).toBeNull();
+    expect(queryByText('Add item')).toBeNull();
   });
 
   it('does not render action button when only onAction is provided', () => {
     const { queryByText } = render(<TabEmptyState onAction={mockOnAction} />);
 
-    expect(queryByText('Add Item')).toBeNull();
+    expect(queryByText('Add item')).toBeNull();
   });
 
   it('renders custom children', () => {
@@ -82,10 +82,10 @@ describe('TabEmptyState', () => {
 
   it('calls onAction when action button is pressed', () => {
     const { getByText } = render(
-      <TabEmptyState actionButtonText="Add Item" onAction={mockOnAction} />,
+      <TabEmptyState actionButtonText="Add item" onAction={mockOnAction} />,
     );
 
-    fireEvent.press(getByText('Add Item'));
+    fireEvent.press(getByText('Add item'));
     expect(mockOnAction).toHaveBeenCalledTimes(1);
   });
 
@@ -118,7 +118,7 @@ describe('TabEmptyState', () => {
   it('passes actionButtonProps to action Button component', () => {
     const { getByTestId } = render(
       <TabEmptyState
-        actionButtonText="Add Item"
+        actionButtonText="Add item"
         onAction={mockOnAction}
         actionButtonProps={{ testID: 'custom-button' }}
       />,

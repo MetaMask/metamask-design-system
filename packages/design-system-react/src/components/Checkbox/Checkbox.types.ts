@@ -21,7 +21,8 @@ export type CheckboxProps = Omit<
     labelProps?: Omit<Partial<TextProps>, 'children'>;
 
     /**
-     * Optional props passed to the input element.
+     * Optional props passed to the native input element (the visible control).
+     * Prefer putting test ids here — the input is Selenium-visible and clickable.
      */
     inputProps?: Omit<
       ComponentProps<'input'>,
@@ -31,7 +32,7 @@ export type CheckboxProps = Omit<
     };
 
     /**
-     * Optional props passed to the container div wrapping the checkbox icon.
+     * Optional props passed to the relative wrapper around the input and check icon.
      */
     checkboxContainerProps?: (Omit<ComponentProps<'div'>, 'children'> & {
       className?: string;

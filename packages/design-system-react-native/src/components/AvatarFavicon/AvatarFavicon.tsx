@@ -2,8 +2,8 @@ import {
   AvatarBaseShape,
   AvatarFaviconSize,
 } from '@metamask/design-system-shared';
+import type { ImageErrorEventData } from 'expo-image';
 import React, { useState } from 'react';
-import type { ImageErrorEvent } from 'react-native';
 
 import { AvatarBase } from '../AvatarBase';
 import { ImageOrSvg } from '../temp-components/ImageOrSvg';
@@ -22,7 +22,7 @@ export const AvatarFavicon = ({
   const [finalFallbackText, setFallbackText] = useState<string>('');
 
   const backupFallbackText = fallbackText || name?.[0] || '?';
-  const onImageErrorHandler = (e: ImageErrorEvent) => {
+  const onImageErrorHandler = (e: ImageErrorEventData) => {
     setFallbackText(backupFallbackText);
     imageOrSvgProps?.onImageError?.(e);
   };
@@ -47,7 +47,7 @@ export const AvatarFavicon = ({
           height={'100%'}
           {...imageOrSvgProps}
           imageProps={{
-            resizeMode: 'contain',
+            contentFit: 'contain',
             ...imageOrSvgProps?.imageProps,
           }}
           onImageError={onImageErrorHandler}

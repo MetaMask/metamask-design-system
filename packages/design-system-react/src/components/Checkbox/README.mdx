@@ -209,7 +209,7 @@ Optional props to be passed to the label's Text component.
 
 ### `inputProps`
 
-Optional props passed to the input element. This allows you to pass additional attributes like data-testid, aria-describedby, etc.
+Optional props passed to the native input element (the visible checkbox control). Prefer putting `data-testid` here — the input is the interactive, Selenium-visible target for clicks and disabled checks.
 
 <table>
   <thead>
@@ -234,7 +234,7 @@ Optional props passed to the input element. This allows you to pass additional a
 
 ### `checkboxContainerProps`
 
-Optional props passed to the container div wrapping the checkbox icon.
+Optional props passed to the relative wrapper around the input and check icon.
 
 <table>
   <thead>
@@ -373,3 +373,7 @@ Migrating from `ui/components/component-library/checkbox` in MetaMask Extension?
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- `label`: sentence case, no period

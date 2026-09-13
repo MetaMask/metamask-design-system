@@ -91,7 +91,7 @@ describe('AvatarFavicon', () => {
           imageProps={{ 'data-testid': 'img2' }}
         />,
       );
-      expect(screen.getByTestId('img2')).toHaveAttribute('alt', 'Dapp logo');
+      expect(screen.getByTestId('img2')).toHaveAttribute('alt', 'Site logo');
     });
 
     it('does not render fallbackText initially', () => {
@@ -155,7 +155,7 @@ describe('AvatarFavicon', () => {
         />,
       );
       const img = screen.getByTestId('img-no-name') as HTMLImageElement;
-      expect(img.alt).toBe('Dapp logo');
+      expect(img.alt).toBe('Site logo');
     });
   });
 

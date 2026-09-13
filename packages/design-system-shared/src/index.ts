@@ -268,13 +268,6 @@ export {
   type FilterButtonGroupContextValue,
 } from './contexts/FilterButtonGroup';
 
-// PureBlack context
-export {
-  PureBlackContext,
-  type PureBlackContextValue,
-  type PureBlackProviderProps,
-} from './contexts/PureBlack';
-
 // SelectButton types (ADR-0003 + ADR-0004)
 export {
   SelectButtonSize,
@@ -288,3 +281,6 @@ export { type SectionHeaderPropsShared } from './types/SectionHeader';
 
 // Toast types (ADR-0003 + ADR-0004)
 export { ToastSeverity, type ToastPropsShared } from './types/Toast';
+
+// HeaderSubpage types (ADR-0004)
+export { type HeaderSubpagePropsShared } from './types/HeaderSubpage';

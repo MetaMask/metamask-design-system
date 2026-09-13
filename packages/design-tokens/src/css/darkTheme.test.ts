@@ -22,6 +22,9 @@ describe('Dark Theme Colors CSS', () => {
             const shade: string | undefined = parts[1];
             if (color && shade) {
               cssValue = `var(--brand-colors-${color}-${color}${shade})`;
+            } else if (color && !shade) {
+              // Shade-less brand tokens (e.g. black, white)
+              cssValue = `var(--brand-colors-${color})`;
             } else {
               throw new Error(`Invalid color or shade: ${value as string}`);
             }

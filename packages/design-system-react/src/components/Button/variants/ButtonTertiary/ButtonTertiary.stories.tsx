@@ -97,7 +97,7 @@ type Story = StoryObj<typeof ButtonTertiary>;
 
 export const Default: Story = {
   args: {
-    children: 'Button Tertiary',
+    children: 'Button tertiary',
   },
 };
 
@@ -139,21 +139,21 @@ export const IsInverse: Story = {
 
 export const IsFullWidth: Story = {
   args: {
-    children: 'Full Width',
+    children: 'Full width',
     isFullWidth: true,
   },
 };
 
 export const StartIconName: Story = {
   args: {
-    children: 'With Start Icon',
+    children: 'With start icon',
     startIconName: IconName.AddSquare,
   },
 };
 
 export const EndIconName: Story = {
   args: {
-    children: 'With End Icon',
+    children: 'With end icon',
     endIconName: IconName.AddSquare,
   },
 };
@@ -168,7 +168,7 @@ export const IsLoading: Story = {
 
 export const IsDisabled: Story = {
   args: {
-    children: 'Disabled Button Tertiary',
+    children: 'Disabled button tertiary',
     isDisabled: true,
   },
 };

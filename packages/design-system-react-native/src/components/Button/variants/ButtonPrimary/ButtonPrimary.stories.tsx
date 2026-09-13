@@ -66,7 +66,7 @@ const ButtonPrimaryStory: React.FC<ButtonPrimaryProps> = ({
 
 export const Default: Story = {
   args: {
-    children: 'Sample ButtonPrimary Text',
+    children: 'Sample ButtonPrimary text',
     size: ButtonSize.Lg,
     isLoading: false,
     loadingText: 'Loading',
@@ -96,7 +96,7 @@ export const IsLoading: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ButtonPrimary isLoading>ButtonPrimary</ButtonPrimary>
-      <ButtonPrimary isLoading loadingText="With Loading Text">
+      <ButtonPrimary isLoading loadingText="Loading...">
         ButtonPrimary
       </ButtonPrimary>
     </View>
@@ -105,21 +105,21 @@ export const IsLoading: Story = {
 
 export const WithStartAccessory: Story = {
   args: {
-    children: 'Start Accessory',
+    children: 'Start accessory',
     startIconName: IconName.Add,
   },
 };
 
 export const WithEndAccessory: Story = {
   args: {
-    children: 'End Accessory',
+    children: 'End accessory',
     endIconName: IconName.Add,
   },
 };
 
 export const WithStartAndEndAccessory: Story = {
   args: {
-    children: 'Start and End Accessory',
+    children: 'Start and end accessory',
     startIconName: IconName.Add,
     endIconName: IconName.AddSquare,
   },

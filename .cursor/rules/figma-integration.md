@@ -377,7 +377,7 @@ yarn figma:connect:react-native       # For React Native
 # 4. Validate before publishing
 yarn figma:connect:publish:dry-run
 
-# 5. Publish to Figma
+# 5. Publish to Figma (or merge to main — CI publishes automatically)
 yarn figma:connect:publish
 ```
 
@@ -391,7 +391,7 @@ When component props change:
 # 2. Validate changes
 yarn figma:connect:publish:dry-run
 
-# 3. Republish
+# 3. Republish (or merge to main — CI publishes automatically)
 yarn figma:connect:publish
 ```
 
@@ -471,8 +471,8 @@ After creating or updating Code Connect files, verify:
 - [ ] Realistic example props provided
 - [ ] Imports array includes component and referenced prop const objects
 - [ ] Both React and React Native have Code Connect files
-- [ ] Dry run passes: `yarn figma:connect:publish:dry-run`
-- [ ] Successfully published: `yarn figma:connect:publish`
+- [ ] Dry run passes: `yarn figma:connect:publish:dry-run` (also runs on every PR in CI)
+- [ ] Successfully published: `yarn figma:connect:publish` (automated on merge to `main`)
 - [ ] Verified in Figma Dev Mode (platform dropdown, correct imports, code examples)
 
 ## References

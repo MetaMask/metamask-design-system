@@ -4,13 +4,25 @@ import type { ThemeColors } from '../types';
 export const colors: ThemeColors = {
   background: {
     /** For default neutral surface (#FFFFFF) */
-    default: brandColor.grey000,
+    default: brandColor.white,
     /** For sunken neutral surface below background/default (#F3F5F9) */
     alternative: brandColor.grey050,
     /** For section bg usually over background/default (#F3F5F9) */
     section: brandColor.grey050,
     /** For subsection bg usually over background/section (#FFFFFF) */
     subsection: brandColor.grey000,
+    /**
+     * One level above `background.default`. Use for surfaces over a
+     * scrim/overlay (e.g. Modal, BottomSheet). Matches `background.default`
+     * in light — elevation comes from overlay/shadow, not fill.
+     */
+    elevated1: brandColor.white,
+    /**
+     * Two levels above the base surface. Can sit on `background.default` or
+     * `background.elevated1`. Use for floating UI (e.g. Toast, Menu,
+     * Popover, Tooltip). Matches `background.default` in light.
+     */
+    elevated2: brandColor.white,
     /** For muted neutral surface (#b4b4b528) */
     muted: '#b4b4b528',
     /** Hover state surface for background/default */
@@ -57,6 +69,11 @@ export const colors: ThemeColors = {
     default: brandColor.grey400,
     /** Muted color for borders (#b4b4b566) */
     muted: '#b4b4b566',
+    /**
+     * Border for elevated surfaces. Transparent in light; use with
+     * `background.elevated1` / `elevated2` when a hairline is needed.
+     */
+    alternative: 'transparent',
   },
   overlay: {
     /** Default color for overlays (scrim) (#0a0d135c) */
@@ -143,35 +160,35 @@ export const colors: ThemeColors = {
     inverse: brandColor.grey000,
   },
   accent01: {
-    /** Expressive color in light orange (#ffa680) */
+    /** Expressive color in light orange (#ffc0a5) */
     light: brandColor.orange200,
-    /** Expressive color in orange (#ff5c16) */
+    /** Expressive color in orange (#fa4b00) */
     normal: brandColor.orange400,
-    /** Expressive color in dark orange (#661800) */
+    /** Expressive color in dark orange (#28001a) */
     dark: brandColor.orange700,
   },
   accent02: {
-    /** Expressive color in light purple (#eac2ff) */
+    /** Expressive color in light purple (#e1a9ff) */
     light: brandColor.purple100,
-    /** Expressive color in purple (#d075ff) */
+    /** Expressive color in purple (#c66ef5) */
     normal: brandColor.purple300,
-    /** Expressive color in dark purple (#3d065f) */
+    /** Expressive color in dark purple (#360853) */
     dark: brandColor.purple800,
   },
   accent03: {
-    /** Expressive color in light lime (#e5ffc3) */
+    /** Expressive color in light lime (#e3ff89) */
     light: brandColor.lime050,
-    /** Expressive color in lime (#baf24a) */
+    /** Expressive color in lime (#b9f302) */
     normal: brandColor.lime100,
     /** Expressive color in dark lime (#013330) */
     dark: brandColor.lime700,
   },
   accent04: {
-    /** Expressive color in light indigo (#cce7ff) */
+    /** Expressive color in light indigo (#b4d0ff) */
     light: brandColor.indigo100,
-    /** Expressive color in indigo (#89b0ff) */
+    /** Expressive color in indigo (#73a6ff) */
     normal: brandColor.indigo200,
-    /** Expressive color in dark indigo (#190066) */
+    /** Expressive color in dark indigo (#002139) */
     dark: brandColor.indigo800,
   },
   flask: {

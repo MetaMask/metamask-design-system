@@ -195,7 +195,7 @@ export const Children: Story = {
       </AvatarBase>
       {/* Icon */}
       <AvatarBase>
-        <Icon name={IconName.User} size={IconSize.Sm} />
+        <Icon name={IconName.UserCircle} size={IconSize.Sm} />
       </AvatarBase>
     </div>
   ),

@@ -5,7 +5,7 @@ HeaderStandard is a header component with a centered title and optional back and
 ```tsx
 import { HeaderStandard } from '@metamask/design-system-react-native';
 
-<HeaderStandard title="Page Title" onBack={handleBack} onClose={handleClose} />;
+<HeaderStandard title="Page title" onBack={handleBack} onClose={handleClose} />;
 ```
 
 ## Props
@@ -164,12 +164,12 @@ Tailwind classes merged onto the root [HeaderBase](../HeaderBase/README.md) cont
 <HeaderStandard title="Settings" onBack={() => navigation.goBack()} />
 
 <HeaderStandard
-  title="Modal Title"
+  title="Modal title"
   onClose={() => setModalVisible(false)}
 />
 
 <HeaderStandard
-  title="Page Title"
+  title="Page title"
   subtitle="Subtitle text"
   onBack={handleBack}
   onClose={handleClose}
@@ -185,3 +185,13 @@ Tailwind classes merged onto the root [HeaderBase](../HeaderBase/README.md) cont
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Sentence case — applies to all multi-word screen titles
+- No period
+
+```
+✅ "Account settings"
+❌ "Account Settings"
+```

@@ -1,8 +1,9 @@
 // import figma needs to remain as figma otherwise it breaks code connect
 // eslint-disable-next-line import-x/no-named-as-default
 import figma from '@figma/code-connect';
-import { IconSize } from '@metamask/design-system-shared';
 import React from 'react';
+
+import { IconSize } from '../Icon';
 
 import { IconAlert } from './IconAlert';
 
@@ -32,8 +33,8 @@ figma.connect(
         Xl: IconSize.Xl,
       }),
     },
-    example: ({ severity, size, ...props }) => (
-      <IconAlert severity={severity} size={size} {...props} />
+    example: ({ severity, size }) => (
+      <IconAlert severity={severity} size={size} />
     ),
   },
 );

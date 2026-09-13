@@ -59,7 +59,7 @@ type Story = StoryObj<typeof TextButton>;
 
 export const Default: Story = {
   args: {
-    children: 'Text Button',
+    children: 'Text button',
   },
 };
 
@@ -111,7 +111,7 @@ export const IsInverse: Story = {
   render: (args) => (
     <div className="rounded bg-primary-default p-4">
       <TextButton {...args} isInverse>
-        Inverse Button
+        Inverse button
       </TextButton>
     </div>
   ),
@@ -119,21 +119,21 @@ export const IsInverse: Story = {
 
 export const StartIconName: Story = {
   args: {
-    children: 'With Start Icon',
+    children: 'With start icon',
     startIconName: IconName.AddSquare,
   },
 };
 
 export const EndIconName: Story = {
   args: {
-    children: 'With End Icon',
+    children: 'With end icon',
     endIconName: IconName.AddSquare,
   },
 };
 
 export const IsDisabled: Story = {
   args: {
-    children: 'Disabled Button',
+    children: 'Disabled button',
     isDisabled: true,
   },
 };

@@ -8,7 +8,6 @@ import React, { Children, useMemo } from 'react';
 
 import { Box } from '../Box';
 
-import { getSegmentedControlBorderRadiusTwClass } from './SegmentedControl.constants';
 import type { SegmentedControlProps } from './SegmentedControl.types';
 
 export const SegmentedControl = ({
@@ -40,10 +39,7 @@ export const SegmentedControl = ({
         {...rest}
         accessibilityRole="tablist"
         twClassName={mergeTwClassName(
-          mergeTwClassName(
-            `${widthClass} flex-row items-center gap-1 border border-muted p-1`,
-            getSegmentedControlBorderRadiusTwClass(size),
-          ),
+          `${widthClass} flex-row items-center gap-1 rounded-full border border-muted p-1`,
           twClassName,
         )}
         style={style}

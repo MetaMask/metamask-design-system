@@ -30,14 +30,14 @@ type Story = StoryObj<HeaderStandardProps>;
 
 export const Default: Story = {
   args: {
-    title: 'Header Title',
+    title: 'Header title',
   },
 };
 
 export const Subtitle: Story = {
   args: {
     title: 'Settings',
-    subtitle: 'Account Settings',
+    subtitle: 'Account settings',
     onBack: () => null,
   },
 };
@@ -51,7 +51,7 @@ export const OnBack: Story = {
 
 export const OnClose: Story = {
   args: {
-    title: 'Modal Title',
+    title: 'Modal title',
     onClose: () => null,
   },
 };
@@ -82,7 +82,7 @@ export const Children: Story = {
   render: () => (
     <HeaderStandard onClose={() => null}>
       <Box twClassName="items-center">
-        <Text variant={TextVariant.HeadingSm}>Custom Title</Text>
+        <Text variant={TextVariant.HeadingSm}>Custom title</Text>
         <Text variant={TextVariant.BodySm}>Subtitle text</Text>
       </Box>
     </HeaderStandard>

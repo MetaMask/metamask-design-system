@@ -31,6 +31,12 @@ export type ToastSharedProps = Omit<BannerBaseProps, 'closeButtonProps'> & {
 export type ToastOptions = ToastSharedProps & {
   hasNoTimeout?: boolean;
   topOffset?: number;
+  /**
+   * When `false`, hides the close button on the imperative toast.
+   * Swipe-to-dismiss, auto-dismiss, and `toast.dismiss()` still work.
+   * Defaults to `true`.
+   */
+  showCloseButton?: boolean;
 };
 
 /**

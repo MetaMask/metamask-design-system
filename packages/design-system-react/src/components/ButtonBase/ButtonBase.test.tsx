@@ -15,26 +15,46 @@ describe('ButtonBase', () => {
       <ButtonBase size={ButtonBaseSize.Sm}>Button</ButtonBase>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
-    expect(screen.getByRole('button')).toHaveClass('px-3');
 
     rerender(<ButtonBase size={ButtonBaseSize.Md}>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-10');
-    expect(screen.getByRole('button')).toHaveClass('px-3');
 
     rerender(<ButtonBase>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
-    expect(screen.getByRole('button')).toHaveClass('px-4');
   });
 
   it('applies large size by default', () => {
     render(<ButtonBase>Default Size</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
-    expect(screen.getByRole('button')).toHaveClass('px-4');
   });
 
-  it('applies size-based border radius for default large button', () => {
-    render(<ButtonBase>Rounded</ButtonBase>);
-    expect(screen.getByRole('button')).toHaveClass('rounded-xl');
+  it.each([ButtonBaseSize.Sm, ButtonBaseSize.Md, ButtonBaseSize.Lg])(
+    'applies the same label-only horizontal padding at size %s',
+    (size) => {
+      render(<ButtonBase size={size}>Button</ButtonBase>);
+
+      expect(screen.getByRole('button')).toHaveClass('px-4');
+    },
+  );
+
+  it('insets the padding on each side that has an accessory', () => {
+    const { rerender } = render(
+      <ButtonBase startIconName={IconName.Add}>Start</ButtonBase>,
+    );
+    expect(screen.getByRole('button')).toHaveClass('pl-3', 'pr-4');
+
+    rerender(<ButtonBase endIconName={IconName.Add}>End</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('pl-4', 'pr-3');
+
+    rerender(
+      <ButtonBase
+        startIconName={IconName.Add}
+        endIconName={IconName.ArrowRight}
+      >
+        Both
+      </ButtonBase>,
+    );
+    expect(screen.getByRole('button')).toHaveClass('px-3');
   });
 
   it('renders as child component when asChild is true', () => {
@@ -56,14 +76,14 @@ describe('ButtonBase', () => {
     render(
       <ButtonBase
         isLoading
-        loadingText="Please wait..."
+        loadingText="Loading..."
         loadingIconProps={{ 'data-testid': 'loading-spinner' }}
       >
         Submit
       </ButtonBase>,
     );
     expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
-    const loadingTexts = screen.getAllByText('Please wait...');
+    const loadingTexts = screen.getAllByText('Loading...');
     expect(loadingTexts).toHaveLength(2);
     const widthPlaceholder = screen
       .getByRole('button')
@@ -131,14 +151,14 @@ describe('ButtonBase', () => {
   });
 
   it('applies disabled state', () => {
-    render(<ButtonBase isDisabled>Disabled Button</ButtonBase>);
+    render(<ButtonBase isDisabled>Disabled button</ButtonBase>);
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass('opacity-50', 'cursor-not-allowed');
   });
 
   it('applies full width class when isFullWidth is true', () => {
-    render(<ButtonBase isFullWidth>Full Width Button</ButtonBase>);
+    render(<ButtonBase isFullWidth>Full width button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('w-full');
   });
 
@@ -183,7 +203,7 @@ describe('ButtonBase', () => {
   });
 
   it('disables the button when isLoading is true', () => {
-    render(<ButtonBase isLoading>Loading Button</ButtonBase>);
+    render(<ButtonBase isLoading>Loading button</ButtonBase>);
 
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
@@ -192,7 +212,7 @@ describe('ButtonBase', () => {
 
   it('applies disabled styles for both isDisabled and isLoading states', () => {
     const { rerender } = render(
-      <ButtonBase isDisabled>Disabled Button</ButtonBase>,
+      <ButtonBase isDisabled>Disabled button</ButtonBase>,
     );
 
     let button = screen.getByRole('button');
@@ -205,7 +225,7 @@ describe('ButtonBase', () => {
         loadingText="Loading"
         loadingTextProps={{ className: 'custom-text-class' }}
       >
-        Loading Button
+        Loading button
       </ButtonBase>,
     );
     button = screen.getByRole('button');
@@ -347,13 +367,13 @@ describe('ButtonBase', () => {
     });
 
     it('applies aria-disabled when isDisabled is true', () => {
-      render(<ButtonBase isDisabled>Disabled Button</ButtonBase>);
+      render(<ButtonBase isDisabled>Disabled button</ButtonBase>);
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-disabled', 'true');
     });
 
     it('applies aria-busy when isLoading is true', () => {
-      render(<ButtonBase isLoading>Loading Button</ButtonBase>);
+      render(<ButtonBase isLoading>Loading button</ButtonBase>);
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-busy', 'true');
     });
@@ -437,7 +457,7 @@ describe('ButtonBase', () => {
       render(
         <ButtonBase
           isLoading
-          loadingText="Please wait"
+          loadingText="Loading..."
           loadingIconProps={{ 'data-testid': 'loading-spinner' }}
         >
           Submit
@@ -452,7 +472,7 @@ describe('ButtonBase', () => {
 
     it('sets proper tabindex for disabled buttons', () => {
       const { rerender } = render(
-        <ButtonBase isDisabled>Disabled Button</ButtonBase>,
+        <ButtonBase isDisabled>Disabled button</ButtonBase>,
       );
       let button = screen.getByRole('button');
       expect(button).toHaveAttribute('tabindex', '-1');

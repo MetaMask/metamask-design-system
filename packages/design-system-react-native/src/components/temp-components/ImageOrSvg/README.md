@@ -1,6 +1,6 @@
 # ImageOrSvg
 
-ImageOrSvg is used to render flexible image and SVG elements within an interface.
+ImageOrSvg is used to render flexible image and SVG elements within an interface. Raster images are rendered with `expo-image` so remote URIs are cached on disk.
 
 ```tsx
 import { ImageOrSvg } from '@metamask/design-system-react-native';
@@ -51,9 +51,9 @@ The height of the image or SVG.
 
 Callback triggered when the image has loaded successfully.
 
-| TYPE                                                        | REQUIRED | DEFAULT     |
-| ----------------------------------------------------------- | -------- | ----------- |
-| `(event: NativeSyntheticEvent<ImageLoadEventData>) => void` | No       | `undefined` |
+| TYPE                                  | REQUIRED | DEFAULT     |
+| ------------------------------------- | -------- | ----------- |
+| `(event: ImageLoadEventData) => void` | No       | `undefined` |
 
 ```tsx
 <ImageOrSvg
@@ -66,9 +66,9 @@ Callback triggered when the image has loaded successfully.
 
 Callback triggered when there is an error loading the image.
 
-| TYPE                                                              | REQUIRED | DEFAULT     |
-| ----------------------------------------------------------------- | -------- | ----------- |
-| `(errorEvent: NativeSyntheticEvent<ImageErrorEventData>) => void` | No       | `undefined` |
+| TYPE                                        | REQUIRED | DEFAULT     |
+| ------------------------------------------- | -------- | ----------- |
+| `(errorEvent: ImageErrorEventData) => void` | No       | `undefined` |
 
 ```tsx
 <ImageOrSvg

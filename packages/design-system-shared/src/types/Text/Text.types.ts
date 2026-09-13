@@ -31,7 +31,7 @@ export type FontStyle = (typeof FontStyle)[keyof typeof FontStyle];
  * Semantic values shared across React and React Native platforms.
  */
 export const FontFamily = {
-  /** Default: Geist */
+  /** Default: Inter */
   Default: 'default',
   /** Accent: MM Sans */
   Accent: 'accent',
@@ -183,7 +183,7 @@ export type TextPropsShared = {
   fontWeight?: FontWeight;
   /**
    * Optional prop to adjust the font family.
-   * Default: Geist
+   * Default: Inter
    * Accent: MM Sans
    * Hero: MM Poly
    */

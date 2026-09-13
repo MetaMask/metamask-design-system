@@ -24,7 +24,7 @@ export const AvatarFavicon = forwardRef<HTMLDivElement, AvatarFaviconProps>(
   ) => {
     const [finalFallbackText, setFinalFallbackText] = useState<string>('');
     const backupFallbackText = fallbackText || name?.[0] || '?';
-    const altText = name || 'Dapp logo'; // TBC: Add localization for default text
+    const altText = name || 'Site logo'; // TBC: Add localization for default text
 
     const onErrorHandler = (e: React.SyntheticEvent<HTMLImageElement>) => {
       setFinalFallbackText(backupFallbackText);

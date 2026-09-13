@@ -1,7 +1,6 @@
-import { usePureBlack } from '@metamask/design-system-react';
 import React from 'react';
 
-import { lightTheme as lightThemeJS, resolveDarkTheme } from '../src';
+import { darkTheme as darkThemeJS, lightTheme as lightThemeJS } from '../src';
 
 import { ColorSwatch, ColorSwatchGroup } from './components';
 import {
@@ -18,6 +17,16 @@ const meta = {
   parameters: {
     docs: {
       page: README,
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false, // Design token color showcase, not user-facing UI patterns
+          },
+        ],
+      },
     },
   },
 };
@@ -68,13 +77,13 @@ export const CSSLightTheme = {
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {Object.entries(lightThemeColors).map(
-          ([name, { color, name: colorName }]) => (
+          ([name, { color, resolvedColor, name: colorName }]) => (
             <ColorSwatch
               key={name}
               color={color}
               textBackgroundColor="transparent"
               textColor={getContrastYIQ(
-                color,
+                resolvedColor,
                 lightThemeJS.colors.background.default, // TODO Use CSS instead of JS object once CSS object is cleaned up
               )}
               backgroundColor={colorName}
@@ -92,19 +101,13 @@ export const CSSLightTheme = {
 
 export const CSSDarkTheme = {
   render: () => {
-    const isPureBlack = usePureBlack();
-    const darkThemeColors = getCSSVariablesFromStylesheet(
-      '--color-',
-      'dark',
-      isPureBlack,
-    );
-    const backgroundDefault =
-      resolveDarkTheme(isPureBlack).colors.background.default;
+    const darkThemeColors = getCSSVariablesFromStylesheet('--color-', 'dark');
+    const backgroundDefault = darkThemeJS.colors.background.default;
 
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
         {Object.entries(darkThemeColors).map(
-          ([name, { color, name: colorName }]) => (
+          ([name, { color, resolvedColor, name: colorName }]) => (
             <ColorSwatch
               key={name}
               color={color}
@@ -112,7 +115,7 @@ export const CSSDarkTheme = {
               backgroundColor={colorName}
               borderColor="var(--color-border-muted)"
               textBackgroundColor="transparent"
-              textColor={getContrastYIQ(color, backgroundDefault)}
+              textColor={getContrastYIQ(resolvedColor, backgroundDefault)}
             />
           ),
         )}
@@ -151,9 +154,7 @@ export const JSLightTheme = {
 
 export const JSDarkTheme = {
   render: () => {
-    const isPureBlack = usePureBlack();
-    const darkTheme = resolveDarkTheme(isPureBlack);
-    const colors = getJSColors(darkTheme.colors);
+    const colors = getJSColors(darkThemeJS.colors);
 
     return (
       <div className="grid grid-cols-[repeat(auto-fill,300px)] gap-4">
@@ -164,7 +165,7 @@ export const JSDarkTheme = {
             textBackgroundColor="transparent"
             textColor={getContrastYIQ(
               color,
-              darkTheme.colors.background.default,
+              darkThemeJS.colors.background.default,
             )}
             name={name}
           />

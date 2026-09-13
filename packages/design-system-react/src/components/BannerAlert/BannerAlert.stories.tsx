@@ -191,7 +191,7 @@ export const ActionButtonLayout: Story = {
 export const OnClose: Story = {
   args: {
     title: 'onClose demo',
-    children: 'Click the close icon to trigger onClose.',
+    children: 'Use the close icon to trigger onClose.',
     actionButtonLabel: undefined,
     actionButtonOnClick: undefined,
   },

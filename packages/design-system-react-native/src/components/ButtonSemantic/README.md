@@ -147,3 +147,9 @@ Use the `style` prop to customize the component's appearance with React Native s
 ## References
 
 [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- Use concise action labels that describe the outcome, such as `Long`, `Short`, `Buy`, `Sell`, `Yes`, or `No`.
+- `children`: sentence case, no period
+- `loadingText`: sentence case with an ellipsis, such as `"Placing order..."`

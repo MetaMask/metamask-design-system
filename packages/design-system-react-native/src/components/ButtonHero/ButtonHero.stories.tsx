@@ -60,7 +60,7 @@ type Story = StoryObj<typeof ButtonHero>;
 
 export const Default: Story = {
   args: {
-    children: 'Primary Action',
+    children: 'Primary action',
   },
 };
 
@@ -82,28 +82,28 @@ export const Size: Story = {
 
 export const IsFullWidth: Story = {
   args: {
-    children: 'Full Width',
+    children: 'Full width',
     isFullWidth: true,
   },
 };
 
 export const StartIconName: Story = {
   args: {
-    children: 'Start Icon',
+    children: 'Start icon',
     startIconName: IconName.AddSquare,
   },
 };
 
 export const EndIconName: Story = {
   args: {
-    children: 'End Icon',
+    children: 'End icon',
     endIconName: IconName.AddSquare,
   },
 };
 
 export const IsDisabled: Story = {
   args: {
-    children: 'Disabled Button',
+    children: 'Disabled button',
     isDisabled: true,
   },
 };

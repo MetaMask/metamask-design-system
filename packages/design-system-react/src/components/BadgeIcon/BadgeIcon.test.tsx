@@ -9,7 +9,9 @@ import { BadgeIcon } from './BadgeIcon';
 
 describe('BadgeIcon', () => {
   it('renders with default props', () => {
-    render(<BadgeIcon iconName={IconName.User} data-testid="badge-icon" />);
+    render(
+      <BadgeIcon iconName={IconName.UserCircle} data-testid="badge-icon" />,
+    );
     const badgeIcon = screen.getByTestId('badge-icon');
     expect(badgeIcon).toBeInTheDocument();
     expect(badgeIcon).toHaveClass(
@@ -25,7 +27,7 @@ describe('BadgeIcon', () => {
   it('renders the icon correctly', () => {
     render(
       <BadgeIcon
-        iconName={IconName.User}
+        iconName={IconName.UserCircle}
         iconProps={{ 'data-testid': 'icon' }}
       />,
     );
@@ -36,7 +38,7 @@ describe('BadgeIcon', () => {
   it('applies custom icon props', () => {
     render(
       <BadgeIcon
-        iconName={IconName.User}
+        iconName={IconName.UserCircle}
         iconProps={{
           className: 'custom-icon-class',
           color: IconColor.ErrorDefault,
@@ -51,7 +53,7 @@ describe('BadgeIcon', () => {
   it('applies custom className', () => {
     render(
       <BadgeIcon
-        iconName={IconName.User}
+        iconName={IconName.UserCircle}
         className="bg-default"
         data-testid="badge-icon"
       />,
@@ -62,7 +64,7 @@ describe('BadgeIcon', () => {
 
   it('forwards ref to the root div', () => {
     const ref = createRef<HTMLDivElement>();
-    render(<BadgeIcon ref={ref} iconName={IconName.User} />);
+    render(<BadgeIcon ref={ref} iconName={IconName.UserCircle} />);
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
   });
 
@@ -83,7 +85,7 @@ describe('BadgeIcon', () => {
   it('uses correct icon size class', () => {
     render(
       <BadgeIcon
-        iconName={IconName.User}
+        iconName={IconName.UserCircle}
         iconProps={{
           'data-testid': 'icon',
           className: TWCLASSMAP_ICON_SIZE_DIMENSION.xs,

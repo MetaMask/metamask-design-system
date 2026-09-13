@@ -25,11 +25,6 @@ export const useTheme = (): Theme => {
   return theme;
 };
 
-export const usePureBlack = (): boolean => {
-  const { isPureBlack } = useContext(ThemeContext);
-  return isPureBlack;
-};
-
 /**
  * Hook that provides access to the tailwind utility function.
  * Use this when you only need styling capabilities.
