@@ -3,13 +3,14 @@ import {
   ButtonIconSize,
   FontWeight,
   IconName,
+  IconColor,
   TextVariant,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { AvatarToken } from '../AvatarToken';
-import { BadgeIcon } from '../BadgeIcon';
+import { Icon } from '../Icon';
 import { Box } from '../Box';
 import { ButtonIcon } from '../ButtonIcon';
 import { Text } from '../Text';
@@ -58,7 +59,9 @@ const meta: Meta<HeaderSubpageProps> = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
-    titleEndAccessory: <BadgeIcon iconName={IconName.VerifiedFilled} />,
+    titleEndAccessory: (
+      <Icon name={IconName.VerifiedFilled} color={IconColor.PrimaryDefault} />
+    ),
   },
 };
 
@@ -66,7 +69,11 @@ export default meta;
 
 type Story = StoryObj<HeaderSubpageProps>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    onBack: () => console.log('Back pressed'),
+  },
+};
 
 export const Title: Story = {
   args: {
@@ -79,6 +86,7 @@ export const Description: Story = {
   args: {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
+    titleEndAccessory: undefined,
     description: (
       <Box className="flex flex-row items-center gap-1">
         <Text variant={TextVariant.BodySm} fontWeight={FontWeight.Medium}>
@@ -100,6 +108,7 @@ export const OnBack: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
     onBack: () => console.log('Back pressed'),
   },
 };
@@ -109,6 +118,7 @@ export const OnClose: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
     onClose: () => console.log('Close pressed'),
   },
 };
@@ -118,6 +128,7 @@ export const EndButtonIconProps: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
     onBack: () => console.log('Back pressed'),
     onClose: () => console.log('Close pressed'),
     endButtonIconProps: [
@@ -135,6 +146,7 @@ export const StartAccessory: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
     startAccessory: (
       <ButtonIcon
         iconName={IconName.ArrowLeft}
@@ -150,6 +162,7 @@ export const EndAccessory: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
     onBack: () => console.log('Back pressed'),
     endAccessory: (
       <Box className="flex flex-row gap-2">
