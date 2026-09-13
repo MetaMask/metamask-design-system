@@ -35,7 +35,7 @@ export const SelectButton = ({
   const resolvedTextProps = {
     ...textProps,
     twClassName: mergeTwClassName(
-      'text-left grow px-1',
+      isFullWidth ? 'text-left grow px-1' : 'text-left',
       textProps?.twClassName,
     ),
   };
