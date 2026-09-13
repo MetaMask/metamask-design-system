@@ -140,10 +140,10 @@ export const colors: ThemeColors = {
     mutedPressed: '#f0b03440',
   },
   success: {
-    /** For positive semantic elements: success, confirm, complete, safe (#BAF24A) */
+    /** For positive semantic elements: success, confirm, complete, safe (#b9f302) */
     default: brandColor.lime100,
-    /** Muted color for positive semantic (#baf24a26) */
-    muted: '#baf24a26',
+    /** Muted color for positive semantic (#b9f30226) */
+    muted: '#b9f30226',
     /** For elements placed on top of success/default fill (#0d0d0f) */
     inverse: '#0d0d0f',
     /** Hover state surface for success/default (#c9f570) */
@@ -151,10 +151,10 @@ export const colors: ThemeColors = {
     /** Pressed state surface for success/default (#d7f796) */
     defaultPressed: '#d7f796',
 
-    /** Hover state surface for success/muted (#baf24a33) */
-    mutedHover: '#baf24a33',
-    /** Pressed state surface for success/muted (#baf24a40) */
-    mutedPressed: '#baf24a40',
+    /** Hover state surface for success/muted (#b9f30233) */
+    mutedHover: '#b9f30233',
+    /** Pressed state surface for success/muted (#b9f30240) */
+    mutedPressed: '#b9f30240',
   },
   info: {
     /** For informational read-only elements: info, reminder, hint (#8b99ff) */
@@ -165,35 +165,35 @@ export const colors: ThemeColors = {
     inverse: '#0d0d0f',
   },
   accent01: {
-    /** Expressive color in light orange (#ffa680) */
+    /** Expressive color in light orange (#ffc0a5) */
     light: brandColor.orange200,
-    /** Expressive color in orange (#ff5c16) */
+    /** Expressive color in orange (#fa4b00) */
     normal: brandColor.orange400,
-    /** Expressive color in dark orange (#661800) */
+    /** Expressive color in dark orange (#28001a) */
     dark: brandColor.orange700,
   },
   accent02: {
-    /** Expressive color in light purple (#eac2ff) */
+    /** Expressive color in light purple (#e1a9ff) */
     light: brandColor.purple100,
-    /** Expressive color in purple (#d075ff) */
+    /** Expressive color in purple (#c66ef5) */
     normal: brandColor.purple300,
-    /** Expressive color in dark purple (#3d065f) */
+    /** Expressive color in dark purple (#360853) */
     dark: brandColor.purple800,
   },
   accent03: {
-    /** Expressive color in light lime (#e5ffc3) */
+    /** Expressive color in light lime (#e3ff89) */
     light: brandColor.lime050,
-    /** Expressive color in lime (#baf24a) */
+    /** Expressive color in lime (#b9f302) */
     normal: brandColor.lime100,
     /** Expressive color in dark lime (#013330) */
     dark: brandColor.lime700,
   },
   accent04: {
-    /** Expressive color in light indigo (#cce7ff) */
+    /** Expressive color in light indigo (#b4d0ff) */
     light: brandColor.indigo100,
-    /** Expressive color in indigo (#89b0ff) */
+    /** Expressive color in indigo (#73a6ff) */
     normal: brandColor.indigo200,
-    /** Expressive color in dark indigo (#190066) */
+    /** Expressive color in dark indigo (#002139) */
     dark: brandColor.indigo800,
   },
   flask: {

@@ -13,15 +13,6 @@ export const TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION: Record<
   [ButtonBaseSize.Lg]: 'h-12', // size (48px).
 };
 
-export const TWCLASSMAP_BUTTONBASE_BORDER_RADIUS: Record<
-  ButtonBaseSize,
-  string
-> = {
-  [ButtonBaseSize.Sm]: 'rounded-lg', // 8px.
-  [ButtonBaseSize.Md]: 'rounded-xl', // 12px.
-  [ButtonBaseSize.Lg]: 'rounded-xl', // 12px.
-};
-
 export const MAP_BUTTONBASE_SIZE_ICONSIZE: Record<ButtonBaseSize, IconSize> = {
   [ButtonBaseSize.Sm]: IconSize.Sm,
   [ButtonBaseSize.Md]: IconSize.Sm,
@@ -37,23 +28,20 @@ export const MAP_BUTTONBASE_SIZE_TEXT_VARIANT: Record<
   [ButtonBaseSize.Lg]: TextVariant.BodyMd,
 };
 
-export const getButtonBaseBorderRadiusTwClass = (
-  size: ButtonBaseSize,
-): string => TWCLASSMAP_BUTTONBASE_BORDER_RADIUS[size];
-
 export const getButtonBaseHorizontalPaddingTwClasses = (
-  buttonSize: ButtonBaseSize,
   hasStart: boolean,
   hasEnd: boolean,
 ): string => {
-  if (buttonSize !== ButtonBaseSize.Lg || (hasStart && hasEnd)) {
+  // Icons sit closer to the edge than a label, so each accessory pulls its own
+  // side in from 16px to 12px.
+  if (hasStart && hasEnd) {
     return 'px-3';
-  }
-  if (!hasStart && !hasEnd) {
-    return 'px-4';
   }
   if (hasStart) {
     return 'pl-3 pr-4';
   }
-  return 'pl-4 pr-3';
+  if (hasEnd) {
+    return 'pl-4 pr-3';
+  }
+  return 'px-4';
 };

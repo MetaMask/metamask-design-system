@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.47.0]
+
+### Changed
+
+- Updated `ButtonBase` and `ButtonIcon` to use fully rounded pill shapes across sizes and variants ([#1494](https://github.com/MetaMask/metamask-design-system/pull/1494))
+- Deprecated `ButtonFilter` in favor of `FilterButton` ([#1509](https://github.com/MetaMask/metamask-design-system/pull/1509))
+
 ## [0.46.0]
 
 ### Added
@@ -757,7 +764,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.46.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.47.0...HEAD
+[0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.46.0...@metamask/design-system-react-native@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.45.0...@metamask/design-system-react-native@0.46.0
 [0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.44.0...@metamask/design-system-react-native@0.45.0
 [0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.43.0...@metamask/design-system-react-native@0.44.0
