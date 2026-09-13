@@ -46,7 +46,7 @@ Optional leading visual (e.g. avatar), rendered before the title stack.
 
 ### `title`
 
-Optional title (string or node). When a string is provided, default text styling is applied: BodyMd, Medium, TextDefault.
+Optional title (string or node). When a string is provided, default text styling is applied: BodyMd, Medium, TextDefault. Use `titleEndAccessory` to render a badge or other accessory beside the title.
 
 <table>
   <thead>
@@ -98,33 +98,6 @@ Optional description (string or node). When a string is provided, default text s
 
 <Canvas of={HeaderSubpageStories.Description} />
 
-### `titleEndAccessory`
-
-Optional node rendered after the title (e.g. badges).
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>ReactNode</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={HeaderSubpageStories.TitleEndAccessory} />
-
 ### `titleProps`
 
 Props passed to the title Text component when `title` is a string. Useful for passing `data-testid` and other supported Text props.
@@ -160,8 +133,6 @@ Props passed to the title Text component when `title` is a string. Useful for pa
   </tbody>
 </table>
 
-<Canvas of={HeaderSubpageStories.TitleProps} />
-
 ### `descriptionProps`
 
 Props passed to the description Text component when `description` is a string. Useful for passing `data-testid` and other supported Text props.
@@ -194,8 +165,6 @@ Props passed to the description Text component when `description` is a string. U
     </tr>
   </tbody>
 </table>
-
-<Canvas of={HeaderSubpageStories.DescriptionProps} />
 
 ### `onBack`
 
@@ -266,7 +235,10 @@ Additional props to pass to the back ButtonIcon. If provided (even without `onBa
   <tbody>
     <tr>
       <td align="left">
-        <code>Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'} ariaLabel?: string {'}'}</code>
+        <code>
+          Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'}{' '}
+          ariaLabel?: string {'}'}
+        </code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -291,7 +263,10 @@ Additional props to pass to the close ButtonIcon. If provided (even without `onC
   <tbody>
     <tr>
       <td align="left">
-        <code>Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'} ariaLabel?: string {'}'}</code>
+        <code>
+          Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'}{' '}
+          ariaLabel?: string {'}'}
+        </code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -458,7 +433,11 @@ Use the `className` prop to add custom CSS classes to the component. These class
 </table>
 
 ```tsx
-<HeaderSubpage className="border-b border-muted" title="Settings" onBack={() => {}} />
+<HeaderSubpage
+  className="border-b border-muted"
+  title="Settings"
+  onBack={() => {}}
+/>
 ```
 
 ### `style`

@@ -3,13 +3,13 @@ import {
   ButtonIconSize,
   FontWeight,
   IconName,
-  TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { AvatarToken } from '../AvatarToken';
+import { BadgeIcon } from '../BadgeIcon';
 import { Box } from '../Box';
 import { ButtonIcon } from '../ButtonIcon';
 import { Text } from '../Text';
@@ -57,6 +57,8 @@ const meta: Meta<HeaderSubpageProps> = {
   args: {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
+    description: ETH_DESCRIPTION,
+    titleEndAccessory: <BadgeIcon iconName={IconName.VerifiedFilled} />,
   },
 };
 
@@ -66,17 +68,20 @@ type Story = StoryObj<HeaderSubpageProps>;
 
 export const Default: Story = {};
 
+export const Title: Story = {
+  args: {
+    avatar: undefined,
+    title: 'Settings',
+  },
+};
+
 export const Description: Story = {
   args: {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: (
       <Box className="flex flex-row items-center gap-1">
-        <Text
-          variant={TextVariant.BodySm}
-          fontWeight={FontWeight.Medium}
-          color={TextColor.TextAlternative}
-        >
+        <Text variant={TextVariant.BodySm} fontWeight={FontWeight.Medium}>
           0x1234...5678
         </Text>
         <ButtonIcon
@@ -87,32 +92,6 @@ export const Description: Story = {
         />
       </Box>
     ),
-  },
-};
-
-export const Title: Story = {
-  args: {
-    avatar: undefined,
-    title: 'Settings',
-  },
-};
-
-export const TitleProps: Story = {
-  args: {
-    title: 'Ethereum',
-    titleProps: {
-      'data-testid': 'header-subpage-title',
-    },
-  },
-};
-
-export const DescriptionProps: Story = {
-  args: {
-    title: ETH_TITLE,
-    description: '0x1234...5678',
-    descriptionProps: {
-      'data-testid': 'header-subpage-description',
-    },
   },
 };
 
@@ -186,24 +165,5 @@ export const EndAccessory: Story = {
         />
       </Box>
     ),
-  },
-};
-
-export const TitleEndAccessory: Story = {
-  args: {
-    avatar: ETH_AVATAR,
-    title: ETH_TITLE,
-    description: ETH_DESCRIPTION,
-    titleEndAccessory: (
-      <Text
-        variant={TextVariant.BodySm}
-        fontWeight={FontWeight.Medium}
-        color={TextColor.TextAlternative}
-      >
-        Verified
-      </Text>
-    ),
-    onBack: () => console.log('Back pressed'),
-    onClose: () => console.log('Close pressed'),
   },
 };
