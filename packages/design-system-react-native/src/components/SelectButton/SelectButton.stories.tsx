@@ -136,7 +136,10 @@ export const FullWidthLeftAligned: Story = {
       <SelectButton
         onPress={noopPress}
         isFullWidth
-        placeholder="Full-width select button"
+        contentWrapperProps={{ twClassName: 'w-full justify-between' }}
+        textProps={{ twClassName: 'text-left grow px-1' }}
+        startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
+        placeholder="Full-width left-aligned select button"
       />
     </SelectButtonStoryWrapper>
   ),
