@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.48.0]
+
+### Added
+
+- Added `Infinity` to `IconName` ([#1512](https://github.com/MetaMask/metamask-design-system/pull/1512))
+
+### Changed
+
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-twrnc-preset@^0.12.0` ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
+  - Required coordination bump with the brand accent palette in `@metamask/design-tokens@12.0.0`
+- Updated `Maskicon` generated color pairings to the 2026 brand accent palette ([#1497](https://github.com/MetaMask/metamask-design-system/pull/1497))
+  - Existing account addresses resolve to different background and foreground colors; there is no API change
+- Increased the default `SectionHeader` start and end icon size from `IconSize.Sm` to `IconSize.Md` ([#1516](https://github.com/MetaMask/metamask-design-system/pull/1516))
+  - Pass `startIconProps` / `endIconProps` with `size: IconSize.Sm` to keep the previous size
+
+### Fixed
+
+- Fixed `SelectButton` so it can stretch to full width in a flex parent ([#1515](https://github.com/MetaMask/metamask-design-system/pull/1515))
+- Redrew the `CopySuccess` icon silhouette to match `Copy` ([#1517](https://github.com/MetaMask/metamask-design-system/pull/1517))
+
 ## [0.47.0]
 
 ### Changed
@@ -764,7 +784,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.47.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.48.0...HEAD
+[0.48.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.47.0...@metamask/design-system-react-native@0.48.0
 [0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.46.0...@metamask/design-system-react-native@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.45.0...@metamask/design-system-react-native@0.46.0
 [0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.44.0...@metamask/design-system-react-native@0.45.0
