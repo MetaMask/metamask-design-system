@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: upgrade Storybook to 10.6.0 ([#1514](https://github.com/MetaMask/metamask-design-system/pull/1514))
+- fix: Increase default icon size in SectionHeader from Sm to Md ([#1516](https://github.com/MetaMask/metamask-design-system/pull/1516))
+- fix: support full-width SelectButton usage ([#1515](https://github.com/MetaMask/metamask-design-system/pull/1515))
+- docs: improve HeaderSubpage examples ([#1513](https://github.com/MetaMask/metamask-design-system/pull/1513))
+- chore: align RN animation stack with metamask-mobile#35615 ([#1381](https://github.com/MetaMask/metamask-design-system/pull/1381))
+- fix(icons): redraw CopySuccess to match Copy silhouette ([#1517](https://github.com/MetaMask/metamask-design-system/pull/1517))
+- feat: update Maskicon color pairings ([#1497](https://github.com/MetaMask/metamask-design-system/pull/1497))
+- feat(react): add HeaderSubpage component ([#1505](https://github.com/MetaMask/metamask-design-system/pull/1505))
+- feat(icons): add Infinity icon ([#1512](https://github.com/MetaMask/metamask-design-system/pull/1512))
+- docs: add content guidance to component READMEs ([#1472](https://github.com/MetaMask/metamask-design-system/pull/1472))
+
 ## [0.47.0]
 
 ### Changed

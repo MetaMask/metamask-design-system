@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: update brand accent colors ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
+
 ## [11.0.0]
 
 ### Changed
