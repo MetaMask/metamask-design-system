@@ -121,6 +121,7 @@ import MusdFilledSVG from './assets/musd-filled.svg';
 import MusdSVG from './assets/musd.svg';
 import NoPhotographySVG from './assets/no-photography.svg';
 import NotificationSVG from './assets/notification.svg';
+import PeopleFilledSVG from './assets/people-filled.svg';
 import PeopleSVG from './assets/people.svg';
 import PinSVG from './assets/pin.svg';
 import PlantSVG from './assets/plant.svg';
@@ -312,6 +313,7 @@ export const assetByIconName: AssetByIconName = {
   Musd: MusdSVG,
   NoPhotography: NoPhotographySVG,
   Notification: NotificationSVG,
+  PeopleFilled: PeopleFilledSVG,
   People: PeopleSVG,
   Pin: PinSVG,
   Plant: PlantSVG,
