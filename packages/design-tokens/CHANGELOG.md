@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.0.0]
+
 ### Uncategorized
 
 - feat: update brand accent colors ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
@@ -494,7 +496,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@11.0.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@12.0.0...HEAD
+[12.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@11.0.0...@metamask/design-tokens@12.0.0
 [11.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@10.0.0...@metamask/design-tokens@11.0.0
 [10.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@9.0.0...@metamask/design-tokens@10.0.0
 [9.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...@metamask/design-tokens@9.0.0
