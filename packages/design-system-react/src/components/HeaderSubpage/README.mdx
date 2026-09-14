@@ -7,11 +7,29 @@ import * as HeaderSubpageStories from './HeaderSubpage.stories';
 A left-aligned navigation header for secondary pages that need identity content such as an avatar, title, or description alongside navigation actions. Use HeaderSubpage for subpage headers; use HeaderBase or ModalHeader when the title should be centered.
 
 ```tsx
-import { HeaderSubpage } from '@metamask/design-system-react';
+import {
+  AvatarToken,
+  AvatarTokenSize,
+  HeaderSubpage,
+  Icon,
+  IconColor,
+  IconName,
+} from '@metamask/design-system-react';
 
 <HeaderSubpage
-  avatar={<AvatarToken src="..." size={AvatarTokenSize.Lg} name="Ethereum" />}
+  avatar={
+    <AvatarToken
+      src="https://cryptologos.cc/logos/ethereum-eth-logo.svg"
+      size={AvatarTokenSize.Lg}
+      name="Ethereum"
+    />
+  }
   title="Ethereum"
+  description="ETH"
+  titleEndAccessory={
+    <Icon name={IconName.VerifiedFilled} color={IconColor.PrimaryDefault} />
+  }
+  onBack={() => {}}
 />;
 ```
 
@@ -46,11 +64,12 @@ Optional leading visual (e.g. avatar), rendered before the title stack.
 
 ### `title`
 
-Optional title (string or node). When a string is provided, default text styling is applied: BodyMd, Medium, TextDefault.
+Optional title (string or node). When a string is provided, default text styling is applied: BodyMd, Medium, TextDefault. Use `titleProps` to pass props to the `Text` component when `title` is a string. Use `titleEndAccessory` to render a badge or other accessory beside the title.
 
 <table>
   <thead>
     <tr>
+      <th align="left">PROP</th>
       <th align="left">TYPE</th>
       <th align="left">REQUIRED</th>
       <th align="left">DEFAULT</th>
@@ -58,6 +77,33 @@ Optional title (string or node). When a string is provided, default text styling
   </thead>
   <tbody>
     <tr>
+      <td align="left">
+        <code>title</code>
+      </td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>titleProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>titleEndAccessory</code>
+      </td>
       <td align="left">
         <code>ReactNode</code>
       </td>
@@ -69,15 +115,16 @@ Optional title (string or node). When a string is provided, default text styling
   </tbody>
 </table>
 
-<Canvas of={HeaderSubpageStories.TitleOnly} />
+<Canvas of={HeaderSubpageStories.Title} />
 
 ### `description`
 
-Optional description (string or node). When a string is provided, default text styling is applied: BodySm, Medium, TextAlternative.
+Optional description (string or node). When a string is provided, default text styling is applied: BodySm, Medium, TextAlternative. Use `descriptionProps` to pass props to the `Text` component when `description` is a string.
 
 <table>
   <thead>
     <tr>
+      <th align="left">PROP</th>
       <th align="left">TYPE</th>
       <th align="left">REQUIRED</th>
       <th align="left">DEFAULT</th>
@@ -86,7 +133,22 @@ Optional description (string or node). When a string is provided, default text s
   <tbody>
     <tr>
       <td align="left">
+        <code>description</code>
+      </td>
+      <td align="left">
         <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>descriptionProps</code>
+      </td>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -98,90 +160,14 @@ Optional description (string or node). When a string is provided, default text s
 
 <Canvas of={HeaderSubpageStories.Description} />
 
-### `titleEndAccessory`
-
-Optional node rendered after the title (e.g. badges).
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>ReactNode</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={HeaderSubpageStories.TitleEndAccessory} />
-
-### `titleProps`
-
-Props passed to the title Text component when `title` is a string. Useful for passing `data-testid` and other supported Text props.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>Partial&lt;TextProps&gt;</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-### `descriptionProps`
-
-Props passed to the description Text component when `description` is a string. Useful for passing `data-testid` and other supported Text props.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>Partial&lt;TextProps&gt;</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 ### `onBack`
 
-Callback when the back button is pressed. If provided, a back button will be rendered as the start accessory. The button uses a default English `ariaLabel` of "Go back"; override via `backButtonProps.ariaLabel` for localization.
+Callback when the back button is pressed. If provided, a back button is rendered as the start accessory. The button uses a default English `ariaLabel` of "Go back"; override via `backButtonProps.ariaLabel` for localization. Use `backButtonProps` to pass additional props to the back ButtonIcon. If `backButtonProps` is provided without `onBack`, a back button is still rendered.
 
 <table>
   <thead>
     <tr>
+      <th align="left">PROP</th>
       <th align="left">TYPE</th>
       <th align="left">REQUIRED</th>
       <th align="left">DEFAULT</th>
@@ -190,7 +176,25 @@ Callback when the back button is pressed. If provided, a back button will be ren
   <tbody>
     <tr>
       <td align="left">
+        <code>onBack</code>
+      </td>
+      <td align="left">
         <code>() =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>backButtonProps</code>
+      </td>
+      <td align="left">
+        <code>
+          Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'}{' '}
+          ariaLabel?: string {'}'}
+        </code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -204,11 +208,12 @@ Callback when the back button is pressed. If provided, a back button will be ren
 
 ### `onClose`
 
-Callback when the close button is pressed. If provided, a close button will be added to the end accessories. The button uses a default English `ariaLabel` of "Close"; override via `closeButtonProps.ariaLabel` for localization.
+Callback when the close button is pressed. If provided, a close button is added to the end accessories. The button uses a default English `ariaLabel` of "Close"; override via `closeButtonProps.ariaLabel` for localization. Use `closeButtonProps` to pass additional props to the close ButtonIcon. If `closeButtonProps` is provided without `onClose`, a close button is still rendered.
 
 <table>
   <thead>
     <tr>
+      <th align="left">PROP</th>
       <th align="left">TYPE</th>
       <th align="left">REQUIRED</th>
       <th align="left">DEFAULT</th>
@@ -217,7 +222,25 @@ Callback when the close button is pressed. If provided, a close button will be a
   <tbody>
     <tr>
       <td align="left">
+        <code>onClose</code>
+      </td>
+      <td align="left">
         <code>() =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>closeButtonProps</code>
+      </td>
+      <td align="left">
+        <code>
+          Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'}{' '}
+          ariaLabel?: string {'}'}
+        </code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -229,115 +252,14 @@ Callback when the close button is pressed. If provided, a close button will be a
 
 <Canvas of={HeaderSubpageStories.OnClose} />
 
-### `backButtonProps`
-
-Additional props to pass to the back ButtonIcon. If provided (even without `onBack`), a back button will be rendered with these props spread.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'} ariaLabel?: string {'}'}</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-### `closeButtonProps`
-
-Additional props to pass to the close ButtonIcon. If provided (even without `onClose`), a close button will be added with these props spread.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>Omit&lt;ButtonIconProps, 'iconName' | 'ariaLabel'&gt; & {'{'} ariaLabel?: string {'}'}</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-### `startButtonIconProps`
-
-Optional ButtonIcon props to render as the start accessory. Only used if `startAccessory` is not provided and no back button shortcuts are active.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>ButtonIconProps</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-### `endButtonIconProps`
-
-Optional array of ButtonIcon props to render as additional end accessories. Rendered in reverse order (first item appears rightmost). Only used if `endAccessory` is not provided.
-
-<table>
-  <thead>
-    <tr>
-      <th align="left">TYPE</th>
-      <th align="left">REQUIRED</th>
-      <th align="left">DEFAULT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">
-        <code>ButtonIconProps[]</code>
-      </td>
-      <td align="left">No</td>
-      <td align="left">
-        <code>undefined</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<Canvas of={HeaderSubpageStories.EndButtonIconProps} />
-
 ### `startAccessory`
 
-Optional content before the identity content. Takes priority over `startButtonIconProps` and back shortcuts. Use this escape hatch when you need complete control over the start slot content.
+Optional content before the identity content. Use this escape hatch when you need complete control over the start slot. Use `startButtonIconProps` to render a start ButtonIcon when `startAccessory` is not provided and no back button shortcuts are active. `startAccessory` takes priority over `startButtonIconProps` and back shortcuts.
 
 <table>
   <thead>
     <tr>
+      <th align="left">PROP</th>
       <th align="left">TYPE</th>
       <th align="left">REQUIRED</th>
       <th align="left">DEFAULT</th>
@@ -346,7 +268,22 @@ Optional content before the identity content. Takes priority over `startButtonIc
   <tbody>
     <tr>
       <td align="left">
+        <code>startAccessory</code>
+      </td>
+      <td align="left">
         <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>startButtonIconProps</code>
+      </td>
+      <td align="left">
+        <code>ButtonIconProps</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -360,11 +297,12 @@ Optional content before the identity content. Takes priority over `startButtonIc
 
 ### `endAccessory`
 
-Optional content after the identity content. Takes priority over `endButtonIconProps` and close shortcuts. Use this escape hatch when you need complete control over the end slot content.
+Optional content after the identity content. Use this escape hatch when you need complete control over the end slot. Use `endButtonIconProps` to render additional end ButtonIcons when `endAccessory` is not provided. Items are rendered in reverse order (first item appears rightmost). `endAccessory` takes priority over `endButtonIconProps` and close shortcuts.
 
 <table>
   <thead>
     <tr>
+      <th align="left">PROP</th>
       <th align="left">TYPE</th>
       <th align="left">REQUIRED</th>
       <th align="left">DEFAULT</th>
@@ -373,7 +311,22 @@ Optional content after the identity content. Takes priority over `endButtonIconP
   <tbody>
     <tr>
       <td align="left">
+        <code>endAccessory</code>
+      </td>
+      <td align="left">
         <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>endButtonIconProps</code>
+      </td>
+      <td align="left">
+        <code>ButtonIconProps[]</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -384,6 +337,8 @@ Optional content after the identity content. Takes priority over `endButtonIconP
 </table>
 
 <Canvas of={HeaderSubpageStories.EndAccessory} />
+
+<Canvas of={HeaderSubpageStories.EndButtonIconProps} />
 
 ### `accessoryGap`
 
@@ -436,7 +391,11 @@ Use the `className` prop to add custom CSS classes to the component. These class
 </table>
 
 ```tsx
-<HeaderSubpage className="border-b border-muted" title="Settings" onBack={() => {}} />
+<HeaderSubpage
+  className="border-b border-muted"
+  title="Settings"
+  onBack={() => {}}
+/>
 ```
 
 ### `style`
