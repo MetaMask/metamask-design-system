@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.0.0]
+
+### Changed
+
+- **BREAKING:** Replaced Geist with Inter as the default typeface ([#1489](https://github.com/MetaMask/metamask-design-system/pull/1489))
+  - `--font-family-default` is now `'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+  - `fontFamilies.default` is now `'Inter'`
+  - Accent (MM Sans) and hero (MM Poly) families are unchanged; font size, weight, line height, and letter spacing tokens are unchanged
+  - Consumers must bundle the Inter font files; the package does not ship font binaries
+  - See [Migration Guide](./MIGRATION.md#from-version-10x-to-1100)
+
 ## [10.0.0]
 
 ### Changed
@@ -479,7 +490,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@10.0.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@11.0.0...HEAD
+[11.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@10.0.0...@metamask/design-tokens@11.0.0
 [10.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@9.0.0...@metamask/design-tokens@10.0.0
 [9.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...@metamask/design-tokens@9.0.0
 [8.7.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.6.0...@metamask/design-tokens@8.7.0

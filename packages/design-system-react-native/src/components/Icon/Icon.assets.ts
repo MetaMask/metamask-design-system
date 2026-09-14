@@ -87,10 +87,13 @@ import GiftSVG from './assets/gift.svg';
 import GlobalSearchSVG from './assets/global-search.svg';
 import GlobalSVG from './assets/global.svg';
 import HardwareSVG from './assets/hardware.svg';
+import HeartStraightFilledSVG from './assets/heart-straight-filled.svg';
+import HeartStraightSVG from './assets/heart-straight.svg';
 import HierarchySVG from './assets/hierarchy.svg';
 import HomeFilledSVG from './assets/home-filled.svg';
 import HomeSVG from './assets/home.svg';
 import ImageSVG from './assets/image.svg';
+import InfinitySVG from './assets/infinity.svg';
 import InfoSVG from './assets/info.svg';
 import KeepSVG from './assets/keep.svg';
 import KeySVG from './assets/key.svg';
@@ -275,10 +278,13 @@ export const assetByIconName: AssetByIconName = {
   GlobalSearch: GlobalSearchSVG,
   Global: GlobalSVG,
   Hardware: HardwareSVG,
+  HeartStraightFilled: HeartStraightFilledSVG,
+  HeartStraight: HeartStraightSVG,
   Hierarchy: HierarchySVG,
   HomeFilled: HomeFilledSVG,
   Home: HomeSVG,
   Image: ImageSVG,
+  Infinity: InfinitySVG,
   Info: InfoSVG,
   Keep: KeepSVG,
   Key: KeySVG,

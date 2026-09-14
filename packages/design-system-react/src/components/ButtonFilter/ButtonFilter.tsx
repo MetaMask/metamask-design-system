@@ -5,6 +5,10 @@ import { ButtonBase } from '../ButtonBase';
 
 import type { ButtonFilterProps } from './ButtonFilter.types';
 
+/**
+ * @deprecated Use `FilterButton` instead. This component will be removed
+ * in a future major version of the design system.
+ */
 export const ButtonFilter = forwardRef<HTMLButtonElement, ButtonFilterProps>(
   ({ className, isActive = false, ...props }, ref) => {
     const mergedClassName = twMerge(

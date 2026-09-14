@@ -15,26 +15,46 @@ describe('ButtonBase', () => {
       <ButtonBase size={ButtonBaseSize.Sm}>Button</ButtonBase>,
     );
     expect(screen.getByRole('button')).toHaveClass('h-8');
-    expect(screen.getByRole('button')).toHaveClass('px-3');
 
     rerender(<ButtonBase size={ButtonBaseSize.Md}>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-10');
-    expect(screen.getByRole('button')).toHaveClass('px-3');
 
     rerender(<ButtonBase>Button</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
-    expect(screen.getByRole('button')).toHaveClass('px-4');
   });
 
   it('applies large size by default', () => {
     render(<ButtonBase>Default Size</ButtonBase>);
     expect(screen.getByRole('button')).toHaveClass('h-12');
-    expect(screen.getByRole('button')).toHaveClass('px-4');
   });
 
-  it('applies size-based border radius for default large button', () => {
-    render(<ButtonBase>Rounded</ButtonBase>);
-    expect(screen.getByRole('button')).toHaveClass('rounded-xl');
+  it.each([ButtonBaseSize.Sm, ButtonBaseSize.Md, ButtonBaseSize.Lg])(
+    'applies the same label-only horizontal padding at size %s',
+    (size) => {
+      render(<ButtonBase size={size}>Button</ButtonBase>);
+
+      expect(screen.getByRole('button')).toHaveClass('px-4');
+    },
+  );
+
+  it('insets the padding on each side that has an accessory', () => {
+    const { rerender } = render(
+      <ButtonBase startIconName={IconName.Add}>Start</ButtonBase>,
+    );
+    expect(screen.getByRole('button')).toHaveClass('pl-3', 'pr-4');
+
+    rerender(<ButtonBase endIconName={IconName.Add}>End</ButtonBase>);
+    expect(screen.getByRole('button')).toHaveClass('pl-4', 'pr-3');
+
+    rerender(
+      <ButtonBase
+        startIconName={IconName.Add}
+        endIconName={IconName.ArrowRight}
+      >
+        Both
+      </ButtonBase>,
+    );
+    expect(screen.getByRole('button')).toHaveClass('px-3');
   });
 
   it('renders as child component when asChild is true', () => {

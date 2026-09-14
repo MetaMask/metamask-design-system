@@ -218,7 +218,7 @@ describe('Typography CSS', () => {
   // Test font families
   describe('Font Families', () => {
     const fontFamilies = {
-      default: "'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      default: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
       accent: "'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
       hero: "'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif",
     };
