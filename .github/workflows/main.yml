@@ -86,6 +86,7 @@ jobs:
 
           if [[ "${{ github.event_name }}" == "pull_request" || "${{ github.event_name }}" == "merge_group" ]]; then
             BASE_REF="${{ github.event.pull_request.base.ref || github.event.merge_group.base_ref }}"
+            BASE_REF="${BASE_REF#refs/heads/}"
             git fetch origin "$BASE_REF"
             CHANGED_FILES="$(git diff --name-only "origin/$BASE_REF...HEAD")"
           else
