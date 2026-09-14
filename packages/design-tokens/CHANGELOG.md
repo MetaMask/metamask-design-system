@@ -9,9 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [12.0.0]
 
-### Uncategorized
+### Changed
 
-- feat: update brand accent colors ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
+- **BREAKING:** Updated brand accent and selected neutral token values to the 2026 rebrand palette ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
+  - Token names and APIs are unchanged; CSS, JS, Figma, and Tailwind outputs emit new hex values
+  - Orange, purple, lime, and indigo brand steps change (for example `orange400` `#ff5c16` → `#fa4b00`, `lime100` `#baf24a` → `#b9f302`)
+  - Neutral `white010` changes from `#fcfcfc` to `#f5f5f5`
+  - Light and dark semantic tokens that reference those brand colors (including accent and dark success) pick up the new values
+  - See [Migration Guide](./MIGRATION.md#from-version-11x-to-1200)
 
 ## [11.0.0]
 

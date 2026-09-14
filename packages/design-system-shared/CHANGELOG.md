@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.38.0]
 
-### Uncategorized
+### Added
 
-- docs: improve HeaderSubpage examples ([#1513](https://github.com/MetaMask/metamask-design-system/pull/1513))
-- fix(icons): redraw CopySuccess to match Copy silhouette ([#1517](https://github.com/MetaMask/metamask-design-system/pull/1517))
-- feat(react): add HeaderSubpage component ([#1505](https://github.com/MetaMask/metamask-design-system/pull/1505))
-- feat(icons): add Infinity icon ([#1512](https://github.com/MetaMask/metamask-design-system/pull/1512))
+- Added `Infinity` to `IconName` ([#1512](https://github.com/MetaMask/metamask-design-system/pull/1512))
+- Added `HeaderSubpagePropsShared` for cross-platform `HeaderSubpage` support ([#1505](https://github.com/MetaMask/metamask-design-system/pull/1505))
+
+### Fixed
+
+- Redrew the `CopySuccess` icon silhouette to match `Copy` ([#1517](https://github.com/MetaMask/metamask-design-system/pull/1517))
 
 ## [0.37.0]
 

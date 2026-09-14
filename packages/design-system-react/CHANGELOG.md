@@ -9,14 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.44.0]
 
-### Uncategorized
+### Added
 
-- docs: improve HeaderSubpage examples ([#1513](https://github.com/MetaMask/metamask-design-system/pull/1513))
-- fix(icons): redraw CopySuccess to match Copy silhouette ([#1517](https://github.com/MetaMask/metamask-design-system/pull/1517))
-- feat: update Maskicon color pairings ([#1497](https://github.com/MetaMask/metamask-design-system/pull/1497))
-- feat(react): add HeaderSubpage component ([#1505](https://github.com/MetaMask/metamask-design-system/pull/1505))
-- feat(icons): add Infinity icon ([#1512](https://github.com/MetaMask/metamask-design-system/pull/1512))
-- docs: add content guidance to component READMEs ([#1472](https://github.com/MetaMask/metamask-design-system/pull/1472))
+- Added `HeaderSubpage` for subpage navigation headers with optional back, close, title, description, and accessory slots ([#1505](https://github.com/MetaMask/metamask-design-system/pull/1505))
+- Added `Infinity` to `IconName` ([#1512](https://github.com/MetaMask/metamask-design-system/pull/1512))
+
+### Changed
+
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-tailwind-preset@^0.14.0` ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
+  - Required coordination bump with the brand accent palette in `@metamask/design-tokens@12.0.0`
+  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-11x-to-1200)
+- Updated `Maskicon` generated color pairings to the 2026 brand accent palette ([#1497](https://github.com/MetaMask/metamask-design-system/pull/1497))
+  - Existing account addresses resolve to different background and foreground colors; there is no API change
+
+### Fixed
+
+- Redrew the `CopySuccess` icon silhouette to match `Copy` ([#1517](https://github.com/MetaMask/metamask-design-system/pull/1517))
 
 ## [0.43.0]
 

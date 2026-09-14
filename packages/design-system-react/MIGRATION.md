@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.43.0 to 0.44.0](#from-version-0430-to-0440)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -3630,6 +3631,48 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.43.0 to 0.44.0
+
+<a id="from-version-0430-to-0440"></a>
+
+<a id="peer-dependencies-design-tokens-12"></a>
+
+#### Peer dependencies: design-tokens 12.0.0
+
+**What changed:**
+
+- Peer `@metamask/design-tokens` is now `^12.0.0` (was `^11.0.0`)
+- Peer `@metamask/design-system-tailwind-preset` is now `^0.14.0` (was `^0.13.0`)
+- `Maskicon` (used by `AvatarAccount`) uses the new brand accent pairings from [#1497](https://github.com/MetaMask/metamask-design-system/pull/1497)
+
+**Migration:**
+
+```json
+{
+  "dependencies": {
+    "@metamask/design-system-react": "0.44.0",
+    "@metamask/design-tokens": "^12.0.0",
+    "@metamask/design-system-tailwind-preset": "^0.14.0"
+  }
+}
+```
+
+See the [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-11x-to-1200) for the hex value table. No component import or prop changes are required for the palette update.
+
+`HeaderSubpage` is new in this version and is additive:
+
+```tsx
+import { HeaderSubpage } from '@metamask/design-system-react';
+
+<HeaderSubpage
+  title="Send"
+  description="Ethereum Mainnet"
+  onBack={() => history.back()}
+/>;
+```
+
+**Impact:** Install will fail until tokens and the Tailwind preset satisfy the new peer ranges. Generated Maskicon artwork for existing addresses will change color.
 
 ### From version 0.40.0 to 0.41.0
 
