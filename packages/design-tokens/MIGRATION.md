@@ -2,7 +2,6 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
-- [From version 11.x to 12.0.0](#from-version-11x-to-1200)
 - [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
 - [From version 8.x to 9.0.0](#from-version-8x-to-900)
@@ -14,57 +13,6 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
-
-## From version 11.x to 12.0.0
-
-<a id="from-version-11x-to-1200"></a>
-
-<a id="brand-accent-palette-2026"></a>
-
-Brand accent (and one neutral) token **values** change to the 2026 rebrand palette. Token names, CSS variable names, JS keys, and Tailwind class names are unchanged.
-
-### What changed
-
-| Token       | Before (11.x) | After (12.0.0) |
-| ----------- | ------------- | -------------- |
-| `white010`  | `#fcfcfc`     | `#f5f5f5`      |
-| `orange200` | `#ffa680`     | `#ffc0a5`      |
-| `orange400` | `#ff5c16`     | `#fa4b00`      |
-| `orange600` | `#932d06`     | `#330022`      |
-| `orange700` | `#661800`     | `#28001a`      |
-| `purple100` | `#eac2ff`     | `#e1a9ff`      |
-| `purple300` | `#d075ff`     | `#c66ef5`      |
-| `purple800` | `#3d065f`     | `#360853`      |
-| `lime050`   | `#e5ffc3`     | `#e3ff89`      |
-| `lime100`   | `#baf24a`     | `#b9f302`      |
-| `indigo100` | `#cce7ff`     | `#b4d0ff`      |
-| `indigo200` | `#89b0ff`     | `#73a6ff`      |
-| `indigo800` | `#190066`     | `#002139`      |
-
-Semantic light and dark theme tokens that reference these brand colors (including accent scales and dark `success`) emit the new hex values automatically.
-
-### Migration
-
-No import or token-name changes are required:
-
-```tsx
-// Before (11.x) and after (12.0.0) — same API
-import { brandColor, lightTheme, darkTheme } from '@metamask/design-tokens';
-
-brandColor.orange400;
-lightTheme.colors.accent01.default;
-darkTheme.colors.success.default;
-```
-
-Upgrade `@metamask/design-tokens` to `^12.0.0`. If you pin a Tailwind or twrnc preset, upgrade those peers in the same change (`@metamask/design-system-tailwind-preset@^0.14.0` or `@metamask/design-system-twrnc-preset@^0.12.0`).
-
-Search product code for the **old hex literals** above and replace them with the matching token. Hardcoded `#ff5c16` / `#baf24a` (and the other previous values) will drift from the system.
-
-### Impact
-
-- **Visual:** Accents, dark success, and Maskicon pairings that consume these tokens will look different.
-- **No TypeScript or runtime API break** unless you asserted exact hex strings in tests.
-- Apps already on the 2026 Figma palette should match; apps still on the previous brand accents will see the new colors on upgrade.
 
 ## From version 10.x to 11.0.0
 

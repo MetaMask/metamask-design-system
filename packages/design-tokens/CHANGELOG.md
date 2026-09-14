@@ -16,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Orange, purple, lime, and indigo brand steps change (for example `orange400` `#ff5c16` → `#fa4b00`, `lime100` `#baf24a` → `#b9f302`)
   - Neutral `white010` changes from `#fcfcfc` to `#f5f5f5`
   - Light and dark semantic tokens that reference those brand colors (including accent and dark success) pick up the new values
-  - See [Migration Guide](./MIGRATION.md#from-version-11x-to-1200)
 
 ## [11.0.0]
 

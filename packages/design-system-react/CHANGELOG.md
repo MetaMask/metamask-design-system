@@ -18,7 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-tailwind-preset@^0.14.0` ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
   - Required coordination bump with the brand accent palette in `@metamask/design-tokens@12.0.0`
-  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-11x-to-1200)
 - Updated `Maskicon` generated color pairings to the 2026 brand accent palette ([#1497](https://github.com/MetaMask/metamask-design-system/pull/1497))
   - Existing account addresses resolve to different background and foreground colors; there is no API change
 

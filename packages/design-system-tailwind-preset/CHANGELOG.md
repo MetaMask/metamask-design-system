@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING:** Updated peer dependency to `@metamask/design-tokens@^12.0.0` ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
   - Required coordination bump with `@metamask/design-tokens@12.0.0`; preset utilities are unchanged
   - Brand accent color values come from design-tokens
-  - See [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-11x-to-1200)
 
 ## [0.13.0]
 
