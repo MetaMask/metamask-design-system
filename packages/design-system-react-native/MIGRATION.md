@@ -4,7 +4,6 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.47.0 to 0.48.0](#from-version-0470-to-0480)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
 - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
 - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
@@ -53,7 +52,6 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.47.0 to 0.48.0](#from-version-0470-to-0480)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
   - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
   - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
@@ -77,55 +75,6 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
-
-### From version 0.47.0 to 0.48.0
-
-<a id="from-version-0470-to-0480"></a>
-
-<a id="peer-dependencies-design-tokens-12"></a>
-
-#### Peer dependencies: design-tokens 12.0.0
-
-**What changed:**
-
-- Peer `@metamask/design-tokens` is now `^12.0.0` (was `^11.0.0`)
-- Peer `@metamask/design-system-twrnc-preset` is now `^0.12.0` (was `^0.11.0`)
-- `Maskicon` (used by `AvatarAccount`) uses the new brand accent pairings from [#1497](https://github.com/MetaMask/metamask-design-system/pull/1497)
-- Default `SectionHeader` start and end icon size is `IconSize.Md` instead of `IconSize.Sm`
-
-**Migration:**
-
-```json
-{
-  "dependencies": {
-    "@metamask/design-system-react-native": "0.48.0",
-    "@metamask/design-tokens": "^12.0.0",
-    "@metamask/design-system-twrnc-preset": "^0.12.0"
-  }
-}
-```
-
-Keep the previous `SectionHeader` icon size with explicit props:
-
-```tsx
-import {
-  IconName,
-  IconSize,
-  SectionHeader,
-} from '@metamask/design-system-react-native';
-
-<SectionHeader
-  title="Networks"
-  startIconName={IconName.Global}
-  startIconProps={{ size: IconSize.Sm }}
-  endIconName={IconName.ArrowRight}
-  endIconProps={{ size: IconSize.Sm }}
-/>;
-```
-
-See the [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-11x-to-1200) for the hex value table.
-
-**Impact:** Install will fail until tokens and the twrnc preset satisfy the new peer ranges. Generated Maskicon artwork for existing addresses will change color. Section headers that relied on the default icon size will render larger icons.
 
 ### From version 0.44.0 to 0.45.0
 
