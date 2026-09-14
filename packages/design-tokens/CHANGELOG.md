@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [12.0.0]
+## [11.1.0]
 
 ### Changed
 
-- **BREAKING:** Updated brand accent and selected neutral token values to the 2026 rebrand palette ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
+- Updated brand accent and selected neutral token values to the 2026 rebrand palette ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
   - Token names and APIs are unchanged; CSS, JS, Figma, and Tailwind outputs emit new hex values
   - Orange, purple, lime, and indigo brand steps change (for example `orange400` `#ff5c16` → `#fa4b00`, `lime100` `#baf24a` → `#b9f302`)
   - Neutral `white010` changes from `#fcfcfc` to `#f5f5f5`
@@ -500,8 +500,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@12.0.0...HEAD
-[12.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@11.0.0...@metamask/design-tokens@12.0.0
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@11.1.0...HEAD
+[11.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@11.0.0...@metamask/design-tokens@11.1.0
 [11.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@10.0.0...@metamask/design-tokens@11.0.0
 [10.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@9.0.0...@metamask/design-tokens@10.0.0
 [9.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...@metamask/design-tokens@9.0.0

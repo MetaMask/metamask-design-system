@@ -3440,7 +3440,7 @@ __metadata:
     typescript: "npm:~5.2.2"
   peerDependencies:
     "@metamask/design-system-twrnc-preset": ^0.12.0
-    "@metamask/design-tokens": ^12.0.0
+    "@metamask/design-tokens": ^11.0.0
     "@metamask/utils": ^11.12.1
     expo-image: ">=3.0.0"
     lodash: ^4.17.21
@@ -3491,7 +3491,7 @@ __metadata:
     typescript: "npm:~5.2.2"
   peerDependencies:
     "@metamask/design-system-tailwind-preset": ^0.14.0
-    "@metamask/design-tokens": ^12.0.0
+    "@metamask/design-tokens": ^11.0.0
     "@metamask/utils": ^11.12.1
     react: ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -3537,7 +3537,7 @@ __metadata:
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^12.0.0
+    "@metamask/design-tokens": ^11.0.0
     tailwindcss: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -3569,7 +3569,7 @@ __metadata:
     twrnc: "npm:^4.5.1"
     typescript: "npm:~5.2.2"
   peerDependencies:
-    "@metamask/design-tokens": ^12.0.0
+    "@metamask/design-tokens": ^11.0.0
     react: ">=18.2.0"
   languageName: unknown
   linkType: soft

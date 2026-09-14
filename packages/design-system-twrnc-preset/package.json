@@ -82,7 +82,7 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@metamask/design-tokens": "^12.0.0",
+    "@metamask/design-tokens": "^11.0.0",
     "react": ">=18.2.0"
   },
   "engines": {
