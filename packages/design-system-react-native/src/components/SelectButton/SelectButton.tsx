@@ -1,4 +1,5 @@
 import {
+  mergeTwClassName,
   SelectButtonEndArrow,
   SelectButtonSize,
   SelectButtonVariant,
@@ -21,6 +22,7 @@ export const SelectButton = ({
   endAccessory,
   hideEndArrow = false,
   isDisabled = false,
+  isFullWidth = false,
   endArrowDirectionIconProps,
   variant = SelectButtonVariant.Primary,
   isLoading = false,
@@ -30,6 +32,25 @@ export const SelectButton = ({
   ...buttonBaseRest
 }: SelectButtonProps) => {
   const labelContent = value ?? placeholder;
+  const resolvedTextProps = {
+    ...textProps,
+    twClassName: mergeTwClassName(
+      // Ensure the label actually grows to push the end arrow when full width.
+      // ButtonBase applies 'grow-0' by default; add 'grow' here to override it.
+      // Keep 'flex-1' for existing expectations/tests.
+      isFullWidth ? 'text-left flex-1 grow' : 'text-left',
+      textProps?.twClassName,
+    ),
+  };
+  const resolvedContentWrapperProps = isFullWidth
+    ? {
+        ...buttonBaseRest.contentWrapperProps,
+        twClassName: mergeTwClassName(
+          'w-full',
+          buttonBaseRest.contentWrapperProps?.twClassName,
+        ),
+      }
+    : buttonBaseRest.contentWrapperProps;
 
   let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;
   if (hideEndArrow) {
@@ -47,14 +68,16 @@ export const SelectButton = ({
       {...buttonBaseRest}
       size={size}
       isDisabled={isDisabled}
+      isFullWidth={isFullWidth}
       isLoading={isLoading}
       children={labelContent}
       textProps={{
         ...(variant === SelectButtonVariant.Tertiary
           ? { color: TextColor.TextAlternative }
           : {}),
-        ...textProps,
+        ...resolvedTextProps,
       }}
+      contentWrapperProps={resolvedContentWrapperProps}
       startAccessory={startAccessory}
       endAccessory={resolvedEndArrowDirection ? undefined : endAccessory}
       endIconName={
