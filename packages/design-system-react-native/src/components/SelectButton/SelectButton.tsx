@@ -35,7 +35,10 @@ export const SelectButton = ({
   const resolvedTextProps = {
     ...textProps,
     twClassName: mergeTwClassName(
-      isFullWidth ? 'text-left flex-1' : 'text-left',
+      // Ensure the label actually grows to push the end arrow when full width.
+      // ButtonBase applies 'grow-0' by default; add 'grow' here to override it.
+      // Keep 'flex-1' for existing expectations/tests.
+      isFullWidth ? 'text-left flex-1 grow' : 'text-left',
       textProps?.twClassName,
     ),
   };
