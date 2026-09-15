@@ -29,6 +29,43 @@ describe('HeaderBase', () => {
 
       expect(getByTestId('custom-content')).toBeOnTheScreen();
     });
+
+    it('renders title wrapper but no content when children is not provided', () => {
+      const { getByTestId } = render(
+        <HeaderBase
+          childrenWrapperProps={{ testID: 'title-wrapper' }}
+          startAccessory={<Text testID="start-content">Start</Text>}
+        />,
+      );
+
+      const titleWrapper = getByTestId('title-wrapper');
+      expect(titleWrapper).toBeOnTheScreen();
+      expect(titleWrapper.children).toHaveLength(0);
+    });
+
+    it('renders title wrapper but no content when children is empty string', () => {
+      const { getByTestId } = render(
+        <HeaderBase childrenWrapperProps={{ testID: 'title-wrapper' }}>
+          {''}
+        </HeaderBase>,
+      );
+
+      const titleWrapper = getByTestId('title-wrapper');
+      expect(titleWrapper).toBeOnTheScreen();
+      expect(titleWrapper.children).toHaveLength(0);
+    });
+
+    it('renders title wrapper but no content when children is null', () => {
+      const { getByTestId } = render(
+        <HeaderBase childrenWrapperProps={{ testID: 'title-wrapper' }}>
+          {null}
+        </HeaderBase>,
+      );
+
+      const titleWrapper = getByTestId('title-wrapper');
+      expect(titleWrapper).toBeOnTheScreen();
+      expect(titleWrapper.children).toHaveLength(0);
+    });
   });
 
   describe('root props', () => {
