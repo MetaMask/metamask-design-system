@@ -115,6 +115,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
   const hasStartAccessory = Boolean(resolvedStartAccessory);
   const hasEndAccessory = Boolean(resolvedEndAccessory);
   const hasAnyAccessory = hasStartAccessory || hasEndAccessory;
+  const hasChildren = children !== undefined && children !== null && children !== '';
 
   // Calculate equal width for both accessory wrappers to ensure title stays centered.
   const accessoryWrapperWidth =
@@ -173,17 +174,19 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
       })}
 
       {/* Title */}
-      <View style={tw.style('flex-1 items-center')} {...childrenWrapperProps}>
-        <TextOrChildren
-          textProps={{
-            variant: TextVariant.HeadingSm,
-            ...textProps,
-            style: [tw.style('text-center'), textProps?.style],
-          }}
-        >
-          {children}
-        </TextOrChildren>
-      </View>
+      {hasChildren && (
+        <View style={tw.style('flex-1 items-center')} {...childrenWrapperProps}>
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.HeadingSm,
+              ...textProps,
+              style: [tw.style('text-center'), textProps?.style],
+            }}
+          >
+            {children}
+          </TextOrChildren>
+        </View>
+      )}
 
       {/* End accessory */}
       {renderAccessoryWrapper({
