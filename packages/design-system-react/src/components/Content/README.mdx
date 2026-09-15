@@ -1,0 +1,739 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ContentStories from './Content.stories';
+
+# Content
+
+Content lays out the inner row for list items: an avatar, title and description on the left, and value and subvalue on the right. Use it when you need the row layout without `ListItem` padding, press handling, or row shell accessories.
+
+The root is a horizontal row with no padding or min-height floors. For padded list rows with variant-driven min-heights, press handling, or row shell accessories, use [ListItem](../ListItem/README.mdx).
+
+```tsx
+import { Content } from '@metamask/design-system-react';
+
+<Content
+  title="Label"
+  description="Secondary"
+  value="Value"
+  subvalue="Subvalue"
+/>;
+```
+
+<Canvas of={ContentStories.Default} />
+<Controls />
+
+## Props
+
+### `title`
+
+Primary label on the left. Pass a string for default body styling, or a node for custom content.
+
+Default string styles: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextDefault`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content title="Network" />
+
+<Content title={<Text variant={TextVariant.HeadingSm}>Custom title</Text>} />
+```
+
+<Canvas of={ContentStories.Title} />
+
+### `description`
+
+Secondary line under the title on the left. Pass a string for default body styling, or a node for custom content.
+
+Default string styles: `TextVariant.BodySm`, `FontWeight.Medium`, `TextColor.TextAlternative`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content title="Network" description="Ethereum Mainnet" />
+```
+
+<Canvas of={ContentStories.Description} />
+
+### `value`
+
+Primary value on the right. Pass a string for default body styling, or a node for custom content.
+
+Default string styles: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextDefault`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content title="Amount" value="$10.00" />
+```
+
+<Canvas of={ContentStories.Value} />
+
+### `subvalue`
+
+Secondary line under the value on the right. Pass a string for default body styling, or a node (for example a button). Can be used with or without `value`.
+
+Default string styles: `TextVariant.BodySm`, `FontWeight.Medium`, `TextColor.TextAlternative`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content title="Network" value="1.234 ETH" subvalue="~$2,500" />
+
+<Content
+  avatar={<AvatarToken name="ETH" src={ethIcon} size={AvatarTokenSize.Lg} />}
+  subvalue={
+    <Button variant={ButtonVariant.Secondary} size={ButtonSize.Sm}>
+      3% bonus
+    </Button>
+  }
+/>
+```
+
+<Canvas of={ContentStories.Subvalue} />
+
+### `titleProps`
+
+Props merged onto the `Text` component when `title` is a string. Overrides default title text styles.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;Omit&lt;TextProps, 'children'&gt;&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content title="Warning" titleProps={{ color: TextColor.WarningDefault }} />
+```
+
+### `descriptionProps`
+
+Props merged onto `SensitiveText` when `description` is a string. Overrides default description text styles. Supports `isHidden` and `length` to mask the string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;Omit&lt;SensitiveTextProps, 'children'&gt;&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content
+  title="Account"
+  description="0x1234…abcd"
+  descriptionProps={{ isHidden: true }}
+/>
+```
+
+<Canvas of={ContentStories.DescriptionProps} />
+
+### `valueProps`
+
+Props merged onto `SensitiveText` when `value` is a string. Overrides default value text styles. Supports `isHidden` and `length` to mask the string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;Omit&lt;SensitiveTextProps, 'children'&gt;&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content title="Balance" value="$1,234.56" valueProps={{ isHidden: true }} />
+```
+
+<Canvas of={ContentStories.ValueProps} />
+
+### `subvalueProps`
+
+Props merged onto `SensitiveText` when `subvalue` is a string. Overrides default subvalue text styles. Supports `isHidden` and `length` to mask the string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;Omit&lt;SensitiveTextProps, 'children'&gt;&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content
+  title="Amount"
+  value="$10.00"
+  subvalue="+2.5%"
+  subvalueProps={{ isHidden: true }}
+/>
+```
+
+<Canvas of={ContentStories.SubvalueProps} />
+
+### `avatar`
+
+Optional leading visual before the title column. Use large avatars (40×40) in this slot.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  AvatarToken,
+  AvatarTokenSize,
+  Content,
+} from '@metamask/design-system-react';
+
+<Content
+  avatar={<AvatarToken name="ETH" src={ethIcon} size={AvatarTokenSize.Lg} />}
+  title="Ethereum"
+  value="0.24 ETH"
+/>;
+```
+
+<Canvas of={ContentStories.Avatar} />
+
+### `titleStartAccessory`
+
+Optional node before the title on the same line (for example an icon or badge).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content title="Network" titleStartAccessory={<Icon name={IconName.Info} />} />
+```
+
+<Canvas of={ContentStories.TitleStartAccessory} />
+
+### `titleEndAccessory`
+
+Optional node after the title on the same line (for example a status dot).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content
+  title="Network"
+  titleEndAccessory={<Icon name={IconName.Question} />}
+/>
+```
+
+<Canvas of={ContentStories.TitleEndAccessory} />
+
+### `descriptionStartAccessory`
+
+Optional node before the description on the same line.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content
+  title="Network"
+  description="Ethereum Mainnet"
+  descriptionStartAccessory={<Icon name={IconName.Info} />}
+/>
+```
+
+<Canvas of={ContentStories.DescriptionStartAccessory} />
+
+### `descriptionEndAccessory`
+
+Optional node after the description on the same line.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content
+  title="Network"
+  description="Ethereum Mainnet"
+  descriptionEndAccessory={<Icon name={IconName.Question} />}
+/>
+```
+
+<Canvas of={ContentStories.DescriptionEndAccessory} />
+
+### `valueStartAccessory`
+
+Optional node before the value on the same line.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content
+  title="Label"
+  value="100"
+  valueStartAccessory={<Icon name={IconName.Check} />}
+/>
+```
+
+<Canvas of={ContentStories.ValueStartAccessory} />
+
+### `valueEndAccessory`
+
+Optional node after the value on the same line.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content
+  title="Label"
+  value="100"
+  valueEndAccessory={<Icon name={IconName.Info} />}
+/>
+```
+
+<Canvas of={ContentStories.ValueEndAccessory} />
+
+### `subvalueStartAccessory`
+
+Optional node before the subvalue on the same line.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content
+  title="Amount"
+  value="$10.00"
+  subvalue="~$0.50 fee"
+  subvalueStartAccessory={<Icon name={IconName.Info} />}
+/>
+```
+
+<Canvas of={ContentStories.SubvalueStartAccessory} />
+
+### `subvalueEndAccessory`
+
+Optional node after the subvalue on the same line.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<Content
+  title="Amount"
+  value="$10.00"
+  subvalue="~$0.50 fee"
+  subvalueEndAccessory={<Icon name={IconName.Question} />}
+/>
+```
+
+<Canvas of={ContentStories.SubvalueEndAccessory} />
+
+### `variant`
+
+Layout variant controlling alignment and which secondary slots render.
+
+Available values:
+
+- `ContentVariant.OneLine` — omits `description` and `subvalue`; vertically centered
+- `ContentVariant.TwoLines` — default; all slots; vertically centered
+- `ContentVariant.MultiLine` — all slots; top-aligned for three or more lines
+
+When using `ListItem`, total row min-heights (48px / 72px / 88px including `py-3`) are applied on the ListItem shell.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ContentVariant</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>ContentVariant.TwoLines</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { Content, ContentVariant } from '@metamask/design-system-react';
+
+<Content variant={ContentVariant.OneLine} title="Label" value="Value" />
+
+<Content
+  variant={ContentVariant.MultiLine}
+  title="Label"
+  description={
+    <>
+      <Text variant={TextVariant.BodySm}>Line one</Text>
+      <Text variant={TextVariant.BodySm}>Line two</Text>
+    </>
+  }
+/>
+```
+
+<Canvas of={ContentStories.Variant} />
+
+### `className`
+
+Optional Tailwind CSS classes merged onto the root `Box` with `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { Content } from '@metamask/design-system-react';
+
+<Content title="Label" className="opacity-80" />;
+```
+
+### `style`
+
+Optional inline styles for dynamic values that cannot be expressed with `className`. Prefer `className` for static Tailwind utilities.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>React.CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { Content } from '@metamask/design-system-react';
+
+<Content
+  title="Network"
+  description="Ethereum Mainnet"
+  style={{ opacity: isHighlighted ? 1 : 0.7 }}
+/>;
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
