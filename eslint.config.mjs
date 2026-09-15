@@ -223,9 +223,31 @@ const config = createConfig([
       'packages/design-system-react/src/components/**/*.{ts,tsx}',
       'packages/design-system-react-native/src/components/**/*.{ts,tsx}',
     ],
-    ignores: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.d.ts'],
+    ignores: [
+      '**/*.stories.tsx',
+      '**/*.test.tsx',
+      '**/*.d.ts',
+      '**/*.figma.ts',
+      '**/*.figma.tsx',
+    ],
     rules: {
       'import-x/no-default-export': 'error',
+    },
+  },
+  // Code Connect Template API files (virtual `figma` module, default export required)
+  {
+    files: ['**/*.figma.ts'],
+    rules: {
+      'import-x/no-unresolved': ['error', { ignore: ['^figma$'] }],
+      'import-x/no-default-export': 'off',
+      'import-x/no-anonymous-default-export': 'off',
+      'spaced-comment': [
+        'error',
+        'always',
+        {
+          markers: ['/'],
+        },
+      ],
     },
   },
   // Tailwind ESLint for React Web
