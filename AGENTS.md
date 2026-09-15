@@ -94,6 +94,7 @@ yarn create-component:react-native --name ComponentName --description "Brief des
 # Storybook
 yarn storybook                # React web (port 6006)
 yarn workspace @metamask/storybook-react-native storybook:web  # React Native web (port 6007)
+yarn storybook:react-native   # React Native Metro + MCP (port 7007)
 yarn storybook:ios:build      # React Native iOS dev client (first time / native dep changes)
 yarn storybook:ios            # React Native iOS (Metro + dev client)
 yarn storybook:android:build  # React Native Android dev client (first time / native dep changes)
