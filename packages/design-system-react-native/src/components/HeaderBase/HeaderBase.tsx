@@ -173,8 +173,8 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
       })}
 
       {/* Title */}
-      {children && (
-        <View style={tw.style('flex-1 items-center')} {...childrenWrapperProps}>
+      <View style={tw.style('flex-1 items-center')} {...childrenWrapperProps}>
+        {children && (
           <TextOrChildren
             textProps={{
               variant: TextVariant.HeadingSm,
@@ -184,8 +184,8 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
           >
             {children}
           </TextOrChildren>
-        </View>
-      )}
+        )}
+      </View>
 
       {/* End accessory */}
       {renderAccessoryWrapper({
