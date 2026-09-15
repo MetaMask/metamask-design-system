@@ -121,6 +121,7 @@ import MusdFilled from './MusdFilled';
 import Musd from './Musd';
 import NoPhotography from './NoPhotography';
 import Notification from './Notification';
+import PeopleFilled from './PeopleFilled';
 import People from './People';
 import Pin from './Pin';
 import Plant from './Plant';
@@ -308,6 +309,7 @@ export const Icons = {
   Musd,
   NoPhotography,
   Notification,
+  PeopleFilled,
   People,
   Pin,
   Plant,

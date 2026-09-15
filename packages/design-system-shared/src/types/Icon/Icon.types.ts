@@ -171,6 +171,7 @@ export const IconName = {
   Musd: 'Musd',
   NoPhotography: 'NoPhotography',
   Notification: 'Notification',
+  PeopleFilled: 'PeopleFilled',
   People: 'People',
   Pin: 'Pin',
   Plant: 'Plant',
