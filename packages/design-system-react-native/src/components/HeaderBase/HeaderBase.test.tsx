@@ -40,7 +40,7 @@ describe('HeaderBase', () => {
 
       const titleWrapper = getByTestId('title-wrapper');
       expect(titleWrapper).toBeOnTheScreen();
-      expect(titleWrapper.children.length).toBe(0);
+      expect(titleWrapper.children).toHaveLength(0);
     });
 
     it('renders title wrapper but no content when children is empty string', () => {
@@ -52,7 +52,7 @@ describe('HeaderBase', () => {
 
       const titleWrapper = getByTestId('title-wrapper');
       expect(titleWrapper).toBeOnTheScreen();
-      expect(titleWrapper.children.length).toBe(0);
+      expect(titleWrapper.children).toHaveLength(0);
     });
 
     it('renders title wrapper but no content when children is null', () => {
@@ -64,7 +64,7 @@ describe('HeaderBase', () => {
 
       const titleWrapper = getByTestId('title-wrapper');
       expect(titleWrapper).toBeOnTheScreen();
-      expect(titleWrapper.children.length).toBe(0);
+      expect(titleWrapper.children).toHaveLength(0);
     });
   });
 
