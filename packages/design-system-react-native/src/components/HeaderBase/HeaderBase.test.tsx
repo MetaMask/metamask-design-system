@@ -30,35 +30,41 @@ describe('HeaderBase', () => {
       expect(getByTestId('custom-content')).toBeOnTheScreen();
     });
 
-    it('does not render title wrapper when children is not provided', () => {
-      const { queryByTestId } = render(
+    it('renders title wrapper but no content when children is not provided', () => {
+      const { getByTestId } = render(
         <HeaderBase
           childrenWrapperProps={{ testID: 'title-wrapper' }}
           startAccessory={<Text testID="start-content">Start</Text>}
         />,
       );
 
-      expect(queryByTestId('title-wrapper')).toBeNull();
+      const titleWrapper = getByTestId('title-wrapper');
+      expect(titleWrapper).toBeOnTheScreen();
+      expect(titleWrapper.children.length).toBe(0);
     });
 
-    it('does not render title wrapper when children is empty string', () => {
-      const { queryByTestId } = render(
+    it('renders title wrapper but no content when children is empty string', () => {
+      const { getByTestId } = render(
         <HeaderBase childrenWrapperProps={{ testID: 'title-wrapper' }}>
           {''}
         </HeaderBase>,
       );
 
-      expect(queryByTestId('title-wrapper')).toBeNull();
+      const titleWrapper = getByTestId('title-wrapper');
+      expect(titleWrapper).toBeOnTheScreen();
+      expect(titleWrapper.children.length).toBe(0);
     });
 
-    it('does not render title wrapper when children is null', () => {
-      const { queryByTestId } = render(
+    it('renders title wrapper but no content when children is null', () => {
+      const { getByTestId } = render(
         <HeaderBase childrenWrapperProps={{ testID: 'title-wrapper' }}>
           {null}
         </HeaderBase>,
       );
 
-      expect(queryByTestId('title-wrapper')).toBeNull();
+      const titleWrapper = getByTestId('title-wrapper');
+      expect(titleWrapper).toBeOnTheScreen();
+      expect(titleWrapper.children.length).toBe(0);
     });
   });
 
