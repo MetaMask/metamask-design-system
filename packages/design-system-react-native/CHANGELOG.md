@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added `PeopleFilled` to `IconName` ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
-- Added conditional title block rendering to `HeaderBase` when children is empty ([#1522](https://github.com/MetaMask/metamask-design-system/pull/1522))
 
 ### Changed
 
