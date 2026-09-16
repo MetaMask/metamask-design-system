@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.49.0]
+
+### Added
+
+- Added `PeopleFilled` to `IconName` ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
+
+### Changed
+
+- Updated `MainActionButton` border radius styling ([#1526](https://github.com/MetaMask/metamask-design-system/pull/1526))
+
+### Fixed
+
+- Fixed `AvatarAccount` extra-small square size border radius ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
+- Fixed `HeaderBase` flex-1 spacer preservation when children is empty ([#1524](https://github.com/MetaMask/metamask-design-system/pull/1524))
+
 ## [0.48.0]
 
 ### Added
@@ -784,7 +799,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.48.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.0...HEAD
+[0.49.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.48.0...@metamask/design-system-react-native@0.49.0
 [0.48.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.47.0...@metamask/design-system-react-native@0.48.0
 [0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.46.0...@metamask/design-system-react-native@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.45.0...@metamask/design-system-react-native@0.46.0
