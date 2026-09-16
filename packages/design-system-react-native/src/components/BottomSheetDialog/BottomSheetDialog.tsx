@@ -253,7 +253,7 @@ export const BottomSheetDialog = forwardRef<
       () => [
         tw.style(
           'bg-elevated1',
-          'rounded-t-[40px] overflow-hidden border border-muted border-b-0',
+          'rounded-t-[32px] overflow-hidden border border-muted border-b-0',
           twClassName,
         ),
         {

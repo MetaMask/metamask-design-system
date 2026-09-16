@@ -375,7 +375,7 @@ describe('BottomSheetDialog', () => {
 
     expect(mockStyle).toHaveBeenCalledWith(
       'bg-elevated1',
-      'rounded-t-[40px] overflow-hidden border border-muted border-b-0',
+      'rounded-t-[32px] overflow-hidden border border-muted border-b-0',
       undefined,
     );
   });
@@ -389,7 +389,7 @@ describe('BottomSheetDialog', () => {
 
     expect(mockStyle).toHaveBeenCalledWith(
       'bg-elevated1',
-      'rounded-t-[40px] overflow-hidden border border-muted border-b-0',
+      'rounded-t-[32px] overflow-hidden border border-muted border-b-0',
       undefined,
     );
   });
