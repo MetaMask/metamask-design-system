@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.45.0]
+
 ### Uncategorized
 
 - feat(icons): add PeopleFilled icon ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
@@ -592,7 +594,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.44.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.0...HEAD
+[0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.44.0...@metamask/design-system-react@0.45.0
 [0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.43.0...@metamask/design-system-react@0.44.0
 [0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.42.0...@metamask/design-system-react@0.43.0
 [0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.41.0...@metamask/design-system-react@0.42.0
