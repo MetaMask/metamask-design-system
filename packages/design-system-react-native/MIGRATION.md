@@ -4125,14 +4125,14 @@ The design system TextField uses TWRNC (Tailwind React Native CSS) instead of th
 | Concern            | Mobile                                 | Design System                  |
 | ------------------ | -------------------------------------- | ------------------------------ |
 | Styling system     | `useStyles` hook + `StyleSheet.create` | `useTailwind()` + `tw.style()` |
-| Border radius      | `12px`                                 | `8px` (`rounded-lg`)           |
+| Border radius      | `12px`                                 | `12px` (`rounded-xl`)          |
 | Background         | `theme.colors.background.muted`        | `bg-muted` (equivalent token)  |
 | Disabled opacity   | `0.5`                                  | `0.5` (identical)              |
 | Height             | `48px`                                 | `48px` (identical)             |
 | Horizontal padding | `16px`                                 | `16px` (`px-4`, identical)     |
 | Accessory gap      | `marginRight/Left: 12`                 | `gap-3` (12px, identical)      |
 
-The `border-radius` change from `12px` to `8px` is the most visible visual difference.
+The `border-radius` matches the mobile version at `12px`.
 
 #### Migration Examples
 
@@ -4232,7 +4232,7 @@ const MyInput: React.FC<TextFieldProps> = (props) => (
 - Mobile legacy `TextField` wrapped accessories in `<View>` elements with hardcoded `testID`s; MMDS renders accessories directly.
 - The `testID` prop targets the root `Pressable` in MMDS vs. the inner `TextInput` in the mobile version.
 - MMDS sets `accessible={false}` on the root `Pressable`; the mobile version does not.
-- Border radius is `8px` in MMDS vs. `12px` in the mobile version.
+- Border radius is `12px` in both MMDS and the mobile version.
 
 ### KeyValueRow Component
 
