@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.39.0]
 
-### Uncategorized
+### Added
 
-- feat(icons): add PeopleFilled icon ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
+- Added `PeopleFilled` to `IconName` ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
 
 ## [0.38.0]
 

@@ -9,13 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.49.0]
 
-### Uncategorized
+### Added
 
-- Update MainActionButton border radius ([#1526](https://github.com/MetaMask/metamask-design-system/pull/1526))
-- feat(icons): add PeopleFilled icon ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
-- fix: update xs square avatar radius ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
-- fix(HeaderBase): preserve flex-1 spacer when children is empty ([#1524](https://github.com/MetaMask/metamask-design-system/pull/1524))
-- feat(HeaderBase): conditionally render title block when children is empty ([#1522](https://github.com/MetaMask/metamask-design-system/pull/1522))
+- Added `PeopleFilled` to `IconName` ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
+- Added conditional title block rendering to `HeaderBase` when children is empty ([#1522](https://github.com/MetaMask/metamask-design-system/pull/1522))
+
+### Changed
+
+- Updated `MainActionButton` border radius styling ([#1526](https://github.com/MetaMask/metamask-design-system/pull/1526))
+
+### Fixed
+
+- Fixed `AvatarAccount` extra-small square size border radius ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
+- Fixed `HeaderBase` flex-1 spacer preservation when children is empty ([#1524](https://github.com/MetaMask/metamask-design-system/pull/1524))
 
 ## [0.48.0]
 

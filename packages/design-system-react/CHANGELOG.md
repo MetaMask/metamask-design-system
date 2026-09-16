@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.45.0]
 
-### Uncategorized
+### Added
 
-- feat(icons): add PeopleFilled icon ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
-- fix: update xs square avatar radius ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
+- Added `PeopleFilled` to `IconName` ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
+
+### Fixed
+
+- Fixed `AvatarAccount` extra-small square size border radius ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
 
 ## [0.44.0]
 
