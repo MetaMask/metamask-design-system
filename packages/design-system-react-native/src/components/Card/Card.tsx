@@ -21,9 +21,8 @@ export const Card = ({
         onPress={onPress}
         style={({ pressed }) => [
           tw.style(
-            pressed
-              ? 'p-4 rounded-2xl bg-background-section-pressed'
-              : 'p-4 rounded-2xl bg-background-section',
+            'p-4 rounded-2xl bg-background-section',
+            pressed && 'bg-pressed',
             twClassName,
           ),
           style,

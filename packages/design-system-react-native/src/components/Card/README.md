@@ -48,8 +48,8 @@ import { Card } from '@metamask/design-system-react-native';
 
 Optional props to pass to the underlying `Pressable` when `onPress` is provided.
 
-| TYPE                                                          | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------- | -------- | ----------- |
+| TYPE                                                       | REQUIRED | DEFAULT     |
+| ---------------------------------------------------------- | -------- | ----------- |
 | `Omit<PressableProps, 'onPress' \| 'style' \| 'children'>` | No       | `undefined` |
 
 ```tsx

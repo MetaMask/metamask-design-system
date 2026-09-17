@@ -77,7 +77,7 @@ describe('Card', () => {
     expect(onPressMock).toHaveBeenCalledTimes(1);
   });
 
-  it('applies default card styles', () => {
+it('applies default card styles', () => {
     const { getByTestId } = render(
       <Card testID="card">
         <Text>Content</Text>
@@ -90,7 +90,7 @@ describe('Card', () => {
     );
   });
 
-  it('applies twClassName', () => {
+  it('applies twClassName on static card', () => {
     const { getByTestId } = render(
       <Card testID="card" twClassName="p-8 rounded-lg">
         <Text>Content</Text>
@@ -100,6 +100,19 @@ describe('Card', () => {
     const styles = flattenStyles(card.props.style);
     expect(styles[0]).toStrictEqual(
       tw.style('p-4 rounded-2xl bg-background-section', 'p-8 rounded-lg'),
+    );
+  });
+
+  it('applies twClassName on interactive card', () => {
+    const { getByTestId } = render(
+      <Card testID="card" onPress={jest.fn()} twClassName="p-8">
+        <Text>Content</Text>
+      </Card>,
+    );
+    const card = getByTestId('card');
+    const styles = flattenStyles(card.props.style);
+    expect(styles[0]).toStrictEqual(
+      tw.style('p-4 rounded-2xl bg-background-section', false, 'p-8'),
     );
   });
 
