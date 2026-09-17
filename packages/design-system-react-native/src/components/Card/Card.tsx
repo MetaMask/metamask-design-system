@@ -14,14 +14,12 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const tw = useTailwind();
 
-  const baseClassName = 'p-4 rounded-2xl bg-background-section';
-
   if (isInteractive) {
     return (
       <Pressable
         accessibilityRole="button"
         style={[
-          tw.style(baseClassName, twClassName),
+          tw.style('p-4 rounded-2xl bg-background-section', twClassName),
           style as StyleProp<ViewStyle>,
         ]}
         {...(props as Omit<PressableProps, 'children' | 'style'>)}
@@ -34,7 +32,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <View
       style={[
-        tw.style(baseClassName, twClassName),
+        tw.style('p-4 rounded-2xl bg-background-section', twClassName),
         style as StyleProp<ViewStyle>,
       ]}
       {...(props as object)}
