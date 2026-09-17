@@ -1,6 +1,6 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import type { CardProps } from './Card.types';
 
@@ -8,32 +8,38 @@ export const Card = ({
   children,
   onPress,
   twClassName,
-  touchableOpacityProps,
+  pressableProps,
   style,
   ...props
 }: CardProps) => {
   const tw = useTailwind();
 
-  const cardStyle = [
-    tw.style('p-4 rounded-2xl bg-background-section', twClassName),
-    style,
-  ];
-
   if (onPress) {
     return (
-      <TouchableOpacity
+      <Pressable
         {...props}
         onPress={onPress}
-        style={cardStyle}
-        {...touchableOpacityProps}
+        style={({ pressed }) => [
+          tw.style(
+            pressed
+              ? 'p-4 rounded-2xl bg-background-section-pressed'
+              : 'p-4 rounded-2xl bg-background-section',
+            twClassName,
+          ),
+          style,
+        ]}
+        {...pressableProps}
       >
         {children}
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 
   return (
-    <View style={cardStyle} {...props}>
+    <View
+      style={[tw.style('p-4 rounded-2xl bg-background-section', twClassName), style]}
+      {...props}
+    >
       {children}
     </View>
   );

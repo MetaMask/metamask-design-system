@@ -136,13 +136,13 @@ describe('Card', () => {
     expect(card.props.accessibilityLabel).toBe('My card');
   });
 
-  it('accepts touchableOpacityProps without breaking onPress', () => {
+  it('accepts pressableProps without breaking onPress', () => {
     const onPressMock = jest.fn();
     const { getByTestId } = render(
       <Card
         testID="card"
         onPress={onPressMock}
-        touchableOpacityProps={{ activeOpacity: 0.5 }}
+        pressableProps={{ accessibilityRole: 'button' }}
       >
         <Text>Content</Text>
       </Card>,

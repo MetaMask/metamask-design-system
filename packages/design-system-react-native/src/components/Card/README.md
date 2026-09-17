@@ -30,7 +30,7 @@ import { Card } from '@metamask/design-system-react-native';
 
 ### `onPress`
 
-Optional callback when the card is pressed. When provided, the card renders as a `TouchableOpacity` instead of a `View`.
+Optional callback when the card is pressed. When provided, the card renders as a `Pressable` instead of a `View`, and applies a pressed background state.
 
 | TYPE         | REQUIRED | DEFAULT     |
 | ------------ | -------- | ----------- |
@@ -44,22 +44,22 @@ import { Card } from '@metamask/design-system-react-native';
 </Card>;
 ```
 
-### `touchableOpacityProps`
+### `pressableProps`
 
-Optional props to pass to the underlying `TouchableOpacity` when `onPress` is provided. Use this for TouchableOpacity-specific props like `activeOpacity` or a separate `testID` for the interactive element.
+Optional props to pass to the underlying `Pressable` when `onPress` is provided.
 
-| TYPE                                                              | REQUIRED | DEFAULT     |
-| ----------------------------------------------------------------- | -------- | ----------- |
-| `Omit<TouchableOpacityProps, 'onPress' \| 'style' \| 'children'>` | No       | `undefined` |
+| TYPE                                                          | REQUIRED | DEFAULT     |
+| ------------------------------------------------------------- | -------- | ----------- |
+| `Omit<PressableProps, 'onPress' \| 'style' \| 'children'>` | No       | `undefined` |
 
 ```tsx
 import { Card } from '@metamask/design-system-react-native';
 
 <Card
   onPress={() => {}}
-  touchableOpacityProps={{ activeOpacity: 0.7, testID: 'card-touchable' }}
+  pressableProps={{ accessibilityRole: 'button', testID: 'card-pressable' }}
 >
-  <Text>Pressable card with custom opacity</Text>
+  <Text>Interactive card</Text>
 </Card>;
 ```
 

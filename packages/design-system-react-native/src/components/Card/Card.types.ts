@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { TouchableOpacityProps } from 'react-native';
+import type { PressableProps, ViewProps } from 'react-native';
 
 /**
  * Card component props.
@@ -11,7 +11,7 @@ export type CardProps = {
   children: ReactNode;
   /**
    * Optional callback when the card is pressed.
-   * When provided, the card wraps content in a TouchableOpacity.
+   * When provided, the card renders as a Pressable with a pressed background state.
    */
   onPress?: () => void;
   /**
@@ -19,10 +19,7 @@ export type CardProps = {
    */
   twClassName?: string;
   /**
-   * Optional props to pass to the underlying TouchableOpacity when onPress is provided.
+   * Optional props to pass to the underlying Pressable when onPress is provided.
    */
-  touchableOpacityProps?: Omit<
-    TouchableOpacityProps,
-    'onPress' | 'style' | 'children'
-  >;
-} & TouchableOpacityProps;
+  pressableProps?: Omit<PressableProps, 'onPress' | 'style' | 'children'>;
+} & ViewProps;
