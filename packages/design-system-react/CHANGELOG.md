@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.45.1]
 
-### Uncategorized
+### Fixed
 
-- Update BottomSheet and Modal border radius ([#1525](https://github.com/MetaMask/metamask-design-system/pull/1525))
-- fix: update TextField border radius to 12px ([#1527](https://github.com/MetaMask/metamask-design-system/pull/1527))
+- Updated `BottomSheetDialog` and `ModalContent` corner radius from 40px to 32px ([#1525](https://github.com/MetaMask/metamask-design-system/pull/1525))
+- Updated `TextField` container border radius from 8px to 12px ([#1527](https://github.com/MetaMask/metamask-design-system/pull/1527))
 
 ## [0.45.0]
 
