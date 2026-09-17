@@ -103,7 +103,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <Card style={tw.style('bg-muted', isActive && 'bg-success-default')}>
+    <Card style={tw.style('bg-background-section', isActive && 'bg-success-default')}>
       Conditional styling
     </Card>
   );
