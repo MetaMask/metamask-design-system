@@ -28,36 +28,21 @@ import { Card } from '@metamask/design-system-react-native';
 </Card>;
 ```
 
-### `onPress`
+### `isInteractive`
 
-Optional callback when the card is pressed. When provided, the card renders as a `Pressable` instead of a `View`, and applies a pressed background state.
+When `true`, the card renders as a `Pressable` and accepts all `PressableProps` (e.g. `onPress`, `onLongPress`, `accessibilityRole`). A pressed background overlay is applied automatically. When `false` (default), the card renders as a `View`.
 
-| TYPE         | REQUIRED | DEFAULT     |
-| ------------ | -------- | ----------- |
-| `() => void` | No       | `undefined` |
-
-```tsx
-import { Card } from '@metamask/design-system-react-native';
-
-<Card onPress={() => console.log('Card pressed')}>
-  <Text>Pressable card</Text>
-</Card>;
-```
-
-### `pressableProps`
-
-Optional props to pass to the underlying `Pressable` when `onPress` is provided.
-
-| TYPE                                                       | REQUIRED | DEFAULT     |
-| ---------------------------------------------------------- | -------- | ----------- |
-| `Omit<PressableProps, 'onPress' \| 'style' \| 'children'>` | No       | `undefined` |
+| TYPE      | REQUIRED | DEFAULT |
+| --------- | -------- | ------- |
+| `boolean` | No       | `false` |
 
 ```tsx
 import { Card } from '@metamask/design-system-react-native';
 
 <Card
-  onPress={() => {}}
-  pressableProps={{ accessibilityRole: 'button', testID: 'card-pressable' }}
+  isInteractive
+  onPress={() => console.log('Card pressed')}
+  onLongPress={() => console.log('Card long pressed')}
 >
   <Text>Interactive card</Text>
 </Card>;
@@ -90,11 +75,11 @@ import { Card } from '@metamask/design-system-react-native';
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. When `isInteractive` is `true`, `style` may also be a function `({ pressed }) => StyleProp<ViewStyle>`.
 
-| TYPE                   | REQUIRED | DEFAULT     |
-| ---------------------- | -------- | ----------- |
-| `StyleProp<ViewStyle>` | No       | `undefined` |
+| TYPE                                                                         | REQUIRED | DEFAULT     |
+| ---------------------------------------------------------------------------- | -------- | ----------- |
+| `StyleProp<ViewStyle>` or `(state: PressableStateCallbackType) => StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
@@ -103,12 +88,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <Card
-      style={tw.style(
-        'bg-background-section',
-        isActive && 'bg-success-default',
-      )}
-    >
+    <Card style={tw.style('bg-background-section', isActive && 'bg-success-default')}>
       Conditional styling
     </Card>
   );

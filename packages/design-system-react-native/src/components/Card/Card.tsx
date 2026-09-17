@@ -1,33 +1,46 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { Pressable, View } from 'react-native';
+import type { PressableProps, PressableStateCallbackType, StyleProp, ViewStyle } from 'react-native';
 
 import type { CardProps } from './Card.types';
 
-export const Card = ({
+export const Card: React.FC<CardProps> = ({
   children,
-  onPress,
+  isInteractive = false,
   twClassName,
-  pressableProps,
   style,
   ...props
-}: CardProps) => {
+}) => {
   const tw = useTailwind();
 
-  if (onPress) {
+  const baseClassName = 'p-4 rounded-2xl bg-background-section';
+
+  if (isInteractive) {
+    const pressableStyle = style as PressableProps['style'];
+
+    const getPressableStyle = ({
+      pressed,
+    }: PressableStateCallbackType): StyleProp<ViewStyle> => {
+      const baseStyle = tw.style(baseClassName, pressed && 'bg-pressed', twClassName);
+
+      if (!pressableStyle) {
+        return baseStyle;
+      }
+
+      const userStyle =
+        typeof pressableStyle === 'function'
+          ? pressableStyle({ pressed })
+          : pressableStyle;
+
+      return [baseStyle, userStyle];
+    };
+
     return (
       <Pressable
-        {...props}
-        onPress={onPress}
-        style={({ pressed }) => [
-          tw.style(
-            'p-4 rounded-2xl bg-background-section',
-            pressed && 'bg-pressed',
-            twClassName,
-          ),
-          style,
-        ]}
-        {...pressableProps}
+        accessibilityRole="button"
+        style={getPressableStyle}
+        {...(props as Omit<PressableProps, 'children' | 'style'>)}
       >
         {children}
       </Pressable>
@@ -36,13 +49,12 @@ export const Card = ({
 
   return (
     <View
-      style={[
-        tw.style('p-4 rounded-2xl bg-background-section', twClassName),
-        style,
-      ]}
-      {...props}
+      style={[tw.style(baseClassName, twClassName), style as StyleProp<ViewStyle>]}
+      {...(props as object)}
     >
       {children}
     </View>
   );
 };
+
+Card.displayName = 'Card';
