@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.39.0]
+
+### Added
+
+- Added `PeopleFilled` to `IconName` ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
+
 ## [0.38.0]
 
 ### Added
@@ -373,7 +379,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.38.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.39.0...HEAD
+[0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.38.0...@metamask/design-system-shared@0.39.0
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.37.0...@metamask/design-system-shared@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.36.0...@metamask/design-system-shared@0.37.0
 [0.36.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.35.0...@metamask/design-system-shared@0.36.0
