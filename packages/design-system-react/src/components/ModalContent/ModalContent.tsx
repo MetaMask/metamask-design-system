@@ -110,7 +110,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
               modalDialogProps?.className,
             )}
           >
-            <section role="dialog" aria-modal="true">
+            <section>
               {children}
             </section>
           </Box>

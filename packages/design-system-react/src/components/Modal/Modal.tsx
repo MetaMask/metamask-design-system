@@ -34,7 +34,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         previousActiveElement.current =
           (document.activeElement as HTMLElement) || document.body;
 
-        if (dialog.showModal) {
+        if (dialog.showModal && !dialog.open) {
           dialog.showModal();
         }
 
@@ -56,11 +56,11 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       if (!dialog) return;
 
       const handleCancel = (event: Event) => {
+        event.preventDefault();
         if (!isClosedOnEscapeKey) {
-          event.preventDefault();
-        } else {
-          onClose();
+          return;
         }
+        onClose();
       };
 
       const handleClick = (event: MouseEvent) => {
@@ -87,6 +87,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         dialog.removeEventListener('close', handleClose);
       };
     }, [
+      isOpen,
       isClosedOnOutsideClick,
       isClosedOnEscapeKey,
       onClose,
@@ -119,7 +120,10 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
             ref.current = node;
           }
         }}
-        className={twMerge('backdrop:bg-overlay-default', className)}
+        className={twMerge(
+          'inset-0 m-0 h-full w-full max-h-none max-w-none overflow-visible border-0 bg-transparent p-0 backdrop:bg-transparent',
+          className,
+        )}
         {...(props as React.DialogHTMLAttributes<HTMLDialogElement>)}
       >
         <ModalContext.Provider value={context}>{children}</ModalContext.Provider>
