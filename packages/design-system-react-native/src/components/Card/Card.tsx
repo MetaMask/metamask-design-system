@@ -1,7 +1,12 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { Pressable, View } from 'react-native';
-import type { PressableProps, PressableStateCallbackType, StyleProp, ViewStyle } from 'react-native';
+import type {
+  PressableProps,
+  PressableStateCallbackType,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 import type { CardProps } from './Card.types';
 
@@ -22,7 +27,11 @@ export const Card: React.FC<CardProps> = ({
     const getPressableStyle = ({
       pressed,
     }: PressableStateCallbackType): StyleProp<ViewStyle> => {
-      const baseStyle = tw.style(baseClassName, pressed && 'bg-pressed', twClassName);
+      const baseStyle = tw.style(
+        baseClassName,
+        pressed && 'bg-pressed',
+        twClassName,
+      );
 
       if (!pressableStyle) {
         return baseStyle;
@@ -49,7 +58,10 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <View
-      style={[tw.style(baseClassName, twClassName), style as StyleProp<ViewStyle>]}
+      style={[
+        tw.style(baseClassName, twClassName),
+        style as StyleProp<ViewStyle>,
+      ]}
       {...(props as object)}
     >
       {children}

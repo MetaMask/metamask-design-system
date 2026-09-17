@@ -77,8 +77,8 @@ import { Card } from '@metamask/design-system-react-native';
 
 Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. When `isInteractive` is `true`, `style` may also be a function `({ pressed }) => StyleProp<ViewStyle>`.
 
-| TYPE                                                                         | REQUIRED | DEFAULT     |
-| ---------------------------------------------------------------------------- | -------- | ----------- |
+| TYPE                                                                                    | REQUIRED | DEFAULT     |
+| --------------------------------------------------------------------------------------- | -------- | ----------- |
 | `StyleProp<ViewStyle>` or `(state: PressableStateCallbackType) => StyleProp<ViewStyle>` | No       | `undefined` |
 
 ```tsx
@@ -88,7 +88,12 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
   const tw = useTailwind();
 
   return (
-    <Card style={tw.style('bg-background-section', isActive && 'bg-success-default')}>
+    <Card
+      style={tw.style(
+        'bg-background-section',
+        isActive && 'bg-success-default',
+      )}
+    >
       Conditional styling
     </Card>
   );
