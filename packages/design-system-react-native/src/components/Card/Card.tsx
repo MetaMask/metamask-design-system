@@ -37,7 +37,10 @@ export const Card = ({
 
   return (
     <View
-      style={[tw.style('p-4 rounded-2xl bg-background-section', twClassName), style]}
+      style={[
+        tw.style('p-4 rounded-2xl bg-background-section', twClassName),
+        style,
+      ]}
       {...props}
     >
       {children}
