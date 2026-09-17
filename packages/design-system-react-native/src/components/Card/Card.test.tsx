@@ -77,7 +77,7 @@ describe('Card', () => {
     expect(onPressMock).toHaveBeenCalledTimes(1);
   });
 
-it('applies default card styles', () => {
+  it('applies default card styles', () => {
     const { getByTestId } = render(
       <Card testID="card">
         <Text>Content</Text>
