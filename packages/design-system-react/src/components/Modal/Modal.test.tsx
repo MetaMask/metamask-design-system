@@ -5,7 +5,7 @@ import { Modal } from './Modal';
 import { useModalContext } from './Modal.context';
 
 describe('Modal', () => {
-  it('renders children inside a portal at document.body when isOpen is true', () => {
+  it('renders children when isOpen is true', () => {
     render(
       <Modal isOpen onClose={jest.fn()}>
         <div data-testid="child">modal content</div>
@@ -14,8 +14,6 @@ describe('Modal', () => {
     const child = screen.getByTestId('child');
     expect(child).toBeInTheDocument();
     expect(child).toHaveTextContent('modal content');
-    // Portal target is document.body, not the test container's mount root.
-    expect(document.body.contains(child)).toBe(true);
   });
 
   it('renders nothing when isOpen is false', () => {
@@ -27,18 +25,18 @@ describe('Modal', () => {
     expect(screen.queryByTestId('child')).not.toBeInTheDocument();
   });
 
-  it('forwards ref to the underlying root div', () => {
-    const ref = createRef<HTMLDivElement>();
+  it('forwards ref to the underlying dialog element', () => {
+    const ref = createRef<HTMLDialogElement>();
     render(
       <Modal ref={ref} isOpen onClose={jest.fn()} data-testid="modal">
         <div>content</div>
       </Modal>,
     );
     expect(ref.current).toBe(screen.getByTestId('modal'));
-    expect(ref.current?.tagName).toBe('DIV');
+    expect(ref.current?.tagName).toBe('DIALOG');
   });
 
-  it('forwards className and arbitrary HTML attributes to the root div', () => {
+  it('forwards className and arbitrary HTML attributes to the dialog element', () => {
     render(
       <Modal
         isOpen
