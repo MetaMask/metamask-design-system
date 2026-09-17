@@ -17,12 +17,13 @@ export const Card = ({
   if (onPress) {
     return (
       <Pressable
+        accessibilityRole="button"
         {...props}
         onPress={onPress}
         style={({ pressed }) => [
           tw.style(
             pressed
-              ? 'p-4 rounded-2xl bg-background-section-pressed'
+              ? 'p-4 rounded-2xl bg-pressed'
               : 'p-4 rounded-2xl bg-background-section',
             twClassName,
           ),
