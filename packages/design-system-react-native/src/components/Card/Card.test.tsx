@@ -88,7 +88,7 @@ describe('Card', () => {
     );
     const styles = flattenStyles(getByTestId('card').props.style);
     expect(styles[0]).toStrictEqual(
-      tw.style('p-4 rounded-2xl bg-background-section', false),
+      tw.style('p-4 rounded-2xl bg-background-section'),
     );
   });
 
@@ -112,13 +112,26 @@ describe('Card', () => {
     );
     const styles = flattenStyles(getByTestId('card').props.style);
     expect(styles[0]).toStrictEqual(
-      tw.style('p-4 rounded-2xl bg-background-section', false, 'p-8'),
+      tw.style('p-4 rounded-2xl bg-background-section', 'p-8'),
     );
   });
 
   it('merges custom style prop on static card', () => {
     const { getByTestId } = render(
       <Card testID="card" style={{ margin: 8 }}>
+        <Text>Content</Text>
+      </Card>,
+    );
+    const styles = flattenStyles(getByTestId('card').props.style);
+    expect(styles[0]).toStrictEqual(
+      tw.style('p-4 rounded-2xl bg-background-section'),
+    );
+    expect(styles[1]).toStrictEqual({ margin: 8 });
+  });
+
+  it('merges custom style prop on interactive card', () => {
+    const { getByTestId } = render(
+      <Card testID="card" isInteractive style={{ margin: 8 }}>
         <Text>Content</Text>
       </Card>,
     );
