@@ -53,7 +53,7 @@ export const Card: React.FC<CardProps> = ({
         tw.style(baseClassName, twClassName),
         style as StyleProp<ViewStyle>,
       ]}
-      {...(props as object)}
+      {...props}
     >
       {children}
     </View>
