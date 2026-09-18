@@ -7,14 +7,21 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import { Card } from './Card';
 
 function flattenStyles(
-  styleProp: StyleProp<ViewStyle> | undefined,
+  styleProp:
+    | StyleProp<ViewStyle>
+    | ((state: { pressed: boolean }) => StyleProp<ViewStyle>)
+    | undefined,
+  pressed = false,
 ): ViewStyle[] {
   if (styleProp === null) {
     return [];
   }
+  if (typeof styleProp === 'function') {
+    return flattenStyles(styleProp({ pressed }), pressed);
+  }
   if (Array.isArray(styleProp)) {
     return styleProp.flatMap((item) =>
-      flattenStyles(item as StyleProp<ViewStyle>),
+      flattenStyles(item as StyleProp<ViewStyle>, pressed),
     );
   }
   if (typeof styleProp === 'object') {
@@ -57,6 +64,16 @@ describe('Card', () => {
     expect(getByTestId('card').props.accessible).toBe(true);
   });
 
+  it('uses a button accessibility role for interactive cards', () => {
+    const { getByTestId } = render(
+      <Card testID="card" isInteractive>
+        <Text>Content</Text>
+      </Card>,
+    );
+
+    expect(getByTestId('card').props.accessibilityRole).toBe('button');
+  });
+
   it('fires onPress when isInteractive card is pressed', () => {
     const onPressMock = jest.fn();
     const { getByTestId } = render(
@@ -89,6 +106,18 @@ describe('Card', () => {
     const styles = flattenStyles(getByTestId('card').props.style);
     expect(styles[0]).toStrictEqual(
       tw.style('p-4 rounded-2xl bg-background-section'),
+    );
+  });
+
+  it('applies pressed styles on interactive card', () => {
+    const { getByTestId } = render(
+      <Card testID="card" isInteractive>
+        <Text>Content</Text>
+      </Card>,
+    );
+
+    expect(flattenStyles(getByTestId('card').props.style, true)[0]).toStrictEqual(
+      tw.style('p-4 rounded-2xl bg-background-section', 'bg-pressed'),
     );
   });
 
