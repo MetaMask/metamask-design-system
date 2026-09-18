@@ -64,7 +64,7 @@ describe('Card', () => {
       </Card>,
     );
     expect(getByTestId('card')).toHaveStyle(
-      tw.style('p-4 rounded-2xl bg-background-section'),
+      tw.style('p-4 rounded-2xl bg-section'),
     );
   });
 
@@ -75,7 +75,7 @@ describe('Card', () => {
       </Card>,
     );
     expect(getByTestId('card')).toHaveStyle(
-      tw.style('p-4 rounded-2xl bg-background-section'),
+      tw.style('p-4 rounded-2xl bg-section'),
     );
   });
 
@@ -87,7 +87,7 @@ describe('Card', () => {
     );
 
     expect(getByTestId('card')).toHaveStyle(
-      tw.style('p-4 rounded-2xl bg-background-section', 'bg-pressed'),
+      tw.style('p-4 rounded-2xl bg-section', 'bg-pressed'),
     );
   });
 
@@ -98,7 +98,7 @@ describe('Card', () => {
       </Card>,
     );
     expect(getByTestId('card')).toHaveStyle(
-      tw.style('p-4 rounded-2xl bg-background-section', 'p-8 rounded-lg'),
+      tw.style('p-4 rounded-2xl bg-section', 'p-8 rounded-lg'),
     );
   });
 
@@ -109,7 +109,7 @@ describe('Card', () => {
       </Card>,
     );
     expect(getByTestId('card')).toHaveStyle(
-      tw.style('p-4 rounded-2xl bg-background-section', 'p-8'),
+      tw.style('p-4 rounded-2xl bg-section', 'p-8'),
     );
   });
 
@@ -120,7 +120,7 @@ describe('Card', () => {
       </Card>,
     );
     expect(getByTestId('card')).toHaveStyle([
-      tw.style('p-4 rounded-2xl bg-background-section'),
+      tw.style('p-4 rounded-2xl bg-section'),
       { margin: 8 },
     ]);
   });
@@ -132,7 +132,7 @@ describe('Card', () => {
       </Card>,
     );
     expect(getByTestId('card')).toHaveStyle([
-      tw.style('p-4 rounded-2xl bg-background-section'),
+      tw.style('p-4 rounded-2xl bg-section'),
       { margin: 8 },
     ]);
   });

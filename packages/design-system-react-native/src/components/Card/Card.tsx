@@ -19,7 +19,7 @@ export const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   const tw = useTailwind();
-  const baseClassName = 'p-4 rounded-2xl bg-background-section';
+  const baseClassName = 'p-4 rounded-2xl bg-section';
 
   if (isInteractive) {
     const getPressableStyle = ({
