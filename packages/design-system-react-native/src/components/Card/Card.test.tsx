@@ -2,40 +2,12 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
 
 import { Card } from './Card';
 
-function flattenStyles(
-  styleProp:
-    | StyleProp<ViewStyle>
-    | ((state: { pressed: boolean }) => StyleProp<ViewStyle>)
-    | undefined,
-  pressed = false,
-): ViewStyle[] {
-  if (styleProp === null) {
-    return [];
-  }
-  if (typeof styleProp === 'function') {
-    return flattenStyles(styleProp({ pressed }), pressed);
-  }
-  if (Array.isArray(styleProp)) {
-    return styleProp.flatMap((item) =>
-      flattenStyles(item as StyleProp<ViewStyle>, pressed),
-    );
-  }
-  if (typeof styleProp === 'object') {
-    return [styleProp as ViewStyle];
-  }
-  return [];
-}
-
 describe('Card', () => {
-  let tw: ReturnType<typeof useTailwind>;
-
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
-  });
+  const { result } = renderHook(() => useTailwind());
+  const tw = result.current;
 
   it('renders children', () => {
     const { getByText } = render(
@@ -91,8 +63,7 @@ describe('Card', () => {
         <Text>Content</Text>
       </Card>,
     );
-    const styles = flattenStyles(getByTestId('card').props.style);
-    expect(styles[0]).toStrictEqual(
+    expect(getByTestId('card')).toHaveStyle(
       tw.style('p-4 rounded-2xl bg-background-section'),
     );
   });
@@ -103,20 +74,19 @@ describe('Card', () => {
         <Text>Content</Text>
       </Card>,
     );
-    const styles = flattenStyles(getByTestId('card').props.style);
-    expect(styles[0]).toStrictEqual(
+    expect(getByTestId('card')).toHaveStyle(
       tw.style('p-4 rounded-2xl bg-background-section'),
     );
   });
 
   it('applies pressed styles on interactive card', () => {
     const { getByTestId } = render(
-      <Card testID="card" isInteractive>
+      <Card testID="card" isInteractive testOnly_pressed>
         <Text>Content</Text>
       </Card>,
     );
 
-    expect(flattenStyles(getByTestId('card').props.style, true)[0]).toStrictEqual(
+    expect(getByTestId('card')).toHaveStyle(
       tw.style('p-4 rounded-2xl bg-background-section', 'bg-pressed'),
     );
   });
@@ -127,8 +97,7 @@ describe('Card', () => {
         <Text>Content</Text>
       </Card>,
     );
-    const styles = flattenStyles(getByTestId('card').props.style);
-    expect(styles[0]).toStrictEqual(
+    expect(getByTestId('card')).toHaveStyle(
       tw.style('p-4 rounded-2xl bg-background-section', 'p-8 rounded-lg'),
     );
   });
@@ -139,8 +108,7 @@ describe('Card', () => {
         <Text>Content</Text>
       </Card>,
     );
-    const styles = flattenStyles(getByTestId('card').props.style);
-    expect(styles[0]).toStrictEqual(
+    expect(getByTestId('card')).toHaveStyle(
       tw.style('p-4 rounded-2xl bg-background-section', 'p-8'),
     );
   });
@@ -151,11 +119,10 @@ describe('Card', () => {
         <Text>Content</Text>
       </Card>,
     );
-    const styles = flattenStyles(getByTestId('card').props.style);
-    expect(styles[0]).toStrictEqual(
+    expect(getByTestId('card')).toHaveStyle([
       tw.style('p-4 rounded-2xl bg-background-section'),
-    );
-    expect(styles[1]).toStrictEqual({ margin: 8 });
+      { margin: 8 },
+    ]);
   });
 
   it('merges custom style prop on interactive card', () => {
@@ -164,11 +131,10 @@ describe('Card', () => {
         <Text>Content</Text>
       </Card>,
     );
-    const styles = flattenStyles(getByTestId('card').props.style);
-    expect(styles[0]).toStrictEqual(
+    expect(getByTestId('card')).toHaveStyle([
       tw.style('p-4 rounded-2xl bg-background-section'),
-    );
-    expect(styles[1]).toStrictEqual({ margin: 8 });
+      { margin: 8 },
+    ]);
   });
 
   it('passes testID to root element', () => {
