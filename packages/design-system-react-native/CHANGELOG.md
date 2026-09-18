@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Updated `BottomSheetDialog` top corner radius to 32px ([#1525](https://github.com/MetaMask/metamask-design-system/pull/1525))
 - Updated `TextField` container border radius from 8px to 12px ([#1527](https://github.com/MetaMask/metamask-design-system/pull/1527))
 
 ## [0.49.0]
@@ -25,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fixed `AvatarAccount` extra-small square size border radius ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
+- Updated `AvatarBase` extra-small square border radius to fix inherited avatar components, including `BadgeNetwork` ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
 - Fixed `HeaderBase` flex-1 spacer preservation when children is empty ([#1524](https://github.com/MetaMask/metamask-design-system/pull/1524))
 
 ## [0.48.0]
