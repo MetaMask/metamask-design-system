@@ -1,28 +1,20 @@
 import type { ReactNode } from 'react';
-import type { TouchableOpacityProps } from 'react-native';
+import type { PressableProps, ViewProps } from 'react-native';
 
 /**
  * Card component props.
+ *
+ * When `isInteractive` is `false` (default), the root is a `View`.
+ * When `true`, the root is a `Pressable` and all `PressableProps` are available.
  */
-export type CardProps = {
-  /**
-   * Content to display inside the card.
-   */
-  children: ReactNode;
-  /**
-   * Optional callback when the card is pressed.
-   * When provided, the card wraps content in a TouchableOpacity.
-   */
-  onPress?: () => void;
-  /**
-   * Optional prop to add twrnc overriding classNames.
-   */
-  twClassName?: string;
-  /**
-   * Optional props to pass to the underlying TouchableOpacity when onPress is provided.
-   */
-  touchableOpacityProps?: Omit<
-    TouchableOpacityProps,
-    'onPress' | 'style' | 'children'
-  >;
-} & TouchableOpacityProps;
+export type CardProps =
+  | ({
+      children: ReactNode;
+      twClassName?: string;
+      isInteractive?: false;
+    } & ViewProps)
+  | ({
+      children: ReactNode;
+      twClassName?: string;
+      isInteractive: true;
+    } & Omit<PressableProps, 'children'>);
