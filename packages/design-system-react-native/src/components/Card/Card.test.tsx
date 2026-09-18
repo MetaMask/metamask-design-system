@@ -87,7 +87,7 @@ describe('Card', () => {
     );
 
     expect(getByTestId('card')).toHaveStyle(
-      tw.style('p-4 rounded-2xl bg-background-section', 'bg-pressed'),
+      tw.style('p-4 rounded-2xl bg-background-section'),
     );
   });
 

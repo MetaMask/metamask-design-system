@@ -28,7 +28,6 @@ export const Card: React.FC<CardProps> = ({
       const baseStyle = tw.style(
         baseClassName,
         twClassName,
-        pressed && 'bg-pressed',
       );
       const userStyle =
         typeof style === 'function' ? style({ pressed }) : style;
@@ -42,6 +41,13 @@ export const Card: React.FC<CardProps> = ({
         style={getPressableStyle}
         {...(props as Omit<PressableProps, 'children' | 'style'>)}
       >
+        <View
+          pointerEvents="none"
+          style={tw.style(
+            'absolute inset-0 rounded-2xl',
+            pressed && 'bg-pressed',
+          )}
+        />
         {children}
       </Pressable>
     );
