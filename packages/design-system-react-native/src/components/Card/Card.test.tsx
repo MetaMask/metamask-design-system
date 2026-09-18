@@ -137,6 +137,20 @@ describe('Card', () => {
     ]);
   });
 
+  it('applies function style prop on interactive card', () => {
+    const { getByTestId } = render(
+      <Card
+        testID="card"
+        isInteractive
+        style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+      >
+        <Text>Content</Text>
+      </Card>,
+    );
+
+    expect(getByTestId('card')).toHaveStyle({ opacity: 1 });
+  });
+
   it('passes testID to root element', () => {
     const { getByTestId } = render(
       <Card testID="my-card">
