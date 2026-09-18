@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
+- [From version 0.49.0 to 0.x.0](#from-version-0490-to-0x0)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
 - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
 - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
@@ -53,7 +53,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
+  - [From version 0.49.0 to 0.x.0](#from-version-0490-to-0x0)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
   - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
   - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
@@ -78,9 +78,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.49.0 to 0.50.0
+### From version 0.49.0 to 0.x.0
 
-<a id="from-version-0490-to-0500"></a>
+<a id="from-version-0490-to-0x0"></a>
 
 #### `Card`: interactive API and root element
 
@@ -98,7 +98,7 @@ This changes the underlying React Native element and removes the `touchableOpaci
 ```
 
 ```tsx
-// After (0.50.0)
+// After (0.x.0)
 <Card isInteractive onPress={handlePress}>
   <Text>Card content</Text>
 </Card>
