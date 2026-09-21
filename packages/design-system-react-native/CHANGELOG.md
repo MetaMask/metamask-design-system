@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.50.0]
+
 ### Uncategorized
 
 - revert: Maskicon color pairing changes ([#1541](https://github.com/MetaMask/metamask-design-system/pull/1541))
@@ -818,7 +820,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.2...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.50.0...HEAD
+[0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.2...@metamask/design-system-react-native@0.50.0
 [0.49.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.1...@metamask/design-system-react-native@0.49.2
 [0.49.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.0...@metamask/design-system-react-native@0.49.1
 [0.49.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.48.0...@metamask/design-system-react-native@0.49.0

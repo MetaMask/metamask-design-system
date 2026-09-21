@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.45.3]
+
 ### Uncategorized
 
 - revert: Maskicon color pairing changes ([#1541](https://github.com/MetaMask/metamask-design-system/pull/1541))
@@ -615,7 +617,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.2...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.3...HEAD
+[0.45.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.2...@metamask/design-system-react@0.45.3
 [0.45.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.1...@metamask/design-system-react@0.45.2
 [0.45.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.0...@metamask/design-system-react@0.45.1
 [0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.44.0...@metamask/design-system-react@0.45.0
