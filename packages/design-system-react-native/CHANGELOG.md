@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- revert: Maskicon color pairing changes ([#1541](https://github.com/MetaMask/metamask-design-system/pull/1541))
+- fix(Card): update default styles to bg-muted, rounded-2xl, no border ([#1533](https://github.com/MetaMask/metamask-design-system/pull/1533))
+
 ## [0.49.2]
 
 ### Changed

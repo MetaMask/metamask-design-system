@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- revert: Maskicon color pairing changes ([#1541](https://github.com/MetaMask/metamask-design-system/pull/1541))
+
 ## [0.45.2]
 
 ### Changed
