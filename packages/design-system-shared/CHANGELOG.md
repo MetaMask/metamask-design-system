@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.39.1]
 
-### Uncategorized
+### Fixed
 
-- fix: update list arrow icon to sort ascending ([#1537](https://github.com/MetaMask/metamask-design-system/pull/1537))
+- Updated `ListArrow` icon artwork to use a downward sort arrow ([#1537](https://github.com/MetaMask/metamask-design-system/pull/1537))
 
 ## [0.39.0]
 
