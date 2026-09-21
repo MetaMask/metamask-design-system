@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.49.2]
+
+### Changed
+
+- Updated `ListArrow` icon artwork to use a downward sort arrow ([#1537](https://github.com/MetaMask/metamask-design-system/pull/1537))
+- Update Checkbox border radius to fully rounded for brand update ([#1531](https://github.com/MetaMask/metamask-design-system/pull/1531))
+
+## [0.49.1]
+
+### Fixed
+
+- Updated `BottomSheetDialog` top corner radius to 32px ([#1525](https://github.com/MetaMask/metamask-design-system/pull/1525))
+- Updated `TextField` container border radius from 8px to 12px ([#1527](https://github.com/MetaMask/metamask-design-system/pull/1527))
+
 ## [0.49.0]
 
 ### Added
@@ -19,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fixed `AvatarAccount` extra-small square size border radius ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
+- Updated `AvatarBase` extra-small square border radius to fix inherited avatar components, including `BadgeNetwork` ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
 - Fixed `HeaderBase` flex-1 spacer preservation when children is empty ([#1524](https://github.com/MetaMask/metamask-design-system/pull/1524))
 
 ## [0.48.0]
@@ -799,7 +813,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.2...HEAD
+[0.49.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.1...@metamask/design-system-react-native@0.49.2
+[0.49.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.0...@metamask/design-system-react-native@0.49.1
 [0.49.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.48.0...@metamask/design-system-react-native@0.49.0
 [0.48.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.47.0...@metamask/design-system-react-native@0.48.0
 [0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.46.0...@metamask/design-system-react-native@0.47.0
