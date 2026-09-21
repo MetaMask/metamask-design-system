@@ -7,12 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.39.1]
-
-### Fixed
-
-- Updated `ListArrow` icon artwork to use a downward sort arrow ([#1537](https://github.com/MetaMask/metamask-design-system/pull/1537))
-
 ## [0.39.0]
 
 ### Added
@@ -385,8 +379,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.39.1...HEAD
-[0.39.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.39.0...@metamask/design-system-shared@0.39.1
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.39.0...HEAD
 [0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.38.0...@metamask/design-system-shared@0.39.0
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.37.0...@metamask/design-system-shared@0.38.0
 [0.37.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.36.0...@metamask/design-system-shared@0.37.0
