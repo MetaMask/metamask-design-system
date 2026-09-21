@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.50.0]
+
+### Changed
+
+- **BREAKING:** Updated `Card` interaction behavior and default appearance ([#1533](https://github.com/MetaMask/metamask-design-system/pull/1533))
+  - Interactive cards now require `isInteractive` and render a `Pressable` instead of a `TouchableOpacity`
+  - Removed `touchableOpacityProps`; interactive cards now accept `PressableProps` directly
+  - Changed the default background to `bg-section`, border radius to `rounded-2xl`, and removed the default border
+  - See the [Migration Guide](./MIGRATION.md#from-version-0492-to-0500)
+
+### Fixed
+
+- Restored the previous deterministic `Maskicon` color palette so existing account addresses retain their colors when upgrading from versions before `0.48.0` ([#1541](https://github.com/MetaMask/metamask-design-system/pull/1541))
+
 ## [0.49.2]
 
 ### Changed
@@ -813,7 +827,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.2...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.50.0...HEAD
+[0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.2...@metamask/design-system-react-native@0.50.0
 [0.49.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.1...@metamask/design-system-react-native@0.49.2
 [0.49.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.0...@metamask/design-system-react-native@0.49.1
 [0.49.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.48.0...@metamask/design-system-react-native@0.49.0

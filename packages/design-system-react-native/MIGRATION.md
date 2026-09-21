@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.49.0 to 0.x.0](#from-version-0490-to-0x0)
+- [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
 - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
 - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
@@ -53,7 +53,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.49.0 to 0.x.0](#from-version-0490-to-0x0)
+  - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
   - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
   - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
@@ -78,33 +78,49 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.49.0 to 0.x.0
+### From version 0.49.2 to 0.50.0
 
-<a id="from-version-0490-to-0x0"></a>
+<a id="from-version-0492-to-0500"></a>
 
 #### `Card`: interactive API and root element
 
-`Card` now renders a `Pressable` only when `isInteractive` is `true`. Previously, providing `onPress` caused the card to render as a `TouchableOpacity`.
+**What changed:**
 
-This changes the underlying React Native element and removes the `touchableOpacityProps` prop. Interactive cards now accept the standard `PressableProps` directly.
+- `Card` now renders a `Pressable` only when `isInteractive` is `true`. Previously, providing `onPress` rendered a `TouchableOpacity`.
+- The `touchableOpacityProps` prop was removed. Interactive cards accept standard `PressableProps` directly.
+- Default styles changed from `bg-default rounded border border-default` to `bg-section rounded-2xl` with no border.
+- Interactive cards use `bg-pressed` while pressed.
 
 **Migration:**
 
 ```tsx
-// Before (0.49.0)
-<Card onPress={handlePress} touchableOpacityProps={{ activeOpacity: 0.7 }}>
+// Before (0.49.2)
+import { Card, Text } from '@metamask/design-system-react-native';
+
+<Card
+  onPress={handleViewRewards}
+  touchableOpacityProps={{ activeOpacity: 0.7 }}
+>
   <Text>Card content</Text>
-</Card>
+</Card>;
 ```
 
 ```tsx
-// After (0.x.0)
-<Card isInteractive onPress={handlePress}>
+// After (0.50.0)
+import { Card, Text } from '@metamask/design-system-react-native';
+
+<Card isInteractive onPress={handleViewRewards}>
   <Text>Card content</Text>
-</Card>
+</Card>;
 ```
 
-Set `isInteractive` to `true` whenever the card should respond to press interactions. This is also required for the pressed-state background feedback (`bg-pressed`) to be applied.
+Set `isInteractive` whenever the card should respond to press interactions. Replace any other `touchableOpacityProps` values with their `PressableProps` equivalents where available. If the card must retain the previous appearance, add `twClassName="bg-default rounded border border-default"`.
+
+**Impact:**
+
+- Cards with `onPress` must add `isInteractive` or they will render as non-interactive `View` elements.
+- Code using `touchableOpacityProps` will fail TypeScript checks and must move supported properties onto `Card`.
+- All cards that rely on default styles will adopt the new background, radius, and border treatment.
 
 ### From version 0.44.0 to 0.45.0
 
