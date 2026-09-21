@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- Update Checkbox border radius to fully rounded for brand update ([#1531](https://github.com/MetaMask/metamask-design-system/pull/1531))
+- docs: correct release notes for v71 and v70 ([#1536](https://github.com/MetaMask/metamask-design-system/pull/1536))
+
 ## [0.49.1]
 
 ### Fixed
