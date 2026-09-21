@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.45.3]
 
-### Uncategorized
+### Fixed
 
-- revert: Maskicon color pairing changes ([#1541](https://github.com/MetaMask/metamask-design-system/pull/1541))
+- Restored the previous deterministic `Maskicon` color palette so existing account addresses retain their colors when upgrading from versions before `0.44.0` ([#1541](https://github.com/MetaMask/metamask-design-system/pull/1541))
 
 ## [0.45.2]
 
