@@ -19,7 +19,7 @@ jobs:
             retry: 'true'
     steps:
       - name: Checkout and setup environment
-        uses: MetaMask/action-checkout-and-setup@v1
+        uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: false
       - name: Install Playwright browsers
@@ -31,7 +31,7 @@ jobs:
         run: ${{ matrix.command }}
       - name: Run Storybook tests
         if: matrix.retry == 'true'
-        uses: MetaMask/action-retry-command@v1
+        uses: MetaMask/action-retry-command@2377689bfd9a03010a956b7c14273a2fc43d20cf # v1.0.1
         with:
           command: ${{ matrix.command }}
           max-retries: 3
