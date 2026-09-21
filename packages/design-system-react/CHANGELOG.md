@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.45.2]
+
 ### Uncategorized
 
 - fix: update list arrow icon to sort ascending ([#1537](https://github.com/MetaMask/metamask-design-system/pull/1537))
@@ -610,7 +612,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.2...HEAD
+[0.45.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.1...@metamask/design-system-react@0.45.2
 [0.45.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.0...@metamask/design-system-react@0.45.1
 [0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.44.0...@metamask/design-system-react@0.45.0
 [0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.43.0...@metamask/design-system-react@0.44.0
