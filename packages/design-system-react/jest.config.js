@@ -30,7 +30,8 @@ module.exports = merge(baseConfig, {
     '\\.d\\.ts$',
     '\\.constants\\.ts$', // ignore all .constants.ts files
     '\\.dev\\.ts$', // ignore all .dev.ts files
-    '\\.figma\\.tsx', // Figma code connect files
+    '\\.figma\\.tsx', // Figma code connect files (legacy parser)
+    '\\.figma\\.ts$', // Figma code connect template files
     'src/components/Icon/icons/', // Auto-generated icons
     'scripts/create-component/ComponentName/', // component template
   ],
