@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode, RefObject } from 'react';
 
 import type { FocusableElement } from '../ModalFocus/ModalFocus.types';
 
-export type ModalProps = Omit<ComponentProps<'div'>, 'children'> & {
+export type ModalProps = Omit<ComponentProps<'dialog'>, 'children'> & {
   /**
    * Whether the modal is open. When `false`, nothing is rendered (and the
    * portal subtree is unmounted, releasing focus state).
