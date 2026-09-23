@@ -37,6 +37,11 @@ export type ToastOptions = ToastSharedProps & {
    * Defaults to `true`.
    */
   showCloseButton?: boolean;
+  /**
+   * Called after the toast has fully animated out, regardless of how it was
+   * dismissed (close button, swipe, auto-dismiss, or `toast.dismiss()`).
+   */
+  onDismiss?: () => void;
 };
 
 /**
