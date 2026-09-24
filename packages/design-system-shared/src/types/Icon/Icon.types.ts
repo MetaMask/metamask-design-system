@@ -93,6 +93,7 @@ export const IconName = {
   CheckBold: 'CheckBold',
   Check: 'Check',
   CircleX: 'CircleX',
+  Clipboard: 'Clipboard',
   ClockFilled: 'ClockFilled',
   Clock: 'Clock',
   Close: 'Close',

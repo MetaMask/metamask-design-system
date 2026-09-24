@@ -43,6 +43,7 @@ import ChartSVG from './assets/chart.svg';
 import CheckBoldSVG from './assets/check-bold.svg';
 import CheckSVG from './assets/check.svg';
 import CircleXSVG from './assets/circle-x.svg';
+import ClipboardSVG from './assets/clipboard.svg';
 import ClockFilledSVG from './assets/clock-filled.svg';
 import ClockSVG from './assets/clock.svg';
 import CloseSVG from './assets/close.svg';
@@ -235,6 +236,7 @@ export const assetByIconName: AssetByIconName = {
   CheckBold: CheckBoldSVG,
   Check: CheckSVG,
   CircleX: CircleXSVG,
+  Clipboard: ClipboardSVG,
   ClockFilled: ClockFilledSVG,
   Clock: ClockSVG,
   Close: CloseSVG,

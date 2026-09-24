@@ -43,6 +43,7 @@ import Chart from './Chart';
 import CheckBold from './CheckBold';
 import Check from './Check';
 import CircleX from './CircleX';
+import Clipboard from './Clipboard';
 import ClockFilled from './ClockFilled';
 import Clock from './Clock';
 import Close from './Close';
@@ -231,6 +232,7 @@ export const Icons = {
   CheckBold,
   Check,
   CircleX,
+  Clipboard,
   ClockFilled,
   Clock,
   Close,
