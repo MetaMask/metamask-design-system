@@ -105,4 +105,25 @@ describe('Maskicon Utilities', () => {
     expect(firstCall).toBe(secondCall);
     expect(firstCall).toContain('<svg');
   });
+
+  it('getMaskiconColorFamily groups single-hue pairs by color', () => {
+    expect(MaskiconUtilities.getMaskiconColorFamily('#FF5C16', '#FCFCFC')).toBe(
+      'Orange',
+    );
+    expect(MaskiconUtilities.getMaskiconColorFamily('#D075FF', '#3D065F')).toBe(
+      'Purple',
+    );
+    expect(MaskiconUtilities.getMaskiconColorFamily('#BAF24A', '#013330')).toBe(
+      'Lime',
+    );
+    expect(MaskiconUtilities.getMaskiconColorFamily('#89B0FF', '#190066')).toBe(
+      'Blue',
+    );
+  });
+
+  it('getMaskiconColorFamily returns Mixed for complementary hues', () => {
+    expect(MaskiconUtilities.getMaskiconColorFamily('#EAC2FF', '#013330')).toBe(
+      'Mixed',
+    );
+  });
 });
