@@ -1,0 +1,217 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as HeaderRootStories from './HeaderRoot.stories';
+
+# HeaderRoot
+
+`HeaderRoot` is a header with a left section and an end section (`endAccessory` or `endButtonIconProps`). Use it on **top-level entry screens** that do **not** need back navigation (for example home or root tabs). Use **HeaderBase** when users need **back navigation**.
+
+```tsx
+import { HeaderRoot, IconName } from '@metamask/design-system-react';
+
+<HeaderRoot
+  title="Screen Title"
+  endButtonIconProps={[
+    {
+      iconName: IconName.Close,
+      ariaLabel: 'Close',
+      onClick: handleClose,
+    },
+  ]}
+/>;
+```
+
+<Canvas of={HeaderRootStories.Default} />
+
+## Props
+
+### `children`
+
+Custom content for the left section. When set, `title` and `titleAccessory` are not rendered.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderRootStories.Children} />
+
+### `title`
+
+Main title as a string or React node. Only used when `children` is not provided. Strings use `TextVariant.HeadingLg` and receive `titleProps`; nodes render as-is without `titleProps`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderRootStories.Title} />
+
+### `titleAccessory`
+
+Content after the title in the title row. Only when `children` is not provided and `title` is renderable.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderRootStories.TitleAccessory} />
+
+### `titleProps`
+
+Props forwarded to the `Text` wrapper when `title` is a **string**. Ignored when `title` is a React node.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `endAccessory`
+
+Custom end section. Takes priority over `endButtonIconProps` when both are set.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderRootStories.EndAccessory} />
+
+### `endButtonIconProps`
+
+Array of `ButtonIcon` props. Rendered in **reverse** order (first item is rightmost). Used only when `endAccessory` is not set. Each item must include `ariaLabel`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ButtonIconProps[]</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderRootStories.EndButtonIconProps} />
+
+<Canvas of={HeaderRootStories.EndButtonIconPropsMultiple} />
+
+### `className`
+
+Optional Tailwind classes merged with the component defaults (including `min-h-14`) via `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
