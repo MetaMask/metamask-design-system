@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.46.0]
+
+### Added
+
+- Added `ArrowSquareOut` to `IconName` ([#1544](https://github.com/MetaMask/metamask-design-system/pull/1544))
+- Added `Clipboard` to `IconName` ([#1543](https://github.com/MetaMask/metamask-design-system/pull/1543))
+
+### Changed
+
+- Updated `MoreVertical` icon artwork to use larger dots ([#1544](https://github.com/MetaMask/metamask-design-system/pull/1544))
+
 ## [0.45.3]
 
 ### Fixed
@@ -617,7 +628,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.3...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.46.0...HEAD
+[0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.3...@metamask/design-system-react@0.46.0
 [0.45.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.2...@metamask/design-system-react@0.45.3
 [0.45.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.1...@metamask/design-system-react@0.45.2
 [0.45.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.0...@metamask/design-system-react@0.45.1
