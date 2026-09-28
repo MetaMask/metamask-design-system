@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.40.0]
 
-### Uncategorized
+### Added
 
-- feat: Update more-vertical icon and add arrow-square-out icon ([#1544](https://github.com/MetaMask/metamask-design-system/pull/1544))
-- feat: add clipboard icon ([#1543](https://github.com/MetaMask/metamask-design-system/pull/1543))
-- fix: update list arrow icon to sort ascending ([#1537](https://github.com/MetaMask/metamask-design-system/pull/1537))
+- Added `ArrowSquareOut` to `IconName` ([#1544](https://github.com/MetaMask/metamask-design-system/pull/1544))
+- Added `Clipboard` to `IconName` ([#1543](https://github.com/MetaMask/metamask-design-system/pull/1543))
+
+### Changed
+
+- Updated `MoreVertical` icon artwork to use larger dots ([#1544](https://github.com/MetaMask/metamask-design-system/pull/1544))
+- Updated `ListArrow` icon artwork to use a downward sort arrow ([#1537](https://github.com/MetaMask/metamask-design-system/pull/1537))
 
 ## [0.39.0]
 
