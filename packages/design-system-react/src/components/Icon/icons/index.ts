@@ -20,6 +20,7 @@ import ArrowDoubleRight from './ArrowDoubleRight';
 import ArrowDown from './ArrowDown';
 import ArrowLeft from './ArrowLeft';
 import ArrowRight from './ArrowRight';
+import ArrowSquareOut from './ArrowSquareOut';
 import ArrowUp from './ArrowUp';
 import AttachMoney from './AttachMoney';
 import Backspace from './Backspace';
@@ -209,6 +210,7 @@ export const Icons = {
   ArrowDown,
   ArrowLeft,
   ArrowRight,
+  ArrowSquareOut,
   ArrowUp,
   AttachMoney,
   Backspace,

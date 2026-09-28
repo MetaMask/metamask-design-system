@@ -20,6 +20,7 @@ import ArrowDoubleRightSVG from './assets/arrow-double-right.svg';
 import ArrowDownSVG from './assets/arrow-down.svg';
 import ArrowLeftSVG from './assets/arrow-left.svg';
 import ArrowRightSVG from './assets/arrow-right.svg';
+import ArrowSquareOutSVG from './assets/arrow-square-out.svg';
 import ArrowUpSVG from './assets/arrow-up.svg';
 import AttachMoneySVG from './assets/attach-money.svg';
 import BackspaceSVG from './assets/backspace.svg';
@@ -213,6 +214,7 @@ export const assetByIconName: AssetByIconName = {
   ArrowDown: ArrowDownSVG,
   ArrowLeft: ArrowLeftSVG,
   ArrowRight: ArrowRightSVG,
+  ArrowSquareOut: ArrowSquareOutSVG,
   ArrowUp: ArrowUpSVG,
   AttachMoney: AttachMoneySVG,
   Backspace: BackspaceSVG,

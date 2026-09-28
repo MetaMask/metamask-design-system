@@ -70,6 +70,7 @@ export const IconName = {
   ArrowDown: 'ArrowDown',
   ArrowLeft: 'ArrowLeft',
   ArrowRight: 'ArrowRight',
+  ArrowSquareOut: 'ArrowSquareOut',
   ArrowUp: 'ArrowUp',
   AttachMoney: 'AttachMoney',
   Backspace: 'Backspace',
