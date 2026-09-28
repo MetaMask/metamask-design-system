@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: Update more-vertical icon and add arrow-square-out icon ([#1544](https://github.com/MetaMask/metamask-design-system/pull/1544))
+- feat: add clipboard icon ([#1543](https://github.com/MetaMask/metamask-design-system/pull/1543))
+
 ## [0.50.0]
 
 ### Changed
