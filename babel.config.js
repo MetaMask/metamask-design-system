@@ -2,7 +2,7 @@
 module.exports = {
   env: {
     test: {
-      presets: ['@babel/preset-typescript'],
+      presets: ['@babel/preset-flow', '@babel/preset-typescript'],
       plugins: ['@babel/plugin-transform-modules-commonjs'],
     },
   },
