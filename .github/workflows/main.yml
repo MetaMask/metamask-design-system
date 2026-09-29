@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  merge_group:
 
 jobs:
   check-workflows:
@@ -61,7 +62,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Check release
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
         uses: ./.github/actions/check-release
         with:
           commit-starts-with: 'Release [version],Release v[version],Release/[version],Release/v[version],Release `[version]`'
@@ -83,9 +84,11 @@ jobs:
         run: |
           PATTERN='^packages/design-system-react(-native)?/(.*/)?[^/]+\.figma\.(tsx|ts)$|^packages/design-system-react(-native)?/figma\.config\.json$'
 
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            git fetch origin "${{ github.base_ref }}"
-            CHANGED_FILES="$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")"
+          if [[ "${{ github.event_name }}" == "pull_request" || "${{ github.event_name }}" == "merge_group" ]]; then
+            BASE_REF="${{ github.event.pull_request.base.ref || github.event.merge_group.base_ref }}"
+            BASE_REF="${BASE_REF#refs/heads/}"
+            git fetch origin "$BASE_REF"
+            CHANGED_FILES="$(git diff --name-only "origin/$BASE_REF...HEAD")"
           else
             if [[ -z "${{ github.event.before }}" || "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
               echo "changed=false" >> "$GITHUB_OUTPUT"
