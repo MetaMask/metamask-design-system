@@ -6609,10 +6609,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmldom/xmldom@npm:0.7.7":
-  version: 0.7.7
-  resolution: "@xmldom/xmldom@npm:0.7.7"
-  checksum: 10/9563832186a53c1ea44cae8ebbcc14df1394a7d95a0a61f251a3cfa84b39d6aa8747bb77c905badf1b7b40543ce21add4504b267c886631915997205bf76cfc8
+"@xmldom/xmldom@npm:0.8.15":
+  version: 0.8.15
+  resolution: "@xmldom/xmldom@npm:0.8.15"
+  checksum: 10/521d8e5a9798a47dddb28237d112e47637d638e4f3d60ce1eefa1f397d2439af5a00f781c956b5affc251ef8a1bbc1f8325161d32f7b27c89aacf5ff84f14cf7
   languageName: node
   linkType: hard
 
