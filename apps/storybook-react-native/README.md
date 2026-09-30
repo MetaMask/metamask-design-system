@@ -16,7 +16,7 @@ Storybook app for validating `@metamask/design-system-react-native` components i
 | Storybook web (`storybook dev` / static build)               | Supported                  | Browser-based component review and sharing  |
 | Expo Go (`expo start --ios` / `--android`)                   | Unsupported for validation | Known Reanimated/Worklets native mismatches |
 
-Reanimated 4 + Worklets require a **development build**. Expo Go cannot load our current JS stack (Reanimated 4.5.3 / Worklets 0.10.4 on Expo SDK 54) because its prebuilt native binaries are older.
+Reanimated 4 + Worklets require a **development build**. Expo Go cannot load our current JS stack (Reanimated 4.5.3 / Worklets 0.10.4 on Expo SDK 57) because its prebuilt native binaries are older.
 
 ## Run Storybook (supported flow)
 
