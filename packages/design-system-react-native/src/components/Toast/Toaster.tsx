@@ -57,6 +57,7 @@ const assertRegisteredRef = (method: 'dismiss' | 'toast'): ToasterRef => {
 const getToastProps = ({
   hasNoTimeout: _hasNoTimeout,
   onClose: _onClose,
+  onDismiss: _onDismiss,
   topOffset: _topOffset,
   twClassName: _twClassName,
   showCloseButton: _showCloseButton,
@@ -81,6 +82,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const animationStartedRef = useRef(false);
     const visibleAtRef = useRef<number | null>(null);
     const hasNoTimeoutRef = useRef(false);
+    const toastOnDismissRef = useRef<(() => void) | undefined>(undefined);
     // Invalidates queued spring-back resumes after replace/dismiss. A completed
     // spring cannot be cancelled, so scheduleOnRN(resume) can still run later.
     const toastGenerationRef = useRef(0);
@@ -97,6 +99,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const toastGeneration = useSharedValue(0);
     const topOffset = toastOptions?.topOffset ?? 0;
     hasNoTimeoutRef.current = Boolean(toastOptions?.hasNoTimeout);
+    toastOnDismissRef.current = toastOptions?.onDismiss;
     const animatedStyle = useAnimatedStyle(() => ({
       transform: [{ translateY: translateYProgress.value + topOffset }],
     }));
@@ -124,7 +127,9 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       isDismissing.value = false;
       isSwipeActive.value = false;
       clearScheduledAutoDismiss();
+      const onDismiss = toastOnDismissRef.current;
       setToastOptions(undefined);
+      onDismiss?.();
     };
 
     const startDismissAnimation = () => {
