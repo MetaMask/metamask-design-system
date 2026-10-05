@@ -1924,8 +1924,8 @@ Note: `ButtonFilter` inherits its size prop from `ButtonBaseProps`. Use `ButtonB
 
 ##### Import Path
 
-| Mobile Pattern                                                                      | Design System Migration                                     |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Mobile Pattern                                                                      | Design System Migration                                         |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | `import ButtonHero from '.../component-library/components-temp/Buttons/ButtonHero'` | `import { Button } from '@metamask/design-system-react-native'` |
 
 Note: The legacy component uses a **default export**; `Button` is a **named export**.
