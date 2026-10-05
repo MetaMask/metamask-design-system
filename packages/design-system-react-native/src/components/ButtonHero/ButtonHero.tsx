@@ -46,6 +46,9 @@ const ButtonHeroInner: React.FC<ButtonHeroProps> = ({
  * Used for primary marketing and call-to-action use cases.
  * The button is locked to light theme colors regardless of the app's theme setting.
  *
+ * @deprecated Use `Button` with `variant={ButtonVariant.Primary}` instead.
+ * This component will be removed in a future major version of the design system.
+ *
  * @param props - ButtonHero props extending ButtonBaseProps
  * @returns ButtonHero component wrapped in light ThemeProvider
  */
