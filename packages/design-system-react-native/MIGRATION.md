@@ -1918,39 +1918,38 @@ Note: `ButtonFilter` inherits its size prop from `ButtonBaseProps`. Use `ButtonB
 
 ### ButtonHero Component
 
-The `ButtonHero` component is a branded, light-theme-locked button for high-impact actions (swaps, claims, rewards). The legacy version in `components-temp` already wraps `ButtonBase` from `@metamask/design-system-react-native`, so the migration is primarily an import change with a few behavioral differences.
+`ButtonHero` is deprecated. Migrate the legacy Mobile `ButtonHero` (`app/component-library/components-temp/Buttons/ButtonHero`) to `Button`. Primary is the default variant, so omit `variant` or pass `variant={ButtonVariant.Primary}`.
 
 #### Breaking Changes
 
 ##### Import Path
 
-| Mobile Pattern                                                                      | Design System Migration                                             |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `import ButtonHero from '.../component-library/components-temp/Buttons/ButtonHero'` | `import { ButtonHero } from '@metamask/design-system-react-native'` |
+| Mobile Pattern                                                                      | Design System Migration                                         |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `import ButtonHero from '.../component-library/components-temp/Buttons/ButtonHero'` | `import { Button } from '@metamask/design-system-react-native'` |
 
-Note: The legacy component uses a **default export**; the design system uses a **named export**.
+Note: The legacy component uses a **default export**; `Button` is a **named export**.
 
-##### `twClassName`, `textClassName`, `iconClassName` Are Ignored
+##### Variant
 
-The design system `ButtonHero` intentionally strips `twClassName`, `textClassName`, and `iconClassName` to prevent overriding the hero-specific light-theme styling. If you relied on these props:
+`Button` renders the primary variant when `variant` is omitted. Pass `variant={ButtonVariant.Primary}` when you want the variant explicit.
 
-| Mobile Pattern                     | Design System Migration                                      |
-| ---------------------------------- | ------------------------------------------------------------ |
-| `twClassName="w-full"`             | `isFullWidth`                                                |
-| `twClassName="bg-primary-default"` | Remove — already the hero default                            |
-| `style={tw.style('w-full')}`       | `isFullWidth` (or keep `style` — it is still passed through) |
+##### Size
 
-##### Props (Unchanged)
+Use `ButtonSize` from `@metamask/design-system-react-native`. Its values (`'sm'`, `'md'`, `'lg'`) match the sizes previously used with `ButtonHero`.
 
-The `ButtonHero` accepts the same `ButtonBaseProps` as the legacy version. These props work identically:
+##### Width
 
-- `children`, `size`, `isFullWidth`, `isDisabled`, `isLoading`, `loadingText`
-- `startIconName`, `endIconName`, `onPress`, `style`, `testID`
-- `accessibilityLabel`, `accessibilityHint`
+| Mobile Pattern               | Design System Migration |
+| ---------------------------- | ----------------------- |
+| `twClassName="w-full"`       | `isFullWidth`           |
+| `style={tw.style('w-full')}` | `isFullWidth`           |
 
-##### Size Enum
+`Button` still accepts `twClassName`, `textClassName`, and `style`.
 
-Use `ButtonHeroSize` from `@metamask/design-system-react-native`. Its values (`'sm'`, `'md'`, `'lg'`) are identical to `ButtonSize` and `ButtonBaseSize`.
+##### Theme
+
+Legacy `ButtonHero` locked colors to the light theme. `Button` follows the active theme.
 
 #### Migration Examples
 
@@ -1976,23 +1975,41 @@ import { ButtonSize } from '@metamask/design-system-react-native';
 After (Design System):
 
 ```tsx
-import {
-  ButtonHero,
-  ButtonHeroSize,
-} from '@metamask/design-system-react-native';
+import { Button, ButtonSize } from '@metamask/design-system-react-native';
 
-<ButtonHero
-  size={ButtonHeroSize.Lg}
+<Button
+  size={ButtonSize.Lg}
   onPress={handleClaim}
   isDisabled={isLoading}
   isFullWidth
   testID="claim-button"
 >
   Claim Winnings
-</ButtonHero>;
+</Button>;
 ```
 
-##### Hero button with twClassName (stripped)
+The same button with an explicit primary variant:
+
+```tsx
+import {
+  Button,
+  ButtonSize,
+  ButtonVariant,
+} from '@metamask/design-system-react-native';
+
+<Button
+  variant={ButtonVariant.Primary}
+  size={ButtonSize.Lg}
+  onPress={handleClaim}
+  isDisabled={isLoading}
+  isFullWidth
+  testID="claim-button"
+>
+  Claim Winnings
+</Button>;
+```
+
+##### Hero button with twClassName
 
 Before (Mobile):
 
@@ -2011,17 +2028,14 @@ import ButtonHero from '../../../component-library/components-temp/Buttons/Butto
 After (Design System):
 
 ```tsx
-import {
-  ButtonHero,
-  ButtonHeroSize,
-} from '@metamask/design-system-react-native';
+import { Button, ButtonSize } from '@metamask/design-system-react-native';
 
-<ButtonHero size={ButtonHeroSize.Lg} onPress={handleNext} isFullWidth>
+<Button size={ButtonSize.Lg} onPress={handleNext} isFullWidth>
   Continue
-</ButtonHero>;
+</Button>;
 ```
 
-`bg-primary-default` is the hero default and `w-full` maps to `isFullWidth`. Both `twClassName` overrides are no longer needed.
+Primary styling is the `Button` default, and `w-full` maps to `isFullWidth`.
 
 ### ButtonIcon Component
 
