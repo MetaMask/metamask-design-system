@@ -60,7 +60,7 @@
     "@jest/globals": "^29.7.0",
     "@metamask/auto-changelog": "^6.2.1",
     "@metamask/design-system-tailwind-preset": "workspace:^",
-    "@metamask/utils": "^11.12.1",
+    "@metamask/utils": "^12.0.0",
     "@svgr/cli": "^8.1.0",
     "@testing-library/dom": "^10.0.0",
     "@testing-library/jest-dom": "^6.6.3",
