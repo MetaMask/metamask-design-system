@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { Icon } from './Icon';
+import { Icon } from './Icon.js';
 
 import { IconName, IconSize } from '.';
 

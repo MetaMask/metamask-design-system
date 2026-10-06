@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box, BoxBackgroundColor } from '../Box';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Box, BoxBackgroundColor } from '../Box/index.js';
 
-import type { ModalOverlayProps } from './ModalOverlay.types';
+import type { ModalOverlayProps } from './ModalOverlay.types.js';
 
 export const ModalOverlay = forwardRef<HTMLDivElement, ModalOverlayProps>(
   ({ className, ...props }, ref) => (

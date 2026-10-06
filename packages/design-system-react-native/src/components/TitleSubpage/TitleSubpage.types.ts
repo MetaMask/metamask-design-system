@@ -3,9 +3,9 @@ import type { TitleSubpagePropsShared } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
 // Internal dependencies.
-import type { BoxProps } from '../Box/Box.types';
-import type { BoxRowProps } from '../BoxRow/BoxRow.types';
-import type { TextProps } from '../Text/Text.types';
+import type { BoxProps } from '../Box/Box.types.js';
+import type { BoxRowProps } from '../BoxRow/BoxRow.types.js';
+import type { TextProps } from '../Text/Text.types.js';
 
 /**
  * TitleSubpage component props (React Native).

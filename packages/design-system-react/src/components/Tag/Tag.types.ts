@@ -2,7 +2,7 @@ import type { TagPropsShared } from '@metamask/design-system-shared';
 import type { IconName } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { IconProps } from '../Icon';
+import type { IconProps } from '../Icon/index.js';
 
 /**
  * Tag component props (React / extension).

@@ -1,4 +1,4 @@
-import { ButtonSemanticSeverity } from './ButtonSemantic.types';
+import { ButtonSemanticSeverity } from './ButtonSemantic.types.js';
 
 export const TWCLASSMAP_BUTTONSEMANTIC_BG: Record<
   ButtonSemanticSeverity,

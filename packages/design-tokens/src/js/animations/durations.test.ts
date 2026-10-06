@@ -1,4 +1,4 @@
-import { AnimationDuration } from './durations';
+import { AnimationDuration } from './durations.js';
 
 describe('AnimationDuration', () => {
   it('instantly is 0ms', () => {

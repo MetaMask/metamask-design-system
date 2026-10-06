@@ -1,2 +1,2 @@
-export { SectionHeader } from './SectionHeader';
-export type { SectionHeaderProps } from './SectionHeader.types';
+export { SectionHeader } from './SectionHeader.js';
+export type { SectionHeaderProps } from './SectionHeader.types.js';

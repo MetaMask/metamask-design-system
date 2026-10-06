@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Icon, IconName, IconSize } from '../Icon';
-import { TextColor } from '../Text';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
+import { TextColor } from '../Text/index.js';
 
-import { AvatarBase } from './AvatarBase';
-import { SAMPLE_AVATARBASE_URIS } from './AvatarBase.dev';
+import { SAMPLE_AVATARBASE_URIS } from './AvatarBase.dev.js';
+import { AvatarBase } from './AvatarBase.js';
 import README from './README.mdx';
 
 import { AvatarBaseSize, AvatarBaseShape } from '.';

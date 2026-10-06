@@ -3,9 +3,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { createRenderer } from '../../../../test-utils/createRenderer';
+import { createRenderer } from '../../../../test-utils/createRenderer.js';
 
-import { ButtonTertiary } from './ButtonTertiary';
+import { ButtonTertiary } from './ButtonTertiary.js';
 
 describe('ButtonTertiary', () => {
   let tw: ReturnType<typeof useTailwind>;

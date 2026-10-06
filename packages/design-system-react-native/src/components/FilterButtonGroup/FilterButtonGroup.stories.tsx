@@ -8,11 +8,11 @@ import React, { useEffect, useState } from 'react';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
 
-import { FilterButton } from '../FilterButton';
-import { SelectButton } from '../SelectButton';
+import { FilterButton } from '../FilterButton/index.js';
+import { SelectButton } from '../SelectButton/index.js';
 
-import { FilterButtonGroup } from './FilterButtonGroup';
-import type { FilterButtonGroupProps } from './FilterButtonGroup.types';
+import { FilterButtonGroup } from './FilterButtonGroup.js';
+import type { FilterButtonGroupProps } from './FilterButtonGroup.types.js';
 
 const noopPress = () => undefined;
 

@@ -15,29 +15,21 @@
     "url": "https://github.com/MetaMask/metamask-design-system.git"
   },
   "license": "MIT",
+  "type": "module",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json",
     "./styles.css": "./dist/styles.css",
     "./tailwind/theme.css": "./dist/tailwind/theme.css"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references && yarn build:css",
+    "build": "tsc --project tsconfig.build.json && yarn build:css",
     "build:css": "cleancss -o dist/styles.css src/css/index.css && yarn build:css:tailwind",
     "build:css:tailwind": "mkdir -p dist/tailwind && postcss src/tailwind/theme.css --use postcss-import -o dist/tailwind/theme.css --no-map",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-tokens",
@@ -53,7 +45,6 @@
     "@metamask/auto-changelog": "^6.2.1",
     "@metamask/design-system-react": "workspace:^",
     "@metamask/design-system-shared": "workspace:^",
-    "@ts-bridge/cli": "^0.6.3",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
     "clean-css-cli": "^5.6.3",

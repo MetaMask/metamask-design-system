@@ -6,11 +6,11 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box } from '../../Box';
-import { Text } from '../../Text';
+import { Box } from '../../Box/index.js';
+import { Text } from '../../Text/index.js';
 
-import { Maskicon } from './Maskicon';
-import type { MaskiconProps } from './Maskicon.types';
+import { Maskicon } from './Maskicon.js';
+import type { MaskiconProps } from './Maskicon.types.js';
 import README from './README.mdx';
 
 const meta: Meta<MaskiconProps> = {

@@ -5,9 +5,9 @@ import {
 import type { CSSProperties } from 'react';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 
-import type { BadgeWrapperProps } from './BadgeWrapper.types';
+import type { BadgeWrapperProps } from './BadgeWrapper.types.js';
 
 const CIRCULAR_ANCHOR_EDGE_INSET = '7%';
 const RECTANGULAR_ANCHOR_EDGE_INSET = '11%';

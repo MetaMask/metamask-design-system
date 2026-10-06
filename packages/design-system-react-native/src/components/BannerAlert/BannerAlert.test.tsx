@@ -6,9 +6,9 @@ import {
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { BannerBase } from '../BannerBase';
+import { BannerBase } from '../BannerBase/index.js';
 
-import { BannerAlert } from './BannerAlert';
+import { BannerAlert } from './BannerAlert.js';
 
 import { BannerAlertSeverity } from '.';
 

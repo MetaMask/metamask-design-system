@@ -2,9 +2,9 @@ import { AvatarNetworkSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarNetwork } from './AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev';
-import type { AvatarNetworkProps } from './AvatarNetwork.types';
+import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev.js';
+import { AvatarNetwork } from './AvatarNetwork.js';
+import type { AvatarNetworkProps } from './AvatarNetwork.types.js';
 
 const meta: Meta<AvatarNetworkProps> = {
   title: 'Components/AvatarNetwork',

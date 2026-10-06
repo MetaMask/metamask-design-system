@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from 'react';
 
-import type { ButtonIconProps } from '../ButtonIcon';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
 
 /**
  * Props accepted by the auto-rendered back / close `ButtonIcon`. The

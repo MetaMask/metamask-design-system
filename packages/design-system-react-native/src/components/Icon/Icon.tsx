@@ -3,9 +3,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { assetByIconName } from './Icon.assets';
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
-import type { IconProps } from './Icon.types';
+import { assetByIconName } from './Icon.assets.js';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants.js';
+import type { IconProps } from './Icon.types.js';
 
 export const Icon = ({
   size = IconSize.Md,

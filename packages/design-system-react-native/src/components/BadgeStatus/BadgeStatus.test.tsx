@@ -6,11 +6,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { BadgeStatus } from './BadgeStatus';
 import {
   TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE,
   TWCLASSMAP_BADGESTATUS_SIZE,
-} from './BadgeStatus.constants';
+} from './BadgeStatus.constants.js';
+import { BadgeStatus } from './BadgeStatus.js';
 
 describe('BadgeStatus', () => {
   it('renders with default props and status Active', () => {

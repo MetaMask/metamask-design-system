@@ -4,7 +4,7 @@ import { act, create } from 'react-test-renderer';
 import {
   FilterButtonSize,
   FilterButtonVariant,
-} from '../../types/FilterButton/FilterButton.types';
+} from '../../types/FilterButton/FilterButton.types.js';
 
 import type { FilterButtonGroupContextValue } from '.';
 import { FilterButtonGroupContext } from '.';

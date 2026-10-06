@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Box } from '../Box';
-import { Text, TextVariant, TextColor } from '../Text';
+import { Box } from '../Box/index.js';
+import { Text, TextVariant, TextColor } from '../Text/index.js';
 
-import { ButtonSemantic } from './ButtonSemantic';
-import type { ButtonSemanticProps } from './ButtonSemantic.types';
-import { ButtonSemanticSeverity } from './ButtonSemantic.types';
+import { ButtonSemantic } from './ButtonSemantic.js';
+import type { ButtonSemanticProps } from './ButtonSemantic.types.js';
+import { ButtonSemanticSeverity } from './ButtonSemantic.types.js';
 
 const meta: Meta<ButtonSemanticProps> = {
   title: 'Components/ButtonSemantic',

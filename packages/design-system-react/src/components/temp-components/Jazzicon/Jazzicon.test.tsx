@@ -1,7 +1,7 @@
 import { render, screen, waitFor, act } from '@testing-library/react';
 import React from 'react';
 
-import { Jazzicon } from './Jazzicon';
+import { Jazzicon } from './Jazzicon.js';
 
 describe('Jazzicon', () => {
   describe('Jazzicon component', () => {

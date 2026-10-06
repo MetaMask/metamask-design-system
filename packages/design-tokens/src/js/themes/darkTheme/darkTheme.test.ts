@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { darkTheme } from './darkTheme';
+import { darkTheme } from './darkTheme.js';
 
 const jsonDarkThemeTokens = require('../../../figma/darkTheme.json');
 const designTokens = require('../../../figma/tokens.json');

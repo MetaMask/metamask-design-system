@@ -7,11 +7,11 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { BoxColumn } from '../BoxColumn';
-import { BoxRow } from '../BoxRow';
-import { ButtonIcon } from '../ButtonIcon';
+import { BoxColumn } from '../BoxColumn/index.js';
+import { BoxRow } from '../BoxRow/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
 
-import type { KeyValueColumnProps } from './KeyValueColumn.types';
+import type { KeyValueColumnProps } from './KeyValueColumn.types.js';
 
 export const KeyValueColumn = ({
   keyStartAccessory,

@@ -2,7 +2,7 @@
 import { renderHook, act } from '@testing-library/react-native';
 
 // Internal dependencies.
-import { useHeaderStandardAnimated } from './useHeaderStandardAnimated';
+import { useHeaderStandardAnimated } from './useHeaderStandardAnimated.js';
 
 jest.mock('react-native-reanimated', () =>
   jest.requireActual('react-native-reanimated/mock'),

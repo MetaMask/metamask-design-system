@@ -4,10 +4,10 @@ import React, { createRef } from 'react';
 import { TextInput, View } from 'react-native';
 import { act } from 'react-test-renderer';
 
-import { createRenderer } from '../../test-utils/createRenderer';
-import { Input } from '../Input';
+import { createRenderer } from '../../test-utils/createRenderer.js';
+import { Input } from '../Input/index.js';
 
-import { TextField } from './TextField';
+import { TextField } from './TextField.js';
 
 const ROOT_TEST_ID = 'textfield';
 

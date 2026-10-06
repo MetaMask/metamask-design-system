@@ -3,9 +3,9 @@ import { IconColor, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants.js';
 
-import { BadgeIcon } from './BadgeIcon';
+import { BadgeIcon } from './BadgeIcon.js';
 
 describe('BadgeIcon', () => {
   it('renders with default props', () => {

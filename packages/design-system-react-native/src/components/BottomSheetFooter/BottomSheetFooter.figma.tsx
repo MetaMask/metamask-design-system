@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { BottomSheetFooter } from './BottomSheetFooter';
+import { BottomSheetFooter } from './BottomSheetFooter.js';
 
 import { ButtonsAlignment } from '.';
 

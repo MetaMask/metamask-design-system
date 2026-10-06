@@ -13,10 +13,10 @@ import { Text as RNText } from 'react-native';
 import {
   TOAST_DISMISS_VELOCITY_THRESHOLD,
   TOAST_VISIBILITY_DURATION,
-} from './Toast.constants';
-import type { ToastOptions, ToasterRef } from './Toast.types';
-import { ToastSeverity } from './Toast.types';
-import { Toaster, toast } from './Toaster';
+} from './Toast.constants.js';
+import type { ToastOptions, ToasterRef } from './Toast.types.js';
+import { ToastSeverity } from './Toast.types.js';
+import { Toaster, toast } from './Toaster.js';
 
 // Mock cancelAnimation as a jest.fn so we can assert on calls.
 const mockCancelAnimation = jest.fn();

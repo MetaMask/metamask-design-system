@@ -3,7 +3,7 @@ import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { BoxColumn } from './BoxColumn';
+import { BoxColumn } from './BoxColumn.js';
 
 const ROOT_TEST_ID = 'box-column-root';
 

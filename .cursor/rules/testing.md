@@ -247,5 +247,5 @@ After adding or updating tests, verify:
 - @.cursor/rules/component-architecture.md
 - @.cursor/rules/styling.md
 - @packages/design-system-react-native/jest.config.js
-- @packages/design-system-react-native/jest.setup.js
+- @packages/design-system-react-native/jest.setup.cjs
 - @docs/ai-agents.md

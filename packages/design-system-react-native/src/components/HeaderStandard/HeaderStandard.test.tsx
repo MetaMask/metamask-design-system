@@ -4,10 +4,10 @@ import React from 'react';
 import { Text } from 'react-native';
 
 // External dependencies.
-import { IconName } from '../Icon';
+import { IconName } from '../Icon/index.js';
 
 // Internal dependencies.
-import { HeaderStandard } from './HeaderStandard';
+import { HeaderStandard } from './HeaderStandard.js';
 
 const CONTAINER_TEST_ID = 'header-standard-container';
 const TITLE_TEST_ID = 'header-standard-title';

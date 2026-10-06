@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
-import { TextFieldSize } from '../TextField';
+import { TextFieldSize } from '../TextField/index.js';
 
 import README from './README.mdx';
-import { TextFieldSearch } from './TextFieldSearch';
-import type { TextFieldSearchProps } from './TextFieldSearch.types';
+import { TextFieldSearch } from './TextFieldSearch.js';
+import type { TextFieldSearchProps } from './TextFieldSearch.types.js';
 
 type ControlledTextFieldSearchProps = Omit<
   TextFieldSearchProps,

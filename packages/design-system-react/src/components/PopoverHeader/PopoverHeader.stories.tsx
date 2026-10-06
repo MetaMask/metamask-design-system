@@ -2,12 +2,12 @@ import { BoxBackgroundColor, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Icon } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { PopoverHeader } from './PopoverHeader';
-import type { PopoverHeaderProps } from './PopoverHeader.types';
+import { PopoverHeader } from './PopoverHeader.js';
+import type { PopoverHeaderProps } from './PopoverHeader.types.js';
 import README from './README.mdx';
 
 const meta: Meta<PopoverHeaderProps> = {

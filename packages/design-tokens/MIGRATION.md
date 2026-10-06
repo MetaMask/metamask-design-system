@@ -2,6 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [ESM-only entry point](#esm-only-entry-point)
 - [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
 - [From version 8.x to 9.0.0](#from-version-8x-to-900)
@@ -13,6 +14,12 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## ESM-only entry point
+
+`@metamask/design-tokens` publishes a single ECMAScript module. `package.json` sets `"type": "module"`, and `exports` points at `./dist/index.js` with types at `./dist/index.d.ts`. The CommonJS `require` entry and the `module` field are removed. The CSS entry points `./styles.css` and `./tailwind/theme.css` are unchanged.
+
+Import the JavaScript entry with `import`. On Node 24, `require()` can load the module. Named exports are properties of the returned module namespace.
 
 ## From version 10.x to 11.0.0
 

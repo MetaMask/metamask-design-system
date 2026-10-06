@@ -1,2 +1,2 @@
-export { ButtonFilter } from './ButtonFilter';
-export type { ButtonFilterProps } from './ButtonFilter.types';
+export { ButtonFilter } from './ButtonFilter.js';
+export type { ButtonFilterProps } from './ButtonFilter.types.js';

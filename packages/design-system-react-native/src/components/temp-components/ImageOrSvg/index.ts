@@ -1,2 +1,2 @@
-export { ImageOrSvg } from './ImageOrSvg';
-export type { ImageOrSvgProps, ImageOrSvgSrc } from './ImageOrSvg.types';
+export { ImageOrSvg } from './ImageOrSvg.js';
+export type { ImageOrSvgProps, ImageOrSvgSrc } from './ImageOrSvg.types.js';

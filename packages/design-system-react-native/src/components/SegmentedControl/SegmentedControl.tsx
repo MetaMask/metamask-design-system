@@ -6,9 +6,9 @@ import {
 } from '@metamask/design-system-shared';
 import React, { Children, useMemo } from 'react';
 
-import { Box } from '../Box';
+import { Box } from '../Box/index.js';
 
-import type { SegmentedControlProps } from './SegmentedControl.types';
+import type { SegmentedControlProps } from './SegmentedControl.types.js';
 
 export const SegmentedControl = ({
   value,

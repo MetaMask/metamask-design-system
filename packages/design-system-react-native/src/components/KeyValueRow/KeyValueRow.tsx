@@ -9,11 +9,11 @@ import {
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
-import { ButtonIcon } from '../ButtonIcon';
+import { Box } from '../Box/index.js';
+import { BoxRow } from '../BoxRow/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
 
-import type { KeyValueRowProps } from './KeyValueRow.types';
+import type { KeyValueRowProps } from './KeyValueRow.types.js';
 
 export const KeyValueRow = ({
   keyStartAccessory,

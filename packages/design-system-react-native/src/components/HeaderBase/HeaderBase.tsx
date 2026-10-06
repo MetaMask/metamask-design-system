@@ -7,11 +7,11 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import type { ButtonIconProps } from '../ButtonIcon';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon/index.js';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import { TextOrChildren } from '../temp-components/TextOrChildren/index.js';
 
-import type { HeaderBaseProps } from './HeaderBase.types';
+import type { HeaderBaseProps } from './HeaderBase.types.js';
 
 // `startAccessory` is the primary escape hatch. `startButtonIconProps`
 // remains as a convenience path for the common single-back-button case.

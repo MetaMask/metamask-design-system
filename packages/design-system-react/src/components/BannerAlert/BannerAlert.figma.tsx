@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { BannerAlert } from './BannerAlert';
+import { BannerAlert } from './BannerAlert.js';
 
 import { BannerAlertSeverity } from '.';
 

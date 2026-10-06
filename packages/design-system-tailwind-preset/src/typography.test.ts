@@ -1,9 +1,9 @@
 import {
   getDesignTokenVariables,
   collectCssVariables,
-} from '../scripts/testUtils';
+} from '../scripts/testUtils.js';
 
-import { typography } from './typography';
+import { typography } from './typography.js';
 
 describe('Typography', () => {
   // Collect all CSS variables used in the 'typography' object

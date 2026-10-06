@@ -2,8 +2,8 @@ import { IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { BadgeIcon } from './BadgeIcon';
-import type { BadgeIconProps } from './BadgeIcon.types';
+import { BadgeIcon } from './BadgeIcon.js';
+import type { BadgeIconProps } from './BadgeIcon.types.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof BadgeIcon> = {

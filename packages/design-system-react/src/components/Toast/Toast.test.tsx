@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
 
-import { Toast } from './Toast';
+import { Toast } from './Toast.js';
 
 describe('Toast', () => {
   it('renders title and description', () => {

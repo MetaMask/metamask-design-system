@@ -2,11 +2,11 @@ import { SensitiveTextLength } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { TextColor, TextVariant } from '../Text';
+import { TextColor, TextVariant } from '../Text/index.js';
 
 import README from './README.mdx';
-import { SensitiveText } from './SensitiveText';
-import type { SensitiveTextProps } from './SensitiveText.types';
+import { SensitiveText } from './SensitiveText.js';
+import type { SensitiveTextProps } from './SensitiveText.types.js';
 
 const meta: Meta<SensitiveTextProps> = {
   title: 'React Components/SensitiveText',

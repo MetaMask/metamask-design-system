@@ -7,10 +7,10 @@ import {
   BoxBackgroundColor,
   BoxFlexDirection,
   BoxBorderColor,
-} from '../Box';
-import { Text } from '../Text';
+} from '../Box/index.js';
+import { Text } from '../Text/index.js';
 
-import { ButtonFilter } from './ButtonFilter';
+import { ButtonFilter } from './ButtonFilter.js';
 
 const meta: Meta<typeof ButtonFilter> = {
   title: 'Components/ButtonFilter',

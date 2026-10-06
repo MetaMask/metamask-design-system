@@ -2,11 +2,11 @@ import { SliderMarkColor } from '@metamask/design-system-shared';
 import { act, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { DEFAULT_MARKS } from './Slider.constants';
-import type { UseSliderGestureParams } from './Slider.types';
-import * as sliderUtilities from './Slider.utilities';
-import { buildColorStops } from './Slider.utilities';
-import { useSliderGesture } from './useSliderGesture';
+import { DEFAULT_MARKS } from './Slider.constants.js';
+import type { UseSliderGestureParams } from './Slider.types.js';
+import * as sliderUtilities from './Slider.utilities.js';
+import { buildColorStops } from './Slider.utilities.js';
+import { useSliderGesture } from './useSliderGesture.js';
 
 jest.mock('react-native-gesture-handler', () => {
   const createGestureMock = () => {

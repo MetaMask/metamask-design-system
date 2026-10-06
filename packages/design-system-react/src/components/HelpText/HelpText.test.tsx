@@ -6,11 +6,11 @@ import {
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
-import { ICON_ALERT_SEVERITY_MAP } from '../IconAlert/IconAlert.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants.js';
+import { ICON_ALERT_SEVERITY_MAP } from '../IconAlert/IconAlert.constants.js';
 
-import { HelpText } from './HelpText';
-import { MAP_HELPTEXT_SEVERITY_COLOR } from './HelpText.constants';
+import { MAP_HELPTEXT_SEVERITY_COLOR } from './HelpText.constants.js';
+import { HelpText } from './HelpText.js';
 
 describe('HelpText', () => {
   it('renders children with default body-sm variant and default text color', () => {

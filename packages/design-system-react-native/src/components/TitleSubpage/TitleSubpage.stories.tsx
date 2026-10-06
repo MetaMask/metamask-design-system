@@ -7,13 +7,13 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import UsdcSVG from '../../assets/token-icons/usdc.svg';
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
-import { Icon, IconName, IconSize, IconColor } from '../Icon';
-import { Text } from '../Text';
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken/index.js';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box/index.js';
+import { Icon, IconName, IconSize, IconColor } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { TitleSubpage } from './TitleSubpage';
-import type { TitleSubpageProps } from './TitleSubpage.types';
+import { TitleSubpage } from './TitleSubpage.js';
+import type { TitleSubpageProps } from './TitleSubpage.types.js';
 
 /**
  * Token avatar for stories using bundled USDC artwork.

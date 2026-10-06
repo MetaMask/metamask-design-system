@@ -2,11 +2,11 @@ import { BoxFlexDirection, TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Text } from '../Text/index.js';
 
-import { SectionDivider } from './SectionDivider';
-import type { SectionDividerProps } from './SectionDivider.types';
+import { SectionDivider } from './SectionDivider.js';
+import type { SectionDividerProps } from './SectionDivider.types.js';
 
 const meta: Meta<typeof SectionDivider> = {
   title: 'Components/SectionDivider',

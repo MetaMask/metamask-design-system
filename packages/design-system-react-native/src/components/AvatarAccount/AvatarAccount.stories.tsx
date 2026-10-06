@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarAccount } from './AvatarAccount';
-import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants';
-import type { AvatarAccountProps } from './AvatarAccount.types';
+import { SAMPLE_AVATARACCOUNT_ADDRESSES } from './AvatarAccount.constants.js';
+import { AvatarAccount } from './AvatarAccount.js';
+import type { AvatarAccountProps } from './AvatarAccount.types.js';
 
 import { AvatarAccountSize, AvatarAccountVariant } from '.';
 

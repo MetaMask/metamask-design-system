@@ -6,7 +6,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import type { ReactNode } from 'react';
 
-import { BannerBase } from './BannerBase';
+import { BannerBase } from './BannerBase.js';
 
 describe('BannerBase', () => {
   const closeButtonTestId = 'banner-base-close-button';

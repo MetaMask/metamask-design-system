@@ -5,10 +5,10 @@ import {
 import type { ImageErrorEventData } from 'expo-image';
 import React, { useState } from 'react';
 
-import { AvatarBase } from '../AvatarBase';
-import { ImageOrSvg } from '../temp-components/ImageOrSvg';
+import { AvatarBase } from '../AvatarBase/index.js';
+import { ImageOrSvg } from '../temp-components/ImageOrSvg/index.js';
 
-import type { AvatarNetworkProps } from './AvatarNetwork.types';
+import type { AvatarNetworkProps } from './AvatarNetwork.types.js';
 
 export const AvatarNetwork = ({
   src,

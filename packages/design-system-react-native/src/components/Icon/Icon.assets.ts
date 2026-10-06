@@ -190,7 +190,7 @@ import WebTrafficSVG from './assets/web-traffic.svg';
 import WifiOffSVG from './assets/wifi-off.svg';
 import WifiSVG from './assets/wifi.svg';
 import XSVG from './assets/x.svg';
-import type { AssetByIconName } from './Icon.types';
+import type { AssetByIconName } from './Icon.types.js';
 
 /**
  * Asset stored by icon name

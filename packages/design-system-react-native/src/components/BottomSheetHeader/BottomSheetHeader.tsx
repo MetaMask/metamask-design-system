@@ -3,11 +3,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
 // External dependencies.
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { HeaderBase } from '../HeaderBase';
-import { IconName } from '../Icon';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon/index.js';
+import { HeaderBase } from '../HeaderBase/index.js';
+import { IconName } from '../Icon/index.js';
 
-import type { BottomSheetHeaderProps } from './BottomSheetHeader.types';
+import type { BottomSheetHeaderProps } from './BottomSheetHeader.types.js';
 
 export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   style,

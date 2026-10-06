@@ -1,1 +1,4 @@
-export { BadgeCountSize, type BadgeCountPropsShared } from './BadgeCount.types';
+export {
+  BadgeCountSize,
+  type BadgeCountPropsShared,
+} from './BadgeCount.types.js';

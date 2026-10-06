@@ -1,9 +1,9 @@
 import type { KeyValueRowPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
-import type { ButtonIconProps } from '../ButtonIcon/ButtonIcon.types';
-import type { SensitiveTextProps } from '../SensitiveText';
-import type { TextProps } from '../Text/Text.types';
+import type { ButtonIconProps } from '../ButtonIcon/ButtonIcon.types.js';
+import type { SensitiveTextProps } from '../SensitiveText/index.js';
+import type { TextProps } from '../Text/Text.types.js';
 
 export type KeyValueRowProps = KeyValueRowPropsShared &
   Omit<ViewProps, 'children'> & {

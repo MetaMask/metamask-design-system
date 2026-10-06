@@ -1,8 +1,8 @@
 import type { CSSProperties, ReactNode } from 'react';
 
-import type { HelpTextProps } from '../HelpText';
-import type { LabelProps } from '../Label';
-import type { TextFieldProps } from '../TextField';
+import type { HelpTextProps } from '../HelpText/index.js';
+import type { LabelProps } from '../Label/index.js';
+import type { TextFieldProps } from '../TextField/index.js';
 
 /**
  * Props forwarded to the inner `TextField`. Omits every key that

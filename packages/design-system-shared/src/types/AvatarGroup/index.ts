@@ -2,4 +2,4 @@ export {
   AvatarGroupSize,
   AvatarGroupVariant,
   type AvatarGroupPropsShared,
-} from './AvatarGroup.types';
+} from './AvatarGroup.types.js';

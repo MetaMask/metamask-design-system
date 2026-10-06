@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
-import { ModalBody } from './ModalBody';
-import type { ModalBodyProps } from './ModalBody.types';
+import { ModalBody } from './ModalBody.js';
+import type { ModalBodyProps } from './ModalBody.types.js';
 import README from './README.mdx';
 
 const meta: Meta<ModalBodyProps> = {

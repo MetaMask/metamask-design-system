@@ -1,8 +1,8 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import { BottomSheetFooter } from './BottomSheetFooter';
-import { ButtonsAlignment } from './BottomSheetFooter.types';
+import { BottomSheetFooter } from './BottomSheetFooter.js';
+import { ButtonsAlignment } from './BottomSheetFooter.types.js';
 
 describe('BottomSheetFooter', () => {
   it('renders correctly with root testID from ViewProps', () => {

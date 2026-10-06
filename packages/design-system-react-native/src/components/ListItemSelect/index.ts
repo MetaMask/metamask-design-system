@@ -1,2 +1,2 @@
-export { ListItemSelect } from './ListItemSelect';
-export type { ListItemSelectProps } from './ListItemSelect.types';
+export { ListItemSelect } from './ListItemSelect.js';
+export type { ListItemSelectProps } from './ListItemSelect.types.js';

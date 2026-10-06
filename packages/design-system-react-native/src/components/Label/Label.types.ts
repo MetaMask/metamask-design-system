@@ -1,4 +1,4 @@
-import type { TextProps } from '../Text';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * Label component props.

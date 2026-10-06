@@ -2,11 +2,11 @@ import { BannerBaseActionButtonLayout } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Icon, IconName, IconSize } from '../Icon';
-import { Text } from '../Text';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { BannerBase } from './BannerBase';
-import type { BannerBaseProps } from './BannerBase.types';
+import { BannerBase } from './BannerBase.js';
+import type { BannerBaseProps } from './BannerBase.types.js';
 import README from './README.mdx';
 
 const meta: Meta<BannerBaseProps> = {

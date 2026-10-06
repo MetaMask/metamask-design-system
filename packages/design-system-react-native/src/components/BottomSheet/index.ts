@@ -1,6 +1,6 @@
-export { BottomSheet } from './BottomSheet';
+export { BottomSheet } from './BottomSheet.js';
 export type {
   BottomSheetProps,
   BottomSheetRef,
   BottomSheetPostCallback,
-} from './BottomSheet.types';
+} from './BottomSheet.types.js';

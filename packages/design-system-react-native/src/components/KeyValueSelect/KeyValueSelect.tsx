@@ -13,10 +13,10 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import { KeyValueRow } from '../KeyValueRow';
-import { SelectButton } from '../SelectButton';
+import { KeyValueRow } from '../KeyValueRow/index.js';
+import { SelectButton } from '../SelectButton/index.js';
 
-import type { KeyValueSelectProps } from './KeyValueSelect.types';
+import type { KeyValueSelectProps } from './KeyValueSelect.types.js';
 
 const ROOT_TW_CLASS_NAME = 'w-full';
 

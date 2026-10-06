@@ -12,13 +12,13 @@ import { lightTheme } from '@metamask/design-tokens';
 import React from 'react';
 
 // External dependencies.
-import { BannerBase } from '../BannerBase';
-import { IconAlert } from '../IconAlert';
+import { BannerBase } from '../BannerBase/index.js';
+import { IconAlert } from '../IconAlert/index.js';
 
 // Internal dependencies.
-import { TOAST_SEVERITY_ICON_MAP } from './Toast.constants';
-import { ToastSeverity } from './Toast.types';
-import type { ToastProps } from './Toast.types';
+import { TOAST_SEVERITY_ICON_MAP } from './Toast.constants.js';
+import { ToastSeverity } from './Toast.types.js';
+import type { ToastProps } from './Toast.types.js';
 
 const renderSeverityAccessory = ({
   iconAlertProps,

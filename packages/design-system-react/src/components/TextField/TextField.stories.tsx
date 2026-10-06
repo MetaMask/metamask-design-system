@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
 import README from './README.mdx';
-import { TextField } from './TextField';
-import { TextFieldSize, TextFieldType } from './TextField.types';
-import type { TextFieldProps } from './TextField.types';
+import { TextField } from './TextField.js';
+import { TextFieldSize, TextFieldType } from './TextField.types.js';
+import type { TextFieldProps } from './TextField.types.js';
 
 function ControlledTextField(props: TextFieldProps) {
   const [value, setValue] = useState(props.value ?? '');

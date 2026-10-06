@@ -1,6 +1,6 @@
 import { darkTheme, lightTheme } from '@metamask/design-tokens';
 
-import { Theme } from './Theme.types';
+import { Theme } from './Theme.types.js';
 
 /**
  * Helper function to convert a camelCase / PascalCase string to kebab-case.

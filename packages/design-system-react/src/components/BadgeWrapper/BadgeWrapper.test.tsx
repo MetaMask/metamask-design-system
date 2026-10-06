@@ -5,7 +5,7 @@ import {
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { BadgeWrapper } from './BadgeWrapper';
+import { BadgeWrapper } from './BadgeWrapper.js';
 
 describe('BadgeWrapper', () => {
   it('renders the wrapper, anchor, and badge elements', () => {

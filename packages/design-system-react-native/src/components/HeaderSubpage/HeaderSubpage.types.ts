@@ -1,7 +1,7 @@
 import type { HeaderSubpagePropsShared } from '@metamask/design-system-shared';
 
-import type { ButtonIconProps } from '../ButtonIcon';
-import type { ListItemProps } from '../ListItem';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import type { ListItemProps } from '../ListItem/index.js';
 
 /**
  * HeaderSubpage component props.

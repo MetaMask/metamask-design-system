@@ -2,7 +2,7 @@ import { BoxBackgroundColor, IconColor } from '@metamask/design-system-shared';
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { BannerAlert } from './BannerAlert';
+import { BannerAlert } from './BannerAlert.js';
 
 import { BannerAlertSeverity } from '.';
 

@@ -6,7 +6,7 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarIcon } from './AvatarIcon';
+import { AvatarIcon } from './AvatarIcon.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarIcon> = {

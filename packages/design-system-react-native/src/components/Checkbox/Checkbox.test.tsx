@@ -10,9 +10,9 @@ import type {
   PressableStateCallbackType,
 } from 'react-native';
 
-import { createRenderer } from '../../test-utils/createRenderer';
+import { createRenderer } from '../../test-utils/createRenderer.js';
 
-import { Checkbox } from './Checkbox';
+import { Checkbox } from './Checkbox.js';
 
 describe('Checkbox', () => {
   let tw: ReturnType<typeof useTailwind>;

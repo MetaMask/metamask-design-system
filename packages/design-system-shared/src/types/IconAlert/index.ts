@@ -1,4 +1,4 @@
 export {
   IconAlertSeverity,
   type IconAlertPropsShared,
-} from './IconAlert.types';
+} from './IconAlert.types.js';

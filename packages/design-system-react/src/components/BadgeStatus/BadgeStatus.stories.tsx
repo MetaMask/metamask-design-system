@@ -5,8 +5,8 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { BadgeStatus } from './BadgeStatus';
-import type { BadgeStatusProps } from './BadgeStatus.types';
+import { BadgeStatus } from './BadgeStatus.js';
+import type { BadgeStatusProps } from './BadgeStatus.types.js';
 import README from './README.mdx';
 
 const meta: Meta<BadgeStatusProps> = {

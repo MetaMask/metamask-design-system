@@ -2,8 +2,8 @@ import type { TextFieldPropsShared } from '@metamask/design-system-shared';
 import type { Ref } from 'react';
 import type { StyleProp, TextInput, ViewStyle } from 'react-native';
 
-import type { BoxProps } from '../Box/Box.types';
-import type { InputProps } from '../Input/Input.types';
+import type { BoxProps } from '../Box/Box.types.js';
+import type { InputProps } from '../Input/Input.types.js';
 
 /**
  * Additional props merged onto the inner `Input` (`../Input/Input.tsx`).

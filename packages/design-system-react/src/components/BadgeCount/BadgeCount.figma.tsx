@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { BadgeCount } from './BadgeCount';
+import { BadgeCount } from './BadgeCount.js';
 
 import { BadgeCountSize } from '.';
 

@@ -3,9 +3,9 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { IconName } from '../Icon';
+import { IconName } from '../Icon/index.js';
 
-import { Button } from './Button';
+import { Button } from './Button.js';
 
 import { ButtonVariant, ButtonSize } from '.';
 

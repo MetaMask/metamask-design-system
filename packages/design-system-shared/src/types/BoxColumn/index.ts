@@ -1,1 +1,1 @@
-export { type BoxColumnPropsShared } from './BoxColumn.types';
+export { type BoxColumnPropsShared } from './BoxColumn.types.js';

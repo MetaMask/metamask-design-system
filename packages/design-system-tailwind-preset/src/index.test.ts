@@ -1,5 +1,5 @@
-import { colors } from './colors';
-import { shadows } from './shadows';
+import { colors } from './colors.js';
+import { shadows } from './shadows.js';
 
 import tailwindConfig from '.';
 

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Text } from '../Text/index.js';
 
-import { BottomSheetHeader } from './BottomSheetHeader';
-import type { BottomSheetHeaderProps } from './BottomSheetHeader.types';
+import { BottomSheetHeader } from './BottomSheetHeader.js';
+import type { BottomSheetHeaderProps } from './BottomSheetHeader.types.js';
 
 const meta: Meta<BottomSheetHeaderProps> = {
   title: 'Components/BottomSheetHeader',

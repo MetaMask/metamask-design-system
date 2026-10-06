@@ -1,10 +1,10 @@
 import { mergeTwClassName } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Checkbox } from '../Checkbox';
-import { ListItem } from '../ListItem';
+import { Checkbox } from '../Checkbox/index.js';
+import { ListItem } from '../ListItem/index.js';
 
-import type { ListItemMultiSelectProps } from './ListItemMultiSelect.types';
+import type { ListItemMultiSelectProps } from './ListItemMultiSelect.types.js';
 
 const noopChange = () => undefined;
 

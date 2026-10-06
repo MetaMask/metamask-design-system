@@ -7,15 +7,15 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Text, TextColor, TextVariant, FontWeight } from '../Text';
+import { Text, TextColor, TextVariant, FontWeight } from '../Text/index.js';
 
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
-} from './AvatarBase.constants';
-import type { AvatarBaseProps } from './AvatarBase.types';
+} from './AvatarBase.constants.js';
+import type { AvatarBaseProps } from './AvatarBase.types.js';
 
 export const AvatarBase = ({
   children,

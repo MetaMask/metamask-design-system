@@ -1,9 +1,9 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { ButtonBase } from '../ButtonBase';
+import { ButtonBase } from '../ButtonBase/index.js';
 
-import type { ButtonFilterProps } from './ButtonFilter.types';
+import type { ButtonFilterProps } from './ButtonFilter.types.js';
 
 /**
  * @deprecated Use `FilterButton` instead. This component will be removed

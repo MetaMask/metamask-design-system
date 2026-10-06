@@ -2,8 +2,8 @@ import { BadgeCountSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { BadgeCount } from './BadgeCount';
-import type { BadgeCountProps } from './BadgeCount.types';
+import { BadgeCount } from './BadgeCount.js';
+import type { BadgeCountProps } from './BadgeCount.types.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof BadgeCount> = {

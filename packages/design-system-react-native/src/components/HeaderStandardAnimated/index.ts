@@ -1,6 +1,6 @@
-export { HeaderStandardAnimated } from './HeaderStandardAnimated';
-export { useHeaderStandardAnimated } from './useHeaderStandardAnimated';
+export { HeaderStandardAnimated } from './HeaderStandardAnimated.js';
+export { useHeaderStandardAnimated } from './useHeaderStandardAnimated.js';
 export type {
   HeaderStandardAnimatedProps,
   UseHeaderStandardAnimatedReturn,
-} from './HeaderStandardAnimated.types';
+} from './HeaderStandardAnimated.types.js';

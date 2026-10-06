@@ -1,1 +1,1 @@
-export { type TextOrChildrenPropsShared } from './TextOrChildren.types';
+export { type TextOrChildrenPropsShared } from './TextOrChildren.types.js';

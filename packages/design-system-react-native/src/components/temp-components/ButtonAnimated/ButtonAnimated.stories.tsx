@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Text, TextColor, TextVariant, FontWeight } from '../../Text';
+import { Text, TextColor, TextVariant, FontWeight } from '../../Text/index.js';
 
-import { ButtonAnimated } from './ButtonAnimated';
-import type { ButtonAnimatedProps } from './ButtonAnimated.types';
+import { ButtonAnimated } from './ButtonAnimated.js';
+import type { ButtonAnimatedProps } from './ButtonAnimated.types.js';
 
 const meta: Meta<ButtonAnimatedProps> = {
   title: 'Temp Components/ButtonAnimated',

@@ -4,7 +4,7 @@ import figma from '@figma/code-connect';
 import { IconName } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { AvatarIcon } from './AvatarIcon';
+import { AvatarIcon } from './AvatarIcon.js';
 
 import { AvatarIconSize, AvatarIconSeverity } from '.';
 

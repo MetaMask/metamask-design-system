@@ -4,7 +4,7 @@ import figma from '@figma/code-connect';
 import { IconName, TagSeverity } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Tag } from './Tag';
+import { Tag } from './Tag.js';
 
 /**
  * React implementation of Tag (`figma.connect` for Figma Dev Mode).

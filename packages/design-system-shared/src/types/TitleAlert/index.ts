@@ -1,1 +1,1 @@
-export type { TitleAlertPropsShared } from './TitleAlert.types';
+export type { TitleAlertPropsShared } from './TitleAlert.types.js';

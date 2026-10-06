@@ -1,2 +1,2 @@
-export { ListItemMultiSelect } from './ListItemMultiSelect';
-export type { ListItemMultiSelectProps } from './ListItemMultiSelect.types';
+export { ListItemMultiSelect } from './ListItemMultiSelect.js';
+export type { ListItemMultiSelectProps } from './ListItemMultiSelect.types.js';

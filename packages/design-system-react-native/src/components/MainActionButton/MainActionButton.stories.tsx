@@ -1,11 +1,11 @@
 import { BoxFlexDirection } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import { Box } from '../Box';
-import { IconName } from '../Icon';
+import { Box } from '../Box/index.js';
+import { IconName } from '../Icon/index.js';
 
-import { MainActionButton } from './MainActionButton';
-import type { MainActionButtonProps } from './MainActionButton.types';
+import { MainActionButton } from './MainActionButton.js';
+import type { MainActionButtonProps } from './MainActionButton.types.js';
 
 const meta: Meta<MainActionButtonProps> = {
   title: 'Components/MainActionButton',

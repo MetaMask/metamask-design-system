@@ -1,1 +1,1 @@
-export { type FilterButtonGroupPropsShared } from './FilterButtonGroup.types';
+export { type FilterButtonGroupPropsShared } from './FilterButtonGroup.types.js';

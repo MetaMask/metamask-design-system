@@ -2,13 +2,13 @@ import { ButtonVariant, TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
-import { Box, BoxFlexDirection } from '../Box';
-import { Button } from '../Button';
-import { Text } from '../Text';
+import { Box, BoxFlexDirection } from '../Box/index.js';
+import { Button } from '../Button/index.js';
+import { Text } from '../Text/index.js';
 
 import README from './README.mdx';
-import { Skeleton } from './Skeleton';
-import type { SkeletonProps } from './Skeleton.types';
+import { Skeleton } from './Skeleton.js';
+import type { SkeletonProps } from './Skeleton.types.js';
 
 const meta: Meta<SkeletonProps> = {
   title: 'React Components/Skeleton',

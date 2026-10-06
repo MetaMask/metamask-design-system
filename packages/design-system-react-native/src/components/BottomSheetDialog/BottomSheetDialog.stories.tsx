@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useRef } from 'react';
 import { View, Pressable } from 'react-native';
 
-import { Box } from '../Box';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Text } from '../Text/index.js';
 
-import { BottomSheetDialog } from './BottomSheetDialog';
+import { BottomSheetDialog } from './BottomSheetDialog.js';
 import type {
   BottomSheetDialogProps,
   BottomSheetDialogRef,
-} from './BottomSheetDialog.types';
+} from './BottomSheetDialog.types.js';
 
 const meta: Meta<BottomSheetDialogProps> = {
   title: 'Components/BottomSheetDialog',

@@ -7,7 +7,7 @@ import React from 'react';
 import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
-import type { BadgeWrapperProps } from './BadgeWrapper.types';
+import type { BadgeWrapperProps } from './BadgeWrapper.types.js';
 
 const CIRCULAR_ANCHOR_EDGE_INSET: DimensionValue = '7%';
 const RECTANGULAR_ANCHOR_EDGE_INSET: DimensionValue = '11%';

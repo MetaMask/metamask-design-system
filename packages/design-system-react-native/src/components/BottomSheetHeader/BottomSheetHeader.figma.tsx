@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { BottomSheetHeader } from './BottomSheetHeader';
+import { BottomSheetHeader } from './BottomSheetHeader.js';
 
 figma.connect(
   BottomSheetHeader,

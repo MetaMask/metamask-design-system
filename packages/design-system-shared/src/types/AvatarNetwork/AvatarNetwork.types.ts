@@ -1,4 +1,4 @@
-import { AvatarBaseSize } from '../AvatarBase/AvatarBase.types';
+import { AvatarBaseSize } from '../AvatarBase/AvatarBase.types.js';
 
 export const AvatarNetworkSize = AvatarBaseSize;
 export type AvatarNetworkSize = AvatarBaseSize;

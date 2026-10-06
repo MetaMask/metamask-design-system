@@ -1,10 +1,10 @@
 import { IconSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Icon } from '../Icon';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Icon } from '../Icon/index.js';
 
-import type { BadgeIconProps } from './BadgeIcon.types';
+import type { BadgeIconProps } from './BadgeIcon.types.js';
 
 export const BadgeIcon = forwardRef<HTMLDivElement, BadgeIconProps>(
   ({ iconName, iconProps, className = '', style, ...props }, ref) => {

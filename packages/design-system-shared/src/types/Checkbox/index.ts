@@ -1,1 +1,1 @@
-export { type CheckboxPropsShared } from './Checkbox.types';
+export { type CheckboxPropsShared } from './Checkbox.types.js';

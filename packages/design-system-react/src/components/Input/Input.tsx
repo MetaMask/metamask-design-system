@@ -1,13 +1,13 @@
 import { TextVariant } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 import {
   TWCLASSMAP_TEXT_VARIANT_FONTSTYLE,
   TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
-} from '../Text/Text.constants';
+} from '../Text/Text.constants.js';
 
-import type { InputProps } from './Input.types';
+import type { InputProps } from './Input.types.js';
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (

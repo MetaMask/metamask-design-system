@@ -8,9 +8,9 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import type { ReactTestInstance } from 'react-test-renderer';
 
 // Internal dependencies.
-import { createRenderer } from '../../test-utils/createRenderer';
+import { createRenderer } from '../../test-utils/createRenderer.js';
 
-import { SectionHeader } from './SectionHeader';
+import { SectionHeader } from './SectionHeader.js';
 
 const ROOT_TEST_ID = 'section-header-root';
 const TITLE_ROW_TEST_ID = 'section-header-title-row';

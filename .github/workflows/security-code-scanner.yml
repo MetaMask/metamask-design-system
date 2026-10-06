@@ -33,6 +33,7 @@ jobs:
             '**/*.test.ts*'
             '**/fixtures/'
             '**/jest.config.js'
+            '**/jest.config.cjs'
             '**/jest.environment.js'
             '**/mocks/'
             '**/test*/'

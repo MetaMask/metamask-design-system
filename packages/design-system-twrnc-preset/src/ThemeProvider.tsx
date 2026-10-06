@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { create } from 'twrnc';
 
-import { generateTailwindConfig } from './tailwind.config';
-import type { Theme } from './Theme.types';
-import type { ThemeContextProps } from './ThemeContext';
-import { ThemeContext } from './ThemeContext';
+import { generateTailwindConfig } from './tailwind.config.js';
+import type { Theme } from './Theme.types.js';
+import type { ThemeContextProps } from './ThemeContext.js';
+import { ThemeContext } from './ThemeContext.js';
 
 /**
  * Theme provider component that wraps child components with theme context

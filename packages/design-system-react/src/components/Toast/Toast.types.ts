@@ -1,7 +1,7 @@
 import type { ToastPropsShared } from '@metamask/design-system-shared';
 
-import type { BannerBaseProps } from '../BannerBase';
-import type { IconProps } from '../Icon';
+import type { BannerBaseProps } from '../BannerBase/index.js';
+import type { IconProps } from '../Icon/index.js';
 
 type ToastCloseButtonProps = Omit<
   NonNullable<BannerBaseProps['closeButtonProps']>,

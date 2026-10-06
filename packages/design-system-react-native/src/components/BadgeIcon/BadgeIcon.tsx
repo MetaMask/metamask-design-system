@@ -3,9 +3,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Icon } from '../Icon';
+import { Icon } from '../Icon/index.js';
 
-import type { BadgeIconProps } from './BadgeIcon.types';
+import type { BadgeIconProps } from './BadgeIcon.types.js';
 
 export const BadgeIcon = ({
   iconName,

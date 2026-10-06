@@ -12,15 +12,15 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import { BottomSheetDialog } from '../BottomSheetDialog';
-import type { BottomSheetDialogRef } from '../BottomSheetDialog';
-import { BottomSheetOverlay } from '../BottomSheetOverlay/BottomSheetOverlay';
+import { BottomSheetDialog } from '../BottomSheetDialog/index.js';
+import type { BottomSheetDialogRef } from '../BottomSheetDialog/index.js';
+import { BottomSheetOverlay } from '../BottomSheetOverlay/BottomSheetOverlay.js';
 
 import type {
   BottomSheetPostCallback,
   BottomSheetProps,
   BottomSheetRef,
-} from './BottomSheet.types';
+} from './BottomSheet.types.js';
 
 export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
   (

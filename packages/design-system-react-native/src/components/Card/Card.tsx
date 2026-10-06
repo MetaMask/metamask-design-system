@@ -8,7 +8,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import type { CardProps } from './Card.types';
+import type { CardProps } from './Card.types.js';
 
 export const Card: React.FC<CardProps> = ({
   children,

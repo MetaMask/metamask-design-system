@@ -2,10 +2,10 @@ import { BoxFlexDirection } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 
-import { Box } from '../Box';
-import { Text, TextVariant } from '../Text';
+import { Box } from '../Box/index.js';
+import { Text, TextVariant } from '../Text/index.js';
 
-import type { HeaderSearchProps } from './HeaderSearch.types';
+import type { HeaderSearchProps } from './HeaderSearch.types.js';
 
 import { HeaderSearch, HeaderSearchVariant } from '.';
 

@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box } from '../Box';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Box } from '../Box/index.js';
 
-import type { ModalBodyProps } from './ModalBody.types';
+import type { ModalBodyProps } from './ModalBody.types.js';
 
 export const ModalBody = forwardRef<HTMLDivElement, ModalBodyProps>(
   ({ className, children, tabIndex = 0, ...props }, ref) => (

@@ -3,5 +3,5 @@ export {
   SelectButtonEndArrow,
   SelectButtonVariant,
 } from '@metamask/design-system-shared';
-export { SelectButton } from './SelectButton';
-export type { SelectButtonProps } from './SelectButton.types';
+export { SelectButton } from './SelectButton.js';
+export type { SelectButtonProps } from './SelectButton.types.js';

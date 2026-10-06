@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { shadows } from './shadows';
+import { shadows } from './shadows.js';
 
 const jsonLightThemeTokens = require('../../../figma/lightTheme.json');
 const designTokens = require('../../../figma/tokens.json');

@@ -11,8 +11,8 @@ import { Text as RNText } from 'react-native';
 import {
   TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTWEIGHT,
-} from './Text.constants';
-import type { TextProps } from './Text.types';
+} from './Text.constants.js';
+import type { TextProps } from './Text.types.js';
 
 export const Text: React.FC<TextProps> = ({
   variant = TextVariant.BodyMd,

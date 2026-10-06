@@ -6,10 +6,10 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
+import { Box } from '../Box/index.js';
 
-import { HelpText } from './HelpText';
-import type { HelpTextProps } from './HelpText.types';
+import { HelpText } from './HelpText.js';
+import type { HelpTextProps } from './HelpText.types.js';
 
 const meta: Meta<HelpTextProps> = {
   title: 'Components/HelpText',

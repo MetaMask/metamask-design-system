@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { TextField } from './TextField';
-import { TextFieldSize, TextFieldType } from './TextField.types';
+import { TextField } from './TextField.js';
+import { TextFieldSize, TextFieldType } from './TextField.types.js';
 
 const ROOT_TEST_ID = 'textfield';
 const noop = () => undefined;

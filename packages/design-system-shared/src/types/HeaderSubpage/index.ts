@@ -1,1 +1,1 @@
-export { type HeaderSubpagePropsShared } from './HeaderSubpage.types';
+export { type HeaderSubpagePropsShared } from './HeaderSubpage.types.js';

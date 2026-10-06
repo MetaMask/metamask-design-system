@@ -1,9 +1,9 @@
 import { SensitiveTextLength } from '@metamask/design-system-shared';
 import React, { useMemo } from 'react';
 
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
-import type { SensitiveTextProps } from './SensitiveText.types';
+import type { SensitiveTextProps } from './SensitiveText.types.js';
 
 const isValidLength = (value: string): boolean => {
   const num = Number(value);

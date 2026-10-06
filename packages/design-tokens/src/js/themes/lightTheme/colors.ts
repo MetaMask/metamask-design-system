@@ -1,5 +1,5 @@
-import { brandColor } from '../../brandColor';
-import type { ThemeColors } from '../types';
+import { brandColor } from '../../brandColor/index.js';
+import type { ThemeColors } from '../types.js';
 
 export const colors: ThemeColors = {
   background: {

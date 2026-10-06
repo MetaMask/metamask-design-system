@@ -1,4 +1,4 @@
-import type { BottomSheetDialogProps } from '../BottomSheetDialog/BottomSheetDialog.types';
+import type { BottomSheetDialogProps } from '../BottomSheetDialog/BottomSheetDialog.types.js';
 
 /**
  * BottomSheet component props.

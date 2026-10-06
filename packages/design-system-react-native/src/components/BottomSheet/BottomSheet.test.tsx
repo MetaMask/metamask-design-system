@@ -2,8 +2,8 @@ import { act, fireEvent, render } from '@testing-library/react-native';
 import React, { useEffect, useRef } from 'react';
 import { BackHandler, Platform, TouchableOpacity, View } from 'react-native';
 
-import { BottomSheet } from './BottomSheet';
-import type { BottomSheetRef } from './BottomSheet.types';
+import { BottomSheet } from './BottomSheet.js';
+import type { BottomSheetRef } from './BottomSheet.types.js';
 
 jest.mock('@metamask/design-system-twrnc-preset', () => ({
   useTailwind: () => ({

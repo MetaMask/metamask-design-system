@@ -1,6 +1,6 @@
-import { KeyValueRowVariant } from '../KeyValueRow/KeyValueRow.types';
-import type { KeyValueRowPropsShared } from '../KeyValueRow/KeyValueRow.types';
-import type { SelectButtonPropsShared } from '../SelectButton/SelectButton.types';
+import { KeyValueRowVariant } from '../KeyValueRow/KeyValueRow.types.js';
+import type { KeyValueRowPropsShared } from '../KeyValueRow/KeyValueRow.types.js';
+import type { SelectButtonPropsShared } from '../SelectButton/SelectButton.types.js';
 
 /**
  * KeyValueSelect row height variant (ADR-0003).

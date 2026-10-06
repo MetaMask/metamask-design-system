@@ -3,7 +3,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import { ScrollView } from 'react-native';
 
-import type { FilterButtonGroupProps } from './FilterButtonGroup.types';
+import type { FilterButtonGroupProps } from './FilterButtonGroup.types.js';
 
 export const FilterButtonGroup = ({
   value,

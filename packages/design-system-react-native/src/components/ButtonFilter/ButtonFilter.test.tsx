@@ -2,7 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { ButtonFilter } from './ButtonFilter';
+import { ButtonFilter } from './ButtonFilter.js';
 
 describe('ButtonFilter', () => {
   let tw: ReturnType<typeof useTailwind>;

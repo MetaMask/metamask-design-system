@@ -1,4 +1,4 @@
-import type { TextVariant } from '../Text/Text.types';
+import type { TextVariant } from '../Text/Text.types.js';
 
 /**
  * Input component shared props (ADR-0004)

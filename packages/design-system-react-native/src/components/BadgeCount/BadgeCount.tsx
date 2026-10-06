@@ -6,13 +6,13 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Text, TextColor, FontWeight } from '../Text';
+import { Text, TextColor, FontWeight } from '../Text/index.js';
 
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
-} from './BadgeCount.constants';
-import type { BadgeCountProps } from './BadgeCount.types';
+} from './BadgeCount.constants.js';
+import type { BadgeCountProps } from './BadgeCount.types.js';
 
 export const BadgeCount = ({
   size = BadgeCountSize.Md,

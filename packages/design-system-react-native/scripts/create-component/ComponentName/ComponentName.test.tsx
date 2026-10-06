@@ -3,7 +3,7 @@ import { renderHook, render } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { ComponentName } from './ComponentName';
+import { ComponentName } from './ComponentName.js';
 
 describe('ComponentName', () => {
   let tw: ReturnType<typeof useTailwind>;

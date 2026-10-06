@@ -6,7 +6,7 @@ import {
 import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 
 import {
   TWCLASSMAP_TEXT_VARIANT_FONTSTYLE,
@@ -15,8 +15,8 @@ import {
   TWCLASSMAP_TEXT_FONTSTYLE,
   TWCLASSMAP_TEXT_FONTWEIGHT,
   MAP_TEXT_VARIANT_TAG,
-} from './Text.constants';
-import type { TextProps } from './Text.types';
+} from './Text.constants.js';
+import type { TextProps } from './Text.types.js';
 
 export const Text: React.FC<TextProps> = ({
   variant = TextVariant.BodyMd,

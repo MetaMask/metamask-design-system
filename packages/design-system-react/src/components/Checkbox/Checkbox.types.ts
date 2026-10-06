@@ -1,8 +1,8 @@
 import type { CheckboxPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { IconProps } from '../Icon';
-import type { TextProps } from '../Text';
+import type { IconProps } from '../Icon/index.js';
+import type { TextProps } from '../Text/index.js';
 
 export type CheckboxProps = Omit<
   ComponentProps<'label'>,

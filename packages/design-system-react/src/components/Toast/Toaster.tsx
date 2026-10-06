@@ -8,19 +8,19 @@ import React, {
   useState,
 } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 
-import { Toast } from './Toast';
 import {
   TOAST_ANIMATION_DURATION,
   TOAST_VISIBILITY_DURATION,
-} from './Toast.constants';
+} from './Toast.constants.js';
+import { Toast } from './Toast.js';
 import type {
   ToastOptions,
   ToastProps,
   ToasterProps,
   ToasterRef,
-} from './Toast.types';
+} from './Toast.types.js';
 
 type ToastStoreListener = (options: ToastOptions | undefined) => void;
 

@@ -3,7 +3,7 @@
 import * as brandColors from '../../../figma/brandColors.json';
 import * as lightTheme from '../../../figma/lightTheme.json';
 
-import { colors as definedColors } from './colors';
+import { colors as definedColors } from './colors.js';
 
 type ColorDetails = {
   value: string;

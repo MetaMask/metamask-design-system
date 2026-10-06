@@ -10,7 +10,7 @@ const baseConfig = require('../../jest.config.packages');
 
 const displayName = path.basename(__dirname);
 
-module.exports = merge(baseConfig, {
+const config = merge(baseConfig, {
   // The display name when running multiple projects
   displayName,
 
@@ -105,8 +105,15 @@ module.exports = merge(baseConfig, {
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
-    '\\.svg$': '<rootDir>/__mocks__/svgMock.js',
+    '\\.svg$': '<rootDir>/__mocks__/svgMock.cjs',
   },
   setupFiles: ['react-native-gesture-handler/jestSetup'],
-  setupFilesAfterEnv: ['./jest.setup.js'],
+  setupFilesAfterEnv: ['./jest.setup.cjs'],
 });
+
+// Replace the shared ts-jest transform. This package compiles tests with Babel.
+config.transform = {
+  '^.+\\.(cjs|js|jsx|ts|tsx)$': 'babel-jest',
+};
+
+module.exports = config;

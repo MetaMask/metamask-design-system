@@ -1,2 +1,2 @@
-export { BadgeNetwork } from './BadgeNetwork';
-export type { BadgeNetworkProps } from './BadgeNetwork.types';
+export { BadgeNetwork } from './BadgeNetwork.js';
+export type { BadgeNetworkProps } from './BadgeNetwork.types.js';

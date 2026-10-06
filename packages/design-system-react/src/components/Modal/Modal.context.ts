@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-import type { ModalProps } from './Modal.types';
+import type { ModalProps } from './Modal.types.js';
 
 export type ModalContextType = Omit<ModalProps, 'children'>;
 

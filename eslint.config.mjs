@@ -29,8 +29,9 @@ const config = createConfig([
       'packages/design-system-react/src/components/Icon/icons/*.tsx',
       'packages/design-system-react/src/components/Icon/icons/index.ts',
       // design system react native
-      'packages/design-system-react-native/metro.config.js',
-      'packages/design-system-react-native/jest.setup.js',
+      'packages/design-system-react-native/metro.config.cjs',
+      'packages/design-system-react-native/jest.setup.cjs',
+      'packages/*/scripts/create-component/ComponentName/**',
       'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.test.tsx',
       'packages/design-system-react-native/src/components/temp-components/Blockies/Blockies.tsx',
       'packages/design-system-react-native/src/components/temp-components/ButtonAnimated/ButtonAnimated.tsx',
@@ -216,6 +217,29 @@ const config = createConfig([
     files: ['**/*.mjs'],
     languageOptions: {
       sourceType: 'module',
+    },
+  },
+  {
+    files: ['packages/**/*.{ts,tsx}'],
+    rules: {
+      // Directory imports need `/index.js` so Node16 can resolve the ESM build.
+      'import-x/no-useless-path-segments': ['error', { noUselessIndex: false }],
+      // Node16 loads the emit as `.js`, so TypeScript source imports use a `.js`
+      // specifier. Allow that specifier, and keep `.ts` / `.tsx` specifiers forbidden.
+      'import-x/extensions': [
+        'error',
+        'never',
+        {
+          pattern: {
+            js: 'always',
+            json: 'always',
+            ts: 'never',
+            tsx: 'never',
+          },
+          // Package subpaths such as `react-native-reanimated/mock` stay extensionless.
+          ignorePackages: true,
+        },
+      ],
     },
   },
   {

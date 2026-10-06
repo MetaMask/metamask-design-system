@@ -3,8 +3,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { ButtonTertiary } from './ButtonTertiary';
-import type { ButtonTertiaryProps } from './ButtonTertiary.types';
+import { ButtonTertiary } from './ButtonTertiary.js';
+import type { ButtonTertiaryProps } from './ButtonTertiary.types.js';
 
 const meta: Meta<ButtonTertiaryProps> = {
   title: 'Components/Button/variants/ButtonTertiary',

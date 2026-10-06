@@ -2,8 +2,8 @@ import { TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
-import { Input } from './Input';
-import type { InputProps } from './Input.types';
+import { Input } from './Input.js';
+import type { InputProps } from './Input.types.js';
 import README from './README.mdx';
 
 function ControlledInput(props: InputProps) {

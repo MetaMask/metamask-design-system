@@ -4,9 +4,9 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef, useState } from 'react';
 
-import { AvatarBase } from '../AvatarBase';
+import { AvatarBase } from '../AvatarBase/index.js';
 
-import type { AvatarTokenProps } from './AvatarToken.types';
+import type { AvatarTokenProps } from './AvatarToken.types.js';
 
 export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
   (

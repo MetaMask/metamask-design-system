@@ -3,10 +3,10 @@ import { render, fireEvent, act } from '@testing-library/react-native';
 import React from 'react';
 
 // External dependencies.
-import { Text, IconName } from '..';
+import { Text, IconName } from '../index.js';
 
 // Internal dependencies.
-import { HeaderBase } from './HeaderBase';
+import { HeaderBase } from './HeaderBase.js';
 
 describe('HeaderBase', () => {
   beforeEach(() => {

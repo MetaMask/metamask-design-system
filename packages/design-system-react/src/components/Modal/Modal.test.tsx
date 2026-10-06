@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { Modal } from './Modal';
-import { useModalContext } from './Modal.context';
+import { useModalContext } from './Modal.context.js';
+import { Modal } from './Modal.js';
 
 describe('Modal', () => {
   it('renders children inside a portal at document.body when isOpen is true', () => {

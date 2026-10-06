@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { ButtonBase } from '../ButtonBase';
+import { twMerge } from '../../utils/tw-merge.js';
+import { ButtonBase } from '../ButtonBase/index.js';
 
-import type { ButtonFilterProps } from './ButtonFilter.types';
+import type { ButtonFilterProps } from './ButtonFilter.types.js';
 
 /**
  * @deprecated Use `FilterButton` instead. This component will be removed

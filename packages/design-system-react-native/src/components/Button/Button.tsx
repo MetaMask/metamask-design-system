@@ -1,10 +1,10 @@
 import { ButtonVariant } from '@metamask/design-system-shared';
 import React from 'react';
 
-import type { ButtonProps } from './Button.types';
-import { ButtonPrimary } from './variants/ButtonPrimary';
-import { ButtonSecondary } from './variants/ButtonSecondary';
-import { ButtonTertiary } from './variants/ButtonTertiary';
+import type { ButtonProps } from './Button.types.js';
+import { ButtonPrimary } from './variants/ButtonPrimary/index.js';
+import { ButtonSecondary } from './variants/ButtonSecondary/index.js';
+import { ButtonTertiary } from './variants/ButtonTertiary/index.js';
 
 export const Button = (buttonProps: ButtonProps) => {
   const { variant = ButtonVariant.Primary, ...restProps } = buttonProps;

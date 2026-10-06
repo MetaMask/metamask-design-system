@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { ModalFocus } from './ModalFocus';
+import { ModalFocus } from './ModalFocus.js';
 
 describe('ModalFocus', () => {
   it('renders children inside the focus trap', () => {

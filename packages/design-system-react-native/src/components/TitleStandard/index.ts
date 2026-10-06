@@ -1,2 +1,2 @@
-export { TitleStandard } from './TitleStandard';
-export type { TitleStandardProps } from './TitleStandard.types';
+export { TitleStandard } from './TitleStandard.js';
+export type { TitleStandardProps } from './TitleStandard.types.js';

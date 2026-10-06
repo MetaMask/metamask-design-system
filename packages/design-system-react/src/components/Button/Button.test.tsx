@@ -2,7 +2,7 @@ import { ButtonVariant, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { Button } from './Button';
+import { Button } from './Button.js';
 
 describe('Button', () => {
   describe('Variants', () => {

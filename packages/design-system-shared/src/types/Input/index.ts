@@ -1,1 +1,1 @@
-export { type InputPropsShared } from './Input.types';
+export { type InputPropsShared } from './Input.types.js';

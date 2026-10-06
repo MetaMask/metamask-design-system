@@ -3,10 +3,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants.js';
 
-import { IconAlert } from './IconAlert';
-import { ICON_ALERT_SEVERITY_MAP } from './IconAlert.constants';
+import { ICON_ALERT_SEVERITY_MAP } from './IconAlert.constants.js';
+import { IconAlert } from './IconAlert.js';
 
 type IconAlertSeverityUnion =
   (typeof IconAlertSeverity)[keyof typeof IconAlertSeverity];

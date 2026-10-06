@@ -7,11 +7,11 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
 
-import { Box } from '../Box';
-import { Icon, IconName, IconSize } from '../Icon';
+import { Box } from '../Box/index.js';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
 
-import { FilterButton } from './FilterButton';
-import type { FilterButtonProps } from './FilterButton.types';
+import { FilterButton } from './FilterButton.js';
+import type { FilterButtonProps } from './FilterButton.types.js';
 
 const noopPress = () => undefined;
 

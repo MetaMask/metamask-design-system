@@ -1,7 +1,7 @@
 import type { TextAreaPropsShared } from '@metamask/design-system-shared';
 import type { ChangeEvent, ComponentPropsWithoutRef, FocusEvent } from 'react';
 
-import type { TextAreaResize } from './TextArea.constants';
+import type { TextAreaResize } from './TextArea.constants.js';
 
 /**
  * TextArea component props (React platform-specific)

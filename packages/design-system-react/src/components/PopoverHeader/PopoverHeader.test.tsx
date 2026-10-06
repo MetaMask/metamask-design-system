@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { PopoverHeader } from './PopoverHeader';
+import { PopoverHeader } from './PopoverHeader.js';
 
 describe('PopoverHeader', () => {
   it('renders without crashing', () => {

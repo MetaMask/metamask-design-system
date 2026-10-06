@@ -3,9 +3,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { TextVariant, TextColor } from '../Text';
+import { TextVariant, TextColor } from '../Text/index.js';
 
-import { SensitiveText } from './SensitiveText';
+import { SensitiveText } from './SensitiveText.js';
 
 describe('SensitiveText', () => {
   it('renders correctly', () => {

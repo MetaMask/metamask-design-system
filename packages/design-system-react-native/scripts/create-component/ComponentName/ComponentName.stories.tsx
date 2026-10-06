@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { ComponentName } from './ComponentName';
+import { ComponentName } from './ComponentName.js';
 
 const meta: Meta<typeof ComponentName> = {
   title: 'Components/ComponentName',

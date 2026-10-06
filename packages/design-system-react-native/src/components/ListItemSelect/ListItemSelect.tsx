@@ -1,10 +1,10 @@
 import { mergeTwClassName } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Icon, IconColor, IconName, IconSize } from '../Icon';
-import { ListItem } from '../ListItem';
+import { Icon, IconColor, IconName, IconSize } from '../Icon/index.js';
+import { ListItem } from '../ListItem/index.js';
 
-import type { ListItemSelectProps } from './ListItemSelect.types';
+import type { ListItemSelectProps } from './ListItemSelect.types.js';
 
 export const ListItemSelect = ({
   isSelected,

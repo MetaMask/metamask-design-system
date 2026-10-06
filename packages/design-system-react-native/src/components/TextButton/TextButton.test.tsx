@@ -3,7 +3,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { TextButton } from './TextButton';
+import { TextButton } from './TextButton.js';
 
 const noopPress = () => undefined;
 

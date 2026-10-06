@@ -5,13 +5,13 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { AvatarBase } from '../AvatarBase';
-import { Blockies } from '../temp-components/Blockies';
-import { Jazzicon } from '../temp-components/Jazzicon';
-import { Maskicon } from '../temp-components/Maskicon';
+import { AvatarBase } from '../AvatarBase/index.js';
+import { Blockies } from '../temp-components/Blockies/index.js';
+import { Jazzicon } from '../temp-components/Jazzicon/index.js';
+import { Maskicon } from '../temp-components/Maskicon/index.js';
 
-import { MAP_AVATARACCOUNT_SIZE_SIZENUMBER } from './AvatarAccount.constants';
-import type { AvatarAccountProps } from './AvatarAccount.types';
+import { MAP_AVATARACCOUNT_SIZE_SIZENUMBER } from './AvatarAccount.constants.js';
+import type { AvatarAccountProps } from './AvatarAccount.types.js';
 
 export const AvatarAccount = forwardRef<HTMLDivElement, AvatarAccountProps>(
   (

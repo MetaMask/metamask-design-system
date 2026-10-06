@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box, BoxBackgroundColor } from '../Box';
-import { Icon, IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
+import { Box, BoxBackgroundColor } from '../Box/index.js';
+import { Icon, IconName } from '../Icon/index.js';
+import { Text, TextVariant } from '../Text/index.js';
 
-import { ActionListItem } from './ActionListItem';
-import type { ActionListItemProps } from './ActionListItem.types';
+import { ActionListItem } from './ActionListItem.js';
+import type { ActionListItemProps } from './ActionListItem.types.js';
 
 const meta: Meta<ActionListItemProps> = {
   title: 'Components/ActionListItem',

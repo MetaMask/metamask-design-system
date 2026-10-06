@@ -1,1 +1,1 @@
-export { TagSeverity, type TagPropsShared } from './Tag.types';
+export { TagSeverity, type TagPropsShared } from './Tag.types.js';

@@ -1,4 +1,4 @@
-import type { BannerBasePropsShared } from '../BannerBase';
+import type { BannerBasePropsShared } from '../BannerBase/index.js';
 
 /**
  * BannerAlert severity variants.

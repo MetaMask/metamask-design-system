@@ -3,10 +3,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { useState } from 'react';
 
-import { FilterButton } from '../FilterButton';
+import { FilterButton } from '../FilterButton/index.js';
 
-import { SegmentedControl } from './SegmentedControl';
-import type { SegmentedControlProps } from './SegmentedControl.types';
+import { SegmentedControl } from './SegmentedControl.js';
+import type { SegmentedControlProps } from './SegmentedControl.types.js';
 
 const GROUP_TEST_ID = 'segmented-control';
 const FILTER_A_TEST_ID = 'filter-a';

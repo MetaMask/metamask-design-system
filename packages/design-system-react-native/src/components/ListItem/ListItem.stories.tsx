@@ -1,13 +1,13 @@
 import { ContentVariant, TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
-import { Box } from '../Box';
-import { Icon, IconName } from '../Icon';
-import { Text } from '../Text';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev.js';
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken/index.js';
+import { Box } from '../Box/index.js';
+import { Icon, IconName } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import type { ListItemProps } from './ListItem.types';
+import type { ListItemProps } from './ListItem.types.js';
 
 import { ListItem } from '.';
 

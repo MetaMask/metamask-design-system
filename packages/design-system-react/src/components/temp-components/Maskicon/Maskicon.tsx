@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import type { MaskiconProps } from './Maskicon.types';
-import { getMaskiconSVG } from './Maskicon.utilities';
+import type { MaskiconProps } from './Maskicon.types.js';
+import { getMaskiconSVG } from './Maskicon.utilities.js';
 
 export const Maskicon = ({
   address,
