@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import type { IconName } from '../Icon';
+import type { IconName } from '../Icon/index.js';
 
 /**
  * SectionHeader component shared props (ADR-0004).

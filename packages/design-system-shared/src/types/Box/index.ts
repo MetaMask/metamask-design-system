@@ -8,4 +8,4 @@ export {
   type BoxSpacing,
   type BoxBorderWidth,
   type BoxPropsShared,
-} from './Box.types';
+} from './Box.types.js';

@@ -10,7 +10,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import type { TextStyle } from 'react-native';
 
-import { Input } from './Input';
+import { Input } from './Input.js';
 
 const TEST_ID = 'input';
 

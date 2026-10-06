@@ -1,7 +1,7 @@
 export { KeyValueSelectVariant } from '@metamask/design-system-shared';
-export { KeyValueSelect } from './KeyValueSelect';
+export { KeyValueSelect } from './KeyValueSelect.js';
 export type {
   KeyValueSelectKeyValueRowProps,
   KeyValueSelectProps,
   KeyValueSelectSelectButtonProps,
-} from './KeyValueSelect.types';
+} from './KeyValueSelect.types.js';

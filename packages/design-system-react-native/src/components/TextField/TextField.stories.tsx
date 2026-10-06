@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
 
-import { Box } from '../Box';
-import { Icon, IconName, IconSize } from '../Icon';
+import { Box } from '../Box/index.js';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
 
-import { TextField } from './TextField';
-import type { TextFieldProps } from './TextField.types';
+import { TextField } from './TextField.js';
+import type { TextFieldProps } from './TextField.types.js';
 
 function ControlledTextField(props: TextFieldProps) {
   const [value, setValue] = useState(props.value ?? '');

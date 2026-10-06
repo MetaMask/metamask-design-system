@@ -7,12 +7,12 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
-import { Icon } from '../Icon';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box/index.js';
+import { Icon } from '../Icon/index.js';
 
 import README from './README.mdx';
-import { Tag } from './Tag';
-import type { TagProps } from './Tag.types';
+import { Tag } from './Tag.js';
+import type { TagProps } from './Tag.types.js';
 
 const meta: Meta<TagProps> = {
   title: 'React Components/Tag',

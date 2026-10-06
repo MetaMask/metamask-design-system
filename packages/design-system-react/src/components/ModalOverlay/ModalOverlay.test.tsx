@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { ModalOverlay } from './ModalOverlay';
+import { ModalOverlay } from './ModalOverlay.js';
 
 describe('ModalOverlay', () => {
   it('renders without crashing', () => {

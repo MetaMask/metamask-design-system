@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import type { IconAlertSeverity } from '../IconAlert/IconAlert.types';
+import type { IconAlertSeverity } from '../IconAlert/IconAlert.types.js';
 
 /**
  * TitleAlert component shared props (ADR-0004).

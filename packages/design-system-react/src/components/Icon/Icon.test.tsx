@@ -2,9 +2,9 @@ import { IconName, IconSize, IconColor } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { Icon } from './Icon';
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
-import type { IconProps } from './Icon.types';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants.js';
+import { Icon } from './Icon.js';
+import type { IconProps } from './Icon.types.js';
 
 describe('Icon', () => {
   it('should render correctly', () => {

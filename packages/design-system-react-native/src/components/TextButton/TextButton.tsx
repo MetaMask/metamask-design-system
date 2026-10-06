@@ -1,9 +1,9 @@
 import { TextColor, TextVariant } from '@metamask/design-system-shared';
 import React, { useState } from 'react';
 
-import { Text, FontWeight } from '../Text';
+import { Text, FontWeight } from '../Text/index.js';
 
-import type { TextButtonProps } from './TextButton.types';
+import type { TextButtonProps } from './TextButton.types.js';
 
 export const TextButton: React.FC<TextButtonProps> = ({
   children,

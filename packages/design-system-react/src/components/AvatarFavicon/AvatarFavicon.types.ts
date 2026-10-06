@@ -1,7 +1,7 @@
 import type { AvatarFaviconPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { AvatarBaseProps } from '../AvatarBase';
+import type { AvatarBaseProps } from '../AvatarBase/index.js';
 
 /**
  * AvatarFavicon component props (React platform-specific)

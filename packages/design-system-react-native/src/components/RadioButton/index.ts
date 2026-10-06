@@ -1,2 +1,2 @@
-export { RadioButton } from './RadioButton';
-export type { RadioButtonProps } from './RadioButton.types';
+export { RadioButton } from './RadioButton.js';
+export type { RadioButtonProps } from './RadioButton.types.js';

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
 
-import { Box } from '../Box';
+import { Box } from '../Box/index.js';
 
-import { TextArea } from './TextArea';
-import type { TextAreaProps } from './TextArea.types';
+import { TextArea } from './TextArea.js';
+import type { TextAreaProps } from './TextArea.types.js';
 
 function ControlledTextArea(props: TextAreaProps) {
   const [value, setValue] = useState(props.value ?? '');

@@ -3,9 +3,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { forwardRef } from 'react';
 import type { View } from 'react-native';
 
-import { Box } from '../Box';
+import { Box } from '../Box/index.js';
 
-import type { SectionDividerProps } from './SectionDivider.types';
+import type { SectionDividerProps } from './SectionDivider.types.js';
 
 export const SectionDivider = forwardRef<View, SectionDividerProps>(
   (

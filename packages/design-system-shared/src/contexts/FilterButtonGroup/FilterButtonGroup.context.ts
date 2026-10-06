@@ -3,7 +3,7 @@ import { createContext } from 'react';
 import type {
   FilterButtonSize,
   FilterButtonVariant,
-} from '../../types/FilterButton/FilterButton.types';
+} from '../../types/FilterButton/FilterButton.types.js';
 
 export type FilterButtonGroupContextValue = {
   value: string;

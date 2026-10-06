@@ -12,11 +12,11 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
-import { Content } from '../Content';
+import { Box } from '../Box/index.js';
+import { BoxRow } from '../BoxRow/index.js';
+import { Content } from '../Content/index.js';
 
-import type { ListItemProps } from './ListItem.types';
+import type { ListItemProps } from './ListItem.types.js';
 
 export const ListItem: React.FC<ListItemProps> = ({
   children,

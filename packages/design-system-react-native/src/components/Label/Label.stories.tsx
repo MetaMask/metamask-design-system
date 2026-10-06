@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
+import { Box } from '../Box/index.js';
 
-import { Label } from './Label';
-import type { LabelProps } from './Label.types';
+import { Label } from './Label.js';
+import type { LabelProps } from './Label.types.js';
 
 const meta: Meta<LabelProps> = {
   title: 'Components/Label',

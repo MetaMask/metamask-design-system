@@ -6,7 +6,7 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonIcon } from './ButtonIcon';
+import { ButtonIcon } from './ButtonIcon.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof ButtonIcon> = {

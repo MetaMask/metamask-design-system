@@ -1,9 +1,9 @@
 import type { AvatarAccountPropsShared } from '@metamask/design-system-shared';
 
-import type { AvatarBaseProps } from '../AvatarBase';
-import type { BlockiesProps } from '../temp-components/Blockies';
-import type { JazziconProps } from '../temp-components/Jazzicon';
-import type { MaskiconProps } from '../temp-components/Maskicon';
+import type { AvatarBaseProps } from '../AvatarBase/index.js';
+import type { BlockiesProps } from '../temp-components/Blockies/index.js';
+import type { JazziconProps } from '../temp-components/Jazzicon/index.js';
+import type { MaskiconProps } from '../temp-components/Maskicon/index.js';
 
 /**
  * AvatarAccount component props.

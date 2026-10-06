@@ -3,14 +3,14 @@ import type { ComponentType } from 'react';
 import React from 'react';
 import Animated from 'react-native-reanimated';
 
-import { Box } from '../Box';
-import { IconName } from '../Icon';
-import { Text, TextColor, TextVariant } from '../Text';
-import { TitleStandard } from '../TitleStandard';
+import { Box } from '../Box/index.js';
+import { IconName } from '../Icon/index.js';
+import { Text, TextColor, TextVariant } from '../Text/index.js';
+import { TitleStandard } from '../TitleStandard/index.js';
 
-import { HeaderStandardAnimated } from './HeaderStandardAnimated';
-import type { HeaderStandardAnimatedProps } from './HeaderStandardAnimated.types';
-import { useHeaderStandardAnimated } from './useHeaderStandardAnimated';
+import { HeaderStandardAnimated } from './HeaderStandardAnimated.js';
+import type { HeaderStandardAnimatedProps } from './HeaderStandardAnimated.types.js';
+import { useHeaderStandardAnimated } from './useHeaderStandardAnimated.js';
 
 type ScrollStoryArgs = Omit<
   HeaderStandardAnimatedProps,

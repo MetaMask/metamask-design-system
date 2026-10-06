@@ -1,5 +1,5 @@
-export { BottomSheetDialog } from './BottomSheetDialog';
+export { BottomSheetDialog } from './BottomSheetDialog.js';
 export type {
   BottomSheetDialogProps,
   BottomSheetDialogRef,
-} from './BottomSheetDialog.types';
+} from './BottomSheetDialog.types.js';

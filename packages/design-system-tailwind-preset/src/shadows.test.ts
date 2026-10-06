@@ -1,9 +1,9 @@
 import {
   getDesignTokenVariables,
   collectCssVariables,
-} from '../scripts/testUtils';
+} from '../scripts/testUtils.js';
 
-import { shadows, shadowColors, shadowPlugin } from './shadows';
+import { shadows, shadowColors, shadowPlugin } from './shadows.js';
 
 // Mock version of Tailwind's PluginAPI with only the methods we use (addUtilities)
 type MockedPluginAPI = {

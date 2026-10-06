@@ -1,1 +1,1 @@
-export { type BoxRowPropsShared } from './BoxRow.types';
+export { type BoxRowPropsShared } from './BoxRow.types.js';

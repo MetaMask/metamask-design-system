@@ -6,8 +6,8 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarIcon } from './AvatarIcon';
-import type { AvatarIconProps } from './AvatarIcon.types';
+import { AvatarIcon } from './AvatarIcon.js';
+import type { AvatarIconProps } from './AvatarIcon.types.js';
 
 const meta: Meta<AvatarIconProps> = {
   title: 'Components/AvatarIcon',

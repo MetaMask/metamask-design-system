@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from 'react';
 
-import type { BoxProps } from '../Box';
+import type { BoxProps } from '../Box/index.js';
 
 /**
  * ModalContent dialog max-width.

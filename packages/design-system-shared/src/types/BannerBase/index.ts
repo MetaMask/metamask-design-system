@@ -1,4 +1,4 @@
 export {
   BannerBaseActionButtonLayout,
   type BannerBasePropsShared,
-} from './BannerBase.types';
+} from './BannerBase.types.js';

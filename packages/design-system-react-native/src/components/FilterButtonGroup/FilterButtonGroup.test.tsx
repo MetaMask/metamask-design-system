@@ -7,10 +7,10 @@ import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { FilterButton } from '../FilterButton';
-import { SelectButton } from '../SelectButton';
+import { FilterButton } from '../FilterButton/index.js';
+import { SelectButton } from '../SelectButton/index.js';
 
-import { FilterButtonGroup } from './FilterButtonGroup';
+import { FilterButtonGroup } from './FilterButtonGroup.js';
 
 const GROUP_TEST_ID = 'filter-button-group';
 

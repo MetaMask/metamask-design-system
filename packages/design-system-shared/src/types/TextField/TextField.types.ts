@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import type { InputPropsShared } from '../Input/Input.types';
+import type { InputPropsShared } from '../Input/Input.types.js';
 
 /**
  * TextField shared props (ADR-0004).

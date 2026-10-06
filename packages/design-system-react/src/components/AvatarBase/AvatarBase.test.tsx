@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { TextColor } from '../Text';
+import { TextColor } from '../Text/index.js';
 
-import { AvatarBase } from './AvatarBase';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
-} from './AvatarBase.constants';
+} from './AvatarBase.constants.js';
+import { AvatarBase } from './AvatarBase.js';
 
 import { AvatarBaseSize, AvatarBaseShape } from '.';
 

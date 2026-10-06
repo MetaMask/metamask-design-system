@@ -1,7 +1,7 @@
 import type { AvatarBasePropsShared } from '@metamask/design-system-shared';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
-import type { TextProps } from '../Text';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * AvatarBase component props.

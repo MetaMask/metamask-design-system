@@ -1,6 +1,6 @@
 import * as designTokens from '../../figma/tokens.json';
 
-import { fontWeights } from './fontWeights';
+import { fontWeights } from './fontWeights.js';
 
 describe('Font Size', () => {
   it('js tokens for font weight bold matches figma tokens', () => {

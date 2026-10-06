@@ -1,8 +1,8 @@
 import { IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import { BadgeIcon } from './BadgeIcon';
-import type { BadgeIconProps } from './BadgeIcon.types';
+import { BadgeIcon } from './BadgeIcon.js';
+import type { BadgeIconProps } from './BadgeIcon.types.js';
 
 const meta: Meta<BadgeIconProps> = {
   title: 'Components/BadgeIcon',

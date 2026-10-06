@@ -1,8 +1,8 @@
 import type { ListItemPropsShared } from '@metamask/design-system-shared';
 import type { PressableProps } from 'react-native';
 
-import type { BoxProps } from '../Box/Box.types';
-import type { ContentProps } from '../Content/Content.types';
+import type { BoxProps } from '../Box/Box.types.js';
+import type { ContentProps } from '../Content/Content.types.js';
 
 type ListItemPropsBase = ListItemPropsShared & ContentProps;
 

@@ -3,9 +3,9 @@ import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { IconName } from '../Icon';
+import { IconName } from '../Icon/index.js';
 
-import { Tag } from './Tag';
+import { Tag } from './Tag.js';
 
 describe('Tag', () => {
   let tw: ReturnType<typeof useTailwind>;

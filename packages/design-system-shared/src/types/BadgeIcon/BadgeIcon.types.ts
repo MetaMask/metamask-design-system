@@ -1,4 +1,4 @@
-import type { IconName } from '../Icon';
+import type { IconName } from '../Icon/index.js';
 
 /**
  * BadgeIcon component shared props (ADR-0004)

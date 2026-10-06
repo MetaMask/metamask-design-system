@@ -1,4 +1,4 @@
-import type { FilterButtonVariant } from '../FilterButton/FilterButton.types';
+import type { FilterButtonVariant } from '../FilterButton/FilterButton.types.js';
 
 /**
  * FilterButtonGroup component shared props (ADR-0004).

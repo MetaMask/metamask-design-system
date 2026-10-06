@@ -2,15 +2,15 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { Text, TextVariant } from '../Text';
+import { Text, TextVariant } from '../Text/index.js';
 
-import { AvatarBase } from './AvatarBase';
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
-} from './AvatarBase.constants';
+} from './AvatarBase.constants.js';
+import { AvatarBase } from './AvatarBase.js';
 
 import { AvatarBaseSize, AvatarBaseShape } from '.';
 

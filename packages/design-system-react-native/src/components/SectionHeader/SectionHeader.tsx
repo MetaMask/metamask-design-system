@@ -10,11 +10,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { Pressable } from 'react-native';
 
-import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
-import { Icon } from '../Icon';
+import { Box } from '../Box/index.js';
+import { BoxRow } from '../BoxRow/index.js';
+import { Icon } from '../Icon/index.js';
 
-import type { SectionHeaderProps } from './SectionHeader.types';
+import type { SectionHeaderProps } from './SectionHeader.types.js';
 
 /**
  * Horizontal section header: optional start/end icons or accessories, and a title row with optional inline accessory.

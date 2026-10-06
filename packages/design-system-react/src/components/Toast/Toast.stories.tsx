@@ -8,14 +8,14 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Button } from '../Button/index.js';
+import { Text } from '../Text/index.js';
 
 import README from './README.mdx';
-import { Toast } from './Toast';
-import type { ToastProps } from './Toast.types';
-import { Toaster, toast } from './Toaster';
+import { Toast } from './Toast.js';
+import type { ToastProps } from './Toast.types.js';
+import { Toaster, toast } from './Toaster.js';
 
 const meta: Meta<ToastProps> = {
   title: 'React Components/Toast',

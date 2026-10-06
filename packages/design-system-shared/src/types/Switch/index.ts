@@ -1,1 +1,1 @@
-export { type SwitchPropsShared } from './Switch.types';
+export { type SwitchPropsShared } from './Switch.types.js';

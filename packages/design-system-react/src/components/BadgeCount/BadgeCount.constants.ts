@@ -1,6 +1,6 @@
 import { BadgeCountSize } from '@metamask/design-system-shared';
 
-import { TextVariant } from '../Text';
+import { TextVariant } from '../Text/index.js';
 
 // Mappings
 export const MAP_BADGECOUNT_SIZE_TEXTVARIANT: Record<

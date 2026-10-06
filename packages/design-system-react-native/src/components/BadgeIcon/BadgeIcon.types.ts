@@ -1,7 +1,7 @@
 import type { BadgeIconPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
-import type { IconProps } from '../Icon';
+import type { IconProps } from '../Icon/index.js';
 
 /**
  * BadgeIcon component props (React Native platform-specific)

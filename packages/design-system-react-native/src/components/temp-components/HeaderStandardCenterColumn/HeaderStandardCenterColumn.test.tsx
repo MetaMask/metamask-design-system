@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Text, TextVariant } from '../../Text';
+import { Text, TextVariant } from '../../Text/index.js';
 
-import { HeaderStandardCenterColumn } from './HeaderStandardCenterColumn';
+import { HeaderStandardCenterColumn } from './HeaderStandardCenterColumn.js';
 
 describe('HeaderStandardCenterColumn', () => {
   it('renders title', () => {

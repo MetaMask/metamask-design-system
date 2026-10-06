@@ -2,7 +2,7 @@ import { ButtonHeroSize, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonHero } from './ButtonHero';
+import { ButtonHero } from './ButtonHero.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof ButtonHero> = {

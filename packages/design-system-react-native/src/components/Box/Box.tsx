@@ -19,8 +19,8 @@ import {
   TWCLASSMAP_BOX_PADDING_HORIZONTAL,
   TWCLASSMAP_BOX_PADDING_VERTICAL,
   TWCLASSMAP_BOX_BORDER_WIDTH,
-} from './Box.constants';
-import type { BoxProps } from './Box.types';
+} from './Box.constants.js';
+import type { BoxProps } from './Box.types.js';
 
 export const Box = forwardRef<View, BoxProps>(
   (

@@ -3,13 +3,13 @@ import { mergeTwClassName } from '@metamask/design-system-shared';
 import React, { useMemo } from 'react';
 
 // External dependencies.
-import type { ButtonIconProps } from '../ButtonIcon';
-import { HeaderBase } from '../HeaderBase';
-import { IconName } from '../Icon';
-import { HeaderStandardCenterColumn } from '../temp-components/HeaderStandardCenterColumn';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import { HeaderBase } from '../HeaderBase/index.js';
+import { IconName } from '../Icon/index.js';
+import { HeaderStandardCenterColumn } from '../temp-components/HeaderStandardCenterColumn/index.js';
 
 // Internal dependencies.
-import type { HeaderStandardProps } from './HeaderStandard.types';
+import type { HeaderStandardProps } from './HeaderStandard.types.js';
 
 export const HeaderStandard: React.FC<HeaderStandardProps> = ({
   title,

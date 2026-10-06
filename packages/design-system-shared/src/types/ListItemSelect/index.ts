@@ -1,1 +1,1 @@
-export { type ListItemSelectPropsShared } from './ListItemSelect.types';
+export { type ListItemSelectPropsShared } from './ListItemSelect.types.js';

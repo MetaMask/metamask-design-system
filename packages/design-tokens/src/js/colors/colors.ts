@@ -1,4 +1,4 @@
-import { lightTheme, darkTheme } from '../themes';
+import { lightTheme, darkTheme } from '../themes/index.js';
 
 /**
  * This object is DEPRECATED in favour of the theme objects

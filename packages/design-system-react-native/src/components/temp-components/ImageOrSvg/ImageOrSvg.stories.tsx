@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 
 import SampleLocalSvg from './assets/ethereum-eth-logo.svg';
-import { ImageOrSvg } from './ImageOrSvg';
-import type { ImageOrSvgProps } from './ImageOrSvg.types';
+import { ImageOrSvg } from './ImageOrSvg.js';
+import type { ImageOrSvgProps } from './ImageOrSvg.types.js';
 
 const meta: Meta<ImageOrSvgProps> = {
   title: 'Temp Components/ImageOrSvg',

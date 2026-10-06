@@ -1,7 +1,7 @@
 import type { TextFieldPropsShared } from '@metamask/design-system-shared';
 import type { ComponentPropsWithoutRef, Ref } from 'react';
 
-import type { InputProps } from '../Input/Input.types';
+import type { InputProps } from '../Input/Input.types.js';
 
 /**
  * TextField size variants (web-only, ADR-0003).

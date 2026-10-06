@@ -20,7 +20,7 @@ import { interpolateColor } from 'react-native-reanimated';
 import {
   DOT_EDGE_INSET_PERCENT,
   DOT_EDGE_MAX_PERCENT,
-} from './Slider.constants';
+} from './Slider.constants.js';
 
 export type SliderColorStop = {
   step: number;

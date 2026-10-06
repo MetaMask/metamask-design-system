@@ -2,7 +2,7 @@ import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonTertiary } from './ButtonTertiary';
+import { ButtonTertiary } from './ButtonTertiary.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof ButtonTertiary> = {

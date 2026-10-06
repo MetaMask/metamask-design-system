@@ -8,13 +8,13 @@ import {
   BoxBorderColor,
   BoxFlexDirection,
   BoxJustifyContent,
-} from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { Text, TextColor } from '../Text';
+} from '../Box/index.js';
+import { Button, ButtonVariant } from '../Button/index.js';
+import { Text, TextColor } from '../Text/index.js';
 
-import { Popover } from './Popover';
-import { PopoverPosition, PopoverRole } from './Popover.types';
-import type { PopoverProps } from './Popover.types';
+import { Popover } from './Popover.js';
+import { PopoverPosition, PopoverRole } from './Popover.types.js';
+import type { PopoverProps } from './Popover.types.js';
 import README from './README.mdx';
 
 const meta: Meta<PopoverProps> = {

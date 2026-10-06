@@ -4,9 +4,9 @@ import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React, { createRef } from 'react';
 import { View } from 'react-native';
 
-import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from '../SelectButton/SelectButton.constants';
+import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from '../SelectButton/SelectButton.constants.js';
 
-import { KeyValueSelect } from './KeyValueSelect';
+import { KeyValueSelect } from './KeyValueSelect.js';
 
 const ROOT_TEST_ID = 'key-value-select';
 const noopPress = () => undefined;

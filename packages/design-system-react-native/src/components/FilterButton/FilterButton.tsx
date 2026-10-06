@@ -8,11 +8,11 @@ import {
 import React, { useContext } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import { Button } from '../Button';
-import { IconColor } from '../Icon';
-import { TextColor } from '../Text';
+import { Button } from '../Button/index.js';
+import { IconColor } from '../Icon/index.js';
+import { TextColor } from '../Text/index.js';
 
-import type { FilterButtonProps } from './FilterButton.types';
+import type { FilterButtonProps } from './FilterButton.types.js';
 
 const SELECTED_BUTTON_VARIANT_BY_FILTER_VARIANT: Record<
   FilterButtonVariant,

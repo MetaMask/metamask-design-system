@@ -6,11 +6,11 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box } from '../../Box';
-import { Text } from '../../Text';
+import { Box } from '../../Box/index.js';
+import { Text } from '../../Text/index.js';
 
-import { Blockies } from './Blockies';
-import type { BlockiesProps } from './Blockies.types';
+import { Blockies } from './Blockies.js';
+import type { BlockiesProps } from './Blockies.types.js';
 import README from './README.mdx';
 
 const meta: Meta<BlockiesProps> = {

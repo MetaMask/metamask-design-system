@@ -6,11 +6,11 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ScrollView } from 'react-native';
 
-import { Box } from '../../Box';
-import { Text, TextVariant, TextColor, FontWeight } from '../../Text';
+import { Box } from '../../Box/index.js';
+import { Text, TextVariant, TextColor, FontWeight } from '../../Text/index.js';
 
-import { Maskicon } from './Maskicon';
-import type { MaskiconProps } from './Maskicon.types';
+import { Maskicon } from './Maskicon.js';
+import type { MaskiconProps } from './Maskicon.types.js';
 
 const meta: Meta<MaskiconProps> = {
   title: 'Temp Components/Maskicon',

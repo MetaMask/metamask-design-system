@@ -1,1 +1,1 @@
-export { ContentVariant, type ContentPropsShared } from './Content.types';
+export { ContentVariant, type ContentPropsShared } from './Content.types.js';

@@ -10,11 +10,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { FilterButtonGroup } from '../FilterButtonGroup/FilterButtonGroup';
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
-import { SegmentedControl } from '../SegmentedControl/SegmentedControl';
+import { FilterButtonGroup } from '../FilterButtonGroup/FilterButtonGroup.js';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants.js';
+import { SegmentedControl } from '../SegmentedControl/SegmentedControl.js';
 
-import { FilterButton } from './FilterButton';
+import { FilterButton } from './FilterButton.js';
 
 const ROOT_TEST_ID = 'filter-button';
 

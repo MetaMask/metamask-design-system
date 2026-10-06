@@ -5,15 +5,15 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
-import { Box } from '../Box';
-import { Icon, IconName, IconSize } from '../Icon';
-import { TextVariant } from '../Text';
+import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount/index.js';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev.js';
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken/index.js';
+import { Box } from '../Box/index.js';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
+import { TextVariant } from '../Text/index.js';
 
-import { KeyValueRow } from './KeyValueRow';
-import type { KeyValueRowProps } from './KeyValueRow.types';
+import { KeyValueRow } from './KeyValueRow.js';
+import type { KeyValueRowProps } from './KeyValueRow.types.js';
 
 const meta: Meta<KeyValueRowProps> = {
   title: 'Components/KeyValueRow',

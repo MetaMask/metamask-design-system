@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { TextButtonSize } from '../../types';
-import { IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
+import { TextButtonSize } from '../../types/index.js';
+import { IconName } from '../Icon/index.js';
+import { Text, TextVariant } from '../Text/index.js';
 
-import { TextButton } from './TextButton';
+import { TextButton } from './TextButton.js';
 
 describe('TextButton', () => {
   it('renders with text button styles by default', () => {

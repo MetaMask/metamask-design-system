@@ -1,1 +1,4 @@
-export { HelpTextSeverity, type HelpTextPropsShared } from './HelpText.types';
+export {
+  HelpTextSeverity,
+  type HelpTextPropsShared,
+} from './HelpText.types.js';

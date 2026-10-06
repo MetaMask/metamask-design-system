@@ -3,14 +3,14 @@ import React, { useRef, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { BottomSheetFooter } from '../BottomSheetFooter';
-import { BottomSheetHeader } from '../BottomSheetHeader';
-import { Box } from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { Text } from '../Text';
+import { BottomSheetFooter } from '../BottomSheetFooter/index.js';
+import { BottomSheetHeader } from '../BottomSheetHeader/index.js';
+import { Box } from '../Box/index.js';
+import { Button, ButtonVariant } from '../Button/index.js';
+import { Text } from '../Text/index.js';
 
-import { BottomSheet } from './BottomSheet';
-import type { BottomSheetProps, BottomSheetRef } from './BottomSheet.types';
+import { BottomSheet } from './BottomSheet.js';
+import type { BottomSheetProps, BottomSheetRef } from './BottomSheet.types.js';
 
 const meta: Meta<BottomSheetProps> = {
   title: 'Components/BottomSheet',

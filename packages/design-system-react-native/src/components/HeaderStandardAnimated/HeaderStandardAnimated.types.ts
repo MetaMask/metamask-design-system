@@ -5,7 +5,7 @@ import type {
 } from 'react-native-reanimated';
 
 // Internal dependencies.
-import type { HeaderStandardProps } from '../HeaderStandard/HeaderStandard.types';
+import type { HeaderStandardProps } from '../HeaderStandard/HeaderStandard.types.js';
 
 /**
  * HeaderStandardAnimated component props.

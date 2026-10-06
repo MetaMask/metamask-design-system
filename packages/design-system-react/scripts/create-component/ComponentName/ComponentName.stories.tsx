@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { ComponentName } from './ComponentName';
+import { ComponentName } from './ComponentName.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof ComponentName> = {

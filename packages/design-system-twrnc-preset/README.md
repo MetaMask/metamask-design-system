@@ -77,6 +77,8 @@ export default {
 };
 ```
 
+This package is ESM-only. Node 24 can load the named exports below with `require()`.
+
 **JavaScript:**
 
 ```javascript

@@ -4,11 +4,11 @@ import type {
 } from '@metamask/design-system-shared';
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
-import type { BoxProps } from '../Box/Box.types';
-import type { BoxRowProps } from '../BoxRow/BoxRow.types';
-import type { IconProps } from '../Icon';
-import type { SpinnerProps } from '../temp-components/Spinner';
-import type { TextProps } from '../Text';
+import type { BoxProps } from '../Box/Box.types.js';
+import type { BoxRowProps } from '../BoxRow/BoxRow.types.js';
+import type { IconProps } from '../Icon/index.js';
+import type { SpinnerProps } from '../temp-components/Spinner/index.js';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * ButtonBase component props.

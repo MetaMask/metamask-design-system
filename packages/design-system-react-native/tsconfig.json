@@ -19,9 +19,9 @@
   ],
   "include": ["src/**/*", "global.d.ts"],
   "exclude": [
-    "jest.config.js",
+    "jest.config.cjs",
     ".eslintrc.js",
-    "babel.config.js",
+    "babel.config.cjs",
     "react-native.config.js"
   ]
 }

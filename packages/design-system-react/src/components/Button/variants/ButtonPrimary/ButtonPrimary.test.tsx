@@ -2,7 +2,7 @@ import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { ButtonPrimary } from './ButtonPrimary';
+import { ButtonPrimary } from './ButtonPrimary.js';
 
 describe('ButtonPrimary', () => {
   it('renders with primary button styles by default', () => {

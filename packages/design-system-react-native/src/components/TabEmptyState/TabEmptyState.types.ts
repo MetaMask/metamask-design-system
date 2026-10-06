@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 import type { ViewProps } from 'react-native';
 
-import type { ButtonProps } from '../Button/Button.types';
-import type { TextProps } from '../Text/Text.types';
+import type { ButtonProps } from '../Button/Button.types.js';
+import type { TextProps } from '../Text/Text.types.js';
 
 /**
  * TabEmptyState component props.

@@ -1,2 +1,2 @@
-export { ButtonSecondary } from './ButtonSecondary';
-export type { ButtonSecondaryProps } from './ButtonSecondary.types';
+export { ButtonSecondary } from './ButtonSecondary.js';
+export type { ButtonSecondaryProps } from './ButtonSecondary.types.js';

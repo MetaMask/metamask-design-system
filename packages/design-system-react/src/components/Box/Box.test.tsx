@@ -9,7 +9,6 @@ import {
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { Box } from './Box';
 import {
   TWCLASSMAP_BOX_GAP,
   TWCLASSMAP_BOX_MARGIN,
@@ -27,7 +26,8 @@ import {
   TWCLASSMAP_BOX_PADDING_HORIZONTAL,
   TWCLASSMAP_BOX_PADDING_VERTICAL,
   TWCLASSMAP_BOX_BORDER_WIDTH,
-} from './Box.constants';
+} from './Box.constants.js';
+import { Box } from './Box.js';
 
 describe('Box', () => {
   it('renders children and style', () => {

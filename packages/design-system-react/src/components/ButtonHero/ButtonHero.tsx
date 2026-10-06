@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { ButtonBase } from '../ButtonBase';
+import { twMerge } from '../../utils/tw-merge.js';
+import { ButtonBase } from '../ButtonBase/index.js';
 
-import type { ButtonHeroProps } from './ButtonHero.types';
+import type { ButtonHeroProps } from './ButtonHero.types.js';
 
 /**
  * @deprecated Use `Button` with `variant={ButtonVariant.Primary}` instead.

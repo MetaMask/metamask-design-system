@@ -2,11 +2,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { Icon, IconColor, IconSize } from '../Icon';
-import { ButtonAnimated } from '../temp-components/ButtonAnimated';
-import { Text, FontWeight, TextColor, TextVariant } from '../Text';
+import { Icon, IconColor, IconSize } from '../Icon/index.js';
+import { ButtonAnimated } from '../temp-components/ButtonAnimated/index.js';
+import { Text, FontWeight, TextColor, TextVariant } from '../Text/index.js';
 
-import type { MainActionButtonProps } from './MainActionButton.types';
+import type { MainActionButtonProps } from './MainActionButton.types.js';
 
 export const MainActionButton = ({
   iconName,

@@ -2,7 +2,7 @@ import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { ButtonSecondary } from './ButtonSecondary';
+import { ButtonSecondary } from './ButtonSecondary.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof ButtonSecondary> = {

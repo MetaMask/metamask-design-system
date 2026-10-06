@@ -7,11 +7,11 @@ import {
   BoxAlignItems,
   BoxFlexDirection,
   BoxJustifyContent,
-} from '../Box';
-import { Icon, IconSize } from '../Icon';
-import { Text, TextColor, TextVariant } from '../Text';
+} from '../Box/index.js';
+import { Icon, IconSize } from '../Icon/index.js';
+import { Text, TextColor, TextVariant } from '../Text/index.js';
 
-import type { ActionListItemProps } from './ActionListItem.types';
+import type { ActionListItemProps } from './ActionListItem.types.js';
 
 export const ActionListItem: React.FC<ActionListItemProps> = ({
   label,

@@ -8,12 +8,12 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Box } from '../Box';
-import { BoxColumn } from '../BoxColumn';
-import { BoxRow } from '../BoxRow';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { Box } from '../Box/index.js';
+import { BoxColumn } from '../BoxColumn/index.js';
+import { BoxRow } from '../BoxRow/index.js';
+import { TextOrChildren } from '../temp-components/TextOrChildren/index.js';
 
-import type { ContentProps } from './Content.types';
+import type { ContentProps } from './Content.types.js';
 
 export const Content: React.FC<ContentProps> = ({
   variant = ContentVariant.TwoLines,

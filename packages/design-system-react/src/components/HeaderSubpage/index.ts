@@ -1,2 +1,2 @@
-export { HeaderSubpage } from './HeaderSubpage';
-export type { HeaderSubpageProps } from './HeaderSubpage.types';
+export { HeaderSubpage } from './HeaderSubpage.js';
+export type { HeaderSubpageProps } from './HeaderSubpage.types.js';

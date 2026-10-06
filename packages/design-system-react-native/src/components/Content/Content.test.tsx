@@ -9,7 +9,7 @@ import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { Content } from './Content';
+import { Content } from './Content.js';
 
 const ROOT_TEST_ID = 'content-root';
 

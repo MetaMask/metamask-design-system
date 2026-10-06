@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { ButtonFilter } from './ButtonFilter';
+import { ButtonFilter } from './ButtonFilter.js';
 
 describe('ButtonFilter', () => {
   const defaultProps = {

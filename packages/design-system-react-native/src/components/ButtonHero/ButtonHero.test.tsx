@@ -2,10 +2,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { createRenderer } from '../../test-utils/createRenderer';
-import { IconName } from '../Icon';
+import { createRenderer } from '../../test-utils/createRenderer.js';
+import { IconName } from '../Icon/index.js';
 
-import { ButtonHero } from './ButtonHero';
+import { ButtonHero } from './ButtonHero.js';
 
 describe('ButtonHero', () => {
   let tw: ReturnType<typeof useTailwind>;

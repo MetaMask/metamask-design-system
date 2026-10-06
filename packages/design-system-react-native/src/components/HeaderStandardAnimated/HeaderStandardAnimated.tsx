@@ -8,11 +8,11 @@ import Animated, {
 } from 'react-native-reanimated';
 
 // External dependencies.
-import { HeaderStandard } from '../HeaderStandard';
-import { HeaderStandardCenterColumn } from '../temp-components/HeaderStandardCenterColumn';
+import { HeaderStandard } from '../HeaderStandard/index.js';
+import { HeaderStandardCenterColumn } from '../temp-components/HeaderStandardCenterColumn/index.js';
 
 // Internal dependencies.
-import type { HeaderStandardAnimatedProps } from './HeaderStandardAnimated.types';
+import type { HeaderStandardAnimatedProps } from './HeaderStandardAnimated.types.js';
 
 const COMPACT_TITLE_ENTER_OFFSET_PX = 8;
 

@@ -3,7 +3,7 @@ import {
   AvatarIconSize,
 } from '@metamask/design-system-shared';
 
-import { IconSize, IconColor } from '../Icon';
+import { IconSize, IconColor } from '../Icon/index.js';
 
 export const MAP_AVATARICON_SIZE_ICONSIZE: Record<AvatarIconSize, IconSize> = {
   [AvatarIconSize.Xs]: IconSize.Xs, // 16px avatar -> 12px icon

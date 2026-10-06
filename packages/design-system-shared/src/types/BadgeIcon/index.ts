@@ -1,1 +1,1 @@
-export { type BadgeIconPropsShared } from './BadgeIcon.types';
+export { type BadgeIconPropsShared } from './BadgeIcon.types.js';

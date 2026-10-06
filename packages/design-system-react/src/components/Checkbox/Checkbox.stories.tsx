@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useRef, useState } from 'react';
 
-import { Button, ButtonVariant } from '../Button';
+import { Button, ButtonVariant } from '../Button/index.js';
 
-import { Checkbox } from './Checkbox';
-import type { CheckboxProps } from './Checkbox.types';
+import { Checkbox } from './Checkbox.js';
+import type { CheckboxProps } from './Checkbox.types.js';
 import README from './README.mdx';
 
 const meta: Meta<CheckboxProps> = {

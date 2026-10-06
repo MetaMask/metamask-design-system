@@ -2,12 +2,12 @@ import { BoxBackgroundColor, IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Icon } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { ModalHeader } from './ModalHeader';
-import type { ModalHeaderProps } from './ModalHeader.types';
+import { ModalHeader } from './ModalHeader.js';
+import type { ModalHeaderProps } from './ModalHeader.types.js';
 import README from './README.mdx';
 
 const meta: Meta<ModalHeaderProps> = {

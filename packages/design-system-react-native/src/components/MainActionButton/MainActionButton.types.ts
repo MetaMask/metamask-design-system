@@ -5,8 +5,8 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import type { IconName, IconProps } from '../Icon';
-import type { TextProps } from '../Text';
+import type { IconName, IconProps } from '../Icon/index.js';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * MainActionButton component props.

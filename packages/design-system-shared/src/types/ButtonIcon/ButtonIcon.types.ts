@@ -1,4 +1,4 @@
-import type { IconName } from '../Icon';
+import type { IconName } from '../Icon/index.js';
 
 /**
  * ButtonIcon - size

@@ -7,7 +7,7 @@ import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { TitleAlert } from './TitleAlert';
+import { TitleAlert } from './TitleAlert.js';
 
 const CONTAINER_TEST_ID = 'title-alert-container';
 const TITLE_ROW_TEST_ID = 'title-alert-title';

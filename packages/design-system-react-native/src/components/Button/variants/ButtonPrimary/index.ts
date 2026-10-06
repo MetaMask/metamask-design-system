@@ -1,2 +1,2 @@
-export { ButtonPrimary } from './ButtonPrimary';
-export type { ButtonPrimaryProps } from './ButtonPrimary.types';
+export { ButtonPrimary } from './ButtonPrimary.js';
+export type { ButtonPrimaryProps } from './ButtonPrimary.types.js';

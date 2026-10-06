@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import React, { useState, useCallback, useEffect } from 'react';
 import { SvgUri } from 'react-native-svg';
 
-import type { ImageOrSvgProps } from './ImageOrSvg.types';
+import type { ImageOrSvgProps } from './ImageOrSvg.types.js';
 
 export const ImageOrSvg = ({
   src,

@@ -8,7 +8,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 
-import type { ButtonAnimatedProps } from './ButtonAnimated.types';
+import type { ButtonAnimatedProps } from './ButtonAnimated.types.js';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 

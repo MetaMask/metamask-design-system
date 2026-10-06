@@ -2,4 +2,4 @@ export {
   AvatarIconSize,
   AvatarIconSeverity,
   type AvatarIconPropsShared,
-} from './AvatarIcon.types';
+} from './AvatarIcon.types.js';

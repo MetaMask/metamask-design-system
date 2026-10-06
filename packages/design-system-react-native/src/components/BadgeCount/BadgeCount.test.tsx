@@ -3,13 +3,13 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Text, TextColor, FontWeight } from '../Text';
+import { Text, TextColor, FontWeight } from '../Text/index.js';
 
-import { BadgeCount } from './BadgeCount';
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
-} from './BadgeCount.constants';
+} from './BadgeCount.constants.js';
+import { BadgeCount } from './BadgeCount.js';
 
 describe('BadgeCount', () => {
   it('renders with default props and count less than max', () => {

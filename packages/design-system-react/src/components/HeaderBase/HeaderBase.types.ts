@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from 'react';
 
-import type { BoxProps } from '../Box';
+import type { BoxProps } from '../Box/index.js';
 
 /**
  * Box prop bag for the three internal slot wrappers (start accessory, title,

@@ -1,7 +1,7 @@
 import {
   TOAST_ANIMATION_DURATION,
   TOAST_VISIBILITY_DURATION,
-} from './Toast.constants';
+} from './Toast.constants.js';
 
 describe('Toast.constants', () => {
   it('exports the shared toast timing constants', () => {

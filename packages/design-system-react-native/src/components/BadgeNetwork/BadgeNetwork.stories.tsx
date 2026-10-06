@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
+import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev.js';
 
-import { BadgeNetwork } from './BadgeNetwork';
-import type { BadgeNetworkProps } from './BadgeNetwork.types';
+import { BadgeNetwork } from './BadgeNetwork.js';
+import type { BadgeNetworkProps } from './BadgeNetwork.types.js';
 
 const meta: Meta<BadgeNetworkProps> = {
   title: 'Components/BadgeNetwork',

@@ -1,2 +1,2 @@
-export { ModalHeader } from './ModalHeader';
-export type { ModalHeaderProps } from './ModalHeader.types';
+export { ModalHeader } from './ModalHeader.js';
+export type { ModalHeaderProps } from './ModalHeader.types.js';

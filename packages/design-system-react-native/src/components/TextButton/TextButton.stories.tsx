@@ -2,10 +2,10 @@ import { TextVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
-import { TextButton } from './TextButton';
-import type { TextButtonProps } from './TextButton.types';
+import { TextButton } from './TextButton.js';
+import type { TextButtonProps } from './TextButton.types.js';
 
 const meta: Meta<TextButtonProps> = {
   title: 'Components/TextButton',

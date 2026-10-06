@@ -2,9 +2,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { TextOrChildren } from '../temp-components/TextOrChildren/index.js';
 
-import type { RadioButtonProps } from './RadioButton.types';
+import type { RadioButtonProps } from './RadioButton.types.js';
 
 const getRadioButtonBorderClass = (
   isReadOnly: boolean,

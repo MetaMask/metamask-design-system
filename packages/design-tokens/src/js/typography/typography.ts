@@ -1,8 +1,8 @@
-import { fontSizes } from './fontSizes';
-import { fontWeights } from './fontWeights';
-import { letterSpacing } from './letterSpacing';
-import { lineHeights } from './lineHeights';
-import type { ThemeTypography } from './types';
+import { fontSizes } from './fontSizes.js';
+import { fontWeights } from './fontWeights.js';
+import { letterSpacing } from './letterSpacing.js';
+import { lineHeights } from './lineHeights.js';
+import type { ThemeTypography } from './types.js';
 
 export const typography: ThemeTypography = {
   sDisplayLG: {

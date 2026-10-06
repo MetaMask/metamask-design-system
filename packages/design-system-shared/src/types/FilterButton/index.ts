@@ -2,4 +2,4 @@ export {
   FilterButtonSize,
   FilterButtonVariant,
   type FilterButtonPropsShared,
-} from './FilterButton.types';
+} from './FilterButton.types.js';

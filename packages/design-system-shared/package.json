@@ -15,27 +15,20 @@
     "url": "https://github.com/MetaMask/metamask-design-system.git"
   },
   "license": "MIT",
+  "type": "module",
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.cts",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "tsx scripts/generate-icons.ts && ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "tsx scripts/generate-icons.ts && tsc --project tsconfig.build.json",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-shared",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-shared",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
@@ -54,7 +47,6 @@
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@svgr/plugin-svgo": "^8.1.0",
-    "@ts-bridge/cli": "^0.6.3",
     "@types/jest": "^27.4.1",
     "@types/react": "^19.2.0",
     "@types/react-test-renderer": "^19.2.0",

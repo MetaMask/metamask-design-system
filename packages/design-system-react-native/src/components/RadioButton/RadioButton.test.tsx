@@ -2,7 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { RadioButton } from './RadioButton';
+import { RadioButton } from './RadioButton.js';
 
 describe('RadioButton', () => {
   let tw: ReturnType<typeof useTailwind>;

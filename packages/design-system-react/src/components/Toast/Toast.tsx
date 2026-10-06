@@ -7,12 +7,12 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { BannerBase } from '../BannerBase';
-import { Icon } from '../Icon';
+import { twMerge } from '../../utils/tw-merge.js';
+import { BannerBase } from '../BannerBase/index.js';
+import { Icon } from '../Icon/index.js';
 
-import { TOAST_SEVERITY_ICON_MAP } from './Toast.constants';
-import type { ToastProps } from './Toast.types';
+import { TOAST_SEVERITY_ICON_MAP } from './Toast.constants.js';
+import type { ToastProps } from './Toast.types.js';
 
 const renderSeverityAccessory = ({
   severity,

@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import { Box } from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Button, ButtonVariant } from '../Button/index.js';
+import { Text } from '../Text/index.js';
 
-import { Skeleton } from './Skeleton';
-import type { SkeletonProps } from './Skeleton.types';
+import { Skeleton } from './Skeleton.js';
+import type { SkeletonProps } from './Skeleton.types.js';
 
 const meta: Meta<SkeletonProps> = {
   title: 'Components/Skeleton',

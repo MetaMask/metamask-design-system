@@ -3,10 +3,10 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
-import { BadgeNetwork } from '../BadgeNetwork';
+import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount/index.js';
+import { BadgeNetwork } from '../BadgeNetwork/index.js';
 
-import { BadgeWrapper } from './BadgeWrapper';
+import { BadgeWrapper } from './BadgeWrapper.js';
 
 import { BadgeWrapperPosition, BadgeWrapperPositionAnchorShape } from '.';
 

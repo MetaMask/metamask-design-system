@@ -2,8 +2,8 @@ import type { ToastPropsShared } from '@metamask/design-system-shared';
 import { ToastSeverity } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
-import type { BannerBaseProps } from '../BannerBase';
-import type { IconProps } from '../Icon/Icon.types';
+import type { BannerBaseProps } from '../BannerBase/index.js';
+import type { IconProps } from '../Icon/Icon.types.js';
 
 export { ToastSeverity };
 export type { ToastPropsShared };

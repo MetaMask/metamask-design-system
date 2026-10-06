@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 
-import type { ComponentNameProps } from './ComponentName.types';
+import type { ComponentNameProps } from './ComponentName.types.js';
 
 export const ComponentName: React.FC<ComponentNameProps> = ({
   children,

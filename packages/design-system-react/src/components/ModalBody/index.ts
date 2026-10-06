@@ -1,2 +1,2 @@
-export { ModalBody } from './ModalBody';
-export type { ModalBodyProps } from './ModalBody.types';
+export { ModalBody } from './ModalBody.js';
+export type { ModalBodyProps } from './ModalBody.types.js';

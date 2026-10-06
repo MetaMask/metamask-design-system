@@ -1,6 +1,6 @@
 import * as designTokens from '../../figma/tokens.json';
 
-import { fontSizes } from './fontSizes';
+import { fontSizes } from './fontSizes.js';
 
 describe('Font Size', () => {
   it('js tokens for fontSize1 matches figma tokens fontSize1', () => {

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { FormTextField } from './FormTextField';
+import { FormTextField } from './FormTextField.js';
 
 const ROOT_TEST_ID = 'form-text-field';
 const noop = () => undefined;

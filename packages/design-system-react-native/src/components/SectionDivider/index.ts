@@ -1,2 +1,2 @@
-export { SectionDivider } from './SectionDivider';
-export type { SectionDividerProps } from './SectionDivider.types';
+export { SectionDivider } from './SectionDivider.js';
+export type { SectionDividerProps } from './SectionDivider.types.js';

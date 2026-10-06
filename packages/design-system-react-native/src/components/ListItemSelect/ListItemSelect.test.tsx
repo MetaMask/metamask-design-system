@@ -3,9 +3,9 @@ import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { IconName } from '../Icon';
+import { IconName } from '../Icon/index.js';
 
-import { ListItemSelect } from './ListItemSelect';
+import { ListItemSelect } from './ListItemSelect.js';
 
 const ROOT_TEST_ID = 'listitem-select-root';
 const noopPress = () => undefined;

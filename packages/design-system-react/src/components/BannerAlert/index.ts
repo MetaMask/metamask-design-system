@@ -1,3 +1,3 @@
 export { BannerAlertSeverity } from '@metamask/design-system-shared';
-export { BannerAlert } from './BannerAlert';
-export type { BannerAlertProps } from './BannerAlert.types';
+export { BannerAlert } from './BannerAlert.js';
+export type { BannerAlertProps } from './BannerAlert.types.js';

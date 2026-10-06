@@ -1,1 +1,1 @@
-export type { SectionHeaderPropsShared } from './SectionHeader.types';
+export type { SectionHeaderPropsShared } from './SectionHeader.types.js';

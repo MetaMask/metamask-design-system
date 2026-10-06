@@ -3,13 +3,13 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Box } from '../Box';
-import { ButtonIcon } from '../ButtonIcon';
-import { IconName } from '../Icon';
-import { TextColor, TextVariant } from '../Text';
+import { Box } from '../Box/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
+import { IconName } from '../Icon/index.js';
+import { TextColor, TextVariant } from '../Text/index.js';
 
-import { BoxColumn } from './BoxColumn';
-import type { BoxColumnProps } from './BoxColumn.types';
+import { BoxColumn } from './BoxColumn.js';
+import type { BoxColumnProps } from './BoxColumn.types.js';
 
 const meta: Meta<BoxColumnProps> = {
   title: 'Components/BoxColumn',

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { ComponentName } from './ComponentName';
+import { ComponentName } from './ComponentName.js';
 
 describe('ComponentName Component', () => {
   it('renders children correctly', () => {

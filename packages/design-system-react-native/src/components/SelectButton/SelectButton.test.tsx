@@ -11,10 +11,10 @@ import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants.js';
 
-import { SelectButton } from './SelectButton';
-import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from './SelectButton.constants';
+import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from './SelectButton.constants.js';
+import { SelectButton } from './SelectButton.js';
 
 const ROOT_TEST_ID = 'select-button';
 

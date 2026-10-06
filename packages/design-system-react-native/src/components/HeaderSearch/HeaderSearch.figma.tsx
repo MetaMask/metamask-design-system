@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { HeaderSearch } from './HeaderSearch';
+import { HeaderSearch } from './HeaderSearch.js';
 
 import { HeaderSearchVariant } from '.';
 

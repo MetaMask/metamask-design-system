@@ -1,12 +1,12 @@
 import { ButtonSize, ButtonVariant } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box, BoxFlexDirection } from '../Box';
-import { Button } from '../Button';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Box, BoxFlexDirection } from '../Box/index.js';
+import { Button } from '../Button/index.js';
 
-import { ButtonsAlignment } from './ModalFooter.types';
-import type { ModalFooterProps } from './ModalFooter.types';
+import { ButtonsAlignment } from './ModalFooter.types.js';
+import type { ModalFooterProps } from './ModalFooter.types.js';
 
 export const ModalFooter = forwardRef<HTMLElement, ModalFooterProps>(
   (

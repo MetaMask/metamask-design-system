@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { IconColor } from '../../Icon';
-import { TextColor } from '../../Text';
+import { IconColor } from '../../Icon/index.js';
+import { TextColor } from '../../Text/index.js';
 
-import { Spinner } from './Spinner';
-import type { SpinnerProps } from './Spinner.types';
+import { Spinner } from './Spinner.js';
+import type { SpinnerProps } from './Spinner.types.js';
 
 const meta: Meta<SpinnerProps> = {
   title: 'Temp Components/Spinner',

@@ -8,19 +8,19 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
-import { Icon, IconColor } from '../Icon';
-import { ButtonAnimated } from '../temp-components/ButtonAnimated';
-import { Spinner } from '../temp-components/Spinner';
+import { Box } from '../Box/index.js';
+import { BoxRow } from '../BoxRow/index.js';
+import { Icon, IconColor } from '../Icon/index.js';
+import { ButtonAnimated } from '../temp-components/ButtonAnimated/index.js';
+import { Spinner } from '../temp-components/Spinner/index.js';
 
 import {
   MAP_BUTTONBASE_SIZE_ICONSIZE,
   MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
   getButtonBaseHorizontalPaddingTwClasses,
   TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
-} from './ButtonBase.constants';
-import type { ButtonBaseProps } from './ButtonBase.types';
+} from './ButtonBase.constants.js';
+import type { ButtonBaseProps } from './ButtonBase.types.js';
 
 export const ButtonBase = ({
   children,

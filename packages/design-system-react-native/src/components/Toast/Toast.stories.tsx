@@ -8,17 +8,17 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView } from 'react-native';
 
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { IconSize } from '../Icon';
-import { Spinner } from '../temp-components/Spinner';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Button } from '../Button/index.js';
+import { IconSize } from '../Icon/index.js';
+import { Spinner } from '../temp-components/Spinner/index.js';
+import { Text } from '../Text/index.js';
 
 // Internal dependencies.
-import { Toast } from './Toast';
-import { ToastSeverity } from './Toast.types';
-import type { ToastProps } from './Toast.types';
-import { Toaster, toast } from './Toaster';
+import { Toast } from './Toast.js';
+import { ToastSeverity } from './Toast.types.js';
+import type { ToastProps } from './Toast.types.js';
+import { Toaster, toast } from './Toaster.js';
 
 const meta: Meta<ToastProps> = {
   title: 'Components/Toast',

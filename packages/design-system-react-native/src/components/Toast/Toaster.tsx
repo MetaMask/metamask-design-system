@@ -22,7 +22,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
 
 // Internal dependencies.
-import { Toast } from './Toast';
 import {
   TOAST_DISMISS_DISTANCE_THRESHOLD,
   TOAST_DISMISS_MIN_DISTANCE,
@@ -32,13 +31,14 @@ import {
   TOAST_SWIPE_FAIL_OFFSET_X,
   TOAST_TOP_PADDING,
   TOAST_VISIBILITY_DURATION,
-} from './Toast.constants';
+} from './Toast.constants.js';
+import { Toast } from './Toast.js';
 import type {
   ToastOptions,
   ToastProps,
   ToasterProps,
   ToasterRef,
-} from './Toast.types';
+} from './Toast.types.js';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -239,7 +239,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
 
     const swipeGesture = useMemo(() => {
       // These gesture callbacks need explicit 'worklet' directives because this
-      // package ships a pre-built dist compiled by ts-bridge (tsc), which emits the
+      // package ships a pre-built dist compiled by tsc, which emits the
       // gesture chain as a namespaced call (react_native_gesture_handler_1.Gesture).
       // The consumer's Reanimated/Worklets Babel plugin does run over dist, but its
       // gesture auto-detection doesn't recognize that compiled namespaced form.

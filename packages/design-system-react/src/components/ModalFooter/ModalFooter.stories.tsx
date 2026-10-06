@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
-import { Box, BoxFlexDirection } from '../Box';
-import { Checkbox } from '../Checkbox';
+import { Box, BoxFlexDirection } from '../Box/index.js';
+import { Checkbox } from '../Checkbox/index.js';
 
-import { ModalFooter } from './ModalFooter';
-import { ButtonsAlignment } from './ModalFooter.types';
-import type { ModalFooterProps } from './ModalFooter.types';
+import { ModalFooter } from './ModalFooter.js';
+import { ButtonsAlignment } from './ModalFooter.types.js';
+import type { ModalFooterProps } from './ModalFooter.types.js';
 import README from './README.mdx';
 
 const meta: Meta<ModalFooterProps> = {

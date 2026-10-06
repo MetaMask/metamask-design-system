@@ -3,4 +3,4 @@ export {
   BadgeWrapperPosition,
   type BadgeWrapperCustomPosition,
   type BadgeWrapperPropsShared,
-} from './BadgeWrapper.types';
+} from './BadgeWrapper.types.js';

@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { HeaderStandardCenterColumn } from './HeaderStandardCenterColumn';
-import type { HeaderStandardCenterColumnProps } from './HeaderStandardCenterColumn.types';
+import { HeaderStandardCenterColumn } from './HeaderStandardCenterColumn.js';
+import type { HeaderStandardCenterColumnProps } from './HeaderStandardCenterColumn.types.js';
 
 const meta: Meta<HeaderStandardCenterColumnProps> = {
   title: 'Temp Components/HeaderStandardCenterColumn',

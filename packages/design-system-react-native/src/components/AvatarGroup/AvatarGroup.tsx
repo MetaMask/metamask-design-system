@@ -8,21 +8,21 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
 
-import type { AvatarAccountProps } from '../AvatarAccount';
-import { AvatarAccount } from '../AvatarAccount';
-import { AvatarBase } from '../AvatarBase';
-import type { AvatarFaviconProps } from '../AvatarFavicon';
-import { AvatarFavicon } from '../AvatarFavicon';
-import type { AvatarNetworkProps } from '../AvatarNetwork';
-import { AvatarNetwork } from '../AvatarNetwork';
-import type { AvatarTokenProps } from '../AvatarToken';
-import { AvatarToken } from '../AvatarToken';
+import type { AvatarAccountProps } from '../AvatarAccount/index.js';
+import { AvatarAccount } from '../AvatarAccount/index.js';
+import { AvatarBase } from '../AvatarBase/index.js';
+import type { AvatarFaviconProps } from '../AvatarFavicon/index.js';
+import { AvatarFavicon } from '../AvatarFavicon/index.js';
+import type { AvatarNetworkProps } from '../AvatarNetwork/index.js';
+import { AvatarNetwork } from '../AvatarNetwork/index.js';
+import type { AvatarTokenProps } from '../AvatarToken/index.js';
+import { AvatarToken } from '../AvatarToken/index.js';
 
 import {
   MAP_AVATARGROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT,
   TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS,
-} from './AvatarGroup.constants';
-import type { AvatarGroupProps } from './AvatarGroup.types';
+} from './AvatarGroup.constants.js';
+import type { AvatarGroupProps } from './AvatarGroup.types.js';
 
 export const AvatarGroup = ({
   variant,

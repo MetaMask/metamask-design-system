@@ -1,7 +1,7 @@
 import type { ButtonIconPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { IconProps } from '../Icon';
+import type { IconProps } from '../Icon/index.js';
 
 export type ButtonIconProps = ComponentProps<'button'> &
   ButtonIconPropsShared & {

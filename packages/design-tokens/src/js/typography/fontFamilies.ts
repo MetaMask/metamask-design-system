@@ -1,4 +1,4 @@
-import type { FontFamilies } from './types';
+import type { FontFamilies } from './types.js';
 
 export const fontFamilies: FontFamilies = {
   default: 'Inter',

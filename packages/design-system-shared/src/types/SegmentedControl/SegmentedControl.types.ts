@@ -1,4 +1,4 @@
-import { ButtonBaseSize } from '../ButtonBase/ButtonBase.types';
+import { ButtonBaseSize } from '../ButtonBase/ButtonBase.types.js';
 
 /**
  * SegmentedControl size options (ADR-0003).

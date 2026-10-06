@@ -1,9 +1,9 @@
 import { brandColor } from '@metamask/design-tokens';
 import type { TwConfig } from 'twrnc';
 
-import { getThemeColors } from './colors';
-import type { Theme } from './Theme.types';
-import { typographyTailwindConfig } from './typography';
+import { getThemeColors } from './colors.js';
+import type { Theme } from './Theme.types.js';
+import { typographyTailwindConfig } from './typography.js';
 
 /**
  * Extracts colors by prefix from the flattened colors object and removes the prefix from keys.
@@ -113,4 +113,4 @@ export const generateTailwindConfig = (theme: Theme): TwConfig => {
 };
 
 // Export Theme enum for consumers
-export { Theme } from './Theme.types';
+export { Theme } from './Theme.types.js';

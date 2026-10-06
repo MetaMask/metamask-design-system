@@ -1,6 +1,6 @@
 import type { SensitiveTextPropsShared } from '@metamask/design-system-shared';
 
-import type { TextProps } from '../Text/Text.types';
+import type { TextProps } from '../Text/Text.types.js';
 
 /**
  * SensitiveText component props (React platform-specific).

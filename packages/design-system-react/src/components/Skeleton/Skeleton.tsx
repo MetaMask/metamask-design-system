@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 
-import type { SkeletonProps } from './Skeleton.types';
+import type { SkeletonProps } from './Skeleton.types.js';
 
 export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
   (

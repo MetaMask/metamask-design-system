@@ -1,10 +1,10 @@
 import type { AvatarTokenPropsShared } from '@metamask/design-system-shared';
 
-import type { AvatarBaseProps } from '../AvatarBase';
+import type { AvatarBaseProps } from '../AvatarBase/index.js';
 import type {
   ImageOrSvgProps,
   ImageOrSvgSrc,
-} from '../temp-components/ImageOrSvg';
+} from '../temp-components/ImageOrSvg/index.js';
 
 /**
  * AvatarToken component props (React Native platform-specific)

@@ -9,11 +9,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Text } from './Text';
 import {
   TWCLASSMAP_TEXT_FONTWEIGHT,
   TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
-} from './Text.constants';
+} from './Text.constants.js';
+import { Text } from './Text.js';
 
 function buildTextStyleArgs({
   variant = TextVariant.BodyMd,

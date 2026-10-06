@@ -2,11 +2,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { forwardRef, useCallback } from 'react';
 import type { View } from 'react-native';
 
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { Icon, IconColor, IconName, IconSize } from '../Icon';
-import { TextField } from '../TextField';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon/index.js';
+import { Icon, IconColor, IconName, IconSize } from '../Icon/index.js';
+import { TextField } from '../TextField/index.js';
 
-import type { TextFieldSearchProps } from './TextFieldSearch.types';
+import type { TextFieldSearchProps } from './TextFieldSearch.types.js';
 
 export const TextFieldSearch = forwardRef<View, TextFieldSearchProps>(
   (

@@ -6,16 +6,16 @@ import {
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
-import { Icon, IconSize } from '../Icon';
+import { Box } from '../Box/index.js';
+import { BoxRow } from '../BoxRow/index.js';
+import { Icon, IconSize } from '../Icon/index.js';
 
 import {
   MAP_TAG_SEVERITY_BACKGROUND,
   MAP_TAG_SEVERITY_ICON_COLOR,
   MAP_TAG_SEVERITY_TEXT_COLOR,
-} from './Tag.constants';
-import type { TagProps } from './Tag.types';
+} from './Tag.constants.js';
+import type { TagProps } from './Tag.types.js';
 
 export const Tag: React.FC<TagProps> = ({
   children,

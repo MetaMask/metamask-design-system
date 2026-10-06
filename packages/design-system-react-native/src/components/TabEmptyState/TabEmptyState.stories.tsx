@@ -2,12 +2,12 @@ import { BoxBackgroundColor } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Icon, IconName, IconSize } from '../Icon';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { TabEmptyState } from './TabEmptyState';
-import type { TabEmptyStateProps } from './TabEmptyState.types';
+import { TabEmptyState } from './TabEmptyState.js';
+import type { TabEmptyStateProps } from './TabEmptyState.types.js';
 
 const meta: Meta<TabEmptyStateProps> = {
   title: 'Components/TabEmptyState',

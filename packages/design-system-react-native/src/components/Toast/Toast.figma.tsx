@@ -3,9 +3,9 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { Button } from '../Button';
+import { Button } from '../Button/index.js';
 
-import { Toast } from './Toast';
+import { Toast } from './Toast.js';
 
 import { ToastSeverity, Toaster, toast } from '.';
 

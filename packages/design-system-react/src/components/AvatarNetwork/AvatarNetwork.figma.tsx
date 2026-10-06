@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { AvatarNetwork } from './AvatarNetwork';
+import { AvatarNetwork } from './AvatarNetwork.js';
 
 import { AvatarNetworkSize } from '.';
 

@@ -15,8 +15,8 @@ import type { ViewStyle } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
-import { Box } from '../Box';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Text } from '../Text/index.js';
 
 import {
   DEFAULT_MARKS,
@@ -27,16 +27,16 @@ import {
   THUMB_LEFT_OFFSET,
   THUMB_SIZE,
   THUMB_TOP_OFFSET,
-} from './Slider.constants';
-import type { SliderProps } from './Slider.types';
+} from './Slider.constants.js';
+import type { SliderProps } from './Slider.types.js';
 import {
   buildColorStops,
   clampValueToRange,
   getDotLeftPercent,
   getTrackPercentFromValue,
   hasThemedMarkColors,
-} from './Slider.utilities';
-import { useSliderGesture } from './useSliderGesture';
+} from './Slider.utilities.js';
+import { useSliderGesture } from './useSliderGesture.js';
 
 export const Slider = ({
   value,

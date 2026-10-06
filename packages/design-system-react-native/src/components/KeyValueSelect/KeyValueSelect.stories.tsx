@@ -5,14 +5,14 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
-import { Box } from '../Box';
-import { Icon, IconName, IconSize } from '../Icon';
-import { TextVariant } from '../Text';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev.js';
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken/index.js';
+import { Box } from '../Box/index.js';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
+import { TextVariant } from '../Text/index.js';
 
-import { KeyValueSelect } from './KeyValueSelect';
-import type { KeyValueSelectProps } from './KeyValueSelect.types';
+import { KeyValueSelect } from './KeyValueSelect.js';
+import type { KeyValueSelectProps } from './KeyValueSelect.types.js';
 
 const noopPress = () => undefined;
 

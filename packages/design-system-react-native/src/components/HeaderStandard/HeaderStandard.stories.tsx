@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
-import { IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
+import { Box } from '../Box/index.js';
+import { IconName } from '../Icon/index.js';
+import { Text, TextVariant } from '../Text/index.js';
 
-import { HeaderStandard } from './HeaderStandard';
-import type { HeaderStandardProps } from './HeaderStandard.types';
+import { HeaderStandard } from './HeaderStandard.js';
+import type { HeaderStandardProps } from './HeaderStandard.types.js';
 
 const meta: Meta<HeaderStandardProps> = {
   title: 'Components/HeaderStandard',

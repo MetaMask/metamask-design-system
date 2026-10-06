@@ -9,10 +9,10 @@ import {
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef, useState } from 'react';
 
-import { BoxBackgroundColor, BoxBorderColor } from '../Box';
+import { BoxBackgroundColor, BoxBorderColor } from '../Box/index.js';
 
-import { Popover } from './Popover';
-import { PopoverPosition, PopoverRole } from './Popover.types';
+import { Popover } from './Popover.js';
+import { PopoverPosition, PopoverRole } from './Popover.types.js';
 
 jest.mock('@floating-ui/react-dom', () => {
   const actual = jest.requireActual('@floating-ui/react-dom');

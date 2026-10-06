@@ -4,11 +4,11 @@ import React, { useRef, useEffect } from 'react';
 import { Platform } from 'react-native';
 
 // External dependencies.
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
 // Internal dependencies
-import { BottomSheetDialog } from './BottomSheetDialog';
-import type { BottomSheetDialogRef } from './BottomSheetDialog.types';
+import { BottomSheetDialog } from './BottomSheetDialog.js';
+import type { BottomSheetDialogRef } from './BottomSheetDialog.types.js';
 
 const mockThemeRef = { current: 'light' };
 const mockStyle = jest.fn((...args: string[]) => args);

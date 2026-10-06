@@ -7,12 +7,12 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Box } from '../Box';
-import { IconAlert } from '../IconAlert';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { IconAlert } from '../IconAlert/index.js';
+import { Text } from '../Text/index.js';
 
-import { MAP_HELPTEXT_SEVERITY_COLOR } from './HelpText.constants';
-import type { HelpTextProps } from './HelpText.types';
+import { MAP_HELPTEXT_SEVERITY_COLOR } from './HelpText.constants.js';
+import type { HelpTextProps } from './HelpText.types.js';
 
 export const HelpText: React.FC<HelpTextProps> = ({
   severity,

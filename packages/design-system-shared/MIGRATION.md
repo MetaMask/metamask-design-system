@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
+  - [ESM-only entry point](#esm-only-entry-point)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
@@ -13,6 +14,14 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
+
+### ESM-only entry point
+
+<a id="esm-only-entry-point"></a>
+
+`@metamask/design-system-shared` publishes a single ECMAScript module. `package.json` sets `"type": "module"`, and `exports` points at `./dist/index.js` with types at `./dist/index.d.ts`. The CommonJS `require` entry is removed.
+
+Import the package with `import`. On Node 24, `require()` can load the module. Named exports are properties of the returned module namespace.
 
 ### From version 0.34.0 to 0.35.0
 

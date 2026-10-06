@@ -3,6 +3,8 @@
  * https://jestjs.io/docs/configuration
  */
 
+const path = require('path');
+
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -80,6 +82,9 @@ module.exports = {
   // Here we ensure that Jest resolves `@metamask/*` imports to the uncompiled source code for packages that live in this repo.
   // NOTE: This must be synchronized with the `paths` option in `tsconfig.packages.json`.
   moduleNameMapper: {
+    // Source files import relative paths with a `.js` extension so Node can
+    // load the ESM build. Jest resolves the TypeScript sources, so strip it.
+    '^(\\.{1,2}/.*)\\.js$': '$1',
     '^@metamask/(.+)$': [
       '<rootDir>/../$1/src',
       // Some @metamask/* packages we are referencing aren't in this monorepo,
@@ -184,8 +189,27 @@ module.exports = {
   // Setting this value to "fake" allows the use of fake timers for functions such as "setTimeout"
   // timers: "real",
 
-  // A map from regular expressions to paths to transformers
-  // transform: undefined,
+  // The packages are ESM, but Jest runs the tests as CommonJS. Overriding the
+  // module settings here compiles the sources to CommonJS for tests without
+  // affecting the published build.
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: {
+          module: 'CommonJS',
+          moduleResolution: 'Node',
+          verbatimModuleSyntax: false,
+          // Node resolution does not read the ESM `exports` field, so point
+          // workspace packages at their source the same way `paths` does.
+          baseUrl: path.resolve(__dirname),
+          paths: {
+            '@metamask/*': ['packages/*/src'],
+          },
+        },
+      },
+    ],
+  },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: undefined

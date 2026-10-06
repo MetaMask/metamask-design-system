@@ -4,16 +4,16 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { AvatarBase, AvatarBaseShape } from '../AvatarBase';
-import { Icon } from '../Icon';
+import { twMerge } from '../../utils/tw-merge.js';
+import { AvatarBase, AvatarBaseShape } from '../AvatarBase/index.js';
+import { Icon } from '../Icon/index.js';
 
 import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
-} from './AvatarIcon.constants';
-import type { AvatarIconProps } from './AvatarIcon.types';
+} from './AvatarIcon.constants.js';
+import type { AvatarIconProps } from './AvatarIcon.types.js';
 
 export const AvatarIcon = forwardRef<HTMLDivElement, AvatarIconProps>(
   (

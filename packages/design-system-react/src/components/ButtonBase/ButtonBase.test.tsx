@@ -2,7 +2,7 @@ import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { ButtonBase } from './ButtonBase';
+import { ButtonBase } from './ButtonBase.js';
 
 describe('ButtonBase', () => {
   it('renders children correctly', () => {

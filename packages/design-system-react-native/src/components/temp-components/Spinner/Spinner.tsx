@@ -9,12 +9,12 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 
-import type { IconProps } from '../../Icon';
-import { Icon, IconColor, IconName, IconSize } from '../../Icon';
-import type { TextProps } from '../../Text';
-import { Text, TextVariant, TextColor } from '../../Text';
+import type { IconProps } from '../../Icon/index.js';
+import { Icon, IconColor, IconName, IconSize } from '../../Icon/index.js';
+import type { TextProps } from '../../Text/index.js';
+import { Text, TextVariant, TextColor } from '../../Text/index.js';
 
-import type { SpinnerProps } from './Spinner.types';
+import type { SpinnerProps } from './Spinner.types.js';
 
 export const Spinner = ({
   color = IconColor.IconDefault,
@@ -40,9 +40,12 @@ export const Spinner = ({
   }, []);
 
   // Define the animated style
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${rotation.value % 360}deg` }],
-  }), []);
+  const animatedStyle = useAnimatedStyle(
+    () => ({
+      transform: [{ rotate: `${rotation.value % 360}deg` }],
+    }),
+    [],
+  );
 
   const finalSpinnerIconProps: IconProps = {
     size: IconSize.Md,

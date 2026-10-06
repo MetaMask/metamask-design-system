@@ -6,7 +6,7 @@ import {
 } from 'react-native-reanimated';
 
 // Internal dependencies.
-import type { UseHeaderStandardAnimatedReturn } from './HeaderStandardAnimated.types';
+import type { UseHeaderStandardAnimatedReturn } from './HeaderStandardAnimated.types.js';
 
 /**
  * Hook for managing HeaderStandardAnimated scroll-linked animations.

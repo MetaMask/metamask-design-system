@@ -3,13 +3,13 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
-import { Icon, IconName } from '../Icon';
-import { Text } from '../Text';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev.js';
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken/index.js';
+import { Icon, IconName } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { ListItemSelect } from './ListItemSelect';
-import type { ListItemSelectProps } from './ListItemSelect.types';
+import { ListItemSelect } from './ListItemSelect.js';
+import type { ListItemSelectProps } from './ListItemSelect.types.js';
 
 const noopPress = () => undefined;
 

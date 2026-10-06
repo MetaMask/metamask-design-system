@@ -1,10 +1,10 @@
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Icon, IconName, IconSize } from '../Icon';
-import { FontWeight, Text, TextColor, TextVariant } from '../Text';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
+import { FontWeight, Text, TextColor, TextVariant } from '../Text/index.js';
 
-import { ActionListItem } from './ActionListItem';
+import { ActionListItem } from './ActionListItem.js';
 
 const SAMPLE_ACTIONLISTITEM_PROPS = {
   label: 'Settings',

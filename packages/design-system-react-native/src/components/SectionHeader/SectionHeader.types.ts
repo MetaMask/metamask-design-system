@@ -3,9 +3,9 @@ import type { SectionHeaderPropsShared } from '@metamask/design-system-shared';
 import type { PressableProps, ViewProps } from 'react-native';
 
 // Internal dependencies.
-import type { BoxRowProps } from '../BoxRow/BoxRow.types';
-import type { IconProps } from '../Icon';
-import type { TextProps } from '../Text/Text.types';
+import type { BoxRowProps } from '../BoxRow/BoxRow.types.js';
+import type { IconProps } from '../Icon/index.js';
+import type { TextProps } from '../Text/Text.types.js';
 
 type SectionHeaderPropsBase = SectionHeaderPropsShared & {
   /**

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
-import { Box, BoxFlexDirection } from '../Box';
-import { TextFieldSize, TextFieldType } from '../TextField';
+import { Box, BoxFlexDirection } from '../Box/index.js';
+import { TextFieldSize, TextFieldType } from '../TextField/index.js';
 
-import { FormTextField } from './FormTextField';
-import type { FormTextFieldProps } from './FormTextField.types';
+import { FormTextField } from './FormTextField.js';
+import type { FormTextFieldProps } from './FormTextField.types.js';
 import README from './README.mdx';
 
 const meta: Meta<FormTextFieldProps> = {

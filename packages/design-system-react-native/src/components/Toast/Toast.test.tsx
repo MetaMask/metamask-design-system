@@ -15,8 +15,8 @@ import React from 'react';
 import { Text as RNText } from 'react-native';
 
 // Internal dependencies.
-import { Toast } from './Toast';
-import { ToastSeverity } from './Toast.types';
+import { Toast } from './Toast.js';
+import { ToastSeverity } from './Toast.types.js';
 
 jest.mock('../Icon', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
