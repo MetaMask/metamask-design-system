@@ -87,7 +87,7 @@
     "ws@7.4.6": "^7.5.10"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
+    "@babel/core": "^7.29.7",
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@figma/code-connect": "^1.4.9",
