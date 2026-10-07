@@ -90,16 +90,16 @@ This guide provides detailed instructions for migrating your project from one ve
 
 Supported peers now match the React Native 0.86.3 / Expo SDK 57 / React 19.2.3 stack in MetaMask Mobile. `react-native-svg` is now a required peer because `Icon` and image components import it.
 
-| Peer | Before (0.51.0) | After (0.52.0) |
-| --- | --- | --- |
-| `react` | `>=18.2.0` | `>=19.2.3` |
-| `react-native` | `>=0.76.0` | `>=0.86.3` |
-| `expo-image` | `>=3.0.0` | `>=57.0.5` |
-| `react-native-gesture-handler` | `>=2.25.0` | `>=2.32.0` |
-| `react-native-reanimated` | `>=4.2.0` | `>=4.5.3` |
-| `react-native-safe-area-context` | `>=5.0.0` | `>=5.8.0` |
-| `react-native-worklets` | `>=0.7.4` | `>=0.10.4` |
-| `react-native-svg` | not declared | `>=15.15.5` |
+| Peer                             | Before (0.51.0) | After (0.52.0) |
+| -------------------------------- | --------------- | -------------- |
+| `react`                          | `>=18.2.0`      | `>=19.2.3`     |
+| `react-native`                   | `>=0.76.0`      | `>=0.86.3`     |
+| `expo-image`                     | `>=3.0.0`       | `>=57.0.5`     |
+| `react-native-gesture-handler`   | `>=2.25.0`      | `>=2.32.0`     |
+| `react-native-reanimated`        | `>=4.2.0`       | `>=4.5.3`      |
+| `react-native-safe-area-context` | `>=5.0.0`       | `>=5.8.0`      |
+| `react-native-worklets`          | `>=0.7.4`       | `>=0.10.4`     |
+| `react-native-svg`               | not declared    | `>=15.15.5`    |
 
 `@metamask/design-system-twrnc-preset` raises its `react` peer to `>=19.2.3` in the same release. See the [twrnc migration guide](../design-system-twrnc-preset/MIGRATION.md#from-version-0120-to-0130).
 
