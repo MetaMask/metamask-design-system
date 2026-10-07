@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.52.0]
+
 ### Uncategorized
 
 - chore: deprecate ButtonHero in favor of primary Button ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
@@ -844,7 +846,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.51.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.52.0...HEAD
+[0.52.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.51.0...@metamask/design-system-react-native@0.52.0
 [0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.50.0...@metamask/design-system-react-native@0.51.0
 [0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.2...@metamask/design-system-react-native@0.50.0
 [0.49.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.1...@metamask/design-system-react-native@0.49.2
