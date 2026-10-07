@@ -17,14 +17,16 @@ or
 This package requires the following peer dependencies to be installed in your project:
 
 ```bash
-yarn add react@^18.2.0 react-native@0.72.15 twrnc@^4.5.1
+yarn add react@>=19.2.3 react-native@>=0.86.3 twrnc@^4.5.1
 ```
 
 or
 
 ```bash
-npm install react@^18.2.0 react-native@0.72.15 twrnc@^4.5.1
+npm install react@>=19.2.3 react-native@>=0.86.3 twrnc@^4.5.1
 ```
+
+See the [migration guide](./MIGRATION.md#from-version-0120-to-0130).
 
 ## Usage
 
