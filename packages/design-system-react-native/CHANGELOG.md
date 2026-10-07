@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.52.0]
 
-### Uncategorized
+### Changed
 
-- chore: deprecate ButtonHero in favor of primary Button ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
-- fix(security): upgrade Babel parents past CVE-2026-44728 ([#1571](https://github.com/MetaMask/metamask-design-system/pull/1571))
-- chore: align React Native 0.86.3 / Expo SDK 57 / React 19.2.3 with metamask-mobile ([#1553](https://github.com/MetaMask/metamask-design-system/pull/1553))
+- Deprecated `ButtonHero` in favor of `Button` with `variant={ButtonVariant.Primary}` ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
+  - Primary is the default `Button` variant, so `variant` can be omitted
+  - `ButtonHero` still works and will be removed in a future major version
 
 ## [0.51.0]
 
