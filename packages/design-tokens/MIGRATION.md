@@ -2,7 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
-- [From version 11.x to 12.0.0](#from-version-11x-to-1200)
+- [From version 11.x to 0.X.0](#from-version-11x-to-0x0)
 - [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
 - [From version 8.x to 9.0.0](#from-version-8x-to-900)
@@ -15,7 +15,7 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
 
-## From version 11.x to 12.0.0
+## From version 11.x to 0.X.0
 
 Accent and hero typefaces change from MM Sans and MM Poly to Grotzec Cond. Consumers must bundle the Grotzec Cond Bold font file; the token values alone do not ship font binaries.
 

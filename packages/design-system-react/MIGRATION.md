@@ -48,7 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.46.x to 0.47.0](#from-version-046x-to-0470)
+  - [From version 0.46.x to 0.X.0](#from-version-046x-to-0x0)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -3632,9 +3632,9 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
-### From version 0.46.x to 0.47.0
+### From version 0.46.x to 0.X.0
 
-<a id="from-version-046x-to-0470"></a>
+<a id="from-version-046x-to-0x0"></a>
 
 <a id="accent-and-hero-typefaces-grotzec-cond"></a>
 
@@ -3657,7 +3657,7 @@ Take `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](..
 ```
 
 ```css
-/* After (0.47.0) */
+/* After (0.X.0) */
 @font-face {
   font-family: 'Grotzec Cond';
   font-style: normal;
@@ -3666,7 +3666,7 @@ Take `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](..
 }
 ```
 
-See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-11x-to-1200) for the full weight list.
+See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-11x-to-0x0) for the full weight list.
 
 **Impact:** No component code changes are required beyond swapping the font assets. Accent and hero text render as Bold at every weight, and Grotzec Cond's condensed metrics will change wrapping.
 
