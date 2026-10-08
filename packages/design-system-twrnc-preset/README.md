@@ -26,7 +26,7 @@ or
 npm install react@>=19.2.3 react-native@>=0.86.3 twrnc@^4.5.1
 ```
 
-See the [migration guide](./MIGRATION.md#from-version-0120-to-0130).
+See the [migration guide](./MIGRATION.md#from-version-0x0-to-0y0).
 
 ## Usage
 
