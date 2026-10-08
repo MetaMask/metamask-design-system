@@ -26,7 +26,7 @@ or
 npm install react@>=19.2.3 react-native@>=0.86.3 expo-image@>=57.0.5 react-native-gesture-handler@>=2.32.0 react-native-reanimated@>=4.5.3 react-native-safe-area-context@>=5.8.0 react-native-svg@>=15.15.5 react-native-worklets@>=0.10.4
 ```
 
-**Note:** These floors match MetaMask Mobile's React Native 0.86.3 / Expo SDK 57 stack. See the [migration guide](./MIGRATION.md#from-version-0510-to-0520).
+**Note:** These floors match MetaMask Mobile's React Native 0.86.3 / Expo SDK 57 stack. See the [migration guide](./MIGRATION.md#from-version-0x0-to-0y0).
 
 ## Contributing
 

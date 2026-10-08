@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
+- [From version 0.X.0 to 0.Y.0](#from-version-0x0-to-0y0)
 - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
 - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
@@ -55,7 +55,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
+  - [From version 0.X.0 to 0.Y.0](#from-version-0x0-to-0y0)
   - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
   - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
@@ -82,9 +82,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.51.0 to 0.52.0
+### From version 0.X.0 to 0.Y.0
 
-<a id="from-version-0510-to-0520"></a>
+<a id="from-version-0x0-to-0y0"></a>
 
 #### Peer dependencies aligned with MetaMask Mobile
 
@@ -92,7 +92,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 Supported peers now match the React Native 0.86.3 / Expo SDK 57 / React 19.2.3 stack in MetaMask Mobile. `react-native-svg` is now a required peer because `Icon` and image components import it.
 
-| Peer                             | Before (0.51.0) | After (0.52.0) |
+| Peer                             | Before (0.X.0) | After (0.Y.0) |
 | -------------------------------- | --------------- | -------------- |
 | `react`                          | `>=18.2.0`      | `>=19.2.3`     |
 | `react-native`                   | `>=0.76.0`      | `>=0.86.3`     |
@@ -103,7 +103,7 @@ Supported peers now match the React Native 0.86.3 / Expo SDK 57 / React 19.2.3 s
 | `react-native-worklets`          | `>=0.7.4`       | `>=0.10.4`     |
 | `react-native-svg`               | not declared    | `>=15.15.5`    |
 
-`@metamask/design-system-twrnc-preset` raises its `react` peer to `>=19.2.3` in the same release. See the [twrnc migration guide](../design-system-twrnc-preset/MIGRATION.md#from-version-0120-to-0130).
+`@metamask/design-system-twrnc-preset` raises its `react` peer to `>=19.2.3` in the same release. See the [twrnc migration guide](../design-system-twrnc-preset/MIGRATION.md#from-version-0x0-to-0y0).
 
 **Migration:**
 
