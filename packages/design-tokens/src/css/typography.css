@@ -4,8 +4,8 @@
 :root {
   /* font family */
   --font-family-default: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-accent: 'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-hero: 'MMPoly', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-accent: 'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-hero: 'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   /* font sizes */
   --font-size-base: 16px;
   --font-size-1: 0.625rem;

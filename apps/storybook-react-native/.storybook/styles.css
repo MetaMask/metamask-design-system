@@ -46,19 +46,6 @@ body {
 }
 
 @font-face {
-  font-family: 'MMSans-Regular';
-  src: url('/fonts/MMSans/MMSans-Regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'MMSans-Medium';
-  src: url('/fonts/MMSans/MMSans-Medium.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'MMSans-Bold';
-  src: url('/fonts/MMSans/MMSans-Bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'MMPoly-Regular';
-  src: url('/fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
+  font-family: 'GrotzecCond-Bold';
+  src: url('/fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
 }

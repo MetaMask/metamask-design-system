@@ -124,8 +124,8 @@ export const FontFamilyStory: Story = {
   render: () => (
     <View>
       <Text fontFamily={FontFamily.Default}>Default (Inter)</Text>
-      <Text fontFamily={FontFamily.Accent}>Accent (MM Sans)</Text>
-      <Text fontFamily={FontFamily.Hero}>Hero (MM Poly)</Text>
+      <Text fontFamily={FontFamily.Accent}>Accent (Grotzec Cond)</Text>
+      <Text fontFamily={FontFamily.Hero}>Hero (Grotzec Cond)</Text>
     </View>
   ),
   name: 'Font Family',
