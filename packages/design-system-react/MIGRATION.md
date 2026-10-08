@@ -3642,6 +3642,10 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 `FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. This comes from `@metamask/design-tokens`, where `--font-family-accent` and `--font-family-hero` changed value. The `font-accent` and `font-hero` utility classes, the `FontFamily` enum, and every `Text` prop are unchanged. `FontFamily.Default` remains Inter.
 
+`FontFamily.Accent` remains available in this release. It is likely to be deprecated in a future version, because accent and hero now use the same typeface.
+
+Accent is likely to be deprecated in a future version. `FontFamily.Accent` stays available in this release. New usage should prefer `FontFamily.Hero`, which now uses the same typeface.
+
 **Migration:**
 
 Take `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) and replace the MM Sans and MM Poly `@font-face` rules. Only the Bold cut is available, so declare it at weights 400, 500, and 600. Keep the `LICENSE` in that directory with the font file. Grotzec Condensed Bold is commercial software licensed to ConsenSys for the MetaMask application only, and it is excluded from the repository MIT license. See the root [`LICENSE`](../../LICENSE).

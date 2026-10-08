@@ -90,6 +90,8 @@ This guide provides detailed instructions for migrating your project from one ve
 
 `FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. React Native resolves fonts by **PostScript name**, so `@metamask/design-system-twrnc-preset` maps each weight to a font name. Those names changed. Only the Bold cut is available, so every accent and hero weight uses `GrotzecCond-Bold`.
 
+`FontFamily.Accent` remains available in this release. It is likely to be deprecated in a future version, because accent and hero now use the same typeface.
+
 | twrnc class           | Before           | After              |
 | --------------------- | ---------------- | ------------------ |
 | `font-accent-regular` | `MMSans-Regular` | `GrotzecCond-Bold` |
@@ -98,6 +100,8 @@ This guide provides detailed instructions for migrating your project from one ve
 | `font-hero-regular`   | `MMPoly-Regular` | `GrotzecCond-Bold` |
 
 `default-*` (Inter) is unchanged, as is the `Text` component API. `font-hero-medium` and `font-hero-bold` were not mapped before this release and still are not.
+
+Accent is likely to be deprecated in a future version. The accent weight mappings stay available in this release. New usage should prefer hero, which now uses the same typeface. `font-hero-medium` and `font-hero-bold` are still unmapped, so a later deprecation would need those weights if accent's weight scale is the one to keep.
 
 **Migration:**
 

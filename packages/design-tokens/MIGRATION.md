@@ -30,6 +30,10 @@ Accent and hero typefaces change from MM Sans and MM Poly to Grotzec Cond. Consu
 
 Only the Bold cut shipped. On the web, weights 400, 500, and 600 all point at that file, so regular, medium, and bold accent and hero text render as Bold. On React Native, every accent and hero weight resolves to the PostScript name `GrotzecCond-Bold`.
 
+`fontFamilies.accent` remains available in this release. The accent role is likely to be deprecated in a future version, because accent and hero now use the same typeface.
+
+Accent is likely to be deprecated in a future version. Both roles now use the same typeface, but accent stays in this release because it is still part of the public API. New usage should prefer hero.
+
 ### Migration
 
 Replace the MM Sans and MM Poly font files with Grotzec Cond Bold and update your `@font-face` declarations. The web file is in [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) (`.woff2`) and the React Native file is in [`apps/storybook-react-native/fonts/GrotzecCond`](../../apps/storybook-react-native/fonts/GrotzecCond) (`.otf`).
