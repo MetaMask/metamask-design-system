@@ -4,11 +4,11 @@ This guide describes breaking changes in `@metamask/design-system-twrnc-preset`.
 
 ## Table of Contents
 
-- [From version 0.12.0 to 0.13.0](#from-version-0120-to-0130)
+- [From version 0.X.0 to 0.Y.0](#from-version-0x0-to-0y0)
 
-## From version 0.12.0 to 0.13.0
+## From version 0.X.0 to 0.Y.0
 
-<a id="from-version-0120-to-0130"></a>
+<a id="from-version-0x0-to-0y0"></a>
 
 ### React peer dependency
 
