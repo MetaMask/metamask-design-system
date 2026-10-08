@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.46.x to 0.47.0](#from-version-046x-to-0470)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -3630,6 +3631,44 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.46.x to 0.47.0
+
+<a id="from-version-046x-to-0470"></a>
+
+<a id="accent-and-hero-typefaces-grotzec-cond"></a>
+
+#### Accent and hero typefaces: MM Sans and MM Poly to Grotzec Cond
+
+`FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. This comes from `@metamask/design-tokens`, where `--font-family-accent` and `--font-family-hero` changed value. The `font-accent` and `font-hero` utility classes, the `FontFamily` enum, and every `Text` prop are unchanged. `FontFamily.Default` remains Inter.
+
+**Migration:**
+
+Take `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) and replace the MM Sans and MM Poly `@font-face` rules. Only the Bold cut is available, so declare it at weights 400, 500, and 600. Keep the `LICENSE` in that directory with the font file. Grotzec Condensed Bold is commercial software licensed to ConsenSys for the MetaMask application only, and it is excluded from the repository MIT license. See the root [`LICENSE`](../../LICENSE).
+
+```css
+/* Before (0.46.x) */
+@font-face {
+  font-family: 'MMSans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/MMSans/MMSans-Bold.woff2') format('woff2');
+}
+```
+
+```css
+/* After (0.47.0) */
+@font-face {
+  font-family: 'Grotzec Cond';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
+}
+```
+
+See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-11x-to-1200) for the full weight list.
+
+**Impact:** No component code changes are required beyond swapping the font assets. Accent and hero text render as Bold at every weight, and Grotzec Cond's condensed metrics will change wrapping.
 
 ### From version 0.40.0 to 0.41.0
 

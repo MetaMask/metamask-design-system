@@ -2,6 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 11.x to 12.0.0](#from-version-11x-to-1200)
 - [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
 - [From version 8.x to 9.0.0](#from-version-8x-to-900)
@@ -13,6 +14,64 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 11.x to 12.0.0
+
+Accent and hero typefaces change from MM Sans and MM Poly to Grotzec Cond. Consumers must bundle the Grotzec Cond Bold font file; the token values alone do not ship font binaries.
+
+### What changed
+
+- `--font-family-accent` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMSans', ...`)
+- `--font-family-hero` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMPoly', ...`)
+- `fontFamilies.accent` and `fontFamilies.hero` are now `'Grotzec Cond'`
+- The Figma tokens `global.fontFamilies.accent` and `global.fontFamilies.hero` are now `Grotzec Cond`
+
+`--font-family-default` (Inter) is unchanged. No font size, line height, weight, or letter spacing token changed.
+
+Only the Bold cut shipped. On the web, weights 400, 500, and 600 all point at that file, so regular, medium, and bold accent and hero text render as Bold. On React Native, every accent and hero weight resolves to the PostScript name `GrotzecCond-Bold`.
+
+### Migration
+
+Replace the MM Sans and MM Poly font files with Grotzec Cond Bold and update your `@font-face` declarations. The web file is in [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) (`.woff2`) and the React Native file is in [`apps/storybook-react-native/fonts/GrotzecCond`](../../apps/storybook-react-native/fonts/GrotzecCond) (`.otf`).
+
+Grotzec Condensed Bold is commercial font software owned by Secretonix Lda, trading as Feliciano Type. It is licensed to ConsenSys Software Inc. solely for use within the MetaMask application. It is not open source and is excluded from this repository's MIT license. Any directory that contains the font files must include the notice in that directory's `LICENSE`, and the repository license must keep the excluded-font carve-out. See the root [`LICENSE`](../../LICENSE).
+
+```css
+/* Before */
+@font-face {
+  font-family: 'MMSans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/MMSans/MMSans-Regular.woff2') format('woff2');
+}
+```
+
+```css
+/* After */
+@font-face {
+  font-family: 'Grotzec Cond';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
+}
+```
+
+Declare the same file at each weight the scale still requests:
+
+| Weight | Style  | File               |
+| ------ | ------ | ------------------ |
+| 400    | normal | `GrotzecCond-Bold` |
+| 500    | normal | `GrotzecCond-Bold` |
+| 600    | normal | `GrotzecCond-Bold` |
+
+Hero previously used MM Poly the same way: one file declared at 400, 500, and 600. Accent previously used three MM Sans cuts (Regular, Medium, and Bold). Those files are removed.
+
+### Impact
+
+- **Web consumers:** Swap the font binaries and `@font-face` rules. `font-accent` and `font-hero` still select those roles; the typeface behind both is now Grotzec Cond.
+- **React Native consumers:** Font family names are resolved per weight. See [`@metamask/design-system-react-native`](../design-system-react-native/MIGRATION.md#accent-and-hero-typefaces-mm-sans-and-mm-poly-to-grotzec-cond).
+- **Anyone hardcoding `'MMSans'` or `'MMPoly'`:** Search for those literals outside token references and update them.
+- Expect reflow. Grotzec Cond is a condensed bold display face, so accent and hero text will be narrower and heavier than MM Sans and MM Poly.
 
 ## From version 10.x to 11.0.0
 
