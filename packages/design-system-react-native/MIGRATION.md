@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.51.x to 0.52.0](#from-version-051x-to-0520)
+- [From version 0.51.0 to 0.X.0](#from-version-0510-to-0x0)
 - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
 - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
@@ -54,7 +54,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.51.x to 0.52.0](#from-version-051x-to-0520)
+  - [From version 0.51.0 to 0.X.0](#from-version-0510-to-0x0)
   - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
   - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
@@ -80,9 +80,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.51.x to 0.52.0
+### From version 0.51.0 to 0.X.0
 
-<a id="from-version-051x-to-0520"></a>
+<a id="from-version-0510-to-0x0"></a>
 
 <a id="accent-and-hero-typefaces-mm-sans-and-mm-poly-to-grotzec-cond"></a>
 
@@ -104,7 +104,7 @@ This guide provides detailed instructions for migrating your project from one ve
 Take `GrotzecCond-Bold.otf` from [`apps/storybook-react-native/fonts/GrotzecCond`](../../apps/storybook-react-native/fonts/GrotzecCond) and register it under `GrotzecCond-Bold`. Remove the MM Sans and MM Poly registrations. Keep the `LICENSE` in that directory with the font file. Grotzec Condensed Bold is commercial software licensed to ConsenSys for the MetaMask application only, and it is excluded from the repository MIT license. See the root [`LICENSE`](../../LICENSE).
 
 ```tsx
-// Before (0.51.x)
+// Before (0.51.0)
 import { useFonts } from 'expo-font';
 
 useFonts({
@@ -116,7 +116,7 @@ useFonts({
 ```
 
 ```tsx
-// After (0.52.0)
+// After (0.X.0)
 import { useFonts } from 'expo-font';
 
 useFonts({
@@ -124,7 +124,7 @@ useFonts({
 });
 ```
 
-See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-11x-to-1200) for the web `@font-face` setup. React Native web Storybook loads the same cut from [`apps/storybook-react-native/public/fonts/GrotzecCond`](../../apps/storybook-react-native/public/fonts/GrotzecCond) (`.woff2`) under the family name `GrotzecCond-Bold`.
+See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-1110-to-x00) for the web `@font-face` setup. React Native web Storybook loads the same cut from [`apps/storybook-react-native/public/fonts/GrotzecCond`](../../apps/storybook-react-native/public/fonts/GrotzecCond) (`.woff2`) under the family name `GrotzecCond-Bold`.
 
 **Impact:** Accent and hero text renders with the system fallback until `GrotzecCond-Bold` is registered, so this must ship together with the asset swap. Regular, medium, and bold accent text, and regular hero text, all render as Bold. Expect reflow, since Grotzec Cond is narrower and heavier than MM Sans and MM Poly.
 
