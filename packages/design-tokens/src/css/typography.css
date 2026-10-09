@@ -36,7 +36,7 @@
   --letter-spacing-0: 0;
   --letter-spacing-1: 2.5%;
   /* Grotzec (accent and hero) tracking, every size */
-  --letter-spacing-grotzec: -2%;
+  --letter-spacing-grotzec: -0.02em;
   /* typography scale small screen */
   --typography-s-display-lg-font-size: var(--font-size-8);
   --typography-s-display-lg-line-height: var(--line-height-7);
