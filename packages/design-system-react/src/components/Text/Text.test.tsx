@@ -92,6 +92,29 @@ describe('Text Component', () => {
         );
       });
     });
+
+    it.each([FontFamily.Accent, FontFamily.Hero])(
+      'uses Grotzec tracking for %s at every size',
+      (family) => {
+        const { container } = render(<Text fontFamily={family}>Test</Text>);
+        expect(container.firstChild).toHaveClass(
+          'tracking-grotzec',
+          'md:tracking-grotzec',
+        );
+        expect(container.firstChild).not.toHaveClass(
+          'tracking-s-body-md',
+          'md:tracking-l-body-md',
+        );
+      },
+    );
+
+    it('keeps variant tracking for the default family', () => {
+      const { container } = render(
+        <Text fontFamily={FontFamily.Default}>Test</Text>,
+      );
+      expect(container.firstChild).toHaveClass('tracking-s-body-md');
+      expect(container.firstChild).not.toHaveClass('tracking-grotzec');
+    });
   });
 
   describe('Font Style', () => {

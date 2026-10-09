@@ -48,8 +48,8 @@ export const FontFamily: StoryFn<typeof Text> = () => {
   return (
     <>
       <Text style={styles.default}>Inter</Text>
-      <Text style={styles.accent}>MM Sans</Text>
-      <Text style={styles.hero}>MM Poly</Text>
+      <Text style={styles.accent}>Grotzec Cond</Text>
+      <Text style={styles.hero}>Grotzec Cond</Text>
     </>
   );
 };
