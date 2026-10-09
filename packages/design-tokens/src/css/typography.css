@@ -4,8 +4,8 @@
 :root {
   /* font family */
   --font-family-default: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-accent: 'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-hero: 'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-accent: 'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-hero: 'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   /* font sizes */
   --font-size-base: 16px;
   --font-size-1: 0.625rem;
@@ -35,6 +35,8 @@
   /* letter spacing */
   --letter-spacing-0: 0;
   --letter-spacing-1: 2.5%;
+  /* Grotzec (accent and hero) tracking, every size */
+  --letter-spacing-grotzec: -2%;
   /* typography scale small screen */
   --typography-s-display-lg-font-size: var(--font-size-8);
   --typography-s-display-lg-line-height: var(--line-height-7);

@@ -21,14 +21,16 @@ Accent and hero typefaces change from MM Sans and MM Poly to Grotzec Cond. Consu
 
 ### What changed
 
-- `--font-family-accent` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMSans', ...`)
-- `--font-family-hero` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMPoly', ...`)
+- `--font-family-accent` is now `'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMSans', ...`)
+- `--font-family-hero` is now `'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMPoly', ...`)
 - `fontFamilies.accent` and `fontFamilies.hero` are now `'Grotzec Cond'`
 - The Figma tokens `global.fontFamilies.accent` and `global.fontFamilies.hero` are now `Grotzec Cond`
 
-`--font-family-default` (Inter) is unchanged. No font size, line height, weight, or letter spacing token changed.
+`--font-family-default` (Inter) is unchanged. No font size, line height, or weight token changed. `--letter-spacing-grotzec` is `-2%`. `Text` applies it for Accent and Hero at every size. The letter-spacing scale used by other styles is unchanged.
 
 Only the Bold cut shipped. On the web, weights 400, 500, and 600 all point at that file, so regular, medium, and bold accent and hero text render as Bold. On React Native, every accent and hero weight resolves to the PostScript name `GrotzecCond-Bold`.
+
+Oswald Bold is the fallback for characters Grotzec Cond does not include, including Cyrillic and Vietnamese. It is the [SIL Open Font License](https://scripts.sil.org/OFL) cut from Google Fonts. The web file is in [`apps/storybook-react/fonts/Oswald`](../../apps/storybook-react/fonts/Oswald) (`.woff2`) and the React Native file is in [`apps/storybook-react-native/fonts/Oswald`](../../apps/storybook-react-native/fonts/Oswald) (`.ttf`). Keep the `OFL.txt` in that directory with the font file.
 
 `fontFamilies.accent` remains available in this release. The accent role is likely to be deprecated in a future version, because accent and hero now use the same typeface.
 
@@ -58,9 +60,18 @@ Grotzec Condensed Bold is commercial font software owned by Secretonix Lda, trad
   font-weight: 400;
   src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400 600;
+  src: url('fonts/Oswald/Oswald-Bold.woff2') format('woff2');
+}
 ```
 
-Declare the same file at each weight the scale still requests:
+Add the `unicode-range` from [`apps/storybook-react/tailwind.css`](../../apps/storybook-react/tailwind.css) so Oswald is used for characters Grotzec Cond does not cover, including Cyrillic and Vietnamese.
+
+Declare the Grotzec Cond file at each weight the scale still requests:
 
 | Weight | Style  | File               |
 | ------ | ------ | ------------------ |
@@ -72,7 +83,7 @@ Hero previously used MM Poly the same way: one file declared at 400, 500, and 60
 
 ### Impact
 
-- **Web consumers:** Swap the font binaries and `@font-face` rules. `font-accent` and `font-hero` still select those roles; the typeface behind both is now Grotzec Cond.
+- **Web consumers:** Swap the font binaries and `@font-face` rules. `font-accent` and `font-hero` still select those roles; the typeface behind both is now Grotzec Cond, with Oswald for characters that face does not include.
 - **React Native consumers:** Font family names are resolved per weight. See [`@metamask/design-system-react-native`](../design-system-react-native/MIGRATION.md#accent-and-hero-typefaces-mm-sans-and-mm-poly-to-grotzec-cond).
 - **Anyone hardcoding `'MMSans'` or `'MMPoly'`:** Search for those literals outside token references and update them.
 - Expect reflow. Grotzec Cond is a condensed bold display face, so accent and hero text will be narrower and heavier than MM Sans and MM Poly.

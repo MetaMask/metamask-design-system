@@ -70,6 +70,7 @@ export const typography = {
     'l-button-label-lg': 'var(--typography-l-button-label-lg-letter-spacing)',
     'l-amount-display-lg':
       'var(--typography-l-amount-display-lg-letter-spacing)',
+    grotzec: 'var(--letter-spacing-grotzec)',
   },
   fontWeight: {
     // agnostic weights

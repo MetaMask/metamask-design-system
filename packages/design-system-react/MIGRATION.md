@@ -3640,7 +3640,7 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 #### Accent and hero typefaces: MM Sans and MM Poly to Grotzec Cond
 
-`FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. This comes from `@metamask/design-tokens`, where `--font-family-accent` and `--font-family-hero` changed value. The `font-accent` and `font-hero` utility classes, the `FontFamily` enum, and every `Text` prop are unchanged. `FontFamily.Default` remains Inter.
+`FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. This comes from `@metamask/design-tokens`, where `--font-family-accent` and `--font-family-hero` changed value. The `font-accent` and `font-hero` utility classes, the `FontFamily` enum, and every `Text` prop are unchanged. `FontFamily.Default` remains Inter. `Text` sets letter spacing to -2% for Accent and Hero at every size. Accent and hero fall back to Oswald for characters Grotzec Cond does not include.
 
 `FontFamily.Accent` remains available in this release. It is likely to be deprecated in a future version, because accent and hero now use the same typeface.
 
