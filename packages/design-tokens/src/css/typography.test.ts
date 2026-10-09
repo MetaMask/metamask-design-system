@@ -122,8 +122,10 @@ describe('Typography CSS', () => {
         }
       }
 
-      it('sets Grotzec letter spacing to -2%', () => {
-        expect(typographyCSS).toContain('--letter-spacing-grotzec: -2%;');
+      it('sets Grotzec letter spacing to -0.02em', () => {
+        expect(typographyCSS).toContain(
+          '--letter-spacing-grotzec: -0.02em;',
+        );
       });
     });
   });
