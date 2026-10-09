@@ -50,9 +50,7 @@ export const Text: React.FC<TextProps> = ({
       : TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
     fontStyle ? TWCLASSMAP_TEXT_FONTSTYLE[fontStyle] : undefined,
     TWCLASSMAP_TEXT_FONTFAMILY[fontFamily],
-    isGrotzecFontFamily(fontFamily)
-      ? TWCLASS_TEXT_GROTZEC_TRACKING
-      : undefined,
+    isGrotzecFontFamily(fontFamily) ? TWCLASS_TEXT_GROTZEC_TRACKING : undefined,
     textTransform,
     textAlign,
     overflowWrap,

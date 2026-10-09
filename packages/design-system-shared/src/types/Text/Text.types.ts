@@ -45,7 +45,12 @@ export const FontFamily = {
  */
 export const GROTZEC_LETTER_SPACING_RATIO = -0.02;
 
-/** True when the family renders Grotzec Cond. */
+/**
+ * True when the family renders Grotzec Cond.
+ *
+ * @param fontFamily - The text font family.
+ * @returns Whether Accent or Hero is selected.
+ */
 export const isGrotzecFontFamily = (fontFamily: FontFamily): boolean =>
   fontFamily === FontFamily.Accent || fontFamily === FontFamily.Hero;
 

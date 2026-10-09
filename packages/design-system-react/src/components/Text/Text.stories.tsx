@@ -243,7 +243,9 @@ export const FontFamilyStory: Story = {
       <Text fontFamily={FontFamily.Default}>Default (Inter)</Text>
       <Text fontFamily={FontFamily.Accent}>Accent (Grotzec Cond)</Text>
       <Text fontFamily={FontFamily.Hero}>Hero (Grotzec Cond)</Text>
-      <Text fontFamily={FontFamily.Hero}>Hero fallback: Привет, Tiếng Việt</Text>
+      <Text fontFamily={FontFamily.Hero}>
+        Hero fallback: Привет, Tiếng Việt
+      </Text>
     </div>
   ),
   name: 'Font Family',
