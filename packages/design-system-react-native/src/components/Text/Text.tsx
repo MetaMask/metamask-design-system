@@ -1,8 +1,10 @@
 import {
   FontFamily,
   FontStyle,
+  GROTZEC_LETTER_SPACING_RATIO,
   TextColor,
   TextVariant,
+  isGrotzecFontFamily,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useMemo } from 'react';
@@ -35,7 +37,22 @@ export const Text: React.FC<TextProps> = ({
       isItalic && fontFamily === FontFamily.Default ? '-italic' : ''
     }`;
     const fontClass = `font-${fontFamily}${fontSuffix}`;
-    return tw.style(`text-${variant}`, fontClass, color, twClassName);
+    const baseStyle = tw.style(
+      `text-${variant}`,
+      fontClass,
+      color,
+      twClassName,
+    );
+    if (
+      !isGrotzecFontFamily(fontFamily) ||
+      typeof baseStyle.fontSize !== 'number'
+    ) {
+      return baseStyle;
+    }
+    return {
+      ...baseStyle,
+      letterSpacing: baseStyle.fontSize * GROTZEC_LETTER_SPACING_RATIO,
+    };
   }, [variant, color, finalFontWeight, fontFamily, fontStyle, twClassName, tw]);
 
   return (

@@ -21,6 +21,7 @@ function App() {
     'Inter-SemiBold': require('../fonts/Inter/Inter-SemiBold.ttf'),
     'Inter-SemiBoldItalic': require('../fonts/Inter/Inter-SemiBoldItalic.ttf'),
     'GrotzecCond-Bold': require('../fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+    'Oswald-Bold': require('../fonts/Oswald/Oswald-Bold.ttf'),
   });
 
   if (!fontsLoaded) {

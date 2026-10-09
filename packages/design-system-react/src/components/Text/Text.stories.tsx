@@ -53,7 +53,7 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontFamily),
       mapping: FontFamily,
       description:
-        'Optional prop to adjust the font family. Default: Inter, Accent: Grotzec Cond, Hero: Grotzec Cond',
+        'Optional prop to adjust the font family. Default: Inter, Accent: Grotzec Cond, Hero: Grotzec Cond. Accent and hero fall back to Oswald for characters Grotzec Cond does not include.',
     },
     fontStyle: {
       control: 'select',
@@ -243,6 +243,7 @@ export const FontFamilyStory: Story = {
       <Text fontFamily={FontFamily.Default}>Default (Inter)</Text>
       <Text fontFamily={FontFamily.Accent}>Accent (Grotzec Cond)</Text>
       <Text fontFamily={FontFamily.Hero}>Hero (Grotzec Cond)</Text>
+      <Text fontFamily={FontFamily.Hero}>Hero fallback: Привет, Tiếng Việt</Text>
     </div>
   ),
   name: 'Font Family',

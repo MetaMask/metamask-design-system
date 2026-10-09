@@ -121,6 +121,10 @@ describe('Typography CSS', () => {
           });
         }
       }
+
+      it('sets Grotzec letter spacing to -2%', () => {
+        expect(typographyCSS).toContain('--letter-spacing-grotzec: -2%;');
+      });
     });
   });
 
@@ -219,8 +223,9 @@ describe('Typography CSS', () => {
   describe('Font Families', () => {
     const fontFamilies = {
       default: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-      accent: "'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-      hero: "'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      accent:
+        "'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      hero: "'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif",
     };
 
     Object.entries(fontFamilies).forEach(([family, expectedValue]) => {

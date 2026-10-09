@@ -775,6 +775,9 @@
 @utility tracking-l-amount-display-lg {
   letter-spacing: var(--typography-l-amount-display-lg-letter-spacing);
 }
+@utility tracking-grotzec {
+  letter-spacing: var(--letter-spacing-grotzec);
+}
 
 @utility font-default {
   font-family: var(--font-family-default);

@@ -2,6 +2,7 @@ import {
   FontFamily,
   TextColor,
   TextVariant,
+  isGrotzecFontFamily,
 } from '@metamask/design-system-shared';
 import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
@@ -12,6 +13,7 @@ import {
   TWCLASSMAP_TEXT_VARIANT_FONTSTYLE,
   TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTFAMILY,
+  TWCLASS_TEXT_GROTZEC_TRACKING,
   TWCLASSMAP_TEXT_FONTSTYLE,
   TWCLASSMAP_TEXT_FONTWEIGHT,
   MAP_TEXT_VARIANT_TAG,
@@ -48,6 +50,9 @@ export const Text: React.FC<TextProps> = ({
       : TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
     fontStyle ? TWCLASSMAP_TEXT_FONTSTYLE[fontStyle] : undefined,
     TWCLASSMAP_TEXT_FONTFAMILY[fontFamily],
+    isGrotzecFontFamily(fontFamily)
+      ? TWCLASS_TEXT_GROTZEC_TRACKING
+      : undefined,
     textTransform,
     textAlign,
     overflowWrap,

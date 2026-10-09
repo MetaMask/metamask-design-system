@@ -88,7 +88,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 #### Accent and hero typefaces: MM Sans and MM Poly to Grotzec Cond
 
-`FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. React Native resolves fonts by **PostScript name**, so `@metamask/design-system-twrnc-preset` maps each weight to a font name. Those names changed. Only the Bold cut is available, so every accent and hero weight uses `GrotzecCond-Bold`.
+`FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. React Native resolves fonts by **PostScript name**, so `@metamask/design-system-twrnc-preset` maps each weight to a font name. Those names changed. Only the Bold cut is available, so every accent and hero weight uses `GrotzecCond-Bold`. `Text` sets letter spacing to -2% of the font size for Accent and Hero at every size. Register `Oswald-Bold` as well. React Native web uses it for characters Grotzec Cond does not include. On iOS and Android a text style has one font name, so those characters use the system font unless the app adds `Oswald-Bold` to a native font cascade.
 
 `FontFamily.Accent` remains available in this release. It is likely to be deprecated in a future version, because accent and hero now use the same typeface.
 
@@ -125,6 +125,7 @@ import { useFonts } from 'expo-font';
 
 useFonts({
   'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+  'Oswald-Bold': require('./fonts/Oswald/Oswald-Bold.ttf'),
 });
 ```
 

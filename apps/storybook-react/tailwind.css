@@ -73,3 +73,21 @@
   font-weight: 600;
   src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
 }
+
+/* Oswald Bold covers characters Grotzec Cond does not, including Cyrillic and Vietnamese. */
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400 600;
+  src: url('fonts/Oswald/Oswald-Bold.woff2') format('woff2');
+  unicode-range: U+01A0-01A1, U+01AF-01B0, U+01B7, U+01C4-01CE, U+01D3-01D4,
+    U+01E4-01EB, U+01EE-01EF, U+01F1-01F5, U+01FA-01FB, U+0200-0217, U+021E-021F,
+    U+022A-022D, U+0230-0233, U+0292, U+02BB-02BC, U+02C9, U+0309, U+030F, U+0311,
+    U+031B, U+0323-0324, U+032E, U+0331, U+0335, U+03A0, U+0400-045F, U+0462-0463,
+    U+046A-046B, U+0472-0475, U+048A-04FF, U+0510-0513, U+051C-051D, U+0524-0529,
+    U+052E-052F, U+1E02-1E03, U+1E0A-1E0B, U+1E1E-1E1F, U+1E40-1E41, U+1E56-1E57,
+    U+1E60-1E61, U+1E6A-1E6B, U+1E9E, U+1EA0-1EF1, U+1EF4-1EF9, U+2010, U+2032-2033,
+    U+2052, U+20A1, U+20A3-20A4, U+20A6-20A7, U+20A9, U+20AB, U+20AD-20AE,
+    U+20B1-20B2, U+20B4-20B5, U+20B8-20BA, U+20BC-20BD, U+2113, U+2116, U+212A-212B,
+    U+212E, U+2205, U+2215, U+2219, U+27E8-27E9;
+}
