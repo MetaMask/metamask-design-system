@@ -1,0 +1,111 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as MarketingMomentStories from './MarketingMoments.stories';
+
+<Meta of={MarketingMomentStories} />
+
+# Marketing moment
+
+**Category:** Other
+
+**Components used:** Box, Button, Icon, Text
+
+**Last updated:** Oct 13, 2026
+
+A marketing moment is a full-screen decision. It introduces one product opportunity, or confirms one step in a setup flow, and asks the user to continue or leave.
+
+<Canvas of={MarketingMomentStories.Default} />
+
+## What this pattern does
+
+It gives the user a single, interruptive choice: take the offered action now, or dismiss the screen and return to what they were doing. The screen owns the viewport so the choice is not competing with the rest of the product.
+
+## When to use this pattern
+
+Use a marketing moment when the user has to make one decision before they can continue, and that decision is the point of the screen.
+
+- Announcing a product the user has not started, such as MetaMask Card, Perps, or an invitation.
+- Confirming a step that already happened and pointing to the one action that should happen next.
+- The user can safely postpone the action. Dismissal is a complete outcome, not an error.
+
+## When not to use this pattern
+
+- If the message should stay visible while the user keeps using the current screen, use [BannerAlert](?path=/docs/react-components-banneralert--docs) instead.
+- If the user must confirm or cancel a destructive action on top of the current screen, use [Modal](?path=/docs/react-components-modal--docs) instead.
+- If the only job is to confirm that something finished and then get out of the way, use [Toast](?path=/docs/react-components-toast--docs) instead.
+- If the screen collects more than one decision, use the form or flow those fields belong to. A marketing moment is not a wizard step.
+
+## Composition
+
+Every moment has the same frame: a phone-width screen, one content stack, and two actions pinned to the bottom. There are no navigation buttons. No back button, close icon, or header action. `Not now` is how the user leaves.
+
+**Required**
+
+- A title, rendered as the page heading. The title always uses `TextVariant.DisplayMd`. Do not drop the size to fit a longer title, and do not change it between layouts. If the title wraps too far, shorten the words.
+- One or two sentences of description, in body text. A second paragraph is only for a fact that does not belong in the first sentence, such as when a card will arrive.
+- Artwork. In these examples the artwork is an icon in a muted frame. Swap in product art without changing the stack.
+- One primary button. Its label names the action (`Set up card`, `Finish setup`, `Accept invite`).
+- One tertiary button directly under the primary button, labeled `Not now`. It closes the moment immediately and returns the user to the previous screen.
+
+**Layouts**
+
+There are two layouts. The title size, description size, artwork frame, and buttons stay the same in both. Only the order of the text and the asset changes.
+
+Text at the top, asset at the bottom. Use this when the user needs to read the offer before they see the art. Announcements use this layout.
+
+<Canvas of={MarketingMomentStories.SpendAndEarn} />
+
+Asset at the top, text at the bottom. Use this when the user already knows where they are, and the art confirms the moment before the copy explains what to do next.
+
+<Canvas of={MarketingMomentStories.YourCardIsOrdered} />
+
+The actions stay at the bottom in both layouts. The content does not scroll in the default composition. If the description needs a third paragraph, shorten the copy before adding scroll.
+
+## State coverage
+
+The Storybook examples show the resting screen. Product implementations also need the transitions below.
+
+- **Resting.** The user sees the title, description, artwork, and actions. Activating the primary button or `Not now` leaves this state.
+- **Continuing.** The primary button can show its loading state while the next step opens. The rest of the screen stays put. Success leaves this screen. Failure stays here and explains what went wrong in the description, or in a banner on the next screen, not in a second marketing moment.
+- **Dismissed.** The moment is gone and the user is back on the screen they came from. Do not show the same moment again in the same session.
+- **Completed.** The moment is gone because the user took the action. Later entry points use the product's normal empty, in-progress, or done states. Do not show the invitation again.
+
+This pattern has no empty state. If there is no moment to show, render the underlying screen.
+
+This pattern has no disabled state. If the user cannot take the action yet, do not show the moment.
+
+## Accessibility
+
+This screen replaces the current view. It is not a dialog, so do not trap focus and do not move focus into a container that the user cannot leave.
+
+- The title is the only page heading. Move focus to that heading when the screen opens so the name and purpose are announced together.
+- Tab order follows the visual order: heading, description, primary button, then `Not now`.
+- Both actions are buttons. Activate them with Enter or Space.
+- The artwork is decorative. Do not give it a name that repeats the title.
+- When the user dismisses the screen, return focus to the control that opened it.
+- When the user continues, move focus to the heading of the next screen.
+
+## Anti-patterns
+
+- Adding any navigation button, including back, close, or a header action. `Not now` already leaves the screen.
+- Omitting `Not now`, or renaming it. Every moment can be left immediately, and the label stays the same so the way out is recognizable.
+- Changing the title size between moments or layouts. A long title gets shorter copy, not a smaller style.
+- Two primary buttons. The screen has one recommended action. The other choice is tertiary.
+- Title case on the heading or the buttons. Write `Set up card`, not `Set Up Card`. Product names such as MetaMask Card and Perps stay capitalized.
+- Putting the asset above the text on an announcement the user has not seen before. They should read the offer before the art.
+- Reusing the moment as an error or a loading screen. Those states belong to the flow the primary button opens.
+
+## Related patterns
+
+- **Banner alert.** Often confused with a marketing moment because both announce something. A banner stays on the current screen. A marketing moment is the screen.
+- **Modal.** Often confused with a marketing moment because both ask for a decision. A modal covers the current task and returns to it. A marketing moment is a destination.
+- **Toast.** Used after a marketing moment, not instead of one, when a later step only needs a short confirmation.
+
+## Examples in production
+
+These stories are the reference set for the pattern. They are not a record of shipped screens. Add a product link here when a team ships one.
+
+- **Spend and earn, Perps, stablecoin bonus, and Gold Fox Collective** are title-first announcements. Each one offers a product and can be dismissed.
+- **Your card is ordered** and **You're in** are artwork-first confirmations in the middle of card setup. The primary button continues setup. `Not now` postpones it.
+
+<Canvas of={MarketingMomentStories.AllMoments} />

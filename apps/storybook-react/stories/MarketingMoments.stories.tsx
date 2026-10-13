@@ -7,7 +7,6 @@ import {
   BoxFlexWrap,
   BoxJustifyContent,
   Button,
-  ButtonIcon,
   ButtonSize,
   ButtonVariant,
   FontWeight,
@@ -38,8 +37,6 @@ type MarketingMomentProps = {
   description: string | string[];
   iconName?: IconName;
   primaryButtonLabel: string;
-  secondaryButtonLabel?: string;
-  showBackButton?: boolean;
 };
 
 const MarketingMomentArtwork = ({ iconName }: { iconName: IconName }) => (
@@ -67,11 +64,12 @@ const MarketingMomentTitle = ({
   return (
     <Box flexDirection={BoxFlexDirection.Column} gap={4}>
       <Text
+        asChild
         variant={TextVariant.DisplayMd}
         fontWeight={FontWeight.Bold}
         textAlign={TextAlign.Center}
       >
-        {title}
+        <h1>{title}</h1>
       </Text>
       <Box flexDirection={BoxFlexDirection.Column} gap={3}>
         {paragraphs.map((paragraph) => (
@@ -94,8 +92,6 @@ const MarketingMoment = ({
   description,
   iconName = IconName.Image,
   primaryButtonLabel,
-  secondaryButtonLabel,
-  showBackButton = false,
 }: MarketingMomentProps) => {
   const titleBlock = (
     <MarketingMomentTitle title={title} description={description} />
@@ -110,24 +106,13 @@ const MarketingMoment = ({
       borderWidth={1}
       className="h-[812px] w-[390px] shrink-0 overflow-hidden rounded-3xl"
     >
-      {/* Navigation */}
-      <Box
-        flexDirection={BoxFlexDirection.Row}
-        alignItems={BoxAlignItems.Center}
-        paddingHorizontal={4}
-        className="mt-12 h-12"
-      >
-        {showBackButton && (
-          <ButtonIcon iconName={IconName.ArrowLeft} ariaLabel="Back" />
-        )}
-      </Box>
-
       {/* Content */}
       <Box
         flexDirection={BoxFlexDirection.Column}
         gap={6}
         paddingHorizontal={6}
         paddingTop={4}
+        className="mt-12"
       >
         {layout === MarketingMomentLayout.TitleFirst ? (
           <>
@@ -157,15 +142,13 @@ const MarketingMoment = ({
         >
           {primaryButtonLabel}
         </Button>
-        {secondaryButtonLabel && (
-          <Button
-            variant={ButtonVariant.Tertiary}
-            size={ButtonSize.Lg}
-            isFullWidth
-          >
-            {secondaryButtonLabel}
-          </Button>
-        )}
+        <Button
+          variant={ButtonVariant.Tertiary}
+          size={ButtonSize.Lg}
+          isFullWidth
+        >
+          Not now
+        </Button>
       </Box>
     </Box>
   );
@@ -174,11 +157,6 @@ const MarketingMoment = ({
 const meta: Meta<typeof MarketingMoment> = {
   title: 'Examples/Marketing Moments',
   component: MarketingMoment,
-  parameters: {
-    docs: {
-      disable: true,
-    },
-  },
   argTypes: {
     layout: {
       control: 'select',
@@ -192,8 +170,6 @@ const meta: Meta<typeof MarketingMoment> = {
       mapping: IconName,
     },
     primaryButtonLabel: { control: 'text' },
-    secondaryButtonLabel: { control: 'text' },
-    showBackButton: { control: 'boolean' },
   },
   decorators: [
     (Story) => (
@@ -214,8 +190,6 @@ export const Default: Story = {
     description: 'Description explains the value in one or two sentences.',
     iconName: IconName.Image,
     primaryButtonLabel: 'Get started',
-    secondaryButtonLabel: 'Not now',
-    showBackButton: false,
   },
 };
 
@@ -227,7 +201,6 @@ export const SpendAndEarn: Story = {
       'The MetaMask Card is the fast and easy way to spend your crypto and earn up to 3% mUSD back.',
     iconName: IconName.Card,
     primaryButtonLabel: 'Set up now',
-    secondaryButtonLabel: 'Not now',
   },
 };
 
@@ -235,7 +208,6 @@ export const YourCardIsOrdered: Story = {
   name: 'Your card is ordered',
   args: {
     layout: MarketingMomentLayout.ArtworkFirst,
-    showBackButton: true,
     title: 'Your card is ordered',
     description: [
       'It should arrive in 4 to 6 weeks.',
@@ -250,7 +222,6 @@ export const YoureIn: Story = {
   name: "You're in",
   args: {
     layout: MarketingMomentLayout.ArtworkFirst,
-    showBackButton: true,
     title: "You're in!",
     description:
       'Finish setting up your card so you can start spending your crypto.',
@@ -267,7 +238,6 @@ export const PerpsAreHere: Story = {
       'Long or short with up to 40x leverage. Fund your account with one click.',
     iconName: IconName.Candlestick,
     primaryButtonLabel: 'Get started',
-    secondaryButtonLabel: 'Not now',
   },
 };
 
@@ -279,7 +249,6 @@ export const StablecoinBonus: Story = {
       'Convert your stablecoins to mUSD and earn a 3% annualized bonus.',
     iconName: IconName.Coin,
     primaryButtonLabel: 'Get started',
-    secondaryButtonLabel: 'Not now',
   },
 };
 
@@ -291,7 +260,6 @@ export const GoldFoxCollective: Story = {
       'Unlock exclusive perks, early features, and curated rewards. By invitation only.',
     iconName: IconName.MetamaskFoxOutline,
     primaryButtonLabel: 'Accept invite',
-    secondaryButtonLabel: 'Not now',
   },
 };
 
