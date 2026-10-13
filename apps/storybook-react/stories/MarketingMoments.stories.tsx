@@ -1,17 +1,13 @@
 import {
   Box,
   BoxAlignItems,
-  BoxBackgroundColor,
-  BoxBorderColor,
   BoxFlexDirection,
-  BoxFlexWrap,
   BoxJustifyContent,
   Button,
   ButtonSize,
   ButtonVariant,
   FontWeight,
   Icon,
-  IconColor,
   IconName,
   IconSize,
   Text,
@@ -22,58 +18,49 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
+const MarketingMomentAccent = {
+  Accent01: 'accent01',
+  Accent02: 'accent02',
+  Accent03: 'accent03',
+  Accent04: 'accent04',
+} as const;
+type MarketingMomentAccent =
+  (typeof MarketingMomentAccent)[keyof typeof MarketingMomentAccent];
+
+/** Light fills the screen and icon. Dark fills the type and artwork frame. */
+const accentGroup = {
+  accent01: {
+    screen: 'bg-accent01-light',
+    text: 'text-accent01-dark',
+    artwork: 'bg-accent01-dark',
+    icon: 'text-accent01-light',
+  },
+  accent02: {
+    screen: 'bg-accent02-light',
+    text: 'text-accent02-dark',
+    artwork: 'bg-accent02-dark',
+    icon: 'text-accent02-light',
+  },
+  accent03: {
+    screen: 'bg-accent03-light',
+    text: 'text-accent03-dark',
+    artwork: 'bg-accent03-dark',
+    icon: 'text-accent03-light',
+  },
+  accent04: {
+    screen: 'bg-accent04-light',
+    text: 'text-accent04-dark',
+    artwork: 'bg-accent04-dark',
+    icon: 'text-accent04-light',
+  },
+} as const;
+
 type MarketingMomentProps = {
   title: string;
   description: string | string[];
   iconName?: IconName;
   primaryButtonLabel: string;
-};
-
-const MarketingMomentArtwork = ({ iconName }: { iconName: IconName }) => (
-  <Box
-    backgroundColor={BoxBackgroundColor.BackgroundMuted}
-    alignItems={BoxAlignItems.Center}
-    justifyContent={BoxJustifyContent.Center}
-    flexDirection={BoxFlexDirection.Column}
-    className="h-60 w-full rounded-lg"
-  >
-    <Icon
-      name={iconName}
-      size={IconSize.Xl}
-      color={IconColor.IconAlternative}
-    />
-  </Box>
-);
-
-const MarketingMomentTitle = ({
-  title,
-  description,
-}: Pick<MarketingMomentProps, 'title' | 'description'>) => {
-  const paragraphs = Array.isArray(description) ? description : [description];
-
-  return (
-    <Box flexDirection={BoxFlexDirection.Column} gap={4}>
-      <Text
-        asChild
-        variant={TextVariant.DisplayMd}
-        fontWeight={FontWeight.Bold}
-        textAlign={TextAlign.Center}
-      >
-        <h1>{title}</h1>
-      </Text>
-      <Box flexDirection={BoxFlexDirection.Column} gap={3}>
-        {paragraphs.map((paragraph) => (
-          <Text
-            key={paragraph}
-            color={TextColor.TextAlternative}
-            textAlign={TextAlign.Center}
-          >
-            {paragraph}
-          </Text>
-        ))}
-      </Box>
-    </Box>
-  );
+  accent?: MarketingMomentAccent;
 };
 
 const MarketingMoment = ({
@@ -81,32 +68,60 @@ const MarketingMoment = ({
   description,
   iconName = IconName.Image,
   primaryButtonLabel,
+  accent,
 }: MarketingMomentProps) => {
+  const paragraphs = Array.isArray(description) ? description : [description];
+  const colors = accent ? accentGroup[accent] : undefined;
+
   return (
     <Box
       flexDirection={BoxFlexDirection.Column}
-      backgroundColor={BoxBackgroundColor.BackgroundDefault}
-      borderColor={BoxBorderColor.BorderMuted}
-      borderWidth={1}
-      className="h-[812px] w-[390px] shrink-0 overflow-hidden rounded-3xl"
+      className={`h-dvh w-full ${colors?.screen ?? 'bg-default'}`}
     >
       <Box
         flexDirection={BoxFlexDirection.Column}
+        gap={4}
         paddingHorizontal={6}
-        paddingTop={4}
         className="mt-12"
       >
-        <MarketingMomentTitle title={title} description={description} />
+        <Text
+          asChild
+          variant={TextVariant.DisplayMd}
+          fontWeight={FontWeight.Bold}
+          textAlign={TextAlign.Center}
+          className={colors?.text}
+        >
+          <h1>{title}</h1>
+        </Text>
+        {paragraphs.map((paragraph) => (
+          <Text
+            key={paragraph}
+            textAlign={TextAlign.Center}
+            color={colors ? undefined : TextColor.TextAlternative}
+            className={colors?.text}
+          >
+            {paragraph}
+          </Text>
+        ))}
       </Box>
 
       <Box
-        flexDirection={BoxFlexDirection.Column}
         alignItems={BoxAlignItems.Center}
         justifyContent={BoxJustifyContent.Center}
         paddingHorizontal={6}
-        className="min-h-0 w-full flex-1"
+        className="flex min-h-0 w-full flex-1"
       >
-        <MarketingMomentArtwork iconName={iconName} />
+        <Box
+          alignItems={BoxAlignItems.Center}
+          justifyContent={BoxJustifyContent.Center}
+          className={`flex h-60 w-full rounded-lg ${colors?.artwork ?? 'bg-muted'}`}
+        >
+          <Icon
+            name={iconName}
+            size={IconSize.Xl}
+            className={colors?.icon}
+          />
+        </Box>
       </Box>
 
       <Box
@@ -135,7 +150,7 @@ const MarketingMoment = ({
 };
 
 const meta: Meta<typeof MarketingMoment> = {
-  title: 'Examples/Marketing Moments',
+  title: 'Patterns/Marketing Moments',
   component: MarketingMoment,
   argTypes: {
     title: { control: 'text' },
@@ -146,10 +161,16 @@ const meta: Meta<typeof MarketingMoment> = {
       mapping: IconName,
     },
     primaryButtonLabel: { control: 'text' },
+    accent: {
+      control: 'select',
+      options: Object.values(MarketingMomentAccent),
+    },
   },
+  // The preview decorator adds 1rem of padding. Pull the moment back out so
+  // h-dvh matches the story canvas.
   decorators: [
     (Story) => (
-      <Box padding={4}>
+      <Box className="-m-4">
         <Story />
       </Box>
     ),
@@ -176,6 +197,7 @@ export const SpendAndEarn: Story = {
       'The MetaMask Card is the fast and easy way to spend your crypto and earn up to 3% mUSD back.',
     iconName: IconName.Card,
     primaryButtonLabel: 'Set up now',
+    accent: MarketingMomentAccent.Accent01,
   },
 };
 
@@ -189,6 +211,7 @@ export const YourCardIsOrdered: Story = {
     ],
     iconName: IconName.Card,
     primaryButtonLabel: 'Set up card',
+    accent: MarketingMomentAccent.Accent02,
   },
 };
 
@@ -200,6 +223,7 @@ export const YoureIn: Story = {
       'Finish setting up your card so you can start spending your crypto.',
     iconName: IconName.Confirmation,
     primaryButtonLabel: 'Finish setup',
+    accent: MarketingMomentAccent.Accent03,
   },
 };
 
@@ -211,6 +235,7 @@ export const PerpsAreHere: Story = {
       'Long or short with up to 40x leverage. Fund your account with one click.',
     iconName: IconName.Candlestick,
     primaryButtonLabel: 'Get started',
+    accent: MarketingMomentAccent.Accent04,
   },
 };
 
@@ -222,6 +247,7 @@ export const StablecoinBonus: Story = {
       'Convert your stablecoins to mUSD and earn a 3% annualized bonus.',
     iconName: IconName.Coin,
     primaryButtonLabel: 'Get started',
+    accent: MarketingMomentAccent.Accent03,
   },
 };
 
@@ -233,17 +259,14 @@ export const GoldFoxCollective: Story = {
       'Unlock exclusive perks, early features, and curated rewards. By invitation only.',
     iconName: IconName.MetamaskFoxOutline,
     primaryButtonLabel: 'Accept invite',
+    accent: MarketingMomentAccent.Accent02,
   },
 };
 
 export const AllMoments: Story = {
   name: 'All moments',
   render: () => (
-    <Box
-      flexDirection={BoxFlexDirection.Row}
-      flexWrap={BoxFlexWrap.Wrap}
-      gap={4}
-    >
+    <Box className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {[
         SpendAndEarn,
         YourCardIsOrdered,
