@@ -18,6 +18,8 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
+import './MarketingMoments.css';
+
 const MarketingMomentAccent = {
   Accent01: 'accent01',
   Accent02: 'accent02',
@@ -27,31 +29,22 @@ const MarketingMomentAccent = {
 type MarketingMomentAccent =
   (typeof MarketingMomentAccent)[keyof typeof MarketingMomentAccent];
 
-/** Light fills the screen and icon. Dark fills the type and artwork frame. */
 const accentGroup = {
   accent01: {
-    screen: 'bg-accent01-light',
-    text: 'text-accent01-dark',
-    artwork: 'bg-accent01-dark',
-    icon: 'text-accent01-light',
+    light: 'var(--color-accent01-light)',
+    dark: 'var(--color-accent01-dark)',
   },
   accent02: {
-    screen: 'bg-accent02-light',
-    text: 'text-accent02-dark',
-    artwork: 'bg-accent02-dark',
-    icon: 'text-accent02-light',
+    light: 'var(--color-accent02-light)',
+    dark: 'var(--color-accent02-dark)',
   },
   accent03: {
-    screen: 'bg-accent03-light',
-    text: 'text-accent03-dark',
-    artwork: 'bg-accent03-dark',
-    icon: 'text-accent03-light',
+    light: 'var(--color-accent03-light)',
+    dark: 'var(--color-accent03-dark)',
   },
   accent04: {
-    screen: 'bg-accent04-light',
-    text: 'text-accent04-dark',
-    artwork: 'bg-accent04-dark',
-    icon: 'text-accent04-light',
+    light: 'var(--color-accent04-light)',
+    dark: 'var(--color-accent04-dark)',
   },
 } as const;
 
@@ -72,11 +65,21 @@ const MarketingMoment = ({
 }: MarketingMomentProps) => {
   const paragraphs = Array.isArray(description) ? description : [description];
   const colors = accent ? accentGroup[accent] : undefined;
+  const accentStyle = colors
+    ? ({
+        '--marketing-moment-accent-light': colors.light,
+        '--marketing-moment-accent-dark': colors.dark,
+      } as React.CSSProperties)
+    : undefined;
+  const foregroundClassName = colors
+    ? 'marketing-moment__foreground'
+    : undefined;
 
   return (
     <Box
       flexDirection={BoxFlexDirection.Column}
-      className={`h-dvh w-full ${colors?.screen ?? 'bg-default'}`}
+      className={`h-dvh w-full ${colors ? 'marketing-moment' : 'bg-default'}`}
+      style={accentStyle}
     >
       <Box
         flexDirection={BoxFlexDirection.Column}
@@ -89,7 +92,7 @@ const MarketingMoment = ({
           variant={TextVariant.DisplayMd}
           fontWeight={FontWeight.Bold}
           textAlign={TextAlign.Center}
-          className={colors?.text}
+          className={foregroundClassName}
         >
           <h1>{title}</h1>
         </Text>
@@ -98,7 +101,7 @@ const MarketingMoment = ({
             key={paragraph}
             textAlign={TextAlign.Center}
             color={colors ? undefined : TextColor.TextAlternative}
-            className={colors?.text}
+            className={foregroundClassName}
           >
             {paragraph}
           </Text>
@@ -114,9 +117,18 @@ const MarketingMoment = ({
         <Box
           alignItems={BoxAlignItems.Center}
           justifyContent={BoxJustifyContent.Center}
-          className={`flex h-60 w-full rounded-lg ${colors?.artwork ?? 'bg-muted'}`}
+          className={`flex h-60 w-full rounded-lg ${
+            colors ? 'marketing-moment__artwork' : 'bg-muted'
+          }`}
         >
-          <Icon name={iconName} size={IconSize.Xl} className={colors?.icon} />
+          <Icon
+            name={iconName}
+            size={IconSize.Xl}
+            className={colors ? 'marketing-moment__icon' : undefined}
+            style={
+              colors ? { color: 'var(--marketing-moment-surface)' } : undefined
+            }
+          />
         </Box>
       </Box>
 
@@ -137,6 +149,7 @@ const MarketingMoment = ({
           variant={ButtonVariant.Tertiary}
           size={ButtonSize.Lg}
           isFullWidth
+          className={foregroundClassName}
         >
           Not now
         </Button>
