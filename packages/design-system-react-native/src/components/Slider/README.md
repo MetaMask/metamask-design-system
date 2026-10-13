@@ -394,7 +394,7 @@ const [value, setValue] = useState(50);
 
 ### Layout and accessibility (`Box` / `View`)
 
-The root container applies a default horizontal inset (`trackInset`, 16px) so the thumb can overhang the track at min/max without clipping. Override with `trackInset={0}` when the parent already provides edge padding, or pass `style={{ marginHorizontal: 0 }}` to reset the default margin.
+The thumb stays fully on the track. At 0% its left edge is the track start, and at 100% its right edge is the track end. `trackInset` defaults to `0`.
 
 The root `Box` sets `accessibilityRole="adjustable"` with increment/decrement actions. Use top-level `View` props for layout and accessibility overrides (`accessibilityLabel`, `accessibilityHint`, `pointerEvents`, etc.). Keys reserved by Slider (`style`, `twClassName`, `testID`, and keys owned by the Slider API surface) are not passed through from this intersection.
 
@@ -416,11 +416,11 @@ const [value, setValue] = useState(50);
 
 ### `trackInset`
 
-Optional horizontal inset on the root container so the thumb can overhang the track at min/max without clipping. Defaults to `16` (matches thumb half-width). Set to `0` when the parent already provides edge padding.
+Optional extra horizontal inset on the root container. Defaults to `0` because the thumb no longer hangs off the track.
 
 | TYPE     | REQUIRED | DEFAULT |
 | -------- | -------- | ------- |
-| `number` | No       | `16`    |
+| `number` | No       | `0`     |
 
 ```tsx
 import { Slider } from '@metamask/design-system-react-native';
@@ -428,7 +428,7 @@ import { useState } from 'react';
 
 const [value, setValue] = useState(50);
 
-<Slider value={value} onValueChange={setValue} trackInset={0} />;
+<Slider value={value} onValueChange={setValue} trackInset={8} />;
 ```
 
 ### `twClassName`

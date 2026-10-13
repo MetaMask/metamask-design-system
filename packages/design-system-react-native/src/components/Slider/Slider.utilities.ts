@@ -5,7 +5,8 @@
  * - **Domain value** — the controlled `value` prop (`minimumValue`…`maximumValue`).
  * - **Track percent** — normalized 0–100 position along the track (used for dots,
  *   labels, and haptic thresholds; may be non-linear via `map*` hooks).
- * - **Pixel position** — thumb/fill offset in layout pixels (`translateX`).
+ * - **Pixel position** — thumb-center offset in layout pixels (`translateX`).
+ *   Travel is inset by half the thumb so the circle stays on the track.
  *
  * Functions marked with `'worklet'` run on the UI thread inside gesture handlers.
  * JS-thread callers use the non-worklet wrappers (`getTrackPercentFromValue`, etc.).
@@ -20,6 +21,7 @@ import { interpolateColor } from 'react-native-reanimated';
 import {
   DOT_EDGE_INSET_PERCENT,
   DOT_EDGE_MAX_PERCENT,
+  THUMB_SIZE,
 } from './Slider.constants';
 
 export type SliderColorStop = {
@@ -146,6 +148,17 @@ export function resolveValueToTrackPercent(
 
 // --- Track-percent ↔ pixel position (worklet) ---
 
+/**
+ * Thumb-center pixel for a track percent.
+ *
+ * Travel is one thumb-width shorter than the track, so the whole thumb stays
+ * on the bar: at 0% its left edge is the track start, and at 100% its right
+ * edge is the track end. Matches the batch-sell slider in metamask-mobile#37525.
+ *
+ * @param trackPercent - Track position from 0–100.
+ * @param width - Track width in pixels.
+ * @returns Thumb-center offset from the track start.
+ */
 export function trackPercentToPosition(
   trackPercent: number,
   width: number,
@@ -156,33 +169,52 @@ export function trackPercentToPosition(
     return 0;
   }
 
-  return (clampTrackPercent(trackPercent) / 100) * width;
+  const travel = Math.max(width - THUMB_SIZE, 0);
+  return THUMB_SIZE / 2 + (clampTrackPercent(trackPercent) / 100) * travel;
 }
 
+/**
+ * Track percent for a thumb-center pixel. Touches outside the thumb's travel
+ * clamp to 0% or 100%.
+ *
+ * @param position - Thumb center, or a touch X treated as that center.
+ * @param width - Track width in pixels.
+ * @returns Track percent clamped to 0–100.
+ */
 export function positionToTrackPercent(
   position: number,
   width: number,
 ): number {
   'worklet';
 
-  if (width === 0) {
+  const travel = width - THUMB_SIZE;
+  if (width === 0 || travel <= 0) {
     return 0;
   }
 
-  return clampTrackPercent((position / width) * 100);
+  const minCenter = THUMB_SIZE / 2;
+  const center = Math.max(minCenter, Math.min(width - minCenter, position));
+  return clampTrackPercent(((center - minCenter) / travel) * 100);
 }
 
 /**
- * Clamps a touch X coordinate to the track bounds.
+ * Clamps a touch X to the thumb-center travel, so a drag cannot pull the thumb
+ * off either end of the track.
  *
  * @param position - Touch X in track coordinates.
  * @param width - Track width in pixels.
- * @returns Clamped pixel position.
+ * @returns Clamped thumb-center position.
  */
 export function clampGesturePosition(position: number, width: number): number {
   'worklet';
 
-  return Math.max(0, Math.min(position, width));
+  if (width === 0) {
+    return 0;
+  }
+
+  const minCenter = THUMB_SIZE / 2;
+  const maxCenter = Math.max(minCenter, width - minCenter);
+  return Math.max(minCenter, Math.min(position, maxCenter));
 }
 
 // --- JS-thread domain ↔ track-percent ---
