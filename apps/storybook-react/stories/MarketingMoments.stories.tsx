@@ -72,7 +72,7 @@ const MarketingMoment = ({
         <Box
           alignItems={BoxAlignItems.Center}
           justifyContent={BoxJustifyContent.Center}
-          className="flex h-full max-h-60 min-h-0 w-full overflow-hidden rounded-lg bg-muted"
+          className="flex size-full max-h-60 min-h-0 overflow-hidden rounded-lg bg-muted"
         >
           <Icon
             name={iconName}
@@ -215,7 +215,7 @@ export const GoldFoxCollective: Story = {
 export const AllMoments: Story = {
   name: 'All moments',
   render: () => (
-    <Box className="grid w-full grid-cols-1 border-t border-l border-muted md:grid-cols-2 lg:grid-cols-3">
+    <Box className="grid w-full grid-cols-1 border-l border-t border-muted md:grid-cols-2 lg:grid-cols-3">
       {[
         SpendAndEarn,
         YourCardIsOrdered,
@@ -224,7 +224,7 @@ export const AllMoments: Story = {
         StablecoinBonus,
         GoldFoxCollective,
       ].map((story) => (
-        <Box key={story.args?.title} className="border-r border-b border-muted">
+        <Box key={story.args?.title} className="border-b border-r border-muted">
           <MarketingMoment {...(story.args as MarketingMomentProps)} />
         </Box>
       ))}
