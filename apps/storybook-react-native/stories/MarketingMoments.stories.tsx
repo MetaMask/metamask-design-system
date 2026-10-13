@@ -2,7 +2,6 @@ import {
   Box,
   BoxAlignItems,
   BoxFlexDirection,
-  BoxFlexWrap,
   BoxJustifyContent,
   Button,
   ButtonSize,
@@ -18,7 +17,6 @@ import {
 } from '@metamask/design-system-react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
-import { ScrollView, useWindowDimensions } from 'react-native';
 
 type MarketingMomentProps = {
   title: string;
@@ -35,14 +33,12 @@ const MarketingMoment = ({
   iconName = IconName.Image,
   primaryButtonLabel,
 }: MarketingMomentProps) => {
-  const { height } = useWindowDimensions();
   const paragraphs = Array.isArray(description) ? description : [description];
 
   return (
     <Box
       flexDirection={BoxFlexDirection.Column}
-      twClassName="w-full bg-default"
-      style={{ height }}
+      twClassName="min-h-0 w-full flex-1 bg-default"
     >
       <Box
         flexDirection={BoxFlexDirection.Column}
@@ -209,46 +205,4 @@ export const GoldFoxCollective: Story = {
     iconName: IconName.MetamaskFoxOutline,
     primaryButtonLabel: 'Accept invite',
   },
-};
-
-const AllMomentsGrid = () => {
-  const { width } = useWindowDimensions();
-  let columns = 1;
-  if (width >= 1024) {
-    columns = 3;
-  } else if (width >= 768) {
-    columns = 2;
-  }
-
-  return (
-    <ScrollView>
-      <Box
-        flexDirection={BoxFlexDirection.Row}
-        flexWrap={BoxFlexWrap.Wrap}
-        twClassName="w-full border-l border-t border-muted"
-      >
-        {[
-          SpendAndEarn,
-          YourCardIsOrdered,
-          YoureIn,
-          PerpsAreHere,
-          StablecoinBonus,
-          GoldFoxCollective,
-        ].map((story) => (
-          <Box
-            key={story.args?.title}
-            twClassName="border-b border-r border-muted"
-            style={{ width: `${100 / columns}%` }}
-          >
-            <MarketingMoment {...(story.args as MarketingMomentProps)} />
-          </Box>
-        ))}
-      </Box>
-    </ScrollView>
-  );
-};
-
-export const AllMoments: Story = {
-  name: 'All moments',
-  render: () => <AllMomentsGrid />,
 };
