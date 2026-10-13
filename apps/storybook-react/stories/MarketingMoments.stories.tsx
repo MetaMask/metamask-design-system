@@ -116,11 +116,7 @@ const MarketingMoment = ({
           justifyContent={BoxJustifyContent.Center}
           className={`flex h-60 w-full rounded-lg ${colors?.artwork ?? 'bg-muted'}`}
         >
-          <Icon
-            name={iconName}
-            size={IconSize.Xl}
-            className={colors?.icon}
-          />
+          <Icon name={iconName} size={IconSize.Xl} className={colors?.icon} />
         </Box>
       </Box>
 
