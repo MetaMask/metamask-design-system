@@ -41,25 +41,19 @@ Every moment has the same frame: a phone-width screen, one content stack, and tw
 
 **Required**
 
-- A title, rendered as the page heading. The title always uses `TextVariant.DisplayMd`. Do not drop the size to fit a longer title, and do not change it between layouts. If the title wraps too far, shorten the words.
+- A title, rendered as the page heading. The title always uses `TextVariant.DisplayMd`. Do not drop the size to fit a longer title. If the title wraps too far, shorten the words.
 - One or two sentences of description, in body text. A second paragraph is only for a fact that does not belong in the first sentence, such as when a card will arrive.
 - Artwork. In these examples the artwork is an icon in a muted frame. Swap in product art without changing the stack.
 - One primary button. Its label names the action (`Set up card`, `Finish setup`, `Accept invite`).
 - One tertiary button directly under the primary button, labeled `Not now`. It closes the moment immediately and returns the user to the previous screen.
 
-**Layouts**
+**Layout**
 
-There are two layouts. The title size, description size, artwork frame, and buttons stay the same in both. Only the order of the text and the asset changes.
-
-Text at the top, asset at the bottom. Use this when the user needs to read the offer before they see the art. Announcements use this layout.
+There is one layout. The title and description sit at the top. The asset is centered in the space between the copy and the actions. The actions stay at the bottom. Title size, description size, artwork frame, and buttons do not change from one moment to the next.
 
 <Canvas of={MarketingMomentStories.SpendAndEarn} />
 
-Asset at the top, text at the bottom. Use this when the user already knows where they are, and the art confirms the moment before the copy explains what to do next.
-
-<Canvas of={MarketingMomentStories.YourCardIsOrdered} />
-
-The actions stay at the bottom in both layouts. The content does not scroll in the default composition. If the description needs a third paragraph, shorten the copy before adding scroll.
+The content does not scroll. If the description needs a third paragraph, shorten the copy before adding scroll.
 
 ## State coverage
 
@@ -89,10 +83,10 @@ This screen replaces the current view. It is not a dialog, so do not trap focus 
 
 - Adding any navigation button, including back, close, or a header action. `Not now` already leaves the screen.
 - Omitting `Not now`, or renaming it. Every moment can be left immediately, and the label stays the same so the way out is recognizable.
-- Changing the title size between moments or layouts. A long title gets shorter copy, not a smaller style.
+- Changing the title size between moments. A long title gets shorter copy, not a smaller style.
 - Two primary buttons. The screen has one recommended action. The other choice is tertiary.
 - Title case on the heading or the buttons. Write `Set up card`, not `Set Up Card`. Product names such as MetaMask Card and Perps stay capitalized.
-- Putting the asset above the text on an announcement the user has not seen before. They should read the offer before the art.
+- Moving the asset above the title, or pinning it directly under the copy so the frame changes from moment to moment. The asset stays centered between the copy and the actions.
 - Reusing the moment as an error or a loading screen. Those states belong to the flow the primary button opens.
 
 ## Related patterns
@@ -105,7 +99,7 @@ This screen replaces the current view. It is not a dialog, so do not trap focus 
 
 These stories are the reference set for the pattern. They are not a record of shipped screens. Add a product link here when a team ships one.
 
-- **Spend and earn, Perps, stablecoin bonus, and Gold Fox Collective** are title-first announcements. Each one offers a product and can be dismissed.
-- **Your card is ordered** and **You're in** are artwork-first confirmations in the middle of card setup. The primary button continues setup. `Not now` postpones it.
+- **Spend and earn, Perps, stablecoin bonus, and Gold Fox Collective** announce a product. Each one offers that product, and `Not now` dismisses it.
+- **Your card is ordered** and **You're in** confirm a step in card setup. The primary button continues setup. `Not now` returns to the previous screen.
 
 <Canvas of={MarketingMomentStories.AllMoments} />

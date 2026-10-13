@@ -22,17 +22,7 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-const MarketingMomentLayout = {
-  /** Title and description above the artwork. Used for announcements and offers. */
-  TitleFirst: 'title-first',
-  /** Artwork above the title and description. Used for confirmations mid-flow. */
-  ArtworkFirst: 'artwork-first',
-} as const;
-type MarketingMomentLayout =
-  (typeof MarketingMomentLayout)[keyof typeof MarketingMomentLayout];
-
 type MarketingMomentProps = {
-  layout?: MarketingMomentLayout;
   title: string;
   description: string | string[];
   iconName?: IconName;
@@ -87,17 +77,11 @@ const MarketingMomentTitle = ({
 };
 
 const MarketingMoment = ({
-  layout = MarketingMomentLayout.TitleFirst,
   title,
   description,
   iconName = IconName.Image,
   primaryButtonLabel,
 }: MarketingMomentProps) => {
-  const titleBlock = (
-    <MarketingMomentTitle title={title} description={description} />
-  );
-  const artwork = <MarketingMomentArtwork iconName={iconName} />;
-
   return (
     <Box
       flexDirection={BoxFlexDirection.Column}
@@ -106,34 +90,30 @@ const MarketingMoment = ({
       borderWidth={1}
       className="h-[812px] w-[390px] shrink-0 overflow-hidden rounded-3xl"
     >
-      {/* Content */}
       <Box
         flexDirection={BoxFlexDirection.Column}
-        gap={6}
         paddingHorizontal={6}
         paddingTop={4}
         className="mt-12"
       >
-        {layout === MarketingMomentLayout.TitleFirst ? (
-          <>
-            {titleBlock}
-            {artwork}
-          </>
-        ) : (
-          <>
-            {artwork}
-            {titleBlock}
-          </>
-        )}
+        <MarketingMomentTitle title={title} description={description} />
       </Box>
 
-      {/* Actions */}
+      <Box
+        flexDirection={BoxFlexDirection.Column}
+        alignItems={BoxAlignItems.Center}
+        justifyContent={BoxJustifyContent.Center}
+        paddingHorizontal={6}
+        className="min-h-0 w-full flex-1"
+      >
+        <MarketingMomentArtwork iconName={iconName} />
+      </Box>
+
       <Box
         flexDirection={BoxFlexDirection.Column}
         gap={2}
         paddingHorizontal={4}
         paddingBottom={8}
-        className="mt-auto"
       >
         <Button
           variant={ButtonVariant.Primary}
@@ -158,10 +138,6 @@ const meta: Meta<typeof MarketingMoment> = {
   title: 'Examples/Marketing Moments',
   component: MarketingMoment,
   argTypes: {
-    layout: {
-      control: 'select',
-      options: Object.values(MarketingMomentLayout),
-    },
     title: { control: 'text' },
     description: { control: 'text' },
     iconName: {
@@ -185,7 +161,6 @@ type Story = StoryObj<typeof MarketingMoment>;
 
 export const Default: Story = {
   args: {
-    layout: MarketingMomentLayout.TitleFirst,
     title: 'Title goes here',
     description: 'Description explains the value in one or two sentences.',
     iconName: IconName.Image,
@@ -207,7 +182,6 @@ export const SpendAndEarn: Story = {
 export const YourCardIsOrdered: Story = {
   name: 'Your card is ordered',
   args: {
-    layout: MarketingMomentLayout.ArtworkFirst,
     title: 'Your card is ordered',
     description: [
       'It should arrive in 4 to 6 weeks.',
@@ -221,7 +195,6 @@ export const YourCardIsOrdered: Story = {
 export const YoureIn: Story = {
   name: "You're in",
   args: {
-    layout: MarketingMomentLayout.ArtworkFirst,
     title: "You're in!",
     description:
       'Finish setting up your card so you can start spending your crypto.',
