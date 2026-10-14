@@ -1,8 +1,6 @@
 import {
   FontFamily as FontFamilyRole,
   Text,
-  TextColor,
-  TextVariant,
 } from '@metamask/design-system-react';
 import type { StoryFn, Meta } from '@storybook/react-vite';
 import React from 'react';
@@ -36,32 +34,11 @@ export const FontFamily: StoryFn<typeof Text> = () => {
         Inter
       </Text>
       <Text fontFamily={FontFamilyRole.Accent} style={sample}>
-        Grotzec Cond
+        Accent (Grotzec Cond)
       </Text>
-      <div className="space-y-1">
-        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          Oswald, Cyrillic
-        </Text>
-        <Text fontFamily={FontFamilyRole.Hero} style={sample}>
-          Привет
-        </Text>
-      </div>
-      <div className="space-y-1">
-        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          Oswald, Vietnamese
-        </Text>
-        <Text fontFamily={FontFamilyRole.Hero} style={sample}>
-          Tiếng Việt
-        </Text>
-      </div>
-      <div className="space-y-1">
-        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          IBM Plex Sans Condensed, Greek
-        </Text>
-        <Text fontFamily={FontFamilyRole.Hero} style={sample}>
-          Γεια
-        </Text>
-      </div>
+      <Text fontFamily={FontFamilyRole.Hero} style={sample}>
+        Hero (Grotzec Cond)
+      </Text>
     </div>
   );
 };

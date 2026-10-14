@@ -21,20 +21,17 @@ Accent and hero typefaces change from MM Sans and MM Poly to Grotzec Cond. Consu
 
 ### What changed
 
-- `--font-family-accent` is now `'Grotzec Cond', Oswald, 'IBM Plex Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMSans', ...`)
-- `--font-family-hero` is now `'Grotzec Cond', Oswald, 'IBM Plex Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMPoly', ...`)
-- `--font-family-default` is now `'Inter', 'IBM Plex Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+- `--font-family-accent` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMSans', ...`)
+- `--font-family-hero` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMPoly', ...`)
 - `fontFamilies.accent` and `fontFamilies.hero` are now `'Grotzec Cond'`
 - The Figma tokens `global.fontFamilies.accent` and `global.fontFamilies.hero` are now `Grotzec Cond`
 - Small-screen `S-AmountDisplay-Lg` is now 48px with a 56px line height (was 40px/50px)
 
-`--font-family-default` still starts with Inter. IBM Plex Sans Condensed is the next family in that stack, and in the accent and hero stacks after Oswald. No font weight token changed. `--letter-spacing-grotzec` is `-0.02em`. `Text` applies it for Accent and Hero at every size. The letter-spacing scale used by other styles is unchanged.
+`--font-family-default` is unchanged: `'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif`. No font weight token changed. `--letter-spacing-grotzec` is `-0.02em`. `Text` applies it for Accent and Hero at every size. The letter-spacing scale used by other styles is unchanged.
 
 Only the Bold cut shipped. On the web, weights 400, 500, and 600 all point at that file, so regular, medium, and bold accent and hero text render as Bold. On React Native, every accent and hero weight resolves to the PostScript name `GrotzecCond-Bold`.
 
-Oswald Bold is the fallback for characters Grotzec Cond does not include, including Cyrillic and Vietnamese. It is the [SIL Open Font License](https://scripts.sil.org/OFL) cut from Google Fonts. The web file is in [`apps/storybook-react/fonts/Oswald`](../../apps/storybook-react/fonts/Oswald) (`.woff2`) and the React Native file is in [`apps/storybook-react-native/fonts/Oswald`](../../apps/storybook-react-native/fonts/Oswald) (`.ttf`). Keep the `OFL.txt` in that directory with the font file.
-
-[IBM Plex Sans Condensed](https://fonts.google.com/specimen/IBM+Plex+Sans+Condensed) Bold is the next fallback for Hero and for the default sans stack. On Hero it follows Oswald, including Greek. On the sans stack it follows Inter. It is the upstream Bold cut, under the SIL Open Font License, with reserved font name "Plex". The web file is in [`apps/storybook-react/fonts/IBMPlexSansCondensed`](../../apps/storybook-react/fonts/IBMPlexSansCondensed) (`.woff2`) and the React Native file is in [`apps/storybook-react-native/fonts/IBMPlexSansCondensed`](../../apps/storybook-react-native/fonts/IBMPlexSansCondensed) (`.ttf`). Keep the `OFL.txt` in that directory with the font file.
+Characters missing from Inter or Grotzec Cond fall through to Helvetica Neue, Helvetica, Arial, and the generic sans-serif. No extra fallback font files are required.
 
 `fontFamilies.accent` remains available in this release. The accent role is likely to be deprecated in a future version, because accent and hero now use the same typeface.
 
@@ -64,24 +61,7 @@ Grotzec Condensed Bold is commercial font software owned by Secretonix Lda, trad
   font-weight: 400;
   src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
 }
-
-@font-face {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 400 600;
-  src: url('fonts/Oswald/Oswald-Bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'IBM Plex Sans Condensed';
-  font-style: normal;
-  font-weight: 700;
-  src: url('fonts/IBMPlexSansCondensed/IBMPlexSansCondensed-Bold.woff2')
-    format('woff2');
-}
 ```
-
-Add the `unicode-range` values from [`apps/storybook-react/tailwind.css`](../../apps/storybook-react/tailwind.css). Oswald covers characters Grotzec Cond does not include, including Cyrillic and Vietnamese. IBM Plex Sans Condensed covers characters neither of those includes, including Greek.
 
 Declare the Grotzec Cond file at each weight the scale still requests:
 
@@ -95,7 +75,7 @@ Hero previously used MM Poly the same way: one file declared at 400, 500, and 60
 
 ### Impact
 
-- **Web consumers:** Swap the font binaries and `@font-face` rules. `font-accent` and `font-hero` still select those roles; the typeface behind both is now Grotzec Cond, then Oswald, then IBM Plex Sans Condensed.
+- **Web consumers:** Swap the font binaries and `@font-face` rules. `font-accent` and `font-hero` still select those roles; the typeface behind both is now Grotzec Cond, then Helvetica Neue, Helvetica, Arial, and sans-serif.
 - **React Native consumers:** Font family names are resolved per weight. See [`@metamask/design-system-react-native`](../design-system-react-native/MIGRATION.md#accent-and-hero-typefaces-mm-sans-and-mm-poly-to-grotzec-cond).
 - **Anyone hardcoding `'MMSans'` or `'MMPoly'`:** Search for those literals outside token references and update them.
 - Expect reflow. Grotzec Cond is a condensed bold display face, so accent and hero text will be narrower and heavier than MM Sans and MM Poly.

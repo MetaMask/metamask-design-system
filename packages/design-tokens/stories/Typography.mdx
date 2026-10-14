@@ -9,8 +9,8 @@ Good typography improves readability, legibility, and the prioritization of info
 
 Inter is the default typeface. Accent and hero use Grotzec Cond. The CSS variables include the fallback stack. The JS values are the primary family only.
 
-- **Inter**: The default typeface for primary content. Falls back to IBM Plex Sans Condensed.
-- **Grotzec Cond**: The accent and hero typeface, a condensed bold face for emphasis and display text. Falls back to Oswald for Cyrillic and Vietnamese, then IBM Plex Sans Condensed for Greek.
+- **Inter**: The default typeface for primary content. Falls back to Helvetica Neue, Helvetica, Arial, then the generic sans-serif.
+- **Grotzec Cond**: The accent and hero typeface, a condensed bold face for emphasis and display text. Characters it does not include fall back to Helvetica Neue, Helvetica, Arial, then the generic sans-serif.
 
 <Canvas of={TypographyStories.FontFamily} />
 
@@ -34,7 +34,7 @@ Inter is the default typeface. Accent and hero use Grotzec Cond. The CSS variabl
       <td>
         <code>var(--font-family-default)</code>
       </td>
-      <td>IBM Plex Sans Condensed</td>
+      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
     </tr>
     <tr>
       <td>
@@ -46,7 +46,7 @@ Inter is the default typeface. Accent and hero use Grotzec Cond. The CSS variabl
       <td>
         <code>var(--font-family-accent)</code>
       </td>
-      <td>Oswald, then IBM Plex Sans Condensed</td>
+      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
     </tr>
     <tr>
       <td>
@@ -58,7 +58,7 @@ Inter is the default typeface. Accent and hero use Grotzec Cond. The CSS variabl
       <td>
         <code>var(--font-family-hero)</code>
       </td>
-      <td>Oswald, then IBM Plex Sans Condensed</td>
+      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
     </tr>
   </tbody>
 </table>

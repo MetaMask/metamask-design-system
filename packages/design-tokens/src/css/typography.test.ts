@@ -222,11 +222,9 @@ describe('Typography CSS', () => {
   // Test font families
   describe('Font Families', () => {
     const fontFamilies = {
-      default:
-        "'Inter', 'IBM Plex Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-      accent:
-        "'Grotzec Cond', Oswald, 'IBM Plex Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-      hero: "'Grotzec Cond', Oswald, 'IBM Plex Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      default: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      accent: "'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      hero: "'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif",
     };
 
     Object.entries(fontFamilies).forEach(([family, expectedValue]) => {

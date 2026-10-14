@@ -140,30 +140,6 @@ export const FontFamilyStory: Story = {
       <TextStory {...args} fontFamily={FontFamily.Hero}>
         Hero (Grotzec Cond)
       </TextStory>
-      <View style={{ gap: 4 }}>
-        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          Oswald, Cyrillic
-        </Text>
-        <TextStory {...args} fontFamily={FontFamily.Hero}>
-          Привет
-        </TextStory>
-      </View>
-      <View style={{ gap: 4 }}>
-        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          Oswald, Vietnamese
-        </Text>
-        <TextStory {...args} fontFamily={FontFamily.Hero}>
-          Tiếng Việt
-        </TextStory>
-      </View>
-      <View style={{ gap: 4 }}>
-        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          IBM Plex Sans Condensed, Greek
-        </Text>
-        <TextStory {...args} fontFamily={FontFamily.Hero}>
-          Γεια
-        </TextStory>
-      </View>
     </View>
   ),
   name: 'Font Family',

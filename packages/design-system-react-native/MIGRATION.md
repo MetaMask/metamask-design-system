@@ -88,7 +88,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 #### Accent and hero typefaces: MM Sans and MM Poly to Grotzec Cond
 
-`FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. React Native resolves fonts by **PostScript name**, so `@metamask/design-system-twrnc-preset` maps each weight to a font name. Those names changed. Only the Bold cut is available, so every accent and hero weight uses `GrotzecCond-Bold`. `Text` sets letter spacing to -2% of the font size for Accent and Hero at every size. Register `Oswald-Bold` and `IBMPlexSansCond-Bold` as well. React Native web uses Oswald, then IBM Plex Sans Condensed, for characters Grotzec Cond does not include. On iOS and Android a text style has one font name, so those characters use the system font unless the app adds those fonts to a native font cascade.
+`FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. React Native resolves fonts by **PostScript name**, so `@metamask/design-system-twrnc-preset` maps each weight to a font name. Those names changed. Only the Bold cut is available, so every accent and hero weight uses `GrotzecCond-Bold`. `Text` sets letter spacing to -2% of the font size for Accent and Hero at every size. A text style has one font name, so characters Grotzec Cond does not include use the system font. On the web, those characters fall through to Helvetica Neue, Helvetica, Arial, and sans-serif. See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-1110-to-x00).
 
 `FontFamily.Accent` remains available in this release. It is likely to be deprecated in a future version, because accent and hero now use the same typeface.
 
@@ -127,12 +127,8 @@ import { useFonts } from 'expo-font';
 
 useFonts({
   'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
-  'Oswald-Bold': require('./fonts/Oswald/Oswald-Bold.ttf'),
-  'IBMPlexSansCond-Bold': require('./fonts/IBMPlexSansCondensed/IBMPlexSansCondensed-Bold.ttf'),
 });
 ```
-
-Register `IBMPlexSansCond-Bold` under that PostScript name. The file is the upstream Bold cut, unchanged.
 
 See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-1110-to-x00) for the web `@font-face` setup. React Native web Storybook loads the same cut from [`apps/storybook-react-native/public/fonts/GrotzecCond`](../../apps/storybook-react-native/public/fonts/GrotzecCond) (`.woff2`) under the family name `GrotzecCond-Bold`.
 

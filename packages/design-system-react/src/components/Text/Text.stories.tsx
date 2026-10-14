@@ -53,7 +53,7 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontFamily),
       mapping: FontFamily,
       description:
-        'Optional prop to adjust the font family. Default: Inter, then IBM Plex Sans Condensed. Accent and hero: Grotzec Cond, then Oswald, then IBM Plex Sans Condensed.',
+        'Optional prop to adjust the font family. Default: Inter. Accent and hero: Grotzec Cond. Both fall back to Helvetica Neue, Helvetica, Arial, then sans-serif.',
     },
     fontStyle: {
       control: 'select',
@@ -377,30 +377,6 @@ export const FontFamilyStory: Story = {
       <Text {...args} fontFamily={FontFamily.Hero}>
         Hero (Grotzec Cond)
       </Text>
-      <div className="space-y-1">
-        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          Oswald, Cyrillic
-        </Text>
-        <Text {...args} fontFamily={FontFamily.Hero}>
-          Привет
-        </Text>
-      </div>
-      <div className="space-y-1">
-        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          Oswald, Vietnamese
-        </Text>
-        <Text {...args} fontFamily={FontFamily.Hero}>
-          Tiếng Việt
-        </Text>
-      </div>
-      <div className="space-y-1">
-        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
-          IBM Plex Sans Condensed, Greek
-        </Text>
-        <Text {...args} fontFamily={FontFamily.Hero}>
-          Γεια
-        </Text>
-      </div>
     </div>
   ),
   name: 'Font Family',
