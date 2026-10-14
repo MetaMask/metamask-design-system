@@ -32,7 +32,9 @@ function buildTextStyleArgs({
 }> = {}) {
   const fw = fontWeight ?? TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant];
   const isItalic = fontStyle === FontStyle.Italic;
-  const fontSuffix = `${TWCLASSMAP_TEXT_FONTWEIGHT[fw]}${
+  const resolvedFontWeight =
+    fontFamily === FontFamily.Hero ? FontWeight.Bold : fw;
+  const fontSuffix = `${TWCLASSMAP_TEXT_FONTWEIGHT[resolvedFontWeight]}${
     isItalic && fontFamily === FontFamily.Default ? '-italic' : ''
   }`;
   const fontClass = `font-${fontFamily}${fontSuffix}`;

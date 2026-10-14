@@ -35,10 +35,8 @@ export const FontFamily = {
   Default: 'default',
   /** Accent: MM Sans */
   Accent: 'accent',
-  /** Hero: MM Poly */
+  /** Hero: Grotzec Cond Bold */
   Hero: 'hero',
-  /** Grotzec Cond: temporary opt-in family for product evaluation */
-  Grotzec: 'grotzec',
 } as const;
 
 export type FontFamily = (typeof FontFamily)[keyof typeof FontFamily];

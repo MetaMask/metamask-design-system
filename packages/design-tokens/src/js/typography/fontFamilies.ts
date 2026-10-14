@@ -3,6 +3,5 @@ import type { FontFamilies } from './types';
 export const fontFamilies: FontFamilies = {
   default: 'Inter',
   accent: 'MMSans',
-  hero: 'MMPoly',
-  grotzec: 'Grotzec Cond',
+  hero: 'Grotzec Cond',
 };

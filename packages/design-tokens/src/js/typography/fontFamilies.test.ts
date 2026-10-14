@@ -21,9 +21,4 @@ describe('Font Families', () => {
     );
   });
 
-  it('js tokens for font family grotzec matches figma tokens', () => {
-    expect(fontFamilies.grotzec).toStrictEqual(
-      designTokens.global.fontFamilies.grotzec.value,
-    );
-  });
 });

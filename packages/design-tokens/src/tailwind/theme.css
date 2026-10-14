@@ -785,9 +785,6 @@
 @utility font-hero {
   font-family: var(--font-family-hero);
 }
-@utility font-grotzec {
-  font-family: var(--font-family-grotzec);
-}
 @utility font-regular {
   font-weight: var(--font-weight-regular);
 }

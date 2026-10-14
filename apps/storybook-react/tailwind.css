@@ -52,7 +52,7 @@
   src: url('fonts/Inter/Inter-SemiBoldItalic.woff2') format('woff2');
 }
 
-/* Grotzec Cond — only the Bold cut is available, so every weight uses it */
+/* Hero: Grotzec Cond — only the Bold cut is available, so every weight uses it */
 @font-face {
   font-family: 'Grotzec Cond';
   font-style: normal;
@@ -96,24 +96,3 @@
   src: url('fonts/MMSans/MMSans-Bold.woff2') format('woff2');
 }
 
-/* MM Poly */
-@font-face {
-  font-family: 'MMPoly';
-  font-style: normal;
-  font-weight: 400;
-  src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'MMPoly';
-  font-style: normal;
-  font-weight: 500;
-  src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'MMPoly';
-  font-style: normal;
-  font-weight: 600;
-  src: url('fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
-}

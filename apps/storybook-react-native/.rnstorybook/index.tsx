@@ -20,7 +20,6 @@ function App() {
     'Inter-MediumItalic': require('../fonts/Inter/Inter-MediumItalic.ttf'),
     'Inter-SemiBold': require('../fonts/Inter/Inter-SemiBold.ttf'),
     'Inter-SemiBoldItalic': require('../fonts/Inter/Inter-SemiBoldItalic.ttf'),
-    'MMPoly-Regular': require('../fonts/MMPoly/MMPoly-Regular.otf'),
     'GrotzecCond-Bold': require('../fonts/GrotzecCond/GrotzecCond-Bold.otf'),
     'MMSans-Regular': require('../fonts/MMSans/MMSans-Regular.otf'),
     'MMSans-Medium': require('../fonts/MMSans/MMSans-Medium.otf'),

@@ -63,7 +63,3 @@ body {
   src: url('/fonts/MMSans/MMSans-Bold.woff2') format('woff2');
 }
 
-@font-face {
-  font-family: 'MMPoly-Regular';
-  src: url('/fonts/MMPoly/MMPoly-Regular.woff2') format('woff2');
-}
