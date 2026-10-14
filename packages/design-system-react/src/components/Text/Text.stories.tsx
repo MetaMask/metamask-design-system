@@ -121,6 +121,7 @@ export const Variant: Story = {
   render: () => (
     <div className="space-y-4">
       <Text variant={TextVariant.DisplayLg}>DisplayLg</Text>
+      <Text variant={TextVariant.DisplayXl}>DisplayXl</Text>
       <Text variant={TextVariant.DisplayMd}>DisplayMd</Text>
       <Text variant={TextVariant.HeadingLg}>HeadingLg</Text>
       <Text variant={TextVariant.HeadingMd}>HeadingMd</Text>

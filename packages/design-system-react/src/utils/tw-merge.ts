@@ -2,6 +2,7 @@ import { extendTailwindMerge } from 'tailwind-merge';
 
 const variantClassGroups = [
   's-display-lg',
+  's-display-xl',
   's-display-md',
   's-heading-lg',
   's-heading-md',
@@ -11,6 +12,7 @@ const variantClassGroups = [
   's-body-sm',
   's-body-xs',
   'l-display-lg',
+  'l-display-xl',
   'l-display-md',
   'l-heading-lg',
   'l-heading-md',

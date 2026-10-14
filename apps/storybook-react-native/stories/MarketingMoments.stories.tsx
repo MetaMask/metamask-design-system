@@ -47,7 +47,7 @@ const MarketingMoment = ({
         twClassName="mt-12 shrink-0"
       >
         <Text
-          variant={TextVariant.DisplayMd}
+          variant={TextVariant.DisplayXl}
           fontWeight={FontWeight.Bold}
           accessibilityRole="header"
           twClassName="text-center"

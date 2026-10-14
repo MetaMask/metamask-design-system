@@ -48,6 +48,7 @@ export type FontFamily = (typeof FontFamily)[keyof typeof FontFamily];
 export const TextVariant = {
   // Display Sizes
   DisplayLg: 'display-lg',
+  DisplayXl: 'display-xl',
   DisplayMd: 'display-md',
 
   // Heading Sizes

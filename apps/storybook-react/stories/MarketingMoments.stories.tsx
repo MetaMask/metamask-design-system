@@ -46,7 +46,7 @@ const MarketingMoment = ({
       >
         <Text
           asChild
-          variant={TextVariant.DisplayMd}
+          variant={TextVariant.DisplayXl}
           fontWeight={FontWeight.Bold}
           textAlign={TextAlign.Center}
         >

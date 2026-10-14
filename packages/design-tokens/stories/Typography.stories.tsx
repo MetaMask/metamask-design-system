@@ -63,6 +63,12 @@ export const SmallScreen: StoryFn<typeof Text> = () => {
       lineHeight: `${typography.sDisplayLG.lineHeight}px`,
       fontWeight: typography.sDisplayLG.fontWeight,
     },
+    displayXL: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.sDisplayXL.fontSize,
+      lineHeight: `${typography.sDisplayXL.lineHeight}px`,
+      fontWeight: typography.sDisplayXL.fontWeight,
+    },
     displayMD: {
       fontFamily: fontFamilies.default,
       fontSize: typography.sDisplayMD.fontSize,
@@ -186,6 +192,11 @@ export const SmallScreen: StoryFn<typeof Text> = () => {
           styles.displayLG.lineHeight
         } ${styles.displayLG.fontSize / smallScreenFontSizeBase}rem`}
       </Text>
+      <Text style={styles.displayXL}>
+        {`S DisplayXL ${styles.displayXL.fontSize}px/${
+          styles.displayXL.lineHeight
+        } ${styles.displayXL.fontSize / smallScreenFontSizeBase}rem`}
+      </Text>
       <Text style={styles.displayMD}>
         {`S DisplayMD ${styles.displayMD.fontSize}px/${
           styles.displayMD.lineHeight
@@ -288,6 +299,12 @@ export const LargeScreen: StoryFn<typeof Text> = () => {
       fontSize: typography.lDisplayLG.fontSize,
       lineHeight: `${typography.lDisplayLG.lineHeight}px`,
       fontWeight: typography.lDisplayLG.fontWeight,
+    },
+    displayXL: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.lDisplayXL.fontSize,
+      lineHeight: `${typography.lDisplayXL.lineHeight}px`,
+      fontWeight: typography.lDisplayXL.fontWeight,
     },
     displayMD: {
       fontFamily: fontFamilies.default,
@@ -411,6 +428,11 @@ export const LargeScreen: StoryFn<typeof Text> = () => {
         {`L DisplayLG ${styles.displayLG.fontSize}px/${
           styles.displayLG.lineHeight
         } ${styles.displayLG.fontSize / largeScreenFontSizeBase}rem`}
+      </Text>
+      <Text style={styles.displayXL}>
+        {`L DisplayXL ${styles.displayXL.fontSize}px/${
+          styles.displayXL.lineHeight
+        } ${styles.displayXL.fontSize / largeScreenFontSizeBase}rem`}
       </Text>
       <Text style={styles.displayMD}>
         {`L DisplayMD ${styles.displayMD.fontSize}px/${
@@ -544,6 +566,12 @@ export const SmallScreenCSS: StoryFn<typeof Text> = () => {
       fontSize: 'var(--typography-s-display-lg-font-size)',
       lineHeight: 'var(--typography-s-display-lg-line-height)',
       fontWeight: 'var(--typography-s-display-lg-font-weight)',
+    },
+    DisplayXL: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-s-display-xl-font-size)',
+      lineHeight: 'var(--typography-s-display-xl-line-height)',
+      fontWeight: 'var(--typography-s-display-xl-font-weight)',
     },
     DisplayMD: {
       fontFamily: 'var(--font-family-default)',
@@ -701,6 +729,12 @@ export const LargeScreenCSS: StoryFn<typeof Text> = () => {
       fontSize: 'var(--typography-l-display-lg-font-size)',
       lineHeight: 'var(--typography-l-display-lg-line-height)',
       fontWeight: 'var(--typography-l-display-lg-font-weight)',
+    },
+    DisplayXL: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-l-display-xl-font-size)',
+      lineHeight: 'var(--typography-l-display-xl-line-height)',
+      fontWeight: 'var(--typography-l-display-xl-font-weight)',
     },
     DisplayMD: {
       fontFamily: 'var(--font-family-default)',

@@ -11,6 +11,13 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
         letterSpacing: `${typography.sDisplayLG.letterSpacing as number}`,
       },
     ],
+    'display-xl': [
+      typography.sDisplayXL.fontSize.toString(),
+      {
+        lineHeight: `${typography.sDisplayXL.lineHeight as number}px`,
+        letterSpacing: `${typography.sDisplayXL.letterSpacing as number}`,
+      },
+    ],
     'display-md': [
       typography.sDisplayMD.fontSize.toString(),
       {
@@ -117,6 +124,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
   },
   letterSpacing: {
     'display-lg': `${typography.sDisplayLG.letterSpacing as number}`,
+    'display-xl': `${typography.sDisplayXL.letterSpacing as number}`,
     'display-md': `${typography.sDisplayMD.letterSpacing as number}`,
     'heading-lg': `${typography.sHeadingLG.letterSpacing as number}`,
     'heading-md': `${typography.sHeadingMD.letterSpacing as number}`,
@@ -133,6 +141,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
   },
   lineHeight: {
     'display-lg': `${typography.sDisplayLG.lineHeight as number}px`,
+    'display-xl': `${typography.sDisplayXL.lineHeight as number}px`,
     'display-md': `${typography.sDisplayMD.lineHeight as number}px`,
     'heading-lg': `${typography.sHeadingLG.lineHeight as number}px`,
     'heading-md': `${typography.sHeadingMD.lineHeight as number}px`,

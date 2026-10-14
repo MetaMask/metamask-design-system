@@ -3,6 +3,7 @@
  */
 export type TypographyVariant =
   | 'display-lg'
+  | 'display-xl'
   | 'display-md'
   | 'heading-lg'
   | 'heading-md'
