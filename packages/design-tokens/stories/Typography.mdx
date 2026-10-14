@@ -7,11 +7,10 @@ Good typography improves readability, legibility, and the prioritization of info
 
 ## Font Family
 
-Our design system now offers three distinct font families to support a rich typographic hierarchy:
+Inter is the default typeface. Accent and hero use Grotzec Cond. The CSS variables include the fallback stack. The JS values are the primary family only.
 
-- **Inter**: The default typeface for primary content, optimized for readability.
-- **MM Sans**: A secondary option that adds subtle visual flair and differentiates sections without overpowering the main content.
-- **MM Poly**: A display-oriented, expressive font used for bold, attention-grabbing statements.
+- **Inter**: The default typeface for primary content. Falls back to Helvetica Neue, Helvetica, Arial, then the generic sans-serif.
+- **Grotzec Cond**: The accent and hero typeface, a condensed bold face for emphasis and display text. Characters it does not include fall back to Helvetica Neue, Helvetica, Arial, then the generic sans-serif.
 
 <Canvas of={TypographyStories.FontFamily} />
 
@@ -21,6 +20,7 @@ Our design system now offers three distinct font families to support a rich typo
       <th>Font Family</th>
       <th>JS</th>
       <th>CSS</th>
+      <th>Fallback</th>
     </tr>
   </thead>
   <tbody>
@@ -34,10 +34,11 @@ Our design system now offers three distinct font families to support a rich typo
       <td>
         <code>var(--font-family-default)</code>
       </td>
+      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
     </tr>
     <tr>
       <td>
-        <strong>MM Sans</strong>
+        <strong>Grotzec Cond</strong>
       </td>
       <td>
         <code>fontFamilies.accent</code>
@@ -45,10 +46,11 @@ Our design system now offers three distinct font families to support a rich typo
       <td>
         <code>var(--font-family-accent)</code>
       </td>
+      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
     </tr>
     <tr>
       <td>
-        <strong>MM Poly</strong>
+        <strong>Grotzec Cond</strong>
       </td>
       <td>
         <code>fontFamilies.hero</code>
@@ -56,6 +58,7 @@ Our design system now offers three distinct font families to support a rich typo
       <td>
         <code>var(--font-family-hero)</code>
       </td>
+      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
     </tr>
   </tbody>
 </table>

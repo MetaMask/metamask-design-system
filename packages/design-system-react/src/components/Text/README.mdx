@@ -263,7 +263,7 @@ Use the `fontWeight` prop and the `FontWeight` enum from `@metamask/design-syste
 
 ### `fontFamily`
 
-Use the `fontFamily` prop and the `FontFamily` enum from `@metamask/design-system-react` to change the font family of the `Text` component.
+Use the `fontFamily` prop and the `FontFamily` enum from `@metamask/design-system-react` to change the font family of the `Text` component. Default is Inter. Accent and hero are Grotzec Cond. Characters those faces do not include fall back to Helvetica Neue, Helvetica, Arial, then the generic sans-serif.
 
 <table>
   <thead>
@@ -292,6 +292,7 @@ Use the `fontFamily` prop and the `FontFamily` enum from `@metamask/design-syste
       <th>Font Family</th>
       <th>Tailwind ClassName</th>
       <th>Font Family Value</th>
+      <th>Fallback</th>
     </tr>
   </thead>
   <tbody>
@@ -303,6 +304,7 @@ Use the `fontFamily` prop and the `FontFamily` enum from `@metamask/design-syste
         <code>font-default</code>
       </td>
       <td>Inter</td>
+      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
     </tr>
     <tr>
       <td>
@@ -311,7 +313,8 @@ Use the `fontFamily` prop and the `FontFamily` enum from `@metamask/design-syste
       <td>
         <code>font-accent</code>
       </td>
-      <td>MM Sans</td>
+      <td>Grotzec Cond</td>
+      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
     </tr>
     <tr>
       <td>
@@ -320,7 +323,8 @@ Use the `fontFamily` prop and the `FontFamily` enum from `@metamask/design-syste
       <td>
         <code>font-hero</code>
       </td>
-      <td>MM Poly</td>
+      <td>Grotzec Cond</td>
+      <td>Helvetica Neue, Helvetica, Arial, sans-serif</td>
     </tr>
   </tbody>
 </table>

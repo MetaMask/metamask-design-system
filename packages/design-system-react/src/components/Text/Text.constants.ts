@@ -17,6 +17,10 @@ export const TWCLASSMAP_TEXT_FONTFAMILY: Record<FontFamily, string> = {
   [FontFamily.Hero]: 'font-hero',
 };
 
+/** Overrides variant tracking for Grotzec at every breakpoint. */
+export const TWCLASS_TEXT_GROTZEC_TRACKING =
+  'tracking-grotzec md:tracking-grotzec';
+
 export const TWCLASSMAP_TEXT_FONTSTYLE: Record<FontStyle, string> = {
   [FontStyle.Italic]: 'italic',
   [FontStyle.Normal]: 'not-italic',

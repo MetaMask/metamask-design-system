@@ -80,11 +80,12 @@ export const Default: Story = {
 };
 
 export const Variant: Story = {
-  render: () => (
+  render: (args) => (
     <ScrollView>
       {Object.keys(TextVariant).map((variantKey) => (
         <TextStory
           key={variantKey}
+          {...args}
           variant={TextVariant[variantKey as keyof typeof TextVariant]}
         >
           {variantKey}
@@ -95,11 +96,12 @@ export const Variant: Story = {
 };
 
 export const Color: Story = {
-  render: () => (
+  render: (args) => (
     <ScrollView>
       {Object.keys(TextColor).map((colorKey) => (
         <TextStory
           key={colorKey}
+          {...args}
           color={TextColor[colorKey as keyof typeof TextColor]}
         >
           {colorKey}
@@ -110,32 +112,48 @@ export const Color: Story = {
 };
 
 export const FontWeightStory: Story = {
-  render: () => (
+  render: (args) => (
     <View>
-      <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
-      <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
-      <Text fontWeight={FontWeight.Bold}>Bold (600)</Text>
+      <TextStory {...args} fontWeight={FontWeight.Regular}>
+        Regular (400)
+      </TextStory>
+      <TextStory {...args} fontWeight={FontWeight.Medium}>
+        Medium (500)
+      </TextStory>
+      <TextStory {...args} fontWeight={FontWeight.Bold}>
+        Bold (600)
+      </TextStory>
     </View>
   ),
   name: 'Font Weight',
 };
 
 export const FontFamilyStory: Story = {
-  render: () => (
-    <View>
-      <Text fontFamily={FontFamily.Default}>Default (Inter)</Text>
-      <Text fontFamily={FontFamily.Accent}>Accent (MM Sans)</Text>
-      <Text fontFamily={FontFamily.Hero}>Hero (MM Poly)</Text>
+  render: (args) => (
+    <View style={{ gap: 24 }}>
+      <TextStory {...args} fontFamily={FontFamily.Default}>
+        Default (Inter)
+      </TextStory>
+      <TextStory {...args} fontFamily={FontFamily.Accent}>
+        Accent (Grotzec Cond)
+      </TextStory>
+      <TextStory {...args} fontFamily={FontFamily.Hero}>
+        Hero (Grotzec Cond)
+      </TextStory>
     </View>
   ),
   name: 'Font Family',
 };
 
 export const FontStyleStory: Story = {
-  render: () => (
+  render: (args) => (
     <View>
-      <Text fontStyle={FontStyle.Normal}>Normal</Text>
-      <Text fontStyle={FontStyle.Italic}>Italic</Text>
+      <TextStory {...args} fontStyle={FontStyle.Normal}>
+        Normal
+      </TextStory>
+      <TextStory {...args} fontStyle={FontStyle.Italic}>
+        Italic
+      </TextStory>
     </View>
   ),
   name: 'Font Style',

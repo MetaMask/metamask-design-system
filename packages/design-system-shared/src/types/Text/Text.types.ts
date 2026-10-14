@@ -33,11 +33,26 @@ export type FontStyle = (typeof FontStyle)[keyof typeof FontStyle];
 export const FontFamily = {
   /** Default: Inter */
   Default: 'default',
-  /** Accent: MM Sans */
+  /** Accent: Grotzec Cond */
   Accent: 'accent',
-  /** Hero: MM Poly */
+  /** Hero: Grotzec Cond */
   Hero: 'hero',
 } as const;
+
+/**
+ * Grotzec tracking for Accent and Hero, as a fraction of the font size.
+ * Applied at every size. -0.02 is -2%.
+ */
+export const GROTZEC_LETTER_SPACING_RATIO = -0.02;
+
+/**
+ * True when the family renders Grotzec Cond.
+ *
+ * @param fontFamily - The text font family.
+ * @returns Whether Accent or Hero is selected.
+ */
+export const isGrotzecFontFamily = (fontFamily: FontFamily): boolean =>
+  fontFamily === FontFamily.Accent || fontFamily === FontFamily.Hero;
 
 export type FontFamily = (typeof FontFamily)[keyof typeof FontFamily];
 
@@ -184,8 +199,8 @@ export type TextPropsShared = {
   /**
    * Optional prop to adjust the font family.
    * Default: Inter
-   * Accent: MM Sans
-   * Hero: MM Poly
+   * Accent: Grotzec Cond
+   * Hero: Grotzec Cond
    */
   fontFamily?: FontFamily;
   /**

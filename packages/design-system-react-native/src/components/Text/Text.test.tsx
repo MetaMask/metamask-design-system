@@ -2,6 +2,7 @@ import {
   FontFamily,
   FontStyle,
   FontWeight,
+  GROTZEC_LETTER_SPACING_RATIO,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -204,6 +205,57 @@ describe('Text', () => {
       const textElement = getByTestId('text');
 
       expect(textElement.props.style).toContainEqual(customStyle);
+    });
+
+    it('applies -2% letter spacing for Grotzec families at the variant size', () => {
+      [FontFamily.Accent, FontFamily.Hero].forEach((fontFamily) => {
+        const { getByTestId } = render(
+          <Text testID="text" fontFamily={fontFamily}>
+            Grotzec
+          </Text>,
+        );
+        const textStyle = getByTestId('text').props.style[0];
+        expect(textStyle.letterSpacing).toBe(
+          textStyle.fontSize * GROTZEC_LETTER_SPACING_RATIO,
+        );
+      });
+    });
+
+    it('resolves Grotzec families to GrotzecCond-Bold at every font weight', () => {
+      [FontFamily.Accent, FontFamily.Hero].forEach((fontFamily) => {
+        Object.values(FontWeight).forEach((fontWeight) => {
+          const { getByTestId, unmount } = render(
+            <Text testID="text" fontFamily={fontFamily} fontWeight={fontWeight}>
+              Grotzec
+            </Text>,
+          );
+          expect(getByTestId('text').props.style[0].fontFamily).toBe(
+            'GrotzecCond-Bold',
+          );
+          unmount();
+        });
+      });
+    });
+
+    it('keeps variant letter spacing for the default family', () => {
+      let expectedStyles: { letterSpacing?: number | string } | undefined;
+
+      const TestComponent = () => {
+        const tw = useTailwind();
+        expectedStyles = tw.style(
+          ...buildTextStyleArgs({ fontFamily: FontFamily.Default }),
+        );
+        return (
+          <Text testID="text" fontFamily={FontFamily.Default}>
+            Inter
+          </Text>
+        );
+      };
+
+      const { getByTestId } = render(<TestComponent />);
+      expect(getByTestId('text').props.style[0].letterSpacing).toBe(
+        expectedStyles?.letterSpacing,
+      );
     });
 
     it('applies accessibilityRole="text"', () => {

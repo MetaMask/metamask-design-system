@@ -6,6 +6,7 @@ import {
   Button,
   ButtonSize,
   ButtonVariant,
+  FontFamily,
   FontWeight,
   Icon,
   IconColor,
@@ -46,7 +47,8 @@ const MarketingMoment = ({
       >
         <Text
           asChild
-          variant={TextVariant.DisplayMd}
+          variant={TextVariant.DisplayLg}
+          fontFamily={FontFamily.Hero}
           fontWeight={FontWeight.Bold}
           textAlign={TextAlign.Center}
         >

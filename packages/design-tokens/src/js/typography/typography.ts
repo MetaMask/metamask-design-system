@@ -115,8 +115,8 @@ export const typography: ThemeTypography = {
   },
   sAmountDisplayLg: {
     fontWeight: fontWeights.bold,
-    fontSize: fontSizes.fontSize8,
-    lineHeight: lineHeights.lineHeight7,
+    fontSize: fontSizes.fontSize9,
+    lineHeight: lineHeights.lineHeight8,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   lDisplayLG: {

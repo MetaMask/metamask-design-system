@@ -53,7 +53,7 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontFamily),
       mapping: FontFamily,
       description:
-        'Optional prop to adjust the font family. Default: Inter, Accent: MM Sans, Hero: MM Poly',
+        'Optional prop to adjust the font family. Default: Inter. Accent and hero: Grotzec Cond. Both fall back to Helvetica Neue, Helvetica, Arial, then sans-serif.',
     },
     fontStyle: {
       control: 'select',
@@ -111,6 +111,10 @@ const meta: Meta<typeof Text> = {
 export default meta;
 type Story = StoryObj<typeof Text>;
 
+function mergeClassName(className: string | undefined, ...extra: string[]) {
+  return [...extra, className].filter(Boolean).join(' ');
+}
+
 export const Default: Story = {
   args: {
     children: 'The quick orange fox jumped over the lazy dog.',
@@ -118,26 +122,60 @@ export const Default: Story = {
 };
 
 export const Variant: Story = {
-  render: () => (
+  render: (args) => (
     <div className="space-y-4">
-      <Text variant={TextVariant.DisplayLg}>DisplayLg</Text>
-      <Text variant={TextVariant.DisplayMd}>DisplayMd</Text>
-      <Text variant={TextVariant.HeadingLg}>HeadingLg</Text>
-      <Text variant={TextVariant.HeadingMd}>HeadingMd</Text>
-      <Text variant={TextVariant.HeadingSm}>HeadingSm</Text>
-      <Text variant={TextVariant.BodyLg}>BodyLg</Text>
-      <Text variant={TextVariant.BodyMd}>BodyMd</Text>
-      <Text variant={TextVariant.BodySm}>BodySm</Text>
-      <Text variant={TextVariant.BodyXs}>BodyXs</Text>
-      <Text variant={TextVariant.PageHeading}>PageHeading</Text>
-      <Text variant={TextVariant.SectionHeading}>SectionHeading</Text>
-      <Text variant={TextVariant.ButtonLabelMd} className="block">
+      <Text {...args} variant={TextVariant.DisplayLg}>
+        DisplayLg
+      </Text>
+      <Text {...args} variant={TextVariant.DisplayMd}>
+        DisplayMd
+      </Text>
+      <Text {...args} variant={TextVariant.HeadingLg}>
+        HeadingLg
+      </Text>
+      <Text {...args} variant={TextVariant.HeadingMd}>
+        HeadingMd
+      </Text>
+      <Text {...args} variant={TextVariant.HeadingSm}>
+        HeadingSm
+      </Text>
+      <Text {...args} variant={TextVariant.BodyLg}>
+        BodyLg
+      </Text>
+      <Text {...args} variant={TextVariant.BodyMd}>
+        BodyMd
+      </Text>
+      <Text {...args} variant={TextVariant.BodySm}>
+        BodySm
+      </Text>
+      <Text {...args} variant={TextVariant.BodyXs}>
+        BodyXs
+      </Text>
+      <Text {...args} variant={TextVariant.PageHeading}>
+        PageHeading
+      </Text>
+      <Text {...args} variant={TextVariant.SectionHeading}>
+        SectionHeading
+      </Text>
+      <Text
+        {...args}
+        variant={TextVariant.ButtonLabelMd}
+        className={['block', args.className].filter(Boolean).join(' ')}
+      >
         ButtonLabelMd
       </Text>
-      <Text variant={TextVariant.ButtonLabelLg} className="block">
+      <Text
+        {...args}
+        variant={TextVariant.ButtonLabelLg}
+        className={['block', args.className].filter(Boolean).join(' ')}
+      >
         ButtonLabelLg
       </Text>
-      <Text variant={TextVariant.AmountDisplayLg} className="block">
+      <Text
+        {...args}
+        variant={TextVariant.AmountDisplayLg}
+        className={['block', args.className].filter(Boolean).join(' ')}
+      >
         AmountDisplayLg
       </Text>
     </div>
@@ -145,69 +183,153 @@ export const Variant: Story = {
 };
 
 export const Color: Story = {
-  render: () => (
+  render: (args) => (
     <div>
-      <Text color={TextColor.TextDefault} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.TextDefault}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         TextDefault
       </Text>
-      <Text color={TextColor.TextAlternative} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.TextAlternative}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         TextAlternative
       </Text>
-      <Text color={TextColor.TextMuted} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.TextMuted}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         TextMuted
       </Text>
-      <Text color={TextColor.PrimaryDefault} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.PrimaryDefault}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         PrimaryDefault
       </Text>
-      <Text color={TextColor.PrimaryDefaultHover} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.PrimaryDefaultHover}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         PrimaryDefaultHover
       </Text>
-      <Text color={TextColor.PrimaryDefaultPressed} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.PrimaryDefaultPressed}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         PrimaryDefaultPressed
       </Text>
-      <Text color={TextColor.PrimaryInverse} className="bg-primary-default p-4">
+      <Text
+        {...args}
+        color={TextColor.PrimaryInverse}
+        className={mergeClassName(args.className, 'bg-primary-default p-4')}
+      >
         PrimaryInverse on bg-primary-default
       </Text>
-      <Text color={TextColor.ErrorDefault} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.ErrorDefault}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         ErrorDefault
       </Text>
-      <Text color={TextColor.ErrorDefaultHover} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.ErrorDefaultHover}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         ErrorDefaultHover
       </Text>
-      <Text color={TextColor.ErrorDefaultPressed} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.ErrorDefaultPressed}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         ErrorDefaultPressed
       </Text>
-      <Text color={TextColor.ErrorInverse} className="bg-error-default p-4">
+      <Text
+        {...args}
+        color={TextColor.ErrorInverse}
+        className={mergeClassName(args.className, 'bg-error-default p-4')}
+      >
         ErrorInverse on bg-error-default
       </Text>
-      <Text color={TextColor.SuccessDefault} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.SuccessDefault}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         SuccessDefault
       </Text>
-      <Text color={TextColor.SuccessDefaultHover} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.SuccessDefaultHover}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         SuccessDefaultHover
       </Text>
-      <Text color={TextColor.SuccessDefaultPressed} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.SuccessDefaultPressed}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         SuccessDefaultPressed
       </Text>
-      <Text color={TextColor.SuccessInverse} className="bg-success-default p-4">
+      <Text
+        {...args}
+        color={TextColor.SuccessInverse}
+        className={mergeClassName(args.className, 'bg-success-default p-4')}
+      >
         SuccessInverse on bg-success-default
       </Text>
-      <Text color={TextColor.WarningDefault} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.WarningDefault}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         WarningDefault
       </Text>
-      <Text color={TextColor.WarningDefaultHover} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.WarningDefaultHover}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         WarningDefaultHover
       </Text>
-      <Text color={TextColor.WarningDefaultPressed} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.WarningDefaultPressed}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         WarningDefaultPressed
       </Text>
-      <Text color={TextColor.WarningInverse} className="bg-warning-default p-4">
+      <Text
+        {...args}
+        color={TextColor.WarningInverse}
+        className={mergeClassName(args.className, 'bg-warning-default p-4')}
+      >
         WarningInverse on bg-warning-default
       </Text>
-      <Text color={TextColor.InfoDefault} className="p-4">
+      <Text
+        {...args}
+        color={TextColor.InfoDefault}
+        className={mergeClassName(args.className, 'p-4')}
+      >
         InfoDefault
       </Text>
-      <Text color={TextColor.InfoInverse} className="bg-info-default p-4">
+      <Text
+        {...args}
+        color={TextColor.InfoInverse}
+        className={mergeClassName(args.className, 'bg-info-default p-4')}
+      >
         InfoInverse on bg-info-default
       </Text>
     </div>
@@ -227,67 +349,97 @@ export const Color: Story = {
 };
 
 export const FontWeightStory: Story = {
-  render: () => (
+  render: (args) => (
     <div className="space-y-4">
-      <Text fontWeight={FontWeight.Regular}>Regular (400)</Text>
-      <Text fontWeight={FontWeight.Medium}>Medium (500)</Text>
-      <Text fontWeight={FontWeight.Bold}>Bold (600)</Text>
+      <Text {...args} fontWeight={FontWeight.Regular}>
+        Regular (400)
+      </Text>
+      <Text {...args} fontWeight={FontWeight.Medium}>
+        Medium (500)
+      </Text>
+      <Text {...args} fontWeight={FontWeight.Bold}>
+        Bold (600)
+      </Text>
     </div>
   ),
   name: 'Font Weight',
 };
 
 export const FontFamilyStory: Story = {
-  render: () => (
-    <div className="space-y-4">
-      <Text fontFamily={FontFamily.Default}>Default (Inter)</Text>
-      <Text fontFamily={FontFamily.Accent}>Accent (MM Sans)</Text>
-      <Text fontFamily={FontFamily.Hero}>Hero (MM Poly)</Text>
+  render: (args) => (
+    <div className="space-y-6">
+      <Text {...args} fontFamily={FontFamily.Default}>
+        Default (Inter)
+      </Text>
+      <Text {...args} fontFamily={FontFamily.Accent}>
+        Accent (Grotzec Cond)
+      </Text>
+      <Text {...args} fontFamily={FontFamily.Hero}>
+        Hero (Grotzec Cond)
+      </Text>
     </div>
   ),
   name: 'Font Family',
 };
 
 export const FontStyleStory: Story = {
-  render: () => (
+  render: (args) => (
     <div className="space-y-4">
-      <Text fontStyle={FontStyle.Normal}>Normal</Text>
-      <Text fontStyle={FontStyle.Italic}>Italic</Text>
+      <Text {...args} fontStyle={FontStyle.Normal}>
+        Normal
+      </Text>
+      <Text {...args} fontStyle={FontStyle.Italic}>
+        Italic
+      </Text>
     </div>
   ),
   name: 'Font Style',
 };
 
 export const TextTransformStory: Story = {
-  render: () => (
+  render: (args) => (
     <div className="space-y-4">
-      <Text textTransform={TextTransform.Uppercase}>uppercase</Text>
-      <Text textTransform={TextTransform.Lowercase}>lowercase</Text>
-      <Text textTransform={TextTransform.Capitalize}>capitalize</Text>
+      <Text {...args} textTransform={TextTransform.Uppercase}>
+        uppercase
+      </Text>
+      <Text {...args} textTransform={TextTransform.Lowercase}>
+        lowercase
+      </Text>
+      <Text {...args} textTransform={TextTransform.Capitalize}>
+        capitalize
+      </Text>
     </div>
   ),
   name: 'Text Transform',
 };
 
 export const TextAlignStory: Story = {
-  render: () => (
+  render: (args) => (
     <div className="space-y-4">
-      <Text textAlign={TextAlign.Left}>Left aligned</Text>
-      <Text textAlign={TextAlign.Center}>Center aligned</Text>
-      <Text textAlign={TextAlign.Right}>Right aligned</Text>
-      <Text textAlign={TextAlign.Justify}>Justify aligned</Text>
+      <Text {...args} textAlign={TextAlign.Left}>
+        Left aligned
+      </Text>
+      <Text {...args} textAlign={TextAlign.Center}>
+        Center aligned
+      </Text>
+      <Text {...args} textAlign={TextAlign.Right}>
+        Right aligned
+      </Text>
+      <Text {...args} textAlign={TextAlign.Justify}>
+        Justify aligned
+      </Text>
     </div>
   ),
   name: 'Text Align',
 };
 
 export const OverflowWrapStory: Story = {
-  render: () => (
+  render: (args) => (
     <div className="w-48 border border-warning-default">
-      <Text overflowWrap={OverflowWrap.Normal}>
+      <Text {...args} overflowWrap={OverflowWrap.Normal}>
         Normal: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
       </Text>
-      <Text overflowWrap={OverflowWrap.Anywhere}>
+      <Text {...args} overflowWrap={OverflowWrap.Anywhere}>
         Break-word: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
       </Text>
     </div>
@@ -296,21 +448,33 @@ export const OverflowWrapStory: Story = {
 };
 
 export const Ellipsis: Story = {
-  render: () => (
+  render: (args) => (
     <div className="w-48 border border-primary-default">
-      <Text ellipsis>Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d</Text>
-      <Text>No Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d</Text>
+      <Text {...args} ellipsis>
+        Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
+      </Text>
+      <Text {...args} ellipsis={false}>
+        No Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
+      </Text>
     </div>
   ),
 };
 
 export const AsChild: Story = {
-  render: () => (
+  render: (args) => (
     <div className="space-y-4">
-      <Text asChild className="block">
+      <Text
+        {...args}
+        asChild
+        className={mergeClassName(args.className, 'block')}
+      >
         <span>Text rendered as span</span>
       </Text>
-      <Text asChild className="block">
+      <Text
+        {...args}
+        asChild
+        className={mergeClassName(args.className, 'block')}
+      >
         <button
           type="button"
           onClick={() => {
@@ -321,7 +485,14 @@ export const AsChild: Story = {
           Text rendered as button
         </button>
       </Text>
-      <Text asChild className="border border-default bg-default">
+      <Text
+        {...args}
+        asChild
+        className={mergeClassName(
+          args.className,
+          'border border-default bg-default',
+        )}
+      >
         <input
           type="text"
           placeholder="Rendered as input"
