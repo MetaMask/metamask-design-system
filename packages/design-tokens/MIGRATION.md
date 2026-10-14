@@ -28,7 +28,7 @@ The hero typeface changes from MM Poly to Grotzec Cond Bold. `FontFamily.Accent`
 - `--font-family-grotzec`, `fontFamilies.grotzec`, and `font-grotzec` are removed. Use the hero token and `font-hero`
 - `--font-family-accent` and `fontFamilies.accent` are unchanged
 
-Only the Bold cut is licensed. Declare that one file at weights 400, 500, and 600 so every requested weight uses Grotzec Cond Bold.
+Only the Bold cut is licensed. Declare it at weight 600. Regular and medium requests fall back to that Bold cut.
 
 ### Migration
 
@@ -42,8 +42,6 @@ Replace MM Poly font files with `GrotzecCond-Bold.woff2` from [`apps/storybook-r
   src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
 }
 ```
-
-Repeat that declaration at weights 400 and 500, pointing each one at the same Bold file.
 
 ## From version 10.x to 11.0.0
 

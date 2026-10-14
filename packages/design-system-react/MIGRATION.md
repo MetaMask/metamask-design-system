@@ -3648,7 +3648,7 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 **Migration:**
 
-Register `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) at weights 400, 500, and 600. Keep the adjacent `LICENSE`. Remove MM Poly `@font-face` rules. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1110-to-x00).
+Register `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) at weight 600. Lighter weight requests fall back to that Bold cut. Keep the adjacent `LICENSE`. Remove MM Poly `@font-face` rules. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1110-to-x00).
 
 ### From version 0.40.0 to 0.41.0
 
