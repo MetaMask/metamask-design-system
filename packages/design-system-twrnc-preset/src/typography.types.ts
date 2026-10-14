@@ -2,8 +2,8 @@
  * Different Typography variants to be used as twrnc classNames
  */
 export type TypographyVariant =
-  | 'display-lg'
   | 'display-xl'
+  | 'display-lg'
   | 'display-md'
   | 'heading-lg'
   | 'heading-md'

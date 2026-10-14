@@ -1,8 +1,8 @@
 export const typography = {
   fontSize: {
     // small screen typography
-    's-display-lg': 'var(--typography-s-display-lg-font-size)',
     's-display-xl': 'var(--typography-s-display-xl-font-size)',
+    's-display-lg': 'var(--typography-s-display-lg-font-size)',
     's-display-md': 'var(--typography-s-display-md-font-size)',
     's-heading-lg': 'var(--typography-s-heading-lg-font-size)',
     's-heading-md': 'var(--typography-s-heading-md-font-size)',
@@ -17,8 +17,8 @@ export const typography = {
     's-button-label-lg': 'var(--typography-s-button-label-lg-font-size)',
     's-amount-display-lg': 'var(--typography-s-amount-display-lg-font-size)',
     // large screen typography
-    'l-display-lg': 'var(--typography-l-display-lg-font-size)',
     'l-display-xl': 'var(--typography-l-display-xl-font-size)',
+    'l-display-lg': 'var(--typography-l-display-lg-font-size)',
     'l-display-md': 'var(--typography-l-display-md-font-size)',
     'l-heading-lg': 'var(--typography-l-heading-lg-font-size)',
     'l-heading-md': 'var(--typography-l-heading-md-font-size)',
@@ -41,8 +41,8 @@ export const typography = {
   },
   letterSpacing: {
     // small screen typography
-    's-display-lg': 'var(--typography-s-display-lg-letter-spacing)',
     's-display-xl': 'var(--typography-s-display-xl-letter-spacing)',
+    's-display-lg': 'var(--typography-s-display-lg-letter-spacing)',
     's-display-md': 'var(--typography-s-display-md-letter-spacing)',
     's-heading-lg': 'var(--typography-s-heading-lg-letter-spacing)',
     's-heading-md': 'var(--typography-s-heading-md-letter-spacing)',
@@ -58,8 +58,8 @@ export const typography = {
     's-amount-display-lg':
       'var(--typography-s-amount-display-lg-letter-spacing)',
     // large screen typography
-    'l-display-lg': 'var(--typography-l-display-lg-letter-spacing)',
     'l-display-xl': 'var(--typography-l-display-xl-letter-spacing)',
+    'l-display-lg': 'var(--typography-l-display-lg-letter-spacing)',
     'l-display-md': 'var(--typography-l-display-md-letter-spacing)',
     'l-heading-lg': 'var(--typography-l-heading-lg-letter-spacing)',
     'l-heading-md': 'var(--typography-l-heading-md-letter-spacing)',
@@ -83,8 +83,8 @@ export const typography = {
   },
   lineHeight: {
     // small screen typography
-    's-display-lg': 'var(--typography-s-display-lg-line-height)',
     's-display-xl': 'var(--typography-s-display-xl-line-height)',
+    's-display-lg': 'var(--typography-s-display-lg-line-height)',
     's-display-md': 'var(--typography-s-display-md-line-height)',
     's-heading-lg': 'var(--typography-s-heading-lg-line-height)',
     's-heading-md': 'var(--typography-s-heading-md-line-height)',
@@ -99,8 +99,8 @@ export const typography = {
     's-button-label-lg': 'var(--typography-s-button-label-lg-line-height)',
     's-amount-display-lg': 'var(--typography-s-amount-display-lg-line-height)',
     // large screen typography
-    'l-display-lg': 'var(--typography-l-display-lg-line-height)',
     'l-display-xl': 'var(--typography-l-display-xl-line-height)',
+    'l-display-lg': 'var(--typography-l-display-lg-line-height)',
     'l-display-md': 'var(--typography-l-display-md-line-height)',
     'l-heading-lg': 'var(--typography-l-heading-lg-line-height)',
     'l-heading-md': 'var(--typography-l-heading-md-line-height)',

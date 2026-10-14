@@ -6,8 +6,8 @@ type TypeStyle = {
 };
 
 export type ThemeTypography = {
-  sDisplayLG: TypeStyle;
   sDisplayXL: TypeStyle;
+  sDisplayLG: TypeStyle;
   sDisplayMD: TypeStyle;
   sHeadingLG: TypeStyle;
   sHeadingMD: TypeStyle;
@@ -26,8 +26,8 @@ export type ThemeTypography = {
   sButtonLabelMd: TypeStyle;
   sButtonLabelLg: TypeStyle;
   sAmountDisplayLg: TypeStyle;
-  lDisplayLG: TypeStyle;
   lDisplayXL: TypeStyle;
+  lDisplayLG: TypeStyle;
   lDisplayMD: TypeStyle;
   lHeadingLG: TypeStyle;
   lHeadingMD: TypeStyle;

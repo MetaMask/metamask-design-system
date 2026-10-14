@@ -5,16 +5,16 @@ import { lineHeights } from './lineHeights';
 import type { ThemeTypography } from './types';
 
 export const typography: ThemeTypography = {
-  sDisplayLG: {
-    fontWeight: fontWeights.bold,
-    fontSize: fontSizes.fontSize8,
-    lineHeight: lineHeights.lineHeight7,
-    letterSpacing: letterSpacing.letterSpacing0,
-  },
   sDisplayXL: {
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.fontSize10,
     lineHeight: lineHeights.lineHeight9,
+    letterSpacing: letterSpacing.letterSpacing0,
+  },
+  sDisplayLG: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.fontSize8,
+    lineHeight: lineHeights.lineHeight7,
     letterSpacing: letterSpacing.letterSpacing0,
   },
   sDisplayMD: {
@@ -125,13 +125,13 @@ export const typography: ThemeTypography = {
     lineHeight: lineHeights.lineHeight8,
     letterSpacing: letterSpacing.letterSpacing0,
   },
-  lDisplayLG: {
+  lDisplayXL: {
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.fontSize10,
     lineHeight: lineHeights.lineHeight9,
     letterSpacing: letterSpacing.letterSpacing0,
   },
-  lDisplayXL: {
+  lDisplayLG: {
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.fontSize10,
     lineHeight: lineHeights.lineHeight9,

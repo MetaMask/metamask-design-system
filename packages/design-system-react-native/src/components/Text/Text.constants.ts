@@ -12,8 +12,8 @@ export const TWCLASSMAP_TEXT_FONTWEIGHT: {
 export const TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT: {
   [key in TextVariant]: FontWeight;
 } = {
-  [TextVariant.DisplayLg]: FontWeight.Bold,
   [TextVariant.DisplayXl]: FontWeight.Bold,
+  [TextVariant.DisplayLg]: FontWeight.Bold,
   [TextVariant.DisplayMd]: FontWeight.Bold,
   [TextVariant.HeadingLg]: FontWeight.Bold,
   [TextVariant.HeadingMd]: FontWeight.Bold,

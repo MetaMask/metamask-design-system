@@ -10,13 +10,13 @@ export const MAP_TEXT_VARIANT_INPUT_METRICS: Record<
   TextVariant,
   { fontSize: number; letterSpacing: number }
 > = {
-  [TextVariant.DisplayLg]: {
-    fontSize: typography.sDisplayLG.fontSize,
-    letterSpacing: typography.sDisplayLG.letterSpacing,
-  },
   [TextVariant.DisplayXl]: {
     fontSize: typography.sDisplayXL.fontSize,
     letterSpacing: typography.sDisplayXL.letterSpacing,
+  },
+  [TextVariant.DisplayLg]: {
+    fontSize: typography.sDisplayLG.fontSize,
+    letterSpacing: typography.sDisplayLG.letterSpacing,
   },
   [TextVariant.DisplayMd]: {
     fontSize: typography.sDisplayMD.fontSize,

@@ -521,11 +521,11 @@
 }
 
 /* Legacy typography classnames parity with the old preset */
-@utility text-s-display-lg {
-  font-size: var(--typography-s-display-lg-font-size);
-}
 @utility text-s-display-xl {
   font-size: var(--typography-s-display-xl-font-size);
+}
+@utility text-s-display-lg {
+  font-size: var(--typography-s-display-lg-font-size);
 }
 @utility text-s-display-md {
   font-size: var(--typography-s-display-md-font-size);
@@ -566,11 +566,11 @@
 @utility text-s-amount-display-lg {
   font-size: var(--typography-s-amount-display-lg-font-size);
 }
-@utility text-l-display-lg {
-  font-size: var(--typography-l-display-lg-font-size);
-}
 @utility text-l-display-xl {
   font-size: var(--typography-l-display-xl-font-size);
+}
+@utility text-l-display-lg {
+  font-size: var(--typography-l-display-lg-font-size);
 }
 @utility text-l-display-md {
   font-size: var(--typography-l-display-md-font-size);
@@ -612,11 +612,11 @@
   font-size: var(--typography-l-amount-display-lg-font-size);
 }
 
-@utility leading-s-display-lg {
-  line-height: var(--typography-s-display-lg-line-height);
-}
 @utility leading-s-display-xl {
   line-height: var(--typography-s-display-xl-line-height);
+}
+@utility leading-s-display-lg {
+  line-height: var(--typography-s-display-lg-line-height);
 }
 @utility leading-s-display-md {
   line-height: var(--typography-s-display-md-line-height);
@@ -657,11 +657,11 @@
 @utility leading-s-amount-display-lg {
   line-height: var(--typography-s-amount-display-lg-line-height);
 }
-@utility leading-l-display-lg {
-  line-height: var(--typography-l-display-lg-line-height);
-}
 @utility leading-l-display-xl {
   line-height: var(--typography-l-display-xl-line-height);
+}
+@utility leading-l-display-lg {
+  line-height: var(--typography-l-display-lg-line-height);
 }
 @utility leading-l-display-md {
   line-height: var(--typography-l-display-md-line-height);
@@ -703,11 +703,11 @@
   line-height: var(--typography-l-amount-display-lg-line-height);
 }
 
-@utility tracking-s-display-lg {
-  letter-spacing: var(--typography-s-display-lg-letter-spacing);
-}
 @utility tracking-s-display-xl {
   letter-spacing: var(--typography-s-display-xl-letter-spacing);
+}
+@utility tracking-s-display-lg {
+  letter-spacing: var(--typography-s-display-lg-letter-spacing);
 }
 @utility tracking-s-display-md {
   letter-spacing: var(--typography-s-display-md-letter-spacing);
@@ -748,11 +748,11 @@
 @utility tracking-s-amount-display-lg {
   letter-spacing: var(--typography-s-amount-display-lg-letter-spacing);
 }
-@utility tracking-l-display-lg {
-  letter-spacing: var(--typography-l-display-lg-letter-spacing);
-}
 @utility tracking-l-display-xl {
   letter-spacing: var(--typography-l-display-xl-letter-spacing);
+}
+@utility tracking-l-display-lg {
+  letter-spacing: var(--typography-l-display-lg-letter-spacing);
 }
 @utility tracking-l-display-md {
   letter-spacing: var(--typography-l-display-md-letter-spacing);
