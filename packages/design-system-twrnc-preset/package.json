@@ -84,7 +84,7 @@
   },
   "peerDependencies": {
     "@metamask/design-tokens": "^11.0.0",
-    "react": ">=18.2.0"
+    "react": ">=19.2.3"
   },
   "engines": {
     "node": ">=24"
