@@ -3,9 +3,9 @@
  */
 :root {
   /* font family */
-  --font-family-default: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-accent: 'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-hero: 'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-default: 'Inter', 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-accent: 'Grotzec Cond', Oswald, 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-hero: 'Grotzec Cond', Oswald, 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   /* font sizes */
   --font-size-base: 16px;
   --font-size-1: 0.625rem;
@@ -114,8 +114,8 @@
   --typography-s-button-label-lg-line-height: var(--line-height-4);
   --typography-s-button-label-lg-font-weight: var(--font-weight-medium);
   --typography-s-button-label-lg-letter-spacing: var(--letter-spacing-0);
-  --typography-s-amount-display-lg-font-size: var(--font-size-8);
-  --typography-s-amount-display-lg-line-height: var(--line-height-7);
+  --typography-s-amount-display-lg-font-size: var(--font-size-9);
+  --typography-s-amount-display-lg-line-height: var(--line-height-8);
   --typography-s-amount-display-lg-font-weight: var(--font-weight-bold);
   --typography-s-amount-display-lg-letter-spacing: var(--letter-spacing-0);
 

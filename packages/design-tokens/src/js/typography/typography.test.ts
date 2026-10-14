@@ -456,6 +456,11 @@ describe('Typography', () => {
         ),
       );
     });
+
+    it('sets sAmountDisplayLg to 48px with a 56px line height', () => {
+      expect(typography.sAmountDisplayLg.fontSize).toBe(48);
+      expect(typography.sAmountDisplayLg.lineHeight).toBe(56);
+    });
   });
 
   describe('Typography Large Screen', () => {

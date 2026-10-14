@@ -53,7 +53,7 @@ const meta: Meta<typeof Text> = {
       options: Object.keys(FontFamily),
       mapping: FontFamily,
       description:
-        'Optional prop to adjust the font family. Default: Inter, Accent: Grotzec Cond, Hero: Grotzec Cond. Accent and hero fall back to Oswald for characters Grotzec Cond does not include.',
+        'Optional prop to adjust the font family. Default: Inter, then IBM Plex Sans. Accent and hero: Grotzec Cond, then Oswald, then IBM Plex Sans.',
     },
     fontStyle: {
       control: 'select',
@@ -118,26 +118,60 @@ export const Default: Story = {
 };
 
 export const Variant: Story = {
-  render: () => (
+  render: (args) => (
     <div className="space-y-4">
-      <Text variant={TextVariant.DisplayLg}>DisplayLg</Text>
-      <Text variant={TextVariant.DisplayMd}>DisplayMd</Text>
-      <Text variant={TextVariant.HeadingLg}>HeadingLg</Text>
-      <Text variant={TextVariant.HeadingMd}>HeadingMd</Text>
-      <Text variant={TextVariant.HeadingSm}>HeadingSm</Text>
-      <Text variant={TextVariant.BodyLg}>BodyLg</Text>
-      <Text variant={TextVariant.BodyMd}>BodyMd</Text>
-      <Text variant={TextVariant.BodySm}>BodySm</Text>
-      <Text variant={TextVariant.BodyXs}>BodyXs</Text>
-      <Text variant={TextVariant.PageHeading}>PageHeading</Text>
-      <Text variant={TextVariant.SectionHeading}>SectionHeading</Text>
-      <Text variant={TextVariant.ButtonLabelMd} className="block">
+      <Text {...args} variant={TextVariant.DisplayLg}>
+        DisplayLg
+      </Text>
+      <Text {...args} variant={TextVariant.DisplayMd}>
+        DisplayMd
+      </Text>
+      <Text {...args} variant={TextVariant.HeadingLg}>
+        HeadingLg
+      </Text>
+      <Text {...args} variant={TextVariant.HeadingMd}>
+        HeadingMd
+      </Text>
+      <Text {...args} variant={TextVariant.HeadingSm}>
+        HeadingSm
+      </Text>
+      <Text {...args} variant={TextVariant.BodyLg}>
+        BodyLg
+      </Text>
+      <Text {...args} variant={TextVariant.BodyMd}>
+        BodyMd
+      </Text>
+      <Text {...args} variant={TextVariant.BodySm}>
+        BodySm
+      </Text>
+      <Text {...args} variant={TextVariant.BodyXs}>
+        BodyXs
+      </Text>
+      <Text {...args} variant={TextVariant.PageHeading}>
+        PageHeading
+      </Text>
+      <Text {...args} variant={TextVariant.SectionHeading}>
+        SectionHeading
+      </Text>
+      <Text
+        {...args}
+        variant={TextVariant.ButtonLabelMd}
+        className={['block', args.className].filter(Boolean).join(' ')}
+      >
         ButtonLabelMd
       </Text>
-      <Text variant={TextVariant.ButtonLabelLg} className="block">
+      <Text
+        {...args}
+        variant={TextVariant.ButtonLabelLg}
+        className={['block', args.className].filter(Boolean).join(' ')}
+      >
         ButtonLabelLg
       </Text>
-      <Text variant={TextVariant.AmountDisplayLg} className="block">
+      <Text
+        {...args}
+        variant={TextVariant.AmountDisplayLg}
+        className={['block', args.className].filter(Boolean).join(' ')}
+      >
         AmountDisplayLg
       </Text>
     </div>
@@ -244,7 +278,7 @@ export const FontFamilyStory: Story = {
       <Text fontFamily={FontFamily.Accent}>Accent (Grotzec Cond)</Text>
       <Text fontFamily={FontFamily.Hero}>Hero (Grotzec Cond)</Text>
       <Text fontFamily={FontFamily.Hero}>
-        Hero fallback: Привет, Tiếng Việt
+        Hero fallback: Привет, Tiếng Việt, Γεια
       </Text>
     </div>
   ),

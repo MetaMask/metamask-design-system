@@ -123,9 +123,7 @@ describe('Typography CSS', () => {
       }
 
       it('sets Grotzec letter spacing to -0.02em', () => {
-        expect(typographyCSS).toContain(
-          '--letter-spacing-grotzec: -0.02em;',
-        );
+        expect(typographyCSS).toContain('--letter-spacing-grotzec: -0.02em;');
       });
     });
   });
@@ -224,10 +222,11 @@ describe('Typography CSS', () => {
   // Test font families
   describe('Font Families', () => {
     const fontFamilies = {
-      default: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      default:
+        "'Inter', 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
       accent:
-        "'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif",
-      hero: "'Grotzec Cond', Oswald, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+        "'Grotzec Cond', Oswald, 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      hero: "'Grotzec Cond', Oswald, 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
     };
 
     Object.entries(fontFamilies).forEach(([family, expectedValue]) => {

@@ -80,11 +80,12 @@ export const Default: Story = {
 };
 
 export const Variant: Story = {
-  render: () => (
+  render: (args) => (
     <ScrollView>
       {Object.keys(TextVariant).map((variantKey) => (
         <TextStory
           key={variantKey}
+          {...args}
           variant={TextVariant[variantKey as keyof typeof TextVariant]}
         >
           {variantKey}
@@ -127,7 +128,7 @@ export const FontFamilyStory: Story = {
       <Text fontFamily={FontFamily.Accent}>Accent (Grotzec Cond)</Text>
       <Text fontFamily={FontFamily.Hero}>Hero (Grotzec Cond)</Text>
       <Text fontFamily={FontFamily.Hero}>
-        Hero fallback: Привет, Tiếng Việt
+        Hero fallback: Привет, Tiếng Việt, Γεια
       </Text>
     </View>
   ),
