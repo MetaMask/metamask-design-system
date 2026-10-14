@@ -2,7 +2,6 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
-- [From version 11.1.0 to X.0.0](#from-version-1110-to-x00)
 - [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
 - [From version 8.x to 9.0.0](#from-version-8x-to-900)
@@ -14,21 +13,6 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
-
-## From version 11.1.0 to X.0.0
-
-Grotzec Cond is available as an additive, opt-in font family:
-
-- CSS: `--font-family-grotzec`
-- JavaScript: `fontFamilies.grotzec`
-- Tailwind: `font-grotzec`
-- Figma: `global.fontFamilies.grotzec`
-
-Default, accent, hero, and every typography size remain unchanged. This lets products evaluate Grotzec Cond with local size, line-height, and letter-spacing overrides before the design system updates its semantic roles and type scale.
-
-Only the Bold cut is available. The Storybook font file is declared at weights 400, 500, and 600 so every requested weight uses the same cut. Copy `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) and retain the adjacent `LICENSE`. Grotzec Cond is commercial software licensed to ConsenSys for the MetaMask application only and is excluded from the repository MIT license.
-
-`grotzec` is an interim family. It is expected to be consolidated into `hero` after product usage establishes the final typography styles. Migration guidance will be provided before `grotzec` or `accent` is deprecated.
 
 ## From version 10.x to 11.0.0
 
