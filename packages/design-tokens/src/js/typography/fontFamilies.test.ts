@@ -20,5 +20,4 @@ describe('Font Families', () => {
       designTokens.global.fontFamilies.hero.value,
     );
   });
-
 });
