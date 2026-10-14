@@ -15,6 +15,7 @@ export const TWCLASSMAP_TEXT_FONTFAMILY: Record<FontFamily, string> = {
   [FontFamily.Default]: 'font-default',
   [FontFamily.Accent]: 'font-accent',
   [FontFamily.Hero]: 'font-hero',
+  [FontFamily.Grotzec]: 'font-grotzec',
 };
 
 export const TWCLASSMAP_TEXT_FONTSTYLE: Record<FontStyle, string> = {

@@ -7,11 +7,12 @@ Good typography improves readability, legibility, and the prioritization of info
 
 ## Font Family
 
-Our design system now offers three distinct font families to support a rich typographic hierarchy:
+Our design system offers four font families:
 
 - **Inter**: The default typeface for primary content, optimized for readability.
 - **MM Sans**: A secondary option that adds subtle visual flair and differentiates sections without overpowering the main content.
 - **MM Poly**: A display-oriented, expressive font used for bold, attention-grabbing statements.
+- **Grotzec Cond**: A temporary opt-in family for evaluating condensed marketing and amount styles without changing the existing accent or hero roles. Only the Bold cut is available.
 
 <Canvas of={TypographyStories.FontFamily} />
 
@@ -55,6 +56,17 @@ Our design system now offers three distinct font families to support a rich typo
       </td>
       <td>
         <code>var(--font-family-hero)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Grotzec Cond</strong>
+      </td>
+      <td>
+        <code>fontFamilies.grotzec</code>
+      </td>
+      <td>
+        <code>var(--font-family-grotzec)</code>
       </td>
     </tr>
   </tbody>

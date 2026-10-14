@@ -4,4 +4,5 @@ export const fontFamilies: FontFamilies = {
   default: 'Inter',
   accent: 'MMSans',
   hero: 'MMPoly',
+  grotzec: 'Grotzec Cond',
 };

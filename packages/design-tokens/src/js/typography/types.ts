@@ -50,6 +50,7 @@ export type FontFamilies = {
   default: string;
   accent: string;
   hero: string;
+  grotzec: string;
 };
 
 export type FontSizes = {

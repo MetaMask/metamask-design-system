@@ -52,6 +52,28 @@
   src: url('fonts/Inter/Inter-SemiBoldItalic.woff2') format('woff2');
 }
 
+/* Grotzec Cond — only the Bold cut is available, so every weight uses it */
+@font-face {
+  font-family: 'Grotzec Cond';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Grotzec Cond';
+  font-style: normal;
+  font-weight: 500;
+  src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Grotzec Cond';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
+}
+
 /* MM Sans */
 @font-face {
   font-family: 'MMSans';

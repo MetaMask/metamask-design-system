@@ -3631,6 +3631,18 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
+### From version 0.46.0 to 0.X.0
+
+<a id="from-version-0460-to-0x0"></a>
+
+#### Add the opt-in Grotzec font family
+
+`FontFamily.Grotzec` is available as an additive font family. It applies `font-grotzec`, backed by `--font-family-grotzec`, without changing `FontFamily.Default`, `FontFamily.Accent`, `FontFamily.Hero`, or any typography size.
+
+Register `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) at weights 400, 500, and 600. Keep the adjacent `LICENSE`; Grotzec Cond is commercial software licensed to ConsenSys for the MetaMask application only.
+
+Use existing `Text` props or Tailwind classes to evaluate product-specific size, line-height, and letter-spacing combinations. `FontFamily.Grotzec` is expected to be consolidated into `FontFamily.Hero` after those styles are established. Migration guidance will be provided before `Grotzec` or `Accent` is deprecated.
+
 ### From version 0.40.0 to 0.41.0
 
 <a id="from-version-0400-to-0410"></a>

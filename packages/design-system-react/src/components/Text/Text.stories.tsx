@@ -243,6 +243,7 @@ export const FontFamilyStory: Story = {
       <Text fontFamily={FontFamily.Default}>Default (Inter)</Text>
       <Text fontFamily={FontFamily.Accent}>Accent (MM Sans)</Text>
       <Text fontFamily={FontFamily.Hero}>Hero (MM Poly)</Text>
+      <Text fontFamily={FontFamily.Grotzec}>Grotzec (Grotzec Cond)</Text>
     </div>
   ),
   name: 'Font Family',

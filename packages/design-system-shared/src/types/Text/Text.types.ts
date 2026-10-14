@@ -37,6 +37,8 @@ export const FontFamily = {
   Accent: 'accent',
   /** Hero: MM Poly */
   Hero: 'hero',
+  /** Grotzec Cond: temporary opt-in family for product evaluation */
+  Grotzec: 'grotzec',
 } as const;
 
 export type FontFamily = (typeof FontFamily)[keyof typeof FontFamily];

@@ -78,6 +78,26 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
+### From version 0.51.0 to 0.X.0
+
+<a id="from-version-0510-to-0x0"></a>
+
+#### Add the opt-in Grotzec font family
+
+`FontFamily.Grotzec` is available as an additive font family. It resolves regular, medium, and bold text to the `GrotzecCond-Bold` PostScript name without changing `FontFamily.Default`, `FontFamily.Accent`, `FontFamily.Hero`, or any typography size.
+
+Copy `GrotzecCond-Bold.otf` from [`apps/storybook-react-native/fonts/GrotzecCond`](../../apps/storybook-react-native/fonts/GrotzecCond), retain the adjacent `LICENSE`, and register it under its PostScript name:
+
+```tsx
+import { useFonts } from 'expo-font';
+
+useFonts({
+  'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+});
+```
+
+Use `twClassName` or `style` to evaluate product-specific size, line-height, and letter-spacing combinations. `FontFamily.Grotzec` is expected to be consolidated into `FontFamily.Hero` after those styles are established. Migration guidance will be provided before `Grotzec` or `Accent` is deprecated.
+
 ### From version 0.49.2 to 0.50.0
 
 <a id="from-version-0492-to-0500"></a>

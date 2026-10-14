@@ -48,6 +48,13 @@ describe('twMerge utility', () => {
     });
   });
 
+  describe('font family conflicts', () => {
+    it('keeps the last design system font family', () => {
+      const result = twMerge('font-default font-grotzec');
+      expect(result).toBe('font-grotzec');
+    });
+  });
+
   describe('complex class combinations', () => {
     it('should handle multiple property conflicts simultaneously', () => {
       const result = twMerge('text-l-heading-lg font-bold text-alternative');

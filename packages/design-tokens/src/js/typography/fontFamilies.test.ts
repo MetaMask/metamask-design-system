@@ -20,4 +20,10 @@ describe('Font Families', () => {
       designTokens.global.fontFamilies.hero.value,
     );
   });
+
+  it('js tokens for font family grotzec matches figma tokens', () => {
+    expect(fontFamilies.grotzec).toStrictEqual(
+      designTokens.global.fontFamilies.grotzec.value,
+    );
+  });
 });

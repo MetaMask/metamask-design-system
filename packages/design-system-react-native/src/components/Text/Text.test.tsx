@@ -167,6 +167,34 @@ describe('Text', () => {
       });
     });
 
+    Object.values(FontFamily).forEach((fontFamily) => {
+      it(`applies font family ${fontFamily} correctly`, () => {
+        let expectedStyles;
+
+        const TestComponent = () => {
+          const tw = useTailwind();
+          expectedStyles = tw.style(
+            ...buildTextStyleArgs({ fontFamily, fontWeight: FontWeight.Bold }),
+          );
+          return (
+            <Text
+              testID="text"
+              fontFamily={fontFamily}
+              fontWeight={FontWeight.Bold}
+            >
+              Test
+            </Text>
+          );
+        };
+
+        const { getByTestId } = render(<TestComponent />);
+        const textElement = getByTestId('text');
+
+        expect(expectedStyles).toBeDefined();
+        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+      });
+    });
+
     Object.values(FontStyle).forEach((fontStyle) => {
       it(`applies font style ${fontStyle} correctly`, () => {
         let expectedStyles;

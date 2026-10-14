@@ -114,6 +114,9 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
     'accent-medium': 'MMSans-Medium',
     'accent-bold': 'MMSans-Bold',
     'hero-regular': 'MMPoly-Regular',
+    'grotzec-regular': 'GrotzecCond-Bold',
+    'grotzec-medium': 'GrotzecCond-Bold',
+    'grotzec-bold': 'GrotzecCond-Bold',
   },
   letterSpacing: {
     'display-lg': `${typography.sDisplayLG.letterSpacing as number}`,

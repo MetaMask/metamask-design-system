@@ -36,6 +36,7 @@ export const typography = {
     default: 'var(--font-family-default)',
     accent: 'var(--font-family-accent)',
     hero: 'var(--font-family-hero)',
+    grotzec: 'var(--font-family-grotzec)',
   },
   letterSpacing: {
     // small screen typography
