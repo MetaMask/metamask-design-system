@@ -7,10 +7,10 @@ Good typography improves readability, legibility, and the prioritization of info
 
 ## Font Family
 
-Our design system offers two typefaces. Accent and hero share Grotzec Cond so display text stays consistent across those roles.
+Inter is the default typeface. Accent and hero use Grotzec Cond. The CSS variables include the fallback stack. The JS values are the primary family only.
 
-- **Inter**: The default typeface for primary content, optimized for readability.
-- **Grotzec Cond**: The accent and hero typeface, a condensed bold face for emphasis and display text.
+- **Inter**: The default typeface for primary content. Falls back to IBM Plex Sans Condensed.
+- **Grotzec Cond**: The accent and hero typeface, a condensed bold face for emphasis and display text. Falls back to Oswald for Cyrillic and Vietnamese, then IBM Plex Sans Condensed for Greek.
 
 <Canvas of={TypographyStories.FontFamily} />
 
@@ -20,6 +20,7 @@ Our design system offers two typefaces. Accent and hero share Grotzec Cond so di
       <th>Font Family</th>
       <th>JS</th>
       <th>CSS</th>
+      <th>Fallback</th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +34,7 @@ Our design system offers two typefaces. Accent and hero share Grotzec Cond so di
       <td>
         <code>var(--font-family-default)</code>
       </td>
+      <td>IBM Plex Sans Condensed</td>
     </tr>
     <tr>
       <td>
@@ -44,6 +46,7 @@ Our design system offers two typefaces. Accent and hero share Grotzec Cond so di
       <td>
         <code>var(--font-family-accent)</code>
       </td>
+      <td>Oswald, then IBM Plex Sans Condensed</td>
     </tr>
     <tr>
       <td>
@@ -55,6 +58,7 @@ Our design system offers two typefaces. Accent and hero share Grotzec Cond so di
       <td>
         <code>var(--font-family-hero)</code>
       </td>
+      <td>Oswald, then IBM Plex Sans Condensed</td>
     </tr>
   </tbody>
 </table>

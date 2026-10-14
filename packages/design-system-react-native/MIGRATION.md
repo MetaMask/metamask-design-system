@@ -88,7 +88,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 #### Accent and hero typefaces: MM Sans and MM Poly to Grotzec Cond
 
-`FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. React Native resolves fonts by **PostScript name**, so `@metamask/design-system-twrnc-preset` maps each weight to a font name. Those names changed. Only the Bold cut is available, so every accent and hero weight uses `GrotzecCond-Bold`. `Text` sets letter spacing to -2% of the font size for Accent and Hero at every size. Register `Oswald-Bold` and `IBMPlexSans-Regular` as well. React Native web uses Oswald, then IBM Plex Sans, for characters Grotzec Cond does not include. On iOS and Android a text style has one font name, so those characters use the system font unless the app adds those fonts to a native font cascade.
+`FontFamily.Accent` and `FontFamily.Hero` now resolve to Grotzec Cond. React Native resolves fonts by **PostScript name**, so `@metamask/design-system-twrnc-preset` maps each weight to a font name. Those names changed. Only the Bold cut is available, so every accent and hero weight uses `GrotzecCond-Bold`. `Text` sets letter spacing to -2% of the font size for Accent and Hero at every size. Register `Oswald-Bold` and `IBMPlexSansCond-Bold` as well. React Native web uses Oswald, then IBM Plex Sans Condensed, for characters Grotzec Cond does not include. On iOS and Android a text style has one font name, so those characters use the system font unless the app adds those fonts to a native font cascade.
 
 `FontFamily.Accent` remains available in this release. It is likely to be deprecated in a future version, because accent and hero now use the same typeface.
 
@@ -98,10 +98,12 @@ This guide provides detailed instructions for migrating your project from one ve
 | `font-accent-medium`  | `MMSans-Medium`  | `GrotzecCond-Bold` |
 | `font-accent-bold`    | `MMSans-Bold`    | `GrotzecCond-Bold` |
 | `font-hero-regular`   | `MMPoly-Regular` | `GrotzecCond-Bold` |
+| `font-hero-medium`    | (unmapped)       | `GrotzecCond-Bold` |
+| `font-hero-bold`      | (unmapped)       | `GrotzecCond-Bold` |
 
-`default-*` (Inter) is unchanged, as is the `Text` component API. `font-hero-medium` and `font-hero-bold` were not mapped before this release and still are not.
+`default-*` (Inter) is unchanged, as is the `Text` component API. `font-hero-medium` and `font-hero-bold` are new, so `FontFamily.Hero` now renders Grotzec Cond at every font weight, including variants that default to medium or bold.
 
-Accent is likely to be deprecated in a future version. The accent weight mappings stay available in this release. New usage should prefer hero, which now uses the same typeface. `font-hero-medium` and `font-hero-bold` are still unmapped, so a later deprecation would need those weights if accent's weight scale is the one to keep.
+Accent is likely to be deprecated in a future version. The accent weight mappings stay available in this release. New usage should prefer hero, which now uses the same typeface and has the same weight scale.
 
 **Migration:**
 
@@ -126,13 +128,15 @@ import { useFonts } from 'expo-font';
 useFonts({
   'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
   'Oswald-Bold': require('./fonts/Oswald/Oswald-Bold.ttf'),
-  'IBMPlexSans-Regular': require('./fonts/IBMPlexSans/IBMPlexSans[wdth,wght].ttf'),
+  'IBMPlexSansCond-Bold': require('./fonts/IBMPlexSansCondensed/IBMPlexSansCondensed-Bold.ttf'),
 });
 ```
 
+Register `IBMPlexSansCond-Bold` under that PostScript name. The file is the upstream Bold cut, unchanged.
+
 See the [design tokens migration guide](../design-tokens/MIGRATION.md#from-version-1110-to-x00) for the web `@font-face` setup. React Native web Storybook loads the same cut from [`apps/storybook-react-native/public/fonts/GrotzecCond`](../../apps/storybook-react-native/public/fonts/GrotzecCond) (`.woff2`) under the family name `GrotzecCond-Bold`.
 
-**Impact:** Accent and hero text renders with the system fallback until `GrotzecCond-Bold` is registered, so this must ship together with the asset swap. Regular, medium, and bold accent text, and regular hero text, all render as Bold. Expect reflow, since Grotzec Cond is narrower and heavier than MM Sans and MM Poly.
+**Impact:** Accent and hero text renders with the system fallback until `GrotzecCond-Bold` is registered, so this must ship together with the asset swap. Regular, medium, and bold accent and hero text all render as Bold. Expect reflow, since Grotzec Cond is narrower and heavier than MM Sans and MM Poly.
 
 ### From version 0.49.2 to 0.50.0
 

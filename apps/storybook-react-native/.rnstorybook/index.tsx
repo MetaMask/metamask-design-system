@@ -22,7 +22,7 @@ function App() {
     'Inter-SemiBoldItalic': require('../fonts/Inter/Inter-SemiBoldItalic.ttf'),
     'GrotzecCond-Bold': require('../fonts/GrotzecCond/GrotzecCond-Bold.otf'),
     'Oswald-Bold': require('../fonts/Oswald/Oswald-Bold.ttf'),
-    'IBMPlexSans-Regular': require('../fonts/IBMPlexSans/IBMPlexSans[wdth,wght].ttf'),
+    'IBMPlexSansCond-Bold': require('../fonts/IBMPlexSansCondensed/IBMPlexSansCondensed-Bold.ttf'),
   });
 
   if (!fontsLoaded) {

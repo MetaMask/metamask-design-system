@@ -221,6 +221,22 @@ describe('Text', () => {
       });
     });
 
+    it('resolves Grotzec families to GrotzecCond-Bold at every font weight', () => {
+      [FontFamily.Accent, FontFamily.Hero].forEach((fontFamily) => {
+        Object.values(FontWeight).forEach((fontWeight) => {
+          const { getByTestId, unmount } = render(
+            <Text testID="text" fontFamily={fontFamily} fontWeight={fontWeight}>
+              Grotzec
+            </Text>,
+          );
+          expect(getByTestId('text').props.style[0].fontFamily).toBe(
+            'GrotzecCond-Bold',
+          );
+          unmount();
+        });
+      });
+    });
+
     it('keeps variant letter spacing for the default family', () => {
       let expectedStyles: { letterSpacing?: number | string } | undefined;
 

@@ -3,9 +3,12 @@
  */
 :root {
   /* font family */
-  --font-family-default: 'Inter', 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-accent: 'Grotzec Cond', Oswald, 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-hero: 'Grotzec Cond', Oswald, 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-default: 'Inter', 'IBM Plex Sans Condensed', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
+  --font-family-accent: 'Grotzec Cond', Oswald, 'IBM Plex Sans Condensed',
+    'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-hero: 'Grotzec Cond', Oswald, 'IBM Plex Sans Condensed',
+    'Helvetica Neue', Helvetica, Arial, sans-serif;
   /* font sizes */
   --font-size-base: 16px;
   --font-size-1: 0.625rem;

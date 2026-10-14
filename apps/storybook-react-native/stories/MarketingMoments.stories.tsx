@@ -6,6 +6,7 @@ import {
   Button,
   ButtonSize,
   ButtonVariant,
+  FontFamily,
   FontWeight,
   Icon,
   IconColor,
@@ -49,6 +50,7 @@ const MarketingMoment = ({
         <Text
           variant={TextVariant.DisplayMd}
           fontWeight={FontWeight.Bold}
+          fontFamily={FontFamily.Hero}
           accessibilityRole="header"
           twClassName="text-center"
         >

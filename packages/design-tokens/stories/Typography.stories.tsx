@@ -1,4 +1,9 @@
-import { Text } from '@metamask/design-system-react';
+import {
+  FontFamily as FontFamilyRole,
+  Text,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-react';
 import type { StoryFn, Meta } from '@storybook/react-vite';
 import React from 'react';
 
@@ -6,7 +11,6 @@ import { typography } from '../src/js/typography';
 import { fontFamilies } from '../src/js/typography/fontFamilies';
 import { fontSizes } from '../src/js/typography/fontSizes';
 import { fontWeights } from '../src/js/typography/fontWeights';
-import { letterSpacing } from '../src/js/typography/letterSpacing';
 import { lineHeights } from '../src/js/typography/lineHeights';
 
 import README from './Typography.mdx';
@@ -22,35 +26,43 @@ const meta: Meta<typeof Text> = {
 
 export default meta;
 export const FontFamily: StoryFn<typeof Text> = () => {
-  const styles = {
-    default: {
-      fontFamily: fontFamilies.default,
-      fontSize: fontSizes.fontSize7,
-      lineHeight: `${lineHeights.lineHeight6}px`,
-      fontWeight: fontWeights.regular,
-      letterSpacing: letterSpacing.letterSpacing1,
-    },
-    accent: {
-      fontFamily: fontFamilies.accent,
-      fontSize: fontSizes.fontSize7,
-      lineHeight: `${lineHeights.lineHeight6}px`,
-      fontWeight: fontWeights.regular,
-      letterSpacing: letterSpacing.letterSpacing1,
-    },
-    hero: {
-      fontFamily: fontFamilies.hero,
-      fontSize: fontSizes.fontSize7,
-      lineHeight: `${lineHeights.lineHeight6}px`,
-      fontWeight: fontWeights.regular,
-      letterSpacing: letterSpacing.letterSpacing1,
-    },
+  const sample = {
+    fontSize: fontSizes.fontSize7,
+    lineHeight: `${lineHeights.lineHeight6}px`,
   };
   return (
-    <>
-      <Text style={styles.default}>Inter</Text>
-      <Text style={styles.accent}>Grotzec Cond</Text>
-      <Text style={styles.hero}>Grotzec Cond</Text>
-    </>
+    <div className="space-y-6">
+      <Text fontFamily={FontFamilyRole.Default} style={sample}>
+        Inter
+      </Text>
+      <Text fontFamily={FontFamilyRole.Accent} style={sample}>
+        Grotzec Cond
+      </Text>
+      <div className="space-y-1">
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
+          Oswald, Cyrillic
+        </Text>
+        <Text fontFamily={FontFamilyRole.Hero} style={sample}>
+          Привет
+        </Text>
+      </div>
+      <div className="space-y-1">
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
+          Oswald, Vietnamese
+        </Text>
+        <Text fontFamily={FontFamilyRole.Hero} style={sample}>
+          Tiếng Việt
+        </Text>
+      </div>
+      <div className="space-y-1">
+        <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
+          IBM Plex Sans Condensed, Greek
+        </Text>
+        <Text fontFamily={FontFamilyRole.Hero} style={sample}>
+          Γεια
+        </Text>
+      </div>
+    </div>
   );
 };
 
