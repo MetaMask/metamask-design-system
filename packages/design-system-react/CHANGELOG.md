@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.47.0]
+
 ### Uncategorized
 
 - feat: add DisplayXl typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
@@ -636,7 +638,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.46.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.47.0...HEAD
+[0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.46.0...@metamask/design-system-react@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.3...@metamask/design-system-react@0.46.0
 [0.45.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.2...@metamask/design-system-react@0.45.3
 [0.45.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.1...@metamask/design-system-react@0.45.2
