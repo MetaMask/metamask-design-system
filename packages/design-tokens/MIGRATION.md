@@ -19,7 +19,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 <a id="from-version-1110-to-1200"></a>
 
-The hero typeface changes from MM Poly to Grotzec Cond Bold. `FontFamily.Accent` and MM Sans are unchanged and will be removed in a later release.
+The hero typeface changes from MM Poly to Grotzec Cond Bold. `fontFamilies.accent` and `--font-family-accent` (MM Sans) are unchanged and will be removed in a later release.
 
 ### What changed
 
@@ -45,7 +45,7 @@ Replace MM Poly font files with `GrotzecCond-Bold.woff2` from [`apps/storybook-r
 
 **Impact:**
 
-Apps that still declare an MM Poly `@font-face` for `FontFamily.Hero` will fall back to Helvetica until they register Grotzec Cond Bold. Token names are unchanged.
+Apps that still declare an MM Poly `@font-face` for `--font-family-hero` or `fontFamilies.hero` will fall back to Helvetica until they register Grotzec Cond Bold. Token names are unchanged.
 
 ## From version 10.x to 11.0.0
 

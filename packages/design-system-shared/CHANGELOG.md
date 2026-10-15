@@ -17,7 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated `FontFamily.Hero` to represent Grotzec Cond Bold ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
   - The value remains `'hero'`
-  - See [Migration Guide](./MIGRATION.md#from-version-0400-to-0410)
 - Updated the `Share` icon artwork to a box-and-arrow glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
 
 ## [0.40.0]
