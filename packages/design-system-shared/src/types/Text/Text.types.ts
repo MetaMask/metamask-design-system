@@ -35,7 +35,7 @@ export const FontFamily = {
   Default: 'default',
   /** Accent: MM Sans */
   Accent: 'accent',
-  /** Hero: MM Poly */
+  /** Hero: Grotzec Cond Bold */
   Hero: 'hero',
 } as const;
 
