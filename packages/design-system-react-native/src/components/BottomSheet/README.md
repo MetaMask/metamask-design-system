@@ -80,7 +80,7 @@ Optional callback triggered when the sheet is fully opened.
 
 ### `isInteractable`
 
-Optional boolean indicating whether the sheet can be dismissed by swiping or tapping the overlay. When `false`, the drag handle is hidden and overlay taps are disabled.
+Optional boolean indicating whether the sheet can be dismissed by swiping or tapping the overlay. When `false`, the drag handle is transparent (its space is still reserved) and overlay taps are disabled.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
