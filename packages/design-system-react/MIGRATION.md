@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.46.0 to 0.X.0](#from-version-0460-to-0x0)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -3630,6 +3631,24 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.46.0 to 0.X.0
+
+<a id="from-version-0460-to-0x0"></a>
+
+#### Hero typeface: MM Poly to Grotzec Cond
+
+`FontFamily.Hero` now renders Grotzec Cond Bold. The `font-hero` class name is unchanged. `FontFamily.Accent` and MM Sans are unchanged and will be removed in a later release.
+
+**What changed:**
+
+- `FontFamily.Grotzec` and `font-grotzec` are removed. Use `FontFamily.Hero` and `font-hero`
+- Hero is backed by `--font-family-hero`, which now resolves to Grotzec Cond
+- Only the Bold cut exists, so regular, medium, and bold weights all render that cut
+
+**Migration:**
+
+Register `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) at weight 600. Lighter weight requests fall back to that Bold cut. Keep the adjacent `LICENSE`. Remove MM Poly `@font-face` rules. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1110-to-x00).
 
 ### From version 0.40.0 to 0.41.0
 
