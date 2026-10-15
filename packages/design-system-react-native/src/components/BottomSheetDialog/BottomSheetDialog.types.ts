@@ -19,7 +19,7 @@ export type BottomSheetDialogProps = {
    * Optional boolean that indicates if the sheet is swippable.
    * This affects whether or not tapping on the overlay will dismiss
    * the sheet as well, and whether the drag handle indicator is visible.
-   * When false, the drag handle is transparent but still reserves its space.
+   * When false, the drag handle is not visible.
    *
    * @default true
    */
