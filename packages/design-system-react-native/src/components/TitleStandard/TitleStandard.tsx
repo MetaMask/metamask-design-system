@@ -1,5 +1,6 @@
 // Third party dependencies.
 import {
+  FontFamily,
   FontWeight,
   TextColor,
   TextVariant,
@@ -55,7 +56,8 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
         {...titleWrapperProps}
         endAccessory={titleEndAccessory}
         textProps={{
-          variant: TextVariant.HeadingLg,
+          variant: TextVariant.DisplayLg,
+          fontFamily: FontFamily.Hero,
           ...titleProps,
         }}
       >
@@ -68,7 +70,7 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
           {...bottomLabelWrapperProps}
           endAccessory={bottomLabelEndAccessory}
           textProps={{
-            variant: TextVariant.BodySm,
+            variant: TextVariant.BodyMd,
             fontWeight: FontWeight.Medium,
             color: TextColor.TextAlternative,
             ...bottomLabelProps,

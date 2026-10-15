@@ -1,4 +1,10 @@
 // Third party dependencies.
+import {
+  FontFamily,
+  FontWeight,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
@@ -29,6 +35,23 @@ describe('TitleStandard', () => {
       const { getByText } = render(<TitleStandard title="$4.42" />);
 
       expect(getByText('$4.42')).toBeOnTheScreen();
+    });
+
+    it('renders string title with display typography', () => {
+      const { getByText } = render(<TitleStandard title="$4.42" />);
+
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const displayLgStyles = tw`text-${TextVariant.DisplayLg}` as {
+        fontSize?: number;
+      };
+      const heroStyles = tw.style(
+        `font-${FontFamily.Hero}-${FontWeight.Bold}`,
+      ) as { fontFamily?: string };
+
+      expect(getByText('$4.42')).toHaveStyle({
+        fontSize: displayLgStyles.fontSize,
+        fontFamily: heroStyles.fontFamily,
+      });
     });
 
     it('renders React node title', () => {
@@ -104,6 +127,27 @@ describe('TitleStandard', () => {
       );
 
       expect(getByText('0.002 ETH')).toBeOnTheScreen();
+    });
+
+    it('renders string bottomLabel with body typography', () => {
+      const { getByText } = render(
+        <TitleStandard title="$4.42" bottomLabel="0.002 ETH" />,
+      );
+
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const bodyMdStyles = tw`text-${TextVariant.BodyMd}` as {
+        fontSize?: number;
+      };
+
+      expect(getByText('0.002 ETH')).toHaveStyle({
+        fontSize: bodyMdStyles.fontSize,
+      });
+      expect(getByText('0.002 ETH')).toHaveStyle(
+        tw.style(
+          `font-default-${FontWeight.Medium}`,
+          TextColor.TextAlternative,
+        ),
+      );
     });
 
     it('forwards bottomLabelProps testID to bottom label Text', () => {

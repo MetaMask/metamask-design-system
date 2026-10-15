@@ -12,7 +12,7 @@ import { TitleStandard } from '@metamask/design-system-react-native';
 
 ### `title`
 
-The primary title. The title row always renders. When `title` is a string, it is wrapped with heading typography (`TextVariant.HeadingLg` and `titleProps`); other `ReactNode` values render as provided.
+The primary title. The title row always renders. When `title` is a string, it is wrapped with display typography (`TextVariant.DisplayLg`, `FontFamily.Hero`, and `titleProps`); other `ReactNode` values render as provided.
 
 | TYPE        | REQUIRED | DEFAULT |
 | ----------- | -------- | ------- |
@@ -78,7 +78,7 @@ import {
 
 ### `bottomLabel`
 
-Optional bottom row with secondary label typography when the value is a string (`BodySm`, medium, `TextColor.TextAlternative`). If `bottomLabel` is renderable, `bottomAccessory` is not shown.
+Optional bottom row with secondary label typography when the value is a string (`BodyMd`, medium, `TextColor.TextAlternative`). If `bottomLabel` is renderable, `bottomAccessory` is not shown.
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -156,7 +156,7 @@ import {
 
 ### `titleProps`
 
-Optional props merged into the heading `Text` when `title` is a string. Use for `testID` or typography overrides.
+Optional props merged into the title `Text` when `title` is a string. Use for `testID` or typography overrides.
 
 | TYPE                                   | REQUIRED | DEFAULT     |
 | -------------------------------------- | -------- | ----------- |
