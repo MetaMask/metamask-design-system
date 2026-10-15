@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add DisplayXl typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+- feat: replace Hero with Grotzec Cond ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+- fix(security): upgrade Babel parents past CVE-2026-44728 ([#1571](https://github.com/MetaMask/metamask-design-system/pull/1571))
+- chore: align React Native 0.86.3 / Expo SDK 57 / React 19.2.3 with metamask-mobile ([#1553](https://github.com/MetaMask/metamask-design-system/pull/1553))
+
 ## [0.12.0]
 
 ### Changed

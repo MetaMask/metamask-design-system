@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add DisplayXl typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+
 ## [0.14.0]
 
 ### Changed

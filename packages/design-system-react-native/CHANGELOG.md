@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix(dsrn): reserve BottomSheet drag handle space when not interactable ([#1589](https://github.com/MetaMask/metamask-design-system/pull/1589))
+- feat: add DisplayXl typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+- fix(icons): replace the Share glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
+- feat: replace Hero with Grotzec Cond ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+- chore: deprecate ButtonHero in favor of primary Button ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
+- fix(security): upgrade Babel parents past CVE-2026-44728 ([#1571](https://github.com/MetaMask/metamask-design-system/pull/1571))
+- chore: align React Native 0.86.3 / Expo SDK 57 / React 19.2.3 with metamask-mobile ([#1553](https://github.com/MetaMask/metamask-design-system/pull/1553))
+
 ## [0.51.0]
 
 ### Added
