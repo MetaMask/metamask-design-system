@@ -54,7 +54,7 @@ const MarketingMoment = ({
           // -2% letter-spacing and 110% line-height per branding agency aesthetic
           // may not work for all locales and font fallbacks
           // will need more sophisticated approach for clients
-          twClassName="text-center leading-[1.1] tracking-[-0.2]"
+          className="text-center leading-[1.1] tracking-[-0.2]"
         >
           <h1>{title}</h1>
         </Text>
