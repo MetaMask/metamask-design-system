@@ -23,6 +23,8 @@ export const TWCLASSMAP_TEXT_FONTSTYLE: Record<FontStyle, string> = {
 };
 
 export const TWCLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
+  [TextVariant.DisplayXl]:
+    'text-s-display-xl leading-s-display-xl tracking-s-display-xl md:text-l-display-xl md:leading-l-display-xl md:tracking-l-display-xl',
   [TextVariant.DisplayLg]:
     'text-s-display-lg leading-s-display-lg tracking-s-display-lg md:text-l-display-lg md:leading-l-display-lg md:tracking-l-display-lg',
   [TextVariant.DisplayMd]:
@@ -54,6 +56,7 @@ export const TWCLASSMAP_TEXT_VARIANT_FONTSTYLE: Record<TextVariant, string> = {
 };
 
 export const TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT: Record<TextVariant, string> = {
+  [TextVariant.DisplayXl]: 'font-bold md:font-medium',
   [TextVariant.DisplayLg]: 'font-bold md:font-medium',
   [TextVariant.DisplayMd]: 'font-bold md:font-medium',
   [TextVariant.HeadingLg]: 'font-bold',
@@ -74,6 +77,7 @@ export const MAP_TEXT_VARIANT_TAG: Record<
   TextVariant,
   keyof React.JSX.IntrinsicElements
 > = {
+  [TextVariant.DisplayXl]: 'h1',
   [TextVariant.DisplayLg]: 'h1',
   [TextVariant.DisplayMd]: 'h1',
   [TextVariant.HeadingLg]: 'h2',

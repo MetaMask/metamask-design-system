@@ -37,6 +37,10 @@
   --letter-spacing-0: 0;
   --letter-spacing-1: 2.5%;
   /* typography scale small screen */
+  --typography-s-display-xl-font-size: var(--font-size-10);
+  --typography-s-display-xl-line-height: var(--line-height-9);
+  --typography-s-display-xl-font-weight: var(--font-weight-bold);
+  --typography-s-display-xl-letter-spacing: var(--letter-spacing-0);
   --typography-s-display-lg-font-size: var(--font-size-8);
   --typography-s-display-lg-line-height: var(--line-height-7);
   --typography-s-display-lg-font-weight: var(--font-weight-bold);
@@ -113,12 +117,16 @@
   --typography-s-button-label-lg-line-height: var(--line-height-4);
   --typography-s-button-label-lg-font-weight: var(--font-weight-medium);
   --typography-s-button-label-lg-letter-spacing: var(--letter-spacing-0);
-  --typography-s-amount-display-lg-font-size: var(--font-size-8);
-  --typography-s-amount-display-lg-line-height: var(--line-height-7);
+  --typography-s-amount-display-lg-font-size: var(--font-size-9);
+  --typography-s-amount-display-lg-line-height: var(--line-height-8);
   --typography-s-amount-display-lg-font-weight: var(--font-weight-bold);
   --typography-s-amount-display-lg-letter-spacing: var(--letter-spacing-0);
 
   /* typography scale large screen */
+  --typography-l-display-xl-font-size: var(--font-size-10);
+  --typography-l-display-xl-line-height: var(--line-height-9);
+  --typography-l-display-xl-font-weight: var(--font-weight-medium);
+  --typography-l-display-xl-letter-spacing: var(--letter-spacing-0);
   --typography-l-display-lg-font-size: var(--font-size-10);
   --typography-l-display-lg-line-height: var(--line-height-9);
   --typography-l-display-lg-font-weight: var(--font-weight-medium);

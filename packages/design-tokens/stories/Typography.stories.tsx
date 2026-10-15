@@ -57,6 +57,12 @@ export const FontFamily: StoryFn<typeof Text> = () => {
 export const SmallScreen: StoryFn<typeof Text> = () => {
   const smallScreenFontSizeBase = 16;
   const styles = {
+    displayXL: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.sDisplayXL.fontSize,
+      lineHeight: `${typography.sDisplayXL.lineHeight}px`,
+      fontWeight: typography.sDisplayXL.fontWeight,
+    },
     displayLG: {
       fontFamily: fontFamilies.default,
       fontSize: typography.sDisplayLG.fontSize,
@@ -181,6 +187,11 @@ export const SmallScreen: StoryFn<typeof Text> = () => {
   };
   return (
     <>
+      <Text style={styles.displayXL}>
+        {`S DisplayXL ${styles.displayXL.fontSize}px/${
+          styles.displayXL.lineHeight
+        } ${styles.displayXL.fontSize / smallScreenFontSizeBase}rem`}
+      </Text>
       <Text style={styles.displayLG}>
         {`S DisplayLG ${styles.displayLG.fontSize}px/${
           styles.displayLG.lineHeight
@@ -283,6 +294,12 @@ export const SmallScreen: StoryFn<typeof Text> = () => {
 export const LargeScreen: StoryFn<typeof Text> = () => {
   const largeScreenFontSizeBase = 16;
   const styles = {
+    displayXL: {
+      fontFamily: fontFamilies.default,
+      fontSize: typography.lDisplayXL.fontSize,
+      lineHeight: `${typography.lDisplayXL.lineHeight}px`,
+      fontWeight: typography.lDisplayXL.fontWeight,
+    },
     displayLG: {
       fontFamily: fontFamilies.default,
       fontSize: typography.lDisplayLG.fontSize,
@@ -407,6 +424,11 @@ export const LargeScreen: StoryFn<typeof Text> = () => {
   };
   return (
     <>
+      <Text style={styles.displayXL}>
+        {`L DisplayXL ${styles.displayXL.fontSize}px/${
+          styles.displayXL.lineHeight
+        } ${styles.displayXL.fontSize / largeScreenFontSizeBase}rem`}
+      </Text>
       <Text style={styles.displayLG}>
         {`L DisplayLG ${styles.displayLG.fontSize}px/${
           styles.displayLG.lineHeight
@@ -539,6 +561,12 @@ export const FontWeight: StoryFn<typeof Text> = () => {
 export const SmallScreenCSS: StoryFn<typeof Text> = () => {
   const fontBase = 16;
   const styles = {
+    DisplayXL: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-s-display-xl-font-size)',
+      lineHeight: 'var(--typography-s-display-xl-line-height)',
+      fontWeight: 'var(--typography-s-display-xl-font-weight)',
+    },
     DisplayLG: {
       fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-s-display-lg-font-size)',
@@ -696,6 +724,12 @@ export const LargeScreenCSS: StoryFn<typeof Text> = () => {
   const fontBase = 16;
 
   const styles = {
+    DisplayXL: {
+      fontFamily: 'var(--font-family-default)',
+      fontSize: 'var(--typography-l-display-xl-font-size)',
+      lineHeight: 'var(--typography-l-display-xl-line-height)',
+      fontWeight: 'var(--typography-l-display-xl-font-weight)',
+    },
     DisplayLG: {
       fontFamily: 'var(--font-family-default)',
       fontSize: 'var(--typography-l-display-lg-font-size)',
