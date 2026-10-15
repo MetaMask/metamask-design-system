@@ -9,11 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [12.0.0]
 
-### Uncategorized
+### Added
 
-- feat: add DisplayXl typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
-- feat: replace Hero with Grotzec Cond ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
-- chore: align React Native 0.86.3 / Expo SDK 57 / React 19.2.3 with metamask-mobile ([#1553](https://github.com/MetaMask/metamask-design-system/pull/1553))
+- Added the display XL typography style for small and large screens ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - JS: `typography.sDisplayXL` and `typography.lDisplayXL`
+  - CSS: `--typography-s-display-xl-*` and `--typography-l-display-xl-*`
+  - Tailwind v4: `text-s-display-xl`, `text-l-display-xl`, and the matching `leading-*` and `tracking-*` utilities
+  - Small screens use 60px / 75px at weight bold; large screens use 60px / 75px at weight medium (16px root)
+
+### Changed
+
+- **BREAKING:** Replaced MM Poly with Grotzec Cond Bold as the hero typeface ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - `--font-family-hero` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+  - `fontFamilies.hero` and the Figma token `global.fontFamilies.hero` are now `Grotzec Cond`
+  - Only the Bold cut is licensed; register it at weight 600
+  - `fontFamilies.accent` and `--font-family-accent` are unchanged
+  - See [Migration Guide](./MIGRATION.md#from-version-1110-to-1200)
+- Updated the small-screen amount display large style from 40px / 50px to 48px / 56px ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - `typography.sAmountDisplayLg` and `--typography-s-amount-display-lg-*` now use `fontSize9` (48px) and `lineHeight8` (56px)
+  - The large-screen amount display large style stays 60px / 75px
 
 ## [11.1.0]
 

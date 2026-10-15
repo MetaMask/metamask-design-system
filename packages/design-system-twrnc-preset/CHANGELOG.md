@@ -9,12 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.13.0]
 
-### Uncategorized
+### Added
 
-- feat: add DisplayXl typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
-- feat: replace Hero with Grotzec Cond ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
-- fix(security): upgrade Babel parents past CVE-2026-44728 ([#1571](https://github.com/MetaMask/metamask-design-system/pull/1571))
-- chore: align React Native 0.86.3 / Expo SDK 57 / React 19.2.3 with metamask-mobile ([#1553](https://github.com/MetaMask/metamask-design-system/pull/1553))
+- Added the `display-xl` typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+
+### Changed
+
+- **BREAKING:** Replaced the `hero-regular` font family (`MMPoly-Regular`) with `hero-bold` (`GrotzecCond-Bold`) ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - The class `font-hero-regular` is removed; use `font-hero-bold`
+  - See the [React Native Migration Guide](../design-system-react-native/MIGRATION.md#from-version-0510-to-0520)
+- **BREAKING:** Updated the peer dependency to `@metamask/design-tokens@^12.0.0` ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - Required coordination bump with the hero typeface change in `@metamask/design-tokens@12.0.0`
+  - See the [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-1110-to-1200)
+- Updated the small-screen `amount-display-lg` size from 40px / 50px to 48px / 56px ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - The large-screen amount display large size stays 60px / 75px
 
 ## [0.12.0]
 

@@ -5,7 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
-  - [From version 0.40.0 to 0.X.0](#from-version-0400-to-0x0)
+  - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
@@ -15,13 +15,34 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.40.0 to 0.X.0
+### From version 0.40.0 to 0.41.0
 
-<a id="from-version-0400-to-0x0"></a>
+<a id="from-version-0400-to-0410"></a>
 
 #### `FontFamily.Hero` is Grotzec Cond
 
-`FontFamily.Grotzec` is removed. Use `FontFamily.Hero`, whose value remains `'hero'`. `FontFamily.Accent` is unchanged and will be removed in a later release.
+**What changed:**
+
+- `FontFamily.Hero` still has the value `'hero'`. Component packages now render that value with Grotzec Cond Bold instead of MM Poly.
+- `FontFamily.Grotzec` is not part of this package. Use `FontFamily.Hero`.
+- `FontFamily.Accent` is unchanged and will be removed in a later release.
+- `TextVariant.DisplayXl` (`'display-xl'`) is new.
+
+**Migration:**
+
+```tsx
+import { FontFamily, TextVariant } from '@metamask/design-system-shared';
+
+const heroFamily = FontFamily.Hero;
+const displayTitle = TextVariant.DisplayXl;
+```
+
+Load `GrotzecCond-Bold` in the app that renders `FontFamily.Hero`. See the [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-1110-to-1200).
+
+**Impact:**
+
+- Code that switches on `FontFamily.Hero` keeps compiling, because the value is still `'hero'`.
+- Screens that render the hero family need the Grotzec Cond Bold font file instead of MM Poly.
 
 ### From version 0.34.0 to 0.35.0
 

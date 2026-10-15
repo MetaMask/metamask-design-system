@@ -9,15 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.52.0]
 
-### Uncategorized
+### Added
 
-- fix(dsrn): reserve BottomSheet drag handle space when not interactable ([#1589](https://github.com/MetaMask/metamask-design-system/pull/1589))
-- feat: add DisplayXl typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
-- fix(icons): replace the Share glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
-- feat: replace Hero with Grotzec Cond ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
-- chore: deprecate ButtonHero in favor of primary Button ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
-- fix(security): upgrade Babel parents past CVE-2026-44728 ([#1571](https://github.com/MetaMask/metamask-design-system/pull/1571))
-- chore: align React Native 0.86.3 / Expo SDK 57 / React 19.2.3 with metamask-mobile ([#1553](https://github.com/MetaMask/metamask-design-system/pull/1553))
+- Added `TextVariant.DisplayXl` ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - Uses the 60px / 75px bold display style
+
+### Changed
+
+- **BREAKING:** `FontFamily.Hero` now renders Grotzec Cond Bold instead of MM Poly ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - `Text` applies `font-hero-bold` for `FontFamily.Hero`, including when `fontWeight` is regular or medium
+  - The twrnc class `font-hero-regular` is removed; use `font-hero-bold`, which resolves to the PostScript name `GrotzecCond-Bold`
+  - See [Migration Guide](./MIGRATION.md#from-version-0510-to-0520)
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-twrnc-preset@^0.13.0` ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - Required coordination bump with the hero typeface change in `@metamask/design-tokens@12.0.0`
+- Updated small-screen `TextVariant.AmountDisplayLg` from 40px / 50px to 48px / 56px ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - The large-screen size stays 60px / 75px
+- Updated the `Share` icon artwork to a box-and-arrow glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
+- Deprecated `ButtonHero` in favor of `Button` ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
+  - Primary is the default `Button` variant; pass `variant={ButtonVariant.Primary}` to set it explicitly
+  - `ButtonHero` remains available until a future major version
+
+### Fixed
+
+- Fixed `BottomSheetDialog` so a non-interactable sheet keeps the drag handle's space ([#1589](https://github.com/MetaMask/metamask-design-system/pull/1589))
+  - When `isInteractable` is `false`, the handle stays in the layout and is only hidden visually (`opacity-0`)
+  - Sheet height no longer shifts when the sheet is not swippable
 
 ## [0.51.0]
 

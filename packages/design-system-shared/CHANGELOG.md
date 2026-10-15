@@ -9,12 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.41.0]
 
-### Uncategorized
+### Added
 
-- feat: add DisplayXl typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
-- fix(icons): replace the Share glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
-- feat: replace Hero with Grotzec Cond ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
-- chore: align React Native 0.86.3 / Expo SDK 57 / React 19.2.3 with metamask-mobile ([#1553](https://github.com/MetaMask/metamask-design-system/pull/1553))
+- Added `TextVariant.DisplayXl` (`'display-xl'`) ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+
+### Changed
+
+- Updated `FontFamily.Hero` to represent Grotzec Cond Bold ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - The value remains `'hero'`
+  - See [Migration Guide](./MIGRATION.md#from-version-0400-to-0410)
+- Updated the `Share` icon artwork to a box-and-arrow glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
 
 ## [0.40.0]
 

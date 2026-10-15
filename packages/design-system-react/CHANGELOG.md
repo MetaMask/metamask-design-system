@@ -9,13 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.47.0]
 
-### Uncategorized
+### Added
 
-- feat: add DisplayXl typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
-- fix(icons): replace the Share glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
-- feat: replace Hero with Grotzec Cond ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
-- chore: deprecate ButtonHero in favor of primary Button ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
-- chore: align React Native 0.86.3 / Expo SDK 57 / React 19.2.3 with metamask-mobile ([#1553](https://github.com/MetaMask/metamask-design-system/pull/1553))
+- Added `TextVariant.DisplayXl` ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - Renders an `h1`
+  - Small screens: 60px / 75px, bold; screens 768px and wider: 60px / 75px, medium
+
+### Changed
+
+- **BREAKING:** `FontFamily.Hero` now renders Grotzec Cond Bold instead of MM Poly ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - The `font-hero` class name is unchanged and still maps to `--font-family-hero`
+  - Only the Bold cut exists, so regular, medium, and bold weights all render that cut
+  - See [Migration Guide](./MIGRATION.md#from-version-0460-to-0470)
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-tailwind-preset@^0.15.0` ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - Required coordination bump with the hero typeface change in `@metamask/design-tokens@12.0.0`
+- Updated small-screen `TextVariant.AmountDisplayLg` from 40px / 50px to 48px / 56px ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - The large-screen size stays 60px / 75px
+- Updated the `Share` icon artwork to a box-and-arrow glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
+- Deprecated `ButtonHero` in favor of `Button` ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
+  - Primary is the default `Button` variant; pass `variant={ButtonVariant.Primary}` to set it explicitly
+  - `ButtonHero` remains available until a future major version
 
 ## [0.46.0]
 
