@@ -20,14 +20,13 @@ export const SLIDER_LABEL_LINE_HEIGHT = 20;
 /** Bottom padding when range labels may render (RANGE_LABEL_TOP + label height). */
 export const SLIDER_BOTTOM_PADDING = RANGE_LABEL_TOP + SLIDER_LABEL_LINE_HEIGHT;
 /**
- * Default horizontal inset on the root container; equals |THUMB_LEFT_OFFSET| so
- * the thumb can overhang at min/max without clipping.
+ * Default horizontal inset on the root container. The thumb stays on the track
+ * at both ends, so no overhang margin is required.
  */
-export const SLIDER_TRACK_INSET = Math.abs(THUMB_LEFT_OFFSET);
+export const SLIDER_TRACK_INSET = 0;
 /**
- * Edge marker inset (percent) so dots/labels at 0/100 stay on the visible track.
- * The thumb at 0% sits half its width (THUMB_SIZE / 2) left of the track start;
- * a small inset keeps edge markers from sitting under the thumb center.
+ * Edge marker inset (percent) so dots/labels at 0/100 stay on the visible track
+ * instead of sitting under the thumb when it rests at either end.
  */
 export const DOT_EDGE_INSET_PERCENT = '2%';
 export const DOT_EDGE_MAX_PERCENT = '98%';

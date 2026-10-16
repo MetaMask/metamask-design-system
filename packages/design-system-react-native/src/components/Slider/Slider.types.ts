@@ -21,11 +21,10 @@ export type { SliderMark, SliderMarkColor };
 export type SliderProps = SliderPropsShared &
   ViewProps & {
     /**
-     * Horizontal inset on the root container so the thumb can overhang the track
-     * at min/max without clipping. Defaults to {@link SLIDER_TRACK_INSET} (16);
-     * override when the parent already provides edge padding.
+     * Extra horizontal inset on the root container. Defaults to
+     * {@link SLIDER_TRACK_INSET} (0) because the thumb stays on the track.
      *
-     * @default 16
+     * @default 0
      */
     trackInset?: number;
 
@@ -141,7 +140,7 @@ export type UseSliderGestureResult = {
   /** Animated width for the filled portion of the track (follows thumb). */
   progressStyle: ReturnType<typeof useAnimatedStyle>;
 
-  /** Animated `translateX` for the thumb relative to the track start. */
+  /** Animated thumb-center `translateX`, inset so the thumb stays on the track. */
   thumbStyle: ReturnType<typeof useAnimatedStyle>;
 
   /** Combined pan + tap gesture for the track/thumb hit area. */
