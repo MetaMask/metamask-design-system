@@ -6,6 +6,7 @@ import {
   Button,
   ButtonSize,
   ButtonVariant,
+  FontFamily,
   FontWeight,
   Icon,
   IconColor,
@@ -46,9 +47,14 @@ const MarketingMoment = ({
       >
         <Text
           asChild
-          variant={TextVariant.DisplayMd}
+          variant={TextVariant.DisplayXl}
           fontWeight={FontWeight.Bold}
+          fontFamily={FontFamily.Hero}
           textAlign={TextAlign.Center}
+          // -2% letter-spacing and 110% line-height per branding agency aesthetic
+          // may not work for all locales and font fallbacks
+          // will need more sophisticated approach for clients
+          className="text-center leading-[1.1] tracking-[-0.2]"
         >
           <h1>{title}</h1>
         </Text>

@@ -70,6 +70,7 @@ describe('twMerge utility', () => {
   describe('variant class validation', () => {
     it('should handle all small variant classes', () => {
       const smallVariants = [
+        'text-s-display-xl',
         'text-s-display-md',
         'text-s-heading-lg',
         'text-s-heading-md',
@@ -91,6 +92,7 @@ describe('twMerge utility', () => {
 
     it('should handle all large variant classes', () => {
       const largeVariants = [
+        'text-l-display-xl',
         'text-l-display-md',
         'text-l-heading-lg',
         'text-l-heading-md',

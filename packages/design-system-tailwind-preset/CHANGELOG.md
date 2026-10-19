@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.0]
+
+### Added
+
+- Added `s-display-xl` and `l-display-xl` font size, line height, and letter spacing utilities ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+
+### Changed
+
+- **BREAKING:** Updated the peer dependency to `@metamask/design-tokens@^12.0.0` ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - Required coordination bump with the hero typeface change in `@metamask/design-tokens@12.0.0`
+  - `font-hero` still maps to `--font-family-hero`; the font files consumers load change with design-tokens
+  - See the [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-1110-to-1200)
+
 ## [0.14.0]
 
 ### Changed
@@ -128,7 +141,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.14.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.15.0...HEAD
+[0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.14.0...@metamask/design-system-tailwind-preset@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.13.0...@metamask/design-system-tailwind-preset@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.12.0...@metamask/design-system-tailwind-preset@0.13.0
 [0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.11.0...@metamask/design-system-tailwind-preset@0.12.0

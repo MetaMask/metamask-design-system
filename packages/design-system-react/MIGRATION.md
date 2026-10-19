@@ -48,7 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.46.0 to 0.X.0](#from-version-0460-to-0x0)
+  - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -3632,9 +3632,9 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
-### From version 0.46.0 to 0.X.0
+### From version 0.46.0 to 0.47.0
 
-<a id="from-version-0460-to-0x0"></a>
+<a id="from-version-0460-to-0470"></a>
 
 #### Hero typeface: MM Poly to Grotzec Cond
 
@@ -3642,13 +3642,23 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 **What changed:**
 
-- `FontFamily.Grotzec` and `font-grotzec` are removed. Use `FontFamily.Hero` and `font-hero`
+- Use `FontFamily.Hero` and `font-hero`. `FontFamily.Hero` still has the value `'hero'`
 - Hero is backed by `--font-family-hero`, which now resolves to Grotzec Cond
 - Only the Bold cut exists, so regular, medium, and bold weights all render that cut
 
 **Migration:**
 
-Register `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) at weight 600. Lighter weight requests fall back to that Bold cut. Keep the adjacent `LICENSE`. Remove MM Poly `@font-face` rules. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1110-to-x00).
+Register `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) at weight 600. Lighter weight requests fall back to that Bold cut. Keep the adjacent `LICENSE`. Remove MM Poly `@font-face` rules. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1110-to-1200).
+
+```tsx
+import { FontFamily, Text } from '@metamask/design-system-react';
+
+<Text fontFamily={FontFamily.Hero}>Shield coverage</Text>;
+```
+
+**Impact:**
+
+Existing `FontFamily.Hero` usage keeps the same prop. The rendered face changes after the app loads Grotzec Cond Bold. Peer dependencies now require `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-tailwind-preset@^0.15.0`.
 
 ### From version 0.40.0 to 0.41.0
 
