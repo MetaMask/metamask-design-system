@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0]
+
+### Added
+
+- Added the `display-xl` typography variant ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+
+### Changed
+
+- **BREAKING:** Replaced the `hero-regular` font family (`MMPoly-Regular`) with `hero-bold` (`GrotzecCond-Bold`) ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - The class `font-hero-regular` is removed; use `font-hero-bold`
+  - See the [React Native Migration Guide](../design-system-react-native/MIGRATION.md#from-version-0510-to-0520)
+- **BREAKING:** Updated the peer dependency to `@metamask/design-tokens@^12.0.0` ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - Required coordination bump with the hero typeface change in `@metamask/design-tokens@12.0.0`
+  - See the [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-1110-to-1200)
+- Updated the small-screen `amount-display-lg` size from 40px / 50px to 48px / 56px ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - The large-screen amount display large size stays 60px / 75px
+
 ## [0.12.0]
 
 ### Changed
@@ -127,7 +144,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.12.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.13.0...HEAD
+[0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.12.0...@metamask/design-system-twrnc-preset@0.13.0
 [0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.11.0...@metamask/design-system-twrnc-preset@0.12.0
 [0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.10.0...@metamask/design-system-twrnc-preset@0.11.0
 [0.10.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.9.0...@metamask/design-system-twrnc-preset@0.10.0

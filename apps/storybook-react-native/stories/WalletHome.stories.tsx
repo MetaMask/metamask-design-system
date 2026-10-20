@@ -41,7 +41,7 @@ import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
 
 const meta: Meta = {
-  title: 'Examples/Wallet Home',
+  title: 'Patterns/Wallet Home',
   component: () => null,
 };
 

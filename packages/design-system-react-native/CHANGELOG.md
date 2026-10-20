@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.52.0]
+
+### Added
+
+- Added `TextVariant.DisplayXl` ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - Uses the 60px / 75px bold display style
+
+### Changed
+
+- **BREAKING:** `FontFamily.Hero` now renders Grotzec Cond Bold instead of MM Poly ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - `Text` applies `font-hero-bold` for `FontFamily.Hero`, including when `fontWeight` is regular or medium
+  - The twrnc class `font-hero-regular` is removed; use `font-hero-bold`, which resolves to the PostScript name `GrotzecCond-Bold`
+  - See [Migration Guide](./MIGRATION.md#from-version-0510-to-0520)
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-twrnc-preset@^0.13.0` ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - Required coordination bump with the hero typeface change in `@metamask/design-tokens@12.0.0`
+- Updated small-screen `TextVariant.AmountDisplayLg` from 40px / 50px to 48px / 56px ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - The large-screen size stays 60px / 75px
+- Updated the `Share` icon artwork to a box-and-arrow glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
+- Deprecated `ButtonHero` in favor of `Button` ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
+  - Primary is the default `Button` variant; pass `variant={ButtonVariant.Primary}` to set it explicitly
+  - `ButtonHero` remains available until a future major version
+
+### Fixed
+
+- Fixed `BottomSheetDialog` so a non-interactable sheet keeps the drag handle's space ([#1589](https://github.com/MetaMask/metamask-design-system/pull/1589))
+  - When `isInteractable` is `false`, the handle stays in the layout and is only hidden visually (`opacity-0`)
+  - Sheet height no longer shifts when the sheet is not swippable
+
 ## [0.51.0]
 
 ### Added
@@ -838,7 +866,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.51.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.52.0...HEAD
+[0.52.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.51.0...@metamask/design-system-react-native@0.52.0
 [0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.50.0...@metamask/design-system-react-native@0.51.0
 [0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.2...@metamask/design-system-react-native@0.50.0
 [0.49.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.1...@metamask/design-system-react-native@0.49.2

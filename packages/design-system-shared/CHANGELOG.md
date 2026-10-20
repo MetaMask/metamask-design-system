@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.41.0]
+
+### Added
+
+- Added `TextVariant.DisplayXl` (`'display-xl'`) ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+
+### Changed
+
+- Updated `FontFamily.Hero` to represent Grotzec Cond Bold ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - The value remains `'hero'`
+- Updated the `Share` icon artwork to a box-and-arrow glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
+
 ## [0.40.0]
 
 ### Added
@@ -391,7 +403,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.40.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.41.0...HEAD
+[0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.40.0...@metamask/design-system-shared@0.41.0
 [0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.39.0...@metamask/design-system-shared@0.40.0
 [0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.38.0...@metamask/design-system-shared@0.39.0
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.37.0...@metamask/design-system-shared@0.38.0

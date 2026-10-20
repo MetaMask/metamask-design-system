@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
 - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
 - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
@@ -53,6 +54,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
   - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
   - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
@@ -77,6 +79,41 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.51.0 to 0.52.0
+
+<a id="from-version-0510-to-0520"></a>
+
+#### Hero typeface: MM Poly to Grotzec Cond
+
+`FontFamily.Hero` now renders Grotzec Cond Bold. `FontFamily.Accent` and MM Sans are unchanged and will be removed in a later release.
+
+**What changed:**
+
+- The twrnc family class `font-hero-regular` is removed. Use `font-hero-bold`, which resolves to the PostScript name `GrotzecCond-Bold`
+- `Text` always applies `font-hero-bold` for `FontFamily.Hero`, including when `fontWeight` is regular or medium
+- `FontFamily.Hero` still has the value `'hero'`
+
+**Migration:**
+
+Stop registering `MMPoly-Regular`. Copy `GrotzecCond-Bold.otf` from [`apps/storybook-react-native/fonts/GrotzecCond`](../../apps/storybook-react-native/fonts/GrotzecCond), retain the adjacent `LICENSE`, and register it under its PostScript name:
+
+```tsx
+import { useFonts } from 'expo-font';
+import { FontFamily, Text } from '@metamask/design-system-react-native';
+
+useFonts({
+  'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+});
+
+<Text fontFamily={FontFamily.Hero}>Rewards</Text>;
+```
+
+Replace any direct `font-hero-regular` class with `font-hero-bold`.
+
+**Impact:**
+
+`font-hero-regular` no longer resolves. Hero text stays on `FontFamily.Hero`, and every weight uses the Bold cut. Peer dependencies now require `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-twrnc-preset@^0.13.0`.
 
 ### From version 0.49.2 to 0.50.0
 

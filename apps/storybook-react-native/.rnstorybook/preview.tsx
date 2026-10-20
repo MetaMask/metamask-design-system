@@ -24,6 +24,13 @@ const ThemeDecorator = ({ children }: PropsWithChildren) => {
 };
 
 const preview: Preview = {
+  parameters: {
+    options: {
+      storySort: {
+        order: ['Components', 'Patterns', 'Temp Components', '*'],
+      },
+    },
+  },
   decorators: [
     (Story: React.ComponentType) => (
       <ThemeDecorator>
