@@ -41,7 +41,7 @@ export const AvatarNetwork = ({
       fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
       twClassName={mergeTwClassName(
-        src && !finalFallbackText && 'bg-white',
+        src && !finalFallbackText ? 'bg-white' : undefined,
         twClassName,
       )}
       {...props}

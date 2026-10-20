@@ -37,7 +37,10 @@ export const AvatarNetwork = forwardRef<HTMLDivElement, AvatarNetworkProps>(
         ref={ref}
         shape={AvatarBaseShape.Square}
         size={size}
-        className={twMerge(src && !finalFallbackText && 'bg-white', className)}
+        className={twMerge(
+          src && !finalFallbackText ? 'bg-white' : undefined,
+          className,
+        )}
         fallbackText={src ? finalFallbackText : backupFallbackText}
         fallbackTextProps={fallbackTextProps}
         {...props}

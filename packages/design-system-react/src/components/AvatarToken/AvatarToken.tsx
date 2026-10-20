@@ -37,7 +37,10 @@ export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
         ref={ref}
         shape={AvatarBaseShape.Circle}
         size={size}
-        className={twMerge(src && !finalFallbackText && 'bg-white', className)}
+        className={twMerge(
+          src && !finalFallbackText ? 'bg-white' : undefined,
+          className,
+        )}
         fallbackText={src ? finalFallbackText : backupFallbackText}
         fallbackTextProps={fallbackTextProps}
         {...props}

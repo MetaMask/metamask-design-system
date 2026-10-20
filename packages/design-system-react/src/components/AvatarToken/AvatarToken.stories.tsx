@@ -151,6 +151,23 @@ export const FallbackText: Story = {
   },
 };
 
+export const PngAndImageErrorFallback: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <AvatarToken
+        name="Bitcoin"
+        fallbackText="BTC"
+        src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=040"
+      />
+      <AvatarToken
+        name="Unavailable token"
+        fallbackText="UT"
+        src="https://example.com/unavailable-token.png"
+      />
+    </div>
+  ),
+};
+
 export const Size: Story = {
   render: () => (
     <div className="flex items-center gap-2">
