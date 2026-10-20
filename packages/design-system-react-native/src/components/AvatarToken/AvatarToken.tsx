@@ -40,7 +40,10 @@ export const AvatarToken = ({
       shape={AvatarBaseShape.Circle}
       fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
-      twClassName={mergeTwClassName(src && 'bg-white', twClassName)}
+      twClassName={mergeTwClassName(
+        src && !finalFallbackText && 'bg-white',
+        twClassName,
+      )}
       {...props}
     >
       {src && (
