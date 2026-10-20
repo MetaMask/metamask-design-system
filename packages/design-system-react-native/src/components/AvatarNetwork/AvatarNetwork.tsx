@@ -40,10 +40,11 @@ export const AvatarNetwork = ({
       shape={AvatarBaseShape.Square}
       fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
-      twClassName={mergeTwClassName(
-        src && !finalFallbackText ? 'bg-white' : undefined,
-        twClassName,
-      )}
+      twClassName={
+        src && !finalFallbackText
+          ? mergeTwClassName('bg-white', twClassName)
+          : twClassName
+      }
       {...props}
     >
       {src && (
