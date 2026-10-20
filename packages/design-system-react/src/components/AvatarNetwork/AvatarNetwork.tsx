@@ -4,6 +4,7 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef, useState } from 'react';
 
+import { twMerge } from '../../utils/tw-merge';
 import { AvatarBase } from '../AvatarBase';
 
 import type { AvatarNetworkProps } from './AvatarNetwork.types';
@@ -36,7 +37,7 @@ export const AvatarNetwork = forwardRef<HTMLDivElement, AvatarNetworkProps>(
         ref={ref}
         shape={AvatarBaseShape.Square}
         size={size}
-        className={className}
+        className={twMerge(src && 'bg-white', className)}
         fallbackText={src ? finalFallbackText : backupFallbackText}
         fallbackTextProps={fallbackTextProps}
         {...props}

@@ -1,6 +1,7 @@
 import {
   AvatarBaseShape,
   AvatarTokenSize,
+  mergeTwClassName,
 } from '@metamask/design-system-shared';
 import type { ImageErrorEventData } from 'expo-image';
 import React, { useState } from 'react';
@@ -17,6 +18,7 @@ export const AvatarToken = ({
   fallbackText,
   fallbackTextProps,
   imageOrSvgProps,
+  twClassName,
   ...props
 }: AvatarTokenProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
@@ -38,6 +40,7 @@ export const AvatarToken = ({
       shape={AvatarBaseShape.Circle}
       fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
+      twClassName={mergeTwClassName(src && 'bg-white', twClassName)}
       {...props}
     >
       {src && (
