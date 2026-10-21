@@ -280,6 +280,7 @@ describe('TitleStandard', () => {
       const container = getByTestId(CONTAINER_TEST_ID);
 
       expect(container).toHaveStyle(tw`gap-1`);
+      expect(container).toHaveStyle(tw`pb-6`);
       expect(container).toHaveStyle(tw`bg-default`);
     });
   });

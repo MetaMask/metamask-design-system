@@ -46,7 +46,7 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
   ...props
 }) => {
   return (
-    <Box twClassName={twClassName} gap={1} {...props}>
+    <Box twClassName={twClassName} gap={1} paddingBottom={6} {...props}>
       {/* Top Accessory Slot */}
       {topAccessory}
       {/* Title Row */}
