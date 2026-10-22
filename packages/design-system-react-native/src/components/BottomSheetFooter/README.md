@@ -1,6 +1,6 @@
 # BottomSheetFooter
 
-BottomSheetFooter is a footer component specifically used for BottomSheets. It renders a primary and/or secondary button in either a horizontal or vertical layout, with enforced button variants and consistent ordering.
+BottomSheetFooter is a footer component specifically used for BottomSheets. It renders a primary, secondary, and/or tertiary button in either a horizontal or vertical layout, with enforced button variants and consistent ordering. The tertiary button always sits at the bottom.
 
 ```tsx
 import {
@@ -18,7 +18,7 @@ import {
 
 ### `primaryButtonProps`
 
-Optional props for the primary action button. The button automatically renders with `ButtonVariant.Primary`. Appears second (rightmost in horizontal layout, bottom in vertical layout).
+Optional props for the primary action button. The button automatically renders with `ButtonVariant.Primary`. Appears after the secondary button (rightmost in a horizontal layout, below it in a vertical layout) and above the tertiary button when one is set.
 
 | TYPE                           | REQUIRED | DEFAULT     |
 | ------------------------------ | -------- | ----------- |
@@ -49,14 +49,36 @@ import { BottomSheetFooter } from '@metamask/design-system-react-native';
 />;
 ```
 
+### `tertiaryButtonProps`
+
+Optional props for the tertiary action button. The button automatically renders with `ButtonVariant.Tertiary`. It always appears last, at the bottom of the footer. In a horizontal layout it sits on its own row beneath the primary and secondary buttons. In a vertical layout it is the last stacked button.
+
+| TYPE                           | REQUIRED | DEFAULT     |
+| ------------------------------ | -------- | ----------- |
+| `Omit<ButtonProps, 'variant'>` | No       | `undefined` |
+
+```tsx
+import {
+  BottomSheetFooter,
+  ButtonsAlignment,
+} from '@metamask/design-system-react-native';
+
+<BottomSheetFooter
+  buttonsAlignment={ButtonsAlignment.Vertical}
+  secondaryButtonProps={{ children: 'Cancel', onPress: () => {} }}
+  primaryButtonProps={{ children: 'Submit', onPress: () => {} }}
+  tertiaryButtonProps={{ children: 'Not now', onPress: () => {} }}
+/>;
+```
+
 ### `buttonsAlignment`
 
 Optional prop to control the alignment of the buttons.
 
 Available alignments:
 
-- `ButtonsAlignment.Horizontal` - buttons are laid out side by side
-- `ButtonsAlignment.Vertical` - buttons are stacked on top of each other
+- `ButtonsAlignment.Horizontal` - primary and secondary buttons are laid out side by side. A tertiary button stays on its own row at the bottom.
+- `ButtonsAlignment.Vertical` - buttons are stacked. Order is secondary, primary, then tertiary at the bottom.
 
 | TYPE               | REQUIRED | DEFAULT                       |
 | ------------------ | -------- | ----------------------------- |
@@ -134,4 +156,4 @@ For MetaMask Extension modal footers (`ModalFooter` on web), see [`design-system
 
 ## Content guidelines
 
-- `primaryButtonProps.children` and `secondaryButtonProps.children`: sentence case, no period
+- `primaryButtonProps.children`, `secondaryButtonProps.children`, and `tertiaryButtonProps.children`: sentence case, no period
