@@ -1,6 +1,8 @@
 # BottomSheetFooter
 
-BottomSheetFooter is a footer component specifically used for BottomSheets. It renders a primary, secondary, and/or tertiary button in either a horizontal or vertical layout, with enforced button variants and consistent ordering. The tertiary button always sits at the bottom.
+BottomSheetFooter is the action area at the bottom of a bottom sheet. Use it for up to three actions — secondary, primary, and an optional tertiary action such as "Not now". Use a vertical layout so the tertiary button sits under the others.
+
+Pass each label and press handler through its button props. The footer sets the variant for you. Use `Button` directly when an action needs a different variant, when you need more than three actions, or when the actions are not part of a bottom sheet footer.
 
 ```tsx
 import {
@@ -51,7 +53,7 @@ import { BottomSheetFooter } from '@metamask/design-system-react-native';
 
 ### `tertiaryButtonProps`
 
-Optional props for the tertiary action button. The button automatically renders with `ButtonVariant.Tertiary`. It always appears last, at the bottom of the footer. In a horizontal layout it sits on its own row beneath the primary and secondary buttons. In a vertical layout it is the last stacked button.
+Optional props for the tertiary action button. Renders with `ButtonVariant.Tertiary`. Appears last. Use a vertical layout to place it under the other buttons.
 
 | TYPE                           | REQUIRED | DEFAULT     |
 | ------------------------------ | -------- | ----------- |
@@ -77,8 +79,8 @@ Optional prop to control the alignment of the buttons.
 
 Available alignments:
 
-- `ButtonsAlignment.Horizontal` - primary and secondary buttons are laid out side by side. A tertiary button stays on its own row at the bottom.
-- `ButtonsAlignment.Vertical` - buttons are stacked. Order is secondary, primary, then tertiary at the bottom.
+- `ButtonsAlignment.Horizontal` - buttons are laid out side by side
+- `ButtonsAlignment.Vertical` - buttons are stacked. A tertiary button is last, under the others.
 
 | TYPE               | REQUIRED | DEFAULT                       |
 | ------------------ | -------- | ----------------------------- |

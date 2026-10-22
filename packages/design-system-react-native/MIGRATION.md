@@ -2602,7 +2602,7 @@ The old `buttonPropsArray: ButtonProps[]` is replaced by named props. The `varia
 | Index `1` (when two buttons)                    | `primaryButtonProps`                                                             | renamed     | Confirm / primary action — rendered second (right in a horizontal row, below secondary in a vertical list).                                                                                       |
 | Single-element array                            | Typically `primaryButtonProps` only                                              | convention  | If the legacy array had one button, map it to the slot that matches its `variant` (`Primary` → `primaryButtonProps`, `Secondary` → `secondaryButtonProps`, low-emphasis → `tertiaryButtonProps`). |
 | `variant` on each entry                         | removed                                                                          | removed     | Always `Primary` / `Secondary` / `Tertiary` per slot; types use `Omit<ButtonProps, 'variant'>`.                                                                                                   |
-| Third low-emphasis action (for example Link)    | `tertiaryButtonProps`                                                            | added       | Renders `ButtonVariant.Tertiary` and always sits at the bottom of the footer, including under a horizontal primary/secondary row.                                                                 |
+| Third low-emphasis action (for example Link)    | `tertiaryButtonProps`                                                            | added       | Renders `ButtonVariant.Tertiary` and appears last. Use `ButtonsAlignment.Vertical` to place it under the other buttons.                                                                           |
 | `label`                                         | `children`                                                                       | renamed     | DS `Button` uses `children` for the visible label.                                                                                                                                                |
 | `onPress`                                       | `onPress`                                                                        | unchanged   | Still the native press handler on each button bag.                                                                                                                                                |
 | `style` on footer                               | `style`, `twClassName`                                                           | extended    | `twClassName` is new for Tailwind utility overrides on the footer container.                                                                                                                      |
@@ -2713,7 +2713,7 @@ After (Design System):
 
 ##### Tertiary action at the bottom
 
-A third, low-emphasis action such as "Not now" maps to `tertiaryButtonProps`. The footer renders it with `ButtonVariant.Tertiary` and places it last. With `ButtonsAlignment.Vertical` the order is secondary, primary, tertiary. With `ButtonsAlignment.Horizontal` the primary and secondary buttons stay on one row and the tertiary button sits on its own row underneath.
+A third, low-emphasis action such as "Not now" maps to `tertiaryButtonProps`. The footer renders it with `ButtonVariant.Tertiary` and places it last. Use `ButtonsAlignment.Vertical` so it sits under the other buttons.
 
 ```tsx
 <BottomSheetFooter

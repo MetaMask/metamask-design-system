@@ -62,10 +62,8 @@ export type ModalFooterProps = ComponentProps<'footer'> & {
   secondaryButtonProps?: ModalFooterButtonProps;
   /**
    * Optional props for the tertiary action button. Renders with
-   * `ButtonVariant.Tertiary` automatically. Always appears last, at the
-   * bottom of the footer. In horizontal layout it sits on its own full-width
-   * row beneath the primary and secondary buttons. In vertical layout it is
-   * the last stacked button.
+   * `ButtonVariant.Tertiary` automatically. Appears last. Use a vertical
+   * layout to place it under the other buttons.
    */
   tertiaryButtonProps?: ModalFooterButtonProps;
   /**

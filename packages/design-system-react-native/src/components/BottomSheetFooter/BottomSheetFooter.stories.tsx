@@ -17,9 +17,9 @@ const meta: Meta<BottomSheetFooterProps> = {
       control: {
         type: 'select',
       },
+      description:
+        'Horizontal lays the buttons in a row. Vertical stacks them. A tertiary button is last, so use Vertical to place it at the bottom.',
     },
-    twClassName: { control: 'text' },
-    style: { control: 'object' },
   },
   decorators: [
     (Story) => (

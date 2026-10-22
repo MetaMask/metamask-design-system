@@ -4,9 +4,9 @@ import * as ModalFooterStories from './ModalFooter.stories';
 
 # ModalFooter
 
-`ModalFooter` is the bottom section of a modal. It hosts up to three action buttons — primary, secondary, and tertiary — and an optional slot above them for inline form controls (a "do not show again" checkbox, a disclaimer, etc.). The tertiary button always sits at the bottom.
+`ModalFooter` is the action area at the bottom of a modal. Use it for up to three actions — secondary, primary, and an optional tertiary action such as "Not now" — plus an optional slot above the buttons for inline form controls. Use a vertical layout so the tertiary button sits under the others.
 
-The component owns the button semantics: it renders the primary button with `ButtonVariant.Primary`, the secondary button with `ButtonVariant.Secondary`, and the tertiary button with `ButtonVariant.Tertiary` automatically. Consumers configure each via `primaryButtonProps` / `secondaryButtonProps` / `tertiaryButtonProps`, but cannot override the variant. This mirrors the React Native `BottomSheetFooter` so the modal/sheet families share semantics across platforms.
+Pass each label and click handler through its button props. The footer sets the variant for you. Use `Button` directly when an action needs a different variant, when you need more than three actions, or when the actions are not part of a modal footer.
 
 ```tsx
 import { ModalFooter } from '@metamask/design-system-react';
@@ -79,7 +79,7 @@ Props for the secondary action button. Renders with `ButtonVariant.Secondary` au
 
 ### `tertiaryButtonProps`
 
-Props for the tertiary action button. Renders with `ButtonVariant.Tertiary` automatically. Always appears last, at the bottom of the footer. In horizontal layout it sits on its own full-width row beneath the primary and secondary buttons. In vertical layout it is the last stacked button.
+Optional props for the tertiary action button. Renders with `ButtonVariant.Tertiary`. Appears last. Use a vertical layout to place it under the other buttons.
 
 <table>
   <thead>
@@ -110,8 +110,8 @@ Props for the tertiary action button. Renders with `ButtonVariant.Tertiary` auto
 
 Layout direction for the action button row.
 
-- `ButtonsAlignment.Horizontal` (default) — primary and secondary share the row, each takes `flex-1`. Order: secondary, primary. A tertiary button stays on its own full-width row at the bottom.
-- `ButtonsAlignment.Vertical` — buttons stack with full width. Order: secondary, primary, then tertiary at the bottom.
+- `ButtonsAlignment.Horizontal` (default) — buttons are laid out side by side.
+- `ButtonsAlignment.Vertical` — buttons are stacked. A tertiary button is last, under the others.
 
 <table>
   <thead>

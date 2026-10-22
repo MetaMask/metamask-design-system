@@ -51,10 +51,9 @@ const meta: Meta<ModalFooterProps> = {
     buttonsAlignment: {
       control: 'radio',
       options: Object.values(ButtonsAlignment),
+      description:
+        'Horizontal lays the buttons in a row. Vertical stacks them. A tertiary button is last, so use Vertical to place it at the bottom.',
     },
-    primaryButtonProps: { control: 'object' },
-    secondaryButtonProps: { control: 'object' },
-    tertiaryButtonProps: { control: 'object' },
   },
 };
 

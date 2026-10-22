@@ -43,9 +43,7 @@ export type BottomSheetFooterProps = {
   /**
    * Optional props for the tertiary action button.
    * Renders with ButtonVariant.Tertiary automatically.
-   * Always appears last, at the bottom of the footer. In a horizontal layout
-   * it sits on its own row beneath the primary and secondary buttons. In a
-   * vertical layout it is the last stacked button.
+   * Appears last. Use a vertical layout to place it under the other buttons.
    */
   tertiaryButtonProps?: BottomSheetFooterButtonProps;
   /**

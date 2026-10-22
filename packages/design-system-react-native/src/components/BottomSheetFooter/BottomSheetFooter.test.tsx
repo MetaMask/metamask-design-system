@@ -85,36 +85,7 @@ describe('BottomSheetFooter', () => {
     const footer = getByTestId('footer');
     const flatStyle = Object.assign({}, ...footer.props.style.flat());
     expect(flatStyle.flexDirection).toBe('column');
-    expect(getByTestId('tertiary')).toHaveStyle(tw`mt-4 self-stretch`);
-  });
-
-  it('pins the tertiary button under a horizontal primary and secondary row', () => {
-    const { getAllByRole, getByTestId } = render(
-      <BottomSheetFooter
-        testID="footer"
-        buttonsAlignment={ButtonsAlignment.Horizontal}
-        secondaryButtonProps={{ children: 'Cancel', testID: 'secondary' }}
-        primaryButtonProps={{ children: 'Submit', testID: 'primary' }}
-        tertiaryButtonProps={{ children: 'Not now', testID: 'tertiary' }}
-      />,
-    );
-
-    const buttons = getAllByRole('button');
-    expect(buttons.map((button) => button.props.testID)).toStrictEqual([
-      'secondary',
-      'primary',
-      'tertiary',
-    ]);
-
-    const footer = getByTestId('footer');
-    const footerStyle = Object.assign({}, ...footer.props.style.flat());
-    expect(footerStyle.flexDirection).toBe('column');
-
-    const actionRow = footer.children[0] as {
-      props: { style: { flexDirection?: string } };
-    };
-    expect(actionRow.props.style.flexDirection).toBe('row');
-    expect(getByTestId('tertiary')).toHaveStyle(tw`mt-4 self-stretch`);
+    expect(getByTestId('tertiary')).toHaveStyle(tw`self-stretch`);
   });
 
   it('renders tertiaryButtonProps as ButtonVariant.Tertiary even when variant is passed', () => {

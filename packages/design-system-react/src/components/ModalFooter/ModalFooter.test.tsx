@@ -159,34 +159,6 @@ describe('ModalFooter', () => {
     );
   });
 
-  it('pins the tertiary button under a horizontal primary and secondary row', () => {
-    render(
-      <ModalFooter
-        primaryButtonProps={{ children: 'Confirm', 'data-testid': 'primary' }}
-        secondaryButtonProps={{
-          children: 'Cancel',
-          'data-testid': 'secondary',
-        }}
-        tertiaryButtonProps={{
-          children: 'Not now',
-          'data-testid': 'tertiary',
-        }}
-      />,
-    );
-
-    const buttons = screen.getAllByRole('button');
-    expect(buttons[2]).toBe(screen.getByTestId('tertiary'));
-
-    const actionRow = screen.getByTestId('primary').parentElement;
-    expect(actionRow).toHaveClass('flex-row');
-    expect(screen.getByTestId('secondary').parentElement).toBe(actionRow);
-
-    const tertiary = screen.getByTestId('tertiary');
-    expect(tertiary).toHaveClass('w-full');
-    expect(tertiary.parentElement).toHaveClass('flex-col');
-    expect(tertiary.parentElement).toBe(actionRow?.parentElement);
-  });
-
   it('renders a lone tertiary button with the horizontal alignment utility', () => {
     render(
       <ModalFooter
