@@ -54,6 +54,7 @@ const meta: Meta<ModalFooterProps> = {
     },
     primaryButtonProps: { control: 'object' },
     secondaryButtonProps: { control: 'object' },
+    tertiaryButtonProps: { control: 'object' },
   },
 };
 
@@ -87,6 +88,33 @@ export const SecondaryOnly: Story = {
   args: {
     secondaryButtonProps: {
       children: 'Cancel',
+      onClick: () => undefined,
+    },
+  },
+};
+
+export const TertiaryOnly: Story = {
+  args: {
+    tertiaryButtonProps: {
+      children: 'Not now',
+      onClick: () => undefined,
+    },
+  },
+};
+
+export const TertiaryButtonProps: Story = {
+  args: {
+    buttonsAlignment: ButtonsAlignment.Vertical,
+    primaryButtonProps: {
+      children: 'Confirm',
+      onClick: () => undefined,
+    },
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onClick: () => undefined,
+    },
+    tertiaryButtonProps: {
+      children: 'Not now',
       onClick: () => undefined,
     },
   },

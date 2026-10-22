@@ -4,9 +4,9 @@ import * as ModalFooterStories from './ModalFooter.stories';
 
 # ModalFooter
 
-`ModalFooter` is the bottom section of a modal. It hosts up to two action buttons — primary and secondary — and an optional slot above them for inline form controls (a "do not show again" checkbox, a disclaimer, etc.).
+`ModalFooter` is the bottom section of a modal. It hosts up to three action buttons — primary, secondary, and tertiary — and an optional slot above them for inline form controls (a "do not show again" checkbox, a disclaimer, etc.). The tertiary button always sits at the bottom.
 
-The component owns the button semantics: it renders the primary button with `ButtonVariant.Primary` and the secondary button with `ButtonVariant.Secondary` automatically. Consumers configure each via `primaryButtonProps` / `secondaryButtonProps`, but cannot override the variant. This mirrors the React Native `BottomSheetFooter` so the modal/sheet families share semantics across platforms.
+The component owns the button semantics: it renders the primary button with `ButtonVariant.Primary`, the secondary button with `ButtonVariant.Secondary`, and the tertiary button with `ButtonVariant.Tertiary` automatically. Consumers configure each via `primaryButtonProps` / `secondaryButtonProps` / `tertiaryButtonProps`, but cannot override the variant. This mirrors the React Native `BottomSheetFooter` so the modal/sheet families share semantics across platforms.
 
 ```tsx
 import { ModalFooter } from '@metamask/design-system-react';
@@ -23,7 +23,7 @@ import { ModalFooter } from '@metamask/design-system-react';
 
 ### `primaryButtonProps`
 
-Props for the primary action button. Renders with `ButtonVariant.Primary` automatically. Appears second (right in horizontal layout, bottom in vertical layout).
+Props for the primary action button. Renders with `ButtonVariant.Primary` automatically. Appears after the secondary button (right in horizontal layout, below it in vertical layout) and above the tertiary button when one is set.
 
 Pass the localized label as `children` and wire the click handler via `onClick`. `ModalFooter` is i18n-agnostic — pass localized strings from your application's i18n layer (e.g. `t('confirm')`).
 
@@ -77,12 +77,41 @@ Props for the secondary action button. Renders with `ButtonVariant.Secondary` au
 
 <Canvas of={ModalFooterStories.SecondaryOnly} />
 
+### `tertiaryButtonProps`
+
+Props for the tertiary action button. Renders with `ButtonVariant.Tertiary` automatically. Always appears last, at the bottom of the footer. In horizontal layout it sits on its own full-width row beneath the primary and secondary buttons. In vertical layout it is the last stacked button.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;ButtonProps, 'variant'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={ModalFooterStories.TertiaryButtonProps} />
+
+<Canvas of={ModalFooterStories.TertiaryOnly} />
+
 ### `buttonsAlignment`
 
 Layout direction for the action button row.
 
-- `ButtonsAlignment.Horizontal` (default) — buttons share the row, each takes `flex-1`. Order: secondary, primary.
-- `ButtonsAlignment.Vertical` — buttons stack with full width. Order: secondary on top, primary on bottom.
+- `ButtonsAlignment.Horizontal` (default) — primary and secondary share the row, each takes `flex-1`. Order: secondary, primary. A tertiary button stays on its own full-width row at the bottom.
+- `ButtonsAlignment.Vertical` — buttons stack with full width. Order: secondary, primary, then tertiary at the bottom.
 
 <table>
   <thead>
@@ -111,7 +140,7 @@ Layout direction for the action button row.
 
 ### `children`
 
-Optional custom content rendered above the action button row. Use this for inline form controls (checkboxes, disclaimers) or to fully replace the button row by omitting both `primaryButtonProps` and `secondaryButtonProps`.
+Optional custom content rendered above the action button row. Use this for inline form controls (checkboxes, disclaimers) or to fully replace the button row by omitting `primaryButtonProps`, `secondaryButtonProps`, and `tertiaryButtonProps`.
 
 <table>
   <thead>
@@ -175,4 +204,4 @@ Migrating from `ui/components/component-library/modal-footer` in MetaMask Extens
 
 ## Content guidelines
 
-- Button labels (`primaryButtonProps.children`, `secondaryButtonProps.children`): sentence case, no period
+- Button labels (`primaryButtonProps.children`, `secondaryButtonProps.children`, `tertiaryButtonProps.children`): sentence case, no period

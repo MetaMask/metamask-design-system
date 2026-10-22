@@ -17,7 +17,7 @@ export type ButtonsAlignment =
 
 /**
  * Button props accepted by `ModalFooter`. The `variant` is enforced internally
- * by the component (Primary or Secondary, depending on slot), so consumers
+ * by the component (Primary, Secondary, or Tertiary, depending on slot), so consumers
  * cannot override it. The `data-*` index signature is preserved so test ids
  * and other dataset attributes can be passed through `Partial`/`Omit`
  * indirection.
@@ -30,8 +30,8 @@ export type ModalFooterProps = ComponentProps<'footer'> & {
   /**
    * Optional custom content rendered above the action button row. Use this
    * for inline form controls (e.g. a "do not show again" checkbox) or to
-   * fully replace the built-in button row by omitting both
-   * `primaryButtonProps` and `secondaryButtonProps`.
+   * fully replace the built-in button row by omitting
+   * `primaryButtonProps`, `secondaryButtonProps`, and `tertiaryButtonProps`.
    */
   children?: ReactNode;
   /**
@@ -45,8 +45,9 @@ export type ModalFooterProps = ComponentProps<'footer'> & {
   buttonsAlignment?: ButtonsAlignment;
   /**
    * Optional props for the primary action button. Renders with
-   * `ButtonVariant.Primary` automatically. Appears second (right in
-   * horizontal layout, bottom in vertical layout).
+   * `ButtonVariant.Primary` automatically. Appears after the secondary
+   * button (right in horizontal layout, below it in vertical layout) and
+   * above the tertiary button when set.
    *
    * Pass the localized label as `children`. Wire the click handler via
    * `onClick`. `ModalFooter` is i18n-agnostic and intentionally does not pull
@@ -59,6 +60,14 @@ export type ModalFooterProps = ComponentProps<'footer'> & {
    * horizontal layout, top in vertical layout).
    */
   secondaryButtonProps?: ModalFooterButtonProps;
+  /**
+   * Optional props for the tertiary action button. Renders with
+   * `ButtonVariant.Tertiary` automatically. Always appears last, at the
+   * bottom of the footer. In horizontal layout it sits on its own full-width
+   * row beneath the primary and secondary buttons. In vertical layout it is
+   * the last stacked button.
+   */
+  tertiaryButtonProps?: ModalFooterButtonProps;
   /**
    * Optional prop for additional CSS classes to be applied to the
    * ModalFooter root. Merged with the component's defaults via `twMerge`.

@@ -2580,7 +2580,7 @@ Source references (for API diffing):
 - Legacy: [`app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.tsx`](https://github.com/MetaMask/metamask-mobile/blob/main/app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.tsx) and [`BottomSheetFooter.types.ts`](https://github.com/MetaMask/metamask-mobile/blob/main/app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.types.ts)
 - MMDS: [`packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.tsx`](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.tsx) and [`BottomSheetFooter.types.ts`](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.types.ts)
 
-On web, the extension modal footer migration lives under [ModalFooter Component](../design-system-react/MIGRATION.md#modalfooter-component). Web `ModalFooter` shares the primary and secondary slots. `tertiaryButtonProps` is React Native only.
+On web, the extension modal footer migration lives under [ModalFooter Component](../design-system-react/MIGRATION.md#modalfooter-component). Web `ModalFooter` shares the same primary, secondary, and tertiary slots.
 
 #### Breaking Changes
 
