@@ -68,6 +68,33 @@ export const SecondaryOnly: Story = {
   },
 };
 
+export const TertiaryOnly: Story = {
+  args: {
+    tertiaryButtonProps: {
+      children: 'Not now',
+      onPress: () => console.log('Not now pressed'),
+    },
+  },
+};
+
+export const TertiaryButtonProps: Story = {
+  args: {
+    buttonsAlignment: ButtonsAlignment.Vertical,
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onPress: () => console.log('Cancel pressed'),
+    },
+    primaryButtonProps: {
+      children: 'Submit',
+      onPress: () => console.log('Submit pressed'),
+    },
+    tertiaryButtonProps: {
+      children: 'Not now',
+      onPress: () => console.log('Not now pressed'),
+    },
+  },
+};
+
 export const Horizontal: Story = {
   args: {
     buttonsAlignment: ButtonsAlignment.Horizontal,

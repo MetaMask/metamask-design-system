@@ -30,7 +30,8 @@ export type BottomSheetFooterProps = {
   /**
    * Optional props for the primary action button.
    * Renders with ButtonVariant.Primary automatically.
-   * Appears second (rightmost in horizontal layout, bottom in vertical layout).
+   * Appears after the secondary button (rightmost in a horizontal layout,
+   * below it in a vertical layout) and above the tertiary button when set.
    */
   primaryButtonProps?: BottomSheetFooterButtonProps;
   /**
@@ -39,6 +40,14 @@ export type BottomSheetFooterProps = {
    * Appears first (leftmost in horizontal layout, top in vertical layout).
    */
   secondaryButtonProps?: BottomSheetFooterButtonProps;
+  /**
+   * Optional props for the tertiary action button.
+   * Renders with ButtonVariant.Tertiary automatically.
+   * Always appears last, at the bottom of the footer. In a horizontal layout
+   * it sits on its own row beneath the primary and secondary buttons. In a
+   * vertical layout it is the last stacked button.
+   */
+  tertiaryButtonProps?: BottomSheetFooterButtonProps;
   /**
    * Tailwind CSS classes for the footer container.
    */

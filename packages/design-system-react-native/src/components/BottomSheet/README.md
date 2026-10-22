@@ -191,5 +191,5 @@ Compose a bottom sheet with `BottomSheetHeader`, body content, and `BottomSheetF
 
 - `BottomSheetHeader` children: sentence case, no period
 - `BottomSheet` children: sentence case for string body content; complete sentences end with a period
-- `BottomSheetFooter` button labels (`primaryButtonProps.children`, `secondaryButtonProps.children`): sentence case, no period
+- `BottomSheetFooter` button labels (`primaryButtonProps.children`, `secondaryButtonProps.children`, `tertiaryButtonProps.children`): sentence case, no period
 - Use the guidance for any nested components used in the body
