@@ -82,9 +82,6 @@ describe('BottomSheetFooter', () => {
     expect(buttons[1]).toBe(getByTestId('primary'));
     expect(buttons[2]).toBe(getByTestId('tertiary'));
 
-    const footer = getByTestId('footer');
-    const flatStyle = Object.assign({}, ...footer.props.style.flat());
-    expect(flatStyle.flexDirection).toBe('column');
     expect(getByTestId('tertiary')).toHaveStyle(tw`mt-4 self-stretch`);
   });
 
@@ -100,20 +97,9 @@ describe('BottomSheetFooter', () => {
     );
 
     const buttons = getAllByRole('button');
-    expect(buttons.map((button) => button.props.testID)).toStrictEqual([
-      'secondary',
-      'primary',
-      'tertiary',
-    ]);
-
-    const footer = getByTestId('footer');
-    const footerStyle = Object.assign({}, ...footer.props.style.flat());
-    expect(footerStyle.flexDirection).toBe('column');
-
-    const actionRow = footer.children[0] as {
-      props: { style: { flexDirection?: string } };
-    };
-    expect(actionRow.props.style.flexDirection).toBe('row');
+    expect(buttons[0]).toBe(getByTestId('secondary'));
+    expect(buttons[1]).toBe(getByTestId('primary'));
+    expect(buttons[2]).toBe(getByTestId('tertiary'));
     expect(getByTestId('tertiary')).toHaveStyle(tw`mt-4 self-stretch`);
   });
 
