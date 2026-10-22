@@ -77,7 +77,7 @@ export const Src: Story = {
       <AvatarToken
         name="Bitcoin"
         fallbackText="BTC"
-        src={SAMPLE_AVATARTOKEN_URIS[0]}
+        src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=040"
       />
       <AvatarToken
         name="Ethereum"
@@ -109,6 +109,11 @@ export const Fallback: Story = {
       <AvatarToken name="Bitcoin" fallbackText="BTC" />
       <AvatarToken name="Ethereum" />
       <AvatarToken />
+      <AvatarToken
+        name="Unavailable token"
+        fallbackText="UT"
+        src="https://example.com/unavailable-token.png"
+      />
     </div>
   ),
   parameters: {
