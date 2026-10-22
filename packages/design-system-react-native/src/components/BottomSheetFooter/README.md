@@ -1,6 +1,6 @@
 # BottomSheetFooter
 
-BottomSheetFooter is the action area at the bottom of a bottom sheet. Use it for up to three actions — secondary, primary, and an optional tertiary action such as "Not now". Use a vertical layout so the tertiary button sits under the others.
+BottomSheetFooter is the action area at the bottom of a bottom sheet. Use it for up to three actions — secondary, primary, and an optional tertiary action such as "Not now". Use a vertical layout so the tertiary button sits under the others. Do not use all three buttons with a horizontal layout.
 
 Pass each label and press handler through its button props. The footer sets the variant for you. Use `Button` directly when an action needs a different variant, when you need more than three actions, or when the actions are not part of a bottom sheet footer.
 
@@ -53,7 +53,7 @@ import { BottomSheetFooter } from '@metamask/design-system-react-native';
 
 ### `tertiaryButtonProps`
 
-Optional props for the tertiary action button. Renders with `ButtonVariant.Tertiary`. Appears last. Use a vertical layout to place it under the other buttons.
+Optional props for the tertiary action button. Renders with `ButtonVariant.Tertiary`. Appears last. Use a vertical layout to place it under the other buttons. Do not use all three buttons with a horizontal layout.
 
 | TYPE                           | REQUIRED | DEFAULT     |
 | ------------------------------ | -------- | ----------- |
@@ -79,8 +79,8 @@ Optional prop to control the alignment of the buttons.
 
 Available alignments:
 
-- `ButtonsAlignment.Horizontal` - buttons are laid out side by side
-- `ButtonsAlignment.Vertical` - buttons are stacked. A tertiary button is last, under the others.
+- `ButtonsAlignment.Horizontal` - buttons are laid out side by side. Do not use this alignment with all three buttons.
+- `ButtonsAlignment.Vertical` - buttons are stacked. A tertiary button is last, under the others. Use this alignment when a tertiary button is set.
 
 | TYPE               | REQUIRED | DEFAULT                       |
 | ------------------ | -------- | ----------------------------- |

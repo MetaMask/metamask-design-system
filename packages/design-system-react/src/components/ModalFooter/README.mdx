@@ -4,7 +4,7 @@ import * as ModalFooterStories from './ModalFooter.stories';
 
 # ModalFooter
 
-`ModalFooter` is the action area at the bottom of a modal. Use it for up to three actions — secondary, primary, and an optional tertiary action such as "Not now" — plus an optional slot above the buttons for inline form controls. Use a vertical layout so the tertiary button sits under the others.
+`ModalFooter` is the action area at the bottom of a modal. Use it for up to three actions — secondary, primary, and an optional tertiary action such as "Not now" — plus an optional slot above the buttons for inline form controls. Use a vertical layout so the tertiary button sits under the others. Do not use all three buttons with a horizontal layout.
 
 Pass each label and click handler through its button props. The footer sets the variant for you. Use `Button` directly when an action needs a different variant, when you need more than three actions, or when the actions are not part of a modal footer.
 
@@ -79,7 +79,7 @@ Props for the secondary action button. Renders with `ButtonVariant.Secondary` au
 
 ### `tertiaryButtonProps`
 
-Optional props for the tertiary action button. Renders with `ButtonVariant.Tertiary`. Appears last. Use a vertical layout to place it under the other buttons.
+Optional props for the tertiary action button. Renders with `ButtonVariant.Tertiary`. Appears last. Use a vertical layout to place it under the other buttons. Do not use all three buttons with a horizontal layout.
 
 <table>
   <thead>
@@ -110,8 +110,8 @@ Optional props for the tertiary action button. Renders with `ButtonVariant.Terti
 
 Layout direction for the action button row.
 
-- `ButtonsAlignment.Horizontal` (default) — buttons are laid out side by side.
-- `ButtonsAlignment.Vertical` — buttons are stacked. A tertiary button is last, under the others.
+- `ButtonsAlignment.Horizontal` (default) — buttons are laid out side by side. Do not use this alignment with all three buttons.
+- `ButtonsAlignment.Vertical` — buttons are stacked. A tertiary button is last, under the others. Use this alignment when a tertiary button is set.
 
 <table>
   <thead>
