@@ -9,12 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.48.0]
 
-### Uncategorized
+### Added
 
-- fix(security): upgrade tsx so esbuild leaves 0.27.7 ([#1608](https://github.com/MetaMask/metamask-design-system/pull/1608))
-- DS-new-icons ([#1612](https://github.com/MetaMask/metamask-design-system/pull/1612))
-- fix: use white backgrounds for avatar images ([#1594](https://github.com/MetaMask/metamask-design-system/pull/1594))
-- fix(storybook): apply controls across Text stories ([#1591](https://github.com/MetaMask/metamask-design-system/pull/1591))
+- Added `Pause` and `Play` icons, available as `IconName.Pause` and `IconName.Play` ([#1612](https://github.com/MetaMask/metamask-design-system/pull/1612))
+
+### Fixed
+
+- Fixed `AvatarToken` and `AvatarNetwork` so an image source renders on a white background ([#1594](https://github.com/MetaMask/metamask-design-system/pull/1594))
+  - Transparent logo pixels stay visible in dark mode
+  - Fallback initials keep the themed background
+  - A `className` passed by the consumer still overrides the white background
 
 ## [0.47.0]
 
