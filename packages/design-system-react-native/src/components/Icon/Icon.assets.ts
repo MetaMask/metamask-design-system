@@ -123,10 +123,12 @@ import MusdFilledSVG from './assets/musd-filled.svg';
 import MusdSVG from './assets/musd.svg';
 import NoPhotographySVG from './assets/no-photography.svg';
 import NotificationSVG from './assets/notification.svg';
+import PauseSVG from './assets/pause.svg';
 import PeopleFilledSVG from './assets/people-filled.svg';
 import PeopleSVG from './assets/people.svg';
 import PinSVG from './assets/pin.svg';
 import PlantSVG from './assets/plant.svg';
+import PlaySVG from './assets/play.svg';
 import PlugSVG from './assets/plug.svg';
 import PopUpSVG from './assets/pop-up.svg';
 import PredictionsSVG from './assets/predictions.svg';
@@ -317,10 +319,12 @@ export const assetByIconName: AssetByIconName = {
   Musd: MusdSVG,
   NoPhotography: NoPhotographySVG,
   Notification: NotificationSVG,
+  Pause: PauseSVG,
   PeopleFilled: PeopleFilledSVG,
   People: PeopleSVG,
   Pin: PinSVG,
   Plant: PlantSVG,
+  Play: PlaySVG,
   Plug: PlugSVG,
   PopUp: PopUpSVG,
   Predictions: PredictionsSVG,
