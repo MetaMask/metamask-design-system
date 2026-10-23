@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.48.0]
+
 ### Uncategorized
 
 - fix(security): upgrade tsx so esbuild leaves 0.27.7 ([#1608](https://github.com/MetaMask/metamask-design-system/pull/1608))
@@ -658,7 +660,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.47.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.48.0...HEAD
+[0.48.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.47.0...@metamask/design-system-react@0.48.0
 [0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.46.0...@metamask/design-system-react@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.3...@metamask/design-system-react@0.46.0
 [0.45.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.2...@metamask/design-system-react@0.45.3
