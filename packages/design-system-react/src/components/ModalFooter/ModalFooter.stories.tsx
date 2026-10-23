@@ -51,9 +51,9 @@ const meta: Meta<ModalFooterProps> = {
     buttonsAlignment: {
       control: 'radio',
       options: Object.values(ButtonsAlignment),
+      description:
+        'Horizontal lays the buttons in a row. Vertical stacks them. A tertiary button is last, so use Vertical to place it at the bottom.',
     },
-    primaryButtonProps: { control: 'object' },
-    secondaryButtonProps: { control: 'object' },
   },
 };
 
@@ -87,6 +87,33 @@ export const SecondaryOnly: Story = {
   args: {
     secondaryButtonProps: {
       children: 'Cancel',
+      onClick: () => undefined,
+    },
+  },
+};
+
+export const TertiaryOnly: Story = {
+  args: {
+    tertiaryButtonProps: {
+      children: 'Not now',
+      onClick: () => undefined,
+    },
+  },
+};
+
+export const TertiaryButtonProps: Story = {
+  args: {
+    buttonsAlignment: ButtonsAlignment.Vertical,
+    primaryButtonProps: {
+      children: 'Confirm',
+      onClick: () => undefined,
+    },
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onClick: () => undefined,
+    },
+    tertiaryButtonProps: {
+      children: 'Not now',
       onClick: () => undefined,
     },
   },

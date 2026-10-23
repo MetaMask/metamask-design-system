@@ -2573,14 +2573,14 @@ The DS `BottomSheetHeader` supports the same back/close convenience props as mob
 
 ### BottomSheetFooter Component
 
-The `BottomSheetFooter` component has significant breaking changes. The old mobile version accepted a generic `buttonPropsArray` (an array of full `ButtonProps` objects including `variant`). The DS version uses a structured `primaryButtonProps` / `secondaryButtonProps` API instead, where `variant` is set automatically.
+The `BottomSheetFooter` component has significant breaking changes. The old mobile version accepted a generic `buttonPropsArray` (an array of full `ButtonProps` objects including `variant`). The DS version uses a structured `primaryButtonProps` / `secondaryButtonProps` / `tertiaryButtonProps` API instead, where `variant` is set automatically.
 
 Source references (for API diffing):
 
 - Legacy: [`app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.tsx`](https://github.com/MetaMask/metamask-mobile/blob/main/app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.tsx) and [`BottomSheetFooter.types.ts`](https://github.com/MetaMask/metamask-mobile/blob/main/app/component-library/components/BottomSheets/BottomSheetFooter/BottomSheetFooter.types.ts)
 - MMDS: [`packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.tsx`](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.tsx) and [`BottomSheetFooter.types.ts`](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-system-react-native/src/components/BottomSheetFooter/BottomSheetFooter.types.ts)
 
-On web, the extension modal footer migration lives under [ModalFooter Component](../design-system-react/MIGRATION.md#modalfooter-component); that API was converged onto the same primary/secondary slot shape as this footer.
+On web, the extension modal footer migration lives under [ModalFooter Component](../design-system-react/MIGRATION.md#modalfooter-component). Web `ModalFooter` shares the same primary, secondary, and tertiary slots.
 
 #### Breaking Changes
 
@@ -2593,28 +2593,29 @@ On web, the extension modal footer migration lives under [ModalFooter Component]
 
 ##### `buttonPropsArray` → `primaryButtonProps` / `secondaryButtonProps`
 
-The old `buttonPropsArray: ButtonProps[]` is replaced by two named props. The `variant` field is no longer accepted — the DS footer always renders the primary button as `ButtonVariant.Primary` and the secondary button as `ButtonVariant.Secondary`.
+The old `buttonPropsArray: ButtonProps[]` is replaced by named props. The `variant` field is no longer accepted — the DS footer always renders the primary button as `ButtonVariant.Primary`, the secondary button as `ButtonVariant.Secondary`, and the tertiary button as `ButtonVariant.Tertiary`.
 
-| Legacy mobile API                               | MMDS API                                                 | Change type | Notes                                                                                                                                                                        |
-| ----------------------------------------------- | -------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `buttonPropsArray` (required)                   | `primaryButtonProps` / `secondaryButtonProps` (optional) | reshaped    | At least one slot should be provided when you need actions; see empty footer behavior below.                                                                                 |
-| Index `0` in the array                          | `secondaryButtonProps`                                   | renamed     | Cancel / secondary action — rendered first (left / top).                                                                                                                     |
-| Index `1` (when two buttons)                    | `primaryButtonProps`                                     | renamed     | Confirm / primary action — rendered second (right / bottom).                                                                                                                 |
-| Single-element array                            | Typically `primaryButtonProps` only                      | convention  | If the legacy array had one button, map it to the slot that matches its `variant` (`Primary` → `primaryButtonProps`, `Secondary` → `secondaryButtonProps`).                  |
-| `variant` on each entry                         | removed                                                  | removed     | Always `Primary` / `Secondary` per slot; types use `Omit<ButtonProps, 'variant'>`.                                                                                           |
-| `label`                                         | `children`                                               | renamed     | DS `Button` uses `children` for the visible label.                                                                                                                           |
-| `onPress`                                       | `onPress`                                                | unchanged   | Still the native press handler on each button bag.                                                                                                                           |
-| `style` on footer                               | `style`, `twClassName`                                   | extended    | `twClassName` is new for Tailwind utility overrides on the footer container.                                                                                                 |
-| Renders `View` when `buttonPropsArray` is empty | `null` when both slots omitted                           | behavior    | Legacy still mounted an empty footer `View` (with default `testID`). MMDS returns `null` — wrap with your own `View` if you need a stable layout or test id with no buttons. |
+| Legacy mobile API                               | MMDS API                                                                         | Change type | Notes                                                                                                                                                                                             |
+| ----------------------------------------------- | -------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `buttonPropsArray` (required)                   | `primaryButtonProps` / `secondaryButtonProps` / `tertiaryButtonProps` (optional) | reshaped    | At least one slot should be provided when you need actions; see empty footer behavior below.                                                                                                      |
+| Index `0` in the array                          | `secondaryButtonProps`                                                           | renamed     | Cancel / secondary action — rendered first (left / top).                                                                                                                                          |
+| Index `1` (when two buttons)                    | `primaryButtonProps`                                                             | renamed     | Confirm / primary action — rendered second (right in a horizontal row, below secondary in a vertical list).                                                                                       |
+| Single-element array                            | Typically `primaryButtonProps` only                                              | convention  | If the legacy array had one button, map it to the slot that matches its `variant` (`Primary` → `primaryButtonProps`, `Secondary` → `secondaryButtonProps`, low-emphasis → `tertiaryButtonProps`). |
+| `variant` on each entry                         | removed                                                                          | removed     | Always `Primary` / `Secondary` / `Tertiary` per slot; types use `Omit<ButtonProps, 'variant'>`.                                                                                                   |
+| Third low-emphasis action (for example Link)    | `tertiaryButtonProps`                                                            | added       | Renders `ButtonVariant.Tertiary` and appears last. Use `ButtonsAlignment.Vertical` to place it under the other buttons.                                                                           |
+| `label`                                         | `children`                                                                       | renamed     | DS `Button` uses `children` for the visible label.                                                                                                                                                |
+| `onPress`                                       | `onPress`                                                                        | unchanged   | Still the native press handler on each button bag.                                                                                                                                                |
+| `style` on footer                               | `style`, `twClassName`                                                           | extended    | `twClassName` is new for Tailwind utility overrides on the footer container.                                                                                                                      |
+| Renders `View` when `buttonPropsArray` is empty | `null` when every slot is omitted                                                | behavior    | Legacy still mounted an empty footer `View` (with default `testID`). MMDS returns `null` — wrap with your own `View` if you need a stable layout or test id with no buttons.                      |
 
-| Old `buttonPropsArray` field                | New prop location                                       |
-| ------------------------------------------- | ------------------------------------------------------- |
-| First element (secondary action)            | `secondaryButtonProps`                                  |
-| Last/only element (primary action)          | `primaryButtonProps`                                    |
-| `label: string`                             | `children: React.ReactNode`                             |
-| `variant: ButtonVariants.Primary/Secondary` | Removed — set automatically                             |
-| `size: ButtonSize.Lg`                       | `size: ButtonSize.Lg` (keep, explicit size recommended) |
-| `onPress`                                   | `onPress`                                               |
+| Old `buttonPropsArray` field                     | New prop location                                           |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| First element (secondary action)                 | `secondaryButtonProps`                                      |
+| Last/only element (primary action)               | `primaryButtonProps`                                        |
+| `label: string`                                  | `children: React.ReactNode`                                 |
+| `variant: ButtonVariants.Primary/Secondary/Link` | Removed — set automatically (`Tertiary` for the third slot) |
+| `size: ButtonSize.Lg`                            | `size: ButtonSize.Lg` (keep, explicit size recommended)     |
+| `onPress`                                        | `onPress`                                                   |
 
 ##### `label` → `children`
 
@@ -2710,6 +2711,31 @@ After (Design System):
 />
 ```
 
+##### Tertiary action at the bottom
+
+A third, low-emphasis action such as "Not now" maps to `tertiaryButtonProps`. The footer renders it with `ButtonVariant.Tertiary` and places it last. Use `ButtonsAlignment.Vertical` so it sits under the other buttons.
+
+```tsx
+<BottomSheetFooter
+  buttonsAlignment={ButtonsAlignment.Vertical}
+  secondaryButtonProps={{
+    children: strings('common.cancel'),
+    onPress: handleCancel,
+    size: ButtonSize.Lg,
+  }}
+  primaryButtonProps={{
+    children: strings('common.confirm'),
+    onPress: handleConfirm,
+    size: ButtonSize.Lg,
+  }}
+  tertiaryButtonProps={{
+    children: strings('common.not_now'),
+    onPress: handleDismiss,
+    size: ButtonSize.Lg,
+  }}
+/>
+```
+
 ##### `ButtonsAlignment` — Same enum within React Native
 
 Between legacy mobile and `@metamask/design-system-react-native`, `ButtonsAlignment.Horizontal` / `ButtonsAlignment.Vertical` keep the same enum values (`'Horizontal'` | `'Vertical'`). Only the import path changes:
@@ -2731,7 +2757,7 @@ On web, `@metamask/design-system-react` **`ModalFooter`** uses lowercase alignme
 
 #### Blocked Patterns
 
-If the `buttonPropsArray` contains **more than two** button entries, or if buttons need variants other than Primary/Secondary (e.g. `ButtonVariants.Link`), the DS `BottomSheetFooter` cannot be used as a drop-in replacement. Keep the old CL import for those files until the DS component adds broader support.
+If the `buttonPropsArray` contains **more than three** button entries, or if a button needs a variant other than Primary, Secondary, or Tertiary, the DS `BottomSheetFooter` cannot be used as a drop-in replacement. A third low-emphasis action maps to `tertiaryButtonProps`. Keep the old CL import for anything beyond that.
 
 #### API Differences
 
@@ -2739,7 +2765,7 @@ The DS `BottomSheetFooter` adds `twClassName` for Tailwind utility class overrid
 
 ##### Button prop renames inside each slot
 
-Mobile legacy `Button` and MMDS `Button` already share names like `isDanger` on primary/secondary variants. When migrating footers, apply the same [Button Component](#button-component) renames (`isDisabled`, `isLoading`, etc.) inside `primaryButtonProps` / `secondaryButtonProps` if your old `buttonPropsArray` entries used older prop names.
+Mobile legacy `Button` and MMDS `Button` already share names like `isDanger` on primary/secondary variants. When migrating footers, apply the same [Button Component](#button-component) renames (`isDisabled`, `isLoading`, etc.) inside `primaryButtonProps` / `secondaryButtonProps` / `tertiaryButtonProps` if your old `buttonPropsArray` entries used older prop names.
 
 ##### Extension / web modal footer (`ModalFooter`)
 
