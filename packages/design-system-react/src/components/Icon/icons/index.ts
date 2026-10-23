@@ -123,10 +123,12 @@ import MusdFilled from './MusdFilled';
 import Musd from './Musd';
 import NoPhotography from './NoPhotography';
 import Notification from './Notification';
+import Pause from './Pause';
 import PeopleFilled from './PeopleFilled';
 import People from './People';
 import Pin from './Pin';
 import Plant from './Plant';
+import Play from './Play';
 import Plug from './Plug';
 import PopUp from './PopUp';
 import Predictions from './Predictions';
@@ -313,10 +315,12 @@ export const Icons = {
   Musd,
   NoPhotography,
   Notification,
+  Pause,
   PeopleFilled,
   People,
   Pin,
   Plant,
+  Play,
   Plug,
   PopUp,
   Predictions,
