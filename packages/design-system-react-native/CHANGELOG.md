@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.53.0]
+
+### Added
+
+- Added `Pause` and `Play` icons, available as `IconName.Pause` and `IconName.Play` ([#1612](https://github.com/MetaMask/metamask-design-system/pull/1612))
+
+### Fixed
+
+- Fixed `AvatarToken` and `AvatarNetwork` so an image source renders on a white background ([#1594](https://github.com/MetaMask/metamask-design-system/pull/1594))
+  - Transparent logo pixels stay visible in dark mode
+  - Fallback initials keep the themed background
+  - A `twClassName` passed by the consumer still overrides the white background
+
 ## [0.52.0]
 
 ### Added
@@ -866,7 +879,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.52.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.53.0...HEAD
+[0.53.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.52.0...@metamask/design-system-react-native@0.53.0
 [0.52.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.51.0...@metamask/design-system-react-native@0.52.0
 [0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.50.0...@metamask/design-system-react-native@0.51.0
 [0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.2...@metamask/design-system-react-native@0.50.0
