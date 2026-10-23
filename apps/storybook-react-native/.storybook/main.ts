@@ -18,6 +18,9 @@ function getAbsolutePath(value: string): string {
 }
 
 const config: StorybookConfig = {
+  features: {
+    componentsManifest: true,
+  },
   stories: [
     '../stories/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/design-system-react-native/src/**/*.stories.@(js|jsx|ts|tsx)',
@@ -27,6 +30,7 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-docs'),
     getAbsolutePath('@storybook/addon-vitest'),
+    getAbsolutePath('@storybook/addon-mcp'),
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-native-web-vite'),

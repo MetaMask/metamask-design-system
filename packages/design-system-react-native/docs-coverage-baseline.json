@@ -1,0 +1,14 @@
+{
+  "AvatarGroup": ["props"],
+  "BannerAlert": ["props"],
+  "BannerBase": ["props"],
+  "ButtonAnimated": ["props"],
+  "Card": ["props"],
+  "FilterButton": ["props"],
+  "HeaderSearch": ["props"],
+  "HeaderStandardAnimated": ["story"],
+  "HeaderStandardCenterColumn": ["props"],
+  "SectionHeader": ["props"],
+  "Toast": ["props"],
+  "Toaster": ["story"]
+}

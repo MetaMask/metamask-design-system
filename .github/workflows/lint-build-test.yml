@@ -73,6 +73,8 @@ jobs:
         with:
           is-high-risk-environment: false
       - run: yarn build
+      - name: Check React Native docs coverage
+        run: yarn workspace @metamask/design-system-react-native docs:coverage --manifest dist/docs-manifest.json
       - name: Require clean working directory
         shell: bash
         run: |
