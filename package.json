@@ -114,7 +114,7 @@
     "rimraf": "^5.0.5",
     "semver": "^7.7.1",
     "simple-git-hooks": "^2.8.0",
-    "tsx": "^4.20.6",
+    "tsx": "^4.23.15",
     "typescript": "~5.2.2",
     "typescript-eslint": "^8.39.0",
     "yargs": "^17.7.2"

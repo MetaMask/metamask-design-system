@@ -87,7 +87,7 @@
     "react-test-renderer": "19.2.3",
     "storybook": "10.6.2",
     "ts-jest": "^29.2.5",
-    "tsx": "^4.20.6",
+    "tsx": "^4.23.15",
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
