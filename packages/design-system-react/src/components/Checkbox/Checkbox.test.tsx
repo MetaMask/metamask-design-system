@@ -290,6 +290,7 @@ describe('Checkbox', () => {
 
     expect(screen.getByTestId('chk-input')).toHaveClass(
       'bg-transparent',
+      'border-muted',
       'enabled:hover:bg-hover',
       'enabled:active:bg-pressed',
     );
