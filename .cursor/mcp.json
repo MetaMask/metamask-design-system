@@ -2,6 +2,9 @@
   "mcpServers": {
     "storybook-mcp": {
       "url": "http://localhost:6006/mcp"
+    },
+    "storybook-react-native-mcp": {
+      "url": "http://localhost:7007/mcp"
     }
   }
 }
