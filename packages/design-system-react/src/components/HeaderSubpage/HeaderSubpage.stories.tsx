@@ -1,14 +1,18 @@
 import {
   AvatarTokenSize,
+  ButtonIconSize,
   FontWeight,
   IconName,
-  TextColor,
+  IconColor,
   TextVariant,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 import { AvatarToken } from '../AvatarToken';
+import { Box } from '../Box';
+import { ButtonIcon } from '../ButtonIcon';
+import { Icon } from '../Icon';
 import { Text } from '../Text';
 
 import { HeaderSubpage } from './HeaderSubpage';
@@ -54,6 +58,10 @@ const meta: Meta<HeaderSubpageProps> = {
   args: {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
+    description: ETH_DESCRIPTION,
+    titleEndAccessory: (
+      <Icon name={IconName.VerifiedFilled} color={IconColor.PrimaryDefault} />
+    ),
   },
 };
 
@@ -61,13 +69,37 @@ export default meta;
 
 type Story = StoryObj<HeaderSubpageProps>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    onBack: () => console.log('Back pressed'),
+  },
+};
+
+export const Title: Story = {
+  args: {
+    avatar: undefined,
+    title: 'Settings',
+  },
+};
 
 export const Description: Story = {
   args: {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
-    description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
+    description: (
+      <Box className="flex flex-row items-center gap-1">
+        <Text variant={TextVariant.BodySm} fontWeight={FontWeight.Medium}>
+          0x1234...5678
+        </Text>
+        <ButtonIcon
+          iconName={IconName.Copy}
+          size={ButtonIconSize.Xs}
+          ariaLabel="Copy address"
+          onClick={() => console.log('Copy address pressed')}
+        />
+      </Box>
+    ),
   },
 };
 
@@ -76,6 +108,7 @@ export const OnBack: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
     onBack: () => console.log('Back pressed'),
   },
 };
@@ -85,16 +118,7 @@ export const OnClose: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
-    onClose: () => console.log('Close pressed'),
-  },
-};
-
-export const BackAndClose: Story = {
-  args: {
-    avatar: ETH_AVATAR,
-    title: ETH_TITLE,
-    description: ETH_DESCRIPTION,
-    onBack: () => console.log('Back pressed'),
+    titleEndAccessory: undefined,
     onClose: () => console.log('Close pressed'),
   },
 };
@@ -104,6 +128,7 @@ export const EndButtonIconProps: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
     onBack: () => console.log('Back pressed'),
     onClose: () => console.log('Close pressed'),
     endButtonIconProps: [
@@ -121,12 +146,14 @@ export const StartAccessory: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
     startAccessory: (
-      <Text variant={TextVariant.BodyMd} fontWeight={FontWeight.Medium}>
-        Edit
-      </Text>
+      <ButtonIcon
+        iconName={IconName.ArrowLeft}
+        ariaLabel="Go back"
+        onClick={() => console.log('Back pressed')}
+      />
     ),
-    onClose: () => console.log('Close pressed'),
   },
 };
 
@@ -135,47 +162,21 @@ export const EndAccessory: Story = {
     avatar: ETH_AVATAR,
     title: ETH_TITLE,
     description: ETH_DESCRIPTION,
+    titleEndAccessory: undefined,
     onBack: () => console.log('Back pressed'),
     endAccessory: (
-      <Text variant={TextVariant.BodyMd} fontWeight={FontWeight.Medium}>
-        Save
-      </Text>
+      <Box className="flex flex-row gap-2">
+        <ButtonIcon
+          iconName={IconName.Notification}
+          ariaLabel="Create price alert"
+          onClick={() => console.log('Price alert pressed')}
+        />
+        <ButtonIcon
+          iconName={IconName.Share}
+          ariaLabel="Share token"
+          onClick={() => console.log('Share pressed')}
+        />
+      </Box>
     ),
-  },
-};
-
-export const TitleOnly: Story = {
-  args: {
-    avatar: undefined,
-    title: 'Settings',
-    onBack: () => console.log('Back pressed'),
-  },
-};
-
-export const TitleEndAccessory: Story = {
-  args: {
-    avatar: ETH_AVATAR,
-    title: ETH_TITLE,
-    description: ETH_DESCRIPTION,
-    titleEndAccessory: (
-      <Text
-        variant={TextVariant.BodySm}
-        fontWeight={FontWeight.Medium}
-        color={TextColor.TextAlternative}
-      >
-        Badge
-      </Text>
-    ),
-    onBack: () => console.log('Back pressed'),
-    onClose: () => console.log('Close pressed'),
-  },
-};
-
-export const NoContent: Story = {
-  args: {
-    avatar: undefined,
-    title: undefined,
-    onBack: () => console.log('Back pressed'),
-    onClose: () => console.log('Close pressed'),
   },
 };

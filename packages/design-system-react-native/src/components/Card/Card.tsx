@@ -1,40 +1,63 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Pressable, View } from 'react-native';
+import type {
+  PressableProps,
+  PressableStateCallbackType,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 import type { CardProps } from './Card.types';
 
-export const Card = ({
+export const Card: React.FC<CardProps> = ({
   children,
-  onPress,
+  isInteractive = false,
   twClassName,
-  touchableOpacityProps,
   style,
+  accessibilityRole,
   ...props
-}: CardProps) => {
+}) => {
   const tw = useTailwind();
+  const baseClassName = 'p-4 rounded-2xl bg-section';
 
-  const cardStyle = [
-    tw.style('p-4 rounded border border-default bg-default', twClassName),
-    style,
-  ];
+  if (isInteractive) {
+    const getPressableStyle = ({
+      pressed,
+    }: PressableStateCallbackType): StyleProp<ViewStyle> => {
+      const baseStyle = tw.style(
+        baseClassName,
+        twClassName,
+        pressed && 'bg-pressed',
+      );
+      const userStyle =
+        typeof style === 'function' ? style({ pressed }) : style;
 
-  if (onPress) {
+      return userStyle ? [baseStyle, userStyle] : baseStyle;
+    };
+
     return (
-      <TouchableOpacity
-        {...props}
-        onPress={onPress}
-        style={cardStyle}
-        {...touchableOpacityProps}
+      <Pressable
+        accessibilityRole={accessibilityRole ?? 'button'}
+        style={getPressableStyle}
+        {...(props as Omit<PressableProps, 'children' | 'style'>)}
       >
         {children}
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 
   return (
-    <View style={cardStyle} {...props}>
+    <View
+      style={[
+        tw.style(baseClassName, twClassName),
+        style as StyleProp<ViewStyle>,
+      ]}
+      {...props}
+    >
       {children}
     </View>
   );
 };
+
+Card.displayName = 'Card';

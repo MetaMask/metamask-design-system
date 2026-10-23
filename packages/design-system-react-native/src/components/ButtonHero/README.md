@@ -1,5 +1,13 @@
 # ButtonHero
 
+`ButtonHero` is deprecated. Use `Button` with `variant={ButtonVariant.Primary}` instead. This component will be removed in a future major version of the design system.
+
+```tsx
+import { Button, ButtonVariant } from '@metamask/design-system-react-native';
+
+<Button variant={ButtonVariant.Primary}>Primary action</Button>;
+```
+
 A branded, high-impact button reserved for the most important actions in Trade. Use sparingly for key user actions that require emphasis and visual prominence.
 
 Use for:
@@ -191,7 +199,7 @@ This ensures consistent branding for high-impact actions across different theme 
 
 ## Migration from MetaMask Mobile Component Library
 
-Migrating from the legacy `ButtonHero` in `app/component-library/components-temp/Buttons/ButtonHero`? See the [ButtonHero migration guide](../../../MIGRATION.md#buttonhero-component) for import changes and `twClassName` behavior differences.
+`ButtonHero` is deprecated. Migrate the legacy `ButtonHero` in `app/component-library/components-temp/Buttons/ButtonHero` to `Button`. Primary is the default variant, so omit `variant` or pass `variant={ButtonVariant.Primary}`. See the [ButtonHero migration guide](../../../MIGRATION.md#buttonhero-component).
 
 ## References
 

@@ -4,6 +4,13 @@ import type { TypographyTailwindConfigProps } from './typography.types';
 
 export const typographyTailwindConfig: TypographyTailwindConfigProps = {
   fontSize: {
+    'display-xl': [
+      typography.sDisplayXL.fontSize.toString(),
+      {
+        lineHeight: `${typography.sDisplayXL.lineHeight as number}px`,
+        letterSpacing: `${typography.sDisplayXL.letterSpacing as number}`,
+      },
+    ],
     'display-lg': [
       typography.sDisplayLG.fontSize.toString(),
       {
@@ -113,9 +120,10 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
     'accent-regular': 'MMSans-Regular',
     'accent-medium': 'MMSans-Medium',
     'accent-bold': 'MMSans-Bold',
-    'hero-regular': 'MMPoly-Regular',
+    'hero-bold': 'GrotzecCond-Bold',
   },
   letterSpacing: {
+    'display-xl': `${typography.sDisplayXL.letterSpacing as number}`,
     'display-lg': `${typography.sDisplayLG.letterSpacing as number}`,
     'display-md': `${typography.sDisplayMD.letterSpacing as number}`,
     'heading-lg': `${typography.sHeadingLG.letterSpacing as number}`,
@@ -132,6 +140,7 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
     'amount-display-lg': `${typography.sAmountDisplayLg.letterSpacing as number}`,
   },
   lineHeight: {
+    'display-xl': `${typography.sDisplayXL.lineHeight as number}px`,
     'display-lg': `${typography.sDisplayLG.lineHeight as number}px`,
     'display-md': `${typography.sDisplayMD.lineHeight as number}px`,
     'heading-lg': `${typography.sHeadingLG.lineHeight as number}px`,

@@ -1,5 +1,26 @@
+// Reanimated 4.5+ ships ESM-only entrypoints; mock before any component import.
+// Upstream mock.ts allocates a new `{ value: init }` on every call, so rerenders
+// reset SharedValues to the latest prop. Production only uses `init` on mount.
+jest.mock('react-native-reanimated', () => {
+  const React = require('react');
+  const Reanimated = jest.requireActual('react-native-reanimated/mock');
+
+  const useSharedValue = (init) => {
+    const ref = React.useRef(null);
+    if (ref.current === null) {
+      ref.current = Reanimated.useSharedValue(init);
+    }
+    return ref.current;
+  };
+
+  return {
+    ...Reanimated,
+    useSharedValue,
+  };
+});
+
 jest.mock('react-native-worklets', () => {
-  const Worklets = require('react-native-worklets/lib/module/mock');
+  const Worklets = jest.requireActual('react-native-worklets/src/mock');
 
   return {
     ...Worklets,
@@ -7,7 +28,7 @@ jest.mock('react-native-worklets', () => {
   };
 });
 
-require('react-native-reanimated').setUpTests();
+require('react-native-reanimated/mock').setUpTests();
 
 jest.mock('expo-image', () => {
   const { Image } = require('react-native');

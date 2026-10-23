@@ -5,6 +5,10 @@ import { ButtonBase } from '../ButtonBase';
 
 import type { ButtonHeroProps } from './ButtonHero.types';
 
+/**
+ * @deprecated Use `Button` with `variant={ButtonVariant.Primary}` instead.
+ * This component will be removed in a future major version of the design system.
+ */
 export const ButtonHero = forwardRef<HTMLButtonElement, ButtonHeroProps>(
   ({ className, isDisabled, isLoading, ...props }, ref) => {
     const isInteractive = !(isDisabled || isLoading);

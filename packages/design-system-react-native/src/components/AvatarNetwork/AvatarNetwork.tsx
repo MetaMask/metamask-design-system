@@ -1,6 +1,7 @@
 import {
   AvatarBaseShape,
   AvatarNetworkSize,
+  mergeTwClassName,
 } from '@metamask/design-system-shared';
 import type { ImageErrorEventData } from 'expo-image';
 import React, { useState } from 'react';
@@ -17,6 +18,7 @@ export const AvatarNetwork = ({
   fallbackText,
   fallbackTextProps,
   imageOrSvgProps,
+  twClassName,
   ...props
 }: AvatarNetworkProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
@@ -38,6 +40,11 @@ export const AvatarNetwork = ({
       shape={AvatarBaseShape.Square}
       fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
+      twClassName={
+        src && !finalFallbackText
+          ? mergeTwClassName('bg-white', twClassName)
+          : twClassName
+      }
       {...props}
     >
       {src && (

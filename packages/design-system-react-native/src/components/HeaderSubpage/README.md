@@ -7,14 +7,19 @@ import {
   AvatarToken,
   AvatarTokenSize,
   HeaderSubpage,
+  Icon,
+  IconColor,
+  IconName,
 } from '@metamask/design-system-react-native';
 
 <HeaderSubpage
   avatar={<AvatarToken name="Ethereum" size={AvatarTokenSize.Lg} />}
   title="Ethereum"
   description="ETH"
+  titleEndAccessory={
+    <Icon name={IconName.VerifiedFilled} color={IconColor.PrimaryDefault} />
+  }
   onBack={() => navigation.goBack()}
-  onClose={() => navigation.pop()}
 />;
 ```
 
@@ -24,11 +29,13 @@ Inherits [ListItem](../ListItem/README.md) / [Content](../Content/README.md) pro
 
 ### `title`
 
-Primary identity label in the header row. Pass a string for default [Content](../Content/README.md) body styling, or a node for custom content.
+Primary identity label in the header row. Pass a string for default [Content](../Content/README.md) body styling, or a node for custom content. Use `titleProps` to pass props to the `Text` component when `title` is a string. Use `titleEndAccessory` to render a badge or other accessory beside the title.
 
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
+| PROP                | TYPE                 | REQUIRED | DEFAULT     |
+| ------------------- | -------------------- | -------- | ----------- |
+| `title`             | `ReactNode`          | No       | `undefined` |
+| `titleProps`        | `Partial<TextProps>` | No       | `undefined` |
+| `titleEndAccessory` | `ReactNode`          | No       | `undefined` |
 
 ```tsx
 <HeaderSubpage title="Ethereum" onBack={goBack} />
@@ -39,49 +46,17 @@ Primary identity label in the header row. Pass a string for default [Content](..
 />
 ```
 
-### `titleProps`
-
-Props forwarded to the design-system `Text` component when `title` is a string.
-
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<TextProps>` | No       | `undefined` |
-
-```tsx
-<HeaderSubpage
-  title="Ethereum"
-  titleProps={{ testID: 'header-subpage-title' }}
-  onBack={goBack}
-/>
-```
-
 ### `description`
 
-Secondary line below the title. Pass a string for default [Content](../Content/README.md) body styling, or a node for custom content.
+Secondary line below the title. Pass a string for default [Content](../Content/README.md) body styling, or a node for custom content. Use `descriptionProps` to pass props to the `Text` component when `description` is a string.
 
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
+| PROP               | TYPE                 | REQUIRED | DEFAULT     |
+| ------------------ | -------------------- | -------- | ----------- |
+| `description`      | `ReactNode`          | No       | `undefined` |
+| `descriptionProps` | `Partial<TextProps>` | No       | `undefined` |
 
 ```tsx
 <HeaderSubpage title="Ethereum" description="ETH" onBack={goBack} />
-```
-
-### `descriptionProps`
-
-Props forwarded to `Text` when `description` is a string.
-
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<TextProps>` | No       | `undefined` |
-
-```tsx
-<HeaderSubpage
-  title="Ethereum"
-  description="ETH"
-  descriptionProps={{ testID: 'header-subpage-description' }}
-  onBack={goBack}
-/>
 ```
 
 ### `avatar`
@@ -103,25 +78,16 @@ Leading visual in the identity row (for example a token avatar). Use `AvatarToke
 
 ### `onBack`
 
-If set, renders a start [ButtonIcon](../ButtonIcon/README.md) with a back arrow. The press handler is `backButtonProps.onPress` when both are provided.
+If set, renders a start [ButtonIcon](../ButtonIcon/README.md) with a back arrow. Use `backButtonProps` for the back `ButtonIcon` (excluding `iconName`, which is fixed). Supplying `backButtonProps` also shows the back button; `backButtonProps.onPress` takes precedence over `onBack` when both are provided.
 
-| TYPE         | REQUIRED | DEFAULT     |
-| ------------ | -------- | ----------- |
-| `() => void` | No       | `undefined` |
+| PROP              | TYPE                                | REQUIRED | DEFAULT     |
+| ----------------- | ----------------------------------- | -------- | ----------- |
+| `onBack`          | `() => void`                        | No       | `undefined` |
+| `backButtonProps` | `Omit<ButtonIconProps, 'iconName'>` | No       | `undefined` |
 
 ```tsx
 <HeaderSubpage title="Ethereum" onBack={() => navigation.goBack()} />
-```
 
-### `backButtonProps`
-
-Props for the back `ButtonIcon` (excluding `iconName`, which is fixed). Supplying this object also shows the back button; use `onPress` for the handler if `onBack` is not used.
-
-| TYPE                                | REQUIRED | DEFAULT     |
-| ----------------------------------- | -------- | ----------- |
-| `Omit<ButtonIconProps, 'iconName'>` | No       | `undefined` |
-
-```tsx
 <HeaderSubpage
   title="Ethereum"
   backButtonProps={{
@@ -134,40 +100,37 @@ Props for the back `ButtonIcon` (excluding `iconName`, which is fixed). Supplyin
 
 ### `onClose`
 
-If set, appends a close `ButtonIcon` to the end actions.
+If set, appends a close `ButtonIcon` to the end actions. Use `closeButtonProps` for the close `ButtonIcon` (excluding `iconName`). `closeButtonProps.onPress` takes precedence over `onClose` when both are set.
 
-| TYPE         | REQUIRED | DEFAULT     |
-| ------------ | -------- | ----------- |
-| `() => void` | No       | `undefined` |
+| PROP               | TYPE                                | REQUIRED | DEFAULT     |
+| ------------------ | ----------------------------------- | -------- | ----------- |
+| `onClose`          | `() => void`                        | No       | `undefined` |
+| `closeButtonProps` | `Omit<ButtonIconProps, 'iconName'>` | No       | `undefined` |
 
 ```tsx
 <HeaderSubpage title="Ethereum" onClose={() => navigation.pop()} />
-```
 
-### `closeButtonProps`
-
-Props for the close `ButtonIcon` (excluding `iconName`). `onPress` takes precedence over `onClose` when both are set.
-
-| TYPE                                | REQUIRED | DEFAULT     |
-| ----------------------------------- | -------- | ----------- |
-| `Omit<ButtonIconProps, 'iconName'>` | No       | `undefined` |
-
-```tsx
 <HeaderSubpage
   title="Ethereum"
   closeButtonProps={{ onPress: close, testID: 'header-subpage-close' }}
 />
 ```
 
-### `startButtonIconProps`
+### `startAccessory`
 
-Optional [ButtonIcon](../ButtonIcon/README.md) props for the start accessory. Used only when `startAccessory` is not provided. Takes priority over `onBack` / `backButtonProps`.
+Custom start content. Use `startButtonIconProps` to render a start [ButtonIcon](../ButtonIcon/README.md) when `startAccessory` is not provided. `startAccessory` takes priority over `startButtonIconProps` and back shortcuts; `startButtonIconProps` takes priority over `onBack` / `backButtonProps`.
 
-| TYPE              | REQUIRED | DEFAULT     |
-| ----------------- | -------- | ----------- |
-| `ButtonIconProps` | No       | `undefined` |
+| PROP                   | TYPE              | REQUIRED | DEFAULT     |
+| ---------------------- | ----------------- | -------- | ----------- |
+| `startAccessory`       | `ReactNode`       | No       | `undefined` |
+| `startButtonIconProps` | `ButtonIconProps` | No       | `undefined` |
 
 ```tsx
+<HeaderSubpage
+  title="Ethereum"
+  startAccessory={<CustomBackControl onPress={goBack} />}
+/>
+
 <HeaderSubpage
   title="Ethereum"
   startButtonIconProps={{
@@ -178,50 +141,26 @@ Optional [ButtonIcon](../ButtonIcon/README.md) props for the start accessory. Us
 />
 ```
 
-### `endButtonIconProps`
-
-Optional array of [ButtonIcon](../ButtonIcon/README.md) props appended after the close shortcut. Rendered in reverse order (first item appears rightmost). Used only when `endAccessory` is not provided.
-
-| TYPE                | REQUIRED | DEFAULT     |
-| ------------------- | -------- | ----------- |
-| `ButtonIconProps[]` | No       | `undefined` |
-
-```tsx
-<HeaderSubpage
-  title="Ethereum"
-  onBack={goBack}
-  onClose={close}
-  endButtonIconProps={[{ iconName: IconName.Search, onPress: openSearch }]}
-/>
-```
-
-### `startAccessory`
-
-Custom start content. Takes priority over `startButtonIconProps` and back shortcuts.
-
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
-
-```tsx
-<HeaderSubpage
-  title="Ethereum"
-  startAccessory={<CustomBackControl onPress={goBack} />}
-/>
-```
-
 ### `endAccessory`
 
-Custom end content. Takes priority over `endButtonIconProps` and close shortcuts.
+Custom end content. Use `endButtonIconProps` to append additional [ButtonIcon](../ButtonIcon/README.md)s after the close shortcut when `endAccessory` is not provided. Items are rendered in reverse order (first item appears rightmost). `endAccessory` takes priority over `endButtonIconProps` and close shortcuts.
 
-| TYPE        | REQUIRED | DEFAULT     |
-| ----------- | -------- | ----------- |
-| `ReactNode` | No       | `undefined` |
+| PROP                 | TYPE                | REQUIRED | DEFAULT     |
+| -------------------- | ------------------- | -------- | ----------- |
+| `endAccessory`       | `ReactNode`         | No       | `undefined` |
+| `endButtonIconProps` | `ButtonIconProps[]` | No       | `undefined` |
 
 ```tsx
 <HeaderSubpage
   title="Ethereum"
   endAccessory={<CustomCloseControl onPress={close} />}
+/>
+
+<HeaderSubpage
+  title="Ethereum"
+  onBack={goBack}
+  onClose={close}
+  endButtonIconProps={[{ iconName: IconName.Search, onPress: openSearch }]}
 />
 ```
 

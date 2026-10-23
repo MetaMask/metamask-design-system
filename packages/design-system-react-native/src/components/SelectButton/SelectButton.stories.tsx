@@ -80,6 +80,86 @@ export const Default: Story = {
   ),
 };
 
+export const Variant: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      <SelectButton
+        onPress={noopPress}
+        variant={SelectButtonVariant.Primary}
+        endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="Primary (ButtonSecondary look)"
+      />
+      <SelectButton
+        onPress={noopPress}
+        variant={SelectButtonVariant.Secondary}
+        endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="Secondary (ButtonTertiary look)"
+      />
+      <SelectButton
+        onPress={noopPress}
+        variant={SelectButtonVariant.Tertiary}
+        endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="Tertiary (alternative text)"
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const Size: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      {(
+        Object.entries(SelectButtonSize) as [
+          keyof typeof SelectButtonSize,
+          (typeof SelectButtonSize)[keyof typeof SelectButtonSize],
+        ][]
+      ).map(([key, value]) => (
+        <SelectButton
+          key={key}
+          size={value}
+          onPress={noopPress}
+          placeholder={`Size: ${key}`}
+        />
+      ))}
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const IsFullWidth: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      {Object.values(SelectButtonVariant).map((variant) => (
+        <SelectButton
+          key={variant}
+          onPress={noopPress}
+          isFullWidth
+          variant={variant}
+          startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
+          placeholder={`${variant} full width`}
+        />
+      ))}
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const IsDisabled: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      <SelectButton
+        onPress={noopPress}
+        endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="Enabled"
+      />
+      <SelectButton
+        onPress={noopPress}
+        endArrowDirection={SelectButtonEndArrow.Down}
+        placeholder="Disabled"
+        isDisabled
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
 export const StartAccessory: Story = {
   render: () => (
     <SelectButtonStoryWrapper gap={4}>
@@ -88,6 +168,18 @@ export const StartAccessory: Story = {
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="With start accessory"
         startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const EndAccessory: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      <SelectButton
+        onPress={noopPress}
+        placeholder="Custom trailing content"
+        endAccessory={<Icon name={IconName.Close} size={IconSize.Sm} />}
       />
     </SelectButtonStoryWrapper>
   ),
@@ -145,81 +237,6 @@ export const EndArrowDirectionIconProps: Story = {
         placeholder="Large arrow"
         endArrowDirectionIconProps={{ size: IconSize.Lg }}
       />
-    </SelectButtonStoryWrapper>
-  ),
-};
-
-export const IsDisabled: Story = {
-  render: () => (
-    <SelectButtonStoryWrapper gap={4}>
-      <SelectButton
-        onPress={noopPress}
-        endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Enabled"
-      />
-      <SelectButton
-        onPress={noopPress}
-        endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Disabled"
-        isDisabled
-      />
-    </SelectButtonStoryWrapper>
-  ),
-};
-
-export const EndAccessory: Story = {
-  render: () => (
-    <SelectButtonStoryWrapper gap={4}>
-      <SelectButton
-        onPress={noopPress}
-        placeholder="Custom trailing content"
-        endAccessory={<Icon name={IconName.Close} size={IconSize.Sm} />}
-      />
-    </SelectButtonStoryWrapper>
-  ),
-};
-
-export const Variant: Story = {
-  render: () => (
-    <SelectButtonStoryWrapper gap={4}>
-      <SelectButton
-        onPress={noopPress}
-        variant={SelectButtonVariant.Primary}
-        endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Primary (ButtonSecondary look)"
-      />
-      <SelectButton
-        onPress={noopPress}
-        variant={SelectButtonVariant.Secondary}
-        endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Secondary (ButtonTertiary look)"
-      />
-      <SelectButton
-        onPress={noopPress}
-        variant={SelectButtonVariant.Tertiary}
-        endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Tertiary (alternative text)"
-      />
-    </SelectButtonStoryWrapper>
-  ),
-};
-
-export const Size: Story = {
-  render: () => (
-    <SelectButtonStoryWrapper gap={4}>
-      {(
-        Object.entries(SelectButtonSize) as [
-          keyof typeof SelectButtonSize,
-          (typeof SelectButtonSize)[keyof typeof SelectButtonSize],
-        ][]
-      ).map(([key, value]) => (
-        <SelectButton
-          key={key}
-          size={value}
-          onPress={noopPress}
-          placeholder={`Size: ${key}`}
-        />
-      ))}
     </SelectButtonStoryWrapper>
   ),
 };

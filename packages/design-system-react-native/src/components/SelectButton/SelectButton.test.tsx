@@ -299,6 +299,20 @@ describe('SelectButton', () => {
   });
 
   describe('when rendering root pressable styles', () => {
+    it('supports a full-width button with left-aligned content', () => {
+      const { getByTestId, getByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          isFullWidth
+          placeholder="Label"
+        />,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`w-full`);
+      expect(getByText('Label')).toHaveStyle(tw.style('text-left flex-1'));
+    });
+
     it('uses default primary container background', () => {
       const { getByTestId } = render(
         <SelectButton

@@ -4,6 +4,8 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
+- [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
 - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
 - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
@@ -52,6 +54,8 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
+  - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
   - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
   - [From version 0.41.0 to 0.42.0](#from-version-0410-to-0420)
@@ -75,6 +79,85 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.51.0 to 0.52.0
+
+<a id="from-version-0510-to-0520"></a>
+
+#### Hero typeface: MM Poly to Grotzec Cond
+
+`FontFamily.Hero` now renders Grotzec Cond Bold. `FontFamily.Accent` and MM Sans are unchanged and will be removed in a later release.
+
+**What changed:**
+
+- The twrnc family class `font-hero-regular` is removed. Use `font-hero-bold`, which resolves to the PostScript name `GrotzecCond-Bold`
+- `Text` always applies `font-hero-bold` for `FontFamily.Hero`, including when `fontWeight` is regular or medium
+- `FontFamily.Hero` still has the value `'hero'`
+
+**Migration:**
+
+Stop registering `MMPoly-Regular`. Copy `GrotzecCond-Bold.otf` from [`apps/storybook-react-native/fonts/GrotzecCond`](../../apps/storybook-react-native/fonts/GrotzecCond), retain the adjacent `LICENSE`, and register it under its PostScript name:
+
+```tsx
+import { useFonts } from 'expo-font';
+import { FontFamily, Text } from '@metamask/design-system-react-native';
+
+useFonts({
+  'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+});
+
+<Text fontFamily={FontFamily.Hero}>Rewards</Text>;
+```
+
+Replace any direct `font-hero-regular` class with `font-hero-bold`.
+
+**Impact:**
+
+`font-hero-regular` no longer resolves. Hero text stays on `FontFamily.Hero`, and every weight uses the Bold cut. Peer dependencies now require `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-twrnc-preset@^0.13.0`.
+
+### From version 0.49.2 to 0.50.0
+
+<a id="from-version-0492-to-0500"></a>
+
+#### `Card`: interactive API and root element
+
+**What changed:**
+
+- `Card` now renders a `Pressable` only when `isInteractive` is `true`. Previously, providing `onPress` rendered a `TouchableOpacity`.
+- The `touchableOpacityProps` prop was removed. Interactive cards accept standard `PressableProps` directly.
+- Default styles changed from `bg-default rounded border border-default` to `bg-section rounded-2xl` with no border.
+- Interactive cards use `bg-pressed` while pressed.
+
+**Migration:**
+
+```tsx
+// Before (0.49.2)
+import { Card, Text } from '@metamask/design-system-react-native';
+
+<Card
+  onPress={handleViewRewards}
+  touchableOpacityProps={{ activeOpacity: 0.7 }}
+>
+  <Text>Card content</Text>
+</Card>;
+```
+
+```tsx
+// After (0.50.0)
+import { Card, Text } from '@metamask/design-system-react-native';
+
+<Card isInteractive onPress={handleViewRewards}>
+  <Text>Card content</Text>
+</Card>;
+```
+
+Set `isInteractive` whenever the card should respond to press interactions. Replace any other `touchableOpacityProps` values with their `PressableProps` equivalents where available. If the card must retain the previous appearance, add `twClassName="bg-default rounded border border-default"`.
+
+**Impact:**
+
+- Cards with `onPress` must add `isInteractive` or they will render as non-interactive `View` elements.
+- Code using `touchableOpacityProps` will fail TypeScript checks and must move supported properties onto `Card`.
+- All cards that rely on default styles will adopt the new background, radius, and border treatment.
 
 ### From version 0.44.0 to 0.45.0
 
@@ -455,10 +538,12 @@ Upgrade Reanimated and Worklets together in your app before bumping the design s
 | 55       | 4.2.1                     | 0.7.4                   |
 | 56       | 4.3.1                     | 0.8.3                   |
 
+For the RN 0.85 pre-upgrade animation stack on MetaMask Mobile main, use `react-native-reanimated` 4.5.3, `react-native-worklets` 0.10.4, and `react-native-gesture-handler` ~2.32.0 ([metamask-mobile#35615](https://github.com/MetaMask/metamask-mobile/pull/35615)). 4.5.3 includes the settled-animation props-registry fix (SWM #9987) that caused off-screen BottomSheets on 4.5.1.
+
 1. Install compatible versions (example for Expo SDK 55 / MetaMask Mobile platform upgrade):
 
    ```bash
-   npx expo install react-native-reanimated@~4.2.1 react-native-worklets@0.7.4
+   npx expo install react-native-reanimated@4.5.3 react-native-worklets@0.10.4 react-native-gesture-handler@~2.32.0
    ```
 
 2. Update Babel to use the Worklets plugin (replace the Reanimated 3 plugin if present):
@@ -1870,39 +1955,38 @@ Note: `ButtonFilter` inherits its size prop from `ButtonBaseProps`. Use `ButtonB
 
 ### ButtonHero Component
 
-The `ButtonHero` component is a branded, light-theme-locked button for high-impact actions (swaps, claims, rewards). The legacy version in `components-temp` already wraps `ButtonBase` from `@metamask/design-system-react-native`, so the migration is primarily an import change with a few behavioral differences.
+`ButtonHero` is deprecated. Migrate the legacy Mobile `ButtonHero` (`app/component-library/components-temp/Buttons/ButtonHero`) to `Button`. Primary is the default variant, so omit `variant` or pass `variant={ButtonVariant.Primary}`.
 
 #### Breaking Changes
 
 ##### Import Path
 
-| Mobile Pattern                                                                      | Design System Migration                                             |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `import ButtonHero from '.../component-library/components-temp/Buttons/ButtonHero'` | `import { ButtonHero } from '@metamask/design-system-react-native'` |
+| Mobile Pattern                                                                      | Design System Migration                                         |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `import ButtonHero from '.../component-library/components-temp/Buttons/ButtonHero'` | `import { Button } from '@metamask/design-system-react-native'` |
 
-Note: The legacy component uses a **default export**; the design system uses a **named export**.
+Note: The legacy component uses a **default export**; `Button` is a **named export**.
 
-##### `twClassName`, `textClassName`, `iconClassName` Are Ignored
+##### Variant
 
-The design system `ButtonHero` intentionally strips `twClassName`, `textClassName`, and `iconClassName` to prevent overriding the hero-specific light-theme styling. If you relied on these props:
+`Button` renders the primary variant when `variant` is omitted. Pass `variant={ButtonVariant.Primary}` when you want the variant explicit.
 
-| Mobile Pattern                     | Design System Migration                                      |
-| ---------------------------------- | ------------------------------------------------------------ |
-| `twClassName="w-full"`             | `isFullWidth`                                                |
-| `twClassName="bg-primary-default"` | Remove — already the hero default                            |
-| `style={tw.style('w-full')}`       | `isFullWidth` (or keep `style` — it is still passed through) |
+##### Size
 
-##### Props (Unchanged)
+Use `ButtonSize` from `@metamask/design-system-react-native`. Its values (`'sm'`, `'md'`, `'lg'`) match the sizes previously used with `ButtonHero`.
 
-The `ButtonHero` accepts the same `ButtonBaseProps` as the legacy version. These props work identically:
+##### Width
 
-- `children`, `size`, `isFullWidth`, `isDisabled`, `isLoading`, `loadingText`
-- `startIconName`, `endIconName`, `onPress`, `style`, `testID`
-- `accessibilityLabel`, `accessibilityHint`
+| Mobile Pattern               | Design System Migration |
+| ---------------------------- | ----------------------- |
+| `twClassName="w-full"`       | `isFullWidth`           |
+| `style={tw.style('w-full')}` | `isFullWidth`           |
 
-##### Size Enum
+`Button` still accepts `twClassName`, `textClassName`, and `style`.
 
-Use `ButtonHeroSize` from `@metamask/design-system-react-native`. Its values (`'sm'`, `'md'`, `'lg'`) are identical to `ButtonSize` and `ButtonBaseSize`.
+##### Theme
+
+Legacy `ButtonHero` locked colors to the light theme. `Button` follows the active theme.
 
 #### Migration Examples
 
@@ -1928,23 +2012,41 @@ import { ButtonSize } from '@metamask/design-system-react-native';
 After (Design System):
 
 ```tsx
-import {
-  ButtonHero,
-  ButtonHeroSize,
-} from '@metamask/design-system-react-native';
+import { Button, ButtonSize } from '@metamask/design-system-react-native';
 
-<ButtonHero
-  size={ButtonHeroSize.Lg}
+<Button
+  size={ButtonSize.Lg}
   onPress={handleClaim}
   isDisabled={isLoading}
   isFullWidth
   testID="claim-button"
 >
   Claim Winnings
-</ButtonHero>;
+</Button>;
 ```
 
-##### Hero button with twClassName (stripped)
+The same button with an explicit primary variant:
+
+```tsx
+import {
+  Button,
+  ButtonSize,
+  ButtonVariant,
+} from '@metamask/design-system-react-native';
+
+<Button
+  variant={ButtonVariant.Primary}
+  size={ButtonSize.Lg}
+  onPress={handleClaim}
+  isDisabled={isLoading}
+  isFullWidth
+  testID="claim-button"
+>
+  Claim Winnings
+</Button>;
+```
+
+##### Hero button with twClassName
 
 Before (Mobile):
 
@@ -1963,17 +2065,14 @@ import ButtonHero from '../../../component-library/components-temp/Buttons/Butto
 After (Design System):
 
 ```tsx
-import {
-  ButtonHero,
-  ButtonHeroSize,
-} from '@metamask/design-system-react-native';
+import { Button, ButtonSize } from '@metamask/design-system-react-native';
 
-<ButtonHero size={ButtonHeroSize.Lg} onPress={handleNext} isFullWidth>
+<Button size={ButtonSize.Lg} onPress={handleNext} isFullWidth>
   Continue
-</ButtonHero>;
+</Button>;
 ```
 
-`bg-primary-default` is the hero default and `w-full` maps to `isFullWidth`. Both `twClassName` overrides are no longer needed.
+Primary styling is the `Button` default, and `w-full` maps to `isFullWidth`.
 
 ### ButtonIcon Component
 
@@ -4123,14 +4222,14 @@ The design system TextField uses TWRNC (Tailwind React Native CSS) instead of th
 | Concern            | Mobile                                 | Design System                  |
 | ------------------ | -------------------------------------- | ------------------------------ |
 | Styling system     | `useStyles` hook + `StyleSheet.create` | `useTailwind()` + `tw.style()` |
-| Border radius      | `12px`                                 | `8px` (`rounded-lg`)           |
+| Border radius      | `12px`                                 | `12px` (`rounded-xl`)          |
 | Background         | `theme.colors.background.muted`        | `bg-muted` (equivalent token)  |
 | Disabled opacity   | `0.5`                                  | `0.5` (identical)              |
 | Height             | `48px`                                 | `48px` (identical)             |
 | Horizontal padding | `16px`                                 | `16px` (`px-4`, identical)     |
 | Accessory gap      | `marginRight/Left: 12`                 | `gap-3` (12px, identical)      |
 
-The `border-radius` change from `12px` to `8px` is the most visible visual difference.
+The `border-radius` matches the mobile version at `12px`.
 
 #### Migration Examples
 
@@ -4230,7 +4329,7 @@ const MyInput: React.FC<TextFieldProps> = (props) => (
 - Mobile legacy `TextField` wrapped accessories in `<View>` elements with hardcoded `testID`s; MMDS renders accessories directly.
 - The `testID` prop targets the root `Pressable` in MMDS vs. the inner `TextInput` in the mobile version.
 - MMDS sets `accessible={false}` on the root `Pressable`; the mobile version does not.
-- Border radius is `8px` in MMDS vs. `12px` in the mobile version.
+- Border radius is `12px` in both MMDS and the mobile version.
 
 ### KeyValueRow Component
 

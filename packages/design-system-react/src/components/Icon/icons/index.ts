@@ -20,6 +20,7 @@ import ArrowDoubleRight from './ArrowDoubleRight';
 import ArrowDown from './ArrowDown';
 import ArrowLeft from './ArrowLeft';
 import ArrowRight from './ArrowRight';
+import ArrowSquareOut from './ArrowSquareOut';
 import ArrowUp from './ArrowUp';
 import AttachMoney from './AttachMoney';
 import Backspace from './Backspace';
@@ -43,6 +44,7 @@ import Chart from './Chart';
 import CheckBold from './CheckBold';
 import Check from './Check';
 import CircleX from './CircleX';
+import Clipboard from './Clipboard';
 import ClockFilled from './ClockFilled';
 import Clock from './Clock';
 import Close from './Close';
@@ -121,9 +123,12 @@ import MusdFilled from './MusdFilled';
 import Musd from './Musd';
 import NoPhotography from './NoPhotography';
 import Notification from './Notification';
+import Pause from './Pause';
+import PeopleFilled from './PeopleFilled';
 import People from './People';
 import Pin from './Pin';
 import Plant from './Plant';
+import Play from './Play';
 import Plug from './Plug';
 import PopUp from './PopUp';
 import Predictions from './Predictions';
@@ -207,6 +212,7 @@ export const Icons = {
   ArrowDown,
   ArrowLeft,
   ArrowRight,
+  ArrowSquareOut,
   ArrowUp,
   AttachMoney,
   Backspace,
@@ -230,6 +236,7 @@ export const Icons = {
   CheckBold,
   Check,
   CircleX,
+  Clipboard,
   ClockFilled,
   Clock,
   Close,
@@ -308,9 +315,12 @@ export const Icons = {
   Musd,
   NoPhotography,
   Notification,
+  Pause,
+  PeopleFilled,
   People,
   Pin,
   Plant,
+  Play,
   Plug,
   PopUp,
   Predictions,

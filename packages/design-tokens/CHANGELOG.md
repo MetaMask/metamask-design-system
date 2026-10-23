@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.0.0]
+
+### Added
+
+- Added the display XL typography style for small and large screens ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - JS: `typography.sDisplayXL` and `typography.lDisplayXL`
+  - CSS: `--typography-s-display-xl-*` and `--typography-l-display-xl-*`
+  - Tailwind v4: `text-s-display-xl`, `text-l-display-xl`, and the matching `leading-*` and `tracking-*` utilities
+  - Small screens use 60px / 75px at weight bold; large screens use 60px / 75px at weight medium (16px root)
+
+### Changed
+
+- **BREAKING:** Replaced MM Poly with Grotzec Cond Bold as the hero typeface ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - `--font-family-hero` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif`
+  - `fontFamilies.hero` and the Figma token `global.fontFamilies.hero` are now `Grotzec Cond`
+  - Only the Bold cut is licensed; register it at weight 600
+  - `fontFamilies.accent` and `--font-family-accent` are unchanged
+  - See [Migration Guide](./MIGRATION.md#from-version-1110-to-1200)
+- Updated the small-screen amount display large style from 40px / 50px to 48px / 56px ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - `typography.sAmountDisplayLg` and `--typography-s-amount-display-lg-*` now use `fontSize9` (48px) and `lineHeight8` (56px)
+  - The large-screen amount display large style stays 60px / 75px
+
+## [11.1.0]
+
+### Changed
+
+- Updated brand accent and selected neutral token values to the 2026 rebrand palette ([#1496](https://github.com/MetaMask/metamask-design-system/pull/1496))
+  - Token names and APIs are unchanged; CSS, JS, Figma, and Tailwind outputs emit new hex values
+  - Orange, purple, lime, and indigo brand steps change (for example `orange400` `#ff5c16` → `#fa4b00`, `lime100` `#baf24a` → `#b9f302`)
+  - Neutral `white010` changes from `#fcfcfc` to `#f5f5f5`
+  - Light and dark semantic tokens that reference those brand colors (including accent and dark success) pick up the new values
+
 ## [11.0.0]
 
 ### Changed
@@ -490,7 +522,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@11.0.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@12.0.0...HEAD
+[12.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@11.1.0...@metamask/design-tokens@12.0.0
+[11.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@11.0.0...@metamask/design-tokens@11.1.0
 [11.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@10.0.0...@metamask/design-tokens@11.0.0
 [10.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@9.0.0...@metamask/design-tokens@10.0.0
 [9.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-tokens@8.7.0...@metamask/design-tokens@9.0.0

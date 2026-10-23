@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import type { BoxSpacing } from '../Box';
+
 /**
  * HeaderSubpage shared props (ADR-0004).
  * Platform-independent properties shared across React and React Native.
@@ -43,4 +45,10 @@ export type HeaderSubpagePropsShared = {
    * Takes priority over `endButtonIconProps` and close shortcuts.
    */
   endAccessory?: ReactNode;
+  /**
+   * Gap between start/end accessories and the identity content.
+   *
+   * @default 2
+   */
+  accessoryGap?: BoxSpacing;
 };

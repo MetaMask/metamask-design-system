@@ -35,7 +35,7 @@ export const FontFamily = {
   Default: 'default',
   /** Accent: MM Sans */
   Accent: 'accent',
-  /** Hero: MM Poly */
+  /** Hero: Grotzec Cond Bold */
   Hero: 'hero',
 } as const;
 
@@ -47,6 +47,7 @@ export type FontFamily = (typeof FontFamily)[keyof typeof FontFamily];
  */
 export const TextVariant = {
   // Display Sizes
+  DisplayXl: 'display-xl',
   DisplayLg: 'display-lg',
   DisplayMd: 'display-md',
 

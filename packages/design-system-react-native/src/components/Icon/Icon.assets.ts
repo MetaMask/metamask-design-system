@@ -20,6 +20,7 @@ import ArrowDoubleRightSVG from './assets/arrow-double-right.svg';
 import ArrowDownSVG from './assets/arrow-down.svg';
 import ArrowLeftSVG from './assets/arrow-left.svg';
 import ArrowRightSVG from './assets/arrow-right.svg';
+import ArrowSquareOutSVG from './assets/arrow-square-out.svg';
 import ArrowUpSVG from './assets/arrow-up.svg';
 import AttachMoneySVG from './assets/attach-money.svg';
 import BackspaceSVG from './assets/backspace.svg';
@@ -43,6 +44,7 @@ import ChartSVG from './assets/chart.svg';
 import CheckBoldSVG from './assets/check-bold.svg';
 import CheckSVG from './assets/check.svg';
 import CircleXSVG from './assets/circle-x.svg';
+import ClipboardSVG from './assets/clipboard.svg';
 import ClockFilledSVG from './assets/clock-filled.svg';
 import ClockSVG from './assets/clock.svg';
 import CloseSVG from './assets/close.svg';
@@ -121,9 +123,12 @@ import MusdFilledSVG from './assets/musd-filled.svg';
 import MusdSVG from './assets/musd.svg';
 import NoPhotographySVG from './assets/no-photography.svg';
 import NotificationSVG from './assets/notification.svg';
+import PauseSVG from './assets/pause.svg';
+import PeopleFilledSVG from './assets/people-filled.svg';
 import PeopleSVG from './assets/people.svg';
 import PinSVG from './assets/pin.svg';
 import PlantSVG from './assets/plant.svg';
+import PlaySVG from './assets/play.svg';
 import PlugSVG from './assets/plug.svg';
 import PopUpSVG from './assets/pop-up.svg';
 import PredictionsSVG from './assets/predictions.svg';
@@ -211,6 +216,7 @@ export const assetByIconName: AssetByIconName = {
   ArrowDown: ArrowDownSVG,
   ArrowLeft: ArrowLeftSVG,
   ArrowRight: ArrowRightSVG,
+  ArrowSquareOut: ArrowSquareOutSVG,
   ArrowUp: ArrowUpSVG,
   AttachMoney: AttachMoneySVG,
   Backspace: BackspaceSVG,
@@ -234,6 +240,7 @@ export const assetByIconName: AssetByIconName = {
   CheckBold: CheckBoldSVG,
   Check: CheckSVG,
   CircleX: CircleXSVG,
+  Clipboard: ClipboardSVG,
   ClockFilled: ClockFilledSVG,
   Clock: ClockSVG,
   Close: CloseSVG,
@@ -312,9 +319,12 @@ export const assetByIconName: AssetByIconName = {
   Musd: MusdSVG,
   NoPhotography: NoPhotographySVG,
   Notification: NotificationSVG,
+  Pause: PauseSVG,
+  PeopleFilled: PeopleFilledSVG,
   People: PeopleSVG,
   Pin: PinSVG,
   Plant: PlantSVG,
+  Play: PlaySVG,
   Plug: PlugSVG,
   PopUp: PopUpSVG,
   Predictions: PredictionsSVG,

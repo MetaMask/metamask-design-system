@@ -12,36 +12,35 @@ on:
 jobs:
   run-security-scan:
     name: Run security scan
-    runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: read
       security-events: write
-    steps:
-      - name: Analyse code
-        uses: MetaMask/action-security-code-scanner@v1
-        with:
-          repo: ${{ github.repository }}
-          paths_ignored: |
-            .storybook/
-            '**/__snapshots__/'
-            '**/*.snap'
-            '**/*.stories.js'
-            '**/*.stories.tsx'
-            '**/*.test.browser.ts*'
-            '**/*.test.js*'
-            '**/*.test.ts*'
-            '**/fixtures/'
-            '**/jest.config.js'
-            '**/jest.environment.js'
-            '**/mocks/'
-            '**/test*/'
-            docs/
-            e2e/
-            merged-packages/
-            node_modules
-            storybook/
-            test*/
-          rules_excluded: example
-          project_metrics_token: ${{ secrets.SECURITY_SCAN_METRICS_TOKEN }}
-          slack_webhook: ${{ secrets.APPSEC_BOT_SLACK_WEBHOOK }}
+    uses: MetaMask/action-security-code-scanner/.github/workflows/security-scan.yml@becb242930b3cc271c26da0280050db9c157e291 # v2.1.1
+    with:
+      repo: ${{ github.repository }}
+      scanner-ref: 'v2'
+      paths-ignored: |
+        .storybook/
+        '**/__snapshots__/'
+        '**/*.snap'
+        '**/*.stories.js'
+        '**/*.stories.tsx'
+        '**/*.test.browser.ts*'
+        '**/*.test.js*'
+        '**/*.test.ts*'
+        '**/fixtures/'
+        '**/jest.config.js'
+        '**/jest.environment.js'
+        '**/mocks/'
+        '**/test*/'
+        docs/
+        e2e/
+        merged-packages/
+        node_modules
+        storybook/
+        test*/
+      rules-excluded: example
+    secrets:
+      project-metrics-token: ${{ secrets.SECURITY_SCAN_METRICS_TOKEN }}
+      slack-webhook: ${{ secrets.APPSEC_BOT_SLACK_WEBHOOK }}

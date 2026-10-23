@@ -2,39 +2,12 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
 
 import { Card } from './Card';
 
-/**
- * Flattens a given style prop into a plain array of ViewStyle objects.
- *
- * @param styleProp - The style prop to flatten.
- * @returns An array of flattened ViewStyle objects.
- */
-function flattenStyles(
-  styleProp: StyleProp<ViewStyle> | undefined,
-): ViewStyle[] {
-  if (styleProp === null) {
-    return [];
-  }
-  if (Array.isArray(styleProp)) {
-    return styleProp.flatMap((item) =>
-      flattenStyles(item as StyleProp<ViewStyle>),
-    );
-  }
-  if (typeof styleProp === 'object') {
-    return [styleProp as ViewStyle];
-  }
-  return [];
-}
-
 describe('Card', () => {
-  let tw: ReturnType<typeof useTailwind>;
-
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
-  });
+  const { result } = renderHook(() => useTailwind());
+  const tw = result.current;
 
   it('renders children', () => {
     const { getByText } = render(
@@ -45,31 +18,38 @@ describe('Card', () => {
     expect(getByText('Card content')).toBeDefined();
   });
 
-  it('renders as a View when onPress is not provided', () => {
+  it('renders as a View when isInteractive is false', () => {
     const { getByTestId } = render(
       <Card testID="card">
         <Text>Content</Text>
       </Card>,
     );
-    const card = getByTestId('card');
-    expect(card.type).toBe('View');
+    expect(getByTestId('card').type).toBe('View');
   });
 
-  it('renders as accessible when onPress is provided', () => {
+  it('renders as a Pressable when isInteractive is true', () => {
     const { getByTestId } = render(
-      <Card testID="card" onPress={jest.fn()}>
+      <Card testID="card" isInteractive>
         <Text>Content</Text>
       </Card>,
     );
-    const card = getByTestId('card');
-    // TouchableOpacity sets accessible=true on its host View
-    expect(card.props.accessible).toBe(true);
+    expect(getByTestId('card').props.accessible).toBe(true);
   });
 
-  it('fires onPress when pressed', () => {
+  it('uses a button accessibility role for interactive cards', () => {
+    const { getByTestId } = render(
+      <Card testID="card" isInteractive>
+        <Text>Content</Text>
+      </Card>,
+    );
+
+    expect(getByTestId('card').props.accessibilityRole).toBe('button');
+  });
+
+  it('fires onPress when isInteractive card is pressed', () => {
     const onPressMock = jest.fn();
     const { getByTestId } = render(
-      <Card testID="card" onPress={onPressMock}>
+      <Card testID="card" isInteractive onPress={onPressMock}>
         <Text>Content</Text>
       </Card>,
     );
@@ -77,50 +57,101 @@ describe('Card', () => {
     expect(onPressMock).toHaveBeenCalledTimes(1);
   });
 
-  it('applies default card styles', () => {
+  it('applies default card styles on static card', () => {
     const { getByTestId } = render(
       <Card testID="card">
         <Text>Content</Text>
       </Card>,
     );
-    const card = getByTestId('card');
-    const styles = flattenStyles(card.props.style);
-    expect(styles[0]).toStrictEqual(
-      tw.style('p-4 rounded border border-default bg-default'),
+    expect(getByTestId('card')).toHaveStyle(
+      tw.style('p-4 rounded-2xl bg-section'),
     );
   });
 
-  it('applies twClassName', () => {
+  it('applies default card styles on interactive card', () => {
+    const { getByTestId } = render(
+      <Card testID="card" isInteractive>
+        <Text>Content</Text>
+      </Card>,
+    );
+    expect(getByTestId('card')).toHaveStyle(
+      tw.style('p-4 rounded-2xl bg-section'),
+    );
+  });
+
+  it('applies pressed styles on interactive card', () => {
+    const { getByTestId } = render(
+      <Card testID="card" isInteractive testOnly_pressed>
+        <Text>Content</Text>
+      </Card>,
+    );
+
+    expect(getByTestId('card')).toHaveStyle(
+      tw.style('p-4 rounded-2xl bg-section', 'bg-pressed'),
+    );
+  });
+
+  it('applies twClassName on static card', () => {
     const { getByTestId } = render(
       <Card testID="card" twClassName="p-8 rounded-lg">
         <Text>Content</Text>
       </Card>,
     );
-    const card = getByTestId('card');
-    const styles = flattenStyles(card.props.style);
-    expect(styles[0]).toStrictEqual(
-      tw.style(
-        'p-4 rounded border border-default bg-default',
-        'p-8 rounded-lg',
-      ),
+    expect(getByTestId('card')).toHaveStyle(
+      tw.style('p-4 rounded-2xl bg-section', 'p-8 rounded-lg'),
     );
   });
 
-  it('merges custom style prop', () => {
+  it('applies twClassName on interactive card', () => {
+    const { getByTestId } = render(
+      <Card testID="card" isInteractive twClassName="p-8">
+        <Text>Content</Text>
+      </Card>,
+    );
+    expect(getByTestId('card')).toHaveStyle(
+      tw.style('p-4 rounded-2xl bg-section', 'p-8'),
+    );
+  });
+
+  it('merges custom style prop on static card', () => {
     const { getByTestId } = render(
       <Card testID="card" style={{ margin: 8 }}>
         <Text>Content</Text>
       </Card>,
     );
-    const card = getByTestId('card');
-    const styles = flattenStyles(card.props.style);
-    expect(styles[0]).toStrictEqual(
-      tw.style('p-4 rounded border border-default bg-default'),
-    );
-    expect(styles[1]).toStrictEqual({ margin: 8 });
+    expect(getByTestId('card')).toHaveStyle([
+      tw.style('p-4 rounded-2xl bg-section'),
+      { margin: 8 },
+    ]);
   });
 
-  it('passes testID to root element via ViewProps', () => {
+  it('merges custom style prop on interactive card', () => {
+    const { getByTestId } = render(
+      <Card testID="card" isInteractive style={{ margin: 8 }}>
+        <Text>Content</Text>
+      </Card>,
+    );
+    expect(getByTestId('card')).toHaveStyle([
+      tw.style('p-4 rounded-2xl bg-section'),
+      { margin: 8 },
+    ]);
+  });
+
+  it('applies function style prop on interactive card', () => {
+    const { getByTestId } = render(
+      <Card
+        testID="card"
+        isInteractive
+        style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+      >
+        <Text>Content</Text>
+      </Card>,
+    );
+
+    expect(getByTestId('card')).toHaveStyle({ opacity: 1 });
+  });
+
+  it('passes testID to root element', () => {
     const { getByTestId } = render(
       <Card testID="my-card">
         <Text>Content</Text>
@@ -129,28 +160,12 @@ describe('Card', () => {
     expect(getByTestId('my-card')).toBeDefined();
   });
 
-  it('passes accessibilityLabel via ViewProps', () => {
+  it('passes accessibilityLabel via props', () => {
     const { getByTestId } = render(
       <Card testID="card" accessibilityLabel="My card">
         <Text>Content</Text>
       </Card>,
     );
-    const card = getByTestId('card');
-    expect(card.props.accessibilityLabel).toBe('My card');
-  });
-
-  it('accepts touchableOpacityProps without breaking onPress', () => {
-    const onPressMock = jest.fn();
-    const { getByTestId } = render(
-      <Card
-        testID="card"
-        onPress={onPressMock}
-        touchableOpacityProps={{ activeOpacity: 0.5 }}
-      >
-        <Text>Content</Text>
-      </Card>,
-    );
-    fireEvent.press(getByTestId('card'));
-    expect(onPressMock).toHaveBeenCalledTimes(1);
+    expect(getByTestId('card').props.accessibilityLabel).toBe('My card');
   });
 });

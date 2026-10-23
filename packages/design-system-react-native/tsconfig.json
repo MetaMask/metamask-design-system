@@ -2,10 +2,12 @@
   "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "ES2020",
     "jsx": "react-native",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node16"
+    "moduleResolution": "bundler",
+    "customConditions": ["react-native"]
   },
   "references": [
     {

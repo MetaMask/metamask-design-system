@@ -4,7 +4,7 @@ import React from 'react';
 import EthSVG from '../../assets/token-icons/eth.svg';
 import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
 import { Box } from '../Box';
-import { IconName } from '../Icon';
+import { Icon, IconColor, IconName } from '../Icon';
 
 import { HeaderSubpage } from './HeaderSubpage';
 import type { HeaderSubpageProps } from './HeaderSubpage.types';
@@ -47,7 +47,15 @@ export default meta;
 
 type Story = StoryObj<HeaderSubpageProps>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    description: ETH_DESCRIPTION,
+    titleEndAccessory: (
+      <Icon name={IconName.VerifiedFilled} color={IconColor.PrimaryDefault} />
+    ),
+    onBack: () => null,
+  },
+};
 
 export const Description: Story = {
   args: {

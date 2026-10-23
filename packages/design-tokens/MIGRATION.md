@@ -2,6 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 11.1.0 to 12.0.0](#from-version-1110-to-1200)
 - [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
 - [From version 8.x to 9.0.0](#from-version-8x-to-900)
@@ -13,6 +14,38 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 11.1.0 to 12.0.0
+
+<a id="from-version-1110-to-1200"></a>
+
+The hero typeface changes from MM Poly to Grotzec Cond Bold. `fontFamilies.accent` and `--font-family-accent` (MM Sans) are unchanged and will be removed in a later release.
+
+### What changed
+
+- `--font-family-hero` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMPoly', ...`)
+- `fontFamilies.hero` and the Figma token `global.fontFamilies.hero` are now `Grotzec Cond` (was `MMPoly`)
+- Keep using `font-hero` and `fontFamilies.hero`. This package does not add a separate Grotzec family token
+- `--font-family-accent` and `fontFamilies.accent` are unchanged
+
+Only the Bold cut is licensed. Declare it at weight 600. Regular and medium requests fall back to that Bold cut.
+
+### Migration
+
+Replace MM Poly font files with `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond). Keep the adjacent `LICENSE`. Grotzec Cond is commercial software licensed to ConsenSys for the MetaMask application only and is excluded from the repository MIT license.
+
+```css
+@font-face {
+  font-family: 'Grotzec Cond';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
+}
+```
+
+**Impact:**
+
+Apps that still declare an MM Poly `@font-face` for `--font-family-hero` or `fontFamilies.hero` will fall back to Helvetica until they register Grotzec Cond Bold. Token names are unchanged.
 
 ## From version 10.x to 11.0.0
 
