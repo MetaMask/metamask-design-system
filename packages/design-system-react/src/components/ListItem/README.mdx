@@ -1,0 +1,563 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as ListItemStories from './ListItem.stories';
+
+# ListItem
+
+ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.mdx) in a `Box` shell (`px-4 py-3`) and owns row shell accessories (`startAccessory`, `endAccessory`). For the inner row layout without padding, click handling, or shell accessories, use [Content](../Content/README.mdx) directly.
+
+The row root is transparent by default so it inherits the surface behind it. Place list items inside a parent that sets the list background (for example a `Box` or page section). Interactive rows apply a semi-transparent `active:bg-pressed` tint while pressed, which reads correctly over different parent backgrounds without per-row color setup.
+
+```tsx
+import {
+  Box,
+  BoxBackgroundColor,
+  ListItem,
+} from '@metamask/design-system-react';
+
+<Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+  <ListItem
+    isInteractive
+    title="Network"
+    description="Ethereum Mainnet"
+    value="1.234 ETH"
+    onClick={() => {}}
+  />
+</Box>;
+```
+
+<Canvas of={ListItemStories.Default} />
+<Controls />
+
+## Background and pressed feedback
+
+ListItem does not apply a default row background. Define the list surface on the parent container and keep rows transparent so press feedback stays consistent across the list.
+
+When `isInteractive` is `true`, the row applies `active:bg-pressed` while pressed—a general-purpose tint meant to layer over the parent background. In most layouts you do not need to set row background or pressed colors yourself.
+
+Reserve row-level backgrounds for designs that require them (for example a highlighted, warning, or disabled row). If you set a custom idle background on a row, also define how that row should look when pressed so feedback remains visible—for example with `active:` variants in `className`.
+
+```tsx
+import {
+  Box,
+  BoxBackgroundColor,
+  ListItem,
+} from '@metamask/design-system-react';
+
+// Typical: parent owns the surface
+<Box backgroundColor={BoxBackgroundColor.BackgroundDefault}>
+  <ListItem isInteractive title="Settings" onClick={() => {}} />
+  <ListItem isInteractive title="Security" onClick={() => {}} />
+</Box>;
+
+// Row-specific background (only when the design requires it)
+<ListItem
+  isInteractive
+  title="Action required"
+  onClick={() => {}}
+  className="bg-warning-muted active:bg-warning-muted-pressed"
+/>;
+```
+
+## Props
+
+### `isInteractive`
+
+When `true`, the root is focusable with `role="button"`, accepts `onClick`, and applies pressed styles. When `false` (default), the root is a static `Box`.
+
+Interactive rows stay transparent at rest and apply `active:bg-pressed` while pressed. See [Background and pressed feedback](#background-and-pressed-feedback) for how this interacts with parent surfaces and custom row backgrounds.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<ListItem title="Static row" />
+
+<ListItem isInteractive title="Tappable row" onClick={() => {}} />
+```
+
+<Canvas of={ListItemStories.IsInteractive} />
+
+### `onClick`
+
+Callback fired when the row is clicked or activated with Enter/Space. Intended for use with `isInteractive`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>MouseEventHandler&lt;HTMLDivElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<ListItem isInteractive title="Settings" onClick={() => {}} />
+```
+
+### `title`
+
+Primary label on the left. Pass a string for default body styling, or a node for custom content.
+
+Default string styles: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextDefault`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<ListItem title="Network" />
+
+<ListItem title={<Text variant={TextVariant.HeadingSm}>Custom title</Text>} />
+```
+
+### `description`
+
+Secondary line under the title on the left. Pass a string for default body styling, or a node for custom content.
+
+Default string styles: `TextVariant.BodySm`, `FontWeight.Medium`, `TextColor.TextAlternative`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<ListItem title="Network" description="Ethereum Mainnet" />
+```
+
+### `value`
+
+Primary value on the right. Pass a string for default body styling, or a node for custom content.
+
+Default string styles: `TextVariant.BodyMd`, `FontWeight.Medium`, `TextColor.TextDefault`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<ListItem title="Amount" value="$10.00" />
+```
+
+### `subvalue`
+
+Secondary line under the value on the right. Pass a string for default body styling, or a node for custom content.
+
+Default string styles: `TextVariant.BodySm`, `FontWeight.Medium`, `TextColor.TextAlternative`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<ListItem title="Network" value="1.234 ETH" subvalue="~$2,500" />
+```
+
+### `avatar`
+
+Optional leading visual after `startAccessory` and before the title column. Use large avatars (40×40) in this slot.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  AvatarToken,
+  AvatarTokenSize,
+  ListItem,
+} from '@metamask/design-system-react';
+
+<ListItem
+  avatar={<AvatarToken name="ETH" src={ethIcon} size={AvatarTokenSize.Lg} />}
+  title="Ethereum"
+  value="0.24 ETH"
+/>;
+```
+
+<Canvas of={ListItemStories.Avatar} />
+
+### `startAccessory`
+
+Optional leading element on the content row, before the avatar (for example a rank or icon). Icons in this slot should be 20×20 (`IconSize.Md`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { Icon, IconName, ListItem } from '@metamask/design-system-react';
+
+<ListItem
+  startAccessory={<Icon name={IconName.Coin} />}
+  title="With start accessory"
+/>;
+```
+
+<Canvas of={ListItemStories.StartAccessory} />
+
+### `endAccessory`
+
+Optional trailing element on the content row, after the value column (for example a chevron or button).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { Icon, IconName, ListItem } from '@metamask/design-system-react';
+
+<ListItem title="Network" endAccessory={<Icon name={IconName.ArrowRight} />} />;
+```
+
+<Canvas of={ListItemStories.EndAccessory} />
+
+### `accessoryGap`
+
+Gap between `startAccessory` / `endAccessory` and the inner content row. Uses the same spacing scale as `Box` `gap` (`BoxSpacing`); `4` is 16px. Defaults to `0` for tight layouts. Use `accessoryGap={4}` when you need clear separation between shell accessories and content.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>BoxSpacing</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>0</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<ListItem
+  startAccessory={<Icon name={IconName.Coin} />}
+  accessoryGap={4}
+  title="With spaced start accessory"
+/>
+```
+
+<Canvas of={ListItemStories.AccessoryGap} />
+
+### `variant`
+
+Layout variant controlling row min-height, vertical alignment, and which secondary slots render.
+
+Available values:
+
+- `ListItemVariant.OneLine` — 48px min height (incl. padding), centered; omits `description` and `subvalue`
+- `ListItemVariant.TwoLines` — 72px min height, centered; all slots
+- `ListItemVariant.MultiLine` — 88px min height, top-aligned; all slots
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ListItemVariant</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>ListItemVariant.TwoLines</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+`ListItemVariant` is re-exported from `@metamask/design-system-react` alongside `ListItem`. It is the same const object as `ContentVariant` (also exported from the package root).
+
+```tsx
+import {
+  ListItem,
+  ListItemVariant,
+} from '@metamask/design-system-react';
+
+<ListItem variant={ListItemVariant.OneLine} title="Network" value="Mainnet" />
+
+<ListItem
+  variant={ListItemVariant.MultiLine}
+  avatar={<AvatarToken name="ETH" src={ethIcon} size={AvatarTokenSize.Lg} />}
+  title="Network"
+  description="Secondary line"
+  value="Value"
+/>;
+```
+
+<Canvas of={ListItemStories.Variant} />
+
+### `children`
+
+Optional React children rendered below the `Content` block on the padded root.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { Box, ListItem } from '@metamask/design-system-react';
+
+<ListItem title="Summary">
+  <Box className="mt-2 rounded bg-background-muted px-3 py-2">
+    Expanded details
+  </Box>
+</ListItem>;
+```
+
+<Canvas of={ListItemStories.Children} />
+
+### `titleProps`, `descriptionProps`, `valueProps`, `subvalueProps`
+
+Props merged onto text when the matching field is a string. Overrides default text styles. For `descriptionProps`, `valueProps`, and `subvalueProps`, pass `isHidden` / `length` to mask string content via `SensitiveText`.
+
+See [Content/README.mdx](../Content/README.mdx) for types and examples.
+
+### `titleStartAccessory`, `titleEndAccessory`, `descriptionStartAccessory`, `descriptionEndAccessory`, `valueStartAccessory`, `valueEndAccessory`, `subvalueStartAccessory`, `subvalueEndAccessory`
+
+Optional inline accessories on the same line as the matching text field.
+
+See [Content/README.mdx](../Content/README.mdx) for types and examples.
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+Applied on the root `Box`, merged with default padding (`px-4 py-3`). Prefer layout overrides (padding, radius, borders) over row backgrounds. If you set a row background, pair it with an appropriate pressed treatment—see [Background and pressed feedback](#background-and-pressed-feedback).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { ListItem } from '@metamask/design-system-react';
+
+// Override default padding
+<ListItem title="Label" className="px-6 py-4" />
+
+// Add layout chrome without changing row background
+<ListItem title="Label" className="rounded-lg border border-muted" />
+```
+
+### `style`
+
+Use the `style` prop sparingly for dynamic styles that cannot be expressed with `className`. Prefer Tailwind classes for consistent theming.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
