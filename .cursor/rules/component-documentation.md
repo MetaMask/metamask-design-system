@@ -114,7 +114,7 @@ Follow **Storybook controls (cross-platform)** above; mobile panels work best wi
 ```bash
 # Run Storybook
 yarn storybook                # React web (port 6006)
-yarn storybook:react-native   # React Native Metro + MCP (port 7007)
+yarn workspace @metamask/storybook-react-native start  # React Native Metro + MCP (port 7007)
 yarn storybook:ios:build      # React Native iOS dev client (first time / native dep changes)
 yarn storybook:ios            # React Native iOS (Metro + dev client)
 yarn storybook:android:build  # React Native Android dev client (first time / native dep changes)

@@ -46,16 +46,25 @@ yarn workspace @metamask/storybook-react-native exec expo start --dev-client --p
 
 ## AI integration (Storybook MCP)
 
-The React Native Storybook Metro server exposes an MCP endpoint for AI agents at:
+React Native Storybook exposes an experimental MCP endpoint on Metro's channel server:
 
 ```text
 http://localhost:7007/mcp
 ```
 
-Start Metro without launching a simulator or device when only the MCP endpoint is needed:
+`metro.config.js` follows the current `@storybook/react-native` MCP configuration (`experimental_mcp` and `websockets: 'auto'` on the Metro `withStorybook` wrapper). Those options are what start the endpoint. No extra root script is required.
+
+The endpoint comes up with the existing Metro commands. Device scripts launch a dev client as well:
 
 ```bash
-yarn storybook:react-native
+yarn storybook:ios
+yarn storybook:android
+```
+
+Start Metro without a simulator or device when only the MCP endpoint is needed:
+
+```bash
+yarn workspace @metamask/storybook-react-native start
 ```
 
 The endpoint provides:
@@ -66,9 +75,9 @@ The endpoint provides:
 - `get-storybook-story-instructions` for React Native story-writing guidance
 - `select-story` to display a story on a connected device
 
-WebSocket support is enabled automatically so `select-story` works when a device is connected. Documentation tools work without a connected device.
+`websockets: 'auto'` enables `select-story` when a device is connected. Documentation tools work without a connected device.
 
-Port 6007 hosts the separate React Native Web Storybook UI. The official React Native MCP implementation runs on Metro's channel server at port 7007, not on the web Storybook server.
+Port 6007 hosts the separate React Native Web Storybook UI (`yarn workspace @metamask/storybook-react-native storybook:web`). The native MCP channel server stays on port 7007.
 
 ## Run Storybook web
 
