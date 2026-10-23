@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix(security): upgrade tsx so esbuild leaves 0.27.7 ([#1608](https://github.com/MetaMask/metamask-design-system/pull/1608))
+- DS-new-icons ([#1612](https://github.com/MetaMask/metamask-design-system/pull/1612))
+
 ## [0.41.0]
 
 ### Added
