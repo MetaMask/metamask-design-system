@@ -4,10 +4,32 @@ on:
   push:
     branches: [main]
   pull_request:
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.sha || github.ref }}
+  cancel-in-progress: ${{ !contains(github.ref, 'refs/heads/main') }}
 
 jobs:
+  check-skip-merge-queue:
+    name: Check if pull request can skip merge queue
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      skip-merge-queue: ${{ steps.check-skip-merge-queue.outputs.up-to-date }}
+    steps:
+      - name: Check pull request merge queue status
+        id: check-skip-merge-queue
+        if: github.event_name == 'merge_group'
+        uses: MetaMask/github-tools/.github/actions/check-skip-merge-queue@5d993ac935eff3f248d2213bb2d6922ce9cb3510 # v1
+
   check-workflows:
     name: Check workflows
+    needs:
+      - check-skip-merge-queue
+    if: github.event_name != 'merge_group' || needs.check-skip-merge-queue.outputs.skip-merge-queue != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -21,6 +43,7 @@ jobs:
 
   analyse-code:
     name: Code scanner
+    needs: check-workflows
     uses: ./.github/workflows/security-code-scanner.yml
     permissions:
       actions: read
@@ -61,7 +84,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Check release
-        if: github.event_name == 'pull_request'
+        if: github.event_name != 'push'
         uses: ./.github/actions/check-release
         with:
           commit-starts-with: 'Release [version],Release v[version],Release/[version],Release/v[version],Release `[version]`'
@@ -144,6 +167,7 @@ jobs:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     needs:
+      - check-skip-merge-queue
       - analyse-code
       - check-release
       - lint-build-test
@@ -157,7 +181,15 @@ jobs:
       - name: Check that all jobs have passed
         id: set-output
         shell: bash
+        env:
+          SKIP_MERGE_QUEUE: ${{ needs.check-skip-merge-queue.outputs.skip-merge-queue }}
         run: |
+          if [[ "$SKIP_MERGE_QUEUE" == "true" ]]; then
+            echo "Pull request is up to date and first in the merge queue; skipping remaining checks."
+            echo "passed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           REQUIRED=(
             "analyse-code:${{ needs.analyse-code.result }}"
             "check-release:${{ needs.check-release.result }}"
@@ -188,11 +220,14 @@ jobs:
     name: All jobs pass
     if: ${{ always() }}
     runs-on: ubuntu-latest
-    needs: all-jobs-complete
+    needs:
+      - all-jobs-complete
+      - check-skip-merge-queue
+    env:
+      PASSED: ${{ needs.all-jobs-complete.outputs.passed == 'true' || needs.check-skip-merge-queue.outputs.skip-merge-queue == 'true' }}
     steps:
       - name: Check that all jobs have passed
         run: |
-          passed="${{ needs.all-jobs-complete.outputs.passed }}"
-          if [[ $passed != "true" ]]; then
+          if [[ "$PASSED" != "true" ]]; then
             exit 1
           fi
