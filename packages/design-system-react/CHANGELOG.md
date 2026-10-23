@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.48.0]
+
+### Added
+
+- Added `Pause` and `Play` icons, available as `IconName.Pause` and `IconName.Play` ([#1612](https://github.com/MetaMask/metamask-design-system/pull/1612))
+
+### Fixed
+
+- Fixed `AvatarToken` and `AvatarNetwork` so an image source renders on a white background ([#1594](https://github.com/MetaMask/metamask-design-system/pull/1594))
+  - Transparent logo pixels stay visible in dark mode
+  - Fallback initials keep the themed background
+  - A `className` passed by the consumer still overrides the white background
+
 ## [0.47.0]
 
 ### Added
@@ -651,7 +664,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.47.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.48.0...HEAD
+[0.48.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.47.0...@metamask/design-system-react@0.48.0
 [0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.46.0...@metamask/design-system-react@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.3...@metamask/design-system-react@0.46.0
 [0.45.3]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.2...@metamask/design-system-react@0.45.3
