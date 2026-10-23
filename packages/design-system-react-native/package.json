@@ -27,6 +27,7 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./docs-manifest.json": "./dist/docs-manifest.json",
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
@@ -35,7 +36,8 @@
     "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references && cp -r src/components/Icon/assets dist/components/Icon/",
+    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references && cp -r src/components/Icon/assets dist/components/Icon/ && yarn build:docs-manifest",
+    "build:docs-manifest": "tsx ../../scripts/docs-manifest/generate-docs-manifest.ts --package .",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react-native",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react-native",
     "create-component:react-native": "tsx scripts/create-component",
