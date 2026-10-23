@@ -109,6 +109,8 @@ jobs:
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             git fetch origin "${{ github.base_ref }}"
             CHANGED_FILES="$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")"
+          elif [[ "${{ github.event_name }}" == "merge_group" ]]; then
+            CHANGED_FILES="$(git diff --name-only "${{ github.event.merge_group.base_sha }}" HEAD)"
           else
             if [[ -z "${{ github.event.before }}" || "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
               echo "changed=false" >> "$GITHUB_OUTPUT"
