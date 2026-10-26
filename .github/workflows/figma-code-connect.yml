@@ -11,6 +11,9 @@ on:
       FIGMA_ACCESS_TOKEN:
         required: true
 
+permissions:
+  contents: read
+
 jobs:
   figma-code-connect:
     name: ${{ inputs.publish && 'Publish Code Connect' || 'Validate Code Connect' }}
