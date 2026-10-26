@@ -3,6 +3,9 @@ name: Lint, Build, and Test
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   prepare:
     name: Prepare
@@ -54,7 +57,9 @@ jobs:
         uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: false
-      - run: yarn workspace ${{ matrix.package-name }} changelog:validate
+      - run: yarn workspace "$PACKAGE_NAME" changelog:validate
+        env:
+          PACKAGE_NAME: ${{ matrix.package-name }}
       - name: Require clean working directory
         shell: bash
         run: |
@@ -113,7 +118,9 @@ jobs:
         with:
           is-high-risk-environment: false
       - run: yarn build
-      - run: yarn workspace ${{ matrix.package-name }} run test
+      - run: yarn workspace "$PACKAGE_NAME" run test
+        env:
+          PACKAGE_NAME: ${{ matrix.package-name }}
       - name: Require clean working directory
         shell: bash
         run: |
