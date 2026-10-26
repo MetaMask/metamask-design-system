@@ -5,6 +5,7 @@ import React from 'react';
 import { HeaderSearch, HeaderSearchVariant } from '.';
 
 const mockTextFieldSearchProps = {
+  inputAccessibilityLabel: 'Search',
   value: '',
   onChangeText: jest.fn(),
   onPressClearButton: jest.fn(),
