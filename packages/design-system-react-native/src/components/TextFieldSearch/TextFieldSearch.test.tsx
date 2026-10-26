@@ -20,11 +20,11 @@ describe('TextFieldSearch', () => {
     expect(screen.getByTestId('textfieldsearch')).toBeOnTheScreen();
   });
 
-  it('applies accessibilityLabel to the inner text input', () => {
+  it('applies inputAccessibilityLabel to the inner text input', () => {
     render(
       <TextFieldSearch
         value=""
-        accessibilityLabel="Search tokens"
+        inputAccessibilityLabel="Search tokens"
         inputProps={{ testID: 'search-input' }}
         onPressClearButton={mockOnPressClearButton}
       />,
@@ -35,11 +35,11 @@ describe('TextFieldSearch', () => {
     );
   });
 
-  it('prefers accessibilityLabel over inputProps.accessibilityLabel', () => {
+  it('prefers inputAccessibilityLabel over inputProps.accessibilityLabel', () => {
     render(
       <TextFieldSearch
         value=""
-        accessibilityLabel="Search tokens"
+        inputAccessibilityLabel="Search tokens"
         inputProps={{
           accessibilityLabel: 'Search networks',
           testID: 'search-input',
@@ -54,7 +54,7 @@ describe('TextFieldSearch', () => {
     expect(screen.queryByLabelText('Search networks')).toBeNull();
   });
 
-  it('uses inputProps.accessibilityLabel when accessibilityLabel is not set', () => {
+  it('uses inputProps.accessibilityLabel when inputAccessibilityLabel is not set', () => {
     render(
       <TextFieldSearch
         value=""

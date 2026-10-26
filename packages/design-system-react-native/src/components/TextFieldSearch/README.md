@@ -8,7 +8,7 @@ import { TextFieldSearch } from '@metamask/design-system-react-native';
 const [searchText, setSearchText] = useState('');
 
 <TextFieldSearch
-  accessibilityLabel="Search tokens"
+  inputAccessibilityLabel="Search tokens"
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}
@@ -16,13 +16,13 @@ const [searchText, setSearchText] = useState('');
 />;
 ```
 
-These fields usually have no visible label, so set `accessibilityLabel` to name the inner `TextInput`. It renders no text.
+These fields usually have no visible label, so set `inputAccessibilityLabel` to name the inner `TextInput`. It renders no text.
 
 ## Props
 
 This component extends [TextField](../TextField/README.md) props.
 
-### `accessibilityLabel`
+### `inputAccessibilityLabel`
 
 Accessible name for the inner `TextInput`. Set it when the field has no visible label. It takes precedence over `inputProps.accessibilityLabel`.
 
@@ -58,7 +58,7 @@ import { TextFieldSearch } from '@metamask/design-system-react-native';
 const [searchText, setSearchText] = useState('');
 
 <TextFieldSearch
-  accessibilityLabel="Search tokens"
+  inputAccessibilityLabel="Search tokens"
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}

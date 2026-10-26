@@ -45,7 +45,7 @@ const meta: Meta<TextFieldSearchProps> = {
     placeholder: {
       control: 'text',
     },
-    accessibilityLabel: {
+    inputAccessibilityLabel: {
       control: 'text',
       description:
         'Accessible name for the search input when there is no visible label.',
@@ -63,9 +63,9 @@ export default meta;
 
 type Story = StoryObj<TextFieldSearchProps>;
 
-export const AccessibilityLabel: Story = {
+export const InputAccessibilityLabel: Story = {
   args: {
-    accessibilityLabel: 'Search tokens',
+    inputAccessibilityLabel: 'Search tokens',
     placeholder: 'Search',
     value: '',
     onPressClearButton: noop,
@@ -77,7 +77,7 @@ export const Default: Story = {
   args: {
     value: '',
     placeholder: 'Search',
-    accessibilityLabel: 'Search',
+    inputAccessibilityLabel: 'Search',
     onPressClearButton: noop,
   },
   render: (args) => <ControlledTextFieldSearch {...args} />,
