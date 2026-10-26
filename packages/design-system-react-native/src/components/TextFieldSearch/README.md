@@ -12,7 +12,7 @@ import { TextFieldSearch } from '@metamask/design-system-react-native';
   value={search}
   onChangeText={setSearch}
   onPressClearButton={() => setSearch('')}
-/>
+/>;
 ```
 
 ## Accessibility
@@ -27,6 +27,7 @@ When there is no visible label, set `accessibilityLabel` to give the inner
 - `onPressClearButton`: Called when the clear button is pressed.
 
 All other `TextField` props are supported.
+
 # TextFieldSearch
 
 TextFieldSearch is an input component that allows users to enter text to search. It extends the [TextField](../TextField/README.md) component with a search icon and optional clear button.
