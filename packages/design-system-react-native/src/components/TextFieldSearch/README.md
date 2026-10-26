@@ -16,7 +16,7 @@ const [searchText, setSearchText] = useState('');
 />;
 ```
 
-These fields usually have no visible label, so set `accessibilityLabel` to name the inner `TextInput`. It renders no text. On React web the equivalent prop is `inputAriaLabel`.
+These fields usually have no visible label, so set `accessibilityLabel` to name the inner `TextInput`. It renders no text.
 
 ## Props
 
