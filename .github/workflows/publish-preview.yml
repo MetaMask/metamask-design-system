@@ -6,11 +6,13 @@ on:
 
 permissions:
   contents: read
-  pull-requests: write
 
 jobs:
   publish-preview:
     name: Publish build preview
+    permissions:
+      contents: read
+      pull-requests: write
     # issue_comment runs with repository secrets. The shared workflow builds
     # the pull request without the NPM token, then publishes sanitized
     # artifacts in a separate job. prepare-preview-builds still rewrites
