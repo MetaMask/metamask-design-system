@@ -54,6 +54,7 @@ const meta: Meta<TextFieldSearchProps> = {
     isReadOnly: { control: 'boolean' },
     isError: { control: 'boolean' },
     placeholder: { control: 'text' },
+    label: { control: 'text' },
     value: { control: 'text' },
   },
 };
@@ -112,4 +113,13 @@ export const ClearButtonProps: Story = {
       clearButtonProps={{ ariaLabel: 'Clear search' }}
     />
   ),
+};
+
+export const Label: Story = {
+  args: {
+    label: 'Search tokens',
+    placeholder: 'Name or address',
+    value: '',
+  },
+  render: (args) => <ControlledTextFieldSearch {...args} />,
 };

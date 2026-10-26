@@ -6,8 +6,24 @@ import { TextFieldSearch } from './TextFieldSearch';
 const ROOT_TEST_ID = 'text-field-search';
 const CLEAR_BUTTON_TEST_ID = 'text-field-search-clear-button';
 const noop = () => undefined;
-
 describe('TextFieldSearch', () => {
+  // jsdom does not implement <search>, so React logs "unrecognized tag" with
+  // a %s format argument. The landmark role is set explicitly and tested below.
+  // beforeEach: jest restores mocks before every test (restoreMocks).
+  beforeEach(() => {
+    const originalError = console.error.bind(console);
+    jest.spyOn(console, 'error').mockImplementation((...args: unknown[]) => {
+      const message = args.map(String).join(' ');
+      if (
+        message.includes('unrecognized in this browser') &&
+        message.includes('search')
+      ) {
+        return;
+      }
+      originalError(...(args as Parameters<typeof console.error>));
+    });
+  });
+
   describe('rendering', () => {
     it('applies muted background and hover background when enabled', () => {
       render(
@@ -309,6 +325,229 @@ describe('TextFieldSearch', () => {
       });
 
       expect(onChange).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('search landmark', () => {
+    it('renders a search landmark around the field', () => {
+      render(
+        <TextFieldSearch
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Search tokens"
+        />,
+      );
+
+      const field = screen.getByTestId(ROOT_TEST_ID);
+      const landmark = screen.getByRole('search', { name: 'Search tokens' });
+
+      expect(field.tagName).toBe('DIV');
+      expect(landmark).toContainElement(field);
+    });
+
+    it('keeps the ref on the field container inside the landmark', () => {
+      const ref = createRef<HTMLDivElement>();
+      render(
+        <TextFieldSearch
+          ref={ref}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Search tokens"
+        />,
+      );
+
+      expect(ref.current?.tagName).toBe('DIV');
+      expect(ref.current?.parentElement).toBe(screen.getByRole('search'));
+    });
+
+    it('forwards className to the search landmark and the field', () => {
+      render(
+        <TextFieldSearch
+          className="w-full"
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Search tokens"
+        />,
+      );
+
+      expect(screen.getByRole('search')).toHaveClass('inline-flex', 'w-full');
+      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass(
+        'w-full',
+        'bg-muted',
+      );
+    });
+  });
+
+  describe('accessible name', () => {
+    it('uses placeholder as the visually hidden label', () => {
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Search tokens"
+        />,
+      );
+
+      const input = screen.getByRole('searchbox', { name: 'Search tokens' });
+      const label = screen.getByText('Search tokens');
+
+      expect(input).toHaveAttribute('placeholder', 'Search tokens');
+      expect(label.tagName).toBe('LABEL');
+      expect(label).toHaveClass('sr-only');
+      expect(label).toHaveAttribute('for', input.id);
+    });
+
+    it('uses label when it differs from the placeholder', () => {
+      render(
+        <TextFieldSearch
+          label="Search accounts"
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Name or address"
+        />,
+      );
+
+      expect(
+        screen.getByRole('searchbox', { name: 'Search accounts' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('search', { name: 'Search accounts' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole('searchbox', { name: 'Name or address' }),
+      ).not.toBeInTheDocument();
+    });
+
+    it('uses an element label as the accessible name', () => {
+      render(
+        <TextFieldSearch
+          label={<span>Search tokens</span>}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Name or address"
+        />,
+      );
+
+      expect(
+        screen.getByRole('searchbox', { name: 'Search tokens' }),
+      ).toBeInTheDocument();
+    });
+
+    it('falls back to placeholder when label is an empty string', () => {
+      render(
+        <TextFieldSearch
+          label=""
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Search tokens"
+        />,
+      );
+
+      expect(
+        screen.getByRole('search', { name: 'Search tokens' }),
+      ).toBeInTheDocument();
+    });
+
+    it('skips the hidden label when label is false', () => {
+      const { container } = render(
+        <TextFieldSearch
+          label={false}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Search tokens"
+        />,
+      );
+
+      expect(container.querySelector('label')).not.toBeInTheDocument();
+      expect(screen.getByRole('search')).not.toHaveAttribute('aria-labelledby');
+      expect(screen.getByRole('searchbox')).toHaveAttribute(
+        'placeholder',
+        'Search tokens',
+      );
+    });
+
+    it('does not render a label when label and placeholder are omitted', () => {
+      const { container } = render(
+        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
+      );
+
+      expect(container.querySelector('label')).not.toBeInTheDocument();
+      expect(screen.getByRole('search')).not.toHaveAttribute('aria-labelledby');
+    });
+
+    it('uses an explicit id for the input and the label', () => {
+      render(
+        <TextFieldSearch
+          id="account-search"
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Search"
+        />,
+      );
+
+      expect(screen.getByRole('searchbox')).toHaveAttribute(
+        'id',
+        'account-search',
+      );
+      expect(screen.getByText('Search').closest('label')).toHaveAttribute(
+        'for',
+        'account-search',
+      );
+    });
+
+    it('generates a distinct id for each field', () => {
+      render(
+        <>
+          <TextFieldSearch
+            onChange={noop}
+            value=""
+            clearButtonOnClick={noop}
+            placeholder="Accounts"
+          />
+          <TextFieldSearch
+            onChange={noop}
+            value=""
+            clearButtonOnClick={noop}
+            placeholder="Networks"
+          />
+        </>,
+      );
+
+      const accounts = screen.getByRole('searchbox', { name: 'Accounts' });
+      const networks = screen.getByRole('searchbox', { name: 'Networks' });
+
+      expect(accounts.id).not.toBe('');
+      expect(accounts.id).not.toBe(networks.id);
+    });
+
+    it('keeps an inputProps aria-label as the input name', () => {
+      render(
+        <TextFieldSearch
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+          placeholder="Search tokens"
+          inputProps={{ 'aria-label': 'Filter tokens' }}
+        />,
+      );
+
+      expect(
+        screen.getByRole('searchbox', { name: 'Filter tokens' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('search', { name: 'Search tokens' }),
+      ).toBeInTheDocument();
     });
   });
 });

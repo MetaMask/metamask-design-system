@@ -4,21 +4,33 @@ import * as TextFieldSearchStories from './TextFieldSearch.stories';
 
 # TextFieldSearch
 
-TextFieldSearch is a controlled search input built on top of `TextField`. It renders a leading search icon, sets the native input `type` to `search`, and shows a trailing clear button when the field has a value. Use it for filtering or search experiences; for a general-purpose text input, use `TextField`.
+TextFieldSearch is a controlled search input built on top of `TextField`. It renders a `<search>` landmark, a leading search icon, a native search input, and a trailing clear button when the field has a value. The input is named by a visually hidden label, because this field does not show a separate visible label and placeholder text is not a name. Use it for filtering or search experiences; for a general-purpose text input, use `TextField`. Do not wrap it in another `<search>` element.
 
 ```tsx
 import { TextFieldSearch } from '@metamask/design-system-react';
 
-<TextFieldSearch placeholder="Search" value="" />;
+<TextFieldSearch placeholder="Search tokens" value="" />;
 ```
 
 The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` to your own state — the clear button always renders when `value` is truthy and `clearButtonOnClick` is required.
+
+Pass `placeholder` for the visible hint. That same string is the accessible name unless you pass `label`.
 
 <Canvas of={TextFieldSearchStories.Default} />
 
 ## Props
 
 The clear button is rendered automatically after the input whenever `value` is truthy.
+
+### `label`
+
+Accessible name rendered as a visually hidden `<label>` and associated with the input. Also names the `<search>` landmark, so more than one search field on a page can be told apart.
+
+When `label` is omitted or an empty string, `placeholder` is used. Pass `label` when the name should differ from the placeholder. Pass `false` to skip the hidden label when the input is named another way.
+
+Prefer `label` over `inputProps['aria-label']`. An `aria-label` on the input replaces the `<label>` as the input's name.
+
+<Canvas of={TextFieldSearchStories.Label} />
 
 ### `clearButtonOnClick`
 
@@ -51,6 +63,8 @@ Inherited from `TextField`. Renders the error border treatment.
 ### Other props
 
 All other `TextField` props (`isReadOnly`, `placeholder`, `inputProps`, `inputRef`, `startAccessory`, `endAccessory`, etc.) are supported. The `type` prop is fixed to `'search'` and is not configurable.
+
+`className` is applied to the `<search>` landmark and to the field. Width and flex utilities size the landmark, and the field fills it. Margin and padding utilities are applied to both, so keep spacing on a parent element. `ref` still points at the field container, not the landmark.
 
 ## Controls
 

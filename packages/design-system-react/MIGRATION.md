@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
   - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
@@ -3487,7 +3488,7 @@ The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven
 
 ### TextFieldSearch Component
 
-`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`.
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The field sits in a native `<search>` landmark and is named by a visually hidden `<label>` (from `label`, or from `placeholder` when `label` is omitted). The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` field container plus a configurable `clearButtonProps.ariaLabel`. Do not wrap it in another `<search>` element, and do not copy the placeholder into `inputProps['aria-label']`.
 
 #### Import Path
 
@@ -3539,18 +3540,18 @@ The extension component pulled the clear-button aria-label from `useI18nContext`
 
 | Extension Prop                      | Design System Migration                                                                                                     |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `as` / polymorphic `C`              | Removed. The container is always a `<div>`.                                                                                 |
+| `as` / polymorphic `C`              | Removed. The field container is a `<div>` inside a `<search>` landmark.                                                     |
 | `type`                              | Fixed to `'search'`; not configurable. Use `TextField` if you need a different input type.                                  |
 | `inputProps.marginRight` adjustment | Removed. The container automatically reserves room for the clear button via the existing `TextField` end-accessory padding. |
 
 #### Ref
 
-- `ref` on `TextFieldSearch` targets the root container (`HTMLDivElement`).
+- `ref` on `TextFieldSearch` targets the field container (`HTMLDivElement`), not the `<search>` landmark.
 - Use `inputRef` (inherited from `TextField`) to reach the inner `<input>`.
 
 #### Styling
 
-The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className`.
+The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className`. That class list is applied to the `<search>` landmark and the field, so put margin and padding on a parent.
 
 ### FormTextField Component
 
@@ -3631,6 +3632,56 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.48.0 to 0.49.0
+
+<a id="from-version-0480-to-0490"></a>
+
+#### TextFieldSearch: search landmark and visually hidden label
+
+**What changed:**
+
+`TextFieldSearch` now renders a native `<search>` landmark around the field and a visually hidden `<label>` for the input. Placeholder text is not an accessible name. The hidden label uses the `label` prop when it is set, and otherwise uses `placeholder`. The landmark uses that same text, so more than one search field on a page can be distinguished. An `id` is generated when you don't pass one.
+
+`className` is applied to the landmark and to the field. Width and flex utilities still size the control. Margin and padding utilities are applied to both layers, so keep spacing on a parent.
+
+**Migration:**
+
+Remove call-site `<search>` wrappers and `aria-label`s that repeat the placeholder. Pass `label` only when the accessible name should differ from the placeholder.
+
+```tsx
+// Before (0.48.x) — landmark and name added beside the field
+<search className="px-4 py-2">
+  <TextFieldSearch
+    className="w-full"
+    clearButtonOnClick={handleClear}
+    inputProps={{ 'aria-label': t('searchYourAccounts') }}
+    onChange={handleChange}
+    placeholder={t('searchYourAccounts')}
+    value={query}
+  />
+</search>
+
+// After (0.49.0) — TextFieldSearch provides the landmark and the name
+<div className="px-4 py-2">
+  <TextFieldSearch
+    className="w-full"
+    clearButtonOnClick={handleClear}
+    onChange={handleChange}
+    placeholder={t('searchYourAccounts')}
+    value={query}
+  />
+</div>
+```
+
+**Impact:**
+
+- The DOM gains a `<search>` parent and a visually hidden label. Update snapshot tests.
+- The label is associated with `useId` when you don't pass `id`, which requires React 18 or newer.
+- Do not wrap `TextFieldSearch` in another `<search>` element.
+- `ref` still points at the field container (`HTMLDivElement`), not the landmark.
+- `className="w-full"` and `flex-1` still size the control. Move margin and padding to a parent so they are not applied twice.
+- An `inputProps` `aria-label` still replaces the `<label>` as the input name. Remove it when it duplicates `placeholder` or `label`.
 
 ### From version 0.46.0 to 0.47.0
 
