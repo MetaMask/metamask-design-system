@@ -9,6 +9,8 @@ on:
         required: false
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   run-security-scan:
     name: Run security scan
