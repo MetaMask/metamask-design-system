@@ -63,7 +63,7 @@
     "@babel/preset-env": "^7.29.7",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.23.3",
-    "@metamask/auto-changelog": "^6.2.1",
+    "@metamask/auto-changelog": "^7.0.1",
     "@metamask/design-tokens": "workspace:^",
     "@react-native/babel-preset": "0.86.3",
     "@react-native/jest-preset": "0.86.3",
