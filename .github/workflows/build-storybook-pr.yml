@@ -3,6 +3,9 @@ name: Build Storybook PR
 on:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   build-storybook:
     name: Build Storybook PR
