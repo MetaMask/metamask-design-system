@@ -1,35 +1,5 @@
 # TextFieldSearch
 
-`TextFieldSearch` is a controlled search input with a leading search icon and
-an optional clear button. Use it for filtering or search experiences.
-
-```tsx
-import { TextFieldSearch } from '@metamask/design-system-react-native';
-
-<TextFieldSearch
-  accessibilityLabel="Search tokens"
-  placeholder="Search"
-  value={search}
-  onChangeText={setSearch}
-  onPressClearButton={() => setSearch('')}
-/>;
-```
-
-## Accessibility
-
-When there is no visible label, set `accessibilityLabel` to give the inner
-`TextInput` an accessible name without rendering visible text.
-
-## Props
-
-- `accessibilityLabel`: Accessible name for the inner `TextInput`.
-- `clearButtonProps`: Additional props for the clear button.
-- `onPressClearButton`: Called when the clear button is pressed.
-
-All other `TextField` props are supported.
-
-# TextFieldSearch
-
 TextFieldSearch is an input component that allows users to enter text to search. It extends the [TextField](../TextField/README.md) component with a search icon and optional clear button.
 
 ```tsx
@@ -38,16 +8,27 @@ import { TextFieldSearch } from '@metamask/design-system-react-native';
 const [searchText, setSearchText] = useState('');
 
 <TextFieldSearch
+  accessibilityLabel="Search tokens"
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}
-  placeholder="Search..."
+  placeholder="Search"
 />;
 ```
+
+These fields usually have no visible label, so set `accessibilityLabel` to name the inner `TextInput`. It renders no text. On React web the equivalent prop is `inputAriaLabel`.
 
 ## Props
 
 This component extends [TextField](../TextField/README.md) props.
+
+### `accessibilityLabel`
+
+Accessible name for the inner `TextInput`. Set it when the field has no visible label. It takes precedence over `inputProps.accessibilityLabel`.
+
+| TYPE   | REQUIRED |
+| ------ | -------- |
+| string | No       |
 
 ### Clear Button Behavior
 
@@ -77,10 +58,11 @@ import { TextFieldSearch } from '@metamask/design-system-react-native';
 const [searchText, setSearchText] = useState('');
 
 <TextFieldSearch
+  accessibilityLabel="Search tokens"
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}
-  placeholder="Search..."
+  placeholder="Search"
 />;
 ```
 

@@ -161,6 +161,19 @@ export const IsReadOnly: Story = {
   ),
 };
 
+export const AsChild: Story = {
+  render: () => (
+    <TextField
+      asChild
+      inputProps={{ 'aria-label': 'Search tokens' }}
+      placeholder="Search"
+      value=""
+    >
+      <search />
+    </TextField>
+  ),
+};
+
 export const Truncate: Story = {
   render: () => (
     <div className="flex w-48 flex-col gap-4">

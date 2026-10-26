@@ -4,26 +4,23 @@ import * as TextFieldSearchStories from './TextFieldSearch.stories';
 
 # TextFieldSearch
 
-TextFieldSearch is a controlled search input built on top of `TextField`. It renders a leading search icon, sets the native input `type` to `search`, and shows a trailing clear button when the field has a value. Use it for filtering or search experiences; for a general-purpose text input, use `TextField`.
+TextFieldSearch is a controlled search input built on top of `TextField`. It renders a `<search>` landmark with a leading search icon, sets the native input `type` to `search`, and shows a trailing clear button when the field has a value. Use it for filtering or search experiences; for a general-purpose text input, use `TextField`.
 
 ```tsx
 import { TextFieldSearch } from '@metamask/design-system-react';
 
-<TextFieldSearch placeholder="Search" value="" />;
+<TextFieldSearch
+  inputAriaLabel="Search tokens"
+  placeholder="Search"
+  value={search}
+  onChange={(event) => setSearch(event.target.value)}
+  clearButtonOnClick={() => setSearch('')}
+/>;
 ```
 
 The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` to your own state — the clear button always renders when `value` is truthy and `clearButtonOnClick` is required.
 
-When there is no visible label, set `ariaLabel` so screen readers can identify
-the search input.
-
-```tsx
-<TextFieldSearch
-  ariaLabel="Search tokens"
-  placeholder="Search"
-  value=""
-/>
-```
+The root element is a `<search>` landmark, so screen readers can jump straight to it. When a page has more than one search, give each landmark its own name with `aria-label`. That name is separate from the input's name: `inputAriaLabel` names the input itself, which matters because these fields usually have no visible label.
 
 <Canvas of={TextFieldSearchStories.Default} />
 
@@ -47,10 +44,13 @@ Inherited from `TextField`. Controls the height of the container.
 
 <Canvas of={TextFieldSearchStories.Size} />
 
-### `ariaLabel`
+### `inputAriaLabel`
 
-Sets the accessible name of the inner search input without rendering a visible
-label.
+Names the inner search input without rendering any text. Set it whenever the field has no visible label. It takes precedence over `inputProps['aria-label']`.
+
+A top-level `aria-label` is not an alternative: it names the `<search>` landmark, not the input.
+
+<Canvas of={TextFieldSearchStories.InputAriaLabel} />
 
 ### `isDisabled`
 

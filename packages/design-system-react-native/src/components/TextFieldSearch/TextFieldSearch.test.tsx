@@ -25,11 +25,50 @@ describe('TextFieldSearch', () => {
       <TextFieldSearch
         value=""
         accessibilityLabel="Search tokens"
+        inputProps={{ testID: 'search-input' }}
         onPressClearButton={mockOnPressClearButton}
       />,
     );
 
-    expect(screen.getByLabelText('Search tokens')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Search tokens')).toBe(
+      screen.getByTestId('search-input'),
+    );
+  });
+
+  it('prefers accessibilityLabel over inputProps.accessibilityLabel', () => {
+    render(
+      <TextFieldSearch
+        value=""
+        accessibilityLabel="Search tokens"
+        inputProps={{
+          accessibilityLabel: 'Search networks',
+          testID: 'search-input',
+        }}
+        onPressClearButton={mockOnPressClearButton}
+      />,
+    );
+
+    expect(screen.getByLabelText('Search tokens')).toBe(
+      screen.getByTestId('search-input'),
+    );
+    expect(screen.queryByLabelText('Search networks')).toBeNull();
+  });
+
+  it('uses inputProps.accessibilityLabel when accessibilityLabel is not set', () => {
+    render(
+      <TextFieldSearch
+        value=""
+        inputProps={{
+          accessibilityLabel: 'Search networks',
+          testID: 'search-input',
+        }}
+        onPressClearButton={mockOnPressClearButton}
+      />,
+    );
+
+    expect(screen.getByLabelText('Search networks')).toBe(
+      screen.getByTestId('search-input'),
+    );
   });
 
   it('calls onPressClearButton when clear button is pressed and value exists', () => {

@@ -307,6 +307,49 @@ describe('TextField', () => {
     });
   });
 
+  describe('asChild', () => {
+    it('renders the child element as the root', () => {
+      render(
+        <TextField asChild data-testid={ROOT_TEST_ID} onChange={noop} value="">
+          <section />
+        </TextField>,
+      );
+
+      const root = screen.getByTestId(ROOT_TEST_ID);
+
+      expect(root.tagName).toBe('SECTION');
+      expect(root).toContainElement(screen.getByRole('textbox'));
+    });
+
+    it('merges its className onto the child element', () => {
+      render(
+        <TextField
+          asChild
+          data-testid={ROOT_TEST_ID}
+          className="ring-2"
+          onChange={noop}
+          value=""
+        >
+          <section />
+        </TextField>,
+      );
+
+      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveClass('ring-2');
+    });
+
+    it('forwards the ref to the child element', () => {
+      const ref = createRef<HTMLDivElement>();
+
+      render(
+        <TextField asChild ref={ref} onChange={noop} value="">
+          <section data-testid={ROOT_TEST_ID} />
+        </TextField>,
+      );
+
+      expect(ref.current).toBe(screen.getByTestId(ROOT_TEST_ID));
+    });
+  });
+
   describe('className', () => {
     it('merges custom className onto the root container', () => {
       render(

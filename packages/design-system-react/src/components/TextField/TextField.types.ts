@@ -115,6 +115,15 @@ export type TextFieldProps = Omit<
      */
     onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
     /**
+     * Renders the field's content inside the element passed as `children`
+     * instead of a `<div>`, merging the container's props and ref onto it.
+     * The child must be a single element. `TextFieldSearch` uses this to
+     * render a `<search>` landmark.
+     *
+     * @default false
+     */
+    asChild?: boolean;
+    /**
      * Optional additional CSS classes for the root container.
      */
     className?: string;

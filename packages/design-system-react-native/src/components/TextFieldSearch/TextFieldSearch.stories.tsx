@@ -45,6 +45,11 @@ const meta: Meta<TextFieldSearchProps> = {
     placeholder: {
       control: 'text',
     },
+    accessibilityLabel: {
+      control: 'text',
+      description:
+        'Accessible name for the search input when there is no visible label.',
+    },
     twClassName: {
       control: 'text',
     },
@@ -62,6 +67,7 @@ export const Default: Story = {
   args: {
     value: '',
     placeholder: 'Search',
+    accessibilityLabel: 'Search',
     onPressClearButton: noop,
   },
   render: (args) => <ControlledTextFieldSearch {...args} />,

@@ -1,7 +1,19 @@
 import type { ButtonIconProps } from '../ButtonIcon';
 import type { TextFieldProps } from '../TextField';
 
-export type TextFieldSearchProps = Omit<TextFieldProps, 'type'> & {
+export type TextFieldSearchProps = Omit<
+  TextFieldProps,
+  'asChild' | 'children' | 'type'
+> & {
+  /**
+   * Accessible name for the inner search input. Set it when the field has no
+   * visible label. It renders no text.
+   *
+   * A top-level `aria-label` does something different: it names the `<search>`
+   * landmark that wraps the field, which distinguishes the region when a page
+   * has more than one search.
+   */
+  inputAriaLabel?: string;
   /**
    * Accessible name for the inner search input. Use this when the search field
    * does not have a visible label.

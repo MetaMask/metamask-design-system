@@ -1,3 +1,4 @@
+import { Slot, Slottable } from '@radix-ui/react-slot';
 import React, {
   forwardRef,
   useCallback,
@@ -21,7 +22,9 @@ const SIZE_CLASS: Record<TextFieldSize, string> = {
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   (
     {
+      asChild,
       autoFocus = false,
+      children,
       className,
       id,
       inputElement,
@@ -102,6 +105,8 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     const { className: inputClassNameFromProps, ...inputRest } =
       inputProps ?? {};
 
+    const Component = asChild ? Slot : 'div';
+
     const containerClassName = twMerge(
       'inline-flex items-center rounded-xl border bg-muted transition-colors',
       SIZE_CLASS[size],
@@ -123,13 +128,14 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     );
 
     return (
-      <div
+      <Component
         ref={ref}
         className={containerClassName}
         style={style}
         onClick={handleClick}
         {...rest}
       >
+        {asChild ? <Slottable>{children}</Slottable> : children}
         {startAccessory}
         {inputElement ?? (
           <Input
@@ -154,7 +160,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
           />
         )}
         {endAccessory}
-      </div>
+      </Component>
     );
   },
 );

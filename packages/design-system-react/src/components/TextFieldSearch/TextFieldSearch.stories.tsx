@@ -55,6 +55,11 @@ const meta: Meta<TextFieldSearchProps> = {
     isError: { control: 'boolean' },
     placeholder: { control: 'text' },
     value: { control: 'text' },
+    inputAriaLabel: {
+      control: 'text',
+      description:
+        'Accessible name for the search input when there is no visible label.',
+    },
   },
 };
 
@@ -114,12 +119,11 @@ export const ClearButtonProps: Story = {
   ),
 };
 
-export const AriaLabel: Story = {
-  render: () => (
-    <ControlledTextFieldSearch
-      ariaLabel="Search tokens"
-      placeholder="Search"
-      value=""
-    />
-  ),
+export const InputAriaLabel: Story = {
+  args: {
+    inputAriaLabel: 'Search tokens',
+    placeholder: 'Search',
+    value: '',
+  },
+  render: (args) => <ControlledTextFieldSearch {...args} />,
 };

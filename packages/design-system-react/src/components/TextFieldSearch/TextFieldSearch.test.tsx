@@ -85,10 +85,23 @@ describe('TextFieldSearch', () => {
       expect(screen.getByRole('searchbox')).toBeInTheDocument();
     });
 
-    it('applies ariaLabel to the inner search input', () => {
+    it('renders a search landmark as the root element', () => {
       render(
         <TextFieldSearch
-          ariaLabel="Search tokens"
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      expect(screen.getByTestId(ROOT_TEST_ID).tagName).toBe('SEARCH');
+    });
+
+    it('names the inner search input with inputAriaLabel', () => {
+      render(
+        <TextFieldSearch
+          inputAriaLabel="Search tokens"
           onChange={noop}
           value=""
           clearButtonOnClick={noop}
@@ -98,6 +111,55 @@ describe('TextFieldSearch', () => {
       expect(
         screen.getByRole('searchbox', { name: 'Search tokens' }),
       ).toBeInTheDocument();
+    });
+
+    it('prefers inputAriaLabel over an aria-label passed through inputProps', () => {
+      render(
+        <TextFieldSearch
+          inputAriaLabel="Search tokens"
+          inputProps={{ 'aria-label': 'Search networks' }}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      expect(
+        screen.getByRole('searchbox', { name: 'Search tokens' }),
+      ).toBeInTheDocument();
+    });
+
+    it('uses the aria-label passed through inputProps when inputAriaLabel is not set', () => {
+      render(
+        <TextFieldSearch
+          inputProps={{ 'aria-label': 'Search networks' }}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      expect(
+        screen.getByRole('searchbox', { name: 'Search networks' }),
+      ).toBeInTheDocument();
+    });
+
+    it('keeps a top-level aria-label on the search landmark', () => {
+      render(
+        <TextFieldSearch
+          aria-label="Tokens"
+          data-testid={ROOT_TEST_ID}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      expect(screen.getByTestId(ROOT_TEST_ID)).toHaveAttribute(
+        'aria-label',
+        'Tokens',
+      );
+      expect(screen.getByRole('searchbox')).not.toHaveAttribute('aria-label');
     });
 
     it('renders the default search icon as start accessory', () => {
