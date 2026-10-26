@@ -71,7 +71,7 @@ When `true` (default) the inner input truncates overflowing text with an ellipsi
 
 ### `asChild`
 
-Renders the field's content inside the element you pass as `children` instead of a `<div>`, merging the container's props and ref onto that element. The child must be a single element. `TextFieldSearch` uses this to render a `<search>` landmark.
+Renders the field's content inside the element you pass as `children` instead of a `<div>`, merging the container's props and ref onto that element. The child must be a single element. `TextFieldSearch` uses this to render a `<search>` landmark. For search inputs, use TextFieldSearch instead of TextField with asChild.
 
 <Canvas of={TextFieldStories.AsChild} />
 

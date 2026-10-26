@@ -63,16 +63,6 @@ export default meta;
 
 type Story = StoryObj<TextFieldSearchProps>;
 
-export const InputAccessibilityLabel: Story = {
-  args: {
-    inputAccessibilityLabel: 'Search tokens',
-    placeholder: 'Search',
-    value: '',
-    onPressClearButton: noop,
-  },
-  render: (args) => <ControlledTextFieldSearch {...args} />,
-};
-
 export const Default: Story = {
   args: {
     value: '',
@@ -87,11 +77,13 @@ export const IsError: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ControlledTextFieldSearch
+        inputAccessibilityLabel="Search"
         value=""
         placeholder="Default"
         onPressClearButton={noop}
       />
       <ControlledTextFieldSearch
+        inputAccessibilityLabel="Search"
         value=""
         placeholder="Error state"
         isError
@@ -105,11 +97,13 @@ export const IsDisabled: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <ControlledTextFieldSearch
+        inputAccessibilityLabel="Search"
         value="Editable"
         placeholder="Enabled"
         onPressClearButton={noop}
       />
       <TextFieldSearch
+        inputAccessibilityLabel="Search"
         value="Not editable"
         placeholder="Disabled"
         isDisabled
@@ -121,6 +115,7 @@ export const IsDisabled: Story = {
 
 export const IsReadOnly: Story = {
   args: {
+    inputAccessibilityLabel: 'Search',
     placeholder: 'Search readonly',
     value: 'Search query',
     isReadOnly: true,
@@ -131,8 +126,19 @@ export const IsReadOnly: Story = {
 
 export const WithValue: Story = {
   args: {
+    inputAccessibilityLabel: 'Search',
     placeholder: 'Search...',
     value: 'Search text',
+    onPressClearButton: noop,
+  },
+  render: (args) => <ControlledTextFieldSearch {...args} />,
+};
+
+export const InputAccessibilityLabel: Story = {
+  args: {
+    inputAccessibilityLabel: 'Search tokens',
+    placeholder: 'Search',
+    value: '',
     onPressClearButton: noop,
   },
   render: (args) => <ControlledTextFieldSearch {...args} />,

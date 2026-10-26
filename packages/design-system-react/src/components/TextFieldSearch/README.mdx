@@ -4,7 +4,7 @@ import * as TextFieldSearchStories from './TextFieldSearch.stories';
 
 # TextFieldSearch
 
-TextFieldSearch is a controlled search input built on top of `TextField`. It renders a `<search>` landmark with a leading search icon, sets the native input `type` to `search`, and shows a trailing clear button when the field has a value. Use it for filtering or search experiences; for a general-purpose text input, use `TextField`.
+TextFieldSearch is the component for search and filtering experiences. Use it when people need to search or filter. For a general-purpose text input, use `TextField`.
 
 ```tsx
 import { TextFieldSearch } from '@metamask/design-system-react';
@@ -19,8 +19,6 @@ import { TextFieldSearch } from '@metamask/design-system-react';
 ```
 
 The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` to your own state — the clear button always renders when `value` is truthy and `clearButtonOnClick` is required.
-
-The root element is a `<search>` landmark, so screen readers can jump straight to it. When a page has more than one search, give each landmark its own name with `aria-label`. That name is separate from the input's name: `inputAriaLabel` names the input itself, which matters because these fields usually have no visible label.
 
 <Canvas of={TextFieldSearchStories.Default} />
 
@@ -44,14 +42,6 @@ Inherited from `TextField`. Controls the height of the container.
 
 <Canvas of={TextFieldSearchStories.Size} />
 
-### `inputAriaLabel`
-
-Names the inner search input without rendering any text. Set it whenever the field has no visible label. It takes precedence over `inputProps['aria-label']`.
-
-A top-level `aria-label` is not an alternative: it names the `<search>` landmark, not the input.
-
-<Canvas of={TextFieldSearchStories.InputAriaLabel} />
-
 ### `isDisabled`
 
 Inherited from `TextField`. Disables the inner input and the clear button container.
@@ -63,6 +53,14 @@ Inherited from `TextField`. Disables the inner input and the clear button contai
 Inherited from `TextField`. Renders the error border treatment.
 
 <Canvas of={TextFieldSearchStories.IsError} />
+
+### `inputAriaLabel`
+
+Required name for the inner search input. It renders no text. It takes precedence over `inputProps['aria-label']`.
+
+A top-level `aria-label` is not an alternative: it names the `<search>` landmark, not the input.
+
+<Canvas of={TextFieldSearchStories.InputAriaLabel} />
 
 ### Other props
 

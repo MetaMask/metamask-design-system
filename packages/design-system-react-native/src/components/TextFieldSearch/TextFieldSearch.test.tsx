@@ -14,7 +14,11 @@ describe('TextFieldSearch', () => {
 
   it('renders on screen', () => {
     render(
-      <TextFieldSearch value="" onPressClearButton={mockOnPressClearButton} />,
+      <TextFieldSearch
+        inputAccessibilityLabel="Search"
+        value=""
+        onPressClearButton={mockOnPressClearButton}
+      />,
     );
 
     expect(screen.getByTestId('textfieldsearch')).toBeOnTheScreen();
@@ -54,26 +58,10 @@ describe('TextFieldSearch', () => {
     expect(screen.queryByLabelText('Search networks')).toBeNull();
   });
 
-  it('uses inputProps.accessibilityLabel when inputAccessibilityLabel is not set', () => {
-    render(
-      <TextFieldSearch
-        value=""
-        inputProps={{
-          accessibilityLabel: 'Search networks',
-          testID: 'search-input',
-        }}
-        onPressClearButton={mockOnPressClearButton}
-      />,
-    );
-
-    expect(screen.getByLabelText('Search networks')).toBe(
-      screen.getByTestId('search-input'),
-    );
-  });
-
   it('calls onPressClearButton when clear button is pressed and value exists', () => {
     render(
       <TextFieldSearch
+        inputAccessibilityLabel="Search"
         value="search text"
         onPressClearButton={mockOnPressClearButton}
         clearButtonProps={{ testID: 'clear-button' }}
@@ -88,6 +76,7 @@ describe('TextFieldSearch', () => {
   it('does not render clear button when value is empty', () => {
     render(
       <TextFieldSearch
+        inputAccessibilityLabel="Search"
         value=""
         onPressClearButton={mockOnPressClearButton}
         clearButtonProps={{ testID: 'clear-button' }}
@@ -100,6 +89,7 @@ describe('TextFieldSearch', () => {
   it('uses startAccessory when provided', () => {
     render(
       <TextFieldSearch
+        inputAccessibilityLabel="Search"
         value=""
         onPressClearButton={mockOnPressClearButton}
         startAccessory={<Text testID="custom-start">S</Text>}
@@ -112,6 +102,7 @@ describe('TextFieldSearch', () => {
   it('uses endAccessory when provided instead of clear button', () => {
     render(
       <TextFieldSearch
+        inputAccessibilityLabel="Search"
         value="search text"
         onPressClearButton={mockOnPressClearButton}
         clearButtonProps={{ testID: 'clear-button' }}

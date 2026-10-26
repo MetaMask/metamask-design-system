@@ -7,10 +7,10 @@ import type { TextFieldProps } from '../TextField';
  */
 export type TextFieldSearchProps = TextFieldProps & {
   /**
-   * Accessible name for the inner `TextInput`. Use this when the search field
-   * does not have a visible label.
+   * Accessible name for the inner `TextInput`. Required, including when the
+   * search field does not have a visible label.
    */
-  inputAccessibilityLabel?: string;
+  inputAccessibilityLabel: string;
   /**
    * Optional prop to pass any additional props to the clear button.
    */
