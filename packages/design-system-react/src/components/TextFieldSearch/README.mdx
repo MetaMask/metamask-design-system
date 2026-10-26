@@ -4,17 +4,19 @@ import * as TextFieldSearchStories from './TextFieldSearch.stories';
 
 # TextFieldSearch
 
-TextFieldSearch is a controlled search input built on top of `TextField`. It renders a `<search>` landmark, a leading search icon, a native search input, and a trailing clear button when the field has a value. The input is named by a visually hidden label, because this field does not show a separate visible label and placeholder text is not a name. Use it for filtering or search experiences; for a general-purpose text input, use `TextField`. Do not wrap it in another `<search>` element.
+TextFieldSearch is a controlled search input built on top of `TextField`. It renders a `<search>` landmark, a leading search icon, a native search input, and a trailing clear button when the field has a value. This field does not show a separate visible label, so `inputAriaLabel` is required and names both the landmark and the input. Placeholder text is only a visible hint. Use it for filtering or search experiences; for a general-purpose text input, use `TextField`. Do not wrap it in another `<search>` element.
 
 ```tsx
 import { TextFieldSearch } from '@metamask/design-system-react';
 
-<TextFieldSearch placeholder="Search tokens" value="" />;
+<TextFieldSearch
+  inputAriaLabel="Search tokens"
+  placeholder="Search tokens"
+  value=""
+/>;
 ```
 
 The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` to your own state — the clear button always renders when `value` is truthy and `clearButtonOnClick` is required.
-
-Pass `placeholder` for the visible hint. That same string is the accessible name unless you pass `label`.
 
 <Canvas of={TextFieldSearchStories.Default} />
 
@@ -22,15 +24,13 @@ Pass `placeholder` for the visible hint. That same string is the accessible name
 
 The clear button is rendered automatically after the input whenever `value` is truthy.
 
-### `label`
+### `inputAriaLabel`
 
-Accessible name rendered as a visually hidden `<label>` and associated with the input. Also names the `<search>` landmark, so more than one search field on a page can be told apart.
+Required accessible name for the search input. Set as `aria-label` on the input and on the `<search>` landmark, so more than one search field on a page can be told apart.
 
-When `label` is omitted or an empty string, `placeholder` is used. Pass `label` when the name should differ from the placeholder. Pass `false` to skip the hidden label when the input is named another way.
+This component never renders a visible label. Do not use `placeholder` as the name. `inputAriaLabel` replaces an `aria-label` passed through `inputProps`.
 
-Prefer `label` over `inputProps['aria-label']`. An `aria-label` on the input replaces the `<label>` as the input's name.
-
-<Canvas of={TextFieldSearchStories.Label} />
+<Canvas of={TextFieldSearchStories.InputAriaLabel} />
 
 ### `clearButtonOnClick`
 

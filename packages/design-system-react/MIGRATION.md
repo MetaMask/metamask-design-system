@@ -3488,7 +3488,7 @@ The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven
 
 ### TextFieldSearch Component
 
-`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The field sits in a native `<search>` landmark and is named by a visually hidden `<label>` (from `label`, or from `placeholder` when `label` is omitted). The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` field container plus a configurable `clearButtonProps.ariaLabel`. Do not wrap it in another `<search>` element, and do not copy the placeholder into `inputProps['aria-label']`.
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The field sits in a native `<search>` landmark. `inputAriaLabel` is required: the field does not show a visible label, and that string is the `aria-label` on the input and the landmark. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` field container plus a configurable `clearButtonProps.ariaLabel`. Do not wrap it in another `<search>` element, and do not pass the name through `inputProps['aria-label']`.
 
 #### Import Path
 
@@ -3530,6 +3530,7 @@ The extension component pulled the clear-button aria-label from `useI18nContext`
 
 // After (Design System): pass a localized label via clearButtonProps
 <TextFieldSearch
+  inputAriaLabel="Search"
   value={value}
   clearButtonOnClick={handleClear}
   clearButtonProps={{ ariaLabel: t('clear') }}
@@ -3637,17 +3638,17 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 <a id="from-version-0480-to-0490"></a>
 
-#### TextFieldSearch: search landmark and visually hidden label
+#### TextFieldSearch: search landmark and required `inputAriaLabel`
 
 **What changed:**
 
-`TextFieldSearch` now renders a native `<search>` landmark around the field and a visually hidden `<label>` for the input. Placeholder text is not an accessible name. The hidden label uses the `label` prop when it is set, and otherwise uses `placeholder`. The landmark uses that same text, so more than one search field on a page can be distinguished. An `id` is generated when you don't pass one.
+`TextFieldSearch` now renders a native `<search>` landmark around the field. The field does not show a visible label, and placeholder text is not an accessible name, so `inputAriaLabel` is required. That string is the `aria-label` on the input and on the landmark. More than one search field on a page needs a distinct `inputAriaLabel`.
 
 `className` is applied to the landmark and to the field. Width and flex utilities still size the control. Margin and padding utilities are applied to both layers, so keep spacing on a parent.
 
 **Migration:**
 
-Remove call-site `<search>` wrappers and `aria-label`s that repeat the placeholder. Pass `label` only when the accessible name should differ from the placeholder.
+Remove call-site `<search>` wrappers. Pass the string you used for `inputProps['aria-label']` as `inputAriaLabel`.
 
 ```tsx
 // Before (0.48.x) — landmark and name added beside the field
@@ -3667,6 +3668,7 @@ Remove call-site `<search>` wrappers and `aria-label`s that repeat the placehold
   <TextFieldSearch
     className="w-full"
     clearButtonOnClick={handleClear}
+    inputAriaLabel={t('searchYourAccounts')}
     onChange={handleChange}
     placeholder={t('searchYourAccounts')}
     value={query}
@@ -3676,12 +3678,12 @@ Remove call-site `<search>` wrappers and `aria-label`s that repeat the placehold
 
 **Impact:**
 
-- The DOM gains a `<search>` parent and a visually hidden label. Update snapshot tests.
-- The label is associated with `useId` when you don't pass `id`, which requires React 18 or newer.
+- `inputAriaLabel` is required. Existing call sites fail typecheck until they pass it.
+- The DOM gains a `<search>` parent. Update snapshot tests.
 - Do not wrap `TextFieldSearch` in another `<search>` element.
 - `ref` still points at the field container (`HTMLDivElement`), not the landmark.
 - `className="w-full"` and `flex-1` still size the control. Move margin and padding to a parent so they are not applied twice.
-- An `inputProps` `aria-label` still replaces the `<label>` as the input name. Remove it when it duplicates `placeholder` or `label`.
+- `inputAriaLabel` replaces `inputProps['aria-label']` on the input. Remove the duplicate.
 
 ### From version 0.46.0 to 0.47.0
 

@@ -6,6 +6,7 @@ import { TextFieldSearch } from './TextFieldSearch';
 const ROOT_TEST_ID = 'text-field-search';
 const CLEAR_BUTTON_TEST_ID = 'text-field-search-clear-button';
 const noop = () => undefined;
+const INPUT_ARIA_LABEL = 'Search';
 describe('TextFieldSearch', () => {
   // jsdom does not implement <search>, so React logs "unrecognized tag" with
   // a %s format argument. The landmark role is set explicitly and tested below.
@@ -28,6 +29,7 @@ describe('TextFieldSearch', () => {
     it('applies muted background and hover background when enabled', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           data-testid={ROOT_TEST_ID}
           onChange={noop}
           value=""
@@ -44,6 +46,7 @@ describe('TextFieldSearch', () => {
     it('does not apply hover background class when disabled', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           data-testid={ROOT_TEST_ID}
           onChange={noop}
           value=""
@@ -60,6 +63,7 @@ describe('TextFieldSearch', () => {
     it('does not apply hover background class when in error state', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           data-testid={ROOT_TEST_ID}
           onChange={noop}
           value=""
@@ -75,7 +79,12 @@ describe('TextFieldSearch', () => {
 
     it('hides native webkit search decorations on the input', () => {
       render(
-        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
+        <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
       );
 
       const input = screen.getByRole('searchbox');
@@ -90,6 +99,7 @@ describe('TextFieldSearch', () => {
     it('renders root container and inner search input', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           data-testid={ROOT_TEST_ID}
           onChange={noop}
           value=""
@@ -103,7 +113,12 @@ describe('TextFieldSearch', () => {
 
     it('renders the default search icon as start accessory', () => {
       const { container } = render(
-        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
+        <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
       );
 
       // Icon renders an <svg>; assert one exists before the input.
@@ -113,6 +128,7 @@ describe('TextFieldSearch', () => {
     it('allows overriding the start accessory', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value=""
           clearButtonOnClick={noop}
@@ -127,6 +143,7 @@ describe('TextFieldSearch', () => {
       const ref = createRef<HTMLDivElement>();
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           ref={ref}
           data-testid={ROOT_TEST_ID}
           onChange={noop}
@@ -142,7 +159,12 @@ describe('TextFieldSearch', () => {
   describe('clear button', () => {
     it('is hidden when value is empty', () => {
       render(
-        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
+        <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
       );
 
       expect(
@@ -153,6 +175,7 @@ describe('TextFieldSearch', () => {
     it('is shown when value is truthy', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value="hello"
           clearButtonOnClick={noop}
@@ -166,6 +189,7 @@ describe('TextFieldSearch', () => {
       const onClick = jest.fn();
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value="hello"
           clearButtonOnClick={onClick}
@@ -180,6 +204,7 @@ describe('TextFieldSearch', () => {
     it('uses a default "Clear" aria-label', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value="hello"
           clearButtonOnClick={noop}
@@ -193,6 +218,7 @@ describe('TextFieldSearch', () => {
       const onClick = jest.fn();
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value="hello"
           isDisabled
@@ -211,6 +237,7 @@ describe('TextFieldSearch', () => {
     it('stays disabled when isDisabled is true even if clearButtonProps says otherwise', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value="hello"
           isDisabled
@@ -225,6 +252,7 @@ describe('TextFieldSearch', () => {
     it('clearButtonProps.isDisabled can disable the clear button when the field is enabled', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value="hello"
           clearButtonOnClick={noop}
@@ -240,6 +268,7 @@ describe('TextFieldSearch', () => {
       const overrideOnClick = jest.fn();
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value="hello"
           clearButtonOnClick={onClick}
@@ -256,6 +285,7 @@ describe('TextFieldSearch', () => {
     it('allows overriding the clear button aria-label via clearButtonProps', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value="hello"
           clearButtonOnClick={noop}
@@ -273,6 +303,7 @@ describe('TextFieldSearch', () => {
     it('renders provided endAccessory alongside the clear button', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value="hello"
           clearButtonOnClick={noop}
@@ -287,6 +318,7 @@ describe('TextFieldSearch', () => {
     it('renders endAccessory when there is no clear button', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={noop}
           value=""
           clearButtonOnClick={noop}
@@ -304,7 +336,12 @@ describe('TextFieldSearch', () => {
   describe('forwarding to TextField', () => {
     it('sets the input type to "search"', () => {
       render(
-        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
+        <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
       );
 
       expect(screen.getByRole('searchbox')).toHaveAttribute('type', 'search');
@@ -314,6 +351,7 @@ describe('TextFieldSearch', () => {
       const onChange = jest.fn();
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           onChange={onChange}
           value=""
           clearButtonOnClick={noop}
@@ -326,22 +364,39 @@ describe('TextFieldSearch', () => {
 
       expect(onChange).toHaveBeenCalledTimes(1);
     });
+
+    it('forwards an explicit id to the input', () => {
+      render(
+        <TextFieldSearch
+          id="account-search"
+          inputAriaLabel="Search accounts"
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      expect(screen.getByRole('searchbox')).toHaveAttribute(
+        'id',
+        'account-search',
+      );
+    });
   });
 
   describe('search landmark', () => {
     it('renders a search landmark around the field', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           data-testid={ROOT_TEST_ID}
           onChange={noop}
           value=""
           clearButtonOnClick={noop}
-          placeholder="Search tokens"
         />,
       );
 
       const field = screen.getByTestId(ROOT_TEST_ID);
-      const landmark = screen.getByRole('search', { name: 'Search tokens' });
+      const landmark = screen.getByRole('search', { name: INPUT_ARIA_LABEL });
 
       expect(field.tagName).toBe('DIV');
       expect(landmark).toContainElement(field);
@@ -351,6 +406,7 @@ describe('TextFieldSearch', () => {
       const ref = createRef<HTMLDivElement>();
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           ref={ref}
           onChange={noop}
           value=""
@@ -366,6 +422,7 @@ describe('TextFieldSearch', () => {
     it('forwards className to the search landmark and the field', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel={INPUT_ARIA_LABEL}
           className="w-full"
           data-testid={ROOT_TEST_ID}
           onChange={noop}
@@ -384,29 +441,27 @@ describe('TextFieldSearch', () => {
   });
 
   describe('accessible name', () => {
-    it('uses placeholder as the visually hidden label', () => {
+    it('sets inputAriaLabel on the input', () => {
       render(
         <TextFieldSearch
+          inputAriaLabel="Search tokens"
           onChange={noop}
           value=""
           clearButtonOnClick={noop}
-          placeholder="Search tokens"
+          placeholder="Name or address"
         />,
       );
 
       const input = screen.getByRole('searchbox', { name: 'Search tokens' });
-      const label = screen.getByText('Search tokens');
 
-      expect(input).toHaveAttribute('placeholder', 'Search tokens');
-      expect(label.tagName).toBe('LABEL');
-      expect(label).toHaveClass('sr-only');
-      expect(label).toHaveAttribute('for', input.id);
+      expect(input).toHaveAttribute('aria-label', 'Search tokens');
+      expect(input).toHaveAttribute('placeholder', 'Name or address');
     });
 
-    it('uses label when it differs from the placeholder', () => {
+    it('sets inputAriaLabel on the search landmark', () => {
       render(
         <TextFieldSearch
-          label="Search accounts"
+          inputAriaLabel="Search tokens"
           onChange={noop}
           value=""
           clearButtonOnClick={noop}
@@ -415,139 +470,47 @@ describe('TextFieldSearch', () => {
       );
 
       expect(
-        screen.getByRole('searchbox', { name: 'Search accounts' }),
-      ).toBeInTheDocument();
+        screen.getByRole('search', { name: 'Search tokens' }),
+      ).toHaveAttribute('aria-label', 'Search tokens');
       expect(
-        screen.getByRole('search', { name: 'Search accounts' }),
-      ).toBeInTheDocument();
-      expect(
-        screen.queryByRole('searchbox', { name: 'Name or address' }),
+        screen.queryByRole('search', { name: 'Name or address' }),
       ).not.toBeInTheDocument();
     });
 
-    it('uses an element label as the accessible name', () => {
+    it('replaces an aria-label passed through inputProps', () => {
       render(
         <TextFieldSearch
-          label={<span>Search tokens</span>}
+          inputAriaLabel="Search tokens"
           onChange={noop}
           value=""
           clearButtonOnClick={noop}
-          placeholder="Name or address"
+          inputProps={{ 'aria-label': 'Filter tokens' }}
         />,
       );
 
       expect(
         screen.getByRole('searchbox', { name: 'Search tokens' }),
       ).toBeInTheDocument();
-    });
-
-    it('falls back to placeholder when label is an empty string', () => {
-      render(
-        <TextFieldSearch
-          label=""
-          onChange={noop}
-          value=""
-          clearButtonOnClick={noop}
-          placeholder="Search tokens"
-        />,
-      );
-
       expect(
-        screen.getByRole('search', { name: 'Search tokens' }),
-      ).toBeInTheDocument();
+        screen.queryByRole('searchbox', { name: 'Filter tokens' }),
+      ).not.toBeInTheDocument();
     });
 
-    it('skips the hidden label when label is false', () => {
-      const { container } = render(
+    it('merges a className passed through inputProps', () => {
+      render(
         <TextFieldSearch
-          label={false}
+          inputAriaLabel="Search tokens"
           onChange={noop}
           value=""
           clearButtonOnClick={noop}
-          placeholder="Search tokens"
+          inputProps={{ className: 'custom-input' }}
         />,
       );
 
-      expect(container.querySelector('label')).not.toBeInTheDocument();
-      expect(screen.getByRole('search')).not.toHaveAttribute('aria-labelledby');
-      expect(screen.getByRole('searchbox')).toHaveAttribute(
-        'placeholder',
-        'Search tokens',
+      expect(screen.getByRole('searchbox')).toHaveClass(
+        'custom-input',
+        '[&::-webkit-search-cancel-button]:hidden',
       );
-    });
-
-    it('does not render a label when label and placeholder are omitted', () => {
-      const { container } = render(
-        <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,
-      );
-
-      expect(container.querySelector('label')).not.toBeInTheDocument();
-      expect(screen.getByRole('search')).not.toHaveAttribute('aria-labelledby');
-    });
-
-    it('uses an explicit id for the input and the label', () => {
-      render(
-        <TextFieldSearch
-          id="account-search"
-          onChange={noop}
-          value=""
-          clearButtonOnClick={noop}
-          placeholder="Search"
-        />,
-      );
-
-      expect(screen.getByRole('searchbox')).toHaveAttribute(
-        'id',
-        'account-search',
-      );
-      expect(screen.getByText('Search').closest('label')).toHaveAttribute(
-        'for',
-        'account-search',
-      );
-    });
-
-    it('generates a distinct id for each field', () => {
-      render(
-        <>
-          <TextFieldSearch
-            onChange={noop}
-            value=""
-            clearButtonOnClick={noop}
-            placeholder="Accounts"
-          />
-          <TextFieldSearch
-            onChange={noop}
-            value=""
-            clearButtonOnClick={noop}
-            placeholder="Networks"
-          />
-        </>,
-      );
-
-      const accounts = screen.getByRole('searchbox', { name: 'Accounts' });
-      const networks = screen.getByRole('searchbox', { name: 'Networks' });
-
-      expect(accounts.id).not.toBe('');
-      expect(accounts.id).not.toBe(networks.id);
-    });
-
-    it('keeps an inputProps aria-label as the input name', () => {
-      render(
-        <TextFieldSearch
-          onChange={noop}
-          value=""
-          clearButtonOnClick={noop}
-          placeholder="Search tokens"
-          inputProps={{ 'aria-label': 'Filter tokens' }}
-        />,
-      );
-
-      expect(
-        screen.getByRole('searchbox', { name: 'Filter tokens' }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole('search', { name: 'Search tokens' }),
-      ).toBeInTheDocument();
     });
   });
 });

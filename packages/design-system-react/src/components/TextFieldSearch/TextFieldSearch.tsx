@@ -1,9 +1,8 @@
-import React, { forwardRef, useId } from 'react';
+import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
 import { Icon, IconColor, IconName, IconSize } from '../Icon';
-import { Label } from '../Label';
 import { TextField, TextFieldSize, TextFieldType } from '../TextField';
 
 import type { TextFieldSearchProps } from './TextFieldSearch.types';
@@ -18,23 +17,12 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
       startAccessory,
       isDisabled = false,
       className,
-      id,
       inputProps,
-      label,
-      placeholder,
+      inputAriaLabel,
       ...props
     },
     ref,
   ) => {
-    const generatedInputId = useId();
-    const labelId = useId();
-    const inputId = id ?? generatedInputId;
-    // Empty string falls through to the placeholder. `false` does not: it
-    // opts out of the hidden label when the input is named another way.
-    const labelFromProp = label === '' ? undefined : label;
-    const accessibleName = labelFromProp ?? placeholder;
-    const showLabel = Boolean(accessibleName);
-
     const clearButton = value ? (
       <ButtonIcon
         data-testid="text-field-search-clear-button"
@@ -61,18 +49,11 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
         // Older engines and jsdom treat <search> as an unknown element and
         // drop its implicit landmark role. The explicit role keeps it.
         role="search"
+        aria-label={inputAriaLabel}
         className={twMerge('inline-flex', className)}
-        aria-labelledby={showLabel ? labelId : undefined}
       >
-        {showLabel ? (
-          <Label id={labelId} htmlFor={inputId} className="sr-only">
-            {accessibleName}
-          </Label>
-        ) : null}
         <TextField
           ref={ref}
-          id={inputId}
-          placeholder={placeholder}
           value={value}
           isDisabled={isDisabled}
           type={TextFieldType.Search}
@@ -84,6 +65,7 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
           )}
           inputProps={{
             ...inputProps,
+            'aria-label': inputAriaLabel,
             className: twMerge(
               '[&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden',
               inputProps?.className,
