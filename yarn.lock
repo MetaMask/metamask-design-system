@@ -3118,30 +3118,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/auto-changelog@npm:^6.1.1":
-  version: 6.2.1
-  resolution: "@metamask/auto-changelog@npm:6.2.1"
-  dependencies:
-    "@octokit/rest": "npm:^20.0.0"
-    diff: "npm:^5.0.0"
-    execa: "npm:^5.1.1"
-    semver: "npm:^7.3.5"
-    yargs: "npm:^17.0.1"
-  peerDependencies:
-    oxfmt: ^0.45.0
-    prettier: ">=3.0.0"
-  peerDependenciesMeta:
-    oxfmt:
-      optional: true
-    prettier:
-      optional: true
-  bin:
-    auto-changelog: dist/cli.mjs
-  checksum: 10/88f5bc63ef5003b3e4f88ebf018229ce5e701283cadee1dcbd37f869541a1102ba6a8a96fd54993863e3578c8b79f0c6e0242e4afd08c58d5db529bc75dbaf2c
-  languageName: node
-  linkType: hard
-
-"@metamask/auto-changelog@npm:^7.0.1":
+"@metamask/auto-changelog@npm:^7.0.0, @metamask/auto-changelog@npm:^7.0.1":
   version: 7.0.1
   resolution: "@metamask/auto-changelog@npm:7.0.1"
   dependencies:
@@ -3164,23 +3141,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/create-release-branch@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@metamask/create-release-branch@npm:4.2.2"
+"@metamask/create-release-branch@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "@metamask/create-release-branch@npm:4.2.3"
   dependencies:
     "@metamask/action-utils": "npm:^2.0.0"
-    "@metamask/auto-changelog": "npm:^6.1.1"
-    "@metamask/utils": "npm:^9.0.0"
+    "@metamask/auto-changelog": "npm:^7.0.0"
+    "@metamask/utils": "npm:^11.12.0"
     debug: "npm:^4.3.4"
     execa: "npm:^8.0.1"
     express: "npm:^4.21.2"
     open: "npm:^10.1.0"
     pony-cause: "npm:^2.1.9"
-    semver: "npm:^7.5.4"
+    semver: "npm:^7.8.5"
     validate-npm-package-name: "npm:^5.0.0"
     which: "npm:^3.0.0"
     yaml: "npm:^2.2.2"
-    yargs: "npm:^17.7.1"
+    yargs: "npm:^17.7.2"
   peerDependencies:
     oxfmt: ^0.45.0
     prettier: ">=3.0.0"
@@ -3191,7 +3168,7 @@ __metadata:
       optional: true
   bin:
     create-release-branch: bin/create-release-branch.js
-  checksum: 10/35b1e671c53cf0c1c03bb076fe33684bdc4eee55935feb0be4f681d4682c57dd68a953585fb6cac8707117218716156ade715db5484d9ade4e25ec79aeba27c1
+  checksum: 10/64c6e1cb609a66cc42ab05b6c4c87138fc697839b7ce5c2d4c91b1731fe0eda96bfb1085028fb87cc540626c8cad3eac96f57ac794e3a847b750d8e4feb551ed
   languageName: node
   linkType: hard
 
@@ -3479,7 +3456,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.3"
     "@figma/code-connect": "npm:^1.4.9"
     "@lavamoat/allow-scripts": "npm:^3.2.1"
-    "@metamask/create-release-branch": "npm:^4.2.2"
+    "@metamask/create-release-branch": "npm:^4.2.3"
     "@metamask/eslint-config": "npm:^15.0.1"
     "@metamask/eslint-config-jest": "npm:^15.0.1"
     "@metamask/eslint-config-nodejs": "npm:^15.0.1"
@@ -3644,7 +3621,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/utils@npm:^11.12.1":
+"@metamask/utils@npm:^11.12.0, @metamask/utils@npm:^11.12.1":
   version: 11.12.1
   resolution: "@metamask/utils@npm:11.12.1"
   dependencies:
@@ -3661,23 +3638,6 @@ __metadata:
     semver: "npm:^7.5.4"
     uuid: "npm:^9.0.1"
   checksum: 10/2d91b1d5338929f7a7c0e272ea564426d229e4d5bc33f7b124043245b3d14afb0f01ca15fcee70c434fa1cd537eb82c537ea575489a8672a10ea3da6ae74da81
-  languageName: node
-  linkType: hard
-
-"@metamask/utils@npm:^9.0.0":
-  version: 9.3.0
-  resolution: "@metamask/utils@npm:9.3.0"
-  dependencies:
-    "@ethereumjs/tx": "npm:^4.2.0"
-    "@metamask/superstruct": "npm:^3.1.0"
-    "@noble/hashes": "npm:^1.3.1"
-    "@scure/base": "npm:^1.1.3"
-    "@types/debug": "npm:^4.1.7"
-    debug: "npm:^4.3.4"
-    pony-cause: "npm:^2.1.10"
-    semver: "npm:^7.5.4"
-    uuid: "npm:^9.0.1"
-  checksum: 10/ed6648cd973bbf3b4eb0e862903b795a99d27784c820e19f62f0bc0ddf353e98c2858d7e9aaebc0249a586391b344e35b9249d13c08e3ea0c74b23dc1c6b1558
   languageName: node
   linkType: hard
 
@@ -9260,7 +9220,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:^5.0.0, execa@npm:^5.1.1":
+"execa@npm:^5.0.0":
   version: 5.1.1
   resolution: "execa@npm:5.1.1"
   dependencies:
@@ -17337,7 +17297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:17.7.2, yargs@npm:^17.0.0, yargs@npm:^17.0.1, yargs@npm:^17.3.1, yargs@npm:^17.6.2, yargs@npm:^17.7.1, yargs@npm:^17.7.2":
+"yargs@npm:17.7.2, yargs@npm:^17.0.0, yargs@npm:^17.3.1, yargs@npm:^17.6.2, yargs@npm:^17.7.2":
   version: 17.7.2
   resolution: "yargs@npm:17.7.2"
   dependencies:
