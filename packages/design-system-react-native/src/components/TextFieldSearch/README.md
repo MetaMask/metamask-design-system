@@ -8,7 +8,7 @@ import { TextFieldSearch } from '@metamask/design-system-react-native';
 const [searchText, setSearchText] = useState('');
 
 <TextFieldSearch
-  inputAccessibilityLabel="Search tokens"
+  inputAccessibilityLabel="Search"
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}
@@ -56,7 +56,7 @@ import { TextFieldSearch } from '@metamask/design-system-react-native';
 const [searchText, setSearchText] = useState('');
 
 <TextFieldSearch
-  inputAccessibilityLabel="Search tokens"
+  inputAccessibilityLabel="Search"
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}
