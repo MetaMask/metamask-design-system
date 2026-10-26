@@ -48,7 +48,7 @@ const meta: Meta<TextFieldSearchProps> = {
     inputAccessibilityLabel: {
       control: 'text',
       description:
-        'Accessible name for the search input when there is no visible label.',
+        'Required accessible name for the inner TextInput. It renders no text.',
     },
     twClassName: {
       control: 'text',

@@ -48,22 +48,6 @@ Accessible name for the inner `TextInput`. Required, including when the field ha
 | ------ | -------- |
 | string | Yes      |
 
-## Usage
-
-```tsx
-import { TextFieldSearch } from '@metamask/design-system-react-native';
-
-const [searchText, setSearchText] = useState('');
-
-<TextFieldSearch
-  inputAccessibilityLabel="Search tokens"
-  value={searchText}
-  onChangeText={setSearchText}
-  onPressClearButton={() => setSearchText('')}
-  placeholder="Search"
-/>;
-```
-
 ## Content guidelines
 
 - Sentence case

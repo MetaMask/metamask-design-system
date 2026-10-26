@@ -24,21 +24,30 @@ The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` 
 
 ## Props
 
-The clear button is rendered automatically after the input whenever `value` is truthy.
-
-### `clearButtonOnClick`
-
-Click handler invoked when the clear button is pressed. Use it to reset the controlled `value`.
-
-### `clearButtonProps`
-
-Additional props forwarded to the underlying `ButtonIcon`. Use `clearButtonProps.ariaLabel` to provide a localized label (defaults to `'Clear'`).
-
-<Canvas of={TextFieldSearchStories.ClearButtonProps} />
-
 ### `size`
 
 Inherited from `TextField`. Controls the height of the container.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>TextFieldSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>TextFieldSize.Lg</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={TextFieldSearchStories.Size} />
 
@@ -46,19 +55,136 @@ Inherited from `TextField`. Controls the height of the container.
 
 Inherited from `TextField`. Disables the inner input and the clear button container.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={TextFieldSearchStories.IsDisabled} />
 
 ### `isError`
 
 Inherited from `TextField`. Renders the error border treatment.
 
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <Canvas of={TextFieldSearchStories.IsError} />
+
+The clear button is rendered automatically after the input whenever `value` is truthy.
+
+### `clearButtonOnClick`
+
+Click handler invoked when the clear button is pressed. Use it to reset the controlled `value`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>MouseEventHandler&lt;HTMLButtonElement&gt;</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `clearButtonProps`
+
+Additional props forwarded to the underlying `ButtonIcon`. Use `clearButtonProps.ariaLabel` to provide a localized label (defaults to `'Clear'`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;ButtonIconProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TextFieldSearchStories.ClearButtonProps} />
 
 ### `inputAriaLabel`
 
 Required name for the inner search input. It renders no text. It takes precedence over `inputProps['aria-label']`.
 
 A top-level `aria-label` is not an alternative: it names the `<search>` landmark, not the input.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={TextFieldSearchStories.InputAriaLabel} />
 
