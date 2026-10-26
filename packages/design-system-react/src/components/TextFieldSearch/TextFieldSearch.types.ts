@@ -3,6 +3,11 @@ import type { TextFieldProps } from '../TextField';
 
 export type TextFieldSearchProps = Omit<TextFieldProps, 'type'> & {
   /**
+   * Accessible name for the inner search input. Use this when the search field
+   * does not have a visible label.
+   */
+  ariaLabel?: string;
+  /**
    * Click handler for the clear button. Use it to reset the controlled `value`.
    * Required: the clear button always renders when `value` is truthy.
    */

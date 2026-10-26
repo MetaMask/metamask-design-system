@@ -20,6 +20,18 @@ describe('TextFieldSearch', () => {
     expect(screen.getByTestId('textfieldsearch')).toBeOnTheScreen();
   });
 
+  it('applies accessibilityLabel to the inner text input', () => {
+    render(
+      <TextFieldSearch
+        value=""
+        accessibilityLabel="Search tokens"
+        onPressClearButton={mockOnPressClearButton}
+      />,
+    );
+
+    expect(screen.getByLabelText('Search tokens')).toBeOnTheScreen();
+  });
+
   it('calls onPressClearButton when clear button is pressed and value exists', () => {
     render(
       <TextFieldSearch

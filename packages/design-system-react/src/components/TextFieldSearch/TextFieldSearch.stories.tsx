@@ -113,3 +113,13 @@ export const ClearButtonProps: Story = {
     />
   ),
 };
+
+export const AriaLabel: Story = {
+  render: () => (
+    <ControlledTextFieldSearch
+      ariaLabel="Search tokens"
+      placeholder="Search"
+      value=""
+    />
+  ),
+};

@@ -121,3 +121,13 @@ export const WithValue: Story = {
   },
   render: (args) => <ControlledTextFieldSearch {...args} />,
 };
+
+export const AccessibilityLabel: Story = {
+  args: {
+    accessibilityLabel: 'Search tokens',
+    placeholder: 'Search',
+    value: '',
+    onPressClearButton: noop,
+  },
+  render: (args) => <ControlledTextFieldSearch {...args} />,
+};

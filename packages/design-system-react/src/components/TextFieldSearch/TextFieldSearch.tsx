@@ -17,6 +17,7 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
       startAccessory,
       isDisabled = false,
       className,
+      ariaLabel,
       inputProps,
       ...props
     },
@@ -57,6 +58,7 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
         )}
         inputProps={{
           ...inputProps,
+          'aria-label': ariaLabel ?? inputProps?.['aria-label'],
           className: twMerge(
             '[&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden',
             inputProps?.className,

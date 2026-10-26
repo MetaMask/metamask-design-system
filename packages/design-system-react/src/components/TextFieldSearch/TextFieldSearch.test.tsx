@@ -85,6 +85,21 @@ describe('TextFieldSearch', () => {
       expect(screen.getByRole('searchbox')).toBeInTheDocument();
     });
 
+    it('applies ariaLabel to the inner search input', () => {
+      render(
+        <TextFieldSearch
+          ariaLabel="Search tokens"
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      expect(
+        screen.getByRole('searchbox', { name: 'Search tokens' }),
+      ).toBeInTheDocument();
+    });
+
     it('renders the default search icon as start accessory', () => {
       const { container } = render(
         <TextFieldSearch onChange={noop} value="" clearButtonOnClick={noop} />,

@@ -14,6 +14,17 @@ import { TextFieldSearch } from '@metamask/design-system-react';
 
 The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` to your own state — the clear button always renders when `value` is truthy and `clearButtonOnClick` is required.
 
+When there is no visible label, set `ariaLabel` so screen readers can identify
+the search input.
+
+```tsx
+<TextFieldSearch
+  ariaLabel="Search tokens"
+  placeholder="Search"
+  value=""
+/>
+```
+
 <Canvas of={TextFieldSearchStories.Default} />
 
 ## Props
@@ -35,6 +46,11 @@ Additional props forwarded to the underlying `ButtonIcon`. Use `clearButtonProps
 Inherited from `TextField`. Controls the height of the container.
 
 <Canvas of={TextFieldSearchStories.Size} />
+
+### `ariaLabel`
+
+Sets the accessible name of the inner search input without rendering a visible
+label.
 
 ### `isDisabled`
 
