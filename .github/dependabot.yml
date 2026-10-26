@@ -7,6 +7,10 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    cooldown:
+      default-days: 7
+      exclude:
+        - '@metamask/*'
     allow:
       - dependency-name: '@metamask/*'
     versioning-strategy: 'increase'
