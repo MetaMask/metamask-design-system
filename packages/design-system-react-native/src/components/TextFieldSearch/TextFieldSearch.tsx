@@ -54,8 +54,7 @@ export const TextFieldSearch = forwardRef<View, TextFieldSearchProps>(
         {...props}
         inputProps={{
           ...inputProps,
-          accessibilityLabel:
-            inputAccessibilityLabel ?? inputProps?.accessibilityLabel,
+          accessibilityLabel: inputAccessibilityLabel,
         }}
         value={value}
         startAccessory={
