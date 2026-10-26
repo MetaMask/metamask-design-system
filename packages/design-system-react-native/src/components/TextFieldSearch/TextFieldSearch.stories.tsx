@@ -63,6 +63,16 @@ export default meta;
 
 type Story = StoryObj<TextFieldSearchProps>;
 
+export const AccessibilityLabel: Story = {
+  args: {
+    accessibilityLabel: 'Search tokens',
+    placeholder: 'Search',
+    value: '',
+    onPressClearButton: noop,
+  },
+  render: (args) => <ControlledTextFieldSearch {...args} />,
+};
+
 export const Default: Story = {
   args: {
     value: '',
@@ -123,16 +133,6 @@ export const WithValue: Story = {
   args: {
     placeholder: 'Search...',
     value: 'Search text',
-    onPressClearButton: noop,
-  },
-  render: (args) => <ControlledTextFieldSearch {...args} />,
-};
-
-export const AccessibilityLabel: Story = {
-  args: {
-    accessibilityLabel: 'Search tokens',
-    placeholder: 'Search',
-    value: '',
     onPressClearButton: noop,
   },
   render: (args) => <ControlledTextFieldSearch {...args} />,
