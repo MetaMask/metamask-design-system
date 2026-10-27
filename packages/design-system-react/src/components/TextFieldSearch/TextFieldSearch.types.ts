@@ -1,10 +1,7 @@
 import type { ButtonIconProps } from '../ButtonIcon';
 import type { TextFieldProps } from '../TextField';
 
-export type TextFieldSearchProps = Omit<
-  TextFieldProps,
-  'asChild' | 'children' | 'type'
-> & {
+export type TextFieldSearchProps = Omit<TextFieldProps, 'type'> & {
   /**
    * Accessible name for the inner search input. Required. It renders no text.
    *
