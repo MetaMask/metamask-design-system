@@ -8,9 +8,8 @@ export type TextFieldSearchProps = Omit<
   /**
    * Accessible name for the inner search input. Required. It renders no text.
    *
-   * A top-level `aria-label` does something different: it names the `<search>`
-   * landmark that wraps the field, which distinguishes the region when a page
-   * has more than one search.
+   * A surrounding `<search>` element is a separate landmark. Put `aria-label`
+   * on that element when a page has more than one search.
    */
   inputAriaLabel: string;
   /**

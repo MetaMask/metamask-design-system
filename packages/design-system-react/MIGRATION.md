@@ -3488,7 +3488,7 @@ The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven
 
 ### TextFieldSearch Component
 
-`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The root element is a `<search>` landmark. `inputAriaLabel` is required and names the inner input; a top-level `aria-label` names the landmark instead. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` root plus a configurable `clearButtonProps.ariaLabel`. Do not wrap it in another `<search>` element.
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The root element is a `<div>`. Wrap it in `<search>` when the page should expose a search landmark. `inputAriaLabel` is required and names the inner input. An `aria-label` on the `<search>` element names the landmark instead. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` root plus a configurable `clearButtonProps.ariaLabel`.
 
 #### Import Path
 
@@ -3541,18 +3541,18 @@ The extension component pulled the clear-button aria-label from `useI18nContext`
 
 | Extension Prop                      | Design System Migration                                                                                                     |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `as` / polymorphic `C`              | Removed. The root element is a `<search>`.                                                                                  |
+| `as` / polymorphic `C`              | Removed. The root element is a `<div>`. Wrap the field in `<search>` for a search landmark.                                 |
 | `type`                              | Fixed to `'search'`; not configurable. Use `TextField` if you need a different input type.                                  |
 | `inputProps.marginRight` adjustment | Removed. The container automatically reserves room for the clear button via the existing `TextField` end-accessory padding. |
 
 #### Ref
 
-- `ref` on `TextFieldSearch` targets the `<search>` root. The TypeScript type remains `HTMLDivElement`.
+- `ref` on `TextFieldSearch` targets the root container (`HTMLDivElement`).
 - Use `inputRef` (inherited from `TextField`) to reach the inner `<input>`.
 
 #### Styling
 
-The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className`. That class list is applied once, on the `<search>` root.
+The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className` on the field. Put landmark spacing on the surrounding `<search>` element.
 
 ### FormTextField Component
 
@@ -3638,18 +3638,18 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 <a id="from-version-0480-to-0x0"></a>
 
-#### TextFieldSearch: search landmark and required `inputAriaLabel`
+#### TextFieldSearch: required `inputAriaLabel`
 
 **What changed:**
 
-The web root element changes from `<div>` to `<search>`. There is no extra wrapper: `className`, `ref`, and `data-testid` stay on that root. `inputAriaLabel` is required and names the inner input. It takes precedence over `inputProps['aria-label']`. A top-level `aria-label` names the landmark, which distinguishes the region when a page has more than one search.
+`inputAriaLabel` is required and names the inner input. It takes precedence over `inputProps['aria-label']`. The component root stays a `<div>`. Wrap the field in `<search>` so assistive technology can jump to the search. An `aria-label` on that element names the landmark when a page has more than one search. That name is separate from `inputAriaLabel`.
 
 **Migration:**
 
-Remove call-site `<search>` wrappers. Pass the string you used for `inputProps['aria-label']` as `inputAriaLabel`. Keep a top-level `aria-label` only when the landmark itself needs a separate name.
+Keep the call-site `<search>` wrapper. Pass the string you used for `inputProps['aria-label']` as `inputAriaLabel`.
 
 ```tsx
-// Before (0.48.x) — landmark and name added beside the field
+// Before (0.48.x) — the input name is passed through inputProps
 <search className="px-4 py-2">
   <TextFieldSearch
     className="w-full"
@@ -3661,24 +3661,24 @@ Remove call-site `<search>` wrappers. Pass the string you used for `inputProps['
   />
 </search>
 
-// After (0.X.0) — TextFieldSearch is the landmark, and the input has its own name
-<TextFieldSearch
-  className="w-full px-4 py-2"
-  clearButtonOnClick={handleClear}
-  inputAriaLabel={t('searchYourAccounts')}
-  onChange={handleChange}
-  placeholder={t('searchYourAccounts')}
-  value={query}
-/>
+// After (0.X.0) — the input has inputAriaLabel, and the landmark stays at the call site
+<search className="px-4 py-2" aria-label={t('searchYourAccounts')}>
+  <TextFieldSearch
+    className="w-full"
+    clearButtonOnClick={handleClear}
+    inputAriaLabel={t('searchYourAccounts')}
+    onChange={handleChange}
+    placeholder={t('searchYourAccounts')}
+    value={query}
+  />
+</search>
 ```
 
 **Impact:**
 
 - `inputAriaLabel` is required. Existing call sites fail typecheck until they pass it.
-- The root tag changes from `div` to `search`. Update snapshot tests that assert the old tag.
-- Do not wrap `TextFieldSearch` in another `<search>` element.
-- `ref` points at the `<search>` root. Its TypeScript type remains `HTMLDivElement`.
-- `className` is applied once, on that root.
+- The root element stays a `<div>`. `ref` and `className` still target that container.
+- Keep the `<search>` wrapper. Put a landmark `aria-label` on it when a page has more than one search.
 - `inputAriaLabel` wins over `inputProps['aria-label']` on the input.
 
 ### From version 0.46.0 to 0.47.0

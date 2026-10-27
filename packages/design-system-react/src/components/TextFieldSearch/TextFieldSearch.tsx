@@ -75,10 +75,7 @@ export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
         }
         endAccessory={resolvedEndAccessory}
         {...props}
-        asChild
-      >
-        <search />
-      </TextField>
+      />
     );
   },
 );

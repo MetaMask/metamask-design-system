@@ -94,7 +94,7 @@ describe('TextFieldSearch', () => {
       expect(screen.getByRole('searchbox')).toBeInTheDocument();
     });
 
-    it('renders a search landmark as the root element', () => {
+    it('renders a div as the root element', () => {
       render(
         <TextFieldSearch
           inputAriaLabel="Search"
@@ -105,7 +105,7 @@ describe('TextFieldSearch', () => {
         />,
       );
 
-      expect(screen.getByTestId(ROOT_TEST_ID).tagName).toBe('SEARCH');
+      expect(screen.getByTestId(ROOT_TEST_ID).tagName).toBe('DIV');
     });
 
     it('names the inner search input with inputAriaLabel', () => {
@@ -139,7 +139,7 @@ describe('TextFieldSearch', () => {
       ).toBeInTheDocument();
     });
 
-    it('keeps a top-level aria-label on the search landmark', () => {
+    it('keeps a top-level aria-label on the root', () => {
       render(
         <TextFieldSearch
           inputAriaLabel="Search"

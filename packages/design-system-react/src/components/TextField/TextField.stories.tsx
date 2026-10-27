@@ -165,11 +165,11 @@ export const AsChild: Story = {
   render: () => (
     <TextField
       asChild
-      inputProps={{ 'aria-label': 'Search tokens' }}
-      placeholder="Search"
+      inputProps={{ 'aria-label': 'Amount' }}
+      placeholder="0"
       value=""
     >
-      <search />
+      <section />
     </TextField>
   ),
 };

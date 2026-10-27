@@ -117,8 +117,8 @@ export type TextFieldProps = Omit<
     /**
      * Renders the field's content inside the element passed as `children`
      * instead of a `<div>`, merging the container's props and ref onto it.
-     * The child must be a single element. `TextFieldSearch` uses this to
-     * render a `<search>` landmark.
+     * The child must be a single element. For a search input, use
+     * `TextFieldSearch` and wrap it in `<search>`.
      *
      * @default false
      */
