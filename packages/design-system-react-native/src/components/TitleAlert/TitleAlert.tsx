@@ -25,7 +25,7 @@ import type { TitleAlertProps } from './TitleAlert.types';
  * @param props.title - Title row content; row renders only when `title` is renderable
  * @param props.titleWrapperProps - Optional props spread onto the title row {@link BoxRow}
  * @param props.titleProps - Optional props merged into title row `Text` when `title` is a string
- * @param props.description - Optional description below the title; uses {@link TextOrChildren}
+ * @param props.description - Optional text-centered description below the title; uses {@link TextOrChildren}
  * @param props.descriptionProps - Optional props merged into description `Text` when `description` is a string
  * @param props.twClassName - Optional Tailwind classes on the root BoxColumn
  *
