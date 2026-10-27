@@ -16,13 +16,16 @@ export const ModalFooter = forwardRef<HTMLElement, ModalFooterProps>(
       buttonsAlignment = ButtonsAlignment.Horizontal,
       primaryButtonProps,
       secondaryButtonProps,
+      tertiaryButtonProps,
       ...props
     },
     ref,
   ) => {
     const isHorizontal = buttonsAlignment === ButtonsAlignment.Horizontal;
     const buttonClassName = isHorizontal ? 'flex-1' : 'w-full';
-    const hasButtons = Boolean(primaryButtonProps || secondaryButtonProps);
+    const hasButtons = Boolean(
+      primaryButtonProps || secondaryButtonProps || tertiaryButtonProps,
+    );
 
     return (
       <footer ref={ref} className={twMerge('px-4 pt-4', className)} {...props}>
@@ -53,6 +56,17 @@ export const ModalFooter = forwardRef<HTMLElement, ModalFooterProps>(
                 className={twMerge(
                   buttonClassName,
                   primaryButtonProps.className,
+                )}
+              />
+            )}
+            {tertiaryButtonProps && (
+              <Button
+                size={ButtonSize.Lg}
+                {...tertiaryButtonProps}
+                variant={ButtonVariant.Tertiary}
+                className={twMerge(
+                  buttonClassName,
+                  tertiaryButtonProps.className,
                 )}
               />
             )}
