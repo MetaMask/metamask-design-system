@@ -22,6 +22,7 @@ const CANCEL_LABEL = 'Cancel';
  *   variant={HeaderSearchVariant.Screen}
  *   onPressBackButton={handleBack}
  *   textFieldSearchProps={{
+ *     inputAccessibilityLabel: 'Search',
  *     value: searchText,
  *     onChangeText: setSearchText,
  *     onPressClearButton: () => setSearchText(''),
@@ -35,6 +36,7 @@ const CANCEL_LABEL = 'Cancel';
  *   variant={HeaderSearchVariant.Inline}
  *   onPressCancelButton={handleCancel}
  *   textFieldSearchProps={{
+ *     inputAccessibilityLabel: 'Search',
  *     value: searchText,
  *     onChangeText: setSearchText,
  *     onPressClearButton: () => setSearchText(''),

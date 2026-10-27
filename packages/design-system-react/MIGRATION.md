@@ -3488,7 +3488,7 @@ The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven
 
 ### TextFieldSearch Component
 
-`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The root element is a `<div>`. Wrap it in `<search>` when the page should expose a search landmark. `inputAriaLabel` is required and names the inner input. An `aria-label` on the `<search>` element names the landmark instead. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` root plus a configurable `clearButtonProps.ariaLabel`.
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`. `inputAriaLabel` is required and names the inner input.
 
 #### Import Path
 
@@ -3541,7 +3541,7 @@ The extension component pulled the clear-button aria-label from `useI18nContext`
 
 | Extension Prop                      | Design System Migration                                                                                                     |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `as` / polymorphic `C`              | Removed. The root element is a `<div>`. Wrap the field in `<search>` for a search landmark.                                 |
+| `as` / polymorphic `C`              | Removed. The container is always a `<div>`.                                                                                 |
 | `type`                              | Fixed to `'search'`; not configurable. Use `TextField` if you need a different input type.                                  |
 | `inputProps.marginRight` adjustment | Removed. The container automatically reserves room for the clear button via the existing `TextField` end-accessory padding. |
 
@@ -3552,7 +3552,7 @@ The extension component pulled the clear-button aria-label from `useI18nContext`
 
 #### Styling
 
-The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className` on the field. Put landmark spacing on the surrounding `<search>` element.
+The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `mm-text-field-search` / `mm-text-field__button-clear` SCSS classes. Custom container styles should be passed via `className`.
 
 ### FormTextField Component
 
@@ -3642,43 +3642,35 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 **What changed:**
 
-`inputAriaLabel` is required and names the inner input. It takes precedence over `inputProps['aria-label']`. The component root stays a `<div>`. Wrap the field in `<search>` so assistive technology can jump to the search. An `aria-label` on that element names the landmark when a page has more than one search. That name is separate from `inputAriaLabel`.
+`inputAriaLabel` is required and names the inner input. It takes precedence over `inputProps['aria-label']`.
 
 **Migration:**
 
-Keep the call-site `<search>` wrapper. Pass the string you used for `inputProps['aria-label']` as `inputAriaLabel`.
+Pass the string you used for `inputProps['aria-label']` as `inputAriaLabel`.
 
 ```tsx
-// Before (0.48.x) — the input name is passed through inputProps
-<search className="px-4 py-2">
-  <TextFieldSearch
-    className="w-full"
-    clearButtonOnClick={handleClear}
-    inputProps={{ 'aria-label': t('searchYourAccounts') }}
-    onChange={handleChange}
-    placeholder={t('searchYourAccounts')}
-    value={query}
-  />
-</search>
+// Before (0.48.x)
+<TextFieldSearch
+  clearButtonOnClick={handleClear}
+  inputProps={{ 'aria-label': t('searchYourAccounts') }}
+  onChange={handleChange}
+  placeholder={t('searchYourAccounts')}
+  value={query}
+/>
 
-// After (0.X.0) — the input has inputAriaLabel, and the landmark stays at the call site
-<search className="px-4 py-2" aria-label={t('searchYourAccounts')}>
-  <TextFieldSearch
-    className="w-full"
-    clearButtonOnClick={handleClear}
-    inputAriaLabel={t('searchYourAccounts')}
-    onChange={handleChange}
-    placeholder={t('searchYourAccounts')}
-    value={query}
-  />
-</search>
+// After (0.X.0)
+<TextFieldSearch
+  clearButtonOnClick={handleClear}
+  inputAriaLabel={t('searchYourAccounts')}
+  onChange={handleChange}
+  placeholder={t('searchYourAccounts')}
+  value={query}
+/>
 ```
 
 **Impact:**
 
 - `inputAriaLabel` is required. Existing call sites fail typecheck until they pass it.
-- The root element stays a `<div>`. `ref` and `className` still target that container.
-- Keep the `<search>` wrapper. Put a landmark `aria-label` on it when a page has more than one search.
 - `inputAriaLabel` wins over `inputProps['aria-label']` on the input.
 
 ### From version 0.46.0 to 0.47.0

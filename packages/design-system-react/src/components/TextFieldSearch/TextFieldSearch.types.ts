@@ -4,9 +4,7 @@ import type { TextFieldProps } from '../TextField';
 export type TextFieldSearchProps = Omit<TextFieldProps, 'type'> & {
   /**
    * Accessible name for the inner search input. Required. It renders no text.
-   *
-   * A surrounding `<search>` element is a separate landmark. Put `aria-label`
-   * on that element when a page has more than one search.
+   * It takes precedence over `inputProps['aria-label']`.
    */
   inputAriaLabel: string;
   /**

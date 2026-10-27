@@ -89,7 +89,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-`inputAccessibilityLabel` is required and is set as `accessibilityLabel` on the inner `TextInput`. It takes precedence over `inputProps.accessibilityLabel`. A top-level `accessibilityLabel` still lands on the root `Box`, which is hidden from screen readers (`accessible={false}`), so it does not name the field. React Native has no `<search>` landmark.
+`inputAccessibilityLabel` is required and is set as `accessibilityLabel` on the inner `TextInput`. It takes precedence over `inputProps.accessibilityLabel`. A top-level `accessibilityLabel` still lands on the root `Box`, which is hidden from screen readers (`accessible={false}`), so it does not name the field.
 
 **Migration:**
 

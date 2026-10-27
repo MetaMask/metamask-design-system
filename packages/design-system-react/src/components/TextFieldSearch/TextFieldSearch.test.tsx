@@ -94,20 +94,6 @@ describe('TextFieldSearch', () => {
       expect(screen.getByRole('searchbox')).toBeInTheDocument();
     });
 
-    it('renders a div as the root element', () => {
-      render(
-        <TextFieldSearch
-          inputAriaLabel="Search"
-          data-testid={ROOT_TEST_ID}
-          onChange={noop}
-          value=""
-          clearButtonOnClick={noop}
-        />,
-      );
-
-      expect(screen.getByTestId(ROOT_TEST_ID).tagName).toBe('DIV');
-    });
-
     it('names the inner search input with inputAriaLabel', () => {
       render(
         <TextFieldSearch

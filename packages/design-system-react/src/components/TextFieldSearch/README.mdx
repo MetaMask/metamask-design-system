@@ -4,23 +4,13 @@ import * as TextFieldSearchStories from './TextFieldSearch.stories';
 
 # TextFieldSearch
 
-TextFieldSearch is the component for search and filtering experiences. Use it when people need to search or filter. For a general-purpose text input, use `TextField`.
+TextFieldSearch is a controlled search input built on top of `TextField`. It renders a leading search icon, sets the native input `type` to `search`, and shows a trailing clear button when the field has a value. Use it for filtering or search experiences; for a general-purpose text input, use `TextField`.
 
 ```tsx
 import { TextFieldSearch } from '@metamask/design-system-react';
 
-<search>
-  <TextFieldSearch
-    inputAriaLabel="Search"
-    placeholder="Search"
-    value={search}
-    onChange={(event) => setSearch(event.target.value)}
-    clearButtonOnClick={() => setSearch('')}
-  />
-</search>;
+<TextFieldSearch inputAriaLabel="Search" placeholder="Search" value="" />;
 ```
-
-Wrap the field in `<search>`. It is a landmark, so people using a screen reader can jump to the search. `inputAriaLabel` names the input and renders no text. When a page has more than one search, give each `<search>` its own `aria-label`. That name is for the landmark, and `inputAriaLabel` is for the input.
 
 The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` to your own state — the clear button always renders when `value` is truthy and `clearButtonOnClick` is required.
 
@@ -61,8 +51,6 @@ Inherited from `TextField`. Renders the error border treatment.
 ### `inputAriaLabel`
 
 Required name for the inner search input. It renders no text. It takes precedence over `inputProps['aria-label']`.
-
-An `aria-label` on the surrounding `<search>` element names the landmark, not the input.
 
 <Canvas of={TextFieldSearchStories.InputAriaLabel} />
 

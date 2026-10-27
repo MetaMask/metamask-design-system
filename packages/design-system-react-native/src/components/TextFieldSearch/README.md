@@ -1,6 +1,6 @@
 # TextFieldSearch
 
-TextFieldSearch is the component for search and filtering experiences. Use it when people need to search or filter. For a general-purpose text input, use [TextField](../TextField/README.md).
+TextFieldSearch is an input component that allows users to enter text to search. It extends the [TextField](../TextField/README.md) component with a search icon and optional clear button.
 
 ```tsx
 import { TextFieldSearch } from '@metamask/design-system-react-native';
@@ -12,7 +12,7 @@ const [searchText, setSearchText] = useState('');
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}
-  placeholder="Search"
+  placeholder="Search..."
 />;
 ```
 
@@ -60,7 +60,7 @@ const [searchText, setSearchText] = useState('');
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}
-  placeholder="Search"
+  placeholder="Search..."
 />;
 ```
 
