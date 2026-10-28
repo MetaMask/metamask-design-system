@@ -36,7 +36,6 @@ export const typography = {
   fontFamily: {
     sans: 'var(--font-family-default)',
     default: 'var(--font-family-default)',
-    accent: 'var(--font-family-accent)',
     hero: 'var(--font-family-hero)',
   },
   letterSpacing: {

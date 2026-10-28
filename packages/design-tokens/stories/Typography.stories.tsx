@@ -30,13 +30,6 @@ export const FontFamily: StoryFn<typeof Text> = () => {
       fontWeight: fontWeights.regular,
       letterSpacing: letterSpacing.letterSpacing1,
     },
-    accent: {
-      fontFamily: fontFamilies.accent,
-      fontSize: fontSizes.fontSize7,
-      lineHeight: `${lineHeights.lineHeight6}px`,
-      fontWeight: fontWeights.regular,
-      letterSpacing: letterSpacing.letterSpacing1,
-    },
     hero: {
       fontFamily: fontFamilies.hero,
       fontSize: fontSizes.fontSize7,
@@ -48,7 +41,6 @@ export const FontFamily: StoryFn<typeof Text> = () => {
   return (
     <>
       <Text style={styles.default}>Inter</Text>
-      <Text style={styles.accent}>MM Sans</Text>
       <Text style={styles.hero}>Grotzec Cond</Text>
     </>
   );

@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
+  - [From version 0.43.0 to 0.X.0](#from-version-0430-to-0x0)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
@@ -13,6 +14,39 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
+
+### From version 0.43.0 to 0.X.0
+
+<a id="from-version-0430-to-0x0"></a>
+
+#### `FontFamily.Accent` removed
+
+`FontFamily.Accent` (MM Sans) is removed. `FontFamily.Default` and `FontFamily.Hero` remain. `FontFamily.Hero` still has the value `'hero'` and represents Grotzec Cond Bold.
+
+**What changed:**
+
+- Removed `FontFamily.Accent` (`'accent'`)
+- `FontFamily.Default` (`'default'`) and `FontFamily.Hero` (`'hero'`) are unchanged
+
+**Migration:**
+
+```tsx
+// Before (0.43.0)
+import { FontFamily } from '@metamask/design-system-shared';
+
+fontFamily={FontFamily.Accent}
+
+// After (0.X.0)
+import { FontFamily } from '@metamask/design-system-shared';
+
+fontFamily={FontFamily.Default}
+```
+
+Use `FontFamily.Hero` when the text is a display or marketing headline.
+
+**Impact:**
+
+TypeScript fails on `FontFamily.Accent`. `@metamask/design-system-react` and `@metamask/design-system-react-native` re-export the same `FontFamily` object, so those packages must update in the same release.
 
 ### From version 0.34.0 to 0.35.0
 

@@ -2,6 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 12.0.0 to X.0.0](#from-version-1200-to-x00)
 - [From version 11.1.0 to 12.0.0](#from-version-1110-to-1200)
 - [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
@@ -14,6 +15,49 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 12.0.0 to X.0.0
+
+<a id="from-version-1200-to-x00"></a>
+
+MM Sans is removed. `fontFamilies.accent`, `--font-family-accent`, and the `font-accent` utility are gone. MM Poly was already replaced by Grotzec Cond Bold in 12.0.0; delete any MM Poly files that are still bundled. `fontFamilies.hero` and `--font-family-hero` stay on Grotzec Cond.
+
+### What changed
+
+- Removed `fontFamilies.accent` and the Figma token `global.fontFamilies.accent`
+- Removed `--font-family-accent`
+- Removed the `font-accent` utility
+- `fontFamilies.hero`, `--font-family-hero`, and `font-hero` are unchanged
+
+### Migration
+
+Stop loading MM Sans and MM Poly. Use Inter for body text and Grotzec Cond Bold for hero text.
+
+```css
+/* Before (12.0.0) */
+font-family: var(--font-family-accent);
+
+/* After (X.0.0) */
+font-family: var(--font-family-default);
+```
+
+Delete MM Sans `@font-face` rules and the font files. The same applies to any leftover MM Poly files.
+
+```css
+/* Remove */
+@font-face {
+  font-family: 'MMSans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/MMSans/MMSans-Regular.woff2') format('woff2');
+}
+```
+
+Hero text keeps the Grotzec Cond Bold face registered for `--font-family-hero`. Use `font-family: var(--font-family-hero)` when the text is a display or marketing headline.
+
+**Impact:**
+
+Styles that still reference `--font-family-accent` or `font-accent` fall back to the inherited font until they switch to `--font-family-default` or `--font-family-hero`.
 
 ## From version 11.1.0 to 12.0.0
 
@@ -409,7 +453,7 @@ The preset is no longer needed for Tailwind v4 consumers. It will eventually be 
 | Color shortcuts   | `@utility` directives (e.g. `bg-default`, `text-default`, `border-default`)                                                                    |
 | Typography        | `@utility` directives for `text-*`, `leading-*`, `tracking-*`                                                                                  |
 | Font weights      | `@utility` directives for `font-regular`, `font-medium`, `font-bold`                                                                           |
-| Font families     | `@utility` directives for `font-default`, `font-accent`, `font-hero`                                                                           |
+| Font families     | `@utility` directives for `font-default`, `font-hero`                                                                                          |
 | Box shadows       | `@theme` variables (`--shadow-xs` / `sm` / `md` / `lg`) auto-generate `shadow-xs`–`shadow-lg` utilities                                        |
 | Shadow colors     | `--color-shadow-default` / `primary` / `error` in `@theme` only (no `shadow-default` etc. utilities; v3’s color-stack pattern had no adoption) |
 | Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                                                              |

@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.54.0 to 0.X.0](#from-version-0540-to-0x0)
 - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
 - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
@@ -54,6 +55,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.54.0 to 0.X.0](#from-version-0540-to-0x0)
   - [From version 0.53.0 to 0.54.0](#from-version-0530-to-0540)
   - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
   - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
@@ -80,6 +82,42 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.54.0 to 0.X.0
+
+<a id="from-version-0540-to-0x0"></a>
+
+#### Removed `FontFamily.Accent` and MM Sans
+
+`FontFamily.Accent` is removed. The twrnc families `accent-regular`, `accent-medium`, and `accent-bold` are removed with it. `FontFamily.Hero` still uses `font-hero-bold` (`GrotzecCond-Bold`). Delete any leftover MM Poly registration; that face was replaced in 0.52.0.
+
+**What changed:**
+
+- `FontFamily.Accent` is removed
+- `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` no longer resolve
+- `FontFamily.Hero` still applies `font-hero-bold` for every weight
+
+**Migration:**
+
+Stop registering `MMSans-Regular`, `MMSans-Medium`, and `MMSans-Bold`. Delete those files and any leftover `MMPoly-Regular` registration.
+
+```tsx
+// Before (0.54.0)
+import { FontFamily, Text } from '@metamask/design-system-react-native';
+
+<Text fontFamily={FontFamily.Accent}>Rewards balance</Text>;
+
+// After (0.X.0)
+import { FontFamily, Text } from '@metamask/design-system-react-native';
+
+<Text fontFamily={FontFamily.Default}>Rewards balance</Text>;
+```
+
+Use `FontFamily.Hero` when the text is a display or marketing headline. Replace any direct `font-accent-*` class with `font-default-regular`, `font-default-medium`, or `font-default-bold`.
+
+**Impact:**
+
+`font-accent-*` classes no longer resolve. Hero text stays on `FontFamily.Hero`. This release coordinates with `@metamask/design-tokens`, `@metamask/design-system-shared`, and `@metamask/design-system-twrnc-preset`.
 
 ### From version 0.53.0 to 0.54.0
 

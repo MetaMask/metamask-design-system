@@ -13,7 +13,6 @@ export const TWCLASSMAP_TEXT_FONTWEIGHT: Record<FontWeight, string> = {
 
 export const TWCLASSMAP_TEXT_FONTFAMILY: Record<FontFamily, string> = {
   [FontFamily.Default]: 'font-default',
-  [FontFamily.Accent]: 'font-accent',
   [FontFamily.Hero]: 'font-hero',
 };
 

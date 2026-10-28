@@ -797,9 +797,6 @@
 @utility font-default {
   font-family: var(--font-family-default);
 }
-@utility font-accent {
-  font-family: var(--font-family-accent);
-}
 @utility font-hero {
   font-family: var(--font-family-hero);
 }
