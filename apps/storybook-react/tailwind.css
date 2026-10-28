@@ -59,25 +59,3 @@
   font-weight: 600;
   src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
 }
-
-/* MM Sans */
-@font-face {
-  font-family: 'MMSans';
-  font-style: normal;
-  font-weight: 400;
-  src: url('fonts/MMSans/MMSans-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'MMSans';
-  font-style: normal;
-  font-weight: 500;
-  src: url('fonts/MMSans/MMSans-Medium.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'MMSans';
-  font-style: normal;
-  font-weight: 600;
-  src: url('fonts/MMSans/MMSans-Bold.woff2') format('woff2');
-}

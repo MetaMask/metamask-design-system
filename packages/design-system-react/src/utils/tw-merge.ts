@@ -53,7 +53,7 @@ export const twMerge = extendTailwindMerge({
           text: variantClassGroups,
         },
       ],
-      'font-family': ['font-default', 'font-accent', 'font-hero'],
+      'font-family': ['font-default', 'font-hero'],
       'font-weight': [
         'font-thin',
         'font-extralight',

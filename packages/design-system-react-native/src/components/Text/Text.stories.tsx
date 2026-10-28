@@ -134,9 +134,6 @@ export const FontFamilyStory: Story = {
       <Text {...args} fontFamily={FontFamily.Default}>
         Default (Inter)
       </Text>
-      <Text {...args} fontFamily={FontFamily.Accent}>
-        Accent (MM Sans)
-      </Text>
       <Text {...args} fontFamily={FontFamily.Hero}>
         Hero (Grotzec Cond)
       </Text>

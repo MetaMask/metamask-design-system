@@ -219,7 +219,6 @@ describe('Typography CSS', () => {
   describe('Font Families', () => {
     const fontFamilies = {
       default: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-      accent: "'MMSans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
       hero: "'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif",
     };
 

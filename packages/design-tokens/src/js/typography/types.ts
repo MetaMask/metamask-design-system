@@ -50,7 +50,6 @@ export type ThemeTypography = {
 
 export type FontFamilies = {
   default: string;
-  accent: string;
   hero: string;
 };
 

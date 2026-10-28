@@ -117,9 +117,6 @@ export const typographyTailwindConfig: TypographyTailwindConfigProps = {
     'default-medium-italic': 'Inter-MediumItalic',
     'default-bold': 'Inter-SemiBold',
     'default-bold-italic': 'Inter-SemiBoldItalic',
-    'accent-regular': 'MMSans-Regular',
-    'accent-medium': 'MMSans-Medium',
-    'accent-bold': 'MMSans-Bold',
     'hero-bold': 'GrotzecCond-Bold',
   },
   letterSpacing: {

@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.49.0 to 0.X.0](#from-version-0490-to-0x0)
   - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
   - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
@@ -3633,6 +3634,42 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.49.0 to 0.X.0
+
+<a id="from-version-0490-to-0x0"></a>
+
+#### Removed `FontFamily.Accent` (MM Sans)
+
+`FontFamily.Accent` and the `font-accent` class are removed. `FontFamily.Hero` stays and still renders Grotzec Cond Bold. Delete any leftover MM Poly font files; that face was replaced in 0.47.0.
+
+**What changed:**
+
+- `FontFamily.Accent` is removed from `FontFamily`
+- `font-accent` no longer resolves. The Tailwind preset no longer maps `accent` to `--font-family-accent`
+- `FontFamily.Hero` and `font-hero` are unchanged
+
+**Migration:**
+
+Replace `FontFamily.Accent` with `FontFamily.Hero`.
+
+```tsx
+// Before (0.49.0)
+import { FontFamily, Text } from '@metamask/design-system-react';
+
+<Text fontFamily={FontFamily.Accent}>Rewards balance</Text>;
+
+// After (0.X.0)
+import { FontFamily, Text } from '@metamask/design-system-react';
+
+<Text fontFamily={FontFamily.Hero}>Rewards balance</Text>;
+```
+
+Replace `font-accent` with `font-hero`. Delete MM Sans `@font-face` rules and font files, and any leftover MM Poly files. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1200-to-x00).
+
+**Impact:**
+
+TypeScript fails on `FontFamily.Accent`. `font-accent` no longer applies a family. This release coordinates with `@metamask/design-tokens`, `@metamask/design-system-shared`, and `@metamask/design-system-tailwind-preset`.
 
 ### From version 0.48.0 to 0.49.0
 

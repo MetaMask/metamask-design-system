@@ -85,9 +85,6 @@ export type TypographyTailwindConfigProps = {
     'default-medium-italic': string;
     'default-bold': string;
     'default-bold-italic': string;
-    'accent-regular': string;
-    'accent-medium': string;
-    'accent-bold': string;
     'hero-bold': string;
   };
   letterSpacing: Record<TypographyVariant, string>;
