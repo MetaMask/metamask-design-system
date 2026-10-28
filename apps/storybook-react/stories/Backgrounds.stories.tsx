@@ -19,6 +19,7 @@ import React from 'react';
 const meta: Meta = {
   title: 'Patterns/Backgrounds',
   component: () => null,
+  tags: ['!autodocs'],
 };
 
 export default meta;
