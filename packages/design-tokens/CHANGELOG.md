@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Uncategorized
-
-- chore(deps-dev): bump @metamask/auto-changelog from 6.2.1 to 7.0.1 ([#1623](https://github.com/MetaMask/metamask-design-system/pull/1623))
-
 ## [12.0.0]
 
 ### Added
