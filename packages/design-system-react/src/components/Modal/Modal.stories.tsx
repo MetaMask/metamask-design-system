@@ -221,6 +221,7 @@ export const InitialFocusRef: Story = {
               Modal Header
             </ModalHeader>
             <TextFieldSearch
+              inputAriaLabel="Search"
               placeholder="Search"
               inputRef={inputRef}
               value={searchValue}

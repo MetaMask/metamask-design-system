@@ -17,6 +17,8 @@ export const TextFieldSearch = forwardRef<View, TextFieldSearchProps>(
       style,
       startAccessory,
       endAccessory,
+      inputAccessibilityLabel,
+      inputProps,
       ...props
     },
     ref,
@@ -50,6 +52,10 @@ export const TextFieldSearch = forwardRef<View, TextFieldSearchProps>(
       <TextField
         ref={ref}
         {...props}
+        inputProps={{
+          ...inputProps,
+          accessibilityLabel: inputAccessibilityLabel,
+        }}
         value={value}
         startAccessory={
           startAccessory !== undefined ? startAccessory : searchIcon

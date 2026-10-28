@@ -9,7 +9,7 @@ TextFieldSearch is a controlled search input built on top of `TextField`. It ren
 ```tsx
 import { TextFieldSearch } from '@metamask/design-system-react';
 
-<TextFieldSearch placeholder="Search" value="" />;
+<TextFieldSearch inputAriaLabel="Search" placeholder="Search" value="" />;
 ```
 
 The component is controlled. Wire `value`, `onChange`, and `clearButtonOnClick` to your own state — the clear button always renders when `value` is truthy and `clearButtonOnClick` is required.
@@ -47,6 +47,12 @@ Inherited from `TextField`. Disables the inner input and the clear button contai
 Inherited from `TextField`. Renders the error border treatment.
 
 <Canvas of={TextFieldSearchStories.IsError} />
+
+### `inputAriaLabel`
+
+Required name for the inner search input. It renders no text. It takes precedence over `inputProps['aria-label']`.
+
+<Canvas of={TextFieldSearchStories.InputAriaLabel} />
 
 ### Other props
 

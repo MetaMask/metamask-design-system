@@ -8,6 +8,7 @@ import { TextFieldSearch } from '@metamask/design-system-react-native';
 const [searchText, setSearchText] = useState('');
 
 <TextFieldSearch
+  inputAccessibilityLabel="Search"
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}
@@ -39,6 +40,14 @@ Optional prop to pass any additional props to the clear button (e.g. [ButtonIcon
 | ------------------------ | -------- |
 | Partial<ButtonIconProps> | No       |
 
+### `inputAccessibilityLabel`
+
+Accessible name for the inner `TextInput`. Required, including when the field has no visible label. It takes precedence over `inputProps.accessibilityLabel`. It renders no text.
+
+| TYPE   | REQUIRED |
+| ------ | -------- |
+| string | Yes      |
+
 ## Usage
 
 ```tsx
@@ -47,6 +56,7 @@ import { TextFieldSearch } from '@metamask/design-system-react-native';
 const [searchText, setSearchText] = useState('');
 
 <TextFieldSearch
+  inputAccessibilityLabel="Search"
   value={searchText}
   onChangeText={setSearchText}
   onPressClearButton={() => setSearchText('')}

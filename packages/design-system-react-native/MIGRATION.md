@@ -54,6 +54,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.53.0 to 0.X.0](#from-version-0530-to-0x0)
   - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
   - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
@@ -79,6 +80,41 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.53.0 to 0.X.0
+
+<a id="from-version-0530-to-0x0"></a>
+
+#### TextFieldSearch: required `inputAccessibilityLabel`
+
+**What changed:**
+
+`inputAccessibilityLabel` is required and is set as `accessibilityLabel` on the inner `TextInput`. It takes precedence over `inputProps.accessibilityLabel`. A top-level `accessibilityLabel` still lands on the root `Box`, which is hidden from screen readers (`accessible={false}`), so it does not name the field.
+
+**Migration:**
+
+```tsx
+// Before (0.53.x)
+<TextFieldSearch
+  accessibilityLabel="Search tokens"
+  value={query}
+  onChangeText={setQuery}
+  onPressClearButton={() => setQuery('')}
+/>
+
+// After (0.X.0)
+<TextFieldSearch
+  inputAccessibilityLabel="Search tokens"
+  value={query}
+  onChangeText={setQuery}
+  onPressClearButton={() => setQuery('')}
+/>
+```
+
+**Impact:**
+
+- `inputAccessibilityLabel` is required. Existing call sites fail typecheck until they pass it.
+- `HeaderSearch` forwards `textFieldSearchProps`, so that object must include `inputAccessibilityLabel`.
 
 ### From version 0.51.0 to 0.52.0
 

@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.48.0 to 0.X.0](#from-version-0480-to-0x0)
   - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
@@ -3487,7 +3488,7 @@ The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven
 
 ### TextFieldSearch Component
 
-`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`.
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`. `inputAriaLabel` is required and names the inner input.
 
 #### Import Path
 
@@ -3529,6 +3530,7 @@ The extension component pulled the clear-button aria-label from `useI18nContext`
 
 // After (Design System): pass a localized label via clearButtonProps
 <TextFieldSearch
+  inputAriaLabel="Search"
   value={value}
   clearButtonOnClick={handleClear}
   clearButtonProps={{ ariaLabel: t('clear') }}
@@ -3631,6 +3633,45 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.48.0 to 0.X.0
+
+<a id="from-version-0480-to-0x0"></a>
+
+#### TextFieldSearch: required `inputAriaLabel`
+
+**What changed:**
+
+`inputAriaLabel` is required and names the inner input. It takes precedence over `inputProps['aria-label']`.
+
+**Migration:**
+
+Pass the string you used for `inputProps['aria-label']` as `inputAriaLabel`.
+
+```tsx
+// Before (0.48.x)
+<TextFieldSearch
+  clearButtonOnClick={handleClear}
+  inputProps={{ 'aria-label': t('searchYourAccounts') }}
+  onChange={handleChange}
+  placeholder={t('searchYourAccounts')}
+  value={query}
+/>
+
+// After (0.X.0)
+<TextFieldSearch
+  clearButtonOnClick={handleClear}
+  inputAriaLabel={t('searchYourAccounts')}
+  onChange={handleChange}
+  placeholder={t('searchYourAccounts')}
+  value={query}
+/>
+```
+
+**Impact:**
+
+- `inputAriaLabel` is required. Existing call sites fail typecheck until they pass it.
+- `inputAriaLabel` wins over `inputProps['aria-label']` on the input.
 
 ### From version 0.46.0 to 0.47.0
 

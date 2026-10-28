@@ -55,6 +55,11 @@ const meta: Meta<TextFieldSearchProps> = {
     isError: { control: 'boolean' },
     placeholder: { control: 'text' },
     value: { control: 'text' },
+    inputAriaLabel: {
+      control: 'text',
+      description:
+        'Accessible name for the search input when there is no visible label.',
+    },
   },
 };
 
@@ -64,6 +69,7 @@ type Story = StoryObj<TextFieldSearchProps>;
 
 export const Default: Story = {
   args: {
+    inputAriaLabel: 'Search',
     placeholder: 'Search',
     value: '',
   },
@@ -74,16 +80,19 @@ export const Size: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <ControlledTextFieldSearch
+        inputAriaLabel="Search"
         placeholder="Sm"
         size={TextFieldSize.Sm}
         value=""
       />
       <ControlledTextFieldSearch
+        inputAriaLabel="Search"
         placeholder="Md"
         size={TextFieldSize.Md}
         value=""
       />
       <ControlledTextFieldSearch
+        inputAriaLabel="Search"
         placeholder="Lg"
         size={TextFieldSize.Lg}
         value=""
@@ -94,22 +103,42 @@ export const Size: Story = {
 
 export const IsDisabled: Story = {
   render: () => (
-    <ControlledTextFieldSearch placeholder="Search" value="hello" isDisabled />
+    <ControlledTextFieldSearch
+      inputAriaLabel="Search"
+      placeholder="Search"
+      value="hello"
+      isDisabled
+    />
   ),
 };
 
 export const IsError: Story = {
   render: () => (
-    <ControlledTextFieldSearch placeholder="Search" value="hello" isError />
+    <ControlledTextFieldSearch
+      inputAriaLabel="Search"
+      placeholder="Search"
+      value="hello"
+      isError
+    />
   ),
 };
 
 export const ClearButtonProps: Story = {
   render: () => (
     <ControlledTextFieldSearch
+      inputAriaLabel="Search"
       placeholder="Search"
       value="hello"
       clearButtonProps={{ ariaLabel: 'Clear search' }}
     />
   ),
+};
+
+export const InputAriaLabel: Story = {
+  args: {
+    inputAriaLabel: 'Search tokens',
+    placeholder: 'Search',
+    value: '',
+  },
+  render: (args) => <ControlledTextFieldSearch {...args} />,
 };
