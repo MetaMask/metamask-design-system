@@ -30,6 +30,8 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **Migration:**
 
+Replace `FontFamily.Accent` with `FontFamily.Hero`.
+
 ```tsx
 // Before (0.43.0)
 import { FontFamily } from '@metamask/design-system-shared';
@@ -39,10 +41,8 @@ fontFamily={FontFamily.Accent}
 // After (0.X.0)
 import { FontFamily } from '@metamask/design-system-shared';
 
-fontFamily={FontFamily.Default}
+fontFamily={FontFamily.Hero}
 ```
-
-Use `FontFamily.Hero` when the text is a display or marketing headline.
 
 **Impact:**
 

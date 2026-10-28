@@ -31,17 +31,17 @@ MM Sans is removed. `fontFamilies.accent`, `--font-family-accent`, and the `font
 
 ### Migration
 
-Stop loading MM Sans and MM Poly. Use Inter for body text and Grotzec Cond Bold for hero text.
+Replace accent with the hero family. `--font-family-hero` and `font-hero` already resolve to Grotzec Cond Bold. Stop loading MM Sans and any leftover MM Poly files.
 
 ```css
 /* Before (12.0.0) */
 font-family: var(--font-family-accent);
 
 /* After (X.0.0) */
-font-family: var(--font-family-default);
+font-family: var(--font-family-hero);
 ```
 
-Delete MM Sans `@font-face` rules and the font files. The same applies to any leftover MM Poly files.
+Replace the `font-accent` utility with `font-hero`. Delete MM Sans `@font-face` rules and the font files. The same applies to any leftover MM Poly files.
 
 ```css
 /* Remove */
@@ -53,11 +53,9 @@ Delete MM Sans `@font-face` rules and the font files. The same applies to any le
 }
 ```
 
-Hero text keeps the Grotzec Cond Bold face registered for `--font-family-hero`. Use `font-family: var(--font-family-hero)` when the text is a display or marketing headline.
-
 **Impact:**
 
-Styles that still reference `--font-family-accent` or `font-accent` fall back to the inherited font until they switch to `--font-family-default` or `--font-family-hero`.
+Styles that still reference `--font-family-accent` or `font-accent` fall back to the inherited font until they switch to `--font-family-hero` or `font-hero`.
 
 ## From version 11.1.0 to 12.0.0
 

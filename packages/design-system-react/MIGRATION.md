@@ -3651,6 +3651,8 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 **Migration:**
 
+Replace `FontFamily.Accent` with `FontFamily.Hero`.
+
 ```tsx
 // Before (0.49.0)
 import { FontFamily, Text } from '@metamask/design-system-react';
@@ -3660,10 +3662,10 @@ import { FontFamily, Text } from '@metamask/design-system-react';
 // After (0.X.0)
 import { FontFamily, Text } from '@metamask/design-system-react';
 
-<Text fontFamily={FontFamily.Default}>Rewards balance</Text>;
+<Text fontFamily={FontFamily.Hero}>Rewards balance</Text>;
 ```
 
-Use `FontFamily.Hero` when the text is a display or marketing headline. Delete MM Sans `@font-face` rules and font files, and any leftover MM Poly files. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1200-to-x00).
+Replace `font-accent` with `font-hero`. Delete MM Sans `@font-face` rules and font files, and any leftover MM Poly files. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1200-to-x00).
 
 **Impact:**
 

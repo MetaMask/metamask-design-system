@@ -99,7 +99,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **Migration:**
 
-Stop registering `MMSans-Regular`, `MMSans-Medium`, and `MMSans-Bold`. Delete those files and any leftover `MMPoly-Regular` registration.
+Replace `FontFamily.Accent` with `FontFamily.Hero`. Stop registering `MMSans-Regular`, `MMSans-Medium`, and `MMSans-Bold`. Delete those files and any leftover `MMPoly-Regular` registration.
 
 ```tsx
 // Before (0.54.0)
@@ -110,10 +110,10 @@ import { FontFamily, Text } from '@metamask/design-system-react-native';
 // After (0.X.0)
 import { FontFamily, Text } from '@metamask/design-system-react-native';
 
-<Text fontFamily={FontFamily.Default}>Rewards balance</Text>;
+<Text fontFamily={FontFamily.Hero}>Rewards balance</Text>;
 ```
 
-Use `FontFamily.Hero` when the text is a display or marketing headline. Replace any direct `font-accent-*` class with `font-default-regular`, `font-default-medium`, or `font-default-bold`.
+Replace `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` with `font-hero-bold`. Hero ships only the Bold cut, so every former accent weight uses that face.
 
 **Impact:**
 
