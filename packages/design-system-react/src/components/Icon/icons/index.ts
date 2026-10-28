@@ -73,6 +73,7 @@ import Extension from './Extension';
 import EyeSlash from './EyeSlash';
 import Eye from './Eye';
 import FaceId from './FaceId';
+import FeedPost from './FeedPost';
 import Feedback from './Feedback';
 import File from './File';
 import Filter from './Filter';
@@ -131,7 +132,6 @@ import Plant from './Plant';
 import Play from './Play';
 import Plug from './Plug';
 import PopUp from './PopUp';
-import Post from './Post';
 import Predictions from './Predictions';
 import ProgrammingArrows from './ProgrammingArrows';
 import QrCode from './QrCode';
@@ -266,6 +266,7 @@ export const Icons = {
   EyeSlash,
   Eye,
   FaceId,
+  FeedPost,
   Feedback,
   File,
   Filter,
@@ -324,7 +325,6 @@ export const Icons = {
   Play,
   Plug,
   PopUp,
-  Post,
   Predictions,
   ProgrammingArrows,
   QrCode,

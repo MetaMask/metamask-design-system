@@ -73,6 +73,7 @@ import ExtensionSVG from './assets/extension.svg';
 import EyeSlashSVG from './assets/eye-slash.svg';
 import EyeSVG from './assets/eye.svg';
 import FaceIdSVG from './assets/face-id.svg';
+import FeedPostSVG from './assets/feed-post.svg';
 import FeedbackSVG from './assets/feedback.svg';
 import FileSVG from './assets/file.svg';
 import FilterSVG from './assets/filter.svg';
@@ -131,7 +132,6 @@ import PlantSVG from './assets/plant.svg';
 import PlaySVG from './assets/play.svg';
 import PlugSVG from './assets/plug.svg';
 import PopUpSVG from './assets/pop-up.svg';
-import PostSVG from './assets/post.svg';
 import PredictionsSVG from './assets/predictions.svg';
 import ProgrammingArrowsSVG from './assets/programming-arrows.svg';
 import QrCodeSVG from './assets/qr-code.svg';
@@ -270,6 +270,7 @@ export const assetByIconName: AssetByIconName = {
   EyeSlash: EyeSlashSVG,
   Eye: EyeSVG,
   FaceId: FaceIdSVG,
+  FeedPost: FeedPostSVG,
   Feedback: FeedbackSVG,
   File: FileSVG,
   Filter: FilterSVG,
@@ -328,7 +329,6 @@ export const assetByIconName: AssetByIconName = {
   Play: PlaySVG,
   Plug: PlugSVG,
   PopUp: PopUpSVG,
-  Post: PostSVG,
   Predictions: PredictionsSVG,
   ProgrammingArrows: ProgrammingArrowsSVG,
   QrCode: QrCodeSVG,
