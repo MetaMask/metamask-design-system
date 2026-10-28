@@ -54,7 +54,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.53.0 to 0.X.0](#from-version-0530-to-0x0)
+  - [From version 0.53.0 to 0.54.0](#from-version-0530-to-0540)
   - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
   - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
@@ -81,9 +81,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.53.0 to 0.X.0
+### From version 0.53.0 to 0.54.0
 
-<a id="from-version-0530-to-0x0"></a>
+<a id="from-version-0530-to-0540"></a>
 
 #### TextFieldSearch: required `inputAccessibilityLabel`
 
@@ -102,7 +102,7 @@ This guide provides detailed instructions for migrating your project from one ve
   onPressClearButton={() => setQuery('')}
 />
 
-// After (0.X.0)
+// After (0.54.0)
 <TextFieldSearch
   inputAccessibilityLabel="Search tokens"
   value={query}

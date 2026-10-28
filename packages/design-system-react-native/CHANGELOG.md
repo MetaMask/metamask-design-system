@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.54.0]
+
+### Added
+
+- Added `FeedPost`, available as `IconName.FeedPost` ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
+
+### Changed
+
+- **BREAKING:** `TextFieldSearch` requires `inputAccessibilityLabel` ([#1621](https://github.com/MetaMask/metamask-design-system/pull/1621))
+  - The string is set as `accessibilityLabel` on the inner `TextInput`
+  - It takes precedence over `inputProps.accessibilityLabel`
+  - A top-level `accessibilityLabel` still lands on the root `Box`, which is hidden from screen readers, so it does not name the field
+  - `HeaderSearch` forwards `textFieldSearchProps`, so that object must include `inputAccessibilityLabel`
+  - See [Migration Guide](./MIGRATION.md#from-version-0530-to-0540)
+- Changed the info `IconAlert` icon color from `IconColor.PrimaryDefault` to `IconColor.IconDefault` ([#1638](https://github.com/MetaMask/metamask-design-system/pull/1638))
+
 ## [0.53.0]
 
 ### Added
@@ -879,7 +895,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.53.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.54.0...HEAD
+[0.54.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.53.0...@metamask/design-system-react-native@0.54.0
 [0.53.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.52.0...@metamask/design-system-react-native@0.53.0
 [0.52.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.51.0...@metamask/design-system-react-native@0.52.0
 [0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.50.0...@metamask/design-system-react-native@0.51.0

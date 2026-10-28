@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.43.0]
+
+### Added
+
+- Added `FeedPost` to `IconName` ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
+
 ## [0.42.0]
 
 ### Added
@@ -409,7 +415,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.42.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.43.0...HEAD
+[0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.42.0...@metamask/design-system-shared@0.43.0
 [0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.41.0...@metamask/design-system-shared@0.42.0
 [0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.40.0...@metamask/design-system-shared@0.41.0
 [0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.39.0...@metamask/design-system-shared@0.40.0

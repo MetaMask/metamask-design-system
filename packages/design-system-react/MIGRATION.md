@@ -48,7 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.48.0 to 0.X.0](#from-version-0480-to-0x0)
+  - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
   - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
@@ -3634,9 +3634,9 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
-### From version 0.48.0 to 0.X.0
+### From version 0.48.0 to 0.49.0
 
-<a id="from-version-0480-to-0x0"></a>
+<a id="from-version-0480-to-0490"></a>
 
 #### TextFieldSearch: required `inputAriaLabel`
 
@@ -3658,7 +3658,7 @@ Pass the string you used for `inputProps['aria-label']` as `inputAriaLabel`.
   value={query}
 />
 
-// After (0.X.0)
+// After (0.49.0)
 <TextFieldSearch
   clearButtonOnClick={handleClear}
   inputAriaLabel={t('searchYourAccounts')}

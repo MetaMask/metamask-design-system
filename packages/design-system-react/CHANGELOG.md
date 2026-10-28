@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.49.0]
+
+### Added
+
+- Added `FeedPost`, available as `IconName.FeedPost` ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
+
+### Changed
+
+- **BREAKING:** `TextFieldSearch` requires `inputAriaLabel` ([#1621](https://github.com/MetaMask/metamask-design-system/pull/1621))
+  - The string is the accessible name of the inner search input and renders no visible text
+  - It takes precedence over `inputProps['aria-label']`
+  - See [Migration Guide](./MIGRATION.md#from-version-0480-to-0490)
+- Changed the info `IconAlert` icon color from `IconColor.PrimaryDefault` to `IconColor.IconDefault` ([#1638](https://github.com/MetaMask/metamask-design-system/pull/1638))
+
 ## [0.48.0]
 
 ### Added
@@ -664,7 +678,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.48.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.49.0...HEAD
+[0.49.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.48.0...@metamask/design-system-react@0.49.0
 [0.48.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.47.0...@metamask/design-system-react@0.48.0
 [0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.46.0...@metamask/design-system-react@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.45.3...@metamask/design-system-react@0.46.0
