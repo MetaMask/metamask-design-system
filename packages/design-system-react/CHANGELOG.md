@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add feed-post icon ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
+- feat(TextFieldSearch): support accessible label without visible text ([#1621](https://github.com/MetaMask/metamask-design-system/pull/1621))
+- feat(IconAlert): change info variant color to IconDefault ([#1638](https://github.com/MetaMask/metamask-design-system/pull/1638))
+- chore(deps-dev): bump @metamask/auto-changelog from 6.2.1 to 7.0.1 ([#1623](https://github.com/MetaMask/metamask-design-system/pull/1623))
+
 ## [0.48.0]
 
 ### Added
