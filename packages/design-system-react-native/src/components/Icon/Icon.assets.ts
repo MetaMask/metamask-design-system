@@ -73,6 +73,7 @@ import ExtensionSVG from './assets/extension.svg';
 import EyeSlashSVG from './assets/eye-slash.svg';
 import EyeSVG from './assets/eye.svg';
 import FaceIdSVG from './assets/face-id.svg';
+import FeedPostSVG from './assets/feed-post.svg';
 import FeedbackSVG from './assets/feedback.svg';
 import FileSVG from './assets/file.svg';
 import FilterSVG from './assets/filter.svg';
@@ -269,6 +270,7 @@ export const assetByIconName: AssetByIconName = {
   EyeSlash: EyeSlashSVG,
   Eye: EyeSVG,
   FaceId: FaceIdSVG,
+  FeedPost: FeedPostSVG,
   Feedback: FeedbackSVG,
   File: FileSVG,
   Filter: FilterSVG,

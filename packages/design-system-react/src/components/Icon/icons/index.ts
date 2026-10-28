@@ -73,6 +73,7 @@ import Extension from './Extension';
 import EyeSlash from './EyeSlash';
 import Eye from './Eye';
 import FaceId from './FaceId';
+import FeedPost from './FeedPost';
 import Feedback from './Feedback';
 import File from './File';
 import Filter from './Filter';
@@ -265,6 +266,7 @@ export const Icons = {
   EyeSlash,
   Eye,
   FaceId,
+  FeedPost,
   Feedback,
   File,
   Filter,

@@ -123,6 +123,7 @@ export const IconName = {
   EyeSlash: 'EyeSlash',
   Eye: 'Eye',
   FaceId: 'FaceId',
+  FeedPost: 'FeedPost',
   Feedback: 'Feedback',
   File: 'File',
   Filter: 'Filter',
