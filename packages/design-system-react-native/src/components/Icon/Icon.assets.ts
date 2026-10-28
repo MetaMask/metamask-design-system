@@ -131,6 +131,7 @@ import PlantSVG from './assets/plant.svg';
 import PlaySVG from './assets/play.svg';
 import PlugSVG from './assets/plug.svg';
 import PopUpSVG from './assets/pop-up.svg';
+import PostSVG from './assets/post.svg';
 import PredictionsSVG from './assets/predictions.svg';
 import ProgrammingArrowsSVG from './assets/programming-arrows.svg';
 import QrCodeSVG from './assets/qr-code.svg';
@@ -327,6 +328,7 @@ export const assetByIconName: AssetByIconName = {
   Play: PlaySVG,
   Plug: PlugSVG,
   PopUp: PopUpSVG,
+  Post: PostSVG,
   Predictions: PredictionsSVG,
   ProgrammingArrows: ProgrammingArrowsSVG,
   QrCode: QrCodeSVG,

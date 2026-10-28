@@ -181,6 +181,7 @@ export const IconName = {
   Play: 'Play',
   Plug: 'Plug',
   PopUp: 'PopUp',
+  Post: 'Post',
   Predictions: 'Predictions',
   ProgrammingArrows: 'ProgrammingArrows',
   QrCode: 'QrCode',
