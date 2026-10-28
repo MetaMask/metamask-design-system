@@ -21,7 +21,7 @@
     "@metamask/design-system-react-native": "workspace:^",
     "@metamask/design-system-twrnc-preset": "workspace:^",
     "@metamask/design-tokens": "workspace:^",
-    "@metamask/utils": "^11.12.1",
+    "@metamask/utils": "^12.0.1",
     "expo": "~57.0.22",
     "expo-asset": "~57.0.17",
     "expo-dev-client": "~57.0.19",
