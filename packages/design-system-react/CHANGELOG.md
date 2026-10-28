@@ -9,12 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.49.0]
 
-### Uncategorized
+### Added
 
-- feat: add feed-post icon ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
-- feat(TextFieldSearch): support accessible label without visible text ([#1621](https://github.com/MetaMask/metamask-design-system/pull/1621))
-- feat(IconAlert): change info variant color to IconDefault ([#1638](https://github.com/MetaMask/metamask-design-system/pull/1638))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.2.1 to 7.0.1 ([#1623](https://github.com/MetaMask/metamask-design-system/pull/1623))
+- Added `FeedPost`, available as `IconName.FeedPost` ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
+
+### Changed
+
+- **BREAKING:** `TextFieldSearch` requires `inputAriaLabel` ([#1621](https://github.com/MetaMask/metamask-design-system/pull/1621))
+  - The string is the accessible name of the inner search input and renders no visible text
+  - It takes precedence over `inputProps['aria-label']`
+  - See [Migration Guide](./MIGRATION.md#from-version-0480-to-0490)
+- Changed the info `IconAlert` icon color from `IconColor.PrimaryDefault` to `IconColor.IconDefault` ([#1638](https://github.com/MetaMask/metamask-design-system/pull/1638))
 
 ## [0.48.0]
 

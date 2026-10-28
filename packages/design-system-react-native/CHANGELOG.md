@@ -9,13 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.54.0]
 
-### Uncategorized
+### Added
 
-- feat: add feed-post icon ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
-- feat(TextFieldSearch): support accessible label without visible text ([#1621](https://github.com/MetaMask/metamask-design-system/pull/1621))
-- feat(IconAlert): change info variant color to IconDefault ([#1638](https://github.com/MetaMask/metamask-design-system/pull/1638))
-- docs(TitleAlert): add text-centered to description JSDoc ([#1636](https://github.com/MetaMask/metamask-design-system/pull/1636))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.2.1 to 7.0.1 ([#1623](https://github.com/MetaMask/metamask-design-system/pull/1623))
+- Added `FeedPost`, available as `IconName.FeedPost` ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
+
+### Changed
+
+- **BREAKING:** `TextFieldSearch` requires `inputAccessibilityLabel` ([#1621](https://github.com/MetaMask/metamask-design-system/pull/1621))
+  - The string is set as `accessibilityLabel` on the inner `TextInput`
+  - It takes precedence over `inputProps.accessibilityLabel`
+  - A top-level `accessibilityLabel` still lands on the root `Box`, which is hidden from screen readers, so it does not name the field
+  - `HeaderSearch` forwards `textFieldSearchProps`, so that object must include `inputAccessibilityLabel`
+  - See [Migration Guide](./MIGRATION.md#from-version-0530-to-0540)
+- Changed the info `IconAlert` icon color from `IconColor.PrimaryDefault` to `IconColor.IconDefault` ([#1638](https://github.com/MetaMask/metamask-design-system/pull/1638))
 
 ## [0.53.0]
 
