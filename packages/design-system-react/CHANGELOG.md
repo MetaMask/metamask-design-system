@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: remove MM Sans and FontFamily.Accent ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+- fix: align feed-post icon with Phosphor style ([#1643](https://github.com/MetaMask/metamask-design-system/pull/1643))
+
 ## [0.49.0]
 
 ### Added
