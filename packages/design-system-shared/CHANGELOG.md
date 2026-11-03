@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.45.0]
 
-### Uncategorized
+### Added
 
-- feat: add Phosphor sports icons ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
-- chore(deps-dev): bump @metamask/auto-changelog from 7.0.1 to 7.1.0 ([#1653](https://github.com/MetaMask/metamask-design-system/pull/1653))
+- Added Phosphor sports icons to `IconName` ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
+  - `Baseball`, `Basketball`, `Bicycle`, `BoxingGlove`, `Cricket`, `FlagCheckered`, `Football`, `GameController`, `Golf`, `Hockey`, `Horse`, `Medal`, `PingPong`, `SoccerBall`, and `TennisBall`
 
 ## [0.44.0]
 

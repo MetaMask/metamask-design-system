@@ -9,11 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.56.0]
 
-### Uncategorized
+### Added
 
-- feat: add Phosphor sports icons ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
-- fix(RadioButton): use icon-default for the checked state ([#1650](https://github.com/MetaMask/metamask-design-system/pull/1650))
-- chore(deps-dev): bump @metamask/auto-changelog from 7.0.1 to 7.1.0 ([#1653](https://github.com/MetaMask/metamask-design-system/pull/1653))
+- Added Phosphor sports icons, available as `IconName` values ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
+  - `Baseball`, `Basketball`, `Bicycle`, `BoxingGlove`, `Cricket`, `FlagCheckered`, `Football`, `GameController`, `Golf`, `Hockey`, `Horse`, `Medal`, `PingPong`, `SoccerBall`, and `TennisBall`
+
+### Fixed
+
+- Fixed the checked `RadioButton` so its border and inner dot use `icon-default` instead of `primary-default` ([#1650](https://github.com/MetaMask/metamask-design-system/pull/1650))
+  - The checked state follows the icon color in light and dark themes, matching `Checkbox`
+  - Danger and read-only states are unchanged
 
 ## [0.55.0]
 
