@@ -1,0 +1,6 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+import { Ref, forwardRef } from "react";
+const SvgHorse = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M12.75 9.375a1.125 1.125 0 1 1-1.125-1.125 1.125 1.125 0 0 1 1.125 1.125m9 2.764a9.777 9.777 0 0 1-9.553 9.611h-.204A9.7 9.7 0 0 1 5.5 19.313a.753.753 0 1 1 1-1.125 8 8 0 0 0 1.885 1.253l2.49-3.425c-2.136-.921-4.45-.53-5.756-.308a2.99 2.99 0 0 1-2.935-1.203l-.028-.04-1.292-2.063a.75.75 0 0 1 .243-1.036L10.5 5.581V3a.75.75 0 0 1 .75-.75H12a9.75 9.75 0 0 1 9.75 9.889m-1.5-.02A8.25 8.25 0 0 0 12 3.75V6a.75.75 0 0 1-.357.638l-9.106 5.605.877 1.406a1.49 1.49 0 0 0 1.461.58c1.5-.254 4.572-.773 7.32.766a3.756 3.756 0 0 0 3.555-3.745.75.75 0 0 1 1.5 0 5.257 5.257 0 0 1-4.856 5.234L9.852 19.98a8.5 8.5 0 0 0 2.315.271 8.277 8.277 0 0 0 8.083-8.132" /></svg>;
+const ForwardRef = forwardRef(SvgHorse);
+export default ForwardRef;

@@ -1,0 +1,6 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+import { Ref, forwardRef } from "react";
+const SvgBoxingGlove = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M15.75 1.5h-4.5A5.256 5.256 0 0 0 6 6.75h-.75a3 3 0 0 0-3 3v2.737a1.5 1.5 0 0 0 .33.937 1 1 0 0 0 .057.065L6 16.813v3.437a1.5 1.5 0 0 0 1.5 1.5H18a1.5 1.5 0 0 0 1.5-1.5v-3.645l1.442-5.048a1.5 1.5 0 0 0 .058-.412V6.75a5.256 5.256 0 0 0-5.25-5.25m3.75 9.645-1.47 5.149a.7.7 0 0 0-.03.206v3.75H7.5V16.5a.75.75 0 0 0-.223-.533L3.75 12.48V9.75a1.5 1.5 0 0 1 1.5-1.5H6v1.5a.75.75 0 0 0 1.5 0v-3A3.75 3.75 0 0 1 11.25 3h4.5a3.75 3.75 0 0 1 3.75 3.75Zm-3.414 4.526-1.659.829 1.659.829a.75.75 0 0 1-.672 1.342l-2.664-1.333-2.664 1.333a.75.75 0 1 1-.672-1.342l1.659-.829-1.659-.829a.75.75 0 1 1 .672-1.342l2.664 1.333 2.664-1.333a.75.75 0 1 1 .672 1.342" /></svg>;
+const ForwardRef = forwardRef(SvgBoxingGlove);
+export default ForwardRef;
