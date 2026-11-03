@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add Phosphor sports icons ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
+- fix(RadioButton): use icon-default for the checked state ([#1650](https://github.com/MetaMask/metamask-design-system/pull/1650))
+- chore(deps-dev): bump @metamask/auto-changelog from 7.0.1 to 7.1.0 ([#1653](https://github.com/MetaMask/metamask-design-system/pull/1653))
+
 ## [0.55.0]
 
 ### Changed
