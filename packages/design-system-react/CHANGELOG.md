@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.51.0]
+
+### Added
+
+- Added Phosphor sports icons, available as `IconName` values ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
+  - `Baseball`, `Basketball`, `Bicycle`, `BoxingGlove`, `Cricket`, `FlagCheckered`, `Football`, `GameController`, `Golf`, `Hockey`, `Horse`, `Medal`, `PingPong`, `SoccerBall`, and `TennisBall`
+
 ## [0.50.0]
 
 ### Changed
@@ -695,7 +702,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.50.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.0...HEAD
+[0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.50.0...@metamask/design-system-react@0.51.0
 [0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.49.0...@metamask/design-system-react@0.50.0
 [0.49.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.48.0...@metamask/design-system-react@0.49.0
 [0.48.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.47.0...@metamask/design-system-react@0.48.0

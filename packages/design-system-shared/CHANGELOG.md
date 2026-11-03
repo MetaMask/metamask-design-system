@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.45.0]
+
+### Added
+
+- Added Phosphor sports icons to `IconName` ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
+  - `Baseball`, `Basketball`, `Bicycle`, `BoxingGlove`, `Cricket`, `FlagCheckered`, `Football`, `GameController`, `Golf`, `Hockey`, `Horse`, `Medal`, `PingPong`, `SoccerBall`, and `TennisBall`
+
 ## [0.44.0]
 
 ### Changed
@@ -430,7 +437,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.44.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.0...HEAD
+[0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.44.0...@metamask/design-system-shared@0.45.0
 [0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.43.0...@metamask/design-system-shared@0.44.0
 [0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.42.0...@metamask/design-system-shared@0.43.0
 [0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.41.0...@metamask/design-system-shared@0.42.0

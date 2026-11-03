@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.56.0]
+
+### Added
+
+- Added Phosphor sports icons, available as `IconName` values ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
+  - `Baseball`, `Basketball`, `Bicycle`, `BoxingGlove`, `Cricket`, `FlagCheckered`, `Football`, `GameController`, `Golf`, `Hockey`, `Horse`, `Medal`, `PingPong`, `SoccerBall`, and `TennisBall`
+
+### Fixed
+
+- Fixed the checked `RadioButton` so its border and inner dot use `icon-default` instead of `primary-default` ([#1650](https://github.com/MetaMask/metamask-design-system/pull/1650))
+  - The checked state follows the icon color in light and dark themes, matching `Checkbox`
+  - Danger and read-only states are unchanged
+
 ## [0.55.0]
 
 ### Changed
@@ -913,7 +926,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.55.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.0...HEAD
+[0.56.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.55.0...@metamask/design-system-react-native@0.56.0
 [0.55.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.54.0...@metamask/design-system-react-native@0.55.0
 [0.54.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.53.0...@metamask/design-system-react-native@0.54.0
 [0.53.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.52.0...@metamask/design-system-react-native@0.53.0
