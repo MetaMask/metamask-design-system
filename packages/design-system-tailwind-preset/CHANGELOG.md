@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.0]
+
+### Changed
+
+- **BREAKING:** Removed `fontFamily.accent` from the preset ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - The Tailwind v3 `font-accent` class is no longer generated; use `font-hero` instead
+  - See the [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-1200-to-1300)
+- **BREAKING:** Updated the peer dependency to `@metamask/design-tokens@^13.0.0` ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - Required coordination bump with the removal of `--font-family-accent` in `@metamask/design-tokens@13.0.0`
+
 ## [0.15.0]
 
 ### Added
@@ -141,7 +151,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.15.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.16.0...HEAD
+[0.16.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.15.0...@metamask/design-system-tailwind-preset@0.16.0
 [0.15.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.14.0...@metamask/design-system-tailwind-preset@0.15.0
 [0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.13.0...@metamask/design-system-tailwind-preset@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-tailwind-preset@0.12.0...@metamask/design-system-tailwind-preset@0.13.0

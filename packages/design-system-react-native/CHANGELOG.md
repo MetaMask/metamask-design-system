@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.55.0]
+
+### Changed
+
+- **BREAKING:** Removed `FontFamily.Accent` (MM Sans) ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - The twrnc classes `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` no longer resolve
+  - Use `FontFamily.Hero` and `font-hero-bold` (`GrotzecCond-Bold`) instead
+  - Apps can stop registering `MMSans-Regular`, `MMSans-Medium`, and `MMSans-Bold`
+  - See [Migration Guide](./MIGRATION.md#from-version-0540-to-0550)
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^13.0.0` and `@metamask/design-system-twrnc-preset@^0.14.0` ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - Required coordination bump with the accent font family removal in `@metamask/design-tokens@13.0.0`
+
+### Fixed
+
+- Fixed the `FeedPost` icon artwork to match the Phosphor icon style ([#1643](https://github.com/MetaMask/metamask-design-system/pull/1643))
+  - The plus and pencil have equal stroke weight, the pencil ends are rounded, and the plus is slightly larger with more clearance
+  - `IconName.FeedPost` is unchanged
+
 ## [0.54.0]
 
 ### Added
@@ -895,7 +913,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.54.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.55.0...HEAD
+[0.55.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.54.0...@metamask/design-system-react-native@0.55.0
 [0.54.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.53.0...@metamask/design-system-react-native@0.54.0
 [0.53.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.52.0...@metamask/design-system-react-native@0.53.0
 [0.52.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.51.0...@metamask/design-system-react-native@0.52.0

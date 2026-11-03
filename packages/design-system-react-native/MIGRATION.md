@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.54.0 to 0.X.0](#from-version-0540-to-0x0)
+- [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
 - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
 - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
@@ -55,7 +55,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.54.0 to 0.X.0](#from-version-0540-to-0x0)
+  - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
   - [From version 0.53.0 to 0.54.0](#from-version-0530-to-0540)
   - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
   - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
@@ -83,9 +83,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.54.0 to 0.X.0
+### From version 0.54.0 to 0.55.0
 
-<a id="from-version-0540-to-0x0"></a>
+<a id="from-version-0540-to-0550"></a>
 
 #### Removed `FontFamily.Accent` and MM Sans
 
@@ -94,30 +94,79 @@ This guide provides detailed instructions for migrating your project from one ve
 **What changed:**
 
 - `FontFamily.Accent` is removed
-- `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` no longer resolve
+- `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` no longer resolve. `@metamask/design-system-twrnc-preset@0.14.0` removes them from `typographyTailwindConfig.fontFamily`
+- Peer dependencies are now `@metamask/design-tokens@^13.0.0` and `@metamask/design-system-twrnc-preset@^0.14.0`
 - `FontFamily.Hero` still applies `font-hero-bold` for every weight
 
 **Migration:**
 
-Replace `FontFamily.Accent` with `FontFamily.Hero`. Stop registering `MMSans-Regular`, `MMSans-Medium`, and `MMSans-Bold`. Delete those files and any leftover `MMPoly-Regular` registration.
+Replace `FontFamily.Accent` with `FontFamily.Hero`. Grotzec Cond is a condensed display face, so keep it for headlines and marketing moments. If the accent text was body copy, use `FontFamily.Default` (Inter) instead.
 
 ```tsx
 // Before (0.54.0)
-import { FontFamily, Text } from '@metamask/design-system-react-native';
+import {
+  FontFamily,
+  FontWeight,
+  Text,
+  TextVariant,
+} from '@metamask/design-system-react-native';
 
-<Text fontFamily={FontFamily.Accent}>Rewards balance</Text>;
+<Text
+  variant={TextVariant.DisplayMd}
+  fontFamily={FontFamily.Accent}
+  fontWeight={FontWeight.Medium}
+>
+  Earn rewards with MetaMask
+</Text>;
 
-// After (0.X.0)
-import { FontFamily, Text } from '@metamask/design-system-react-native';
+// After (0.55.0)
+import {
+  FontFamily,
+  Text,
+  TextVariant,
+} from '@metamask/design-system-react-native';
 
-<Text fontFamily={FontFamily.Hero}>Rewards balance</Text>;
+<Text variant={TextVariant.DisplayMd} fontFamily={FontFamily.Hero}>
+  Earn rewards with MetaMask
+</Text>;
 ```
 
-Replace `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` with `font-hero-bold`. Hero ships only the Bold cut, so every former accent weight uses that face.
+`fontWeight` has no effect with `FontFamily.Hero`; Hero ships only the Bold cut, so every weight renders `font-hero-bold`.
+
+Replace `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` with `font-hero-bold`:
+
+```tsx
+// Before (0.54.0)
+<Text twClassName="font-accent-bold">Earn rewards with MetaMask</Text>;
+
+// After (0.55.0)
+<Text twClassName="font-hero-bold">Earn rewards with MetaMask</Text>;
+```
+
+Stop registering `MMSans-Regular`, `MMSans-Medium`, and `MMSans-Bold`, then delete those files and any leftover `MMPoly-Regular` registration:
+
+```tsx
+// Before (0.54.0)
+const [fontsLoaded] = useFonts({
+  'Inter-Regular': require('./fonts/Inter/Inter-Regular.ttf'),
+  'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+  'MMSans-Regular': require('./fonts/MMSans/MMSans-Regular.otf'),
+  'MMSans-Medium': require('./fonts/MMSans/MMSans-Medium.otf'),
+  'MMSans-Bold': require('./fonts/MMSans/MMSans-Bold.otf'),
+});
+
+// After (0.55.0)
+const [fontsLoaded] = useFonts({
+  'Inter-Regular': require('./fonts/Inter/Inter-Regular.ttf'),
+  'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+});
+```
 
 **Impact:**
 
-`font-accent-*` classes no longer resolve. Hero text stays on `FontFamily.Hero`. This release coordinates with `@metamask/design-tokens`, `@metamask/design-system-shared`, and `@metamask/design-system-twrnc-preset`.
+- TypeScript fails on `FontFamily.Accent`
+- `font-accent-*` classes no longer resolve and there is no build error, so search for `font-accent` before upgrading
+- Installs warn about unmet peer dependencies until `@metamask/design-tokens` and `@metamask/design-system-twrnc-preset` are upgraded
 
 ### From version 0.53.0 to 0.54.0
 

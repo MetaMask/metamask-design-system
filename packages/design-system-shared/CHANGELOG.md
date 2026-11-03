@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.44.0]
+
+### Changed
+
+- **BREAKING:** Removed `FontFamily.Accent` (`'accent'`, MM Sans) ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - The `FontFamily` type is now `'default' | 'hero'`
+  - Use `FontFamily.Hero` (Grotzec Cond Bold) instead
+  - See [Migration Guide](./MIGRATION.md#from-version-0430-to-0440)
+
+### Fixed
+
+- Fixed the `FeedPost` icon artwork to match the Phosphor icon style ([#1643](https://github.com/MetaMask/metamask-design-system/pull/1643))
+  - The plus and pencil have equal stroke weight, the pencil ends are rounded, and the plus is slightly larger with more clearance
+  - `IconName.FeedPost` is unchanged
+
 ## [0.43.0]
 
 ### Added
@@ -415,7 +430,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.43.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.44.0...HEAD
+[0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.43.0...@metamask/design-system-shared@0.44.0
 [0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.42.0...@metamask/design-system-shared@0.43.0
 [0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.41.0...@metamask/design-system-shared@0.42.0
 [0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.40.0...@metamask/design-system-shared@0.41.0

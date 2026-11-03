@@ -2,7 +2,7 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
-- [From version 12.0.0 to X.0.0](#from-version-1200-to-x00)
+- [From version 12.0.0 to 13.0.0](#from-version-1200-to-1300)
 - [From version 11.1.0 to 12.0.0](#from-version-1110-to-1200)
 - [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
@@ -16,46 +16,80 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
 
-## From version 12.0.0 to X.0.0
+## From version 12.0.0 to 13.0.0
 
-<a id="from-version-1200-to-x00"></a>
+<a id="from-version-1200-to-1300"></a>
 
 MM Sans is removed. `fontFamilies.accent`, `--font-family-accent`, and the `font-accent` utility are gone. MM Poly was already replaced by Grotzec Cond Bold in 12.0.0; delete any MM Poly files that are still bundled. `fontFamilies.hero` and `--font-family-hero` stay on Grotzec Cond.
 
 ### What changed
 
-- Removed `fontFamilies.accent` and the Figma token `global.fontFamilies.accent`
-- Removed `--font-family-accent`
-- Removed the `font-accent` utility
-- `fontFamilies.hero`, `--font-family-hero`, and `font-hero` are unchanged
+- Removed `fontFamilies.accent` (`'MMSans'`) and the `FontFamilies['accent']` type key
+- Removed the Figma token `global.fontFamilies.accent`
+- Removed `--font-family-accent` from `@metamask/design-tokens/styles.css`
+- Removed the Tailwind v4 `font-accent` utility from `@metamask/design-tokens/tailwind/theme.css`
+- `fontFamilies.default`, `fontFamilies.hero`, `--font-family-default`, `--font-family-hero`, `font-default`, and `font-hero` are unchanged
 
 ### Migration
 
-Replace accent with the hero family. `--font-family-hero` and `font-hero` already resolve to Grotzec Cond Bold. Stop loading MM Sans and any leftover MM Poly files.
+Replace accent with the hero family. `--font-family-hero` and `font-hero` already resolve to Grotzec Cond Bold. Grotzec Cond is a condensed display face with only a Bold cut, so use it for headlines and marketing moments. If the accent text was body copy, use the default family (Inter) instead.
+
+CSS custom property:
 
 ```css
 /* Before (12.0.0) */
-font-family: var(--font-family-accent);
+.welcome-login__title {
+  font-family: var(--font-family-accent);
+}
 
-/* After (X.0.0) */
-font-family: var(--font-family-hero);
+/* After (13.0.0) */
+.welcome-login__title {
+  font-family: var(--font-family-hero);
+}
 ```
 
-Replace the `font-accent` utility with `font-hero`. Delete MM Sans `@font-face` rules and the font files. The same applies to any leftover MM Poly files.
+Tailwind v4 utility:
+
+```tsx
+// Before (12.0.0)
+<h2 className="font-accent text-l-display-md">Earn rewards with MetaMask</h2>
+
+// After (13.0.0)
+<h2 className="font-hero text-l-display-md">Earn rewards with MetaMask</h2>
+```
+
+JavaScript token:
+
+```ts
+// Before (12.0.0)
+import { fontFamilies } from '@metamask/design-tokens';
+
+const rewardsTitleStyle = { fontFamily: fontFamilies.accent };
+
+// After (13.0.0)
+import { fontFamilies } from '@metamask/design-tokens';
+
+const rewardsTitleStyle = { fontFamily: fontFamilies.hero };
+```
+
+Delete MM Sans `@font-face` rules and the font files. The same applies to any leftover MM Poly files.
 
 ```css
 /* Remove */
 @font-face {
   font-family: 'MMSans';
   font-style: normal;
-  font-weight: 400;
-  src: url('fonts/MMSans/MMSans-Regular.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/MMSans/MM_Sans-Variable.woff2') format('woff2');
 }
 ```
 
 **Impact:**
 
-Styles that still reference `--font-family-accent` or `font-accent` fall back to the inherited font until they switch to `--font-family-hero` or `font-hero`.
+- TypeScript fails on `fontFamilies.accent`
+- Styles that still reference `--font-family-accent` or `font-accent` fall back to the inherited font until they switch to `--font-family-hero` or `font-hero`. There is no build error for these, so search for `font-family-accent` and `font-accent` before upgrading
+- `@metamask/design-system-react@0.50.0`, `@metamask/design-system-react-native@0.55.0`, `@metamask/design-system-tailwind-preset@0.16.0`, and `@metamask/design-system-twrnc-preset@0.14.0` require `@metamask/design-tokens@^13.0.0`, so upgrade them together
 
 ## From version 11.1.0 to 12.0.0
 

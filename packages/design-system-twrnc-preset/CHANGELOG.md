@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.0]
+
+### Changed
+
+- **BREAKING:** Removed the `accent-regular`, `accent-medium`, and `accent-bold` font families (`MMSans-Regular`, `MMSans-Medium`, `MMSans-Bold`) ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - Removed the matching keys from `TypographyTailwindConfigProps['fontFamily']`
+  - The classes `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` no longer resolve; use `font-hero-bold`
+  - See the [React Native Migration Guide](../design-system-react-native/MIGRATION.md#from-version-0540-to-0550)
+- **BREAKING:** Updated the peer dependency to `@metamask/design-tokens@^13.0.0` ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - Required coordination bump with the accent font family removal in `@metamask/design-tokens@13.0.0`
+
 ## [0.13.0]
 
 ### Added
@@ -144,7 +155,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MetaMask design token integration for React Native
 - TWRNC preset configuration with MetaMask styling utilities
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.13.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.14.0...HEAD
+[0.14.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.13.0...@metamask/design-system-twrnc-preset@0.14.0
 [0.13.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.12.0...@metamask/design-system-twrnc-preset@0.13.0
 [0.12.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.11.0...@metamask/design-system-twrnc-preset@0.12.0
 [0.11.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-twrnc-preset@0.10.0...@metamask/design-system-twrnc-preset@0.11.0
