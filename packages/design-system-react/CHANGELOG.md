@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.51.0]
+
 ### Uncategorized
 
 - feat: add Phosphor sports icons ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
@@ -700,7 +702,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.50.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.0...HEAD
+[0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.50.0...@metamask/design-system-react@0.51.0
 [0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.49.0...@metamask/design-system-react@0.50.0
 [0.49.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.48.0...@metamask/design-system-react@0.49.0
 [0.48.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.47.0...@metamask/design-system-react@0.48.0
