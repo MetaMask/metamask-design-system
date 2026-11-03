@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.16.0]
 
-### Uncategorized
+### Changed
 
-- feat: remove MM Sans and FontFamily.Accent ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.2.1 to 7.0.1 ([#1623](https://github.com/MetaMask/metamask-design-system/pull/1623))
+- **BREAKING:** Removed `fontFamily.accent` from the preset ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - The Tailwind v3 `font-accent` class is no longer generated; use `font-hero` instead
+  - See the [design-tokens Migration Guide](../design-tokens/MIGRATION.md#from-version-1200-to-1300)
+- **BREAKING:** Updated the peer dependency to `@metamask/design-tokens@^13.0.0` ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - Required coordination bump with the removal of `--font-family-accent` in `@metamask/design-tokens@13.0.0`
 
 ## [0.15.0]
 

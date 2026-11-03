@@ -9,10 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [13.0.0]
 
-### Uncategorized
+### Changed
 
-- feat: remove MM Sans and FontFamily.Accent ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
-- chore(deps-dev): bump @metamask/auto-changelog from 6.2.1 to 7.0.1 ([#1623](https://github.com/MetaMask/metamask-design-system/pull/1623))
+- **BREAKING:** Removed the MM Sans accent font family ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - Removed `fontFamilies.accent` (`'MMSans'`) and the `accent` key from the `FontFamilies` type
+  - Removed the Figma token `global.fontFamilies.accent`
+  - Removed the `--font-family-accent` CSS custom property from `styles.css`
+  - Removed the Tailwind v4 `font-accent` utility from `tailwind/theme.css`
+  - Use `fontFamilies.hero`, `--font-family-hero`, or `font-hero` (Grotzec Cond Bold) instead; `default` and `hero` are unchanged
+  - See [Migration Guide](./MIGRATION.md#from-version-1200-to-1300)
 
 ## [12.0.0]
 

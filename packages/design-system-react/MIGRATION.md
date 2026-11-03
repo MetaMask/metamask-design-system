@@ -48,7 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.49.0 to 0.X.0](#from-version-0490-to-0x0)
+  - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
   - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
   - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
@@ -3635,9 +3635,9 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
-### From version 0.49.0 to 0.X.0
+### From version 0.49.0 to 0.50.0
 
-<a id="from-version-0490-to-0x0"></a>
+<a id="from-version-0490-to-0500"></a>
 
 #### Removed `FontFamily.Accent` (MM Sans)
 
@@ -3646,30 +3646,60 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 **What changed:**
 
 - `FontFamily.Accent` is removed from `FontFamily`
-- `font-accent` no longer resolves. The Tailwind preset no longer maps `accent` to `--font-family-accent`
+- `font-accent` no longer resolves. `@metamask/design-system-tailwind-preset@0.16.0` no longer maps `accent` to `--font-family-accent`, and `@metamask/design-tokens@13.0.0` removes the Tailwind v4 `font-accent` utility
+- `twMerge` no longer treats `font-accent` as a font family class, so it does not dedupe it against `font-default` or `font-hero`
+- Peer dependencies are now `@metamask/design-tokens@^13.0.0` and `@metamask/design-system-tailwind-preset@^0.16.0`
 - `FontFamily.Hero` and `font-hero` are unchanged
 
 **Migration:**
 
-Replace `FontFamily.Accent` with `FontFamily.Hero`.
+Replace `FontFamily.Accent` with `FontFamily.Hero`. Grotzec Cond is a condensed display face, so keep it for headlines and marketing moments. If the accent text was body copy, use `FontFamily.Default` (Inter) instead.
 
 ```tsx
 // Before (0.49.0)
-import { FontFamily, Text } from '@metamask/design-system-react';
+import { FontFamily, Text, TextVariant } from '@metamask/design-system-react';
 
-<Text fontFamily={FontFamily.Accent}>Rewards balance</Text>;
+<Text variant={TextVariant.DisplayMd} fontFamily={FontFamily.Accent}>
+  Earn rewards with MetaMask
+</Text>;
 
-// After (0.X.0)
-import { FontFamily, Text } from '@metamask/design-system-react';
+// After (0.50.0)
+import { FontFamily, Text, TextVariant } from '@metamask/design-system-react';
 
-<Text fontFamily={FontFamily.Hero}>Rewards balance</Text>;
+<Text variant={TextVariant.DisplayMd} fontFamily={FontFamily.Hero}>
+  Earn rewards with MetaMask
+</Text>;
 ```
 
-Replace `font-accent` with `font-hero`. Delete MM Sans `@font-face` rules and font files, and any leftover MM Poly files. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1200-to-x00).
+Replace the `font-accent` class with `font-hero`:
+
+```tsx
+// Before (0.49.0)
+<Text className="font-accent">Earn rewards with MetaMask</Text>;
+
+// After (0.50.0)
+<Text className="font-hero">Earn rewards with MetaMask</Text>;
+```
+
+Upgrade the peer dependencies in the same change:
+
+```json
+{
+  "dependencies": {
+    "@metamask/design-system-react": "^0.50.0",
+    "@metamask/design-system-tailwind-preset": "^0.16.0",
+    "@metamask/design-tokens": "^13.0.0"
+  }
+}
+```
+
+Delete MM Sans `@font-face` rules and font files, and any leftover MM Poly files. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1200-to-1300).
 
 **Impact:**
 
-TypeScript fails on `FontFamily.Accent`. `font-accent` no longer applies a family. This release coordinates with `@metamask/design-tokens`, `@metamask/design-system-shared`, and `@metamask/design-system-tailwind-preset`.
+- TypeScript fails on `FontFamily.Accent`
+- `font-accent` no longer applies a family and there is no build error, so search for `font-accent` and `font-family-accent` before upgrading
+- Installs warn about unmet peer dependencies until `@metamask/design-tokens` and `@metamask/design-system-tailwind-preset` are upgraded
 
 ### From version 0.48.0 to 0.49.0
 

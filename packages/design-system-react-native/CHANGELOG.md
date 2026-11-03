@@ -9,10 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.55.0]
 
-### Uncategorized
+### Changed
 
-- feat: remove MM Sans and FontFamily.Accent ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
-- fix: align feed-post icon with Phosphor style ([#1643](https://github.com/MetaMask/metamask-design-system/pull/1643))
+- **BREAKING:** Removed `FontFamily.Accent` (MM Sans) ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - The twrnc classes `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` no longer resolve
+  - Use `FontFamily.Hero` and `font-hero-bold` (`GrotzecCond-Bold`) instead
+  - Apps can stop registering `MMSans-Regular`, `MMSans-Medium`, and `MMSans-Bold`
+  - See [Migration Guide](./MIGRATION.md#from-version-0540-to-0550)
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^13.0.0` and `@metamask/design-system-twrnc-preset@^0.14.0` ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - Required coordination bump with the accent font family removal in `@metamask/design-tokens@13.0.0`
+
+### Fixed
+
+- Fixed the `FeedPost` icon artwork to match the Phosphor icon style ([#1643](https://github.com/MetaMask/metamask-design-system/pull/1643))
+  - The plus and pencil have equal stroke weight, the pencil ends are rounded, and the plus is slightly larger with more clearance
+  - `IconName.FeedPost` is unchanged
 
 ## [0.54.0]
 

@@ -9,10 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.44.0]
 
-### Uncategorized
+### Changed
 
-- feat: remove MM Sans and FontFamily.Accent ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
-- fix: align feed-post icon with Phosphor style ([#1643](https://github.com/MetaMask/metamask-design-system/pull/1643))
+- **BREAKING:** Removed `FontFamily.Accent` (`'accent'`, MM Sans) ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - The `FontFamily` type is now `'default' | 'hero'`
+  - Use `FontFamily.Hero` (Grotzec Cond Bold) instead
+  - See [Migration Guide](./MIGRATION.md#from-version-0430-to-0440)
+
+### Fixed
+
+- Fixed the `FeedPost` icon artwork to match the Phosphor icon style ([#1643](https://github.com/MetaMask/metamask-design-system/pull/1643))
+  - The plus and pencil have equal stroke weight, the pencil ends are rounded, and the plus is slightly larger with more clearance
+  - `IconName.FeedPost` is unchanged
 
 ## [0.43.0]
 

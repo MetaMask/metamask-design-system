@@ -5,7 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
-  - [From version 0.43.0 to 0.X.0](#from-version-0430-to-0x0)
+  - [From version 0.43.0 to 0.44.0](#from-version-0430-to-0440)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
   - [From version 0.24.0 to 0.25.0](#from-version-0240-to-0250)
@@ -15,9 +15,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.43.0 to 0.X.0
+### From version 0.43.0 to 0.44.0
 
-<a id="from-version-0430-to-0x0"></a>
+<a id="from-version-0430-to-0440"></a>
 
 #### `FontFamily.Accent` removed
 
@@ -26,27 +26,39 @@ This guide provides detailed instructions for migrating your project from one ve
 **What changed:**
 
 - Removed `FontFamily.Accent` (`'accent'`)
+- The `FontFamily` type is now `'default' | 'hero'`, so the string literal `'accent'` no longer type-checks either
 - `FontFamily.Default` (`'default'`) and `FontFamily.Hero` (`'hero'`) are unchanged
 
 **Migration:**
 
-Replace `FontFamily.Accent` with `FontFamily.Hero`.
+Replace `FontFamily.Accent` with `FontFamily.Hero`. Any `Record<FontFamily, ...>` map must drop its `accent` key.
 
 ```tsx
 // Before (0.43.0)
 import { FontFamily } from '@metamask/design-system-shared';
 
-fontFamily={FontFamily.Accent}
+const FONT_FAMILY_CLASS: Record<FontFamily, string> = {
+  [FontFamily.Default]: 'font-default',
+  [FontFamily.Accent]: 'font-accent',
+  [FontFamily.Hero]: 'font-hero',
+};
 
-// After (0.X.0)
+const rewardsTitleProps = { fontFamily: FontFamily.Accent };
+
+// After (0.44.0)
 import { FontFamily } from '@metamask/design-system-shared';
 
-fontFamily={FontFamily.Hero}
+const FONT_FAMILY_CLASS: Record<FontFamily, string> = {
+  [FontFamily.Default]: 'font-default',
+  [FontFamily.Hero]: 'font-hero',
+};
+
+const rewardsTitleProps = { fontFamily: FontFamily.Hero };
 ```
 
 **Impact:**
 
-TypeScript fails on `FontFamily.Accent`. `@metamask/design-system-react` and `@metamask/design-system-react-native` re-export the same `FontFamily` object, so those packages must update in the same release.
+TypeScript fails on `FontFamily.Accent` and on `Record<FontFamily, ...>` objects that still list `accent`. `@metamask/design-system-react@0.50.0` and `@metamask/design-system-react-native@0.55.0` re-export the same `FontFamily` object, so upgrade them together. See the [React](../design-system-react/MIGRATION.md#from-version-0490-to-0500) and [React Native](../design-system-react-native/MIGRATION.md#from-version-0540-to-0550) guides.
 
 ### From version 0.34.0 to 0.35.0
 
