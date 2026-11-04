@@ -61,9 +61,9 @@
   },
   "scriptsConfig": {
     "#default": "lavamoat/scripts.strict.json",
-    "build-storybook": "lavamoat/scripts.storybook.json",
-    "chromatic": "lavamoat/scripts.net.json",
-    "storybook": "lavamoat/scripts.net.json",
-    "test-storybook": "lavamoat/scripts.net.json"
+    "build-storybook": "lavamoat/scripts.unsafe.json",
+    "chromatic": "lavamoat/scripts.unsafe.json",
+    "storybook": "lavamoat/scripts.unsafe.json",
+    "test-storybook": "lavamoat/scripts.unsafe.json"
   }
 }
