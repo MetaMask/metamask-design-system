@@ -20,7 +20,7 @@ const config = createConfig([
       '**/storybook-static/**',
       'merged-packages/**',
       '.yarn/**',
-      'lavamoat/*.cjs',
+      'lavamoat/*.js',
       'scripts/create-package/package-template/**',
       /**
        * Design System specific ignores
