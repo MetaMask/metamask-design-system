@@ -1,0 +1,15 @@
+{
+  "notes": "For scripts that run `yarn install`. Yarn links workspaces with symlinks, and Node.js only allows `fs.symlink` with unrestricted read and write access, so this profile grants full filesystem access plus network.",
+  "extends": "./scripts.base.json",
+  "nodeOptions": {
+    "--disable-warning": ["ExperimentalWarning"],
+    "--allow-fs-read": ["*"],
+    "--allow-fs-write": ["*"],
+    "--allow-child-process": true,
+    "--allow-net": true,
+    "--allow-worker": true,
+    "--allow-addons": true,
+    "--allow-wasi": false,
+    "--allow-inspector": false
+  }
+}
