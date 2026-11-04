@@ -20,24 +20,32 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [24.x]
+        node-version: [26.x]
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: ${{ inputs.publish }}
 
-      - name: Dry run Code Connect publish
-        if: ${{ !inputs.publish }}
+      # The LavaMoat runner strips environment variables containing "TOKEN"
+      # from `yarn run` scripts, so the Figma CLI reads the token from `.env`
+      # (loaded in-process via dotenv) instead.
+      - name: Write Figma access token to .env
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+        run: printf 'FIGMA_ACCESS_TOKEN=%s\n' "$FIGMA_ACCESS_TOKEN" > .env
+
+      - name: Dry run Code Connect publish
+        if: ${{ !inputs.publish }}
         run: yarn figma:connect:publish:dry-run
 
       - name: Publish Code Connect to Figma
         if: ${{ inputs.publish }}
-        env:
-          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
         run: yarn figma:connect:publish
+
+      - name: Remove .env
+        if: ${{ always() }}
+        run: rm -f .env
 
       - name: Require clean working directory
         shell: bash
