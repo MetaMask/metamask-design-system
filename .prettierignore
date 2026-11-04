@@ -4,7 +4,7 @@ node_modules/
 .yarn/global/
 
 # Vendored from @lavamoat/harden
-lavamoat/*.cjs
+lavamoat/*.js
 
 .expo
 
