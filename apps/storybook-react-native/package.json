@@ -83,15 +83,15 @@
   "installConfig": {},
   "scriptsConfig": {
     "#default": "lavamoat/scripts.strict.json",
-    "android": "lavamoat/scripts.net.json",
-    "android:build": "lavamoat/scripts.native.json",
-    "build-storybook": "lavamoat/scripts.storybook.json",
-    "ios": "lavamoat/scripts.net.json",
-    "ios:build": "lavamoat/scripts.native.json",
-    "prestorybook": "lavamoat/scripts.cli.json",
-    "start": "lavamoat/scripts.net.json",
-    "storybook:web": "lavamoat/scripts.net.json",
-    "test-storybook": "lavamoat/scripts.net.json",
-    "web": "lavamoat/scripts.net.json"
+    "android": "lavamoat/scripts.unsafe.json",
+    "android:build": "lavamoat/scripts.unsafe.json",
+    "build-storybook": "lavamoat/scripts.unsafe.json",
+    "ios": "lavamoat/scripts.unsafe.json",
+    "ios:build": "lavamoat/scripts.unsafe.json",
+    "prestorybook": "lavamoat/scripts.unsafe.json",
+    "start": "lavamoat/scripts.unsafe.json",
+    "storybook:web": "lavamoat/scripts.unsafe.json",
+    "test-storybook": "lavamoat/scripts.unsafe.json",
+    "web": "lavamoat/scripts.unsafe.json"
   }
 }
