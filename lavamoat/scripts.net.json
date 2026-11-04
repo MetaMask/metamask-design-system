@@ -1,7 +1,8 @@
 {
-  "notes": "For scripts that must reach the network or listen on a port (dev servers, registry installs and publishes, Chromatic and Figma uploads). Writes are still limited to the project.",
+  "notes": "For scripts that must reach the network: Figma Code Connect and preview publishing. Writes are still limited to the project. Requires Node.js 25+, where `--allow-net` exists.",
   "extends": "./scripts.base.json",
   "nodeOptions": {
+    "--disable-warning": ["ExperimentalWarning"],
     "--allow-fs-read": ["/"],
     "--allow-fs-write": ["$PROJECT_CWD"],
     "--allow-child-process": true,
