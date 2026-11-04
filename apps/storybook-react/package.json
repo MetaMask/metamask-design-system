@@ -58,5 +58,12 @@
   },
   "dependencies": {
     "@vitest/browser": "^4.1.10"
+  },
+  "scriptsConfig": {
+    "#default": "lavamoat/scripts.strict.json",
+    "build-storybook": "lavamoat/scripts.storybook.json",
+    "chromatic": "lavamoat/scripts.net.json",
+    "storybook": "lavamoat/scripts.net.json",
+    "test-storybook": "lavamoat/scripts.net.json"
   }
 }

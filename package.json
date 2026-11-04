@@ -21,7 +21,7 @@
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
     "chromatic": "yarn workspace @metamask/storybook-react chromatic",
     "create-component:react": "yarn workspace @metamask/design-system-react create-component",
-    "create-package": "tsx scripts/create-package",
+    "create-package": "node --import tsx scripts/create-package",
     "figma:connect:react": "figma connect --config packages/design-system-react/figma.config.json",
     "figma:connect:react-native": "figma connect --config packages/design-system-react-native/figma.config.json",
     "figma:connect:publish": "yarn figma:connect:publish:react && yarn figma:connect:publish:react-native",
@@ -52,12 +52,12 @@
     "test": "yarn test:scripts --silent --collectCoverage=false --reporters=jest-silent-reporter && yarn test:packages",
     "test:clean": "yarn workspaces foreach --all --parallel --verbose run test:clean && yarn test",
     "test:packages": "yarn test:verbose --silent --collectCoverage=false --reporters=jest-silent-reporter",
-    "test:scripts": "NODE_OPTIONS=--experimental-vm-modules yarn jest --config ./jest.config.scripts.js --silent",
+    "test:scripts": "yarn jest --config ./jest.config.scripts.js --silent",
     "test:storybook": "yarn test:storybook:react && yarn test:storybook:react-native",
     "test:storybook:react": "yarn workspace @metamask/storybook-react test-storybook",
     "test:storybook:react-native": "yarn workspace @metamask/storybook-react-native test-storybook",
     "test:verbose": "yarn workspaces foreach --all --parallel --verbose run test:verbose",
-    "update-readme-content": "tsx scripts/update-readme-content.ts",
+    "update-readme-content": "node --import tsx scripts/update-readme-content.ts",
     "workspaces:list-versions": "./scripts/list-workspace-versions.sh"
   },
   "simple-git-hooks": {
@@ -127,5 +127,44 @@
       "simple-git-hooks": false,
       "tsx>esbuild": false
     }
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "yarn",
+      "version": ">=4.18.1",
+      "onFail": "error"
+    }
+  },
+  "scriptsConfig": {
+    "#default": "lavamoat/scripts.strict.json",
+    "build": "lavamoat/scripts.yarn.json",
+    "build:clean": "lavamoat/scripts.yarn.json",
+    "build:types": "lavamoat/scripts.build.json",
+    "changelog:update": "lavamoat/scripts.yarn.json",
+    "changelog:validate": "lavamoat/scripts.yarn.json",
+    "chromatic": "lavamoat/scripts.yarn.json",
+    "create-component:react": "lavamoat/scripts.yarn.json",
+    "create-package": "lavamoat/scripts.cli.json",
+    "figma:connect:*": "lavamoat/scripts.net.json",
+    "generate:icons": "lavamoat/scripts.yarn.json",
+    "lint": "lavamoat/scripts.yarn.json",
+    "lint:dependencies": "lavamoat/scripts.lint.json",
+    "lint:dependencies:fix": "lavamoat/scripts.lint.json",
+    "lint:eslint": "lavamoat/scripts.lint-worker.json",
+    "lint:fix": "lavamoat/scripts.yarn.json",
+    "lint:misc": "lavamoat/scripts.lint.json",
+    "prepack": "lavamoat/scripts.yarn.json",
+    "prepare-preview-builds": "lavamoat/scripts.net.json",
+    "publish-previews": "lavamoat/scripts.yarn.json",
+    "setup": "lavamoat/scripts.net.json",
+    "storybook*": "lavamoat/scripts.yarn.json",
+    "test": "lavamoat/scripts.yarn.json",
+    "test:clean": "lavamoat/scripts.yarn.json",
+    "test:packages": "lavamoat/scripts.yarn.json",
+    "test:scripts": "lavamoat/scripts.test.json",
+    "test:storybook*": "lavamoat/scripts.yarn.json",
+    "test:verbose": "lavamoat/scripts.yarn.json",
+    "update-readme-content": "lavamoat/scripts.cli.json",
+    "workspaces:list-versions": "lavamoat/scripts.yarn.json"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "notes": "For scripts that must reach the network or listen on a port (dev servers, registry installs and publishes, Chromatic and Figma uploads). Writes are still limited to the project.",
+  "extends": "./scripts.base.json",
+  "nodeOptions": {
+    "--allow-fs-read": ["/"],
+    "--allow-fs-write": ["$PROJECT_CWD"],
+    "--allow-child-process": true,
+    "--allow-net": true,
+    "--allow-worker": true,
+    "--allow-addons": true,
+    "--allow-wasi": false,
+    "--allow-inspector": false
+  }
+}
