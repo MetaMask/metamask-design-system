@@ -1,0 +1,15 @@
+{
+  "notes": "Jest runs test files in child processes and needs `--experimental-vm-modules` for ESM support.",
+  "extends": "./scripts.base.json",
+  "nodeOptions": {
+    "--experimental-vm-modules": true,
+    "--allow-fs-read": ["/"],
+    "--allow-fs-write": ["$PROJECT_CWD"],
+    "--allow-child-process": true,
+    "--allow-net": false,
+    "--allow-worker": false,
+    "--allow-addons": true,
+    "--allow-wasi": false,
+    "--allow-inspector": false
+  }
+}

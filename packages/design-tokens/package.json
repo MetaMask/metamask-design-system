@@ -44,10 +44,10 @@
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-tokens",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
-    "test:clean": "NODE_OPTIONS=--experimental-vm-modules jest --clearCache",
-    "test:verbose": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
-    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
+    "test": "jest --reporters=jest-silent-reporter",
+    "test:clean": "jest --clearCache",
+    "test:verbose": "jest --verbose",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@metamask/auto-changelog": "^7.1.0",
@@ -71,5 +71,18 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "scriptsConfig": {
+    "#default": "lavamoat/scripts.strict.json",
+    "build": "lavamoat/scripts.yarn.json",
+    "changelog:update": "lavamoat/scripts.lint.json",
+    "changelog:validate": "lavamoat/scripts.lint.json",
+    "publish:preview": "lavamoat/scripts.net.json",
+    "test": "lavamoat/scripts.test.json",
+    "test:clean": "lavamoat/scripts.test.json",
+    "test:verbose": "lavamoat/scripts.test.json",
+    "test:watch": "lavamoat/scripts.test.json",
+    "build:css": "lavamoat/scripts.yarn.json",
+    "build:css:tailwind": "lavamoat/scripts.build.json"
   }
 }
