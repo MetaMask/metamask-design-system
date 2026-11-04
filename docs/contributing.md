@@ -2,9 +2,11 @@
 
 ## Getting started
 
-- Install [Node.js](https://nodejs.org) 24 (see `.nvmrc`)
+- Install [Node.js](https://nodejs.org) 26 (see `.nvmrc`)
   - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm install` will install the version in `.nvmrc` and running `nvm use` will automatically choose the right node version for you.
+  - Scripts run under the Node.js permission model (see [Script permissions](#script-permissions)). Node.js 24 can't apply the network restrictions, and scripts that use the `net` or `install` profiles fail on it.
 - Install [Yarn](https://yarnpkg.com) via [Corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#how-to-install)
+  - Node.js 26 no longer bundles Corepack. Install it with `npm install --global corepack` and then run `corepack enable`.
   - If you have Yarn installed globally via Homebrew or NPM, you'll need to uninstall it before enabling it via Corepack.
 - Run `yarn install` to install dependencies and run any required post-install scripts.
 - Run `yarn simple-git-hooks` to add a [Git hook](https://github.com/toplenboren/simple-git-hooks#what-is-a-git-hook) to your local development environment which will ensure that all files pass linting before you push a branch.
@@ -32,6 +34,26 @@ If you need to customize the behavior of ESLint, see `eslint.config.mjs` in the 
 
 - Run `yarn lint` to lint all files and show possible violations across the monorepo.
 - Run `yarn lint:fix` to fix any automatically fixable violations.
+
+## Script permissions
+
+The package manager is hardened with [`@lavamoat/harden`](https://github.com/LavaMoat/LavaMoat/tree/main/packages/harden). Every script run with `yarn run` (or `yarn <script>`) is wrapped in the [Node.js permission model](https://nodejs.org/api/permissions.html). The workspace's `scriptsConfig` field chooses the profile, a JSON file in `lavamoat/`. Scripts without an entry use `#default` (`lavamoat/scripts.strict.json`), which only allows reading and writing inside the repository.
+
+When you add a script, give it the narrowest profile that works:
+
+| Profile   | Use for                                                                                      |
+| --------- | -------------------------------------------------------------------------------------------- |
+| `strict`  | Default. Pure Node.js scripts that only touch the repository                                 |
+| `build`   | Build tools that start child processes                                                       |
+| `yarn`    | Scripts that call other `yarn` scripts                                                       |
+| `lint`    | Linters and changelog tooling                                                                |
+| `test`    | Jest                                                                                         |
+| `cli`     | TypeScript scripts run through `node --import tsx`                                           |
+| `net`     | Scripts that need the network, such as Figma Code Connect or preview publishing              |
+| `install` | Scripts that run `yarn install` (Node.js only allows symlinks with unrestricted fs access)   |
+| `unsafe`  | No restrictions. Only for tools that can't run under the permission model, such as Storybook |
+
+The runner also removes environment variables whose names contain `TOKEN`, `SECRET`, `KEY`, `AUTH`, `PASSWORD`, `SESSION` or `SSH` (see `lavamoat/.env.ban.json`). Put local secrets in `.env` instead, for example `FIGMA_ACCESS_TOKEN` for Figma Code Connect.
 
 ## Performing operations across the monorepo
 
