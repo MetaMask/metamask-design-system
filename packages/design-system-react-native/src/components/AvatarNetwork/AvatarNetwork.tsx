@@ -54,8 +54,15 @@ export const AvatarNetwork = ({
           height={'100%'}
           {...imageOrSvgProps}
           imageProps={{
-            contentFit: 'contain',
+            // Raster logos. `cover` fills the square; `contain` letterboxes
+            // non-square assets and lets bg-white show as edge slivers.
+            contentFit: 'cover',
             ...imageOrSvgProps?.imageProps,
+          }}
+          svgProps={{
+            // SVG ignores contentFit. `slice` is the SVG equivalent of cover.
+            preserveAspectRatio: 'xMidYMid slice',
+            ...imageOrSvgProps?.svgProps,
           }}
           onImageError={onImageErrorHandler}
           onSvgError={onSvgErrorHandler}

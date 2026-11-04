@@ -63,6 +63,11 @@ describe('AvatarNetwork', () => {
       );
       expect(screen.getByTestId('fb-default')).toHaveTextContent('?');
     });
+
+    it('does not apply a white background', () => {
+      render(<AvatarNetwork name="Arbitrum" data-testid="avatar" />);
+      expect(screen.getByTestId('avatar')).not.toHaveClass('bg-white');
+    });
   });
 
   describe('when src IS provided', () => {
@@ -79,7 +84,7 @@ describe('AvatarNetwork', () => {
       const img = screen.getByTestId('img') as HTMLImageElement;
       expect(img.src).toContain(src);
       expect(img.alt).toBe('ACME');
-      expect(img).toHaveClass('size-full', 'object-contain');
+      expect(img).toHaveClass('size-full', 'object-cover');
       expect(img).toHaveAttribute('id', 'img-id');
     });
 
@@ -92,6 +97,20 @@ describe('AvatarNetwork', () => {
         />,
       );
       expect(screen.getByTestId('img2')).toHaveAttribute('alt', 'Network logo');
+    });
+
+    it('keeps a white background behind the network image', () => {
+      render(<AvatarNetwork name="Arbitrum" src={src} data-testid="avatar" />);
+      expect(screen.getByTestId('avatar')).toHaveClass('bg-white');
+    });
+
+    it('removes the white background after the image errors', () => {
+      render(<AvatarNetwork name="Beta" src="bad.png" data-testid="avatar" />);
+      expect(screen.getByTestId('avatar')).toHaveClass('bg-white');
+
+      fireEvent.error(screen.getByRole('img'));
+
+      expect(screen.getByTestId('avatar')).not.toHaveClass('bg-white');
     });
 
     it('does not render fallbackText initially', () => {
