@@ -45,7 +45,7 @@ export const AvatarFavicon = forwardRef<HTMLDivElement, AvatarFaviconProps>(
           <img
             src={src}
             alt={altText}
-            className="size-full object-contain"
+            className="size-full object-cover"
             {...imageProps}
             onError={onErrorHandler}
           />

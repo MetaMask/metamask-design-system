@@ -47,8 +47,15 @@ export const AvatarFavicon = ({
           height={'100%'}
           {...imageOrSvgProps}
           imageProps={{
-            contentFit: 'contain',
+            // Raster favicons. `cover` fills the circle; `contain` letterboxes
+            // non-square assets and lets the avatar background show in the gaps.
+            contentFit: 'cover',
             ...imageOrSvgProps?.imageProps,
+          }}
+          svgProps={{
+            // SVG ignores contentFit. `slice` is the SVG equivalent of cover.
+            preserveAspectRatio: 'xMidYMid slice',
+            ...imageOrSvgProps?.svgProps,
           }}
           onImageError={onImageErrorHandler}
           onSvgError={onSvgErrorHandler}
