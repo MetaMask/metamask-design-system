@@ -129,30 +129,38 @@ module.exports = defineConfig({
         expectWorkspaceField(
           workspace,
           'scripts.test',
-          'NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter',
+          'jest --reporters=jest-silent-reporter',
         );
 
         // All non-root packages must have the same "test:clean" script.
         expectWorkspaceField(
           workspace,
           'scripts.test:clean',
-          'NODE_OPTIONS=--experimental-vm-modules jest --clearCache',
+          'jest --clearCache',
         );
 
         // All non-root packages must have the same "test:verbose" script.
         expectWorkspaceField(
           workspace,
           'scripts.test:verbose',
-          'NODE_OPTIONS=--experimental-vm-modules jest --verbose',
+          'jest --verbose',
         );
 
         // All non-root packages must have the same "test:watch" script.
-        expectWorkspaceField(
-          workspace,
-          'scripts.test:watch',
-          'NODE_OPTIONS=--experimental-vm-modules jest --watch',
-        );
+        expectWorkspaceField(workspace, 'scripts.test:watch', 'jest --watch');
+
+        // All non-root packages must run their shared scripts with the same
+        // LavaMoat script permission profiles.
+        expectPackageScriptsConfig(workspace, isPrivate);
       }
+
+      // Every workspace must fall back to the strict LavaMoat script
+      // permission profile for scripts without an explicit profile.
+      expectWorkspaceField(
+        workspace,
+        'scriptsConfig.#default',
+        'lavamoat/scripts.strict.json',
+      );
 
       if (isChildWorkspace && !isApps) {
         // The list of files included in all non-root packages must only include
@@ -207,7 +215,11 @@ module.exports = defineConfig({
       if (isChildWorkspace) {
         workspace.unset('packageManager');
       } else {
-        expectWorkspaceField(workspace, 'packageManager', 'yarn@4.16.0');
+        expectWorkspaceField(
+          workspace,
+          'packageManager',
+          'yarn@4.18.1+sha512.b2e1e7524f654f2749d32b4ebcb4622473cb5bcbc485df2007e12a154e50162a4d795526768bc5f5b8f81717bfd79deb2472813d86fb5ae2eb551fa9c872b08f',
+        );
       }
 
       // All packages must specify a minimum Node.js version of 24.
@@ -361,6 +373,46 @@ async function workspaceFileExists(workspace, path) {
     throw error;
   }
   return true;
+}
+
+/**
+ * Expect that a non-root package maps its shared scripts to the expected
+ * LavaMoat script permission profiles in `scriptsConfig`.
+ *
+ * @param {Workspace} workspace - The workspace to check.
+ * @param {boolean} isPrivate - Whether the workspace is private.
+ */
+function expectPackageScriptsConfig(workspace, isPrivate) {
+  for (const scriptName of ['changelog:update', 'changelog:validate']) {
+    expectWorkspaceField(
+      workspace,
+      `scriptsConfig.${scriptName}`,
+      'lavamoat/scripts.lint.json',
+    );
+  }
+
+  for (const scriptName of [
+    'test',
+    'test:clean',
+    'test:verbose',
+    'test:watch',
+  ]) {
+    expectWorkspaceField(
+      workspace,
+      `scriptsConfig.${scriptName}`,
+      'lavamoat/scripts.test.json',
+    );
+  }
+
+  if (isPrivate) {
+    workspace.unset('scriptsConfig.publish:preview');
+  } else {
+    expectWorkspaceField(
+      workspace,
+      'scriptsConfig.publish:preview',
+      'lavamoat/scripts.net.json',
+    );
+  }
 }
 
 /**
