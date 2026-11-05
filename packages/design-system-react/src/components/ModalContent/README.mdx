@@ -49,11 +49,34 @@ Content rendered inside the dialog. Typically composed of `ModalHeader`, `ModalB
 
 Max-width of the inner dialog. Override entirely via `modalDialogProps.className="max-w-..."` if you need a custom width.
 
-| Value                  | Max-width |
-| ---------------------- | --------- |
-| `ModalContentSize.Sm`  | 360px     |
-| `ModalContentSize.Md`  | 480px     |
-| `ModalContentSize.Lg`  | 720px     |
+<table>
+  <thead>
+    <tr>
+      <th align="left">VALUE</th>
+      <th align="left">MAX-WIDTH</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ModalContentSize.Sm</code>
+      </td>
+      <td align="left">360px</td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>ModalContentSize.Md</code>
+      </td>
+      <td align="left">480px</td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>ModalContentSize.Lg</code>
+      </td>
+      <td align="left">720px</td>
+    </tr>
+  </tbody>
+</table>
 
 <table>
   <thead>
@@ -132,14 +155,69 @@ Custom CSS classes applied to the outer positioning element. Merged with the com
 
 `ModalContent` reads the following flags from `useModalContext` and reacts to them:
 
-| Flag                      | Effect                                                                                            |
-| ------------------------- | ------------------------------------------------------------------------------------------------- |
-| `isClosedOnEscapeKey`     | When `true`, pressing Escape calls `onClose`.                                                      |
-| `isClosedOnOutsideClick`  | When `true`, mousedown outside the dialog calls `onClose` (subject to the opt-out below).         |
-| `autoFocus`               | Forwarded to `ModalFocus`. When `true`, the first focusable child is focused on mount.            |
-| `initialFocusRef`         | Forwarded to `ModalFocus`. When set, this element receives focus on mount.                        |
-| `finalFocusRef`           | Forwarded to `ModalFocus`. When set, this element receives focus on close.                        |
-| `restoreFocus`            | Forwarded to `ModalFocus`. When `true`, focus returns to the element that opened the modal.       |
+<table>
+  <thead>
+    <tr>
+      <th align="left">FLAG</th>
+      <th align="left">EFFECT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>isClosedOnEscapeKey</code>
+      </td>
+      <td align="left">
+        When <code>true</code>, pressing Escape calls <code>onClose</code>.
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>isClosedOnOutsideClick</code>
+      </td>
+      <td align="left">
+        When <code>true</code>, mousedown outside the dialog calls{' '}
+        <code>onClose</code> (subject to the opt-out below).
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>autoFocus</code>
+      </td>
+      <td align="left">
+        Forwarded to <code>ModalFocus</code>. When <code>true</code>, the first
+        focusable child is focused on mount.
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>initialFocusRef</code>
+      </td>
+      <td align="left">
+        Forwarded to <code>ModalFocus</code>. When set, this element receives
+        focus on mount.
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>finalFocusRef</code>
+      </td>
+      <td align="left">
+        Forwarded to <code>ModalFocus</code>. When set, this element receives
+        focus on close.
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <code>restoreFocus</code>
+      </td>
+      <td align="left">
+        Forwarded to <code>ModalFocus</code>. When <code>true</code>, focus
+        returns to the element that opened the modal.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Canvas of={ModalContentStories.KeyboardAndOutsideClickConfig} />
 
@@ -152,7 +230,9 @@ To prevent this, `ModalContent` ignores any mousedown whose target's `closest('[
 ```tsx
 import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from '@metamask/design-system-react';
 
-<Box {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}>{popoverContent}</Box>
+<Box {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}>
+  {popoverContent}
+</Box>;
 ```
 
 The constant resolves to the literal string `data-mm-modal-ignore-outside-click`. The attribute presence is what matters — the value is unused.
