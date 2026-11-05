@@ -1,4 +1,6 @@
 {
-  "notes": "Clears all Node.js permission flags; only environment variable filtering and PATH reordering apply. Use ONLY for tools that cannot start under the permission model. Storybook bundles @yarnpkg/fslib, which assigns `resolve` on an object inheriting from `path.posix`, and Node freezes `path` when `--permission` is enabled, so Storybook crashes on startup.",
-  "nodeOptions": {}
+  "notes": "Clears all Node.js permission flags; only environment variable filtering and PATH reordering apply. Use ONLY for tools that cannot start under the permission model. Storybook bundles @yarnpkg/fslib, which assigns `resolve` on an object inheriting from `path.posix`, and Node freezes `path` when `--permission` is enabled, so Storybook crashes on startup. `--max-old-space-size` keeps large Storybook Vitest runs within GitHub-hosted runner memory.",
+  "nodeOptions": {
+    "--max-old-space-size": "4096"
+  }
 }
