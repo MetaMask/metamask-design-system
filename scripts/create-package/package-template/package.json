@@ -54,5 +54,16 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "scriptsConfig": {
+    "#default": "lavamoat/scripts.strict.json",
+    "build": "lavamoat/scripts.build.json",
+    "changelog:update": "lavamoat/scripts.lint.json",
+    "changelog:validate": "lavamoat/scripts.lint.json",
+    "publish:preview": "lavamoat/scripts.net.json",
+    "test": "lavamoat/scripts.test.json",
+    "test:clean": "lavamoat/scripts.test.json",
+    "test:verbose": "lavamoat/scripts.test.json",
+    "test:watch": "lavamoat/scripts.test.json"
   }
 }
