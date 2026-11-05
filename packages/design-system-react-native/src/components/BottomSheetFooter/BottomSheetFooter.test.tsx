@@ -1,10 +1,20 @@
-import { render, fireEvent } from '@testing-library/react-native';
+import { ButtonVariant } from '@metamask/design-system-shared';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render, fireEvent, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { BottomSheetFooter } from './BottomSheetFooter';
+import type { BottomSheetFooterButtonProps } from './BottomSheetFooter.types';
 import { ButtonsAlignment } from './BottomSheetFooter.types';
 
 describe('BottomSheetFooter', () => {
+  let tw: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    const { result } = renderHook(() => useTailwind());
+    tw = result.current;
+  });
+
   it('renders correctly with root testID from ViewProps', () => {
     const { getByTestId } = render(
       <BottomSheetFooter
@@ -41,9 +51,84 @@ describe('BottomSheetFooter', () => {
     expect(getByText('Cancel')).toBeDefined();
   });
 
-  it('returns null when neither button prop is provided', () => {
+  it('returns null when no button props are provided', () => {
     const { toJSON } = render(<BottomSheetFooter />);
     expect(toJSON()).toBeNull();
+  });
+
+  it('renders only the tertiary button when only tertiaryButtonProps is provided', () => {
+    const { getAllByRole, getByText } = render(
+      <BottomSheetFooter tertiaryButtonProps={{ children: 'Not now' }} />,
+    );
+
+    expect(getAllByRole('button')).toHaveLength(1);
+    expect(getByText('Not now')).toBeOnTheScreen();
+  });
+
+  it('renders the tertiary button last in a vertical list', () => {
+    const { getAllByRole, getByTestId } = render(
+      <BottomSheetFooter
+        testID="footer"
+        buttonsAlignment={ButtonsAlignment.Vertical}
+        secondaryButtonProps={{ children: 'Cancel', testID: 'secondary' }}
+        primaryButtonProps={{ children: 'Submit', testID: 'primary' }}
+        tertiaryButtonProps={{ children: 'Not now', testID: 'tertiary' }}
+      />,
+    );
+
+    const buttons = getAllByRole('button');
+    expect(buttons).toHaveLength(3);
+    expect(buttons[0]).toBe(getByTestId('secondary'));
+    expect(buttons[1]).toBe(getByTestId('primary'));
+    expect(buttons[2]).toBe(getByTestId('tertiary'));
+
+    const footer = getByTestId('footer');
+    const flatStyle = Object.assign({}, ...footer.props.style.flat());
+    expect(flatStyle.flexDirection).toBe('column');
+    expect(getByTestId('tertiary')).toHaveStyle(tw`self-stretch`);
+  });
+
+  it('renders tertiaryButtonProps as ButtonVariant.Tertiary even when variant is passed', () => {
+    const tertiaryButtonProps = {
+      children: 'Not now',
+      testID: 'tertiary',
+      variant: ButtonVariant.Primary,
+    } as BottomSheetFooterButtonProps;
+
+    const { getByTestId } = render(
+      <BottomSheetFooter tertiaryButtonProps={tertiaryButtonProps} />,
+    );
+
+    expect(getByTestId('tertiary')).toHaveStyle(tw`border-0 bg-transparent`);
+  });
+
+  it('fires onPress when the tertiary button is pressed', () => {
+    const onPress = jest.fn();
+    const { getByText } = render(
+      <BottomSheetFooter
+        tertiaryButtonProps={{ children: 'Not now', onPress }}
+      />,
+    );
+
+    fireEvent.press(getByText('Not now'));
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('passes configurable testID and style to the tertiary button', () => {
+    const customStyle = { marginBottom: 8 };
+    const { getByTestId } = render(
+      <BottomSheetFooter
+        tertiaryButtonProps={{
+          children: 'Not now',
+          testID: 'later-button',
+          style: customStyle,
+        }}
+      />,
+    );
+
+    const button = getByTestId('later-button');
+    expect(button).toBeOnTheScreen();
+    expect(button).toHaveStyle(customStyle);
   });
 
   it('fires onPress when primary button is pressed', () => {

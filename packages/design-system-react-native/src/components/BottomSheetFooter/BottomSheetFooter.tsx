@@ -1,9 +1,9 @@
 // Third party dependencies.
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
-import { View } from 'react-native';
 
 // External dependencies.
+import { Box, BoxFlexDirection } from '../Box';
 import { Button, ButtonVariant } from '../Button';
 
 // Internal dependencies.
@@ -16,48 +16,50 @@ export const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
   buttonsAlignment = ButtonsAlignment.Horizontal,
   primaryButtonProps,
   secondaryButtonProps,
+  tertiaryButtonProps,
   ...props
 }) => {
   const tw = useTailwind();
   const isHorizontal = buttonsAlignment === ButtonsAlignment.Horizontal;
   const buttonBaseClass = isHorizontal ? 'flex-1' : 'self-stretch';
-  const gapClass = isHorizontal ? 'ml-4' : 'mt-4';
-  const hasBothButtons =
-    Boolean(primaryButtonProps) && Boolean(secondaryButtonProps);
 
-  if (!primaryButtonProps && !secondaryButtonProps) {
+  if (!primaryButtonProps && !secondaryButtonProps && !tertiaryButtonProps) {
     return null;
   }
 
   return (
-    <View
-      style={[
-        tw.style(
-          isHorizontal ? 'flex-row' : 'flex-col',
-          'px-4 py-0',
-          twClassName,
-        ),
-        style,
-      ]}
+    <Box
+      flexDirection={
+        isHorizontal ? BoxFlexDirection.Row : BoxFlexDirection.Column
+      }
+      gap={4}
+      paddingHorizontal={4}
+      paddingVertical={0}
+      twClassName={twClassName}
+      style={style}
       {...props}
     >
-      {secondaryButtonProps && (
+      {secondaryButtonProps ? (
         <Button
           {...secondaryButtonProps}
           variant={ButtonVariant.Secondary}
           style={[tw.style(buttonBaseClass), secondaryButtonProps.style]}
         />
-      )}
-      {primaryButtonProps && (
+      ) : null}
+      {primaryButtonProps ? (
         <Button
           {...primaryButtonProps}
           variant={ButtonVariant.Primary}
-          style={[
-            tw.style(buttonBaseClass, hasBothButtons && gapClass),
-            primaryButtonProps.style,
-          ]}
+          style={[tw.style(buttonBaseClass), primaryButtonProps.style]}
         />
-      )}
-    </View>
+      ) : null}
+      {tertiaryButtonProps ? (
+        <Button
+          {...tertiaryButtonProps}
+          variant={ButtonVariant.Tertiary}
+          style={[tw.style(buttonBaseClass), tertiaryButtonProps.style]}
+        />
+      ) : null}
+    </Box>
   );
 };

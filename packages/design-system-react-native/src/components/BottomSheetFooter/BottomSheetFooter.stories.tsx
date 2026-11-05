@@ -17,9 +17,9 @@ const meta: Meta<BottomSheetFooterProps> = {
       control: {
         type: 'select',
       },
+      description:
+        'Horizontal lays the buttons in a row. Vertical stacks them. A tertiary button is last, so use Vertical to place it at the bottom.',
     },
-    twClassName: { control: 'text' },
-    style: { control: 'object' },
   },
   decorators: [
     (Story) => (
@@ -64,6 +64,33 @@ export const SecondaryOnly: Story = {
     secondaryButtonProps: {
       children: 'Cancel',
       onPress: () => console.log('Cancel pressed'),
+    },
+  },
+};
+
+export const TertiaryOnly: Story = {
+  args: {
+    tertiaryButtonProps: {
+      children: 'Not now',
+      onPress: () => console.log('Not now pressed'),
+    },
+  },
+};
+
+export const TertiaryButtonProps: Story = {
+  args: {
+    buttonsAlignment: ButtonsAlignment.Vertical,
+    secondaryButtonProps: {
+      children: 'Cancel',
+      onPress: () => console.log('Cancel pressed'),
+    },
+    primaryButtonProps: {
+      children: 'Submit',
+      onPress: () => console.log('Submit pressed'),
+    },
+    tertiaryButtonProps: {
+      children: 'Not now',
+      onPress: () => console.log('Not now pressed'),
     },
   },
 };
