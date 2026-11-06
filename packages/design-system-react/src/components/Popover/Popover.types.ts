@@ -1,12 +1,11 @@
 import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 
 /**
- * Popover - placement of the floating element relative to the reference element.
- * `Auto` picks the side with the most space, which enables both `flip` and
- * `preventOverflow` automatically.
+ * Popover - preferred placement relative to the reference element. The
+ * Popover flips to the opposite side and shifts along the other axis when the
+ * preferred placement would overflow the viewport.
  */
 export const PopoverPosition = {
-  Auto: 'auto',
   Top: 'top',
   TopStart: 'top-start',
   TopEnd: 'top-end',
@@ -34,7 +33,10 @@ export const PopoverRole = {
 } as const;
 export type PopoverRole = (typeof PopoverRole)[keyof typeof PopoverRole];
 
-export type PopoverProps = Omit<ComponentProps<'div'>, 'role'> & {
+export type PopoverProps = Omit<
+  ComponentProps<'div'>,
+  'role' | 'popover' | 'children'
+> & {
   /**
    * The contents of the Popover.
    */
@@ -49,85 +51,45 @@ export type PopoverProps = Omit<ComponentProps<'div'>, 'role'> & {
    */
   style?: CSSProperties;
   /**
-   * Placement relative to `referenceElement`. When `PopoverPosition.Auto`,
-   * `flip` and `preventOverflow` are forced on regardless of their props.
+   * Whether the Popover is open. Nothing is rendered when `false`.
+   */
+  isOpen?: boolean;
+  /**
+   * Called when the browser closes the Popover: light dismiss (a click
+   * outside), the Escape key, or another dismissible popover opening. Set
+   * `isOpen` to `false` here to keep a controlled Popover in sync. Never
+   * called when the Popover closes because `isOpen` became `false`.
+   */
+  onClose?: () => void;
+  /**
+   * Whether the browser may close the Popover on light dismiss and Escape
+   * (`popover="auto"`). Set to `false` for popovers that must stay open until
+   * `isOpen` changes, such as hover tooltips (`popover="manual"`).
    *
-   * @default PopoverPosition.Auto
+   * @default true
+   */
+  isDismissible?: boolean;
+  /**
+   * The element the Popover is positioned against.
+   */
+  referenceElement?: HTMLElement | null;
+  /**
+   * Preferred placement relative to `referenceElement`.
+   *
+   * @default PopoverPosition.Bottom
    */
   position?: PopoverPosition;
+  /**
+   * `[skidding, distance]` offset in px. Skidding moves the Popover along
+   * the reference edge, distance moves it away from the reference.
+   *
+   * @default [0, 8]
+   */
+  offset?: [number, number];
   /**
    * ARIA role applied to the Popover root.
    *
    * @default PopoverRole.Tooltip
    */
   role?: PopoverRole;
-  /**
-   * Render an arrow pointing at the reference element.
-   *
-   * @default false
-   */
-  hasArrow?: boolean;
-  /**
-   * Props forwarded to the arrow element. `ref`, `style`, and `children` are
-   * reserved for internal use (arrow positioning, rotation styles, and the
-   * arrow visual) and cannot be overridden.
-   */
-  arrowProps?: Omit<ComponentProps<'div'>, 'ref' | 'style' | 'children'>;
-  /**
-   * Match the popover width to the reference element's `clientWidth`.
-   *
-   * @default false
-   */
-  matchWidth?: boolean;
-  /**
-   * Keep the Popover within the viewport. Forced on when
-   * `position === PopoverPosition.Auto`.
-   *
-   * @default false
-   */
-  preventOverflow?: boolean;
-  /**
-   * Allow flipping to the opposite side when there is not enough space.
-   * Forced on when `position === PopoverPosition.Auto`.
-   *
-   * @default false
-   */
-  flip?: boolean;
-  /**
-   * Hide the Popover when the reference element is scrolled out of view.
-   *
-   * @default true
-   */
-  referenceHidden?: boolean;
-  /**
-   * The element the Popover is positioned against.
-   */
-  referenceElement?: HTMLElement | null;
-  /**
-   * Whether the Popover is open. Nothing is rendered when `false`.
-   */
-  isOpen?: boolean;
-  /**
-   * `[skidding, distance]` offset (in px) applied to the Popover.
-   *
-   * @default [0, 8]
-   */
-  offset?: [number, number];
-  /**
-   * Render the Popover into `document.body` via `createPortal`. Rarely
-   * needed: the Popover is shown in the top layer with the native Popover
-   * API, so ancestors' `overflow` and `z-index` cannot clip or cover it.
-   *
-   * @default false
-   */
-  isPortal?: boolean;
-  /**
-   * Called when the user presses the Escape key while the Popover is open.
-   */
-  onPressEscKey?: () => void;
-  /**
-   * Called when the user clicks outside the Popover and the reference element
-   * while the Popover is open.
-   */
-  onClickOutside?: () => void;
 };
