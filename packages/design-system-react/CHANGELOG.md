@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.51.1]
+
 ### Uncategorized
 
 - fix(design-system-react): allow data-\* attributes in Input and TextField inputProps ([#1667](https://github.com/MetaMask/metamask-design-system/pull/1667))
@@ -709,7 +711,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.1...HEAD
+[0.51.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.0...@metamask/design-system-react@0.51.1
 [0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.50.0...@metamask/design-system-react@0.51.0
 [0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.49.0...@metamask/design-system-react@0.50.0
 [0.49.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.48.0...@metamask/design-system-react@0.49.0
