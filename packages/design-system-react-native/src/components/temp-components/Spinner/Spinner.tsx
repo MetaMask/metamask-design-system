@@ -1,6 +1,6 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useEffect, useRef } from 'react';
-import { Animated, Easing, View } from 'react-native';
+import { AccessibilityInfo, Animated, Easing, View } from 'react-native';
 
 import type { IconProps } from '../../Icon';
 import { Icon, IconColor, IconName, IconSize } from '../../Icon';
@@ -27,22 +27,92 @@ export const Spinner = ({
   // updates the view on the UI thread without going through the shadow tree.
   const rotation = useRef(new Animated.Value(0)).current;
 
-  // Start the animation when the component mounts
+  // Reanimated's default ReduceMotion.System skipped this infinite rotation when
+  // the OS reduce-motion setting was on. The native-driver loop does not, so read
+  // the setting and hold the icon at 0deg while it is enabled. The loop lives in
+  // this effect so a parent re-render does not restart it.
   useEffect(() => {
-    const loop = Animated.loop(
-      Animated.timing(rotation, {
-        toValue: 1,
-        duration: 1000, // Complete a full spin in 1 second
-        easing: Easing.linear,
-        useNativeDriver: true,
-        isInteraction: false,
-      }),
+    let isActive = true;
+    let sawReduceMotionChange = false;
+    let loop: Animated.CompositeAnimation | null = null;
+
+    const stopRotation = () => {
+      if (loop) {
+        loop.stop();
+        loop = null;
+      }
+
+      rotation.setValue(0);
+    };
+
+    const startRotation = () => {
+      if (loop) {
+        return;
+      }
+
+      loop = Animated.loop(
+        Animated.timing(rotation, {
+          toValue: 1,
+          duration: 1000, // Complete a full spin in 1 second
+          easing: Easing.linear,
+          useNativeDriver: true,
+          isInteraction: false,
+        }),
+      );
+      loop.start();
+    };
+
+    const applyReduceMotion = (reduceMotionEnabled: boolean) => {
+      if (!isActive) {
+        return;
+      }
+
+      if (reduceMotionEnabled) {
+        stopRotation();
+        return;
+      }
+
+      startRotation();
+    };
+
+    // A reduceMotionChanged event can arrive before the initial read resolves.
+    // Keep that newer value and drop the stale read so the loop does not flicker.
+    const applyInitialReduceMotion = (reduceMotionEnabled: boolean) => {
+      if (sawReduceMotionChange) {
+        return;
+      }
+
+      applyReduceMotion(reduceMotionEnabled);
+    };
+
+    const subscription = AccessibilityInfo.addEventListener(
+      'reduceMotionChanged',
+      (reduceMotionEnabled) => {
+        sawReduceMotionChange = true;
+        applyReduceMotion(reduceMotionEnabled);
+      },
     );
 
-    loop.start();
+    // A missing or rejected read cannot tell us the setting. Spin, matching the
+    // previous behavior, instead of leaving the spinner stuck.
+    const readReduceMotion = AccessibilityInfo.isReduceMotionEnabled();
+
+    if (typeof readReduceMotion?.then === 'function') {
+      void readReduceMotion.then(applyInitialReduceMotion, () => {
+        applyInitialReduceMotion(false);
+      });
+    } else {
+      applyInitialReduceMotion(false);
+    }
 
     return () => {
-      loop.stop();
+      isActive = false;
+      // React Native Web returns undefined when matchMedia is unavailable.
+      subscription?.remove();
+
+      if (loop) {
+        loop.stop();
+      }
     };
   }, [rotation]);
 
