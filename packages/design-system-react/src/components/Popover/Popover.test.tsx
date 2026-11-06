@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import React, { createRef, useState } from 'react';
+import React, { createRef, useLayoutEffect, useState } from 'react';
 
 import { Popover } from './Popover';
 import { PopoverPosition, PopoverRole } from './Popover.types';
@@ -164,6 +164,42 @@ describe('Popover', () => {
       expect(showPopover).toHaveBeenCalledTimes(2);
     });
 
+    it.each([
+      ['already open', true, 0],
+      ['not yet open', false, 1],
+    ])(
+      'handles :popover-open when the popover is %s',
+      (_label, open, calls) => {
+        jest
+          .spyOn(Element.prototype, 'matches')
+          .mockImplementation(
+            (selector: string) => selector !== ':popover-open' || open,
+          );
+        const showPopover = jest.spyOn(HTMLElement.prototype, 'showPopover');
+        render(<Popover isOpen>x</Popover>);
+        expect(showPopover).toHaveBeenCalledTimes(calls);
+      },
+    );
+
+    it('still shows the popover when :popover-open cannot be queried', () => {
+      jest
+        .spyOn(Element.prototype, 'matches')
+        .mockImplementation((selector: string) => {
+          if (selector === ':popover-open') {
+            throw new Error('unsupported');
+          }
+          return true;
+        });
+      const showPopover = jest.spyOn(HTMLElement.prototype, 'showPopover');
+      render(
+        <Popover data-testid="popover" isOpen>
+          x
+        </Popover>,
+      );
+      expect(showPopover).toHaveBeenCalledTimes(1);
+      expect(screen.getByTestId('popover')).toBeInTheDocument();
+    });
+
     it('does not show the popover while closed', () => {
       const showPopover = jest.spyOn(HTMLElement.prototype, 'showPopover');
       render(<Popover isOpen={false}>x</Popover>);
@@ -277,6 +313,236 @@ describe('Popover', () => {
       render(<ControlledPopover />);
       dispatchToggle(screen.getByTestId('popover'), 'closed');
       expect(screen.queryByTestId('popover')).not.toBeInTheDocument();
+    });
+
+    it('does not report the close caused by changing isDismissible', () => {
+      const onClose = jest.fn();
+      const Harness = ({ dismissible }: { dismissible: boolean }) => {
+        useLayoutEffect(() => {
+          const root = document.querySelector('[data-testid="popover"]');
+          if (root?.getAttribute('popover') === 'manual') {
+            const event = new Event('toggle');
+            Object.assign(event, { newState: 'closed' });
+            root.dispatchEvent(event);
+          }
+        });
+        return (
+          <Popover
+            data-testid="popover"
+            isOpen
+            isDismissible={dismissible}
+            onClose={onClose}
+          >
+            x
+          </Popover>
+        );
+      };
+      const { rerender } = render(<Harness dismissible />);
+      rerender(<Harness dismissible={false} />);
+      expect(onClose).not.toHaveBeenCalled();
+      dispatchToggle(screen.getByTestId('popover'), 'closed');
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('trigger light dismiss', () => {
+    const defineInvoker = (element: HTMLElement) => {
+      let target: Element | null = null;
+      let action = 'toggle';
+      Object.defineProperty(element, 'popoverTargetElement', {
+        configurable: true,
+        get: () => target,
+        set: (value: Element | null) => {
+          target = value;
+        },
+      });
+      Object.defineProperty(element, 'popoverTargetAction', {
+        configurable: true,
+        get: () => action,
+        set: (value: string) => {
+          action = value;
+        },
+      });
+      return {
+        get target() {
+          return target;
+        },
+        get action() {
+          return action;
+        },
+      };
+    };
+
+    it('registers a button trigger as the invoker and restores it', () => {
+      const { reference } = createReference();
+      const invoker = defineInvoker(reference);
+      const { unmount } = render(
+        <Popover data-testid="popover" isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      expect(invoker.target).toBe(screen.getByTestId('popover'));
+      expect(invoker.action).toBe('show');
+      unmount();
+      expect(invoker.target).toBeNull();
+      expect(invoker.action).toBe('toggle');
+    });
+
+    it('registers an input button and ignores a text input or div', () => {
+      const input = document.createElement('input');
+      input.type = 'button';
+      const text = document.createElement('input');
+      const div = document.createElement('div');
+      [input, text, div].forEach((element) => {
+        document.body.appendChild(element);
+        createdReferences.push(element);
+      });
+      const inputInvoker = defineInvoker(input);
+      const textInvoker = defineInvoker(text);
+      const divInvoker = defineInvoker(div);
+      const { rerender } = render(
+        <Popover data-testid="popover" isOpen referenceElement={input}>
+          x
+        </Popover>,
+      );
+      expect(inputInvoker.target).toBe(screen.getByTestId('popover'));
+      rerender(
+        <Popover data-testid="popover" isOpen referenceElement={text}>
+          x
+        </Popover>,
+      );
+      expect(textInvoker.target).toBeNull();
+      rerender(
+        <Popover data-testid="popover" isOpen referenceElement={div}>
+          x
+        </Popover>,
+      );
+      expect(divInvoker.target).toBeNull();
+    });
+
+    it('does not register an invoker when the popover is not dismissible', () => {
+      const { reference } = createReference();
+      const invoker = defineInvoker(reference);
+      render(
+        <Popover
+          data-testid="popover"
+          isOpen
+          isDismissible={false}
+          referenceElement={reference}
+        >
+          x
+        </Popover>,
+      );
+      expect(invoker.target).toBeNull();
+    });
+
+    it('re-shows instead of closing when the reference gesture light-dismisses', () => {
+      const reference = document.createElement('div');
+      const child = document.createElement('span');
+      reference.appendChild(child);
+      document.body.appendChild(reference);
+      createdReferences.push(reference);
+      const showPopover = jest.spyOn(HTMLElement.prototype, 'showPopover');
+      const onClose = jest.fn();
+      render(
+        <Popover
+          data-testid="popover"
+          isOpen
+          referenceElement={reference}
+          onClose={onClose}
+        >
+          x
+        </Popover>,
+      );
+      fireEvent.pointerDown(child);
+      dispatchToggle(screen.getByTestId('popover'), 'closed');
+      expect(onClose).not.toHaveBeenCalled();
+      expect(showPopover).toHaveBeenCalledTimes(2);
+    });
+
+    it('ignores a re-entrant close from the re-show', () => {
+      const reference = document.createElement('div');
+      document.body.appendChild(reference);
+      createdReferences.push(reference);
+      let armed = false;
+      const showPopover = jest
+        .spyOn(HTMLElement.prototype, 'showPopover')
+        .mockImplementation(function reenter(this: HTMLElement) {
+          if (!armed) {
+            return;
+          }
+          armed = false;
+          const event = new Event('toggle');
+          Object.assign(event, { newState: 'closed' });
+          this.dispatchEvent(event);
+        });
+      const onClose = jest.fn();
+      render(
+        <Popover
+          data-testid="popover"
+          isOpen
+          referenceElement={reference}
+          onClose={onClose}
+        >
+          x
+        </Popover>,
+      );
+      fireEvent.pointerDown(reference);
+      armed = true;
+      dispatchToggle(screen.getByTestId('popover'), 'closed');
+      expect(onClose).not.toHaveBeenCalled();
+      expect(showPopover).toHaveBeenCalledTimes(2);
+    });
+
+    it('does not re-show when the Popover API is unavailable', () => {
+      const reference = document.createElement('div');
+      document.body.appendChild(reference);
+      createdReferences.push(reference);
+      const descriptor = Object.getOwnPropertyDescriptor(
+        HTMLElement.prototype,
+        'showPopover',
+      ) as PropertyDescriptor;
+      const onClose = jest.fn();
+      // @ts-expect-error simulating a browser without the Popover API
+      delete HTMLElement.prototype.showPopover;
+      try {
+        render(
+          <Popover
+            data-testid="popover"
+            isOpen
+            referenceElement={reference}
+            onClose={onClose}
+          >
+            x
+          </Popover>,
+        );
+        fireEvent.pointerDown(reference);
+        dispatchToggle(screen.getByTestId('popover'), 'closed');
+        expect(onClose).not.toHaveBeenCalled();
+      } finally {
+        Object.defineProperty(HTMLElement.prototype, 'showPopover', descriptor);
+      }
+    });
+
+    it('still reports Escape after a gesture on the reference', () => {
+      const reference = document.createElement('div');
+      document.body.appendChild(reference);
+      createdReferences.push(reference);
+      const onClose = jest.fn();
+      render(
+        <Popover
+          data-testid="popover"
+          isOpen
+          referenceElement={reference}
+          onClose={onClose}
+        >
+          x
+        </Popover>,
+      );
+      fireEvent.pointerDown(reference);
+      fireEvent.keyDown(document, { key: 'Escape' });
+      dispatchToggle(screen.getByTestId('popover'), 'closed');
+      expect(onClose).toHaveBeenCalledTimes(1);
     });
   });
 

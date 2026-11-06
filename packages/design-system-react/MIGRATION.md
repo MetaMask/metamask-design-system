@@ -3110,7 +3110,7 @@ const [isOpen, setIsOpen] = useState(false);
 </Popover>;
 ```
 
-Toggling from the trigger is safe: the trigger's click runs before the browser's `toggle` event, so the popover is already unmounted when the light dismiss is reported.
+Toggling from the trigger is safe. Button and input triggers are registered as the popover invoker, so the browser does not light-dismiss them. For any other element, a light dismiss caused by that gesture is ignored and the popover is shown again, and `onClose` does not run. `setIsOpen(!isOpen)` therefore closes it once, including on browsers that light-dismiss on `pointerup` before the `click` event.
 
 ##### Hover tooltips and popovers that stay open
 
