@@ -4,6 +4,8 @@ import * as ModalFocusStories from './ModalFocus.stories';
 
 # ModalFocus
 
+> **Note:** `Modal` now renders a native `<dialog>` opened with `showModal()`, which already makes the rest of the page inert and contains focus, so `Modal` and `ModalContent` no longer use `ModalFocus`. It remains available for non-dialog surfaces (for example popover-like layers) that still need a focus trap.
+
 `ModalFocus` traps keyboard focus inside its subtree while it is mounted. Use it to wrap modal, dialog, or popover content so screen-reader and keyboard-only users cannot tab outside the open layer. It is a thin wrapper around [`react-focus-lock`](https://github.com/theKashey/react-focus-lock) with a small API for initial focus, final focus, and focus restoration.
 
 ```tsx

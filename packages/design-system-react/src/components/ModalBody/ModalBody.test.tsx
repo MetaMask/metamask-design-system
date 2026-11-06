@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
+import { Modal } from '../Modal';
+
 import { ModalBody } from './ModalBody';
 
 describe('ModalBody', () => {
@@ -60,5 +62,17 @@ describe('ModalBody', () => {
     const body = screen.getByTestId('modal-body');
     expect(body).toHaveAttribute('id', 'body');
     expect(body).toHaveAttribute('role', 'region');
+  });
+
+  it('describes the surrounding native dialog, honoring a custom id', () => {
+    render(
+      <Modal isOpen onClose={jest.fn()}>
+        <ModalBody id="custom-body">Body copy</ModalBody>
+      </Modal>,
+    );
+    expect(screen.getByRole('dialog')).toHaveAttribute(
+      'aria-describedby',
+      'custom-body',
+    );
   });
 });

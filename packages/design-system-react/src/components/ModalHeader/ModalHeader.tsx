@@ -3,11 +3,13 @@ import {
   IconName,
   TextVariant,
 } from '@metamask/design-system-shared';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext, useEffect } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 import { Box } from '../Box';
 import { ButtonIcon } from '../ButtonIcon';
+import { ModalContext } from '../Modal/Modal.context';
+import { useStableId } from '../Modal/useStableId';
 import { Text, TextAlign } from '../Text';
 
 import type { ModalHeaderProps } from './ModalHeader.types';
@@ -25,6 +27,19 @@ export const ModalHeader = forwardRef<HTMLElement, ModalHeaderProps>(
       closeButtonProps,
       ...rest
     } = props;
+
+    // The title element labels the native `<dialog>` via `aria-labelledby`.
+    const generatedId = useStableId();
+    const titleId = (rest.id ? `${rest.id}-title` : undefined) ?? generatedId;
+    const registerTitleId = useContext(ModalContext)?.registerTitleId;
+    const hasTitle = children !== undefined && children !== null;
+    useEffect(() => {
+      if (!registerTitleId || !hasTitle || !titleId) {
+        return undefined;
+      }
+      registerTitleId(titleId);
+      return () => registerTitleId(undefined);
+    }, [registerTitleId, hasTitle, titleId]);
 
     // The discriminated union on `ModalHeaderProps` guarantees that whenever
     // `onBack` is set, `backButtonProps` is also set (with a required
@@ -80,7 +95,9 @@ export const ModalHeader = forwardRef<HTMLElement, ModalHeaderProps>(
           </Box>
         )}
         {titleContent !== undefined && titleContent !== null && (
-          <Box className="col-start-2 col-end-3 w-full">{titleContent}</Box>
+          <Box id={titleId} className="col-start-2 col-end-3 w-full">
+            {titleContent}
+          </Box>
         )}
         {resolvedEndAccessory && (
           <Box className="col-start-3 justify-self-end">

@@ -9,10 +9,7 @@ import * as ModalHeaderStories from './ModalHeader.stories';
 ```tsx
 import { ModalHeader } from '@metamask/design-system-react';
 
-<ModalHeader
-  onClose={handleClose}
-  closeButtonProps={{ ariaLabel: t('close') }}
->
+<ModalHeader onClose={handleClose} closeButtonProps={{ ariaLabel: t('close') }}>
   {t('removeAccount')}
 </ModalHeader>;
 ```
@@ -23,7 +20,7 @@ import { ModalHeader } from '@metamask/design-system-react';
 
 ### `children`
 
-Header title content. When a string, it is auto-wrapped in a `Text` component with `TextVariant.HeadingSm` and `TextAlign.Center`. When a `ReactNode`, it is rendered as-is so consumers can supply custom title layouts.
+Header title content. The title is automatically wired as the accessible name of the surrounding native `<dialog>` (`aria-labelledby`) when rendered inside `Modal`; an explicit `aria-labelledby` / `aria-label` on `Modal` takes precedence. When a string, it is auto-wrapped in a `Text` component with `TextVariant.HeadingSm` and `TextAlign.Center`. When a `ReactNode`, it is rendered as-is so consumers can supply custom title layouts.
 
 <table>
   <thead>
@@ -67,7 +64,9 @@ When `onBack` is set, the component renders a back `ButtonIcon` in the start slo
       <td align="left">
         <code>onBack: () =&gt; void</code>
         <br />
-        <code>backButtonProps: Omit&lt;ButtonIconProps, 'iconName' | 'size'&gt;</code>
+        <code>
+          backButtonProps: Omit&lt;ButtonIconProps, 'iconName' | 'size'&gt;
+        </code>
       </td>
       <td align="left">No (but co-required when set)</td>
       <td align="left">
@@ -94,7 +93,9 @@ Same shape as `onBack` / `backButtonProps`. When `onClose` is set, a close `Butt
       <td align="left">
         <code>onClose: () =&gt; void</code>
         <br />
-        <code>closeButtonProps: Omit&lt;ButtonIconProps, 'iconName' | 'size'&gt;</code>
+        <code>
+          closeButtonProps: Omit&lt;ButtonIconProps, 'iconName' | 'size'&gt;
+        </code>
       </td>
       <td align="left">No (but co-required when set)</td>
       <td align="left">

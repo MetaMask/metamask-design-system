@@ -17,7 +17,7 @@ export type ModalContentSize =
   (typeof ModalContentSize)[keyof typeof ModalContentSize];
 
 /**
- * Box prop bag used for the inner dialog `<section>`. Mirrors the legacy
+ * Box prop bag used for the inner dialog surface `<section>`. Mirrors the legacy
  * `modalDialogProps` typing but is bound to the MMDS `BoxProps` shape and
  * carries an explicit `data-*` index signature so consumers can pass through
  * test ids and other dataset attributes through `Partial`/`Omit` indirection.
@@ -41,8 +41,8 @@ export type ModalContentProps = Omit<ComponentProps<'div'>, 'children'> & {
    */
   size?: ModalContentSize;
   /**
-   * Props forwarded to the inner dialog `Box` (the `<section
-   * role="dialog">`). Use this to add `data-testid`, override layout, change
+   * Props forwarded to the inner dialog `Box` (a plain
+   * `<section>`; dialog semantics live on the native `<dialog>` in `Modal`). Use this to add `data-testid`, override layout, change
    * background, or apply Tailwind utilities via `className`.
    */
   modalDialogProps?: DialogBoxProps;
