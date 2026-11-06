@@ -4,7 +4,13 @@ import * as PopoverStories from './Popover.stories';
 
 # Popover
 
-`Popover` is a floating layer that positions itself against a reference element using [`@floating-ui/react-dom`](https://floating-ui.com/docs/react-dom). Use it for tooltips, menus, and other contextual content that needs to anchor to a trigger. Wire `referenceElement`, `isOpen`, and one of `onPressEscKey` / `onClickOutside` to control visibility from the trigger.
+`Popover` is a floating layer that positions itself against a reference element. Use it for tooltips, menus, and other contextual content that needs to anchor to a trigger. Wire `referenceElement`, `isOpen`, and one of `onPressEscKey` / `onClickOutside` to control visibility from the trigger.
+
+`Popover` is built on native web platform APIs and has no positioning-library dependency:
+
+- **[Popover API](https://developer.mozilla.org/docs/Web/API/Popover_API)** — the root renders with `popover="manual"` and is shown in the browser's top layer, so ancestors with `overflow: hidden` or their own stacking context cannot clip or cover it. Visibility stays controlled by `isOpen`; native light dismiss is not used.
+- **[CSS anchor positioning](https://developer.mozilla.org/docs/Web/CSS/CSS_anchor_positioning)** — used when the browser supports it (Chrome 128+, Firefox 147+, Safari 26+) and the configuration can be expressed in CSS: a fixed `position` without `hasArrow` or `preventOverflow`. `Popover` sets a generated `anchor-name` on `referenceElement` while open and restores the previous value on close.
+- **Positioning fallback** — everything else (older browsers, `PopoverPosition.Auto`, `hasArrow`, `preventOverflow`) uses a small built-in positioning utility that measures the reference element and updates on scroll and resize.
 
 ```tsx
 import { Popover, PopoverPosition } from '@metamask/design-system-react';
@@ -37,9 +43,13 @@ The contents rendered inside the floating layer. Padding and background come fro
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>ReactNode</code></td>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>undefined</code></td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -58,9 +68,13 @@ Controls whether the popover is mounted. When `false`, nothing is rendered. Pair
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>boolean</code></td>
+      <td align="left">
+        <code>boolean</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>undefined</code></td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -79,16 +93,20 @@ The DOM element the popover anchors to. Capture this from your trigger via `useS
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>HTMLElement | null</code></td>
+      <td align="left">
+        <code>HTMLElement | null</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>undefined</code></td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
     </tr>
   </tbody>
 </table>
 
 ### `position`
 
-Placement relative to the reference element. `PopoverPosition.Auto` lets `react-popper` pick the best fit and forces `flip` and `preventOverflow` on regardless of those props.
+Placement relative to the reference element. `PopoverPosition.Auto` picks the side with the most space and keeps the popover inside the viewport, regardless of the `flip` and `preventOverflow` props.
 
 <table>
   <thead>
@@ -100,9 +118,13 @@ Placement relative to the reference element. `PopoverPosition.Auto` lets `react-
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>PopoverPosition</code></td>
+      <td align="left">
+        <code>PopoverPosition</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>PopoverPosition.Auto</code></td>
+      <td align="left">
+        <code>PopoverPosition.Auto</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -123,9 +145,13 @@ ARIA role for the popover root. Use `PopoverRole.Dialog` when the contents are i
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>PopoverRole</code></td>
+      <td align="left">
+        <code>PopoverRole</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>PopoverRole.Tooltip</code></td>
+      <td align="left">
+        <code>PopoverRole.Tooltip</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -146,9 +172,13 @@ Renders a small notch pointing at the reference element. Position-aware — the 
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>boolean</code></td>
+      <td align="left">
+        <code>boolean</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>false</code></td>
+      <td align="left">
+        <code>false</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -157,7 +187,7 @@ Renders a small notch pointing at the reference element. Position-aware — the 
 
 ### `arrowProps`
 
-Props forwarded to the arrow element, such as `className` for additional styling and `data-testid` for tests. `ref`, `style`, and `children` are reserved for internal use (popper positioning, rotation styles, and the arrow visual) and cannot be overridden.
+Props forwarded to the arrow element, such as `className` for additional styling and `data-testid` for tests. `ref`, `style`, and `children` are reserved for internal use (arrow positioning, rotation styles, and the arrow visual) and cannot be overridden.
 
 <table>
   <thead>
@@ -169,16 +199,22 @@ Props forwarded to the arrow element, such as `className` for additional styling
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>Omit&lt;ComponentProps&lt;'div'&gt;, 'ref' | 'style' | 'children'&gt;</code></td>
+      <td align="left">
+        <code>
+          Omit&lt;ComponentProps&lt;'div'&gt;, 'ref' | 'style' | 'children'&gt;
+        </code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>undefined</code></td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
     </tr>
   </tbody>
 </table>
 
 ### `isPortal`
 
-Renders the popover into `document.body` via `createPortal` instead of inline. Use when the popover would otherwise be clipped by an ancestor with `overflow: hidden`.
+Renders the popover into `document.body` via `createPortal` instead of inline. Rarely needed: because the popover is shown in the top layer, it is not clipped by ancestors with `overflow: hidden` even when rendered inline. Keep it for DOM-order reasons (for example, CSS selectors or event delegation that expect the popover under `body`). Avoid it for popovers opened from inside a modal `<dialog>`: content outside the dialog is inert while it is open, so render those popovers inline.
 
 <table>
   <thead>
@@ -190,14 +226,22 @@ Renders the popover into `document.body` via `createPortal` instead of inline. U
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>boolean</code></td>
+      <td align="left">
+        <code>boolean</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>false</code></td>
+      <td align="left">
+        <code>false</code>
+      </td>
     </tr>
   </tbody>
 </table>
 
 <Canvas of={PopoverStories.IsPortal} />
+
+The popover is shown in the top layer, so it escapes ancestors with `overflow: hidden` even without `isPortal`:
+
+<Canvas of={PopoverStories.TopLayer} />
 
 ### `matchWidth`
 
@@ -213,9 +257,13 @@ Sizes the popover to the reference element's `clientWidth`. Common pattern for m
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>boolean</code></td>
+      <td align="left">
+        <code>boolean</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>false</code></td>
+      <td align="left">
+        <code>false</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -236,9 +284,13 @@ Allows the popover to flip to the opposite side when there is not enough space a
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>boolean</code></td>
+      <td align="left">
+        <code>boolean</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>false</code></td>
+      <td align="left">
+        <code>false</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -257,16 +309,20 @@ Keeps the popover inside the viewport. Forced on when `position` is `PopoverPosi
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>boolean</code></td>
+      <td align="left">
+        <code>boolean</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>false</code></td>
+      <td align="left">
+        <code>false</code>
+      </td>
     </tr>
   </tbody>
 </table>
 
 ### `referenceHidden`
 
-Hides the popover (`visibility: hidden; pointer-events: none`) when the reference element is scrolled out of view. Driven by `react-popper`'s `data-popper-reference-hidden` attribute.
+Hides the popover (`visibility: hidden; pointer-events: none`) when the reference element is scrolled out of view, including out of a scrolling ancestor. Driven by the `data-popper-reference-hidden` attribute on the popover root, which is measured by the positioning fallback or, with CSS anchor positioning, by an `IntersectionObserver` on the reference element.
 
 <table>
   <thead>
@@ -278,12 +334,18 @@ Hides the popover (`visibility: hidden; pointer-events: none`) when the referenc
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>boolean</code></td>
+      <td align="left">
+        <code>boolean</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>true</code></td>
+      <td align="left">
+        <code>true</code>
+      </td>
     </tr>
   </tbody>
 </table>
+
+<Canvas of={PopoverStories.ReferenceHidden} />
 
 ### `offset`
 
@@ -299,9 +361,13 @@ Hides the popover (`visibility: hidden; pointer-events: none`) when the referenc
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>[number, number]</code></td>
+      <td align="left">
+        <code>[number, number]</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>[0, 8]</code></td>
+      <td align="left">
+        <code>[0, 8]</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -320,9 +386,13 @@ Called when the user presses the Escape key while the popover is open. Wire to y
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>() =&gt; void</code></td>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>undefined</code></td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -343,9 +413,13 @@ Called when the user clicks outside the popover and the reference element while 
   </thead>
   <tbody>
     <tr>
-      <td align="left"><code>() =&gt; void</code></td>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
       <td align="left">No</td>
-      <td align="left"><code>undefined</code></td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -362,5 +436,6 @@ Migrating from `ui/components/component-library/popover` in MetaMask Extension? 
 
 ## References
 
-- [@floating-ui/react-dom](https://floating-ui.com/docs/react-dom)
+- [MDN: Popover API](https://developer.mozilla.org/docs/Web/API/Popover_API)
+- [MDN: CSS anchor positioning](https://developer.mozilla.org/docs/Web/CSS/CSS_anchor_positioning)
 - [MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)

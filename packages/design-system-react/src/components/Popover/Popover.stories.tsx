@@ -219,6 +219,77 @@ export const IsPortal: Story = {
   },
 };
 
+export const TopLayer: Story = {
+  render: () => {
+    const [referenceElement, setReferenceElement] =
+      useState<HTMLElement | null>(null);
+    return (
+      <Box
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        padding={4}
+        className="relative z-0 h-[120px] w-[320px] overflow-hidden"
+      >
+        <Button
+          variant={ButtonVariant.Primary}
+          ref={(node) => setReferenceElement(node)}
+        >
+          Reference
+        </Button>
+        <Popover
+          isOpen
+          hasArrow
+          position={PopoverPosition.BottomStart}
+          referenceElement={referenceElement}
+        >
+          <Box className="w-[240px]">
+            <Text>
+              Rendered inline inside an overflow hidden container, but shown in
+              the top layer so it is not clipped.
+            </Text>
+          </Box>
+        </Popover>
+      </Box>
+    );
+  },
+};
+
+export const ReferenceHidden: Story = {
+  render: () => {
+    const [referenceElement, setReferenceElement] =
+      useState<HTMLElement | null>(null);
+    return (
+      <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+        <Text>
+          Scroll the container. The popover hides once its reference is scrolled
+          out of view.
+        </Text>
+        <Box
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+          className="mt-[120px] h-[200px] w-[320px] overflow-y-auto"
+        >
+          <Box padding={4} className="h-[600px] pt-[120px]">
+            <Button
+              variant={ButtonVariant.Primary}
+              ref={(node) => setReferenceElement(node)}
+            >
+              Reference
+            </Button>
+          </Box>
+        </Box>
+        <Popover
+          isOpen
+          position={PopoverPosition.Right}
+          referenceElement={referenceElement}
+        >
+          <Text>Follows the reference</Text>
+        </Popover>
+      </Box>
+    );
+  },
+};
+
 export const MatchWidth: Story = {
   render: () => {
     const [referenceElement, setReferenceElement] =
