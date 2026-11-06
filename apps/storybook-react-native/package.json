@@ -80,5 +80,18 @@
   "engines": {
     "node": ">=24"
   },
-  "installConfig": {}
+  "installConfig": {},
+  "scriptsConfig": {
+    "#default": "lavamoat/scripts.strict.json",
+    "android": "lavamoat/scripts.unsafe.json",
+    "android:build": "lavamoat/scripts.unsafe.json",
+    "build-storybook": "lavamoat/scripts.unsafe.json",
+    "ios": "lavamoat/scripts.unsafe.json",
+    "ios:build": "lavamoat/scripts.unsafe.json",
+    "prestorybook": "lavamoat/scripts.unsafe.json",
+    "start": "lavamoat/scripts.unsafe.json",
+    "storybook:web": "lavamoat/scripts.unsafe.json",
+    "test-storybook": "lavamoat/scripts.unsafe.json",
+    "web": "lavamoat/scripts.unsafe.json"
+  }
 }

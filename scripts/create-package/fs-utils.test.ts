@@ -71,19 +71,27 @@ describe('create-package/fs-utils', () => {
     it('should ignore file system entities that are neither files nor directories', async () => {
       expect.assertions(1);
 
-      await withinSandbox(async (sandbox) => {
-        const dirPath = path.join(sandbox.directoryPath, 'dir/');
-        await writeFile(path.join(dirPath, 'file1.txt'), 'foo');
-        await fs.symlink(
-          path.join(dirPath, 'file1.txt'),
-          path.join(dirPath, 'file2.txt'),
-        );
+      const dirPath = path.join('/fake', 'dir/');
+      jest.spyOn(fs, 'readdir').mockResolvedValue([
+        {
+          // @ts-expect-error: Mock name.
+          name: 'file1.txt',
+          isDirectory: (): boolean => false,
+          isFile: (): boolean => true,
+        },
+        {
+          // @ts-expect-error: Mock name.
+          name: 'file2.txt',
+          isDirectory: (): boolean => false,
+          isFile: (): boolean => false,
+        },
+      ]);
+      jest.spyOn(fs, 'readFile').mockResolvedValue('foo');
 
-        const files = await readAllFiles(dirPath);
+      const files = await readAllFiles(dirPath);
 
-        expect(files).toStrictEqual({
-          'file1.txt': 'foo',
-        });
+      expect(files).toStrictEqual({
+        'file1.txt': 'foo',
       });
     });
   });

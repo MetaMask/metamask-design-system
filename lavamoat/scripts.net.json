@@ -1,0 +1,15 @@
+{
+  "notes": "For scripts that must reach the network: Figma Code Connect and preview publishing. Writes are still limited to the project. Requires Node.js 25+, where `--allow-net` exists.",
+  "extends": "./scripts.base.json",
+  "nodeOptions": {
+    "--disable-warning": ["ExperimentalWarning"],
+    "--allow-fs-read": ["/"],
+    "--allow-fs-write": ["$PROJECT_CWD"],
+    "--allow-child-process": true,
+    "--allow-net": true,
+    "--allow-worker": true,
+    "--allow-addons": true,
+    "--allow-wasi": false,
+    "--allow-inspector": false
+  }
+}
