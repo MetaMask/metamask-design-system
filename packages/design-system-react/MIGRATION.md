@@ -3110,7 +3110,7 @@ const [isOpen, setIsOpen] = useState(false);
 </Popover>;
 ```
 
-Toggling from the trigger is safe: the trigger's click runs before the browser's `toggle` event, so the popover is already unmounted when the light dismiss is reported.
+Toggling from the trigger is safe: `Popover` passes the reference to `showPopover` as `source`, so the browser does not light-dismiss on trigger clicks and the toggle does not fight `onClose`.
 
 ##### Hover tooltips and popovers that stay open
 

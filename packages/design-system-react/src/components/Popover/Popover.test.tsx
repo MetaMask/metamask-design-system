@@ -138,7 +138,19 @@ describe('Popover', () => {
       const root = screen.getByTestId('popover');
       expect(root).toHaveAttribute('popover', 'auto');
       expect(showPopover).toHaveBeenCalledTimes(1);
+      expect(showPopover).toHaveBeenCalledWith();
       expect(showPopover.mock.instances[0]).toBe(root);
+    });
+
+    it('shows the popover with the reference as source', () => {
+      const showPopover = jest.spyOn(HTMLElement.prototype, 'showPopover');
+      const { reference } = createReference();
+      render(
+        <Popover isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      expect(showPopover).toHaveBeenCalledWith({ source: reference });
     });
 
     it('renders popover="manual" when isDismissible is false', () => {
@@ -200,6 +212,21 @@ describe('Popover', () => {
       );
       dispatchToggle(screen.getByTestId('popover'), 'closed');
       expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
+    it('is not called when isDismissible changes hide the popover', () => {
+      const onClose = jest.fn();
+      render(
+        <Popover data-testid="popover" isOpen onClose={onClose}>
+          x
+        </Popover>,
+      );
+      const root = screen.getByTestId('popover');
+      // Simulate the attribute-change hide: React has already updated
+      // `popover`, then the browser fires `toggle` with the previous listener.
+      root.setAttribute('popover', 'manual');
+      dispatchToggle(root, 'closed');
+      expect(onClose).not.toHaveBeenCalled();
     });
 
     it('is not called when the popover opens', () => {

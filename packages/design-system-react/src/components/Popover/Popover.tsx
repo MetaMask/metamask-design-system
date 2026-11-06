@@ -51,17 +51,39 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       if (!isOpen || !element) {
         return undefined;
       }
+      const expectedPopover = isDismissible ? 'auto' : 'manual';
       const handleToggle = (event: Event) => {
         if ((event as Event & { newState?: string }).newState === 'closed') {
+          // Changing `popover` between auto and manual hides the popover and
+          // fires `toggle` before this effect re-runs. Ignore that close so
+          // controlled state stays open and we can show again below.
+          if (element.getAttribute('popover') !== expectedPopover) {
+            return;
+          }
           onCloseRef.current?.();
         }
       };
       element.addEventListener('toggle', handleToggle);
       if (typeof element.showPopover === 'function') {
-        element.showPopover();
+        try {
+          // Pass the reference as `source` so it is the invoker: clicks on it
+          // are not light-dismiss outside clicks, and a trigger toggle does not
+          // fight `onClose` (WHATWG html#12157).
+          if (referenceElement) {
+            (
+              element.showPopover as (options?: {
+                source?: Element | null;
+              }) => void
+            )({ source: referenceElement });
+          } else {
+            element.showPopover();
+          }
+        } catch {
+          // Already open (e.g. `isDismissible` changed without a hide here).
+        }
       }
       return () => element.removeEventListener('toggle', handleToggle);
-    }, [isOpen, isDismissible]);
+    }, [isOpen, isDismissible, referenceElement]);
 
     useLayoutEffect(() => {
       const floating = popoverRef.current;
