@@ -58,7 +58,7 @@ const meta: Meta<TextFieldSearchProps> = {
     inputAriaLabel: {
       control: 'text',
       description:
-        'Accessible name for the search input when there is no visible label.',
+        'Required accessible name for the inner search input. It renders no text.',
     },
   },
 };
