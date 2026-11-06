@@ -1,13 +1,10 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef, useState } from 'react';
 
-import { BoxBackgroundColor, BoxBorderColor } from '../Box';
-
 import { Popover } from './Popover';
 import { PopoverPosition, PopoverRole } from './Popover.types';
 
 const FLOATING_SIZE = { width: 100, height: 50 };
-const ARROW_SIZE = 40;
 
 const createdReferences: HTMLElement[] = [];
 
@@ -20,51 +17,88 @@ const createReference = (
   },
 ) => {
   const reference = document.createElement('button');
-  reference.dataset.testid = 'reference';
   document.body.appendChild(reference);
   createdReferences.push(reference);
-  jest.spyOn(reference, 'getBoundingClientRect').mockReturnValue({
-    left: rect.x,
-    top: rect.y,
-    width: rect.width,
-    height: rect.height,
-    right: rect.x + rect.width,
-    bottom: rect.y + rect.height,
-  } as DOMRect);
-  return reference;
+  const getRect = jest.spyOn(reference, 'getBoundingClientRect');
+  const setRect = (next: typeof rect) =>
+    getRect.mockReturnValue({
+      x: next.x,
+      y: next.y,
+      left: next.x,
+      top: next.y,
+      width: next.width,
+      height: next.height,
+      right: next.x + next.width,
+      bottom: next.y + next.height,
+    } as DOMRect);
+  setRect(rect);
+  return { reference, setRect };
 };
 
-const mockCssAnchorSupport = (supported: boolean) => {
-  const originalCSS = globalThis.CSS;
-  globalThis.CSS = {
-    supports: () => supported,
-  } as unknown as typeof CSS;
-  return () => {
-    globalThis.CSS = originalCSS;
-  };
+const dispatchToggle = (element: HTMLElement, newState: string) => {
+  const event = new Event('toggle');
+  Object.assign(event, { newState });
+  act(() => {
+    element.dispatchEvent(event);
+  });
 };
+
+type ObserverCallback = (entries: { isIntersecting: boolean }[]) => void;
 
 describe('Popover', () => {
+  let resizeCallbacks: (() => void)[];
+  let intersectionCallbacks: ObserverCallback[];
+  let observed: Element[];
+
   beforeEach(() => {
+    resizeCallbacks = [];
+    intersectionCallbacks = [];
+    observed = [];
     jest
       .spyOn(HTMLElement.prototype, 'offsetWidth', 'get')
-      .mockImplementation(function getWidth(this: HTMLElement) {
-        return this.dataset.testid === 'popover-arrow'
-          ? ARROW_SIZE
-          : FLOATING_SIZE.width;
-      });
+      .mockReturnValue(FLOATING_SIZE.width);
     jest
       .spyOn(HTMLElement.prototype, 'offsetHeight', 'get')
-      .mockImplementation(function getHeight(this: HTMLElement) {
-        return this.dataset.testid === 'popover-arrow'
-          ? ARROW_SIZE
-          : FLOATING_SIZE.height;
-      });
+      .mockReturnValue(FLOATING_SIZE.height);
+    Object.defineProperty(document.documentElement, 'clientWidth', {
+      configurable: true,
+      value: 1000,
+    });
+    Object.defineProperty(document.documentElement, 'clientHeight', {
+      configurable: true,
+      value: 800,
+    });
+    globalThis.ResizeObserver = class {
+      constructor(callback: () => void) {
+        resizeCallbacks.push(callback);
+      }
+
+      observe(element: Element) {
+        observed.push(element);
+      }
+
+      disconnect = jest.fn();
+
+      unobserve = jest.fn();
+    } as unknown as typeof ResizeObserver;
+    globalThis.IntersectionObserver = class {
+      constructor(callback: ObserverCallback) {
+        intersectionCallbacks.push(callback);
+      }
+
+      observe = jest.fn();
+
+      disconnect = jest.fn();
+    } as unknown as typeof IntersectionObserver;
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
     createdReferences.splice(0).forEach((reference) => reference.remove());
+    // @ts-expect-error cleaning up test globals
+    delete globalThis.ResizeObserver;
+    // @ts-expect-error cleaning up test globals
+    delete globalThis.IntersectionObserver;
   });
 
   describe('isOpen', () => {
@@ -74,6 +108,11 @@ describe('Popover', () => {
           hidden
         </Popover>,
       );
+      expect(screen.queryByTestId('popover')).not.toBeInTheDocument();
+    });
+
+    it('renders nothing by default', () => {
+      render(<Popover data-testid="popover">hidden</Popover>);
       expect(screen.queryByTestId('popover')).not.toBeInTheDocument();
     });
 
@@ -89,7 +128,7 @@ describe('Popover', () => {
   });
 
   describe('Popover API', () => {
-    it('renders a manual popover and shows it in the top layer when opened', () => {
+    it('renders popover="auto" by default and shows it when opened', () => {
       const showPopover = jest.spyOn(HTMLElement.prototype, 'showPopover');
       render(
         <Popover data-testid="popover" isOpen>
@@ -97,9 +136,32 @@ describe('Popover', () => {
         </Popover>,
       );
       const root = screen.getByTestId('popover');
-      expect(root).toHaveAttribute('popover', 'manual');
+      expect(root).toHaveAttribute('popover', 'auto');
       expect(showPopover).toHaveBeenCalledTimes(1);
       expect(showPopover.mock.instances[0]).toBe(root);
+    });
+
+    it('renders popover="manual" when isDismissible is false', () => {
+      render(
+        <Popover data-testid="popover" isOpen isDismissible={false}>
+          x
+        </Popover>,
+      );
+      expect(screen.getByTestId('popover')).toHaveAttribute(
+        'popover',
+        'manual',
+      );
+    });
+
+    it('shows the popover again when isDismissible changes while open', () => {
+      const showPopover = jest.spyOn(HTMLElement.prototype, 'showPopover');
+      const { rerender } = render(<Popover isOpen>x</Popover>);
+      rerender(
+        <Popover isOpen isDismissible={false}>
+          x
+        </Popover>,
+      );
+      expect(showPopover).toHaveBeenCalledTimes(2);
     });
 
     it('does not show the popover while closed', () => {
@@ -128,6 +190,304 @@ describe('Popover', () => {
     });
   });
 
+  describe('onClose', () => {
+    it('is called when the browser closes the popover', () => {
+      const onClose = jest.fn();
+      render(
+        <Popover data-testid="popover" isOpen onClose={onClose}>
+          x
+        </Popover>,
+      );
+      dispatchToggle(screen.getByTestId('popover'), 'closed');
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
+    it('is not called when the popover opens', () => {
+      const onClose = jest.fn();
+      render(
+        <Popover data-testid="popover" isOpen onClose={onClose}>
+          x
+        </Popover>,
+      );
+      dispatchToggle(screen.getByTestId('popover'), 'open');
+      expect(onClose).not.toHaveBeenCalled();
+    });
+
+    it('does not throw without an onClose handler', () => {
+      render(
+        <Popover data-testid="popover" isOpen>
+          x
+        </Popover>,
+      );
+      expect(() =>
+        dispatchToggle(screen.getByTestId('popover'), 'closed'),
+      ).not.toThrow();
+    });
+
+    it('calls the latest onClose without re-showing the popover', () => {
+      const showPopover = jest.spyOn(HTMLElement.prototype, 'showPopover');
+      const first = jest.fn();
+      const second = jest.fn();
+      const { rerender } = render(
+        <Popover data-testid="popover" isOpen onClose={first}>
+          x
+        </Popover>,
+      );
+      rerender(
+        <Popover data-testid="popover" isOpen onClose={second}>
+          x
+        </Popover>,
+      );
+      dispatchToggle(screen.getByTestId('popover'), 'closed');
+      expect(first).not.toHaveBeenCalled();
+      expect(second).toHaveBeenCalledTimes(1);
+      expect(showPopover).toHaveBeenCalledTimes(1);
+    });
+
+    it('stops listening once isOpen becomes false', () => {
+      const onClose = jest.fn();
+      const { rerender } = render(
+        <Popover data-testid="popover" isOpen onClose={onClose}>
+          x
+        </Popover>,
+      );
+      const root = screen.getByTestId('popover');
+      rerender(
+        <Popover data-testid="popover" isOpen={false} onClose={onClose}>
+          x
+        </Popover>,
+      );
+      dispatchToggle(root, 'closed');
+      expect(onClose).not.toHaveBeenCalled();
+    });
+
+    it('keeps a controlled isOpen in sync', () => {
+      const ControlledPopover = () => {
+        const [isOpen, setIsOpen] = useState(true);
+        return (
+          <Popover
+            data-testid="popover"
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+          >
+            x
+          </Popover>
+        );
+      };
+      render(<ControlledPopover />);
+      dispatchToggle(screen.getByTestId('popover'), 'closed');
+      expect(screen.queryByTestId('popover')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('positioning', () => {
+    it('positions below the reference by default with an 8px offset', () => {
+      const { reference } = createReference();
+      render(
+        <Popover data-testid="popover" isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      const root = screen.getByTestId('popover');
+      expect(root).toHaveStyle({
+        position: 'fixed',
+        top: '408px',
+        left: '450px',
+      });
+      expect(root).toHaveAttribute('data-placement', 'bottom');
+    });
+
+    it('applies the requested position and offset', () => {
+      const { reference } = createReference();
+      render(
+        <Popover
+          data-testid="popover"
+          isOpen
+          referenceElement={reference}
+          position={PopoverPosition.RightStart}
+          offset={[4, 12]}
+        >
+          x
+        </Popover>,
+      );
+      expect(screen.getByTestId('popover')).toHaveStyle({
+        top: '304px',
+        left: '612px',
+      });
+    });
+
+    it('flips and reports the resolved placement', () => {
+      const { reference } = createReference({
+        x: 400,
+        y: 20,
+        width: 200,
+        height: 100,
+      });
+      render(
+        <Popover
+          data-testid="popover"
+          isOpen
+          referenceElement={reference}
+          position={PopoverPosition.Top}
+        >
+          x
+        </Popover>,
+      );
+      const root = screen.getByTestId('popover');
+      expect(root).toHaveAttribute('data-placement', 'bottom');
+      expect(root).toHaveStyle({ top: '128px' });
+    });
+
+    it('renders at the origin with the requested placement without a reference', () => {
+      render(
+        <Popover data-testid="popover" isOpen position={PopoverPosition.Left}>
+          x
+        </Popover>,
+      );
+      const root = screen.getByTestId('popover');
+      expect(root).toHaveStyle({ top: '0px', left: '0px' });
+      expect(root).toHaveAttribute('data-placement', 'left');
+    });
+
+    it('updates on scroll and resize', () => {
+      const { reference, setRect } = createReference();
+      render(
+        <Popover data-testid="popover" isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      setRect({ x: 100, y: 100, width: 200, height: 100 });
+      act(() => {
+        fireEvent.scroll(window);
+      });
+      expect(screen.getByTestId('popover')).toHaveStyle({
+        top: '208px',
+        left: '150px',
+      });
+      setRect({ x: 200, y: 100, width: 200, height: 100 });
+      act(() => {
+        fireEvent(window, new Event('resize'));
+      });
+      expect(screen.getByTestId('popover')).toHaveStyle({ left: '250px' });
+    });
+
+    it('observes the reference and popover sizes', () => {
+      const { reference, setRect } = createReference();
+      render(
+        <Popover data-testid="popover" isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      expect(observed).toStrictEqual([
+        reference,
+        screen.getByTestId('popover'),
+      ]);
+      setRect({ x: 400, y: 300, width: 300, height: 100 });
+      act(() => resizeCallbacks[0]());
+      expect(screen.getByTestId('popover')).toHaveStyle({ left: '500px' });
+    });
+
+    it('keeps the same position state when nothing moved', () => {
+      const { reference } = createReference();
+      render(
+        <Popover data-testid="popover" isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      const before = screen.getByTestId('popover').getAttribute('style');
+      act(() => {
+        fireEvent.scroll(window);
+      });
+      expect(screen.getByTestId('popover').getAttribute('style')).toBe(before);
+    });
+
+    it('removes listeners when closed', () => {
+      const removeListener = jest.spyOn(window, 'removeEventListener');
+      const { reference } = createReference();
+      const { rerender } = render(
+        <Popover isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      rerender(
+        <Popover isOpen={false} referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      expect(removeListener).toHaveBeenCalledWith(
+        'scroll',
+        expect.any(Function),
+        expect.objectContaining({ capture: true }),
+      );
+      expect(removeListener).toHaveBeenCalledWith(
+        'resize',
+        expect.any(Function),
+      );
+    });
+
+    it('works without ResizeObserver and IntersectionObserver', () => {
+      // @ts-expect-error simulating an environment without observers
+      delete globalThis.ResizeObserver;
+      // @ts-expect-error simulating an environment without observers
+      delete globalThis.IntersectionObserver;
+      const { reference } = createReference();
+      const { unmount } = render(
+        <Popover data-testid="popover" isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      expect(screen.getByTestId('popover')).toHaveStyle({ top: '408px' });
+      expect(() => unmount()).not.toThrow();
+    });
+  });
+
+  describe('hidden reference', () => {
+    it('hides the popover while the reference is out of view', () => {
+      const { reference } = createReference();
+      render(
+        <Popover data-testid="popover" isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      const root = screen.getByTestId('popover');
+      expect(root).not.toHaveClass('invisible');
+      act(() => intersectionCallbacks[0]([{ isIntersecting: false }]));
+      expect(root).toHaveClass('invisible', 'pointer-events-none');
+      act(() =>
+        intersectionCallbacks[0]([
+          { isIntersecting: false },
+          { isIntersecting: true },
+        ]),
+      );
+      expect(root).not.toHaveClass('invisible');
+    });
+
+    it('resets when the popover closes', () => {
+      const { reference } = createReference();
+      const { rerender } = render(
+        <Popover data-testid="popover" isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      act(() => intersectionCallbacks[0]([{ isIntersecting: false }]));
+      rerender(
+        <Popover
+          data-testid="popover"
+          isOpen={false}
+          referenceElement={reference}
+        >
+          x
+        </Popover>,
+      );
+      rerender(
+        <Popover data-testid="popover" isOpen referenceElement={reference}>
+          x
+        </Popover>,
+      );
+      expect(screen.getByTestId('popover')).not.toHaveClass('invisible');
+    });
+  });
+
   describe('role', () => {
     it('defaults to tooltip', () => {
       render(
@@ -138,7 +498,7 @@ describe('Popover', () => {
       expect(screen.getByTestId('popover')).toHaveAttribute('role', 'tooltip');
     });
 
-    it('can be set to dialog', () => {
+    it('applies dialog', () => {
       render(
         <Popover data-testid="popover" isOpen role={PopoverRole.Dialog}>
           x
@@ -148,943 +508,48 @@ describe('Popover', () => {
     });
   });
 
-  describe('className and style', () => {
-    it('uses elevated2 background and muted border on popover root and arrow visual', () => {
-      render(
-        <Popover data-testid="popover" isOpen hasArrow>
-          x
-        </Popover>,
-      );
-      const root = screen.getByTestId('popover');
-      expect(root).toHaveClass(BoxBackgroundColor.BackgroundElevated2);
-      expect(root).toHaveClass(BoxBorderColor.BorderMuted);
-
-      const arrowVisual = screen.getByTestId('popover-arrow-visual');
-      expect(arrowVisual).toHaveClass(BoxBackgroundColor.BackgroundElevated2);
-      expect(arrowVisual).toHaveClass(BoxBorderColor.BorderMuted);
-    });
-
-    it('merges consumer className with internal classes', () => {
-      render(
-        <Popover data-testid="popover" isOpen className="z-10">
-          x
-        </Popover>,
-      );
-      const root = screen.getByTestId('popover');
-      expect(root).toHaveClass('z-10');
-      expect(root).toHaveClass('rounded-lg');
-      expect(root).toHaveClass('shadow-md');
-      expect(root).toHaveClass('m-0', 'overflow-visible');
-    });
-
-    it('applies the reference-hidden visibility classes when referenceHidden is true', () => {
-      render(
-        <Popover data-testid="popover" isOpen>
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveClass(
-        'data-[popper-reference-hidden=true]:invisible',
-      );
-    });
-
-    it('omits the reference-hidden classes when referenceHidden is false', () => {
-      render(
-        <Popover data-testid="popover" isOpen referenceHidden={false}>
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).not.toHaveClass(
-        'data-[popper-reference-hidden=true]:invisible',
-      );
-    });
-
-    it('merges consumer style on top of the computed position', () => {
+  describe('className, style and native props', () => {
+    it('merges className and style and forwards native props', () => {
       render(
         <Popover
           data-testid="popover"
           isOpen
-          position={PopoverPosition.Bottom}
-          offset={[0, 0]}
-          referenceElement={createReference()}
-          style={{ top: '99px', zIndex: 5 }}
-        >
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveStyle({
-        position: 'fixed',
-        left: '450px',
-        top: '99px',
-        zIndex: 5,
-      });
-    });
-  });
-
-  describe('position', () => {
-    it('uses Auto by default and picks the side with the most space', () => {
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          referenceElement={createReference({
-            x: 400,
-            y: 600,
-            width: 200,
-            height: 100,
-          })}
+          className="mt-2 p-2"
+          style={{ width: 240 }}
+          aria-label="Menu"
+          id="menu"
         >
           x
         </Popover>,
       );
       const root = screen.getByTestId('popover');
-      expect(root).toHaveAttribute('data-popper-placement', 'top');
-      expect(root).toHaveStyle({ left: '450px', top: '542px' });
-    });
-
-    it('places the popover at the requested position', () => {
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          position={PopoverPosition.BottomStart}
-          referenceElement={createReference()}
-        >
-          x
-        </Popover>,
-      );
-      const root = screen.getByTestId('popover');
-      expect(root).toHaveAttribute('data-popper-placement', 'bottom-start');
-      expect(root).toHaveStyle({ left: '400px', top: '408px' });
-    });
-
-    it('only flips when flip is enabled', () => {
-      const reference = createReference({
-        x: 400,
-        y: 10,
-        width: 200,
-        height: 20,
-      });
-      const { rerender } = render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          position={PopoverPosition.Top}
-          referenceElement={reference}
-        >
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveAttribute(
-        'data-popper-placement',
-        'top',
-      );
-
-      rerender(
-        <Popover
-          data-testid="popover"
-          isOpen
-          position={PopoverPosition.Top}
-          referenceElement={reference}
-          flip
-        >
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveAttribute(
-        'data-popper-placement',
-        'bottom',
-      );
-    });
-
-    it('keeps the popover inside the viewport with preventOverflow', () => {
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          position={PopoverPosition.Bottom}
-          preventOverflow
-          referenceElement={createReference({
-            x: -50,
-            y: 300,
-            width: 20,
-            height: 20,
-          })}
-        >
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveStyle({ left: '0px' });
-    });
-
-    it('applies the [skidding, distance] offset', () => {
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          position={PopoverPosition.BottomStart}
-          offset={[4, 16]}
-          referenceElement={createReference()}
-        >
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveStyle({
-        left: '404px',
-        top: '416px',
-      });
-    });
-
-    it('stays at the origin without a reference element', () => {
-      render(
-        <Popover data-testid="popover" isOpen position={PopoverPosition.Top}>
-          x
-        </Popover>,
-      );
-      const root = screen.getByTestId('popover');
-      expect(root).toHaveStyle({ left: '0px', top: '0px' });
-      expect(root).toHaveAttribute('data-popper-placement', 'top');
+      expect(root).toHaveClass('mt-2', 'p-2', 'rounded-lg', 'm-0');
+      expect(root).not.toHaveClass('p-4');
+      expect(root).toHaveStyle({ width: '240px', position: 'fixed' });
+      expect(root).toHaveAttribute('aria-label', 'Menu');
+      expect(root).toHaveAttribute('id', 'menu');
     });
   });
 
-  describe('auto update', () => {
-    it('repositions on scroll and resize and stops after closing', () => {
-      const reference = createReference();
-      const rect = jest.mocked(reference.getBoundingClientRect);
-      const { rerender } = render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          position={PopoverPosition.BottomStart}
-          referenceElement={reference}
-        >
-          x
-        </Popover>,
-      );
-
-      rect.mockReturnValue({
-        left: 100,
-        top: 50,
-        width: 200,
-        height: 100,
-      } as DOMRect);
-      act(() => {
-        fireEvent.scroll(window);
-      });
-      expect(screen.getByTestId('popover')).toHaveStyle({
-        left: '100px',
-        top: '158px',
-      });
-
-      rect.mockReturnValue({
-        left: 120,
-        top: 50,
-        width: 200,
-        height: 100,
-      } as DOMRect);
-      act(() => {
-        fireEvent(window, new Event('resize'));
-      });
-      expect(screen.getByTestId('popover')).toHaveStyle({ left: '120px' });
-
-      act(() => {
-        fireEvent.scroll(window);
-      });
-      expect(screen.getByTestId('popover')).toHaveStyle({ left: '120px' });
-
-      rerender(
-        <Popover
-          data-testid="popover"
-          isOpen={false}
-          position={PopoverPosition.BottomStart}
-          referenceElement={reference}
-        >
-          x
-        </Popover>,
-      );
-      const callsAfterClose = rect.mock.calls.length;
-      fireEvent.scroll(window);
-      expect(rect.mock.calls).toHaveLength(callsAfterClose);
-    });
-
-    it('observes the reference and popover sizes when ResizeObserver exists', () => {
-      const observe = jest.fn();
-      const disconnect = jest.fn();
-      let callback: () => void = () => undefined;
-      const originalResizeObserver = globalThis.ResizeObserver;
-      globalThis.ResizeObserver = jest.fn((cb: () => void) => {
-        callback = cb;
-        return { observe, disconnect, unobserve: jest.fn() };
-      }) as unknown as typeof ResizeObserver;
-
-      try {
-        const reference = createReference();
-        const { unmount } = render(
-          <Popover
-            data-testid="popover"
-            isOpen
-            position={PopoverPosition.BottomStart}
-            referenceElement={reference}
-          >
-            x
-          </Popover>,
-        );
-        expect(observe).toHaveBeenCalledWith(reference);
-        expect(observe).toHaveBeenCalledWith(screen.getByTestId('popover'));
-
-        jest.mocked(reference.getBoundingClientRect).mockReturnValue({
-          left: 10,
-          top: 300,
-          width: 200,
-          height: 100,
-        } as DOMRect);
-        act(() => callback());
-        expect(screen.getByTestId('popover')).toHaveStyle({ left: '10px' });
-
-        unmount();
-        expect(disconnect).toHaveBeenCalled();
-      } finally {
-        globalThis.ResizeObserver = originalResizeObserver;
-      }
-    });
-  });
-
-  describe('layout shift', () => {
-    it('repositions when the reference moves without scroll or resize events', () => {
-      const originalIntersectionObserver = globalThis.IntersectionObserver;
-      const callbacks: ((entries: { intersectionRatio: number }[]) => void)[] =
-        [];
-      const disconnect = jest.fn();
-      globalThis.IntersectionObserver = jest.fn(
-        (callback: (entries: { intersectionRatio: number }[]) => void) => {
-          callbacks.push(callback);
-          return { observe: jest.fn(), disconnect };
-        },
-      ) as unknown as typeof IntersectionObserver;
-
-      try {
-        const reference = createReference();
-        const { unmount } = render(
-          <Popover
-            data-testid="popover"
-            isOpen
-            position={PopoverPosition.BottomStart}
-            referenceElement={reference}
-          >
-            x
-          </Popover>,
-        );
-        act(() => callbacks[callbacks.length - 1]([{ intersectionRatio: 1 }]));
-
-        jest.mocked(reference.getBoundingClientRect).mockReturnValue({
-          left: 40,
-          top: 300,
-          width: 200,
-          height: 100,
-        } as DOMRect);
-        act(() =>
-          callbacks[callbacks.length - 1]([{ intersectionRatio: 0.8 }]),
-        );
-        expect(screen.getByTestId('popover')).toHaveStyle({ left: '40px' });
-
-        unmount();
-        expect(disconnect).toHaveBeenCalled();
-      } finally {
-        globalThis.IntersectionObserver = originalIntersectionObserver;
-      }
-    });
-  });
-
-  describe('referenceHidden', () => {
-    it('flags the popover when the reference is scrolled out of view', () => {
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          position={PopoverPosition.Bottom}
-          referenceElement={createReference({
-            x: 400,
-            y: -200,
-            width: 200,
-            height: 100,
-          })}
-        >
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveAttribute(
-        'data-popper-reference-hidden',
-        'true',
-      );
-    });
-
-    it('does not flag the popover when the reference is visible', () => {
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          position={PopoverPosition.Bottom}
-          referenceElement={createReference()}
-        >
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveAttribute(
-        'data-popper-reference-hidden',
-        'false',
-      );
-    });
-  });
-
-  describe('CSS anchor positioning', () => {
-    let restoreCss: () => void;
-
-    beforeEach(() => {
-      restoreCss = mockCssAnchorSupport(true);
-    });
-
-    afterEach(() => {
-      restoreCss();
-    });
-
-    it('anchors the popover to the reference instead of computing coordinates', () => {
-      const reference = createReference();
-      const setProperty = jest.spyOn(reference.style, 'setProperty');
-      const removeProperty = jest.spyOn(reference.style, 'removeProperty');
-      const { unmount } = render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          position={PopoverPosition.TopEnd}
-          flip
-          referenceElement={reference}
-        >
-          x
-        </Popover>,
-      );
-
-      const [property, anchorName] = setProperty.mock.calls[0];
-      expect(property).toBe('anchor-name');
-      expect(anchorName).toMatch(/^--mm-popover-anchor-\d+$/u);
-      expect(reference.getBoundingClientRect).not.toHaveBeenCalled();
-
-      const root = screen.getByTestId('popover');
-      expect(root).toHaveAttribute('data-popper-placement', 'top-end');
-      expect(root).toHaveAttribute('data-popper-reference-hidden', 'false');
-      expect(root).toHaveStyle({ position: 'fixed' });
-
-      unmount();
-      expect(removeProperty).toHaveBeenCalledWith('anchor-name');
-    });
-
-    it('preserves an anchor-name already set on the reference', () => {
-      const reference = createReference();
-      jest
-        .spyOn(reference.style, 'getPropertyValue')
-        .mockReturnValue('--existing');
-      const setProperty = jest.spyOn(reference.style, 'setProperty');
-      const { unmount } = render(
-        <Popover
-          isOpen
-          position={PopoverPosition.Top}
-          referenceElement={reference}
-        >
-          x
-        </Popover>,
-      );
-      expect(setProperty.mock.calls[0][1]).toMatch(
-        /^--existing, --mm-popover-anchor-\d+$/u,
-      );
-      unmount();
-      expect(setProperty).toHaveBeenLastCalledWith('anchor-name', '--existing');
-    });
-
-    describe('referenceHidden', () => {
-      const originalIntersectionObserver = globalThis.IntersectionObserver;
-      const observe = jest.fn();
-      const disconnect = jest.fn();
-      let callback: IntersectionObserverCallback = () => undefined;
-
-      beforeEach(() => {
-        globalThis.IntersectionObserver = jest.fn(
-          (cb: IntersectionObserverCallback) => {
-            callback = cb;
-            return { observe, disconnect };
-          },
-        ) as unknown as typeof IntersectionObserver;
-      });
-
-      afterEach(() => {
-        globalThis.IntersectionObserver = originalIntersectionObserver;
-      });
-
-      it('tracks whether the reference is clipped with an IntersectionObserver', () => {
-        const reference = createReference();
-        const { unmount } = render(
-          <Popover
-            data-testid="popover"
-            isOpen
-            position={PopoverPosition.Right}
-            referenceElement={reference}
-          >
-            x
-          </Popover>,
-        );
-        expect(observe).toHaveBeenCalledWith(reference);
-        const root = screen.getByTestId('popover');
-        expect(root).toHaveAttribute('data-popper-reference-hidden', 'false');
-
-        act(() =>
-          callback(
-            [{ isIntersecting: false } as IntersectionObserverEntry],
-            {} as IntersectionObserver,
-          ),
-        );
-        expect(root).toHaveAttribute('data-popper-reference-hidden', 'true');
-
-        act(() =>
-          callback(
-            [{ isIntersecting: true } as IntersectionObserverEntry],
-            {} as IntersectionObserver,
-          ),
-        );
-        expect(root).toHaveAttribute('data-popper-reference-hidden', 'false');
-
-        unmount();
-        expect(disconnect).toHaveBeenCalled();
-      });
-
-      it('does not observe the reference when referenceHidden is false', () => {
-        render(
-          <Popover
-            isOpen
-            position={PopoverPosition.Right}
-            referenceHidden={false}
-            referenceElement={createReference()}
-          >
-            x
-          </Popover>,
-        );
-        expect(observe).not.toHaveBeenCalled();
-      });
-    });
-
-    it.each([
-      ['position is Auto', { position: PopoverPosition.Auto }],
-      ['hasArrow is set', { hasArrow: true }],
-      ['preventOverflow is set', { preventOverflow: true }],
-    ])('falls back to JS positioning when %s', (_, overrides) => {
-      const reference = createReference();
-      const setProperty = jest.spyOn(reference.style, 'setProperty');
-      render(
-        <Popover
-          isOpen
-          position={PopoverPosition.Bottom}
-          referenceElement={reference}
-          {...overrides}
-        >
-          x
-        </Popover>,
-      );
-      expect(setProperty).not.toHaveBeenCalled();
-      expect(reference.getBoundingClientRect).toHaveBeenCalled();
-    });
-
-    it('falls back to JS positioning without a reference element', () => {
-      render(
-        <Popover data-testid="popover" isOpen position={PopoverPosition.Top}>
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveStyle({ left: '0px' });
-    });
-  });
-
-  describe('hasArrow', () => {
-    it('does not render an arrow by default', () => {
-      render(
-        <Popover data-testid="popover" isOpen>
-          x
-        </Popover>,
-      );
-      expect(screen.queryByTestId('popover-arrow')).not.toBeInTheDocument();
-    });
-
-    it('renders an arrow centered on the reference', () => {
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          hasArrow
-          position={PopoverPosition.Bottom}
-          referenceElement={createReference()}
-        >
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover-arrow')).toHaveStyle({
-        left: '30px',
-        top: '-20px',
-      });
-    });
-
-    it('forwards arrowProps to the arrow element and merges className with the internal positioning classes', () => {
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          hasArrow
-          arrowProps={{
-            id: 'custom-arrow',
-            className: 'custom-arrow-class',
-          }}
-        >
-          x
-        </Popover>,
-      );
-      const arrowEl = document.getElementById('custom-arrow');
-      expect(arrowEl).not.toBeNull();
-      expect(arrowEl).toHaveClass('custom-arrow-class');
-      // `arrowProps` must not clobber the classes that position the arrow.
-      expect(arrowEl).toHaveClass('invisible', 'absolute', 'size-10');
-    });
-
-    it.each([
-      [PopoverPosition.Top, 'rotate(-135deg)'],
-      [PopoverPosition.TopStart, 'rotate(-135deg)'],
-      [PopoverPosition.Bottom, 'rotate(45deg)'],
-      [PopoverPosition.BottomEnd, 'rotate(45deg)'],
-      [PopoverPosition.Left, 'rotate(135deg)'],
-      [PopoverPosition.Right, 'rotate(-45deg)'],
-    ])(
-      'rotates the arrow visual for %s placement',
-      (position, expectedTransform) => {
-        render(
-          <Popover
-            isOpen
-            hasArrow
-            position={position}
-            referenceElement={createReference()}
-          >
-            x
-          </Popover>,
-        );
-        const visual = screen.getByTestId('popover-arrow-visual');
-        expect(visual).toHaveStyle({ transform: expectedTransform });
-      },
-    );
-  });
-
-  describe('matchWidth', () => {
-    it('uses width auto when matchWidth is false', () => {
-      render(
-        <Popover data-testid="popover" isOpen>
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveStyle({ width: 'auto' });
-    });
-
-    it('matches the reference element width when matchWidth is true', () => {
-      const reference = document.createElement('div');
-      Object.defineProperty(reference, 'clientWidth', {
-        configurable: true,
-        get: () => 240,
-      });
-
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          matchWidth
-          referenceElement={reference}
-        >
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toHaveStyle({ width: '240px' });
-    });
-
-    it('follows the reference width while open', () => {
-      const originalResizeObserver = globalThis.ResizeObserver;
-      const callbacks: (() => void)[] = [];
-      const disconnect = jest.fn();
-      globalThis.ResizeObserver = jest.fn((callback: () => void) => {
-        callbacks.push(callback);
-        return { observe: jest.fn(), disconnect, unobserve: jest.fn() };
-      }) as unknown as typeof ResizeObserver;
-
-      try {
-        const reference = createReference();
-        let width = 240;
-        Object.defineProperty(reference, 'clientWidth', {
-          configurable: true,
-          get: () => width,
-        });
-        const { rerender } = render(
-          <Popover
-            data-testid="popover"
-            isOpen
-            matchWidth
-            position={PopoverPosition.Bottom}
-            referenceElement={reference}
-          >
-            x
-          </Popover>,
-        );
-        width = 320;
-        act(() => callbacks.forEach((callback) => callback()));
-        expect(screen.getByTestId('popover')).toHaveStyle({ width: '320px' });
-
-        rerender(
-          <Popover
-            data-testid="popover"
-            isOpen={false}
-            matchWidth
-            position={PopoverPosition.Bottom}
-            referenceElement={reference}
-          >
-            x
-          </Popover>,
-        );
-        expect(disconnect).toHaveBeenCalled();
-      } finally {
-        globalThis.ResizeObserver = originalResizeObserver;
-      }
-    });
-  });
-
-  describe('isPortal', () => {
-    it('renders inline (in the parent) when isPortal is false', () => {
-      const { container } = render(
-        <div data-testid="parent">
-          <Popover data-testid="popover" isOpen>
-            x
-          </Popover>
-        </div>,
-      );
-      const parent = screen.getByTestId('parent');
-      expect(parent).toContainElement(screen.getByTestId('popover'));
-      // The popover root sits inside the parent wrapper rendered by RTL.
-      expect(container).toContainElement(screen.getByTestId('popover'));
-    });
-
-    it('renders into document.body when isPortal is true', () => {
-      render(
-        <div data-testid="parent">
-          <Popover data-testid="popover" isOpen isPortal>
-            x
-          </Popover>
-        </div>,
-      );
-      const parent = screen.getByTestId('parent');
-      const popover = screen.getByTestId('popover');
-      expect(parent).not.toContainElement(popover);
-      expect(document.body).toContainElement(popover);
-    });
-  });
-
-  describe('ref forwarding', () => {
-    it('forwards a ref object to the popover root', () => {
+  describe('ref', () => {
+    it('forwards object refs', () => {
       const ref = createRef<HTMLDivElement>();
       render(
-        <Popover ref={ref} data-testid="popover" isOpen>
+        <Popover data-testid="popover" isOpen ref={ref}>
           x
         </Popover>,
       );
       expect(ref.current).toBe(screen.getByTestId('popover'));
     });
 
-    it('forwards a callback ref to the popover root', () => {
-      const refCallback = jest.fn();
+    it('forwards callback refs', () => {
+      const ref = jest.fn();
       render(
-        <Popover ref={refCallback} data-testid="popover" isOpen>
+        <Popover data-testid="popover" isOpen ref={ref}>
           x
         </Popover>,
       );
-      expect(refCallback).toHaveBeenCalledWith(screen.getByTestId('popover'));
-    });
-
-    it('does not call any ref handler when no ref is provided', () => {
-      // Renders without a ref to exercise the "no ref" branch in the
-      // setPopoverRef forwarder.
-      render(
-        <Popover data-testid="popover" isOpen>
-          x
-        </Popover>,
-      );
-      expect(screen.getByTestId('popover')).toBeInTheDocument();
-    });
-  });
-
-  describe('onPressEscKey', () => {
-    it('calls the handler when Escape is pressed', () => {
-      const onPressEscKey = jest.fn();
-      render(
-        <Popover isOpen onPressEscKey={onPressEscKey}>
-          x
-        </Popover>,
-      );
-      fireEvent.keyDown(document, { key: 'Escape' });
-      expect(onPressEscKey).toHaveBeenCalledTimes(1);
-    });
-
-    it('ignores non-Escape keys', () => {
-      const onPressEscKey = jest.fn();
-      render(
-        <Popover isOpen onPressEscKey={onPressEscKey}>
-          x
-        </Popover>,
-      );
-      fireEvent.keyDown(document, { key: 'Enter' });
-      expect(onPressEscKey).not.toHaveBeenCalled();
-    });
-
-    it('does not throw when Escape is pressed without a handler', () => {
-      render(<Popover isOpen>x</Popover>);
-      expect(() =>
-        fireEvent.keyDown(document, { key: 'Escape' }),
-      ).not.toThrow();
-    });
-  });
-
-  describe('onClickOutside', () => {
-    it('fires when clicking outside the popover', () => {
-      const onClickOutside = jest.fn();
-      render(
-        <div>
-          <Popover data-testid="popover" isOpen onClickOutside={onClickOutside}>
-            x
-          </Popover>
-          <button data-testid="outside" type="button">
-            outside
-          </button>
-        </div>,
-      );
-      fireEvent.click(screen.getByTestId('outside'));
-      expect(onClickOutside).toHaveBeenCalledTimes(1);
-    });
-
-    it('does not fire when clicking inside the popover', () => {
-      const onClickOutside = jest.fn();
-      render(
-        <Popover data-testid="popover" isOpen onClickOutside={onClickOutside}>
-          <button data-testid="inside" type="button">
-            inside
-          </button>
-        </Popover>,
-      );
-      fireEvent.click(screen.getByTestId('inside'));
-      expect(onClickOutside).not.toHaveBeenCalled();
-    });
-
-    it('does not fire when clicking the reference element', () => {
-      const reference = document.createElement('button');
-      reference.dataset.testid = 'reference';
-      document.body.appendChild(reference);
-
-      const onClickOutside = jest.fn();
-      render(
-        <Popover
-          data-testid="popover"
-          isOpen
-          referenceElement={reference}
-          onClickOutside={onClickOutside}
-        >
-          x
-        </Popover>,
-      );
-      fireEvent.click(reference);
-      expect(onClickOutside).not.toHaveBeenCalled();
-      document.body.removeChild(reference);
-    });
-
-    it('does not throw when clicking outside without a handler', () => {
-      render(
-        <div>
-          <Popover data-testid="popover" isOpen>
-            x
-          </Popover>
-          <button data-testid="outside" type="button">
-            outside
-          </button>
-        </div>,
-      );
-      expect(() =>
-        fireEvent.click(screen.getByTestId('outside')),
-      ).not.toThrow();
-    });
-
-    it('removes document listeners with the same callbacks and capture options used on add', () => {
-      const addEventListenerSpy = jest.spyOn(document, 'addEventListener');
-      const removeEventListenerSpy = jest.spyOn(
-        document,
-        'removeEventListener',
-      );
-
-      try {
-        const { unmount } = render(
-          <Popover isOpen onClickOutside={jest.fn()} onPressEscKey={jest.fn()}>
-            x
-          </Popover>,
-        );
-
-        const keydownAddCall = addEventListenerSpy.mock.calls.find(
-          ([eventType]) => eventType === 'keydown',
-        );
-        const clickAddCall = addEventListenerSpy.mock.calls.find(
-          ([eventType]) => eventType === 'click',
-        );
-
-        if (!keydownAddCall || !clickAddCall) {
-          throw new Error('Expected Popover to add document event listeners');
-        }
-
-        unmount();
-
-        expect(removeEventListenerSpy).toHaveBeenCalledWith(
-          'keydown',
-          keydownAddCall[1],
-          keydownAddCall[2],
-        );
-        expect(removeEventListenerSpy).toHaveBeenCalledWith(
-          'click',
-          clickAddCall[1],
-          clickAddCall[2],
-        );
-      } finally {
-        addEventListenerSpy.mockRestore();
-        removeEventListenerSpy.mockRestore();
-      }
-    });
-
-    it('removes the click listener when isOpen flips to false', () => {
-      const onClickOutside = jest.fn();
-      const Harness = () => {
-        const [open, setOpen] = useState(true);
-        return (
-          <div>
-            <Popover isOpen={open} onClickOutside={onClickOutside}>
-              x
-            </Popover>
-            <button
-              data-testid="toggle"
-              type="button"
-              onClick={() => setOpen(false)}
-            >
-              close
-            </button>
-            <button data-testid="outside" type="button">
-              outside
-            </button>
-          </div>
-        );
-      };
-      render(<Harness />);
-      fireEvent.click(screen.getByTestId('toggle'));
-      onClickOutside.mockClear();
-      fireEvent.click(screen.getByTestId('outside'));
-      expect(onClickOutside).not.toHaveBeenCalled();
+      expect(ref).toHaveBeenCalledWith(screen.getByTestId('popover'));
     });
   });
 });
