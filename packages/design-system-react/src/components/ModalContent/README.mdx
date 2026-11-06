@@ -4,7 +4,7 @@ import * as ModalContentStories from './ModalContent.stories';
 
 # ModalContent
 
-`ModalContent` is the centered dialog container that lives inside a `Modal`. It owns the close-on-overlay-click and close-on-Escape handlers, hands focus management to `ModalFocus` (using the focus refs/flags from `useModalContext`), and applies the standard `slide-up` entrance animation.
+`ModalContent` is the centered dialog container that lives inside a `Modal`. It lays out the dialog surface inside the native `<dialog>` rendered by `Modal` (an `absolute inset-0` positioning wrapper, so it never competes with the `::backdrop`) and applies the standard `slide-up` entrance animation. Escape handling, focus containment and the `dialog` role/`aria-modal` come from the native `<dialog>` in `Modal`; `ModalContent` does not add its own listeners, focus trap, or nested `role="dialog"`.
 
 `ModalContent` reads its behavior from `useModalContext`, so it must be rendered inside `<Modal>`.
 
@@ -49,11 +49,11 @@ Content rendered inside the dialog. Typically composed of `ModalHeader`, `ModalB
 
 Max-width of the inner dialog. Override entirely via `modalDialogProps.className="max-w-..."` if you need a custom width.
 
-| Value                  | Max-width |
-| ---------------------- | --------- |
-| `ModalContentSize.Sm`  | 360px     |
-| `ModalContentSize.Md`  | 480px     |
-| `ModalContentSize.Lg`  | 720px     |
+| Value                 | Max-width |
+| --------------------- | --------- |
+| `ModalContentSize.Sm` | 360px     |
+| `ModalContentSize.Md` | 480px     |
+| `ModalContentSize.Lg` | 720px     |
 
 <table>
   <thead>
@@ -80,7 +80,7 @@ Max-width of the inner dialog. Override entirely via `modalDialogProps.className
 
 ### `modalDialogProps`
 
-Props forwarded to the inner dialog `Box` (the `<section role="dialog">`). Use this to add `data-testid`, override layout, change background, or apply Tailwind utilities via `className`. Consumer `className` is merged with the component's defaults via `twMerge`.
+Props forwarded to the inner dialog `Box` (a plain `<section>`; the dialog semantics live on the native `<dialog>` in `Modal`). Use this to add `data-testid`, override layout, change background, or apply Tailwind utilities via `className`. Consumer `className` is merged with the component's defaults via `twMerge`.
 
 <table>
   <thead>
@@ -130,32 +130,34 @@ Custom CSS classes applied to the outer positioning element. Merged with the com
 
 ## Behavior controlled via `Modal`
 
-`ModalContent` reads the following flags from `useModalContext` and reacts to them:
+These flags are configured on `Modal` and handled there with the native `<dialog>`:
 
-| Flag                      | Effect                                                                                            |
-| ------------------------- | ------------------------------------------------------------------------------------------------- |
-| `isClosedOnEscapeKey`     | When `true`, pressing Escape calls `onClose`.                                                      |
-| `isClosedOnOutsideClick`  | When `true`, mousedown outside the dialog calls `onClose` (subject to the opt-out below).         |
-| `autoFocus`               | Forwarded to `ModalFocus`. When `true`, the first focusable child is focused on mount.            |
-| `initialFocusRef`         | Forwarded to `ModalFocus`. When set, this element receives focus on mount.                        |
-| `finalFocusRef`           | Forwarded to `ModalFocus`. When set, this element receives focus on close.                        |
-| `restoreFocus`            | Forwarded to `ModalFocus`. When `true`, focus returns to the element that opened the modal.       |
+| Flag                     | Effect                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------ |
+| `isClosedOnEscapeKey`    | When `true`, pressing Escape (the native `cancel` event) calls `onClose`.                  |
+| `isClosedOnOutsideClick` | When `true`, a click on the backdrop or the empty area around the content calls `onClose`. |
+| `autoFocus`              | When `true`, the native dialog focus step focuses the first focusable child on open.       |
+| `initialFocusRef`        | When set, this element receives focus on open.                                             |
+| `finalFocusRef`          | When set, this element receives focus on close.                                            |
+| `restoreFocus`           | When `true`, focus returns to the element that opened the modal.                           |
 
 <Canvas of={ModalContentStories.KeyboardAndOutsideClickConfig} />
 
-## Outside-click opt-out for floating UI primitives
+## Outside-click opt-out
 
-Floating UI primitives (Popover, Tooltip, Select dropdown, etc.) often render via portal as **siblings** to the modal — so a click inside the popover lands outside the modal's dialog DOM tree, which would otherwise trigger the close-on-outside-click handler.
-
-To prevent this, `ModalContent` ignores any mousedown whose target's `closest('[data-mm-modal-ignore-outside-click]')` is non-null. Set the attribute on the floating element's root to opt out:
+Outside clicks are detected by `Modal` (a click that starts and ends on the backdrop, the `<dialog>`, `ModalOverlay`, or the empty area around the content). Clicks whose target's `closest('[data-mm-modal-ignore-outside-click]')` is non-null are ignored. Set the attribute on an element rendered **inside** the modal to opt out:
 
 ```tsx
 import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from '@metamask/design-system-react';
 
-<Box {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}>{popoverContent}</Box>
+<Box {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}>
+  {popoverContent}
+</Box>;
 ```
 
 The constant resolves to the literal string `data-mm-modal-ignore-outside-click`. The attribute presence is what matters — the value is unused.
+
+> Floating UI that is portaled to `document.body` is outside the `<dialog>`: it is inert and painted below the top layer while the modal is open, so the attribute cannot help there. Render such elements inside the modal subtree.
 
 <Canvas of={ModalContentStories.IgnoreOutsideClickAttr} />
 

@@ -330,3 +330,33 @@ export const AutoFocus: Story = {
   },
   render: (args) => <ModalTemplate {...args} />,
 };
+
+export const NativeBackdrop: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const handleOnClose = () => setIsOpen(false);
+
+    return (
+      <>
+        <Button variant={ButtonVariant.Primary} onClick={() => setIsOpen(true)}>
+          Open modal without ModalOverlay
+        </Button>
+        <Modal isOpen={isOpen} onClose={handleOnClose}>
+          <ModalContent>
+            <ModalHeader {...modalHeaderProps(handleOnClose)}>
+              Native backdrop
+            </ModalHeader>
+            <ModalBody>
+              <Text>
+                The page is dimmed by the native dialog backdrop, so no
+                ModalOverlay is needed. Clicking the backdrop or pressing Escape
+                closes the modal.
+              </Text>
+            </ModalBody>
+            <ModalFooter {...modalFooterProps(handleOnClose)} />
+          </ModalContent>
+        </Modal>
+      </>
+    );
+  },
+};

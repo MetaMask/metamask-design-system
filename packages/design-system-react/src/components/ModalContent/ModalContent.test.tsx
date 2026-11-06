@@ -2,7 +2,7 @@ import {
   BoxBackgroundColor,
   BoxBorderColor,
 } from '@metamask/design-system-shared';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { Modal } from '../Modal';
@@ -29,15 +29,20 @@ describe('ModalContent', () => {
     expect(screen.getByTestId('child')).toHaveTextContent('hello');
   });
 
-  it('renders the dialog with role="dialog" and aria-modal', () => {
+  it('relies on the native dialog for semantics (no nested role="dialog" or aria-modal)', () => {
     render(
       <Modal isOpen onClose={onClose}>
-        <ModalContent>dialog content</ModalContent>
+        <ModalContent modalDialogProps={{ 'data-testid': 'surface' }}>
+          dialog content
+        </ModalContent>
       </Modal>,
     );
     const dialog = screen.getByRole('dialog');
-    expect(dialog).toHaveAttribute('aria-modal', 'true');
-    expect(dialog.tagName).toBe('SECTION');
+    expect(dialog.tagName).toBe('DIALOG');
+    const surface = screen.getByTestId('surface');
+    expect(surface.tagName).toBe('SECTION');
+    expect(surface).not.toHaveAttribute('role');
+    expect(surface).not.toHaveAttribute('aria-modal');
   });
 
   it('applies the default size (Sm = max-w-[360px]) to the dialog', () => {
@@ -93,7 +98,9 @@ describe('ModalContent', () => {
     expect(outer.tagName).toBe('DIV');
     expect(outer).toHaveAttribute('id', 'modal-content-id');
     expect(outer).toHaveClass('opacity-50');
-    expect(outer).toHaveClass('fixed', 'inset-0');
+    expect(outer).toHaveClass('absolute', 'inset-0');
+    expect(outer).not.toHaveClass('fixed');
+    expect(outer.className).not.toMatch(/z-\[/u);
   });
 
   it('forwards modalDialogProps to the inner dialog and merges className', () => {
@@ -143,14 +150,22 @@ describe('ModalContent', () => {
     expect(ref.current?.tagName).toBe('DIV');
   });
 
-  describe('Escape key handling', () => {
-    it('calls onClose when Escape is pressed', () => {
+  describe('Escape key handling (native dialog cancel event)', () => {
+    const pressEscape = () => {
+      const event = new Event('cancel', { cancelable: true });
+      act(() => {
+        screen.getByRole('dialog').dispatchEvent(event);
+      });
+      return event;
+    };
+
+    it('calls onClose when the dialog is cancelled', () => {
       render(
         <Modal isOpen onClose={onClose}>
           <ModalContent>content</ModalContent>
         </Modal>,
       );
-      fireEvent.keyDown(document, { key: 'Escape' });
+      pressEscape();
       expect(onClose).toHaveBeenCalledTimes(1);
     });
 
@@ -160,66 +175,70 @@ describe('ModalContent', () => {
           <ModalContent>content</ModalContent>
         </Modal>,
       );
-      fireEvent.keyDown(document, { key: 'Escape' });
+      const event = pressEscape();
+      expect(event.defaultPrevented).toBe(true);
       expect(onClose).not.toHaveBeenCalled();
     });
 
-    it('ignores non-Escape keys', () => {
+    it('does not register its own document keydown handler', () => {
       render(
         <Modal isOpen onClose={onClose}>
           <ModalContent>content</ModalContent>
         </Modal>,
       );
-      fireEvent.keyDown(document, { key: 'Enter' });
+      fireEvent.keyDown(document, { key: 'Escape' });
       expect(onClose).not.toHaveBeenCalled();
     });
   });
 
   describe('Outside click handling', () => {
-    it('calls onClose when mouseDown lands outside the dialog', () => {
+    it('calls onClose when the wrapper around the dialog surface is clicked', () => {
+      render(
+        <Modal isOpen onClose={onClose}>
+          <ModalContent data-testid="modal-content">content</ModalContent>
+        </Modal>,
+      );
+      fireEvent.click(screen.getByText('content'));
+      expect(onClose).not.toHaveBeenCalled();
+
+      fireEvent.click(screen.getByTestId('modal-content'));
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls onClose when the native dialog (backdrop) is clicked', () => {
       render(
         <Modal isOpen onClose={onClose}>
           <ModalContent>content</ModalContent>
         </Modal>,
       );
-      // Click inside the dialog → no onClose.
-      fireEvent.mouseDown(screen.getByRole('dialog'));
-      expect(onClose).not.toHaveBeenCalled();
-
-      // Click outside the dialog (document body itself) → onClose.
-      fireEvent.mouseDown(document.body);
+      fireEvent.click(screen.getByRole('dialog'));
       expect(onClose).toHaveBeenCalledTimes(1);
     });
 
     it('does not call onClose when isClosedOnOutsideClick is false', () => {
       render(
         <Modal isOpen onClose={onClose} isClosedOnOutsideClick={false}>
-          <ModalContent>content</ModalContent>
+          <ModalContent data-testid="modal-content">content</ModalContent>
         </Modal>,
       );
-      fireEvent.mouseDown(document.body);
+      fireEvent.click(screen.getByTestId('modal-content'));
+      fireEvent.click(screen.getByRole('dialog'));
       expect(onClose).not.toHaveBeenCalled();
     });
 
     it('ignores clicks whose target opts out via the data attribute', () => {
       render(
         <Modal isOpen onClose={onClose}>
-          <ModalContent>content</ModalContent>
+          <ModalContent
+            data-testid="modal-content"
+            {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}
+          >
+            content
+          </ModalContent>
         </Modal>,
       );
-      // Render a "popover-like" sibling outside the dialog with the opt-out
-      // attribute and click an element inside it.
-      const popover = document.createElement('div');
-      popover.setAttribute(MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR, '');
-      const item = document.createElement('button');
-      item.textContent = 'popover item';
-      popover.appendChild(item);
-      document.body.appendChild(popover);
-
-      fireEvent.mouseDown(item);
+      fireEvent.click(screen.getByTestId('modal-content'));
       expect(onClose).not.toHaveBeenCalled();
-
-      document.body.removeChild(popover);
     });
   });
 

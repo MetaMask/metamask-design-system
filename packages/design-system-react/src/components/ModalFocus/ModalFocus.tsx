@@ -4,6 +4,10 @@ import ReactFocusLock from 'react-focus-lock';
 import type { ModalFocusProps } from './ModalFocus.types';
 
 /**
+ * No longer used by `Modal`/`ModalContent`: the native `<dialog>` opened with
+ * `showModal()` already provides an inert background and focus containment.
+ * Kept for non-dialog surfaces that still need a focus trap.
+ *
  * Based on the ModalFocusScope component from chakra-ui:
  * https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/modal/src/modal-focus.tsx
  */
