@@ -332,6 +332,61 @@ export const getElementRect = (element: Element): Rect =>
   toRect(element.getBoundingClientRect());
 
 /**
+ * Calls `onMove` when `element` moves without a scroll or resize event (for
+ * example when a sibling reflows). Observes the element against a root shrunk
+ * to the element's own rect, so any movement changes its intersection ratio.
+ *
+ * @param element - The element to watch.
+ * @param onMove - Called after the element moved.
+ * @returns A cleanup function that stops observing.
+ */
+export const observeElementMove = (element: Element, onMove: () => void) => {
+  let observer: IntersectionObserver | undefined;
+
+  const refresh = (skip: boolean, threshold: number) => {
+    observer?.disconnect();
+    if (!skip) {
+      onMove();
+    }
+    const { x, y, width, height } = getElementRect(element);
+    if (!width || !height) {
+      return;
+    }
+    const viewport = getViewportRect();
+    const rootMargin = [
+      y,
+      viewport.width - x - width,
+      viewport.height - y - height,
+      x,
+    ]
+      .map((inset) => `${-Math.floor(inset)}px`)
+      .join(' ');
+
+    let isFirstUpdate = true;
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        const ratio = entry.intersectionRatio;
+        if (ratio !== threshold) {
+          if (!isFirstUpdate) {
+            refresh(false, 1);
+          } else if (ratio) {
+            // Partially clipped at observe time: watch for changes from the
+            // current ratio instead of from fully visible.
+            refresh(false, ratio);
+          }
+        }
+        isFirstUpdate = false;
+      },
+      { root: element.ownerDocument, rootMargin, threshold },
+    );
+    observer.observe(element);
+  };
+
+  refresh(true, 1);
+  return () => observer?.disconnect();
+};
+
+/**
  * Chrome 128+, Firefox 147+, Safari 26+. Requires `position-try-fallbacks`
  * (not the pre-128 `position-try-options` name), which the anchored styles
  * rely on.

@@ -449,6 +449,52 @@ describe('Popover', () => {
     });
   });
 
+  describe('layout shift', () => {
+    it('repositions when the reference moves without scroll or resize events', () => {
+      const originalIntersectionObserver = globalThis.IntersectionObserver;
+      const callbacks: ((entries: { intersectionRatio: number }[]) => void)[] =
+        [];
+      const disconnect = jest.fn();
+      globalThis.IntersectionObserver = jest.fn(
+        (callback: (entries: { intersectionRatio: number }[]) => void) => {
+          callbacks.push(callback);
+          return { observe: jest.fn(), disconnect };
+        },
+      ) as unknown as typeof IntersectionObserver;
+
+      try {
+        const reference = createReference();
+        const { unmount } = render(
+          <Popover
+            data-testid="popover"
+            isOpen
+            position={PopoverPosition.BottomStart}
+            referenceElement={reference}
+          >
+            x
+          </Popover>,
+        );
+        act(() => callbacks[callbacks.length - 1]([{ intersectionRatio: 1 }]));
+
+        jest.mocked(reference.getBoundingClientRect).mockReturnValue({
+          left: 40,
+          top: 300,
+          width: 200,
+          height: 100,
+        } as DOMRect);
+        act(() =>
+          callbacks[callbacks.length - 1]([{ intersectionRatio: 0.8 }]),
+        );
+        expect(screen.getByTestId('popover')).toHaveStyle({ left: '40px' });
+
+        unmount();
+        expect(disconnect).toHaveBeenCalled();
+      } finally {
+        globalThis.IntersectionObserver = originalIntersectionObserver;
+      }
+    });
+  });
+
   describe('referenceHidden', () => {
     it('flags the popover when the reference is scrolled out of view', () => {
       render(
@@ -757,6 +803,54 @@ describe('Popover', () => {
         </Popover>,
       );
       expect(screen.getByTestId('popover')).toHaveStyle({ width: '240px' });
+    });
+
+    it('follows the reference width while open', () => {
+      const originalResizeObserver = globalThis.ResizeObserver;
+      const callbacks: (() => void)[] = [];
+      const disconnect = jest.fn();
+      globalThis.ResizeObserver = jest.fn((callback: () => void) => {
+        callbacks.push(callback);
+        return { observe: jest.fn(), disconnect, unobserve: jest.fn() };
+      }) as unknown as typeof ResizeObserver;
+
+      try {
+        const reference = createReference();
+        let width = 240;
+        Object.defineProperty(reference, 'clientWidth', {
+          configurable: true,
+          get: () => width,
+        });
+        const { rerender } = render(
+          <Popover
+            data-testid="popover"
+            isOpen
+            matchWidth
+            position={PopoverPosition.Bottom}
+            referenceElement={reference}
+          >
+            x
+          </Popover>,
+        );
+        width = 320;
+        act(() => callbacks.forEach((callback) => callback()));
+        expect(screen.getByTestId('popover')).toHaveStyle({ width: '320px' });
+
+        rerender(
+          <Popover
+            data-testid="popover"
+            isOpen={false}
+            matchWidth
+            position={PopoverPosition.Bottom}
+            referenceElement={reference}
+          >
+            x
+          </Popover>,
+        );
+        expect(disconnect).toHaveBeenCalled();
+      } finally {
+        globalThis.ResizeObserver = originalResizeObserver;
+      }
     });
   });
 

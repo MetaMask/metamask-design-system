@@ -6,6 +6,7 @@ import {
   getElementRect,
   getViewportRect,
   isReferenceHidden,
+  observeElementMove,
   supportsCssAnchorPositioning,
 } from './Popover.utilities';
 import type { ComputePopoverPositionOptions } from './Popover.utilities';
@@ -288,6 +289,129 @@ describe('getElementRect', () => {
       width: 3,
       height: 4,
     });
+  });
+});
+
+describe('observeElementMove', () => {
+  const originalIntersectionObserver = globalThis.IntersectionObserver;
+  type Observer = {
+    callback: (entries: { intersectionRatio: number }[]) => void;
+    options: IntersectionObserverInit;
+    observe: jest.Mock;
+    disconnect: jest.Mock;
+  };
+  let observers: Observer[];
+
+  const latest = () => observers[observers.length - 1];
+  const fire = (intersectionRatio: number) =>
+    latest().callback([{ intersectionRatio }]);
+
+  const createElement = (rect: Partial<DOMRect>) => {
+    const element = document.createElement('div');
+    jest
+      .spyOn(element, 'getBoundingClientRect')
+      .mockReturnValue({ ...rect } as DOMRect);
+    return element;
+  };
+
+  beforeEach(() => {
+    observers = [];
+    globalThis.IntersectionObserver = jest.fn(
+      (callback: Observer['callback'], options: IntersectionObserverInit) => {
+        const observer = {
+          callback,
+          options,
+          observe: jest.fn(),
+          disconnect: jest.fn(),
+        };
+        observers.push(observer);
+        return observer;
+      },
+    ) as unknown as typeof IntersectionObserver;
+  });
+
+  afterEach(() => {
+    globalThis.IntersectionObserver = originalIntersectionObserver;
+    jest.restoreAllMocks();
+  });
+
+  it('observes the element against a root shrunk to its own rect', () => {
+    const element = createElement({
+      left: 10,
+      top: 20,
+      width: 100,
+      height: 50,
+    });
+    observeElementMove(element, jest.fn());
+    expect(latest().observe).toHaveBeenCalledWith(element);
+    expect(latest().options).toStrictEqual({
+      root: document,
+      rootMargin: `-20px -${window.innerWidth - 110}px -${
+        window.innerHeight - 70
+      }px -10px`,
+      threshold: 1,
+    });
+  });
+
+  it('calls onMove when the element moves after the first update', () => {
+    const onMove = jest.fn();
+    observeElementMove(
+      createElement({ left: 10, top: 20, width: 100, height: 50 }),
+      onMove,
+    );
+    fire(1);
+    expect(onMove).not.toHaveBeenCalled();
+
+    const moved = latest();
+    fire(0.5);
+    expect(onMove).toHaveBeenCalledTimes(1);
+    expect(moved.disconnect).toHaveBeenCalled();
+    expect(observers).toHaveLength(2);
+    expect(latest().options.threshold).toBe(1);
+  });
+
+  it('re-observes from the current ratio when initially partially clipped', () => {
+    const onMove = jest.fn();
+    observeElementMove(
+      createElement({ left: 10, top: 20, width: 100, height: 50 }),
+      onMove,
+    );
+    fire(0.4);
+    expect(observers).toHaveLength(2);
+    expect(latest().options.threshold).toBe(0.4);
+  });
+
+  it('waits when the element is initially fully clipped', () => {
+    const onMove = jest.fn();
+    observeElementMove(
+      createElement({ left: 10, top: 20, width: 100, height: 50 }),
+      onMove,
+    );
+    fire(0);
+    expect(onMove).not.toHaveBeenCalled();
+    expect(observers).toHaveLength(1);
+  });
+
+  it('does not observe zero-size elements', () => {
+    observeElementMove(createElement({ width: 0, height: 0 }), jest.fn());
+    expect(observers).toHaveLength(0);
+  });
+
+  it('disconnects on cleanup', () => {
+    const stop = observeElementMove(
+      createElement({ left: 10, top: 20, width: 100, height: 50 }),
+      jest.fn(),
+    );
+    stop();
+    expect(latest().disconnect).toHaveBeenCalled();
+  });
+
+  it('cleans up safely when nothing was observed', () => {
+    const stop = observeElementMove(
+      createElement({ width: 0, height: 0 }),
+      jest.fn(),
+    );
+    expect(() => stop()).not.toThrow();
   });
 });
 
