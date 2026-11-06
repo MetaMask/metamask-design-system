@@ -344,6 +344,39 @@ export const supportsCssAnchorPositioning = () =>
   CSS.supports('anchor-name', '--mm-popover') &&
   CSS.supports('position-try-fallbacks', 'flip-block');
 
+/**
+ * Invokes `onMove` when `element` relocates or resizes on screen — including
+ * layout shifts and ancestor reflows that do not fire scroll/resize events.
+ *
+ * @param element - Element whose viewport box should be tracked.
+ * @param onMove - Callback when the box changes.
+ * @returns Cleanup that stops the animation-frame loop.
+ */
+export const observeElementMove = (
+  element: Element,
+  onMove: () => void,
+): (() => void) => {
+  let frameId = 0;
+  let previous = element.getBoundingClientRect();
+
+  const loop = () => {
+    const next = element.getBoundingClientRect();
+    if (
+      next.left !== previous.left ||
+      next.top !== previous.top ||
+      next.width !== previous.width ||
+      next.height !== previous.height
+    ) {
+      previous = next;
+      onMove();
+    }
+    frameId = requestAnimationFrame(loop);
+  };
+
+  frameId = requestAnimationFrame(loop);
+  return () => cancelAnimationFrame(frameId);
+};
+
 export type AnchorPositionStylesOptions = {
   anchorName: string;
   placement: PopoverPlacement;

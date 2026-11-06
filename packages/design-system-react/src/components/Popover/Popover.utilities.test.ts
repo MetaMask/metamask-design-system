@@ -6,6 +6,7 @@ import {
   getElementRect,
   getViewportRect,
   isReferenceHidden,
+  observeElementMove,
   supportsCssAnchorPositioning,
 } from './Popover.utilities';
 import type { ComputePopoverPositionOptions } from './Popover.utilities';
@@ -329,6 +330,58 @@ describe('supportsCssAnchorPositioning', () => {
       'position-visibility',
       expect.anything(),
     );
+  });
+});
+
+describe('observeElementMove', () => {
+  it('invokes onMove when the element box changes and cleans up on stop', () => {
+    const frames: FrameRequestCallback[] = [];
+    const originalRaf = globalThis.requestAnimationFrame;
+    const originalCaf = globalThis.cancelAnimationFrame;
+    globalThis.requestAnimationFrame = ((cb: FrameRequestCallback) => {
+      frames.push(cb);
+      return frames.length;
+    }) as typeof requestAnimationFrame;
+    jest.spyOn(globalThis, 'cancelAnimationFrame').mockImplementation();
+
+    try {
+      const element = document.createElement('div');
+      const getRect = jest.spyOn(element, 'getBoundingClientRect');
+      getRect.mockReturnValue({
+        width: 10,
+        height: 10,
+        left: 0,
+        top: 0,
+        right: 10,
+        bottom: 10,
+      } as DOMRect);
+      const onMove = jest.fn();
+      const stop = observeElementMove(element, onMove);
+
+      expect(frames).toHaveLength(1);
+      frames[0]?.(0);
+      expect(onMove).not.toHaveBeenCalled();
+      expect(frames).toHaveLength(2);
+
+      getRect.mockReturnValue({
+        width: 10,
+        height: 10,
+        left: 40,
+        top: 0,
+        right: 50,
+        bottom: 10,
+      } as DOMRect);
+      frames[1]?.(0);
+      expect(onMove).toHaveBeenCalledTimes(1);
+
+      stop();
+      expect(globalThis.cancelAnimationFrame).toHaveBeenCalledWith(
+        frames.length,
+      );
+    } finally {
+      globalThis.requestAnimationFrame = originalRaf;
+      globalThis.cancelAnimationFrame = originalCaf;
+    }
   });
 });
 

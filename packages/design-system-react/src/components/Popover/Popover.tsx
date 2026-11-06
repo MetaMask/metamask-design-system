@@ -20,6 +20,7 @@ import {
   getElementRect,
   getViewportRect,
   isReferenceHidden,
+  observeElementMove,
   supportsCssAnchorPositioning,
 } from './Popover.utilities';
 import type { PopoverPlacement } from './Popover.utilities';
@@ -82,13 +83,15 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const [offsetSkidding, offsetDistance] = offsetProp;
 
     // CSS cannot report which fallback it picked (needed to rotate the
-    // arrow) and has no equivalent of shifting along the cross axis, so
+    // arrow), has no equivalent of shifting along the cross axis, and
+    // cannot keep `matchWidth` in sync when the reference resizes, so
     // those configurations always use the JS positioning fallback.
     const usesCssAnchor =
       Boolean(isOpen && referenceElement) &&
       !isAuto &&
       !hasArrow &&
       !preventOverflow &&
+      !matchWidth &&
       supportsCssAnchorPositioning();
 
     if (usesCssAnchor && !anchorNameRef.current) {
@@ -205,6 +208,18 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           : new ResizeObserver(update);
       resizeObserver?.observe(referenceElement);
       resizeObserver?.observe(floating);
+      // Ancestor reflows (accordion expand, parent width change) move the
+      // reference without resizing it or firing window scroll/resize.
+      let ancestor: Element | null = referenceElement.parentElement;
+      while (ancestor) {
+        resizeObserver?.observe(ancestor);
+        ancestor = ancestor.parentElement;
+      }
+      // Layout shifts that translate the reference without a size change
+      // (sibling insertion, flex reflow) are caught by comparing its box
+      // each animation frame — the same role Floating UI's `layoutShift`
+      // IntersectionObserver served.
+      const stopObservingMove = observeElementMove(referenceElement, update);
 
       return () => {
         window.removeEventListener(
@@ -214,6 +229,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         );
         window.removeEventListener('resize', update);
         resizeObserver?.disconnect();
+        stopObservingMove();
       };
     }, [
       isOpen,

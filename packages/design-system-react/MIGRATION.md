@@ -48,7 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
+  - [From version 0.51.0 to 0.X.0](#from-version-0510-to-0x0)
   - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
   - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
   - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
@@ -3636,9 +3636,9 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
-### From version 0.51.0 to 0.52.0
+### From version 0.51.0 to 0.X.0
 
-<a id="from-version-0510-to-0520"></a>
+<a id="from-version-0510-to-0x0"></a>
 
 #### `Popover` uses the native Popover API and CSS anchor positioning
 
@@ -3648,8 +3648,8 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 - The root renders with `popover="manual"` and is shown with `showPopover()`, so it sits in the browser's top layer. Ancestors with `overflow: hidden`, `transform`, or their own stacking context no longer clip or cover it
 - The root is `position: fixed` (viewport coordinates) instead of `position: absolute` with a `transform`
-- In browsers with CSS anchor positioning (Chrome 128+, Firefox 147+, Safari 26+), fixed placements without `hasArrow` or `preventOverflow` are positioned by CSS. `Popover` sets a generated `anchor-name` on `referenceElement` while open and restores the previous value on close. In that mode `data-popper-placement` reports the requested placement even if CSS flipped it, and `data-popper-reference-hidden` is driven by an `IntersectionObserver` on the reference
-- All other cases use a built-in positioning utility that updates on scroll, resize, and size changes of the reference or popover
+- In browsers with CSS anchor positioning (Chrome 128+, Firefox 147+, Safari 26+), fixed placements without `hasArrow`, `preventOverflow`, or `matchWidth` are positioned by CSS. `Popover` sets a generated `anchor-name` on `referenceElement` while open and restores the previous value on close. In that mode `data-popper-placement` reports the requested placement even if CSS flipped it, and `data-popper-reference-hidden` is driven by an `IntersectionObserver` on the reference
+- All other cases use a built-in positioning utility that updates on scroll, resize, size changes of the reference or popover, ancestor reflows, and reference relocation from layout shift
 - Visibility is still controlled by `isOpen`. Native light dismiss is not used; keep wiring `onPressEscKey` / `onClickOutside`
 
 **Migration:**

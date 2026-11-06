@@ -407,7 +407,7 @@ describe('Popover', () => {
       expect(rect.mock.calls).toHaveLength(callsAfterClose);
     });
 
-    it('observes the reference and popover sizes when ResizeObserver exists', () => {
+    it('observes the reference, popover, and ancestor sizes when ResizeObserver exists', () => {
       const observe = jest.fn();
       const disconnect = jest.fn();
       let callback: () => void = () => undefined;
@@ -431,6 +431,7 @@ describe('Popover', () => {
         );
         expect(observe).toHaveBeenCalledWith(reference);
         expect(observe).toHaveBeenCalledWith(screen.getByTestId('popover'));
+        expect(observe).toHaveBeenCalledWith(document.body);
 
         jest.mocked(reference.getBoundingClientRect).mockReturnValue({
           left: 10,
@@ -445,6 +446,56 @@ describe('Popover', () => {
         expect(disconnect).toHaveBeenCalled();
       } finally {
         globalThis.ResizeObserver = originalResizeObserver;
+      }
+    });
+
+    it('repositions when the reference relocates without scrolling or resizing', () => {
+      const frames: FrameRequestCallback[] = [];
+      const originalRaf = globalThis.requestAnimationFrame;
+      const originalCaf = globalThis.cancelAnimationFrame;
+      globalThis.requestAnimationFrame = ((cb: FrameRequestCallback) => {
+        frames.push(cb);
+        return frames.length;
+      }) as typeof requestAnimationFrame;
+      jest.spyOn(globalThis, 'cancelAnimationFrame').mockImplementation();
+
+      try {
+        const reference = createReference({
+          x: 400,
+          y: 300,
+          width: 200,
+          height: 100,
+        });
+        const { unmount } = render(
+          <Popover
+            data-testid="popover"
+            isOpen
+            position={PopoverPosition.BottomStart}
+            referenceElement={reference}
+          >
+            x
+          </Popover>,
+        );
+        expect(screen.getByTestId('popover')).toHaveStyle({ left: '400px' });
+
+        jest.mocked(reference.getBoundingClientRect).mockReturnValue({
+          left: 80,
+          top: 300,
+          width: 200,
+          height: 100,
+          right: 280,
+          bottom: 400,
+        } as DOMRect);
+        act(() => {
+          frames[frames.length - 1]?.(0);
+        });
+        expect(screen.getByTestId('popover')).toHaveStyle({ left: '80px' });
+
+        unmount();
+        expect(globalThis.cancelAnimationFrame).toHaveBeenCalled();
+      } finally {
+        globalThis.requestAnimationFrame = originalRaf;
+        globalThis.cancelAnimationFrame = originalCaf;
       }
     });
   });
@@ -627,6 +678,7 @@ describe('Popover', () => {
       ['position is Auto', { position: PopoverPosition.Auto }],
       ['hasArrow is set', { hasArrow: true }],
       ['preventOverflow is set', { preventOverflow: true }],
+      ['matchWidth is set', { matchWidth: true }],
     ])('falls back to JS positioning when %s', (_, overrides) => {
       const reference = createReference();
       const setProperty = jest.spyOn(reference.style, 'setProperty');
