@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix(design-system-react): allow data-\* attributes in Input and TextField inputProps ([#1667](https://github.com/MetaMask/metamask-design-system/pull/1667))
+- fix: make AvatarToken image cover the avatar ([#1661](https://github.com/MetaMask/metamask-design-system/pull/1661))
+- fix: make AvatarFavicon image cover the avatar ([#1662](https://github.com/MetaMask/metamask-design-system/pull/1662))
+- fix: make AvatarNetwork image cover the avatar ([#1659](https://github.com/MetaMask/metamask-design-system/pull/1659))
+
 ## [0.51.0]
 
 ### Added
