@@ -11,21 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fixed `AvatarNetwork` so a non-square image covers the avatar instead of being letterboxed ([#1659](https://github.com/MetaMask/metamask-design-system/pull/1659))
-  - Raster images use `contentFit="cover"`. SVGs use `preserveAspectRatio="xMidYMid slice"`, because SVG ignores `contentFit`
-  - `bg-white` no longer shows as edge slivers. Square images are unchanged
-  - `BadgeNetwork` renders `AvatarNetwork`, so it uses the same fill
-  - Pass `imageOrSvgProps.imageProps.contentFit` of `"contain"` and `imageOrSvgProps.svgProps.preserveAspectRatio` of `"xMidYMid meet"` to keep the previous letterboxing
-- Fixed `AvatarToken` so a non-square image covers the avatar instead of being letterboxed ([#1661](https://github.com/MetaMask/metamask-design-system/pull/1661))
-  - Raster images use `contentFit="cover"`. SVGs use `preserveAspectRatio="xMidYMid slice"`, because SVG ignores `contentFit`
-  - `bg-white` no longer shows as edge slivers. Square images are unchanged
-  - `AvatarGroup` renders `AvatarToken`, so token groups use the same fill
-  - Pass `imageOrSvgProps.imageProps.contentFit` of `"contain"` and `imageOrSvgProps.svgProps.preserveAspectRatio` of `"xMidYMid meet"` to keep the previous letterboxing
-- Fixed `AvatarFavicon` so a non-square image covers the avatar instead of being letterboxed ([#1662](https://github.com/MetaMask/metamask-design-system/pull/1662))
-  - Raster images use `contentFit="cover"`. SVGs use `preserveAspectRatio="xMidYMid slice"`, because SVG ignores `contentFit`
-  - The avatar background no longer shows in the gaps. Square images are unchanged. This component does not add a white background while the image is showing
-  - `AvatarGroup` renders `AvatarFavicon`, so favicon groups use the same fill
-  - Pass `imageOrSvgProps.imageProps.contentFit` of `"contain"` and `imageOrSvgProps.svgProps.preserveAspectRatio` of `"xMidYMid meet"` to keep the previous letterboxing
+- Fixed `AvatarNetwork` image to cover the avatar instead of letterboxing non-square images ([#1659](https://github.com/MetaMask/metamask-design-system/pull/1659))
+- Fixed `AvatarToken` image to cover the avatar instead of letterboxing non-square images ([#1661](https://github.com/MetaMask/metamask-design-system/pull/1661))
+- Fixed `AvatarFavicon` image to cover the avatar instead of letterboxing non-square images ([#1662](https://github.com/MetaMask/metamask-design-system/pull/1662))
 
 ## [0.56.0]
 
