@@ -11,8 +11,8 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import { Box } from '../Box';
 import { BoxRow } from '../BoxRow';
 import { Icon, IconColor } from '../Icon';
+import { Spinner } from '../Spinner';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
-import { Spinner } from '../temp-components/Spinner';
 
 import {
   MAP_BUTTONBASE_SIZE_ICONSIZE,

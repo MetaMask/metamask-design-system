@@ -2,10 +2,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useEffect, useRef } from 'react';
 import { Animated, Easing, View } from 'react-native';
 
-import type { IconProps } from '../../Icon';
-import { Icon, IconColor, IconName, IconSize } from '../../Icon';
-import type { TextProps } from '../../Text';
-import { Text, TextVariant, TextColor } from '../../Text';
+import type { IconProps } from '../Icon';
+import { Icon, IconColor, IconName, IconSize } from '../Icon';
+import type { TextProps } from '../Text';
+import { Text, TextVariant, TextColor } from '../Text';
 
 import type { SpinnerProps } from './Spinner.types';
 
