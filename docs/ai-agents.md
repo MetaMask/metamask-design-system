@@ -135,6 +135,12 @@ The three-layer model provides static guidance (rules, conventions, and process)
 - **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation. Use the React endpoint at `http://localhost:6006/mcp` for `@metamask/design-system-react` and the React Native endpoint at `http://localhost:7007/mcp` for `@metamask/design-system-react-native`.
 - **Consumers (downstream repos):** Storybook MCP provides the highest value. Agents can discover components and props from a running or published Storybook without reading this repo's source.
 
+Component manifests (static JSON, separate from the MCP endpoints above) use the same `v` / `components` / `meta` shape:
+
+**React:** Local — `apps/storybook-react/storybook-static/manifests/components.json` after `yarn build-storybook`, or `http://localhost:6006/manifests/components.json` while `yarn storybook` is running. Published — https://metamask.github.io/metamask-design-system/manifests/components.json
+
+**React Native:** Local — `apps/storybook-react-native/storybook-static/manifests/components.json` after `yarn workspace @metamask/storybook-react-native build-storybook`, or `http://localhost:6007/manifests/components.json` while `yarn workspace @metamask/storybook-react-native storybook:web` is running. Published — https://metamask.github.io/metamask-design-system/react-native/manifests/components.json
+
 ## How AI Agents Use This
 
 ### Cursor Cloud Automations
