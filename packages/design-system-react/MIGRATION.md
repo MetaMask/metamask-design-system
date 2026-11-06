@@ -48,7 +48,6 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
   - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
   - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
   - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
@@ -3140,6 +3139,41 @@ If a call site relied on extension Box style-utility props flowing through `Popo
 
 If a call site or stylesheet targeted `.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`, or `.mm-popover--open`, replace those selectors with `className` (popover root) or `arrowProps.className` (arrow). The `data-popper-placement` and `data-popper-reference-hidden` data attributes are still present on the popover root for callers that need to key styling off the resolved placement.
 
+##### Native positioning (no Floating UI)
+
+`Popover` no longer depends on `@floating-ui/react-dom`. Props, defaults, `PopoverPosition` / `PopoverRole` values, and the `data-popper-placement` / `data-popper-reference-hidden` attributes are unchanged.
+
+**What changed:**
+
+- The root renders with `popover="manual"` and is shown with `showPopover()`, so it sits in the browser's top layer. Ancestors with `overflow: hidden`, `transform`, or their own stacking context no longer clip or cover it
+- The root is `position: fixed` (viewport coordinates) instead of `position: absolute` with a `transform`
+- In browsers with CSS anchor positioning (Chrome 128+, Firefox 147+, Safari 26+), fixed placements without `hasArrow` or `preventOverflow` are positioned by CSS. `Popover` sets a generated `anchor-name` on `referenceElement` while open and restores the previous value on close. In that mode `data-popper-placement` reports the requested placement even if CSS flipped it, and `data-popper-reference-hidden` is driven by an `IntersectionObserver` on the reference
+- All other cases use a built-in positioning utility that updates on scroll, resize, size changes of the reference or popover, and layout shifts that move the reference
+- Visibility is still controlled by `isOpen`. Native light dismiss is not used; keep wiring `onPressEscKey` / `onClickOutside`
+
+**Migration:**
+
+No code changes are required for most call sites. Review these patterns:
+
+- `z-index` on the popover (`style={{ zIndex }}` or `z-*` classes) no longer has an effect against page content because the top layer is always above it. Remove it unless the popover must stack against another top-layer element; top-layer elements stack in the order they were shown
+- Styles that target the popover through an ancestor (for example `.parent .my-popover`) still apply because the DOM position is unchanged, but layout that relied on the popover being clipped by an ancestor no longer happens
+- `isPortal` is no longer needed to escape clipping. It is kept for DOM-order reasons. Do not use it for popovers opened from inside a modal `<dialog>` shown with `showModal()`: content outside the dialog, including `document.body` portals, is inert while the dialog is open. Render those popovers inline instead
+- jsdom does not implement the Popover API. `Popover` skips `showPopover()` when it is unavailable, so existing tests keep working. Add stubs only if a test asserts on Popover API calls:
+
+```ts
+// jest.setup.ts
+if (typeof HTMLElement.prototype.showPopover !== 'function') {
+  HTMLElement.prototype.showPopover = function showPopover() {};
+  HTMLElement.prototype.hidePopover = function hidePopover() {};
+}
+```
+
+**Impact:**
+
+- No TypeScript changes
+- Visual position is equivalent; sub-pixel differences are possible because the fallback positions with `top` / `left` instead of `transform`
+- Requires the Popover API (Chrome 114+, Firefox 125+, Safari 17+). In older browsers the popover still renders with fixed positioning but is not promoted to the top layer
+
 #### API Differences
 
 - `Popover` is no longer polymorphic. It always renders a `<div>`. Consumers that used `as="section"` or similar should wrap or compose.
@@ -3635,45 +3669,6 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
-
-### From version 0.51.0 to 0.52.0
-
-<a id="from-version-0510-to-0520"></a>
-
-#### `Popover` uses the native Popover API and CSS anchor positioning
-
-`Popover` no longer depends on `@floating-ui/react-dom`. Props, defaults, `PopoverPosition` / `PopoverRole` values, and the `data-popper-placement` / `data-popper-reference-hidden` attributes are unchanged.
-
-**What changed:**
-
-- The root renders with `popover="manual"` and is shown with `showPopover()`, so it sits in the browser's top layer. Ancestors with `overflow: hidden`, `transform`, or their own stacking context no longer clip or cover it
-- The root is `position: fixed` (viewport coordinates) instead of `position: absolute` with a `transform`
-- In browsers with CSS anchor positioning (Chrome 128+, Firefox 147+, Safari 26+), fixed placements without `hasArrow` or `preventOverflow` are positioned by CSS. `Popover` sets a generated `anchor-name` on `referenceElement` while open and restores the previous value on close. In that mode `data-popper-placement` reports the requested placement even if CSS flipped it, and `data-popper-reference-hidden` is driven by an `IntersectionObserver` on the reference
-- All other cases use a built-in positioning utility that updates on scroll, resize, and size changes of the reference or popover
-- Visibility is still controlled by `isOpen`. Native light dismiss is not used; keep wiring `onPressEscKey` / `onClickOutside`
-
-**Migration:**
-
-No code changes are required for most call sites. Review these patterns:
-
-- `z-index` on the popover (`style={{ zIndex }}` or `z-*` classes) no longer has an effect against page content because the top layer is always above it. Remove it unless the popover must stack against another top-layer element; top-layer elements stack in the order they were shown
-- Styles that target the popover through an ancestor (for example `.parent .my-popover`) still apply because the DOM position is unchanged, but layout that relied on the popover being clipped by an ancestor no longer happens
-- `isPortal` is no longer needed to escape clipping. It is kept for DOM-order reasons. Do not use it for popovers opened from inside a modal `<dialog>` shown with `showModal()`: content outside the dialog, including `document.body` portals, is inert while the dialog is open. Render those popovers inline instead
-- jsdom does not implement the Popover API. `Popover` skips `showPopover()` when it is unavailable, so existing tests keep working. Add stubs only if a test asserts on Popover API calls:
-
-```ts
-// jest.setup.ts
-if (typeof HTMLElement.prototype.showPopover !== 'function') {
-  HTMLElement.prototype.showPopover = function showPopover() {};
-  HTMLElement.prototype.hidePopover = function hidePopover() {};
-}
-```
-
-**Impact:**
-
-- No TypeScript changes
-- Visual position is equivalent; sub-pixel differences are possible because the fallback positions with `top` / `left` instead of `transform`
-- Requires the Popover API (Chrome 114+, Firefox 125+, Safari 17+). In older browsers the popover still renders with fixed positioning but is not promoted to the top layer
 
 ### From version 0.49.0 to 0.50.0
 

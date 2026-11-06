@@ -10,7 +10,7 @@ import * as PopoverStories from './Popover.stories';
 
 - **[Popover API](https://developer.mozilla.org/docs/Web/API/Popover_API)** — the root renders with `popover="manual"` and is shown in the browser's top layer, so ancestors with `overflow: hidden` or their own stacking context cannot clip or cover it. Visibility stays controlled by `isOpen`; native light dismiss is not used.
 - **[CSS anchor positioning](https://developer.mozilla.org/docs/Web/CSS/CSS_anchor_positioning)** — used when the browser supports it (Chrome 128+, Firefox 147+, Safari 26+) and the configuration can be expressed in CSS: a fixed `position` without `hasArrow` or `preventOverflow`. `Popover` sets a generated `anchor-name` on `referenceElement` while open and restores the previous value on close.
-- **Positioning fallback** — everything else (older browsers, `PopoverPosition.Auto`, `hasArrow`, `preventOverflow`) uses a small built-in positioning utility that measures the reference element and updates on scroll and resize.
+- **Positioning fallback** — everything else (older browsers, `PopoverPosition.Auto`, `hasArrow`, `preventOverflow`) uses a small built-in positioning utility that measures the reference element and updates on scroll, resize, size changes, and layout shifts that move the reference.
 
 ```tsx
 import { Popover, PopoverPosition } from '@metamask/design-system-react';

@@ -20,6 +20,7 @@ import {
   getElementRect,
   getViewportRect,
   isReferenceHidden,
+  observeElementMove,
   supportsCssAnchorPositioning,
 } from './Popover.utilities';
 import type { PopoverPlacement } from './Popover.utilities';
@@ -113,6 +114,27 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       }
     }, [isOpen, isPortal]);
 
+    const [referenceWidth, setReferenceWidth] = useState<number>();
+
+    useLayoutEffect(() => {
+      if (
+        !isOpen ||
+        !matchWidth ||
+        !referenceElement ||
+        typeof ResizeObserver === 'undefined'
+      ) {
+        return undefined;
+      }
+      const observer = new ResizeObserver(() =>
+        setReferenceWidth(referenceElement.clientWidth),
+      );
+      observer.observe(referenceElement);
+      return () => {
+        observer.disconnect();
+        setReferenceWidth(undefined);
+      };
+    }, [isOpen, matchWidth, referenceElement]);
+
     const [isAnchorHidden, setIsAnchorHidden] = useState(false);
 
     // `position-visibility: anchors-visible` ignores scroll-container
@@ -205,6 +227,10 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           : new ResizeObserver(update);
       resizeObserver?.observe(referenceElement);
       resizeObserver?.observe(floating);
+      const stopObservingMove =
+        typeof IntersectionObserver === 'undefined'
+          ? undefined
+          : observeElementMove(referenceElement, update);
 
       return () => {
         window.removeEventListener(
@@ -214,6 +240,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         );
         window.removeEventListener('resize', update);
         resizeObserver?.disconnect();
+        stopObservingMove?.();
       };
     }, [
       isOpen,
@@ -314,7 +341,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const popoverStyle: React.CSSProperties = {
       position: 'fixed',
       ...positionStyle,
-      width: matchWidth ? referenceElement?.clientWidth : 'auto',
+      width: matchWidth
+        ? (referenceWidth ?? referenceElement?.clientWidth)
+        : 'auto',
       ...style,
     };
 
