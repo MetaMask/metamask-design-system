@@ -7,7 +7,7 @@ import type { SensitiveTextProps } from '../../SensitiveText';
  */
 export type TextOrChildrenProps = TextOrChildrenPropsShared & {
   /**
-   * Optional props to be passed to the SensitiveText component when children is a string.
+   * Optional props to be passed to the SensitiveText component when children is a string or number.
    * Supports Text props plus `isHidden` / `length`.
    */
   textProps?: Partial<Omit<SensitiveTextProps, 'children'>>;

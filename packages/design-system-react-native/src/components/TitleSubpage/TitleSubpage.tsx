@@ -1,5 +1,7 @@
 // Third party dependencies.
 import {
+  BoxAlignItems,
+  BoxFlexDirection,
   FontWeight,
   TextColor,
   TextVariant,
@@ -8,7 +10,7 @@ import React from 'react';
 
 // Internal dependencies.
 import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import type { TitleSubpageProps } from './TitleSubpage.types';
 
@@ -18,10 +20,10 @@ import type { TitleSubpageProps } from './TitleSubpage.types';
  *
  * @param props - Component props
  * @param props.title - Title row content (required)
- * @param props.titleAvatar - Leading visual for the identity row (required); passed through as the identity `BoxRow` `startAccessory` so callers control layout and composition (for example badges that extend past the token)
- * @param props.identityRowProps - Optional props spread onto the identity `BoxRow` after defaults (`children`, `startAccessory`, and `textProps` are reserved)
+ * @param props.titleAvatar - Leading visual for the identity row (required); rendered as the first child of the identity row so callers control layout and composition (for example badges that extend past the token)
+ * @param props.identityRowProps - Optional props spread onto the identity row `Box` after defaults (`children` is reserved)
  * @param props.titleColumnProps - Optional props spread onto the title/subtitle column `Box` (`children` is reserved)
- * @param props.bottomLabelWrapperProps - Optional props spread onto the bottom label `BoxRow` after defaults (`children`, `endAccessory`, and `textProps` are reserved)
+ * @param props.bottomLabelWrapperProps - Optional props spread onto the bottom label row `Box` after defaults (`children` is reserved)
  * @param props.titleEndAccessory - Optional inline accessory to the right of `title`
  * @param props.subtitle - Optional subtitle row below the title and above the amount
  * @param props.subtitleEndAccessory - Optional inline accessory to the right of `subtitle`
@@ -62,69 +64,95 @@ export const TitleSubpage: React.FC<TitleSubpageProps> = ({
   return (
     <Box twClassName={twClassName} gap={1} {...props}>
       {/* Identity Row */}
-      <BoxRow
+      <Box
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Center}
         gap={4}
         twClassName="h-14"
         {...identityRowProps}
-        startAccessory={titleAvatar}
       >
+        {titleAvatar}
         {/* Title and Subtitle Column */}
         <Box {...titleColumnProps}>
           {/* Title Row */}
           {title && (
-            <BoxRow
-              endAccessory={titleEndAccessory}
-              textProps={{
-                variant: TextVariant.HeadingSm,
-                color: TextColor.TextDefault,
-                ...titleProps,
-              }}
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              gap={1}
             >
-              {title}
-            </BoxRow>
+              <TextOrChildren
+                textProps={{
+                  variant: TextVariant.HeadingSm,
+                  color: TextColor.TextDefault,
+                  ...titleProps,
+                }}
+              >
+                {title}
+              </TextOrChildren>
+              {titleEndAccessory}
+            </Box>
           )}
           {/* Subtitle Row */}
           {subtitle && (
-            <BoxRow
-              endAccessory={subtitleEndAccessory}
-              textProps={{
-                variant: TextVariant.BodySm,
-                fontWeight: FontWeight.Medium,
-                color: TextColor.TextAlternative,
-                ...subtitleProps,
-              }}
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              gap={1}
             >
-              {subtitle}
-            </BoxRow>
+              <TextOrChildren
+                textProps={{
+                  variant: TextVariant.BodySm,
+                  fontWeight: FontWeight.Medium,
+                  color: TextColor.TextAlternative,
+                  ...subtitleProps,
+                }}
+              >
+                {subtitle}
+              </TextOrChildren>
+              {subtitleEndAccessory}
+            </Box>
           )}
         </Box>
-      </BoxRow>
+      </Box>
       {/* Amount Row */}
       {amount && (
-        <BoxRow
-          endAccessory={amountEndAccessory}
-          textProps={{
-            variant: TextVariant.DisplayLg,
-            ...amountProps,
-          }}
+        <Box
+          flexDirection={BoxFlexDirection.Row}
+          alignItems={BoxAlignItems.Center}
+          gap={1}
         >
-          {amount}
-        </BoxRow>
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.DisplayLg,
+              ...amountProps,
+            }}
+          >
+            {amount}
+          </TextOrChildren>
+          {amountEndAccessory}
+        </Box>
       )}
       {/* Bottom Label Row */}
       {bottomLabel && (
-        <BoxRow
+        <Box
+          flexDirection={BoxFlexDirection.Row}
+          alignItems={BoxAlignItems.Center}
+          gap={1}
           {...bottomLabelWrapperProps}
-          endAccessory={bottomLabelEndAccessory}
-          textProps={{
-            variant: TextVariant.BodySm,
-            fontWeight: FontWeight.Medium,
-            color: TextColor.TextAlternative,
-            ...bottomLabelProps,
-          }}
         >
-          {bottomLabel}
-        </BoxRow>
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.BodySm,
+              fontWeight: FontWeight.Medium,
+              color: TextColor.TextAlternative,
+              ...bottomLabelProps,
+            }}
+          >
+            {bottomLabel}
+          </TextOrChildren>
+          {bottomLabelEndAccessory}
+        </Box>
       )}
       {!bottomLabel && bottomAccessory}
     </Box>

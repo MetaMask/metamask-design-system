@@ -12,6 +12,16 @@ describe('TextOrChildren', () => {
     expect(getByText('Sample Text')).toBeDefined();
   });
 
+  it('renders Text component when children is a number', () => {
+    const { getByText } = render(<TextOrChildren>{1234}</TextOrChildren>);
+    expect(getByText('1234')).toBeDefined();
+  });
+
+  it('renders Text component when children is zero', () => {
+    const { getByText } = render(<TextOrChildren>{0}</TextOrChildren>);
+    expect(getByText('0')).toBeDefined();
+  });
+
   it('hides string children when textProps.isHidden is true', () => {
     const { getByText, queryByText } = render(
       <TextOrChildren textProps={{ isHidden: true }}>

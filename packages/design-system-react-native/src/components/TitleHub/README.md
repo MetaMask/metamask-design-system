@@ -192,11 +192,11 @@ import { TitleHub } from '@metamask/design-system-react-native';
 
 ### `amountWrapperProps`
 
-Optional props spread onto the amount row `BoxRow` (excluding `children`, `endAccessory`, and `textProps`, which TitleHub sets).
+Optional props spread onto the amount row `Box` (excluding `children`, which TitleHub sets). The row defaults to centered items and `gap={1}`; values here override those defaults.
 
-| TYPE                                                                      | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------------------- | -------- | ----------- |
-| `Omit<Partial<BoxRowProps>, 'children' \| 'endAccessory' \| 'textProps'>` | No       | `undefined` |
+| TYPE                                  | REQUIRED | DEFAULT     |
+| ------------------------------------- | -------- | ----------- |
+| `Omit<Partial<BoxProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
 import { TitleHub } from '@metamask/design-system-react-native';
@@ -228,11 +228,11 @@ import { TitleHub } from '@metamask/design-system-react-native';
 
 ### `titleWrapperProps`
 
-Optional props spread onto the title row `BoxRow` (excluding `children`, `endAccessory`, and `textProps`, which TitleHub sets).
+Optional props spread onto the title row `Box` (excluding `children`, which TitleHub sets). The row defaults to centered items and `gap={1}`; values here override those defaults.
 
-| TYPE                                                                      | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------------------- | -------- | ----------- |
-| `Omit<Partial<BoxRowProps>, 'children' \| 'endAccessory' \| 'textProps'>` | No       | `undefined` |
+| TYPE                                  | REQUIRED | DEFAULT     |
+| ------------------------------------- | -------- | ----------- |
+| `Omit<Partial<BoxProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
 import { TitleHub } from '@metamask/design-system-react-native';
@@ -267,11 +267,11 @@ import { TitleHub } from '@metamask/design-system-react-native';
 
 ### `bottomLabelWrapperProps`
 
-Optional props spread onto the bottom label row `BoxRow` (excluding `children`, `endAccessory`, and `textProps`, which TitleHub sets).
+Optional props spread onto the bottom label row `Box` (excluding `children`, which TitleHub sets). The row defaults to centered items and `gap={1}`; values here override those defaults.
 
-| TYPE                                                                      | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------------------- | -------- | ----------- |
-| `Omit<Partial<BoxRowProps>, 'children' \| 'endAccessory' \| 'textProps'>` | No       | `undefined` |
+| TYPE                                  | REQUIRED | DEFAULT     |
+| ------------------------------------- | -------- | ----------- |
+| `Omit<Partial<BoxProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
 import { TitleHub } from '@metamask/design-system-react-native';

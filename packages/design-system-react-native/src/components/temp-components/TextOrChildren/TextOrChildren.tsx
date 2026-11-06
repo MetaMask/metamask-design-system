@@ -8,7 +8,7 @@ export const TextOrChildren = ({
   children,
   textProps,
 }: TextOrChildrenProps) => {
-  if (typeof children === 'string') {
+  if (typeof children === 'string' || typeof children === 'number') {
     return <SensitiveText {...textProps}>{children}</SensitiveText>;
   }
   return <>{children}</>;

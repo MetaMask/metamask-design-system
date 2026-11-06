@@ -57,7 +57,7 @@ describe('TitleStandard', () => {
       expect(getByTestId(TITLE_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards titleWrapperProps testID to the title BoxRow container', () => {
+    it('forwards titleWrapperProps testID to the title row container', () => {
       const { getByTestId } = render(
         <TitleStandard
           title="$4.42"
@@ -118,7 +118,7 @@ describe('TitleStandard', () => {
       expect(getByTestId(BOTTOM_LABEL_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards bottomLabelWrapperProps testID to the bottom label BoxRow container', () => {
+    it('forwards bottomLabelWrapperProps testID to the bottom label row container', () => {
       const { getByTestId } = render(
         <TitleStandard
           title="$4.42"

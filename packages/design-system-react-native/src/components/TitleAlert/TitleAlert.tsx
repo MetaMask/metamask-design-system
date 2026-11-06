@@ -1,5 +1,6 @@
 import {
   BoxAlignItems,
+  BoxFlexDirection,
   BoxJustifyContent,
   FontWeight,
   IconSize,
@@ -9,8 +10,6 @@ import {
 import React from 'react';
 
 import { Box } from '../Box';
-import { BoxColumn } from '../BoxColumn';
-import { BoxRow } from '../BoxRow';
 import { IconAlert } from '../IconAlert';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 
@@ -18,16 +17,16 @@ import type { TitleAlertProps } from './TitleAlert.types';
 
 /**
  * Displays a severity-based {@link IconAlert} above a centered title row.
- * Remaining `View` props are forwarded to the root {@link BoxColumn}.
+ * Remaining `View` props are forwarded to the root {@link Box}.
  *
  * @param props - Component props
  * @param props.severity - Passed to {@link IconAlert} for glyph and color
  * @param props.title - Title row content; row renders only when `title` is renderable
- * @param props.titleWrapperProps - Optional props spread onto the title row {@link BoxRow}
+ * @param props.titleWrapperProps - Optional props spread onto the title row {@link Box}
  * @param props.titleProps - Optional props merged into title row `Text` when `title` is a string
  * @param props.description - Optional text-centered description below the title; uses {@link TextOrChildren}
  * @param props.descriptionProps - Optional props merged into description `Text` when `description` is a string
- * @param props.twClassName - Optional Tailwind classes on the root BoxColumn
+ * @param props.twClassName - Optional Tailwind classes on the root Box
  *
  * @returns The rendered TitleAlert layout.
  */
@@ -42,45 +41,50 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
   ...props
 }) => {
   return (
-    <BoxColumn
+    <Box
+      flexDirection={BoxFlexDirection.Column}
       alignItems={BoxAlignItems.Center}
       gap={1}
-      topAccessory={<IconAlert severity={severity} size={IconSize.Xl} />}
-      bottomAccessory={
-        description ? (
-          <Box twClassName="self-stretch">
-            <TextOrChildren
-              textProps={{
-                variant: TextVariant.BodySm,
-                color: TextColor.TextAlternative,
-                fontWeight: FontWeight.Medium,
-                ...descriptionProps,
-                style: [{ textAlign: 'center' }, descriptionProps?.style],
-              }}
-            >
-              {description}
-            </TextOrChildren>
-          </Box>
-        ) : undefined
-      }
       twClassName={twClassName}
       {...props}
     >
+      <IconAlert severity={severity} size={IconSize.Xl} />
       {title ? (
-        <BoxRow
+        <Box
+          flexDirection={BoxFlexDirection.Row}
+          alignItems={BoxAlignItems.Center}
+          gap={1}
           justifyContent={BoxJustifyContent.Center}
           twClassName="self-stretch"
           {...titleWrapperProps}
-          textProps={{
-            variant: TextVariant.HeadingLg,
-            color: TextColor.TextDefault,
-            ...titleProps,
-          }}
         >
-          {title}
-        </BoxRow>
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.HeadingLg,
+              color: TextColor.TextDefault,
+              ...titleProps,
+            }}
+          >
+            {title}
+          </TextOrChildren>
+        </Box>
       ) : null}
-    </BoxColumn>
+      {description ? (
+        <Box twClassName="self-stretch">
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.BodySm,
+              color: TextColor.TextAlternative,
+              fontWeight: FontWeight.Medium,
+              ...descriptionProps,
+              style: [{ textAlign: 'center' }, descriptionProps?.style],
+            }}
+          >
+            {description}
+          </TextOrChildren>
+        </Box>
+      ) : null}
+    </Box>
   );
 };
 
