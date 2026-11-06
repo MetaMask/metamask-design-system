@@ -18,18 +18,18 @@ import { Popover, PopoverPosition } from '@metamask/design-system-react';
 const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(
   null,
 );
-const [isOpen, setIsOpen] = useState(false);
+const [isOpen, setIsOpen] = useState(true);
 
 <button ref={setReferenceElement} onClick={() => setIsOpen(!isOpen)}>
-  Menu
+  Click to toggle popover
 </button>
 <Popover
   isOpen={isOpen}
   onClose={() => setIsOpen(false)}
   referenceElement={referenceElement}
-  position={PopoverPosition.BottomEnd}
+  position={PopoverPosition.BottomStart}
 >
-  Popover contents
+  Click outside or press Escape to close
 </Popover>;
 ```
 
@@ -89,9 +89,9 @@ Controls whether the popover is mounted and shown. When `false`, nothing is rend
 
 ### `onClose`
 
-Called when the browser closes the popover: a click outside, the Escape key, or another dismissible popover opening. It is driven by the native `toggle` event. Set `isOpen` to `false` here so state matches what is on screen. It is not called when the popover closes because `isOpen` became `false`.
+Called when the browser closes the popover: a click outside, the Escape key, or another dismissible popover opening. It is driven by the native `toggle` event. Set `isOpen` to `false` here so state matches what is on screen. It is not called when the popover closes because `isOpen` became `false`, and it is not called for a click on the trigger.
 
-Clicking the trigger while the popover is open is safe to wire as a toggle (`setIsOpen(!isOpen)`): the trigger's click handler runs first and unmounts the popover, so `onClose` does not reopen it.
+Wire the trigger as a toggle (`setIsOpen(!isOpen)`). Button and input triggers are registered as the popover invoker, so the browser does not count them as an outside click. Any other trigger is shown again when that gesture light-dismisses it, and `onClose` is skipped. The toggle then closes it once. This holds on browsers that light-dismiss on `pointerup` before the `click` event (Chrome before 153), where the click handler would otherwise see `isOpen` already set back to `false` and open the popover again.
 
 <table>
   <thead>
