@@ -1,13 +1,6 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withRepeat,
-  withTiming,
-  Easing,
-} from 'react-native-reanimated';
+import React, { useEffect, useRef } from 'react';
+import { Animated, Easing, View } from 'react-native';
 
 import type { IconProps } from '../../Icon';
 import { Icon, IconColor, IconName, IconSize } from '../../Icon';
@@ -27,22 +20,42 @@ export const Spinner = ({
 }: SpinnerProps) => {
   const tw = useTailwind();
 
-  // Create a shared value for rotation
-  const rotation = useSharedValue(0);
+  // The rotation is driven by React Native's native animation driver instead of
+  // Reanimated. A Reanimated rotation commits the shadow tree on every frame on
+  // Android, which can saturate the JS thread when the screen already contains
+  // other animated views (entering/exiting/layout animations). The native driver
+  // updates the view on the UI thread without going through the shadow tree.
+  const rotation = useRef(new Animated.Value(0)).current;
 
   // Start the animation when the component mounts
   useEffect(() => {
-    rotation.value = withRepeat(
-      withTiming(360, { duration: 1000, easing: Easing.linear }), // Complete a full spin in 1 second
-      -1, // Infinite repetitions
-      false, // Do not reverse the animation
+    const loop = Animated.loop(
+      Animated.timing(rotation, {
+        toValue: 1,
+        duration: 1000, // Complete a full spin in 1 second
+        easing: Easing.linear,
+        useNativeDriver: true,
+        isInteraction: false,
+      }),
     );
-  }, []);
 
-  // Define the animated style
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${rotation.value % 360}deg` }],
-  }), []);
+    loop.start();
+
+    return () => {
+      loop.stop();
+    };
+  }, [rotation]);
+
+  const animatedStyle = {
+    transform: [
+      {
+        rotate: rotation.interpolate({
+          inputRange: [0, 1],
+          outputRange: ['0deg', '360deg'],
+        }),
+      },
+    ],
+  };
 
   const finalSpinnerIconProps: IconProps = {
     size: IconSize.Md,
