@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.56.1]
 
-### Uncategorized
+### Fixed
 
-- fix(Spinner): rotate on the native animation driver ([#1665](https://github.com/MetaMask/metamask-design-system/pull/1665))
-- fix: make AvatarToken image cover the avatar ([#1661](https://github.com/MetaMask/metamask-design-system/pull/1661))
-- fix: make AvatarFavicon image cover the avatar ([#1662](https://github.com/MetaMask/metamask-design-system/pull/1662))
-- fix: make AvatarNetwork image cover the avatar ([#1659](https://github.com/MetaMask/metamask-design-system/pull/1659))
+- Fixed `AvatarNetwork` image to cover the avatar instead of letterboxing non-square images ([#1659](https://github.com/MetaMask/metamask-design-system/pull/1659))
+- Fixed `AvatarToken` image to cover the avatar instead of letterboxing non-square images ([#1661](https://github.com/MetaMask/metamask-design-system/pull/1661))
+- Fixed `AvatarFavicon` image to cover the avatar instead of letterboxing non-square images ([#1662](https://github.com/MetaMask/metamask-design-system/pull/1662))
+- Fixed `Spinner` so it runs on `Animated`'s native driver, fixing an Android freeze caused by continuous Reanimated commits competing with layout animations ([#1665](https://github.com/MetaMask/metamask-design-system/pull/1665))
 
 ## [0.56.0]
 
