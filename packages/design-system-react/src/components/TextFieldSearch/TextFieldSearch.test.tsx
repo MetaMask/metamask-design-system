@@ -109,6 +109,20 @@ describe('TextFieldSearch', () => {
       ).toBeInTheDocument();
     });
 
+    it('forwards data-testid from inputProps to the native input', () => {
+      render(
+        <TextFieldSearch
+          inputAriaLabel="Search tokens"
+          inputProps={{ 'data-testid': 'x' }}
+          onChange={noop}
+          value=""
+          clearButtonOnClick={noop}
+        />,
+      );
+
+      expect(screen.getByTestId('x').tagName).toBe('INPUT');
+    });
+
     it('prefers inputAriaLabel over an aria-label passed through inputProps', () => {
       render(
         <TextFieldSearch

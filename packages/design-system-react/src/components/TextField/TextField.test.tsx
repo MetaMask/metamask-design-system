@@ -305,6 +305,19 @@ describe('TextField', () => {
 
       expect(screen.getByRole('textbox')).toHaveClass('mt-2', 'flex-1');
     });
+
+    it('forwards data-testid from inputProps to the native input', () => {
+      render(
+        <TextField
+          inputProps={{ inputMode: 'decimal', 'data-testid': 'x' }}
+          onChange={noop}
+          value=""
+        />,
+      );
+
+      expect(screen.getByTestId('x').tagName).toBe('INPUT');
+      expect(screen.getByTestId('x')).toHaveAttribute('inputmode', 'decimal');
+    });
   });
 
   describe('className', () => {

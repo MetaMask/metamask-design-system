@@ -148,6 +148,18 @@ describe('FormTextField', () => {
       expect(screen.getByText('hint')).toHaveClass('mt-1', 'italic');
     });
 
+    it('forwards data-testid from inputProps to the native input', () => {
+      render(
+        <FormTextField
+          inputProps={{ 'data-testid': 'x' }}
+          onChange={noop}
+          value=""
+        />,
+      );
+
+      expect(screen.getByTestId('x').tagName).toBe('INPUT');
+    });
+
     it('forwards textFieldProps to the inner TextField', () => {
       render(
         <FormTextField
