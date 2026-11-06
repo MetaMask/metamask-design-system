@@ -16,8 +16,9 @@ src/
 ├── components/
 │   ├── Button/
 │   ├── Input/
+│   ├── Spinner/
 │   └── temp-components/
-│       └── Spinner/
+│       └── TextOrChildren/
 ```
 
 ---

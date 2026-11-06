@@ -7,7 +7,7 @@ import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 import type { BoxProps } from '../Box/Box.types';
 import type { BoxRowProps } from '../BoxRow/BoxRow.types';
 import type { IconProps } from '../Icon';
-import type { SpinnerProps } from '../temp-components/Spinner';
+import type { SpinnerProps } from '../Spinner';
 import type { TextProps } from '../Text';
 
 /**
