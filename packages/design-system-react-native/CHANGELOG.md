@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.56.1]
+
+### Fixed
+
+- Fixed `AvatarNetwork` image to cover the avatar instead of letterboxing non-square images ([#1659](https://github.com/MetaMask/metamask-design-system/pull/1659))
+- Fixed `AvatarToken` image to cover the avatar instead of letterboxing non-square images ([#1661](https://github.com/MetaMask/metamask-design-system/pull/1661))
+- Fixed `AvatarFavicon` image to cover the avatar instead of letterboxing non-square images ([#1662](https://github.com/MetaMask/metamask-design-system/pull/1662))
+- Fixed `Spinner` so it runs on `Animated`'s native driver, fixing an Android freeze caused by continuous Reanimated commits competing with layout animations ([#1665](https://github.com/MetaMask/metamask-design-system/pull/1665))
+
 ## [0.56.0]
 
 ### Added
@@ -926,7 +935,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.1...HEAD
+[0.56.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.0...@metamask/design-system-react-native@0.56.1
 [0.56.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.55.0...@metamask/design-system-react-native@0.56.0
 [0.55.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.54.0...@metamask/design-system-react-native@0.55.0
 [0.54.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.53.0...@metamask/design-system-react-native@0.54.0
