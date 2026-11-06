@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react';
 
 /**
- * Per-placement offsets and rotations applied on top of `react-popper`'s
- * computed arrow position. Keys are the leading segment of
+ * Per-placement offsets and rotations applied on top of the computed arrow
+ * position. Keys are the leading segment of
  * `data-popper-placement` (`'top'`, `'top-start'`, etc. all share the same
  * offset/rotation).
  */

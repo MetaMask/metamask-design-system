@@ -2,8 +2,8 @@ import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 
 /**
  * Popover - placement of the floating element relative to the reference element.
- * Mirrors the placements supported by `react-popper` (`Auto` enables both
- * `flip` and `preventOverflow` automatically).
+ * `Auto` picks the side with the most space, which enables both `flip` and
+ * `preventOverflow` automatically.
  */
 export const PopoverPosition = {
   Auto: 'auto',
@@ -44,8 +44,8 @@ export type PopoverProps = Omit<ComponentProps<'div'>, 'role'> & {
    */
   className?: string;
   /**
-   * Inline styles applied to the Popover root. Merged after the styles
-   * computed by `react-popper`.
+   * Inline styles applied to the Popover root. Merged after the computed
+   * positioning styles.
    */
   style?: CSSProperties;
   /**
@@ -69,7 +69,7 @@ export type PopoverProps = Omit<ComponentProps<'div'>, 'role'> & {
   hasArrow?: boolean;
   /**
    * Props forwarded to the arrow element. `ref`, `style`, and `children` are
-   * reserved for internal use (popper positioning, rotation styles, and the
+   * reserved for internal use (arrow positioning, rotation styles, and the
    * arrow visual) and cannot be overridden.
    */
   arrowProps?: Omit<ComponentProps<'div'>, 'ref' | 'style' | 'children'>;
@@ -114,7 +114,9 @@ export type PopoverProps = Omit<ComponentProps<'div'>, 'role'> & {
    */
   offset?: [number, number];
   /**
-   * Render the Popover into `document.body` via `createPortal`.
+   * Render the Popover into `document.body` via `createPortal`. Rarely
+   * needed: the Popover is shown in the top layer with the native Popover
+   * API, so ancestors' `overflow` and `z-index` cannot clip or cover it.
    *
    * @default false
    */
