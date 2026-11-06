@@ -1,15 +1,10 @@
-import {
-  arrow,
-  autoPlacement,
-  autoUpdate,
-  flip,
-  hide,
-  offset,
-  shift,
-  useFloating,
-} from '@floating-ui/react-dom';
-import type { Middleware, Placement } from '@floating-ui/react-dom';
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 
 import { twMerge } from '../../utils/tw-merge';
@@ -18,10 +13,39 @@ import { Box, BoxBackgroundColor, BoxBorderColor } from '../Box';
 import { POPOVER_ARROW_PLACEMENT_STYLES } from './Popover.constants';
 import { PopoverPosition, PopoverRole } from './Popover.types';
 import type { PopoverProps } from './Popover.types';
+import {
+  computePopoverPosition,
+  getAnchorPositionStyles,
+  getClippingRect,
+  getElementRect,
+  getViewportRect,
+  isReferenceHidden,
+  supportsCssAnchorPositioning,
+} from './Popover.utilities';
+import type { PopoverPlacement } from './Popover.utilities';
 
 type ArrowPlacementKey = keyof typeof POPOVER_ARROW_PLACEMENT_STYLES;
 
+type PositionState = {
+  x: number;
+  y: number;
+  placement: PopoverPlacement;
+  arrow?: { x?: number; y?: number };
+  referenceHidden: boolean;
+};
+
 const CAPTURE_EVENT_LISTENER_OPTIONS = { capture: true };
+const SCROLL_EVENT_LISTENER_OPTIONS = { capture: true, passive: true };
+
+let anchorNameCounter = 0;
+
+const isSamePosition = (a: PositionState, b: PositionState) =>
+  a.x === b.x &&
+  a.y === b.y &&
+  a.placement === b.placement &&
+  a.referenceHidden === b.referenceHidden &&
+  a.arrow?.x === b.arrow?.x &&
+  a.arrow?.y === b.arrow?.y;
 
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
@@ -49,33 +73,160 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const popoverRef = useRef<HTMLDivElement | null>(null);
+    const anchorNameRef = useRef<string | null>(null);
 
     const isAuto = position === PopoverPosition.Auto;
+    const requestedPlacement: PopoverPlacement = isAuto
+      ? PopoverPosition.Bottom
+      : position;
     const [offsetSkidding, offsetDistance] = offsetProp;
 
-    const middleware: Middleware[] = [
-      offset({ mainAxis: offsetDistance, crossAxis: offsetSkidding }),
-    ];
-    if (isAuto) {
-      middleware.push(autoPlacement());
-    } else if (flipEnabled) {
-      middleware.push(flip());
-    }
-    if (isAuto || preventOverflow) {
-      middleware.push(shift());
-    }
-    if (hasArrow) {
-      middleware.push(arrow({ element: arrowRef }));
-    }
-    middleware.push(hide());
+    // CSS cannot report which fallback it picked (needed to rotate the
+    // arrow) and has no equivalent of shifting along the cross axis, so
+    // those configurations always use the JS positioning fallback.
+    const usesCssAnchor =
+      Boolean(isOpen && referenceElement) &&
+      !isAuto &&
+      !hasArrow &&
+      !preventOverflow &&
+      supportsCssAnchorPositioning();
 
-    const { refs, floatingStyles, placement, middlewareData } = useFloating({
-      open: isOpen,
-      whileElementsMounted: autoUpdate,
-      placement: isAuto ? 'bottom' : (position as Placement),
-      elements: { reference: referenceElement ?? null },
-      middleware,
+    if (usesCssAnchor && !anchorNameRef.current) {
+      anchorNameCounter += 1;
+      anchorNameRef.current = `--mm-popover-anchor-${anchorNameCounter}`;
+    }
+
+    const [positionState, setPositionState] = useState<PositionState>({
+      x: 0,
+      y: 0,
+      placement: requestedPlacement,
+      referenceHidden: false,
     });
+
+    // Popover API: render in the top layer so ancestors' `overflow` and
+    // stacking contexts never clip or cover the popover. `manual` keeps
+    // visibility controlled by `isOpen` instead of native light dismiss.
+    useLayoutEffect(() => {
+      const element = popoverRef.current;
+      if (isOpen && typeof element?.showPopover === 'function') {
+        element.showPopover();
+      }
+    }, [isOpen, isPortal]);
+
+    const [isAnchorHidden, setIsAnchorHidden] = useState(false);
+
+    // `position-visibility: anchors-visible` ignores scroll-container
+    // clipping in Firefox, so CSS-anchored popovers track visibility here.
+    useEffect(() => {
+      if (
+        !usesCssAnchor ||
+        !referenceHidden ||
+        !referenceElement ||
+        typeof IntersectionObserver === 'undefined'
+      ) {
+        setIsAnchorHidden(false);
+        return undefined;
+      }
+      const observer = new IntersectionObserver(([entry]) => {
+        setIsAnchorHidden(!entry.isIntersecting);
+      });
+      observer.observe(referenceElement);
+      return () => observer.disconnect();
+    }, [usesCssAnchor, referenceHidden, referenceElement]);
+
+    useLayoutEffect(() => {
+      const anchorName = anchorNameRef.current;
+      if (!usesCssAnchor || !referenceElement || !anchorName) {
+        return undefined;
+      }
+      const previousAnchorName =
+        referenceElement.style.getPropertyValue('anchor-name');
+      referenceElement.style.setProperty(
+        'anchor-name',
+        previousAnchorName
+          ? `${previousAnchorName}, ${anchorName}`
+          : anchorName,
+      );
+      return () => {
+        if (previousAnchorName) {
+          referenceElement.style.setProperty('anchor-name', previousAnchorName);
+        } else {
+          referenceElement.style.removeProperty('anchor-name');
+        }
+      };
+    }, [usesCssAnchor, referenceElement]);
+
+    useLayoutEffect(() => {
+      const floating = popoverRef.current;
+      if (!isOpen || usesCssAnchor || !referenceElement || !floating) {
+        return undefined;
+      }
+
+      const update = () => {
+        const arrowElement = arrowRef.current;
+        const referenceRect = getElementRect(referenceElement);
+        const result = computePopoverPosition({
+          referenceRect,
+          floatingSize: {
+            width: floating.offsetWidth,
+            height: floating.offsetHeight,
+          },
+          boundary: getViewportRect(),
+          position,
+          offset: [offsetSkidding, offsetDistance],
+          flip: flipEnabled,
+          shift: preventOverflow,
+          arrowSize: arrowElement
+            ? {
+                width: arrowElement.offsetWidth,
+                height: arrowElement.offsetHeight,
+              }
+            : undefined,
+        });
+        const next: PositionState = {
+          ...result,
+          referenceHidden: isReferenceHidden(
+            referenceRect,
+            getClippingRect(referenceElement),
+          ),
+        };
+        setPositionState((previous) =>
+          isSamePosition(previous, next) ? previous : next,
+        );
+      };
+
+      update();
+
+      window.addEventListener('scroll', update, SCROLL_EVENT_LISTENER_OPTIONS);
+      window.addEventListener('resize', update);
+      const resizeObserver =
+        typeof ResizeObserver === 'undefined'
+          ? undefined
+          : new ResizeObserver(update);
+      resizeObserver?.observe(referenceElement);
+      resizeObserver?.observe(floating);
+
+      return () => {
+        window.removeEventListener(
+          'scroll',
+          update,
+          SCROLL_EVENT_LISTENER_OPTIONS,
+        );
+        window.removeEventListener('resize', update);
+        resizeObserver?.disconnect();
+      };
+    }, [
+      isOpen,
+      usesCssAnchor,
+      referenceElement,
+      position,
+      offsetSkidding,
+      offsetDistance,
+      flipEnabled,
+      preventOverflow,
+      hasArrow,
+      isPortal,
+    ]);
 
     useEffect(() => {
       if (!isOpen || (!onPressEscKey && !onClickOutside)) {
@@ -137,12 +288,32 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       return null;
     }
 
+    const placement = usesCssAnchor
+      ? requestedPlacement
+      : positionState.placement;
     const arrowSide = placement.split('-')[0] as ArrowPlacementKey;
     const arrowPlacementStyle = POPOVER_ARROW_PLACEMENT_STYLES[arrowSide];
-    const referenceHiddenValue = Boolean(middlewareData.hide?.referenceHidden);
+    const referenceHiddenValue = usesCssAnchor
+      ? isAnchorHidden
+      : positionState.referenceHidden;
+
+    const positionStyle: React.CSSProperties = usesCssAnchor
+      ? getAnchorPositionStyles({
+          anchorName: anchorNameRef.current as string,
+          placement: requestedPlacement,
+          offset: [offsetSkidding, offsetDistance],
+          flip: flipEnabled,
+        })
+      : {
+          top: positionState.y,
+          left: positionState.x,
+          right: 'auto',
+          bottom: 'auto',
+        };
 
     const popoverStyle: React.CSSProperties = {
-      ...floatingStyles,
+      position: 'fixed',
+      ...positionStyle,
       width: matchWidth ? referenceElement?.clientWidth : 'auto',
       ...style,
     };
@@ -153,7 +324,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       } else if (ref) {
         ref.current = element;
       }
-      refs.setFloating(element);
       popoverRef.current = element;
     };
 
@@ -165,10 +335,13 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         padding={4}
         role={role}
         ref={setPopoverRef}
+        popover="manual"
         data-popper-placement={placement}
         data-popper-reference-hidden={referenceHiddenValue}
         className={twMerge(
-          'rounded-lg shadow-md',
+          // Reset the user agent `[popover]` styles (centered margin,
+          // `overflow: auto` that would clip the arrow, `CanvasText` color).
+          'm-0 overflow-visible rounded-lg shadow-md [color:inherit]',
           referenceHidden &&
             'data-[popper-reference-hidden=true]:pointer-events-none data-[popper-reference-hidden=true]:invisible',
           className,
@@ -187,8 +360,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               arrowProps?.className,
             )}
             style={{
-              left: middlewareData.arrow?.x,
-              top: middlewareData.arrow?.y,
+              left: positionState.arrow?.x,
+              top: positionState.arrow?.y,
               ...arrowPlacementStyle.container,
             }}
           >
