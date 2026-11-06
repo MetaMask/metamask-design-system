@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.51.1]
 
-### Uncategorized
+### Fixed
 
-- fix(design-system-react): allow data-\* attributes in Input and TextField inputProps ([#1667](https://github.com/MetaMask/metamask-design-system/pull/1667))
-- fix: make AvatarToken image cover the avatar ([#1661](https://github.com/MetaMask/metamask-design-system/pull/1661))
-- fix: make AvatarFavicon image cover the avatar ([#1662](https://github.com/MetaMask/metamask-design-system/pull/1662))
-- fix: make AvatarNetwork image cover the avatar ([#1659](https://github.com/MetaMask/metamask-design-system/pull/1659))
+- Fixed `AvatarNetwork` image to cover the avatar instead of letterboxing non-square images ([#1659](https://github.com/MetaMask/metamask-design-system/pull/1659))
+- Fixed `AvatarToken` image to cover the avatar instead of letterboxing non-square images ([#1661](https://github.com/MetaMask/metamask-design-system/pull/1661))
+- Fixed `AvatarFavicon` image to cover the avatar instead of letterboxing non-square images ([#1662](https://github.com/MetaMask/metamask-design-system/pull/1662))
+- Fixed `InputProps` and the `inputProps` of `TextField`, `TextFieldSearch`, and `FormTextField` to accept `data-*` attributes such as `data-testid` ([#1667](https://github.com/MetaMask/metamask-design-system/pull/1667))
 
 ## [0.51.0]
 
