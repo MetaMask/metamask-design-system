@@ -1,5 +1,7 @@
 # BoxColumn
 
+> **Deprecated:** `BoxColumn` will be removed in a future major version. Use [`Box`](../Box/README.md) with `flexDirection={BoxFlexDirection.Column}`, render accessories as sibling children, and wrap string content in `Text`. See the [migration guide](../../../MIGRATION.md#from-version-0560-to-0570).
+
 BoxColumn lays out optional top and bottom accessories with a text or child region in a vertical column. The public API combines [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) (`children`, `textProps` for the middle) with a root [Box](../Box/Box.tsx): `flexDirection` is always column. Other [Box](../Box/Box.types.ts) layout and `View` props apply to that root.
 
 ```tsx

@@ -136,7 +136,7 @@ Props applied to the `Box` that wraps the loading spinner when `isLoading` is tr
 
 ### `contentWrapperProps`
 
-Props applied to the label row (`BoxRow`). Label typography is still controlled via `textProps` on `ButtonBase`, not through this object.
+Props applied to the label row (`Box`). The row defaults to centered items and `gap={1}` when accessories are present; values here override those defaults. Label typography is still controlled via `textProps` on `ButtonBase`, not through this object.
 
 ## Migration from MetaMask Mobile Component Library
 

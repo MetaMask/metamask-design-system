@@ -130,7 +130,7 @@ describe('SectionHeader', () => {
       expect(getByTestId('section-header-title-node')).toBeOnTheScreen();
     });
 
-    it('forwards testID to outer BoxRow', () => {
+    it('forwards testID to outer row', () => {
       const { getByTestId } = render(
         <SectionHeader title="Test" testID={ROOT_TEST_ID} />,
       );
@@ -149,7 +149,7 @@ describe('SectionHeader', () => {
       expect(getByTestId(TITLE_TEXT_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards titleWrapperProps to inner BoxRow', () => {
+    it('forwards titleWrapperProps to inner title row', () => {
       const { getByTestId } = render(
         <SectionHeader
           title="Section"
@@ -158,6 +158,17 @@ describe('SectionHeader', () => {
       );
 
       expect(getByTestId(TITLE_ROW_TEST_ID)).toBeOnTheScreen();
+    });
+
+    it('applies gap from titleWrapperProps over the default', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          titleWrapperProps={{ testID: TITLE_ROW_TEST_ID, gap: 3 }}
+        />,
+      );
+
+      expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`gap-3`);
     });
 
     it('renders titleAccessory in the inner row', () => {

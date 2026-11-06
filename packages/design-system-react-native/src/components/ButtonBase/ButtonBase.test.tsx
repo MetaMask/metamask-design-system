@@ -63,6 +63,21 @@ describe('ButtonBase', () => {
     });
   });
 
+  describe('contentWrapperProps', () => {
+    it('applies gap from contentWrapperProps over the default', () => {
+      const { getByTestId } = render(
+        <ButtonBase
+          startIconName={IconName.Add}
+          contentWrapperProps={{ testID: 'content-row', gap: 3 }}
+        >
+          Click me
+        </ButtonBase>,
+      );
+
+      expect(getByTestId('content-row')).toHaveStyle(tw`gap-3`);
+    });
+  });
+
   describe('size', () => {
     it('applies small height when size is sm', () => {
       const { getByTestId } = render(

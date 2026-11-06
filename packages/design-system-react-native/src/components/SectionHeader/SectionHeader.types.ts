@@ -3,22 +3,19 @@ import type { SectionHeaderPropsShared } from '@metamask/design-system-shared';
 import type { PressableProps, ViewProps } from 'react-native';
 
 // Internal dependencies.
-import type { BoxRowProps } from '../BoxRow/BoxRow.types';
+import type { BoxProps } from '../Box/Box.types';
 import type { IconProps } from '../Icon';
 import type { TextProps } from '../Text/Text.types';
 
 type SectionHeaderPropsBase = SectionHeaderPropsShared & {
   /**
-   * Optional props merged into {@link BoxRow} `textProps` when `title` is a string.
+   * Optional props merged into the title `Text` when `title` is a string.
    */
   titleProps?: Omit<Partial<TextProps>, 'children'>;
   /**
-   * Optional props spread onto the title row {@link BoxRow}. Omits `children`, `endAccessory`, and `textProps` (SectionHeader sets those via `title`, `titleAccessory`, and `titleProps`).
+   * Optional props spread onto the title row {@link Box} (a row with centered items and `gap={1}` by default; values here override those defaults). Omits `children` (SectionHeader sets it via `title` and `titleAccessory`).
    */
-  titleWrapperProps?: Omit<
-    Partial<BoxRowProps>,
-    'children' | 'endAccessory' | 'textProps'
-  >;
+  titleWrapperProps?: Omit<Partial<BoxProps>, 'children'>;
   /**
    * Optional prop to pass additional properties to the start icon.
    */
@@ -36,7 +33,7 @@ type SectionHeaderPropsBase = SectionHeaderPropsShared & {
 /**
  * SectionHeader component props (React Native).
  * Extends {@link SectionHeaderPropsShared} with platform `Text` / `Icon` passthroughs, `twClassName`, and wrapper props.
- * When `isInteractive` is `true`, the outer wrapper is a `Pressable`; otherwise it is a {@link BoxRow} with `ViewProps`.
+ * When `isInteractive` is `true`, the outer wrapper is a `Pressable`; otherwise it is a row {@link Box} with `ViewProps`.
  */
 export type SectionHeaderProps =
   | (SectionHeaderPropsBase & {

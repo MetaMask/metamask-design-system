@@ -5,6 +5,8 @@ import type { SensitiveTextProps } from '../SensitiveText';
 
 /**
  * BoxRow component props.
+ *
+ * @deprecated Use `BoxProps` instead. `BoxRow` will be removed in a future major version.
  */
 export type BoxRowProps = BoxRowPropsShared &
   Omit<BoxProps, 'children' | 'flexDirection'> & {

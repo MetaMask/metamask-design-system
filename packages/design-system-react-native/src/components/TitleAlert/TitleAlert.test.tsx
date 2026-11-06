@@ -57,7 +57,7 @@ describe('TitleAlert', () => {
       expect(getByTestId(TITLE_ROW_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards titleWrapperProps to title row BoxRow', () => {
+    it('forwards titleWrapperProps to title row', () => {
       const { getByTestId } = render(
         <TitleAlert
           severity={IconAlertSeverity.Danger}

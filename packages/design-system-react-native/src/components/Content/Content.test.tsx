@@ -525,7 +525,7 @@ describe('Content', () => {
   });
 
   describe('twClassName', () => {
-    it('applies twClassName on flat BoxRow root', () => {
+    it('applies twClassName on flat row root', () => {
       const { getByTestId } = render(
         <Content title="Label" twClassName="mt-2" testID={ROOT_TEST_ID} />,
       );
@@ -535,7 +535,7 @@ describe('Content', () => {
   });
 
   describe('root layout', () => {
-    it('passes testID to flat BoxRow root', () => {
+    it('passes testID to flat row root', () => {
       const { getByTestId } = render(
         <Content title="Label" testID={ROOT_TEST_ID} />,
       );

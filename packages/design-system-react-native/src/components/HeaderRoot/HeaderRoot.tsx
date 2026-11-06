@@ -5,8 +5,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
-import { BoxRow } from '../BoxRow';
 import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 import { TextVariant } from '../Text';
 
 // Internal dependencies.
@@ -52,16 +52,22 @@ export const HeaderRoot = ({
     }
     if (title) {
       return (
-        <BoxRow
-          endAccessory={titleAccessory}
-          textProps={{
-            variant: TextVariant.HeadingLg,
-            ...titleProps,
-          }}
+        <Box
+          flexDirection={BoxFlexDirection.Row}
+          alignItems={BoxAlignItems.Center}
+          gap={1}
           twClassName="flex-1"
         >
-          {title}
-        </BoxRow>
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.HeadingLg,
+              ...titleProps,
+            }}
+          >
+            {title}
+          </TextOrChildren>
+          {titleAccessory}
+        </Box>
       );
     }
     return null;

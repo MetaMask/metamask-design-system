@@ -5,6 +5,8 @@ import type { TextProps } from '../Text';
 
 /**
  * BoxColumn component props.
+ *
+ * @deprecated Use `BoxProps` instead. `BoxColumn` will be removed in a future major version.
  */
 export type BoxColumnProps = BoxColumnPropsShared &
   Omit<BoxProps, 'children' | 'flexDirection'> & {
