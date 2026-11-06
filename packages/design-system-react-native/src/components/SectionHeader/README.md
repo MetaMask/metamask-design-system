@@ -175,11 +175,11 @@ import { SectionHeader } from '@metamask/design-system-react-native';
 
 ### `titleWrapperProps`
 
-Optional props spread onto the inner `BoxRow` (excluding `children`, `endAccessory`, and `textProps`, which SectionHeader sets).
+Optional props spread onto the inner title row `Box` (excluding `children`, which SectionHeader sets). The row defaults to centered items and `gap={1}`; values here override those defaults.
 
-| TYPE                                                                      | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------------------- | -------- | ----------- |
-| `Omit<Partial<BoxRowProps>, 'children' \| 'endAccessory' \| 'textProps'>` | No       | `undefined` |
+| TYPE                                  | REQUIRED | DEFAULT     |
+| ------------------------------------- | -------- | ----------- |
+| `Omit<Partial<BoxProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
 import { SectionHeader } from '@metamask/design-system-react-native';
@@ -236,7 +236,7 @@ import {
 
 ### `isInteractive`
 
-When `true`, wraps the header in a `Pressable` so the full row is tappable. The header opacity reduces to `0.7` while pressed. An `IconName.ArrowRight` end icon is rendered by default unless `endIconName` or `endAccessory` is provided. `accessibilityRole` defaults to `button` when not provided. In this mode, the component accepts `PressableProps` (for example `onPress`, `disabled`, and accessibility props) on the outer wrapper. When `false` or omitted, the outer wrapper is a static `BoxRow` with `ViewProps`.
+When `true`, wraps the header in a `Pressable` so the full row is tappable. The header opacity reduces to `0.7` while pressed. An `IconName.ArrowRight` end icon is rendered by default unless `endIconName` or `endAccessory` is provided. `accessibilityRole` defaults to `button` when not provided. In this mode, the component accepts `PressableProps` (for example `onPress`, `disabled`, and accessibility props) on the outer wrapper. When `false` or omitted, the outer wrapper is a static row `Box` with `ViewProps`.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -250,7 +250,7 @@ import { SectionHeader, IconName } from '@metamask/design-system-react-native';
 
 ### `twClassName`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the **outer** wrapper (`BoxRow` or `Pressable`). These classes will be merged with the component's default classes using `tw.style()`, allowing you to:
+Use the `twClassName` prop to add Tailwind CSS classes to the **outer** wrapper (row `Box` or `Pressable`). These classes will be merged with the component's default classes using `tw.style()`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -271,7 +271,7 @@ import { SectionHeader } from '@metamask/design-system-react-native';
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values. Other wrapper props (for example `testID` and accessibility fields) are accepted on the outer `BoxRow` when `isInteractive` is omitted, or on the outer `Pressable` when `isInteractive` is `true`.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values. Other wrapper props (for example `testID` and accessibility fields) are accepted on the outer row `Box` when `isInteractive` is omitted, or on the outer `Pressable` when `isInteractive` is `true`.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

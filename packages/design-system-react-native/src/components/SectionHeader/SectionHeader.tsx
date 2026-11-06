@@ -1,4 +1,6 @@
 import {
+  BoxAlignItems,
+  BoxFlexDirection,
   IconColor,
   IconName,
   IconSize,
@@ -11,22 +13,22 @@ import React from 'react';
 import { Pressable } from 'react-native';
 
 import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
 import { Icon } from '../Icon';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import type { SectionHeaderProps } from './SectionHeader.types';
 
 /**
  * Horizontal section header: optional start/end icons or accessories, and a title row with optional inline accessory.
  * When `isInteractive` is `true`, the header is wrapped in a `Pressable` and remaining `PressableProps` are forwarded to it.
- * Otherwise, remaining `View` props are forwarded to the outer {@link BoxRow}.
+ * Otherwise, remaining `View` props are forwarded to the outer row {@link Box}.
  *
  * @param sectionHeaderProps - Component props
  * @param sectionHeaderProps.title - Title content for the inner row (required)
  * @param sectionHeaderProps.titleAccessory - Optional inline metadata beside `title` in the inner row (not for trailing chevrons; use `endIconName` / `endIconProps`)
  * @param sectionHeaderProps.children - Optional full-width content below the header row
  * @param sectionHeaderProps.titleProps - Optional props merged into inner row `Text` when `title` is a string
- * @param sectionHeaderProps.titleWrapperProps - Optional props spread onto the inner `BoxRow`
+ * @param sectionHeaderProps.titleWrapperProps - Optional props spread onto the inner title row `Box`
  * @param sectionHeaderProps.startAccessory - Optional custom node before the title row on the outer row; used when no start icon is resolved
  * @param sectionHeaderProps.startIconName - Optional start icon; takes precedence over `startAccessory` when set
  * @param sectionHeaderProps.startIconProps - Props merged into the start `Icon` (defaults include medium size and default icon color)
@@ -93,22 +95,27 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     Boolean(resolvedStartAccessory) || Boolean(resolvedEndAccessory);
 
   const titleRow = title ? (
-    <BoxRow
-      {...titleWrapperProps}
+    <Box
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
       gap={1}
-      endAccessory={titleAccessory}
+      {...titleWrapperProps}
       twClassName={mergeTwClassName(
         hasAccessories ? 'w-full shrink min-w-0' : '',
         titleWrapperProps?.twClassName,
       )}
-      textProps={{
-        variant: TextVariant.HeadingMd,
-        color: TextColor.TextDefault,
-        ...titleProps,
-      }}
     >
-      {title}
-    </BoxRow>
+      <TextOrChildren
+        textProps={{
+          variant: TextVariant.HeadingMd,
+          color: TextColor.TextDefault,
+          ...titleProps,
+        }}
+      >
+        {title}
+      </TextOrChildren>
+      {titleAccessory}
+    </Box>
   ) : null;
 
   let mainContent = null;
@@ -121,13 +128,15 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
   }
 
   const headerRow = (
-    <BoxRow
+    <Box
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
       gap={1}
-      startAccessory={resolvedStartAccessory}
-      endAccessory={resolvedEndAccessory}
     >
+      {resolvedStartAccessory}
       {mainContent}
-    </BoxRow>
+      {resolvedEndAccessory}
+    </Box>
   );
 
   const body = children ? (
@@ -179,16 +188,18 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
   }
 
   return (
-    <BoxRow
+    <Box
       {...props}
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
       gap={1}
       style={style}
       twClassName={mergeTwClassName('px-4 pb-2 pt-3', twClassName)}
-      startAccessory={resolvedStartAccessory}
-      endAccessory={resolvedEndAccessory}
     >
+      {resolvedStartAccessory}
       {mainContent}
-    </BoxRow>
+      {resolvedEndAccessory}
+    </Box>
   );
 };
 

@@ -9,8 +9,6 @@ import {
 import React from 'react';
 
 import { Box } from '../Box';
-import { BoxColumn } from '../BoxColumn';
-import { BoxRow } from '../BoxRow';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import type { ContentProps } from './Content.types';
@@ -65,40 +63,15 @@ export const Content: React.FC<ContentProps> = ({
       {...props}
     >
       {avatar}
-      <BoxColumn
-        twClassName="flex-1 min-w-0"
-        bottomAccessory={
-          showDescription ? (
-            <BoxRow
-              twClassName="w-full"
-              alignItems={alignItems}
-              startAccessory={descriptionStartAccessory}
-              endAccessory={descriptionEndAccessory}
-              gap={1}
-            >
-              <BoxColumn twClassName="min-w-0">
-                <TextOrChildren
-                  textProps={{
-                    variant: TextVariant.BodySm,
-                    fontWeight: FontWeight.Medium,
-                    color: TextColor.TextAlternative,
-                    ...descriptionProps,
-                  }}
-                >
-                  {description}
-                </TextOrChildren>
-              </BoxColumn>
-            </BoxRow>
-          ) : null
-        }
-      >
+      <Box flexDirection={BoxFlexDirection.Column} twClassName="flex-1 min-w-0">
         {title ? (
-          <BoxRow
-            twClassName="w-full"
-            startAccessory={titleStartAccessory}
-            endAccessory={titleEndAccessory}
+          <Box
+            flexDirection={BoxFlexDirection.Row}
+            alignItems={BoxAlignItems.Center}
             gap={1}
+            twClassName="w-full"
           >
+            {titleStartAccessory}
             <TextOrChildren
               textProps={{
                 variant: TextVariant.BodyMd,
@@ -109,43 +82,46 @@ export const Content: React.FC<ContentProps> = ({
             >
               {title}
             </TextOrChildren>
-          </BoxRow>
+            {titleEndAccessory}
+          </Box>
         ) : null}
-      </BoxColumn>
+        {showDescription ? (
+          <Box
+            flexDirection={BoxFlexDirection.Row}
+            alignItems={alignItems}
+            gap={1}
+            twClassName="w-full"
+          >
+            {descriptionStartAccessory}
+            <Box flexDirection={BoxFlexDirection.Column} twClassName="min-w-0">
+              <TextOrChildren
+                textProps={{
+                  variant: TextVariant.BodySm,
+                  fontWeight: FontWeight.Medium,
+                  color: TextColor.TextAlternative,
+                  ...descriptionProps,
+                }}
+              >
+                {description}
+              </TextOrChildren>
+            </Box>
+            {descriptionEndAccessory}
+          </Box>
+        ) : null}
+      </Box>
       {value || showSubvalue ? (
-        <BoxColumn
+        <Box
+          flexDirection={BoxFlexDirection.Column}
           alignItems={BoxAlignItems.End}
           twClassName="min-w-0"
-          bottomAccessory={
-            showSubvalue ? (
-              <BoxRow
-                alignItems={alignItems}
-                startAccessory={subvalueStartAccessory}
-                endAccessory={subvalueEndAccessory}
-                gap={1}
-              >
-                <BoxColumn twClassName="min-w-0">
-                  <TextOrChildren
-                    textProps={{
-                      variant: TextVariant.BodySm,
-                      fontWeight: FontWeight.Medium,
-                      color: TextColor.TextAlternative,
-                      ...subvalueProps,
-                    }}
-                  >
-                    {subvalue}
-                  </TextOrChildren>
-                </BoxColumn>
-              </BoxRow>
-            ) : null
-          }
         >
           {value ? (
-            <BoxRow
-              startAccessory={valueStartAccessory}
-              endAccessory={valueEndAccessory}
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
               gap={1}
             >
+              {valueStartAccessory}
               <TextOrChildren
                 textProps={{
                   variant: TextVariant.BodyMd,
@@ -156,9 +132,35 @@ export const Content: React.FC<ContentProps> = ({
               >
                 {value}
               </TextOrChildren>
-            </BoxRow>
+              {valueEndAccessory}
+            </Box>
           ) : null}
-        </BoxColumn>
+          {showSubvalue ? (
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={alignItems}
+              gap={1}
+            >
+              {subvalueStartAccessory}
+              <Box
+                flexDirection={BoxFlexDirection.Column}
+                twClassName="min-w-0"
+              >
+                <TextOrChildren
+                  textProps={{
+                    variant: TextVariant.BodySm,
+                    fontWeight: FontWeight.Medium,
+                    color: TextColor.TextAlternative,
+                    ...subvalueProps,
+                  }}
+                >
+                  {subvalue}
+                </TextOrChildren>
+              </Box>
+              {subvalueEndAccessory}
+            </Box>
+          ) : null}
+        </Box>
       ) : null}
     </Box>
   );

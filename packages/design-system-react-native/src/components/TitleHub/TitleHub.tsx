@@ -1,4 +1,6 @@
 import {
+  BoxAlignItems,
+  BoxFlexDirection,
   FontWeight,
   TextColor,
   TextVariant,
@@ -6,7 +8,7 @@ import {
 import React from 'react';
 
 import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import type { TitleHubProps } from './TitleHub.types';
 
@@ -25,9 +27,9 @@ import type { TitleHubProps } from './TitleHub.types';
  * @param props.titleProps - Optional props merged into title row `Text` when `title` is a string
  * @param props.amountProps - Optional props merged into amount `Text` when `amount` is a string
  * @param props.bottomLabelProps - Optional props merged into bottom label `Text` when `bottomLabel` is a string
- * @param props.titleWrapperProps - Optional props spread onto the title row `BoxRow`
- * @param props.amountWrapperProps - Optional props spread onto the amount row `BoxRow`
- * @param props.bottomLabelWrapperProps - Optional props spread onto the bottom label row `BoxRow`
+ * @param props.titleWrapperProps - Optional props spread onto the title row `Box`
+ * @param props.amountWrapperProps - Optional props spread onto the amount row `Box`
+ * @param props.bottomLabelWrapperProps - Optional props spread onto the bottom label row `Box`
  * @param props.twClassName - Optional Tailwind classes on the root container
  *
  * @returns The rendered TitleHub layout.
@@ -53,45 +55,63 @@ export const TitleHub: React.FC<TitleHubProps> = ({
     <Box gap={1} twClassName={twClassName} {...props}>
       {/* Title Row */}
       {title && (
-        <BoxRow
+        <Box
+          flexDirection={BoxFlexDirection.Row}
+          alignItems={BoxAlignItems.Center}
+          gap={1}
           {...titleWrapperProps}
-          endAccessory={titleEndAccessory}
-          textProps={{
-            variant: TextVariant.HeadingMd,
-            color: TextColor.TextDefault,
-            ...titleProps,
-          }}
         >
-          {title}
-        </BoxRow>
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.HeadingMd,
+              color: TextColor.TextDefault,
+              ...titleProps,
+            }}
+          >
+            {title}
+          </TextOrChildren>
+          {titleEndAccessory}
+        </Box>
       )}
       {/* Amount Row */}
       {amount && (
-        <BoxRow
+        <Box
+          flexDirection={BoxFlexDirection.Row}
+          alignItems={BoxAlignItems.Center}
+          gap={1}
           {...amountWrapperProps}
-          endAccessory={amountEndAccessory}
-          textProps={{
-            variant: TextVariant.DisplayLg,
-            ...amountProps,
-          }}
         >
-          {amount}
-        </BoxRow>
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.DisplayLg,
+              ...amountProps,
+            }}
+          >
+            {amount}
+          </TextOrChildren>
+          {amountEndAccessory}
+        </Box>
       )}
       {/* Bottom Label Row */}
       {bottomLabel && (
-        <BoxRow
+        <Box
+          flexDirection={BoxFlexDirection.Row}
+          alignItems={BoxAlignItems.Center}
+          gap={1}
           {...bottomLabelWrapperProps}
-          endAccessory={bottomLabelEndAccessory}
-          textProps={{
-            variant: TextVariant.BodySm,
-            fontWeight: FontWeight.Medium,
-            color: TextColor.TextAlternative,
-            ...bottomLabelProps,
-          }}
         >
-          {bottomLabel}
-        </BoxRow>
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.BodySm,
+              fontWeight: FontWeight.Medium,
+              color: TextColor.TextAlternative,
+              ...bottomLabelProps,
+            }}
+          >
+            {bottomLabel}
+          </TextOrChildren>
+          {bottomLabelEndAccessory}
+        </Box>
       )}
       {/* Bottom Accessory Slot */}
       {!bottomLabel && bottomAccessory}
