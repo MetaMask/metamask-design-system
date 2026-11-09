@@ -5,8 +5,8 @@ set -euo pipefail
 # This script prepares a package to be published as a preview build
 # to GitHub Packages.
 
-if [[ $# -eq 0 ]]; then
-  echo "Missing commit hash."
+if [[ $# -lt 2 || -z "${1}" || -z "${2}" ]]; then
+  echo "Usage: prepare-preview-builds.sh <npm-scope> <short-commit-hash>" >&2
   exit 1
 fi
 
@@ -43,48 +43,47 @@ done < <(yarn workspaces list --json | jq --slurp --raw-output 'map(select(.loca
 echo "Installing dependencies..."
 yarn install --no-immutable
 
-echo "Updating TypeScript imports for specific packages..."
+echo "Updating source imports for workspace packages..."
 
-# Update imports in design-system-react
-if [ -d "packages/design-system-react/src" ]; then
-  echo "- design-system-react source files"
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Update design-system-shared import
-    find "packages/design-system-react/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-system-shared|@metamask-previews/design-system-shared|g' {} +
-  else
-    # Update design-system-shared import
-    find "packages/design-system-react/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-system-shared|@metamask-previews/design-system-shared|g' {} +
+# Rewrite imports of sibling workspace packages only. External packages such as
+# `@metamask/utils` must keep the `@metamask` scope. Longer names are replaced
+# first so `@metamask/design-system-react-native` is not partially rewritten
+# as the shorter `@metamask/design-system-react` package.
+workspace_package_names=()
+for package_dir in packages/*/; do
+  if [[ -f "${package_dir}package.json" ]]; then
+    workspace_package_names+=("$(basename "$package_dir")")
   fi
+done
+
+if [[ ${#workspace_package_names[@]} -eq 0 ]]; then
+  echo "No workspace packages found to rewrite imports for." >&2
+  exit 1
 fi
 
-# Update imports in design-system-react-native
-if [ -d "packages/design-system-react-native/src" ]; then
-  echo "- design-system-react-native source files"
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Update design-tokens import
-    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
-    # Update design-system-twrnc-preset import
-    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-system-twrnc-preset|@metamask-previews/design-system-twrnc-preset|g' {} +
-    # Update design-system-shared import
-    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-system-shared|@metamask-previews/design-system-shared|g' {} +
-  else
-    # Update design-tokens import
-    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
-    # Update design-system-twrnc-preset import
-    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-system-twrnc-preset|@metamask-previews/design-system-twrnc-preset|g' {} +
-    # Update design-system-shared import
-    find "packages/design-system-react-native/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-system-shared|@metamask-previews/design-system-shared|g' {} +
-  fi
-fi
+mapfile -t workspace_package_names < <(
+  printf '%s\n' "${workspace_package_names[@]}" |
+    awk '{ print length, $0 }' |
+    sort -rn |
+    cut -d' ' -f2-
+)
 
-# Update imports in design-system-twrnc-preset
-if [ -d "packages/design-system-twrnc-preset/src" ]; then
-  echo "- design-system-twrnc-preset source files"
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Update design-tokens import
-    find "packages/design-system-twrnc-preset/src" -type f -name "*.ts*" -exec sed -i '' 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
+sed_expressions=()
+for package_name in "${workspace_package_names[@]}"; do
+  sed_expressions+=(-e "s|@metamask/${package_name}|${npm_scope}/${package_name}|g")
+done
+
+while IFS= read -r -d '' source_file; do
+  if [[ "$OSTYPE" == darwin* ]]; then
+    sed -i '' "${sed_expressions[@]}" "$source_file"
   else
-    # Update design-tokens import
-    find "packages/design-system-twrnc-preset/src" -type f -name "*.ts*" -exec sed -i 's|@metamask/design-tokens|@metamask-previews/design-tokens|g' {} +
+    sed -i "${sed_expressions[@]}" "$source_file"
   fi
-fi
+done < <(
+  find packages \
+    \( -path '*/node_modules/*' -o -path '*/dist/*' -o -path '*/coverage/*' \) -prune \
+    -o -type f \( \
+      -name '*.ts' -o -name '*.tsx' -o -name '*.js' -o -name '*.jsx' -o \
+      -name '*.mjs' -o -name '*.cjs' \
+    \) -print0
+)

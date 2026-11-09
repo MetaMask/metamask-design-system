@@ -49,4 +49,15 @@ if has("dependencies") then
   )
 else
   .
+end |
+
+# Private Storybook apps are not part of the preview artifact. The publish job
+# checks out the base branch (those apps still depend on `@metamask/*@workspace:^`)
+# and overlays this root manifest plus `packages/`. Leaving the apps in the
+# workspace set makes that install fail once the packages have been renamed.
+# Preview builds only publish `packages/*`.
+if has("workspaces") then
+  .workspaces = ["packages/*"]
+else
+  .
 end
