@@ -20,9 +20,9 @@ jobs:
     # Its prepare step renames public packages to @metamask-previews and then
     # runs `yarn install`. The portal resolutions it adds only match semver
     # descriptors (`name@^version`), not this repo's `workspace:^` ranges, so
-    # that install fails with "Workspace not found". The Yarn plugin
-    # `.yarn/plugins/plugin-preview-workspace-fallback.cjs` links those
-    # descriptors at the renamed checkout so the install can finish.
+    # that install fails with "Workspace not found".
+    # scripts/plugin-preview-workspace-fallback.cjs links those descriptors
+    # at the renamed checkout so the install can finish.
     # `prepare-preview-builds` then rewrites names, workspace ranges, and
     # source imports, and must stay in the post-rename build so the published
     # version keeps the `preview.<sha>` form from that script.
