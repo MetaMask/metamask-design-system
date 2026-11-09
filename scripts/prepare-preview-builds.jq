@@ -6,7 +6,7 @@
 # of the version. Technically we'd want to bump the non-prerelease portion as
 # well if we wanted this to be SemVer-compliant, but it was simpler not to.
 # This is just for testing, it doesn't need to strictly follow SemVer.
-.version |= split("-")[0] + "-preview.\($hash)" |
+.version |= split("-")[0] + "-preview-\($hash)" |
 
 # The workspace dependencies are updated to point to the exact preview build
 # version, so that Yarn does not try to resolve a different version from the
@@ -51,11 +51,10 @@ else
   .
 end |
 
-# Private Storybook apps are not part of the preview artifact. The publish job
-# checks out the base branch (those apps still depend on `@metamask/*@workspace:^`)
-# and overlays this root manifest plus `packages/`. Leaving the apps in the
-# workspace set makes that install fail once the packages have been renamed.
-# Preview builds only publish `packages/*`.
+# The publish job checks out the default branch, where the private Storybook
+# apps still depend on `@metamask/*@workspace:^`, and only overlays this root
+# manifest and `packages/`. Keeping the apps in the workspace list would make
+# its install fail once the packages have been renamed.
 if has("workspaces") then
   .workspaces = ["packages/*"]
 else

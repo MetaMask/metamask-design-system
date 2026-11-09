@@ -128,7 +128,7 @@ If you've forked this repository, you can create preview builds based on a branc
    You should be able to see the published version of each package in the output. Note two things:
 
    - The name is scoped to the NPM organization you entered instead of `@metamask`.
-   - The ID of the last commit in the branch is appended to the version, e.g. `1.2.3-preview.e2df9b4` instead of `1.2.3`.
+   - The ID of the last commit in the branch is appended to the version, e.g. `1.2.3-preview-e2df9b4` instead of `1.2.3`.
 
 Now you can [use these preview builds in your project](#using-preview-builds).
 
@@ -145,7 +145,7 @@ To use a preview build for a package within a project, you can use one of these 
    ```json
    {
      "dependencies": {
-       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview.07ad19d"
+       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview-07ad19d"
      }
    }
    ```
@@ -159,7 +159,7 @@ To use a preview build for a package within a project, you can use one of these 
    ```json
    {
      "resolutions": {
-       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview.07ad19d"
+       "@metamask/design-tokens": "npm:@metamask-previews/design-tokens@0.0.0-preview-07ad19d"
      }
    }
    ```
