@@ -126,7 +126,7 @@ export const IgnoreOutsideClickAttr: Story = {
           <ModalContent>
             <Box flexDirection={BoxFlexDirection.Column} gap={4} padding={4}>
               <Text>
-                The "popover" below is rendered as a sibling to the dialog and
+                The "popover" below is rendered inside the modal subtree and
                 opts out of the outside-click handler via{' '}
                 <code>{MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR}</code>. Clicking
                 inside it should not close the modal.
@@ -139,13 +139,13 @@ export const IgnoreOutsideClickAttr: Story = {
               </Button>
             </Box>
           </ModalContent>
-          {/* Sibling-portal "popover" — opts out of close-on-outside-click. */}
+          {/* Popover-like element inside the dialog — opts out of close-on-outside-click. */}
           <Box
             backgroundColor={BoxBackgroundColor.BackgroundDefault}
             borderColor={BoxBorderColor.BorderDefault}
             borderWidth={1}
             padding={4}
-            className="fixed bottom-4 right-4 z-[1051] w-[200px] rounded shadow-md"
+            className="absolute bottom-4 right-4 w-[200px] rounded shadow-md"
             {...{ [MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR]: '' }}
           >
             <Text>Popover-like sibling</Text>

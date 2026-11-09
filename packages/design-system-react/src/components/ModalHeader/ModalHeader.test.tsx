@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
+import { Modal } from '../Modal';
+
 import { ModalHeader } from './ModalHeader';
 
 describe('ModalHeader', () => {
@@ -171,5 +173,30 @@ describe('ModalHeader', () => {
     render(<ModalHeader ref={ref} data-testid="modal-header" />);
     expect(ref.current).toBe(screen.getByTestId('modal-header'));
     expect(ref.current?.tagName).toBe('HEADER');
+  });
+
+  it('labels the surrounding native dialog using an id derived from a custom header id', () => {
+    render(
+      <Modal isOpen onClose={jest.fn()}>
+        <ModalHeader id="custom-header">Dialog title</ModalHeader>
+      </Modal>,
+    );
+    expect(screen.getByRole('dialog')).toHaveAttribute(
+      'aria-labelledby',
+      'custom-header-title',
+    );
+    expect(screen.getByText('Dialog title').closest('div')).toHaveAttribute(
+      'id',
+      'custom-header-title',
+    );
+  });
+
+  it('does not label the dialog when the header has no title content', () => {
+    render(
+      <Modal isOpen onClose={jest.fn()}>
+        <ModalHeader />
+      </Modal>,
+    );
+    expect(screen.getByRole('dialog')).not.toHaveAttribute('aria-labelledby');
   });
 });

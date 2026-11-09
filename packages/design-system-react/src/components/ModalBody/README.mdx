@@ -18,7 +18,7 @@ import { ModalBody } from '@metamask/design-system-react';
 
 ### `children`
 
-Content rendered inside the body. `ModalBody` handles vertical scrolling when its content exceeds the available height of the modal.
+Content rendered inside the body. When rendered inside `Modal`, the body is automatically wired as the accessible description of the native `<dialog>` (`aria-describedby`); an explicit `aria-describedby` on `Modal` takes precedence. `ModalBody` handles vertical scrolling when its content exceeds the available height of the modal.
 
 <table>
   <thead>

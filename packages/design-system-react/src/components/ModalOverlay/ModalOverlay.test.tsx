@@ -1,9 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
+import { Modal } from '../Modal';
+
 import { ModalOverlay } from './ModalOverlay';
 
-describe('ModalOverlay', () => {
+describe('ModalOverlay (standalone)', () => {
   it('renders without crashing', () => {
     render(<ModalOverlay data-testid="modal-overlay" />);
     expect(screen.getByTestId('modal-overlay')).toBeInTheDocument();
@@ -65,5 +67,52 @@ describe('ModalOverlay', () => {
     const overlay = screen.getByTestId('modal-overlay');
     expect(overlay).toHaveAttribute('id', 'overlay');
     expect(overlay).toHaveAttribute('role', 'presentation');
+  });
+});
+
+describe('ModalOverlay (inside Modal)', () => {
+  it('is a transparent absolute layer so it does not stack a second scrim over the native backdrop', () => {
+    render(
+      <Modal isOpen onClose={jest.fn()}>
+        <ModalOverlay data-testid="modal-overlay" />
+      </Modal>,
+    );
+    const overlay = screen.getByTestId('modal-overlay');
+    expect(overlay).toHaveClass('absolute', 'inset-0');
+    expect(overlay).not.toHaveClass('fixed');
+    expect(overlay).not.toHaveClass('bg-overlay-default');
+    expect(overlay.className).not.toMatch(/z-\[/u);
+    expect(overlay).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('still accepts a custom className, ref and click handler', () => {
+    const ref = createRef<HTMLDivElement>();
+    const onClick = jest.fn();
+    render(
+      <Modal isOpen onClose={jest.fn()}>
+        <ModalOverlay
+          ref={ref}
+          data-testid="modal-overlay"
+          className="bg-black/20"
+          onClick={onClick}
+        />
+      </Modal>,
+    );
+    const overlay = screen.getByTestId('modal-overlay');
+    expect(ref.current).toBe(overlay);
+    expect(overlay).toHaveClass('bg-black/20');
+    fireEvent.click(overlay);
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('closes the modal when clicked and isClosedOnOutsideClick is enabled', () => {
+    const onClose = jest.fn();
+    render(
+      <Modal isOpen onClose={onClose}>
+        <ModalOverlay data-testid="modal-overlay" />
+      </Modal>,
+    );
+    fireEvent.click(screen.getByTestId('modal-overlay'));
+    expect(onClose).toHaveBeenCalledTimes(1);
   });
 });
