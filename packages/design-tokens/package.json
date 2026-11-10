@@ -63,7 +63,7 @@
     "postcss-import": "^16.1.1",
     "react": "19.2.3",
     "ts-jest": "^29.2.5",
-    "typescript": "~5.2.2"
+    "typescript": "~5.9.3"
   },
   "engines": {
     "node": ">=24"
