@@ -10,4 +10,12 @@ export type ModalBodyProps = ComponentProps<'div'> & {
    * These classes will be merged with the component's default classes using twMerge.
    */
   className?: string;
+  /**
+   * Tab order of the body.
+   *
+   * Unset unless a consumer passes it, so the body is not a tab stop by default.
+   * Pass `0` when the body scrolls and its content has no focusable elements, so
+   * keyboard users can focus the region and scroll it with the arrow keys.
+   */
+  tabIndex?: number;
 };
