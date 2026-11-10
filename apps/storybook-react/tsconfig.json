@@ -4,7 +4,10 @@
     "baseUrl": "./",
     "jsx": "react"
   },
-  "references": [],
+  "references": [
+    { "path": "../../packages/design-system-react" },
+    { "path": "../../packages/design-tokens" }
+  ],
   // TODO: Remove "stories/**/*" once stories/ directory is removed
   "include": ["stories/**/*", ".storybook/**/*"]
 }

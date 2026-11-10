@@ -13,6 +13,7 @@ import README from './Typography.mdx';
 
 const meta: Meta<typeof Text> = {
   title: 'Design Tokens/Typography/Typography',
+  tags: ['!manifest'],
   parameters: {
     docs: {
       page: README,
