@@ -82,6 +82,7 @@ const config = createConfig([
       '**/*.test.{js,ts}',
       '**/tests/**/*.{js,ts}',
       'scripts/*.ts',
+      'scripts/components-manifest/**/*.ts',
       'scripts/create-package/**/*.ts',
       'packages/*/scripts/**/*.ts',
     ],
