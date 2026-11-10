@@ -121,6 +121,59 @@ describe('ModalFooter', () => {
     expect(buttonRow).toHaveClass('flex-col');
   });
 
+  it('renders the tertiary button with the configured label and fires onClick', () => {
+    const onClick = jest.fn();
+    render(
+      <ModalFooter tertiaryButtonProps={{ children: 'Not now', onClick }} />,
+    );
+
+    const button = screen.getByRole('button', { name: 'Not now' });
+    fireEvent.click(button);
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders the tertiary button last in a vertical list', () => {
+    render(
+      <ModalFooter
+        buttonsAlignment={ButtonsAlignment.Vertical}
+        primaryButtonProps={{ children: 'Confirm', 'data-testid': 'primary' }}
+        secondaryButtonProps={{
+          children: 'Cancel',
+          'data-testid': 'secondary',
+        }}
+        tertiaryButtonProps={{
+          children: 'Not now',
+          'data-testid': 'tertiary',
+        }}
+      />,
+    );
+
+    const buttons = screen.getAllByRole('button');
+    expect(buttons[0]).toBe(screen.getByTestId('secondary'));
+    expect(buttons[1]).toBe(screen.getByTestId('primary'));
+    expect(buttons[2]).toBe(screen.getByTestId('tertiary'));
+    expect(screen.getByTestId('tertiary')).toHaveClass('w-full');
+    expect(screen.getByTestId('tertiary').parentElement).toHaveClass(
+      'flex-col',
+    );
+  });
+
+  it('renders a lone tertiary button with the horizontal alignment utility', () => {
+    render(
+      <ModalFooter
+        tertiaryButtonProps={{
+          children: 'Not now',
+          'data-testid': 'tertiary',
+        }}
+      />,
+    );
+
+    const tertiary = screen.getByTestId('tertiary');
+    expect(tertiary).toHaveClass('flex-1');
+    expect(tertiary.parentElement).toHaveClass('flex-row');
+  });
+
   it('merges custom button className alongside the internal alignment utility', () => {
     render(
       <ModalFooter
