@@ -1,5 +1,5 @@
 ---
-description: MetaMask content design rules for user-facing strings — capitalization, punctuation, voice, tone, and terminology. Component-specific copy rules live in each component's README (read via Storybook MCP).
+description: MetaMask content design rules for user-facing strings — capitalization, punctuation, voice, tone, and terminology. Component-specific copy rules live in each component's README.
 globs:
   - packages/design-system-react/src/**/*.{stories.tsx,constants.ts,tsx,ts,mdx}
   - packages/design-system-react-native/src/**/*.{stories.tsx,constants.ts,tsx,ts,md}
@@ -16,7 +16,7 @@ alwaysApply: false
 
 **Does not apply to** Storybook meta `title` / story `name` (sidebar labels), TypeScript identifiers, JSDoc that describes APIs, `CHANGELOG.md`, or historical examples in `MIGRATION.md`.
 
-**Component-specific copy rules** (prop-level guidance for `title`, `description`, button labels, etc.) live in each component's `README.md` / `README.mdx`. Read them via Storybook MCP before writing or reviewing copy for a specific component.
+**Component-specific copy rules** (prop-level guidance for `title`, `description`, button labels, etc.) live in each component's `README.md` / `README.mdx`. Read that README before writing or reviewing copy for a specific component.
 
 ---
 
@@ -209,4 +209,4 @@ When adding or editing user-facing strings:
 - [ ] No "please", "click here", "successfully", "gas fee", or "dapp" in product copy
 - [ ] Tests that assert those strings were updated to match
 - [ ] Default alt text and accessibility strings follow the same rules
-- [ ] Component-specific prop rules checked against the component README via Storybook MCP
+- [ ] Component-specific prop rules checked against the component README
