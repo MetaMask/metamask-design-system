@@ -21,6 +21,7 @@ import { ScrollView } from 'react-native';
 const meta: Meta = {
   title: 'Patterns/Backgrounds',
   component: () => null,
+  tags: ['!manifest'],
 };
 
 export default meta;

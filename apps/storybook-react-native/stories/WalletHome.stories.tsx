@@ -43,6 +43,7 @@ import { ScrollView } from 'react-native';
 const meta: Meta = {
   title: 'Patterns/Wallet Home',
   component: () => null,
+  tags: ['!manifest'],
 };
 
 export default meta;

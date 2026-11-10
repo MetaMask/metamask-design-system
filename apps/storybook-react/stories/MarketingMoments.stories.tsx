@@ -117,6 +117,7 @@ const MarketingMoment = ({
 const meta: Meta<typeof MarketingMoment> = {
   title: 'Patterns/Marketing Moments',
   component: MarketingMoment,
+  tags: ['!manifest'],
   argTypes: {
     title: { control: 'text' },
     description: { control: 'text' },

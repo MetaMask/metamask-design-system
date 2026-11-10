@@ -18,8 +18,6 @@
     "build:clean": "rimraf 'packages/*/dist' '**/*.tsbuildinfo' && yarn build",
     "build:types": "tsc --build tsconfig.build.json --verbose",
     "changelog:update": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:update",
-    "components-manifest:check": "tsx scripts/components-manifest/check.ts",
-    "components-manifest:update": "tsx scripts/components-manifest/update-baseline.ts",
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
     "chromatic": "yarn workspace @metamask/storybook-react chromatic",
     "create-component:react": "yarn workspace @metamask/design-system-react create-component",

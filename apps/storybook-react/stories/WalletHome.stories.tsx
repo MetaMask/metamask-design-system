@@ -38,7 +38,7 @@ import React from 'react';
 const meta: Meta = {
   title: 'Patterns/Wallet Home',
   component: () => null,
-  tags: ['!autodocs'],
+  tags: ['!autodocs', '!manifest'],
   // Remove default padding
   decorators: [
     (Story) => (
