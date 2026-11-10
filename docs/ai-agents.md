@@ -129,7 +129,7 @@ The three-layer model above is for agents working in this repository. In consume
 3. **Component READMEs at the installed tag.** Open the README on GitHub at the per-package tag `@metamask/<package>@<version>`, using the version from the installed package `package.json`.
 4. **The consumer Tailwind config** that applies the MMDS preset in that repository.
 
-Storybook MCP (`storybook-broker-mcp`, via Context Forge) is optional. Agents may use it when it is already configured and responds. Skills must not depend on it.
+We don't host a Storybook MCP server yet, but the components manifests are hosted at https://metamask.github.io/metamask-design-system/manifests/components.json (React) and https://metamask.github.io/metamask-design-system/react-native/manifests/components.json (React Native). Skills must not depend on an MCP server.
 
 ### Maintainers (this repo)
 
@@ -137,7 +137,7 @@ Continue using `.cursor/rules/` as the source of truth for conventions in this r
 
 ### Component manifests
 
-Component manifests are static JSON and use the `v` / `components` / `meta` shape. Consumer repositories use the published URLs. Local paths are for agents working in this repository.
+Component manifests are static JSON and use the `v` / `components` / `meta` shape. Consumer repositories use the published URLs. Local paths are for agents working in this repository. Each entry's prop data is under `reactDocgenTypescript.props` (each prop has `type`), and React also publishes `manifests/docs.json` at https://metamask.github.io/metamask-design-system/manifests/docs.json, which React Native does not.
 
 **React:** Local — `apps/storybook-react/storybook-static/manifests/components.json` after `yarn build-storybook`, or `http://localhost:6006/manifests/components.json` while `yarn storybook` is running. Published — https://metamask.github.io/metamask-design-system/manifests/components.json
 
