@@ -2476,7 +2476,7 @@ The extension exports a separate `deprecated/` `ModalContent` from `ui/component
 
 ### ModalBody Component
 
-The extension `modal-body` component maps to `ModalBody` in the design system. The default visual contract (horizontal padding, scrollable container) is preserved, but the polymorphic Box surface is removed and a keyboard-accessibility default is added.
+The extension `modal-body` component maps to `ModalBody` in the design system. The default visual contract (horizontal padding, scrollable container) is preserved, and `tabIndex` stays unset unless the consumer passes it. The polymorphic Box surface is removed.
 
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
 
@@ -2501,13 +2501,13 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 
 ##### Default and Behavior Changes
 
-| Concern                | Extension Behavior                                                                                  | Design System Behavior                                                                                                                                        |
-| ---------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Horizontal padding     | `paddingLeft={4} paddingRight={4}` Box props (16px each side)                                       | `paddingHorizontal={4}` applied internally → `px-4`. Override with `className="px-0"` (or another `px-*` utility).                                            |
-| Scroll/overflow        | `position: relative; max-height: 100%; overflow-y: auto;` from `.mm-modal-body` SCSS                | Same behavior via `relative max-h-full overflow-y-auto` Tailwind utilities applied internally.                                                                |
-| Keyboard accessibility | No default `tabIndex` — scrollable text-only content was not reachable by keyboard for arrow scroll | `tabIndex={0}` applied by default so keyboard users can focus the scrollable region and arrow-scroll. Override with `tabIndex={-1}` if you need to remove it. |
+| Concern                | Extension Behavior                                                                                                               | Design System Behavior                                                                                                                             |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Horizontal padding     | `paddingLeft={4} paddingRight={4}` Box props (16px each side)                                                                    | `paddingHorizontal={4}` applied internally → `px-4`. Override with `className="px-0"` (or another `px-*` utility).                                 |
+| Scroll/overflow        | `position: relative; max-height: 100%; overflow-y: auto;` from `.mm-modal-body` SCSS                                             | Same behavior via `relative max-h-full overflow-y-auto` Tailwind utilities applied internally.                                                     |
+| Keyboard accessibility | No default `tabIndex` — scrollable text-only content is not reachable by keyboard for arrow scroll unless the call site sets one | `tabIndex` is unset unless passed. Pass `tabIndex={0}` when a scrollable body has no focusable content and keyboard users need to arrow-scroll it. |
 
-This satisfies the WCAG 2.1.1 "Keyboard" rule for scrollable regions (axe `scrollable-region-focusable`) — modals containing only static text now expose the body as a focusable scroll target out of the box.
+`ModalFocus`, used by `ModalContent`, traps focus and moves initial focus to the first focusable control (or `initialFocusRef`). It does not depend on `ModalBody` having `tabIndex={0}`. Pass `tabIndex={0}` on a scrollable body of static text to satisfy WCAG 2.1.1 Keyboard (axe `scrollable-region-focusable`).
 
 #### Migration Examples
 
@@ -2550,7 +2550,7 @@ For typical call sites — for example `ui/components/app/connections-removed-mo
 #### API Differences
 
 - `ModalBody` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `tabIndex`, `ref`) to it.
-- `tabIndex={0}` is now the default. Pass `tabIndex={-1}` (or any other value) to override; the consumer's value wins.
+- `tabIndex` is forwarded only when the consumer passes it. Pass `tabIndex={0}` to make a scrollable body keyboard-focusable, or `tabIndex={-1}` to make it programmatically focusable without adding a tab stop.
 - One-off styling that previously used Box utility props should move to Tailwind via `className` (`px-0`, `py-2`, `flex`, `flex-col`, `gap-2`, etc.).
 
 ### ModalFocus Component
