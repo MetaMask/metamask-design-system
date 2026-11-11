@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarAccount } from './AvatarAccount';
+import { AvatarAccount } from './AvatarAccount.js';
 import README from './README.mdx';
 
 import { AvatarAccountVariant, AvatarAccountSize } from '.';

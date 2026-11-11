@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { TextArea } from './TextArea';
-import { TextAreaResize } from './TextArea.constants';
+import { TextAreaResize } from './TextArea.constants.js';
+import { TextArea } from './TextArea.js';
 
 const ROOT_TEST_ID = 'text-area';
 const noop = () => undefined;

@@ -2,7 +2,7 @@ import { ButtonSize, IconName } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { ButtonSecondary } from './ButtonSecondary';
+import { ButtonSecondary } from './ButtonSecondary.js';
 
 describe('ButtonSecondary', () => {
   it('renders with secondary button styles by default', () => {

@@ -7,10 +7,10 @@ import {
 import React from 'react';
 
 // Internal dependencies.
-import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
+import { Box } from '../Box/index.js';
+import { BoxRow } from '../BoxRow/index.js';
 
-import type { TitleSubpageProps } from './TitleSubpage.types';
+import type { TitleSubpageProps } from './TitleSubpage.types.js';
 
 /**
  * Displays a required identity row (avatar + title stack) with optional subtitle, amount, inline accessories, and bottom rows in a left-aligned layout.

@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 
-import { AvatarAccount } from './AvatarAccount';
+import { AvatarAccount } from './AvatarAccount.js';
 
 import { AvatarAccountVariant, AvatarAccountSize } from '.';
 

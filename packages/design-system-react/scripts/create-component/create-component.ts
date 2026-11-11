@@ -1,6 +1,9 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
 
+// Yarn runs this script with the package directory as the working directory.
+const scriptDir = path.resolve(process.cwd(), 'scripts/create-component');
+
 type CreateComponentArgs = {
   name: string;
   description: string;
@@ -70,9 +73,9 @@ export async function createComponent(
   const folderName = componentName;
 
   // Define paths
-  const templateDir = path.join(__dirname, 'ComponentName');
+  const templateDir = path.join(scriptDir, 'ComponentName');
   const targetDir = path.join(
-    __dirname,
+    scriptDir,
     '..',
     '..',
     'src',
@@ -125,7 +128,7 @@ export async function createComponent(
 
     // Update src/components/index.ts
     const componentsIndexPath = path.join(
-      __dirname,
+      scriptDir,
       '..',
       '..',
       'src',
@@ -133,8 +136,8 @@ export async function createComponent(
       'index.ts',
     );
     const exportStatement = `
-export { ${componentName} } from './${folderName}';
-export type { ${componentName}Props } from './${folderName}';
+export { ${componentName} } from './${folderName}/index.js';
+export type { ${componentName}Props } from './${folderName}/index.js';
 `;
 
     await fs.appendFile(componentsIndexPath, exportStatement, 'utf8');

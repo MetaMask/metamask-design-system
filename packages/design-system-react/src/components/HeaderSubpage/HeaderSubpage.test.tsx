@@ -2,7 +2,7 @@ import { IconName } from '@metamask/design-system-shared';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { HeaderSubpage } from './HeaderSubpage';
+import { HeaderSubpage } from './HeaderSubpage.js';
 
 const CONTAINER_TEST_ID = 'header-subpage-container';
 const BACK_BUTTON_TEST_ID = 'header-subpage-back-button';

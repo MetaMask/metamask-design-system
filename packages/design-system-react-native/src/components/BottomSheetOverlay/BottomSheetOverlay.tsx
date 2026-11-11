@@ -2,8 +2,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useEffect, useRef } from 'react';
 import { Animated, Easing, TouchableOpacity } from 'react-native';
 
-import { DEFAULT_OVERLAY_ANIMATION_DURATION } from './BottomSheetOverlay.constants';
-import { BottomSheetOverlayProps } from './BottomSheetOverlay.types';
+import { DEFAULT_OVERLAY_ANIMATION_DURATION } from './BottomSheetOverlay.constants.js';
+import { BottomSheetOverlayProps } from './BottomSheetOverlay.types.js';
 
 export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
   style,

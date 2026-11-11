@@ -5,4 +5,4 @@ export {
   TextColor,
   TextVariant,
   type TextPropsShared,
-} from './Text.types';
+} from './Text.types.js';

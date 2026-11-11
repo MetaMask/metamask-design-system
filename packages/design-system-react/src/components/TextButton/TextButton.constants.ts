@@ -1,5 +1,5 @@
-import { TextButtonSize } from '../../types';
-import { TextVariant } from '../Text';
+import { TextButtonSize } from '../../types/index.js';
+import { TextVariant } from '../Text/index.js';
 
 export const MAP_TEXTBUTTON_SIZE_TEXTVARIANT: Record<
   TextButtonSize,

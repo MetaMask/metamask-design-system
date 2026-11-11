@@ -1,4 +1,4 @@
-import { AvatarBaseSize } from '../AvatarBase/AvatarBase.types';
+import { AvatarBaseSize } from '../AvatarBase/AvatarBase.types.js';
 
 export const AvatarFaviconSize = AvatarBaseSize;
 export type AvatarFaviconSize = AvatarBaseSize;

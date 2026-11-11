@@ -6,8 +6,8 @@ import {
 import { render, waitFor, cleanup } from '@testing-library/react';
 import React from 'react';
 
-import { Maskicon } from './Maskicon';
-import * as MaskiconUtilities from './Maskicon.utilities';
+import { Maskicon } from './Maskicon.js';
+import * as MaskiconUtilities from './Maskicon.utilities.js';
 
 describe('Maskicon Component', () => {
   afterEach(cleanup);

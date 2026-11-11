@@ -10,10 +10,10 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Text } from '../Text/index.js';
 
-import { ButtonBase } from './ButtonBase';
+import { ButtonBase } from './ButtonBase.js';
 
 const meta: Meta<typeof ButtonBase> = {
   title: 'Components/ButtonBase',

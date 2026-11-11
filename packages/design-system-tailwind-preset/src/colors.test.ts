@@ -1,9 +1,9 @@
 import {
   getDesignTokenVariables,
   collectCssVariables,
-} from '../scripts/testUtils';
+} from '../scripts/testUtils.js';
 
-import { colors } from './colors';
+import { colors } from './colors.js';
 
 describe('Color Preset', () => {
   // Collect all CSS variables used in the 'colors' object

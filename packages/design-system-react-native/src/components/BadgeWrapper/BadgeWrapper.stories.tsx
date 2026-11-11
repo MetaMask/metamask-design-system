@@ -7,19 +7,19 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
-import { AvatarNetwork } from '../AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
-import { AvatarToken } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
-import { BadgeCount } from '../BadgeCount';
-import { BadgeNetwork } from '../BadgeNetwork';
-import { BadgeStatus, BadgeStatusStatus } from '../BadgeStatus';
-import { ButtonIcon } from '../ButtonIcon';
-import { IconName } from '../Icon';
+import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount/index.js';
+import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev.js';
+import { AvatarNetwork } from '../AvatarNetwork/index.js';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev.js';
+import { AvatarToken } from '../AvatarToken/index.js';
+import { BadgeCount } from '../BadgeCount/index.js';
+import { BadgeNetwork } from '../BadgeNetwork/index.js';
+import { BadgeStatus, BadgeStatusStatus } from '../BadgeStatus/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
+import { IconName } from '../Icon/index.js';
 
-import { BadgeWrapper } from './BadgeWrapper';
-import type { BadgeWrapperProps } from './BadgeWrapper.types';
+import { BadgeWrapper } from './BadgeWrapper.js';
+import type { BadgeWrapperProps } from './BadgeWrapper.types.js';
 
 const meta: Meta<BadgeWrapperProps> = {
   title: 'Components/BadgeWrapper',

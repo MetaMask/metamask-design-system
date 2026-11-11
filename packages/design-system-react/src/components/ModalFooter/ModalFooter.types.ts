@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from 'react';
 
-import type { ButtonProps } from '../Button';
+import type { ButtonProps } from '../Button/index.js';
 
 /**
  * Layout direction for the action button row.

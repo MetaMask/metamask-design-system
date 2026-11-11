@@ -3,8 +3,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { ButtonSecondary } from './ButtonSecondary';
-import type { ButtonSecondaryProps } from './ButtonSecondary.types';
+import { ButtonSecondary } from './ButtonSecondary.js';
+import type { ButtonSecondaryProps } from './ButtonSecondary.types.js';
 
 const meta: Meta<ButtonSecondaryProps> = {
   title: 'Components/Button/variants/ButtonSecondary',

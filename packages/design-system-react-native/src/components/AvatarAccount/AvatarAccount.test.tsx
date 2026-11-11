@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { AvatarAccount } from './AvatarAccount';
 import {
   MAP_AVATARACCOUNT_SIZE_SIZENUMBER,
   SAMPLE_AVATARACCOUNT_ADDRESSES,
-} from './AvatarAccount.constants';
+} from './AvatarAccount.constants.js';
+import { AvatarAccount } from './AvatarAccount.js';
 
 import { AvatarAccountSize, AvatarAccountVariant } from '.';
 

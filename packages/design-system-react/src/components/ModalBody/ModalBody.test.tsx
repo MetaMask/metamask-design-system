@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { ModalBody } from './ModalBody';
+import { ModalBody } from './ModalBody.js';
 
 describe('ModalBody', () => {
   it('renders without crashing', () => {

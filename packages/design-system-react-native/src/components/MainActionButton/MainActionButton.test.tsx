@@ -1,9 +1,9 @@
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconName } from '../Icon';
+import { IconName } from '../Icon/index.js';
 
-import { MainActionButton } from './MainActionButton';
+import { MainActionButton } from './MainActionButton.js';
 
 const TEST_ID = 'main-action-button-test';
 

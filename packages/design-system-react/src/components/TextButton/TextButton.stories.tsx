@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { TextButtonSize } from '../../types';
-import { IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
+import { TextButtonSize } from '../../types/index.js';
+import { IconName } from '../Icon/index.js';
+import { Text, TextVariant } from '../Text/index.js';
 
 import README from './README.mdx';
-import { TextButton } from './TextButton';
+import { TextButton } from './TextButton.js';
 
 const meta: Meta<typeof TextButton> = {
   title: 'React Components/TextButton',

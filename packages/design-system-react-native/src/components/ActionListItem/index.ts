@@ -1,2 +1,2 @@
-export { ActionListItem } from './ActionListItem';
-export type { ActionListItemProps } from './ActionListItem.types';
+export { ActionListItem } from './ActionListItem.js';
+export type { ActionListItemProps } from './ActionListItem.types.js';

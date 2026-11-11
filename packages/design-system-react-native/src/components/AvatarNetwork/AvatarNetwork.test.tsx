@@ -4,7 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
-import { AvatarNetwork } from './AvatarNetwork';
+import { AvatarNetwork } from './AvatarNetwork.js';
 
 const LocalSvg = (props: SvgProps) => <View {...props} />;
 

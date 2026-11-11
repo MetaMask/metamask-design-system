@@ -4,10 +4,10 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef, useState } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { AvatarBase } from '../AvatarBase';
+import { twMerge } from '../../utils/tw-merge.js';
+import { AvatarBase } from '../AvatarBase/index.js';
 
-import type { AvatarNetworkProps } from './AvatarNetwork.types';
+import type { AvatarNetworkProps } from './AvatarNetwork.types.js';
 
 export const AvatarNetwork = forwardRef<HTMLDivElement, AvatarNetworkProps>(
   (

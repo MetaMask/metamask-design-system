@@ -7,23 +7,23 @@ import {
 import type { AvatarBaseSize } from '@metamask/design-system-shared';
 import React, { forwardRef, useCallback } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import type { AvatarAccountProps } from '../AvatarAccount';
-import { AvatarAccount } from '../AvatarAccount';
-import { AvatarBase } from '../AvatarBase';
-import type { AvatarFaviconProps } from '../AvatarFavicon';
-import { AvatarFavicon } from '../AvatarFavicon';
-import type { AvatarNetworkProps } from '../AvatarNetwork';
-import { AvatarNetwork } from '../AvatarNetwork';
-import type { AvatarTokenProps } from '../AvatarToken';
-import { AvatarToken } from '../AvatarToken';
+import { twMerge } from '../../utils/tw-merge.js';
+import type { AvatarAccountProps } from '../AvatarAccount/index.js';
+import { AvatarAccount } from '../AvatarAccount/index.js';
+import { AvatarBase } from '../AvatarBase/index.js';
+import type { AvatarFaviconProps } from '../AvatarFavicon/index.js';
+import { AvatarFavicon } from '../AvatarFavicon/index.js';
+import type { AvatarNetworkProps } from '../AvatarNetwork/index.js';
+import { AvatarNetwork } from '../AvatarNetwork/index.js';
+import type { AvatarTokenProps } from '../AvatarToken/index.js';
+import { AvatarToken } from '../AvatarToken/index.js';
 
 import {
   AVATAR_GROUP_SIZE_ISREVERSE_NEGATIVESPACEBETWEENAVATARS_MAP,
   AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP,
   AVATAR_GROUP_SIZE_OVERFLOWTEXT_TEXTVARIANT_MAP,
-} from './AvatarGroup.constants';
-import type { AvatarGroupProps } from './AvatarGroup.types';
+} from './AvatarGroup.constants.js';
+import type { AvatarGroupProps } from './AvatarGroup.types.js';
 
 export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
   (

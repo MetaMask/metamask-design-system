@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import { BottomSheetHeader } from './BottomSheetHeader';
+import { BottomSheetHeader } from './BottomSheetHeader.js';
 
 describe('BottomSheetHeader', () => {
   describe('rendering', () => {

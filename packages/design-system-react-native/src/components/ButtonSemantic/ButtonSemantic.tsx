@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 
-import { ButtonBase } from '../ButtonBase';
+import { ButtonBase } from '../ButtonBase/index.js';
 
 import {
   TWCLASSMAP_BUTTONSEMANTIC_BG,
   TWCLASSMAP_BUTTONSEMANTIC_BG_PRESSED,
   TWCLASSMAP_BUTTONSEMANTIC_TEXT,
-} from './ButtonSemantic.constants';
-import type { ButtonSemanticProps } from './ButtonSemantic.types';
-import { ButtonSemanticSeverity } from './ButtonSemantic.types';
+} from './ButtonSemantic.constants.js';
+import type { ButtonSemanticProps } from './ButtonSemantic.types.js';
+import { ButtonSemanticSeverity } from './ButtonSemantic.types.js';
 
 export const ButtonSemantic = ({
   severity,

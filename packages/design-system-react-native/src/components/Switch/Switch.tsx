@@ -2,9 +2,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { Switch as RNSwitch, Platform, View } from 'react-native';
 
-import { Text, TextVariant, TextColor } from '../Text';
+import { Text, TextVariant, TextColor } from '../Text/index.js';
 
-import type { SwitchProps } from './Switch.types';
+import type { SwitchProps } from './Switch.types.js';
 
 const IOS_SWITCH_MARGIN_FIX = 4;
 

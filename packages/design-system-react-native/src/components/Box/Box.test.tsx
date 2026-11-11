@@ -12,7 +12,6 @@ import React, { createRef } from 'react';
 import { Text, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { Box } from './Box';
 import {
   TWCLASSMAP_BOX_GAP,
   TWCLASSMAP_BOX_MARGIN,
@@ -30,7 +29,8 @@ import {
   TWCLASSMAP_BOX_PADDING_HORIZONTAL,
   TWCLASSMAP_BOX_PADDING_VERTICAL,
   TWCLASSMAP_BOX_BORDER_WIDTH,
-} from './Box.constants';
+} from './Box.constants.js';
+import { Box } from './Box.js';
 
 /**
  * Flattens a given style prop into a plain array of ViewStyle objects.

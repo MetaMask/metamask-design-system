@@ -1,2 +1,2 @@
-export { TitleAlert } from './TitleAlert';
-export type { TitleAlertProps } from './TitleAlert.types';
+export { TitleAlert } from './TitleAlert.js';
+export type { TitleAlertProps } from './TitleAlert.types.js';

@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from 'react';
 
-import type { TextProps } from '../Text';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * `Label` extends `TextProps` so consumers can pass any Text styling override

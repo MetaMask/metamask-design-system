@@ -1,7 +1,7 @@
-import type { AvatarBaseSize as AvatarIconSize } from '../AvatarBase';
-import type { IconName } from '../Icon/Icon.types';
+import type { AvatarBaseSize as AvatarIconSize } from '../AvatarBase/index.js';
+import type { IconName } from '../Icon/Icon.types.js';
 
-export { AvatarBaseSize as AvatarIconSize } from '../AvatarBase';
+export { AvatarBaseSize as AvatarIconSize } from '../AvatarBase/index.js';
 
 /**
  * AvatarIcon - severity

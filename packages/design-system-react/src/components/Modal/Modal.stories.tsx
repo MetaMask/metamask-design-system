@@ -2,19 +2,19 @@ import { IconName } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useRef, useState } from 'react';
 
-import { Box, BoxFlexDirection } from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { ModalBody } from '../ModalBody';
-import { ModalContent } from '../ModalContent';
-import { ModalFooter } from '../ModalFooter';
-import { ModalHeader } from '../ModalHeader';
-import { ModalOverlay } from '../ModalOverlay';
-import { Text } from '../Text';
-import { TextButton } from '../TextButton';
-import { TextFieldSearch } from '../TextFieldSearch';
+import { Box, BoxFlexDirection } from '../Box/index.js';
+import { Button, ButtonVariant } from '../Button/index.js';
+import { ModalBody } from '../ModalBody/index.js';
+import { ModalContent } from '../ModalContent/index.js';
+import { ModalFooter } from '../ModalFooter/index.js';
+import { ModalHeader } from '../ModalHeader/index.js';
+import { ModalOverlay } from '../ModalOverlay/index.js';
+import { Text } from '../Text/index.js';
+import { TextButton } from '../TextButton/index.js';
+import { TextFieldSearch } from '../TextFieldSearch/index.js';
 
-import { Modal } from './Modal';
-import type { ModalProps } from './Modal.types';
+import { Modal } from './Modal.js';
+import type { ModalProps } from './Modal.types.js';
 import README from './README.mdx';
 
 type ModalStoryArgs = Omit<ModalProps, 'children' | 'isOpen' | 'onClose'> & {

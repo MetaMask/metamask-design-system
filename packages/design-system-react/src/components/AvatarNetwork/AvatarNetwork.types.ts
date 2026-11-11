@@ -1,7 +1,7 @@
 import type { AvatarNetworkPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { AvatarBaseProps } from '../AvatarBase';
+import type { AvatarBaseProps } from '../AvatarBase/index.js';
 
 /**
  * AvatarNetwork component props (React platform-specific)

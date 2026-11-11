@@ -6,5 +6,5 @@ export {
   FontStyle,
   type TextPropsShared,
 } from '@metamask/design-system-shared';
-export { Text } from './Text';
-export type { TextProps } from './Text.types';
+export { Text } from './Text.js';
+export type { TextProps } from './Text.types.js';

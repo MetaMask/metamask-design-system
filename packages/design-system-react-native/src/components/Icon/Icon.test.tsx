@@ -3,8 +3,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Icon } from './Icon';
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants.js';
+import { Icon } from './Icon.js';
 
 describe('Icon', () => {
   describe('Icon Component', () => {

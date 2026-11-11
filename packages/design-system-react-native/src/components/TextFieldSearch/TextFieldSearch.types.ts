@@ -1,6 +1,6 @@
 // External dependencies.
-import type { ButtonIconProps } from '../ButtonIcon';
-import type { TextFieldProps } from '../TextField';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import type { TextFieldProps } from '../TextField/index.js';
 
 /**
  * TextFieldSearch component props.

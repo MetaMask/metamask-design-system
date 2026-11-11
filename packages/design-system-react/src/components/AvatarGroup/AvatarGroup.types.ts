@@ -4,11 +4,11 @@ import type {
 } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { AvatarAccountProps } from '../AvatarAccount';
-import type { AvatarBaseProps } from '../AvatarBase';
-import type { AvatarFaviconProps } from '../AvatarFavicon';
-import type { AvatarNetworkProps } from '../AvatarNetwork';
-import type { AvatarTokenProps } from '../AvatarToken';
+import type { AvatarAccountProps } from '../AvatarAccount/index.js';
+import type { AvatarBaseProps } from '../AvatarBase/index.js';
+import type { AvatarFaviconProps } from '../AvatarFavicon/index.js';
+import type { AvatarNetworkProps } from '../AvatarNetwork/index.js';
+import type { AvatarTokenProps } from '../AvatarToken/index.js';
 
 type BaseAvatarGroupProps = Omit<AvatarGroupPropsShared, 'variant'> & {
   /**

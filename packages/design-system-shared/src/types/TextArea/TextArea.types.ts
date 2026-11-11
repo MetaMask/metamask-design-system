@@ -1,4 +1,4 @@
-import type { InputPropsShared } from '../Input/Input.types';
+import type { InputPropsShared } from '../Input/Input.types.js';
 
 /**
  * TextArea shared props (ADR-0004). A multiline input layered on the shared

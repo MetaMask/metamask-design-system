@@ -1,6 +1,6 @@
 import type { TouchableOpacityProps, ViewProps } from 'react-native';
 
-import type { TextProps } from '../Text';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * RadioButton component props.

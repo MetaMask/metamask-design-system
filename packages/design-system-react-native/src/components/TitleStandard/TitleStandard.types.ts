@@ -3,8 +3,8 @@ import type { TitleStandardPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
 // Internal dependencies.
-import type { BoxRowProps } from '../BoxRow/BoxRow.types';
-import type { TextProps } from '../Text/Text.types';
+import type { BoxRowProps } from '../BoxRow/BoxRow.types.js';
+import type { TextProps } from '../Text/Text.types.js';
 
 /**
  * TitleStandard component props (React Native).

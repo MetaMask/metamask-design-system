@@ -2,9 +2,9 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Blockies } from './Blockies';
+import { Blockies } from './Blockies.js';
 // @ts-ignore
-import { toDataUrl } from './Blockies.utilities';
+import { toDataUrl } from './Blockies.utilities.js';
 
 // Mock the extractAccountAddress utility
 jest.mock('@metamask/design-system-shared', () => ({

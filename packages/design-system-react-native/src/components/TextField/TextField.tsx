@@ -3,11 +3,11 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { forwardRef, useCallback, useState } from 'react';
 import { View } from 'react-native';
 
-import { Box } from '../Box';
-import { Input } from '../Input';
-import type { InputProps } from '../Input/Input.types';
+import { Box } from '../Box/index.js';
+import { Input } from '../Input/index.js';
+import type { InputProps } from '../Input/Input.types.js';
 
-import type { TextFieldProps } from './TextField.types';
+import type { TextFieldProps } from './TextField.types.js';
 
 export const TextField = forwardRef<View, TextFieldProps>(
   (

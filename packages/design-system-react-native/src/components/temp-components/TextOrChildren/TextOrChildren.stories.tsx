@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { TextColor, TextVariant, FontWeight } from '../../Text';
+import { TextColor, TextVariant, FontWeight } from '../../Text/index.js';
 
-import { TextOrChildren } from './TextOrChildren';
-import type { TextOrChildrenProps } from './TextOrChildren.types';
+import { TextOrChildren } from './TextOrChildren.js';
+import type { TextOrChildrenProps } from './TextOrChildren.types.js';
 
 const meta: Meta<TextOrChildrenProps> = {
   title: 'Temp Components/TextOrChildren',

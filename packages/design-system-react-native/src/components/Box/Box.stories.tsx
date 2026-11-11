@@ -11,10 +11,10 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView } from 'react-native';
 
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
-import { Box } from './Box';
-import type { BoxProps } from './Box.types';
+import { Box } from './Box.js';
+import type { BoxProps } from './Box.types.js';
 
 const meta: Meta<BoxProps> = {
   title: 'Components/Box',

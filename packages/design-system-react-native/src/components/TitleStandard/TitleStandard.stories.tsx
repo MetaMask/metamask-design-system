@@ -6,12 +6,12 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box, BoxFlexDirection, BoxAlignItems } from '../Box';
-import { Icon, IconName, IconSize, IconColor } from '../Icon';
-import { Text } from '../Text';
+import { Box, BoxFlexDirection, BoxAlignItems } from '../Box/index.js';
+import { Icon, IconName, IconSize, IconColor } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { TitleStandard } from './TitleStandard';
-import type { TitleStandardProps } from './TitleStandard.types';
+import { TitleStandard } from './TitleStandard.js';
+import type { TitleStandardProps } from './TitleStandard.types.js';
 
 const meta: Meta<TitleStandardProps> = {
   title: 'Components/TitleStandard',

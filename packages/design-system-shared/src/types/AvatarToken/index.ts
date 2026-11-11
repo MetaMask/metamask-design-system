@@ -1,4 +1,4 @@
 export {
   AvatarTokenSize,
   type AvatarTokenPropsShared,
-} from './AvatarToken.types';
+} from './AvatarToken.types.js';

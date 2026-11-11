@@ -10,8 +10,8 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 
-import { Text } from './Text';
-import type { TextProps } from './Text.types';
+import { Text } from './Text.js';
+import type { TextProps } from './Text.types.js';
 
 const meta: Meta<TextProps> = {
   title: 'Components/Text',

@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
 import EthSVG from '../../assets/token-icons/eth.svg';
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { Box } from '../Box';
-import { Icon, IconColor, IconName } from '../Icon';
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken/index.js';
+import { Box } from '../Box/index.js';
+import { Icon, IconColor, IconName } from '../Icon/index.js';
 
-import { HeaderSubpage } from './HeaderSubpage';
-import type { HeaderSubpageProps } from './HeaderSubpage.types';
+import { HeaderSubpage } from './HeaderSubpage.js';
+import type { HeaderSubpageProps } from './HeaderSubpage.types.js';
 
 const ETH_TITLE = 'Ethereum';
 const ETH_DESCRIPTION = 'ETH';

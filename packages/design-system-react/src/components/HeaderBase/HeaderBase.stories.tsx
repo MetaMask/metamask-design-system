@@ -7,12 +7,12 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box } from '../Box';
-import { ButtonIcon } from '../ButtonIcon';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
+import { Text } from '../Text/index.js';
 
-import { HeaderBase } from './HeaderBase';
-import type { HeaderBaseProps } from './HeaderBase.types';
+import { HeaderBase } from './HeaderBase.js';
+import type { HeaderBaseProps } from './HeaderBase.types.js';
 import README from './README.mdx';
 
 const meta: Meta<HeaderBaseProps> = {

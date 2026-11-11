@@ -2,8 +2,8 @@ import { AvatarFaviconSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarFavicon } from './AvatarFavicon';
-import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.dev';
+import { SAMPLE_AVATARFAVICON_URIS } from './AvatarFavicon.dev.js';
+import { AvatarFavicon } from './AvatarFavicon.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarFavicon> = {

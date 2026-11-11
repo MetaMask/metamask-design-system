@@ -4,7 +4,7 @@ import figma from '@figma/code-connect';
 import { IconName } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { ButtonIcon } from './ButtonIcon';
+import { ButtonIcon } from './ButtonIcon.js';
 
 import { ButtonIconSize, ButtonIconVariant } from '.';
 

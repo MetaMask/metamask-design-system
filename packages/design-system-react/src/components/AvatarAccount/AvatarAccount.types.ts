@@ -1,10 +1,10 @@
 import type { AvatarAccountPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { AvatarBaseProps } from '../AvatarBase';
-import type { Blockies } from '../temp-components/Blockies';
-import type { Jazzicon } from '../temp-components/Jazzicon';
-import type { Maskicon } from '../temp-components/Maskicon';
+import type { AvatarBaseProps } from '../AvatarBase/index.js';
+import type { Blockies } from '../temp-components/Blockies/index.js';
+import type { Jazzicon } from '../temp-components/Jazzicon/index.js';
+import type { Maskicon } from '../temp-components/Maskicon/index.js';
 
 export type AvatarAccountProps = Omit<
   ComponentProps<'img'>,

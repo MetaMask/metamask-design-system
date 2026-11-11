@@ -5,14 +5,14 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarGroup } from './AvatarGroup';
 import {
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
   SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
-} from './AvatarGroup.dev';
-import type { AvatarGroupProps } from './AvatarGroup.types';
+} from './AvatarGroup.dev.js';
+import { AvatarGroup } from './AvatarGroup.js';
+import type { AvatarGroupProps } from './AvatarGroup.types.js';
 import README from './README.mdx';
 
 const meta: Meta<AvatarGroupProps> = {

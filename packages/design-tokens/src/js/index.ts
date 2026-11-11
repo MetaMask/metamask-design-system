@@ -1,17 +1,17 @@
 // DEPRECATED in favor of importing lightTheme and darkTheme
-export { colors } from './colors';
+export { colors } from './colors/index.js';
 
 // Brand Color
-export { brandColor } from './brandColor';
-export type { BrandColor } from './brandColor/brandColor.types';
+export { brandColor } from './brandColor/index.js';
+export type { BrandColor } from './brandColor/brandColor.types.js';
 
 // Themes
-export { lightTheme, darkTheme } from './themes';
-export type { Theme, ThemeColors, ThemeShadows } from './themes/types';
+export { lightTheme, darkTheme } from './themes/index.js';
+export type { Theme, ThemeColors, ThemeShadows } from './themes/types.js';
 
 // Typography
-export { typography, fontFamilies } from './typography';
-export type { ThemeTypography } from './typography';
+export { typography, fontFamilies } from './typography/index.js';
+export type { ThemeTypography } from './typography/index.js';
 
 // Animations
-export { AnimationDuration } from './animations';
+export { AnimationDuration } from './animations/index.js';

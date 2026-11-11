@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { useState, useRef } from 'react';
 import { View } from 'react-native';
 
-import { Button } from '../Button';
+import { Button } from '../Button/index.js';
 
-import { Checkbox } from './Checkbox';
-import type { CheckboxProps } from './Checkbox.types';
+import { Checkbox } from './Checkbox.js';
+import type { CheckboxProps } from './Checkbox.types.js';
 
 const meta: Meta<CheckboxProps> = {
   title: 'Components/Checkbox',

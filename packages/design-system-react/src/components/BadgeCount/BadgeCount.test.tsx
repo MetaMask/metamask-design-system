@@ -2,10 +2,10 @@ import { BadgeCountSize } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { TextColor } from '../Text';
+import { TextColor } from '../Text/index.js';
 
-import { BadgeCount } from './BadgeCount';
-import { TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER } from './BadgeCount.constants';
+import { TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER } from './BadgeCount.constants.js';
+import { BadgeCount } from './BadgeCount.js';
 
 describe('BadgeCount', () => {
   it('renders the correct count', () => {

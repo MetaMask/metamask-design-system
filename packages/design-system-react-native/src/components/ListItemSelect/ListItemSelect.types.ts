@@ -1,7 +1,7 @@
 import type { ListItemSelectPropsShared } from '@metamask/design-system-shared';
 import type { ReactNode } from 'react';
 
-import type { ListItemProps } from '../ListItem/ListItem.types';
+import type { ListItemProps } from '../ListItem/ListItem.types.js';
 
 type ListItemInteractiveProps = Extract<ListItemProps, { isInteractive: true }>;
 

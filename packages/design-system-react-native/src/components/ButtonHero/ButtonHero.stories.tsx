@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { ButtonHero } from './ButtonHero';
+import { ButtonHero } from './ButtonHero.js';
 
 const meta: Meta<typeof ButtonHero> = {
   title: 'Components/ButtonHero',

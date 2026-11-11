@@ -4,10 +4,10 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Box } from '../Box';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { Box } from '../Box/index.js';
+import { TextOrChildren } from '../temp-components/TextOrChildren/index.js';
 
-import type { BoxRowProps } from './BoxRow.types';
+import type { BoxRowProps } from './BoxRow.types.js';
 
 export const BoxRow = ({
   children,

@@ -36,11 +36,11 @@ import {
   DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
   DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD,
   DEFAULT_BOTTOMSHEETDIALOG_SWIPETHRESHOLD_DURATION,
-} from './BottomSheetDialog.constants';
+} from './BottomSheetDialog.constants.js';
 import type {
   BottomSheetDialogRef,
   BottomSheetDialogProps,
-} from './BottomSheetDialog.types';
+} from './BottomSheetDialog.types.js';
 
 export const BottomSheetDialog = forwardRef<
   BottomSheetDialogRef,
@@ -106,7 +106,7 @@ export const BottomSheetDialog = forwardRef<
 
     const gestureHandler = useMemo(() => {
       // These gesture callbacks need explicit 'worklet' directives because this
-      // package ships a pre-built dist compiled by ts-bridge (tsc), which emits the
+      // package ships a pre-built dist compiled by tsc, which emits the
       // gesture chain as a namespaced call (react_native_gesture_handler_1.Gesture).
       // The consumer's Reanimated/Worklets Babel plugin does run over dist (that's
       // why useAnimatedStyle below works), but its gesture auto-detection doesn't

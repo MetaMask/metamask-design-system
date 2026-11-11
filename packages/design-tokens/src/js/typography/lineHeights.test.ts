@@ -1,6 +1,6 @@
 import * as designTokens from '../../figma/tokens.json';
 
-import { lineHeights } from './lineHeights';
+import { lineHeights } from './lineHeights.js';
 
 describe('Line Height', () => {
   it('js tokens for lineHeights1 matches figma tokens lineHeights1', () => {

@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
 
-import { BottomSheetOverlay } from './BottomSheetOverlay';
+import { BottomSheetOverlay } from './BottomSheetOverlay.js';
 
 describe('BottomSheetOverlay', () => {
   it('renders correctly', () => {

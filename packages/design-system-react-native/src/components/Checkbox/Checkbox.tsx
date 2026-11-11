@@ -9,10 +9,10 @@ import React, {
 import type { PressableStateCallbackType } from 'react-native';
 import { Pressable, Animated, Easing } from 'react-native';
 
-import { Icon, IconName, IconColor, IconSize } from '../Icon';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { Icon, IconName, IconColor, IconSize } from '../Icon/index.js';
+import { TextOrChildren } from '../temp-components/TextOrChildren/index.js';
 
-import type { CheckboxProps } from './Checkbox.types';
+import type { CheckboxProps } from './Checkbox.types.js';
 
 const AnimatedView = Animated.View;
 

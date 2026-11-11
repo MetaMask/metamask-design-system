@@ -15,27 +15,20 @@
     "url": "https://github.com/MetaMask/metamask-design-system.git"
   },
   "license": "MIT",
+  "type": "module",
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.cts",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
+    "build": "tsc --project tsconfig.build.json",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
     "create-component": "tsx scripts/create-component",
@@ -66,7 +59,6 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.6.1",
-    "@ts-bridge/cli": "^0.6.3",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
     "@types/react": "^19.2.0",

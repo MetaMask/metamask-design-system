@@ -12,12 +12,12 @@ import type { Middleware, Placement } from '@floating-ui/react-dom';
 import React, { forwardRef, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box, BoxBackgroundColor, BoxBorderColor } from '../Box';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Box, BoxBackgroundColor, BoxBorderColor } from '../Box/index.js';
 
-import { POPOVER_ARROW_PLACEMENT_STYLES } from './Popover.constants';
-import { PopoverPosition, PopoverRole } from './Popover.types';
-import type { PopoverProps } from './Popover.types';
+import { POPOVER_ARROW_PLACEMENT_STYLES } from './Popover.constants.js';
+import { PopoverPosition, PopoverRole } from './Popover.types.js';
+import type { PopoverProps } from './Popover.types.js';
 
 type ArrowPlacementKey = keyof typeof POPOVER_ARROW_PLACEMENT_STYLES;
 

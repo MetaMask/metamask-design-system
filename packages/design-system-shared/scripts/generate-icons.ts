@@ -3,17 +3,20 @@ import jsxPlugin from '@svgr/plugin-jsx';
 import svgoPlugin from '@svgr/plugin-svgo';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
+
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 
 // ─── Paths ────────────────────────────────────────────────────────────────────
 
-const REPO_ROOT = path.join(__dirname, '../../..');
+const REPO_ROOT = path.join(scriptDir, '../../..');
 
 /** Single source of truth for all icon SVG assets */
-const SHARED_ASSETS_DIR = path.join(__dirname, '../src/assets/icons');
+const SHARED_ASSETS_DIR = path.join(scriptDir, '../src/assets/icons');
 
 /** Shared IconName const object lives here */
 const SHARED_TYPES_FILE = path.join(
-  __dirname,
+  scriptDir,
   '../src/types/Icon/Icon.types.ts',
 );
 
@@ -205,7 +208,7 @@ async function generateReactNativeAssets(svgFiles: string[]): Promise<void> {
   }
 
   lines.push(
-    `import type { AssetByIconName } from './Icon.types';`,
+    `import type { AssetByIconName } from './Icon.types.js';`,
     ``,
     `/**`,
     ` * Asset stored by icon name`,
@@ -288,7 +291,7 @@ async function generateReactIcons(svgFiles: string[]): Promise<void> {
     `// Run \`yarn generate:icons\` from the repo root to regenerate`,
     `import type { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';`,
     ``,
-    ...iconNames.map((name) => `import ${name} from './${name}';`),
+    ...iconNames.map((name) => `import ${name} from './${name}.js';`),
     ``,
     `export const Icons = {`,
     ...iconNames.map((name) => `  ${name},`),
@@ -333,7 +336,7 @@ export async function main(): Promise<void> {
 `);
 }
 
-if (require.main === module) {
+if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
   main().catch((error: unknown) => {
     console.error(error);
     throw error;

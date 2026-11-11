@@ -1,2 +1,2 @@
-export { TextOrChildren } from './TextOrChildren';
-export type { TextOrChildrenProps } from './TextOrChildren.types';
+export { TextOrChildren } from './TextOrChildren.js';
+export type { TextOrChildrenProps } from './TextOrChildren.types.js';

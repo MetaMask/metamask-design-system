@@ -1,7 +1,7 @@
 import type { AvatarIconPropsShared } from '@metamask/design-system-shared';
 
-import type { AvatarBaseProps } from '../AvatarBase';
-import type { IconProps } from '../Icon';
+import type { AvatarBaseProps } from '../AvatarBase/index.js';
+import type { IconProps } from '../Icon/index.js';
 
 export type AvatarIconProps = Omit<AvatarBaseProps, 'children' | 'size'> &
   AvatarIconPropsShared & {

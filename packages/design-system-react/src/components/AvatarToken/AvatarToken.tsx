@@ -4,10 +4,10 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef, useState } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { AvatarBase } from '../AvatarBase';
+import { twMerge } from '../../utils/tw-merge.js';
+import { AvatarBase } from '../AvatarBase/index.js';
 
-import type { AvatarTokenProps } from './AvatarToken.types';
+import type { AvatarTokenProps } from './AvatarToken.types.js';
 
 export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
   (

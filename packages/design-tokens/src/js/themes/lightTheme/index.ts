@@ -1,1 +1,1 @@
-export { lightTheme } from './lightTheme';
+export { lightTheme } from './lightTheme.js';

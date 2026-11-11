@@ -1,6 +1,6 @@
-import type { ThemeShadows } from '../types';
+import type { ThemeShadows } from '../types.js';
 
-import { colors } from './colors';
+import { colors } from './colors.js';
 
 export const shadows: ThemeShadows = {
   size: {

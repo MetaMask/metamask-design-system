@@ -2,4 +2,4 @@ export {
   AvatarBaseSize,
   AvatarBaseShape,
   type AvatarBasePropsShared,
-} from './AvatarBase.types';
+} from './AvatarBase.types.js';

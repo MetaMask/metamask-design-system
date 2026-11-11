@@ -1,7 +1,11 @@
 import type { TextPropsShared } from '@metamask/design-system-shared';
 import type { CSSProperties } from 'react';
 
-import type { OverflowWrap, TextAlign, TextTransform } from '../../types';
+import type {
+  OverflowWrap,
+  TextAlign,
+  TextTransform,
+} from '../../types/index.js';
 
 export type TextProps = TextPropsShared & {
   /**

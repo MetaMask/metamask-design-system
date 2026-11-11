@@ -6,12 +6,12 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
-import type { BoxProps } from '../Box';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import type { BoxProps } from '../Box/index.js';
+import { Text } from '../Text/index.js';
 
-import { TitleAlert } from './TitleAlert';
-import type { TitleAlertProps } from './TitleAlert.types';
+import { TitleAlert } from './TitleAlert.js';
+import type { TitleAlertProps } from './TitleAlert.types.js';
 
 const SAMPLE_DESCRIPTION =
   'You are swapping at an unfavorable rate. Review before you continue.';

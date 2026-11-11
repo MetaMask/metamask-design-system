@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import type { TextOrChildrenPropsShared } from '../TextOrChildren';
+import type { TextOrChildrenPropsShared } from '../TextOrChildren/index.js';
 
 /**
  * BoxColumn component shared props (ADR-0004)

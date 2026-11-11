@@ -9,14 +9,14 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef, useMemo } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box } from '../Box';
-import { TWCLASSMAP_BOX_GAP } from '../Box/Box.constants';
-import { ButtonIcon } from '../ButtonIcon';
-import type { ButtonIconProps } from '../ButtonIcon';
-import { Text } from '../Text';
+import { twMerge } from '../../utils/tw-merge.js';
+import { TWCLASSMAP_BOX_GAP } from '../Box/Box.constants.js';
+import { Box } from '../Box/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import { Text } from '../Text/index.js';
 
-import type { HeaderSubpageProps } from './HeaderSubpage.types';
+import type { HeaderSubpageProps } from './HeaderSubpage.types.js';
 
 const renderEndButtonIcons = (endButtonIconProps: ButtonIconProps[]) =>
   endButtonIconProps

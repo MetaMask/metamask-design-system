@@ -1,2 +1,2 @@
-export { TextFieldSearch } from './TextFieldSearch';
-export type { TextFieldSearchProps } from './TextFieldSearch.types';
+export { TextFieldSearch } from './TextFieldSearch.js';
+export type { TextFieldSearchProps } from './TextFieldSearch.types.js';

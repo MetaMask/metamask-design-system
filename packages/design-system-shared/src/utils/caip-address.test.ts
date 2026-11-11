@@ -4,7 +4,7 @@ import {
   generateSeedNonEthereum,
   isEthereumAddress,
   generateIconSeed,
-} from './caip-address';
+} from './caip-address.js';
 
 describe('extractAccountAddress', () => {
   describe('Legacy addresses', () => {

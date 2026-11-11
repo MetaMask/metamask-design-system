@@ -2,4 +2,4 @@ export {
   ButtonIconSize,
   ButtonIconVariant,
   type ButtonIconPropsShared,
-} from './ButtonIcon.types';
+} from './ButtonIcon.types.js';

@@ -6,15 +6,15 @@ import {
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { AvatarBase } from '../AvatarBase';
-import { Icon } from '../Icon';
+import { AvatarBase } from '../AvatarBase/index.js';
+import { Icon } from '../Icon/index.js';
 
 import {
   MAP_AVATARICON_SIZE_ICONSIZE,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
-} from './AvatarIcon.constants';
-import type { AvatarIconProps } from './AvatarIcon.types';
+} from './AvatarIcon.constants.js';
+import type { AvatarIconProps } from './AvatarIcon.types.js';
 
 export const AvatarIcon = ({
   size = AvatarIconSize.Md,

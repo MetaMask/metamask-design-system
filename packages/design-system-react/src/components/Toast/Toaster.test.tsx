@@ -5,9 +5,9 @@ import React, { createRef, useEffect } from 'react';
 import {
   TOAST_ANIMATION_DURATION,
   TOAST_VISIBILITY_DURATION,
-} from './Toast.constants';
-import type { ToastOptions, ToasterRef } from './Toast.types';
-import { Toaster, toast } from './Toaster';
+} from './Toast.constants.js';
+import type { ToastOptions, ToasterRef } from './Toast.types.js';
+import { Toaster, toast } from './Toaster.js';
 
 jest.mock('../Icon', () => ({
   ...jest.requireActual('../Icon'),

@@ -6,11 +6,11 @@ export {
   typography,
   fontFamilies,
   AnimationDuration,
-} from './js';
+} from './js/index.js';
 export type {
   BrandColor,
   Theme,
   ThemeColors,
   ThemeShadows,
   ThemeTypography,
-} from './js';
+} from './js/index.js';

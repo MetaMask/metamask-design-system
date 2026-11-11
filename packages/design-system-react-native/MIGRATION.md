@@ -55,6 +55,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [ESM-only entry point](#esm-only-entry-point)
   - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
   - [From version 0.53.0 to 0.54.0](#from-version-0530-to-0540)
   - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
@@ -82,6 +83,14 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### ESM-only entry point
+
+<a id="esm-only-entry-point"></a>
+
+`@metamask/design-system-react-native` publishes a single ECMAScript module. `package.json` sets `"type": "module"`, and `exports` points at `./dist/index.js` with types at `./dist/index.d.ts`. The CommonJS `require` entry is removed.
+
+Import the package with `import`. On Node 24, `require()` can load the module. Named exports are properties of the returned module namespace.
 
 ### From version 0.54.0 to 0.55.0
 

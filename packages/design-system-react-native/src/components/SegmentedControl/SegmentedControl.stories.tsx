@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import { Box } from '../Box';
-import { FilterButton } from '../FilterButton';
+import { Box } from '../Box/index.js';
+import { FilterButton } from '../FilterButton/index.js';
 
-import { SegmentedControl } from './SegmentedControl';
-import type { SegmentedControlProps } from './SegmentedControl.types';
+import { SegmentedControl } from './SegmentedControl.js';
+import type { SegmentedControlProps } from './SegmentedControl.types.js';
 
 const noopPress = () => undefined;
 

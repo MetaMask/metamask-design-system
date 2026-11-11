@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { ModalHeader } from './ModalHeader';
+import { ModalHeader } from './ModalHeader.js';
 
 describe('ModalHeader', () => {
   it('renders without crashing', () => {

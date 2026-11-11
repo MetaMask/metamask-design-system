@@ -1,4 +1,4 @@
-import type { FontSizes } from './types';
+import type { FontSizes } from './types.js';
 
 export const fontSizes: FontSizes = {
   fontSize1: 10,

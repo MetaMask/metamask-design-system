@@ -1,4 +1,4 @@
-import type { ThemeTypography } from '../typography';
+import type { ThemeTypography } from '../typography/index.js';
 
 type ShadowShape = {
   shadowColor: string;

@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Icon, IconName, IconSize } from '../Icon';
-import { Text } from '../Text';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { BannerBase } from './BannerBase';
-import type { BannerBaseProps } from './BannerBase.types';
+import { BannerBase } from './BannerBase.js';
+import type { BannerBaseProps } from './BannerBase.types.js';
 
 const meta: Meta<BannerBaseProps> = {
   title: 'Components/BannerBase',

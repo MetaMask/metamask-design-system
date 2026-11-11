@@ -7,10 +7,10 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Icon } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { ButtonBase } from './ButtonBase';
+import { ButtonBase } from './ButtonBase.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof ButtonBase> = {

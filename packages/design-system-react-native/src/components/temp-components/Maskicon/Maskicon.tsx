@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
-import type { MaskiconProps } from './Maskicon.types';
-import { getMaskiconSVG } from './Maskicon.utilities';
+import type { MaskiconProps } from './Maskicon.types.js';
+import { getMaskiconSVG } from './Maskicon.utilities.js';
 
 export const Maskicon = ({ address, size = 32, ...props }: MaskiconProps) => {
   const [svgString, setSvgString] = useState('');

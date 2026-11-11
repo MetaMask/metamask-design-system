@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { TextFieldSearch } from './TextFieldSearch';
+import { TextFieldSearch } from './TextFieldSearch.js';
 
 const ROOT_TEST_ID = 'text-field-search';
 const CLEAR_BUTTON_TEST_ID = 'text-field-search-clear-button';

@@ -1,13 +1,13 @@
 import { ButtonVariant } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import type { ButtonProps } from './Button.types';
-import { ButtonPrimary } from './variants/ButtonPrimary';
-import type { ButtonPrimaryProps } from './variants/ButtonPrimary';
-import { ButtonSecondary } from './variants/ButtonSecondary';
-import type { ButtonSecondaryProps } from './variants/ButtonSecondary';
-import { ButtonTertiary } from './variants/ButtonTertiary';
-import type { ButtonTertiaryProps } from './variants/ButtonTertiary';
+import type { ButtonProps } from './Button.types.js';
+import { ButtonPrimary } from './variants/ButtonPrimary/index.js';
+import type { ButtonPrimaryProps } from './variants/ButtonPrimary/index.js';
+import { ButtonSecondary } from './variants/ButtonSecondary/index.js';
+import type { ButtonSecondaryProps } from './variants/ButtonSecondary/index.js';
+import { ButtonTertiary } from './variants/ButtonTertiary/index.js';
+import type { ButtonTertiaryProps } from './variants/ButtonTertiary/index.js';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = ButtonVariant.Primary, ...props }, ref) => {

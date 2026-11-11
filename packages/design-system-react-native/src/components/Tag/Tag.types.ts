@@ -1,7 +1,7 @@
 import type { TagPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
-import type { IconName, IconProps } from '../Icon';
+import type { IconName, IconProps } from '../Icon/index.js';
 
 /**
  * Tag component props (React Native platform-specific).

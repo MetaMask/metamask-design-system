@@ -6,11 +6,11 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ScrollView } from 'react-native';
 
-import { Box } from '../../Box';
-import { Text, TextColor, TextVariant, FontWeight } from '../../Text';
+import { Box } from '../../Box/index.js';
+import { Text, TextColor, TextVariant, FontWeight } from '../../Text/index.js';
 
-import { Blockies } from './Blockies';
-import type { BlockiesProps } from './Blockies.types';
+import { Blockies } from './Blockies.js';
+import type { BlockiesProps } from './Blockies.types.js';
 
 const meta: Meta<BlockiesProps> = {
   title: 'Temp Components/Blockies',

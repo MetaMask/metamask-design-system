@@ -2,15 +2,15 @@ import { BoxFlexDirection } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount';
-import { AvatarToken, AvatarTokenSize } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
-import { Box } from '../Box';
-import { Icon, IconName, IconSize } from '../Icon';
-import { TextVariant } from '../Text';
+import { AvatarAccount, AvatarAccountSize } from '../AvatarAccount/index.js';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev.js';
+import { AvatarToken, AvatarTokenSize } from '../AvatarToken/index.js';
+import { Box } from '../Box/index.js';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
+import { TextVariant } from '../Text/index.js';
 
-import { KeyValueColumn } from './KeyValueColumn';
-import type { KeyValueColumnProps } from './KeyValueColumn.types';
+import { KeyValueColumn } from './KeyValueColumn.js';
+import type { KeyValueColumnProps } from './KeyValueColumn.types.js';
 
 const meta: Meta<KeyValueColumnProps> = {
   title: 'Components/KeyValueColumn',

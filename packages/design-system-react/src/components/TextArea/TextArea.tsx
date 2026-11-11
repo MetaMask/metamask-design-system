@@ -1,9 +1,12 @@
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 
-import { CLASSMAP_TEXTAREA_RESIZE, TextAreaResize } from './TextArea.constants';
-import type { TextAreaProps } from './TextArea.types';
+import {
+  CLASSMAP_TEXTAREA_RESIZE,
+  TextAreaResize,
+} from './TextArea.constants.js';
+import type { TextAreaProps } from './TextArea.types.js';
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (

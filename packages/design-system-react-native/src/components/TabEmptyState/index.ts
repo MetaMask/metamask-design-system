@@ -1,2 +1,2 @@
-export { TabEmptyState } from './TabEmptyState';
-export type { TabEmptyStateProps } from './TabEmptyState.types';
+export { TabEmptyState } from './TabEmptyState.js';
+export type { TabEmptyStateProps } from './TabEmptyState.types.js';

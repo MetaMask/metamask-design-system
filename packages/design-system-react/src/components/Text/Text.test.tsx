@@ -8,8 +8,8 @@ import {
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { OverflowWrap, TextAlign, TextTransform } from '../../types';
-import { twMerge } from '../../utils/tw-merge';
+import { OverflowWrap, TextAlign, TextTransform } from '../../types/index.js';
+import { twMerge } from '../../utils/tw-merge.js';
 
 import {
   TWCLASSMAP_TEXT_VARIANT_FONTSTYLE,
@@ -17,7 +17,7 @@ import {
   TWCLASSMAP_TEXT_FONTFAMILY,
   TWCLASSMAP_TEXT_FONTSTYLE,
   TWCLASSMAP_TEXT_FONTWEIGHT,
-} from './Text.constants';
+} from './Text.constants.js';
 
 import { Text } from '.';
 

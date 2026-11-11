@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import type { BoxSpacing } from '../Box';
+import type { BoxSpacing } from '../Box/index.js';
 
 /**
  * ListItem shared props (ADR-0004).

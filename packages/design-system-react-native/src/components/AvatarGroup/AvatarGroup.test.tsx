@@ -5,15 +5,15 @@ import {
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import type { AvatarAccountProps } from '../AvatarAccount';
+import type { AvatarAccountProps } from '../AvatarAccount/index.js';
 
-import { AvatarGroup } from './AvatarGroup';
 import {
   SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR,
   SAMPLE_AVATARGROUP_AVATARFAVICONPROPSARR,
   SAMPLE_AVATARGROUP_AVATARNETWORKPROPSARR,
   SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR,
-} from './AvatarGroup.dev';
+} from './AvatarGroup.dev.js';
+import { AvatarGroup } from './AvatarGroup.js';
 
 describe('AvatarGroup', () => {
   describe('Account variant', () => {

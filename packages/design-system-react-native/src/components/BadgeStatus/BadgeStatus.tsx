@@ -6,8 +6,8 @@ import { View } from 'react-native';
 import {
   TWCLASSMAP_BADGESTATUS_STATUS_CIRCLE,
   TWCLASSMAP_BADGESTATUS_SIZE,
-} from './BadgeStatus.constants';
-import type { BadgeStatusProps } from './BadgeStatus.types';
+} from './BadgeStatus.constants.js';
+import type { BadgeStatusProps } from './BadgeStatus.types.js';
 
 export const BadgeStatus = ({
   status,

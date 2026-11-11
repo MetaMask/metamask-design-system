@@ -1,9 +1,9 @@
 import type { HeaderSubpagePropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { BoxProps } from '../Box';
-import type { ButtonIconProps } from '../ButtonIcon';
-import type { TextProps } from '../Text';
+import type { BoxProps } from '../Box/index.js';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * Props for back/close ButtonIcons that override iconName and make ariaLabel optional.

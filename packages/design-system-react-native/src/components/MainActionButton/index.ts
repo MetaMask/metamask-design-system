@@ -1,2 +1,2 @@
-export { MainActionButton } from './MainActionButton';
-export type { MainActionButtonProps } from './MainActionButton.types';
+export { MainActionButton } from './MainActionButton.js';
+export type { MainActionButtonProps } from './MainActionButton.types.js';

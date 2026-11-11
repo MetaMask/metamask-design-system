@@ -3,7 +3,7 @@ import type {
   TextAreaPropsShared,
 } from '@metamask/design-system-shared';
 
-import type { InputProps } from '../Input/Input.types';
+import type { InputProps } from '../Input/Input.types.js';
 
 /**
  * Additional props merged onto the `Input` (`../Input/Input.tsx`).

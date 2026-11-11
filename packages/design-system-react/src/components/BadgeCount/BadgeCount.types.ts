@@ -2,7 +2,7 @@
 import type { BadgeCountPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { TextProps } from '../Text';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * BadgeCount component props (React platform-specific)

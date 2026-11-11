@@ -6,13 +6,13 @@ import {
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from '../Icon/Icon.constants.js';
 
-import { AvatarIcon } from './AvatarIcon';
 import {
   TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR,
   MAP_AVATARICON_SEVERITY_ICONCOLOR,
-} from './AvatarIcon.constants';
+} from './AvatarIcon.constants.js';
+import { AvatarIcon } from './AvatarIcon.js';
 
 describe('AvatarIcon', () => {
   it('renders with default props', () => {

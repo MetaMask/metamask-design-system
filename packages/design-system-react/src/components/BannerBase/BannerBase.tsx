@@ -18,13 +18,13 @@ import React, {
   useState,
 } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { ButtonIcon } from '../ButtonIcon';
-import { Text } from '../Text';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Box } from '../Box/index.js';
+import { Button } from '../Button/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
+import { Text } from '../Text/index.js';
 
-import type { BannerBaseProps } from './BannerBase.types';
+import type { BannerBaseProps } from './BannerBase.types.js';
 
 /** BodyMd line height — title block (`typography.sBodyMD.lineHeight`). */
 const BODY_MD_LINE_HEIGHT = 24;

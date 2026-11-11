@@ -1,4 +1,4 @@
 export {
   BannerAlertSeverity,
   type BannerAlertPropsShared,
-} from './BannerAlert.types';
+} from './BannerAlert.types.js';

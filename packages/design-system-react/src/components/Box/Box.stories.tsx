@@ -10,10 +10,10 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
-import { Box } from './Box';
-import type { BoxProps } from './Box.types';
+import { Box } from './Box.js';
+import type { BoxProps } from './Box.types.js';
 import README from './README.mdx';
 
 const meta: Meta<BoxProps> = {

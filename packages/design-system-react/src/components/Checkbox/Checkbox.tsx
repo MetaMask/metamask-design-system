@@ -1,11 +1,11 @@
 import type { ChangeEvent, KeyboardEvent } from 'react';
 import React, { forwardRef, useImperativeHandle } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Icon, IconName, IconColor, IconSize } from '../Icon';
-import { Text } from '../Text';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Icon, IconName, IconColor, IconSize } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import type { CheckboxProps } from './Checkbox.types';
+import type { CheckboxProps } from './Checkbox.types.js';
 
 export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
   (

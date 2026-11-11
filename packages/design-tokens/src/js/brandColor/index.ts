@@ -1,1 +1,1 @@
-export { brandColor } from './brandColor';
+export { brandColor } from './brandColor.js';

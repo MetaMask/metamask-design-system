@@ -1,10 +1,10 @@
 import { FontWeight, TextVariant } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Text } from '../Text';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Text } from '../Text/index.js';
 
-import type { LabelProps } from './Label.types';
+import type { LabelProps } from './Label.types.js';
 
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(
   ({ htmlFor, className, children, ...textProps }, ref) => (

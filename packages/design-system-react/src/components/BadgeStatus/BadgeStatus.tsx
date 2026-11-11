@@ -1,13 +1,13 @@
 import { BadgeStatusSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 
 import {
   CLASSMAP_BADGESTATUS_STATUS_CIRCLE,
   CLASSMAP_BADGESTATUS_SIZE,
-} from './BadgeStatus.constants';
-import type { BadgeStatusProps } from './BadgeStatus.types';
+} from './BadgeStatus.constants.js';
+import type { BadgeStatusProps } from './BadgeStatus.types.js';
 
 export const BadgeStatus = forwardRef<HTMLDivElement, BadgeStatusProps>(
   (

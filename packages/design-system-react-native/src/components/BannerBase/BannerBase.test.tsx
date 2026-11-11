@@ -6,9 +6,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
-import { BannerBase } from './BannerBase';
+import { BannerBase } from './BannerBase.js';
 
 describe('BannerBase', () => {
   const closeButtonTestId = 'banner-base-close-button';

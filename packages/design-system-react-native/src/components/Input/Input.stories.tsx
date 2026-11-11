@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import { Input } from './Input';
-import type { InputProps } from './Input.types';
+import { Input } from './Input.js';
+import type { InputProps } from './Input.types.js';
 
 function ControlledInput(props: InputProps) {
   const [value, setValue] = useState(props.value ?? '');

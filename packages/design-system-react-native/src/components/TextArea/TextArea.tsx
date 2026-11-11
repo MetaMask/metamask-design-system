@@ -2,10 +2,10 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { forwardRef, useCallback, useEffect, useState } from 'react';
 import { TextInput } from 'react-native';
 
-import { Input } from '../Input';
-import type { InputProps } from '../Input/Input.types';
+import { Input } from '../Input/index.js';
+import type { InputProps } from '../Input/Input.types.js';
 
-import type { TextAreaProps } from './TextArea.types';
+import type { TextAreaProps } from './TextArea.types.js';
 
 export const TextArea = forwardRef<TextInput, TextAreaProps>(
   (

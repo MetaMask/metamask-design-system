@@ -1,2 +1,2 @@
-export { colors as default } from './colors';
-export { colors } from './colors';
+export { colors as default } from './colors.js';
+export { colors } from './colors.js';

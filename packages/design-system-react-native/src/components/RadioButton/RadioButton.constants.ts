@@ -1,4 +1,4 @@
-import type { RadioButtonProps } from './RadioButton.types';
+import type { RadioButtonProps } from './RadioButton.types.js';
 
 // Sample props for stories and tests
 export const SAMPLE_RADIOBUTTON_PROPS: RadioButtonProps = {

@@ -1,1 +1,1 @@
-export { AnimationDuration } from './durations';
+export { AnimationDuration } from './durations.js';

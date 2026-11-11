@@ -2,12 +2,12 @@ import { IconName, TagSeverity } from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { Tag } from './Tag';
 import {
   MAP_TAG_SEVERITY_BACKGROUND,
   MAP_TAG_SEVERITY_ICON_COLOR,
   MAP_TAG_SEVERITY_TEXT_COLOR,
-} from './Tag.constants';
+} from './Tag.constants.js';
+import { Tag } from './Tag.js';
 
 describe('Tag', () => {
   it('renders children correctly', () => {

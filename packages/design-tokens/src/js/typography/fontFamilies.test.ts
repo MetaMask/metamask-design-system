@@ -1,6 +1,6 @@
 import * as designTokens from '../../figma/tokens.json';
 
-import { fontFamilies } from './fontFamilies';
+import { fontFamilies } from './fontFamilies.js';
 
 describe('Font Families', () => {
   it('js tokens for font family default matches figma tokens', () => {

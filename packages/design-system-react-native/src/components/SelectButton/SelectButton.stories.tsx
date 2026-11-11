@@ -7,12 +7,12 @@ import {
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import { Box } from '../Box';
-import type { BoxProps } from '../Box';
-import { Icon, IconName, IconSize } from '../Icon';
+import { Box } from '../Box/index.js';
+import type { BoxProps } from '../Box/index.js';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
 
-import { SelectButton } from './SelectButton';
-import type { SelectButtonProps } from './SelectButton.types';
+import { SelectButton } from './SelectButton.js';
+import type { SelectButtonProps } from './SelectButton.types.js';
 
 const noopPress = () => undefined;
 

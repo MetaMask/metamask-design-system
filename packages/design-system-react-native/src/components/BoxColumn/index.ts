@@ -1,2 +1,2 @@
-export { BoxColumn } from './BoxColumn';
-export type { BoxColumnProps } from './BoxColumn.types';
+export { BoxColumn } from './BoxColumn.js';
+export type { BoxColumnProps } from './BoxColumn.types.js';

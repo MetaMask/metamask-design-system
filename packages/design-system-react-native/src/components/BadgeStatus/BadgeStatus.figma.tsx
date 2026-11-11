@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { BadgeStatus } from './BadgeStatus';
+import { BadgeStatus } from './BadgeStatus.js';
 
 import { BadgeStatusSize, BadgeStatusStatus } from '.';
 

@@ -1,8 +1,8 @@
 import type { ContentPropsShared } from '@metamask/design-system-shared';
 
-import type { BoxProps } from '../Box/Box.types';
-import type { SensitiveTextProps } from '../SensitiveText';
-import type { TextProps } from '../Text/Text.types';
+import type { BoxProps } from '../Box/Box.types.js';
+import type { SensitiveTextProps } from '../SensitiveText/index.js';
+import type { TextProps } from '../Text/Text.types.js';
 
 /**
  * Content component props.

@@ -2,7 +2,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import { Animated } from 'react-native';
 
-import { Spinner } from './Spinner';
+import { Spinner } from './Spinner.js';
 
 describe('Spinner', () => {
   afterEach(() => {

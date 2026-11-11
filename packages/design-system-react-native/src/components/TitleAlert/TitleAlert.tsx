@@ -8,13 +8,13 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Box } from '../Box';
-import { BoxColumn } from '../BoxColumn';
-import { BoxRow } from '../BoxRow';
-import { IconAlert } from '../IconAlert';
-import { TextOrChildren } from '../temp-components/TextOrChildren';
+import { Box } from '../Box/index.js';
+import { BoxColumn } from '../BoxColumn/index.js';
+import { BoxRow } from '../BoxRow/index.js';
+import { IconAlert } from '../IconAlert/index.js';
+import { TextOrChildren } from '../temp-components/TextOrChildren/index.js';
 
-import type { TitleAlertProps } from './TitleAlert.types';
+import type { TitleAlertProps } from './TitleAlert.types.js';
 
 /**
  * Displays a severity-based {@link IconAlert} above a centered title row.

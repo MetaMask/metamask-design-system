@@ -2,12 +2,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
-import { Box } from '../Box';
+import { Box } from '../Box/index.js';
 
 import README from './README.mdx';
-import { TextArea } from './TextArea';
-import { TextAreaResize } from './TextArea.constants';
-import type { TextAreaProps } from './TextArea.types';
+import { TextAreaResize } from './TextArea.constants.js';
+import { TextArea } from './TextArea.js';
+import type { TextAreaProps } from './TextArea.types.js';
 
 const meta: Meta<TextAreaProps> = {
   title: 'React Components/TextArea',

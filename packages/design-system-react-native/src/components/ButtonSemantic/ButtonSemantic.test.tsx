@@ -2,8 +2,8 @@ import { ButtonSemanticSize } from '@metamask/design-system-shared';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 
-import { ButtonSemantic } from './ButtonSemantic';
-import { ButtonSemanticSeverity } from './ButtonSemantic.types';
+import { ButtonSemantic } from './ButtonSemantic.js';
+import { ButtonSemanticSeverity } from './ButtonSemantic.types.js';
 
 describe('ButtonSemantic', () => {
   const mockOnPress = jest.fn();

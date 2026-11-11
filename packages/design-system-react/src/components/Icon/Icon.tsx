@@ -1,11 +1,11 @@
 import { IconSize, IconColor } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 
-import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants';
-import type { IconProps } from './Icon.types';
-import { Icons } from './icons';
+import { TWCLASSMAP_ICON_SIZE_DIMENSION } from './Icon.constants.js';
+import type { IconProps } from './Icon.types.js';
+import { Icons } from './icons/index.js';
 
 export const Icon: React.FC<IconProps> = ({
   name,

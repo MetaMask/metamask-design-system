@@ -1,9 +1,9 @@
 import { Theme, ThemeProvider } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
-import { ButtonBase } from '../ButtonBase';
+import { ButtonBase } from '../ButtonBase/index.js';
 
-import type { ButtonHeroProps } from './ButtonHero.types';
+import type { ButtonHeroProps } from './ButtonHero.types.js';
 
 /**
  * Inner component that uses the locked light theme from ThemeProvider.

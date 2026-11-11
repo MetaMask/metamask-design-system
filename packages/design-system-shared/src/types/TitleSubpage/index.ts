@@ -1,1 +1,1 @@
-export type { TitleSubpagePropsShared } from './TitleSubpage.types';
+export type { TitleSubpagePropsShared } from './TitleSubpage.types.js';

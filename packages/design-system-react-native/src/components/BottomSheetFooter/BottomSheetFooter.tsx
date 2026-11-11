@@ -4,11 +4,11 @@ import React from 'react';
 import { View } from 'react-native';
 
 // External dependencies.
-import { Button, ButtonVariant } from '../Button';
+import { Button, ButtonVariant } from '../Button/index.js';
 
 // Internal dependencies.
-import type { BottomSheetFooterProps } from './BottomSheetFooter.types';
-import { ButtonsAlignment } from './BottomSheetFooter.types';
+import type { BottomSheetFooterProps } from './BottomSheetFooter.types.js';
+import { ButtonsAlignment } from './BottomSheetFooter.types.js';
 
 export const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
   style,

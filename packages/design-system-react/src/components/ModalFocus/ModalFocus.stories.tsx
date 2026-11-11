@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useRef, useState } from 'react';
 
-import { Box, BoxBorderColor, BoxFlexDirection } from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { Input } from '../Input';
-import { Text } from '../Text';
+import { Box, BoxBorderColor, BoxFlexDirection } from '../Box/index.js';
+import { Button, ButtonVariant } from '../Button/index.js';
+import { Input } from '../Input/index.js';
+import { Text } from '../Text/index.js';
 
-import { ModalFocus } from './ModalFocus';
-import type { ModalFocusProps } from './ModalFocus.types';
+import { ModalFocus } from './ModalFocus.js';
+import type { ModalFocusProps } from './ModalFocus.types.js';
 import README from './README.mdx';
 
 const meta: Meta<ModalFocusProps> = {

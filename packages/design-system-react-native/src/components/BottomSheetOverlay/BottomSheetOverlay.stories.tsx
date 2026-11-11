@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Text } from '../Text/index.js';
 
-import { BottomSheetOverlay } from './BottomSheetOverlay';
-import type { BottomSheetOverlayProps } from './BottomSheetOverlay.types';
+import { BottomSheetOverlay } from './BottomSheetOverlay.js';
+import type { BottomSheetOverlayProps } from './BottomSheetOverlay.types.js';
 
 const meta: Meta<BottomSheetOverlayProps> = {
   title: 'Components/BottomSheetOverlay',

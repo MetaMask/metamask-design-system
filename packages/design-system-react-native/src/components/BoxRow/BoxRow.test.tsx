@@ -3,7 +3,7 @@ import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { BoxRow } from './BoxRow';
+import { BoxRow } from './BoxRow.js';
 
 const ROOT_TEST_ID = 'text-with-accessories';
 

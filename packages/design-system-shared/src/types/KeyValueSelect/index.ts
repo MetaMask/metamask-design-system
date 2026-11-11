@@ -2,4 +2,4 @@ export {
   KeyValueSelectVariant,
   type KeyValueSelectPropsShared,
   type KeyValueSelectSelectButtonPropsShared,
-} from './KeyValueSelect.types';
+} from './KeyValueSelect.types.js';

@@ -9,9 +9,9 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import type { ReactTestInstance } from 'react-test-renderer';
 
-import { createRenderer } from '../../test-utils/createRenderer';
+import { createRenderer } from '../../test-utils/createRenderer.js';
 
-import { ButtonBase } from './ButtonBase';
+import { ButtonBase } from './ButtonBase.js';
 
 describe('ButtonBase', () => {
   let tw: ReturnType<typeof useTailwind>;

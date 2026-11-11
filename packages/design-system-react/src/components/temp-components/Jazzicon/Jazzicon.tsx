@@ -5,9 +5,9 @@ import {
 import jazzicon from '@metamask/jazzicon';
 import React, { useEffect, useRef } from 'react';
 
-import { twMerge } from '../../../utils/tw-merge';
+import { twMerge } from '../../../utils/tw-merge.js';
 
-import type { JazziconProps } from './Jazzicon.types';
+import type { JazziconProps } from './Jazzicon.types.js';
 
 /**
  * Cache for storing generated SVG elements by `address:diameter` so

@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useEffect, useState } from 'react';
 
-import { Box, BoxFlexDirection } from '../Box';
-import { Icon, IconName, IconSize } from '../Icon';
-import { Input } from '../Input';
-import type { InputProps } from '../Input';
-import { Text } from '../Text';
+import { Box, BoxFlexDirection } from '../Box/index.js';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
+import { Input } from '../Input/index.js';
+import type { InputProps } from '../Input/index.js';
+import { Text } from '../Text/index.js';
 
-import { Label } from './Label';
-import type { LabelProps } from './Label.types';
+import { Label } from './Label.js';
+import type { LabelProps } from './Label.types.js';
 import README from './README.mdx';
 
 function ControlledInput(props: InputProps) {

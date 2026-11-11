@@ -1,3 +1,3 @@
-export { TextAreaResize } from './TextArea.constants';
-export { TextArea } from './TextArea';
-export type { TextAreaProps } from './TextArea.types';
+export { TextAreaResize } from './TextArea.constants.js';
+export { TextArea } from './TextArea.js';
+export type { TextAreaProps } from './TextArea.types.js';

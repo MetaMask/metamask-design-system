@@ -1,8 +1,8 @@
 import type { KeyValueColumnPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
-import type { ButtonIconProps } from '../ButtonIcon/ButtonIcon.types';
-import type { TextProps } from '../Text/Text.types';
+import type { ButtonIconProps } from '../ButtonIcon/ButtonIcon.types.js';
+import type { TextProps } from '../Text/Text.types.js';
 
 export type KeyValueColumnProps = KeyValueColumnPropsShared &
   Omit<ViewProps, 'children'> & {

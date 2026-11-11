@@ -2,7 +2,7 @@
 import type { ViewProps } from 'react-native';
 
 // External dependencies.
-import type { ButtonProps } from '../Button/Button.types';
+import type { ButtonProps } from '../Button/Button.types.js';
 
 /**
  * Buttons alignment options for the BottomSheetFooter.

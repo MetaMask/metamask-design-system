@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { Switch } from './Switch';
-import type { SwitchProps } from './Switch.types';
+import { Switch } from './Switch.js';
+import type { SwitchProps } from './Switch.types.js';
 
 const meta: Meta<SwitchProps> = {
   title: 'Components/Switch',

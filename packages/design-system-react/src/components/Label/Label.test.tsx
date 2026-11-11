@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { Label } from './Label';
+import { Label } from './Label.js';
 
 describe('Label', () => {
   it('renders a <label> element with children', () => {

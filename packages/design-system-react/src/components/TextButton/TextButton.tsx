@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 
-import { TextButtonSize } from '../../types';
-import { twMerge } from '../../utils/tw-merge';
-import { ButtonBase } from '../ButtonBase';
+import { TextButtonSize } from '../../types/index.js';
+import { twMerge } from '../../utils/tw-merge.js';
+import { ButtonBase } from '../ButtonBase/index.js';
 
-import { MAP_TEXTBUTTON_SIZE_TEXTVARIANT } from './TextButton.constants';
-import type { TextButtonProps } from './TextButton.types';
+import { MAP_TEXTBUTTON_SIZE_TEXTVARIANT } from './TextButton.constants.js';
+import type { TextButtonProps } from './TextButton.types.js';
 
 export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
   (

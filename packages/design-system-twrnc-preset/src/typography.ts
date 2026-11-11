@@ -1,6 +1,6 @@
 import { typography } from '@metamask/design-tokens';
 
-import type { TypographyTailwindConfigProps } from './typography.types';
+import type { TypographyTailwindConfigProps } from './typography.types.js';
 
 export const typographyTailwindConfig: TypographyTailwindConfigProps = {
   fontSize: {

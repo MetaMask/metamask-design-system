@@ -7,10 +7,10 @@ import {
 import React from 'react';
 
 // Internal dependencies.
-import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
+import { Box } from '../Box/index.js';
+import { BoxRow } from '../BoxRow/index.js';
 
-import type { TitleStandardProps } from './TitleStandard.types';
+import type { TitleStandardProps } from './TitleStandard.types.js';
 
 /**
  * Displays a primary title with optional top, inline, and bottom rows in a left-aligned layout.

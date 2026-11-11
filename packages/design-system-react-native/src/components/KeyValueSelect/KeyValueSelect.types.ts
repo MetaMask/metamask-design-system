@@ -4,10 +4,10 @@ import type {
 } from '@metamask/design-system-shared';
 import type { PressableProps } from 'react-native';
 
-import type { ButtonIconProps } from '../ButtonIcon/ButtonIcon.types';
-import type { IconProps } from '../Icon/Icon.types';
-import type { KeyValueRowProps } from '../KeyValueRow/KeyValueRow.types';
-import type { TextProps } from '../Text/Text.types';
+import type { ButtonIconProps } from '../ButtonIcon/ButtonIcon.types.js';
+import type { IconProps } from '../Icon/Icon.types.js';
+import type { KeyValueRowProps } from '../KeyValueRow/KeyValueRow.types.js';
+import type { TextProps } from '../Text/Text.types.js';
 
 /**
  * SelectButton-only props for KeyValueSelect (RN).

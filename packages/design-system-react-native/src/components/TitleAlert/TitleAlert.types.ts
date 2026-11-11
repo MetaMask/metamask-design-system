@@ -1,8 +1,8 @@
 import type { TitleAlertPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps } from 'react-native';
 
-import type { BoxRowProps } from '../BoxRow/BoxRow.types';
-import type { TextProps } from '../Text/Text.types';
+import type { BoxRowProps } from '../BoxRow/BoxRow.types.js';
+import type { TextProps } from '../Text/Text.types.js';
 
 /**
  * TitleAlert component props (React Native).

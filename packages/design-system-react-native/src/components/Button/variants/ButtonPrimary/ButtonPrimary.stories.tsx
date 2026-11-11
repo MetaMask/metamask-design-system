@@ -3,8 +3,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { ButtonPrimary } from './ButtonPrimary';
-import type { ButtonPrimaryProps } from './ButtonPrimary.types';
+import { ButtonPrimary } from './ButtonPrimary.js';
+import type { ButtonPrimaryProps } from './ButtonPrimary.types.js';
 
 const meta: Meta<ButtonPrimaryProps> = {
   title: 'Components/Button/variants/ButtonPrimary',

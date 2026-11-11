@@ -4,10 +4,10 @@ import React, { createRef } from 'react';
 import { TextInput } from 'react-native';
 import { act } from 'react-test-renderer';
 
-import { createRenderer } from '../../test-utils/createRenderer';
-import { Input } from '../Input';
+import { createRenderer } from '../../test-utils/createRenderer.js';
+import { Input } from '../Input/index.js';
 
-import { TextArea } from './TextArea';
+import { TextArea } from './TextArea.js';
 
 const ROOT_TEST_ID = 'text-area';
 

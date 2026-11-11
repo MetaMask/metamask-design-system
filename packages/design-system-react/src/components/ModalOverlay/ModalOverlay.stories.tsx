@@ -2,10 +2,10 @@ import { ButtonVariant } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 
-import { Button } from '../Button';
+import { Button } from '../Button/index.js';
 
-import { ModalOverlay } from './ModalOverlay';
-import type { ModalOverlayProps } from './ModalOverlay.types';
+import { ModalOverlay } from './ModalOverlay.js';
+import type { ModalOverlayProps } from './ModalOverlay.types.js';
 import README from './README.mdx';
 
 const meta: Meta<ModalOverlayProps> = {

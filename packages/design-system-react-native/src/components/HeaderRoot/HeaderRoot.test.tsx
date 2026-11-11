@@ -6,10 +6,10 @@ import { Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { IconName } from '../Icon';
+import { IconName } from '../Icon/index.js';
 
 // Internal dependencies.
-import { HeaderRoot } from './HeaderRoot';
+import { HeaderRoot } from './HeaderRoot.js';
 
 const CONTAINER_TEST_ID = 'header-root-container';
 const LEFT_CHILDREN_TEST_ID = 'header-root-left-children';

@@ -6,10 +6,10 @@ import { Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { IconName } from '../Icon';
+import { IconName } from '../Icon/index.js';
 
 // Internal dependencies.
-import { HeaderSubpage } from './HeaderSubpage';
+import { HeaderSubpage } from './HeaderSubpage.js';
 
 const CONTAINER_TEST_ID = 'header-subpage-container';
 const TITLE_TEST_ID = 'header-subpage-title';

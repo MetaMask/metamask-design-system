@@ -6,11 +6,11 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ScrollView } from 'react-native';
 
-import { Box } from '../../Box';
-import { Text, TextColor, TextVariant, FontWeight } from '../../Text';
+import { Box } from '../../Box/index.js';
+import { Text, TextColor, TextVariant, FontWeight } from '../../Text/index.js';
 
-import { Jazzicon } from './Jazzicon';
-import type { JazziconProps } from './Jazzicon.types';
+import { Jazzicon } from './Jazzicon.js';
+import type { JazziconProps } from './Jazzicon.types.js';
 
 const meta: Meta<JazziconProps> = {
   title: 'Temp Components/Jazzicon',

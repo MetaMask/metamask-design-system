@@ -8,10 +8,10 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { OverflowWrap, TextAlign, TextTransform } from '../../types';
+import { OverflowWrap, TextAlign, TextTransform } from '../../types/index.js';
 
 import README from './README.mdx';
-import { Text } from './Text';
+import { Text } from './Text.js';
 
 const meta: Meta<typeof Text> = {
   title: 'React Components/Text',

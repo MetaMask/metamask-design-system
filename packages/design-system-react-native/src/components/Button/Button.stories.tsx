@@ -8,8 +8,8 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Button } from './Button';
-import type { ButtonProps } from './Button.types';
+import { Button } from './Button.js';
+import type { ButtonProps } from './Button.types.js';
 
 const meta: Meta<ButtonProps> = {
   title: 'Components/Button',

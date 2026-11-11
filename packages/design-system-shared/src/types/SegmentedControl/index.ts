@@ -1,4 +1,4 @@
 export {
   SegmentedControlSize,
   type SegmentedControlPropsShared,
-} from './SegmentedControl.types';
+} from './SegmentedControl.types.js';

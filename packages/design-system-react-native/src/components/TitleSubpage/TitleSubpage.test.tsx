@@ -5,7 +5,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 // Internal dependencies.
-import { TitleSubpage } from './TitleSubpage';
+import { TitleSubpage } from './TitleSubpage.js';
 
 const CONTAINER_TEST_ID = 'title-subpage-container';
 const AMOUNT_TEST_ID = 'title-subpage-amount';

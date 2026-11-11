@@ -6,13 +6,13 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import type { ButtonIconProps } from '../ButtonIcon';
-import { IconName } from '../Icon';
-import { ListItem } from '../ListItem';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon/index.js';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import { IconName } from '../Icon/index.js';
+import { ListItem } from '../ListItem/index.js';
 
 // Internal dependencies.
-import type { HeaderSubpageProps } from './HeaderSubpage.types';
+import type { HeaderSubpageProps } from './HeaderSubpage.types.js';
 
 const renderEndButtonIcons = (endButtonIconProps: ButtonIconProps[]) =>
   endButtonIconProps

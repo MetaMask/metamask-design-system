@@ -1,7 +1,7 @@
 import type { BannerAlertPropsShared } from '@metamask/design-system-shared';
 
-import type { BannerBaseProps } from '../BannerBase';
-import type { IconProps } from '../Icon/Icon.types';
+import type { BannerBaseProps } from '../BannerBase/index.js';
+import type { IconProps } from '../Icon/Icon.types.js';
 
 /**
  * BannerAlert component props (React platform-specific).

@@ -1,7 +1,7 @@
 import type { AvatarBasePropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { TextProps } from '../Text';
+import type { TextProps } from '../Text/index.js';
 
 export type AvatarBaseProps = ComponentProps<'div'> &
   AvatarBasePropsShared & {

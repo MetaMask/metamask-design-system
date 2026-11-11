@@ -1,4 +1,4 @@
-import type { LineHeights } from './types';
+import type { LineHeights } from './types.js';
 
 export const lineHeights: LineHeights = {
   lineHeight1: 16,

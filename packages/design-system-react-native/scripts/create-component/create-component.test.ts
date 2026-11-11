@@ -91,10 +91,10 @@ describe('create-component', () => {
       expect(appendFileCalls).toHaveLength(1);
       expect(appendFileCalls[0][0]).toMatch(/\/src\/components\/index\.ts$/u);
       expect(appendFileCalls[0][1]).toContain(
-        "export { Button } from './Button'",
+        "export { Button } from './Button/index.js'",
       );
       expect(appendFileCalls[0][1]).toContain(
-        "export type { ButtonProps } from './Button'",
+        "export type { ButtonProps } from './Button/index.js'",
       );
     });
 

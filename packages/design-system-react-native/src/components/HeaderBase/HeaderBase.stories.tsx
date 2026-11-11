@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Box } from '../Box';
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
+import { Box } from '../Box/index.js';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon/index.js';
+import { IconName } from '../Icon/index.js';
+import { Text, TextVariant } from '../Text/index.js';
 
-import { HeaderBase } from './HeaderBase';
+import { HeaderBase } from './HeaderBase.js';
 
 const HeaderBaseMeta = {
   title: 'Components/HeaderBase',

@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { AvatarFavicon } from './AvatarFavicon';
+import { AvatarFavicon } from './AvatarFavicon.js';
 
 import { AvatarFaviconSize } from '.';
 

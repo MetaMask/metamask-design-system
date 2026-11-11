@@ -5,7 +5,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 // Internal dependencies.
-import { TitleHub } from './TitleHub';
+import { TitleHub } from './TitleHub.js';
 
 const CONTAINER_TEST_ID = 'title-hub-container';
 const AMOUNT_TEST_ID = 'title-hub-amount';

@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { Icon, IconName } from '../Icon';
-import { ImageOrSvg } from '../temp-components/ImageOrSvg';
+import { Icon, IconName } from '../Icon/index.js';
+import { ImageOrSvg } from '../temp-components/ImageOrSvg/index.js';
 
-import { AvatarBase } from './AvatarBase';
-import { SAMPLE_AVATARBASE_URIS } from './AvatarBase.dev';
-import type { AvatarBaseProps } from './AvatarBase.types';
+import { SAMPLE_AVATARBASE_URIS } from './AvatarBase.dev.js';
+import { AvatarBase } from './AvatarBase.js';
+import type { AvatarBaseProps } from './AvatarBase.types.js';
 
 import { AvatarBaseSize, AvatarBaseShape } from '.';
 

@@ -2,8 +2,8 @@ import { AvatarNetworkSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarNetwork } from './AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev';
+import { SAMPLE_AVATARNETWORK_URIS } from './AvatarNetwork.dev.js';
+import { AvatarNetwork } from './AvatarNetwork.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof AvatarNetwork> = {

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { BadgeNetwork } from './BadgeNetwork';
+import { BadgeNetwork } from './BadgeNetwork.js';
 
 describe('BadgeNetwork', () => {
   it('always applies Xs size + border classes for the outer element', () => {

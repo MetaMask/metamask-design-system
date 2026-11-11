@@ -1,7 +1,7 @@
 import type { SelectButtonPropsShared } from '@metamask/design-system-shared';
 
-import type { ButtonBaseProps } from '../ButtonBase/ButtonBase.types';
-import type { IconProps } from '../Icon/Icon.types';
+import type { ButtonBaseProps } from '../ButtonBase/ButtonBase.types.js';
+import type { IconProps } from '../Icon/Icon.types.js';
 
 /**
  * SelectButton component props.

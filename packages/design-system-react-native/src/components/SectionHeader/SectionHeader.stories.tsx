@@ -8,12 +8,12 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Icon } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { SectionHeader } from './SectionHeader';
-import type { SectionHeaderProps } from './SectionHeader.types';
+import { SectionHeader } from './SectionHeader.js';
+import type { SectionHeaderProps } from './SectionHeader.types.js';
 
 const noopPress = () => undefined;
 

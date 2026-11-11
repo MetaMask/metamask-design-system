@@ -1,14 +1,14 @@
 import { HeaderSearchVariant } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { IconName } from '../Icon';
-import { TextFieldSearch } from '../TextFieldSearch';
-import type { TextFieldSearchProps } from '../TextFieldSearch';
+import { Box } from '../Box/index.js';
+import { Button, ButtonVariant } from '../Button/index.js';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon/index.js';
+import { IconName } from '../Icon/index.js';
+import { TextFieldSearch } from '../TextFieldSearch/index.js';
+import type { TextFieldSearchProps } from '../TextFieldSearch/index.js';
 
-import type { HeaderSearchProps } from './HeaderSearch.types';
+import type { HeaderSearchProps } from './HeaderSearch.types.js';
 
 const CANCEL_LABEL = 'Cancel';
 

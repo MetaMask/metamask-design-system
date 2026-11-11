@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 
-import { ModalContext } from './Modal.context';
-import type { ModalContextType } from './Modal.context';
-import type { ModalProps } from './Modal.types';
+import { ModalContext } from './Modal.context.js';
+import type { ModalContextType } from './Modal.context.js';
+import type { ModalProps } from './Modal.types.js';
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(
   (

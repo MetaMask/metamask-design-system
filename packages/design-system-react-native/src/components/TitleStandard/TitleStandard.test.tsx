@@ -5,7 +5,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 // Internal dependencies.
-import { TitleStandard } from './TitleStandard';
+import { TitleStandard } from './TitleStandard.js';
 
 const CONTAINER_TEST_ID = 'title-standard-container';
 const TITLE_TEST_ID = 'title-standard-title';

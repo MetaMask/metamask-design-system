@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import { TextFieldSearch } from './TextFieldSearch';
-import type { TextFieldSearchProps } from './TextFieldSearch.types';
+import { TextFieldSearch } from './TextFieldSearch.js';
+import type { TextFieldSearchProps } from './TextFieldSearch.types.js';
 
 const noop = () => undefined;
 

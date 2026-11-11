@@ -2,11 +2,11 @@ import { BoxFlexDirection, TagSeverity } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box } from '../Box';
-import { Icon, IconColor, IconName, IconSize } from '../Icon';
+import { Box } from '../Box/index.js';
+import { Icon, IconColor, IconName, IconSize } from '../Icon/index.js';
 
-import { Tag } from './Tag';
-import type { TagProps } from './Tag.types';
+import { Tag } from './Tag.js';
+import type { TagProps } from './Tag.types.js';
 
 const meta: Meta<TagProps> = {
   title: 'Components/Tag',

@@ -1,6 +1,6 @@
 import * as designTokens from '../../figma/tokens.json';
 
-import { letterSpacing } from './letterSpacing';
+import { letterSpacing } from './letterSpacing.js';
 
 describe('Letter Spacing', () => {
   it('js tokens for letterSpacing0 matches figma tokens letterSpacing0', () => {

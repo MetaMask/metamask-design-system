@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { AvatarAccount } from './AvatarAccount';
+import { AvatarAccount } from './AvatarAccount.js';
 
 import { AvatarAccountSize, AvatarAccountVariant } from '.';
 

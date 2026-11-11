@@ -8,5 +8,5 @@ export {
   type BoxSpacing,
   type BoxBorderWidth,
 } from '@metamask/design-system-shared';
-export { Box } from './Box';
-export type { BoxProps } from './Box.types';
+export { Box } from './Box.js';
+export type { BoxProps } from './Box.types.js';

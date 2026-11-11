@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 
-import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
-import { Icon, IconName, IconSize, IconColor } from '../Icon';
-import { Text, TextColor, FontWeight, TextVariant } from '../Text';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box/index.js';
+import { Icon, IconName, IconSize, IconColor } from '../Icon/index.js';
+import { Text, TextColor, FontWeight, TextVariant } from '../Text/index.js';
 
-import { TitleHub } from './TitleHub';
-import type { TitleHubProps } from './TitleHub.types';
+import { TitleHub } from './TitleHub.js';
+import type { TitleHubProps } from './TitleHub.types.js';
 
 /**
  * Pill badge: dot + label (e.g. network), for `titleEndAccessory`.

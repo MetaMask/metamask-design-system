@@ -6,11 +6,11 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box } from '../../Box';
-import { Text } from '../../Text';
+import { Box } from '../../Box/index.js';
+import { Text } from '../../Text/index.js';
 
-import { Jazzicon } from './Jazzicon';
-import type { JazziconProps } from './Jazzicon.types';
+import { Jazzicon } from './Jazzicon.js';
+import type { JazziconProps } from './Jazzicon.types.js';
 import README from './README.mdx';
 
 const meta: Meta<JazziconProps> = {

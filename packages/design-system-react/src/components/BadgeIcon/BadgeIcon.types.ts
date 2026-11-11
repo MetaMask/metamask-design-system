@@ -1,7 +1,7 @@
 import type { BadgeIconPropsShared } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
-import type { IconProps } from '../Icon';
+import type { IconProps } from '../Icon/index.js';
 
 /**
  * BadgeIcon component props (React platform-specific)

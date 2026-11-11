@@ -1,4 +1,4 @@
-import { mergeTwClassName } from './merge-tw-class-name';
+import { mergeTwClassName } from './merge-tw-class-name.js';
 
 describe('mergeTwClassName', () => {
   it('returns base when extra is undefined', () => {

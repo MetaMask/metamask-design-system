@@ -8,11 +8,11 @@ import {
   BoxBackgroundColor,
   BoxFlexDirection,
   BoxFlexWrap,
-} from '../Box';
-import type { BoxProps } from '../Box';
+} from '../Box/index.js';
+import type { BoxProps } from '../Box/index.js';
 
-import { IconAlert } from './IconAlert';
-import type { IconAlertProps } from './IconAlert.types';
+import { IconAlert } from './IconAlert.js';
+import type { IconAlertProps } from './IconAlert.types.js';
 
 const meta: Meta<IconAlertProps> = {
   title: 'Components/IconAlert',

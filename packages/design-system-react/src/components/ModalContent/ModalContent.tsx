@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
+import { twMerge } from '../../utils/tw-merge.js';
 import {
   Box,
   BoxAlignItems,
@@ -8,16 +8,16 @@ import {
   BoxBorderColor,
   BoxFlexDirection,
   BoxJustifyContent,
-} from '../Box';
-import { useModalContext } from '../Modal';
-import { ModalFocus } from '../ModalFocus';
+} from '../Box/index.js';
+import { useModalContext } from '../Modal/index.js';
+import { ModalFocus } from '../ModalFocus/index.js';
 
 import {
   MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR,
   TWCLASSMAP_MODAL_CONTENT_SIZE,
-} from './ModalContent.constants';
-import type { ModalContentProps } from './ModalContent.types';
-import { ModalContentSize } from './ModalContent.types';
+} from './ModalContent.constants.js';
+import type { ModalContentProps } from './ModalContent.types.js';
+import { ModalContentSize } from './ModalContent.types.js';
 
 export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
   (

@@ -5,9 +5,9 @@ import {
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
-import { BadgeWrapper } from './BadgeWrapper';
+import { BadgeWrapper } from './BadgeWrapper.js';
 
 describe('BadgeWrapper', () => {
   it('renders the anchor and badge', () => {

@@ -2,7 +2,7 @@
 // TODO: Replace any types with proper types https://github.com/MetaMask/metamask-design-system/issues/127
 import * as designTokens from '../../figma/tokens.json';
 
-import { typography } from './typography';
+import { typography } from './typography.js';
 
 /**
  * Trim string between 2 characters.

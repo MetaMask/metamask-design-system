@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarToken } from './AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.dev';
+import { SAMPLE_AVATARTOKEN_URIS } from './AvatarToken.dev.js';
+import { AvatarToken } from './AvatarToken.js';
 import README from './README.mdx';
 
 import { AvatarTokenSize } from '.';

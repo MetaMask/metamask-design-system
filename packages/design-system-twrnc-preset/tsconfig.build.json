@@ -5,8 +5,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "jsx": "react-native",
-    "types": ["react-native", "jest"],
-    "emitDeclarationOnly": false
+    "types": ["react-native", "jest"]
   },
   "references": [{ "path": "../design-tokens/tsconfig.build.json" }],
   "include": ["./src"]

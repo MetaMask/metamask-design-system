@@ -7,11 +7,11 @@ import {
   BoxAlignItems,
   BoxJustifyContent,
   BoxBackgroundColor,
-} from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { Text, TextVariant, TextColor } from '../Text';
+} from '../Box/index.js';
+import { Button, ButtonVariant } from '../Button/index.js';
+import { Text, TextVariant, TextColor } from '../Text/index.js';
 
-import type { TabEmptyStateProps } from './TabEmptyState.types';
+import type { TabEmptyStateProps } from './TabEmptyState.types.js';
 
 export const TabEmptyState = ({
   icon,

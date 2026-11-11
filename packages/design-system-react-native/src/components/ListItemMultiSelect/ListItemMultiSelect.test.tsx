@@ -2,9 +2,9 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { Checkbox } from '../Checkbox';
+import { Checkbox } from '../Checkbox/index.js';
 
-import { ListItemMultiSelect } from './ListItemMultiSelect';
+import { ListItemMultiSelect } from './ListItemMultiSelect.js';
 
 const ROOT_TEST_ID = 'listitem-multiselect-root';
 const noopPress = () => undefined;

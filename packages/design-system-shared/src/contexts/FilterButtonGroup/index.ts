@@ -1,4 +1,4 @@
 export {
   FilterButtonGroupContext,
   type FilterButtonGroupContextValue,
-} from './FilterButtonGroup.context';
+} from './FilterButtonGroup.context.js';

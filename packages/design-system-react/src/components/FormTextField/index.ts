@@ -1,2 +1,2 @@
-export { FormTextField } from './FormTextField';
-export type { FormTextFieldProps } from './FormTextField.types';
+export { FormTextField } from './FormTextField.js';
+export type { FormTextFieldProps } from './FormTextField.types.js';

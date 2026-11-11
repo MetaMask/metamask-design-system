@@ -2,7 +2,7 @@
 import type { BadgeCountPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
-import type { TextProps } from '../Text';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * BadgeCount component props (React Native platform-specific)

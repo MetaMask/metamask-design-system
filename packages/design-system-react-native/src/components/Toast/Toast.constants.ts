@@ -2,7 +2,7 @@
 import { IconAlertSeverity } from '@metamask/design-system-shared';
 import type { WithSpringConfig } from 'react-native-reanimated';
 
-import { ToastSeverity } from './Toast.types';
+import { ToastSeverity } from './Toast.types.js';
 
 export {
   TOAST_ANIMATION_DURATION,

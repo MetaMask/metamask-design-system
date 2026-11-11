@@ -4,8 +4,8 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { Icon } from './Icon';
-import type { IconProps } from './Icon.types';
+import { Icon } from './Icon.js';
+import type { IconProps } from './Icon.types.js';
 
 const meta: Meta<IconProps> = {
   title: 'Components/Icon',

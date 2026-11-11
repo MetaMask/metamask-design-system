@@ -2,10 +2,10 @@ import { SliderMarkColor } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useEffect, useState } from 'react';
 
-import { Box } from '../Box';
+import { Box } from '../Box/index.js';
 
-import { Slider } from './Slider';
-import type { SliderProps } from './Slider.types';
+import { Slider } from './Slider.js';
+import type { SliderProps } from './Slider.types.js';
 
 const meta: Meta<SliderProps> = {
   title: 'Components/Slider',

@@ -9,9 +9,9 @@ import {
 import React from 'react';
 import { Text } from 'react-native';
 
-import { IconName } from '../Icon';
+import { IconName } from '../Icon/index.js';
 
-import { KeyValueRow } from './KeyValueRow';
+import { KeyValueRow } from './KeyValueRow.js';
 
 describe('KeyValueRow', () => {
   let tw: ReturnType<typeof useTailwind>;

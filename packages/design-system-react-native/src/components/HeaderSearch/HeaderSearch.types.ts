@@ -3,10 +3,10 @@ import type {
   HeaderSearchScreenPropsShared,
 } from '@metamask/design-system-shared';
 
-import type { BoxProps } from '../Box';
-import type { ButtonProps } from '../Button';
-import type { ButtonIconProps } from '../ButtonIcon';
-import type { TextFieldSearchProps } from '../TextFieldSearch';
+import type { BoxProps } from '../Box/index.js';
+import type { ButtonProps } from '../Button/index.js';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import type { TextFieldSearchProps } from '../TextFieldSearch/index.js';
 
 type HeaderSearchBaseProps = Omit<BoxProps, 'children'> & {
   /**

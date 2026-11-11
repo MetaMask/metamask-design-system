@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { AvatarNetwork, AvatarNetworkSize } from '../AvatarNetwork';
+import { AvatarNetwork, AvatarNetworkSize } from '../AvatarNetwork/index.js';
 
-import type { BadgeNetworkProps } from './BadgeNetwork.types';
+import type { BadgeNetworkProps } from './BadgeNetwork.types.js';
 
 export const BadgeNetwork = ({
   src,

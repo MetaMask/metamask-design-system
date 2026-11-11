@@ -2,7 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useEffect, useRef } from 'react';
 import { Animated, View } from 'react-native';
 
-import type { SkeletonProps } from './Skeleton.types';
+import type { SkeletonProps } from './Skeleton.types.js';
 
 export const Skeleton: React.FC<SkeletonProps> = ({
   height,

@@ -1,1 +1,1 @@
-export type { TitleStandardPropsShared } from './TitleStandard.types';
+export type { TitleStandardPropsShared } from './TitleStandard.types.js';

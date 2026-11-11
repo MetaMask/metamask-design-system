@@ -15,12 +15,12 @@ import { typography } from '@metamask/design-tokens';
 import React, { useState } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { ButtonIcon } from '../ButtonIcon';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Button } from '../Button/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
+import { Text } from '../Text/index.js';
 
-import type { BannerBaseProps } from './BannerBase.types';
+import type { BannerBaseProps } from './BannerBase.types.js';
 
 /** BodyMd line height — title block. */
 const BODY_MD_LINE_HEIGHT = typography.sBodyMD.lineHeight;

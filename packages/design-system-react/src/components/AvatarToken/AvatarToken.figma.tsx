@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { AvatarToken } from './AvatarToken';
+import { AvatarToken } from './AvatarToken.js';
 
 import { AvatarTokenSize } from '.';
 

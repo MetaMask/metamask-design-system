@@ -3,4 +3,4 @@ export {
   type HeaderSearchInlinePropsShared,
   type HeaderSearchPropsShared,
   type HeaderSearchScreenPropsShared,
-} from './HeaderSearch.types';
+} from './HeaderSearch.types.js';

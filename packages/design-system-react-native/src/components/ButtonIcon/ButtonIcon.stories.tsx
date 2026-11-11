@@ -6,8 +6,8 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { ButtonIcon } from './ButtonIcon';
-import type { ButtonIconProps } from './ButtonIcon.types';
+import { ButtonIcon } from './ButtonIcon.js';
+import type { ButtonIconProps } from './ButtonIcon.types.js';
 
 const meta: Meta<ButtonIconProps> = {
   title: 'Components/Button Icon',

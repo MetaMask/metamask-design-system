@@ -4,4 +4,4 @@ export {
   ButtonSemanticSize,
   ButtonSize,
   type ButtonBasePropsShared,
-} from './ButtonBase.types';
+} from './ButtonBase.types.js';

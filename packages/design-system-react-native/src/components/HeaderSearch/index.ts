@@ -4,9 +4,9 @@ export {
   type HeaderSearchPropsShared,
   type HeaderSearchScreenPropsShared,
 } from '@metamask/design-system-shared';
-export { HeaderSearch } from './HeaderSearch';
+export { HeaderSearch } from './HeaderSearch.js';
 export type {
   HeaderSearchProps,
   HeaderSearchScreenProps,
   HeaderSearchInlineProps,
-} from './HeaderSearch.types';
+} from './HeaderSearch.types.js';

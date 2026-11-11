@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
-import { AvatarFavicon } from './AvatarFavicon';
+import { AvatarFavicon } from './AvatarFavicon.js';
 
 const LocalSvg = (props: SvgProps) => <View {...props} />;
 

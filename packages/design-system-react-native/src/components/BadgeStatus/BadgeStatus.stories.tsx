@@ -7,8 +7,8 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
 
-import { BadgeStatus } from './BadgeStatus';
-import type { BadgeStatusProps } from './BadgeStatus.types';
+import { BadgeStatus } from './BadgeStatus.js';
+import type { BadgeStatusProps } from './BadgeStatus.types.js';
 
 const meta: Meta<BadgeStatusProps> = {
   title: 'Components/BadgeStatus',

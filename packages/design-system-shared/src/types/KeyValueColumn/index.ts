@@ -1,1 +1,1 @@
-export { type KeyValueColumnPropsShared } from './KeyValueColumn.types';
+export { type KeyValueColumnPropsShared } from './KeyValueColumn.types.js';

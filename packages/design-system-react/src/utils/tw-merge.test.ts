@@ -1,5 +1,5 @@
 /* eslint-disable tailwindcss/no-contradicting-classname */
-import { twMerge } from './tw-merge';
+import { twMerge } from './tw-merge.js';
 
 describe('twMerge utility', () => {
   describe('text color conflicts', () => {

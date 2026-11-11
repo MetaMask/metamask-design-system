@@ -4,7 +4,7 @@ import { render, renderHook } from '@testing-library/react-native';
 import React, { createRef } from 'react';
 import type { View } from 'react-native';
 
-import { SectionDivider } from './SectionDivider';
+import { SectionDivider } from './SectionDivider.js';
 
 const ROOT_TEST_ID = 'section-divider';
 

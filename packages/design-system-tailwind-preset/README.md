@@ -21,11 +21,13 @@ To use the MetaMask Design System Tailwind CSS preset in your project, follow th
 
 1. Install the package as described in the Installation section above.
 
-2. In your `tailwind.config.js` file, import and use the preset:
+2. In your `tailwind.config.js` file, import and use the preset. The package is ESM-only, so `require()` returns the module namespace and the preset is `default`:
 
 ```javascript
+const designSystemPreset = require('@metamask/design-system-tailwind-preset');
+
 module.exports = {
-  presets: [require('@metamask/design-system-tailwind-preset')],
+  presets: [designSystemPreset.default],
   // ...
 };
 ```
@@ -44,8 +46,10 @@ module.exports = {
 You can override or extend the preset's configurations in your `tailwind.config.js` file:
 
 ```javascript
+const designSystemPreset = require('@metamask/design-system-tailwind-preset');
+
 module.exports = {
-  presets: [require('@metamask/design-system-tailwind-preset')],
+  presets: [designSystemPreset.default],
   theme: {
     extend: {
       // Your custom extensions...

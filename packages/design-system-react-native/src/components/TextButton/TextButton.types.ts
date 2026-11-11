@@ -1,4 +1,4 @@
-import type { TextProps } from '../Text';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * Props for `TextButton`, a text-only control for links and inline actions.

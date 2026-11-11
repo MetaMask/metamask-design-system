@@ -6,12 +6,12 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box } from '../Box';
-import { ButtonIcon } from '../ButtonIcon';
-import { Text, TextAlign } from '../Text';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Box } from '../Box/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
+import { Text, TextAlign } from '../Text/index.js';
 
-import type { PopoverHeaderProps } from './PopoverHeader.types';
+import type { PopoverHeaderProps } from './PopoverHeader.types.js';
 
 export const PopoverHeader = forwardRef<HTMLElement, PopoverHeaderProps>(
   (props, ref) => {

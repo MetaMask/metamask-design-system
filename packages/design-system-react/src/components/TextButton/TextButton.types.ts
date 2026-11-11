@@ -1,5 +1,5 @@
-import type { TextButtonSize } from '../../types';
-import type { ButtonBaseProps } from '../ButtonBase';
+import type { TextButtonSize } from '../../types/index.js';
+import type { ButtonBaseProps } from '../ButtonBase/index.js';
 
 export type TextButtonProps = Omit<
   ButtonBaseProps,

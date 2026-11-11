@@ -2,9 +2,9 @@ import { SensitiveTextLength } from '@metamask/design-system-shared';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Text } from '../../Text';
+import { Text } from '../../Text/index.js';
 
-import { TextOrChildren } from './TextOrChildren';
+import { TextOrChildren } from './TextOrChildren.js';
 
 describe('TextOrChildren', () => {
   it('renders Text component when children is a string', () => {

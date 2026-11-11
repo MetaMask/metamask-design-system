@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { ButtonBaseSize } from '../ButtonBase/ButtonBase.types';
+import { ButtonBaseSize } from '../ButtonBase/ButtonBase.types.js';
 
 /**
  * SelectButton size options (ADR-0003).

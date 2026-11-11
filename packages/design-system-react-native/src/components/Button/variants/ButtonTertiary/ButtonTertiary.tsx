@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 
-import { ButtonBase } from '../../../ButtonBase';
+import { ButtonBase } from '../../../ButtonBase/index.js';
 
-import type { ButtonTertiaryProps } from './ButtonTertiary.types';
+import type { ButtonTertiaryProps } from './ButtonTertiary.types.js';
 
 // Internal Button variant.
 // Consumers should use `Button` with `variant`.

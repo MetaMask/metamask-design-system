@@ -13,11 +13,11 @@ import {
 import {
   THUMB_GRIP_ANIMATION_DURATION,
   THUMB_GRIP_SCALE,
-} from './Slider.constants';
+} from './Slider.constants.js';
 import type {
   UseSliderGestureParams,
   UseSliderGestureResult,
-} from './Slider.types';
+} from './Slider.types.js';
 import {
   clampGesturePosition,
   getMarkHapticThresholds,
@@ -28,7 +28,7 @@ import {
   resolveTrackPercentToValue,
   resolveValueToTrackPercent,
   trackPercentToPosition,
-} from './Slider.utilities';
+} from './Slider.utilities.js';
 
 /**
  * Cap on remembered local updates used to spot late `value` echoes.
@@ -402,7 +402,7 @@ export function useSliderGesture(
 
   const gesture = useMemo(() => {
     // Gesture callbacks need explicit 'worklet' directives because this package
-    // ships pre-built dist compiled by ts-bridge. The consumer's Reanimated Babel
+    // ships pre-built dist compiled by tsc. The consumer's Reanimated Babel
     // plugin does not auto-detect the compiled namespaced Gesture form.
 
     const gripEasing = Easing.bezier(0.3, 0.8, 0.3, 1);

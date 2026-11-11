@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
-import { Icon, IconColor, IconName } from '../Icon';
-import { Text, TextVariant } from '../Text';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box/index.js';
+import { Icon, IconColor, IconName } from '../Icon/index.js';
+import { Text, TextVariant } from '../Text/index.js';
 
-import { HeaderRoot } from './HeaderRoot';
-import type { HeaderRootProps } from './HeaderRoot.types';
+import { HeaderRoot } from './HeaderRoot.js';
+import type { HeaderRootProps } from './HeaderRoot.types.js';
 
 const HeaderRootMeta = {
   title: 'Components/HeaderRoot',

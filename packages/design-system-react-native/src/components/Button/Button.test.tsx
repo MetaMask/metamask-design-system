@@ -2,7 +2,7 @@ import { ButtonVariant } from '@metamask/design-system-shared';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { Button } from './Button';
+import { Button } from './Button.js';
 
 describe('Button', () => {
   it('renders primary variant by default when no variant is provided', () => {

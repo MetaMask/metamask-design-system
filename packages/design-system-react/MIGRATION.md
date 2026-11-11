@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [ESM-only entry point](#esm-only-entry-point)
   - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
   - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
   - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
@@ -3634,6 +3635,14 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### ESM-only entry point
+
+<a id="esm-only-entry-point"></a>
+
+`@metamask/design-system-react` publishes a single ECMAScript module. `package.json` sets `"type": "module"`, and `exports` points at `./dist/index.js` with types at `./dist/index.d.ts`. The CommonJS `require` entry is removed.
+
+Import the package with `import`. On Node 24, `require()` can load the module. Named exports are properties of the returned module namespace.
 
 ### From version 0.49.0 to 0.50.0
 

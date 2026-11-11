@@ -6,11 +6,11 @@ import React, {
   useState,
 } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Input } from '../Input';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Input } from '../Input/index.js';
 
-import { TextFieldSize, TextFieldType } from './TextField.types';
-import type { TextFieldProps } from './TextField.types';
+import { TextFieldSize, TextFieldType } from './TextField.types.js';
+import type { TextFieldProps } from './TextField.types.js';
 
 const SIZE_CLASS: Record<TextFieldSize, string> = {
   [TextFieldSize.Sm]: 'h-8',

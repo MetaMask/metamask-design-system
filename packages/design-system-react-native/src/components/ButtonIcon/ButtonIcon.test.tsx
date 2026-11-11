@@ -7,8 +7,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
-import { ButtonIcon } from './ButtonIcon';
-import { TWCLASSMAP_BUTTONICON_SIZE_DIMENSION } from './ButtonIcon.constants';
+import { TWCLASSMAP_BUTTONICON_SIZE_DIMENSION } from './ButtonIcon.constants.js';
+import { ButtonIcon } from './ButtonIcon.js';
 
 describe('ButtonIcon', () => {
   it('renders default state correctly', () => {

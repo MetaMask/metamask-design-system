@@ -1,14 +1,14 @@
 import { BadgeCountSize } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Text, TextColor, FontWeight } from '../Text';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Text, TextColor, FontWeight } from '../Text/index.js';
 
 import {
   MAP_BADGECOUNT_SIZE_TEXTVARIANT,
   TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER,
-} from './BadgeCount.constants';
-import type { BadgeCountProps } from './BadgeCount.types';
+} from './BadgeCount.constants.js';
+import type { BadgeCountProps } from './BadgeCount.types.js';
 
 export const BadgeCount = forwardRef<HTMLDivElement, BadgeCountProps>(
   (

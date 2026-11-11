@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box } from '../Box';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Box } from '../Box/index.js';
 
-import type { HeaderBaseProps } from './HeaderBase.types';
+import type { HeaderBaseProps } from './HeaderBase.types.js';
 
 export const HeaderBase = forwardRef<HTMLDivElement, HeaderBaseProps>(
   (

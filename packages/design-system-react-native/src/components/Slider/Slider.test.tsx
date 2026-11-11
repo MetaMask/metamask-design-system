@@ -8,13 +8,13 @@ import {
 } from '@testing-library/react-native';
 import React from 'react';
 
-import { Slider } from './Slider';
 import {
   DOT_EDGE_INSET_PERCENT,
   DOT_EDGE_MAX_PERCENT,
   SLIDER_BOTTOM_PADDING,
   SLIDER_TRACK_INSET,
-} from './Slider.constants';
+} from './Slider.constants.js';
+import { Slider } from './Slider.js';
 import {
   buildColorStops,
   clampGesturePosition,
@@ -34,7 +34,7 @@ import {
   resolveTrackPercentToValue,
   resolveValueToTrackPercent,
   trackPercentToPosition,
-} from './Slider.utilities';
+} from './Slider.utilities.js';
 
 jest.mock('react-native-gesture-handler', () => {
   const createGestureMock = () => {

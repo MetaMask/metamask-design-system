@@ -7,7 +7,7 @@ import {
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 
-import { ButtonIcon } from './ButtonIcon';
+import { ButtonIcon } from './ButtonIcon.js';
 
 describe('ButtonIcon', () => {
   it('renders with default props', () => {

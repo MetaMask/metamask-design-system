@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { Icon, IconColor, IconName, IconSize } from '../Icon';
-import { TextField, TextFieldSize, TextFieldType } from '../TextField';
+import { twMerge } from '../../utils/tw-merge.js';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon/index.js';
+import { Icon, IconColor, IconName, IconSize } from '../Icon/index.js';
+import { TextField, TextFieldSize, TextFieldType } from '../TextField/index.js';
 
-import type { TextFieldSearchProps } from './TextFieldSearch.types';
+import type { TextFieldSearchProps } from './TextFieldSearch.types.js';
 
 export const TextFieldSearch = forwardRef<HTMLDivElement, TextFieldSearchProps>(
   (

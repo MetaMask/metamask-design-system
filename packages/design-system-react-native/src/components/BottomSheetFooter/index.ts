@@ -1,6 +1,6 @@
-export { BottomSheetFooter } from './BottomSheetFooter';
-export { ButtonsAlignment } from './BottomSheetFooter.types';
+export { BottomSheetFooter } from './BottomSheetFooter.js';
+export { ButtonsAlignment } from './BottomSheetFooter.types.js';
 export type {
   BottomSheetFooterProps,
   BottomSheetFooterButtonProps,
-} from './BottomSheetFooter.types';
+} from './BottomSheetFooter.types.js';

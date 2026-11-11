@@ -3,9 +3,9 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { IconSize } from '../Icon';
+import { IconSize } from '../Icon/index.js';
 
-import { IconAlert } from './IconAlert';
+import { IconAlert } from './IconAlert.js';
 
 import { IconAlertSeverity } from '.';
 

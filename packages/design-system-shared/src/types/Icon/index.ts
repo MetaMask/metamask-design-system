@@ -3,4 +3,4 @@ export {
   IconName,
   IconSize,
   type IconPropsShared,
-} from './Icon.types';
+} from './Icon.types.js';

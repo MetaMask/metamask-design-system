@@ -5,10 +5,10 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
+import { Box } from '../Box/index.js';
+import { BoxRow } from '../BoxRow/index.js';
 
-import type { TitleHubProps } from './TitleHub.types';
+import type { TitleHubProps } from './TitleHub.types.js';
 
 /**
  * Displays a required title row with optional amount, inline accessories, and bottom rows in a left-aligned layout.

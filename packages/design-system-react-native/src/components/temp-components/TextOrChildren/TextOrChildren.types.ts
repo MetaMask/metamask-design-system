@@ -1,6 +1,6 @@
 import type { TextOrChildrenPropsShared } from '@metamask/design-system-shared';
 
-import type { SensitiveTextProps } from '../../SensitiveText';
+import type { SensitiveTextProps } from '../../SensitiveText/index.js';
 
 /**
  * TextOrChildren component props.

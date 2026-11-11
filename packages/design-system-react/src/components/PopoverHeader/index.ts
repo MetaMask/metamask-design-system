@@ -1,2 +1,2 @@
-export { PopoverHeader } from './PopoverHeader';
-export type { PopoverHeaderProps } from './PopoverHeader.types';
+export { PopoverHeader } from './PopoverHeader.js';
+export type { PopoverHeaderProps } from './PopoverHeader.types.js';

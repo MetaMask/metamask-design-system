@@ -5,16 +5,16 @@ import {
 import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Text, FontWeight, TextVariant, TextColor } from '../Text';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Text, FontWeight, TextVariant, TextColor } from '../Text/index.js';
 
 import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
-} from './AvatarBase.constants';
-import type { AvatarBaseProps } from './AvatarBase.types';
+} from './AvatarBase.constants.js';
+import type { AvatarBaseProps } from './AvatarBase.types.js';
 
 export const AvatarBase = forwardRef<HTMLDivElement, AvatarBaseProps>(
   (

@@ -12,13 +12,13 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Box } from '../Box/index.js';
+import { Button } from '../Button/index.js';
+import { Icon } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { Content } from './Content';
-import type { ContentProps } from './Content.types';
+import { Content } from './Content.js';
+import type { ContentProps } from './Content.types.js';
 
 const meta: Meta<ContentProps> = {
   title: 'Components/Content',

@@ -1,1 +1,1 @@
-export { type BadgeNetworkPropsShared } from './BadgeNetwork.types';
+export { type BadgeNetworkPropsShared } from './BadgeNetwork.types.js';

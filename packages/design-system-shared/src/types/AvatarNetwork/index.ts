@@ -1,4 +1,4 @@
 export {
   AvatarNetworkSize,
   type AvatarNetworkPropsShared,
-} from './AvatarNetwork.types';
+} from './AvatarNetwork.types.js';

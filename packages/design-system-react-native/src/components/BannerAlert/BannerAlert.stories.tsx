@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
-import { IconName } from '../Icon';
-import { Text } from '../Text';
+import { IconName } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { BannerAlert } from './BannerAlert';
-import type { BannerAlertProps } from './BannerAlert.types';
+import { BannerAlert } from './BannerAlert.js';
+import type { BannerAlertProps } from './BannerAlert.types.js';
 
 import { BannerAlertSeverity } from '.';
 

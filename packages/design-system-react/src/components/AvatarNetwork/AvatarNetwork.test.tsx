@@ -6,9 +6,9 @@ import {
   TWCLASSMAP_AVATARBASE_SIZE_DIMENSION,
   TWCLASSMAP_AVATARBASE_SIZE_BORDER,
   TWCLASSMAP_AVATARBASE_HASBORDER_SIZE_DIMENSION,
-} from '../AvatarBase/AvatarBase.constants';
+} from '../AvatarBase/AvatarBase.constants.js';
 
-import { AvatarNetwork } from './AvatarNetwork';
+import { AvatarNetwork } from './AvatarNetwork.js';
 
 describe('AvatarNetwork', () => {
   it('forwards ref to the AvatarBase container', () => {

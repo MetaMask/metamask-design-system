@@ -1,2 +1,2 @@
-export { KeyValueColumn } from './KeyValueColumn';
-export type { KeyValueColumnProps } from './KeyValueColumn.types';
+export { KeyValueColumn } from './KeyValueColumn.js';
+export type { KeyValueColumnProps } from './KeyValueColumn.types.js';

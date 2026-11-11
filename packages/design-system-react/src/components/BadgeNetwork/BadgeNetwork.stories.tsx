@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
+import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev.js';
 
-import { BadgeNetwork } from './BadgeNetwork';
+import { BadgeNetwork } from './BadgeNetwork.js';
 import README from './README.mdx';
 
 const meta: Meta<typeof BadgeNetwork> = {

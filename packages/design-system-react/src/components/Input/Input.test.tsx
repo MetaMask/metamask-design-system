@@ -2,8 +2,8 @@ import { TextVariant } from '@metamask/design-system-shared';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { Input } from './Input';
-import type { InputProps } from './Input.types';
+import { Input } from './Input.js';
+import type { InputProps } from './Input.types.js';
 
 const TEST_ID = 'input';
 

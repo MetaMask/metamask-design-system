@@ -1,1 +1,1 @@
-export { type ListItemPropsShared } from './ListItem.types';
+export { type ListItemPropsShared } from './ListItem.types.js';

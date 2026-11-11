@@ -6,16 +6,16 @@ import {
   BoxBackgroundColor,
   BoxBorderColor,
   BoxFlexDirection,
-} from '../Box';
-import { Button, ButtonVariant } from '../Button';
-import { Modal } from '../Modal';
-import { ModalOverlay } from '../ModalOverlay';
-import { Text } from '../Text';
+} from '../Box/index.js';
+import { Button, ButtonVariant } from '../Button/index.js';
+import { Modal } from '../Modal/index.js';
+import { ModalOverlay } from '../ModalOverlay/index.js';
+import { Text } from '../Text/index.js';
 
-import { ModalContent } from './ModalContent';
-import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from './ModalContent.constants';
-import { ModalContentSize } from './ModalContent.types';
-import type { ModalContentProps } from './ModalContent.types';
+import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from './ModalContent.constants.js';
+import { ModalContent } from './ModalContent.js';
+import { ModalContentSize } from './ModalContent.types.js';
+import type { ModalContentProps } from './ModalContent.types.js';
 import README from './README.mdx';
 
 const meta: Meta<ModalContentProps> = {

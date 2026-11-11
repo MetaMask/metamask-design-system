@@ -1,11 +1,11 @@
-import type { AvatarAccountProps } from '../AvatarAccount';
-import { AvatarAccountVariant } from '../AvatarAccount';
-import type { AvatarFaviconProps } from '../AvatarFavicon';
-import { SAMPLE_AVATARFAVICON_URIS } from '../AvatarFavicon/AvatarFavicon.dev';
-import type { AvatarNetworkProps } from '../AvatarNetwork';
-import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev';
-import type { AvatarTokenProps } from '../AvatarToken';
-import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev';
+import type { AvatarAccountProps } from '../AvatarAccount/index.js';
+import { AvatarAccountVariant } from '../AvatarAccount/index.js';
+import { SAMPLE_AVATARFAVICON_URIS } from '../AvatarFavicon/AvatarFavicon.dev.js';
+import type { AvatarFaviconProps } from '../AvatarFavicon/index.js';
+import { SAMPLE_AVATARNETWORK_URIS } from '../AvatarNetwork/AvatarNetwork.dev.js';
+import type { AvatarNetworkProps } from '../AvatarNetwork/index.js';
+import { SAMPLE_AVATARTOKEN_URIS } from '../AvatarToken/AvatarToken.dev.js';
+import type { AvatarTokenProps } from '../AvatarToken/index.js';
 
 // Sample consts
 export const SAMPLE_AVATARGROUP_AVATARACCOUNTPROPSARR: AvatarAccountProps[] = [

@@ -1,7 +1,7 @@
 // External dependencies.
-import type { ButtonIconProps } from '../ButtonIcon';
-import type { HeaderBaseProps } from '../HeaderBase';
-import type { HeaderStandardCenterColumnFields } from '../temp-components/HeaderStandardCenterColumn';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import type { HeaderBaseProps } from '../HeaderBase/index.js';
+import type { HeaderStandardCenterColumnFields } from '../temp-components/HeaderStandardCenterColumn/index.js';
 
 /**
  * HeaderStandard component props.

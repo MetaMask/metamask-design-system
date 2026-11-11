@@ -5,11 +5,11 @@ import {
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { Modal } from '../Modal';
+import { Modal } from '../Modal/index.js';
 
-import { ModalContent } from './ModalContent';
-import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from './ModalContent.constants';
-import { ModalContentSize } from './ModalContent.types';
+import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from './ModalContent.constants.js';
+import { ModalContent } from './ModalContent.js';
+import { ModalContentSize } from './ModalContent.types.js';
 
 describe('ModalContent', () => {
   const onClose = jest.fn();

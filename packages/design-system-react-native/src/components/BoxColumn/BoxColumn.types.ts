@@ -1,7 +1,7 @@
 import type { BoxColumnPropsShared } from '@metamask/design-system-shared';
 
-import type { BoxProps } from '../Box/Box.types';
-import type { TextProps } from '../Text';
+import type { BoxProps } from '../Box/Box.types.js';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * BoxColumn component props.

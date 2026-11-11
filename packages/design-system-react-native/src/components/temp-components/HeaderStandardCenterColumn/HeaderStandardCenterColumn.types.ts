@@ -2,7 +2,7 @@
 import React from 'react';
 
 // External dependencies.
-import type { TextProps } from '../../Text';
+import type { TextProps } from '../../Text/index.js';
 
 /**
  * Shared title/subtitle fields for header center content (see HeaderStandard, HeaderStandardAnimated).

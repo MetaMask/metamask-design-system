@@ -9,14 +9,14 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { AvatarToken } from '../AvatarToken';
-import { Box } from '../Box';
-import { ButtonIcon } from '../ButtonIcon';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { AvatarToken } from '../AvatarToken/index.js';
+import { Box } from '../Box/index.js';
+import { ButtonIcon } from '../ButtonIcon/index.js';
+import { Icon } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
-import { HeaderSubpage } from './HeaderSubpage';
-import type { HeaderSubpageProps } from './HeaderSubpage.types';
+import { HeaderSubpage } from './HeaderSubpage.js';
+import type { HeaderSubpageProps } from './HeaderSubpage.types.js';
 import README from './README.mdx';
 
 const ETH_TITLE = 'Ethereum';

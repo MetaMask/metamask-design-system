@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { SensitiveText } from '../../SensitiveText';
+import { SensitiveText } from '../../SensitiveText/index.js';
 
-import type { TextOrChildrenProps } from './TextOrChildren.types';
+import type { TextOrChildrenProps } from './TextOrChildren.types.js';
 
 export const TextOrChildren = ({
   children,

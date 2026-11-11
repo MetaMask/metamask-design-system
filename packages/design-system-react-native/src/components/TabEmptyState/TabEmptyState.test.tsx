@@ -2,9 +2,9 @@ import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { Text } from 'react-native';
 
-import { Icon, IconName, IconSize } from '../Icon';
+import { Icon, IconName, IconSize } from '../Icon/index.js';
 
-import { TabEmptyState } from './TabEmptyState';
+import { TabEmptyState } from './TabEmptyState.js';
 
 describe('TabEmptyState', () => {
   const mockOnAction = jest.fn();

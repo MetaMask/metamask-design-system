@@ -8,17 +8,17 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box } from '../Box';
-import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Box } from '../Box/index.js';
+import { Icon } from '../Icon/index.js';
+import { Text } from '../Text/index.js';
 
 import {
   MAP_TAG_SEVERITY_BACKGROUND,
   MAP_TAG_SEVERITY_ICON_COLOR,
   MAP_TAG_SEVERITY_TEXT_COLOR,
-} from './Tag.constants';
-import type { TagProps } from './Tag.types';
+} from './Tag.constants.js';
+import type { TagProps } from './Tag.types.js';
 
 const isTextContent = (content: React.ReactNode): content is string | number =>
   typeof content === 'string' || typeof content === 'number';

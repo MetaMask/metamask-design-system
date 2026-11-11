@@ -3,9 +3,9 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { IconName } from '../Icon';
+import { IconName } from '../Icon/index.js';
 
-import { TextButton } from './TextButton';
+import { TextButton } from './TextButton.js';
 
 import { TextButtonSize } from '.';
 

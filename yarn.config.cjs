@@ -93,8 +93,7 @@ module.exports = defineConfig({
         // All non-root packages must have a license, defaulting to MIT.
         await expectWorkspaceLicense(workspace);
 
-        // All non-root packages must set up ESM- and CommonJS-compatible
-        // exports correctly.
+        // All non-root packages must set up an ESM-only entry point.
         expectCorrectWorkspaceExports(workspace);
 
         if (isPrivate) {
@@ -481,37 +480,21 @@ async function expectWorkspaceLicense(workspace) {
  * @param {Workspace} workspace - The workspace to check.
  */
 function expectCorrectWorkspaceExports(workspace) {
-  // All non-root packages must provide the location of the ESM-compatible
-  // JavaScript entrypoint and its matching type declaration file.
-  expectWorkspaceField(
-    workspace,
-    'exports["."].import.types',
-    './dist/index.d.mts',
-  );
-  expectWorkspaceField(
-    workspace,
-    'exports["."].import.default',
-    './dist/index.mjs',
-  );
+  // Published packages are ESM. The root package and Storybook apps are
+  // excluded by the caller, because their config files are CommonJS.
+  expectWorkspaceField(workspace, 'type', 'module');
 
-  // All non-root package must provide the location of the CommonJS-compatible
-  // entrypoint and its matching type declaration file.
-  expectWorkspaceField(
-    workspace,
-    'exports["."].require.types',
-    './dist/index.d.cts',
-  );
-  expectWorkspaceField(
-    workspace,
-    'exports["."].require.default',
-    './dist/index.cjs',
-  );
-  expectWorkspaceField(workspace, 'main', './dist/index.cjs');
-  expectWorkspaceField(workspace, 'types', './dist/index.d.cts');
+  // All non-root packages must provide the ESM entrypoint and its types.
+  expectWorkspaceField(workspace, 'exports["."].types', './dist/index.d.ts');
+  expectWorkspaceField(workspace, 'exports["."].default', './dist/index.js');
 
-  // Types should not be set in the export object directly, but rather in the
-  // `import` and `require` subfields.
-  expectWorkspaceField(workspace, 'exports["."].types', null);
+  // Packages should not provide separate CommonJS and ESM conditions, or the
+  // legacy main/types/module fields.
+  expectWorkspaceField(workspace, 'exports["."].import', null);
+  expectWorkspaceField(workspace, 'exports["."].require', null);
+  expectWorkspaceField(workspace, 'main', null);
+  expectWorkspaceField(workspace, 'types', null);
+  expectWorkspaceField(workspace, 'module', null);
 
   // All non-root packages must export a `package.json` file.
   expectWorkspaceField(

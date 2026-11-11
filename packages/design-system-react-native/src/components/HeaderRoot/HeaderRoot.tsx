@@ -4,13 +4,13 @@ import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // External dependencies.
-import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
-import { BoxRow } from '../BoxRow';
-import { ButtonIcon, ButtonIconSize } from '../ButtonIcon';
-import { TextVariant } from '../Text';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../Box/index.js';
+import { BoxRow } from '../BoxRow/index.js';
+import { ButtonIcon, ButtonIconSize } from '../ButtonIcon/index.js';
+import { TextVariant } from '../Text/index.js';
 
 // Internal dependencies.
-import type { HeaderRootProps } from './HeaderRoot.types';
+import type { HeaderRootProps } from './HeaderRoot.types.js';
 
 export const HeaderRoot = ({
   children,

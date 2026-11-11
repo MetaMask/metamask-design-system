@@ -3,8 +3,8 @@ import React from 'react';
 import { Image } from 'react-native';
 
 // @ts-ignore
-import type { BlockiesProps } from './Blockies.types';
-import { toDataUrl } from './Blockies.utilities';
+import type { BlockiesProps } from './Blockies.types.js';
+import { toDataUrl } from './Blockies.utilities.js';
 
 export const Blockies = ({ address, size = 32, ...props }: BlockiesProps) => {
   // Extract the account address from CAIP-10 format if needed

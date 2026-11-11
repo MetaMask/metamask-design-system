@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { Skeleton } from './Skeleton';
+import { Skeleton } from './Skeleton.js';
 
 describe('Skeleton', () => {
   it('renders the skeleton container when no children are provided', () => {

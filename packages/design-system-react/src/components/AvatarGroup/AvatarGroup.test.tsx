@@ -5,12 +5,12 @@ import {
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { AvatarAccountVariant } from '../AvatarAccount';
-import { TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE } from '../AvatarBase/AvatarBase.constants';
-import { TextColor } from '../Text';
+import { AvatarAccountVariant } from '../AvatarAccount/index.js';
+import { TWCLASSMAP_AVATARBASE_SIZE_BORDERRADIUSS_SQUARE } from '../AvatarBase/AvatarBase.constants.js';
+import { TextColor } from '../Text/index.js';
 
-import { AvatarGroup } from './AvatarGroup';
-import { AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP } from './AvatarGroup.constants';
+import { AVATAR_GROUP_SIZE_NEGATIVESPACEBETWEENAVATARS_MAP } from './AvatarGroup.constants.js';
+import { AvatarGroup } from './AvatarGroup.js';
 
 describe('AvatarGroup', () => {
   it('forwards ref to the root <div>', () => {

@@ -5,9 +5,16 @@ import {
 import React from 'react';
 import { View } from 'react-native';
 import type { ViewStyle } from 'react-native';
-import RNJazzicon from 'react-native-jazzicon';
+import RNJazziconModule from 'react-native-jazzicon';
 
-import type { JazziconProps } from './Jazzicon.types';
+import type { JazziconProps } from './Jazzicon.types.js';
+
+// `react-native-jazzicon` is CommonJS that sets `exports.default`. Node-style
+// ESM interop (Node, Vite, webpack) returns the whole `module.exports` object
+// as the default import, while Metro and Babel unwrap `default`.
+const RNJazzicon =
+  (RNJazziconModule as unknown as { default?: typeof RNJazziconModule })
+    .default ?? RNJazziconModule;
 
 export const Jazzicon = ({ testID, address, ...props }: JazziconProps) => {
   // Extract the account address from CAIP-10 format if needed

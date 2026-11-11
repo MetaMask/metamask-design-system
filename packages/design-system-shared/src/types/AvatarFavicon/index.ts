@@ -1,4 +1,4 @@
 export {
   AvatarFaviconSize,
   type AvatarFaviconPropsShared,
-} from './AvatarFavicon.types';
+} from './AvatarFavicon.types.js';

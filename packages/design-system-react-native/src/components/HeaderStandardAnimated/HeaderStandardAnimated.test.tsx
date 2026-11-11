@@ -4,7 +4,7 @@ import React from 'react';
 import type { SharedValue } from 'react-native-reanimated';
 
 // Internal dependencies.
-import { HeaderStandardAnimated } from './HeaderStandardAnimated';
+import { HeaderStandardAnimated } from './HeaderStandardAnimated.js';
 
 jest.mock('react-native-reanimated', () => {
   const ReanimatedModule = jest.requireActual('react-native-reanimated/mock');

@@ -1,3 +1,3 @@
-export { ButtonHero } from './ButtonHero';
-export type { ButtonHeroProps } from './ButtonHero.types';
+export { ButtonHero } from './ButtonHero.js';
+export type { ButtonHeroProps } from './ButtonHero.types.js';
 export { ButtonHeroSize } from '@metamask/design-system-shared';

@@ -8,10 +8,10 @@ import {
 import React from 'react';
 import { Text } from 'react-native';
 
-import { IconName } from '../Icon';
-import { TextVariant } from '../Text';
+import { IconName } from '../Icon/index.js';
+import { TextVariant } from '../Text/index.js';
 
-import { KeyValueColumn } from './KeyValueColumn';
+import { KeyValueColumn } from './KeyValueColumn.js';
 
 const stringTruncationCases = [
   { role: 'key', textMatch: 'K' },

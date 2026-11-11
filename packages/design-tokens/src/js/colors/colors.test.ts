@@ -1,6 +1,6 @@
-import { lightTheme, darkTheme } from '../themes';
+import { lightTheme, darkTheme } from '../themes/index.js';
 
-import { colors } from './colors';
+import { colors } from './colors.js';
 
 describe('Colors', () => {
   describe('light theme', () => {

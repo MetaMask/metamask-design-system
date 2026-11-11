@@ -1,6 +1,6 @@
 import type { ListItemMultiSelectPropsShared } from '@metamask/design-system-shared';
 
-import type { ListItemProps } from '../ListItem/ListItem.types';
+import type { ListItemProps } from '../ListItem/ListItem.types.js';
 
 type ListItemInteractiveProps = Extract<ListItemProps, { isInteractive: true }>;
 

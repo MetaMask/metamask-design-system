@@ -5,11 +5,11 @@ import {
 import { render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { BadgeStatus } from './BadgeStatus';
 import {
   CLASSMAP_BADGESTATUS_SIZE,
   CLASSMAP_BADGESTATUS_STATUS_CIRCLE,
-} from './BadgeStatus.constants';
+} from './BadgeStatus.constants.js';
+import { BadgeStatus } from './BadgeStatus.js';
 
 describe('BadgeStatus', () => {
   it('renders with default props', () => {

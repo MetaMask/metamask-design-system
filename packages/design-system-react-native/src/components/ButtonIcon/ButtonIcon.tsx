@@ -7,14 +7,14 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useState } from 'react';
 import type { GestureResponderEvent } from 'react-native';
 
-import { Icon } from '../Icon';
-import { ButtonAnimated } from '../temp-components/ButtonAnimated';
+import { Icon } from '../Icon/index.js';
+import { ButtonAnimated } from '../temp-components/ButtonAnimated/index.js';
 
 import {
   MAP_BUTTONICON_SIZE_ICONSIZE,
   TWCLASSMAP_BUTTONICON_SIZE_DIMENSION,
-} from './ButtonIcon.constants';
-import type { ButtonIconProps } from './ButtonIcon.types';
+} from './ButtonIcon.constants.js';
+import type { ButtonIconProps } from './ButtonIcon.types.js';
 
 export const ButtonIcon = ({
   size = ButtonIconSize.Md,

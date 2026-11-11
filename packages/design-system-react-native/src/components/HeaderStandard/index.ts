@@ -1,2 +1,2 @@
-export { HeaderStandard } from './HeaderStandard';
-export type { HeaderStandardProps } from './HeaderStandard.types';
+export { HeaderStandard } from './HeaderStandard.js';
+export type { HeaderStandardProps } from './HeaderStandard.types.js';

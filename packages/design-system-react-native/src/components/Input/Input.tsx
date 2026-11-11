@@ -11,10 +11,10 @@ import { Platform, TextInput } from 'react-native';
 import {
   TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT,
   TWCLASSMAP_TEXT_FONTWEIGHT,
-} from '../Text/Text.constants';
+} from '../Text/Text.constants.js';
 
-import { MAP_TEXT_VARIANT_INPUT_METRICS } from './Input.constants';
-import type { InputProps } from './Input.types';
+import { MAP_TEXT_VARIANT_INPUT_METRICS } from './Input.constants.js';
+import type { InputProps } from './Input.types.js';
 
 export const Input = forwardRef<TextInput, InputProps>(
   (

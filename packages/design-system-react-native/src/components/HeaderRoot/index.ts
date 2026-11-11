@@ -1,2 +1,2 @@
-export { HeaderRoot } from './HeaderRoot';
-export type { HeaderRootProps } from './HeaderRoot.types';
+export { HeaderRoot } from './HeaderRoot.js';
+export type { HeaderRootProps } from './HeaderRoot.types.js';

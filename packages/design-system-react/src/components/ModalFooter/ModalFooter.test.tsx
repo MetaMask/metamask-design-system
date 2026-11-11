@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { ModalFooter } from './ModalFooter';
-import { ButtonsAlignment } from './ModalFooter.types';
+import { ModalFooter } from './ModalFooter.js';
+import { ButtonsAlignment } from './ModalFooter.types.js';
 
 describe('ModalFooter', () => {
   it('renders without crashing', () => {

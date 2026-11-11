@@ -1,10 +1,10 @@
 import type { BannerBasePropsShared } from '@metamask/design-system-shared';
 import type { GestureResponderEvent } from 'react-native';
 
-import type { BoxProps } from '../Box';
-import type { ButtonProps } from '../Button';
-import type { ButtonIconProps } from '../ButtonIcon';
-import type { TextProps } from '../Text';
+import type { BoxProps } from '../Box/index.js';
+import type { ButtonProps } from '../Button/index.js';
+import type { ButtonIconProps } from '../ButtonIcon/index.js';
+import type { TextProps } from '../Text/index.js';
 
 type BannerBaseActionButtonProps = Omit<
   Partial<ButtonProps>,

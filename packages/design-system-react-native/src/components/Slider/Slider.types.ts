@@ -7,7 +7,7 @@ import type { ViewProps } from 'react-native';
 import type { Gesture } from 'react-native-gesture-handler';
 import type { useAnimatedStyle } from 'react-native-reanimated';
 
-import type { SliderColorStop } from './Slider.utilities';
+import type { SliderColorStop } from './Slider.utilities.js';
 
 export type { SliderMark, SliderMarkColor };
 

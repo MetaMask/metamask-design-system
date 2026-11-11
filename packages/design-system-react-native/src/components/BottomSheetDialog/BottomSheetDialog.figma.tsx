@@ -3,10 +3,10 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { BottomSheetFooter } from '../BottomSheetFooter';
-import { BottomSheetHeader } from '../BottomSheetHeader';
+import { BottomSheetFooter } from '../BottomSheetFooter/index.js';
+import { BottomSheetHeader } from '../BottomSheetHeader/index.js';
 
-import { BottomSheetDialog } from './BottomSheetDialog';
+import { BottomSheetDialog } from './BottomSheetDialog.js';
 
 figma.connect(
   BottomSheetDialog,

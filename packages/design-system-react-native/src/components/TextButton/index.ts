@@ -1,2 +1,2 @@
-export { TextButton } from './TextButton';
-export type { TextButtonProps } from './TextButton.types';
+export { TextButton } from './TextButton.js';
+export type { TextButtonProps } from './TextButton.types.js';

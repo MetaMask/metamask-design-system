@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { createRenderer } from '../../test-utils/createRenderer';
-import { AvatarNetwork } from '../AvatarNetwork';
+import { createRenderer } from '../../test-utils/createRenderer.js';
+import { AvatarNetwork } from '../AvatarNetwork/index.js';
 
-import { BadgeNetwork } from './BadgeNetwork';
+import { BadgeNetwork } from './BadgeNetwork.js';
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 

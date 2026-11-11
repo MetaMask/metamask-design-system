@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { brandColor } from './brandColor';
+import { brandColor } from './brandColor.js';
 
 const designTokens = require('../../figma/brandColors.json');
 

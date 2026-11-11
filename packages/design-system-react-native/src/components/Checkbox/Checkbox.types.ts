@@ -1,8 +1,8 @@
 import type { CheckboxPropsShared } from '@metamask/design-system-shared';
 import type { PressableProps, ViewProps } from 'react-native';
 
-import type { IconProps } from '../Icon';
-import type { TextProps } from '../Text';
+import type { IconProps } from '../Icon/index.js';
+import type { TextProps } from '../Text/index.js';
 
 /**
  * Checkbox component props.

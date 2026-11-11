@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Box, BoxFlexDirection } from '../Box';
-import { HelpText, HelpTextSeverity } from '../HelpText';
-import { Label } from '../Label';
-import { TextField } from '../TextField';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Box, BoxFlexDirection } from '../Box/index.js';
+import { HelpText, HelpTextSeverity } from '../HelpText/index.js';
+import { Label } from '../Label/index.js';
+import { TextField } from '../TextField/index.js';
 
-import type { FormTextFieldProps } from './FormTextField.types';
+import type { FormTextFieldProps } from './FormTextField.types.js';
 
 export const FormTextField = forwardRef<HTMLDivElement, FormTextFieldProps>(
   (

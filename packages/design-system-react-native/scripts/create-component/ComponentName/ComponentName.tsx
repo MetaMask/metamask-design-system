@@ -2,7 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View } from 'react-native';
 
-import type { ComponentNameProps } from './ComponentName.types';
+import type { ComponentNameProps } from './ComponentName.types.js';
 
 export const ComponentName: React.FC<ComponentNameProps> = ({
   children,

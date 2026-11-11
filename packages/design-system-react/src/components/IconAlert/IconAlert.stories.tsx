@@ -9,11 +9,11 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { Box } from '../Box';
-import type { BoxProps } from '../Box';
+import { Box } from '../Box/index.js';
+import type { BoxProps } from '../Box/index.js';
 
-import { IconAlert } from './IconAlert';
-import type { IconAlertProps } from './IconAlert.types';
+import { IconAlert } from './IconAlert.js';
+import type { IconAlertProps } from './IconAlert.types.js';
 import README from './README.mdx';
 
 const meta: Meta<IconAlertProps> = {

@@ -6,12 +6,12 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { ButtonBase } from '../ButtonBase';
-import { IconColor } from '../Icon';
-import { TextColor } from '../Text';
+import { ButtonBase } from '../ButtonBase/index.js';
+import { IconColor } from '../Icon/index.js';
+import { TextColor } from '../Text/index.js';
 
-import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from './SelectButton.constants';
-import type { SelectButtonProps } from './SelectButton.types';
+import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from './SelectButton.constants.js';
+import type { SelectButtonProps } from './SelectButton.types.js';
 
 export const SelectButton = ({
   placeholder,

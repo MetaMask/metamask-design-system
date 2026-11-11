@@ -2,14 +2,14 @@
 import React from 'react';
 
 // External dependencies.
-import { BoxAlignItems } from '../../Box';
-import { BoxColumn } from '../../BoxColumn';
-import type { TextProps } from '../../Text';
-import { FontWeight, TextColor, TextVariant } from '../../Text';
-import { TextOrChildren } from '../TextOrChildren';
+import { BoxAlignItems } from '../../Box/index.js';
+import { BoxColumn } from '../../BoxColumn/index.js';
+import type { TextProps } from '../../Text/index.js';
+import { FontWeight, TextColor, TextVariant } from '../../Text/index.js';
+import { TextOrChildren } from '../TextOrChildren/index.js';
 
 // Internal dependencies.
-import type { HeaderStandardCenterColumnProps } from './HeaderStandardCenterColumn.types';
+import type { HeaderStandardCenterColumnProps } from './HeaderStandardCenterColumn.types.js';
 
 export function HeaderStandardCenterColumn({
   title,

@@ -2,17 +2,17 @@ import { ButtonBaseSize, IconName } from '@metamask/design-system-shared';
 import { Slot, Slottable } from '@radix-ui/react-slot';
 import React, { forwardRef } from 'react';
 
-import { twMerge } from '../../utils/tw-merge';
-import { Icon } from '../Icon';
-import { Text, FontWeight, TextColor } from '../Text';
+import { twMerge } from '../../utils/tw-merge.js';
+import { Icon } from '../Icon/index.js';
+import { Text, FontWeight, TextColor } from '../Text/index.js';
 
 import {
   MAP_BUTTONBASE_SIZE_ICONSIZE,
   MAP_BUTTONBASE_SIZE_TEXT_VARIANT,
   getButtonBaseHorizontalPaddingTwClasses,
   TWCLASSMAP_BUTTONBASE_SIZE_DIMENSION,
-} from './ButtonBase.constants';
-import type { ButtonBaseProps } from './ButtonBase.types';
+} from './ButtonBase.constants.js';
+import type { ButtonBaseProps } from './ButtonBase.types.js';
 
 export const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
   (

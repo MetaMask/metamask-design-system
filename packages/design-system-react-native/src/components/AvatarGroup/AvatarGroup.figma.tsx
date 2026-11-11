@@ -3,7 +3,7 @@
 import figma from '@figma/code-connect';
 import React from 'react';
 
-import { AvatarGroup } from './AvatarGroup';
+import { AvatarGroup } from './AvatarGroup.js';
 
 import { AvatarGroupSize, AvatarGroupVariant } from '.';
 

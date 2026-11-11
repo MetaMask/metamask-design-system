@@ -1,7 +1,7 @@
 import type { BoxRowPropsShared } from '@metamask/design-system-shared';
 
-import type { BoxProps } from '../Box/Box.types';
-import type { SensitiveTextProps } from '../SensitiveText';
+import type { BoxProps } from '../Box/Box.types.js';
+import type { SensitiveTextProps } from '../SensitiveText/index.js';
 
 /**
  * BoxRow component props.

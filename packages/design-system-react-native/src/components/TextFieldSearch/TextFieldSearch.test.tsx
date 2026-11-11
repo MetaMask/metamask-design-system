@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
 
-import { Text } from '../Text';
+import { Text } from '../Text/index.js';
 
-import { TextFieldSearch } from './TextFieldSearch';
+import { TextFieldSearch } from './TextFieldSearch.js';
 
 describe('TextFieldSearch', () => {
   const mockOnPressClearButton = jest.fn();

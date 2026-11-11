@@ -1,10 +1,10 @@
 import { BadgeCountSize } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
-import { Box, BoxFlexDirection } from '../Box';
+import { Box, BoxFlexDirection } from '../Box/index.js';
 
-import { BadgeCount } from './BadgeCount';
-import type { BadgeCountProps } from './BadgeCount.types';
+import { BadgeCount } from './BadgeCount.js';
+import type { BadgeCountProps } from './BadgeCount.types.js';
 
 const meta: Meta<BadgeCountProps> = {
   title: 'Components/BadgeCount',
