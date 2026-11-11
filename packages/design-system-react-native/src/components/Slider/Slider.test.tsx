@@ -98,10 +98,17 @@ describe('Slider.utilities', () => {
       expect(defaultMapTrackPercentToValue(50, 10, 10, 1)).toBe(10);
     });
 
-    it('converts track percent to position and back', () => {
-      expect(trackPercentToPosition(50, 100)).toBe(50);
+    it('keeps the thumb on the track at both ends', () => {
+      const width = 200;
+      const thumbSize = 32;
+
+      expect(trackPercentToPosition(0, width)).toBe(thumbSize / 2);
+      expect(trackPercentToPosition(100, width)).toBe(width - thumbSize / 2);
+      expect(trackPercentToPosition(50, width)).toBe(width / 2);
       expect(trackPercentToPosition(0, 0)).toBe(0);
-      expect(positionToTrackPercent(50, 100)).toBe(50);
+      expect(positionToTrackPercent(thumbSize / 2, width)).toBe(0);
+      expect(positionToTrackPercent(width - thumbSize / 2, width)).toBe(100);
+      expect(positionToTrackPercent(width / 2, width)).toBe(50);
       expect(positionToTrackPercent(50, 0)).toBe(0);
     });
 
@@ -152,10 +159,11 @@ describe('Slider.utilities', () => {
       expect(clampTrackPercent(110)).toBe(100);
     });
 
-    it('clampGesturePosition clamps touch coordinates to track width', () => {
-      expect(clampGesturePosition(-5, 100)).toBe(0);
-      expect(clampGesturePosition(150, 100)).toBe(100);
+    it('clampGesturePosition keeps the thumb center on the track', () => {
+      expect(clampGesturePosition(-5, 100)).toBe(16);
+      expect(clampGesturePosition(150, 100)).toBe(84);
       expect(clampGesturePosition(50, 100)).toBe(50);
+      expect(clampGesturePosition(10, 0)).toBe(0);
     });
   });
 
@@ -643,10 +651,12 @@ describe('Slider', () => {
   describe('when trackInset is provided', () => {
     it('applies custom horizontal inset on root container', () => {
       const { getByTestId } = render(
-        <Slider {...defaultProps} trackInset={0} testID="slider-inset" />,
+        <Slider {...defaultProps} trackInset={12} testID="slider-inset" />,
       );
 
-      expect(getByTestId('slider-inset')).toHaveStyle({ marginHorizontal: 0 });
+      expect(getByTestId('slider-inset')).toHaveStyle({
+        marginHorizontal: 12,
+      });
     });
   });
 
