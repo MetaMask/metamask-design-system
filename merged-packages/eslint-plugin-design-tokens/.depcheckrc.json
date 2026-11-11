@@ -4,11 +4,16 @@
     "@lavamoat/preinstall-always-fail",
     "@metamask/auto-changelog",
     "@types/*",
-    "prettier-plugin-packagejson",
-    "ts-node",
-    "@yarnpkg/core",
-    "@yarnpkg/cli",
+    "@typescript-eslint/*",
+    "@yarnpkg/*",
     "clipanion",
-    "@yarnpkg/fslib"
+    "depcheck",
+    "eslint-config-*",
+    "eslint-import-resolver-typescript",
+    "eslint-plugin-*",
+    "jest-it-up",
+    "prettier-plugin-packagejson",
+    "typanion",
+    "typescript-eslint"
   ]
 }

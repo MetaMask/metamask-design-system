@@ -1,11 +1,11 @@
+import * as typescriptParser from '@typescript-eslint/parser';
 import { RuleTester } from 'eslint';
 
 import { preferThemeColorClassnames } from '../../src/rules/prefer-theme-color-classnames';
 
 const ruleTester = new RuleTester({
-  // eslint-disable-next-line no-restricted-globals
-  parser: require.resolve('@typescript-eslint/parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: typescriptParser,
     ecmaVersion: 2020,
     sourceType: 'module',
   },

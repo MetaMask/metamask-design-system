@@ -1,5 +1,10 @@
 import type { Rule } from 'eslint';
 
+type TemplateElement = Extract<
+  Rule.Node,
+  { type: 'TemplateLiteral' }
+>['quasis'][number];
+
 /**
  * Rule to encourage the use of theme color class names instead of literal color class names.
  */
@@ -89,7 +94,10 @@ export const preferThemeColorClassnames: Rule.RuleModule = {
      * @param value - The string value to check against the defined regex for discouraged color names. This could be the raw text from a Literal node or a segment of a TemplateLiteral node in the AST (Abstract Syntax Tree).
      * @param node - The AST node associated with the value; used for reporting the ESLint error. This node object is part of ESLint's traversal of JavaScript code and provides context like location and type, which are used in reporting and potentially fixing violations.
      */
-    function checkLiteralOrTemplateValue(value: string, node: any) {
+    function checkLiteralOrTemplateValue(
+      value: string,
+      node: Rule.Node | TemplateElement,
+    ) {
       // Return early if the string to be checked is empty or only whitespace
       if (!value.trim()) {
         return;
