@@ -120,22 +120,24 @@ Put MMDS workflows in **project** skills so cloud agents get them. Do not rely o
 - `reviewing-release-prs.md` - Release process
 - `package-migration-process-guide.md` - Infrequent migrations
 
-## Storybook MCP as Dynamic Context
+## Source of Truth for Consumer Repositories
 
-The three-layer model provides static guidance (rules, conventions, and process). Storybook MCP adds a dynamic context layer that agents can query at runtime.
+The three-layer model above is for agents working in this repository. In consumer repositories (MetaMask Extension and Mobile), the source of truth is the baseline below. Skills must work with no MCP server connected.
 
-### What this adds
+1. **Installed `@metamask/design-system-*` package types and exports.** The installed version is the contract for the code being changed. When sources disagree, the installed types win.
+2. **Hosted Storybook components manifests** (React and React Native). These track MMDS `main`, so confirm anything taken from them against the installed types before using it.
+3. **Component READMEs at the installed tag.** Open the README on GitHub at the per-package tag `@metamask/<package>@<version>`, using the version from the installed package `package.json`.
+4. **The consumer Tailwind config** that applies the MMDS preset in that repository.
 
-- Live component and docs metadata from Storybook manifests
-- Story-level examples that reduce prop/API hallucination
-- Optional story test execution and preview tooling when addon toolsets are enabled
+We don't host a Storybook MCP server yet, but the components manifests are hosted at https://metamask.github.io/metamask-design-system/manifests/components.json (React) and https://metamask.github.io/metamask-design-system/react-native/manifests/components.json (React Native). Skills must not depend on an MCP server.
 
-### Maintainers vs consumers
+### Maintainers (this repo)
 
-- **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation. Use the React endpoint at `http://localhost:6006/mcp` for `@metamask/design-system-react` and the React Native endpoint at `http://localhost:7007/mcp` for `@metamask/design-system-react-native`.
-- **Consumers (downstream repos):** Storybook MCP provides the highest value. Agents can discover components and props from a running or published Storybook without reading this repo's source.
+Continue using `.cursor/rules/` as the source of truth for conventions in this repository. Storybook MCP is an optional accelerator for story authoring and validation.
 
-Component manifests (static JSON, separate from the MCP endpoints above) use the same `v` / `components` / `meta` shape:
+### Component manifests
+
+Component manifests are static JSON and use the `v` / `components` / `meta` shape. Consumer repositories use the published URLs. Local paths are for agents working in this repository. Each entry's prop data is under `reactDocgenTypescript.props` (each prop has `type`), and React also publishes `manifests/docs.json` at https://metamask.github.io/metamask-design-system/manifests/docs.json, which React Native does not.
 
 **React:** Local — `apps/storybook-react/storybook-static/manifests/components.json` after `yarn build-storybook`, or `http://localhost:6006/manifests/components.json` while `yarn storybook` is running. Published — https://metamask.github.io/metamask-design-system/manifests/components.json
 

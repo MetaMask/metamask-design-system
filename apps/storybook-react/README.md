@@ -40,7 +40,7 @@ This endpoint helps AI agents work with the design system by exposing:
 - `preview-stories` to generate preview URLs for stories
 - `run-story-tests` to execute story tests (when supported by the Storybook setup)
 
-Maintainers can use these tools while authoring stories in this repo. Consumer repositories get the most value by connecting their agent clients to this endpoint (local) or a published Storybook MCP endpoint.
+Maintainers can use these tools while authoring stories in this repo. Consumer repositories use the baseline in [docs/ai-agents.md](../../docs/ai-agents.md): installed `@metamask/design-system-*` types and exports, the hosted components manifests, component READMEs at the installed tag, and the consumer Tailwind config. Storybook MCP is optional for them.
 
 ## Accessibility Testing
 
