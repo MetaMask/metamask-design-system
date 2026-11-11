@@ -37,7 +37,7 @@ const config = createConfig([
       'packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.stories.tsx',
       'packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.test.tsx',
       'packages/design-system-react-native/src/components/temp-components/ImageOrSvg/ImageOrSvg.tsx',
-      'packages/design-system-react-native/src/components/temp-components/Spinner/Spinner.tsx',
+      'packages/design-system-react-native/src/components/Spinner/Spinner.tsx',
       // storybook react
       'apps/storybook-react/.storybook/*.ts',
       'apps/storybook-react/.storybook/*.tsx',

@@ -299,8 +299,8 @@ export type {
   ImageOrSvgSrc,
 } from './temp-components/ImageOrSvg';
 
-export { Spinner } from './temp-components/Spinner';
-export type { SpinnerProps } from './temp-components/Spinner';
+export { Spinner } from './Spinner';
+export type { SpinnerProps } from './Spinner';
 
 export { BannerAlert, BannerAlertSeverity } from './BannerAlert';
 export type { BannerAlertProps } from './BannerAlert';
