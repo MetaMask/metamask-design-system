@@ -1,5 +1,7 @@
 # ESlint Plugin Design Tokens 🪙✨
 
+<table><tr><td><p align="center"><b>⚠️ PLEASE READ ⚠️</b></p><p align="center">This package is currently being migrated to our <a href="https://github.com/MetaMask/metamask-design-system"><code>metamask-design-system</code></a> monorepo. Please do not make any commits to this repository while this migration is taking place, as they will not be transferred over. Also, please re-open PRs that are under active development in the metamask module template.</p></td></tr></table>
+
 [![npm version](https://badge.fury.io/js/@metamask%2Feslint-plugin-design-tokens.svg)](https://npmjs.com/package/@metamask/eslint-plugin-design-tokens)
 
 ## `@metamask/eslint-plugin-design-tokens`
