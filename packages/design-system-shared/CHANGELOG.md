@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.45.0]
+
+### Added
+
+- Added Phosphor sports icons to `IconName` ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
+  - `Baseball`, `Basketball`, `Bicycle`, `BoxingGlove`, `Cricket`, `FlagCheckered`, `Football`, `GameController`, `Golf`, `Hockey`, `Horse`, `Medal`, `PingPong`, `SoccerBall`, and `TennisBall`
+
+## [0.44.0]
+
+### Changed
+
+- **BREAKING:** Removed `FontFamily.Accent` (`'accent'`, MM Sans) ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - The `FontFamily` type is now `'default' | 'hero'`
+  - Use `FontFamily.Hero` (Grotzec Cond Bold) instead
+  - See [Migration Guide](./MIGRATION.md#from-version-0430-to-0440)
+
+### Fixed
+
+- Fixed the `FeedPost` icon artwork to match the Phosphor icon style ([#1643](https://github.com/MetaMask/metamask-design-system/pull/1643))
+  - The plus and pencil have equal stroke weight, the pencil ends are rounded, and the plus is slightly larger with more clearance
+  - `IconName.FeedPost` is unchanged
+
+## [0.43.0]
+
+### Added
+
+- Added `FeedPost` to `IconName` ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
+
+## [0.42.0]
+
+### Added
+
+- Added `Pause` and `Play` to `IconName` ([#1612](https://github.com/MetaMask/metamask-design-system/pull/1612))
+
+## [0.41.0]
+
+### Added
+
+- Added `TextVariant.DisplayXl` (`'display-xl'`) ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+
+### Changed
+
+- Updated `FontFamily.Hero` to represent Grotzec Cond Bold ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - The value remains `'hero'`
+- Updated the `Share` icon artwork to a box-and-arrow glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
+
 ## [0.40.0]
 
 ### Added
@@ -391,7 +437,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.40.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.0...HEAD
+[0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.44.0...@metamask/design-system-shared@0.45.0
+[0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.43.0...@metamask/design-system-shared@0.44.0
+[0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.42.0...@metamask/design-system-shared@0.43.0
+[0.42.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.41.0...@metamask/design-system-shared@0.42.0
+[0.41.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.40.0...@metamask/design-system-shared@0.41.0
 [0.40.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.39.0...@metamask/design-system-shared@0.40.0
 [0.39.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.38.0...@metamask/design-system-shared@0.39.0
 [0.38.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.37.0...@metamask/design-system-shared@0.38.0

@@ -11,7 +11,7 @@ import { ScrollView } from 'react-native';
 import { Box } from '../Box/index.js';
 import { Button } from '../Button/index.js';
 import { IconSize } from '../Icon/index.js';
-import { Spinner } from '../temp-components/Spinner/index.js';
+import { Spinner } from '../Spinner/index.js';
 import { Text } from '../Text/index.js';
 
 // Internal dependencies.

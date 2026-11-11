@@ -2,6 +2,7 @@
  * Different Typography variants to be used as twrnc classNames
  */
 export type TypographyVariant =
+  | 'display-xl'
   | 'display-lg'
   | 'display-md'
   | 'heading-lg'
@@ -84,10 +85,7 @@ export type TypographyTailwindConfigProps = {
     'default-medium-italic': string;
     'default-bold': string;
     'default-bold-italic': string;
-    'accent-regular': string;
-    'accent-medium': string;
-    'accent-bold': string;
-    'hero-regular': string;
+    'hero-bold': string;
   };
   letterSpacing: Record<TypographyVariant, string>;
   lineHeight: Record<TypographyVariant, string>; // Make sure to include units - "40px" instead of "40"

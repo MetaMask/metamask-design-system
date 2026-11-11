@@ -26,8 +26,12 @@ import AttachMoney from './AttachMoney.js';
 import Backspace from './Backspace.js';
 import Ban from './Ban.js';
 import Bank from './Bank.js';
+import Baseball from './Baseball.js';
+import Basketball from './Basketball.js';
+import Bicycle from './Bicycle.js';
 import Book from './Book.js';
 import Bookmark from './Bookmark.js';
+import BoxingGlove from './BoxingGlove.js';
 import Bridge from './Bridge.js';
 import BuySell from './BuySell.js';
 import Calculator from './Calculator.js';
@@ -55,6 +59,7 @@ import Confirmation from './Confirmation.js';
 import Connect from './Connect.js';
 import CopySuccess from './CopySuccess.js';
 import Copy from './Copy.js';
+import Cricket from './Cricket.js';
 import Customize from './Customize.js';
 import Danger from './Danger.js';
 import Data from './Data.js';
@@ -73,27 +78,34 @@ import Extension from './Extension.js';
 import EyeSlash from './EyeSlash.js';
 import Eye from './Eye.js';
 import FaceId from './FaceId.js';
+import FeedPost from './FeedPost.js';
 import Feedback from './Feedback.js';
 import File from './File.js';
 import Filter from './Filter.js';
 import Fingerprint from './Fingerprint.js';
 import Fire from './Fire.js';
+import FlagCheckered from './FlagCheckered.js';
 import Flag from './Flag.js';
 import FlashFilled from './FlashFilled.js';
 import Flash from './Flash.js';
 import Flask from './Flask.js';
+import Football from './Football.js';
 import Forest from './Forest.js';
 import FullCircle from './FullCircle.js';
+import GameController from './GameController.js';
 import Gas from './Gas.js';
 import Gift from './Gift.js';
 import GlobalSearch from './GlobalSearch.js';
 import Global from './Global.js';
+import Golf from './Golf.js';
 import Hardware from './Hardware.js';
 import HeartStraightFilled from './HeartStraightFilled.js';
 import HeartStraight from './HeartStraight.js';
 import Hierarchy from './Hierarchy.js';
+import Hockey from './Hockey.js';
 import HomeFilled from './HomeFilled.js';
 import Home from './Home.js';
+import Horse from './Horse.js';
 import Image from './Image.js';
 import Infinity from './Infinity.js';
 import Info from './Info.js';
@@ -107,6 +119,7 @@ import LockSlash from './LockSlash.js';
 import Lock from './Lock.js';
 import Logout from './Logout.js';
 import Mail from './Mail.js';
+import Medal from './Medal.js';
 import Menu from './Menu.js';
 import Merge from './Merge.js';
 import MessageQuestion from './MessageQuestion.js';
@@ -123,10 +136,13 @@ import MusdFilled from './MusdFilled.js';
 import Musd from './Musd.js';
 import NoPhotography from './NoPhotography.js';
 import Notification from './Notification.js';
+import Pause from './Pause.js';
 import PeopleFilled from './PeopleFilled.js';
 import People from './People.js';
 import Pin from './Pin.js';
+import PingPong from './PingPong.js';
 import Plant from './Plant.js';
+import Play from './Play.js';
 import Plug from './Plug.js';
 import PopUp from './PopUp.js';
 import Predictions from './Predictions.js';
@@ -156,6 +172,7 @@ import SidePanel from './SidePanel.js';
 import Sms from './Sms.js';
 import SnapsMobile from './SnapsMobile.js';
 import Snaps from './Snaps.js';
+import SoccerBall from './SoccerBall.js';
 import Sparkle from './Sparkle.js';
 import Speed from './Speed.js';
 import Speedometer from './Speedometer.js';
@@ -166,6 +183,7 @@ import SwapHorizontal from './SwapHorizontal.js';
 import SwapVertical from './SwapVertical.js';
 import Tag from './Tag.js';
 import Telegram from './Telegram.js';
+import TennisBall from './TennisBall.js';
 import ThumbDownFilled from './ThumbDownFilled.js';
 import ThumbDown from './ThumbDown.js';
 import ThumbUpFilled from './ThumbUpFilled.js';
@@ -216,8 +234,12 @@ export const Icons = {
   Backspace,
   Ban,
   Bank,
+  Baseball,
+  Basketball,
+  Bicycle,
   Book,
   Bookmark,
+  BoxingGlove,
   Bridge,
   BuySell,
   Calculator,
@@ -245,6 +267,7 @@ export const Icons = {
   Connect,
   CopySuccess,
   Copy,
+  Cricket,
   Customize,
   Danger,
   Data,
@@ -263,27 +286,34 @@ export const Icons = {
   EyeSlash,
   Eye,
   FaceId,
+  FeedPost,
   Feedback,
   File,
   Filter,
   Fingerprint,
   Fire,
+  FlagCheckered,
   Flag,
   FlashFilled,
   Flash,
   Flask,
+  Football,
   Forest,
   FullCircle,
+  GameController,
   Gas,
   Gift,
   GlobalSearch,
   Global,
+  Golf,
   Hardware,
   HeartStraightFilled,
   HeartStraight,
   Hierarchy,
+  Hockey,
   HomeFilled,
   Home,
+  Horse,
   Image,
   Infinity,
   Info,
@@ -297,6 +327,7 @@ export const Icons = {
   Lock,
   Logout,
   Mail,
+  Medal,
   Menu,
   Merge,
   MessageQuestion,
@@ -313,10 +344,13 @@ export const Icons = {
   Musd,
   NoPhotography,
   Notification,
+  Pause,
   PeopleFilled,
   People,
   Pin,
+  PingPong,
   Plant,
+  Play,
   Plug,
   PopUp,
   Predictions,
@@ -346,6 +380,7 @@ export const Icons = {
   Sms,
   SnapsMobile,
   Snaps,
+  SoccerBall,
   Sparkle,
   Speed,
   Speedometer,
@@ -356,6 +391,7 @@ export const Icons = {
   SwapVertical,
   Tag,
   Telegram,
+  TennisBall,
   ThumbDownFilled,
   ThumbDown,
   ThumbUpFilled,

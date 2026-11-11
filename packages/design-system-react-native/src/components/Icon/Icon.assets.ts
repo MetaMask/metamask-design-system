@@ -26,8 +26,12 @@ import AttachMoneySVG from './assets/attach-money.svg';
 import BackspaceSVG from './assets/backspace.svg';
 import BanSVG from './assets/ban.svg';
 import BankSVG from './assets/bank.svg';
+import BaseballSVG from './assets/baseball.svg';
+import BasketballSVG from './assets/basketball.svg';
+import BicycleSVG from './assets/bicycle.svg';
 import BookSVG from './assets/book.svg';
 import BookmarkSVG from './assets/bookmark.svg';
+import BoxingGloveSVG from './assets/boxing-glove.svg';
 import BridgeSVG from './assets/bridge.svg';
 import BuySellSVG from './assets/buy-sell.svg';
 import CalculatorSVG from './assets/calculator.svg';
@@ -55,6 +59,7 @@ import ConfirmationSVG from './assets/confirmation.svg';
 import ConnectSVG from './assets/connect.svg';
 import CopySuccessSVG from './assets/copy-success.svg';
 import CopySVG from './assets/copy.svg';
+import CricketSVG from './assets/cricket.svg';
 import CustomizeSVG from './assets/customize.svg';
 import DangerSVG from './assets/danger.svg';
 import DataSVG from './assets/data.svg';
@@ -73,27 +78,34 @@ import ExtensionSVG from './assets/extension.svg';
 import EyeSlashSVG from './assets/eye-slash.svg';
 import EyeSVG from './assets/eye.svg';
 import FaceIdSVG from './assets/face-id.svg';
+import FeedPostSVG from './assets/feed-post.svg';
 import FeedbackSVG from './assets/feedback.svg';
 import FileSVG from './assets/file.svg';
 import FilterSVG from './assets/filter.svg';
 import FingerprintSVG from './assets/fingerprint.svg';
 import FireSVG from './assets/fire.svg';
+import FlagCheckeredSVG from './assets/flag-checkered.svg';
 import FlagSVG from './assets/flag.svg';
 import FlashFilledSVG from './assets/flash-filled.svg';
 import FlashSVG from './assets/flash.svg';
 import FlaskSVG from './assets/flask.svg';
+import FootballSVG from './assets/football.svg';
 import ForestSVG from './assets/forest.svg';
 import FullCircleSVG from './assets/full-circle.svg';
+import GameControllerSVG from './assets/game-controller.svg';
 import GasSVG from './assets/gas.svg';
 import GiftSVG from './assets/gift.svg';
 import GlobalSearchSVG from './assets/global-search.svg';
 import GlobalSVG from './assets/global.svg';
+import GolfSVG from './assets/golf.svg';
 import HardwareSVG from './assets/hardware.svg';
 import HeartStraightFilledSVG from './assets/heart-straight-filled.svg';
 import HeartStraightSVG from './assets/heart-straight.svg';
 import HierarchySVG from './assets/hierarchy.svg';
+import HockeySVG from './assets/hockey.svg';
 import HomeFilledSVG from './assets/home-filled.svg';
 import HomeSVG from './assets/home.svg';
+import HorseSVG from './assets/horse.svg';
 import ImageSVG from './assets/image.svg';
 import InfinitySVG from './assets/infinity.svg';
 import InfoSVG from './assets/info.svg';
@@ -107,6 +119,7 @@ import LockSlashSVG from './assets/lock-slash.svg';
 import LockSVG from './assets/lock.svg';
 import LogoutSVG from './assets/logout.svg';
 import MailSVG from './assets/mail.svg';
+import MedalSVG from './assets/medal.svg';
 import MenuSVG from './assets/menu.svg';
 import MergeSVG from './assets/merge.svg';
 import MessageQuestionSVG from './assets/message-question.svg';
@@ -123,10 +136,13 @@ import MusdFilledSVG from './assets/musd-filled.svg';
 import MusdSVG from './assets/musd.svg';
 import NoPhotographySVG from './assets/no-photography.svg';
 import NotificationSVG from './assets/notification.svg';
+import PauseSVG from './assets/pause.svg';
 import PeopleFilledSVG from './assets/people-filled.svg';
 import PeopleSVG from './assets/people.svg';
 import PinSVG from './assets/pin.svg';
+import PingPongSVG from './assets/ping-pong.svg';
 import PlantSVG from './assets/plant.svg';
+import PlaySVG from './assets/play.svg';
 import PlugSVG from './assets/plug.svg';
 import PopUpSVG from './assets/pop-up.svg';
 import PredictionsSVG from './assets/predictions.svg';
@@ -156,6 +172,7 @@ import SidePanelSVG from './assets/side-panel.svg';
 import SmsSVG from './assets/sms.svg';
 import SnapsMobileSVG from './assets/snaps-mobile.svg';
 import SnapsSVG from './assets/snaps.svg';
+import SoccerBallSVG from './assets/soccer-ball.svg';
 import SparkleSVG from './assets/sparkle.svg';
 import SpeedSVG from './assets/speed.svg';
 import SpeedometerSVG from './assets/speedometer.svg';
@@ -166,6 +183,7 @@ import SwapHorizontalSVG from './assets/swap-horizontal.svg';
 import SwapVerticalSVG from './assets/swap-vertical.svg';
 import TagSVG from './assets/tag.svg';
 import TelegramSVG from './assets/telegram.svg';
+import TennisBallSVG from './assets/tennis-ball.svg';
 import ThumbDownFilledSVG from './assets/thumb-down-filled.svg';
 import ThumbDownSVG from './assets/thumb-down.svg';
 import ThumbUpFilledSVG from './assets/thumb-up-filled.svg';
@@ -220,8 +238,12 @@ export const assetByIconName: AssetByIconName = {
   Backspace: BackspaceSVG,
   Ban: BanSVG,
   Bank: BankSVG,
+  Baseball: BaseballSVG,
+  Basketball: BasketballSVG,
+  Bicycle: BicycleSVG,
   Book: BookSVG,
   Bookmark: BookmarkSVG,
+  BoxingGlove: BoxingGloveSVG,
   Bridge: BridgeSVG,
   BuySell: BuySellSVG,
   Calculator: CalculatorSVG,
@@ -249,6 +271,7 @@ export const assetByIconName: AssetByIconName = {
   Connect: ConnectSVG,
   CopySuccess: CopySuccessSVG,
   Copy: CopySVG,
+  Cricket: CricketSVG,
   Customize: CustomizeSVG,
   Danger: DangerSVG,
   Data: DataSVG,
@@ -267,27 +290,34 @@ export const assetByIconName: AssetByIconName = {
   EyeSlash: EyeSlashSVG,
   Eye: EyeSVG,
   FaceId: FaceIdSVG,
+  FeedPost: FeedPostSVG,
   Feedback: FeedbackSVG,
   File: FileSVG,
   Filter: FilterSVG,
   Fingerprint: FingerprintSVG,
   Fire: FireSVG,
+  FlagCheckered: FlagCheckeredSVG,
   Flag: FlagSVG,
   FlashFilled: FlashFilledSVG,
   Flash: FlashSVG,
   Flask: FlaskSVG,
+  Football: FootballSVG,
   Forest: ForestSVG,
   FullCircle: FullCircleSVG,
+  GameController: GameControllerSVG,
   Gas: GasSVG,
   Gift: GiftSVG,
   GlobalSearch: GlobalSearchSVG,
   Global: GlobalSVG,
+  Golf: GolfSVG,
   Hardware: HardwareSVG,
   HeartStraightFilled: HeartStraightFilledSVG,
   HeartStraight: HeartStraightSVG,
   Hierarchy: HierarchySVG,
+  Hockey: HockeySVG,
   HomeFilled: HomeFilledSVG,
   Home: HomeSVG,
+  Horse: HorseSVG,
   Image: ImageSVG,
   Infinity: InfinitySVG,
   Info: InfoSVG,
@@ -301,6 +331,7 @@ export const assetByIconName: AssetByIconName = {
   Lock: LockSVG,
   Logout: LogoutSVG,
   Mail: MailSVG,
+  Medal: MedalSVG,
   Menu: MenuSVG,
   Merge: MergeSVG,
   MessageQuestion: MessageQuestionSVG,
@@ -317,10 +348,13 @@ export const assetByIconName: AssetByIconName = {
   Musd: MusdSVG,
   NoPhotography: NoPhotographySVG,
   Notification: NotificationSVG,
+  Pause: PauseSVG,
   PeopleFilled: PeopleFilledSVG,
   People: PeopleSVG,
   Pin: PinSVG,
+  PingPong: PingPongSVG,
   Plant: PlantSVG,
+  Play: PlaySVG,
   Plug: PlugSVG,
   PopUp: PopUpSVG,
   Predictions: PredictionsSVG,
@@ -350,6 +384,7 @@ export const assetByIconName: AssetByIconName = {
   Sms: SmsSVG,
   SnapsMobile: SnapsMobileSVG,
   Snaps: SnapsSVG,
+  SoccerBall: SoccerBallSVG,
   Sparkle: SparkleSVG,
   Speed: SpeedSVG,
   Speedometer: SpeedometerSVG,
@@ -360,6 +395,7 @@ export const assetByIconName: AssetByIconName = {
   SwapVertical: SwapVerticalSVG,
   Tag: TagSVG,
   Telegram: TelegramSVG,
+  TennisBall: TennisBallSVG,
   ThumbDownFilled: ThumbDownFilledSVG,
   ThumbDown: ThumbDownSVG,
   ThumbUpFilled: ThumbUpFilledSVG,

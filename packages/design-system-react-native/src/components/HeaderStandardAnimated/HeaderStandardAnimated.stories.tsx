@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
-import type { ComponentType } from 'react';
 import React from 'react';
 import Animated from 'react-native-reanimated';
 
@@ -17,10 +16,11 @@ type ScrollStoryArgs = Omit<
   'scrollY' | 'titleSectionHeight' | 'children'
 >;
 
-const meta: Meta<ScrollStoryArgs> = {
+// `component` stays a direct reference so docgen can resolve HeaderStandardAnimated.
+// The assertion keeps story args limited to the props the scroll demo does not inject.
+const meta = {
   title: 'Components/HeaderStandardAnimated',
-  component:
-    HeaderStandardAnimated as unknown as ComponentType<ScrollStoryArgs>,
+  component: HeaderStandardAnimated,
   parameters: {
     docs: {
       description: {
@@ -40,7 +40,7 @@ const meta: Meta<ScrollStoryArgs> = {
       </Box>
     ),
   ],
-};
+} as Meta<ScrollStoryArgs>;
 
 export default meta;
 

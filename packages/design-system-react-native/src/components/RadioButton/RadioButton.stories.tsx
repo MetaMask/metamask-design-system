@@ -2,12 +2,21 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
+import { Box } from '../Box/index.js';
+
 import { RadioButton } from './RadioButton.js';
 import type { RadioButtonProps } from './RadioButton.types.js';
 
 const meta: Meta<RadioButtonProps> = {
   title: 'Components/RadioButton',
   component: RadioButton,
+  decorators: [
+    (Story) => (
+      <Box twClassName="p-4">
+        <Story />
+      </Box>
+    ),
+  ],
   argTypes: {
     label: { control: 'text' },
     isChecked: { control: 'boolean' },

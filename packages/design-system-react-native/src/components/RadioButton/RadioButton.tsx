@@ -18,7 +18,7 @@ const getRadioButtonBorderClass = (
     return 'border-error-default';
   }
   if (isChecked) {
-    return 'border-primary-default';
+    return 'border-icon-default';
   }
   return 'border-default';
 };
@@ -33,7 +33,7 @@ const getRadioButtonDotClass = (
   if (isDanger) {
     return 'bg-error-default';
   }
-  return 'bg-primary-default';
+  return 'bg-icon-default';
 };
 
 export const RadioButton = ({

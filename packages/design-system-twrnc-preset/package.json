@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-twrnc-preset",
-  "version": "0.12.0",
+  "version": "0.14.0",
   "description": "Design System twrnc Preset",
   "keywords": [
     "MetaMask",
@@ -50,7 +50,7 @@
     "@babel/preset-env": "^7.29.7",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.23.3",
-    "@metamask/auto-changelog": "^6.2.1",
+    "@metamask/auto-changelog": "^7.1.0",
     "@metamask/design-tokens": "workspace:^",
     "@react-native/babel-preset": "0.86.3",
     "@react-native/jest-preset": "0.86.3",
@@ -66,10 +66,10 @@
     "react-native": "0.86.3",
     "react-test-renderer": "19.2.3",
     "ts-jest": "^29.2.5",
-    "typescript": "~5.2.2"
+    "typescript": "~5.9.3"
   },
   "peerDependencies": {
-    "@metamask/design-tokens": "^11.0.0",
+    "@metamask/design-tokens": "^13.0.0",
     "react": ">=18.2.0"
   },
   "engines": {

@@ -64,6 +64,11 @@ describe('AvatarToken', () => {
       );
       expect(screen.getByTestId('fb-default')).toHaveTextContent('?');
     });
+
+    it('does not apply a white background', () => {
+      render(<AvatarToken name="Bitcoin" data-testid="avatar" />);
+      expect(screen.getByTestId('avatar')).not.toHaveClass('bg-white');
+    });
   });
 
   describe('when src IS provided', () => {
@@ -80,7 +85,7 @@ describe('AvatarToken', () => {
       const img = screen.getByTestId('img') as HTMLImageElement;
       expect(img.src).toContain(src);
       expect(img.alt).toBe('ACME');
-      expect(img).toHaveClass('size-full', 'object-contain');
+      expect(img).toHaveClass('size-full', 'object-cover');
       expect(img).toHaveAttribute('id', 'img-id');
     });
 
@@ -93,6 +98,36 @@ describe('AvatarToken', () => {
         />,
       );
       expect(screen.getByTestId('img2')).toHaveAttribute('alt', 'Token logo');
+    });
+
+    it('keeps a white background behind the token image', () => {
+      render(<AvatarToken name="Bitcoin" src={src} data-testid="avatar" />);
+      expect(screen.getByTestId('avatar')).toHaveClass('bg-white');
+    });
+
+    it('removes the white background after the image errors', () => {
+      render(<AvatarToken name="Beta" src="bad.png" data-testid="avatar" />);
+      expect(screen.getByTestId('avatar')).toHaveClass('bg-white');
+
+      fireEvent.error(screen.getByRole('img'));
+
+      expect(screen.getByTestId('avatar')).not.toHaveClass('bg-white');
+    });
+
+    it('lets imageProps.className override the cover default', () => {
+      render(
+        <AvatarToken
+          name="ACME"
+          src={src}
+          imageProps={{
+            'data-testid': 'img-contain',
+            className: 'size-full object-contain',
+          }}
+        />,
+      );
+      const img = screen.getByTestId('img-contain');
+      expect(img).toHaveClass('size-full', 'object-contain');
+      expect(img).not.toHaveClass('object-cover');
     });
 
     it('does not render fallbackText initially', () => {

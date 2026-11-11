@@ -306,11 +306,15 @@ export const BottomSheetDialog = forwardRef<
             onLayout={updateSheetHeight}
             style={combinedSheetStyle}
           >
-            {isInteractable && (
-              <View style={tw.style('self-stretch items-center p-1')}>
-                <View style={tw.style('h-1 w-10 rounded-sm bg-border-muted')} />
-              </View>
-            )}
+            <View
+              style={tw.style(
+                'self-stretch items-center p-1',
+                !isInteractable && 'opacity-0',
+              )}
+              testID="bottom-sheet-dialog-drag-handle"
+            >
+              <View style={tw.style('h-1 w-10 rounded-sm bg-border-muted')} />
+            </View>
             {children}
           </Animated.View>
         </GestureDetector>

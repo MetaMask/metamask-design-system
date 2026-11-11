@@ -1,7 +1,11 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import React from 'react';
+import { View } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
 
 import { AvatarFavicon } from './AvatarFavicon.js';
+
+const LocalSvg = (props: SvgProps) => <View {...props} />;
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
@@ -24,7 +28,51 @@ describe('AvatarFavicon Component', () => {
     expect(imageOrSvg.props.style[0].width).toBe('100%');
     expect(imageOrSvg.props.style[0].height).toBe('100%');
 
-    expect(imageOrSvg.props.contentFit).toBe('contain');
+    expect(imageOrSvg.props.contentFit).toBe('cover');
+  });
+
+  it('lets imageProps.contentFit override the cover default', () => {
+    const { getByTestId } = render(
+      <AvatarFavicon
+        src={remoteImageSrc}
+        imageOrSvgProps={{
+          imageProps: { testID: 'image-or-svg', contentFit: 'contain' },
+        }}
+      />,
+    );
+
+    expect(getByTestId('image-or-svg').props.contentFit).toBe('contain');
+  });
+
+  it('fills local SVG favicons using preserveAspectRatio slice', () => {
+    const { getByTestId } = render(
+      <AvatarFavicon
+        src={LocalSvg}
+        imageOrSvgProps={{ svgProps: { testID: 'favicon-svg' } }}
+      />,
+    );
+
+    expect(getByTestId('favicon-svg').props.preserveAspectRatio).toBe(
+      'xMidYMid slice',
+    );
+  });
+
+  it('lets svgProps.preserveAspectRatio override the slice default', () => {
+    const { getByTestId } = render(
+      <AvatarFavicon
+        src={LocalSvg}
+        imageOrSvgProps={{
+          svgProps: {
+            testID: 'favicon-svg',
+            preserveAspectRatio: 'xMidYMid meet',
+          },
+        }}
+      />,
+    );
+
+    expect(getByTestId('favicon-svg').props.preserveAspectRatio).toBe(
+      'xMidYMid meet',
+    );
   });
 
   it('updates fallback text on image error when fallbackText is provided', () => {

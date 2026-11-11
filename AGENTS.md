@@ -44,6 +44,8 @@ When asked to **audit** usage, alignment, or gaps, scan **both** platforms above
 
 **MMDS component reference:** Local — `apps/storybook-react/storybook-static/manifests/components.json` after `yarn build-storybook`, or `http://localhost:6006/manifests/components.json` while `yarn storybook` is running. Published — https://metamask.github.io/metamask-design-system/manifests/components.json
 
+**MMDS component reference (React Native):** Local — `apps/storybook-react-native/storybook-static/manifests/components.json` after `yarn workspace @metamask/storybook-react-native build-storybook`, or `http://localhost:6007/manifests/components.json` while `yarn workspace @metamask/storybook-react-native storybook:web` is running. Published — https://metamask.github.io/metamask-design-system/react-native/manifests/components.json
+
 **MMDS Figma (canonical):** https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=0-1 (`fileKey`: `1D6tnzXqWgnUC3spaAOELN`)
 
 ## Monorepo Structure
@@ -94,6 +96,7 @@ yarn create-component:react-native --name ComponentName --description "Brief des
 # Storybook
 yarn storybook                # React web (port 6006)
 yarn workspace @metamask/storybook-react-native storybook:web  # React Native web (port 6007)
+yarn workspace @metamask/storybook-react-native start  # React Native Metro + MCP (port 7007)
 yarn storybook:ios:build      # React Native iOS dev client (first time / native dep changes)
 yarn storybook:ios            # React Native iOS (Metro + dev client)
 yarn storybook:android:build  # React Native Android dev client (first time / native dep changes)

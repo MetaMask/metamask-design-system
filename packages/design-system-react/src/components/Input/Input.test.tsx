@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { Input } from './Input.js';
+import type { InputProps } from './Input.types.js';
 
 const TEST_ID = 'input';
 
@@ -75,6 +76,18 @@ describe('Input', () => {
     );
     const input = screen.getByTestId(TEST_ID);
     expect(input).toHaveClass('text-s-heading-sm');
+  });
+
+  it('forwards data-testid from a props object to the native input', () => {
+    const props: InputProps = {
+      value: '',
+      onChange: () => undefined,
+      'data-testid': 'x',
+    };
+
+    render(<Input {...props} />);
+
+    expect(screen.getByTestId('x').tagName).toBe('INPUT');
   });
 
   it('calls onChange when value changes', () => {

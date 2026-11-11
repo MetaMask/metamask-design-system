@@ -107,7 +107,7 @@ Put MMDS workflows in **project** skills so cloud agents get them. Do not rely o
 
 **Current skills**
 
-- `visual-regression-collect` — Storybook before/after for UI PRs and visual-asset requests; `gh --attach` ([CLI 2.99.0 media](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/)); tight crop; expand to visual dependents
+- `visual-regression-collect` — Storybook before/after for UI PRs and visual-asset requests; headless Playwright (do not open the Cursor IDE browser); `gh --attach` ([CLI 2.99.0 media](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/)); tight crop; expand to visual dependents
 
 ## Layer 3: docs/ (High-Level Guides)
 
@@ -132,8 +132,14 @@ The three-layer model provides static guidance (rules, conventions, and process)
 
 ### Maintainers vs consumers
 
-- **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation.
+- **Maintainers (this repo):** Continue using `.cursor/rules/` as the source of truth for conventions. Storybook MCP is a workflow accelerator for story authoring and validation. Use the React endpoint at `http://localhost:6006/mcp` for `@metamask/design-system-react` and the React Native endpoint at `http://localhost:7007/mcp` for `@metamask/design-system-react-native`.
 - **Consumers (downstream repos):** Storybook MCP provides the highest value. Agents can discover components and props from a running or published Storybook without reading this repo's source.
+
+Component manifests (static JSON, separate from the MCP endpoints above) use the same `v` / `components` / `meta` shape:
+
+**React:** Local — `apps/storybook-react/storybook-static/manifests/components.json` after `yarn build-storybook`, or `http://localhost:6006/manifests/components.json` while `yarn storybook` is running. Published — https://metamask.github.io/metamask-design-system/manifests/components.json
+
+**React Native:** Local — `apps/storybook-react-native/storybook-static/manifests/components.json` after `yarn workspace @metamask/storybook-react-native build-storybook`, or `http://localhost:6007/manifests/components.json` while `yarn workspace @metamask/storybook-react-native storybook:web` is running. Published — https://metamask.github.io/metamask-design-system/react-native/manifests/components.json
 
 ## How AI Agents Use This
 

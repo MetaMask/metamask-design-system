@@ -180,37 +180,30 @@ describe('BottomSheetDialog', () => {
     expect(callbackMock).toHaveBeenCalled();
   });
 
-  it('renders drag handle indicator only when isInteractable is true', () => {
-    const countViews = (json: ReturnType<typeof JSON.parse>): number => {
-      if (!json) {
-        return 0;
-      }
-      let count = json.type === 'View' ? 1 : 0;
-      if (Array.isArray(json.children)) {
-        for (const child of json.children) {
-          if (typeof child === 'object') {
-            count += countViews(child);
-          }
-        }
-      }
-      return count;
-    };
-
-    const interactable = render(
+  it('renders visible drag handle indicator when isInteractable is true', () => {
+    const { getByTestId } = render(
       <BottomSheetDialog isInteractable>
         <Text>Content</Text>
       </BottomSheetDialog>,
     );
-    const nonInteractable = render(
+    expect(getByTestId('bottom-sheet-dialog-drag-handle')).toBeDefined();
+    expect(mockStyle).toHaveBeenCalledWith(
+      'self-stretch items-center p-1',
+      false,
+    );
+  });
+
+  it('renders transparent drag handle indicator when isInteractable is false', () => {
+    const { getByTestId } = render(
       <BottomSheetDialog isInteractable={false}>
         <Text>Content</Text>
       </BottomSheetDialog>,
     );
-
-    // Interactable renders additional View nodes for the drag handle indicator
-    const interactableViewCount = countViews(interactable.toJSON());
-    const nonInteractableViewCount = countViews(nonInteractable.toJSON());
-    expect(interactableViewCount).toBeGreaterThan(nonInteractableViewCount);
+    expect(getByTestId('bottom-sheet-dialog-drag-handle')).toBeDefined();
+    expect(mockStyle).toHaveBeenCalledWith(
+      'self-stretch items-center p-1',
+      'opacity-0',
+    );
   });
 
   it('renders in fullscreen mode', () => {

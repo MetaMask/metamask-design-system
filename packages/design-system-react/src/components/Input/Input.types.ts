@@ -14,4 +14,12 @@ export type InputProps = Omit<
      * Optional inline styles.
      */
     style?: React.CSSProperties;
+    /**
+     * Dataset attributes forwarded to the native `<input>`.
+     *
+     * JSX already accepts `data-*` on `<Input>`, but object literals such as
+     * `TextField`'s `inputProps` do not. This index signature makes those
+     * literals type-check. Same pattern as `Checkbox` `inputProps`.
+     */
+    [key: `data-${string}`]: string;
   };

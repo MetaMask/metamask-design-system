@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build Storybook
@@ -30,6 +33,9 @@ jobs:
         env:
           NODE_ENV: production
         run: yarn build-storybook --output-dir rn-storybook-static
+
+      - name: Check component manifest props
+        run: yarn tsx scripts/components-manifest/assert-manifest.ts apps/storybook-react/storybook-static/manifests/components.json apps/storybook-react-native/rn-storybook-static/manifests/components.json
 
       - name: Nest React Native Storybook under /react-native
         run: |

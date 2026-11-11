@@ -30,6 +30,7 @@ Optional enum to select between typography variants.
 
 Available variants:
 
+- `TextVariant.DisplayXl`
 - `TextVariant.DisplayLg`
 - `TextVariant.DisplayMd`
 - `TextVariant.HeadingLg`

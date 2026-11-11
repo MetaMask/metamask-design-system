@@ -14,6 +14,7 @@ import {
 const meta: Meta<typeof ColorSwatchGroup> = {
   title: 'Design Tokens/Color/Brand Colors',
   component: ColorSwatchGroup,
+  tags: ['!manifest'],
   parameters: {
     docs: {
       page: README,

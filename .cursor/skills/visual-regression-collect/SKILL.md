@@ -89,7 +89,7 @@ Do **not** wait for PR Storybook CI.
 
 Resolve story IDs from `index.json` / `stories.json` (hosted or `http://localhost:6006/index.json`). Do not invent IDs.
 
-Capture the **iframe** only (no Storybook chrome). Wait until `#storybook-root > *` exists. Then crop to the component — see [Tight crop](#tight-crop). Optional: outline the component (not the canvas) with `3px solid hotpink`.
+Capture the **iframe** only (no Storybook chrome) with **headless Playwright**. Do not use the Cursor IDE browser (`user-cursor-ide-browser` or any tool that drives the user's visible Chrome). See [Headless Playwright](#headless-playwright). Wait until `#storybook-root > *` exists. Then crop to the component — see [Tight crop](#tight-crop). Optional: outline the component (not the canvas) with `3px solid hotpink`.
 
 New component stories that exist only on the PR branch (not a temporary sandbox): after-only, labeled “new story”. Never post a broken before image. Sandbox showcases are not “new stories” — always capture both passes locally as above.
 
@@ -102,8 +102,8 @@ Reviewers must be able to see a 2px radius or 1px border change. A full-window s
 **Do**
 
 - Screenshot the **component bounding box**, not the browser viewport and not the whole Storybook canvas.
-- Use `getBoundingClientRect()` on `#storybook-root > :first-child` (or the specific node that changed) and capture that rectangle plus **8–16px** padding.
-- Prefer an element screenshot from the browser tool when it can target that node.
+- Use `getBoundingClientRect()` / `locator.boundingBox()` on `#storybook-root > :first-child` (or the specific node that changed) and capture that rectangle plus **8–16px** padding.
+- Prefer `locator.screenshot()` when the node hugs its content. When the node stretches to the viewport, clip the page screenshot to the content box plus padding.
 - Keep before and after **the same crop size and origin** so the pair is comparable.
 - For a showcase grid, crop to the grid’s bounding box plus the same small padding — not the leftover white page.
 
@@ -172,11 +172,47 @@ On refresh: recapture, rewrite the section, re-attach. The body should show only
 
 If the user asked for visuals before a PR exists, capture into `/tmp/vr/` (or `.cursor/temp/vr/`, gitignored). When the PR is created, attach those files. If the UI changed since capture, recapture first.
 
+## Headless Playwright
+
+Playwright is already a dependency of the Storybook apps. Launch Chromium yourself with `headless: true`. This does not open the user's Chrome, the IDE browser panel, or a headed window.
+
+Run the script from the repo root so `playwright` resolves from `node_modules`. Pass Storybook **args on the iframe URL** (`&args=fontFamily:Hero`) when the shot must show a control value.
+
+```bash
+node --input-type=module << 'EOF'
+import { chromium } from 'playwright';
+
+const url =
+  'http://localhost:6006/iframe.html?id=react-components-text--variant&viewMode=story&args=fontFamily:Hero';
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage({ viewport: { width: 900, height: 1400 } });
+await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+await page.waitForSelector('#storybook-root > *', { timeout: 20000 });
+await page.evaluate(() => document.fonts.ready);
+const root = page.locator('#storybook-root > :first-child');
+const box = await root.boundingBox();
+if (!box) throw new Error('Story root has no box');
+const pad = 12;
+await page.screenshot({
+  path: '/tmp/vr/after/react-text-variant.png',
+  clip: {
+    x: Math.max(0, box.x - pad),
+    y: Math.max(0, box.y - pad),
+    width: box.width + pad * 2,
+    height: box.height + pad * 2,
+  },
+});
+await browser.close();
+EOF
+```
+
+- Keep `headless: true`. Do not set `headless: false` or `channel: 'chrome'`.
+- If the Chromium binary is missing, install it with `yarn playwright install chromium` (from a Storybook app workspace) and retry headless. Do not fall back to the Cursor browser.
+- Use the Cursor IDE browser only when the user explicitly asks to look at the page, or when a headless capture fails and you need the error UI to debug. Say that you are opening a visible browser before you do.
+
 ## Local vs cloud agents
 
-Local agents do **not** get a Cloud Agent VM. Use the Cursor browser against hosted/local Storybook, then `gh --attach`.
-
-Cloud agents use the VM browser against GitHub Pages, PR preview, or Storybook in the VM. Same attach rules if `gh` auth supports `--attach`.
+Local and cloud agents both capture with headless Playwright against hosted GitHub Pages, a PR preview, or Storybook already running in the environment (`localhost:6006` / `localhost:6007`). Then `gh --attach`. Same attach rules if `gh` auth supports `--attach`.
 
 ## Golden path (PR #1494)
 

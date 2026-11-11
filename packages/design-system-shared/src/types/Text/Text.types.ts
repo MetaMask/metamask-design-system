@@ -33,9 +33,7 @@ export type FontStyle = (typeof FontStyle)[keyof typeof FontStyle];
 export const FontFamily = {
   /** Default: Inter */
   Default: 'default',
-  /** Accent: MM Sans */
-  Accent: 'accent',
-  /** Hero: MM Poly */
+  /** Hero: Grotzec Cond Bold */
   Hero: 'hero',
 } as const;
 
@@ -47,6 +45,7 @@ export type FontFamily = (typeof FontFamily)[keyof typeof FontFamily];
  */
 export const TextVariant = {
   // Display Sizes
+  DisplayXl: 'display-xl',
   DisplayLg: 'display-lg',
   DisplayMd: 'display-md',
 
@@ -184,8 +183,7 @@ export type TextPropsShared = {
   /**
    * Optional prop to adjust the font family.
    * Default: Inter
-   * Accent: MM Sans
-   * Hero: MM Poly
+   * Hero: Grotzec Cond Bold
    */
   fontFamily?: FontFamily;
   /**

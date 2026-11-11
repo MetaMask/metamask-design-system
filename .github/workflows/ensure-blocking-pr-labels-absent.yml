@@ -7,6 +7,9 @@ on:
       - labeled
       - unlabeled
 
+permissions:
+  pull-requests: read
+
 jobs:
   ensure-blocking-pr-labels-absent:
     runs-on: ubuntu-latest

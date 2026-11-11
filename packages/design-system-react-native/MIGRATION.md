@@ -4,6 +4,8 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
+- [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
 - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
 - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
 - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
@@ -54,6 +56,9 @@ This guide provides detailed instructions for migrating your project from one ve
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
   - [ESM-only entry point](#esm-only-entry-point)
+  - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
+  - [From version 0.53.0 to 0.54.0](#from-version-0530-to-0540)
+  - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
   - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
   - [From version 0.44.0 to 0.45.0](#from-version-0440-to-0450)
   - [From version 0.42.1 to 0.43.0](#from-version-0421-to-0430)
@@ -86,6 +91,161 @@ This guide provides detailed instructions for migrating your project from one ve
 `@metamask/design-system-react-native` publishes a single ECMAScript module. `package.json` sets `"type": "module"`, and `exports` points at `./dist/index.js` with types at `./dist/index.d.ts`. The CommonJS `require` entry is removed.
 
 Import the package with `import`. On Node 24, `require()` can load the module. Named exports are properties of the returned module namespace.
+
+### From version 0.54.0 to 0.55.0
+
+<a id="from-version-0540-to-0550"></a>
+
+#### Removed `FontFamily.Accent` and MM Sans
+
+`FontFamily.Accent` is removed. The twrnc families `accent-regular`, `accent-medium`, and `accent-bold` are removed with it. `FontFamily.Hero` still uses `font-hero-bold` (`GrotzecCond-Bold`). Delete any leftover MM Poly registration; that face was replaced in 0.52.0.
+
+**What changed:**
+
+- `FontFamily.Accent` is removed
+- `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` no longer resolve. `@metamask/design-system-twrnc-preset@0.14.0` removes them from `typographyTailwindConfig.fontFamily`
+- Peer dependencies are now `@metamask/design-tokens@^13.0.0` and `@metamask/design-system-twrnc-preset@^0.14.0`
+- `FontFamily.Hero` still applies `font-hero-bold` for every weight
+
+**Migration:**
+
+Replace `FontFamily.Accent` with `FontFamily.Hero`. Grotzec Cond is a condensed display face, so keep it for headlines and marketing moments. If the accent text was body copy, use `FontFamily.Default` (Inter) instead.
+
+```tsx
+// Before (0.54.0)
+import {
+  FontFamily,
+  FontWeight,
+  Text,
+  TextVariant,
+} from '@metamask/design-system-react-native';
+
+<Text
+  variant={TextVariant.DisplayMd}
+  fontFamily={FontFamily.Accent}
+  fontWeight={FontWeight.Medium}
+>
+  Earn rewards with MetaMask
+</Text>;
+
+// After (0.55.0)
+import {
+  FontFamily,
+  Text,
+  TextVariant,
+} from '@metamask/design-system-react-native';
+
+<Text variant={TextVariant.DisplayMd} fontFamily={FontFamily.Hero}>
+  Earn rewards with MetaMask
+</Text>;
+```
+
+`fontWeight` has no effect with `FontFamily.Hero`; Hero ships only the Bold cut, so every weight renders `font-hero-bold`.
+
+Replace `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` with `font-hero-bold`:
+
+```tsx
+// Before (0.54.0)
+<Text twClassName="font-accent-bold">Earn rewards with MetaMask</Text>;
+
+// After (0.55.0)
+<Text twClassName="font-hero-bold">Earn rewards with MetaMask</Text>;
+```
+
+Stop registering `MMSans-Regular`, `MMSans-Medium`, and `MMSans-Bold`, then delete those files and any leftover `MMPoly-Regular` registration:
+
+```tsx
+// Before (0.54.0)
+const [fontsLoaded] = useFonts({
+  'Inter-Regular': require('./fonts/Inter/Inter-Regular.ttf'),
+  'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+  'MMSans-Regular': require('./fonts/MMSans/MMSans-Regular.otf'),
+  'MMSans-Medium': require('./fonts/MMSans/MMSans-Medium.otf'),
+  'MMSans-Bold': require('./fonts/MMSans/MMSans-Bold.otf'),
+});
+
+// After (0.55.0)
+const [fontsLoaded] = useFonts({
+  'Inter-Regular': require('./fonts/Inter/Inter-Regular.ttf'),
+  'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+});
+```
+
+**Impact:**
+
+- TypeScript fails on `FontFamily.Accent`
+- `font-accent-*` classes no longer resolve and there is no build error, so search for `font-accent` before upgrading
+- Installs warn about unmet peer dependencies until `@metamask/design-tokens` and `@metamask/design-system-twrnc-preset` are upgraded
+
+### From version 0.53.0 to 0.54.0
+
+<a id="from-version-0530-to-0540"></a>
+
+#### TextFieldSearch: required `inputAccessibilityLabel`
+
+**What changed:**
+
+`inputAccessibilityLabel` is required and is set as `accessibilityLabel` on the inner `TextInput`. It takes precedence over `inputProps.accessibilityLabel`. A top-level `accessibilityLabel` still lands on the root `Box`, which is hidden from screen readers (`accessible={false}`), so it does not name the field.
+
+**Migration:**
+
+```tsx
+// Before (0.53.x)
+<TextFieldSearch
+  accessibilityLabel="Search tokens"
+  value={query}
+  onChangeText={setQuery}
+  onPressClearButton={() => setQuery('')}
+/>
+
+// After (0.54.0)
+<TextFieldSearch
+  inputAccessibilityLabel="Search tokens"
+  value={query}
+  onChangeText={setQuery}
+  onPressClearButton={() => setQuery('')}
+/>
+```
+
+**Impact:**
+
+- `inputAccessibilityLabel` is required. Existing call sites fail typecheck until they pass it.
+- `HeaderSearch` forwards `textFieldSearchProps`, so that object must include `inputAccessibilityLabel`.
+
+### From version 0.51.0 to 0.52.0
+
+<a id="from-version-0510-to-0520"></a>
+
+#### Hero typeface: MM Poly to Grotzec Cond
+
+`FontFamily.Hero` now renders Grotzec Cond Bold. `FontFamily.Accent` and MM Sans are unchanged and will be removed in a later release.
+
+**What changed:**
+
+- The twrnc family class `font-hero-regular` is removed. Use `font-hero-bold`, which resolves to the PostScript name `GrotzecCond-Bold`
+- `Text` always applies `font-hero-bold` for `FontFamily.Hero`, including when `fontWeight` is regular or medium
+- `FontFamily.Hero` still has the value `'hero'`
+
+**Migration:**
+
+Stop registering `MMPoly-Regular`. Copy `GrotzecCond-Bold.otf` from [`apps/storybook-react-native/fonts/GrotzecCond`](../../apps/storybook-react-native/fonts/GrotzecCond), retain the adjacent `LICENSE`, and register it under its PostScript name:
+
+```tsx
+import { useFonts } from 'expo-font';
+import { FontFamily, Text } from '@metamask/design-system-react-native';
+
+useFonts({
+  'GrotzecCond-Bold': require('./fonts/GrotzecCond/GrotzecCond-Bold.otf'),
+});
+
+<Text fontFamily={FontFamily.Hero}>Rewards</Text>;
+```
+
+Replace any direct `font-hero-regular` class with `font-hero-bold`.
+
+**Impact:**
+
+`font-hero-regular` no longer resolves. Hero text stays on `FontFamily.Hero`, and every weight uses the Bold cut. Peer dependencies now require `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-twrnc-preset@^0.13.0`.
 
 ### From version 0.49.2 to 0.50.0
 

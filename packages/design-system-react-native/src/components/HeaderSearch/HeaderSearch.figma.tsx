@@ -27,6 +27,7 @@ figma.connect(HeaderSearch, HEADER_SEARCH_URL, {
       variant={HeaderSearchVariant.Screen}
       onPressBackButton={() => undefined}
       textFieldSearchProps={{
+        inputAccessibilityLabel: 'Search',
         value: '',
         onChangeText: () => undefined,
         onPressClearButton: () => undefined,
@@ -48,6 +49,7 @@ figma.connect(HeaderSearch, HEADER_SEARCH_URL, {
       variant={HeaderSearchVariant.Inline}
       onPressCancelButton={() => undefined}
       textFieldSearchProps={{
+        inputAccessibilityLabel: 'Search',
         value: '',
         onChangeText: () => undefined,
         onPressClearButton: () => undefined,

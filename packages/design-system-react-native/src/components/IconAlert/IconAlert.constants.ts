@@ -10,7 +10,7 @@ export const ICON_ALERT_SEVERITY_MAP: Record<
 > = {
   [IconAlertSeverity.Info]: {
     name: IconName.Info,
-    color: IconColor.PrimaryDefault,
+    color: IconColor.IconDefault,
   },
   [IconAlertSeverity.Success]: {
     name: IconName.Confirmation,

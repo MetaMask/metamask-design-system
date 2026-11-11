@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { SVGProps } from "react";
 import { Ref, forwardRef } from "react";
-const SvgMusdFilled = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M15 14.25a1.5 1.5 0 0 1-1.5 1.5h-.75v-3h.75a1.5 1.5 0 0 1 1.5 1.5M21.75 12A9.75 9.75 0 1 1 12 2.25 9.76 9.76 0 0 1 21.75 12m-5.25 2.25a3 3 0 0 0-3-3h-.75v-3h.375a1.5 1.5 0 0 1 1.5 1.5.75.75 0 0 0 1.5 0 3 3 0 0 0-3-3h-.375V6a.75.75 0 0 0-1.5 0v.75h-.375a3 3 0 0 0 0 6h.375v3h-.75a1.5 1.5 0 0 1-1.5-1.5.75.75 0 0 0-1.5 0 3 3 0 0 0 3 3h.75V18a.75.75 0 0 0 1.5 0v-.75h.75a3 3 0 0 0 3-3m-7.125-4.5a1.5 1.5 0 0 0 1.5 1.5h.375v-3h-.375a1.5 1.5 0 0 0-1.5 1.5" /></svg>;
+const SvgMusdFilled = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" ref={ref} {...props}><path d="M12 2.25A9.75 9.75 0 1 0 21.75 12 9.76 9.76 0 0 0 12 2.25m1.125 14.25h-.375v.75a.75.75 0 0 1-1.5 0v-.75h-1.5a.75.75 0 0 1 0-1.5h3.375a1.125 1.125 0 0 0 0-2.25h-2.25a2.625 2.625 0 0 1 0-5.25h.375v-.75a.75.75 0 0 1 1.5 0v.75h1.5a.75.75 0 0 1 0 1.5h-3.375a1.125 1.125 0 0 0 0 2.25h2.25a2.625 2.625 0 0 1 0 5.25" /></svg>;
 const ForwardRef = forwardRef(SvgMusdFilled);
 export default ForwardRef;

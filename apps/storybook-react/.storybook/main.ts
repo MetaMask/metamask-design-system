@@ -1,7 +1,10 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'url';
 import type { StorybookConfig } from '@storybook/react-vite';
 import path, { join, dirname } from 'path';
+
+import { includeDesignSystemProp } from '../../../scripts/components-manifest/prop-filter';
 
 const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -30,6 +33,22 @@ const rnStorybookUrl =
 const config: StorybookConfig = {
   features: {
     componentsManifest: true,
+  },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      include: [
+        '../../packages/design-system-react/src/**/*.tsx',
+        '../../packages/design-tokens/stories/**/*.tsx',
+        'stories/**/*.tsx',
+      ],
+      exclude: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.figma.tsx'],
+      shouldExtractLiteralValuesFromEnum: true,
+      shouldRemoveUndefinedFromOptional: true,
+      // Children is part of the public API even when it has no JSDoc of its own.
+      skipChildrenPropWithoutDoc: false,
+      propFilter: includeDesignSystemProp,
+    },
   },
   refs: {
     'react-native': {

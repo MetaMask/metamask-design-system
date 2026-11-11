@@ -1,12 +1,23 @@
-import { render, fireEvent } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render, fireEvent, renderHook } from '@testing-library/react-native';
 import React from 'react';
+import { View } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
 
 import { AvatarNetwork } from './AvatarNetwork.js';
+
+const LocalSvg = (props: SvgProps) => <View {...props} />;
 
 const remoteImageSrc = { uri: 'https://example.com/photo.png' };
 const remoteSvgSrc = { uri: 'https://example.com/logo.svg' };
 
 describe('AvatarNetwork Component', () => {
+  let tw: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    tw = renderHook(() => useTailwind()).result.current;
+  });
+
   it('renders with default props', () => {
     const { getByTestId } = render(
       <AvatarNetwork
@@ -24,7 +35,59 @@ describe('AvatarNetwork Component', () => {
     expect(imageOrSvg.props.style[0].width).toBe('100%');
     expect(imageOrSvg.props.style[0].height).toBe('100%');
 
-    expect(imageOrSvg.props.contentFit).toBe('contain');
+    expect(imageOrSvg.props.contentFit).toBe('cover');
+  });
+
+  it('keeps a white background while the network image is shown', () => {
+    const { getByTestId } = render(
+      <AvatarNetwork src={remoteImageSrc} testID="avatar-base" />,
+    );
+
+    expect(getByTestId('avatar-base')).toHaveStyle(tw`bg-white`);
+  });
+
+  it('lets imageProps.contentFit override the cover default', () => {
+    const { getByTestId } = render(
+      <AvatarNetwork
+        src={remoteImageSrc}
+        imageOrSvgProps={{
+          imageProps: { testID: 'image-or-svg', contentFit: 'contain' },
+        }}
+      />,
+    );
+
+    expect(getByTestId('image-or-svg').props.contentFit).toBe('contain');
+  });
+
+  it('fills local SVG logos using preserveAspectRatio slice', () => {
+    const { getByTestId } = render(
+      <AvatarNetwork
+        src={LocalSvg}
+        imageOrSvgProps={{ svgProps: { testID: 'network-svg' } }}
+      />,
+    );
+
+    expect(getByTestId('network-svg').props.preserveAspectRatio).toBe(
+      'xMidYMid slice',
+    );
+  });
+
+  it('lets svgProps.preserveAspectRatio override the slice default', () => {
+    const { getByTestId } = render(
+      <AvatarNetwork
+        src={LocalSvg}
+        imageOrSvgProps={{
+          svgProps: {
+            testID: 'network-svg',
+            preserveAspectRatio: 'xMidYMid meet',
+          },
+        }}
+      />,
+    );
+
+    expect(getByTestId('network-svg').props.preserveAspectRatio).toBe(
+      'xMidYMid meet',
+    );
   });
 
   it('updates fallback text on image error when fallbackText is provided', () => {
@@ -122,6 +185,14 @@ describe('AvatarNetwork Component', () => {
       const { getByText } = render(<AvatarNetwork />);
 
       expect(getByText('?')).toHaveTextContent('?');
+    });
+
+    it('does not apply a white background', () => {
+      const { getByTestId } = render(
+        <AvatarNetwork name="Arbitrum" testID="avatar-base" />,
+      );
+
+      expect(getByTestId('avatar-base')).not.toHaveStyle(tw`bg-white`);
     });
   });
 

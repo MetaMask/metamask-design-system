@@ -49,6 +49,9 @@ This guide provides detailed instructions for migrating your project from one ve
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
   - [ESM-only entry point](#esm-only-entry-point)
+  - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
+  - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
+  - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -3457,13 +3460,13 @@ The `TextField` is now available from the design system. The new component drops
 
 #### Removed Props
 
-| Extension Prop                                                | Design System Migration                                                                                                                                 |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `as` / polymorphic `C`                                        | Removed. The container is always a `<div>`. Wrap with a custom element if you need a different root.                                                    |
-| `InputComponent`                                              | Replaced by the shared `inputElement` slot. Pass a fully-rendered element instead of a component reference.                                             |
-| `testId`                                                      | Pass `data-testid` directly on `TextField` (root). For the inner input, use `getByRole('textbox')` in tests or compose your own via `inputElement`.     |
-| `defaultValue`                                                | Removed. The design-system `Input` is controlled-only; manage state with `value`/`onChange` (or use `inputElement` for an uncontrolled custom input).   |
-| Box style-utility props (`paddingLeft`, `borderRadius`, etc.) | Use `className` with Tailwind utilities, or compose with `Box`. The container's default chrome (border, radius, padding) is fixed by the design system. |
+| Extension Prop                                                | Design System Migration                                                                                                                                   |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`                                        | Removed. The container is always a `<div>`. Wrap with a custom element if you need a different root.                                                      |
+| `InputComponent`                                              | Replaced by the shared `inputElement` slot. Pass a fully-rendered element instead of a component reference.                                               |
+| `testId`                                                      | Pass `data-testid` directly on `TextField` (root). For the inner input, pass `inputProps={{ 'data-testid': '...' }}`. `getByRole('textbox')` still works. |
+| `defaultValue`                                                | Removed. The design-system `Input` is controlled-only; manage state with `value`/`onChange` (or use `inputElement` for an uncontrolled custom input).     |
+| Box style-utility props (`paddingLeft`, `borderRadius`, etc.) | Use `className` with Tailwind utilities, or compose with `Box`. The container's default chrome (border, radius, padding) is fixed by the design system.   |
 
 ```tsx
 // Before (Extension): custom InputComponent reference
@@ -3487,7 +3490,7 @@ The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven
 
 ### TextFieldSearch Component
 
-`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`.
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`. `inputAriaLabel` is required and names the inner input.
 
 #### Import Path
 
@@ -3529,6 +3532,7 @@ The extension component pulled the clear-button aria-label from `useI18nContext`
 
 // After (Design System): pass a localized label via clearButtonProps
 <TextFieldSearch
+  inputAriaLabel="Search"
   value={value}
   clearButtonOnClick={handleClear}
   clearButtonProps={{ ariaLabel: t('clear') }}
@@ -3639,6 +3643,139 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `@metamask/design-system-react` publishes a single ECMAScript module. `package.json` sets `"type": "module"`, and `exports` points at `./dist/index.js` with types at `./dist/index.d.ts`. The CommonJS `require` entry is removed.
 
 Import the package with `import`. On Node 24, `require()` can load the module. Named exports are properties of the returned module namespace.
+
+### From version 0.49.0 to 0.50.0
+
+<a id="from-version-0490-to-0500"></a>
+
+#### Removed `FontFamily.Accent` (MM Sans)
+
+`FontFamily.Accent` and the `font-accent` class are removed. `FontFamily.Hero` stays and still renders Grotzec Cond Bold. Delete any leftover MM Poly font files; that face was replaced in 0.47.0.
+
+**What changed:**
+
+- `FontFamily.Accent` is removed from `FontFamily`
+- `font-accent` no longer resolves. `@metamask/design-system-tailwind-preset@0.16.0` no longer maps `accent` to `--font-family-accent`, and `@metamask/design-tokens@13.0.0` removes the Tailwind v4 `font-accent` utility
+- `twMerge` no longer treats `font-accent` as a font family class, so it does not dedupe it against `font-default` or `font-hero`
+- Peer dependencies are now `@metamask/design-tokens@^13.0.0` and `@metamask/design-system-tailwind-preset@^0.16.0`
+- `FontFamily.Hero` and `font-hero` are unchanged
+
+**Migration:**
+
+Replace `FontFamily.Accent` with `FontFamily.Hero`. Grotzec Cond is a condensed display face, so keep it for headlines and marketing moments. If the accent text was body copy, use `FontFamily.Default` (Inter) instead.
+
+```tsx
+// Before (0.49.0)
+import { FontFamily, Text, TextVariant } from '@metamask/design-system-react';
+
+<Text variant={TextVariant.DisplayMd} fontFamily={FontFamily.Accent}>
+  Earn rewards with MetaMask
+</Text>;
+
+// After (0.50.0)
+import { FontFamily, Text, TextVariant } from '@metamask/design-system-react';
+
+<Text variant={TextVariant.DisplayMd} fontFamily={FontFamily.Hero}>
+  Earn rewards with MetaMask
+</Text>;
+```
+
+Replace the `font-accent` class with `font-hero`:
+
+```tsx
+// Before (0.49.0)
+<Text className="font-accent">Earn rewards with MetaMask</Text>;
+
+// After (0.50.0)
+<Text className="font-hero">Earn rewards with MetaMask</Text>;
+```
+
+Upgrade the peer dependencies in the same change:
+
+```json
+{
+  "dependencies": {
+    "@metamask/design-system-react": "^0.50.0",
+    "@metamask/design-system-tailwind-preset": "^0.16.0",
+    "@metamask/design-tokens": "^13.0.0"
+  }
+}
+```
+
+Delete MM Sans `@font-face` rules and font files, and any leftover MM Poly files. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1200-to-1300).
+
+**Impact:**
+
+- TypeScript fails on `FontFamily.Accent`
+- `font-accent` no longer applies a family and there is no build error, so search for `font-accent` and `font-family-accent` before upgrading
+- Installs warn about unmet peer dependencies until `@metamask/design-tokens` and `@metamask/design-system-tailwind-preset` are upgraded
+
+### From version 0.48.0 to 0.49.0
+
+<a id="from-version-0480-to-0490"></a>
+
+#### TextFieldSearch: required `inputAriaLabel`
+
+**What changed:**
+
+`inputAriaLabel` is required and names the inner input. It takes precedence over `inputProps['aria-label']`.
+
+**Migration:**
+
+Pass the string you used for `inputProps['aria-label']` as `inputAriaLabel`.
+
+```tsx
+// Before (0.48.x)
+<TextFieldSearch
+  clearButtonOnClick={handleClear}
+  inputProps={{ 'aria-label': t('searchYourAccounts') }}
+  onChange={handleChange}
+  placeholder={t('searchYourAccounts')}
+  value={query}
+/>
+
+// After (0.49.0)
+<TextFieldSearch
+  clearButtonOnClick={handleClear}
+  inputAriaLabel={t('searchYourAccounts')}
+  onChange={handleChange}
+  placeholder={t('searchYourAccounts')}
+  value={query}
+/>
+```
+
+**Impact:**
+
+- `inputAriaLabel` is required. Existing call sites fail typecheck until they pass it.
+- `inputAriaLabel` wins over `inputProps['aria-label']` on the input.
+
+### From version 0.46.0 to 0.47.0
+
+<a id="from-version-0460-to-0470"></a>
+
+#### Hero typeface: MM Poly to Grotzec Cond
+
+`FontFamily.Hero` now renders Grotzec Cond Bold. The `font-hero` class name is unchanged. `FontFamily.Accent` and MM Sans are unchanged and will be removed in a later release.
+
+**What changed:**
+
+- Use `FontFamily.Hero` and `font-hero`. `FontFamily.Hero` still has the value `'hero'`
+- Hero is backed by `--font-family-hero`, which now resolves to Grotzec Cond
+- Only the Bold cut exists, so regular, medium, and bold weights all render that cut
+
+**Migration:**
+
+Register `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) at weight 600. Lighter weight requests fall back to that Bold cut. Keep the adjacent `LICENSE`. Remove MM Poly `@font-face` rules. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1110-to-1200).
+
+```tsx
+import { FontFamily, Text } from '@metamask/design-system-react';
+
+<Text fontFamily={FontFamily.Hero}>Shield coverage</Text>;
+```
+
+**Impact:**
+
+Existing `FontFamily.Hero` usage keeps the same prop. The rendered face changes after the app loads Grotzec Cond Bold. Peer dependencies now require `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-tailwind-preset@^0.15.0`.
 
 ### From version 0.40.0 to 0.41.0
 

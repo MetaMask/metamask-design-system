@@ -36,8 +36,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 const meta: Meta = {
-  title: 'Examples/Wallet Home',
+  title: 'Patterns/Wallet Home',
   component: () => null,
+  tags: ['!autodocs', '!manifest'],
   // Remove default padding
   decorators: [
     (Story) => (

@@ -90,7 +90,8 @@ export type TextFieldProps = Omit<
      * Additional props for the inner `Input`. Do not pass `value`,
      * `placeholder`, `isDisabled`, `isReadOnly`, `onFocus`, `onBlur`,
      * `onChange`, `id`, `name`, `type`, `maxLength`, or `required` here;
-     * use the TextField-level props above.
+     * use the TextField-level props above. `data-*` attributes are forwarded
+     * to the native input.
      */
     inputProps?: TextFieldInputProps;
     /**

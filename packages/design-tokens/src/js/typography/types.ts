@@ -6,6 +6,7 @@ type TypeStyle = {
 };
 
 export type ThemeTypography = {
+  sDisplayXL: TypeStyle;
   sDisplayLG: TypeStyle;
   sDisplayMD: TypeStyle;
   sHeadingLG: TypeStyle;
@@ -25,6 +26,7 @@ export type ThemeTypography = {
   sButtonLabelMd: TypeStyle;
   sButtonLabelLg: TypeStyle;
   sAmountDisplayLg: TypeStyle;
+  lDisplayXL: TypeStyle;
   lDisplayLG: TypeStyle;
   lDisplayMD: TypeStyle;
   lHeadingLG: TypeStyle;
@@ -48,7 +50,6 @@ export type ThemeTypography = {
 
 export type FontFamilies = {
   default: string;
-  accent: string;
   hero: string;
 };
 

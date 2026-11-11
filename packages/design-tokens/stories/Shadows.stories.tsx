@@ -23,6 +23,7 @@ const ShadowSwatch: React.FC<ShadowSwatchProps> = ({
 const meta: Meta<typeof ShadowSwatch> = {
   title: 'Design Tokens/Shadows/Shadows',
   component: ShadowSwatch,
+  tags: ['!manifest'],
   parameters: {
     docs: {
       page: README,

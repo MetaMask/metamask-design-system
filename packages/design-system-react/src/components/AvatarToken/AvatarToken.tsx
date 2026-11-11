@@ -4,6 +4,7 @@ import {
 } from '@metamask/design-system-shared';
 import React, { forwardRef, useState } from 'react';
 
+import { twMerge } from '../../utils/tw-merge.js';
 import { AvatarBase } from '../AvatarBase/index.js';
 
 import type { AvatarTokenProps } from './AvatarToken.types.js';
@@ -36,7 +37,10 @@ export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
         ref={ref}
         shape={AvatarBaseShape.Circle}
         size={size}
-        className={className}
+        className={twMerge(
+          src && !finalFallbackText ? 'bg-white' : undefined,
+          className,
+        )}
         fallbackText={src ? finalFallbackText : backupFallbackText}
         fallbackTextProps={fallbackTextProps}
         {...props}
@@ -45,7 +49,7 @@ export const AvatarToken = forwardRef<HTMLDivElement, AvatarTokenProps>(
           <img
             src={src}
             alt={altText}
-            className="size-full object-contain"
+            className="size-full object-cover"
             {...imageProps}
             onError={onErrorHandler}
           />

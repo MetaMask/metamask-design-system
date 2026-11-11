@@ -51,7 +51,7 @@ Optional prop to toggle full screen state of BottomSheetDialog. When enabled, th
 
 ### `isInteractable`
 
-Optional boolean that indicates if the sheet is swippable. This affects whether or not tapping on the overlay will dismiss the sheet as well, and whether the drag handle indicator is shown.
+Optional boolean that indicates if the sheet is swippable. This affects whether or not tapping on the overlay will dismiss the sheet as well, and whether the drag handle indicator is visible. When `false`, the drag handle is transparent but still reserves its space.
 
 | TYPE      | REQUIRED | DEFAULT |
 | --------- | -------- | ------- |
@@ -63,7 +63,7 @@ Optional boolean that indicates if the sheet is swippable. This affects whether 
   <Text>Swipe to dismiss</Text>
 </BottomSheetDialog>
 
-// Non-interactive (no drag handle, no swipe gestures)
+// Non-interactive (transparent drag handle, no swipe gestures)
 <BottomSheetDialog isInteractable={false}>
   <Text>Cannot be swiped away</Text>
 </BottomSheetDialog>

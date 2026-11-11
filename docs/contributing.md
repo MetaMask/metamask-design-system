@@ -2,8 +2,8 @@
 
 ## Getting started
 
-- Install the current LTS version of [Node.js](https://nodejs.org)
-  - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm install` will install the latest version and running `nvm use` will automatically choose the right node version for you.
+- Install [Node.js](https://nodejs.org) 24 (see `.nvmrc`)
+  - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm install` will install the version in `.nvmrc` and running `nvm use` will automatically choose the right node version for you.
 - Install [Yarn](https://yarnpkg.com) via [Corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#how-to-install)
   - If you have Yarn installed globally via Homebrew or NPM, you'll need to uninstall it before enabling it via Corepack.
 - Run `yarn install` to install dependencies and run any required post-install scripts.

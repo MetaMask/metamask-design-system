@@ -3,6 +3,9 @@ name: Test Storybook
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   test-storybook:
     name: Test Storybook (accessibility & stories) (${{ matrix.label }})
@@ -23,7 +26,7 @@ jobs:
         with:
           is-high-risk-environment: false
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: yarn workspace @metamask/storybook-react playwright install --with-deps chromium
       - name: Build packages
         run: yarn build
       - name: Run Storybook tests
