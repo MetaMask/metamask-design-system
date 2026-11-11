@@ -13,9 +13,12 @@
      *
      * NOTE: This must be synchronized with the `moduleNameMapper` option in
      * `jest.config.packages.js`.
+     *
+     * Node16 resolution does not resolve directory imports from ES modules,
+     * so the substitution must name the entry file rather than `src`.
      */
     "paths": {
-      "@metamask/*": ["packages/*/src"]
+      "@metamask/*": ["packages/*/src/index.ts"]
     },
     "strict": true,
     "target": "ES2020"
