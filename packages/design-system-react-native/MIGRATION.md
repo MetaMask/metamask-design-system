@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.56.0 to 0.57.0](#from-version-0560-to-0570)
+- [From version 0.56.0 to 0.X.0](#from-version-0560-to-0x0)
 - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
 - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
 - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
@@ -56,7 +56,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
-  - [From version 0.56.0 to 0.57.0](#from-version-0560-to-0570)
+  - [From version 0.56.0 to 0.X.0](#from-version-0560-to-0x0)
   - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
   - [From version 0.53.0 to 0.54.0](#from-version-0530-to-0540)
   - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
@@ -85,9 +85,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.56.0 to 0.57.0
+### From version 0.56.0 to 0.X.0
 
-<a id="from-version-0560-to-0570"></a>
+<a id="from-version-0560-to-0x0"></a>
 
 #### Deprecated `BoxRow` and `BoxColumn`
 
@@ -95,7 +95,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 **What changed:**
 
-- `BoxRow`, `BoxRowProps`, `BoxColumn`, `BoxColumnProps`, `BoxRowPropsShared`, and `BoxColumnPropsShared` are marked `@deprecated`
+- `BoxRow`, `BoxRowProps`, `BoxColumn`, and `BoxColumnProps` are marked `@deprecated`
 - Wrapper props that were typed from `BoxRowProps` are now typed as `Omit<Partial<BoxProps>, 'children'>`:
   - `ButtonBase` `contentWrapperProps`
   - `SectionHeader` `titleWrapperProps`
@@ -121,7 +121,7 @@ import { BoxRow, Icon, IconName } from '@metamask/design-system-react-native';
   Network fee
 </BoxRow>;
 
-// After (0.57.0)
+// After (0.X.0)
 import {
   Box,
   BoxAlignItems,
@@ -150,7 +150,7 @@ Replace `BoxColumn` with a column `Box`. `topAccessory` and `bottomAccessory` be
   <Content title="Account" />
 </BoxColumn>;
 
-// After (0.57.0)
+// After (0.X.0)
 <Box flexDirection={BoxFlexDirection.Column} gap={2}>
   <BannerAlert />
   <Content title="Account" />
@@ -159,7 +159,7 @@ Replace `BoxColumn` with a column `Box`. `topAccessory` and `bottomAccessory` be
 
 **Impact:**
 
-- Deprecated exports still work in 0.57.0. TypeScript and editors show a deprecation warning
+- Deprecated exports still work in 0.X.0. TypeScript and editors show a deprecation warning
 - `startAccessory` and `endAccessory` are no longer accepted on the wrapper props listed above. They were never documented, and the components either ignored them or let them leak through. Pass accessories with the component's own props instead (for example `titleEndAccessory`)
 - If you passed `gap` through `ButtonBase` `contentWrapperProps` or `SectionHeader` `titleWrapperProps` and expected it to be ignored, remove it
 
