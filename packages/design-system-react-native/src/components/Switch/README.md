@@ -72,7 +72,7 @@ const [isOn, setIsOn] = useState(false);
 
 ### `label`
 
-Optional label that renders text beside the switch. When `label` is a string and `accessibilityLabel` is omitted, that string is also the switch's accessible name. The visible label is hidden from screen readers when the switch has an accessible name, so it is not announced twice.
+Optional label that renders text beside the switch. When `accessibilityLabel` is omitted or empty, this string is the switch's accessible name.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -86,7 +86,7 @@ const [isOn, setIsOn] = useState(false);
 
 ### `accessibilityLabel`
 
-Accessible name for the switch. Use this when the switch has no visible label, or when the announced name should differ from the visible text. It takes precedence over `label`.
+Accessible name for the switch. Use it when there is no visible label, or to add context to a visible label. The accessible name must include the visible label text (WCAG 2.5.3 Label in Name). A non-empty value takes precedence over `label`. An empty string is treated as omitted.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -100,24 +100,12 @@ const [isOn, setIsOn] = useState(false);
   onValueChange={setIsOn}
   accessibilityLabel="Enable notifications"
 />;
-```
-
-### `testID`
-
-Optional test id forwarded to the native switch. The row that wraps the label and the switch does not receive this id.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
-
-```tsx
-const [isOn, setIsOn] = useState(false);
 
 <Switch
   isOn={isOn}
   onValueChange={setIsOn}
   label="Enable notifications"
-  testID="notifications-switch"
+  accessibilityLabel="Enable notifications for this account"
 />;
 ```
 
