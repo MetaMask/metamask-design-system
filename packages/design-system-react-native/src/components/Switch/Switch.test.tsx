@@ -1,5 +1,10 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { fireEvent, render, renderHook } from '@testing-library/react-native';
+import {
+  fireEvent,
+  render,
+  renderHook,
+  within,
+} from '@testing-library/react-native';
 import { Platform } from 'react-native';
 
 import { Switch } from './Switch';
@@ -56,15 +61,19 @@ describe('Switch', () => {
 
     it('passes testID to the container', () => {
       const onValueChange = jest.fn();
-      const { getByTestId } = render(
+      const { getByRole, getByTestId } = render(
         <Switch
           isOn={false}
           onValueChange={onValueChange}
+          label="Enable feature"
           testID="switch-container"
         />,
       );
+      const row = getByTestId('switch-container');
 
-      expect(getByTestId('switch-container')).toBeOnTheScreen();
+      expect(within(row).getByText('Enable feature')).toBeOnTheScreen();
+      expect(within(row).getByRole('switch')).toBeOnTheScreen();
+      expect(getByRole('switch')).not.toHaveProp('testID');
     });
   });
 
@@ -186,6 +195,72 @@ describe('Switch', () => {
   });
 
   describe('accessibility', () => {
+    it('uses accessibilityLabel when label is omitted', () => {
+      const onValueChange = jest.fn();
+      const { getByRole, queryByText } = render(
+        <Switch
+          isOn={false}
+          onValueChange={onValueChange}
+          accessibilityLabel="X"
+        />,
+      );
+
+      expect(getByRole('switch')).toHaveProp('accessibilityLabel', 'X');
+      expect(queryByText('X')).toBeNull();
+    });
+
+    it('uses the label string when accessibilityLabel is omitted', () => {
+      const onValueChange = jest.fn();
+      const { getByRole, getByText } = render(
+        <Switch
+          isOn={false}
+          onValueChange={onValueChange}
+          label="Enable feature"
+        />,
+      );
+
+      expect(getByRole('switch')).toHaveProp(
+        'accessibilityLabel',
+        'Enable feature',
+      );
+      expect(getByText('Enable feature')).toBeOnTheScreen();
+    });
+
+    it('uses accessibilityLabel when a label is also set', () => {
+      const onValueChange = jest.fn();
+      const { getByRole, getByText } = render(
+        <Switch
+          isOn={false}
+          onValueChange={onValueChange}
+          label="Enable notifications"
+          accessibilityLabel="Enable notifications for this account"
+        />,
+      );
+
+      expect(getByRole('switch')).toHaveProp(
+        'accessibilityLabel',
+        'Enable notifications for this account',
+      );
+      expect(getByText('Enable notifications')).toBeOnTheScreen();
+    });
+
+    it('falls back to the label when accessibilityLabel is empty', () => {
+      const onValueChange = jest.fn();
+      const { getByRole } = render(
+        <Switch
+          isOn={false}
+          onValueChange={onValueChange}
+          label="Enable notifications"
+          accessibilityLabel=""
+        />,
+      );
+
+      expect(getByRole('switch')).toHaveProp(
+        'accessibilityLabel',
+        'Enable notifications',
+      );
+    });
+
     it('sets switch role and label from the label prop', () => {
       const onValueChange = jest.fn();
       const { getByRole } = render(

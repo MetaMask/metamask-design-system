@@ -15,9 +15,12 @@ export const Switch = ({
   label,
   style,
   testID,
+  accessibilityLabel,
   ...props
 }: SwitchProps) => {
   const tw = useTailwind();
+  // Blank accessibilityLabel is omitted so the visible label can name the switch.
+  const resolvedLabel = accessibilityLabel || label || undefined;
 
   return (
     <View
@@ -43,7 +46,7 @@ export const Switch = ({
           checked: isOn,
           disabled: isDisabled,
         }}
-        accessibilityLabel={label}
+        accessibilityLabel={resolvedLabel}
         style={[
           Platform.OS === 'ios' && { marginRight: IOS_SWITCH_MARGIN_FIX },
           style,
