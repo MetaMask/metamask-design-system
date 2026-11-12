@@ -7,13 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.0.0]
-
-### Changed
-
-- **BREAKING:** The minimum supported Node.js version is now 24 (`engines.node` is `>=24`) ([#38](https://github.com/MetaMask/eslint-plugin-design-tokens/pull/38))
-- This package is being migrated to the [`metamask-design-system`](https://github.com/MetaMask/metamask-design-system) monorepo ([#37](https://github.com/MetaMask/eslint-plugin-design-tokens/pull/37))
-
 ## [1.1.1]
 
 ### Changed
@@ -40,8 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[Unreleased]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.1.1...v2.0.0
+[Unreleased]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.1.1...HEAD
 [1.1.1]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v0.1.0...v1.0.0
