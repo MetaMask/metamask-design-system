@@ -330,8 +330,16 @@ describe('TitleHub', () => {
     });
   });
 
+  describe('numeric content', () => {
+    it('renders a numeric amount inside Text', () => {
+      const { getByText } = render(<TitleHub title="Send" amount={1234} />);
+
+      expect(getByText('1234')).toBeOnTheScreen();
+    });
+  });
+
   describe('row wrapper props', () => {
-    it('forwards titleWrapperProps to the title BoxRow', () => {
+    it('forwards titleWrapperProps to the title row', () => {
       const { getByTestId } = render(
         <TitleHub
           title="Section"
@@ -342,7 +350,7 @@ describe('TitleHub', () => {
       expect(getByTestId(TITLE_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards amountWrapperProps to the amount BoxRow', () => {
+    it('forwards amountWrapperProps to the amount row', () => {
       const { getByTestId } = render(
         <TitleHub
           title="Send"
@@ -354,7 +362,7 @@ describe('TitleHub', () => {
       expect(getByTestId(AMOUNT_ROW_WRAPPER_TEST_ID)).toBeOnTheScreen();
     });
 
-    it('forwards bottomLabelWrapperProps to the bottom label BoxRow', () => {
+    it('forwards bottomLabelWrapperProps to the bottom label row', () => {
       const { getByTestId } = render(
         <TitleHub
           title="Send"

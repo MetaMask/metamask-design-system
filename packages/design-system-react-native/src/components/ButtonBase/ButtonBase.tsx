@@ -1,4 +1,6 @@
 import {
+  BoxAlignItems,
+  BoxFlexDirection,
   ButtonBaseSize,
   FontWeight,
   mergeTwClassName,
@@ -9,10 +11,10 @@ import React, { useMemo } from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
 import { Icon, IconColor } from '../Icon';
 import { Spinner } from '../Spinner';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import {
   MAP_BUTTONBASE_SIZE_ICONSIZE,
@@ -196,68 +198,69 @@ export const ButtonBase = ({
               </Box>
             )}
 
-            <BoxRow
+            <Box
+              flexDirection={BoxFlexDirection.Row}
+              alignItems={BoxAlignItems.Center}
+              gap={hasAccessories ? 1 : 0}
               {...restContentWrapper}
               twClassName={
                 isLoading
                   ? mergeTwClassName('opacity-0', contentWrapperTw)
                   : contentWrapperTw
               }
-              gap={hasAccessories ? 1 : 0}
-              startAccessory={
-                finalStartIconName ? (
-                  <Icon
-                    name={finalStartIconName}
-                    size={iconSize}
-                    {...startIconProps}
-                    twClassName={mergeTwClassName(
-                      mergeTwClassName(
-                        'shrink-0',
-                        iconClassName ? iconClassName(pressed) : undefined,
-                      ),
-                      startIconProps?.twClassName,
-                    )}
-                  />
-                ) : (
-                  startAccessory
-                )
-              }
-              endAccessory={
-                finalEndIconName ? (
-                  <Icon
-                    name={finalEndIconName}
-                    size={iconSize}
-                    {...endIconProps}
-                    twClassName={mergeTwClassName(
-                      mergeTwClassName(
-                        'shrink-0',
-                        iconClassName ? iconClassName(pressed) : undefined,
-                      ),
-                      endIconProps?.twClassName,
-                    )}
-                  />
-                ) : (
-                  endAccessory
-                )
-              }
-              textProps={{
-                variant: labelTextVariant,
-                fontWeight: FontWeight.Medium,
-                color: TextColor.TextDefault,
-                numberOfLines: 1,
-                ellipsizeMode: 'clip',
-                ...textProps,
-                twClassName: mergeTwClassName(
-                  mergeTwClassName(
-                    'shrink grow-0 flex-wrap text-center',
-                    textClassName ? textClassName(pressed) : undefined,
-                  ),
-                  textProps?.twClassName,
-                ),
-              }}
             >
-              {children}
-            </BoxRow>
+              {finalStartIconName ? (
+                <Icon
+                  name={finalStartIconName}
+                  size={iconSize}
+                  {...startIconProps}
+                  twClassName={mergeTwClassName(
+                    mergeTwClassName(
+                      'shrink-0',
+                      iconClassName ? iconClassName(pressed) : undefined,
+                    ),
+                    startIconProps?.twClassName,
+                  )}
+                />
+              ) : (
+                startAccessory
+              )}
+              <TextOrChildren
+                textProps={{
+                  variant: labelTextVariant,
+                  fontWeight: FontWeight.Medium,
+                  color: TextColor.TextDefault,
+                  numberOfLines: 1,
+                  ellipsizeMode: 'clip',
+                  ...textProps,
+                  twClassName: mergeTwClassName(
+                    mergeTwClassName(
+                      'shrink grow-0 flex-wrap text-center',
+                      textClassName ? textClassName(pressed) : undefined,
+                    ),
+                    textProps?.twClassName,
+                  ),
+                }}
+              >
+                {children}
+              </TextOrChildren>
+              {finalEndIconName ? (
+                <Icon
+                  name={finalEndIconName}
+                  size={iconSize}
+                  {...endIconProps}
+                  twClassName={mergeTwClassName(
+                    mergeTwClassName(
+                      'shrink-0',
+                      iconClassName ? iconClassName(pressed) : undefined,
+                    ),
+                    endIconProps?.twClassName,
+                  )}
+                />
+              ) : (
+                endAccessory
+              )}
+            </Box>
           </>
         );
       }}

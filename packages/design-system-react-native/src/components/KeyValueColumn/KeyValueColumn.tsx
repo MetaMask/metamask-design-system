@@ -1,4 +1,6 @@
 import {
+  BoxAlignItems,
+  BoxFlexDirection,
   ButtonIconSize,
   FontWeight,
   IconColor,
@@ -7,9 +9,9 @@ import {
 } from '@metamask/design-system-shared';
 import React from 'react';
 
-import { BoxColumn } from '../BoxColumn';
-import { BoxRow } from '../BoxRow';
+import { Box } from '../Box';
 import { ButtonIcon } from '../ButtonIcon';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import type { KeyValueColumnProps } from './KeyValueColumn.types';
 
@@ -54,49 +56,62 @@ export const KeyValueColumn = ({
     );
 
   const keyBox = (
-    <BoxRow
-      startAccessory={keyStartAccessory}
-      endAccessory={keyEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.BodyMd,
-        fontWeight: FontWeight.Medium,
-        color: TextColor.TextAlternative,
-        numberOfLines: 1,
-        ellipsizeMode: 'tail',
-        ...keyTextProps,
-      }}
+    <Box
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
+      gap={1}
       twClassName="w-full min-w-0"
     >
-      {keyContent}
-    </BoxRow>
+      {keyStartAccessory}
+      <TextOrChildren
+        textProps={{
+          variant: TextVariant.BodyMd,
+          fontWeight: FontWeight.Medium,
+          color: TextColor.TextAlternative,
+          numberOfLines: 1,
+          ellipsizeMode: 'tail',
+          ...keyTextProps,
+        }}
+      >
+        {keyContent}
+      </TextOrChildren>
+      {keyEndAccessoryNode}
+    </Box>
   );
 
   const valueBox = (
-    <BoxRow
-      startAccessory={valueStartAccessory}
-      endAccessory={valueEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.BodyMd,
-        fontWeight: FontWeight.Medium,
-        color: TextColor.TextDefault,
-        numberOfLines: 1,
-        ellipsizeMode: 'tail',
-        ...valueTextProps,
-      }}
+    <Box
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
+      gap={1}
       twClassName="w-full min-w-0"
     >
-      {valueContent}
-    </BoxRow>
+      {valueStartAccessory}
+      <TextOrChildren
+        textProps={{
+          variant: TextVariant.BodyMd,
+          fontWeight: FontWeight.Medium,
+          color: TextColor.TextDefault,
+          numberOfLines: 1,
+          ellipsizeMode: 'tail',
+          ...valueTextProps,
+        }}
+      >
+        {valueContent}
+      </TextOrChildren>
+      {valueEndAccessoryNode}
+    </Box>
   );
 
   return (
-    <BoxColumn
-      bottomAccessory={valueBox}
+    <Box
+      flexDirection={BoxFlexDirection.Column}
       twClassName={twClassName}
       {...viewProps}
     >
       {keyBox}
-    </BoxColumn>
+      {valueBox}
+    </Box>
   );
 };
 

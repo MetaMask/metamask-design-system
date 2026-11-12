@@ -5,7 +5,6 @@ import type {
 import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { BoxProps } from '../Box/Box.types';
-import type { BoxRowProps } from '../BoxRow/BoxRow.types';
 import type { IconProps } from '../Icon';
 import type { SpinnerProps } from '../Spinner';
 import type { TextProps } from '../Text';
@@ -33,9 +32,9 @@ export type ButtonBaseProps = ButtonBasePropsShared & {
    */
   loadingWrapperProps?: Omit<Partial<BoxProps>, 'children'>;
   /**
-   * Props passed to the label row (`BoxRow`). Label typography remains controlled via `textProps` on ButtonBase.
+   * Props passed to the label row (`Box`). Defaults to a row with centered items and `gap={1}` when accessories are present; values here override those defaults. Label typography remains controlled via `textProps` on ButtonBase.
    */
-  contentWrapperProps?: Omit<Partial<BoxRowProps>, 'children' | 'textProps'>;
+  contentWrapperProps?: Omit<Partial<BoxProps>, 'children'>;
   /**
    * Optional prop to specify an icon to show at the start of the button
    */

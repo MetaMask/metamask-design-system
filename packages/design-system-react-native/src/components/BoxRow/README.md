@@ -1,5 +1,7 @@
 # BoxRow
 
+> **Deprecated:** `BoxRow` will be removed in a future major version. Use [`Box`](../Box/README.md) with `flexDirection={BoxFlexDirection.Row}`, `alignItems={BoxAlignItems.Center}`, and `gap={1}`, render accessories as sibling children, and wrap string content in `Text`. See the [migration guide](../../../MIGRATION.md#from-version-0560-to-0x0).
+
 BoxRow lays out optional start and end accessories with a text or child region in a horizontal row. The public API combines [TextOrChildren](../temp-components/TextOrChildren/TextOrChildren.tsx) (`children`, `textProps` for the middle) with a root [Box](../Box/Box.tsx): `flexDirection` is always row; `alignItems` defaults to center and `gap` defaults to `1`, and both can be overridden. Other [Box](../Box/Box.types.ts) layout and `View` props apply to that root.
 
 ```tsx

@@ -81,11 +81,11 @@ import {
 
 ### `titleWrapperProps`
 
-Optional props spread onto the title row [`BoxRow`](../BoxRow/README.md) (excluding `children`, `startAccessory`, `endAccessory`, and `textProps`, which TitleAlert sets). The row defaults to centered main-axis alignment and `self-stretch` width; `justifyContent` and `twClassName` from `titleWrapperProps` override those defaults when provided.
+Optional props spread onto the title row [`Box`](../Box/README.md) (excluding `children`, which TitleAlert sets). The row defaults to centered items, `gap={1}`, centered main-axis alignment, and `self-stretch` width; `justifyContent` and `twClassName` from `titleWrapperProps` override those defaults when provided.
 
-| TYPE                                                                                          | REQUIRED | DEFAULT     |
-| --------------------------------------------------------------------------------------------- | -------- | ----------- |
-| `Omit<Partial<BoxRowProps>, 'children' \| 'startAccessory' \| 'endAccessory' \| 'textProps'>` | No       | `undefined` |
+| TYPE                                  | REQUIRED | DEFAULT     |
+| ------------------------------------- | -------- | ----------- |
+| `Omit<Partial<BoxProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
 import {

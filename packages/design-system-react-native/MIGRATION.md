@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [From version 0.56.0 to 0.X.0](#from-version-0560-to-0x0)
 - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
 - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
 - [From version 0.49.2 to 0.50.0](#from-version-0492-to-0500)
@@ -55,6 +56,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TabEmptyState Component](#tabemptystate-component)
   - [Toast Component](#toast-component)
 - [Version Updates](#version-updates)
+  - [From version 0.56.0 to 0.X.0](#from-version-0560-to-0x0)
   - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
   - [From version 0.53.0 to 0.54.0](#from-version-0530-to-0540)
   - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
@@ -82,6 +84,84 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.1.0 to 0.2.0](#from-version-010-to-020)
 
 ## Version Updates
+
+### From version 0.56.0 to 0.X.0
+
+<a id="from-version-0560-to-0x0"></a>
+
+#### Deprecated `BoxRow` and `BoxColumn`
+
+`BoxRow` and `BoxColumn` are deprecated and will be removed in a future major version. Use `Box` directly. Every design system component that rendered them internally now renders `Box`, so nothing changes visually.
+
+**What changed:**
+
+- `BoxRow`, `BoxRowProps`, `BoxColumn`, and `BoxColumnProps` are marked `@deprecated`
+- Wrapper props that were typed from `BoxRowProps` are now typed as `Omit<Partial<BoxProps>, 'children'>`:
+  - `ButtonBase` `contentWrapperProps`
+  - `SectionHeader` `titleWrapperProps`
+  - `TitleAlert` `titleWrapperProps`
+  - `TitleHub` `titleWrapperProps`, `amountWrapperProps`, and `bottomLabelWrapperProps`
+  - `TitleStandard` `titleWrapperProps` and `bottomLabelWrapperProps`
+  - `TitleSubpage` `identityRowProps` and `bottomLabelWrapperProps`
+- `gap` passed through `ButtonBase` `contentWrapperProps` or `SectionHeader` `titleWrapperProps` is now applied. Before, the component's own `gap` silently overrode it
+- `TextOrChildren` (and every component that uses it for string content) now wraps `number` children in `Text`, so `amount={1234}` no longer crashes with "Text strings must be rendered within a <Text> component"
+
+**Migration:**
+
+Replace `BoxRow` with a row `Box`. `BoxRow` applied `alignItems={BoxAlignItems.Center}` and `gap={1}` by default, so set them explicitly where you relied on them. Render accessories as siblings, and wrap string children in `Text`:
+
+```tsx
+// Before (0.56.0)
+import { BoxRow, Icon, IconName } from '@metamask/design-system-react-native';
+
+<BoxRow
+  startAccessory={<Icon name={IconName.Info} />}
+  textProps={{ variant: TextVariant.BodyMd }}
+>
+  Network fee
+</BoxRow>;
+
+// After (0.X.0)
+import {
+  Box,
+  BoxAlignItems,
+  BoxFlexDirection,
+  Icon,
+  IconName,
+  Text,
+  TextVariant,
+} from '@metamask/design-system-react-native';
+
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  alignItems={BoxAlignItems.Center}
+  gap={1}
+>
+  <Icon name={IconName.Info} />
+  <Text variant={TextVariant.BodyMd}>Network fee</Text>
+</Box>;
+```
+
+Replace `BoxColumn` with a column `Box`. `topAccessory` and `bottomAccessory` become the first and last children:
+
+```tsx
+// Before (0.56.0)
+<BoxColumn topAccessory={<BannerAlert />} gap={2}>
+  <Content title="Account" />
+</BoxColumn>;
+
+// After (0.X.0)
+<Box flexDirection={BoxFlexDirection.Column} gap={2}>
+  <BannerAlert />
+  <Content title="Account" />
+</Box>;
+```
+
+**Impact:**
+
+- Deprecated exports still work in 0.X.0. TypeScript and editors show a deprecation warning
+- `startAccessory` and `endAccessory` are no longer accepted on the wrapper props listed above. They were never documented, and the components either ignored them or let them leak through. Pass accessories with the component's own props instead (for example `titleEndAccessory`)
+- If you passed `gap` through `ButtonBase` `contentWrapperProps` or `SectionHeader` `titleWrapperProps` and expected it to be ignored, remove it
 
 ### From version 0.54.0 to 0.55.0
 

@@ -55,7 +55,7 @@ describe('TitleSubpage', () => {
       expect(queryByTestId(TITLE_AVATAR_SLOT_TEST_ID)).not.toBeOnTheScreen();
     });
 
-    it('forwards identityRowProps testID to identity BoxRow', () => {
+    it('forwards identityRowProps testID to identity row', () => {
       const { getByTestId } = render(
         <TitleSubpage
           titleAvatar={defaultTitleAvatar}

@@ -168,11 +168,11 @@ Optional props merged into the heading `Text` when `title` is a string. Use for 
 
 ### `titleWrapperProps`
 
-Optional props forwarded to the title row `BoxRow` (for example `testID`, layout, or `twClassName` on the row). `children`, `textProps`, and `endAccessory` are omitted from the type because this component controls them via `title`, `titleProps`, and `titleEndAccessory`.
+Optional props forwarded to the title row `Box` (for example `testID`, layout, or `twClassName` on the row). The row defaults to centered items and `gap={2}`; values here override those defaults. `children` is omitted from the type because this component renders `title` and `titleEndAccessory` inside the row.
 
-| TYPE                                                                      | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------------------- | -------- | ----------- |
-| `Omit<Partial<BoxRowProps>, 'children' \| 'textProps' \| 'endAccessory'>` | No       | `undefined` |
+| TYPE                                  | REQUIRED | DEFAULT     |
+| ------------------------------------- | -------- | ----------- |
+| `Omit<Partial<BoxProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
 <TitleStandard
@@ -199,11 +199,11 @@ Optional props merged into the bottom label `Text` when `bottomLabel` is a strin
 
 ### `bottomLabelWrapperProps`
 
-Optional props forwarded to the bottom label row `BoxRow` when `bottomLabel` is renderable. Same omissions as `titleWrapperProps`: `children`, `textProps`, and `endAccessory` are controlled by `bottomLabel`, `bottomLabelProps`, and `bottomLabelEndAccessory`.
+Optional props forwarded to the bottom label row `Box` when `bottomLabel` is renderable. Same defaults and omissions as `titleWrapperProps`: `children` is controlled by `bottomLabel` and `bottomLabelEndAccessory`.
 
-| TYPE                                                                      | REQUIRED | DEFAULT     |
-| ------------------------------------------------------------------------- | -------- | ----------- |
-| `Omit<Partial<BoxRowProps>, 'children' \| 'textProps' \| 'endAccessory'>` | No       | `undefined` |
+| TYPE                                  | REQUIRED | DEFAULT     |
+| ------------------------------------- | -------- | ----------- |
+| `Omit<Partial<BoxProps>, 'children'>` | No       | `undefined` |
 
 ```tsx
 <TitleStandard
