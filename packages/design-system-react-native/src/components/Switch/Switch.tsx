@@ -14,21 +14,29 @@ export const Switch = ({
   onValueChange,
   label,
   style,
-  testID,
+  accessibilityLabel,
   ...props
 }: SwitchProps) => {
   const tw = useTailwind();
+  const resolvedLabel =
+    accessibilityLabel ?? (typeof label === 'string' ? label : undefined);
+  // Hide the visible label from assistive tech only when the switch itself
+  // carries the accessible name, so the label is not announced twice.
+  const visibleLabelAccessibilityProps = resolvedLabel
+    ? ({
+        accessibilityElementsHidden: true,
+        importantForAccessibility: 'no-hide-descendants',
+      } as const)
+    : undefined;
 
   return (
-    <View
-      testID={testID}
-      style={tw.style('flex-row items-center', isDisabled && 'opacity-50')}
-    >
+    <View style={tw.style('flex-row items-center', isDisabled && 'opacity-50')}>
       {label ? (
         <Text
           variant={TextVariant.BodyMd}
           color={TextColor.TextDefault}
           style={tw`mr-2 flex-1`}
+          {...visibleLabelAccessibilityProps}
         >
           {label}
         </Text>
@@ -43,7 +51,7 @@ export const Switch = ({
           checked: isOn,
           disabled: isDisabled,
         }}
-        accessibilityLabel={label}
+        accessibilityLabel={resolvedLabel}
         style={[
           Platform.OS === 'ios' && { marginRight: IOS_SWITCH_MARGIN_FIX },
           style,

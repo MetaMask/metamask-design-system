@@ -1,8 +1,28 @@
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import { Platform } from 'react-native';
+import type { ReactTestInstance } from 'react-test-renderer';
 
 import { Switch } from './Switch';
+
+const hiddenTextQuery = { includeHiddenElements: true };
+
+// Host row above the switch. Composite parents cannot take style matchers.
+const getSwitchRow = (switchElement: ReactTestInstance) => {
+  let current = switchElement.parent;
+
+  while (current) {
+    if (
+      typeof current.type === 'string' &&
+      current.props.accessibilityRole !== 'switch'
+    ) {
+      return current;
+    }
+    current = current.parent;
+  }
+
+  throw new Error('Switch row not found');
+};
 
 jest.mock('react-native/Libraries/Components/Switch/Switch', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -54,17 +74,19 @@ describe('Switch', () => {
       expect(getByRole('switch')).toBeOnTheScreen();
     });
 
-    it('passes testID to the container', () => {
+    it('forwards testID to the switch', () => {
       const onValueChange = jest.fn();
-      const { getByTestId } = render(
+      const { getByRole, getByTestId } = render(
         <Switch
           isOn={false}
           onValueChange={onValueChange}
-          testID="switch-container"
+          testID="switch-control"
         />,
       );
+      const switchElement = getByRole('switch');
 
-      expect(getByTestId('switch-container')).toBeOnTheScreen();
+      expect(getByTestId('switch-control')).toBe(switchElement);
+      expect(getSwitchRow(switchElement)).not.toHaveProp('testID');
     });
   });
 
@@ -107,7 +129,7 @@ describe('Switch', () => {
         />,
       );
 
-      expect(getByText('Enable feature')).toBeOnTheScreen();
+      expect(getByText('Enable feature', hiddenTextQuery)).toBeOnTheScreen();
     });
 
     it('omits label text when not provided', () => {
@@ -141,31 +163,22 @@ describe('Switch', () => {
 
     it('applies disabled opacity to the container', () => {
       const onValueChange = jest.fn();
-      const { getByTestId } = render(
-        <Switch
-          isOn={false}
-          isDisabled
-          onValueChange={onValueChange}
-          testID="switch-container"
-        />,
+      const { getByRole } = render(
+        <Switch isOn={false} isDisabled onValueChange={onValueChange} />,
       );
 
-      expect(getByTestId('switch-container')).toHaveStyle(
+      expect(getSwitchRow(getByRole('switch'))).toHaveStyle(
         tw`flex-row items-center opacity-50`,
       );
     });
 
     it('omits disabled opacity when enabled', () => {
       const onValueChange = jest.fn();
-      const { getByTestId } = render(
-        <Switch
-          isOn={false}
-          onValueChange={onValueChange}
-          testID="switch-container"
-        />,
+      const { getByRole } = render(
+        <Switch isOn={false} onValueChange={onValueChange} />,
       );
 
-      expect(getByTestId('switch-container')).toHaveStyle(
+      expect(getSwitchRow(getByRole('switch'))).toHaveStyle(
         tw`flex-row items-center`,
       );
     });
@@ -186,6 +199,66 @@ describe('Switch', () => {
   });
 
   describe('accessibility', () => {
+    it('uses accessibilityLabel when label is omitted', () => {
+      const onValueChange = jest.fn();
+      const { getByRole, queryByText } = render(
+        <Switch
+          isOn={false}
+          onValueChange={onValueChange}
+          accessibilityLabel="X"
+        />,
+      );
+
+      expect(getByRole('switch')).toHaveProp('accessibilityLabel', 'X');
+      expect(queryByText('X')).toBeNull();
+    });
+
+    it('uses the label string when accessibilityLabel is omitted', () => {
+      const onValueChange = jest.fn();
+      const { getByRole, getByText } = render(
+        <Switch
+          isOn={false}
+          onValueChange={onValueChange}
+          label="Enable feature"
+        />,
+      );
+      const labelText = getByText('Enable feature', hiddenTextQuery);
+
+      expect(getByRole('switch')).toHaveProp(
+        'accessibilityLabel',
+        'Enable feature',
+      );
+      expect(labelText).toHaveProp('accessibilityElementsHidden', true);
+      expect(labelText).toHaveProp(
+        'importantForAccessibility',
+        'no-hide-descendants',
+      );
+    });
+
+    it('prefers accessibilityLabel when a label is also set', () => {
+      const onValueChange = jest.fn();
+      const { getByRole, getByText } = render(
+        <Switch
+          isOn={false}
+          onValueChange={onValueChange}
+          label="Visible label"
+          accessibilityLabel="Announced name"
+        />,
+      );
+      const labelText = getByText('Visible label', hiddenTextQuery);
+
+      expect(getByRole('switch')).toHaveProp(
+        'accessibilityLabel',
+        'Announced name',
+      );
+      expect(labelText).toBeOnTheScreen();
+      expect(labelText).toHaveProp('accessibilityElementsHidden', true);
+      expect(labelText).toHaveProp(
+        'importantForAccessibility',
+        'no-hide-descendants',
+      );
+    });
+
     it('sets switch role and label from the label prop', () => {
       const onValueChange = jest.fn();
       const { getByRole } = render(
