@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.51.2]
+
 ### Uncategorized
 
 - fix: ModalBody no longer defaults tabIndex to 0 ([#1681](https://github.com/MetaMask/metamask-design-system/pull/1681))
@@ -718,7 +720,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.2...HEAD
+[0.51.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.1...@metamask/design-system-react@0.51.2
 [0.51.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.0...@metamask/design-system-react@0.51.1
 [0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.50.0...@metamask/design-system-react@0.51.0
 [0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.49.0...@metamask/design-system-react@0.50.0

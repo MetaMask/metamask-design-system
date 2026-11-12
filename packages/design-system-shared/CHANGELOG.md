@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.45.1]
+
 ### Uncategorized
 
 - chore: upgrade TypeScript to ~5.9.3 ([#1675](https://github.com/MetaMask/metamask-design-system/pull/1675))
@@ -442,7 +444,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.1...HEAD
+[0.45.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.0...@metamask/design-system-shared@0.45.1
 [0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.44.0...@metamask/design-system-shared@0.45.0
 [0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.43.0...@metamask/design-system-shared@0.44.0
 [0.43.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.42.0...@metamask/design-system-shared@0.43.0
