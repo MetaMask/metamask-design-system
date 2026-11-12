@@ -6,6 +6,7 @@ import { ColorSwatch } from './ColorSwatch';
 const meta: Meta<typeof ColorSwatch> = {
   title: 'Docs Components/ColorSwatch',
   component: ColorSwatch,
+  tags: ['!manifest'],
 };
 
 export default meta;

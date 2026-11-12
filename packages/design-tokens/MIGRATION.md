@@ -2,6 +2,8 @@
 
 This guide provides detailed instructions for migrating your project from one version of the `@metamask/design-tokens` to another.
 
+- [From version 12.0.0 to 13.0.0](#from-version-1200-to-1300)
+- [From version 11.1.0 to 12.0.0](#from-version-1110-to-1200)
 - [From version 10.x to 11.0.0](#from-version-10x-to-1100)
 - [From version 9.x to 10.0.0](#from-version-9x-to-1000)
 - [From version 8.x to 9.0.0](#from-version-8x-to-900)
@@ -13,6 +15,113 @@ This guide provides detailed instructions for migrating your project from one ve
 - [From version 4.1.0 to 5.0.0](#from-version-410-to-500)
 - [From version 3.0.0 to 4.0.0](#from-version-300-to-400)
 - [From version 2.1.1 to 3.0.0](#from-version-211-to-300)
+
+## From version 12.0.0 to 13.0.0
+
+<a id="from-version-1200-to-1300"></a>
+
+MM Sans is removed. `fontFamilies.accent`, `--font-family-accent`, and the `font-accent` utility are gone. MM Poly was already replaced by Grotzec Cond Bold in 12.0.0; delete any MM Poly files that are still bundled. `fontFamilies.hero` and `--font-family-hero` stay on Grotzec Cond.
+
+### What changed
+
+- Removed `fontFamilies.accent` (`'MMSans'`) and the `FontFamilies['accent']` type key
+- Removed the Figma token `global.fontFamilies.accent`
+- Removed `--font-family-accent` from `@metamask/design-tokens/styles.css`
+- Removed the Tailwind v4 `font-accent` utility from `@metamask/design-tokens/tailwind/theme.css`
+- `fontFamilies.default`, `fontFamilies.hero`, `--font-family-default`, `--font-family-hero`, `font-default`, and `font-hero` are unchanged
+
+### Migration
+
+Replace accent with the hero family. `--font-family-hero` and `font-hero` already resolve to Grotzec Cond Bold. Grotzec Cond is a condensed display face with only a Bold cut, so use it for headlines and marketing moments. If the accent text was body copy, use the default family (Inter) instead.
+
+CSS custom property:
+
+```css
+/* Before (12.0.0) */
+.welcome-login__title {
+  font-family: var(--font-family-accent);
+}
+
+/* After (13.0.0) */
+.welcome-login__title {
+  font-family: var(--font-family-hero);
+}
+```
+
+Tailwind v4 utility:
+
+```tsx
+// Before (12.0.0)
+<h2 className="font-accent text-l-display-md">Earn rewards with MetaMask</h2>
+
+// After (13.0.0)
+<h2 className="font-hero text-l-display-md">Earn rewards with MetaMask</h2>
+```
+
+JavaScript token:
+
+```ts
+// Before (12.0.0)
+import { fontFamilies } from '@metamask/design-tokens';
+
+const rewardsTitleStyle = { fontFamily: fontFamilies.accent };
+
+// After (13.0.0)
+import { fontFamilies } from '@metamask/design-tokens';
+
+const rewardsTitleStyle = { fontFamily: fontFamilies.hero };
+```
+
+Delete MM Sans `@font-face` rules and the font files. The same applies to any leftover MM Poly files.
+
+```css
+/* Remove */
+@font-face {
+  font-family: 'MMSans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/MMSans/MM_Sans-Variable.woff2') format('woff2');
+}
+```
+
+**Impact:**
+
+- TypeScript fails on `fontFamilies.accent`
+- Styles that still reference `--font-family-accent` or `font-accent` fall back to the inherited font until they switch to `--font-family-hero` or `font-hero`. There is no build error for these, so search for `font-family-accent` and `font-accent` before upgrading
+- `@metamask/design-system-react@0.50.0`, `@metamask/design-system-react-native@0.55.0`, `@metamask/design-system-tailwind-preset@0.16.0`, and `@metamask/design-system-twrnc-preset@0.14.0` require `@metamask/design-tokens@^13.0.0`, so upgrade them together
+
+## From version 11.1.0 to 12.0.0
+
+<a id="from-version-1110-to-1200"></a>
+
+The hero typeface changes from MM Poly to Grotzec Cond Bold. `fontFamilies.accent` and `--font-family-accent` (MM Sans) are unchanged and will be removed in a later release.
+
+### What changed
+
+- `--font-family-hero` is now `'Grotzec Cond', 'Helvetica Neue', Helvetica, Arial, sans-serif` (was `'MMPoly', ...`)
+- `fontFamilies.hero` and the Figma token `global.fontFamilies.hero` are now `Grotzec Cond` (was `MMPoly`)
+- Keep using `font-hero` and `fontFamilies.hero`. This package does not add a separate Grotzec family token
+- `--font-family-accent` and `fontFamilies.accent` are unchanged
+
+Only the Bold cut is licensed. Declare it at weight 600. Regular and medium requests fall back to that Bold cut.
+
+### Migration
+
+Replace MM Poly font files with `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond). Keep the adjacent `LICENSE`. Grotzec Cond is commercial software licensed to ConsenSys for the MetaMask application only and is excluded from the repository MIT license.
+
+```css
+@font-face {
+  font-family: 'Grotzec Cond';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/GrotzecCond/GrotzecCond-Bold.woff2') format('woff2');
+}
+```
+
+**Impact:**
+
+Apps that still declare an MM Poly `@font-face` for `--font-family-hero` or `fontFamilies.hero` will fall back to Helvetica until they register Grotzec Cond Bold. Token names are unchanged.
 
 ## From version 10.x to 11.0.0
 
@@ -376,7 +485,7 @@ The preset is no longer needed for Tailwind v4 consumers. It will eventually be 
 | Color shortcuts   | `@utility` directives (e.g. `bg-default`, `text-default`, `border-default`)                                                                    |
 | Typography        | `@utility` directives for `text-*`, `leading-*`, `tracking-*`                                                                                  |
 | Font weights      | `@utility` directives for `font-regular`, `font-medium`, `font-bold`                                                                           |
-| Font families     | `@utility` directives for `font-default`, `font-accent`, `font-hero`                                                                           |
+| Font families     | `@utility` directives for `font-default`, `font-hero`                                                                                          |
 | Box shadows       | `@theme` variables (`--shadow-xs` / `sm` / `md` / `lg`) auto-generate `shadow-xs`–`shadow-lg` utilities                                        |
 | Shadow colors     | `--color-shadow-default` / `primary` / `error` in `@theme` only (no `shadow-default` etc. utilities; v3’s color-stack pattern had no adoption) |
 | Light/dark themes | `[data-theme='light']`/`.light` and `[data-theme='dark']`/`.dark` selector blocks                                                              |

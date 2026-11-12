@@ -174,15 +174,17 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
 
       {/* Title */}
       <View style={tw.style('flex-1 items-center')} {...childrenWrapperProps}>
-        <TextOrChildren
-          textProps={{
-            variant: TextVariant.HeadingSm,
-            ...textProps,
-            style: [tw.style('text-center'), textProps?.style],
-          }}
-        >
-          {children}
-        </TextOrChildren>
+        {children && (
+          <TextOrChildren
+            textProps={{
+              variant: TextVariant.HeadingSm,
+              ...textProps,
+              style: [tw.style('text-center'), textProps?.style],
+            }}
+          >
+            {children}
+          </TextOrChildren>
+        )}
       </View>
 
       {/* End accessory */}

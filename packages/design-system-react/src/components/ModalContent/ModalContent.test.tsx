@@ -6,6 +6,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { Modal } from '../Modal';
+import { ModalBody } from '../ModalBody';
 
 import { ModalContent } from './ModalContent';
 import { MODAL_CONTENT_IGNORE_OUTSIDE_CLICK_ATTR } from './ModalContent.constants';
@@ -112,7 +113,7 @@ describe('ModalContent', () => {
     const dialog = screen.getByTestId('dialog');
     expect(dialog).toHaveClass('opacity-75');
     // Default classes are still present after merge.
-    expect(dialog).toHaveClass('max-w-[360px]', 'rounded-lg');
+    expect(dialog).toHaveClass('max-w-[360px]', 'rounded-[32px]');
   });
 
   it('uses elevated1 background and alternative border on the dialog', () => {
@@ -235,6 +236,34 @@ describe('ModalContent', () => {
         </Modal>,
       );
       expect(screen.getByTestId('initial')).toHaveFocus();
+    });
+
+    it('focuses a control inside ModalBody when the body omits tabIndex', () => {
+      render(
+        <Modal isOpen onClose={onClose}>
+          <ModalContent>
+            <ModalBody data-testid="modal-body">
+              <button type="button">Continue</button>
+            </ModalBody>
+          </ModalContent>
+        </Modal>,
+      );
+
+      expect(screen.getByTestId('modal-body')).not.toHaveAttribute('tabindex');
+      expect(screen.getByRole('button', { name: 'Continue' })).toHaveFocus();
+    });
+
+    it('does not focus ModalBody when tabIndex is omitted', () => {
+      render(
+        <Modal isOpen onClose={onClose}>
+          <ModalContent>
+            <ModalBody data-testid="modal-body">Static text</ModalBody>
+          </ModalContent>
+        </Modal>,
+      );
+
+      expect(screen.getByTestId('modal-body')).not.toHaveAttribute('tabindex');
+      expect(screen.getByTestId('modal-body')).not.toHaveFocus();
     });
 
     it('returns focus to finalFocusRef when the modal closes', () => {

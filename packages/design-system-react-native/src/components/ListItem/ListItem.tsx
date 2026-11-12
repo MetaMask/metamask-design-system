@@ -1,5 +1,6 @@
 import {
   BoxAlignItems,
+  BoxFlexDirection,
   ContentVariant,
   mergeTwClassName,
 } from '@metamask/design-system-shared';
@@ -13,7 +14,6 @@ import type {
 } from 'react-native';
 
 import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
 import { Content } from '../Content';
 
 import type { ListItemProps } from './ListItem.types';
@@ -110,14 +110,15 @@ export const ListItem: React.FC<ListItemProps> = ({
   );
 
   const listContent = hasRowAccessories ? (
-    <BoxRow
-      startAccessory={startAccessory}
-      endAccessory={endAccessory}
+    <Box
+      flexDirection={BoxFlexDirection.Row}
       alignItems={accessoryAlignItems}
       gap={accessoryGap}
     >
+      {startAccessory}
       {content}
-    </BoxRow>
+      {endAccessory}
+    </Box>
   ) : (
     content
   );

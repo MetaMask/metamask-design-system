@@ -18,7 +18,7 @@ import { ModalBody } from '@metamask/design-system-react';
 
 ### `children`
 
-Content rendered inside the body. `ModalBody` handles vertical scrolling when its content exceeds the available height of the modal.
+Content rendered inside the body. `ModalBody` handles vertical scrolling when its content exceeds the available height of the modal. The example sets `tabIndex={0}` because the sample is static text in a short frame. See `tabIndex` below.
 
 <table>
   <thead>
@@ -76,19 +76,52 @@ A common pattern in the extension was to drop the body's padding and let individ
 </ModalBody>
 ```
 
+The Canvas below sets `tabIndex={0}` because the frame is short and the rows are static text.
+
 <Canvas of={ModalBodyStories.Padding} />
 
-### Accessibility
+### `tabIndex`
 
-`ModalBody` ships with `tabIndex={0}` by default so the scrollable region is reachable by keyboard — keyboard-only users can focus the body and arrow-scroll through long content. This satisfies the WCAG 2.1.1 "Keyboard" rule for scrollable regions (axe `scrollable-region-focusable`).
+Tab order of the body. `ModalBody` does not set `tabIndex` unless you pass it, so the body is not a tab stop by default.
 
-If your modal body's content already includes focusable elements that own the keyboard scroll experience (forms, lists with focusable rows, etc.) and you don't want an extra tab stop on the body itself, opt out with `tabIndex={-1}` — your value wins over the default:
+Pass `0` when the body scrolls and its content has no focusable elements. Keyboard users can then focus the region and scroll it with the arrow keys. That satisfies WCAG 2.1.1 Keyboard for scrollable regions (axe `scrollable-region-focusable`).
+
+```tsx
+<ModalBody tabIndex={0}>{longText}</ModalBody>
+```
+
+Leave `tabIndex` unset when the body already contains focusable controls (forms, lists with focusable rows, and so on). Those controls are the tab stops. Pass `-1` only when the region should be programmatically focusable without joining the tab sequence.
 
 ```tsx
 <ModalBody tabIndex={-1}>{focusableContent}</ModalBody>
 ```
 
-The `tabIndex` prop is forwarded to the underlying `<div>` like any other HTML attribute.
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>number</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Accessibility
+
+Dialog focus — initial focus, the focus trap, and focus restoration — is owned by `Modal` and `ModalContent` through `ModalFocus`. That behavior does not depend on `ModalBody`'s `tabIndex`.
+
+`ModalBody` is not keyboard-focusable unless you set `tabIndex`. When the body is only static text and it scrolls, set `tabIndex={0}`. When it already contains focusable controls, leave `tabIndex` unset.
 
 ### `className`
 

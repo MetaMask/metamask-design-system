@@ -4,7 +4,6 @@ import type { ViewProps } from 'react-native';
 
 // Internal dependencies.
 import type { BoxProps } from '../Box/Box.types';
-import type { BoxRowProps } from '../BoxRow/BoxRow.types';
 import type { TextProps } from '../Text/Text.types';
 
 /**
@@ -13,37 +12,31 @@ import type { TextProps } from '../Text/Text.types';
  */
 export type TitleSubpageProps = TitleSubpagePropsShared & {
   /**
-   * Optional props spread onto the identity {@link BoxRow} (excluding `children`, `startAccessory`, and `textProps`, which the component owns).
+   * Optional props spread onto the identity row {@link Box} (a row with centered items, `gap={4}`, and `h-14` by default; values here override those defaults). Excludes `children`, which the component owns.
    */
-  identityRowProps?: Omit<
-    Partial<BoxRowProps>,
-    'children' | 'startAccessory' | 'textProps'
-  >;
+  identityRowProps?: Omit<Partial<BoxProps>, 'children'>;
   /**
    * Optional props spread onto the title/subtitle column {@link Box} (excluding `children`, which the component owns).
    */
   titleColumnProps?: Omit<Partial<BoxProps>, 'children'>;
   /**
-   * Optional props spread onto the bottom label {@link BoxRow} (excluding `children`, `endAccessory`, and `textProps`, which the component owns).
+   * Optional props spread onto the bottom label row {@link Box} (a row with centered items and `gap={1}` by default; values here override those defaults). Excludes `children`, which the component owns.
    */
-  bottomLabelWrapperProps?: Omit<
-    Partial<BoxRowProps>,
-    'children' | 'endAccessory' | 'textProps'
-  >;
+  bottomLabelWrapperProps?: Omit<Partial<BoxProps>, 'children'>;
   /**
-   * Optional props merged into {@link BoxRow} `textProps` when `amount` is a string.
+   * Optional props merged into the amount `Text` when `amount` is a string.
    */
   amountProps?: Omit<Partial<TextProps>, 'children'>;
   /**
-   * Optional props merged into {@link BoxRow} `textProps` when `title` is a string.
+   * Optional props merged into the title `Text` when `title` is a string.
    */
   titleProps?: Omit<Partial<TextProps>, 'children'>;
   /**
-   * Optional props merged into {@link BoxRow} `textProps` when `subtitle` is a string.
+   * Optional props merged into the subtitle `Text` when `subtitle` is a string.
    */
   subtitleProps?: Omit<Partial<TextProps>, 'children'>;
   /**
-   * Optional props merged into {@link BoxRow} `textProps` when `bottomLabel` is a string.
+   * Optional props merged into the bottom label `Text` when `bottomLabel` is a string.
    */
   bottomLabelProps?: Omit<Partial<TextProps>, 'children'>;
   /**

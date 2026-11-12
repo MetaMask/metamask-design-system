@@ -1,3 +1,4 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 import { createRequire } from 'node:module';
 import path, { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -6,8 +7,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import babel from '@rolldown/plugin-babel';
 import { designSystemBarrelImportsPlugin } from './vite-plugin-design-system-barrel-imports';
-
-const __filename = fileURLToPath(import.meta.url);
+import { includeDesignSystemProp } from '../../../scripts/components-manifest/prop-filter';
 
 const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -18,6 +18,24 @@ function getAbsolutePath(value: string): string {
 }
 
 const config: StorybookConfig = {
+  features: {
+    componentsManifest: true,
+  },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      include: [
+        '../../packages/design-system-react-native/src/**/*.tsx',
+        'stories/**/*.tsx',
+      ],
+      exclude: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.figma.tsx'],
+      shouldExtractLiteralValuesFromEnum: true,
+      shouldRemoveUndefinedFromOptional: true,
+      // Children is part of the public API even when it has no JSDoc of its own.
+      skipChildrenPropWithoutDoc: false,
+      propFilter: includeDesignSystemProp,
+    },
+  },
   stories: [
     '../stories/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/design-system-react-native/src/**/*.stories.@(js|jsx|ts|tsx)',
@@ -27,6 +45,7 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-docs'),
     getAbsolutePath('@storybook/addon-vitest'),
+    getAbsolutePath('@storybook/addon-mcp'),
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-native-web-vite'),

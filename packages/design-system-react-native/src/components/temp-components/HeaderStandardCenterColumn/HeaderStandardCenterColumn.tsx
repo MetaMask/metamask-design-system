@@ -2,8 +2,7 @@
 import React from 'react';
 
 // External dependencies.
-import { BoxAlignItems } from '../../Box';
-import { BoxColumn } from '../../BoxColumn';
+import { Box, BoxAlignItems, BoxFlexDirection } from '../../Box';
 import type { TextProps } from '../../Text';
 import { FontWeight, TextColor, TextVariant } from '../../Text';
 import { TextOrChildren } from '../TextOrChildren';
@@ -30,22 +29,24 @@ export function HeaderStandardCenterColumn({
   }
 
   return (
-    <BoxColumn
+    <Box
+      flexDirection={BoxFlexDirection.Column}
       alignItems={BoxAlignItems.Center}
-      textProps={{
-        variant: TextVariant.BodyMd,
-        fontWeight: FontWeight.Bold,
-        ...titleProps,
-      }}
-      bottomAccessory={
-        subtitle ? (
-          <TextOrChildren textProps={subtitleTextProps}>
-            {subtitle}
-          </TextOrChildren>
-        ) : undefined
-      }
     >
-      {title}
-    </BoxColumn>
+      <TextOrChildren
+        textProps={{
+          variant: TextVariant.BodyMd,
+          fontWeight: FontWeight.Bold,
+          ...titleProps,
+        }}
+      >
+        {title}
+      </TextOrChildren>
+      {subtitle ? (
+        <TextOrChildren textProps={subtitleTextProps}>
+          {subtitle}
+        </TextOrChildren>
+      ) : null}
+    </Box>
   );
 }

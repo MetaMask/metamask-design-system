@@ -48,6 +48,13 @@ describe('twMerge utility', () => {
     });
   });
 
+  describe('font family conflicts', () => {
+    it('keeps the last design system font family', () => {
+      const result = twMerge('font-default font-hero');
+      expect(result).toBe('font-hero');
+    });
+  });
+
   describe('complex class combinations', () => {
     it('should handle multiple property conflicts simultaneously', () => {
       const result = twMerge('text-l-heading-lg font-bold text-alternative');
@@ -63,6 +70,7 @@ describe('twMerge utility', () => {
   describe('variant class validation', () => {
     it('should handle all small variant classes', () => {
       const smallVariants = [
+        'text-s-display-xl',
         'text-s-display-md',
         'text-s-heading-lg',
         'text-s-heading-md',
@@ -84,6 +92,7 @@ describe('twMerge utility', () => {
 
     it('should handle all large variant classes', () => {
       const largeVariants = [
+        'text-l-display-xl',
         'text-l-display-md',
         'text-l-heading-lg',
         'text-l-heading-md',

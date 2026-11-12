@@ -1,6 +1,6 @@
 {
   "name": "@metamask/design-system-react",
-  "version": "0.44.0",
+  "version": "0.52.0",
   "description": "Design system react ui components",
   "keywords": [
     "MetaMask",
@@ -58,7 +58,7 @@
   "devDependencies": {
     "@figma/code-connect": "^1.4.9",
     "@jest/globals": "^29.7.0",
-    "@metamask/auto-changelog": "^6.2.1",
+    "@metamask/auto-changelog": "^7.1.0",
     "@metamask/design-system-tailwind-preset": "workspace:^",
     "@metamask/utils": "^11.12.1",
     "@svgr/cli": "^8.1.0",
@@ -69,22 +69,22 @@
     "@ts-bridge/cli": "^0.6.3",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.18.54",
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "deepmerge": "^4.2.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "rimraf": "^5.0.5",
     "tailwindcss": "^3.0.0",
     "ts-jest": "^29.2.5",
-    "tsx": "^4.20.6",
-    "typescript": "~5.2.2"
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3"
   },
   "peerDependencies": {
-    "@metamask/design-system-tailwind-preset": "^0.14.0",
-    "@metamask/design-tokens": "^11.0.0",
+    "@metamask/design-system-tailwind-preset": "^0.16.0",
+    "@metamask/design-tokens": "^13.0.0",
     "@metamask/utils": "^11.12.1",
     "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
     "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"

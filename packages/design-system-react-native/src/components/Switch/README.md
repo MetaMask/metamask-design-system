@@ -72,7 +72,7 @@ const [isOn, setIsOn] = useState(false);
 
 ### `label`
 
-Optional label prop that renders text beside the switch.
+Optional label that renders text beside the switch. When `accessibilityLabel` is omitted or empty, this string is the switch's accessible name.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -82,6 +82,31 @@ Optional label prop that renders text beside the switch.
 const [isOn, setIsOn] = useState(false);
 
 <Switch isOn={isOn} onValueChange={setIsOn} label="Enable feature" />;
+```
+
+### `accessibilityLabel`
+
+Accessible name for the switch. Use it when there is no visible label, or to add context to a visible label. The accessible name must include the visible label text (WCAG 2.5.3 Label in Name). A non-empty value takes precedence over `label`. An empty string is treated as omitted.
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+const [isOn, setIsOn] = useState(false);
+
+<Switch
+  isOn={isOn}
+  onValueChange={setIsOn}
+  accessibilityLabel="Enable notifications"
+/>;
+
+<Switch
+  isOn={isOn}
+  onValueChange={setIsOn}
+  label="Enable notifications"
+  accessibilityLabel="Enable notifications for this account"
+/>;
 ```
 
 ### `style`

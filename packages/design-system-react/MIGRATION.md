@@ -48,6 +48,10 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.51.1 to 0.52.0](#from-version-0511-to-0520)
+  - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
+  - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
+  - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.40.0 to 0.41.0](#from-version-0400-to-0410)
   - [From version 0.38.1 to 0.39.0](#from-version-0381-to-0390)
   - [From version 0.36.0 to 0.37.0](#from-version-0360-to-0370)
@@ -2473,7 +2477,7 @@ The extension exports a separate `deprecated/` `ModalContent` from `ui/component
 
 ### ModalBody Component
 
-The extension `modal-body` component maps to `ModalBody` in the design system. The default visual contract (horizontal padding, scrollable container) is preserved, but the polymorphic Box surface is removed and a keyboard-accessibility default is added.
+The extension `modal-body` component maps to `ModalBody` in the design system. The default visual contract (horizontal padding, scrollable container) is preserved, and `tabIndex` stays unset unless the consumer passes it. The polymorphic Box surface is removed.
 
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
 
@@ -2498,13 +2502,13 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 
 ##### Default and Behavior Changes
 
-| Concern                | Extension Behavior                                                                                  | Design System Behavior                                                                                                                                        |
-| ---------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Horizontal padding     | `paddingLeft={4} paddingRight={4}` Box props (16px each side)                                       | `paddingHorizontal={4}` applied internally → `px-4`. Override with `className="px-0"` (or another `px-*` utility).                                            |
-| Scroll/overflow        | `position: relative; max-height: 100%; overflow-y: auto;` from `.mm-modal-body` SCSS                | Same behavior via `relative max-h-full overflow-y-auto` Tailwind utilities applied internally.                                                                |
-| Keyboard accessibility | No default `tabIndex` — scrollable text-only content was not reachable by keyboard for arrow scroll | `tabIndex={0}` applied by default so keyboard users can focus the scrollable region and arrow-scroll. Override with `tabIndex={-1}` if you need to remove it. |
+| Concern                | Extension Behavior                                                                                                               | Design System Behavior                                                                                                                             |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Horizontal padding     | `paddingLeft={4} paddingRight={4}` Box props (16px each side)                                                                    | `paddingHorizontal={4}` applied internally → `px-4`. Override with `className="px-0"` (or another `px-*` utility).                                 |
+| Scroll/overflow        | `position: relative; max-height: 100%; overflow-y: auto;` from `.mm-modal-body` SCSS                                             | Same behavior via `relative max-h-full overflow-y-auto` Tailwind utilities applied internally.                                                     |
+| Keyboard accessibility | No default `tabIndex` — scrollable text-only content is not reachable by keyboard for arrow scroll unless the call site sets one | `tabIndex` is unset unless passed. Pass `tabIndex={0}` when a scrollable body has no focusable content and keyboard users need to arrow-scroll it. |
 
-This satisfies the WCAG 2.1.1 "Keyboard" rule for scrollable regions (axe `scrollable-region-focusable`) — modals containing only static text now expose the body as a focusable scroll target out of the box.
+`ModalFocus`, used by `ModalContent`, traps focus and moves initial focus to the first focusable control (or `initialFocusRef`). It does not depend on `ModalBody` having `tabIndex={0}`. Pass `tabIndex={0}` on a scrollable body of static text to satisfy WCAG 2.1.1 Keyboard (axe `scrollable-region-focusable`).
 
 #### Migration Examples
 
@@ -2547,7 +2551,7 @@ For typical call sites — for example `ui/components/app/connections-removed-mo
 #### API Differences
 
 - `ModalBody` no longer composes Box's polymorphic API. It always renders a `<div>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `tabIndex`, `ref`) to it.
-- `tabIndex={0}` is now the default. Pass `tabIndex={-1}` (or any other value) to override; the consumer's value wins.
+- `tabIndex` is forwarded only when the consumer passes it. Pass `tabIndex={0}` to make a scrollable body keyboard-focusable, or `tabIndex={-1}` to make it programmatically focusable without adding a tab stop.
 - One-off styling that previously used Box utility props should move to Tailwind via `className` (`px-0`, `py-2`, `flex`, `flex-col`, `gap-2`, etc.).
 
 ### ModalFocus Component
@@ -3456,13 +3460,13 @@ The `TextField` is now available from the design system. The new component drops
 
 #### Removed Props
 
-| Extension Prop                                                | Design System Migration                                                                                                                                 |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `as` / polymorphic `C`                                        | Removed. The container is always a `<div>`. Wrap with a custom element if you need a different root.                                                    |
-| `InputComponent`                                              | Replaced by the shared `inputElement` slot. Pass a fully-rendered element instead of a component reference.                                             |
-| `testId`                                                      | Pass `data-testid` directly on `TextField` (root). For the inner input, use `getByRole('textbox')` in tests or compose your own via `inputElement`.     |
-| `defaultValue`                                                | Removed. The design-system `Input` is controlled-only; manage state with `value`/`onChange` (or use `inputElement` for an uncontrolled custom input).   |
-| Box style-utility props (`paddingLeft`, `borderRadius`, etc.) | Use `className` with Tailwind utilities, or compose with `Box`. The container's default chrome (border, radius, padding) is fixed by the design system. |
+| Extension Prop                                                | Design System Migration                                                                                                                                   |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `as` / polymorphic `C`                                        | Removed. The container is always a `<div>`. Wrap with a custom element if you need a different root.                                                      |
+| `InputComponent`                                              | Replaced by the shared `inputElement` slot. Pass a fully-rendered element instead of a component reference.                                               |
+| `testId`                                                      | Pass `data-testid` directly on `TextField` (root). For the inner input, pass `inputProps={{ 'data-testid': '...' }}`. `getByRole('textbox')` still works. |
+| `defaultValue`                                                | Removed. The design-system `Input` is controlled-only; manage state with `value`/`onChange` (or use `inputElement` for an uncontrolled custom input).     |
+| Box style-utility props (`paddingLeft`, `borderRadius`, etc.) | Use `className` with Tailwind utilities, or compose with `Box`. The container's default chrome (border, radius, padding) is fixed by the design system.   |
 
 ```tsx
 // Before (Extension): custom InputComponent reference
@@ -3486,7 +3490,7 @@ The new `TextField` uses Tailwind utilities (focus/error/disabled borders driven
 
 ### TextFieldSearch Component
 
-`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`.
+`TextFieldSearch` is now available from the design system. It composes the design-system `TextField` with a leading search icon, fixes the input `type` to `search`, and renders a trailing clear `ButtonIcon` when the field has a value. The new component drops the extension's polymorphic API and `useI18nContext` dependency in favor of a concrete `forwardRef<HTMLDivElement>` container plus a configurable `clearButtonProps.ariaLabel`. `inputAriaLabel` is required and names the inner input.
 
 #### Import Path
 
@@ -3528,6 +3532,7 @@ The extension component pulled the clear-button aria-label from `useI18nContext`
 
 // After (Design System): pass a localized label via clearButtonProps
 <TextFieldSearch
+  inputAriaLabel="Search"
   value={value}
   clearButtonOnClick={handleClear}
   clearButtonProps={{ ariaLabel: t('clear') }}
@@ -3630,6 +3635,188 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.51.1 to 0.52.0
+
+<a id="from-version-0511-to-0520"></a>
+
+#### ModalBody no longer defaults `tabIndex` to `0`
+
+**What changed:**
+
+- `ModalBody` forwarded `tabIndex={0}` when the consumer omitted `tabIndex`, so every body was a tab stop
+- `tabIndex` is now forwarded only when the consumer passes it
+- The prop stays optional. `tabIndex={0}` and `tabIndex={-1}` still work, and a passed value still wins
+- `ModalFocus` still traps focus and moves initial focus to the first focusable control. It does not depend on the body default
+
+**Migration:**
+
+Leave `tabIndex` unset when the body already contains a focusable control, such as a button. Pass `tabIndex={0}` when the body scrolls and its content is static text, so keyboard users can focus the region and arrow-scroll it.
+
+```tsx
+// Before (0.51.1) — the body was a tab stop even without tabIndex
+import { ModalBody } from '@metamask/design-system-react';
+
+<ModalBody>
+  Your Secret Recovery Phrase is the only way to recover this wallet.
+</ModalBody>;
+
+// After (0.52.0) — opt in when the scrollable body has no focusable content
+import { ModalBody } from '@metamask/design-system-react';
+
+<ModalBody tabIndex={0}>
+  Your Secret Recovery Phrase is the only way to recover this wallet.
+</ModalBody>;
+```
+
+A body that already contains a button does not need `tabIndex`:
+
+```tsx
+import { Button, ModalBody } from '@metamask/design-system-react';
+
+<ModalBody>
+  <Button onClick={handleContinue}>Continue</Button>
+</ModalBody>;
+```
+
+**Impact:**
+
+- Every `ModalBody` that omitted `tabIndex` drops out of the tab order
+- A scrollable body of static text is no longer keyboard-scrollable until the call site passes `tabIndex={0}`
+- Existing `tabIndex` values are unchanged
+
+### From version 0.49.0 to 0.50.0
+
+<a id="from-version-0490-to-0500"></a>
+
+#### Removed `FontFamily.Accent` (MM Sans)
+
+`FontFamily.Accent` and the `font-accent` class are removed. `FontFamily.Hero` stays and still renders Grotzec Cond Bold. Delete any leftover MM Poly font files; that face was replaced in 0.47.0.
+
+**What changed:**
+
+- `FontFamily.Accent` is removed from `FontFamily`
+- `font-accent` no longer resolves. `@metamask/design-system-tailwind-preset@0.16.0` no longer maps `accent` to `--font-family-accent`, and `@metamask/design-tokens@13.0.0` removes the Tailwind v4 `font-accent` utility
+- `twMerge` no longer treats `font-accent` as a font family class, so it does not dedupe it against `font-default` or `font-hero`
+- Peer dependencies are now `@metamask/design-tokens@^13.0.0` and `@metamask/design-system-tailwind-preset@^0.16.0`
+- `FontFamily.Hero` and `font-hero` are unchanged
+
+**Migration:**
+
+Replace `FontFamily.Accent` with `FontFamily.Hero`. Grotzec Cond is a condensed display face, so keep it for headlines and marketing moments. If the accent text was body copy, use `FontFamily.Default` (Inter) instead.
+
+```tsx
+// Before (0.49.0)
+import { FontFamily, Text, TextVariant } from '@metamask/design-system-react';
+
+<Text variant={TextVariant.DisplayMd} fontFamily={FontFamily.Accent}>
+  Earn rewards with MetaMask
+</Text>;
+
+// After (0.50.0)
+import { FontFamily, Text, TextVariant } from '@metamask/design-system-react';
+
+<Text variant={TextVariant.DisplayMd} fontFamily={FontFamily.Hero}>
+  Earn rewards with MetaMask
+</Text>;
+```
+
+Replace the `font-accent` class with `font-hero`:
+
+```tsx
+// Before (0.49.0)
+<Text className="font-accent">Earn rewards with MetaMask</Text>;
+
+// After (0.50.0)
+<Text className="font-hero">Earn rewards with MetaMask</Text>;
+```
+
+Upgrade the peer dependencies in the same change:
+
+```json
+{
+  "dependencies": {
+    "@metamask/design-system-react": "^0.50.0",
+    "@metamask/design-system-tailwind-preset": "^0.16.0",
+    "@metamask/design-tokens": "^13.0.0"
+  }
+}
+```
+
+Delete MM Sans `@font-face` rules and font files, and any leftover MM Poly files. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1200-to-1300).
+
+**Impact:**
+
+- TypeScript fails on `FontFamily.Accent`
+- `font-accent` no longer applies a family and there is no build error, so search for `font-accent` and `font-family-accent` before upgrading
+- Installs warn about unmet peer dependencies until `@metamask/design-tokens` and `@metamask/design-system-tailwind-preset` are upgraded
+
+### From version 0.48.0 to 0.49.0
+
+<a id="from-version-0480-to-0490"></a>
+
+#### TextFieldSearch: required `inputAriaLabel`
+
+**What changed:**
+
+`inputAriaLabel` is required and names the inner input. It takes precedence over `inputProps['aria-label']`.
+
+**Migration:**
+
+Pass the string you used for `inputProps['aria-label']` as `inputAriaLabel`.
+
+```tsx
+// Before (0.48.x)
+<TextFieldSearch
+  clearButtonOnClick={handleClear}
+  inputProps={{ 'aria-label': t('searchYourAccounts') }}
+  onChange={handleChange}
+  placeholder={t('searchYourAccounts')}
+  value={query}
+/>
+
+// After (0.49.0)
+<TextFieldSearch
+  clearButtonOnClick={handleClear}
+  inputAriaLabel={t('searchYourAccounts')}
+  onChange={handleChange}
+  placeholder={t('searchYourAccounts')}
+  value={query}
+/>
+```
+
+**Impact:**
+
+- `inputAriaLabel` is required. Existing call sites fail typecheck until they pass it.
+- `inputAriaLabel` wins over `inputProps['aria-label']` on the input.
+
+### From version 0.46.0 to 0.47.0
+
+<a id="from-version-0460-to-0470"></a>
+
+#### Hero typeface: MM Poly to Grotzec Cond
+
+`FontFamily.Hero` now renders Grotzec Cond Bold. The `font-hero` class name is unchanged. `FontFamily.Accent` and MM Sans are unchanged and will be removed in a later release.
+
+**What changed:**
+
+- Use `FontFamily.Hero` and `font-hero`. `FontFamily.Hero` still has the value `'hero'`
+- Hero is backed by `--font-family-hero`, which now resolves to Grotzec Cond
+- Only the Bold cut exists, so regular, medium, and bold weights all render that cut
+
+**Migration:**
+
+Register `GrotzecCond-Bold.woff2` from [`apps/storybook-react/fonts/GrotzecCond`](../../apps/storybook-react/fonts/GrotzecCond) at weight 600. Lighter weight requests fall back to that Bold cut. Keep the adjacent `LICENSE`. Remove MM Poly `@font-face` rules. See the [design tokens migration](../design-tokens/MIGRATION.md#from-version-1110-to-1200).
+
+```tsx
+import { FontFamily, Text } from '@metamask/design-system-react';
+
+<Text fontFamily={FontFamily.Hero}>Shield coverage</Text>;
+```
+
+**Impact:**
+
+Existing `FontFamily.Hero` usage keeps the same prop. The rendered face changes after the app loads Grotzec Cond Bold. Peer dependencies now require `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-tailwind-preset@^0.15.0`.
 
 ### From version 0.40.0 to 0.41.0
 

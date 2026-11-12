@@ -14,6 +14,7 @@ import README from './ThemeColors.mdx';
 const meta = {
   title: 'Design Tokens/Color/Theme Colors',
   component: ColorSwatchGroup,
+  tags: ['!manifest'],
   parameters: {
     docs: {
       page: README,

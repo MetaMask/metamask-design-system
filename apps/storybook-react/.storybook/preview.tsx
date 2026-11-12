@@ -110,6 +110,8 @@ const preview: Preview = {
           'Getting Started',
           'Design Tokens',
           'React Components',
+          'Patterns',
+          'React Temp Components',
           'Docs Components',
           '*', // All other stories
         ],

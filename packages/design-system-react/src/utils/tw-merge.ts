@@ -1,6 +1,7 @@
 import { extendTailwindMerge } from 'tailwind-merge';
 
 const variantClassGroups = [
+  's-display-xl',
   's-display-lg',
   's-display-md',
   's-heading-lg',
@@ -10,6 +11,7 @@ const variantClassGroups = [
   's-body-md',
   's-body-sm',
   's-body-xs',
+  'l-display-xl',
   'l-display-lg',
   'l-display-md',
   'l-heading-lg',
@@ -51,7 +53,7 @@ export const twMerge = extendTailwindMerge({
           text: variantClassGroups,
         },
       ],
-      'font-family': ['font-default', 'font-accent', 'font-hero'],
+      'font-family': ['font-default', 'font-hero'],
       'font-weight': [
         'font-thin',
         'font-extralight',

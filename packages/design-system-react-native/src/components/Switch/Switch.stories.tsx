@@ -18,6 +18,11 @@ const meta: Meta<SwitchProps> = {
     label: {
       control: 'text',
     },
+    accessibilityLabel: {
+      control: 'text',
+      description:
+        'Accessible name when there is no visible label, or extra context. Include the visible label text.',
+    },
   },
 };
 
@@ -64,8 +69,21 @@ export const IsDisabled: Story = {
 export const Label: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
-      <SwitchStory isOn={false} />
+      <SwitchStory isOn={false} accessibilityLabel="Enable notifications" />
       <SwitchStory isOn={false} label="Switch with label" />
+    </View>
+  ),
+};
+
+export const AccessibilityLabel: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <SwitchStory isOn={false} accessibilityLabel="Enable notifications" />
+      <SwitchStory
+        isOn={false}
+        label="Enable notifications"
+        accessibilityLabel="Enable notifications for this account"
+      />
     </View>
   ),
 };

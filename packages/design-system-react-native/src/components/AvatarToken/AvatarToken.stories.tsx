@@ -33,6 +33,23 @@ export const Default: Story = {
   render: (args) => <AvatarToken {...args} src={SAMPLE_AVATARTOKEN_URIS[0]} />,
 };
 
+export const Src: Story = {
+  render: () => (
+    <View style={{ flexDirection: 'row', gap: 16 }}>
+      <AvatarToken
+        name="Bitcoin"
+        fallbackText="BTC"
+        src={{ uri: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=040' }}
+      />
+      <AvatarToken
+        name="Ethereum"
+        fallbackText="ETH"
+        src={SAMPLE_AVATARTOKEN_URIS[1]}
+      />
+    </View>
+  ),
+};
+
 export const Sizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
@@ -63,6 +80,11 @@ export const Fallback: Story = {
       <AvatarToken name="Bitcoin" fallbackText="BTC" />
       <AvatarToken name="Ethereum" />
       <AvatarToken />
+      <AvatarToken
+        name="Unavailable token"
+        fallbackText="UT"
+        src={{ uri: 'https://example.com/unavailable-token.png' }}
+      />
     </View>
   ),
 };

@@ -20,13 +20,18 @@ import ArrowDoubleRight from './ArrowDoubleRight';
 import ArrowDown from './ArrowDown';
 import ArrowLeft from './ArrowLeft';
 import ArrowRight from './ArrowRight';
+import ArrowSquareOut from './ArrowSquareOut';
 import ArrowUp from './ArrowUp';
 import AttachMoney from './AttachMoney';
 import Backspace from './Backspace';
 import Ban from './Ban';
 import Bank from './Bank';
+import Baseball from './Baseball';
+import Basketball from './Basketball';
+import Bicycle from './Bicycle';
 import Book from './Book';
 import Bookmark from './Bookmark';
+import BoxingGlove from './BoxingGlove';
 import Bridge from './Bridge';
 import BuySell from './BuySell';
 import Calculator from './Calculator';
@@ -43,6 +48,7 @@ import Chart from './Chart';
 import CheckBold from './CheckBold';
 import Check from './Check';
 import CircleX from './CircleX';
+import Clipboard from './Clipboard';
 import ClockFilled from './ClockFilled';
 import Clock from './Clock';
 import Close from './Close';
@@ -53,6 +59,7 @@ import Confirmation from './Confirmation';
 import Connect from './Connect';
 import CopySuccess from './CopySuccess';
 import Copy from './Copy';
+import Cricket from './Cricket';
 import Customize from './Customize';
 import Danger from './Danger';
 import Data from './Data';
@@ -71,27 +78,34 @@ import Extension from './Extension';
 import EyeSlash from './EyeSlash';
 import Eye from './Eye';
 import FaceId from './FaceId';
+import FeedPost from './FeedPost';
 import Feedback from './Feedback';
 import File from './File';
 import Filter from './Filter';
 import Fingerprint from './Fingerprint';
 import Fire from './Fire';
+import FlagCheckered from './FlagCheckered';
 import Flag from './Flag';
 import FlashFilled from './FlashFilled';
 import Flash from './Flash';
 import Flask from './Flask';
+import Football from './Football';
 import Forest from './Forest';
 import FullCircle from './FullCircle';
+import GameController from './GameController';
 import Gas from './Gas';
 import Gift from './Gift';
 import GlobalSearch from './GlobalSearch';
 import Global from './Global';
+import Golf from './Golf';
 import Hardware from './Hardware';
 import HeartStraightFilled from './HeartStraightFilled';
 import HeartStraight from './HeartStraight';
 import Hierarchy from './Hierarchy';
+import Hockey from './Hockey';
 import HomeFilled from './HomeFilled';
 import Home from './Home';
+import Horse from './Horse';
 import Image from './Image';
 import Infinity from './Infinity';
 import Info from './Info';
@@ -105,6 +119,7 @@ import LockSlash from './LockSlash';
 import Lock from './Lock';
 import Logout from './Logout';
 import Mail from './Mail';
+import Medal from './Medal';
 import Menu from './Menu';
 import Merge from './Merge';
 import MessageQuestion from './MessageQuestion';
@@ -121,9 +136,13 @@ import MusdFilled from './MusdFilled';
 import Musd from './Musd';
 import NoPhotography from './NoPhotography';
 import Notification from './Notification';
+import Pause from './Pause';
+import PeopleFilled from './PeopleFilled';
 import People from './People';
 import Pin from './Pin';
+import PingPong from './PingPong';
 import Plant from './Plant';
+import Play from './Play';
 import Plug from './Plug';
 import PopUp from './PopUp';
 import Predictions from './Predictions';
@@ -153,6 +172,7 @@ import SidePanel from './SidePanel';
 import Sms from './Sms';
 import SnapsMobile from './SnapsMobile';
 import Snaps from './Snaps';
+import SoccerBall from './SoccerBall';
 import Sparkle from './Sparkle';
 import Speed from './Speed';
 import Speedometer from './Speedometer';
@@ -163,6 +183,7 @@ import SwapHorizontal from './SwapHorizontal';
 import SwapVertical from './SwapVertical';
 import Tag from './Tag';
 import Telegram from './Telegram';
+import TennisBall from './TennisBall';
 import ThumbDownFilled from './ThumbDownFilled';
 import ThumbDown from './ThumbDown';
 import ThumbUpFilled from './ThumbUpFilled';
@@ -207,13 +228,18 @@ export const Icons = {
   ArrowDown,
   ArrowLeft,
   ArrowRight,
+  ArrowSquareOut,
   ArrowUp,
   AttachMoney,
   Backspace,
   Ban,
   Bank,
+  Baseball,
+  Basketball,
+  Bicycle,
   Book,
   Bookmark,
+  BoxingGlove,
   Bridge,
   BuySell,
   Calculator,
@@ -230,6 +256,7 @@ export const Icons = {
   CheckBold,
   Check,
   CircleX,
+  Clipboard,
   ClockFilled,
   Clock,
   Close,
@@ -240,6 +267,7 @@ export const Icons = {
   Connect,
   CopySuccess,
   Copy,
+  Cricket,
   Customize,
   Danger,
   Data,
@@ -258,27 +286,34 @@ export const Icons = {
   EyeSlash,
   Eye,
   FaceId,
+  FeedPost,
   Feedback,
   File,
   Filter,
   Fingerprint,
   Fire,
+  FlagCheckered,
   Flag,
   FlashFilled,
   Flash,
   Flask,
+  Football,
   Forest,
   FullCircle,
+  GameController,
   Gas,
   Gift,
   GlobalSearch,
   Global,
+  Golf,
   Hardware,
   HeartStraightFilled,
   HeartStraight,
   Hierarchy,
+  Hockey,
   HomeFilled,
   Home,
+  Horse,
   Image,
   Infinity,
   Info,
@@ -292,6 +327,7 @@ export const Icons = {
   Lock,
   Logout,
   Mail,
+  Medal,
   Menu,
   Merge,
   MessageQuestion,
@@ -308,9 +344,13 @@ export const Icons = {
   Musd,
   NoPhotography,
   Notification,
+  Pause,
+  PeopleFilled,
   People,
   Pin,
+  PingPong,
   Plant,
+  Play,
   Plug,
   PopUp,
   Predictions,
@@ -340,6 +380,7 @@ export const Icons = {
   Sms,
   SnapsMobile,
   Snaps,
+  SoccerBall,
   Sparkle,
   Speed,
   Speedometer,
@@ -350,6 +391,7 @@ export const Icons = {
   SwapVertical,
   Tag,
   Telegram,
+  TennisBall,
   ThumbDownFilled,
   ThumbDown,
   ThumbUpFilled,

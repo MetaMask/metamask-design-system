@@ -14,7 +14,7 @@ describe('BadgeNetwork', () => {
       expect.arrayContaining([
         'h-[18px]',
         'w-[18px]',
-        'rounded',
+        'rounded-md',
         'border',
         'border-background-default',
       ]),

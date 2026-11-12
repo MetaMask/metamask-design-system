@@ -79,8 +79,25 @@ describe('AvatarFavicon', () => {
       const img = screen.getByTestId('img') as HTMLImageElement;
       expect(img.src).toContain(src);
       expect(img.alt).toBe('ACME');
-      expect(img).toHaveClass('size-full', 'object-contain');
+      expect(img).toHaveClass('size-full', 'object-cover');
       expect(img).toHaveAttribute('id', 'img-id');
+    });
+
+    it('lets imageProps.className override the cover default', () => {
+      render(
+        <AvatarFavicon
+          name="ACME"
+          src={src}
+          imageProps={{
+            'data-testid': 'img-contain',
+            className: 'size-full object-contain',
+          }}
+        />,
+      );
+
+      const img = screen.getByTestId('img-contain');
+      expect(img).toHaveClass('size-full', 'object-contain');
+      expect(img).not.toHaveClass('object-cover');
     });
 
     it('uses default alt text when name is empty', () => {

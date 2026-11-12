@@ -4,6 +4,14 @@ import * as ButtonHeroStories from './ButtonHero.stories';
 
 # ButtonHero
 
+`ButtonHero` is deprecated. Use `Button` with `variant={ButtonVariant.Primary}` instead. This component will be removed in a future major version of the design system.
+
+```tsx
+import { Button, ButtonVariant } from '@metamask/design-system-react';
+
+<Button variant={ButtonVariant.Primary}>Primary action</Button>;
+```
+
 A branded, high-impact button reserved for the most important actions in Trade. Use sparingly for key user actions that require emphasis and visual prominence.
 
 Use for:

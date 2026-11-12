@@ -3,6 +3,9 @@ name: Lint, Build, and Test
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   prepare:
     name: Prepare
@@ -11,7 +14,7 @@ jobs:
       child-workspace-package-names: ${{ steps.workspace-package-names.outputs.child-workspace-package-names }}
     steps:
       - name: Checkout and setup environment
-        uses: MetaMask/action-checkout-and-setup@v1
+        uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: false
           cache-node-modules: true
@@ -27,7 +30,7 @@ jobs:
     needs: prepare
     steps:
       - name: Checkout and setup environment
-        uses: MetaMask/action-checkout-and-setup@v1
+        uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: false
       - name: Setup
@@ -51,10 +54,12 @@ jobs:
         package-name: ${{ fromJson(needs.prepare.outputs.child-workspace-package-names) }}
     steps:
       - name: Checkout and setup environment
-        uses: MetaMask/action-checkout-and-setup@v1
+        uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: false
-      - run: yarn workspace ${{ matrix.package-name }} changelog:validate
+      - run: yarn workspace "$PACKAGE_NAME" changelog:validate
+        env:
+          PACKAGE_NAME: ${{ matrix.package-name }}
       - name: Require clean working directory
         shell: bash
         run: |
@@ -69,7 +74,7 @@ jobs:
     needs: prepare
     steps:
       - name: Checkout and setup environment
-        uses: MetaMask/action-checkout-and-setup@v1
+        uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: false
       - run: yarn build
@@ -87,7 +92,7 @@ jobs:
     needs: prepare
     steps:
       - name: Checkout and setup environment
-        uses: MetaMask/action-checkout-and-setup@v1
+        uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: false
       - run: yarn build
@@ -109,11 +114,13 @@ jobs:
         package-name: ${{ fromJson(needs.prepare.outputs.child-workspace-package-names) }}
     steps:
       - name: Checkout and setup environment
-        uses: MetaMask/action-checkout-and-setup@v1
+        uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: false
       - run: yarn build
-      - run: yarn workspace ${{ matrix.package-name }} run test
+      - run: yarn workspace "$PACKAGE_NAME" run test
+        env:
+          PACKAGE_NAME: ${{ matrix.package-name }}
       - name: Require clean working directory
         shell: bash
         run: |

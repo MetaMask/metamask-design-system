@@ -6,7 +6,7 @@ import {
   TextVariant,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { render } from '@testing-library/react-native';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { Text } from './Text';
@@ -32,7 +32,9 @@ function buildTextStyleArgs({
 }> = {}) {
   const fw = fontWeight ?? TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant];
   const isItalic = fontStyle === FontStyle.Italic;
-  const fontSuffix = `${TWCLASSMAP_TEXT_FONTWEIGHT[fw]}${
+  const resolvedFontWeight =
+    fontFamily === FontFamily.Hero ? FontWeight.Bold : fw;
+  const fontSuffix = `${TWCLASSMAP_TEXT_FONTWEIGHT[resolvedFontWeight]}${
     isItalic && fontFamily === FontFamily.Default ? '-italic' : ''
   }`;
   const fontClass = `font-${fontFamily}${fontSuffix}`;
@@ -45,30 +47,28 @@ function buildTextStyleArgs({
 }
 
 describe('Text', () => {
+  let tw: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    const { result } = renderHook(() => useTailwind());
+    tw = result.current;
+  });
+
   describe('Text Component', () => {
     it('renders children correctly', () => {
       const { getByText } = render(<Text>Hello, World!</Text>);
-      expect(getByText('Hello, World!')).toBeDefined();
+      expect(getByText('Hello, World!')).toBeOnTheScreen();
     });
 
     it('applies default styles when no props are provided', () => {
-      let expectedStyles;
+      const { getByTestId } = render(<Text testID="text">Hello, World!</Text>);
 
-      const TestComponent = () => {
-        const tw = useTailwind();
-        expectedStyles = tw.style(...buildTextStyleArgs({}));
-        return <Text testID="text">Hello, World!</Text>;
-      };
-
-      const { getByTestId } = render(<TestComponent />);
-      const textElement = getByTestId('text');
-
-      expect(expectedStyles).toBeDefined();
-      expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+      expect(getByTestId('text')).toHaveStyle(
+        tw.style(...buildTextStyleArgs()),
+      );
     });
 
     it('applies custom styles based on props', () => {
-      let expectedStyles;
       const props = {
         variant: TextVariant.HeadingLg,
         color: TextColor.PrimaryDefault,
@@ -77,133 +77,111 @@ describe('Text', () => {
         twClassName: 'text-primary-default',
       };
 
-      const TestComponent = () => {
-        const tw = useTailwind();
-        expectedStyles = tw.style(...buildTextStyleArgs(props));
-        return (
-          <Text testID="text" {...props}>
-            Styled Text
-          </Text>
-        );
-      };
+      const { getByTestId } = render(
+        <Text testID="text" {...props}>
+          Styled Text
+        </Text>,
+      );
 
-      const { getByTestId } = render(<TestComponent />);
-      const textElement = getByTestId('text');
-
-      expect(expectedStyles).toBeDefined();
-      expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+      expect(getByTestId('text')).toHaveStyle(
+        tw.style(...buildTextStyleArgs(props)),
+      );
     });
 
     Object.values(TextVariant).forEach((variant) => {
       it(`applies variant ${variant} correctly`, () => {
-        let expectedStyles;
+        const { getByTestId } = render(
+          <Text testID="text" variant={variant}>
+            Test
+          </Text>,
+        );
 
-        const TestComponent = () => {
-          const tw = useTailwind();
-          expectedStyles = tw.style(
+        expect(getByTestId('text')).toHaveStyle(
+          tw.style(
             ...buildTextStyleArgs({
               variant,
               fontWeight: TWCLASSMAP_TEXT_VARIANT_FONTWEIGHT[variant],
             }),
-          );
-          return (
-            <Text testID="text" variant={variant}>
-              Test
-            </Text>
-          );
-        };
-
-        const { getByTestId } = render(<TestComponent />);
-        const textElement = getByTestId('text');
-
-        expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+          ),
+        );
       });
     });
 
     Object.values(TextColor).forEach((color) => {
       it(`applies color ${color} correctly`, () => {
-        let expectedStyles;
+        const { getByTestId } = render(
+          <Text testID="text" color={color}>
+            Test
+          </Text>,
+        );
 
-        const TestComponent = () => {
-          const tw = useTailwind();
-          expectedStyles = tw.style(...buildTextStyleArgs({ color }));
-          return (
-            <Text testID="text" color={color}>
-              Test
-            </Text>
-          );
-        };
-
-        const { getByTestId } = render(<TestComponent />);
-        const textElement = getByTestId('text');
-
-        expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+        expect(getByTestId('text')).toHaveStyle(
+          tw.style(...buildTextStyleArgs({ color })),
+        );
       });
     });
 
     Object.values(FontWeight).forEach((weight) => {
       it(`applies font weight ${weight} correctly`, () => {
-        let expectedStyles;
+        const { getByTestId } = render(
+          <Text testID="text" fontWeight={weight}>
+            Test
+          </Text>,
+        );
 
-        const TestComponent = () => {
-          const tw = useTailwind();
-          expectedStyles = tw.style(
-            ...buildTextStyleArgs({ fontWeight: weight }),
-          );
-          return (
-            <Text testID="text" fontWeight={weight}>
-              Test
-            </Text>
-          );
-        };
+        expect(getByTestId('text')).toHaveStyle(
+          tw.style(...buildTextStyleArgs({ fontWeight: weight })),
+        );
+      });
+    });
 
-        const { getByTestId } = render(<TestComponent />);
-        const textElement = getByTestId('text');
+    Object.values(FontFamily).forEach((fontFamily) => {
+      it(`applies font family ${fontFamily} correctly`, () => {
+        const { getByTestId } = render(
+          <Text
+            testID="text"
+            fontFamily={fontFamily}
+            fontWeight={FontWeight.Bold}
+          >
+            Test
+          </Text>,
+        );
 
-        expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+        expect(getByTestId('text')).toHaveStyle(
+          tw.style(
+            ...buildTextStyleArgs({ fontFamily, fontWeight: FontWeight.Bold }),
+          ),
+        );
       });
     });
 
     Object.values(FontStyle).forEach((fontStyle) => {
       it(`applies font style ${fontStyle} correctly`, () => {
-        let expectedStyles;
+        const { getByTestId } = render(
+          <Text testID="text" fontStyle={fontStyle}>
+            Test
+          </Text>,
+        );
 
-        const TestComponent = () => {
-          const tw = useTailwind();
-          expectedStyles = tw.style(...buildTextStyleArgs({ fontStyle }));
-          return (
-            <Text testID="text" fontStyle={fontStyle}>
-              Test
-            </Text>
-          );
-        };
-
-        const { getByTestId } = render(<TestComponent />);
-        const textElement = getByTestId('text');
-
-        expect(expectedStyles).toBeDefined();
-        expect(textElement.props.style[0]).toStrictEqual(expectedStyles);
+        expect(getByTestId('text')).toHaveStyle(
+          tw.style(...buildTextStyleArgs({ fontStyle })),
+        );
       });
     });
 
     it('combines custom style prop with generated styles', () => {
       const customStyle = { margin: 10 };
 
-      const TestComponent = () => {
-        return (
-          <Text testID="text" style={customStyle}>
-            Styled Text
-          </Text>
-        );
-      };
+      const { getByTestId } = render(
+        <Text testID="text" style={customStyle}>
+          Styled Text
+        </Text>,
+      );
 
-      const { getByTestId } = render(<TestComponent />);
-      const textElement = getByTestId('text');
-
-      expect(textElement.props.style).toContainEqual(customStyle);
+      expect(getByTestId('text')).toHaveStyle(customStyle);
+      expect(getByTestId('text')).toHaveStyle(
+        tw.style(...buildTextStyleArgs()),
+      );
     });
 
     it('applies accessibilityRole="text"', () => {

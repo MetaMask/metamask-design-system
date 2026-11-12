@@ -17,8 +17,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
 const meta: Meta = {
-  title: 'Examples/Backgrounds',
+  title: 'Patterns/Backgrounds',
   component: () => null,
+  tags: ['!autodocs', '!manifest'],
 };
 
 export default meta;

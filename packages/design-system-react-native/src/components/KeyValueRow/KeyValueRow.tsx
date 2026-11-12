@@ -1,4 +1,6 @@
 import {
+  BoxAlignItems,
+  BoxFlexDirection,
   ButtonIconSize,
   FontWeight,
   IconColor,
@@ -10,8 +12,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
 import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
 import { ButtonIcon } from '../ButtonIcon';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import type { KeyValueRowProps } from './KeyValueRow.types';
 
@@ -66,43 +68,56 @@ export const KeyValueRow = ({
     );
 
   const keyBox = (
-    <BoxRow
-      startAccessory={keyStartAccessory}
-      endAccessory={keyEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.BodyMd,
-        fontWeight: FontWeight.Medium,
-        color: TextColor.TextAlternative,
-        numberOfLines: 1,
-        ellipsizeMode: 'tail',
-        ...keyTextProps,
-      }}
+    <Box
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
+      gap={1}
     >
-      {keyContent}
-    </BoxRow>
+      {keyStartAccessory}
+      <TextOrChildren
+        textProps={{
+          variant: TextVariant.BodyMd,
+          fontWeight: FontWeight.Medium,
+          color: TextColor.TextAlternative,
+          numberOfLines: 1,
+          ellipsizeMode: 'tail',
+          ...keyTextProps,
+        }}
+      >
+        {keyContent}
+      </TextOrChildren>
+      {keyEndAccessoryNode}
+    </Box>
   );
 
   const valueBox = (
-    <BoxRow
-      startAccessory={valueStartAccessory}
-      endAccessory={valueEndAccessoryNode}
-      textProps={{
-        variant: TextVariant.BodyMd,
-        fontWeight: FontWeight.Medium,
-        color: TextColor.TextDefault,
-        numberOfLines: 1,
-        ellipsizeMode: 'tail',
-        ...valueTextProps,
-      }}
+    <Box
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
+      gap={1}
       twClassName="flex-1 min-w-0 justify-end"
     >
-      {valueContent}
-    </BoxRow>
+      {valueStartAccessory}
+      <TextOrChildren
+        textProps={{
+          variant: TextVariant.BodyMd,
+          fontWeight: FontWeight.Medium,
+          color: TextColor.TextDefault,
+          numberOfLines: 1,
+          ellipsizeMode: 'tail',
+          ...valueTextProps,
+        }}
+      >
+        {valueContent}
+      </TextOrChildren>
+      {valueEndAccessoryNode}
+    </Box>
   );
 
   return (
-    <BoxRow
-      endAccessory={valueBox}
+    <Box
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
       gap={4}
       style={[
         tw.style(
@@ -115,7 +130,8 @@ export const KeyValueRow = ({
       {...viewProps}
     >
       <Box twClassName="shrink-0">{keyBox}</Box>
-    </BoxRow>
+      {valueBox}
+    </Box>
   );
 };
 

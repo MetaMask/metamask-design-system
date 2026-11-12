@@ -35,6 +35,7 @@ export const Default: Story = {
   render: (args) => {
     const [value, setValue] = useState('');
     const textFieldSearchProps = {
+      inputAccessibilityLabel: 'Search',
       value,
       onChangeText: setValue,
       onPressClearButton: () => setValue(''),
@@ -75,6 +76,7 @@ export const Variant: Story = {
           variant={HeaderSearchVariant.Screen}
           onPressBackButton={noop}
           textFieldSearchProps={{
+            inputAccessibilityLabel: 'Search',
             value: screenValue,
             onChangeText: setScreenValue,
             onPressClearButton: () => setScreenValue(''),
@@ -88,6 +90,7 @@ export const Variant: Story = {
           variant={HeaderSearchVariant.Inline}
           onPressCancelButton={noop}
           textFieldSearchProps={{
+            inputAccessibilityLabel: 'Search',
             value: inlineValue,
             onChangeText: setInlineValue,
             onPressClearButton: () => setInlineValue(''),
@@ -109,6 +112,7 @@ export const BackButtonProps: Story = {
         onPressBackButton={noop}
         backButtonProps={{ accessibilityLabel: 'Go back' }}
         textFieldSearchProps={{
+          inputAccessibilityLabel: 'Search',
           value,
           onChangeText: setValue,
           onPressClearButton: () => setValue(''),
@@ -129,6 +133,7 @@ export const CancelButtonProps: Story = {
         onPressCancelButton={noop}
         cancelButtonProps={{ testID: 'header-search-cancel' }}
         textFieldSearchProps={{
+          inputAccessibilityLabel: 'Search',
           value,
           onChangeText: setValue,
           onPressClearButton: () => setValue(''),

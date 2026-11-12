@@ -1,6 +1,7 @@
 import {
   AvatarBaseShape,
   AvatarTokenSize,
+  mergeTwClassName,
 } from '@metamask/design-system-shared';
 import type { ImageErrorEventData } from 'expo-image';
 import React, { useState } from 'react';
@@ -17,6 +18,7 @@ export const AvatarToken = ({
   fallbackText,
   fallbackTextProps,
   imageOrSvgProps,
+  twClassName,
   ...props
 }: AvatarTokenProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
@@ -38,6 +40,11 @@ export const AvatarToken = ({
       shape={AvatarBaseShape.Circle}
       fallbackText={src ? finalFallbackText : backupFallbackText}
       fallbackTextProps={fallbackTextProps}
+      twClassName={
+        src && !finalFallbackText
+          ? mergeTwClassName('bg-white', twClassName)
+          : twClassName
+      }
       {...props}
     >
       {src && (
@@ -47,8 +54,15 @@ export const AvatarToken = ({
           height={'100%'}
           {...imageOrSvgProps}
           imageProps={{
-            contentFit: 'contain',
+            // Raster logos. `cover` fills the avatar; `contain` letterboxes
+            // non-square assets and lets bg-white show as edge slivers.
+            contentFit: 'cover',
             ...imageOrSvgProps?.imageProps,
+          }}
+          svgProps={{
+            // SVG ignores contentFit. `slice` is the SVG equivalent of cover.
+            preserveAspectRatio: 'xMidYMid slice',
+            ...imageOrSvgProps?.svgProps,
           }}
           onImageError={onImageErrorHandler}
           onSvgError={onSvgErrorHandler}

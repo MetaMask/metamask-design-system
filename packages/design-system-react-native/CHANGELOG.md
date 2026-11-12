@@ -7,6 +7,168 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.56.2]
+
+### Fixed
+
+- Fixed `MusdFilled` to use the Phosphor `currency-circle-dollar` fill, so its dollar sign matches `Musd` ([#1677](https://github.com/MetaMask/metamask-design-system/pull/1677))
+  - The vertical stroke sits above and below the S, not through it
+  - `IconName.MusdFilled` is unchanged
+- Fixed `Slider` so the thumb stays on the track at both ends ([#1582](https://github.com/MetaMask/metamask-design-system/pull/1582))
+  - `trackInset` now defaults to `0` instead of `16`
+  - Thumb travel is inset by half the thumb size, so the circle no longer hangs off the track at the minimum and maximum
+
+## [0.56.1]
+
+### Fixed
+
+- Fixed `AvatarNetwork` image to cover the avatar instead of letterboxing non-square images ([#1659](https://github.com/MetaMask/metamask-design-system/pull/1659))
+- Fixed `AvatarToken` image to cover the avatar instead of letterboxing non-square images ([#1661](https://github.com/MetaMask/metamask-design-system/pull/1661))
+- Fixed `AvatarFavicon` image to cover the avatar instead of letterboxing non-square images ([#1662](https://github.com/MetaMask/metamask-design-system/pull/1662))
+- Fixed `Spinner` so it runs on `Animated`'s native driver, fixing an Android freeze caused by continuous Reanimated commits competing with layout animations ([#1665](https://github.com/MetaMask/metamask-design-system/pull/1665))
+
+## [0.56.0]
+
+### Added
+
+- Added Phosphor sports icons, available as `IconName` values ([#1656](https://github.com/MetaMask/metamask-design-system/pull/1656))
+  - `Baseball`, `Basketball`, `Bicycle`, `BoxingGlove`, `Cricket`, `FlagCheckered`, `Football`, `GameController`, `Golf`, `Hockey`, `Horse`, `Medal`, `PingPong`, `SoccerBall`, and `TennisBall`
+
+### Fixed
+
+- Fixed the checked `RadioButton` so its border and inner dot use `icon-default` instead of `primary-default` ([#1650](https://github.com/MetaMask/metamask-design-system/pull/1650))
+  - The checked state follows the icon color in light and dark themes, matching `Checkbox`
+  - Danger and read-only states are unchanged
+
+## [0.55.0]
+
+### Changed
+
+- **BREAKING:** Removed `FontFamily.Accent` (MM Sans) ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - The twrnc classes `font-accent-regular`, `font-accent-medium`, and `font-accent-bold` no longer resolve
+  - Use `FontFamily.Hero` and `font-hero-bold` (`GrotzecCond-Bold`) instead
+  - Apps can stop registering `MMSans-Regular`, `MMSans-Medium`, and `MMSans-Bold`
+  - See [Migration Guide](./MIGRATION.md#from-version-0540-to-0550)
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^13.0.0` and `@metamask/design-system-twrnc-preset@^0.14.0` ([#1645](https://github.com/MetaMask/metamask-design-system/pull/1645))
+  - Required coordination bump with the accent font family removal in `@metamask/design-tokens@13.0.0`
+
+### Fixed
+
+- Fixed the `FeedPost` icon artwork to match the Phosphor icon style ([#1643](https://github.com/MetaMask/metamask-design-system/pull/1643))
+  - The plus and pencil have equal stroke weight, the pencil ends are rounded, and the plus is slightly larger with more clearance
+  - `IconName.FeedPost` is unchanged
+
+## [0.54.0]
+
+### Added
+
+- Added `FeedPost`, available as `IconName.FeedPost` ([#1641](https://github.com/MetaMask/metamask-design-system/pull/1641))
+
+### Changed
+
+- **BREAKING:** `TextFieldSearch` requires `inputAccessibilityLabel` ([#1621](https://github.com/MetaMask/metamask-design-system/pull/1621))
+  - The string is set as `accessibilityLabel` on the inner `TextInput`
+  - It takes precedence over `inputProps.accessibilityLabel`
+  - A top-level `accessibilityLabel` still lands on the root `Box`, which is hidden from screen readers, so it does not name the field
+  - `HeaderSearch` forwards `textFieldSearchProps`, so that object must include `inputAccessibilityLabel`
+  - See [Migration Guide](./MIGRATION.md#from-version-0530-to-0540)
+- Changed the info `IconAlert` icon color from `IconColor.PrimaryDefault` to `IconColor.IconDefault` ([#1638](https://github.com/MetaMask/metamask-design-system/pull/1638))
+
+## [0.53.0]
+
+### Added
+
+- Added `Pause` and `Play` icons, available as `IconName.Pause` and `IconName.Play` ([#1612](https://github.com/MetaMask/metamask-design-system/pull/1612))
+
+### Fixed
+
+- Fixed `AvatarToken` and `AvatarNetwork` so an image source renders on a white background ([#1594](https://github.com/MetaMask/metamask-design-system/pull/1594))
+  - Transparent logo pixels stay visible in dark mode
+  - Fallback initials keep the themed background
+  - A `twClassName` passed by the consumer still overrides the white background
+
+## [0.52.0]
+
+### Added
+
+- Added `TextVariant.DisplayXl` ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - Uses the 60px / 75px bold display style
+
+### Changed
+
+- **BREAKING:** `FontFamily.Hero` now renders Grotzec Cond Bold instead of MM Poly ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - `Text` applies `font-hero-bold` for `FontFamily.Hero`, including when `fontWeight` is regular or medium
+  - The twrnc class `font-hero-regular` is removed; use `font-hero-bold`, which resolves to the PostScript name `GrotzecCond-Bold`
+  - See [Migration Guide](./MIGRATION.md#from-version-0510-to-0520)
+- **BREAKING:** Updated peer dependencies to `@metamask/design-tokens@^12.0.0` and `@metamask/design-system-twrnc-preset@^0.13.0` ([#1586](https://github.com/MetaMask/metamask-design-system/pull/1586))
+  - Required coordination bump with the hero typeface change in `@metamask/design-tokens@12.0.0`
+- Updated small-screen `TextVariant.AmountDisplayLg` from 40px / 50px to 48px / 56px ([#1587](https://github.com/MetaMask/metamask-design-system/pull/1587))
+  - The large-screen size stays 60px / 75px
+- Updated the `Share` icon artwork to a box-and-arrow glyph ([#1588](https://github.com/MetaMask/metamask-design-system/pull/1588))
+- Deprecated `ButtonHero` in favor of `Button` ([#1570](https://github.com/MetaMask/metamask-design-system/pull/1570))
+  - Primary is the default `Button` variant; pass `variant={ButtonVariant.Primary}` to set it explicitly
+  - `ButtonHero` remains available until a future major version
+
+### Fixed
+
+- Fixed `BottomSheetDialog` so a non-interactable sheet keeps the drag handle's space ([#1589](https://github.com/MetaMask/metamask-design-system/pull/1589))
+  - When `isInteractable` is `false`, the handle stays in the layout and is only hidden visually (`opacity-0`)
+  - Sheet height no longer shifts when the sheet is not swippable
+
+## [0.51.0]
+
+### Added
+
+- Added `ArrowSquareOut` to `IconName` ([#1544](https://github.com/MetaMask/metamask-design-system/pull/1544))
+- Added `Clipboard` to `IconName` ([#1543](https://github.com/MetaMask/metamask-design-system/pull/1543))
+
+### Changed
+
+- Updated `MoreVertical` icon artwork to use larger dots ([#1544](https://github.com/MetaMask/metamask-design-system/pull/1544))
+
+## [0.50.0]
+
+### Changed
+
+- **BREAKING:** Updated `Card` interaction behavior and default appearance ([#1533](https://github.com/MetaMask/metamask-design-system/pull/1533))
+  - Interactive cards now require `isInteractive` and render a `Pressable` instead of a `TouchableOpacity`
+  - Removed `touchableOpacityProps`; interactive cards now accept `PressableProps` directly
+  - Changed the default background to `bg-section`, border radius to `rounded-2xl`, and removed the default border
+  - See the [Migration Guide](./MIGRATION.md#from-version-0492-to-0500)
+
+### Fixed
+
+- Restored the previous deterministic `Maskicon` color palette so existing account addresses retain their colors when upgrading from versions before `0.48.0` ([#1541](https://github.com/MetaMask/metamask-design-system/pull/1541))
+
+## [0.49.2]
+
+### Changed
+
+- Updated `ListArrow` icon artwork to use a downward sort arrow ([#1537](https://github.com/MetaMask/metamask-design-system/pull/1537))
+- Update Checkbox border radius to fully rounded for brand update ([#1531](https://github.com/MetaMask/metamask-design-system/pull/1531))
+
+## [0.49.1]
+
+### Fixed
+
+- Updated `BottomSheetDialog` top corner radius to 32px ([#1525](https://github.com/MetaMask/metamask-design-system/pull/1525))
+- Updated `TextField` container border radius from 8px to 12px ([#1527](https://github.com/MetaMask/metamask-design-system/pull/1527))
+
+## [0.49.0]
+
+### Added
+
+- Added `PeopleFilled` to `IconName` ([#1520](https://github.com/MetaMask/metamask-design-system/pull/1520))
+
+### Changed
+
+- Updated `MainActionButton` border radius styling ([#1526](https://github.com/MetaMask/metamask-design-system/pull/1526))
+
+### Fixed
+
+- Updated `AvatarBase` extra-small square border radius to fix inherited avatar components, including `BadgeNetwork` ([#1523](https://github.com/MetaMask/metamask-design-system/pull/1523))
+- Fixed `HeaderBase` flex-1 spacer preservation when children is empty ([#1524](https://github.com/MetaMask/metamask-design-system/pull/1524))
+
 ## [0.48.0]
 
 ### Added
@@ -784,7 +946,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.48.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.2...HEAD
+[0.56.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.1...@metamask/design-system-react-native@0.56.2
+[0.56.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.0...@metamask/design-system-react-native@0.56.1
+[0.56.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.55.0...@metamask/design-system-react-native@0.56.0
+[0.55.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.54.0...@metamask/design-system-react-native@0.55.0
+[0.54.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.53.0...@metamask/design-system-react-native@0.54.0
+[0.53.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.52.0...@metamask/design-system-react-native@0.53.0
+[0.52.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.51.0...@metamask/design-system-react-native@0.52.0
+[0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.50.0...@metamask/design-system-react-native@0.51.0
+[0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.2...@metamask/design-system-react-native@0.50.0
+[0.49.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.1...@metamask/design-system-react-native@0.49.2
+[0.49.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.49.0...@metamask/design-system-react-native@0.49.1
+[0.49.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.48.0...@metamask/design-system-react-native@0.49.0
 [0.48.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.47.0...@metamask/design-system-react-native@0.48.0
 [0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.46.0...@metamask/design-system-react-native@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.45.0...@metamask/design-system-react-native@0.46.0

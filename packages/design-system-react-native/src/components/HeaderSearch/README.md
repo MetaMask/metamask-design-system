@@ -12,6 +12,7 @@ import {
   variant={HeaderSearchVariant.Screen}
   onPressBackButton={handleBack}
   textFieldSearchProps={{
+    inputAccessibilityLabel: 'Search',
     value: searchText,
     onChangeText: setSearchText,
     onPressClearButton: () => setSearchText(''),
@@ -53,6 +54,7 @@ import {
   variant={HeaderSearchVariant.Screen}
   onPressBackButton={() => {}}
   textFieldSearchProps={{
+    inputAccessibilityLabel: 'Search',
     value: '',
     onChangeText: () => {},
     onPressClearButton: () => {},
@@ -64,6 +66,7 @@ import {
   variant={HeaderSearchVariant.Inline}
   onPressCancelButton={() => {}}
   textFieldSearchProps={{
+    inputAccessibilityLabel: 'Search',
     value: '',
     onChangeText: () => {},
     onPressClearButton: () => {},
@@ -85,6 +88,7 @@ Forwarded to `TextFieldSearch` (same contract as that component, except `style` 
   variant={HeaderSearchVariant.Screen}
   onPressBackButton={() => navigation.goBack()}
   textFieldSearchProps={{
+    inputAccessibilityLabel: 'Search',
     value: query,
     onChangeText: setQuery,
     onPressClearButton: () => setQuery(''),
@@ -106,6 +110,7 @@ Called when the screen variant’s back `ButtonIcon` is pressed.
   variant={HeaderSearchVariant.Screen}
   onPressBackButton={() => navigation.goBack()}
   textFieldSearchProps={{
+    inputAccessibilityLabel: 'Search',
     value: query,
     onChangeText: setQuery,
     onPressClearButton: () => setQuery(''),
@@ -127,6 +132,7 @@ Called when the inline variant’s **Cancel** `Button` is pressed.
   variant={HeaderSearchVariant.Inline}
   onPressCancelButton={() => setSearchOpen(false)}
   textFieldSearchProps={{
+    inputAccessibilityLabel: 'Search',
     value: query,
     onChangeText: setQuery,
     onPressClearButton: () => setQuery(''),
@@ -149,6 +155,7 @@ Optional props passed to the screen variant’s `ButtonIcon`. `iconName` and `on
   onPressBackButton={() => navigation.goBack()}
   backButtonProps={{ accessibilityLabel: 'Go back', testID: 'search-back' }}
   textFieldSearchProps={{
+    inputAccessibilityLabel: 'Search',
     value: query,
     onChangeText: setQuery,
     onPressClearButton: () => setQuery(''),
@@ -174,6 +181,7 @@ Optional props passed to the inline variant’s `Button`. `variant`, `onPress`, 
     textProps: { twClassName: 'font-medium' },
   }}
   textFieldSearchProps={{
+    inputAccessibilityLabel: 'Search',
     value: query,
     onChangeText: setQuery,
     onPressClearButton: () => setQuery(''),
@@ -196,6 +204,7 @@ Merged with the component’s built-in root row classes (`height`, `flex-row`, s
   onPressBackButton={() => navigation.goBack()}
   twClassName="border-b border-muted"
   textFieldSearchProps={{
+    inputAccessibilityLabel: 'Search',
     value: query,
     onChangeText: setQuery,
     onPressClearButton: () => setQuery(''),
@@ -228,6 +237,7 @@ export const ConditionalHeaderSearch = ({
       onPressBackButton={() => {}}
       style={tw.style('border-b border-muted', isScrolled && 'shadow-sm')}
       textFieldSearchProps={{
+        inputAccessibilityLabel: 'Search',
         value: '',
         onChangeText: () => {},
         onPressClearButton: () => {},

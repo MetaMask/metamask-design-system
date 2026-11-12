@@ -16,7 +16,7 @@ Storybook app for validating `@metamask/design-system-react-native` components i
 | Storybook web (`storybook dev` / static build)               | Supported                  | Browser-based component review and sharing  |
 | Expo Go (`expo start --ios` / `--android`)                   | Unsupported for validation | Known Reanimated/Worklets native mismatches |
 
-Reanimated 4 + Worklets require a **development build**. Expo Go cannot load our current JS stack (Reanimated 4.5.3 / Worklets 0.10.4 on Expo SDK 54) because its prebuilt native binaries are older.
+Reanimated 4 + Worklets require a **development build**. Expo Go cannot load our current JS stack (Reanimated 4.5.3 / Worklets 0.10.4 on Expo SDK 57) because its prebuilt native binaries are older.
 
 ## Run Storybook (supported flow)
 
@@ -43,6 +43,41 @@ If you are running Mobile and Storybook side-by-side, use a separate Metro port:
 ```bash
 yarn workspace @metamask/storybook-react-native exec expo start --dev-client --port 8088
 ```
+
+## AI integration (Storybook MCP)
+
+React Native Storybook exposes an experimental MCP endpoint on Metro's channel server:
+
+```text
+http://localhost:7007/mcp
+```
+
+`metro.config.js` follows the current `@storybook/react-native` MCP configuration (`experimental_mcp` and `websockets: 'auto'` on the Metro `withStorybook` wrapper). Those options are what start the endpoint. No extra root script is required.
+
+The endpoint comes up with the existing Metro commands. Device scripts launch a dev client as well:
+
+```bash
+yarn storybook:ios
+yarn storybook:android
+```
+
+Start Metro without a simulator or device when only the MCP endpoint is needed:
+
+```bash
+yarn workspace @metamask/storybook-react-native start
+```
+
+The endpoint provides:
+
+- `list-all-documentation` to discover React Native components and stories
+- `get-documentation` to retrieve component props, examples, and stories
+- `get-documentation-for-story` to inspect a specific story
+- `get-storybook-story-instructions` for React Native story-writing guidance
+- `select-story` to display a story on a connected device
+
+`websockets: 'auto'` enables `select-story` when a device is connected. Documentation tools work without a connected device.
+
+Port 6007 hosts the separate React Native Web Storybook UI (`yarn workspace @metamask/storybook-react-native storybook:web`). The native MCP channel server stays on port 7007.
 
 ## Run Storybook web
 

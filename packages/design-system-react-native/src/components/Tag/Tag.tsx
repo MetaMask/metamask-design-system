@@ -1,4 +1,6 @@
 import {
+  BoxAlignItems,
+  BoxFlexDirection,
   FontWeight,
   TagSeverity,
   TextVariant,
@@ -7,8 +9,8 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
 import { Box } from '../Box';
-import { BoxRow } from '../BoxRow';
 import { Icon, IconSize } from '../Icon';
+import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import {
   MAP_TAG_SEVERITY_BACKGROUND,
@@ -35,6 +37,9 @@ export const Tag: React.FC<TagProps> = ({
   const textColor = MAP_TAG_SEVERITY_TEXT_COLOR[severity];
   const iconColor = MAP_TAG_SEVERITY_ICON_COLOR[severity];
 
+  const resolvedStartIconName = startIconName ?? startIconProps?.name;
+  const resolvedEndIconName = endIconName ?? endIconProps?.name;
+
   return (
     <Box
       {...props}
@@ -42,53 +47,50 @@ export const Tag: React.FC<TagProps> = ({
       style={[
         tw.style(
           'rounded-md self-start',
-          (startIconName ?? startIconProps?.name) ? 'pl-1' : 'pl-1.5',
-          (endIconName ?? endIconProps?.name) ? 'pr-1' : 'pr-1.5',
+          resolvedStartIconName ? 'pl-1' : 'pl-1.5',
+          resolvedEndIconName ? 'pr-1' : 'pr-1.5',
           twClassName,
         ),
         style,
       ]}
     >
-      <BoxRow
+      <Box
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Center}
         twClassName="gap-0.5"
-        textProps={{
-          color: textColor,
-          variant: TextVariant.BodyXs,
-          fontWeight: FontWeight.Medium,
-        }}
-        startAccessory={(() => {
-          const name = startIconName ?? startIconProps?.name;
-          if (!name) {
-            return startAccessory ?? null;
-          }
-          return (
-            <Icon
-              name={name}
-              color={iconColor}
-              size={IconSize.Xs}
-              twClassName="shrink-0"
-              {...startIconProps}
-            />
-          );
-        })()}
-        endAccessory={(() => {
-          const name = endIconName ?? endIconProps?.name;
-          if (!name) {
-            return endAccessory ?? null;
-          }
-          return (
-            <Icon
-              name={name}
-              color={iconColor}
-              size={IconSize.Xs}
-              twClassName="shrink-0"
-              {...endIconProps}
-            />
-          );
-        })()}
       >
-        {children}
-      </BoxRow>
+        {resolvedStartIconName ? (
+          <Icon
+            name={resolvedStartIconName}
+            color={iconColor}
+            size={IconSize.Xs}
+            twClassName="shrink-0"
+            {...startIconProps}
+          />
+        ) : (
+          (startAccessory ?? null)
+        )}
+        <TextOrChildren
+          textProps={{
+            color: textColor,
+            variant: TextVariant.BodyXs,
+            fontWeight: FontWeight.Medium,
+          }}
+        >
+          {children}
+        </TextOrChildren>
+        {resolvedEndIconName ? (
+          <Icon
+            name={resolvedEndIconName}
+            color={iconColor}
+            size={IconSize.Xs}
+            twClassName="shrink-0"
+            {...endIconProps}
+          />
+        ) : (
+          (endAccessory ?? null)
+        )}
+      </Box>
     </Box>
   );
 };
