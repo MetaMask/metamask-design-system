@@ -34,7 +34,7 @@ export const PopoverRole = {
 } as const;
 export type PopoverRole = (typeof PopoverRole)[keyof typeof PopoverRole];
 
-export type PopoverProps = Omit<ComponentProps<'div'>, 'role'> & {
+export type PopoverProps = Omit<ComponentProps<'div'>, 'popover' | 'role'> & {
   /**
    * The contents of the Popover.
    */

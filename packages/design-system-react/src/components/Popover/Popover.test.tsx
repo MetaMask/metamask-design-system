@@ -132,6 +132,22 @@ describe('Popover', () => {
       );
     });
 
+    it('keeps manual mode when a consumer popover value is passed', () => {
+      render(
+        <Popover
+          data-testid="popover"
+          isOpen
+          {...({ popover: 'auto' } as React.ComponentProps<typeof Popover>)}
+        >
+          x
+        </Popover>,
+      );
+      expect(screen.getByTestId('popover')).toHaveAttribute(
+        'popover',
+        'manual',
+      );
+    });
+
     it('positions with the fixed strategy', () => {
       render(<Popover isOpen>x</Popover>);
       expect(mockedUseFloating.mock.calls[0][0]?.strategy).toBe('fixed');

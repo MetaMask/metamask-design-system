@@ -189,7 +189,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         padding={4}
         role={role}
         ref={setPopoverRef}
-        popover="manual"
         data-popper-placement={placement}
         data-popper-reference-hidden={referenceHiddenValue}
         className={twMerge(
@@ -201,6 +200,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           className,
         )}
         {...props}
+        // Applied after the spread so a consumer `popover` value cannot replace manual mode.
+        popover="manual"
         style={popoverStyle}
       >
         {children}
