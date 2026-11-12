@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import {
   Box,
@@ -34,22 +34,13 @@ const meta: Meta<PopoverProps> = {
       control: 'select',
       options: Object.values(PopoverRole),
     },
-    hasArrow: { control: 'boolean' },
-    isPortal: { control: 'boolean' },
-    matchWidth: { control: 'boolean' },
-    flip: { control: 'boolean' },
-    preventOverflow: { control: 'boolean' },
-    referenceHidden: { control: 'boolean' },
+    isDismissible: { control: 'boolean' },
   },
   args: {
     position: PopoverPosition.BottomStart,
     role: PopoverRole.Tooltip,
-    hasArrow: true,
-    isPortal: false,
-    matchWidth: false,
-    flip: false,
-    preventOverflow: false,
-    referenceHidden: true,
+    isDismissible: true,
+    className: 'p-4',
   },
 };
 
@@ -91,7 +82,7 @@ export const Default: Story = {
       <>
         <ReferenceBox
           setRef={setReferenceElement}
-          onClick={() => setIsOpen((prev) => !prev)}
+          onClick={() => setIsOpen(!isOpen)}
         >
           Click to toggle popover
         </ReferenceBox>
@@ -99,9 +90,9 @@ export const Default: Story = {
           {...args}
           referenceElement={referenceElement}
           isOpen={isOpen}
-          onPressEscKey={() => setIsOpen(false)}
+          onClose={() => setIsOpen(false)}
         >
-          <Text>Popover demo</Text>
+          <Text>Click outside or press Escape to close</Text>
         </Popover>
       </>
     );
@@ -112,20 +103,6 @@ export const Position: Story = {
   render: () => {
     const [referenceElement, setReferenceElement] =
       useState<HTMLElement | null>(null);
-    const placements = [
-      PopoverPosition.TopStart,
-      PopoverPosition.Top,
-      PopoverPosition.TopEnd,
-      PopoverPosition.RightStart,
-      PopoverPosition.Right,
-      PopoverPosition.RightEnd,
-      PopoverPosition.BottomStart,
-      PopoverPosition.Bottom,
-      PopoverPosition.BottomEnd,
-      PopoverPosition.LeftStart,
-      PopoverPosition.Left,
-      PopoverPosition.LeftEnd,
-    ];
     return (
       <Box
         flexDirection={BoxFlexDirection.Row}
@@ -147,13 +124,14 @@ export const Position: Story = {
         >
           <Text>Reference element</Text>
         </Box>
-        {placements.map((placement) => (
+        {Object.values(PopoverPosition).map((placement) => (
           <Popover
             key={placement}
             isOpen
-            hasArrow
+            isDismissible={false}
             position={placement}
             referenceElement={referenceElement}
+            className="p-4"
           >
             <Text>{placement}</Text>
           </Popover>
@@ -163,7 +141,7 @@ export const Position: Story = {
   },
 };
 
-export const HasArrow: Story = {
+export const Offset: Story = {
   render: () => {
     const [referenceElement, setReferenceElement] =
       useState<HTMLElement | null>(null);
@@ -172,69 +150,53 @@ export const HasArrow: Story = {
         <ReferenceBox setRef={setReferenceElement}>Reference</ReferenceBox>
         <Popover
           isOpen
-          hasArrow
+          isDismissible={false}
           position={PopoverPosition.RightStart}
+          offset={[16, 24]}
           referenceElement={referenceElement}
+          className="p-4"
         >
-          <Text>With arrow</Text>
+          <Text>offset [16, 24]</Text>
         </Popover>
         <Popover
           isOpen
-          position={PopoverPosition.RightEnd}
+          isDismissible={false}
+          position={PopoverPosition.BottomStart}
           referenceElement={referenceElement}
+          className="p-4"
         >
-          <Text>Without arrow</Text>
+          <Text>Default offset [0, 8]</Text>
         </Popover>
       </>
     );
   },
 };
 
-export const IsPortal: Story = {
+export const IsDismissible: Story = {
   render: () => {
     const [referenceElement, setReferenceElement] =
       useState<HTMLElement | null>(null);
+    const [isOpen, setIsOpen] = useState(false);
     return (
       <>
-        <ReferenceBox setRef={setReferenceElement}>Reference</ReferenceBox>
-        <Popover
-          isOpen
-          isPortal
-          hasArrow
-          position={PopoverPosition.RightEnd}
-          referenceElement={referenceElement}
+        <Button
+          variant={ButtonVariant.Primary}
+          ref={(node) => setReferenceElement(node)}
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+          onFocus={() => setIsOpen(true)}
+          onBlur={() => setIsOpen(false)}
         >
-          <Text>Inspect to view this popover at the end of document.body</Text>
-        </Popover>
+          Hover or focus me
+        </Button>
         <Popover
-          isOpen
-          hasArrow
-          position={PopoverPosition.RightStart}
+          isOpen={isOpen}
+          isDismissible={false}
+          position={PopoverPosition.Top}
           referenceElement={referenceElement}
+          className="p-4"
         >
-          <Text>Rendered inline (no portal)</Text>
-        </Popover>
-      </>
-    );
-  },
-};
-
-export const MatchWidth: Story = {
-  render: () => {
-    const [referenceElement, setReferenceElement] =
-      useState<HTMLElement | null>(null);
-    return (
-      <>
-        <ReferenceBox setRef={setReferenceElement}>Reference</ReferenceBox>
-        <Popover
-          isOpen
-          matchWidth
-          position={PopoverPosition.Bottom}
-          referenceElement={referenceElement}
-        >
-          <Text>
-            matchWidth makes the popover the same width as the reference.
-          </Text>
+          <Text>Hover tooltip that stays open until isOpen changes</Text>
         </Popover>
       </>
     );
@@ -250,18 +212,22 @@ export const Role: Story = {
         <ReferenceBox setRef={setReferenceElement}>Reference</ReferenceBox>
         <Popover
           isOpen
+          isDismissible={false}
           role={PopoverRole.Dialog}
           aria-label="Dialog example"
           position={PopoverPosition.Left}
           referenceElement={referenceElement}
+          className="p-4"
         >
           <Text>{PopoverRole.Dialog}</Text>
         </Popover>
         <Popover
           isOpen
+          isDismissible={false}
           role={PopoverRole.Tooltip}
           position={PopoverPosition.Right}
           referenceElement={referenceElement}
+          className="p-4"
         >
           <Text>{PopoverRole.Tooltip}</Text>
         </Popover>
@@ -270,36 +236,83 @@ export const Role: Story = {
   },
 };
 
-export const OnPressEscKey: Story = {
+export const TopLayer: Story = {
   render: () => {
     const [referenceElement, setReferenceElement] =
       useState<HTMLElement | null>(null);
-    const [isOpen, setIsOpen] = useState(false);
     return (
-      <>
+      <Box
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        padding={4}
+        className="relative z-0 h-[120px] w-[320px] overflow-hidden"
+      >
         <Button
           variant={ButtonVariant.Primary}
-          onClick={() => setIsOpen(true)}
           ref={(node) => setReferenceElement(node)}
         >
-          Open
+          Reference
         </Button>
         <Popover
-          isOpen={isOpen}
+          isOpen
+          isDismissible={false}
+          position={PopoverPosition.BottomStart}
           referenceElement={referenceElement}
-          position={PopoverPosition.Bottom}
-          hasArrow
-          onPressEscKey={() => setIsOpen(false)}
+          className="p-4"
         >
-          <Text>Press Esc to close</Text>
+          <Box className="w-[240px]">
+            <Text>
+              Rendered inline inside an overflow hidden container, but shown in
+              the top layer so it is not clipped.
+            </Text>
+          </Box>
         </Popover>
-      </>
+      </Box>
     );
   },
 };
 
-export const OnClickOutside: Story = {
+export const ReferenceHidden: Story = {
   render: () => {
+    const [referenceElement, setReferenceElement] =
+      useState<HTMLElement | null>(null);
+    return (
+      <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+        <Text>
+          Scroll the container. The popover hides once its reference is scrolled
+          out of view.
+        </Text>
+        <Box
+          borderColor={BoxBorderColor.BorderDefault}
+          borderWidth={1}
+          className="mt-[120px] h-[200px] w-[320px] overflow-y-auto"
+        >
+          <Box padding={4} className="h-[600px] pt-[120px]">
+            <Button
+              variant={ButtonVariant.Primary}
+              ref={(node) => setReferenceElement(node)}
+            >
+              Reference
+            </Button>
+          </Box>
+        </Box>
+        <Popover
+          isOpen
+          isDismissible={false}
+          position={PopoverPosition.Right}
+          referenceElement={referenceElement}
+          className="p-4"
+        >
+          <Text>Follows the reference</Text>
+        </Popover>
+      </Box>
+    );
+  },
+};
+
+export const InsideDialog: Story = {
+  render: () => {
+    const dialogRef = useRef<HTMLDialogElement>(null);
     const [referenceElement, setReferenceElement] =
       useState<HTMLElement | null>(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -307,20 +320,48 @@ export const OnClickOutside: Story = {
       <>
         <Button
           variant={ButtonVariant.Primary}
-          onClick={() => setIsOpen((prev) => !prev)}
-          ref={(node) => setReferenceElement(node)}
+          onClick={() => dialogRef.current?.showModal()}
         >
-          Open
+          Open modal dialog
         </Button>
-        <Popover
-          isOpen={isOpen}
-          referenceElement={referenceElement}
-          position={PopoverPosition.Bottom}
-          hasArrow
-          onClickOutside={() => setIsOpen(false)}
+        <dialog
+          ref={dialogRef}
+          className="rounded-lg bg-default p-6 text-default backdrop:bg-overlay-default"
+          onClose={() => setIsOpen(false)}
         >
-          <Text>Click outside to close</Text>
-        </Popover>
+          <Box flexDirection={BoxFlexDirection.Column} gap={4}>
+            <Text>
+              The popover is rendered inside the dialog and shown in the top
+              layer above it.
+            </Text>
+            <Box flexDirection={BoxFlexDirection.Row} gap={2}>
+              <Button
+                variant={ButtonVariant.Secondary}
+                ref={(node) => setReferenceElement(node)}
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                Toggle popover
+              </Button>
+              <Button
+                variant={ButtonVariant.Tertiary}
+                onClick={() => dialogRef.current?.close()}
+              >
+                Close dialog
+              </Button>
+            </Box>
+          </Box>
+          <Popover
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            role={PopoverRole.Dialog}
+            aria-label="Popover inside dialog"
+            position={PopoverPosition.BottomStart}
+            referenceElement={referenceElement}
+            className="p-4"
+          >
+            <Text>Escape closes this popover first, then the dialog.</Text>
+          </Popover>
+        </dialog>
       </>
     );
   },

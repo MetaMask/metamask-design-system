@@ -2026,7 +2026,7 @@ import {
 
 The extension `header-base` component maps to `HeaderBase` in the design system. The visual contract — a centered title flanked by start/end accessories — is preserved, but the implementation switches from JS-based width measurement (with a window resize listener) to **CSS Grid** layout. The polymorphic Box surface and the `mm-header-base` class hook are removed.
 
-`HeaderBase` is the layout primitive that `ModalHeader`, `PopoverHeader`, and any custom page-level header sit on. Migrate this first if you're moving any of those.
+`HeaderBase` is the layout primitive that `ModalHeader`, popover headers, and any custom page-level header sit on. Migrate this first if you're moving any of those.
 
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
 
@@ -2997,7 +2997,7 @@ For typical call sites — for example `ui/components/multichain/network-list-me
 
 ### Popover Component
 
-The extension `popover` component maps to `Popover` in the design system. The runtime contract — `referenceElement`, `isOpen`, `position`, `role`, `hasArrow`, `matchWidth`, `flip`, `preventOverflow`, `referenceHidden`, `offset`, `isPortal`, `arrowProps`, `onPressEscKey`, `onClickOutside` — is preserved 1:1, including the `PopoverPosition` and `PopoverRole` value strings. The breaking changes are limited to the surrounding API surface: `@floating-ui/react-dom` is used internally for positioning (consumers do not need to install it), the polymorphic `as` / Box style-utility passthrough is gone, and the legacy SCSS class hooks (`.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`) are replaced by Tailwind utilities and inline styles.
+The extension `popover` component and earlier MMDS `Popover` releases map to a slimmer `Popover` in the design system. It is built on the native Popover API: the root is shown in the browser's top layer and, by default, the browser handles light dismiss and Escape. The API keeps `isOpen`, `referenceElement`, `position`, `offset`, `role`, `className` and `style` and adds `onClose` and `isDismissible`. Flip and shift are always on. Arrow, width matching, portal, polymorphic and Box style-utility props are removed.
 
 Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
 
@@ -3013,36 +3013,40 @@ Refer to [General Extension Migration Guidance](#general-extension-migration-gui
 
 ##### Props and Behavior Mapping
 
-| Extension API                                                                                              | Design System API                                                          | Change Type | Notes                                                                                                                                                                                                             |
-| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `referenceElement?: HTMLElement \| null`                                                                   | `referenceElement?: HTMLElement \| null`                                   | unchanged   | reference element for Floating UI positioning                                                                                                                                                                     |
-| `isOpen?: boolean`                                                                                         | `isOpen?: boolean`                                                         | unchanged   | nothing renders when `false`                                                                                                                                                                                      |
-| `position?: PopoverPosition`                                                                               | `position?: PopoverPosition`                                               | unchanged   | same string values; default `PopoverPosition.Auto` still forces `flip` and `preventOverflow` on                                                                                                                   |
-| `role?: PopoverRole`                                                                                       | `role?: PopoverRole`                                                       | unchanged   | same string values; default `PopoverRole.Tooltip`                                                                                                                                                                 |
-| `hasArrow?: boolean`                                                                                       | `hasArrow?: boolean`                                                       | unchanged   | default `false`; the rendered notch rotates with the resolved placement                                                                                                                                           |
-| `arrowProps?: BoxProps<'div'>`                                                                             | `arrowProps?: Omit<ComponentProps<'div'>, 'ref' \| 'style' \| 'children'>` | narrowed    | extension Box style-utility props are no longer accepted; `ref`, `style`, and `children` are reserved for internal use (popper positioning, rotation styles, arrow visual). Pass `className` for one-off styling. |
-| `matchWidth?: boolean`                                                                                     | `matchWidth?: boolean`                                                     | unchanged   | matches the reference's `clientWidth` when `true`                                                                                                                                                                 |
-| `preventOverflow?: boolean`                                                                                | `preventOverflow?: boolean`                                                | unchanged   | forced on when `position === PopoverPosition.Auto`                                                                                                                                                                |
-| `flip?: boolean`                                                                                           | `flip?: boolean`                                                           | unchanged   | forced on when `position === PopoverPosition.Auto`                                                                                                                                                                |
-| `referenceHidden?: boolean`                                                                                | `referenceHidden?: boolean`                                                | unchanged   | default `true`; behavior preserved (hides popover when `data-popper-reference-hidden="true"`) — implemented via Tailwind `data-[]:` variants instead of SCSS                                                      |
-| `offset?: [number, number]`                                                                                | `offset?: [number, number]`                                                | unchanged   | default `[0, 8]`                                                                                                                                                                                                  |
-| `isPortal?: boolean`                                                                                       | `isPortal?: boolean`                                                       | unchanged   | renders into `document.body` via `createPortal`                                                                                                                                                                   |
-| `onPressEscKey?: () => void`                                                                               | `onPressEscKey?: () => void`                                               | unchanged   | Escape-key callback                                                                                                                                                                                               |
-| `onClickOutside?: () => void`                                                                              | `onClickOutside?: () => void`                                              | unchanged   | click-outside callback (ignores clicks on the reference element)                                                                                                                                                  |
-| `as?: React.ElementType` / `PolymorphicComponentPropWithRef`                                               | removed                                                                    | removed     | always renders a `<div>`. Wrap or compose if you need a different element                                                                                                                                         |
-| Box style-utility props (`backgroundColor`, `padding`, `borderRadius`, …)                                  | removed from public API                                                    | removed     | the popover surface uses fixed design tokens (`BoxBackgroundColor.BackgroundElevated2`, `BoxBorderColor.BorderMuted`, `padding={4}`, `rounded-lg`, `shadow-md`). Override via `className`                         |
-| `.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`, `.mm-popover--open` SCSS class hooks | removed                                                                    | removed     | the SCSS file is gone; styling is Tailwind + inline styles. Use `className` and `arrowProps.className` for overrides                                                                                              |
+This table applies to both the extension `Popover` and earlier MMDS `Popover` releases, which shared the same props.
+
+| Previous API                                                              | Design System API                        | Change Type | Notes                                                                                                                                                                                           |
+| ------------------------------------------------------------------------- | ---------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isOpen?: boolean`                                                        | `isOpen?: boolean`                       | unchanged   | nothing renders when `false`                                                                                                                                                                    |
+| `referenceElement?: HTMLElement \| null`                                  | `referenceElement?: HTMLElement \| null` | unchanged   | element the popover is anchored to                                                                                                                                                              |
+| `onClickOutside?: () => void`                                             | `onClose?: () => void`                   | replaced    | fired from the native `toggle` event when the browser closes the popover (click outside, Escape, another dismissible popover opening). Set `isOpen` to `false` in it                            |
+| `onPressEscKey?: () => void`                                              | `onClose?: () => void`                   | replaced    | same `onClose` handler; Escape is handled natively                                                                                                                                              |
+| (none)                                                                    | `isDismissible?: boolean`                | added       | default `true` (`popover="auto"`). Use `false` (`popover="manual"`) for hover tooltips and popovers that must stay open; they ignore clicks outside and Escape                                  |
+| `position?: PopoverPosition`                                              | `position?: PopoverPosition`             | narrowed    | `PopoverPosition.Auto` removed; default is now `PopoverPosition.Bottom`. The popover flips to the opposite side when it has more room                                                           |
+| `flip?: boolean`                                                          | removed                                  | removed     | always on                                                                                                                                                                                       |
+| `preventOverflow?: boolean`                                               | removed                                  | removed     | always on (shift along the reference edge to stay in the viewport)                                                                                                                              |
+| `offset?: [number, number]`                                               | `offset?: [number, number]`              | unchanged   | `[skidding, distance]`, default `[0, 8]`                                                                                                                                                        |
+| `role?: PopoverRole`                                                      | `role?: PopoverRole`                     | unchanged   | default `PopoverRole.Tooltip`                                                                                                                                                                   |
+| `matchWidth?: boolean`                                                    | removed                                  | removed     | set the width yourself, for example `style={{ width: referenceElement?.offsetWidth }}`                                                                                                          |
+| `referenceHidden?: boolean`                                               | removed                                  | removed     | fixed behavior: the popover is hidden while the reference is scrolled out of view. No call site disabled it except one select-style menu                                                        |
+| `isPortal?: boolean`                                                      | removed                                  | removed     | the top layer already escapes clipping and stacking contexts. Render the popover next to its trigger                                                                                            |
+| `hasArrow?: boolean`, `arrowProps`                                        | removed                                  | removed     | arrows belong to a future `Tooltip` component built on `Popover`. Until then, keep tooltips with arrows on the extension component                                                              |
+| `data-popper-placement`, `data-popper-reference-hidden` attributes        | `data-placement`                         | replaced    | `data-placement` reports the resolved placement after flipping. Hidden state is applied with `invisible pointer-events-none` classes                                                            |
+| `as?: React.ElementType` / `PolymorphicComponentPropWithRef`              | removed                                  | removed     | always renders a `<div>`. Wrap or compose if you need a different element                                                                                                                       |
+| Box style-utility props (`backgroundColor`, `padding`, `borderRadius`, …) | removed from public API                  | removed     | the surface uses fixed design tokens (`BackgroundElevated2`, `BorderMuted`, `rounded-lg`, `shadow-md`) and has no default padding. Pass spacing with `className`, for example `className="p-4"` |
+| `.mm-popover*` SCSS class hooks                                           | removed                                  | removed     | use `className`                                                                                                                                                                                 |
 
 ##### Default and Behavior Changes
 
-| Concern                                | Extension Behavior                                                                                                                                                                     | Design System Behavior                                                                                                                                                                                                                                                        |
-| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Positioning library                    | `react-popper` declared as a direct dependency of the extension                                                                                                                        | `@floating-ui/react-dom` is used internally by `@metamask/design-system-react` — consumers do not install or import it directly                                                                                                                                               |
-| Surface styling                        | Box props applied inside the component (`backgroundColor.backgroundDefault`, `borderRadius.LG`, `borderColor.borderMuted`, `padding={4}`) plus `mm-popover` SCSS hook for `box-shadow` | Same visual: `BoxBackgroundColor.BackgroundElevated2`, `BoxBorderColor.BorderMuted`, `borderWidth={1}`, `padding={4}`, `rounded-lg`, `shadow-md` Tailwind utilities applied internally                                                                                        |
-| Arrow rendering                        | Outer 40×40 invisible container with an `::before` pseudo-element drawing the visible 8×8 notch; rotation via SCSS attribute selectors keyed off `data-popper-placement`               | Same outer container but the visible notch is a real `<Box>` child instead of a pseudo-element. Rotation is computed from the resolved placement and applied as inline `transform`                                                                                            |
-| Reference-hidden visibility            | `.mm-popover--reference-hidden[data-popper-reference-hidden="true"] { visibility: hidden; pointer-events: none; }`                                                                     | Tailwind `data-[popper-reference-hidden=true]:invisible data-[popper-reference-hidden=true]:pointer-events-none` applied when `referenceHidden` is `true`                                                                                                                     |
-| `keydown` listener cleanup             | Registered with `{ capture: true }` but removed without options — listener accumulates across re-renders                                                                               | Registered and removed with matching `{ capture: true }` options (no listener leak)                                                                                                                                                                                           |
-| `PopoverPosition` / `PopoverRole` type | TypeScript `enum` (`enum PopoverPosition { Auto = 'auto', … }`)                                                                                                                        | Const object with derived string-union type ([ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)). All string values unchanged, so `PopoverPosition.Auto`, `PopoverRole.Dialog`, etc. continue to work |
+| Concern                                | Previous Behavior                                                                        | Design System Behavior                                                                                                                                                   |
+| -------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Positioning library                    | `react-popper` (extension) or `@floating-ui/react-dom` (earlier MMDS)                    | Built-in positioning utility (placement, offset, flip, shift) that updates on scroll, resize, and size changes. No positioning library is installed                      |
+| Stacking                               | `position: absolute` in the DOM flow; `z-index` and `isPortal` needed to escape clipping | Shown in the top layer with `position: fixed`. `z-index` has no effect against page content; overflow and stacking contexts on ancestors cannot clip or cover it         |
+| Dismissal                              | Consumer-wired document listeners for Escape and outside clicks                          | Native light dismiss and Escape for `popover="auto"`. Only one dismissible popover is open at a time unless nested. `onClose` reports native closes                      |
+| Default `position`                     | `PopoverPosition.Auto`                                                                   | `PopoverPosition.Bottom`, with flip and shift always on                                                                                                                  |
+| Default padding                        | Extension Box `padding` passthrough, or `padding={4}` on earlier MMDS `Popover`          | No default padding. Menus no longer need `className="p-0"`. Pass `className="p-4"` (or another spacing class) when the content needs inset                               |
+| Inside a modal                         | Portalled popovers needed `data-mm-modal-ignore-outside-click`-style hand-offs           | Render the popover inside the modal next to its trigger. It is painted above a modal `<dialog>` and is not inert. Escape closes the popover first, then the dialog       |
+| `PopoverPosition` / `PopoverRole` type | TypeScript `enum`                                                                        | Const object with derived string-union type ([ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)) |
 
 #### Migration Examples
 
@@ -3057,19 +3061,21 @@ const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(
 );
 const [isOpen, setIsOpen] = useState(false);
 
-<button ref={(node) => setReferenceElement(node)} onClick={() => setIsOpen(true)}>
+<button ref={(node) => setReferenceElement(node)} onClick={() => setIsOpen(!isOpen)}>
   Open
 </button>
 
 <Popover
   isOpen={isOpen}
   referenceElement={referenceElement}
-  position={PopoverPosition.BottomStart}
+  position={PopoverPosition.BottomEnd}
   role={PopoverRole.Dialog}
-  hasArrow
+  flip
+  preventOverflow
   isPortal
   onPressEscKey={() => setIsOpen(false)}
   onClickOutside={() => setIsOpen(false)}
+  style={{ zIndex: 1050 }}
 >
   Menu contents
 </Popover>;
@@ -3090,176 +3096,128 @@ const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(
 );
 const [isOpen, setIsOpen] = useState(false);
 
-<button ref={(node) => setReferenceElement(node)} onClick={() => setIsOpen(true)}>
+<button ref={(node) => setReferenceElement(node)} onClick={() => setIsOpen(!isOpen)}>
   Open
 </button>
 
 <Popover
   isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
   referenceElement={referenceElement}
-  position={PopoverPosition.BottomStart}
+  position={PopoverPosition.BottomEnd}
   role={PopoverRole.Dialog}
-  hasArrow
-  isPortal
-  onPressEscKey={() => setIsOpen(false)}
-  onClickOutside={() => setIsOpen(false)}
 >
   Menu contents
 </Popover>;
 ```
 
-For typical call sites — for example `ui/components/multichain-accounts/multichain-address-rows-hovered-list/multichain-hovered-address-rows-hovered-list.tsx`, `ui/components/app/perps/perps-candle-period-selector/perps-candle-period-selector.tsx`, and `ui/pages/bridge/prepare/bridge-cta-info-text.tsx` (verified via fresh grep) — the only change is the import path; the JSX, prop names, and `PopoverPosition` / `PopoverRole` values stay identical.
+Toggling from the trigger is safe. Button and input triggers are registered as the popover invoker, so the browser does not light-dismiss them. For any other element, a light dismiss caused by that gesture is ignored and the popover is shown again, and `onClose` does not run. `setIsOpen(!isOpen)` therefore closes it once, including on browsers that light-dismiss on `pointerup` before the `click` event.
+
+##### Hover tooltips and popovers that stay open
+
+Use `isDismissible={false}` so clicks elsewhere and Escape do not close the popover, and so it does not close an open menu:
+
+```tsx
+<Popover
+  isOpen={isHovered}
+  isDismissible={false}
+  referenceElement={referenceElement}
+  position={PopoverPosition.Top}
+>
+  Tooltip contents
+</Popover>
+```
+
+##### Replacing `matchWidth`
+
+```tsx
+<Popover
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  referenceElement={referenceElement}
+  style={{ width: referenceElement?.offsetWidth }}
+>
+  …
+</Popover>
+```
 
 ##### Replacing Box style-utility passthrough
 
-If a call site relied on extension Box style-utility props flowing through `Popover` (e.g. `marginTop`, `padding`, `backgroundColor`), move those to the design system equivalents:
-
 ```tsx
-// Before (Extension) — utility props on the Popover root via Box passthrough
-<Popover
-  isOpen={isOpen}
-  referenceElement={referenceElement}
-  padding={6}
-  backgroundColor={BackgroundColor.backgroundAlternative}
->
+// Before (Extension)
+<Popover isOpen={isOpen} referenceElement={referenceElement} padding={6}>
   …
 </Popover>
 
-// After (Design System) — use className for one-off overrides
-<Popover
-  isOpen={isOpen}
-  referenceElement={referenceElement}
-  className="p-6 bg-alternative"
->
+// After (Design System)
+<Popover isOpen={isOpen} referenceElement={referenceElement} className="p-6">
   …
 </Popover>
 ```
 
-##### Replacing legacy SCSS class hooks
+##### Testing
 
-If a call site or stylesheet targeted `.mm-popover`, `.mm-popover__arrow`, `.mm-popover--reference-hidden`, or `.mm-popover--open`, replace those selectors with `className` (popover root) or `arrowProps.className` (arrow). The `data-popper-placement` and `data-popper-reference-hidden` data attributes are still present on the popover root for callers that need to key styling off the resolved placement.
+jsdom does not implement the Popover API or light dismiss. `Popover` skips `showPopover()` when it is unavailable. To test `onClose`, dispatch a `toggle` event on the popover root:
+
+```ts
+const event = new Event('toggle');
+Object.assign(event, { newState: 'closed' });
+act(() => {
+  screen.getByRole('dialog').dispatchEvent(event);
+});
+```
 
 #### API Differences
 
-- `Popover` is no longer polymorphic. It always renders a `<div>`. Consumers that used `as="section"` or similar should wrap or compose.
-- `arrowProps` accepts standard `<div>` props instead of extension Box props, with `ref`, `style`, and `children` omitted (reserved for popper positioning, rotation styles, and the arrow visual). Pass `className` (or any other HTML attribute / `data-*` / `aria-*`) directly.
-- `@floating-ui/react-dom` is bundled inside `@metamask/design-system-react`. Consumers should not add it to their own dependencies after migrating.
-- The `PopoverPosition` and `PopoverRole` exports are now const objects with derived string-union types ([ADR-0003](https://github.com/MetaMask/decisions/blob/main/decisions/design-system/0003-enum-to-string-union-migration.md)). Runtime usage (`PopoverPosition.Auto`, `PopoverRole.Tooltip`) is unchanged. Code that relied on TypeScript `enum`-only behavior (e.g. reverse lookups via `PopoverPosition['auto']`) needs to switch to the string union pattern.
+- Requires the Popover API (Chrome 114+, Firefox 125+, Safari 17+). In older browsers the popover still renders with fixed positioning but is not promoted to the top layer and is not dismissed natively.
+- `PopoverHeader` has been removed. Compose a header with `HeaderBase` inside the popover instead ([PopoverHeader Component](#popoverheader-component)).
+- Positioning is done in JavaScript. CSS anchor positioning with fallbacks needs Chrome 128+ and Firefox 147+, so it can replace the utility once supported browsers reach those versions.
 
 ### PopoverHeader Component
 
-The extension `popover-header` component maps to `PopoverHeader` in the design system. The behavioral contract — a `<header>` with an optional back button on the start, a title in the center, and an optional close button on the end — is preserved. The polymorphic Box surface (`HeaderBaseStyleUtilityProps`), the `mm-popover-header` SCSS class hook, and the implicit `useI18nContext` coupling for the icon-button `aria-label`s are removed.
-
-`PopoverHeader` is built on top of the same three-column grid layout as `HeaderBase`, replicated locally so the outer element stays a single semantic `<header>` (no extra wrapper). Unlike `ModalHeader`, it applies no outer padding — popover surfaces own their own spacing.
-
-The auto-rendered icon buttons and the auto-wrapped title default to inheriting color from the popover surface (`text-inherit` / `TextColor.Inherit`), preserving the legacy `IconColor.inherit` / `TextColor.inherit` defaults so headers placed on inverse or semantic backgrounds pick up the right foreground color automatically.
-
-Refer to [General Extension Migration Guidance](#general-extension-migration-guidance) for shared Box/style-utility migration patterns.
-
-#### Breaking Changes
-
-##### Import Path
-
-| Extension Pattern                                                   | Design System Migration                                                   |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `import { PopoverHeader } from '../../component-library'`           | `import { PopoverHeader } from '@metamask/design-system-react'`           |
-| `import type { PopoverHeaderProps } from '../../component-library'` | `import type { PopoverHeaderProps } from '@metamask/design-system-react'` |
-
-##### Props and Behavior Mapping
-
-| Extension API                                                        | Design System API                                                                          | Change Type | Notes                                                                                                                                                                                                                  |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `children?: ReactNode`                                               | `children?: ReactNode`                                                                     | unchanged   | string children still auto-wrap as `<Text variant={TextVariant.HeadingSm} textAlign={TextAlign.Center} color={TextColor.Inherit}>`; `ReactNode` children render as-is.                                                 |
-| `onBack?: () => void`                                                | `onBack?: () => void`                                                                      | unchanged   | when set, renders the back button — but **`backButtonProps` is now co-required** (see "i18n decoupling" below).                                                                                                        |
-| `onClose?: () => void`                                               | `onClose?: () => void`                                                                     | unchanged   | when set, renders the close button — but **`closeButtonProps` is now co-required**.                                                                                                                                    |
-| `backButtonProps?: ButtonIconProps<'button'>`                        | `backButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.)  | shape       | type now bound to MMDS `ButtonIconProps`; `iconName` (`ArrowLeft`) and `size` (`Sm`) are owned by the component and cannot be overridden via the prop bag. `ariaLabel` is required (preserved from `ButtonIconProps`). |
-| `closeButtonProps?: ButtonIconProps<'button'>`                       | `closeButtonProps: Omit<ButtonIconProps, 'iconName' \| 'size'>` (with `data-*` index sig.) | shape       | same shape change as `backButtonProps`; component owns `iconName=Close` and `size=Sm`.                                                                                                                                 |
-| `startAccessory?: ReactNode`                                         | `startAccessory?: ReactNode`                                                               | unchanged   | when provided, replaces the auto-rendered back button — even if `onBack` is set (legacy precedence preserved).                                                                                                         |
-| `endAccessory?: ReactNode`                                           | `endAccessory?: ReactNode`                                                                 | unchanged   | when provided, replaces the auto-rendered close button — even if `onClose` is set.                                                                                                                                     |
-| `className?: string`                                                 | `className?: string`                                                                       | unchanged   | applied to the outer `<header>`; merged with the component's defaults via `twMerge`.                                                                                                                                   |
-| Polymorphic `as` / extension's `HeaderBaseStyleUtilityProps` surface | removed                                                                                    | removed     | always renders `<header>`. Box utility props on the root (`color`, `textAlign`, `justifyContent`, `padding*`, `width`, …) are removed — use `className` with Tailwind utilities.                                       |
-| `mm-popover-header` SCSS class hook                                  | removed                                                                                    | removed     | no SCSS rule referenced this class — only the legacy test asserted it. Use `className` to customize the root via Tailwind utilities.                                                                                   |
-| `childrenWrapperProps`                                               | removed                                                                                    | removed     | the auto-wrapped title slot is fixed at `col-start-2 col-end-3 w-full`. To customize the title layout, pass a custom `ReactNode` as `children` instead of relying on `childrenWrapperProps`.                           |
-
-##### i18n Decoupling
-
-The extension auto-defaulted the icon-button `aria-label`s to `t('back')` and `t('close')` via `useI18nContext`. The design system **does not** pull strings from any translation context, and there is **no** internal English fallback. The type system enforces this: `onBack` and `backButtonProps` (and `onClose` / `closeButtonProps`) are co-required via a discriminated union — when `onBack` is set, you must also pass `backButtonProps` with at least an `ariaLabel`:
+`PopoverHeader` has been removed from the design system. Compose the same header with `HeaderBase`, `ButtonIcon` and `Text` inside the `Popover`:
 
 ```tsx
-<PopoverHeader
-  onClose={handleClose}
-  closeButtonProps={{ ariaLabel: t('close') }}
+import {
+  ButtonIcon,
+  ButtonIconSize,
+  HeaderBase,
+  IconName,
+  Text,
+  TextAlign,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-react';
+
+<HeaderBase
+  startAccessory={
+    <ButtonIcon
+      iconName={IconName.ArrowLeft}
+      size={ButtonIconSize.Sm}
+      ariaLabel={t('back')}
+      onClick={onBack}
+    />
+  }
+  endAccessory={
+    <ButtonIcon
+      iconName={IconName.Close}
+      size={ButtonIconSize.Sm}
+      ariaLabel={t('close')}
+      onClick={onClose}
+    />
+  }
 >
-  {t('headerTitle')}
-</PopoverHeader>
+  <Text
+    variant={TextVariant.HeadingSm}
+    textAlign={TextAlign.Center}
+    color={TextColor.Inherit}
+  >
+    Title
+  </Text>
+</HeaderBase>;
 ```
 
-If a consumer sets `onClose` without `closeButtonProps`, TypeScript errors at the call site. This guarantees every dismiss button gets a properly localized label without the component reaching into any global i18n context.
-
-##### Color Inheritance
-
-The extension hard-coded `IconColor.inherit` and `TextColor.inherit` on the auto-rendered icon buttons and the auto-wrapped title. The design system preserves this default — the title uses `TextColor.Inherit`, and the auto-rendered `ButtonIcon`s receive `className="text-inherit"` (merged with any consumer-provided `className`). To force a specific color, pass `className` on the prop bag:
-
-```tsx
-closeButtonProps={{ ariaLabel: t('close'), className: 'text-error-default' }}
-```
-
-##### ButtonIcon API Differences
-
-The extension's `ButtonIconProps<'button'>` is replaced by MMDS `ButtonIconProps`. The most common difference for migrating consumers is that the polymorphic `as` typing is gone (the prop bag types against the underlying `<button>` HTML element directly). All standard ButtonIcon props (`ariaLabel`, `disabled`, `onClick`, `data-testid`, etc.) are preserved.
-
-#### Migration Examples
-
-##### Before (Extension)
-
-```tsx
-import { PopoverHeader } from '../../component-library';
-
-// i18n-defaulted close + Box utility props
-<PopoverHeader
-  color={TextColor.infoInverse}
-  textAlign={TextAlign.Center}
-  justifyContent={JustifyContent.spaceBetween}
-  onClose={onClose}
-  childrenWrapperProps={{ style: { whiteSpace: 'nowrap' } }}
->
-  {title}
-</PopoverHeader>;
-```
-
-##### After (Design System)
-
-```tsx
-import { PopoverHeader } from '@metamask/design-system-react';
-
-// aria-label is explicit; Box utility props move to className.
-// The title and the auto-rendered close button inherit color from the
-// surrounding popover surface, so no `color` prop is needed on the header
-// itself — set the color on the popover container instead.
-<PopoverHeader
-  className="text-info-inverse"
-  onClose={onClose}
-  closeButtonProps={{ ariaLabel: t('close') }}
->
-  <span className="whitespace-nowrap">{title}</span>
-</PopoverHeader>;
-```
-
-For the typical extension call site — `ui/pages/bridge/layout/tooltip.tsx` (the only consumer outside of the `popover-header/` package itself, verified via fresh grep) — the churn is:
-
-1. Swap the import path.
-2. Add `closeButtonProps={{ ariaLabel: t('close') }}` to every `<PopoverHeader>` that uses `onClose` (and `backButtonProps={{ ariaLabel: t('back') }}` for `onBack`). The compiler flags missing prop bags so this can be applied mechanically.
-3. Move any root-level Box utility props (`color`, `textAlign`, `justifyContent`, `padding*`, `width`, etc.) onto `className` with Tailwind utilities.
-4. Replace `childrenWrapperProps` with a custom `ReactNode` `children` that wraps the title in the desired layout.
-
-#### API Differences
-
-- `PopoverHeader` always renders a `<header>` and forwards arbitrary HTML attributes (`id`, `role`, `data-*`, `aria-*`, `ref`) to it.
-- The `useI18nContext` coupling for the icon-button `aria-label`s is gone. Discriminated unions enforce co-required `backButtonProps` / `closeButtonProps` at compile time.
-- The component owns `iconName` (`ArrowLeft` / `Close`) and `size` (`Sm`) on the built-in icon buttons. Consumers cannot override them via the prop bag.
-- The auto-rendered icon buttons and the auto-wrapped title default to `text-inherit` so they pick up the popover surface color, preserving the legacy `IconColor.inherit` / `TextColor.inherit` behavior.
-- `startAccessory` / `endAccessory` precedence over the auto-rendered back/close buttons is preserved from the legacy.
-- No outer padding is applied by default — popover surfaces own their own spacing.
+The only extension consumer is `ui/pages/bridge/layout/tooltip.tsx`.
 
 ### SensitiveText Component
 
