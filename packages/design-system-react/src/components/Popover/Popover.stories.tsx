@@ -40,6 +40,7 @@ const meta: Meta<PopoverProps> = {
     position: PopoverPosition.BottomStart,
     role: PopoverRole.Tooltip,
     isDismissible: true,
+    className: 'p-4',
   },
 };
 
@@ -130,6 +131,7 @@ export const Position: Story = {
             isDismissible={false}
             position={placement}
             referenceElement={referenceElement}
+            className="p-4"
           >
             <Text>{placement}</Text>
           </Popover>
@@ -152,6 +154,7 @@ export const Offset: Story = {
           position={PopoverPosition.RightStart}
           offset={[16, 24]}
           referenceElement={referenceElement}
+          className="p-4"
         >
           <Text>offset [16, 24]</Text>
         </Popover>
@@ -160,6 +163,7 @@ export const Offset: Story = {
           isDismissible={false}
           position={PopoverPosition.BottomStart}
           referenceElement={referenceElement}
+          className="p-4"
         >
           <Text>Default offset [0, 8]</Text>
         </Popover>
@@ -190,6 +194,7 @@ export const IsDismissible: Story = {
           isDismissible={false}
           position={PopoverPosition.Top}
           referenceElement={referenceElement}
+          className="p-4"
         >
           <Text>Hover tooltip that stays open until isOpen changes</Text>
         </Popover>
@@ -212,6 +217,7 @@ export const Role: Story = {
           aria-label="Dialog example"
           position={PopoverPosition.Left}
           referenceElement={referenceElement}
+          className="p-4"
         >
           <Text>{PopoverRole.Dialog}</Text>
         </Popover>
@@ -221,6 +227,7 @@ export const Role: Story = {
           role={PopoverRole.Tooltip}
           position={PopoverPosition.Right}
           referenceElement={referenceElement}
+          className="p-4"
         >
           <Text>{PopoverRole.Tooltip}</Text>
         </Popover>
@@ -251,6 +258,7 @@ export const TopLayer: Story = {
           isDismissible={false}
           position={PopoverPosition.BottomStart}
           referenceElement={referenceElement}
+          className="p-4"
         >
           <Box className="w-[240px]">
             <Text>
@@ -293,6 +301,7 @@ export const ReferenceHidden: Story = {
           isDismissible={false}
           position={PopoverPosition.Right}
           referenceElement={referenceElement}
+          className="p-4"
         >
           <Text>Follows the reference</Text>
         </Popover>
@@ -348,6 +357,7 @@ export const InsideDialog: Story = {
             aria-label="Popover inside dialog"
             position={PopoverPosition.BottomStart}
             referenceElement={referenceElement}
+            className="p-4"
           >
             <Text>Escape closes this popover first, then the dialog.</Text>
           </Popover>

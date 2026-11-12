@@ -775,6 +775,15 @@ describe('Popover', () => {
   });
 
   describe('className, style and native props', () => {
+    it('does not apply default padding', () => {
+      render(
+        <Popover data-testid="popover" isOpen>
+          x
+        </Popover>,
+      );
+      expect(screen.getByTestId('popover')).not.toHaveClass('p-4');
+    });
+
     it('merges className and style and forwards native props', () => {
       render(
         <Popover

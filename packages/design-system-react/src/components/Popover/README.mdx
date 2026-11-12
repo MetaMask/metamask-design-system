@@ -39,7 +39,7 @@ const [isOpen, setIsOpen] = useState(true);
 
 ### `children`
 
-The contents rendered inside the floating layer. Padding and background come from the design tokens applied to the popover root.
+The contents rendered inside the floating layer. Background, border, and elevation come from the design tokens applied to the popover root. The root has no default padding — pass `className="p-4"` (or another spacing class) when the content needs inset.
 
 <table>
   <thead>
@@ -251,7 +251,7 @@ ARIA role for the popover root. Use `PopoverRole.Dialog` when the contents are i
 
 ### `className` and `style`
 
-Merged onto the popover root. `style` is applied after the computed position, so use it for sizing, for example `style={{ width: referenceElement?.offsetWidth }}` to match the trigger width. All other native `div` props (`id`, `aria-*`, `data-*`, event handlers) are forwarded.
+Merged onto the popover root. Use `className` for padding and other spacing — there is no default inset, so pass `className="p-4"` when the content needs it. `style` is applied after the computed position, so use it for sizing, for example `style={{ width: referenceElement?.offsetWidth }}` to match the trigger width. All other native `div` props (`id`, `aria-*`, `data-*`, event handlers) are forwarded.
 
 ## Behavior
 

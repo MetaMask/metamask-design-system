@@ -259,7 +259,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         backgroundColor={BoxBackgroundColor.BackgroundElevated2}
         borderColor={BoxBorderColor.BorderMuted}
         borderWidth={1}
-        padding={4}
         role={role}
         ref={setPopoverRef}
         popover={isDismissible ? 'auto' : 'manual'}
