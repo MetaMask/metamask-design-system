@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.56.2]
+
+### Fixed
+
+- Fixed `MusdFilled` to use the Phosphor `currency-circle-dollar` fill, so its dollar sign matches `Musd` ([#1677](https://github.com/MetaMask/metamask-design-system/pull/1677))
+  - The vertical stroke sits above and below the S, not through it
+  - `IconName.MusdFilled` is unchanged
+- Fixed `Slider` so the thumb stays on the track at both ends ([#1582](https://github.com/MetaMask/metamask-design-system/pull/1582))
+  - `trackInset` now defaults to `0` instead of `16`
+  - Thumb travel is inset by half the thumb size, so the circle no longer hangs off the track at the minimum and maximum
+
 ## [0.56.1]
 
 ### Fixed
@@ -935,7 +946,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.2...HEAD
+[0.56.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.1...@metamask/design-system-react-native@0.56.2
 [0.56.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.0...@metamask/design-system-react-native@0.56.1
 [0.56.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.55.0...@metamask/design-system-react-native@0.56.0
 [0.55.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.54.0...@metamask/design-system-react-native@0.55.0
