@@ -28,6 +28,11 @@ export type ComputePopoverPositionOptions = {
    * `[skidding, distance]` in px.
    */
   offset: [number, number];
+  /**
+   * When true, `*-start` / `*-end` on top/bottom follow inline direction
+   * (CSS / Floating UI logical placement). Left/right start/end are unchanged.
+   */
+  rtl?: boolean;
 };
 
 export type PopoverPositionResult = {
@@ -64,6 +69,7 @@ const getCoords = (
   floating: Size,
   placement: PopoverPosition,
   [skidding, distance]: [number, number],
+  rtl = false,
 ) => {
   const side = getSide(placement);
   const alignment = getAlignment(placement);
@@ -81,12 +87,16 @@ const getCoords = (
   }
 
   if (isVerticalSide(side)) {
-    if (alignment === 'start') {
+    // In RTL, start/end are logical inline edges, so they map to the opposite
+    // physical x edge; skidding follows the same inline axis.
+    const alignStart = rtl ? alignment === 'end' : alignment === 'start';
+    const alignEnd = rtl ? alignment === 'start' : alignment === 'end';
+    if (alignStart) {
       x = reference.x;
-    } else if (alignment === 'end') {
+    } else if (alignEnd) {
       x = reference.x + reference.width - floating.width;
     }
-    x += skidding;
+    x += rtl ? -skidding : skidding;
   } else {
     if (alignment === 'start') {
       y = reference.y;
@@ -146,10 +156,11 @@ export const computePopoverPosition = (
     boundary,
     placement: preferredPlacement,
     offset,
+    rtl = false,
   } = options;
   const side = getSide(preferredPlacement);
   let placement = preferredPlacement;
-  let coords = getCoords(referenceRect, floatingSize, placement, offset);
+  let coords = getCoords(referenceRect, floatingSize, placement, offset, rtl);
   const overflow = getOverflow(coords, floatingSize, boundary, side);
 
   if (overflow > 0) {
@@ -159,6 +170,7 @@ export const computePopoverPosition = (
       floatingSize,
       oppositePlacement,
       offset,
+      rtl,
     );
     const oppositeOverflow = getOverflow(
       oppositeCoords,

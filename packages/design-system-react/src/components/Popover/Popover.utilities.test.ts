@@ -47,6 +47,34 @@ describe('computePopoverPosition', () => {
     ).toMatchObject({ x: 604, y: 340 });
   });
 
+  it.each([
+    [PopoverPosition.TopStart, 500, 242],
+    [PopoverPosition.TopEnd, 400, 242],
+    [PopoverPosition.BottomStart, 500, 408],
+    [PopoverPosition.BottomEnd, 400, 408],
+    // Left/right start/end are block-axis and do not mirror in RTL.
+    [PopoverPosition.LeftStart, 292, 300],
+    [PopoverPosition.LeftEnd, 292, 350],
+    [PopoverPosition.RightStart, 608, 300],
+    [PopoverPosition.RightEnd, 608, 350],
+  ])('places %s at (%d, %d) in RTL', (placement, x, y) => {
+    expect(compute({ placement, rtl: true })).toStrictEqual({
+      x,
+      y,
+      placement,
+    });
+  });
+
+  it('mirrors skidding on the inline axis in RTL', () => {
+    expect(
+      compute({
+        placement: PopoverPosition.BottomStart,
+        offset: [10, 0],
+        rtl: true,
+      }),
+    ).toMatchObject({ x: 490, y: 400 });
+  });
+
   it('flips to the opposite side when it overflows less', () => {
     expect(
       compute({

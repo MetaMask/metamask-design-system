@@ -190,6 +190,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           boundary: getViewportRect(),
           placement: position,
           offset: [skidding, distance],
+          rtl: getComputedStyle(floating).direction === 'rtl',
         });
         setCoords((previous) =>
           previous?.x === next.x &&
