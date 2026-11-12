@@ -21,6 +21,11 @@ jobs:
     uses: MetaMask/github-tools/.github/workflows/publish-preview.yml@5d993ac935eff3f248d2213bb2d6922ce9cb3510 # v1
     with:
       docs-url: 'https://github.com/MetaMask/metamask-design-system/blob/main/docs/contributing.md#testing-changes-to-packages-with-preview-builds'
+      # The shared rename step only adds `name@^version` resolutions, which do
+      # not match this repo's `workspace:^` dependencies. Build first so that
+      # prepare-preview-builds rewrites them to `@metamask-previews/*@workspace:*`
+      # before the shared rename and its `yarn install` run.
+      rename-after-install-and-build: true
       build-command: 'yarn prepare-preview-builds @metamask-previews "$(git rev-parse --short HEAD)" && yarn build'
     secrets:
       PUBLISH_PREVIEW_NPM_TOKEN: ${{ secrets.PUBLISH_PREVIEW_NPM_TOKEN }}
