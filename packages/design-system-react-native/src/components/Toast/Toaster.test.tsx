@@ -685,6 +685,27 @@ describe('Toaster', () => {
       expect(screen.queryByText('Closing toast')).toBeNull();
     });
 
+    it('calls onDismiss when toast is swipe-dismissed', async () => {
+      const onDismiss = jest.fn();
+      render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: true,
+        onDismiss,
+        title: 'Swipe dismiss callback toast',
+      });
+
+      await act(async () => {
+        triggerToastLayout(screen.getByTestId('toast-root'));
+        jest.runAllTimers();
+      });
+
+      await swipeToast({ translationY: -500 });
+
+      expect(onDismiss).toHaveBeenCalledTimes(1);
+      expect(screen.queryByText('Swipe dismiss callback toast')).toBeNull();
+    });
+
     it('ignores stale spring-back resume after toast is replaced', async () => {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       const Reanimated = require('react-native-reanimated');
@@ -756,6 +777,61 @@ describe('Toaster', () => {
       } finally {
         withSpringSpy.mockRestore();
       }
+    });
+  });
+  describe('onDismiss callback', () => {
+    it('calls onDismiss when the close button is pressed', async () => {
+      const onDismiss = jest.fn();
+      render(<Toaster ref={toasterRef} />);
+
+      await showToastAndWait(toasterRef, {
+        closeButtonProps: { testID: 'dismiss-btn' },
+        hasNoTimeout: true,
+        onDismiss,
+        title: 'Close button dismiss toast',
+      });
+
+      await act(async () => {
+        fireEvent.press(screen.getByTestId('dismiss-btn'));
+      });
+
+      expect(onDismiss).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls onDismiss when the toast is auto-dismissed', async () => {
+      const onDismiss = jest.fn();
+      render(<Toaster ref={toasterRef} testID="toast-root" />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: false,
+        onDismiss,
+        title: 'Auto-dismiss callback toast',
+      });
+
+      await act(async () => {
+        triggerToastLayout(screen.getByTestId('toast-root'));
+        jest.runAllTimers();
+      });
+
+      expect(onDismiss).toHaveBeenCalledTimes(1);
+      expect(screen.queryByText('Auto-dismiss callback toast')).toBeNull();
+    });
+
+    it('calls onDismiss when the toast is dismissed via closeToast()', async () => {
+      const onDismiss = jest.fn();
+      render(<Toaster ref={toasterRef} />);
+
+      await showToastAndWait(toasterRef, {
+        hasNoTimeout: true,
+        onDismiss,
+        title: 'Programmatic dismiss toast',
+      });
+
+      await act(async () => {
+        toasterRef.current?.closeToast();
+      });
+
+      expect(onDismiss).toHaveBeenCalledTimes(1);
     });
   });
 });
