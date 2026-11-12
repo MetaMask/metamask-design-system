@@ -3,10 +3,18 @@ name: Publish Release
 on:
   workflow_call:
     secrets:
+      # Only required for the first publish of a package, before trusted
+      # publishing is configured. Later publishes authenticate with OIDC.
       NPM_TOKEN:
-        required: true
+        required: false
       SLACK_WEBHOOK_URL:
         required: true
+
+# Jobs inherit this. publish-release and publish-npm opt up to the
+# permissions they need. Keeping id-token off the dry-run job means a
+# missing `dry-run` flag cannot turn that job into a real publish.
+permissions:
+  contents: read
 
 jobs:
   publish-release:
@@ -18,7 +26,7 @@ jobs:
         with:
           ref: ${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: '.nvmrc'
       - uses: MetaMask/action-publish-release@f01f1be110d60fb07d86c880ce3d6bdb353524d3 # v3.3.1
@@ -43,6 +51,15 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: ${{ github.sha }}
+      # action-npm-publish v7 sets YARN_IGNORE_PATH, so it will not follow
+      # yarnPath, and it requires Node >= 22.14 and Yarn >= 4.16. Corepack
+      # activates the Yarn version from packageManager.
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - name: Enable Corepack
+        run: corepack enable
       - uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
         id: restore-build
         with:
@@ -51,22 +68,30 @@ jobs:
             ./node_modules/.yarn-state.yml
           key: ${{ github.sha }}
       - name: Dry Run Publish
-        # omit npm-token token to perform dry run publish
-        uses: MetaMask/action-npm-publish@a529abf2eee6e716da102b53b9b245136439dff2 # v4.0.5
+        uses: MetaMask/action-npm-publish@640617dc160b8787a825ee363da76a168b3b99cb # v7.0.0
         with:
+          dry-run: true
           slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
           subteam: S042S7RE4AE # @metamask-npm-publishers
-        env:
-          SKIP_PREPACK: true
 
   publish-npm:
     environment: npm-publish
     runs-on: ubuntu-latest
     needs: publish-npm-dry-run
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: ${{ github.sha }}
+      # See publish-npm-dry-run. v7 will not use the Yarn release from yarnPath.
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - name: Enable Corepack
+        run: corepack enable
       - uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
         id: restore-build
         with:
@@ -75,13 +100,13 @@ jobs:
             ./node_modules/.yarn-state.yml
           key: ${{ github.sha }}
       - name: Publish
-        uses: MetaMask/action-npm-publish@9449c49fbcb8b5c487dbbc3f6e6171b75a0c6286 # v2.1.1
+        uses: MetaMask/action-npm-publish@640617dc160b8787a825ee363da76a168b3b99cb # v7.0.0
         with:
-          # This `NPM_TOKEN` needs to be manually set per-repository.
-          # Look in the repository settings under "Environments", and set this token in the `npm-publish` environment.
+          dry-run: false
+          # This `NPM_TOKEN` is only needed when publishing a package for the
+          # first time. After trusted publishing is configured for the package,
+          # delete this token from the `npm-publish` environment.
           npm-token: ${{ secrets.NPM_TOKEN }}
-        env:
-          SKIP_PREPACK: true
 
   get-release-version:
     runs-on: ubuntu-latest
