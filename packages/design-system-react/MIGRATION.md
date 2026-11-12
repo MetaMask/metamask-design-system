@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.51.1 to 0.52.0](#from-version-0511-to-0520)
   - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
   - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
   - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
@@ -3634,6 +3635,55 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.51.1 to 0.52.0
+
+<a id="from-version-0511-to-0520"></a>
+
+#### ModalBody no longer defaults `tabIndex` to `0`
+
+**What changed:**
+
+- `ModalBody` forwarded `tabIndex={0}` when the consumer omitted `tabIndex`, so every body was a tab stop
+- `tabIndex` is now forwarded only when the consumer passes it
+- The prop stays optional. `tabIndex={0}` and `tabIndex={-1}` still work, and a passed value still wins
+- `ModalFocus` still traps focus and moves initial focus to the first focusable control. It does not depend on the body default
+
+**Migration:**
+
+Leave `tabIndex` unset when the body already contains a focusable control, such as a button. Pass `tabIndex={0}` when the body scrolls and its content is static text, so keyboard users can focus the region and arrow-scroll it.
+
+```tsx
+// Before (0.51.1) — the body was a tab stop even without tabIndex
+import { ModalBody } from '@metamask/design-system-react';
+
+<ModalBody>
+  Your Secret Recovery Phrase is the only way to recover this wallet.
+</ModalBody>;
+
+// After (0.52.0) — opt in when the scrollable body has no focusable content
+import { ModalBody } from '@metamask/design-system-react';
+
+<ModalBody tabIndex={0}>
+  Your Secret Recovery Phrase is the only way to recover this wallet.
+</ModalBody>;
+```
+
+A body that already contains a button does not need `tabIndex`:
+
+```tsx
+import { Button, ModalBody } from '@metamask/design-system-react';
+
+<ModalBody>
+  <Button onClick={handleContinue}>Continue</Button>
+</ModalBody>;
+```
+
+**Impact:**
+
+- Every `ModalBody` that omitted `tabIndex` drops out of the tab order
+- A scrollable body of static text is no longer keyboard-scrollable until the call site passes `tabIndex={0}`
+- Existing `tabIndex` values are unchanged
 
 ### From version 0.49.0 to 0.50.0
 

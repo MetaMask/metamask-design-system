@@ -7,16 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.51.2]
+## [0.52.0]
+
+### Changed
+
+- **BREAKING:** `ModalBody` no longer defaults `tabIndex` to `0` ([#1681](https://github.com/MetaMask/metamask-design-system/pull/1681))
+  - `tabIndex` is forwarded only when the consumer passes it, so the body is not a tab stop by default
+  - Pass `tabIndex={0}` when a scrollable body has no focusable content and keyboard users need to arrow-scroll it
+  - See [Migration Guide](./MIGRATION.md#from-version-0511-to-0520)
 
 ### Fixed
 
 - Fixed `MusdFilled` to use the Phosphor `currency-circle-dollar` fill, so its dollar sign matches `Musd` ([#1677](https://github.com/MetaMask/metamask-design-system/pull/1677))
   - The vertical stroke sits above and below the S, not through it
   - `IconName.MusdFilled` is unchanged
-- Fixed `ModalBody` so `tabIndex` is forwarded only when the consumer passes it ([#1681](https://github.com/MetaMask/metamask-design-system/pull/1681))
-  - The body is no longer a tab stop by default
-  - Pass `tabIndex={0}` when a scrollable body has no focusable content and keyboard users need to arrow-scroll it
 
 ## [0.51.1]
 
@@ -722,8 +726,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.2...HEAD
-[0.51.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.1...@metamask/design-system-react@0.51.2
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.52.0...HEAD
+[0.52.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.1...@metamask/design-system-react@0.52.0
 [0.51.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.0...@metamask/design-system-react@0.51.1
 [0.51.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.50.0...@metamask/design-system-react@0.51.0
 [0.50.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.49.0...@metamask/design-system-react@0.50.0
