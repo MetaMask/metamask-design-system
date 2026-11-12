@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.51.2]
 
-### Uncategorized
+### Fixed
 
-- fix: ModalBody no longer defaults tabIndex to 0 ([#1681](https://github.com/MetaMask/metamask-design-system/pull/1681))
-- chore: upgrade TypeScript to ~5.9.3 ([#1675](https://github.com/MetaMask/metamask-design-system/pull/1675))
-- fix(icons): use currency-circle-dollar fill for MusdFilled ([#1677](https://github.com/MetaMask/metamask-design-system/pull/1677))
-- docs(TextFieldSearch): align search docs and required label examples ([#1625](https://github.com/MetaMask/metamask-design-system/pull/1625))
+- Fixed `MusdFilled` to use the Phosphor `currency-circle-dollar` fill, so its dollar sign matches `Musd` ([#1677](https://github.com/MetaMask/metamask-design-system/pull/1677))
+  - The vertical stroke sits above and below the S, not through it
+  - `IconName.MusdFilled` is unchanged
+- Fixed `ModalBody` so `tabIndex` is forwarded only when the consumer passes it ([#1681](https://github.com/MetaMask/metamask-design-system/pull/1681))
+  - The body is no longer a tab stop by default
+  - Pass `tabIndex={0}` when a scrollable body has no focusable content and keyboard users need to arrow-scroll it
 
 ## [0.51.1]
 

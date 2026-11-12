@@ -9,10 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.45.1]
 
-### Uncategorized
+### Fixed
 
-- chore: upgrade TypeScript to ~5.9.3 ([#1675](https://github.com/MetaMask/metamask-design-system/pull/1675))
-- fix(icons): use currency-circle-dollar fill for MusdFilled ([#1677](https://github.com/MetaMask/metamask-design-system/pull/1677))
+- Fixed the `MusdFilled` icon artwork to use the Phosphor `currency-circle-dollar` fill, so its dollar sign matches `Musd` ([#1677](https://github.com/MetaMask/metamask-design-system/pull/1677))
+  - The vertical stroke sits above and below the S, not through it
+  - `IconName.MusdFilled` is unchanged
 
 ## [0.45.0]
 
