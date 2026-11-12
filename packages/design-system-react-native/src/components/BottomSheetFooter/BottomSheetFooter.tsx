@@ -21,7 +21,7 @@ export const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
   const tw = useTailwind();
   const isHorizontal = buttonsAlignment === ButtonsAlignment.Horizontal;
   const buttonBaseClass = isHorizontal ? 'flex-1' : 'self-stretch';
-  const gapClass = isHorizontal ? 'ml-4' : 'mt-4';
+  const gapClass = isHorizontal ? 'ml-3' : 'mt-4';
   const hasBothButtons =
     Boolean(primaryButtonProps) && Boolean(secondaryButtonProps);
 
