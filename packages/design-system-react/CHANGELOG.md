@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: ModalBody no longer defaults tabIndex to 0 ([#1681](https://github.com/MetaMask/metamask-design-system/pull/1681))
+- chore: upgrade TypeScript to ~5.9.3 ([#1675](https://github.com/MetaMask/metamask-design-system/pull/1675))
+- fix(icons): use currency-circle-dollar fill for MusdFilled ([#1677](https://github.com/MetaMask/metamask-design-system/pull/1677))
+- docs(TextFieldSearch): align search docs and required label examples ([#1625](https://github.com/MetaMask/metamask-design-system/pull/1625))
+
 ## [0.51.1]
 
 ### Fixed

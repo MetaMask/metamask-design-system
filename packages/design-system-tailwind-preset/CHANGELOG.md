@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: upgrade TypeScript to ~5.9.3 ([#1675](https://github.com/MetaMask/metamask-design-system/pull/1675))
+- chore(deps-dev): bump @metamask/auto-changelog from 7.0.1 to 7.1.0 ([#1653](https://github.com/MetaMask/metamask-design-system/pull/1653))
+
 ## [0.16.0]
 
 ### Changed

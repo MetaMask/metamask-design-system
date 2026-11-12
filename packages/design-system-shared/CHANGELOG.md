@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- chore: upgrade TypeScript to ~5.9.3 ([#1675](https://github.com/MetaMask/metamask-design-system/pull/1675))
+- fix(icons): use currency-circle-dollar fill for MusdFilled ([#1677](https://github.com/MetaMask/metamask-design-system/pull/1677))
+
 ## [0.45.0]
 
 ### Added
