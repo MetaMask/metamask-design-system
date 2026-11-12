@@ -115,6 +115,9 @@ export type PopoverProps = Omit<ComponentProps<'div'>, 'role'> & {
   offset?: [number, number];
   /**
    * Render the Popover into `document.body` via `createPortal`.
+   * Not needed to escape `overflow` or `z-index`: the Popover always renders
+   * in the top layer. Leave it `false` inside a modal `<dialog>`, where
+   * content portalled outside the dialog is inert.
    *
    * @default false
    */
