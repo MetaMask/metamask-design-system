@@ -1,9 +1,13 @@
 {
   "codeConnect": {
-    "include": ["packages/design-system-react/src/components/**/*.tsx"],
+    "include": [
+      "packages/design-system-react/src/components/**/*.tsx",
+      "packages/design-system-react/src/components/**/*.figma.ts"
+    ],
     "exclude": ["**/temp-components/**/*"],
     "parser": "react",
     "label": "React",
+    "language": "jsx",
     "importPaths": {
       "packages/design-system-react/src/components/*": "@metamask/design-system-react"
     },
