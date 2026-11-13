@@ -1,5 +1,11 @@
 node_modules/
 
+# Yarn global folder (relocated into the project by `globalFolder`)
+.yarn/global/
+
+# Vendored from @lavamoat/harden
+lavamoat/*.js
+
 .expo
 
 # Coverage directories
