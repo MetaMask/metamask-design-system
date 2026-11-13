@@ -4,19 +4,35 @@ import React, {
   useRef,
   useImperativeHandle,
   useCallback,
-  useEffect,
+  memo,
 } from 'react';
 import type { PressableStateCallbackType } from 'react-native';
-import { Pressable, Animated, Easing } from 'react-native';
+import { Pressable, Animated, Easing, View } from 'react-native';
 
 import { Icon, IconName, IconColor, IconSize } from '../Icon';
 import { TextOrChildren } from '../temp-components/TextOrChildren';
 
 import type { CheckboxProps } from './Checkbox.types';
 
-const AnimatedView = Animated.View;
+/**
+ * Props equality check for React.memo.
+ * Compares props that affect rendering: selection state, disabled/invalid states,
+ * label, and other identity-affecting props.
+ *
+ * @param prev - Previous props.
+ * @param next - Next props.
+ * @returns True if props are equal and re-render can be skipped.
+ */
+const arePropsEqual = (prev: CheckboxProps, next: CheckboxProps): boolean =>
+  prev.isSelected === next.isSelected &&
+  prev.isDisabled === next.isDisabled &&
+  prev.isInvalid === next.isInvalid &&
+  prev.label === next.label &&
+  prev.twClassName === next.twClassName &&
+  prev.testID === next.testID &&
+  prev.onChange === next.onChange;
 
-export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
+const CheckboxInner = forwardRef<{ toggle: () => void }, CheckboxProps>(
   (
     {
       isSelected,
@@ -33,21 +49,8 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     },
     ref,
   ) => {
-    // Animation values
     const scaleAnim = useRef(new Animated.Value(1)).current;
-    const iconAnim = useRef(new Animated.Value(isSelected ? 1 : 0)).current;
 
-    // Sync icon opacity whenever selection changes
-    useEffect(() => {
-      Animated.timing(iconAnim, {
-        toValue: isSelected ? 1 : 0,
-        duration: 300,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }).start();
-    }, [isSelected, iconAnim]);
-
-    // Bounce effect when toggling
     const animateScale = useCallback(() => {
       Animated.sequence([
         Animated.timing(scaleAnim, {
@@ -65,14 +68,13 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       ]).start();
     }, [scaleAnim]);
 
-    // Press handler: notify parent, then bounce
-    const handlePress = () => {
+    const handlePress = useCallback(() => {
       if (isDisabled) {
         return;
       }
       onChange?.(!isSelected);
       animateScale();
-    };
+    }, [isDisabled, isSelected, onChange, animateScale]);
 
     useImperativeHandle(ref, () => ({ toggle: handlePress }), [handlePress]);
 
@@ -125,23 +127,24 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       >
         {({ pressed }) => (
           <>
-            <AnimatedView
+            <Animated.View
               {...checkboxContainerProps}
               style={[
                 tw`${getCheckboxContainerStyle(pressed)} flex size-[22px] items-center justify-center rounded-full border-2`,
                 { transform: [{ scale: scaleAnim }] },
               ]}
             >
-              {/* Always render icon, opacity driven by iconAnim */}
-              <Animated.View style={{ opacity: iconAnim }}>
-                <Icon
-                  name={IconName.Check}
-                  color={IconColor.IconInverse}
-                  size={IconSize.Sm}
-                  {...checkedIconProps}
-                />
-              </Animated.View>
-            </AnimatedView>
+              {isSelected ? (
+                <View>
+                  <Icon
+                    name={IconName.Check}
+                    color={IconColor.IconInverse}
+                    size={IconSize.Sm}
+                    {...checkedIconProps}
+                  />
+                </View>
+              ) : null}
+            </Animated.View>
             {label ? (
               <TextOrChildren
                 textProps={{ ...labelProps, twClassName: 'ml-3' }}
@@ -155,3 +158,11 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     );
   },
 );
+
+/**
+ * Checkbox component with performance optimizations:
+ * - Wrapped in React.memo with custom equality check to prevent unnecessary re-renders
+ * - Icon only mounted when selected (deferred mounting reduces work for unselected rows)
+ * - Removed per-render animated opacity sync in favor of conditional rendering
+ */
+export const Checkbox = memo(CheckboxInner, arePropsEqual);
