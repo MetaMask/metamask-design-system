@@ -61,9 +61,6 @@ const meta: Meta<SelectButtonProps> = {
     hideEndArrow: {
       control: 'boolean',
     },
-    className: {
-      control: 'text',
-    },
     onClick: {
       action: 'onClick',
     },
@@ -92,7 +89,6 @@ export const Default: Story = {
     variant: SelectButtonVariant.Primary,
     endArrowDirection: SelectButtonEndArrow.Down,
     isDisabled: false,
-    className: '',
   },
   render: (args) => (
     <SelectButtonStoryWrapper>
