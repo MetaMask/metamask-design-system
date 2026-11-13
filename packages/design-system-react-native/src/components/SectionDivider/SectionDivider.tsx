@@ -9,7 +9,15 @@ import type { SectionDividerProps } from './SectionDivider.types';
 
 export const SectionDivider = forwardRef<View, SectionDividerProps>(
   (
-    { borderWidth, borderColor, marginVertical, twClassName, style, ...rest },
+    {
+      borderWidth,
+      borderColor,
+      marginVertical,
+      twClassName,
+      className,
+      style,
+      ...rest
+    },
     ref,
   ) => {
     const tw = useTailwind();
@@ -28,7 +36,10 @@ export const SectionDivider = forwardRef<View, SectionDividerProps>(
         ref={ref}
         borderColor={borderColor ?? BoxBorderColor.BorderMuted}
         marginVertical={marginVertical ?? 5}
-        style={[tw.style('self-stretch', borderTopClass, twClassName), style]}
+        style={[
+          tw.style('self-stretch', borderTopClass, twClassName, className),
+          style,
+        ]}
         {...rest}
       />
     );

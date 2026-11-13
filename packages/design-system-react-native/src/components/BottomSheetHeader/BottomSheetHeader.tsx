@@ -12,6 +12,7 @@ import type { BottomSheetHeaderProps } from './BottomSheetHeader.types';
 export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   style,
   twClassName,
+  className,
   children,
   onBack,
   backButtonProps,
@@ -41,7 +42,7 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   return (
     <HeaderBase
       {...props}
-      style={[tw.style('px-2', twClassName), style]}
+      style={[tw.style('px-2', twClassName, className), style]}
       startAccessory={startAccessory}
       endAccessory={endAccessory}
     >

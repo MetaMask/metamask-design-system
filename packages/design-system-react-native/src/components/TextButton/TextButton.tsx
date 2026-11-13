@@ -10,6 +10,7 @@ export const TextButton: React.FC<TextButtonProps> = ({
   variant = TextVariant.BodyMd,
   fontWeight = FontWeight.Medium,
   twClassName,
+  className,
   accessibilityRole = 'link',
   onPress,
   onPressIn,
@@ -39,6 +40,7 @@ export const TextButton: React.FC<TextButtonProps> = ({
         pressed ? TextColor.PrimaryDefaultPressed : TextColor.PrimaryDefault
       }
       twClassName={twClassName}
+      className={className}
       onPress={onPress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}

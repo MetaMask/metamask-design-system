@@ -40,6 +40,7 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
       keyValueRowProps,
       isDisabled = false,
       twClassName,
+      className,
       style,
       accessibilityRole,
       ...pressableProps
@@ -58,7 +59,11 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
     const getPressableStyle = ({
       pressed,
     }: PressableStateCallbackType): StyleProp<ViewStyle> => {
-      const baseStyle = tw.style(rootTwClassName, pressed && 'bg-pressed');
+      const baseStyle = tw.style(
+        rootTwClassName,
+        className,
+        pressed && 'bg-pressed',
+      );
 
       if (!style) {
         return baseStyle;

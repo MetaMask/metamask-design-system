@@ -31,7 +31,12 @@ export type MainActionButtonProps = {
    */
   labelProps?: Omit<
     Partial<TextProps>,
-    'children' | 'variant' | 'fontWeight' | 'color' | 'twClassName'
+    | 'children'
+    | 'className'
+    | 'variant'
+    | 'fontWeight'
+    | 'color'
+    | 'twClassName'
   >;
   /**
    * Disables the button interaction and applies disabled styling.
@@ -41,8 +46,15 @@ export type MainActionButtonProps = {
   isDisabled?: boolean;
   /**
    * Optional Tailwind classes to extend or override container styles.
+   *
+   * @deprecated Use `className` instead. `twClassName` remains supported for existing callers and will be removed in a future major version.
    */
   twClassName?: string;
+  /**
+   * Tailwind classes from `@metamask/design-system-twrnc-preset`.
+   * Applied after `twClassName` when both are set, so these classes win.
+   */
+  className?: string;
   /**
    * Optional React Native style for the button container.
    */

@@ -7,12 +7,13 @@ import type { ButtonHeroProps } from './ButtonHero.types';
 
 /**
  * Inner component that uses the locked light theme from ThemeProvider.
- * Destructures and ignores twClassName, textClassName, and iconClassName to prevent
- * overriding the hero-specific styling (light theme lock).
+ * Destructures and ignores className, twClassName, textClassName, and iconClassName
+ * to prevent overriding the hero-specific styling (light theme lock).
  *
  * @param props - Component props destructured below
  * @param props.isDisabled - Whether the button is disabled
  * @param props.isLoading - Whether the button is in a loading state
+ * @param props.className - Ignored to prevent override of hero styling
  * @param props.twClassName - Ignored to prevent override of hero styling
  * @param props.textClassName - Ignored to prevent override of hero styling
  * @param props.iconClassName - Ignored to prevent override of hero styling
@@ -21,6 +22,7 @@ import type { ButtonHeroProps } from './ButtonHero.types';
 const ButtonHeroInner: React.FC<ButtonHeroProps> = ({
   isDisabled,
   isLoading,
+  className: _className,
   twClassName: _twClassName,
   textClassName: _textClassName,
   iconClassName: _iconClassName,

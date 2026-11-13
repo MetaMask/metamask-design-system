@@ -24,6 +24,7 @@ export const Text: React.FC<TextProps> = ({
   fontFamily = FontFamily.Default,
   fontStyle = FontStyle.Normal,
   twClassName,
+  className,
   ...props
 }) => {
   const tw = useTailwind();
@@ -39,8 +40,23 @@ export const Text: React.FC<TextProps> = ({
       isItalic && fontFamily === FontFamily.Default ? '-italic' : ''
     }`;
     const fontClass = `font-${fontFamily}${fontSuffix}`;
-    return tw.style(`text-${variant}`, fontClass, color, twClassName);
-  }, [variant, color, finalFontWeight, fontFamily, fontStyle, twClassName, tw]);
+    return tw.style(
+      `text-${variant}`,
+      fontClass,
+      color,
+      twClassName,
+      className,
+    );
+  }, [
+    variant,
+    color,
+    finalFontWeight,
+    fontFamily,
+    fontStyle,
+    twClassName,
+    className,
+    tw,
+  ]);
 
   return (
     <RNText accessibilityRole="text" {...props} style={[textStyle, style]}>

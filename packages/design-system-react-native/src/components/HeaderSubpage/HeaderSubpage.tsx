@@ -40,6 +40,7 @@ export const HeaderSubpage: React.FC<HeaderSubpageProps> = ({
   endAccessory,
   includesTopInset = false,
   twClassName = '',
+  className,
   style,
   accessoryGap = 2,
   testID,
@@ -118,6 +119,7 @@ export const HeaderSubpage: React.FC<HeaderSubpageProps> = ({
         'h-14 px-2 py-0 justify-center',
         twClassName,
       )}
+      className={className}
       style={[includesTopInset && { marginTop: insets.top }, style]}
     />
   );

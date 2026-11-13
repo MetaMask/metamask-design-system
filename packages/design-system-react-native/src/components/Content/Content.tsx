@@ -17,6 +17,7 @@ export const Content: React.FC<ContentProps> = ({
   variant = ContentVariant.TwoLines,
   avatar,
   twClassName,
+  className,
   title,
   titleProps,
   titleStartAccessory,
@@ -60,6 +61,7 @@ export const Content: React.FC<ContentProps> = ({
       alignItems={alignItems}
       gap={4}
       twClassName={twClassName}
+      className={className}
       {...props}
     >
       {avatar}

@@ -22,6 +22,7 @@ export const TextArea = forwardRef<TextInput, TextAreaProps>(
       textVariant,
       style,
       twClassName,
+      className,
       testID,
       ...props
     },
@@ -87,6 +88,7 @@ export const TextArea = forwardRef<TextInput, TextAreaProps>(
             !isDisabled && !isError && !isFocused && 'border-muted',
             isDisabled && 'opacity-50',
             twClassName,
+            className,
           ),
           style,
         ]}

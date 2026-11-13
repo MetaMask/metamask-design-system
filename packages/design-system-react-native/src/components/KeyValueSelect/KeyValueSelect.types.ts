@@ -67,5 +67,13 @@ export type KeyValueSelectProps = Omit<
      */
     keyValueRowProps?: KeyValueSelectKeyValueRowProps;
     /** Optional Tailwind class names applied to the outer Pressable. */
+    /**
+     * @deprecated Use `className` instead. `twClassName` remains supported for existing callers and will be removed in a future major version.
+     */
     twClassName?: string;
+    /**
+     * Tailwind classes from `@metamask/design-system-twrnc-preset`.
+     * Applied after `twClassName` when both are set, so these classes win.
+     */
+    className?: string;
   };

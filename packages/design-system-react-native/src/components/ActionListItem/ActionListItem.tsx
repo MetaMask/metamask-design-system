@@ -26,6 +26,7 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
   onPress,
   pressableProps,
   twClassName,
+  className,
   style,
   ...props
 }) => {
@@ -88,11 +89,12 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
         pressed && !isDisabled && 'bg-pressed',
         isDisabled && 'opacity-50',
         twClassName,
+        className,
       );
 
       return style ? [baseStyle, style] : baseStyle;
     },
-    [tw, isDisabled, twClassName, style],
+    [tw, isDisabled, twClassName, className, style],
   );
 
   return (

@@ -61,6 +61,7 @@ export const Toast: React.FC<ToastProps> = ({
   title,
   titleProps,
   twClassName,
+  className,
   ...props
 }) => {
   const theme = useTheme();
@@ -111,6 +112,7 @@ export const Toast: React.FC<ToastProps> = ({
       title={title}
       titleProps={titleProps}
       twClassName={mergeTwClassName('rounded-2xl', twClassName)}
+      className={className}
     />
   );
 };

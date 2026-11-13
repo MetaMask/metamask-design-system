@@ -25,6 +25,7 @@ export const ButtonIcon = ({
   onPressIn,
   onPressOut,
   twClassName,
+  className,
   style,
   ...props
 }: ButtonIconProps) => {
@@ -70,6 +71,7 @@ export const ButtonIcon = ({
           backgroundColor,
           isDisabled ? 'opacity-50' : 'opacity-100',
           twClassName,
+          className,
         ),
         style,
       ]}

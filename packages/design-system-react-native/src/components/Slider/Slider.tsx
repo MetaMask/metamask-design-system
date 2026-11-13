@@ -56,6 +56,7 @@ export const Slider = ({
   mapTrackPercentToValue,
   trackInset = SLIDER_TRACK_INSET,
   twClassName,
+  className,
   style,
   ...props
 }: SliderProps) => {
@@ -175,6 +176,7 @@ export const Slider = ({
         style,
       ]}
       twClassName={twClassName}
+      className={className}
     >
       <GestureDetector gesture={gesture}>
         <Animated.View

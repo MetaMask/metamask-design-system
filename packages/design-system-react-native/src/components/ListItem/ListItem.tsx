@@ -22,6 +22,7 @@ export const ListItem: React.FC<ListItemProps> = ({
   children,
   isInteractive = false,
   twClassName,
+  className,
   style,
   startAccessory,
   endAccessory,
@@ -66,13 +67,17 @@ export const ListItem: React.FC<ListItemProps> = ({
   const rootTwClassName = mergeTwClassName(rootBaseClassName, twClassName);
 
   const wrapperStyle = style
-    ? [tw.style(rootTwClassName), style]
-    : tw.style(rootTwClassName);
+    ? [tw.style(rootTwClassName, className), style]
+    : tw.style(rootTwClassName, className);
 
   const getPressableStyle = ({
     pressed,
   }: PressableStateCallbackType): StyleProp<ViewStyle> => {
-    const baseStyle = tw.style(rootTwClassName, pressed && 'bg-pressed');
+    const baseStyle = tw.style(
+      rootTwClassName,
+      className,
+      pressed && 'bg-pressed',
+    );
 
     if (!style) {
       return baseStyle;

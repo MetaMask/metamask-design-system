@@ -48,6 +48,7 @@ export const Box = forwardRef<View, BoxProps>(
       borderColor,
       backgroundColor,
       twClassName,
+      className,
       style,
       children,
       ...props
@@ -96,6 +97,7 @@ export const Box = forwardRef<View, BoxProps>(
             borderColor,
             backgroundColor,
             twClassName,
+            className,
           ),
           style,
         ]}

@@ -31,6 +31,7 @@ import type { TitleStandardProps } from './TitleStandard.types';
  * @param props.bottomLabelWrapperProps - Optional props forwarded to the bottom label row `Box`
  * @param props.twClassName - Optional Tailwind classes on the root container
  *
+ * @param props.className - Tailwind classes. Preferred over deprecated `twClassName`.
  * @returns The rendered TitleStandard layout.
  */
 export const TitleStandard: React.FC<TitleStandardProps> = ({
@@ -45,10 +46,11 @@ export const TitleStandard: React.FC<TitleStandardProps> = ({
   bottomLabelProps,
   bottomLabelWrapperProps,
   twClassName = '',
+  className,
   ...props
 }) => {
   return (
-    <Box twClassName={twClassName} gap={1} {...props}>
+    <Box twClassName={twClassName} className={className} gap={1} {...props}>
       {/* Top Accessory Slot */}
       {topAccessory}
       {/* Title Row */}

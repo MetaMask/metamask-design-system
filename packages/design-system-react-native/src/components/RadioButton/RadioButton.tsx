@@ -47,6 +47,7 @@ export const RadioButton = ({
   touchableOpacityProps,
   radioButtonContainerProps,
   twClassName,
+  className,
   style,
   ...props
 }: RadioButtonProps) => {
@@ -60,6 +61,7 @@ export const RadioButton = ({
           'flex-row items-center',
           isDisabled ? 'opacity-50' : 'opacity-100',
           twClassName,
+          className,
         ),
         style,
       ]}

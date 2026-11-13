@@ -303,6 +303,25 @@ describe('Box', () => {
     expect(styles[0]).toStrictEqual(tw.style('flex', 'bg-primary-default p-4'));
   });
 
+  it('applies className', () => {
+    const { getByTestId } = render(<Box testID="box" className="p-4" />);
+    const box = getByTestId('box');
+    const styles = flattenStyles(box.props.style);
+
+    expect(styles[0]).toStrictEqual(tw.style('flex', 'p-4'));
+    expect(box.props.className).toBeUndefined();
+  });
+
+  it('applies className after twClassName', () => {
+    const { getByTestId } = render(
+      <Box testID="box" className="p-2" twClassName="p-4" />,
+    );
+    const box = getByTestId('box');
+    const styles = flattenStyles(box.props.style);
+
+    expect(styles[0]).toStrictEqual(tw.style('flex', 'p-4 p-2'));
+  });
+
   it('applies all flex props together', () => {
     const { getByTestId } = render(
       <Box

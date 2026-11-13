@@ -33,6 +33,7 @@ export const AvatarGroup = ({
   overflowTextProps,
   style,
   twClassName,
+  className,
   ...props
 }: AvatarGroupProps) => {
   const tw = useTailwind();
@@ -96,6 +97,7 @@ export const AvatarGroup = ({
           isReverse ? 'flex-row-reverse' : 'flex-row',
           TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[size],
           twClassName,
+          className,
         ),
         style,
       ]}

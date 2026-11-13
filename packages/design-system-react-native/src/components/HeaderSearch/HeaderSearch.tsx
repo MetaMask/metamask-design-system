@@ -55,6 +55,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
       variant: _variant,
       textFieldSearchProps,
       twClassName,
+      className,
       onPressBackButton,
       backButtonProps,
       ...screenBoxProps
@@ -68,6 +69,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
             ? `${baseTwClassName} ml-1 mr-4 gap-2 ${twClassName}`
             : `${baseTwClassName} ml-1 mr-4 gap-2`
         }
+        className={className}
       >
         <ButtonIcon
           size={ButtonIconSize.Md}
@@ -91,6 +93,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     variant: _variant,
     textFieldSearchProps,
     twClassName,
+    className,
     onPressCancelButton,
     cancelButtonProps,
     ...inlineBoxProps
@@ -104,6 +107,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
           ? `${baseTwClassName} ml-4 ${twClassName}`
           : `${baseTwClassName} ml-4`
       }
+      className={className}
     >
       <TextFieldSearch
         {...(textFieldSearchProps as TextFieldSearchProps)}

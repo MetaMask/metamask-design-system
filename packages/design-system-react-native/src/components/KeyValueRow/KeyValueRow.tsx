@@ -30,6 +30,7 @@ export const KeyValueRow = ({
   valueTextProps,
   variant = KeyValueRowVariant.Summary,
   twClassName,
+  className,
   style,
   ...viewProps
 }: KeyValueRowProps) => {
@@ -124,6 +125,7 @@ export const KeyValueRow = ({
           'px-4',
           variant === KeyValueRowVariant.Input ? 'h-12' : 'h-10',
           twClassName,
+          className,
         ),
         style,
       ]}

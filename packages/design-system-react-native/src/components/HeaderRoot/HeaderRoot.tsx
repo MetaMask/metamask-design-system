@@ -23,6 +23,7 @@ export const HeaderRoot = ({
   style,
   testID,
   twClassName,
+  className,
   ...viewProps
 }: HeaderRootProps) => {
   const insets = useSafeAreaInsets();
@@ -81,6 +82,7 @@ export const HeaderRoot = ({
       paddingLeft={4}
       paddingRight={2}
       twClassName={mergeTwClassName('min-h-14', twClassName)}
+      className={className}
       style={[includesTopInset && { marginTop: insets.top }, style]}
       testID={testID}
       {...viewProps}

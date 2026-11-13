@@ -27,6 +27,7 @@ export const KeyValueColumn = ({
   value: valueContent,
   valueTextProps,
   twClassName,
+  className,
   ...viewProps
 }: KeyValueColumnProps) => {
   const keyEndAccessoryNode =
@@ -107,6 +108,7 @@ export const KeyValueColumn = ({
     <Box
       flexDirection={BoxFlexDirection.Column}
       twClassName={twClassName}
+      className={className}
       {...viewProps}
     >
       {keyBox}

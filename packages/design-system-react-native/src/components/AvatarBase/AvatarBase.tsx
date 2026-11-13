@@ -25,6 +25,7 @@ export const AvatarBase = ({
   fallbackTextProps,
   hasBorder = false,
   twClassName,
+  className,
   style,
   ...props
 }: AvatarBaseProps) => {
@@ -44,6 +45,7 @@ export const AvatarBase = ({
             : TWCLASSMAP_AVATARBASE_SIZE_DIMENSION[size],
           hasBorder && TWCLASSMAP_AVATARBASE_SIZE_BORDER[size],
           twClassName,
+          className,
         ),
         style,
       ]}

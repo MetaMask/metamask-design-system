@@ -32,6 +32,7 @@ import type { TitleHubProps } from './TitleHub.types';
  * @param props.bottomLabelWrapperProps - Optional props spread onto the bottom label row `Box`
  * @param props.twClassName - Optional Tailwind classes on the root container
  *
+ * @param props.className - Tailwind classes. Preferred over deprecated `twClassName`.
  * @returns The rendered TitleHub layout.
  */
 export const TitleHub: React.FC<TitleHubProps> = ({
@@ -49,10 +50,11 @@ export const TitleHub: React.FC<TitleHubProps> = ({
   amountWrapperProps,
   bottomLabelWrapperProps,
   twClassName = '',
+  className,
   ...props
 }) => {
   return (
-    <Box gap={1} twClassName={twClassName} {...props}>
+    <Box gap={1} twClassName={twClassName} className={className} {...props}>
       {/* Title Row */}
       {title && (
         <Box

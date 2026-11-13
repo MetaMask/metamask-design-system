@@ -19,6 +19,7 @@ export const MainActionButton = ({
   style,
   isDisabled = false,
   twClassName = '',
+  className,
   ...props
 }: MainActionButtonProps) => {
   const tw = useTailwind();
@@ -36,6 +37,7 @@ export const MainActionButton = ({
           pressed && !isDisabled ? 'bg-muted-pressed' : 'bg-muted',
           isDisabled ? 'opacity-50' : 'opacity-100',
           twClassName,
+          className,
         ) as StyleProp<ViewStyle>;
 
         const additionalStyle =

@@ -19,6 +19,7 @@ export const HelpText: React.FC<HelpTextProps> = ({
   showIcon = false,
   color = TextColor.TextDefault,
   twClassName,
+  className,
   style,
   testID,
   children,
@@ -32,6 +33,7 @@ export const HelpText: React.FC<HelpTextProps> = ({
         variant={TextVariant.BodySm}
         color={textColor}
         twClassName={twClassName}
+        className={className}
         style={style}
         testID={testID}
         {...props}
@@ -47,6 +49,7 @@ export const HelpText: React.FC<HelpTextProps> = ({
       alignItems={BoxAlignItems.Center}
       gap={1}
       twClassName={twClassName}
+      className={className}
       style={style}
       testID={testID}
     >

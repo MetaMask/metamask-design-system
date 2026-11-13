@@ -23,6 +23,7 @@ export const TabEmptyState = ({
   children,
   style,
   twClassName = '',
+  className,
   ...props
 }: TabEmptyStateProps) => (
   <Box
@@ -32,6 +33,7 @@ export const TabEmptyState = ({
     backgroundColor={BoxBackgroundColor.BackgroundDefault}
     gap={3}
     twClassName={mergeTwClassName('max-w-64', twClassName)}
+    className={className}
     style={style}
     {...props}
   >

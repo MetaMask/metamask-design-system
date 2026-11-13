@@ -42,6 +42,7 @@ export const ButtonBase = ({
   isDisabled,
   isFullWidth,
   twClassName,
+  className,
   textClassName,
   iconClassName,
   style,
@@ -143,6 +144,7 @@ export const ButtonBase = ({
           isFullWidth ? 'w-full' : 'self-start',
           // Custom classes
           customClassName,
+          className,
         );
 
         // Merge with additional styles if provided

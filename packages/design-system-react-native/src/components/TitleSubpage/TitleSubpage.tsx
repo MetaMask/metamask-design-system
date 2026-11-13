@@ -38,6 +38,7 @@ import type { TitleSubpageProps } from './TitleSubpage.types';
  * @param props.bottomLabelProps - Optional props merged into bottom label `Text` when `bottomLabel` is a string
  * @param props.twClassName - Optional Tailwind classes on the root container
  *
+ * @param props.className - Tailwind classes. Preferred over deprecated `twClassName`.
  * @returns The rendered TitleSubpage layout.
  */
 export const TitleSubpage: React.FC<TitleSubpageProps> = ({
@@ -59,10 +60,11 @@ export const TitleSubpage: React.FC<TitleSubpageProps> = ({
   titleColumnProps,
   bottomLabelWrapperProps,
   twClassName = '',
+  className,
   ...props
 }) => {
   return (
-    <Box twClassName={twClassName} gap={1} {...props}>
+    <Box twClassName={twClassName} className={className} gap={1} {...props}>
       {/* Identity Row */}
       <Box
         flexDirection={BoxFlexDirection.Row}

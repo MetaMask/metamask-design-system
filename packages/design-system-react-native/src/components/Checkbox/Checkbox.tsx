@@ -28,6 +28,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       checkboxContainerProps,
       checkedIconProps,
       twClassName,
+      className,
       style,
       ...props
     },
@@ -81,6 +82,7 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
       'flex-row items-center',
       isDisabled ? 'opacity-50' : 'opacity-100',
       twClassName,
+      className,
     );
 
     const getCheckboxContainerStyle = useCallback(

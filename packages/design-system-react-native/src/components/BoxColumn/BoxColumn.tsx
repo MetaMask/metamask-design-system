@@ -13,6 +13,7 @@ import type { BoxColumnProps } from './BoxColumn.types';
  *
  * @param props - Component props.
  * @param props.children - Main content; strings are wrapped in `SensitiveText`.
+ * @param props.className - Tailwind classes. Preferred over deprecated `twClassName`.
  * @param props.textProps - Props passed to `SensitiveText` when `children` is a string.
  * @param props.topAccessory - Node rendered above `children`.
  * @param props.bottomAccessory - Node rendered below `children`.
@@ -25,11 +26,13 @@ export const BoxColumn = ({
   topAccessory,
   bottomAccessory,
   twClassName,
+  className,
   ...rest
 }: BoxColumnProps) => (
   <Box
     flexDirection={BoxFlexDirection.Column}
     twClassName={twClassName}
+    className={className}
     {...rest}
   >
     {topAccessory}

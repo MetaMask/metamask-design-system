@@ -58,6 +58,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     endIconProps,
     isInteractive,
     twClassName = '',
+    className,
     style,
     ...props
   } = sectionHeaderProps;
@@ -159,6 +160,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
           const baseStyle = tw.style(
             'px-4 pb-2 pt-3',
             twClassName,
+            className,
             pressed && !isDisabled && 'opacity-70',
           );
           const additionalStyle =
@@ -180,6 +182,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
         gap={1}
         style={style}
         twClassName={mergeTwClassName('px-4 pb-2 pt-3', twClassName)}
+        className={className}
       >
         {headerRow}
         {children}
@@ -195,6 +198,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
       gap={1}
       style={style}
       twClassName={mergeTwClassName('px-4 pb-2 pt-3', twClassName)}
+      className={className}
     >
       {resolvedStartAccessory}
       {mainContent}

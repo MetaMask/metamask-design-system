@@ -20,6 +20,7 @@ export const ButtonFilter: React.FC<ButtonFilterProps> = (props) => {
   const {
     isActive = false,
     twClassName,
+    className,
     textProps,
     style,
     ...restProps
@@ -27,7 +28,11 @@ export const ButtonFilter: React.FC<ButtonFilterProps> = (props) => {
   const tw = useTailwind();
 
   const mergedStyle = [
-    tw.style(isActive ? 'bg-icon-default' : 'bg-background-muted', twClassName),
+    tw.style(
+      isActive ? 'bg-icon-default' : 'bg-background-muted',
+      twClassName,
+      className,
+    ),
     style,
   ];
 

@@ -13,6 +13,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   childrenWrapperProps,
   animatedViewProps,
   twClassName,
+  className,
   autoPlay = true,
   ...props
 }) => {
@@ -59,7 +60,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   return (
     <View
       style={[
-        tw.style('rounded overflow-hidden', twClassName),
+        tw.style('rounded overflow-hidden', twClassName, className),
         height !== undefined && { height },
         width !== undefined && { width },
         style,

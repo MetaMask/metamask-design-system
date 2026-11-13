@@ -24,6 +24,7 @@ export const HeaderStandardAnimated: React.FC<HeaderStandardAnimatedProps> = ({
   scrollY,
   titleSectionHeight,
   twClassName = '',
+  className,
   ...headerStandardProps
 }) => {
   const compactTitleProgress = useDerivedValue(() => {
@@ -46,7 +47,11 @@ export const HeaderStandardAnimated: React.FC<HeaderStandardAnimatedProps> = ({
   });
 
   return (
-    <HeaderStandard {...headerStandardProps} twClassName={twClassName}>
+    <HeaderStandard
+      {...headerStandardProps}
+      twClassName={twClassName}
+      className={className}
+    >
       <Animated.View style={centerAnimatedStyle}>
         {title ? (
           <HeaderStandardCenterColumn

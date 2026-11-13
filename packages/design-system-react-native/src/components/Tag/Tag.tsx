@@ -29,6 +29,7 @@ export const Tag: React.FC<TagProps> = ({
   endIconProps,
   endAccessory,
   twClassName,
+  className,
   style,
   ...props
 }) => {
@@ -50,6 +51,7 @@ export const Tag: React.FC<TagProps> = ({
           resolvedStartIconName ? 'pl-1' : 'pl-1.5',
           resolvedEndIconName ? 'pr-1' : 'pr-1.5',
           twClassName,
+          className,
         ),
         style,
       ]}

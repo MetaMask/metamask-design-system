@@ -27,6 +27,7 @@ export const Input = forwardRef<TextInput, InputProps>(
       value,
       placeholder,
       twClassName,
+      className,
       onBlur,
       onFocus,
       autoFocus = false,
@@ -72,8 +73,16 @@ export const Input = forwardRef<TextInput, InputProps>(
             isFocused &&
             'border-primary-default',
           twClassName,
+          className,
         ),
-      [isStateStylesDisabled, isDisabled, isFocused, twClassName, tw],
+      [
+        isStateStylesDisabled,
+        isDisabled,
+        isFocused,
+        twClassName,
+        className,
+        tw,
+      ],
     );
     const multilineTypographyStyle = useMemo(
       () => tw.style(`text-${textVariant}`, fontClass),
@@ -95,6 +104,7 @@ export const Input = forwardRef<TextInput, InputProps>(
             isFocused &&
             'border-primary-default',
           twClassName,
+          className,
         ),
       [
         fontClass,
@@ -102,6 +112,7 @@ export const Input = forwardRef<TextInput, InputProps>(
         isDisabled,
         isFocused,
         twClassName,
+        className,
         tw,
       ],
     );

@@ -1,3 +1,4 @@
+
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, { useEffect, useRef } from 'react';
 import { Animated, Easing, View } from 'react-native';
@@ -14,7 +15,7 @@ export const Spinner = ({
   spinnerIconProps,
   loadingText,
   loadingTextProps,
-  twClassName,
+  twClassName, className,
   style,
   ...props
 }: SpinnerProps) => {
@@ -75,7 +76,7 @@ export const Spinner = ({
   return (
     <View
       {...props}
-      style={[tw.style('flex-row items-center gap-x-2', twClassName), style]}
+      style={[tw.style('flex-row items-center gap-x-2', twClassName, className), style]}
     >
       <Animated.View style={[animatedStyle]} testID="spinner-animated-view">
         <Icon {...finalSpinnerIconProps} />

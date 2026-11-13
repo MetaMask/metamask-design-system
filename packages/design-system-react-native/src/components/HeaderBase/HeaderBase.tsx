@@ -85,6 +85,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
   childrenWrapperProps,
   textProps,
   twClassName,
+  className,
   ...props
 }) => {
   const tw = useTailwind();
@@ -158,7 +159,7 @@ export const HeaderBase: React.FC<HeaderBaseProps> = ({
   return (
     <View
       style={[
-        tw.style('flex-row items-center gap-4 h-14', twClassName),
+        tw.style('flex-row items-center gap-4 h-14', twClassName, className),
         includesTopInset && { marginTop: insets.top },
         style,
       ]}

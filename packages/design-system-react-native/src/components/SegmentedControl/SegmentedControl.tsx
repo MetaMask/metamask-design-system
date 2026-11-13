@@ -17,6 +17,7 @@ export const SegmentedControl = ({
   isFullWidth = false,
   children,
   twClassName,
+  className,
   style,
   ...rest
 }: SegmentedControlProps) => {
@@ -42,6 +43,7 @@ export const SegmentedControl = ({
           `${widthClass} flex-row items-center gap-1 rounded-full border border-muted p-1`,
           twClassName,
         )}
+        className={className}
         style={style}
       >
         {Children.map(children, (child, index) =>

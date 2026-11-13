@@ -11,7 +11,15 @@ export type KeyValueColumnProps = KeyValueColumnPropsShared &
     /** Optional props for the value Text when value is a string. */
     valueTextProps?: Partial<Omit<TextProps, 'children'>>;
     /** Optional Tailwind class names applied to the outer BoxVertical. Merged with base styles. */
+    /**
+     * @deprecated Use `className` instead. `twClassName` remains supported for existing callers and will be removed in a future major version.
+     */
     twClassName?: string;
+    /**
+     * Tailwind classes from `@metamask/design-system-twrnc-preset`.
+     * Applied after `twClassName` when both are set, so these classes win.
+     */
+    className?: string;
     /** When set, renders a ButtonIcon as the key endAccessory (takes precedence over keyEndAccessory). */
     keyEndButtonIconProps?: Partial<ButtonIconProps>;
     /** When set, renders a ButtonIcon as the value endAccessory (takes precedence over valueEndAccessory). */

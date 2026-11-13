@@ -19,6 +19,7 @@ export const AvatarNetwork = ({
   fallbackTextProps,
   imageOrSvgProps,
   twClassName,
+  className,
   ...props
 }: AvatarNetworkProps) => {
   const [finalFallbackText, setFallbackText] = useState<string>('');
@@ -45,6 +46,7 @@ export const AvatarNetwork = ({
           ? mergeTwClassName('bg-white', twClassName)
           : twClassName
       }
+      className={className}
       {...props}
     >
       {src && (

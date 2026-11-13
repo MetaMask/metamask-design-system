@@ -12,6 +12,7 @@ export const ListItemMultiSelect = ({
   isSelected,
   accessoryGap = 3,
   twClassName,
+  className,
   ...props
 }: ListItemMultiSelectProps) => {
   const resolvedTwClassName = isSelected
@@ -22,6 +23,7 @@ export const ListItemMultiSelect = ({
     <ListItem
       isInteractive
       twClassName={resolvedTwClassName}
+      className={className}
       endAccessory={
         <Checkbox
           isSelected={isSelected}

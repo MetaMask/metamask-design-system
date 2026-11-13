@@ -28,6 +28,7 @@ import type { TitleAlertProps } from './TitleAlert.types';
  * @param props.descriptionProps - Optional props merged into description `Text` when `description` is a string
  * @param props.twClassName - Optional Tailwind classes on the root Box
  *
+ * @param props.className - Tailwind classes. Preferred over deprecated `twClassName`.
  * @returns The rendered TitleAlert layout.
  */
 export const TitleAlert: React.FC<TitleAlertProps> = ({
@@ -38,6 +39,7 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
   description,
   descriptionProps,
   twClassName = '',
+  className,
   ...props
 }) => {
   return (
@@ -46,6 +48,7 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
       alignItems={BoxAlignItems.Center}
       gap={1}
       twClassName={twClassName}
+      className={className}
       {...props}
     >
       <IconAlert severity={severity} size={IconSize.Xl} />

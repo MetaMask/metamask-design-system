@@ -34,6 +34,7 @@ export const FilterButton = ({
   size,
   isFullWidth,
   twClassName = '',
+  className,
   style,
   onPress,
   ...buttonBaseRest
@@ -80,6 +81,7 @@ export const FilterButton = ({
       onPress={handlePress}
       style={style}
       twClassName={twClassName}
+      className={className}
       textProps={
         effectiveIsSelected
           ? textProps

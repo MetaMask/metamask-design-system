@@ -32,6 +32,7 @@ import {
 import { scheduleOnRN } from 'react-native-worklets';
 
 // Internal dependencies.
+
 import {
   DEFAULT_BOTTOMSHEETDIALOG_DISPLAY_DURATION,
   DEFAULT_BOTTOMSHEETDIALOG_DISMISSTHRESHOLD,
@@ -56,6 +57,7 @@ export const BottomSheetDialog = forwardRef<
       onOpen,
       style,
       twClassName,
+      className,
       ...props
     },
     ref,
@@ -255,6 +257,7 @@ export const BottomSheetDialog = forwardRef<
           'bg-elevated1',
           'rounded-t-[32px] overflow-hidden border border-muted border-b-0',
           twClassName,
+          className,
         ),
         {
           maxHeight: maxSheetHeight,
@@ -277,6 +280,7 @@ export const BottomSheetDialog = forwardRef<
         shadowLg,
         style,
         twClassName,
+        className,
       ],
     );
 

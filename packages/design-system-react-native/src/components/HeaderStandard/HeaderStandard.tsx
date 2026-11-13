@@ -24,6 +24,7 @@ export const HeaderStandard: React.FC<HeaderStandardProps> = ({
   endButtonIconProps,
   startButtonIconProps,
   twClassName = '',
+  className,
   testID,
   ...headerBaseProps
 }) => {
@@ -84,6 +85,7 @@ export const HeaderStandard: React.FC<HeaderStandardProps> = ({
       endButtonIconProps={resolvedEndButtonIconProps}
       {...headerBaseProps}
       twClassName={mergeTwClassName('px-2', twClassName)}
+      className={className}
     >
       {renderContent()}
     </HeaderBase>

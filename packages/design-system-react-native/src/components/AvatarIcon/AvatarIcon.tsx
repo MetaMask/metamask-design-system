@@ -23,6 +23,7 @@ export const AvatarIcon = ({
   iconName,
   iconProps,
   twClassName,
+  className,
   style,
   ...props
 }: AvatarIconProps) => {
@@ -38,6 +39,7 @@ export const AvatarIcon = ({
         tw.style(
           TWCLASSMAP_AVATARICON_SEVERITY_BACKGROUNDCOLOR[severity],
           twClassName,
+          className,
         ),
         style,
       ]}

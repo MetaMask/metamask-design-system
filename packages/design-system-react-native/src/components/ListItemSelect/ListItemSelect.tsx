@@ -12,6 +12,7 @@ export const ListItemSelect = ({
   endAccessory,
   accessoryGap = 3,
   twClassName,
+  className,
   ...props
 }: ListItemSelectProps) => {
   const showCheck = isSelected && showSelectedIcon;
@@ -33,6 +34,7 @@ export const ListItemSelect = ({
     <ListItem
       isInteractive
       twClassName={resolvedTwClassName}
+      className={className}
       endAccessory={resolvedEndAccessory}
       accessoryGap={accessoryGap}
       {...props}

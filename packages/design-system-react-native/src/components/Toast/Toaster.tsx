@@ -22,6 +22,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
 
 // Internal dependencies.
+
 import { Toast } from './Toast';
 import {
   TOAST_DISMISS_DISTANCE_THRESHOLD,
@@ -67,7 +68,7 @@ const getHiddenTranslateY = (height: number, offset: number) =>
   -(height + offset);
 
 const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
-  ({ twClassName, ...props }, ref) => {
+  ({ twClassName, className, ...props }, ref) => {
     const tw = useTailwind();
     const [toastOptions, setToastOptions] = useState<ToastOptions | undefined>(
       undefined,
@@ -370,7 +371,7 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
     const toastProps = getToastProps(toastOptions);
     const { actionButtonLabel, actionButtonOnPress, ...restToastProps } =
       toastProps;
-    const toastTwClassNames = [twClassName, toastTwClassName]
+    const toastTwClassNames = [twClassName, className, toastTwClassName]
       .filter(Boolean)
       .join(' ');
     const handleClose = showCloseButton

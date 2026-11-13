@@ -13,6 +13,7 @@ import { ButtonsAlignment } from './BottomSheetFooter.types';
 export const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
   style,
   twClassName,
+  className,
   buttonsAlignment = ButtonsAlignment.Horizontal,
   primaryButtonProps,
   secondaryButtonProps,
@@ -36,6 +37,7 @@ export const BottomSheetFooter: React.FC<BottomSheetFooterProps> = ({
           isHorizontal ? 'flex-row' : 'flex-col',
           'px-4 py-0',
           twClassName,
+          className,
         ),
         style,
       ]}

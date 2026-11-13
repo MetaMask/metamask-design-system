@@ -20,6 +20,7 @@ export const BadgeCount = ({
   max = 99,
   textProps,
   twClassName,
+  className,
   style,
   ...props
 }: BadgeCountProps) => {
@@ -33,6 +34,7 @@ export const BadgeCount = ({
           'bg-error-default rounded-lg items-center justify-center self-start',
           TWCLASSMAP_BADGECOUNT_SIZE_CONTAINER[size],
           twClassName,
+          className,
         ),
         style,
       ]}
