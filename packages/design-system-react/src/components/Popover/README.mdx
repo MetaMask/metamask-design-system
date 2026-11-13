@@ -4,7 +4,7 @@ import * as PopoverStories from './Popover.stories';
 
 # Popover
 
-`Popover` is a floating layer that positions itself against a reference element using [`@floating-ui/react-dom`](https://floating-ui.com/docs/react-dom). Use it for tooltips, menus, and other contextual content that needs to anchor to a trigger. Wire `referenceElement`, `isOpen`, and one of `onPressEscKey` / `onClickOutside` to control visibility from the trigger.
+`Popover` is a floating layer that positions itself against a reference element using [`@floating-ui/react-dom`](https://floating-ui.com/docs/react-dom), and renders in the browser's [top layer](#top-layer). Use it for tooltips, menus, and other contextual content that needs to anchor to a trigger. Wire `referenceElement`, `isOpen`, and one of `onPressEscKey` / `onClickOutside` to control visibility from the trigger.
 
 ```tsx
 import { Popover, PopoverPosition } from '@metamask/design-system-react';
@@ -178,7 +178,7 @@ Props forwarded to the arrow element, such as `className` for additional styling
 
 ### `isPortal`
 
-Renders the popover into `document.body` via `createPortal` instead of inline. Use when the popover would otherwise be clipped by an ancestor with `overflow: hidden`.
+Renders the popover into `document.body` via `createPortal` instead of inline. You don't need it to escape `overflow: hidden` or `z-index`, because the popover always renders in the top layer (see [Top layer](#top-layer)). Leave it off inside a modal `<dialog>`: content portalled outside the dialog is inert.
 
 <table>
   <thead>
@@ -351,6 +351,18 @@ Called when the user clicks outside the popover and the reference element while 
 </table>
 
 <Canvas of={PopoverStories.OnClickOutside} />
+
+## Top layer
+
+The popover renders with the native [`popover="manual"`](https://developer.mozilla.org/docs/Web/API/Popover_API) attribute and is shown with `showPopover()`, so it sits in the browser's top layer. Ancestors' `overflow`, `transform`, and stacking contexts can't clip or cover it, and `z-index` classes have no effect. Dismissal stays under your control through `onPressEscKey` and `onClickOutside`; the browser never closes it on its own.
+
+<Canvas of={PopoverStories.TopLayer} />
+
+### Inside a dialog
+
+Render the popover inside the `<dialog>`, next to its trigger. It paints above a modal dialog and stays interactive. `onPressEscKey` prevents the default Escape action, so the first Escape closes the popover and the next one closes the dialog.
+
+<Canvas of={PopoverStories.InsideDialog} />
 
 ## Component API
 
