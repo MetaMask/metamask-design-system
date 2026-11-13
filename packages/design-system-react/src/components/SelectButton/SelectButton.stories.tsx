@@ -61,9 +61,6 @@ const meta: Meta<SelectButtonProps> = {
     hideEndArrow: {
       control: 'boolean',
     },
-    className: {
-      control: 'text',
-    },
     onClick: {
       action: 'onClick',
     },
@@ -92,7 +89,6 @@ export const Default: Story = {
     variant: SelectButtonVariant.Primary,
     endArrowDirection: SelectButtonEndArrow.Down,
     isDisabled: false,
-    className: '',
   },
   render: (args) => (
     <SelectButtonStoryWrapper>
@@ -102,28 +98,35 @@ export const Default: Story = {
 };
 
 export const Value: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4}>
-      <SelectButton placeholder="Select network" />
-      <SelectButton placeholder="Select network" value="Ethereum Mainnet" />
+      <SelectButton {...args} placeholder="Select network" value={undefined} />
+      <SelectButton
+        {...args}
+        placeholder="Select network"
+        value="Ethereum Mainnet"
+      />
     </SelectButtonStoryWrapper>
   ),
 };
 
 export const Variant: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4}>
       <SelectButton
+        {...args}
         variant={SelectButtonVariant.Primary}
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Primary (ButtonSecondary look)"
       />
       <SelectButton
+        {...args}
         variant={SelectButtonVariant.Secondary}
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Secondary (ButtonTertiary look)"
       />
       <SelectButton
+        {...args}
         variant={SelectButtonVariant.Tertiary}
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Tertiary (alternative text)"
@@ -133,7 +136,7 @@ export const Variant: Story = {
 };
 
 export const Size: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4}>
       {(
         Object.entries(SelectButtonSize) as [
@@ -141,18 +144,24 @@ export const Size: Story = {
           (typeof SelectButtonSize)[keyof typeof SelectButtonSize],
         ][]
       ).map(([key, size]) => (
-        <SelectButton key={key} size={size} placeholder={`Size: ${key}`} />
+        <SelectButton
+          key={key}
+          {...args}
+          size={size}
+          placeholder={`Size: ${key}`}
+        />
       ))}
     </SelectButtonStoryWrapper>
   ),
 };
 
 export const IsFullWidth: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4} className="w-80">
       {Object.values(SelectButtonVariant).map((variant) => (
         <SelectButton
           key={variant}
+          {...args}
           isFullWidth
           variant={variant}
           startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
@@ -164,13 +173,16 @@ export const IsFullWidth: Story = {
 };
 
 export const IsDisabled: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4}>
       <SelectButton
+        {...args}
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Enabled"
+        isDisabled={false}
       />
       <SelectButton
+        {...args}
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Disabled"
         isDisabled
@@ -180,10 +192,11 @@ export const IsDisabled: Story = {
 };
 
 export const IsLoading: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4}>
-      <SelectButton placeholder="Loading" isLoading />
+      <SelectButton {...args} placeholder="Loading" isLoading />
       <SelectButton
+        {...args}
         variant={SelectButtonVariant.Secondary}
         placeholder="Loading"
         isLoading
@@ -193,17 +206,18 @@ export const IsLoading: Story = {
 };
 
 export const HideEndArrow: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper>
-      <SelectButton placeholder="No chevron" hideEndArrow />
+      <SelectButton {...args} placeholder="No chevron" hideEndArrow />
     </SelectButtonStoryWrapper>
   ),
 };
 
 export const StartAccessory: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4}>
       <SelectButton
+        {...args}
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="With start accessory"
         startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
@@ -213,9 +227,10 @@ export const StartAccessory: Story = {
 };
 
 export const EndAccessory: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4}>
       <SelectButton
+        {...args}
         placeholder="Custom trailing content"
         endAccessory={<Icon name={IconName.Close} size={IconSize.Sm} />}
       />
@@ -224,7 +239,7 @@ export const EndAccessory: Story = {
 };
 
 export const EndArrowDirection: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4}>
       {(
         Object.entries(SelectButtonEndArrow) as [
@@ -234,6 +249,7 @@ export const EndArrowDirection: Story = {
       ).map(([key, direction]) => (
         <SelectButton
           key={key}
+          {...args}
           endArrowDirection={direction}
           placeholder={`End arrow: ${key}`}
         />
@@ -243,9 +259,10 @@ export const EndArrowDirection: Story = {
 };
 
 export const TextProps: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper>
       <SelectButton
+        {...args}
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Custom text variant and color"
         textProps={{
@@ -258,14 +275,16 @@ export const TextProps: Story = {
 };
 
 export const EndArrowDirectionIconProps: Story = {
-  render: () => (
+  render: (args) => (
     <SelectButtonStoryWrapper gap={4}>
       <SelectButton
+        {...args}
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Small arrow"
         endArrowDirectionIconProps={{ size: IconSize.Sm }}
       />
       <SelectButton
+        {...args}
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Large arrow"
         endArrowDirectionIconProps={{ size: IconSize.Lg }}

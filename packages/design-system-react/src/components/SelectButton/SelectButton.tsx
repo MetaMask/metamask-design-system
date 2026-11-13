@@ -31,7 +31,7 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
       size = SelectButtonSize.Sm,
       className,
       style,
-      ...buttonBaseRest
+      ...props
     },
     ref,
   ) => {
@@ -99,7 +99,7 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
     return (
       <ButtonBase
         ref={ref}
-        {...buttonBaseRest}
+        {...props}
         size={size}
         // ButtonBase treats `isDisabled={false}` as set, so a loading button
         // would stay enabled (`false ?? isLoading`). Pass `undefined` unless
