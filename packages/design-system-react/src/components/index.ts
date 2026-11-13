@@ -180,3 +180,11 @@ export type { ToastOptions, ToastProps, ToasterProps } from './Toast';
 
 export { HeaderSubpage } from './HeaderSubpage';
 export type { HeaderSubpageProps } from './HeaderSubpage';
+
+export {
+  SelectButton,
+  SelectButtonEndArrow,
+  SelectButtonSize,
+  SelectButtonVariant,
+} from './SelectButton';
+export type { SelectButtonProps } from './SelectButton';
