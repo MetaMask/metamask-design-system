@@ -1,0 +1,24 @@
+import type { SelectButtonPropsShared } from '@metamask/design-system-shared';
+
+import type { ButtonBaseProps } from '../ButtonBase';
+import type { IconProps } from '../Icon';
+
+/**
+ * SelectButton component props.
+ */
+export type SelectButtonProps = SelectButtonPropsShared &
+  Omit<
+    ButtonBaseProps,
+    | 'children'
+    | 'endIconName'
+    | 'endIconProps'
+    | 'disabled'
+    | 'size'
+    // HTML `value` is the form value. Shared `value` is the selected label.
+    | 'value'
+  > & {
+    /**
+     * Optional props passed to the trailing arrow `Icon` when a trailing arrow is shown (excluding `name`, which is derived from the resolved direction).
+     */
+    endArrowDirectionIconProps?: Partial<Omit<IconProps, 'name'>>;
+  };
