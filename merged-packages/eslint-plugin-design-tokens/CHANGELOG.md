@@ -40,9 +40,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[Unreleased]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.1.1...v2.0.0
-[1.1.1]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.1.0...v1.1.1
-[1.1.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/compare/v0.1.0...v1.0.0
-[0.1.0]: https://github.com/MetaMask/eslint-plugin-design-tokens/releases/tag/v0.1.0
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/eslint-plugin-design-tokens@2.0.0...HEAD
+[2.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/eslint-plugin-design-tokens@1.1.1...@metamask/eslint-plugin-design-tokens@2.0.0
+[1.1.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/eslint-plugin-design-tokens@1.1.0...@metamask/eslint-plugin-design-tokens@1.1.1
+[1.1.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/eslint-plugin-design-tokens@1.0.0...@metamask/eslint-plugin-design-tokens@1.1.0
+[1.0.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/eslint-plugin-design-tokens@0.1.0...@metamask/eslint-plugin-design-tokens@1.0.0
+[0.1.0]: https://github.com/MetaMask/metamask-design-system/releases/tag/@metamask/eslint-plugin-design-tokens@0.1.0
