@@ -42,6 +42,7 @@ export const ButtonBase = ({
   isDisabled,
   isFullWidth,
   twClassName,
+  className,
   textClassName,
   iconClassName,
   style,
@@ -122,11 +123,12 @@ export const ButtonBase = ({
       accessibilityState={accessibilityState}
       accessible
       style={({ pressed }) => {
-        // Evaluate custom className if it's a function
+        // className replaces twClassName when set.
+        const userClassName = className ?? twClassName;
         const customClassName =
-          typeof twClassName === 'function'
-            ? twClassName(pressed)
-            : twClassName;
+          typeof userClassName === 'function'
+            ? userClassName(pressed)
+            : userClassName;
 
         // Build button container styles
         const buttonStyles = tw.style(

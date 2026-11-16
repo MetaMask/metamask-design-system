@@ -16,13 +16,17 @@ export const ButtonSecondary = ({
   isInverse = false,
   isLoading = false,
   twClassName = '',
+  className,
   style,
   ...props
 }: ButtonSecondaryProps) => {
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
+      const userClassName = className ?? twClassName;
       const classNameStr =
-        typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+        typeof userClassName === 'function'
+          ? userClassName(pressed)
+          : userClassName;
 
       const baseClasses = `
         border
@@ -55,7 +59,7 @@ export const ButtonSecondary = ({
 
       return `${backgroundClass} ${borderClass} ${baseClasses}`;
     },
-    [isInverse, isDanger, isLoading, twClassName],
+    [isInverse, isDanger, isLoading, twClassName, className],
   );
 
   const getTextClassName = useCallback(

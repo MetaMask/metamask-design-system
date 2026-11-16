@@ -16,13 +16,17 @@ export const ButtonPrimary = ({
   isInverse = false,
   isLoading = false,
   twClassName = '',
+  className,
   style,
   ...props
 }: ButtonPrimaryProps) => {
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
+      const userClassName = className ?? twClassName;
       const classNameStr =
-        typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+        typeof userClassName === 'function'
+          ? userClassName(pressed)
+          : userClassName;
 
       if (isInverse && isDanger) {
         return `${pressed || isLoading ? 'bg-default-pressed' : 'bg-default'} ${classNameStr}`;
@@ -35,7 +39,7 @@ export const ButtonPrimary = ({
       }
       return `${pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default'} ${classNameStr}`;
     },
-    [isInverse, isDanger, isLoading, twClassName],
+    [isInverse, isDanger, isLoading, twClassName, className],
   );
 
   const getTextClassName = useCallback(
