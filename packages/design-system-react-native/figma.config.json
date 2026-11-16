@@ -1,9 +1,13 @@
 {
   "codeConnect": {
-    "include": ["packages/design-system-react-native/src/components/**/*.tsx"],
+    "include": [
+      "packages/design-system-react-native/src/components/**/*.tsx",
+      "packages/design-system-react-native/src/components/**/*.figma.ts"
+    ],
     "exclude": ["**/temp-components/**/*"],
     "parser": "react",
     "label": "React Native",
+    "language": "jsx",
     "importPaths": {
       "packages/design-system-react-native/src/components/*": "@metamask/design-system-react-native"
     },
