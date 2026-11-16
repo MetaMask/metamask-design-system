@@ -26,22 +26,6 @@ const { inspect } = require('util');
  * @typedef {import('@yarnpkg/types').Yarn.Constraints.DependencyType} DependencyType
  */
 
-/**
- * Packages whose licenses deviate from the default MIT license, mapped to the
- * license expression that the package must declare and the license files that
- * must be present in the package directory. These packages keep the licenses
- * they had before being migrated into this monorepo; see
- * `docs/package-migration-process-guide.md` (migration step PR#11).
- *
- * @type {Record<string, {license: string, licenseFiles: string[]}>}
- */
-const licenseExceptions = {
-  '@metamask/eslint-plugin-design-tokens': {
-    license: '(MIT OR Apache-2.0)',
-    licenseFiles: ['LICENSE.MIT', 'LICENSE.APACHE2'],
-  },
-};
-
 module.exports = defineConfig({
   async constraints({ Yarn }) {
     const rootWorkspace = Yarn.workspace({ cwd: '.' });
@@ -471,35 +455,19 @@ function expectWorkspaceDescription(workspace) {
 /**
  * Expect that the workspace has a license file, and that the `license` field is
  * set. By default, this should be MIT, although some packages have pre-existing
- * licenses that we cannot change; those packages are listed in
- * `licenseExceptions`.
+ * license that we cannot change.
  *
  * @param {Workspace} workspace - The workspace to check.
  */
 async function expectWorkspaceLicense(workspace) {
-  const licenseException = licenseExceptions[workspace.manifest.name];
-
-  const licenseFiles = licenseException
-    ? licenseException.licenseFiles
-    : ['LICENSE', 'LICENCE'];
-  const licenseFilePresence = await Promise.all(
-    licenseFiles.map((licenseFile) =>
-      workspaceFileExists(workspace, licenseFile),
-    ),
-  );
-  // Regular packages may use either "LICENSE" or "LICENCE"; excepted packages
-  // must ship every license file that their license expression refers to.
-  const hasLicenseFile = licenseException
-    ? licenseFilePresence.every(Boolean)
-    : licenseFilePresence.some(Boolean);
-
-  if (!hasLicenseFile) {
+  if (
+    !(await workspaceFileExists(workspace, 'LICENSE')) &&
+    !(await workspaceFileExists(workspace, 'LICENCE'))
+  ) {
     workspace.error('Could not find LICENSE file');
   }
 
-  if (licenseException) {
-    expectWorkspaceField(workspace, 'license', licenseException.license);
-  } else if (
+  if (
     workspace.manifest.license === null ||
     workspace.manifest.license === undefined
   ) {
