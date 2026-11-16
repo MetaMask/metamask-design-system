@@ -59,7 +59,7 @@ export type KeyValueSelectProps = Omit<
     keyEndButtonIconProps?: Partial<ButtonIconProps>;
     /** Optional props for the SelectButton label Text. Mapped from KeyValueRow `valueTextProps`. */
     valueTextProps?: Partial<Omit<TextProps, 'children'>>;
-    /** SelectButton-only props (placeholder and caret controls). */
+    /** SelectButton-only props (placeholder and caret controls). `placeholder` is optional; when the resolved label is empty, no label is rendered. */
     selectButtonProps: KeyValueSelectSelectButtonProps;
     /**
      * Optional props forwarded to the inner KeyValueRow (e.g. `testID`, `twClassName`, `style`,

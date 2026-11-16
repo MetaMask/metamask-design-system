@@ -45,6 +45,8 @@ const meta: Meta<SelectButtonProps> = {
     },
     placeholder: {
       control: 'text',
+      description:
+        'Optional label shown when `value` is `undefined` or `null`. When neither `value` nor `placeholder` resolves to a non-empty string, no label is rendered; provide an `accessibilityLabel` for the accessible name.',
     },
   },
 };
@@ -236,6 +238,31 @@ export const EndArrowDirectionIconProps: Story = {
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Large arrow"
         endArrowDirectionIconProps={{ size: IconSize.Lg }}
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const LongLabel: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      <SelectButton
+        onPress={noopPress}
+        isFullWidth
+        placeholder="Select a very long network name"
+      />
+      <SelectButton
+        onPress={noopPress}
+        isFullWidth
+        placeholder="Ethereum Mainnet"
+        value="A very long selected value that truncates with an ellipsis"
+      />
+      <SelectButton
+        onPress={noopPress}
+        isFullWidth
+        placeholder="Ethereum Mainnet"
+        value="A very long selected value that clips instead of an ellipsis"
+        textProps={{ ellipsizeMode: 'clip' }}
       />
     </SelectButtonStoryWrapper>
   ),

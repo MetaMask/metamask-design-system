@@ -67,6 +67,32 @@ describe('SelectButton', () => {
       expect(getByText('Select')).toHaveTextContent('Select');
     });
 
+    it('renders no label when value is an empty string', () => {
+      const { queryByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Select"
+          value=""
+          accessibilityLabel="Select"
+        />,
+      );
+
+      expect(queryByText(/.+/u)).toBeNull();
+    });
+
+    it('renders no label when there is no value and no placeholder', () => {
+      const { queryByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          accessibilityLabel="Select"
+        />,
+      );
+
+      expect(queryByText(/.+/u)).toBeNull();
+    });
+
     it('exposes testID on the root pressable', () => {
       const { getByTestId } = render(
         <SelectButton
@@ -90,6 +116,85 @@ describe('SelectButton', () => {
       );
 
       expect(getByTestId('start-accessory')).toBeOnTheScreen();
+    });
+  });
+
+  describe('when there is no label', () => {
+    const originalDev = global.__DEV__;
+
+    afterEach(() => {
+      global.__DEV__ = originalDev;
+    });
+
+    it('warns in development when there is no label and no accessibilityLabel', () => {
+      const warnSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => undefined);
+
+      render(<SelectButton testID={ROOT_TEST_ID} onPress={noopPress} />);
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('SelectButton'),
+      );
+      warnSpy.mockRestore();
+    });
+
+    it('does not warn when accessibilityLabel is provided', () => {
+      const warnSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => undefined);
+
+      render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          accessibilityLabel="Select network"
+        />,
+      );
+
+      expect(warnSpy).not.toHaveBeenCalled();
+      warnSpy.mockRestore();
+    });
+
+    it('does not warn when __DEV__ is false', () => {
+      global.__DEV__ = false;
+      const warnSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => undefined);
+
+      render(<SelectButton testID={ROOT_TEST_ID} onPress={noopPress} />);
+
+      expect(warnSpy).not.toHaveBeenCalled();
+      warnSpy.mockRestore();
+    });
+  });
+
+  describe('when the label truncates', () => {
+    it('uses one line with a tail ellipsis by default', () => {
+      const { getByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Label"
+        />,
+      );
+
+      expect(getByText('Label')).toHaveProp('ellipsizeMode', 'tail');
+      expect(getByText('Label')).toHaveProp('numberOfLines', 1);
+    });
+
+    it('lets textProps override the truncation', () => {
+      const { getByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Label"
+          textProps={{ ellipsizeMode: 'clip', numberOfLines: 2 }}
+        />,
+      );
+
+      expect(getByText('Label')).toHaveProp('ellipsizeMode', 'clip');
+      expect(getByText('Label')).toHaveProp('numberOfLines', 2);
     });
   });
 

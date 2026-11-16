@@ -20,7 +20,7 @@ The props contract is **`SelectButtonProps`** from **`@metamask/design-system-re
 
 ### `placeholder`
 
-Label text when **`value`** is **`undefined`** or **`null`**. An empty string **`""`** still counts as a selected label, not a placeholder.
+Optional label text shown when **`value`** is **`undefined`** or **`null`**. When neither **`value`** nor **`placeholder`** resolves to a non-empty string, no label node is rendered; give the control an **`aria-label`** so it still has an accessible name. Development builds log a console warning for a label-less control without **`aria-label`**.
 
 <table>
   <thead>
@@ -35,8 +35,10 @@ Label text when **`value`** is **`undefined`** or **`null`**. An empty string **
       <td align="left">
         <code>string</code>
       </td>
-      <td align="left">Yes</td>
-      <td align="left">N/A</td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -51,7 +53,7 @@ import { SelectButton } from '@metamask/design-system-react';
 
 ### `value`
 
-Optional selected label. When set to a non-null string, it replaces **`placeholder`** in the row.
+Optional selected label. When set to a non-null string, it replaces **`placeholder`** in the row. When the resolved label is **`undefined`**, **`null`**, or an empty string **`""`**, no label is rendered.
 
 <table>
   <thead>
@@ -333,7 +335,7 @@ import {
 
 ### `textProps`
 
-Optional props passed to **`Text`** when the label is a string.
+Optional props passed to **`Text`** when the label is a string. The label truncates to one line with an ellipsis by default (`ellipsis`); pass `ellipsis: false` to let it wrap, and use `className` for finer control. The label keeps `min-w-0` so it can shrink inside the row.
 
 <table>
   <thead>
@@ -371,6 +373,8 @@ import {
 ```
 
 <Canvas of={SelectButtonStories.TextProps} />
+
+<Canvas of={SelectButtonStories.LongLabel} />
 
 ### `endArrowDirectionIconProps`
 

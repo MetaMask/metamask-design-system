@@ -29,7 +29,7 @@ export type KeyValueSelectPropsShared = Omit<
   'value' | 'variant'
 > & {
   /**
-   * Selected select label. When `undefined` or `null`, `selectButtonProps.placeholder` is shown.
+   * Selected select label. When `undefined` or `null`, `selectButtonProps.placeholder` is shown instead. When the resolved label is `undefined`, `null`, or an empty string, no label is rendered.
    */
   value?: string | null;
   /**
@@ -39,7 +39,7 @@ export type KeyValueSelectPropsShared = Omit<
    */
   variant?: KeyValueSelectVariant;
   /**
-   * SelectButton-only props (placeholder and caret controls).
+   * SelectButton-only props (placeholder and caret controls). `placeholder` is optional; when the resolved label is empty, no label is rendered.
    */
   selectButtonProps: KeyValueSelectSelectButtonPropsShared;
   /**

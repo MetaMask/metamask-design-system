@@ -39,9 +39,9 @@ export type SelectButtonVariant =
  */
 export type SelectButtonPropsShared = {
   /**
-   * Label shown when `value` is `undefined` or `null`. Only those two are treated as “no selection”; other falsy values (for example `””`) still render as `value`.
+   * Label shown when `value` is `undefined` or `null`. Optional: when neither `value` nor `placeholder` resolves to a non-empty string, no label is rendered and the control needs an accessible name (`aria-label` on web, `accessibilityLabel` on React Native).
    */
-  placeholder: string;
+  placeholder?: string;
   /**
    * Height size of the button. Maps 1:1 to ButtonBaseSize values.
    *
@@ -49,7 +49,7 @@ export type SelectButtonPropsShared = {
    */
   size?: SelectButtonSize;
   /**
-   * Selected label text. When `undefined` or `null`, `placeholder` is rendered instead.
+   * Selected label text. When `undefined` or `null`, `placeholder` is rendered instead. When the resolved label is `undefined`, `null`, or an empty string, no label is rendered.
    */
   value?: string | null;
   /**

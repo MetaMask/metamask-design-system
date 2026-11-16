@@ -48,11 +48,20 @@ describe('SelectButton', () => {
       expect(screen.getByRole('button')).toHaveTextContent('Select');
     });
 
-    it('renders an empty label when value is an empty string', () => {
-      render(<SelectButton placeholder="Select" value="" />);
+    it('renders no label when value is an empty string', () => {
+      const { container } = render(
+        <SelectButton placeholder="Select" value="" aria-label="Select" />,
+      );
 
-      expect(screen.getByRole('button')).toHaveTextContent('');
-      expect(screen.queryByText('Select')).not.toBeInTheDocument();
+      expect(container.querySelector('span')).not.toBeInTheDocument();
+      expect(screen.getByRole('button').textContent).toBe('');
+    });
+
+    it('renders no label when there is no value and no placeholder', () => {
+      const { container } = render(<SelectButton aria-label="Select" />);
+
+      expect(container.querySelector('span')).not.toBeInTheDocument();
+      expect(screen.getByRole('button').textContent).toBe('');
     });
 
     it('renders startAccessory before the label', () => {
@@ -73,6 +82,48 @@ describe('SelectButton', () => {
 
       expect(ref.current).toBeInstanceOf(HTMLButtonElement);
       expect(ref.current).toHaveTextContent('Label');
+    });
+  });
+
+  describe('when there is no label', () => {
+    it('warns in development when there is no label and no aria-label', () => {
+      const warnSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => undefined);
+
+      render(<SelectButton />);
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('SelectButton'),
+      );
+      warnSpy.mockRestore();
+    });
+
+    it('does not warn when aria-label is provided', () => {
+      const warnSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => undefined);
+
+      render(<SelectButton aria-label="Select network" />);
+
+      expect(warnSpy).not.toHaveBeenCalled();
+      warnSpy.mockRestore();
+    });
+
+    it('does not warn in production', () => {
+      const originalNodeEnv = process.env.NODE_ENV;
+      const warnSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => undefined);
+      process.env.NODE_ENV = 'production';
+
+      try {
+        render(<SelectButton />);
+        expect(warnSpy).not.toHaveBeenCalled();
+      } finally {
+        process.env.NODE_ENV = originalNodeEnv;
+        warnSpy.mockRestore();
+      }
     });
   });
 
@@ -345,6 +396,31 @@ describe('SelectButton', () => {
 
       expect(screen.getByText('Label')).toHaveClass('text-center');
       expect(screen.getByText('Label')).not.toHaveClass('text-left');
+    });
+
+    it('truncates the label to one line with an ellipsis by default', () => {
+      render(<SelectButton placeholder="Label" />);
+
+      expect(screen.getByText('Label')).toHaveClass('truncate', 'min-w-0');
+      expect(screen.getByText('Label')).not.toHaveClass('flex-wrap');
+    });
+
+    it('keeps one-line truncation on a full-width button', () => {
+      render(<SelectButton isFullWidth placeholder="Label" />);
+
+      expect(screen.getByText('Label')).toHaveClass(
+        'truncate',
+        'min-w-0',
+        'flex-1',
+      );
+    });
+
+    it('lets textProps disable truncation', () => {
+      render(
+        <SelectButton placeholder="Label" textProps={{ ellipsis: false }} />,
+      );
+
+      expect(screen.getByText('Label')).not.toHaveClass('truncate');
     });
 
     it('applies disabled opacity when isDisabled is true', () => {

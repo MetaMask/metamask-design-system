@@ -37,22 +37,35 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
     ref,
   ) => {
     const labelContent = value ?? placeholder;
+    const hasLabel = Boolean(labelContent);
     const isTransparentVariant =
       variant === SelectButtonVariant.Secondary ||
       variant === SelectButtonVariant.Tertiary;
     const isInteractive = !isDisabled && !isLoading;
+
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      !hasLabel &&
+      !props['aria-label']
+    ) {
+      console.warn(
+        'SelectButton: no label is rendered because `value` and `placeholder` are missing or empty. Provide an `aria-label` so the control has an accessible name.',
+      );
+    }
 
     const resolvedTextProps = {
       ...(variant === SelectButtonVariant.Tertiary
         ? { color: TextColor.TextAlternative }
         : {}),
       textAlign: TextAlign.Left,
+      // One-line ellipsis by default; callers override it through `textProps`.
+      ellipsis: true,
       ...textProps,
       className: twMerge(
-        'flex-wrap',
+        'min-w-0',
         // `flex-1` sets grow and shrink. Pairing it with `grow` / `shrink`
         // makes twMerge drop one of them, so full width uses `flex-1` only.
-        isFullWidth ? 'min-w-0 flex-1' : 'shrink grow-0',
+        isFullWidth ? 'flex-1' : 'shrink grow-0',
         textProps?.className,
       ),
     };
@@ -136,7 +149,7 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
         className={mergedClassName}
         style={style}
       >
-        {labelContent}
+        {hasLabel ? labelContent : undefined}
       </ButtonBase>
     );
   },

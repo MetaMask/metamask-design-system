@@ -14,11 +14,11 @@ The props contract is **`SelectButtonProps`** from **`@metamask/design-system-re
 
 ### `placeholder`
 
-Label text when **`value`** is **`undefined`** or **`null`**. An empty string **`""`** still counts as a selected label, not a placeholder.
+Optional label text shown when **`value`** is **`undefined`** or **`null`**. When neither **`value`** nor **`placeholder`** resolves to a non-empty string, no label is rendered; give the control an **`accessibilityLabel`** so it still has an accessible name. Development builds log a console warning for a label-less control without **`accessibilityLabel`**.
 
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `string` | Yes      | N/A     |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { SelectButton } from '@metamask/design-system-react-native';
@@ -28,7 +28,7 @@ import { SelectButton } from '@metamask/design-system-react-native';
 
 ### `value`
 
-Optional selected label. When set to a non-null string, it replaces **`placeholder`** in the row.
+Optional selected label. When set to a non-null string, it replaces **`placeholder`** in the row. When the resolved label is **`undefined`**, **`null`**, or an empty string **`""`**, no label is rendered.
 
 | TYPE             | REQUIRED | DEFAULT     |
 | ---------------- | -------- | ----------- |
@@ -176,7 +176,7 @@ import {
 
 ### `textProps`
 
-Optional props passed to **`Text`** when the label is a string.
+Optional props passed to **`Text`** when the label is a string. The label truncates to one line with a tail ellipsis by default (`numberOfLines: 1`, `ellipsizeMode: 'tail'`); pass `ellipsizeMode` or `numberOfLines` through `textProps` to override it.
 
 | TYPE                                   | REQUIRED | DEFAULT     |
 | -------------------------------------- | -------- | ----------- |
