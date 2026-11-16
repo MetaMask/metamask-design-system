@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // specifically disable declarations for the plugin
+    // see reasoning in ./rules.d.ts
+    "declaration": false,
+    "declarationMap": false,
+    "inlineSources": false,
+    "noEmit": false,
+    "outDir": "dist/",
+    "rootDir": "src",
+    "sourceMap": false
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": [
+    "**/__fixtures__/**/*",
+    "**/__mocks__/**/*",
+    "**/__test__/**/*",
+    "**/__tests__/**/*",
+    "**/__snapshots__/**/*",
+    "**/*.test.ts",
+    "**/*.test-d.ts",
+    "**/*.test.*.ts"
+  ]
+}

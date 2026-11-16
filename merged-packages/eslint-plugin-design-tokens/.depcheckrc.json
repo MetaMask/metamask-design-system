@@ -1,0 +1,19 @@
+{
+  "ignores": [
+    "@lavamoat/allow-scripts",
+    "@lavamoat/preinstall-always-fail",
+    "@metamask/auto-changelog",
+    "@types/*",
+    "@typescript-eslint/*",
+    "@yarnpkg/*",
+    "clipanion",
+    "depcheck",
+    "eslint-config-*",
+    "eslint-import-resolver-typescript",
+    "eslint-plugin-*",
+    "jest-it-up",
+    "prettier-plugin-packagejson",
+    "typanion",
+    "typescript-eslint"
+  ]
+}
