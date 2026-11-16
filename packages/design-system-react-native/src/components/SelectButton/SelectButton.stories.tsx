@@ -87,19 +87,19 @@ export const Variant: Story = {
         onPress={noopPress}
         variant={SelectButtonVariant.Primary}
         endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Primary (ButtonSecondary look)"
+        placeholder="Primary"
       />
       <SelectButton
         onPress={noopPress}
         variant={SelectButtonVariant.Secondary}
         endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Secondary (ButtonTertiary look)"
+        placeholder="Secondary"
       />
       <SelectButton
         onPress={noopPress}
         variant={SelectButtonVariant.Tertiary}
         endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Tertiary (alternative text)"
+        placeholder="Tertiary"
       />
     </SelectButtonStoryWrapper>
   ),
@@ -118,7 +118,7 @@ export const Size: Story = {
           key={key}
           size={value}
           onPress={noopPress}
-          placeholder={`Size: ${key}`}
+          placeholder={`Size ${key}`}
         />
       ))}
     </SelectButtonStoryWrapper>
@@ -135,7 +135,7 @@ export const IsFullWidth: Story = {
           isFullWidth
           variant={variant}
           startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
-          placeholder={`${variant} full width`}
+          placeholder={`Full width ${variant}`}
         />
       ))}
     </SelectButtonStoryWrapper>
@@ -199,7 +199,7 @@ export const EndArrowDirection: Story = {
           endArrowDirection={value}
           testID={`select-button-end-${key}`}
           onPress={noopPress}
-          placeholder={`End arrow: ${key}`}
+          placeholder={`End arrow ${key}`}
         />
       ))}
     </SelectButtonStoryWrapper>

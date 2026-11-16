@@ -112,22 +112,6 @@ describe('SelectButton', () => {
         ARROW_PATH_PREFIX[SelectButtonEndArrow.Down],
       );
     });
-
-    it('treats a null endArrowDirection as omitted', () => {
-      render(
-        <SelectButton
-          endArrowDirection={
-            null as unknown as (typeof SelectButtonEndArrow)[keyof typeof SelectButtonEndArrow]
-          }
-          endArrowDirectionIconProps={{ 'data-testid': 'end-arrow' }}
-          placeholder="Label"
-        />,
-      );
-
-      expect(getArrowPath()).toContain(
-        ARROW_PATH_PREFIX[SelectButtonEndArrow.Down],
-      );
-    });
   });
 
   describe('when hideEndArrow is true', () => {

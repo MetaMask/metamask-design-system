@@ -55,7 +55,7 @@ export const SelectButton = ({
   let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;
   if (hideEndArrow) {
     resolvedEndArrowDirection = undefined;
-  } else if (endArrowDirection !== undefined && endArrowDirection !== null) {
+  } else if (endArrowDirection !== undefined) {
     resolvedEndArrowDirection = endArrowDirection;
   } else if (endAccessory) {
     resolvedEndArrowDirection = undefined;
