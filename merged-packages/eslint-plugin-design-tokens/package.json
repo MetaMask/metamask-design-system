@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/MetaMask/eslint-plugin-design-tokens.git"
   },
-  "license": "(MIT OR Apache-2.0)",
+  "license": "MIT",
   "sideEffects": false,
   "exports": {
     ".": {
