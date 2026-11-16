@@ -53,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^8.39.0",
     "@typescript-eslint/parser": "^8.39.0",
     "@yarnpkg/types": "^4.0.0",
+    "deepmerge": "^4.2.2",
     "depcheck": "^1.4.7",
     "eslint": "^9.39.0",
     "eslint-config-prettier": "^9.1.0",

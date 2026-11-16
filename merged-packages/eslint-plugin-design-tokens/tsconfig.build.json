@@ -1,25 +1,16 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tsconfig.packages.build.json",
   "compilerOptions": {
-    // specifically disable declarations for the plugin
-    // see reasoning in ./rules.d.ts
-    "declaration": false,
-    "declarationMap": false,
-    "inlineSources": false,
-    "noEmit": false,
-    "outDir": "dist/",
-    "rootDir": "src",
-    "sourceMap": false
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    // Keep the incremental build state inside the gitignored "dist" directory
+    // so that deleting "dist" also discards the state and the next build
+    // re-emits. The plugin's "build:types" script invokes "tsc" directly
+    // (unlike other packages, which use `ts-bridge`), and plain `tsc -p`
+    // skips emit when it considers the project up-to-date.
+    "tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo"
   },
-  "include": ["./src/**/*.ts"],
-  "exclude": [
-    "**/__fixtures__/**/*",
-    "**/__mocks__/**/*",
-    "**/__test__/**/*",
-    "**/__tests__/**/*",
-    "**/__snapshots__/**/*",
-    "**/*.test.ts",
-    "**/*.test-d.ts",
-    "**/*.test.*.ts"
-  ]
+  "references": [],
+  "include": ["./src"]
 }
