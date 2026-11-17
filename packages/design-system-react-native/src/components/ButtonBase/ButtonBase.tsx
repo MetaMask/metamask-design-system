@@ -111,6 +111,20 @@ export const ButtonBase = ({
     return state;
   }, [isDisabled, isLoading]);
 
+  // Variant styling from `textClassName` is merged into the label's
+  // `twClassName`, which `Text` applies after the `color` prop. Re-assert the
+  // caller's color after the hook so `textProps.color` overrides the variant
+  // label color, matching web.
+  const getLabelTextTwClassName = (pressed: boolean) =>
+    mergeTwClassName(
+      mergeTwClassName(
+        'shrink grow-0 flex-wrap text-center',
+        textClassName ? textClassName(pressed) : undefined,
+      ),
+      mergeTwClassName(textProps?.color ?? '', textProps?.twClassName) ||
+        undefined,
+    );
+
   return (
     <ButtonAnimated
       disabled={isDisabled || isLoading}
@@ -233,13 +247,7 @@ export const ButtonBase = ({
                   numberOfLines: 1,
                   ellipsizeMode: 'clip',
                   ...textProps,
-                  twClassName: mergeTwClassName(
-                    mergeTwClassName(
-                      'shrink grow-0 flex-wrap text-center',
-                      textClassName ? textClassName(pressed) : undefined,
-                    ),
-                    textProps?.twClassName,
-                  ),
+                  twClassName: getLabelTextTwClassName(pressed),
                 }}
               >
                 {children}
