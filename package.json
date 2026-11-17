@@ -21,7 +21,7 @@
     "changelog:validate": "yarn workspaces foreach --all --no-private --parallel --interlaced --verbose run changelog:validate",
     "chromatic": "yarn workspace @metamask/storybook-react chromatic",
     "create-component:react": "yarn workspace @metamask/design-system-react create-component",
-    "create-package": "tsx scripts/create-package",
+    "create-package": "node scripts/create-package/index.ts",
     "figma:connect:react": "figma connect --config packages/design-system-react/figma.config.json",
     "figma:connect:react-native": "figma connect --config packages/design-system-react-native/figma.config.json",
     "figma:connect:publish": "yarn figma:connect:publish:react && yarn figma:connect:publish:react-native",
@@ -57,7 +57,7 @@
     "test:storybook:react": "yarn workspace @metamask/storybook-react test-storybook",
     "test:storybook:react-native": "yarn workspace @metamask/storybook-react-native test-storybook",
     "test:verbose": "yarn workspaces foreach --all --parallel --verbose run test:verbose",
-    "update-readme-content": "tsx scripts/update-readme-content.ts",
+    "update-readme-content": "node scripts/update-readme-content.ts",
     "workspaces:list-versions": "./scripts/list-workspace-versions.sh"
   },
   "simple-git-hooks": {
@@ -67,7 +67,8 @@
     "get-intrinsic": "1.3.0",
     "plist": "3.1.0",
     "pretty-format/react-is": "^19.0.0",
-    "simple-plist": "1.3.1"
+    "simple-plist": "1.3.1",
+    "yargs": "^17.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
@@ -111,10 +112,9 @@
     "rimraf": "^5.0.5",
     "semver": "^7.7.1",
     "simple-git-hooks": "^2.8.0",
-    "tsx": "^4.23.15",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.39.0",
-    "yargs": "^17.7.2"
+    "yargs": "^17.7.3"
   },
   "packageManager": "yarn@4.16.0",
   "engines": {

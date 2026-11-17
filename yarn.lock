@@ -3233,7 +3233,6 @@ __metadata:
     react-test-renderer: "npm:19.2.3"
     storybook: "npm:10.6.2"
     ts-jest: "npm:^29.2.5"
-    tsx: "npm:^4.23.15"
     typescript: "npm:~5.9.3"
   peerDependencies:
     "@metamask/design-system-twrnc-preset": ^0.14.0
@@ -3284,7 +3283,6 @@ __metadata:
     tailwind-merge: "npm:^2.0.0"
     tailwindcss: "npm:^3.0.0"
     ts-jest: "npm:^29.2.5"
-    tsx: "npm:^4.23.15"
     typescript: "npm:~5.9.3"
   peerDependencies:
     "@metamask/design-system-tailwind-preset": ^0.16.0
@@ -3313,7 +3311,6 @@ __metadata:
     react: "npm:19.2.3"
     react-test-renderer: "npm:19.2.3"
     ts-jest: "npm:^29.2.5"
-    tsx: "npm:^4.23.15"
     typescript: "npm:~5.9.3"
   peerDependencies:
     react: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -3511,10 +3508,9 @@ __metadata:
     rimraf: "npm:^5.0.5"
     semver: "npm:^7.7.1"
     simple-git-hooks: "npm:^2.8.0"
-    tsx: "npm:^4.23.15"
     typescript: "npm:~5.9.3"
     typescript-eslint: "npm:^8.39.0"
-    yargs: "npm:^17.7.2"
+    yargs: "npm:^17.7.3"
   languageName: unknown
   linkType: soft
 
@@ -7748,17 +7744,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cliui@npm:^7.0.2":
-  version: 7.0.4
-  resolution: "cliui@npm:7.0.4"
-  dependencies:
-    string-width: "npm:^4.2.0"
-    strip-ansi: "npm:^6.0.0"
-    wrap-ansi: "npm:^7.0.0"
-  checksum: 10/db858c49af9d59a32d603987e6fddaca2ce716cd4602ba5a2bb3a5af1351eebe82aba8dff3ef3e1b331f7fa9d40ca66e67bdf8e7c327ce0ea959747ead65c0ef
-  languageName: node
-  linkType: hard
-
 "cliui@npm:^8.0.1":
   version: 8.0.1
   resolution: "cliui@npm:8.0.1"
@@ -8881,7 +8866,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0 || ^0.26.0 || ^0.27.0 || ^0.28.0, esbuild@npm:~0.28.0":
+"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0 || ^0.26.0 || ^0.27.0 || ^0.28.0":
   version: 0.28.2
   resolution: "esbuild@npm:0.28.2"
   dependencies:
@@ -16509,21 +16494,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^4.23.15":
-  version: 4.23.15
-  resolution: "tsx@npm:4.23.15"
-  dependencies:
-    esbuild: "npm:~0.28.0"
-    fsevents: "npm:~2.3.3"
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    tsx: dist/cli.mjs
-  checksum: 10/f531aca9143a8ba08cf3053bd403a8b036d7bfffacc83c611486215d8cd41febad754d89f02c0bf92e55b747518b9ea124bfe76b55262b40be850f3ee938e4ff
-  languageName: node
-  linkType: hard
-
 "twrnc@npm:^4.5.1":
   version: 4.6.0
   resolution: "twrnc@npm:4.6.0"
@@ -17568,13 +17538,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs-parser@npm:^20.2.2":
-  version: 20.2.9
-  resolution: "yargs-parser@npm:20.2.9"
-  checksum: 10/0188f430a0f496551d09df6719a9132a3469e47fe2747208b1dd0ab2bb0c512a95d0b081628bbca5400fb20dbf2fabe63d22badb346cecadffdd948b049f3fcc
-  languageName: node
-  linkType: hard
-
 "yargs-parser@npm:^21.1.1":
   version: 21.1.1
   resolution: "yargs-parser@npm:21.1.1"
@@ -17582,9 +17545,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:17.7.2, yargs@npm:^17.0.0, yargs@npm:^17.3.1, yargs@npm:^17.6.2, yargs@npm:^17.7.2":
-  version: 17.7.2
-  resolution: "yargs@npm:17.7.2"
+"yargs@npm:^17.7.3":
+  version: 17.7.3
+  resolution: "yargs@npm:17.7.3"
   dependencies:
     cliui: "npm:^8.0.1"
     escalade: "npm:^3.1.1"
@@ -17593,22 +17556,7 @@ __metadata:
     string-width: "npm:^4.2.3"
     y18n: "npm:^5.0.5"
     yargs-parser: "npm:^21.1.1"
-  checksum: 10/abb3e37678d6e38ea85485ed86ebe0d1e3464c640d7d9069805ea0da12f69d5a32df8e5625e370f9c96dd1c2dc088ab2d0a4dd32af18222ef3c4224a19471576
-  languageName: node
-  linkType: hard
-
-"yargs@npm:^16.2.0":
-  version: 16.2.0
-  resolution: "yargs@npm:16.2.0"
-  dependencies:
-    cliui: "npm:^7.0.2"
-    escalade: "npm:^3.1.1"
-    get-caller-file: "npm:^2.0.5"
-    require-directory: "npm:^2.1.1"
-    string-width: "npm:^4.2.0"
-    y18n: "npm:^5.0.5"
-    yargs-parser: "npm:^20.2.2"
-  checksum: 10/807fa21211d2117135d557f95fcd3c3d390530cda2eca0c840f1d95f0f40209dcfeb5ec18c785a1f3425896e623e3b2681e8bb7b6600060eda1c3f4804e7957e
+  checksum: 10/a3826798c03b159e139d0580a3b2733953889a9a1bac8e4e1ca7a1a249b55315b213c323a6a1dbdb305f6e59496a9eaa810742c87e34abcf1a0584d8f59212a1
   languageName: node
   linkType: hard
 

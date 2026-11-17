@@ -38,7 +38,7 @@
     "build": "ts-bridge --project tsconfig.build.json --verbose --clean --no-references",
     "changelog:update": "../../scripts/update-changelog.sh @metamask/design-system-react",
     "changelog:validate": "../../scripts/validate-changelog.sh @metamask/design-system-react",
-    "create-component": "tsx scripts/create-component",
+    "create-component": "node scripts/create-component/index.ts",
     "publish:preview": "yarn npm publish --tag preview",
     "since-latest-release": "../../scripts/since-latest-release.sh",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --reporters=jest-silent-reporter",
@@ -79,7 +79,6 @@
     "rimraf": "^5.0.5",
     "tailwindcss": "^3.0.0",
     "ts-jest": "^29.2.5",
-    "tsx": "^4.23.15",
     "typescript": "~5.9.3"
   },
   "peerDependencies": {

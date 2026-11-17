@@ -1,4 +1,4 @@
-import { createComponent, parseArgs } from './create-component';
+import { createComponent, parseArgs } from './create-component.ts';
 
 const args = parseArgs(process.argv.slice(2));
 createComponent(args).catch((error) => {

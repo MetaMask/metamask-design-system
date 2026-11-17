@@ -21,6 +21,7 @@ jest.mock('execa', () => jest.fn());
 
 jest.mock('prettier', () => ({
   format: jest.fn(),
+  resolveConfig: jest.fn(),
 }));
 
 jest.mock('./fs-utils', () => ({

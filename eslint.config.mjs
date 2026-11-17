@@ -200,11 +200,17 @@ const config = createConfig([
     },
   },
   {
-    files: ['scripts/*.ts', 'packages/*/scripts/**/*.ts'],
+    files: ['scripts/**/*.ts', 'packages/*/scripts/**/*.ts'],
     rules: {
       // Scripts may be self-executable and thus have hashbangs.
       'n/hashbang': 'off',
+      // These files are executed directly with Node, whose ES module
+      // resolution requires explicit file extensions on relative imports.
+      // Test files and templates are transformed or copied elsewhere, so
+      // they keep the TypeScript convention of extensionless imports.
+      'import-x/extensions': ['error', 'ignorePackages', { ts: 'always' }],
     },
+    ignores: ['**/*.test.ts', '**/ComponentName/**'],
   },
   {
     files: ['**/jest.environment.js'],
