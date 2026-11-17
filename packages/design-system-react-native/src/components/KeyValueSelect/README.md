@@ -35,7 +35,7 @@ import { KeyValueSelect } from '@metamask/design-system-react-native';
 
 ### `value`
 
-Optional selected label for the select value. When `undefined` or `null`, `selectButtonProps.placeholder` is shown. An empty string `""` still counts as a selected label.
+Optional selected label for the select value. When `undefined` or `null`, `selectButtonProps.placeholder` is shown instead. When the resolved label is `undefined`, `null`, or an empty string `""`, no label is rendered.
 
 | TYPE             | REQUIRED | DEFAULT     |
 | ---------------- | -------- | ----------- |
@@ -134,7 +134,7 @@ SelectButton-only options for the value. Size is always `Md` and variant is alwa
 
 Includes:
 
-- `placeholder` (required) — label when `value` is `undefined` or `null`
+- `placeholder` (optional) — label when `value` is `undefined` or `null`
 - `endArrowDirection` — trailing arrow direction
 - `hideEndArrow` — hide the trailing arrow
 - `endArrowDirectionIconProps` — props for the trailing arrow `Icon`

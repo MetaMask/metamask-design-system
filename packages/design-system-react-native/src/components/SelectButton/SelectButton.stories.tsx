@@ -1,4 +1,6 @@
 import {
+  BoxAlignItems,
+  BoxFlexDirection,
   SelectButtonEndArrow,
   SelectButtonSize,
   SelectButtonVariant,
@@ -10,6 +12,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { Box } from '../Box';
 import type { BoxProps } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
+import { Text } from '../Text';
 
 import { SelectButton } from './SelectButton';
 import type { SelectButtonProps } from './SelectButton.types';
@@ -37,14 +40,22 @@ const meta: Meta<SelectButtonProps> = {
     isDisabled: {
       control: 'boolean',
     },
+    isLoading: {
+      control: 'boolean',
+    },
     hideEndArrow: {
       control: 'boolean',
+    },
+    value: {
+      control: 'text',
     },
     twClassName: {
       control: 'text',
     },
     placeholder: {
       control: 'text',
+      description:
+        'Optional label shown when `value` is `undefined` or `null`. When neither `value` nor `placeholder` resolves to a non-empty string, no label is rendered; provide an `accessibilityLabel` for the accessible name.',
     },
   },
 };
@@ -80,6 +91,69 @@ export const Default: Story = {
   ),
 };
 
+export const Placeholder: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={6}>
+      <Box
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Start}
+        gap={4}
+      >
+        <Box
+          flexDirection={BoxFlexDirection.Column}
+          gap={2}
+          twClassName="flex-1"
+        >
+          <Text>Placeholder only</Text>
+          <SelectButton
+            onPress={noopPress}
+            isFullWidth
+            placeholder="Select network"
+          />
+        </Box>
+        <Box
+          flexDirection={BoxFlexDirection.Column}
+          gap={2}
+          twClassName="flex-1"
+        >
+          <Text>Value replaces placeholder</Text>
+          <SelectButton
+            onPress={noopPress}
+            isFullWidth
+            placeholder="Select network"
+            value="Ethereum Mainnet"
+          />
+        </Box>
+        <Box
+          flexDirection={BoxFlexDirection.Column}
+          gap={2}
+          twClassName="flex-1"
+        >
+          <Text>No label, accessibilityLabel only</Text>
+          <SelectButton
+            onPress={noopPress}
+            isFullWidth
+            accessibilityLabel="Select network"
+          />
+        </Box>
+      </Box>
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const Value: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      <SelectButton onPress={noopPress} placeholder="Select network" />
+      <SelectButton
+        onPress={noopPress}
+        placeholder="Select network"
+        value="Ethereum Mainnet"
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
 export const Variant: Story = {
   render: () => (
     <SelectButtonStoryWrapper gap={4}>
@@ -87,19 +161,19 @@ export const Variant: Story = {
         onPress={noopPress}
         variant={SelectButtonVariant.Primary}
         endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Primary (ButtonSecondary look)"
+        placeholder="Primary"
       />
       <SelectButton
         onPress={noopPress}
         variant={SelectButtonVariant.Secondary}
         endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Secondary (ButtonTertiary look)"
+        placeholder="Secondary"
       />
       <SelectButton
         onPress={noopPress}
         variant={SelectButtonVariant.Tertiary}
         endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Tertiary (alternative text)"
+        placeholder="Tertiary"
       />
     </SelectButtonStoryWrapper>
   ),
@@ -118,7 +192,7 @@ export const Size: Story = {
           key={key}
           size={value}
           onPress={noopPress}
-          placeholder={`Size: ${key}`}
+          placeholder={`Size ${key}`}
         />
       ))}
     </SelectButtonStoryWrapper>
@@ -135,7 +209,7 @@ export const IsFullWidth: Story = {
           isFullWidth
           variant={variant}
           startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
-          placeholder={`${variant} full width`}
+          placeholder={`Full width ${variant}`}
         />
       ))}
     </SelectButtonStoryWrapper>
@@ -156,6 +230,28 @@ export const IsDisabled: Story = {
         placeholder="Disabled"
         isDisabled
       />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const IsLoading: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      <SelectButton onPress={noopPress} placeholder="Loading" isLoading />
+      <SelectButton
+        onPress={noopPress}
+        variant={SelectButtonVariant.Secondary}
+        placeholder="Loading"
+        isLoading
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const HideEndArrow: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper>
+      <SelectButton onPress={noopPress} placeholder="No chevron" hideEndArrow />
     </SelectButtonStoryWrapper>
   ),
 };
@@ -199,7 +295,7 @@ export const EndArrowDirection: Story = {
           endArrowDirection={value}
           testID={`select-button-end-${key}`}
           onPress={noopPress}
-          placeholder={`End arrow: ${key}`}
+          placeholder={`End arrow ${key}`}
         />
       ))}
     </SelectButtonStoryWrapper>
@@ -236,6 +332,31 @@ export const EndArrowDirectionIconProps: Story = {
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Large arrow"
         endArrowDirectionIconProps={{ size: IconSize.Lg }}
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const LongLabel: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      <SelectButton
+        onPress={noopPress}
+        isFullWidth
+        placeholder="Select a very long network name"
+      />
+      <SelectButton
+        onPress={noopPress}
+        isFullWidth
+        placeholder="Ethereum Mainnet"
+        value="A very long selected value that truncates with an ellipsis"
+      />
+      <SelectButton
+        onPress={noopPress}
+        isFullWidth
+        placeholder="Ethereum Mainnet"
+        value="A very long selected value that clips instead of an ellipsis"
+        textProps={{ ellipsizeMode: 'clip' }}
       />
     </SelectButtonStoryWrapper>
   ),

@@ -29,10 +29,16 @@ export const SelectButton = ({
   size = SelectButtonSize.Sm,
   twClassName = '',
   style,
+  accessibilityLabel,
   ...buttonBaseRest
 }: SelectButtonProps) => {
   const labelContent = value ?? placeholder;
+  const hasLabel = Boolean(labelContent);
+
   const resolvedTextProps = {
+    // One-line ellipsis by default; callers override it through `textProps`.
+    numberOfLines: 1,
+    ellipsizeMode: 'tail' as const,
     ...textProps,
     twClassName: mergeTwClassName(
       // Ensure the label actually grows to push the end arrow when full width.
@@ -55,7 +61,7 @@ export const SelectButton = ({
   let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;
   if (hideEndArrow) {
     resolvedEndArrowDirection = undefined;
-  } else if (endArrowDirection !== undefined && endArrowDirection !== null) {
+  } else if (endArrowDirection !== undefined) {
     resolvedEndArrowDirection = endArrowDirection;
   } else if (endAccessory) {
     resolvedEndArrowDirection = undefined;
@@ -70,7 +76,8 @@ export const SelectButton = ({
       isDisabled={isDisabled}
       isFullWidth={isFullWidth}
       isLoading={isLoading}
-      children={labelContent}
+      accessibilityLabel={accessibilityLabel}
+      children={hasLabel ? labelContent : undefined}
       textProps={{
         ...(variant === SelectButtonVariant.Tertiary
           ? { color: TextColor.TextAlternative }

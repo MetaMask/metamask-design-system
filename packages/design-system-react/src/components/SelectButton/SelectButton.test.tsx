@@ -48,11 +48,20 @@ describe('SelectButton', () => {
       expect(screen.getByRole('button')).toHaveTextContent('Select');
     });
 
-    it('renders an empty label when value is an empty string', () => {
-      render(<SelectButton placeholder="Select" value="" />);
+    it('renders no label when value is an empty string', () => {
+      const { container } = render(
+        <SelectButton placeholder="Select" value="" aria-label="Select" />,
+      );
 
-      expect(screen.getByRole('button')).toHaveTextContent('');
-      expect(screen.queryByText('Select')).not.toBeInTheDocument();
+      expect(container.querySelector('span')).not.toBeInTheDocument();
+      expect(screen.getByRole('button').textContent).toBe('');
+    });
+
+    it('renders no label when there is no value and no placeholder', () => {
+      const { container } = render(<SelectButton aria-label="Select" />);
+
+      expect(container.querySelector('span')).not.toBeInTheDocument();
+      expect(screen.getByRole('button').textContent).toBe('');
     });
 
     it('renders startAccessory before the label', () => {
@@ -103,22 +112,6 @@ describe('SelectButton', () => {
     it('defaults the trailing icon to ArrowDown', () => {
       render(
         <SelectButton
-          endArrowDirectionIconProps={{ 'data-testid': 'end-arrow' }}
-          placeholder="Label"
-        />,
-      );
-
-      expect(getArrowPath()).toContain(
-        ARROW_PATH_PREFIX[SelectButtonEndArrow.Down],
-      );
-    });
-
-    it('treats a null endArrowDirection as omitted', () => {
-      render(
-        <SelectButton
-          endArrowDirection={
-            null as unknown as (typeof SelectButtonEndArrow)[keyof typeof SelectButtonEndArrow]
-          }
           endArrowDirectionIconProps={{ 'data-testid': 'end-arrow' }}
           placeholder="Label"
         />,
@@ -361,6 +354,31 @@ describe('SelectButton', () => {
 
       expect(screen.getByText('Label')).toHaveClass('text-center');
       expect(screen.getByText('Label')).not.toHaveClass('text-left');
+    });
+
+    it('truncates the label to one line with an ellipsis by default', () => {
+      render(<SelectButton placeholder="Label" />);
+
+      expect(screen.getByText('Label')).toHaveClass('truncate', 'min-w-0');
+      expect(screen.getByText('Label')).not.toHaveClass('flex-wrap');
+    });
+
+    it('keeps one-line truncation on a full-width button', () => {
+      render(<SelectButton isFullWidth placeholder="Label" />);
+
+      expect(screen.getByText('Label')).toHaveClass(
+        'truncate',
+        'min-w-0',
+        'flex-1',
+      );
+    });
+
+    it('lets textProps disable truncation', () => {
+      render(
+        <SelectButton placeholder="Label" textProps={{ ellipsis: false }} />,
+      );
+
+      expect(screen.getByText('Label')).not.toHaveClass('truncate');
     });
 
     it('applies disabled opacity when isDisabled is true', () => {

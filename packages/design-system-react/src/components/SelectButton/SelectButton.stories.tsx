@@ -13,6 +13,7 @@ import React from 'react';
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import type { BoxProps } from '../Box';
 import { Icon } from '../Icon';
+import { Text } from '../Text';
 
 import README from './README.mdx';
 import { SelectButton } from './SelectButton';
@@ -29,9 +30,13 @@ const meta: Meta<SelectButtonProps> = {
   argTypes: {
     placeholder: {
       control: 'text',
+      description:
+        'Optional label shown when `value` is `undefined` or `null`. When neither `value` nor `placeholder` resolves to a non-empty string, no label is rendered; provide an `aria-label` for the accessible name.',
     },
     value: {
       control: 'text',
+      description:
+        'Selected label. When the resolved label is empty, no label node is rendered and the label truncates to one line with an ellipsis by default.',
     },
     size: {
       control: 'select',
@@ -97,6 +102,31 @@ export const Default: Story = {
   ),
 };
 
+export const Placeholder: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={6}>
+      <Box
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Start}
+        gap={8}
+      >
+        <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+          <Text>Placeholder only</Text>
+          <SelectButton placeholder="Select network" />
+        </Box>
+        <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+          <Text>Value replaces placeholder</Text>
+          <SelectButton placeholder="Select network" value="Ethereum Mainnet" />
+        </Box>
+        <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+          <Text>No label, aria-label only</Text>
+          <SelectButton aria-label="Select network" />
+        </Box>
+      </Box>
+    </SelectButtonStoryWrapper>
+  ),
+};
+
 export const Value: Story = {
   render: () => (
     <SelectButtonStoryWrapper gap={4}>
@@ -112,17 +142,17 @@ export const Variant: Story = {
       <SelectButton
         variant={SelectButtonVariant.Primary}
         endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Primary (ButtonSecondary look)"
+        placeholder="Primary"
       />
       <SelectButton
         variant={SelectButtonVariant.Secondary}
         endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Secondary (ButtonTertiary look)"
+        placeholder="Secondary"
       />
       <SelectButton
         variant={SelectButtonVariant.Tertiary}
         endArrowDirection={SelectButtonEndArrow.Down}
-        placeholder="Tertiary (alternative text)"
+        placeholder="Tertiary"
       />
     </SelectButtonStoryWrapper>
   ),
@@ -137,7 +167,7 @@ export const Size: Story = {
           (typeof SelectButtonSize)[keyof typeof SelectButtonSize],
         ][]
       ).map(([key, size]) => (
-        <SelectButton key={key} size={size} placeholder={`Size: ${key}`} />
+        <SelectButton key={key} size={size} placeholder={`Size ${key}`} />
       ))}
     </SelectButtonStoryWrapper>
   ),
@@ -152,7 +182,7 @@ export const IsFullWidth: Story = {
           isFullWidth
           variant={variant}
           startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
-          placeholder={`${variant} full width`}
+          placeholder={`Full width ${variant}`}
         />
       ))}
     </SelectButtonStoryWrapper>
@@ -231,7 +261,7 @@ export const EndArrowDirection: Story = {
         <SelectButton
           key={key}
           endArrowDirection={direction}
-          placeholder={`End arrow: ${key}`}
+          placeholder={`End arrow ${key}`}
         />
       ))}
     </SelectButtonStoryWrapper>
@@ -265,6 +295,24 @@ export const EndArrowDirectionIconProps: Story = {
         endArrowDirection={SelectButtonEndArrow.Down}
         placeholder="Large arrow"
         endArrowDirectionIconProps={{ size: IconSize.Lg }}
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const LongLabel: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4} className="w-64">
+      <SelectButton isFullWidth placeholder="Select a very long network name" />
+      <SelectButton
+        isFullWidth
+        placeholder="Ethereum Mainnet"
+        value="A very long selected value that truncates with an ellipsis"
+      />
+      <SelectButton
+        isFullWidth
+        placeholder="Wrapped instead of truncated"
+        textProps={{ ellipsis: false }}
       />
     </SelectButtonStoryWrapper>
   ),

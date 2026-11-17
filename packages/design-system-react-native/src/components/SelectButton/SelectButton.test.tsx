@@ -67,6 +67,32 @@ describe('SelectButton', () => {
       expect(getByText('Select')).toHaveTextContent('Select');
     });
 
+    it('renders no label when value is an empty string', () => {
+      const { queryByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Select"
+          value=""
+          accessibilityLabel="Select"
+        />,
+      );
+
+      expect(queryByText(/.+/u)).toBeNull();
+    });
+
+    it('renders no label when there is no value and no placeholder', () => {
+      const { queryByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          accessibilityLabel="Select"
+        />,
+      );
+
+      expect(queryByText(/.+/u)).toBeNull();
+    });
+
     it('exposes testID on the root pressable', () => {
       const { getByTestId } = render(
         <SelectButton
@@ -90,6 +116,35 @@ describe('SelectButton', () => {
       );
 
       expect(getByTestId('start-accessory')).toBeOnTheScreen();
+    });
+  });
+
+  describe('when the label truncates', () => {
+    it('uses one line with a tail ellipsis by default', () => {
+      const { getByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Label"
+        />,
+      );
+
+      expect(getByText('Label')).toHaveProp('ellipsizeMode', 'tail');
+      expect(getByText('Label')).toHaveProp('numberOfLines', 1);
+    });
+
+    it('lets textProps override the truncation', () => {
+      const { getByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Label"
+          textProps={{ ellipsizeMode: 'clip', numberOfLines: 2 }}
+        />,
+      );
+
+      expect(getByText('Label')).toHaveProp('ellipsizeMode', 'clip');
+      expect(getByText('Label')).toHaveProp('numberOfLines', 2);
     });
   });
 

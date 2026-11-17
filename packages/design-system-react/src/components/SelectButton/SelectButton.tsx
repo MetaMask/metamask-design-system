@@ -9,6 +9,7 @@ import React, { forwardRef } from 'react';
 
 import { twMerge } from '../../utils/tw-merge';
 import { ButtonBase } from '../ButtonBase';
+import { TextAlign } from '../Text';
 
 import { MAP_SELECTBUTTON_END_ARROW_DIRECTION_TO_ICON_NAME } from './SelectButton.constants';
 import type { SelectButtonProps } from './SelectButton.types';
@@ -36,6 +37,7 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
     ref,
   ) => {
     const labelContent = value ?? placeholder;
+    const hasLabel = Boolean(labelContent);
     const isTransparentVariant =
       variant === SelectButtonVariant.Secondary ||
       variant === SelectButtonVariant.Tertiary;
@@ -45,12 +47,15 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
       ...(variant === SelectButtonVariant.Tertiary
         ? { color: TextColor.TextAlternative }
         : {}),
+      textAlign: TextAlign.Left,
+      // One-line ellipsis by default; callers override it through `textProps`.
+      ellipsis: true,
       ...textProps,
       className: twMerge(
-        'flex-wrap text-left',
+        'min-w-0',
         // `flex-1` sets grow and shrink. Pairing it with `grow` / `shrink`
         // makes twMerge drop one of them, so full width uses `flex-1` only.
-        isFullWidth ? 'min-w-0 flex-1' : 'shrink grow-0',
+        isFullWidth ? 'flex-1' : 'shrink grow-0',
         textProps?.className,
       ),
     };
@@ -58,7 +63,7 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
     let resolvedEndArrowDirection: SelectButtonEndArrow | undefined;
     if (hideEndArrow) {
       resolvedEndArrowDirection = undefined;
-    } else if (endArrowDirection !== undefined && endArrowDirection !== null) {
+    } else if (endArrowDirection !== undefined) {
       resolvedEndArrowDirection = endArrowDirection;
     } else if (endAccessory) {
       resolvedEndArrowDirection = undefined;
@@ -134,7 +139,7 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
         className={mergedClassName}
         style={style}
       >
-        {labelContent}
+        {hasLabel ? labelContent : undefined}
       </ButtonBase>
     );
   },
