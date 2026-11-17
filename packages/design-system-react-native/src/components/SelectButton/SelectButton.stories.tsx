@@ -1,4 +1,6 @@
 import {
+  BoxAlignItems,
+  BoxFlexDirection,
   SelectButtonEndArrow,
   SelectButtonSize,
   SelectButtonVariant,
@@ -10,6 +12,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { Box } from '../Box';
 import type { BoxProps } from '../Box';
 import { Icon, IconName, IconSize } from '../Icon';
+import { Text } from '../Text';
 
 import { SelectButton } from './SelectButton';
 import type { SelectButtonProps } from './SelectButton.types';
@@ -37,8 +40,14 @@ const meta: Meta<SelectButtonProps> = {
     isDisabled: {
       control: 'boolean',
     },
+    isLoading: {
+      control: 'boolean',
+    },
     hideEndArrow: {
       control: 'boolean',
+    },
+    value: {
+      control: 'text',
     },
     twClassName: {
       control: 'text',
@@ -78,6 +87,69 @@ export const Default: Story = {
   render: (args) => (
     <SelectButtonStoryWrapper>
       <SelectButton {...args} />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const Placeholder: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={6}>
+      <Box
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Start}
+        gap={4}
+      >
+        <Box
+          flexDirection={BoxFlexDirection.Column}
+          gap={2}
+          twClassName="flex-1"
+        >
+          <Text>Placeholder only</Text>
+          <SelectButton
+            onPress={noopPress}
+            isFullWidth
+            placeholder="Select network"
+          />
+        </Box>
+        <Box
+          flexDirection={BoxFlexDirection.Column}
+          gap={2}
+          twClassName="flex-1"
+        >
+          <Text>Value replaces placeholder</Text>
+          <SelectButton
+            onPress={noopPress}
+            isFullWidth
+            placeholder="Select network"
+            value="Ethereum Mainnet"
+          />
+        </Box>
+        <Box
+          flexDirection={BoxFlexDirection.Column}
+          gap={2}
+          twClassName="flex-1"
+        >
+          <Text>No label, accessibilityLabel only</Text>
+          <SelectButton
+            onPress={noopPress}
+            isFullWidth
+            accessibilityLabel="Select network"
+          />
+        </Box>
+      </Box>
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const Value: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      <SelectButton onPress={noopPress} placeholder="Select network" />
+      <SelectButton
+        onPress={noopPress}
+        placeholder="Select network"
+        value="Ethereum Mainnet"
+      />
     </SelectButtonStoryWrapper>
   ),
 };
@@ -158,6 +230,28 @@ export const IsDisabled: Story = {
         placeholder="Disabled"
         isDisabled
       />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const IsLoading: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={4}>
+      <SelectButton onPress={noopPress} placeholder="Loading" isLoading />
+      <SelectButton
+        onPress={noopPress}
+        variant={SelectButtonVariant.Secondary}
+        placeholder="Loading"
+        isLoading
+      />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const HideEndArrow: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper>
+      <SelectButton onPress={noopPress} placeholder="No chevron" hideEndArrow />
     </SelectButtonStoryWrapper>
   ),
 };

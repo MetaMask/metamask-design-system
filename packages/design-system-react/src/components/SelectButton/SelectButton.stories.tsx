@@ -13,6 +13,7 @@ import React from 'react';
 import { Box, BoxAlignItems, BoxFlexDirection } from '../Box';
 import type { BoxProps } from '../Box';
 import { Icon } from '../Icon';
+import { Text } from '../Text';
 
 import README from './README.mdx';
 import { SelectButton } from './SelectButton';
@@ -97,6 +98,31 @@ export const Default: Story = {
   render: (args) => (
     <SelectButtonStoryWrapper>
       <SelectButton {...args} />
+    </SelectButtonStoryWrapper>
+  ),
+};
+
+export const Placeholder: Story = {
+  render: () => (
+    <SelectButtonStoryWrapper gap={6}>
+      <Box
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Start}
+        gap={8}
+      >
+        <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+          <Text>Placeholder only</Text>
+          <SelectButton placeholder="Select network" />
+        </Box>
+        <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+          <Text>Value replaces placeholder</Text>
+          <SelectButton placeholder="Select network" value="Ethereum Mainnet" />
+        </Box>
+        <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+          <Text>No label, aria-label only</Text>
+          <SelectButton aria-label="Select network" />
+        </Box>
+      </Box>
     </SelectButtonStoryWrapper>
   ),
 };
