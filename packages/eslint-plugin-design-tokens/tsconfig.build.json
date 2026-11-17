@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.packages.build.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    // Repeated here because this config extends the root build config, not
+    // ./tsconfig.json, where these flags are also set.
+    "exactOptionalPropertyTypes": true,
+    "noErrorTruncation": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "references": [],
+  "include": ["./src"]
+}

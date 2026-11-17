@@ -5,7 +5,8 @@
     { "path": "./packages/design-system-tailwind-preset/tsconfig.build.json" },
     { "path": "./packages/design-system-twrnc-preset/tsconfig.build.json" },
     { "path": "./packages/design-system-react/tsconfig.build.json" },
-    { "path": "./packages/design-system-react-native/tsconfig.build.json" }
+    { "path": "./packages/design-system-react-native/tsconfig.build.json" },
+    { "path": "./packages/eslint-plugin-design-tokens/tsconfig.build.json" }
   ],
   "files": [],
   "include": []

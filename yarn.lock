@@ -3456,6 +3456,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@metamask/eslint-plugin-design-tokens@workspace:packages/eslint-plugin-design-tokens":
+  version: 0.0.0-use.local
+  resolution: "@metamask/eslint-plugin-design-tokens@workspace:packages/eslint-plugin-design-tokens"
+  dependencies:
+    "@metamask/auto-changelog": "npm:^7.1.0"
+    "@ts-bridge/cli": "npm:^0.6.3"
+    "@types/jest": "npm:^27.4.1"
+    "@typescript-eslint/parser": "npm:^8.39.0"
+    deepmerge: "npm:^4.2.2"
+    eslint: "npm:^9.39.0"
+    jest: "npm:^29.7.0"
+    ts-jest: "npm:^29.2.5"
+    typescript: "npm:~5.9.3"
+  languageName: unknown
+  linkType: soft
+
 "@metamask/jazzicon@npm:^2.0.0":
   version: 2.0.0
   resolution: "@metamask/jazzicon@npm:2.0.0"
