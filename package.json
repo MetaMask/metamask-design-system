@@ -136,7 +136,7 @@
     }
   },
   "scriptsConfig": {
-    "#default": "lavamoat/scripts.strict.json",
+    "#default": "lavamoat/scripts.base.json",
     "build": "lavamoat/scripts.yarn.json",
     "build:clean": "lavamoat/scripts.yarn.json",
     "build:types": "lavamoat/scripts.build.json",
@@ -144,7 +144,7 @@
     "changelog:validate": "lavamoat/scripts.yarn.json",
     "chromatic": "lavamoat/scripts.yarn.json",
     "create-component:react": "lavamoat/scripts.yarn.json",
-    "create-package": "lavamoat/scripts.cli.json",
+    "create-package": "lavamoat/scripts.install.json",
     "figma:connect:*": "lavamoat/scripts.net.json",
     "generate:icons": "lavamoat/scripts.yarn.json",
     "lint": "lavamoat/scripts.yarn.json",

@@ -60,7 +60,7 @@
     "@vitest/browser": "^4.1.10"
   },
   "scriptsConfig": {
-    "#default": "lavamoat/scripts.strict.json",
+    "#default": "lavamoat/scripts.base.json",
     "build-storybook": "lavamoat/scripts.unsafe.json",
     "chromatic": "lavamoat/scripts.unsafe.json",
     "storybook": "lavamoat/scripts.unsafe.json",
