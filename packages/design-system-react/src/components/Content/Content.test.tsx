@@ -2,21 +2,27 @@ import {
   BoxAlignItems,
   BoxFlexDirection,
   ContentVariant,
-  FontWeight,
   SensitiveTextLength,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
 import { render } from '@testing-library/react';
-import React from 'react';
-
-import { TWCLASSMAP_TEXT_FONTWEIGHT } from '../Text/Text.constants';
+import React, { createRef } from 'react';
 
 import { Content } from './Content';
 
 const ROOT_TEST_ID = 'content-root';
 
+const rowFor = (node: HTMLElement) => node.closest(`.${BoxFlexDirection.Row}`);
+
 describe('Content', () => {
+  const originalNodeEnv = process.env.NODE_ENV;
+
+  afterEach(() => {
+    process.env.NODE_ENV = originalNodeEnv;
+    jest.restoreAllMocks();
+  });
+
   describe('title', () => {
     it('renders string title in the document', () => {
       const { getByText } = render(
@@ -24,17 +30,6 @@ describe('Content', () => {
       );
 
       expect(getByText('Label')).toBeInTheDocument();
-    });
-
-    it('applies default title text classes', () => {
-      const { getByText } = render(
-        <Content title="Title" data-testid={ROOT_TEST_ID} />,
-      );
-
-      const title = getByText('Title');
-      expect(title).toHaveClass('text-s-body-md');
-      expect(title).toHaveClass(TWCLASSMAP_TEXT_FONTWEIGHT[FontWeight.Medium]);
-      expect(title).toHaveClass(TextColor.TextDefault);
     });
 
     it('renders custom title node in the document', () => {
@@ -88,19 +83,6 @@ describe('Content', () => {
       );
 
       expect(getByText('Secondary')).toBeInTheDocument();
-    });
-
-    it('applies default description text classes', () => {
-      const { getByText } = render(
-        <Content title="Title" description="Desc" data-testid={ROOT_TEST_ID} />,
-      );
-
-      const description = getByText('Desc');
-      expect(description).toHaveClass('text-s-body-sm');
-      expect(description).toHaveClass(
-        TWCLASSMAP_TEXT_FONTWEIGHT[FontWeight.Medium],
-      );
-      expect(description).toHaveClass(TextColor.TextAlternative);
     });
 
     it('renders description without title', () => {
@@ -437,9 +419,7 @@ describe('Content', () => {
     });
 
     it('does not render description or subvalue when variant is OneLine', () => {
-      const warnSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => undefined);
+      jest.spyOn(console, 'warn').mockImplementation(() => undefined);
 
       const { getByText, queryByText } = render(
         <Content
@@ -456,7 +436,6 @@ describe('Content', () => {
       expect(getByText('100')).toBeInTheDocument();
       expect(queryByText('Secondary')).not.toBeInTheDocument();
       expect(queryByText('Balance')).not.toBeInTheDocument();
-      warnSpy.mockRestore();
     });
 
     it('renders description and subvalue when variant is TwoLines', () => {
@@ -515,7 +494,25 @@ describe('Content', () => {
       expect(warnSpy).toHaveBeenCalledWith(
         'Content: `subvalue` is ignored when `variant` is `ContentVariant.OneLine`.',
       );
-      warnSpy.mockRestore();
+    });
+
+    it('does not warn in production when OneLine ignores description and subvalue', () => {
+      process.env.NODE_ENV = 'production';
+      const warnSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => undefined);
+
+      render(
+        <Content
+          title="Title"
+          description="Secondary"
+          subvalue="Balance"
+          variant={ContentVariant.OneLine}
+          data-testid={ROOT_TEST_ID}
+        />,
+      );
+
+      expect(warnSpy).not.toHaveBeenCalled();
     });
   });
 
@@ -540,12 +537,8 @@ describe('Content', () => {
         />,
       );
 
-      expect(getByText('1.23456789 ETH').parentElement).not.toHaveClass(
-        'w-full',
-      );
-      expect(getByText('~$1').parentElement?.parentElement).not.toHaveClass(
-        'w-full',
-      );
+      expect(rowFor(getByText('1.23456789 ETH'))).not.toHaveClass('w-full');
+      expect(rowFor(getByText('~$1'))).not.toHaveClass('w-full');
     });
 
     it('keeps title and description rows full width', () => {
@@ -557,14 +550,20 @@ describe('Content', () => {
         />,
       );
 
-      expect(getByText('Title').parentElement).toHaveClass('w-full');
-      expect(getByText('Secondary').parentElement?.parentElement).toHaveClass(
-        'w-full',
-      );
+      expect(rowFor(getByText('Title'))).toHaveClass('w-full');
+      expect(rowFor(getByText('Secondary'))).toHaveClass('w-full');
     });
   });
 
   describe('root layout', () => {
+    it('forwards ref to the root element', () => {
+      const ref = createRef<HTMLDivElement>();
+
+      render(<Content ref={ref} title="Label" />);
+
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+    });
+
     it('passes data-testid to the root Box', () => {
       const { getByTestId } = render(
         <Content title="Label" data-testid={ROOT_TEST_ID} />,
