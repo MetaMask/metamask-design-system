@@ -51,6 +51,7 @@ function SectionContext(args: SectionDividerProps) {
 }
 
 export const Default: Story = {
+  args: {},
   render: SectionContext,
 };
 
@@ -72,6 +73,10 @@ export const BorderWidth: Story = {
       <Box flexDirection={BoxFlexDirection.Column} gap={2}>
         <Text variant={TextVariant.BodySm}>borderWidth={4}</Text>
         <SectionDivider borderWidth={4} marginVertical={0} />
+      </Box>
+      <Box flexDirection={BoxFlexDirection.Column} gap={2}>
+        <Text variant={TextVariant.BodySm}>borderWidth={8}</Text>
+        <SectionDivider borderWidth={8} marginVertical={0} />
       </Box>
     </Box>
   ),

@@ -1,11 +1,10 @@
 import type { BoxProps } from '../Box/Box.types';
 
 /**
- * SectionDivider props match `BoxProps`. Override defaults with any `Box` prop
- * (for example `marginVertical={0}` or `borderWidth={0}`) or with `className` /
- * `style`.
+ * SectionDivider props match `Box`, except `asChild` and `children`.
+ * The component always renders an `hr`.
  *
- * `borderWidth` is mapped to a **top-only** border (`border-t*`) so the line
- * reads as a single hairline on a zero-height box.
+ * `borderWidth` sets the thickness of that line (`0` hides it). It does not
+ * add a border on every side the way `Box` does.
  */
-export type SectionDividerProps = BoxProps;
+export type SectionDividerProps = Omit<BoxProps, 'asChild' | 'children'>;
