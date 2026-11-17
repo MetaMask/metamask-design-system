@@ -4,6 +4,11 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "./src",
+    // Repeated here because this config extends the root build config, not
+    // ./tsconfig.json, where these flags are also set.
+    "exactOptionalPropertyTypes": true,
+    "noErrorTruncation": true,
+    "noUncheckedIndexedAccess": true,
     // Keep the incremental build state inside the gitignored "dist" directory
     // so that deleting "dist" also discards the state and the next build
     // re-emits. The plugin's "build:types" script invokes "tsc" directly

@@ -14,8 +14,9 @@ module.exports = merge(baseConfig, {
   // The display name when running multiple projects
   displayName,
 
-  // Add coverage ignore patterns
-  coveragePathIgnorePatterns: ['index.ts'],
+  // The shared config already ignores src/index.ts. This barrel is the same
+  // kind of re-export file, and that pattern does not match it.
+  coveragePathIgnorePatterns: ['/rules/index\\.ts$'],
 
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
