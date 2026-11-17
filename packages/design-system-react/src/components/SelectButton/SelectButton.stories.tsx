@@ -311,7 +311,8 @@ export const LongLabel: Story = {
       />
       <SelectButton
         isFullWidth
-        placeholder="Wrapped instead of truncated"
+        placeholder="Ethereum Mainnet"
+        value="A very long selected value that clips instead of an ellipsis"
         textProps={{ ellipsis: false }}
       />
     </SelectButtonStoryWrapper>
