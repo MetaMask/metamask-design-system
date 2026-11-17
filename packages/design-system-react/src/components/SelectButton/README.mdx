@@ -1,0 +1,645 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as SelectButtonStories from './SelectButton.stories';
+
+# SelectButton
+
+SelectButton is a compact row for opening a picker or menu: it shows a **`placeholder`** or selected **`value`**, optional leading content, and a trailing chevron (by default **down**) unless you hide it or swap in custom trailing content. Use it on its own for filters and dropdown-style actions.
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+<SelectButton placeholder="Select an option" onClick={() => {}} />;
+```
+
+<Canvas of={SelectButtonStories.Default} />
+
+## Props
+
+The props contract is **`SelectButtonProps`** from **`@metamask/design-system-react`**. It includes all **`ButtonBase`** props except **`children`**, **`endIconName`**, **`endIconProps`**, **`disabled`**, and the button form **`value`** (use **`isDisabled`**; **`value`** is the selected label, derived with **`placeholder`**).
+
+### `placeholder`
+
+Label text when **`value`** is **`undefined`** or **`null`**. An empty string **`""`** still counts as a selected label, not a placeholder.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+<SelectButton placeholder="Network" onClick={() => {}} />;
+```
+
+<Canvas of={SelectButtonStories.Default} />
+
+### `value`
+
+Optional selected label. When set to a non-null string, it replaces **`placeholder`** in the row.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string | null</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+<SelectButton
+  placeholder="Select network"
+  value="Ethereum Mainnet"
+  onClick={() => {}}
+/>;
+```
+
+<Canvas of={SelectButtonStories.Value} />
+
+### `onClick`
+
+Called when the row is clicked.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>MouseEventHandler&lt;HTMLButtonElement&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+<SelectButton
+  placeholder="Open menu"
+  onClick={() => console.log('open')}
+/>;
+```
+
+### `variant`
+
+Controls row styling and default label colors.
+
+Available values:
+
+- `SelectButtonVariant.Primary` — muted filled row (default). Matches `Button` secondary styling, including hover and active backgrounds.
+- `SelectButtonVariant.Secondary` — transparent row (`border-0`); hover, active, and loading use the pressed background.
+- `SelectButtonVariant.Tertiary` — same container as secondary, with alternative label and trailing-arrow colors when using defaults.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>SelectButtonVariant</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>SelectButtonVariant.Primary</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  SelectButton,
+  SelectButtonVariant,
+} from '@metamask/design-system-react';
+
+<SelectButton
+  variant={SelectButtonVariant.Tertiary}
+  placeholder="Filter"
+  onClick={() => {}}
+/>;
+```
+
+<Canvas of={SelectButtonStories.Variant} />
+
+### `endArrowDirection`
+
+Maps to the trailing **`Icon`**: **`ArrowUp`**, **`ArrowDown`**, **`ArrowLeft`**, or **`ArrowRight`**. When omitted and **`endAccessory`** is not used, the chevron defaults to **down**. When **`endAccessory`** is set and **`endArrowDirection`** is omitted, the accessory shows instead of the arrow. If both are set, the arrow wins and **`endAccessory`** is ignored.
+
+Available values:
+
+- `SelectButtonEndArrow.Up`
+- `SelectButtonEndArrow.Down`
+- `SelectButtonEndArrow.Left`
+- `SelectButtonEndArrow.Right`
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>SelectButtonEndArrow</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>Down</code> (when no <code>endAccessory</code>)
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  SelectButton,
+  SelectButtonEndArrow,
+} from '@metamask/design-system-react';
+
+<SelectButton
+  placeholder="Navigate"
+  endArrowDirection={SelectButtonEndArrow.Right}
+  onClick={() => {}}
+/>;
+```
+
+<Canvas of={SelectButtonStories.EndArrowDirection} />
+
+### `hideEndArrow`
+
+When **`true`**, no trailing arrow is shown. **`endAccessory`** may still render when the resolved trailing slot is the accessory.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+<SelectButton placeholder="No chevron" hideEndArrow onClick={() => {}} />;
+```
+
+<Canvas of={SelectButtonStories.HideEndArrow} />
+
+### `endAccessory`
+
+Optional node at the end of the row when no trailing arrow is shown. Omit **`endArrowDirection`** and avoid relying on the default arrow, or set **`hideEndArrow`**.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  Icon,
+  IconName,
+  IconSize,
+  SelectButton,
+} from '@metamask/design-system-react';
+
+<SelectButton
+  onClick={() => {}}
+  placeholder="With custom end"
+  hideEndArrow
+  endAccessory={<Icon name={IconName.Close} size={IconSize.Sm} />}
+/>;
+```
+
+<Canvas of={SelectButtonStories.EndAccessory} />
+
+### `startAccessory`
+
+Optional node before the label (for example a search icon).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  Icon,
+  IconName,
+  IconSize,
+  SelectButton,
+} from '@metamask/design-system-react';
+
+<SelectButton
+  onClick={() => {}}
+  placeholder="Search"
+  startAccessory={<Icon name={IconName.Search} size={IconSize.Sm} />}
+/>;
+```
+
+<Canvas of={SelectButtonStories.StartAccessory} />
+
+### `textProps`
+
+Optional props passed to **`Text`** when the label is a string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  SelectButton,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-react';
+
+<SelectButton
+  onClick={() => {}}
+  placeholder="Styled label"
+  textProps={{ variant: TextVariant.BodySm, color: TextColor.TextAlternative }}
+/>;
+```
+
+<Canvas of={SelectButtonStories.TextProps} />
+
+### `endArrowDirectionIconProps`
+
+Optional props forwarded to the trailing **`Icon`** when a chevron is shown (except **`name`**, which comes from **`endArrowDirection`**).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;Omit&lt;IconProps, 'name'&gt;&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  IconSize,
+  SelectButton,
+  SelectButtonEndArrow,
+} from '@metamask/design-system-react';
+
+<SelectButton
+  endArrowDirection={SelectButtonEndArrow.Down}
+  onClick={() => {}}
+  placeholder="Compact arrow"
+  endArrowDirectionIconProps={{ size: IconSize.Sm }}
+/>;
+```
+
+<Canvas of={SelectButtonStories.EndArrowDirectionIconProps} />
+
+### `isDisabled`
+
+Disables the button and applies reduced opacity.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+<SelectButton placeholder="Disabled" isDisabled onClick={() => {}} />;
+```
+
+<Canvas of={SelectButtonStories.IsDisabled} />
+
+### `isLoading`
+
+Shows the loading treatment on the row (same behavior as **`ButtonBase`**) and uses the pressed background for the active variant.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+<SelectButton placeholder="Loading" isLoading onClick={() => {}} />;
+```
+
+<Canvas of={SelectButtonStories.IsLoading} />
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the root row. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+// Add additional styles
+<SelectButton onClick={() => {}} placeholder="With margin" className="mt-4" />
+
+// Override default styles
+<SelectButton onClick={() => {}} placeholder="Wider padding" className="px-6" />
+```
+
+### `style`
+
+Use the `style` prop for dynamic inline styles that cannot be expressed with `className`. For static styles, prefer `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+export const ConditionalExample = ({ isActive }: { isActive: boolean }) => (
+  <SelectButton
+    onClick={() => {}}
+    placeholder="Conditional styling"
+    style={{ opacity: isActive ? 1 : 0.5 }}
+  />
+);
+```
+
+### `size`
+
+Controls the height of the button. Use `SelectButtonSize` values to keep the type aligned with the component API.
+
+Available values:
+
+- `SelectButtonSize.Sm` — 32px height.
+- `SelectButtonSize.Md` — 40px height.
+- `SelectButtonSize.Lg` — 48px height.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>SelectButtonSize</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>SelectButtonSize.Sm</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  SelectButton,
+  SelectButtonSize,
+} from '@metamask/design-system-react';
+
+<SelectButton size={SelectButtonSize.Sm} placeholder="Compact" onClick={() => {}} />
+<SelectButton size={SelectButtonSize.Md} placeholder="Default" onClick={() => {}} />
+<SelectButton size={SelectButtonSize.Lg} placeholder="Large" onClick={() => {}} />
+```
+
+<Canvas of={SelectButtonStories.Size} />
+
+### `isFullWidth`
+
+When **`true`**, the row stretches to the container width and the label grows so the trailing arrow stays at the end.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>boolean</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { SelectButton } from '@metamask/design-system-react';
+
+<SelectButton isFullWidth placeholder="Select network" onClick={() => {}} />;
+```
+
+<Canvas of={SelectButtonStories.IsFullWidth} />
+
+### Other `ButtonBase` props
+
+Pass through any other **`ButtonBase`** props you need (for example **`loadingText`**, **`aria-label`**, **`aria-haspopup`**, **`aria-expanded`**).
+
+## Component API
+
+<Controls of={SelectButtonStories.Default} />
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
