@@ -155,6 +155,32 @@ describe('ListItem', () => {
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
+    describe('when onKeyDown prevents default', () => {
+      it('does not fire onClick for Enter', () => {
+        const onClick = jest.fn();
+        const onKeyDown = jest.fn(
+          (event: React.KeyboardEvent<HTMLDivElement>) => {
+            event.preventDefault();
+          },
+        );
+
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive
+            title="Label"
+            onClick={onClick}
+            onKeyDown={onKeyDown}
+            data-testid={ROOT_TEST_ID}
+          />,
+        );
+
+        fireEvent.keyDown(getByTestId(ROOT_TEST_ID), { key: 'Enter' });
+
+        expect(onKeyDown).toHaveBeenCalledTimes(1);
+        expect(onClick).not.toHaveBeenCalled();
+      });
+    });
+
     it('renders Content inside interactive root', () => {
       const { getByText, getByTestId } = render(
         <ListItem
