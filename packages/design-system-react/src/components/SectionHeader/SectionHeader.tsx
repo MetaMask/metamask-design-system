@@ -20,7 +20,8 @@ import type { SectionHeaderProps } from './SectionHeader.types';
 /**
  * Horizontal section header: optional start/end icons or accessories, and a
  * title row with optional inline accessory. When `isInteractive` is `true`,
- * the root is focusable and clickable with 80% opacity on hover and press.
+ * the root is focusable and clickable. Pressed and hover feedback use 70%
+ * opacity. Hover applies on web only.
  *
  * Implemented with direct `Box` / `Text` / `Icon` (no `BoxRow`).
  */
@@ -57,11 +58,11 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
 
     const resolvedStartAccessory = startIconName ? (
       <Icon
-        size={IconSize.Sm}
         color={IconColor.IconDefault}
-        className="shrink-0"
         {...startIconProps}
         name={startIconName}
+        size={startIconProps?.size ?? IconSize.Md}
+        className={twMerge('shrink-0', startIconProps?.className)}
       />
     ) : (
       startAccessory
@@ -69,11 +70,11 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
 
     const resolvedEndAccessory = resolvedEndIconName ? (
       <Icon
-        size={IconSize.Sm}
         color={IconColor.IconAlternative}
-        className="shrink-0"
         {...endIconProps}
         name={resolvedEndIconName}
+        size={endIconProps?.size ?? IconSize.Md}
+        className={twMerge('shrink-0', endIconProps?.className)}
       />
     ) : (
       endAccessory
@@ -151,7 +152,7 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
       'px-4 pb-2 pt-3',
       isInteractive &&
         !isDisabled &&
-        'cursor-pointer hover:opacity-80 active:opacity-80',
+        'cursor-pointer hover:opacity-70 active:opacity-70',
       className,
     );
 
@@ -174,12 +175,12 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
       return (
         <Box
           ref={ref}
+          {...props}
+          {...interactiveProps}
           flexDirection={BoxFlexDirection.Column}
           gap={1}
           className={rootClassName}
           style={style}
-          {...interactiveProps}
-          {...props}
         >
           <Box
             flexDirection={BoxFlexDirection.Row}
@@ -196,13 +197,13 @@ export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
     return (
       <Box
         ref={ref}
+        {...props}
+        {...interactiveProps}
         flexDirection={BoxFlexDirection.Row}
         alignItems={BoxAlignItems.Center}
         gap={1}
         className={rootClassName}
         style={style}
-        {...interactiveProps}
-        {...props}
       >
         {headerRow}
       </Box>
