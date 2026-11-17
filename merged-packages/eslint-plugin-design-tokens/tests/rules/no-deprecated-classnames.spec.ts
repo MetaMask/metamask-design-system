@@ -1,4 +1,5 @@
 import * as typescriptParser from '@typescript-eslint/parser';
+import type { Rule } from 'eslint';
 import { RuleTester } from 'eslint';
 
 import { noDeprecatedClassnames } from '../../src/rules/no-deprecated-classnames';
@@ -24,6 +25,9 @@ const customDeprecatedClasses = {
 
 ruleTester.run('no-deprecated-classnames', noDeprecatedClassnames, {
   valid: [
+    // Code snippets that should NOT trigger the rule when no options are
+    // provided at all
+    { code: `const noOptions = "bg-white";` },
     // Code snippets that should NOT trigger the rule without specifying options
     { code: `const classWithoutOptions = "bg-white";`, options: [{}] },
     {
@@ -64,4 +68,29 @@ ruleTester.run('no-deprecated-classnames', noDeprecatedClassnames, {
       ],
     },
   ],
+});
+
+describe('no-deprecated-classnames', () => {
+  it('reports the fallback message when a deprecated classname has no suggested alternative', () => {
+    const report = jest.fn();
+    const context = {
+      id: 'test.ts',
+      options: [{ 'bg-white': undefined }],
+      report,
+    } as unknown as Rule.RuleContext;
+
+    const listeners = noDeprecatedClassnames.create(context);
+    listeners?.Literal?.(
+      { type: 'Literal', value: 'bg-white' } as unknown as Parameters<
+        NonNullable<Rule.NodeListener['Literal']>
+      >[0],
+    );
+
+    expect(report).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message:
+          'bg-white is a deprecated TailwindCSS class. No alternative available.',
+      }),
+    );
+  });
 });

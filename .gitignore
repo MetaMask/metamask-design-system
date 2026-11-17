@@ -35,6 +35,7 @@ scripts/coverage
 # typescript
 packages/*/*.tsbuildinfo
 apps/*/*.tsbuildinfo
+merged-packages/*/*.tsbuildinfo
 
 # Logs
 *storybook.log
