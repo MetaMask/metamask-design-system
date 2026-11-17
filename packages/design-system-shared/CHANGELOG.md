@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.46.0]
+
+### Changed
+
+- Deprecated `BoxRowPropsShared` and `BoxColumnPropsShared`; use `BoxProps` with explicit flex props instead ([#1670](https://github.com/MetaMask/metamask-design-system/pull/1670))
+  - These shared types back the deprecated React Native `BoxRow` and `BoxColumn` components and will be removed in a future major version
+- Made `SelectButtonPropsShared` `placeholder` optional ([#1696](https://github.com/MetaMask/metamask-design-system/pull/1696))
+  - When neither `value` nor `placeholder` resolves to a non-empty string, no label is rendered and the control needs an accessible name (`aria-label` on web, `accessibilityLabel` on React Native)
+
 ## [0.45.1]
 
 ### Fixed
@@ -445,7 +454,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.1...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.46.0...HEAD
+[0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.1...@metamask/design-system-shared@0.46.0
 [0.45.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.0...@metamask/design-system-shared@0.45.1
 [0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.44.0...@metamask/design-system-shared@0.45.0
 [0.44.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.43.0...@metamask/design-system-shared@0.44.0
