@@ -14,7 +14,7 @@ The props contract is **`SelectButtonProps`** from **`@metamask/design-system-re
 
 ### `placeholder`
 
-Optional label text shown when **`value`** is **`undefined`** or **`null`**. When neither **`value`** nor **`placeholder`** resolves to a non-empty string, no label is rendered; give the control an **`accessibilityLabel`** so it still has an accessible name. Development builds log a console warning for a label-less control without **`accessibilityLabel`**.
+Optional label text shown when **`value`** is **`undefined`** or **`null`**. When neither **`value`** nor **`placeholder`** resolves to a non-empty string, no label is rendered; give the control an **`accessibilityLabel`** so it still has an accessible name.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
