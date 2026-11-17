@@ -3469,6 +3469,8 @@ __metadata:
     jest: "npm:^29.7.0"
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.9.3"
+  peerDependencies:
+    eslint: ^9.0.0
   languageName: unknown
   linkType: soft
 

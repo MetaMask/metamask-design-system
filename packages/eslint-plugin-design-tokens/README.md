@@ -4,7 +4,7 @@ An ESLint plugin designed to enforce best practices and consistency for using Me
 
 ## Installation
 
-You'll first need to install [ESLint](https://eslint.org):
+You'll first need to install [ESLint](https://eslint.org) 9 or later. This package lists `eslint` as a peer dependency:
 
 ```shell
 $ npm install --save-dev eslint
@@ -23,6 +23,8 @@ $ npm install @metamask/eslint-plugin-design-tokens
 **Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `@metamask/eslint-plugin-design-tokens` globally.
 
 ## Usage
+
+### Legacy config
 
 Add `@metamask/design-tokens` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
@@ -48,6 +50,37 @@ Then configure the rules you want to use within `rules` property of your `.eslin
     ]
   }
 }
+```
+
+### Flat config
+
+The package publishes a named `rules` export. Register that object under the plugin name in `eslint.config.js`:
+
+```js
+import { rules } from '@metamask/eslint-plugin-design-tokens';
+
+export default [
+  {
+    plugins: {
+      '@metamask/design-tokens': { rules },
+    },
+    rules: {
+      '@metamask/design-tokens/no-deprecated-classnames': [
+        'warn',
+        {
+          'bg-white':
+            "Use 'bg-default' to align with the design system's color tokens.",
+          'bg-surface-default':
+            "Use 'bg-default' to align with the design system's color tokens.",
+          'text-red-500':
+            "Use 'text-error-default' to align with the design system's color tokens.",
+          'text-critical':
+            "Use 'text-error-default' to align with the design system's color tokens.",
+        },
+      ],
+    },
+  },
+];
 ```
 
 ## Supported Rules
