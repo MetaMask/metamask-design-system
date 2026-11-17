@@ -3,8 +3,8 @@
   "extends": "./scripts.base.json",
   "nodeOptions": {
     "--disable-warning": ["ExperimentalWarning"],
-    "--allow-fs-read": true,
-    "--allow-fs-write": true,
+    "--allow-fs-read": ["*"],
+    "--allow-fs-write": ["*"],
     "--allow-child-process": true,
     "--allow-net": true,
     "--allow-worker": true,
