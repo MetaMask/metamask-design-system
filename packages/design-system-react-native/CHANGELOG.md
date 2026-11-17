@@ -9,14 +9,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.57.0]
 
-### Uncategorized
+### Added
 
-- refactor: align SelectButton copy and props with repo rules ([#1696](https://github.com/MetaMask/metamask-design-system/pull/1696))
-- feat: add textProps to Tag ([#1702](https://github.com/MetaMask/metamask-design-system/pull/1702))
-- fix: reduce BottomSheetFooter horizontal button gap to 8px ([#1689](https://github.com/MetaMask/metamask-design-system/pull/1689))
-- fix: reduce BottomSheetFooter horizontal button gap to 12px ([#1687](https://github.com/MetaMask/metamask-design-system/pull/1687))
-- fix(react-native): honor Switch accessibilityLabel ([#1684](https://github.com/MetaMask/metamask-design-system/pull/1684))
-- refactor(design-system-react-native): replace BoxRow and BoxColumn with Box ([#1670](https://github.com/MetaMask/metamask-design-system/pull/1670))
+- Added `textProps` to `Tag` ([#1702](https://github.com/MetaMask/metamask-design-system/pull/1702))
+  - Optional `Partial<TextProps>` merged over the default styling of string children, so tag text can be restyled without replacing it with a custom `Text` child
+
+### Changed
+
+- **BREAKING:** Wrapper props are no longer typed from `BoxRowProps` ([#1670](https://github.com/MetaMask/metamask-design-system/pull/1670))
+  - `ButtonBase` `contentWrapperProps`, `SectionHeader` `titleWrapperProps`, and the wrapper props of `TitleAlert`, `TitleHub`, `TitleStandard`, and `TitleSubpage` are now `Omit<Partial<BoxProps>, 'children'>`
+  - The undocumented `startAccessory`, `endAccessory`, and `textProps` slots are no longer accepted on those wrapper props; pass accessories through the component's own props (for example, `SectionHeader` `titleEndAccessory`)
+  - See [Migration Guide](./MIGRATION.md#from-version-0560-to-0570)
+- Deprecated `BoxRow` and `BoxColumn`; render `Box` with explicit flex props instead ([#1670](https://github.com/MetaMask/metamask-design-system/pull/1670))
+  - `BoxRow`, `BoxRowProps`, `BoxColumn`, and `BoxColumnProps` are marked `@deprecated` and remain available until a future major version
+  - `ButtonBase`, `Content`, `HeaderRoot`, `KeyValueRow`, `KeyValueColumn`, `ListItem`, `SectionHeader`, `Tag`, `TitleAlert`, `TitleHub`, `TitleStandard`, and `TitleSubpage` now render `Box` directly; layouts are unchanged
+  - `gap` passed through `ButtonBase` `contentWrapperProps` or `SectionHeader` `titleWrapperProps` is now applied instead of being silently overridden
+  - Strings and numbers passed to string slots wrap in `Text`, so numeric values such as `TitleHub` `amount={1234}` no longer crash React Native
+  - See [Migration Guide](./MIGRATION.md#from-version-0560-to-0570)
+- Updated `SelectButton` label handling ([#1696](https://github.com/MetaMask/metamask-design-system/pull/1696))
+  - `accessibilityLabel` is forwarded to the label `Text`, so the button can be named independently of the visible label
+  - The label truncates to one line with an ellipsis by default; override that through `textProps`
+  - An empty resolved label renders nothing, and `placeholder` is now optional (see `@metamask/design-system-shared` 0.46.0)
+
+### Fixed
+
+- Fixed `Switch` so a caller's `accessibilityLabel` is honored ([#1684](https://github.com/MetaMask/metamask-design-system/pull/1684))
+  - Previously `label` always overwrote a caller's `accessibilityLabel`, leaving switches with only a visible label unnamed (WCAG 4.1.2)
+  - A non-empty `accessibilityLabel` now wins, and an empty string falls back to `label`
+- Fixed `BottomSheetFooter` so the gap between buttons in the horizontal layout is 8px ([#1687](https://github.com/MetaMask/metamask-design-system/pull/1687), [#1689](https://github.com/MetaMask/metamask-design-system/pull/1689))
+  - The gap was 16px; the vertical layout is unchanged
 
 ## [0.56.2]
 

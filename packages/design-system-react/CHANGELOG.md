@@ -9,13 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.53.0]
 
-### Uncategorized
+### Added
 
-- refactor: align SelectButton copy and props with repo rules ([#1696](https://github.com/MetaMask/metamask-design-system/pull/1696))
-- feat: add SelectButton to @metamask/design-system-react ([#1690](https://github.com/MetaMask/metamask-design-system/pull/1690))
-- feat(dsr): add SectionHeader React parity (DSYS-751) ([#1440](https://github.com/MetaMask/metamask-design-system/pull/1440))
-- feat(dsr): add Content React parity (DSYS-1043) ([#1436](https://github.com/MetaMask/metamask-design-system/pull/1436))
-- feat: add textProps to Tag ([#1702](https://github.com/MetaMask/metamask-design-system/pull/1702))
+- Added `SelectButton` component for opening a picker or menu ([#1690](https://github.com/MetaMask/metamask-design-system/pull/1690), [#1696](https://github.com/MetaMask/metamask-design-system/pull/1696))
+  - Shows the selected `value` or `placeholder` with an optional `startAccessory` and a trailing arrow (down by default) that can be hidden with `hideEndArrow` or replaced with `endAccessory`
+  - Supports `variant` (`SelectButtonVariant.Primary`, `Secondary`, or `Tertiary`), `size` (`SelectButtonSize`), `endArrowDirection` (`SelectButtonEndArrow.Down`, `Up`, `Left`, or `Right`), `isFullWidth`, `isDisabled`, `isLoading`, and `textProps` for the label
+  - `placeholder` is optional; when neither `value` nor `placeholder` resolves to a non-empty string, no label is rendered and the button needs an accessible name (`aria-label`)
+  - Types are shared with React Native through `@metamask/design-system-shared`
+- Added `Content` component for list rows (React parity with React Native) ([#1436](https://github.com/MetaMask/metamask-design-system/pull/1436))
+  - `avatar`, `title`, `description`, `value`, and `subvalue` slots with `variant` (`ContentVariant.OneLine`, `TwoLines`, or `MultiLine`, defaulting to `TwoLines`) plus inline start and end accessories
+  - String `description`, `value`, and `subvalue` slots render `SensitiveText` and accept `isHidden` and `length` through `descriptionProps`, `valueProps`, and `subvalueProps`
+- Added `SectionHeader` component for section headers (React parity with React Native) ([#1440](https://github.com/MetaMask/metamask-design-system/pull/1440))
+  - `title` with an optional `titleAccessory`, `startIconName` and `endIconName`, `startAccessory` and `endAccessory`, and `titleProps` and `titleWrapperProps`
+  - `isInteractive` renders the header as a clickable row (`role="button"` with keyboard activation and pressed opacity) and defaults the end icon to `ArrowRight`; pair it with `disabled` to turn the interaction off
+- Added `textProps` to `Tag` ([#1702](https://github.com/MetaMask/metamask-design-system/pull/1702))
+  - Optional `Partial<TextProps>` merged over the default styling of string children, so tag text can be restyled without replacing it with a custom `Text` child
 
 ## [0.52.0]
 
