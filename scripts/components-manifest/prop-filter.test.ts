@@ -1,4 +1,4 @@
-import { includeDesignSystemProp } from './prop-filter.ts';
+import { includeDesignSystemProp } from './prop-filter';
 
 describe('includeDesignSystemProp', () => {
   it('keeps className, style, children, and testID from React or React Native types', () => {

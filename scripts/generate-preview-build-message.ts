@@ -44,7 +44,7 @@ ${JSON.stringify(packageMap, null, 2)}
 </details>
 `;
 
-  const messagePath = path.resolve(import.meta.dirname, '../preview-build-message.txt');
+  const messagePath = path.resolve(process.cwd(), 'preview-build-message.txt');
   await fs.promises.writeFile(messagePath, previewBuildMessage);
 }
 

@@ -1,6 +1,6 @@
-import cli from './cli.ts';
-import { commands, commandMap } from './commands.ts';
-import * as utils from './utils.ts';
+import cli from './cli';
+import { commands, commandMap } from './commands';
+import * as utils from './utils';
 
 jest.mock('./utils');
 
@@ -38,7 +38,7 @@ describe('create-package/cli', () => {
   beforeEach(() => {
     // yargs calls process.exit() with 1 on failure and sometimes 0 on success.
     // We have to intercept it.
-    jest.spyOn(process, 'exit').mockImplementation((code?: number | string | null) => {
+    jest.spyOn(process, 'exit').mockImplementation((code?: number) => {
       if (code === 1) {
         throw new Error('exit: 1');
       } else {
@@ -52,7 +52,7 @@ describe('create-package/cli', () => {
   });
 
   afterEach(() => {
-    process.exitCode = undefined;
+    delete process.exitCode;
   });
 
   it('should error if a string option contains only whitespace', async () => {

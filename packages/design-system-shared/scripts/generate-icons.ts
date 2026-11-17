@@ -3,6 +3,7 @@ import jsxPlugin from '@svgr/plugin-jsx';
 import svgoPlugin from '@svgr/plugin-svgo';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { pathToFileURL } from 'url';
 
 // ─── Paths ────────────────────────────────────────────────────────────────────
 
@@ -333,7 +334,10 @@ export async function main(): Promise<void> {
 `);
 }
 
-if (require.main === module) {
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
   main().catch((error: unknown) => {
     console.error(error);
     throw error;

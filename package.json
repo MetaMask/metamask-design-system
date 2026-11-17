@@ -85,7 +85,7 @@
     "@types/eslint-plugin-tailwindcss": "^3",
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.191",
-    "@types/node": "^20.19.0",
+    "@types/node": "^16.18.54",
     "@types/semver": "^7",
     "@typescript-eslint/eslint-plugin": "^8.39.0",
     "@typescript-eslint/parser": "^8.39.0",

@@ -1,19 +1,21 @@
 import execa from 'execa';
 import { existsSync, promises as fs } from 'fs';
-import { createRequire } from 'module';
 import path from 'path';
-import { format as prettierFormat } from 'prettier';
-import type { Options as PrettierOptions } from 'prettier';
+import { format as prettierFormat, resolveConfig } from 'prettier';
 
 import { MonorepoFiles, Placeholders } from './constants.ts';
 import type { FileMap } from './fs-utils.ts';
 import { readAllFiles, writeFiles } from './fs-utils.ts';
 
+// Yarn runs scripts with the working directory set to the workspace that owns
+// them, so the current directory is the monorepo root here.
+const REPO_ROOT = path.resolve(process.cwd());
 const PACKAGE_TEMPLATE_DIR = path.join(
-  import.meta.dirname,
+  REPO_ROOT,
+  'scripts',
+  'create-package',
   'package-template',
 );
-const REPO_ROOT = path.join(import.meta.dirname, '..', '..');
 const REPO_TS_CONFIG = path.join(REPO_ROOT, MonorepoFiles.TsConfig);
 const REPO_TS_CONFIG_BUILD = path.join(REPO_ROOT, MonorepoFiles.TsConfigBuild);
 const REPO_PACKAGE_JSON = path.join(REPO_ROOT, MonorepoFiles.PackageJson);
@@ -23,13 +25,6 @@ const allPlaceholdersRegex = new RegExp(
   Object.values(Placeholders).join('|'),
   'gu',
 );
-
-// Dynamic loading needed for the prettier config - ESM import not supported
-// for .js config files.
-const requireConfig = createRequire(import.meta.url);
-const prettierRc = requireConfig(
-  path.join(REPO_ROOT, '.prettierrc.js'),
-) as PrettierOptions;
 
 /**
  * The data necessary to create a new package.
@@ -138,6 +133,10 @@ async function writeJsonFile(
   filePath: string,
   fileContent: string,
 ): Promise<void> {
+  // The prettier config is resolved from the file's location instead of
+  // imported, because ESM import is not supported for .js config files.
+  const prettierRc = await resolveConfig(filePath, { editorconfig: false });
+
   await fs.writeFile(
     filePath,
     await prettierFormat(fileContent, { ...prettierRc, parser: 'json' }),
