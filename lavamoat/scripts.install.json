@@ -3,13 +3,11 @@
   "extends": "./scripts.base.json",
   "nodeOptions": {
     "--disable-warning": ["ExperimentalWarning"],
-    "--allow-fs-read": ["*"],
-    "--allow-fs-write": ["*"],
+    "--allow-fs-read": true,
+    "--allow-fs-write": true,
     "--allow-child-process": true,
     "--allow-net": true,
     "--allow-worker": true,
-    "--allow-addons": true,
-    "--allow-wasi": false,
-    "--allow-inspector": false
+    "--allow-addons": true
   }
 }

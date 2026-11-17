@@ -3,12 +3,8 @@
   "extends": "./scripts.base.json",
   "nodeOptions": {
     "--allow-fs-read": ["/"],
-    "--allow-fs-write": ["$PROJECT_CWD"],
     "--allow-child-process": true,
-    "--allow-net": false,
     "--allow-worker": true,
-    "--allow-addons": true,
-    "--allow-wasi": false,
-    "--allow-inspector": false
+    "--allow-addons": true
   }
 }
