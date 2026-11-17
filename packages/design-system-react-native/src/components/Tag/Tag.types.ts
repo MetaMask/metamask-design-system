@@ -2,6 +2,7 @@ import type { TagPropsShared } from '@metamask/design-system-shared';
 import type { ViewProps, StyleProp, ViewStyle } from 'react-native';
 
 import type { IconName, IconProps } from '../Icon';
+import type { TextProps } from '../Text';
 
 /**
  * Tag component props (React Native platform-specific).
@@ -24,6 +25,10 @@ export type TagProps = TagPropsShared & {
    * Optional prop to pass additional properties to the end icon. You may set `name` here instead of `endIconName`.
    */
   endIconProps?: Partial<IconProps>;
+  /**
+   * Optional props to be passed to the Text component used by string children. Merged over the tag defaults (`BodyXs`, medium weight, severity-based color), so values set here take precedence.
+   */
+  textProps?: Partial<TextProps>;
   /**
    * Additional Tailwind classes to be applied to the Tag container.
    */

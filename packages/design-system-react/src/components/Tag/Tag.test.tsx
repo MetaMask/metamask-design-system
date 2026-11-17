@@ -1,4 +1,9 @@
-import { IconName, TagSeverity } from '@metamask/design-system-shared';
+import {
+  IconName,
+  TagSeverity,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-shared';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
@@ -146,6 +151,30 @@ describe('Tag', () => {
       );
 
       expect(screen.getByTestId('tag-end-accessory')).toBeInTheDocument();
+    });
+  });
+
+  describe('textProps', () => {
+    it('applies textProps overrides to string children', () => {
+      render(
+        <Tag textProps={{ color: TextColor.SuccessDefault }} data-testid="tag">
+          Label
+        </Tag>,
+      );
+
+      const tag = screen.getByTestId('tag');
+      expect(tag.querySelector('p')).toHaveClass('text-success-default');
+    });
+
+    it('overrides the default variant with textProps.variant', () => {
+      render(
+        <Tag textProps={{ variant: TextVariant.BodySm }} data-testid="tag">
+          Label
+        </Tag>,
+      );
+
+      const tag = screen.getByTestId('tag');
+      expect(tag.querySelector('p')).toHaveClass('text-s-body-sm');
     });
   });
 });

@@ -34,6 +34,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
       endIconName,
       endIconProps,
       endAccessory,
+      textProps,
       className,
       style,
       ...props
@@ -76,6 +77,7 @@ export const Tag = forwardRef<HTMLDivElement, TagProps>(
         variant={TextVariant.BodyXs}
         color={textColor}
         fontWeight={FontWeight.Medium}
+        {...textProps}
       >
         {children}
       </Text>
