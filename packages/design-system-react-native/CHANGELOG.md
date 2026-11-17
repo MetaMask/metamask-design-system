@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: align SelectButton copy and props with repo rules ([#1696](https://github.com/MetaMask/metamask-design-system/pull/1696))
+- feat: add textProps to Tag ([#1702](https://github.com/MetaMask/metamask-design-system/pull/1702))
+- fix: reduce BottomSheetFooter horizontal button gap to 8px ([#1689](https://github.com/MetaMask/metamask-design-system/pull/1689))
+- fix: reduce BottomSheetFooter horizontal button gap to 12px ([#1687](https://github.com/MetaMask/metamask-design-system/pull/1687))
+- fix(react-native): honor Switch accessibilityLabel ([#1684](https://github.com/MetaMask/metamask-design-system/pull/1684))
+- refactor(design-system-react-native): replace BoxRow and BoxColumn with Box ([#1670](https://github.com/MetaMask/metamask-design-system/pull/1670))
+
 ## [0.56.2]
 
 ### Fixed

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: align SelectButton copy and props with repo rules ([#1696](https://github.com/MetaMask/metamask-design-system/pull/1696))
+- refactor(design-system-react-native): replace BoxRow and BoxColumn with Box ([#1670](https://github.com/MetaMask/metamask-design-system/pull/1670))
+
 ## [0.45.1]
 
 ### Fixed

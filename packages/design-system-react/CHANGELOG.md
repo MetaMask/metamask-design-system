@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor: align SelectButton copy and props with repo rules ([#1696](https://github.com/MetaMask/metamask-design-system/pull/1696))
+- feat: add SelectButton to @metamask/design-system-react ([#1690](https://github.com/MetaMask/metamask-design-system/pull/1690))
+- feat(dsr): add SectionHeader React parity (DSYS-751) ([#1440](https://github.com/MetaMask/metamask-design-system/pull/1440))
+- feat(dsr): add Content React parity (DSYS-1043) ([#1436](https://github.com/MetaMask/metamask-design-system/pull/1436))
+- feat: add textProps to Tag ([#1702](https://github.com/MetaMask/metamask-design-system/pull/1702))
+
 ## [0.52.0]
 
 ### Changed
