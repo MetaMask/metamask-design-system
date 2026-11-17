@@ -56,38 +56,39 @@ export const Default: Story = {
 };
 
 export const BorderWidth: Story = {
-  render: () => (
+  render: (args) => (
     <Box flexDirection={BoxFlexDirection.Column} gap={4}>
       <Box flexDirection={BoxFlexDirection.Column} gap={2}>
         <Text variant={TextVariant.BodySm}>borderWidth={0}</Text>
-        <SectionDivider borderWidth={0} marginVertical={0} />
+        <SectionDivider {...args} borderWidth={0} marginVertical={0} />
       </Box>
       <Box flexDirection={BoxFlexDirection.Column} gap={2}>
         <Text variant={TextVariant.BodySm}>borderWidth={1} (default)</Text>
-        <SectionDivider borderWidth={1} marginVertical={0} />
+        <SectionDivider {...args} borderWidth={1} marginVertical={0} />
       </Box>
       <Box flexDirection={BoxFlexDirection.Column} gap={2}>
         <Text variant={TextVariant.BodySm}>borderWidth={2}</Text>
-        <SectionDivider borderWidth={2} marginVertical={0} />
+        <SectionDivider {...args} borderWidth={2} marginVertical={0} />
       </Box>
       <Box flexDirection={BoxFlexDirection.Column} gap={2}>
         <Text variant={TextVariant.BodySm}>borderWidth={4}</Text>
-        <SectionDivider borderWidth={4} marginVertical={0} />
+        <SectionDivider {...args} borderWidth={4} marginVertical={0} />
       </Box>
       <Box flexDirection={BoxFlexDirection.Column} gap={2}>
         <Text variant={TextVariant.BodySm}>borderWidth={8}</Text>
-        <SectionDivider borderWidth={8} marginVertical={0} />
+        <SectionDivider {...args} borderWidth={8} marginVertical={0} />
       </Box>
     </Box>
   ),
 };
 
 export const BorderColor: Story = {
-  render: () => (
+  render: (args) => (
     <Box flexDirection={BoxFlexDirection.Column} gap={4}>
       <Box flexDirection={BoxFlexDirection.Column} gap={2}>
         <Text variant={TextVariant.BodySm}>BorderMuted (default)</Text>
         <SectionDivider
+          {...args}
           borderColor={BoxBorderColor.BorderMuted}
           marginVertical={0}
         />
@@ -95,6 +96,7 @@ export const BorderColor: Story = {
       <Box flexDirection={BoxFlexDirection.Column} gap={2}>
         <Text variant={TextVariant.BodySm}>BorderDefault</Text>
         <SectionDivider
+          {...args}
           borderColor={BoxBorderColor.BorderDefault}
           marginVertical={0}
         />
@@ -104,14 +106,14 @@ export const BorderColor: Story = {
 };
 
 export const MarginVertical: Story = {
-  render: () => (
+  render: (args) => (
     <Box flexDirection={BoxFlexDirection.Column}>
       <Text variant={TextVariant.BodySm}>marginVertical={0}</Text>
-      <SectionDivider marginVertical={0} />
+      <SectionDivider {...args} marginVertical={0} />
       <Text variant={TextVariant.BodySm}>marginVertical={5} (default)</Text>
-      <SectionDivider marginVertical={5} />
+      <SectionDivider {...args} marginVertical={5} />
       <Text variant={TextVariant.BodySm}>marginVertical={8}</Text>
-      <SectionDivider marginVertical={8} />
+      <SectionDivider {...args} marginVertical={8} />
     </Box>
   ),
 };

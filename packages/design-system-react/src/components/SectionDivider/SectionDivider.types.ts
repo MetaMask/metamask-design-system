@@ -1,4 +1,4 @@
-import type { BoxProps } from '../Box/Box.types';
+import type { BoxProps } from '../Box';
 
 /**
  * SectionDivider props match `Box`, except `asChild` and `children`.
