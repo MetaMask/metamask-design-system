@@ -40,7 +40,7 @@ import { TagSeverity } from '@metamask/design-system-shared';
 
 ### `children`
 
-Main content. String children are rendered with design-system `Text` (`BodyXs`, medium weight, severity-based color). Other React nodes are rendered as-is (use your own `Text` or layout inside when needed).
+Main content. String children are rendered with design-system `Text` (`BodyXs`, medium weight, severity-based color) unless overridden with `textProps`. Other React nodes are rendered as-is (use your own `Text` or layout inside when needed).
 
 | TYPE        | REQUIRED | DEFAULT     |
 | ----------- | -------- | ----------- |
@@ -77,6 +77,25 @@ Optional partial `IconProps` passed through to the underlying `Icon`. You may se
 | TYPE                  | REQUIRED | DEFAULT     |
 | --------------------- | -------- | ----------- |
 | `Partial<IconProps>?` | No       | `undefined` |
+
+### `textProps`
+
+Optional partial `TextProps` forwarded to the design-system `Text` rendered for string children. Values are merged over the tag defaults (`BodyXs`, medium weight, severity-based color), so anything set here overrides that default. Ignored when children are not strings.
+
+| TYPE                  | REQUIRED | DEFAULT     |
+| --------------------- | -------- | ----------- |
+| `Partial<TextProps>?` | No       | `undefined` |
+
+```tsx
+import { Tag } from '@metamask/design-system-react-native';
+import { TextColor, TextVariant } from '@metamask/design-system-shared';
+
+<Tag
+  textProps={{ color: TextColor.SuccessDefault, variant: TextVariant.BodySm }}
+>
+  4.5% APY
+</Tag>;
+```
 
 ### `startAccessory` / `endAccessory`
 

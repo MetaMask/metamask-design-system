@@ -3,6 +3,8 @@ import {
   IconColor,
   IconSize,
   TagSeverity,
+  TextColor,
+  TextVariant,
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
@@ -126,6 +128,19 @@ export const EndAccessory: Story = {
 export const StartAndEndIconNames: Story = {
   render: () => (
     <Tag startIconName={IconName.Warning} endIconName={IconName.ArrowDown}>
+      Tag
+    </Tag>
+  ),
+};
+
+export const TextProps: Story = {
+  render: () => (
+    <Tag
+      textProps={{
+        color: TextColor.SuccessDefault,
+        variant: TextVariant.BodySm,
+      }}
+    >
       Tag
     </Tag>
   ),

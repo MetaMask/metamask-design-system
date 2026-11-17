@@ -3,6 +3,7 @@ import type { IconName } from '@metamask/design-system-shared';
 import type { ComponentProps } from 'react';
 
 import type { IconProps } from '../Icon';
+import type { TextProps } from '../Text';
 
 /**
  * Tag component props (React / extension).
@@ -26,6 +27,10 @@ export type TagProps = TagPropsShared &
      * Optional props for the end icon. You may set `name` here instead of `endIconName`.
      */
     endIconProps?: Partial<IconProps>;
+    /**
+     * Optional props to be passed to the Text component used by string children. Merged over the tag defaults (`BodyXs`, medium weight, severity-based color), so values set here take precedence.
+     */
+    textProps?: Partial<TextProps>;
     /**
      * Optional CSS classes merged onto the tag container.
      */

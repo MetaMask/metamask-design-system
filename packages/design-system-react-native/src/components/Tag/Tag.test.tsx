@@ -1,3 +1,4 @@
+import { TextColor, TextVariant } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
@@ -136,6 +137,42 @@ describe('Tag', () => {
       );
 
       expect(getByTestId('tag-end-accessory')).toBeOnTheScreen();
+    });
+  });
+
+  describe('textProps', () => {
+    it('applies textProps overrides to string children', () => {
+      const { getByTestId } = render(
+        <Tag
+          textProps={{ testID: 'tag-text', color: TextColor.SuccessDefault }}
+        >
+          4.5% APY
+        </Tag>,
+      );
+
+      expect(getByTestId('tag-text')).toHaveStyle(tw`text-success-default`);
+    });
+
+    it('overrides the default variant with textProps.variant', () => {
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const expectedStyles = tw`text-${TextVariant.BodySm}` as {
+        fontSize?: number;
+      };
+      const { fontSize = 0 } = expectedStyles;
+
+      const { getByTestId } = render(
+        <Tag textProps={{ testID: 'tag-text', variant: TextVariant.BodySm }}>
+          4.5% APY
+        </Tag>,
+      );
+
+      expect(getByTestId('tag-text')).toHaveStyle({ fontSize });
+    });
+
+    it('keeps default string child styling when textProps is omitted', () => {
+      const { getByText } = render(<Tag>From string</Tag>);
+
+      expect(getByText('From string')).toHaveStyle(tw`text-alternative`);
     });
   });
 });
