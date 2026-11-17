@@ -43,16 +43,6 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
       variant === SelectButtonVariant.Tertiary;
     const isInteractive = !isDisabled && !isLoading;
 
-    if (
-      process.env.NODE_ENV !== 'production' &&
-      !hasLabel &&
-      !props['aria-label']
-    ) {
-      console.warn(
-        'SelectButton: no label is rendered because `value` and `placeholder` are missing or empty. Provide an `aria-label` so the control has an accessible name.',
-      );
-    }
-
     const resolvedTextProps = {
       ...(variant === SelectButtonVariant.Tertiary
         ? { color: TextColor.TextAlternative }

@@ -85,48 +85,6 @@ describe('SelectButton', () => {
     });
   });
 
-  describe('when there is no label', () => {
-    it('warns in development when there is no label and no aria-label', () => {
-      const warnSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => undefined);
-
-      render(<SelectButton />);
-
-      expect(warnSpy).toHaveBeenCalledWith(
-        expect.stringContaining('SelectButton'),
-      );
-      warnSpy.mockRestore();
-    });
-
-    it('does not warn when aria-label is provided', () => {
-      const warnSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => undefined);
-
-      render(<SelectButton aria-label="Select network" />);
-
-      expect(warnSpy).not.toHaveBeenCalled();
-      warnSpy.mockRestore();
-    });
-
-    it('does not warn in production', () => {
-      const originalNodeEnv = process.env.NODE_ENV;
-      const warnSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => undefined);
-      process.env.NODE_ENV = 'production';
-
-      try {
-        render(<SelectButton />);
-        expect(warnSpy).not.toHaveBeenCalled();
-      } finally {
-        process.env.NODE_ENV = originalNodeEnv;
-        warnSpy.mockRestore();
-      }
-    });
-  });
-
   describe('when endArrowDirection is set', () => {
     it.each(Object.values(SelectButtonEndArrow))(
       'maps endArrowDirection %s to the matching trailing icon',
