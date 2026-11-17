@@ -6,14 +6,14 @@ import * as path from 'path';
 
 // ─── Paths ────────────────────────────────────────────────────────────────────
 
-const REPO_ROOT = path.join(__dirname, '../../..');
+const REPO_ROOT = path.join(import.meta.dirname, '../../..');
 
 /** Single source of truth for all icon SVG assets */
-const SHARED_ASSETS_DIR = path.join(__dirname, '../src/assets/icons');
+const SHARED_ASSETS_DIR = path.join(import.meta.dirname, '../src/assets/icons');
 
 /** Shared IconName const object lives here */
 const SHARED_TYPES_FILE = path.join(
-  __dirname,
+  import.meta.dirname,
   '../src/types/Icon/Icon.types.ts',
 );
 

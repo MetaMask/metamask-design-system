@@ -1,4 +1,4 @@
-#!yarn tsx
+#!/usr/bin/env node
 
 import execa from 'execa';
 import fs from 'fs';
@@ -14,7 +14,7 @@ const DEPENDENCY_GRAPH_START_MARKER = '<!-- start dependency graph -->';
 const DEPENDENCY_GRAPH_END_MARKER = '<!-- end dependency graph -->';
 const PACKAGE_LIST_START_MARKER = '<!-- start package list -->';
 const PACKAGE_LIST_END_MARKER = '<!-- end package list -->';
-const README_PATH = path.resolve(__dirname, '../README.md');
+const README_PATH = path.resolve(import.meta.dirname, '../README.md');
 
 main().catch((error) => {
   console.error(error);

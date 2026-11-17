@@ -1,15 +1,19 @@
 import execa from 'execa';
 import { existsSync, promises as fs } from 'fs';
+import { createRequire } from 'module';
 import path from 'path';
 import { format as prettierFormat } from 'prettier';
 import type { Options as PrettierOptions } from 'prettier';
 
-import { MonorepoFiles, Placeholders } from './constants';
-import type { FileMap } from './fs-utils';
-import { readAllFiles, writeFiles } from './fs-utils';
+import { MonorepoFiles, Placeholders } from './constants.ts';
+import type { FileMap } from './fs-utils.ts';
+import { readAllFiles, writeFiles } from './fs-utils.ts';
 
-const PACKAGE_TEMPLATE_DIR = path.join(__dirname, 'package-template');
-const REPO_ROOT = path.join(__dirname, '..', '..');
+const PACKAGE_TEMPLATE_DIR = path.join(
+  import.meta.dirname,
+  'package-template',
+);
+const REPO_ROOT = path.join(import.meta.dirname, '..', '..');
 const REPO_TS_CONFIG = path.join(REPO_ROOT, MonorepoFiles.TsConfig);
 const REPO_TS_CONFIG_BUILD = path.join(REPO_ROOT, MonorepoFiles.TsConfigBuild);
 const REPO_PACKAGE_JSON = path.join(REPO_ROOT, MonorepoFiles.PackageJson);
@@ -20,9 +24,10 @@ const allPlaceholdersRegex = new RegExp(
   'gu',
 );
 
-// Dynamic require needed for loading prettier config at runtime - ESM import not supported for .js config files
-// eslint-disable-next-line @typescript-eslint/no-require-imports, import-x/no-dynamic-require, n/global-require
-const prettierRc = require(
+// Dynamic loading needed for the prettier config - ESM import not supported
+// for .js config files.
+const requireConfig = createRequire(import.meta.url);
+const prettierRc = requireConfig(
   path.join(REPO_ROOT, '.prettierrc.js'),
 ) as PrettierOptions;
 

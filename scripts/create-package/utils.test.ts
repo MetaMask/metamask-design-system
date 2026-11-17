@@ -3,10 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import prettier from 'prettier';
 
-import { MonorepoFiles } from './constants';
-import * as fsUtils from './fs-utils';
-import type { PackageData } from './utils';
-import { finalizeAndWriteData, readMonorepoFiles } from './utils';
+import { MonorepoFiles } from './constants.ts';
+import * as fsUtils from './fs-utils.ts';
+import type { PackageData } from './utils.ts';
+import { finalizeAndWriteData, readMonorepoFiles } from './utils.ts';
 
 jest.mock('fs', () => ({
   existsSync: jest.fn(),

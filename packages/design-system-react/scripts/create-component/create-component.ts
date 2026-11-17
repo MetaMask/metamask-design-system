@@ -70,9 +70,9 @@ export async function createComponent(
   const folderName = componentName;
 
   // Define paths
-  const templateDir = path.join(__dirname, 'ComponentName');
+  const templateDir = path.join(import.meta.dirname, 'ComponentName');
   const targetDir = path.join(
-    __dirname,
+    import.meta.dirname,
     '..',
     '..',
     'src',
@@ -125,7 +125,7 @@ export async function createComponent(
 
     // Update src/components/index.ts
     const componentsIndexPath = path.join(
-      __dirname,
+      import.meta.dirname,
       '..',
       '..',
       'src',
