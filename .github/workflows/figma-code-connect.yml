@@ -27,25 +27,21 @@ jobs:
         with:
           is-high-risk-environment: ${{ inputs.publish }}
 
-      # The LavaMoat runner strips environment variables containing "TOKEN"
-      # from `yarn run` scripts, so the Figma CLI reads the token from `.env`
-      # (loaded in-process via dotenv) instead.
-      - name: Write Figma access token to .env
-        env:
-          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
-        run: printf 'FIGMA_ACCESS_TOKEN=%s\n' "$FIGMA_ACCESS_TOKEN" > .env
-
+      # TOKEN is temporarily exempt from the banned environment variable names
+      # in lavamoat/.env.ban.json so that the Figma CLI can read
+      # FIGMA_ACCESS_TOKEN directly from the environment. Re-ban TOKEN once
+      # harden supports per-script overrides of the banned list.
       - name: Dry run Code Connect publish
         if: ${{ !inputs.publish }}
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
         run: yarn figma:connect:publish:dry-run
 
       - name: Publish Code Connect to Figma
         if: ${{ inputs.publish }}
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
         run: yarn figma:connect:publish
-
-      - name: Remove .env
-        if: ${{ always() }}
-        run: rm -f .env
 
       - name: Require clean working directory
         shell: bash

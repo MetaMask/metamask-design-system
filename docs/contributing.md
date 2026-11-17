@@ -4,7 +4,7 @@
 
 - Install [Node.js](https://nodejs.org) 26 (see `.nvmrc`)
   - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm install` will install the version in `.nvmrc` and running `nvm use` will automatically choose the right node version for you.
-  - Scripts run under the Node.js permission model (see [Script permissions](#script-permissions)). Node.js 24 can't apply the network restrictions, and scripts that use the `net` or `install` profiles fail on it.
+  - Scripts run under the Node.js permission model (see [Script permissions](#script-permissions)). Node.js 24 doesn't control network access at all — the `--allow-net` flag doesn't exist there — so running scripts on Node.js 24 gives up that layer of protection (scripts that use the `net` or `install` profiles fail outright instead). Keep in mind that any permission granted to child processes, native addons or workers can get around the network restriction, because it isn't enforced OS-wide.
 - Install [Yarn](https://yarnpkg.com) via [Corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#how-to-install)
   - Node.js 26 no longer bundles Corepack. Install it with `npm install --global corepack` and then run `corepack enable`.
   - If you have Yarn installed globally via Homebrew or NPM, you'll need to uninstall it before enabling it via Corepack.
@@ -37,13 +37,13 @@ If you need to customize the behavior of ESLint, see `eslint.config.mjs` in the 
 
 ## Script permissions
 
-The package manager is hardened with [`@lavamoat/harden`](https://github.com/LavaMoat/LavaMoat/tree/main/packages/harden). Every script run with `yarn run` (or `yarn <script>`) is wrapped in the [Node.js permission model](https://nodejs.org/api/permissions.html). The workspace's `scriptsConfig` field chooses the profile, a JSON file in `lavamoat/`. Scripts without an entry use `#default` (`lavamoat/scripts.strict.json`), which only allows reading and writing inside the repository.
+The package manager is hardened with [`@lavamoat/harden`](https://github.com/LavaMoat/LavaMoat/tree/main/packages/harden). Every script run with `yarn run` (or `yarn <script>`) is wrapped in the [Node.js permission model](https://nodejs.org/api/permissions.html). The workspace's `scriptsConfig` field chooses the profile, a JSON file in `lavamoat/`. Scripts without an entry use `#default` (`lavamoat/scripts.base.json`), which only allows reading and writing inside the repository.
 
 When you add a script, give it the narrowest profile that works:
 
 | Profile   | Use for                                                                                      |
 | --------- | -------------------------------------------------------------------------------------------- |
-| `strict`  | Default. Pure Node.js scripts that only touch the repository                                 |
+| `base`    | Default. Pure Node.js scripts that only touch the repository                                 |
 | `build`   | Build tools that start child processes                                                       |
 | `yarn`    | Scripts that call other `yarn` scripts                                                       |
 | `lint`    | Linters and changelog tooling                                                                |
@@ -53,7 +53,7 @@ When you add a script, give it the narrowest profile that works:
 | `install` | Scripts that run `yarn install` (Node.js only allows symlinks with unrestricted fs access)   |
 | `unsafe`  | No restrictions. Only for tools that can't run under the permission model, such as Storybook |
 
-The runner also removes environment variables whose names contain `TOKEN`, `SECRET`, `KEY`, `AUTH`, `PASSWORD`, `SESSION` or `SSH` (see `lavamoat/.env.ban.json`). Put local secrets in `.env` instead, for example `FIGMA_ACCESS_TOKEN` for Figma Code Connect.
+The runner also removes environment variables whose names contain `SECRET`, `KEY`, `AUTH`, `PASSWORD`, `SESSION` or `SSH` (see `lavamoat/.env.ban.json`). Put local secrets in `.env` instead. `TOKEN` is currently exempt from the ban so that `FIGMA_ACCESS_TOKEN` can reach the Figma Code Connect CLI; re-ban it once harden supports per-script overrides of the banned list.
 
 ## Performing operations across the monorepo
 

@@ -155,12 +155,25 @@ module.exports = defineConfig({
       }
 
       // Every workspace must fall back to the strict LavaMoat script
-      // permission profile for scripts without an explicit profile.
-      expectWorkspaceField(
-        workspace,
-        'scriptsConfig.#default',
-        'lavamoat/scripts.strict.json',
-      );
+      // permission profile for scripts without an explicit profile. The
+      // Storybook React Native app is the exception: every script in it
+      // drives native tooling or Storybook, which cannot run under the
+      // Node.js permission model, so it maps all of its scripts to the
+      // unsafe profile at once via the "*" wildcard.
+      if (workspace.cwd === 'apps/storybook-react-native') {
+        const unsafeWildcard = get(workspace.manifest, 'scriptsConfig.*');
+        if (unsafeWildcard !== 'lavamoat/scripts.unsafe.json') {
+          workspace.error(
+            'Expected scriptsConfig."*" to be "lavamoat/scripts.unsafe.json".',
+          );
+        }
+      } else {
+        expectWorkspaceField(
+          workspace,
+          'scriptsConfig.#default',
+          'lavamoat/scripts.base.json',
+        );
+      }
 
       if (isChildWorkspace && !isApps) {
         // The list of files included in all non-root packages must only include

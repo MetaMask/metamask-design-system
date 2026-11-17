@@ -1,14 +1,9 @@
 {
-  "notes": "For tsx-based code generators that read dependencies and write generated files inside the project.",
+  "notes": "For tsx-based code generators that read dependencies and write generated files inside the project. The broad read access exists because tsx probes a case-inverted copy of the project path to detect filesystem case sensitivity; on case-sensitive filesystems that path resolves nowhere, so only unrestricted read access lets the probe through, and no narrower list of locations can express it. Narrow this once these scripts run on Node.js type stripping instead of tsx.",
   "extends": "./scripts.base.json",
   "nodeOptions": {
     "--allow-fs-read": ["/"],
-    "--allow-fs-write": ["$PROJECT_CWD"],
     "--allow-child-process": true,
-    "--allow-net": false,
-    "--allow-worker": true,
-    "--allow-addons": false,
-    "--allow-wasi": false,
-    "--allow-inspector": false
+    "--allow-worker": true
   }
 }

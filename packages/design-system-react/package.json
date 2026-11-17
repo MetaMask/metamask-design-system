@@ -96,7 +96,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scriptsConfig": {
-    "#default": "lavamoat/scripts.strict.json",
+    "#default": "lavamoat/scripts.base.json",
     "build": "lavamoat/scripts.build.json",
     "changelog:update": "lavamoat/scripts.lint.json",
     "changelog:validate": "lavamoat/scripts.lint.json",
