@@ -2,14 +2,14 @@ import base, { createConfig } from '@metamask/eslint-config';
 import jest from '@metamask/eslint-config-jest';
 import nodejs from '@metamask/eslint-config-nodejs';
 import typescript from '@metamask/eslint-config-typescript';
-// ESM-only package with non-standard "code" export condition
-import { configs as storybookConfigs } from 'eslint-plugin-storybook';
+// eslint-disable-next-line import-x/no-unresolved -- ESM-only package with non-standard "code" export condition
+import storybook from 'eslint-plugin-storybook';
 import tailwind from 'eslint-plugin-tailwindcss';
 
 const NODE_LTS_VERSION = 22;
 
 const config = createConfig([
-  ...storybookConfigs['flat/recommended'],
+  ...storybook.configs['flat/recommended'],
   ...base,
   {
     ignores: [
