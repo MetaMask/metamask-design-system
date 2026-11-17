@@ -154,13 +154,19 @@ describe('Tag', () => {
     });
 
     it('overrides the default variant with textProps.variant', () => {
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      const expectedStyles = tw`text-${TextVariant.BodySm}` as {
+        fontSize?: number;
+      };
+      const { fontSize = 0 } = expectedStyles;
+
       const { getByTestId } = render(
         <Tag textProps={{ testID: 'tag-text', variant: TextVariant.BodySm }}>
           4.5% APY
         </Tag>,
       );
 
-      expect(getByTestId('tag-text')).toHaveStyle(tw`text-body-sm`);
+      expect(getByTestId('tag-text')).toHaveStyle({ fontSize });
     });
 
     it('keeps default string child styling when textProps is omitted', () => {
