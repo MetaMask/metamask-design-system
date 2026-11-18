@@ -164,7 +164,7 @@
     "test:scripts": "lavamoat/scripts.test.json",
     "test:storybook*": "lavamoat/scripts.yarn.json",
     "test:verbose": "lavamoat/scripts.yarn.json",
-    "update-readme-content": "lavamoat/scripts.cli.json",
+    "update-readme-content": "lavamoat/scripts.yarn.json",
     "workspaces:list-versions": "lavamoat/scripts.yarn.json"
   }
 }
