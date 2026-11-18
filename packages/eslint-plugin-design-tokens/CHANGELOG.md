@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated the default `discouragedColors` of `prefer-theme-color-classnames` to the brand palette exposed by `@metamask/design-tokens` ([#1723](https://github.com/MetaMask/metamask-design-system/pull/1723))
+  - The default list is now `black`, `blue`, `gray`, `green`, `grey`, `indigo`, `lime`, `orange`, `purple`, `red`, `white`, `yellow`
+  - `slateGray`, `pink`, and `teal` are no longer discouraged because they were never MetaMask brand colors, while `grey` and `lime` now are
+  - `gray` is kept as an alias so literal classes spelled the Tailwind default way (e.g. `text-gray-500`) are still caught
+- Rule documentation URLs now point at the `metamask-design-system` monorepo instead of the retired standalone repositories ([#1723](https://github.com/MetaMask/metamask-design-system/pull/1723))
+
+### Fixed
+
+- `color-no-hex` now flags 8-digit hex values with an alpha channel, such as `#4459ff1a`, which the current design tokens use ([#1723](https://github.com/MetaMask/metamask-design-system/pull/1723))
+
 ## [2.0.0]
 
 ### Changed
