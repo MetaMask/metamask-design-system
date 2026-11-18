@@ -48,7 +48,6 @@ When you add a script, give it the narrowest profile that works:
 | `yarn`    | Scripts that call other `yarn` scripts                                                       |
 | `lint`    | Linters and changelog tooling                                                                |
 | `test`    | Jest                                                                                         |
-| `cli`     | TypeScript scripts run through `node --import tsx`                                           |
 | `net`     | Scripts that need the network, such as Figma Code Connect or preview publishing              |
 | `install` | Scripts that run `yarn install` (Node.js only allows symlinks with unrestricted fs access)   |
 | `unsafe`  | No restrictions. Only for tools that can't run under the permission model, such as Storybook |
