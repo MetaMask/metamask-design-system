@@ -6,35 +6,28 @@ type TemplateElement = Extract<
 >['quasis'][number];
 
 /**
- * The color family names exposed by `@metamask/design-tokens` that literal
- * color classnames should not shadow. This mirrors the brand palette defined
- * in `packages/design-tokens/src/css/brand-colors.css` (and the `brandColor`
- * JS token), plus the two literal colors (`black` and `white`) that the
- * MetaMask Tailwind and twrnc presets still expose.
+ * The literal color classnames that MetaMask's Tailwind and twrnc setups
+ * expose, and that theme color classnames should be preferred over.
  *
- * `gray` is not an MMDS brand family — MMDS uses `grey` — but it is the
- * spelling Tailwind's default palette uses, so it is kept to catch legacy
- * literal classes such as `text-gray-500` in codebases that have not applied
- * the MetaMask color reset yet.
+ * Brand color families (`grey`, `blue`, `lime`, ...) are deliberately not
+ * included: no MetaMask Tailwind or twrnc configuration exposes them as
+ * classnames. The Tailwind v4 theme resets the color namespace with
+ * `--color-*: initial`, the twrnc preset and consumers' Tailwind configs
+ * replace `theme.colors` with semantic theme colors plus the two literal
+ * colors below, and the deprecated Tailwind v3 preset only ever extends the
+ * palette with semantic theme colors. Literal classes such as `bg-blue-500`
+ * therefore never resolve, and unknown-classname linting (e.g.
+ * `tailwindcss/no-custom-classname`) is the more accurate signal for them.
+ * `black` and `white` are the only literal colors that resolve in every
+ * setup, which makes them what this rule discourages by default.
  *
- * The test suite derives the brand families from the design tokens CSS and
- * asserts this list matches, so it must be updated whenever the palette
- * changes.
+ * Widen the list through the `discouragedColors` option for projects that
+ * keep a larger literal palette available. The test suite derives the
+ * standalone literal colors from the brand palette in
+ * `packages/design-tokens/src/css/brand-colors.css` and asserts this list
+ * matches, so it must be updated whenever the palette changes.
  */
-export const defaultDiscouragedColors = [
-  'black',
-  'blue',
-  'gray',
-  'green',
-  'grey',
-  'indigo',
-  'lime',
-  'orange',
-  'purple',
-  'red',
-  'white',
-  'yellow',
-] as const;
+export const defaultDiscouragedColors = ['black', 'white'] as const;
 
 /**
  * Rule to encourage the use of theme color class names instead of literal color class names.

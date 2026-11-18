@@ -17,54 +17,42 @@ const ruleTester = new RuleTester({
 });
 
 /**
- * Extracts the brand color family names from the design tokens source of
- * truth (`packages/design-tokens/src/css/brand-colors.css`). Each declaration
- * is either `--brand-colors-<family>-<shade>` or, for the two standalone
- * literal colors, `--brand-colors-white` / `--brand-colors-black`.
+ * Extracts the standalone literal colors from the design tokens source of
+ * truth (`packages/design-tokens/src/css/brand-colors.css`). Brand families
+ * appear there with a shade scale (e.g. `--brand-colors-grey-grey100`), while
+ * the standalone literal colors have no shade (e.g. `--brand-colors-white`).
  *
  * The file is read at test time rather than imported from
  * `@metamask/design-tokens` so that the plugin keeps no dependency on that
  * package at runtime.
  *
- * @returns The sorted list of unique brand color family names.
+ * @returns The sorted list of standalone literal color names.
  */
-const getBrandColorFamilies = (): string[] => {
+const getStandaloneBrandColors = (): string[] => {
   const brandColorsPath = path.resolve(
     __dirname,
     '../../../design-tokens/src/css/brand-colors.css',
   );
   const brandColorsCss = readFileSync(brandColorsPath, 'utf8');
 
-  const families = new Set<string>();
+  const shadedFamilies = new Set<string>();
+  const standaloneColors = new Set<string>();
   for (const match of brandColorsCss.matchAll(
     /^\s*--brand-colors-([a-z0-9-]+):/gmu,
   )) {
     const declaration = match[1] ?? '';
-    const family = declaration.includes('-')
-      ? declaration.slice(0, declaration.indexOf('-'))
-      : declaration;
-    if (family.trim().length > 0) {
-      families.add(family);
+    if (declaration.includes('-')) {
+      shadedFamilies.add(declaration.slice(0, declaration.indexOf('-')));
+    } else if (declaration.trim().length > 0) {
+      standaloneColors.add(declaration);
     }
   }
-  return [...families].sort();
+  return [...standaloneColors]
+    .filter((color) => !shadedFamilies.has(color))
+    .sort();
 };
 
-const brandColorFamilies = getBrandColorFamilies();
-
-/**
- * Builds a representative literal color classname for a brand family.
- * `black` and `white` are standalone literal colors without shades; every
- * other family is used with a shade in literal (Tailwind default palette)
- * classnames.
- *
- * @param family - The brand color family name.
- * @returns A literal color classname for that family.
- */
-const getLiteralClassName = (family: string): string =>
-  family === 'black' || family === 'white'
-    ? `bg-${family}`
-    : `bg-${family}-500`;
+const standaloneBrandColors = getStandaloneBrandColors();
 
 ruleTester.run('prefer-theme-color-classnames', preferThemeColorClassnames, {
   valid: [
@@ -74,13 +62,19 @@ ruleTester.run('prefer-theme-color-classnames', preferThemeColorClassnames, {
     { code: `const className = "border-border-muted";` },
     { code: `const templateString = \`bg-\${colorValue}\`;` },
     { code: `const className = "other-non-color-class-name";` },
+    // Brand color families are never exposed as classnames by the MetaMask
+    // Tailwind or twrnc setups, so they are not discouraged by default;
+    // unknown-classname linting is the more accurate signal for them
+    { code: `const className = "bg-grey-050";` },
+    { code: `const className = "bg-lime-300";` },
+    { code: `const className = "text-gray-500";` },
     // This is an example where default discouraged colors are overridden so default colors are not discouraged
     {
-      code: `const className = "bg-blue-500";`,
+      code: `const className = "bg-black";`,
       options: [{ discouragedColors: ['random-override'] }],
     },
     {
-      code: `const className = "bg-blue-500";`,
+      code: `const className = "bg-black";`,
       options: [{ discouragedColors: [' '] }],
     },
   ],
@@ -98,58 +92,15 @@ ruleTester.run('prefer-theme-color-classnames', preferThemeColorClassnames, {
         },
       ],
     },
+    // `black` and `white` are the only literal colors the MetaMask setups expose
     {
-      code: `const className = "border-blue-200";`,
+      code: `const className = "bg-black";`,
       errors: [
         {
-          message: `'border-blue-200' usage of literal color class names is discouraged. Consider using theme color class names instead.`,
+          message: `'bg-black' usage of literal color class names is discouraged. Consider using theme color class names instead.`,
         },
       ],
     },
-    {
-      code: `const className = "text-red-600";`,
-      errors: [
-        {
-          message: `'text-red-600' usage of literal color class names is discouraged. Consider using theme color class names instead.`,
-        },
-      ],
-    },
-    {
-      code: `const templateString = \`bg-blue-\${opacity}\`;`,
-      errors: [
-        {
-          message: `'bg-blue' usage of literal color class names is discouraged. Consider using theme color class names instead.`,
-        },
-      ],
-    },
-    // MetaMask spells the neutral family `grey`, unlike Tailwind's default `gray`
-    {
-      code: `const className = "bg-grey-050";`,
-      errors: [
-        {
-          message: `'bg-grey-050' usage of literal color class names is discouraged. Consider using theme color class names instead.`,
-        },
-      ],
-    },
-    // `gray` stays discouraged to catch literal classes spelled the Tailwind way
-    {
-      code: `const className = "text-gray-500";`,
-      errors: [
-        {
-          message: `'text-gray-500' usage of literal color class names is discouraged. Consider using theme color class names instead.`,
-        },
-      ],
-    },
-    // `lime` is an MMDS brand family the old default list missed; `slateGray`, `pink`, and `teal` were never MMDS colors
-    {
-      code: `const className = "bg-lime-300";`,
-      errors: [
-        {
-          message: `'bg-lime-300' usage of literal color class names is discouraged. Consider using theme color class names instead.`,
-        },
-      ],
-    },
-    // `black` and `white` are the two literal colors the presets still expose
     {
       code: `const className = "text-white";`,
       errors: [
@@ -158,22 +109,19 @@ ruleTester.run('prefer-theme-color-classnames', preferThemeColorClassnames, {
         },
       ],
     },
-    // Every brand color family from the design tokens source of truth is discouraged by default
-    ...brandColorFamilies.map((family) => ({
-      code: `const className = "${getLiteralClassName(family)}";`,
+    {
+      code: `const templateString = \`bg-black-\${opacity}\`;`,
       errors: [
         {
-          message: `'${getLiteralClassName(family)}' usage of literal color class names is discouraged. Consider using theme color class names instead.`,
+          message: `'bg-black' usage of literal color class names is discouraged. Consider using theme color class names instead.`,
         },
       ],
-    })),
+    },
   ],
 });
 
 describe('defaultDiscouragedColors', () => {
-  it('matches the brand color families exposed by @metamask/design-tokens plus the Tailwind-spelled gray alias', () => {
-    expect([...defaultDiscouragedColors].sort()).toEqual(
-      [...brandColorFamilies, 'gray'].sort(),
-    );
+  it('matches the standalone literal colors of the @metamask/design-tokens brand palette', () => {
+    expect([...defaultDiscouragedColors].sort()).toEqual(standaloneBrandColors);
   });
 });
