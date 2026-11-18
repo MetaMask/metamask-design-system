@@ -6,6 +6,37 @@ type TemplateElement = Extract<
 >['quasis'][number];
 
 /**
+ * The color family names exposed by `@metamask/design-tokens` that literal
+ * color classnames should not shadow. This mirrors the brand palette defined
+ * in `packages/design-tokens/src/css/brand-colors.css` (and the `brandColor`
+ * JS token), plus the two literal colors (`black` and `white`) that the
+ * MetaMask Tailwind and twrnc presets still expose.
+ *
+ * `gray` is not an MMDS brand family — MMDS uses `grey` — but it is the
+ * spelling Tailwind's default palette uses, so it is kept to catch legacy
+ * literal classes such as `text-gray-500` in codebases that have not applied
+ * the MetaMask color reset yet.
+ *
+ * The test suite derives the brand families from the design tokens CSS and
+ * asserts this list matches, so it must be updated whenever the palette
+ * changes.
+ */
+export const defaultDiscouragedColors = [
+  'black',
+  'blue',
+  'gray',
+  'green',
+  'grey',
+  'indigo',
+  'lime',
+  'orange',
+  'purple',
+  'red',
+  'white',
+  'yellow',
+] as const;
+
+/**
  * Rule to encourage the use of theme color class names instead of literal color class names.
  */
 export const preferThemeColorClassnames: Rule.RuleModule = {
@@ -15,7 +46,7 @@ export const preferThemeColorClassnames: Rule.RuleModule = {
       description:
         'Encourage the use of theme color class names instead of literal color class names.',
       recommended: true,
-      url: 'https://github.com/MetaMask/eslint-plugin-design-tokens/blob/main/docs/rules/prefer-theme-color-classnames.md',
+      url: 'https://github.com/MetaMask/metamask-design-system/blob/main/packages/eslint-plugin-design-tokens/docs/rules/prefer-theme-color-classnames.md',
     },
     // Adding a schema to accept options
     schema: [
@@ -28,21 +59,7 @@ export const preferThemeColorClassnames: Rule.RuleModule = {
               type: 'string',
               minLength: 1, // This ensures that the string is not empty but does not prevent whitespace-only strings.
             },
-            default: [
-              'blue',
-              'red',
-              'gray',
-              'slateGray',
-              'green',
-              'orange',
-              'black',
-              'white',
-              'indigo',
-              'yellow',
-              'purple',
-              'pink',
-              'teal',
-            ],
+            default: [...defaultDiscouragedColors],
           },
         },
         additionalProperties: false,
@@ -55,21 +72,9 @@ export const preferThemeColorClassnames: Rule.RuleModule = {
   create(context) {
     const options = context.options[0] || {};
 
-    // Default to a list of discouraged color names if none are provided in the options.
+    // Default to the MetaMask brand palette if none are provided in the options.
     const discouragedColors: string[] = options.discouragedColors || [
-      'blue',
-      'red',
-      'gray',
-      'slateGray',
-      'green',
-      'orange',
-      'black',
-      'white',
-      'indigo',
-      'yellow',
-      'purple',
-      'pink',
-      'teal',
+      ...defaultDiscouragedColors,
     ];
 
     // Validate discouragedColors to ensure no empty or whitespace-only strings

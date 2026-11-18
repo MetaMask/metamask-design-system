@@ -2,9 +2,12 @@ import type { Rule } from 'eslint';
 /**
  * Regular expression to match hex color values.
  * Added capturing group to extract the hex value.
+ * Matches three to eight hex digits so that 8-digit ARGB values with an alpha
+ * channel (e.g. `#4459ff1a`, used by the current design tokens) are caught as
+ * well as 6-digit values.
  * Using 'u' flag for Unicode support.
  */
-const hexColorRegex = /(#\p{Hex_Digit}{3,6})\b/u;
+const hexColorRegex = /(#\p{Hex_Digit}{3,8})\b/u;
 
 /**
  * Rule to prevent the use of hex color values.
@@ -15,7 +18,7 @@ export const colorNoHex: Rule.RuleModule = {
     docs: {
       description: 'Prevent the use of hex color values.',
       recommended: true,
-      url: 'https://github.com/MetaMask/eslint-plugin-design-tokens/blob/main/docs/rules/color-no-hex.md',
+      url: 'https://github.com/MetaMask/metamask-design-system/blob/main/packages/eslint-plugin-design-tokens/docs/rules/color-no-hex.md',
     },
     schema: [], // This rule does not take any options
   },

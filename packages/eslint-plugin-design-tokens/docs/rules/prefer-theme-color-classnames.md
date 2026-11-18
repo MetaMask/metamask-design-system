@@ -1,16 +1,18 @@
 # Encourage the Use of Theme Color Classnames (`@metamask/design-tokens/prefer-theme-color-classnames`)
 
-This rule encourages the use of theme color classnames instead of literal color names, promoting theme safe and consistent color management via [design tokens](https://github.com/MetaMask/design-tokens). By advocating for the use of [design tokens](https://github.com/MetaMask/design-tokens) for colors, this rule helps ensure consistency, design system alignment, scalability, and ease of maintenance across your project's UI.
+This rule encourages the use of theme color classnames instead of literal color names, promoting theme safe and consistent color management via [design tokens](https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-tokens). By advocating for the use of [design tokens](https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-tokens) for colors, this rule helps ensure consistency, design system alignment, scalability, and ease of maintenance across your project's UI.
 
 ## Rule Details
 
-The `prefer-theme-color-classnames` rule is aimed at encouraging the use of CSS theme color class names over direct references to literal color names e.g. blue, red, green, slateGray, etc. This practice supports theming, reusability, and easier updates to the color palette.
+The `prefer-theme-color-classnames` rule is aimed at encouraging the use of CSS theme color class names over direct references to literal color names e.g. blue, red, green, grey, etc. This practice supports theming, reusability, and easier updates to the color palette.
+
+In the MetaMask Tailwind and twrnc setups the default color palettes are removed (Tailwind v4 does this with `--color-*: initial` in [`@metamask/design-tokens`'s theme](https://github.com/MetaMask/metamask-design-system/blob/main/packages/design-tokens/src/tailwind/theme.css), and the v3 presets override `theme.colors` the same way), so literal color classnames such as `bg-blue-500` do not resolve to anything. Only the theme color classnames (e.g. `bg-default`, `text-primary-default`) plus the literal `black` and `white` are available.
 
 Examples of **incorrect** code for this rule:
 
 ```jsx
 // In a JSX file
-<div className="bg-slateGray-500">...</div>
+<div className="bg-lime-300">...</div>
 <div className="text-blue-600">...</div>
 ```
 
@@ -26,20 +28,21 @@ Examples of **correct** code for this rule:
 
 This rule accepts an optional single configuration object with the following properties:
 
-- `discouragedColors`: An array of strings representing color names that should be avoided. Providing this array will override the default set of discouraged colors. The default colors considered discouraged are:
-- `blue`
-- `red`
-- `gray`
-- `slateGray`
-- `green`
-- `orange`
+- `discouragedColors`: An array of strings representing color names that should be avoided. Providing this array will override the default set of discouraged colors. The default colors considered discouraged are the brand color families and literal colors exposed by [`@metamask/design-tokens`](https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-tokens):
 - `black`
-- `white`
+- `blue`
+- `gray`
+- `green`
+- `grey`
 - `indigo`
-- `yellow`
+- `lime`
+- `orange`
 - `purple`
-- `pink`
-- `teal`
+- `red`
+- `white`
+- `yellow`
+
+`gray` is not an MMDS brand family — MMDS uses `grey` — but it is the spelling Tailwind's default palette uses, so it stays in the default list to catch legacy literal classes such as `text-gray-500`.
 
 ### Example Configuration:
 

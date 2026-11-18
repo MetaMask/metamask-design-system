@@ -53,5 +53,30 @@ ruleTester.run('color-no-hex', colorNoHex, {
         },
       ],
     },
+    // 8-digit hex values with an alpha channel, as used by the current design tokens
+    {
+      code: `const overlayColor = "#0a0d135c";`,
+      errors: [
+        {
+          message: `'#0a0d135c' Hex color values are not allowed. Consider using design tokens instead. For support reach out to the design system team #metamask-design-system on Slack.`,
+        },
+      ],
+    },
+    {
+      code: `const primaryMuted = "#4459ff1a";`,
+      errors: [
+        {
+          message: `'#4459ff1a' Hex color values are not allowed. Consider using design tokens instead. For support reach out to the design system team #metamask-design-system on Slack.`,
+        },
+      ],
+    },
+    {
+      code: `const borderColor = \`#ff758433\`;`,
+      errors: [
+        {
+          message: `'#ff758433' Hex color values are not allowed. Consider using design tokens instead. For support reach out to the design system team #metamask-design-system on Slack.`,
+        },
+      ],
+    },
   ],
 });

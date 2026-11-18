@@ -1,6 +1,6 @@
 # `@metamask/eslint-plugin-design-tokens`
 
-An ESLint plugin designed to enforce best practices and consistency for using MetaMask [design tokens](https://github.com/MetaMask/design-tokens) across various projects
+An ESLint plugin designed to enforce best practices and consistency for using MetaMask [design tokens](https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-tokens) across various projects
 
 ## Installation
 
