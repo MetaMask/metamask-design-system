@@ -118,7 +118,6 @@
     "test": "lavamoat/scripts.test.json",
     "test:clean": "lavamoat/scripts.test.json",
     "test:verbose": "lavamoat/scripts.test.json",
-    "test:watch": "lavamoat/scripts.test.json",
-    "create-component:react-native": "lavamoat/scripts.cli.json"
+    "test:watch": "lavamoat/scripts.test.json"
   }
 }

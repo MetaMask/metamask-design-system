@@ -42,6 +42,7 @@ merged-packages/*/*.tsbuildinfo
 
 # Storybook build output
 storybook-static
+rn-storybook-static
 
 # Auto-generated storybook requires
 apps/storybook-react-native/.rnstorybook/storybook.requires.*
