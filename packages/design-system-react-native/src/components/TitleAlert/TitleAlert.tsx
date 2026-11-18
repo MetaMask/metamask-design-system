@@ -4,6 +4,7 @@ import {
   BoxJustifyContent,
   FontWeight,
   IconSize,
+  mergeTwClassName,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -26,7 +27,8 @@ import type { TitleAlertProps } from './TitleAlert.types';
  * @param props.titleProps - Optional props merged into title row `Text` when `title` is a string
  * @param props.description - Optional text-centered description below the title; uses {@link TextOrChildren}
  * @param props.descriptionProps - Optional props merged into description `Text` when `description` is a string
- * @param props.twClassName - Optional Tailwind classes on the root Box
+ * @param props.className - Optional CSS classes on the root Box. Replaces `twClassName` when set
+ * @param props.twClassName - Optional Tailwind classes on the root Box. Deprecated in favor of `className`
  *
  * @returns The rendered TitleAlert layout.
  */
@@ -37,16 +39,23 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
   titleWrapperProps,
   description,
   descriptionProps,
+  className,
   twClassName = '',
   ...props
 }) => {
+  const {
+    className: titleWrapperClassName,
+    twClassName: titleWrapperTwClassName,
+    ...titleWrapperRest
+  } = titleWrapperProps ?? {};
+
   return (
     <Box
       flexDirection={BoxFlexDirection.Column}
       alignItems={BoxAlignItems.Center}
       gap={1}
-      twClassName={twClassName}
       {...props}
+      className={className ?? twClassName}
     >
       <IconAlert severity={severity} size={IconSize.Xl} />
       {title ? (
@@ -55,8 +64,11 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
           alignItems={BoxAlignItems.Center}
           gap={1}
           justifyContent={BoxJustifyContent.Center}
-          twClassName="self-stretch"
-          {...titleWrapperProps}
+          {...titleWrapperRest}
+          className={mergeTwClassName(
+            'self-stretch',
+            titleWrapperClassName ?? titleWrapperTwClassName,
+          )}
         >
           <TextOrChildren
             textProps={{
@@ -70,7 +82,7 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
         </Box>
       ) : null}
       {description ? (
-        <Box twClassName="self-stretch">
+        <Box className="self-stretch">
           <TextOrChildren
             textProps={{
               variant: TextVariant.BodySm,

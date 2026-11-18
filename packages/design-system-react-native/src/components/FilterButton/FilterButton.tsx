@@ -33,6 +33,7 @@ export const FilterButton = ({
   isLoading = false,
   size,
   isFullWidth,
+  className,
   twClassName = '',
   style,
   onPress,
@@ -79,15 +80,15 @@ export const FilterButton = ({
       children={children}
       onPress={handlePress}
       style={style}
-      twClassName={twClassName}
+      className={className ?? twClassName}
       textProps={
         effectiveIsSelected
           ? textProps
           : {
               ...textProps,
-              twClassName: mergeTwClassName(
+              className: mergeTwClassName(
                 TextColor.TextAlternative,
-                textProps?.twClassName,
+                textProps?.className ?? textProps?.twClassName,
               ),
             }
       }

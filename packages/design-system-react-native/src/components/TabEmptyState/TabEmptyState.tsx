@@ -22,40 +22,63 @@ export const TabEmptyState = ({
   onAction,
   children,
   style,
+  className,
   twClassName = '',
   ...props
-}: TabEmptyStateProps) => (
-  <Box
-    flexDirection={BoxFlexDirection.Column}
-    alignItems={BoxAlignItems.Center}
-    justifyContent={BoxJustifyContent.Center}
-    backgroundColor={BoxBackgroundColor.BackgroundDefault}
-    gap={3}
-    twClassName={mergeTwClassName('max-w-64', twClassName)}
-    style={style}
-    {...props}
-  >
-    {icon}
-    {description && (
-      <Text
-        variant={TextVariant.BodyMd}
-        color={TextColor.TextAlternative}
-        twClassName="text-center"
-        {...descriptionProps}
-      >
-        {description}
-      </Text>
-    )}
-    {actionButtonText && onAction && (
-      <Button
-        variant={ButtonVariant.Secondary}
-        onPress={onAction}
-        twClassName="self-center"
-        {...actionButtonProps}
-      >
-        {actionButtonText}
-      </Button>
-    )}
-    {children}
-  </Box>
-);
+}: TabEmptyStateProps) => {
+  const {
+    className: descriptionClassName,
+    twClassName: descriptionTwClassName,
+    ...descriptionRest
+  } = descriptionProps ?? {};
+  const {
+    className: actionClassName,
+    twClassName: actionTwClassName,
+    ...actionRest
+  } = actionButtonProps ?? {};
+  const actionUserClassName = actionClassName ?? actionTwClassName;
+  const actionButtonClassName =
+    typeof actionUserClassName === 'function'
+      ? (pressed: boolean) =>
+          mergeTwClassName('self-center', actionUserClassName(pressed))
+      : mergeTwClassName('self-center', actionUserClassName);
+
+  return (
+    <Box
+      flexDirection={BoxFlexDirection.Column}
+      alignItems={BoxAlignItems.Center}
+      justifyContent={BoxJustifyContent.Center}
+      backgroundColor={BoxBackgroundColor.BackgroundDefault}
+      gap={3}
+      className={mergeTwClassName('max-w-64', className ?? twClassName)}
+      style={style}
+      {...props}
+    >
+      {icon}
+      {description && (
+        <Text
+          variant={TextVariant.BodyMd}
+          color={TextColor.TextAlternative}
+          {...descriptionRest}
+          className={mergeTwClassName(
+            'text-center',
+            descriptionClassName ?? descriptionTwClassName,
+          )}
+        >
+          {description}
+        </Text>
+      )}
+      {actionButtonText && onAction && (
+        <Button
+          variant={ButtonVariant.Secondary}
+          onPress={onAction}
+          {...actionRest}
+          className={actionButtonClassName}
+        >
+          {actionButtonText}
+        </Button>
+      )}
+      {children}
+    </Box>
+  );
+};

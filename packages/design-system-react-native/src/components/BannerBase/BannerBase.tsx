@@ -78,6 +78,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
   startAccessory,
   onClose,
   closeButtonProps,
+  className,
   twClassName,
   backgroundColor = BoxBackgroundColor.BackgroundDefault,
   ...props
@@ -156,7 +157,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
       paddingBottom={hasActionButtonBelow ? 4 : 3}
       paddingLeft={4}
       paddingRight={shouldShowCloseButton ? 2 : 4}
-      twClassName={mergeTwClassName('rounded-xl', twClassName)}
+      className={mergeTwClassName('rounded-xl', className ?? twClassName)}
     >
       {startAccessory}
 

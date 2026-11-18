@@ -29,6 +29,11 @@ export const AvatarBase = ({
   ...props
 }: AvatarBaseProps) => {
   const tw = useTailwind();
+  const {
+    className: fallbackClassName,
+    twClassName: fallbackTwClassName,
+    ...fallbackTextRest
+  } = fallbackTextProps ?? {};
 
   return (
     <View
@@ -53,10 +58,10 @@ export const AvatarBase = ({
           color={TextColor.TextMuted}
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
-          {...fallbackTextProps}
-          twClassName={mergeTwClassName(
+          {...fallbackTextRest}
+          className={mergeTwClassName(
             'uppercase',
-            fallbackTextProps?.twClassName,
+            fallbackClassName ?? fallbackTwClassName,
           )}
         >
           {fallbackText}

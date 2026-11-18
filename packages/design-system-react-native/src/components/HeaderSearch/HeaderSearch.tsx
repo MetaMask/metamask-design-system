@@ -1,4 +1,7 @@
-import { HeaderSearchVariant } from '@metamask/design-system-shared';
+import {
+  HeaderSearchVariant,
+  mergeTwClassName,
+} from '@metamask/design-system-shared';
 import React from 'react';
 
 import { Box } from '../Box';
@@ -54,6 +57,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     const {
       variant: _variant,
       textFieldSearchProps,
+      className,
       twClassName,
       onPressBackButton,
       backButtonProps,
@@ -63,11 +67,10 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     return (
       <Box
         {...screenBoxProps}
-        twClassName={
-          twClassName
-            ? `${baseTwClassName} ml-1 mr-4 gap-2 ${twClassName}`
-            : `${baseTwClassName} ml-1 mr-4 gap-2`
-        }
+        className={mergeTwClassName(
+          `${baseTwClassName} ml-1 mr-4 gap-2`,
+          className ?? twClassName,
+        )}
       >
         <ButtonIcon
           size={ButtonIconSize.Md}
@@ -90,6 +93,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   const {
     variant: _variant,
     textFieldSearchProps,
+    className,
     twClassName,
     onPressCancelButton,
     cancelButtonProps,
@@ -99,11 +103,10 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   return (
     <Box
       {...inlineBoxProps}
-      twClassName={
-        twClassName
-          ? `${baseTwClassName} ml-4 ${twClassName}`
-          : `${baseTwClassName} ml-4`
-      }
+      className={mergeTwClassName(
+        `${baseTwClassName} ml-4`,
+        className ?? twClassName,
+      )}
     >
       <TextFieldSearch
         {...(textFieldSearchProps as TextFieldSearchProps)}

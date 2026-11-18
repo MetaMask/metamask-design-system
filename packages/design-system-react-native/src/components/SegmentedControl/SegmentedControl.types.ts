@@ -8,6 +8,12 @@ export type SegmentedControlProps = SegmentedControlPropsShared &
   ViewProps & {
     /**
      * Optional twrnc classes merged into the root container after defaults.
+     *
+     * @deprecated Use `className`.
      */
     twClassName?: string;
+    /**
+     * Optional CSS classes on the root. Replaces `twClassName` when set.
+     */
+    className?: string;
   };

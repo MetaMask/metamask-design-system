@@ -27,27 +27,30 @@ export const SelectButton = ({
   variant = SelectButtonVariant.Primary,
   isLoading = false,
   size = SelectButtonSize.Sm,
+  className,
   twClassName = '',
   style,
   ...buttonBaseRest
 }: SelectButtonProps) => {
   const labelContent = value ?? placeholder;
+  const userClassName = className ?? twClassName;
   const resolvedTextProps = {
     ...textProps,
-    twClassName: mergeTwClassName(
+    className: mergeTwClassName(
       // Ensure the label actually grows to push the end arrow when full width.
       // ButtonBase applies 'grow-0' by default; add 'grow' here to override it.
       // Keep 'flex-1' for existing expectations/tests.
       isFullWidth ? 'text-left flex-1 grow' : 'text-left',
-      textProps?.twClassName,
+      textProps?.className ?? textProps?.twClassName,
     ),
   };
   const resolvedContentWrapperProps = isFullWidth
     ? {
         ...buttonBaseRest.contentWrapperProps,
-        twClassName: mergeTwClassName(
+        className: mergeTwClassName(
           'w-full',
-          buttonBaseRest.contentWrapperProps?.twClassName,
+          buttonBaseRest.contentWrapperProps?.className ??
+            buttonBaseRest.contentWrapperProps?.twClassName,
         ),
       }
     : buttonBaseRest.contentWrapperProps;
@@ -97,18 +100,18 @@ export const SelectButton = ({
             }
           : undefined
       }
-      twClassName={(pressed) =>
+      className={(pressed) =>
         variant === SelectButtonVariant.Secondary ||
         variant === SelectButtonVariant.Tertiary
           ? `min-w-0 ${pressed || isLoading ? 'bg-pressed' : 'bg-transparent'} border-0 ${
-              typeof twClassName === 'function'
-                ? twClassName(pressed)
-                : twClassName
+              typeof userClassName === 'function'
+                ? userClassName(pressed)
+                : userClassName
             }`
           : `min-w-0 ${pressed || isLoading ? 'bg-muted-pressed' : 'bg-muted'} border-transparent border ${
-              typeof twClassName === 'function'
-                ? twClassName(pressed)
-                : twClassName
+              typeof userClassName === 'function'
+                ? userClassName(pressed)
+                : userClassName
             }`
       }
       textClassName={() =>

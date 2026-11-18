@@ -18,14 +18,18 @@ export const ButtonSemantic = ({
   startIconProps,
   endIconProps,
   isLoading = false,
+  className,
   twClassName = '',
   style,
   ...props
 }: ButtonSemanticProps) => {
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
+      const userClassName = className ?? twClassName;
       const classNameStr =
-        typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+        typeof userClassName === 'function'
+          ? userClassName(pressed)
+          : userClassName;
 
       const bgClass =
         pressed || isLoading
@@ -38,7 +42,7 @@ export const ButtonSemantic = ({
 
       return `${bgClass} ${classNameStr}`;
     },
-    [severity, isLoading, twClassName],
+    [severity, isLoading, twClassName, className],
   );
 
   const getTextClassName = useCallback(
@@ -55,7 +59,7 @@ export const ButtonSemantic = ({
       startIconProps={startIconProps}
       endIconProps={endIconProps}
       isLoading={isLoading}
-      twClassName={getContainerClassName}
+      className={getContainerClassName}
       textClassName={getTextClassName}
       iconClassName={getTextClassName}
       style={style}

@@ -29,16 +29,16 @@ const ButtonHeroInner: React.FC<ButtonHeroProps> = ({
   ...props
 }) => (
   <ButtonBase
-    twClassName={(pressed) =>
-      `bg-primary-default ${
-        pressed && !isDisabled && !isLoading ? 'bg-primary-default-pressed' : ''
-      }`
-    }
     textClassName={(_pressed) => 'text-primary-inverse'}
     iconClassName={(_pressed) => 'text-primary-inverse'}
     isDisabled={isDisabled}
     isLoading={isLoading}
     {...props}
+    className={(pressed) =>
+      `bg-primary-default ${
+        pressed && !isDisabled && !isLoading ? 'bg-primary-default-pressed' : ''
+      }`
+    }
   />
 );
 

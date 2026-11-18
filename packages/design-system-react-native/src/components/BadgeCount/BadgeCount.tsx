@@ -24,6 +24,11 @@ export const BadgeCount = ({
   ...props
 }: BadgeCountProps) => {
   const tw = useTailwind();
+  const {
+    className: textClassName,
+    twClassName: textTwClassName,
+    ...textRest
+  } = textProps ?? {};
 
   return (
     <View
@@ -41,8 +46,11 @@ export const BadgeCount = ({
         variant={MAP_BADGECOUNT_SIZE_TEXTVARIANT[size]}
         color={TextColor.ErrorInverse}
         fontWeight={FontWeight.Medium}
-        {...textProps}
-        twClassName={mergeTwClassName('leading-0', textProps?.twClassName)}
+        {...textRest}
+        className={mergeTwClassName(
+          'leading-0',
+          textClassName ?? textTwClassName,
+        )}
       >
         {count > max ? `${max}+` : `${count}`}
       </Text>

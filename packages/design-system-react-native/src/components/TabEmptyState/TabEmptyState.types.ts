@@ -41,6 +41,12 @@ export type TabEmptyStateProps = {
   children?: ReactNode;
   /**
    * Optional prop to add twrnc overriding classNames.
+   *
+   * @deprecated Use `className`.
    */
   twClassName?: string;
+  /**
+   * Optional CSS classes on the root. Replaces `twClassName` when set.
+   */
+  className?: string;
 } & ViewProps;

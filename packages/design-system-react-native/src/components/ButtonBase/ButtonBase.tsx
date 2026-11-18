@@ -162,10 +162,21 @@ export const ButtonBase = ({
       {...props}
     >
       {({ pressed }) => {
-        const { twClassName: loadingWrapperTw, ...restLoadingWrapper } =
-          loadingWrapperProps ?? {};
-        const { twClassName: contentWrapperTw, ...restContentWrapper } =
-          contentWrapperProps ?? {};
+        const {
+          className: loadingClassName,
+          twClassName: loadingWrapperTw,
+          ...restLoadingWrapper
+        } = loadingWrapperProps ?? {};
+        const {
+          className: contentClassName,
+          twClassName: contentWrapperTw,
+          ...restContentWrapper
+        } = contentWrapperProps ?? {};
+        const {
+          className: labelClassName,
+          twClassName: labelTwClassName,
+          ...restTextProps
+        } = textProps ?? {};
 
         return (
           <>
@@ -173,9 +184,9 @@ export const ButtonBase = ({
             {isLoading && (
               <Box
                 {...restLoadingWrapper}
-                twClassName={mergeTwClassName(
+                className={mergeTwClassName(
                   'absolute inset-0 flex items-center justify-center',
-                  loadingWrapperTw,
+                  loadingClassName ?? loadingWrapperTw,
                 )}
               >
                 <Spinner
@@ -205,10 +216,13 @@ export const ButtonBase = ({
               alignItems={BoxAlignItems.Center}
               gap={hasAccessories ? 1 : 0}
               {...restContentWrapper}
-              twClassName={
+              className={
                 isLoading
-                  ? mergeTwClassName('opacity-0', contentWrapperTw)
-                  : contentWrapperTw
+                  ? mergeTwClassName(
+                      'opacity-0',
+                      contentClassName ?? contentWrapperTw,
+                    )
+                  : (contentClassName ?? contentWrapperTw)
               }
             >
               {finalStartIconName ? (
@@ -234,13 +248,13 @@ export const ButtonBase = ({
                   color: TextColor.TextDefault,
                   numberOfLines: 1,
                   ellipsizeMode: 'clip',
-                  ...textProps,
-                  twClassName: mergeTwClassName(
+                  ...restTextProps,
+                  className: mergeTwClassName(
                     mergeTwClassName(
                       'shrink grow-0 flex-wrap text-center',
                       textClassName ? textClassName(pressed) : undefined,
                     ),
-                    textProps?.twClassName,
+                    labelClassName ?? labelTwClassName,
                   ),
                 }}
               >

@@ -87,7 +87,7 @@ export const ListItem: React.FC<ListItemProps> = ({
 
   const content = (
     <Content
-      twClassName={hasRowAccessories ? 'flex-1 min-w-0' : undefined}
+      className={hasRowAccessories ? 'min-w-0 flex-1' : undefined}
       variant={variant}
       avatar={avatar}
       title={title}

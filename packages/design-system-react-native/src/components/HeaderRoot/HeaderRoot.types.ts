@@ -58,6 +58,12 @@ export type HeaderRootProps = ViewProps & {
   testID?: string;
   /**
    * Optional Tailwind class names for the header container.
+   *
+   * @deprecated Use `className`.
    */
   twClassName?: string;
+  /**
+   * Optional CSS classes on the header container. Replaces `twClassName` when set.
+   */
+  className?: string;
 };

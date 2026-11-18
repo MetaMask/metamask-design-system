@@ -16,6 +16,7 @@ import type { ContentProps } from './Content.types';
 export const Content: React.FC<ContentProps> = ({
   variant = ContentVariant.TwoLines,
   avatar,
+  className,
   twClassName,
   title,
   titleProps,
@@ -59,8 +60,8 @@ export const Content: React.FC<ContentProps> = ({
       flexDirection={BoxFlexDirection.Row}
       alignItems={alignItems}
       gap={4}
-      twClassName={twClassName}
       {...props}
+      className={className ?? twClassName}
     >
       {avatar}
       <Box flexDirection={BoxFlexDirection.Column} twClassName="flex-1 min-w-0">

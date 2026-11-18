@@ -16,6 +16,7 @@ export const SegmentedControl = ({
   size = SegmentedControlSize.Sm,
   isFullWidth = false,
   children,
+  className,
   twClassName,
   style,
   ...rest
@@ -38,9 +39,9 @@ export const SegmentedControl = ({
       <Box
         {...rest}
         accessibilityRole="tablist"
-        twClassName={mergeTwClassName(
+        className={mergeTwClassName(
           `${widthClass} flex-row items-center gap-1 rounded-full border border-muted p-1`,
-          twClassName,
+          className ?? twClassName,
         )}
         style={style}
       >

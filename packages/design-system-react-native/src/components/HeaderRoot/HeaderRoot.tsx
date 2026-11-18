@@ -22,6 +22,7 @@ export const HeaderRoot = ({
   includesTopInset = false,
   style,
   testID,
+  className,
   twClassName,
   ...viewProps
 }: HeaderRootProps) => {
@@ -80,10 +81,10 @@ export const HeaderRoot = ({
       gap={4}
       paddingLeft={4}
       paddingRight={2}
-      twClassName={mergeTwClassName('min-h-14', twClassName)}
       style={[includesTopInset && { marginTop: insets.top }, style]}
       testID={testID}
       {...viewProps}
+      className={mergeTwClassName('min-h-14', className ?? twClassName)}
     >
       {renderLeftSection()}
       {endSectionContent ? (
