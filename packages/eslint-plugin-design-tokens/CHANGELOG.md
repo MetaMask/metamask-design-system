@@ -7,17 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- Narrowed the default `discouragedColors` of `prefer-theme-color-classnames` to the literal colors the MetaMask Tailwind and twrnc setups expose ([#1723](https://github.com/MetaMask/metamask-design-system/pull/1723))
-  - The default list is now `black` and `white`, the only literal colors that resolve in the Tailwind v4 theme, the twrnc preset, and consumers' Tailwind configs
-  - Brand color families and the Tailwind-spelled `gray` are no longer discouraged because no MetaMask configuration exposes them as classnames, so literal classes such as `bg-blue-500` never resolve; add them back through the `discouragedColors` option for projects that keep a larger literal palette
-- Rule documentation URLs now point at the `metamask-design-system` monorepo instead of the retired standalone repositories ([#1723](https://github.com/MetaMask/metamask-design-system/pull/1723))
-
-### Fixed
-
-- `color-no-hex` now flags 8-digit hex values with an alpha channel, such as `#4459ff1a`, which the current design tokens use ([#1723](https://github.com/MetaMask/metamask-design-system/pull/1723))
-
 ## [2.0.0]
 
 ### Changed
