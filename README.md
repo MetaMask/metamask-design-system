@@ -33,12 +33,20 @@ linkStyle default opacity:0.5
   design_system_twrnc_preset(["@metamask/design-system-twrnc-preset"]);
   design_tokens(["@metamask/design-tokens"]);
   eslint_plugin_design_tokens(["@metamask/eslint-plugin-design-tokens"]);
+  design_system_react --> design_system_shared;
+  design_system_react --> design_system_tailwind_preset;
   design_system_react --> design_system_tailwind_preset;
   design_system_react --> design_tokens;
+  design_system_react_native --> design_system_shared;
+  design_system_react_native --> design_system_twrnc_preset;
+  design_system_react_native --> design_tokens;
   design_system_react_native --> design_system_twrnc_preset;
   design_system_react_native --> design_tokens;
   design_system_tailwind_preset --> design_tokens;
   design_system_twrnc_preset --> design_tokens;
+  design_system_twrnc_preset --> design_tokens;
+  design_tokens --> design_system_react;
+  design_tokens --> design_system_shared;
 ```
 
 <!-- end dependency graph -->
