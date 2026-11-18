@@ -18,7 +18,6 @@ const config = createConfig([
       '**/docs/**',
       '**/coverage/**',
       '**/storybook-static/**',
-      'merged-packages/**',
       '.yarn/**',
       'scripts/create-package/package-template/**',
       /**

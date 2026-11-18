@@ -80,11 +80,10 @@ describe('no-deprecated-classnames', () => {
     } as unknown as Rule.RuleContext;
 
     const listeners = noDeprecatedClassnames.create(context);
-    listeners?.Literal?.(
-      { type: 'Literal', value: 'bg-white' } as unknown as Parameters<
-        NonNullable<Rule.NodeListener['Literal']>
-      >[0],
-    );
+    listeners?.Literal?.({
+      type: 'Literal',
+      value: 'bg-white',
+    } as unknown as Parameters<NonNullable<Rule.NodeListener['Literal']>>[0]);
 
     expect(report).toHaveBeenCalledWith(
       expect.objectContaining({
