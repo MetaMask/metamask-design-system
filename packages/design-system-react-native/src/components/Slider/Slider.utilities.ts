@@ -423,18 +423,10 @@ export function clampValueToRange(
   return Math.round(clamped / step) * step;
 }
 
-// The worklet helpers above are declared as local `const` bindings and exported
-// here, in one block, instead of with `export function` declarations. TypeScript
-// 5.9's CommonJS emit hoists every `exports.name = name` assignment to the top of
-// the file, before the declarations; consumers (MetaMask Mobile) run the
-// react-native-worklets Babel plugin over dist, and it rewrites each `'worklet'`
-// function declaration into a `var name = <worklet factory>` at the same
-// position. Hoisted assignments would then capture the still-undefined `var`,
-// and every exported worklet would be `undefined` at runtime (Slider crashed
-// with "resolveValueToTrackPercent is not a function"; see MetaMask Mobile
-// #40068). Assignments for `const` bindings stay after initialization, and the
-// worklet bodies above reference these local bindings directly, so worklet
-// closures capture the worklets rather than this module's `exports` object.
+// Worklets must be local `const` arrow functions exported from this block.
+// `export function` worklets are `undefined` in the CJS build once consumers run
+// the worklets Babel plugin over dist, and inline `export const` makes worklets
+// capture the module's `exports` object. Enforced by `no-restricted-syntax`.
 export {
   clampTrackPercent,
   defaultMapValueToTrackPercent,

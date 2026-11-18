@@ -235,6 +235,35 @@ const config = createConfig([
       'import-x/no-default-export': 'error',
     },
   },
+  // Consumers run the react-native-worklets Babel plugin over the published
+  // dist. TypeScript's CJS emit hoists `exports.x = x` for function
+  // declarations above the plugin's `var x = <worklet>` rewrite, leaving the
+  // export `undefined`; inline `export const` rewrites intra-module calls to
+  // `exports.x`, so worklets capture the whole `exports` object.
+  {
+    files: ['packages/design-system-react-native/src/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: [
+            'Program > FunctionDeclaration',
+            'Program > ExportNamedDeclaration > FunctionDeclaration',
+            'Program > ExportDefaultDeclaration > FunctionDeclaration',
+            'Program > ExportNamedDeclaration > VariableDeclaration > VariableDeclarator > ArrowFunctionExpression',
+            'Program > ExportNamedDeclaration > VariableDeclaration > VariableDeclarator > FunctionExpression',
+          ]
+            .map(
+              (fn) =>
+                `${fn} > BlockStatement > ExpressionStatement:first-child[directive='worklet']`,
+            )
+            .join(', '),
+          message:
+            'Declare top-level worklets as local `const` arrow functions and export them from an `export { ... }` block. `export function` worklets break the CJS build, and inline `export const` worklets capture the `exports` object.',
+        },
+      ],
+    },
+  },
   // Tailwind ESLint for React Web
   {
     files: [
