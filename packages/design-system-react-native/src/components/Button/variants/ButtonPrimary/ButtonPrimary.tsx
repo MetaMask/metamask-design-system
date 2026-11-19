@@ -28,34 +28,19 @@ export const ButtonPrimary = ({
       const classes =
         typeof className === 'function' ? className(pressed) : className;
 
-      if (isInverse && isDanger) {
-        return resolveClassName(
-          pressed || isLoading ? 'bg-default-pressed' : 'bg-default',
-          twClasses,
-          classes,
-        );
-      }
-      if (isDanger) {
-        return resolveClassName(
+      let backgroundClass =
+        pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default';
+      if (isDanger && !isInverse) {
+        backgroundClass =
           pressed || isLoading
             ? 'bg-error-default-pressed'
-            : 'bg-error-default',
-          twClasses,
-          classes,
-        );
+            : 'bg-error-default';
+      } else if (isInverse) {
+        backgroundClass =
+          pressed || isLoading ? 'bg-default-pressed' : 'bg-default';
       }
-      if (isInverse) {
-        return resolveClassName(
-          pressed || isLoading ? 'bg-default-pressed' : 'bg-default',
-          twClasses,
-          classes,
-        );
-      }
-      return resolveClassName(
-        pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default',
-        twClasses,
-        classes,
-      );
+
+      return resolveClassName(backgroundClass, twClasses, classes);
     },
     [isInverse, isDanger, isLoading, twClassName, className],
   );
