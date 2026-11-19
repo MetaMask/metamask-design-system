@@ -233,11 +233,15 @@ describe('ButtonSecondary', () => {
     expect(btn).toBeDefined();
   });
 
-  it('handles function-based twClassName', () => {
+  it('handles function-based twClassName and className', () => {
     const dynamicClassName = createDynamicClassName();
 
     const { getByTestId } = render(
-      <ButtonSecondary twClassName={dynamicClassName} testID="button-secondary">
+      <ButtonSecondary
+        twClassName={dynamicClassName}
+        className={dynamicClassName}
+        testID="button-secondary"
+      >
         Dynamic Class
       </ButtonSecondary>,
     );

@@ -25,13 +25,11 @@ type SectionHeaderPropsBase = SectionHeaderPropsShared & {
    */
   endIconProps?: Omit<Partial<IconProps>, 'name'>;
   /**
-   * Optional Tailwind class name to apply to the outer row.
-   *
-   * @deprecated Use `className`.
+   * @deprecated Use `className`. Will be removed in `@metamask/design-system-react-native` 1.0.0.
    */
   twClassName?: string;
   /**
-   * Optional CSS classes on the outer row. Replaces `twClassName` when set.
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
    */
   className?: string;
 };

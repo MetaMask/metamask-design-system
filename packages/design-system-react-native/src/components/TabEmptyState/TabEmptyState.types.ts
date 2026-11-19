@@ -40,13 +40,11 @@ export type TabEmptyStateProps = {
    */
   children?: ReactNode;
   /**
-   * Optional prop to add twrnc overriding classNames.
-   *
-   * @deprecated Use `className`.
+   * @deprecated Use `className`. Will be removed in `@metamask/design-system-react-native` 1.0.0.
    */
   twClassName?: string;
   /**
-   * Optional CSS classes on the root. Replaces `twClassName` when set.
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
    */
   className?: string;
 } & ViewProps;

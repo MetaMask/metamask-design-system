@@ -1,3 +1,4 @@
+import { resolveClassName } from '@metamask/design-system-shared';
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../../../ButtonBase';
@@ -22,22 +23,39 @@ export const ButtonPrimary = ({
 }: ButtonPrimaryProps) => {
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
-      const userClassName = className ?? twClassName;
-      const classNameStr =
-        typeof userClassName === 'function'
-          ? userClassName(pressed)
-          : userClassName;
+      const twClasses =
+        typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+      const classes =
+        typeof className === 'function' ? className(pressed) : className;
 
       if (isInverse && isDanger) {
-        return `${pressed || isLoading ? 'bg-default-pressed' : 'bg-default'} ${classNameStr}`;
+        return resolveClassName(
+          pressed || isLoading ? 'bg-default-pressed' : 'bg-default',
+          twClasses,
+          classes,
+        );
       }
       if (isDanger) {
-        return `${pressed || isLoading ? 'bg-error-default-pressed' : 'bg-error-default'} ${classNameStr}`;
+        return resolveClassName(
+          pressed || isLoading
+            ? 'bg-error-default-pressed'
+            : 'bg-error-default',
+          twClasses,
+          classes,
+        );
       }
       if (isInverse) {
-        return `${pressed || isLoading ? 'bg-default-pressed' : 'bg-default'} ${classNameStr}`;
+        return resolveClassName(
+          pressed || isLoading ? 'bg-default-pressed' : 'bg-default',
+          twClasses,
+          classes,
+        );
       }
-      return `${pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default'} ${classNameStr}`;
+      return resolveClassName(
+        pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default',
+        twClasses,
+        classes,
+      );
     },
     [isInverse, isDanger, isLoading, twClassName, className],
   );

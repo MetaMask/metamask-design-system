@@ -44,7 +44,8 @@ export const Text: React.FC<TextProps> = ({
       `text-${variant}`,
       fontClass,
       color,
-      className ?? twClassName,
+      twClassName,
+      className,
     );
   }, [
     variant,

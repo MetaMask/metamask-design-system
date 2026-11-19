@@ -303,20 +303,13 @@ describe('Box', () => {
     expect(styles[0]).toStrictEqual(tw.style('flex', 'bg-primary-default p-4'));
   });
 
-  it('applies className', () => {
-    const { getByTestId } = render(<Box testID="box" className="p-4" />);
-    const box = getByTestId('box');
-    const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', 'p-4'));
-  });
-
-  it('prefers className over twClassName', () => {
+  it('merges base classes, then twClassName, then className', () => {
     const { getByTestId } = render(
-      <Box testID="box" className="p-2" twClassName="p-4" />,
+      <Box testID="box" twClassName="m-1 p-4" className="p-2" />,
     );
     const box = getByTestId('box');
     const styles = flattenStyles(box.props.style);
-    expect(styles[0]).toStrictEqual(tw.style('flex', 'p-2'));
+    expect(styles[0]).toStrictEqual(tw.style('flex', 'm-1 p-2'));
   });
 
   it('applies all flex props together', () => {

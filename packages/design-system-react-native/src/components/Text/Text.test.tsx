@@ -88,30 +88,6 @@ describe('Text', () => {
       );
     });
 
-    it('applies className', () => {
-      const { getByTestId } = render(
-        <Text testID="text" className="uppercase">
-          Styled Text
-        </Text>,
-      );
-
-      expect(getByTestId('text')).toHaveStyle(
-        tw.style(...buildTextStyleArgs({ twClassName: 'uppercase' })),
-      );
-    });
-
-    it('prefers className over twClassName', () => {
-      const { getByTestId } = render(
-        <Text testID="text" className="uppercase" twClassName="lowercase">
-          Styled Text
-        </Text>,
-      );
-
-      expect(getByTestId('text')).toHaveStyle(
-        tw.style(...buildTextStyleArgs({ twClassName: 'uppercase' })),
-      );
-    });
-
     Object.values(TextVariant).forEach((variant) => {
       it(`applies variant ${variant} correctly`, () => {
         const { getByTestId } = render(

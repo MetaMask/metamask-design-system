@@ -1,3 +1,4 @@
+import { resolveClassName } from '@metamask/design-system-shared';
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../../../ButtonBase';
@@ -22,15 +23,13 @@ export const ButtonSecondary = ({
 }: ButtonSecondaryProps) => {
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
-      const userClassName = className ?? twClassName;
-      const classNameStr =
-        typeof userClassName === 'function'
-          ? userClassName(pressed)
-          : userClassName;
+      const twClasses =
+        typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+      const classes =
+        typeof className === 'function' ? className(pressed) : className;
 
       const baseClasses = `
         border
-        ${classNameStr}
       `;
 
       let backgroundClass = '';
@@ -57,7 +56,11 @@ export const ButtonSecondary = ({
         borderClass = 'border-transparent';
       }
 
-      return `${backgroundClass} ${borderClass} ${baseClasses}`;
+      return resolveClassName(
+        `${backgroundClass} ${borderClass} ${baseClasses}`,
+        twClasses,
+        classes,
+      );
     },
     [isInverse, isDanger, isLoading, twClassName, className],
   );

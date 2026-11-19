@@ -61,16 +61,17 @@ export const Content: React.FC<ContentProps> = ({
       alignItems={alignItems}
       gap={4}
       {...props}
-      className={className ?? twClassName}
+      twClassName={twClassName}
+      className={className}
     >
       {avatar}
-      <Box flexDirection={BoxFlexDirection.Column} twClassName="flex-1 min-w-0">
+      <Box flexDirection={BoxFlexDirection.Column} className="min-w-0 flex-1">
         {title ? (
           <Box
             flexDirection={BoxFlexDirection.Row}
             alignItems={BoxAlignItems.Center}
             gap={1}
-            twClassName="w-full"
+            className="w-full"
           >
             {titleStartAccessory}
             <TextOrChildren
@@ -91,10 +92,10 @@ export const Content: React.FC<ContentProps> = ({
             flexDirection={BoxFlexDirection.Row}
             alignItems={alignItems}
             gap={1}
-            twClassName="w-full"
+            className="w-full"
           >
             {descriptionStartAccessory}
-            <Box flexDirection={BoxFlexDirection.Column} twClassName="min-w-0">
+            <Box flexDirection={BoxFlexDirection.Column} className="min-w-0">
               <TextOrChildren
                 textProps={{
                   variant: TextVariant.BodySm,
@@ -114,7 +115,7 @@ export const Content: React.FC<ContentProps> = ({
         <Box
           flexDirection={BoxFlexDirection.Column}
           alignItems={BoxAlignItems.End}
-          twClassName="min-w-0"
+          className="min-w-0"
         >
           {value ? (
             <Box
@@ -143,10 +144,7 @@ export const Content: React.FC<ContentProps> = ({
               gap={1}
             >
               {subvalueStartAccessory}
-              <Box
-                flexDirection={BoxFlexDirection.Column}
-                twClassName="min-w-0"
-              >
+              <Box flexDirection={BoxFlexDirection.Column} className="min-w-0">
                 <TextOrChildren
                   textProps={{
                     variant: TextVariant.BodySm,

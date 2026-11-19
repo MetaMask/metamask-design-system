@@ -25,13 +25,11 @@ export type TitleAlertProps = TitleAlertPropsShared & {
    */
   descriptionProps?: Omit<Partial<TextProps>, 'children'>;
   /**
-   * Optional Tailwind class name to apply to the container.
-   *
-   * @deprecated Use `className`.
+   * @deprecated Use `className`. Will be removed in `@metamask/design-system-react-native` 1.0.0.
    */
   twClassName?: string;
   /**
-   * Optional CSS classes on the root. Replaces `twClassName` when set.
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
    */
   className?: string;
 } & Omit<ViewProps, 'children'>;

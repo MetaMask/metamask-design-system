@@ -19,8 +19,8 @@ import type { BoxRowProps } from './BoxRow.types';
  * @param props.textProps - Props passed to `SensitiveText` when `children` is a string.
  * @param props.startAccessory - Node rendered before `children`.
  * @param props.endAccessory - Node rendered after `children`.
- * @param props.className - CSS classes on the root `Box`. Replaces `twClassName` when set.
- * @param props.twClassName - Tailwind classes on the root `Box`. Deprecated in favor of `className`.
+ * @param props.className - Tailwind classes on the root `Box`, applied after `twClassName`.
+ * @param props.twClassName - Deprecated, use `className`.
  * @returns The rendered row.
  */
 export const BoxRow = ({
@@ -37,7 +37,8 @@ export const BoxRow = ({
     alignItems={BoxAlignItems.Center}
     gap={1}
     {...rest}
-    className={className ?? twClassName}
+    twClassName={twClassName}
+    className={className}
   >
     {startAccessory}
     <TextOrChildren textProps={textProps}>{children}</TextOrChildren>

@@ -1,4 +1,4 @@
-import { mergeTwClassName } from '@metamask/design-system-shared';
+import { resolveClassName } from '@metamask/design-system-shared';
 import React from 'react';
 
 import {
@@ -36,12 +36,17 @@ export const TabEmptyState = ({
     twClassName: actionTwClassName,
     ...actionRest
   } = actionButtonProps ?? {};
-  const actionUserClassName = actionClassName ?? actionTwClassName;
-  const actionButtonClassName =
-    typeof actionUserClassName === 'function'
-      ? (pressed: boolean) =>
-          mergeTwClassName('self-center', actionUserClassName(pressed))
-      : mergeTwClassName('self-center', actionUserClassName);
+  function getActionClassName(pressed: boolean) {
+    return resolveClassName(
+      'self-center',
+      typeof actionTwClassName === 'function'
+        ? actionTwClassName(pressed)
+        : actionTwClassName,
+      typeof actionClassName === 'function'
+        ? actionClassName(pressed)
+        : actionClassName,
+    );
+  }
 
   return (
     <Box
@@ -50,7 +55,7 @@ export const TabEmptyState = ({
       justifyContent={BoxJustifyContent.Center}
       backgroundColor={BoxBackgroundColor.BackgroundDefault}
       gap={3}
-      className={mergeTwClassName('max-w-64', className ?? twClassName)}
+      className={resolveClassName('max-w-64', twClassName, className)}
       style={style}
       {...props}
     >
@@ -60,9 +65,10 @@ export const TabEmptyState = ({
           variant={TextVariant.BodyMd}
           color={TextColor.TextAlternative}
           {...descriptionRest}
-          className={mergeTwClassName(
+          className={resolveClassName(
             'text-center',
-            descriptionClassName ?? descriptionTwClassName,
+            descriptionTwClassName,
+            descriptionClassName,
           )}
         >
           {description}
@@ -73,7 +79,7 @@ export const TabEmptyState = ({
           variant={ButtonVariant.Secondary}
           onPress={onAction}
           {...actionRest}
-          className={actionButtonClassName}
+          className={getActionClassName}
         >
           {actionButtonText}
         </Button>

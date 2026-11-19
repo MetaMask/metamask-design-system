@@ -60,14 +60,11 @@ export type ButtonBaseProps = ButtonBasePropsShared & {
    */
   endAccessory?: React.ReactNode;
   /**
-   * Optional prop to add twrnc overriding classNames.
-   * Can be a string or a function that receives pressed state and returns a string.
-   *
-   * @deprecated Use `className`.
+   * @deprecated Use `className`. Will be removed in `@metamask/design-system-react-native` 1.0.0.
    */
   twClassName?: string | ((pressed: boolean) => string);
   /**
-   * Optional prop for additional CSS classes to be applied to the ButtonBase component.
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
    * Can be a string or a function that receives pressed state and returns a string.
    */
   className?: string | ((pressed: boolean) => string);

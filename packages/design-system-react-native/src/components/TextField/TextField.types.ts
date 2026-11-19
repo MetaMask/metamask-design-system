@@ -59,9 +59,13 @@ export type TextFieldBaseProps = TextFieldPropsShared & {
    */
   inputRef?: Ref<TextInput>;
   /**
-   * Optional twrnc classes for the root `Box`.
+   * @deprecated Use `className`. Will be removed in `@metamask/design-system-react-native` 1.0.0.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
   /**
    * Optional style for the root `Box`.
    */

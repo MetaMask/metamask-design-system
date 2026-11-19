@@ -2,7 +2,7 @@ import {
   FilterButtonGroupContext,
   FilterButtonVariant,
   SegmentedControlSize,
-  mergeTwClassName,
+  resolveClassName,
 } from '@metamask/design-system-shared';
 import React, { Children, useMemo } from 'react';
 
@@ -39,15 +39,16 @@ export const SegmentedControl = ({
       <Box
         {...rest}
         accessibilityRole="tablist"
-        className={mergeTwClassName(
+        className={resolveClassName(
           `${widthClass} flex-row items-center gap-1 rounded-full border border-muted p-1`,
-          className ?? twClassName,
+          twClassName,
+          className,
         )}
         style={style}
       >
         {Children.map(children, (child, index) =>
           isFullWidth ? (
-            <Box key={index} twClassName="flex-1">
+            <Box key={index} className="flex-1">
               {child}
             </Box>
           ) : (

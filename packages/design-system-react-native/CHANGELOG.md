@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added `className` as the preferred prop for Tailwind classes on `Box`, `Text`, `ButtonBase`, `Button`, `ButtonSemantic`, `FilterButton`, `SelectButton`, `BannerBase`, `BoxRow`, `BoxColumn`, `Content`, `HeaderRoot`, `HeaderSearch`, `SectionHeader`, `SegmentedControl`, `TabEmptyState`, `TextField`, `TitleAlert`, and `TitleSubpage` ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+  - Classes merge in one order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts
+  - `className` also works inside nested prop bags built on `Box` or `Text`, such as `textProps`, `titleWrapperProps`, and `contentWrapperProps`
+  - `ButtonHero` still ignores both `className` and `twClassName`
+
+### Changed
+
+- Deprecated `twClassName` on the components above; it keeps working and will be removed in 1.0.0 ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+  - Rename `twClassName` to `className`. See [Migration Guide](./MIGRATION.md#twclassname-to-classname)
+
 ## [0.57.0]
 
 ### Added

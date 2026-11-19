@@ -242,7 +242,7 @@ describe('ButtonSemantic', () => {
       expect(getByText('Styled Button')).toBeDefined();
     });
 
-    it('accepts twClassName as a function', () => {
+    it('accepts twClassName and className as functions', () => {
       const twClassNameFn = jest.fn((_pressed: boolean) => 'mt-4');
 
       const { getByText } = render(
@@ -250,6 +250,7 @@ describe('ButtonSemantic', () => {
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
           twClassName={twClassNameFn}
+          className={twClassNameFn}
         >
           Function ClassName
         </ButtonSemantic>,

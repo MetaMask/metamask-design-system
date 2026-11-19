@@ -96,7 +96,8 @@ export const Box = forwardRef<View, BoxProps>(
               TWCLASSMAP_BOX_BORDER_WIDTH[borderWidth],
             borderColor,
             backgroundColor,
-            className ?? twClassName,
+            twClassName,
+            className,
           ),
           style,
         ]}

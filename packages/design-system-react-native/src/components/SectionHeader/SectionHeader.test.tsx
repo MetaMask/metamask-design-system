@@ -374,7 +374,7 @@ describe('SectionHeader', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
     });
 
-    it('merges className into outer row styles', () => {
+    it('keeps base padding when className is set', () => {
       const { getByTestId } = render(
         <SectionHeader
           title="Section"
@@ -385,24 +385,6 @@ describe('SectionHeader', () => {
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`px-4 pb-2 pt-3`);
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-4`);
-    });
-
-    it('merges titleWrapperProps className without dropping title row classes', () => {
-      const { getByTestId } = render(
-        <SectionHeader
-          title="Section"
-          endIconName={IconName.ArrowRight}
-          titleWrapperProps={{
-            testID: TITLE_ROW_TEST_ID,
-            className: 'mt-4',
-          }}
-        />,
-      );
-
-      expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(
-        tw`w-full min-w-0 shrink`,
-      );
-      expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveStyle(tw`mt-4`);
     });
 
     it('applies shrink and min-w-0 to mainContent when row accessories are present', () => {

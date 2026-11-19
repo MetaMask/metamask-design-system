@@ -4,6 +4,7 @@ import {
   FilterButtonVariant,
   FilterButtonGroupContext,
   mergeTwClassName,
+  resolveClassName,
 } from '@metamask/design-system-shared';
 import React, { useContext } from 'react';
 import type { GestureResponderEvent } from 'react-native';
@@ -80,15 +81,17 @@ export const FilterButton = ({
       children={children}
       onPress={handlePress}
       style={style}
-      className={className ?? twClassName}
+      twClassName={twClassName}
+      className={className}
       textProps={
         effectiveIsSelected
           ? textProps
           : {
               ...textProps,
-              className: mergeTwClassName(
+              className: resolveClassName(
                 TextColor.TextAlternative,
-                textProps?.className ?? textProps?.twClassName,
+                textProps?.twClassName,
+                textProps?.className,
               ),
             }
       }

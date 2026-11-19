@@ -1,6 +1,6 @@
 import {
   HeaderSearchVariant,
-  mergeTwClassName,
+  resolveClassName,
 } from '@metamask/design-system-shared';
 import React from 'react';
 
@@ -67,9 +67,10 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     return (
       <Box
         {...screenBoxProps}
-        className={mergeTwClassName(
+        className={resolveClassName(
           `${baseTwClassName} ml-1 mr-4 gap-2`,
-          className ?? twClassName,
+          twClassName,
+          className,
         )}
       >
         <ButtonIcon
@@ -80,11 +81,11 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         />
         <TextFieldSearch
           {...(textFieldSearchProps as TextFieldSearchProps)}
-          twClassName={
-            textFieldSearchProps.twClassName
-              ? `flex-1 ${textFieldSearchProps.twClassName}`
-              : 'flex-1'
-          }
+          className={resolveClassName(
+            'flex-1',
+            textFieldSearchProps.twClassName,
+            textFieldSearchProps.className,
+          )}
         />
       </Box>
     );
@@ -103,18 +104,19 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   return (
     <Box
       {...inlineBoxProps}
-      className={mergeTwClassName(
+      className={resolveClassName(
         `${baseTwClassName} ml-4`,
-        className ?? twClassName,
+        twClassName,
+        className,
       )}
     >
       <TextFieldSearch
         {...(textFieldSearchProps as TextFieldSearchProps)}
-        twClassName={
-          textFieldSearchProps.twClassName
-            ? `flex-1 ${textFieldSearchProps.twClassName}`
-            : 'flex-1'
-        }
+        className={resolveClassName(
+          'flex-1',
+          textFieldSearchProps.twClassName,
+          textFieldSearchProps.className,
+        )}
       />
       <Button
         {...cancelButtonProps}
@@ -122,9 +124,11 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         onPress={onPressCancelButton}
         textProps={{
           ...cancelButtonProps?.textProps,
-          twClassName: cancelButtonProps?.textProps?.twClassName
-            ? `text-default ${cancelButtonProps.textProps.twClassName}`
-            : 'text-default',
+          className: resolveClassName(
+            'text-default',
+            cancelButtonProps?.textProps?.twClassName,
+            cancelButtonProps?.textProps?.className,
+          ),
         }}
       >
         {CANCEL_LABEL}

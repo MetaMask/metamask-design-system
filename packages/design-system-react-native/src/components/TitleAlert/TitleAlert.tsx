@@ -4,7 +4,7 @@ import {
   BoxJustifyContent,
   FontWeight,
   IconSize,
-  mergeTwClassName,
+  resolveClassName,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -27,8 +27,8 @@ import type { TitleAlertProps } from './TitleAlert.types';
  * @param props.titleProps - Optional props merged into title row `Text` when `title` is a string
  * @param props.description - Optional text-centered description below the title; uses {@link TextOrChildren}
  * @param props.descriptionProps - Optional props merged into description `Text` when `description` is a string
- * @param props.className - Optional CSS classes on the root Box. Replaces `twClassName` when set
- * @param props.twClassName - Optional Tailwind classes on the root Box. Deprecated in favor of `className`
+ * @param props.className - Optional Tailwind classes on the root Box, applied after `twClassName`
+ * @param props.twClassName - Optional Tailwind classes on the root Box. Deprecated, use `className`
  *
  * @returns The rendered TitleAlert layout.
  */
@@ -55,7 +55,8 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
       alignItems={BoxAlignItems.Center}
       gap={1}
       {...props}
-      className={className ?? twClassName}
+      twClassName={twClassName}
+      className={className}
     >
       <IconAlert severity={severity} size={IconSize.Xl} />
       {title ? (
@@ -65,9 +66,10 @@ export const TitleAlert: React.FC<TitleAlertProps> = ({
           gap={1}
           justifyContent={BoxJustifyContent.Center}
           {...titleWrapperRest}
-          className={mergeTwClassName(
+          className={resolveClassName(
             'self-stretch',
-            titleWrapperClassName ?? titleWrapperTwClassName,
+            titleWrapperTwClassName,
+            titleWrapperClassName,
           )}
         >
           <TextOrChildren
