@@ -2,6 +2,7 @@ import {
   ButtonBaseSize,
   IconColor,
   IconName,
+  TextColor,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import { fireEvent, render, renderHook } from '@testing-library/react-native';
@@ -585,6 +586,20 @@ describe('ButtonBase', () => {
   });
 
   describe('when iconClassName and textClassName are set', () => {
+    it('lets textProps.color override the textClassName color', () => {
+      const { getByText } = render(
+        <ButtonBase
+          textClassName={() => 'text-default'}
+          textProps={{ color: TextColor.TextAlternative }}
+        >
+          Label
+        </ButtonBase>,
+      );
+
+      expect(getByText('Label')).toHaveStyle(tw`text-alternative`);
+      expect(getByText('Label')).not.toHaveStyle(tw`text-default`);
+    });
+
     it('supplies children render function for icon and text class hooks', () => {
       const iconClassNameFn = (pressed: boolean) =>
         pressed ? 'icon-pressed' : 'icon-default';

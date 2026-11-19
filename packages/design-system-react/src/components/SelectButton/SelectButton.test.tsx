@@ -373,12 +373,16 @@ describe('SelectButton', () => {
       );
     });
 
-    it('lets textProps disable truncation', () => {
+    it('keeps the label on one line and clips it when the ellipsis is disabled', () => {
       render(
         <SelectButton placeholder="Label" textProps={{ ellipsis: false }} />,
       );
 
       expect(screen.getByText('Label')).not.toHaveClass('truncate');
+      expect(screen.getByText('Label')).toHaveClass(
+        'whitespace-nowrap',
+        'overflow-hidden',
+      );
     });
 
     it('applies disabled opacity when isDisabled is true', () => {
