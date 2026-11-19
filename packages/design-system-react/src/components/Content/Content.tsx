@@ -111,20 +111,6 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(
     const showSubvalue = !isOneLine && Boolean(subvalue);
     const alignItems = isMultiLine ? BoxAlignItems.Start : BoxAlignItems.Center;
 
-    // Match React Native `__DEV__`: ignored-slot warnings are for authors, not production lists.
-    if (process.env.NODE_ENV !== 'production') {
-      if (isOneLine && description) {
-        console.warn(
-          'Content: `description` is ignored when `variant` is `ContentVariant.OneLine`.',
-        );
-      }
-      if (isOneLine && subvalue) {
-        console.warn(
-          'Content: `subvalue` is ignored when `variant` is `ContentVariant.OneLine`.',
-        );
-      }
-    }
-
     const titleRow = title ? (
       <TextRow
         className="w-full"

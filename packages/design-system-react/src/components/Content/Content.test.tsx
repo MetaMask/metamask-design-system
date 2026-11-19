@@ -16,13 +16,6 @@ const ROOT_TEST_ID = 'content-root';
 const rowFor = (node: HTMLElement) => node.closest(`.${BoxFlexDirection.Row}`);
 
 describe('Content', () => {
-  const originalNodeEnv = process.env.NODE_ENV;
-
-  afterEach(() => {
-    process.env.NODE_ENV = originalNodeEnv;
-    jest.restoreAllMocks();
-  });
-
   describe('title', () => {
     it('renders string title in the document', () => {
       const { getByText } = render(
@@ -419,8 +412,6 @@ describe('Content', () => {
     });
 
     it('does not render description or subvalue when variant is OneLine', () => {
-      jest.spyOn(console, 'warn').mockImplementation(() => undefined);
-
       const { getByText, queryByText } = render(
         <Content
           title="Title"
@@ -471,48 +462,6 @@ describe('Content', () => {
 
       expect(getByText('Secondary line')).toBeInTheDocument();
       expect(getByText('Third line')).toBeInTheDocument();
-    });
-
-    it('warns when OneLine ignores description and subvalue', () => {
-      const warnSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => undefined);
-
-      render(
-        <Content
-          title="Title"
-          description="Secondary"
-          subvalue="Balance"
-          variant={ContentVariant.OneLine}
-          data-testid={ROOT_TEST_ID}
-        />,
-      );
-
-      expect(warnSpy).toHaveBeenCalledWith(
-        'Content: `description` is ignored when `variant` is `ContentVariant.OneLine`.',
-      );
-      expect(warnSpy).toHaveBeenCalledWith(
-        'Content: `subvalue` is ignored when `variant` is `ContentVariant.OneLine`.',
-      );
-    });
-
-    it('does not warn in production when OneLine ignores description and subvalue', () => {
-      process.env.NODE_ENV = 'production';
-      const warnSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => undefined);
-
-      render(
-        <Content
-          title="Title"
-          description="Secondary"
-          subvalue="Balance"
-          variant={ContentVariant.OneLine}
-          data-testid={ROOT_TEST_ID}
-        />,
-      );
-
-      expect(warnSpy).not.toHaveBeenCalled();
     });
   });
 
