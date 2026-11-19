@@ -4,7 +4,7 @@ import type { ViewProps } from 'react-native';
 export type BoxProps = BoxPropsShared &
   ViewProps & {
     /**
-     * @deprecated Use `className`. Will be removed in `@metamask/design-system-react-native` 1.0.0.
+     * @deprecated Use `className` instead.
      */
     twClassName?: string;
     /**

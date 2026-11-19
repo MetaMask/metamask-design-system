@@ -25,7 +25,7 @@ type SectionHeaderPropsBase = SectionHeaderPropsShared & {
    */
   endIconProps?: Omit<Partial<IconProps>, 'name'>;
   /**
-   * @deprecated Use `className`. Will be removed in `@metamask/design-system-react-native` 1.0.0.
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
   /**

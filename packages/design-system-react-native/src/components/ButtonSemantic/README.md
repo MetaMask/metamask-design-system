@@ -127,7 +127,7 @@ Use the `className` prop to add Tailwind CSS classes to the component. Can be a 
 </ButtonSemantic>
 ```
 
-> **Migrating from `twClassName`:** `twClassName` still works but is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 

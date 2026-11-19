@@ -80,7 +80,7 @@ Tailwind classes merged onto the root `Box`.
 <BoxColumn className="gap-2 p-2">Label</BoxColumn>
 ```
 
-> **Migrating from `twClassName`:** `twClassName` still works but is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
