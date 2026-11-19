@@ -35,7 +35,7 @@ Skip changelog-only, types-only, tests-only, docs-only, CI, and non-visual refac
 
 ## Expand to dependents
 
-Primitive and token changes leak into other components. Example: [PR #1494](https://github.com/MetaMask/metamask-design-system/pull/1494) changed `ButtonBase` / `ButtonIcon` radius; reviewers needed shots of `Button` variants, `ButtonHero`, `ButtonFilter`, `TextButton` (opt-out), `SelectButton`, and `SegmentedControl` — not just `ButtonBase.tsx`.
+Primitive and token changes leak into other components. Example: [PR #1494](https://github.com/MetaMask/metamask-design-system/pull/1494) changed `ButtonBase` / `ButtonIcon` radius; reviewers needed shots of `Button` variants, `ButtonFilter`, `TextButton` (opt-out), `SelectButton`, and `SegmentedControl` — not just `ButtonBase.tsx`.
 
 1. Start from changed **implementation** files (`.tsx` components, token CSS/TS). Ignore tests, README, constants-only, and Figma connect unless they are the only signal.
 2. For each changed component, find importers in the same package (and the sibling platform package):
@@ -58,7 +58,7 @@ Primitive and token changes leak into other components. Example: [PR #1494](http
 | 6+ dependents, **or** a shared primitive/token where the review value is the blast radius, **or** the user asks for a composed / all-in-one shot | One **temporary showcase** grid per platform (identical sandbox on before and after), **plus** 1–2 detail shots of the primitive and any opt-out. |
 | Affected component has no story                                                                                                                  | Temporary sandbox for that component only (or after-only if it is brand new on the PR).                                                           |
 
-Showcase when the composed frame is worth more than N separate PNGs — e.g. [PR #1494](https://github.com/MetaMask/metamask-design-system/pull/1494) (`ButtonBase` radius) where reviewers needed `Button`, `ButtonHero`, `ButtonFilter`, `TextButton`, `SelectButton`, and `SegmentedControl` in one glance. Skip the showcase for a lone `BadgeNetwork` radius tweak; crop its existing story tightly instead.
+Showcase when the composed frame is worth more than N separate PNGs — e.g. [PR #1494](https://github.com/MetaMask/metamask-design-system/pull/1494) (`ButtonBase` radius) where reviewers needed `Button`, `ButtonFilter`, `TextButton`, `SelectButton`, and `SegmentedControl` in one glance. Skip the showcase for a lone `BadgeNetwork` radius tweak; crop its existing story tightly instead.
 
 Showcase story path (delete after capture; never commit):
 
@@ -218,7 +218,7 @@ Local and cloud agents both capture with headless Playwright against hosted GitH
 
 Diff touched `ButtonBase` and `ButtonIcon` (and RN `SegmentedControl` to stay concentric). Many dependents → escalate to showcase (not one story per consumer):
 
-- Web showcase grid (local base → local PR head, same sandbox file): `ButtonBase`, `Button` variants/sizes, `ButtonHero`, `ButtonFilter`, `TextButton`, `ButtonIcon`
+- Web showcase grid (local base → local PR head, same sandbox file): `ButtonBase`, `Button` variants/sizes, `ButtonFilter`, `TextButton`, `ButtonIcon`
 - RN showcase grid (same local-base / local-head pattern): those plus `ButtonSemantic`, `SelectButton`, `SegmentedControl`
 - Detail: `ButtonBase` / `ButtonIcon` / RN `SegmentedControl` sizes — before may use hosted main for these existing stories
 

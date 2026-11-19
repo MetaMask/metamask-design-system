@@ -22,9 +22,6 @@ export type ButtonBaseSize =
 export const ButtonSize = ButtonBaseSize;
 export type ButtonSize = ButtonBaseSize;
 
-export const ButtonHeroSize = ButtonBaseSize;
-export type ButtonHeroSize = ButtonBaseSize;
-
 export const ButtonSemanticSize = ButtonBaseSize;
 export type ButtonSemanticSize = ButtonBaseSize;
 
