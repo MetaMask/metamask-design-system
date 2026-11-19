@@ -34,7 +34,7 @@ This rule accepts an optional single configuration object with the following pro
 - `black`
 - `white`
 
-Add brand color families or other literal names (e.g. `gray`) to `discouragedColors` if your project keeps a larger literal palette available, such as when the deprecated Tailwind v3 preset is used without removing the default Tailwind colors.
+Add brand color families or other literal names (e.g. `gray`) to `discouragedColors` if your project keeps a larger literal palette available, such as when the deprecated Tailwind v3 preset is used without removing the default Tailwind colors. The plugin's defaults describe the MetaMask Tailwind and twrnc setups; projects that expose their own literal palettes own their `discouragedColors` configuration, in the same way `no-deprecated-classnames` mappings are configured per project.
 
 ### Example Configuration:
 
