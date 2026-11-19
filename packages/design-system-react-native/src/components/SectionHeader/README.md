@@ -99,7 +99,7 @@ See the `Children` Storybook story for a title + description + trailing chevron 
 
 ### `startIconName`
 
-Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconDefault`; override with `startIconProps`.
+Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconDefault`; override with `startIconProps`.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -113,7 +113,7 @@ import { SectionHeader, IconName } from '@metamask/design-system-react-native';
 
 ### `endIconName`
 
-Optional icon name for the end of the **outer** header row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconAlternative`; override with `endIconProps`. Use for trailing chevrons, disclosure arrows, and other row-level affordances (including beside titles like "How it works"). **Do not** place these icons in `titleAccessory`.
+Optional icon name for the end of the **outer** header row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconAlternative`; override with `endIconProps`. Use for trailing chevrons, disclosure arrows, and other row-level affordances (including beside titles like "How it works"). **Do not** place these icons in `titleAccessory`.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |

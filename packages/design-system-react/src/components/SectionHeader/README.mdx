@@ -158,7 +158,7 @@ When implementing designs or stories, map Figma trailing chevrons (`>`, `ArrowRi
 
 ### `startIconName`
 
-Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconDefault`; override with `startIconProps`.
+Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconDefault`; override with `startIconProps`.
 
 <table>
   <thead>
@@ -185,7 +185,7 @@ Optional icon name for the start of the **outer** row. When set, an `Icon` is re
 
 ### `endIconName`
 
-Optional icon name for the end of the **outer** header row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconAlternative`; override with `endIconProps`. Use for trailing chevrons, disclosure arrows, and other row-level affordances. **Do not** place these icons in `titleAccessory`.
+Optional icon name for the end of the **outer** header row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconAlternative`; override with `endIconProps`. Use for trailing chevrons, disclosure arrows, and other row-level affordances. **Do not** place these icons in `titleAccessory`.
 
 <table>
   <thead>
@@ -266,7 +266,7 @@ Optional custom node after the title row on the **outer** row. Used when no end 
 
 ### `titleProps`
 
-Optional props merged into the inner row `Text` when `title` is a string. Documented in Storybook controls via usage; pass-through object props are omitted from interactive `argTypes`.
+Optional props merged into the inner row `Text` when `title` is a string.
 
 <table>
   <thead>
@@ -384,7 +384,7 @@ Optional props merged into the end `Icon` when an end icon is shown.
 
 ### `isInteractive`
 
-When `true`, the root becomes focusable and clickable so the full row is tappable. Hover and pressed feedback use `hover:opacity-80` and `active:opacity-80` (80% opacity). An `IconName.ArrowRight` end icon is rendered by default unless `endIconName` or `endAccessory` is provided. `role` defaults to `button` and `tabIndex` defaults to `0` when not provided. Use `onClick` for activation. When `disabled` is set, clicks and keyboard activation are ignored and `aria-disabled` is set.
+When `true`, the root becomes focusable and clickable so the full row is tappable. Pressed feedback uses `active:opacity-70` (70% opacity), the same pressed treatment as React Native. Hover is web-only and uses `hover:opacity-70`. An `IconName.ArrowRight` end icon is rendered by default unless `endIconName` or `endAccessory` is provided. `role` defaults to `button` and `tabIndex` defaults to `0` when not provided. Use `onClick` for activation. When `disabled` is set, clicks and keyboard activation are ignored and `aria-disabled` is set.
 
 <table>
   <thead>
