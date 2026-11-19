@@ -28,9 +28,7 @@ export const ButtonSecondary = ({
       const classes =
         typeof className === 'function' ? className(pressed) : className;
 
-      const baseClasses = `
-        border
-      `;
+      const baseClasses = 'border';
 
       let backgroundClass = '';
       let borderClass = '';

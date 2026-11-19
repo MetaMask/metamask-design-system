@@ -28,9 +28,8 @@ export const ButtonTertiary = ({
       const classes =
         typeof className === 'function' ? className(pressed) : className;
 
-      const baseClasses = `
-        ${isInverse && !isDanger ? 'border-[1.5px]' : 'border-0'}
-      `;
+      const baseClasses =
+        isInverse && !isDanger ? 'border-[1.5px]' : 'border-0';
 
       let backgroundClass = '';
       let borderClass = '';

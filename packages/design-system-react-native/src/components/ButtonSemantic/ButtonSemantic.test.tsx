@@ -1,5 +1,6 @@
 import { ButtonSemanticSize } from '@metamask/design-system-shared';
-import { fireEvent, render } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { ButtonSemantic } from './ButtonSemantic';
@@ -7,6 +8,11 @@ import { ButtonSemanticSeverity } from './ButtonSemantic.types';
 
 describe('ButtonSemantic', () => {
   const mockOnPress = jest.fn();
+  let tw: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    tw = renderHook(() => useTailwind()).result.current;
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -242,22 +248,20 @@ describe('ButtonSemantic', () => {
       expect(getByText('Styled Button')).toBeDefined();
     });
 
-    it('accepts twClassName and className as functions', () => {
-      const twClassNameFn = jest.fn((_pressed: boolean) => 'mt-4');
-
-      const { getByText } = render(
+    it('lets className win over twClassName when both are functions', () => {
+      const { getByTestId } = render(
         <ButtonSemantic
           severity={ButtonSemanticSeverity.Success}
           onPress={mockOnPress}
-          twClassName={twClassNameFn}
-          className={twClassNameFn}
+          twClassName={() => 'mt-2'}
+          className={() => 'mt-4'}
+          testID="button-semantic"
         >
           Function ClassName
         </ButtonSemantic>,
       );
 
-      expect(getByText('Function ClassName')).toBeDefined();
-      expect(twClassNameFn).toHaveBeenCalled();
+      expect(getByTestId('button-semantic')).toHaveStyle(tw`mt-4`);
     });
   });
 });

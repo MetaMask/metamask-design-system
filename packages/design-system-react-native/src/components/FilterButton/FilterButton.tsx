@@ -88,6 +88,7 @@ export const FilterButton = ({
           ? textProps
           : {
               ...textProps,
+              twClassName: undefined,
               className: resolveClassName(
                 TextColor.TextAlternative,
                 textProps?.twClassName,

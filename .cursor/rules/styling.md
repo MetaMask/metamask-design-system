@@ -218,6 +218,7 @@ The same applies to nested prop bags such as `textProps`:
 ```tsx
 textProps={{
   ...textProps,
+  twClassName: undefined,
   className: resolveClassName(
     'text-default',
     textProps?.twClassName,

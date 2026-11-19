@@ -81,6 +81,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         />
         <TextFieldSearch
           {...(textFieldSearchProps as TextFieldSearchProps)}
+          twClassName={undefined}
           className={resolveClassName(
             'flex-1',
             textFieldSearchProps.twClassName,
@@ -112,6 +113,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     >
       <TextFieldSearch
         {...(textFieldSearchProps as TextFieldSearchProps)}
+        twClassName={undefined}
         className={resolveClassName(
           'flex-1',
           textFieldSearchProps.twClassName,
@@ -124,6 +126,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         onPress={onPressCancelButton}
         textProps={{
           ...cancelButtonProps?.textProps,
+          twClassName: undefined,
           className: resolveClassName(
             'text-default',
             cancelButtonProps?.textProps?.twClassName,

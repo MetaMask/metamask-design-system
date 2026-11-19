@@ -173,7 +173,7 @@ Test ID for the header container `View`.
 
 ### `className`
 
-Tailwind class names merged with the component defaults (including `min-h-14`) via `twMerge`.
+Tailwind classes merged after the component defaults (including `min-h-14`).
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |

@@ -54,6 +54,7 @@ export const SelectButton = ({
     numberOfLines: 1,
     ellipsizeMode: 'tail' as const,
     ...textProps,
+    twClassName: undefined,
     className: resolveClassName(
       // Ensure the label actually grows to push the end arrow when full width.
       // ButtonBase applies 'grow-0' by default; add 'grow' here to override it.
@@ -66,6 +67,7 @@ export const SelectButton = ({
   const resolvedContentWrapperProps = isFullWidth
     ? {
         ...buttonBaseRest.contentWrapperProps,
+        twClassName: undefined,
         className: resolveClassName(
           'w-full',
           buttonBaseRest.contentWrapperProps?.twClassName,
