@@ -113,19 +113,21 @@ Optional prop to show a loading spinner.
 </ButtonSemantic>
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. Can be a string or a function that receives pressed state and returns a string.
+Use the `className` prop to add Tailwind CSS classes to the component. Can be a string or a function that receives pressed state and returns a string.
 
 | TYPE                                       | REQUIRED | DEFAULT     |
 | ------------------------------------------ | -------- | ----------- |
 | `string \| ((pressed: boolean) => string)` | No       | `undefined` |
 
 ```tsx
-<ButtonSemantic severity={ButtonSemanticSeverity.Success} twClassName="mt-4">
+<ButtonSemantic severity={ButtonSemanticSeverity.Success} className="mt-4">
   With Margin
 </ButtonSemantic>
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 

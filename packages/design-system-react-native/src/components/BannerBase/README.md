@@ -147,17 +147,17 @@ Optional node rendered at the start of the banner.
 | ---------------- | ----------- | -------- | ----------- |
 | `startAccessory` | `ReactNode` | No       | `undefined` |
 
-### `twClassName`
+### `className`
 
 Optional Tailwind classes merged onto the root container.
 
-| PROP          | TYPE     | REQUIRED | DEFAULT     |
-| ------------- | -------- | -------- | ----------- |
-| `twClassName` | `string` | No       | `undefined` |
+| PROP        | TYPE     | REQUIRED | DEFAULT     |
+| ----------- | -------- | -------- | ----------- |
+| `className` | `string` | No       | `undefined` |
 
 ### `style`
 
-Use `style` to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use `style` to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | PROP    | TYPE                   | REQUIRED | DEFAULT     |
 | ------- | ---------------------- | -------- | ----------- |
@@ -181,6 +181,8 @@ export const ConditionalStyleExample = ({
   );
 };
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ## Migration from Mobile Component Library
 

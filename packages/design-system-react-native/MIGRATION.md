@@ -4,6 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
+- [`twClassName` to `className`](#twclassname-to-classname)
 - [From version 0.56.0 to 0.57.0](#from-version-0560-to-0570)
 - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
 - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
@@ -85,7 +86,25 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.56.0 to 0.57.0
+### `twClassName` to `className`
+
+`twClassName` is deprecated on `Box`, `Text`, `ButtonBase`, `Button`, `ButtonSemantic`, `FilterButton`, `SelectButton`, `BannerBase`, `BoxRow`, `BoxColumn`, `Content`, `HeaderRoot`, `HeaderSearch`, `SectionHeader`, `SegmentedControl`, `TabEmptyState`, `TextField`, `TitleAlert`, and `TitleSubpage`. It keeps working until 1.0.0. Other components still use `twClassName` until they are migrated.
+
+Rename the prop. Nothing else changes:
+
+```tsx
+// Before
+<Box twClassName="mt-4 flex-1" />
+
+// After
+<Box className="mt-4 flex-1" />
+```
+
+If both props are passed during migration, classes merge in this order: the component's own classes, then `twClassName`, then `className`. `className` wins on conflicts, and the component's own classes are never dropped.
+
+The same rename applies inside prop bags such as `textProps`, `titleWrapperProps`, and `contentWrapperProps`.
+
+## From version 0.56.0 to 0.57.0
 
 <a id="from-version-0560-to-0570"></a>
 

@@ -260,7 +260,7 @@ Optional React children rendered below the `Content` block on the padded root.
 import { Box, ListItem } from '@metamask/design-system-react-native';
 
 <ListItem title="Summary">
-  <Box twClassName="mt-2 rounded bg-background-muted px-3 py-2">
+  <Box className="mt-2 rounded bg-background-muted px-3 py-2">
     Expanded details
   </Box>
 </ListItem>;
@@ -278,9 +278,9 @@ Optional inline accessories on the same line as the matching text field.
 
 See [Content/README.md](../Content/README.md) for types and examples.
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -295,19 +295,21 @@ Applied on the root `Box` or `Pressable`, merged with default padding (`px-4 py-
 import { ListItem } from '@metamask/design-system-react-native';
 
 // Override default padding
-<ListItem title="Label" twClassName="px-6 py-4">
+<ListItem title="Label" className="px-6 py-4">
   Custom padding
 </ListItem>
 
 // Add layout chrome without changing row background
-<ListItem title="Label" twClassName="rounded-lg border border-muted">
+<ListItem title="Label" className="rounded-lg border border-muted">
   Bordered row
 </ListItem>
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 Avoid setting row background colors unless the design requires it. When you do, use a `style` function so idle and pressed states stay paired.
 

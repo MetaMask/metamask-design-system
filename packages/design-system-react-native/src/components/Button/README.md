@@ -208,9 +208,9 @@ Text to display when the button is in loading state.
 </Button>
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -226,7 +226,7 @@ import { Button } from '@metamask/design-system-react-native';
 <Button
   variant={ButtonVariant.Primary}
   onPress={() => {}}
-  twClassName="shadow-lg"
+  className="shadow-lg"
 >
   Custom Shadow
 </Button>
@@ -235,15 +235,17 @@ import { Button } from '@metamask/design-system-react-native';
 <Button
   variant={ButtonVariant.Primary}
   onPress={() => {}}
-  twClassName="!bg-error-100"
+  className="!bg-error-100"
 >
   Override Background
 </Button>
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

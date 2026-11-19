@@ -78,9 +78,9 @@ Whether the button is disabled.
 </ButtonBase>
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -93,19 +93,21 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { ButtonBase } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<ButtonBase onPress={() => {}} twClassName="mt-4">
+<ButtonBase onPress={() => {}} className="mt-4">
   Custom Background
 </ButtonBase>
 
 // Override default styles
-<ButtonBase onPress={() => {}} twClassName="bg-error-default">
+<ButtonBase onPress={() => {}} className="bg-error-default">
   Override Background
 </ButtonBase>
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
@@ -132,7 +134,7 @@ export const ConditionalExample = ({ isActive }: { isActive: boolean }) => {
 
 ### `loadingWrapperProps`
 
-Props applied to the `Box` that wraps the loading spinner when `isLoading` is true. Merges with the default full-area centered layout; set `twClassName` to extend (not replace) that layout. The loading wrapper has **no default `testID`**—pass `testID` here for tests or automation (for example, if you previously queried `spinner-container`, pass `loadingWrapperProps={{ testID: 'spinner-container' }}`).
+Props applied to the `Box` that wraps the loading spinner when `isLoading` is true. Merges with the default full-area centered layout; set `className` to extend (not replace) that layout. The loading wrapper has **no default `testID`**—pass `testID` here for tests or automation (for example, if you previously queried `spinner-container`, pass `loadingWrapperProps={{ testID: 'spinner-container' }}`).
 
 ### `contentWrapperProps`
 

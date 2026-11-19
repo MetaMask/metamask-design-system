@@ -243,7 +243,7 @@ import { TextField } from '@metamask/design-system-react-native';
 
 The root `Box` sets `accessible={false}` so assistive technologies focus the inner `TextInput`. Prefer **`inputProps`** for `accessibilityLabel`, `accessibilityHint`, and other [TextInput](https://reactnative.dev/docs/textinput) accessibility props.
 
-Use top-level `Box` / `View` props for layout and pointer handling (`pointerEvents`, margins, hit areas via wrappers, etc.). Keys reserved by TextField (`style`, `twClassName`, `testID`, `children`, `accessible`, and keys owned by the TextField API surface) are not passed through from this intersection.
+Use top-level `Box` / `View` props for layout and pointer handling (`pointerEvents`, margins, hit areas via wrappers, etc.). Keys reserved by TextField (`style`, `className`, `testID`, `children`, `accessible`, and keys owned by the TextField API surface) are not passed through from this intersection.
 
 ```tsx
 import { TextField } from '@metamask/design-system-react-native';
@@ -258,9 +258,9 @@ import { TextField } from '@metamask/design-system-react-native';
 />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -273,19 +273,21 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { TextField } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<TextField value="" twClassName="rounded-2xl" placeholder="With extra rounding" />
+<TextField value="" className="rounded-2xl" placeholder="With extra rounding" />
 
 // Override default styles
 <TextField
   value=""
-  twClassName="bg-error-default"
+  className="bg-error-default"
   placeholder="Override background"
 />
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

@@ -153,17 +153,9 @@ Callback function invoked when the button is pressed.
 <ButtonHero onPress={() => console.log('Button pressed')}>Press Me</ButtonHero>
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add custom Tailwind classes to the component.
-
-| TYPE     | REQUIRED | DEFAULT     |
-| -------- | -------- | ----------- |
-| `string` | No       | `undefined` |
-
-```tsx
-<ButtonHero twClassName="mb-4">Custom Styled Button</ButtonHero>
-```
+`ButtonHero` ignores `className` and the deprecated `twClassName` so its locked hero styling can't be overridden. Wrap it in a `Box` if you need spacing around it.
 
 ## Accessibility
 

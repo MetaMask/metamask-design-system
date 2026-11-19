@@ -74,7 +74,7 @@ import { BoxAlignItems } from '@metamask/design-system-react-native';
 <BoxRow alignItems={BoxAlignItems.Start}>Top-aligned row</BoxRow>;
 ```
 
-### `twClassName`
+### `className`
 
 Tailwind classes merged onto the root `Box`. Use this to add layout or override defaults (for example `gap-0` or `gap-2` instead of the default gap).
 
@@ -83,12 +83,14 @@ Tailwind classes merged onto the root `Box`. Use this to add layout or override 
 | `string` | No       | `undefined` |
 
 ```tsx
-<BoxRow twClassName="gap-2 p-2">Label</BoxRow>
+<BoxRow className="gap-2 p-2">Label</BoxRow>
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Forwarded to the root `Box` / `View`. Prefer `twClassName` for token-based styling where possible.
+Forwarded to the root `Box` / `View`. Prefer `className` for token-based styling where possible.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
