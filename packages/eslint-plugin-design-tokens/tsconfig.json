@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.packages.json",
+  "compilerOptions": {
+    "exactOptionalPropertyTypes": true,
+    "noErrorTruncation": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "include": ["./src"],
+  "references": []
+}

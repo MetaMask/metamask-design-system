@@ -79,6 +79,9 @@ export type { ButtonIconProps } from './ButtonIcon';
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
+export { Content, ContentVariant } from './Content';
+export type { ContentProps } from './Content';
+
 export { HeaderBase } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
@@ -128,6 +131,9 @@ export type { SkeletonProps } from './Skeleton';
 
 export { SensitiveText, SensitiveTextLength } from './SensitiveText';
 export type { SensitiveTextProps } from './SensitiveText';
+
+export { SectionHeader } from './SectionHeader';
+export type { SectionHeaderProps } from './SectionHeader';
 
 export { PopoverHeader } from './PopoverHeader';
 export type { PopoverHeaderProps } from './PopoverHeader';
@@ -180,3 +186,11 @@ export type { ToastOptions, ToastProps, ToasterProps } from './Toast';
 
 export { HeaderSubpage } from './HeaderSubpage';
 export type { HeaderSubpageProps } from './HeaderSubpage';
+
+export {
+  SelectButton,
+  SelectButtonEndArrow,
+  SelectButtonSize,
+  SelectButtonVariant,
+} from './SelectButton';
+export type { SelectButtonProps } from './SelectButton';

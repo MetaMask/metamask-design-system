@@ -28,6 +28,7 @@ export const Tag: React.FC<TagProps> = ({
   endIconName,
   endIconProps,
   endAccessory,
+  textProps,
   twClassName,
   style,
   ...props
@@ -75,6 +76,7 @@ export const Tag: React.FC<TagProps> = ({
             color: textColor,
             variant: TextVariant.BodyXs,
             fontWeight: FontWeight.Medium,
+            ...textProps,
           }}
         >
           {children}

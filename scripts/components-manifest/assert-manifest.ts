@@ -109,7 +109,7 @@ function main(): void {
   const [reactPath, reactNativePath] = process.argv.slice(2);
   if (reactPath === undefined || reactNativePath === undefined) {
     console.error(
-      'Usage: tsx scripts/components-manifest/assert-manifest.ts <react-components.json> <react-native-components.json>',
+      'Usage: node scripts/components-manifest/assert-manifest.ts <react-components.json> <react-native-components.json>',
     );
     process.exitCode = 1;
     return;

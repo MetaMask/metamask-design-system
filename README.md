@@ -14,6 +14,7 @@ This repository contains the following packages [^fn1]:
 - [`@metamask/design-system-tailwind-preset`](packages/design-system-tailwind-preset)
 - [`@metamask/design-system-twrnc-preset`](packages/design-system-twrnc-preset)
 - [`@metamask/design-tokens`](packages/design-tokens)
+- [`@metamask/eslint-plugin-design-tokens`](packages/eslint-plugin-design-tokens)
 
 <!-- end package list -->
 
@@ -31,12 +32,21 @@ linkStyle default opacity:0.5
   design_system_tailwind_preset(["@metamask/design-system-tailwind-preset"]);
   design_system_twrnc_preset(["@metamask/design-system-twrnc-preset"]);
   design_tokens(["@metamask/design-tokens"]);
+  eslint_plugin_design_tokens(["@metamask/eslint-plugin-design-tokens"]);
+  design_system_react --> design_system_shared;
+  design_system_react --> design_system_tailwind_preset;
   design_system_react --> design_system_tailwind_preset;
   design_system_react --> design_tokens;
+  design_system_react_native --> design_system_shared;
+  design_system_react_native --> design_system_twrnc_preset;
+  design_system_react_native --> design_tokens;
   design_system_react_native --> design_system_twrnc_preset;
   design_system_react_native --> design_tokens;
   design_system_tailwind_preset --> design_tokens;
   design_system_twrnc_preset --> design_tokens;
+  design_system_twrnc_preset --> design_tokens;
+  design_tokens --> design_system_react;
+  design_tokens --> design_system_shared;
 ```
 
 <!-- end dependency graph -->

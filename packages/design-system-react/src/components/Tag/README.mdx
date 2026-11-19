@@ -37,7 +37,7 @@ Use `TagSeverity.Danger` for destructive or critical states. Internal color toke
 
 ### `children`
 
-Main content. String children use `Text` (`BodyXs`, medium weight, severity-based color). Other React nodes render as-is.
+Main content. String children use `Text` (`BodyXs`, medium weight, severity-based color) unless overridden with `textProps`. Other React nodes render as-is.
 
 <table>
   <thead>
@@ -165,6 +165,33 @@ Optional props forwarded to the end `Icon`. You may set `name` here instead of `
     </tr>
   </tbody>
 </table>
+
+### `textProps`
+
+Optional props forwarded to the design-system `Text` rendered for string children. Values are merged over the tag defaults (`BodyXs`, medium weight, severity-based color), so anything set here overrides that default. Ignored when children are not strings.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TagStories.TextProps} />
 
 ### `startAccessory`
 
