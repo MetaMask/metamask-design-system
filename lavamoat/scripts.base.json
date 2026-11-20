@@ -1,0 +1,15 @@
+{
+  "notes": "Strict baseline that every other profile extends, and the profile used by scripts without a `scriptsConfig` entry. Every permission flag is listed explicitly as a reference for configs that build on this one; extend it and turn on only what a script needs. `./` allows reading the working directory, and `$PROJECT_CWD` the whole monorepo, so scripts can import from the root node_modules.",
+  "nodeOptions": {
+    "--disable-warning": "SecurityWarning",
+    "--permission": true,
+    "--allow-fs-read": ["./", "$PROJECT_CWD"],
+    "--allow-fs-write": ["$PROJECT_CWD"],
+    "--allow-child-process": false,
+    "--allow-net": false,
+    "--allow-worker": false,
+    "--allow-addons": false,
+    "--allow-wasi": false,
+    "--allow-inspector": false
+  }
+}

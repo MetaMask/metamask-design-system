@@ -1,8 +1,29 @@
 import { createSandbox, writeFile, readFile } from '@metamask/utils/node';
 import { promises as fs } from 'fs';
+import type { Dirent } from 'fs';
 import path from 'path';
 
 import { readAllFiles, writeFiles } from './fs-utils';
+
+/**
+ * Creates a partial `Dirent` mock, since only the members the code under test
+ * uses need to be provided.
+ *
+ * @param name - The entry name.
+ * @param isDirectory - The value returned by `isDirectory()`.
+ * @param isFile - The value returned by `isFile()`.
+ * @returns The mock, typed as a Dirent.
+ */
+const makeDirent = (
+  name: string,
+  isDirectory: boolean,
+  isFile: boolean,
+): Dirent =>
+  ({
+    name,
+    isDirectory: (): boolean => isDirectory,
+    isFile: (): boolean => isFile,
+  }) as Dirent;
 
 const { withinSandbox } = createSandbox('create-package/fs-utils');
 
@@ -71,19 +92,19 @@ describe('create-package/fs-utils', () => {
     it('should ignore file system entities that are neither files nor directories', async () => {
       expect.assertions(1);
 
-      await withinSandbox(async (sandbox) => {
-        const dirPath = path.join(sandbox.directoryPath, 'dir/');
-        await writeFile(path.join(dirPath, 'file1.txt'), 'foo');
-        await fs.symlink(
-          path.join(dirPath, 'file1.txt'),
-          path.join(dirPath, 'file2.txt'),
-        );
+      const dirPath = path.join('/fake', 'dir/');
+      jest
+        .spyOn(fs, 'readdir')
+        .mockResolvedValue([
+          makeDirent('file1.txt', false, true),
+          makeDirent('file2.txt', false, false),
+        ]);
+      jest.spyOn(fs, 'readFile').mockResolvedValue('foo');
 
-        const files = await readAllFiles(dirPath);
+      const files = await readAllFiles(dirPath);
 
-        expect(files).toStrictEqual({
-          'file1.txt': 'foo',
-        });
+      expect(files).toStrictEqual({
+        'file1.txt': 'foo',
       });
     });
   });

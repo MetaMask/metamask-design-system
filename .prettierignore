@@ -1,5 +1,11 @@
 node_modules/
 
+# Yarn global folder (relocated into the project by `globalFolder`)
+.yarn/global/
+
+# Vendored from @lavamoat/harden
+lavamoat/*.js
+
 .expo
 
 # Coverage directories
@@ -8,6 +14,7 @@ scripts/coverage
 
 # Storybook build output
 storybook-static/
+rn-storybook-static/
 
 # Auto-generated storybook files
 apps/storybook-react-native/.rnstorybook/storybook.requires.*

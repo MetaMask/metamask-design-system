@@ -20,13 +20,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [24.x]
+        node-version: [26.x]
     steps:
       - name: Checkout and setup environment
         uses: MetaMask/action-checkout-and-setup@392abd40aa6a0600a3c0ef4af75851662587e6ec # v1.4.0
         with:
           is-high-risk-environment: ${{ inputs.publish }}
 
+      # TOKEN is temporarily exempt from the banned environment variable names
+      # in lavamoat/.env.ban.json so that the Figma CLI can read
+      # FIGMA_ACCESS_TOKEN directly from the environment. Re-ban TOKEN once
+      # harden supports per-script overrides of the banned list.
       - name: Dry run Code Connect publish
         if: ${{ !inputs.publish }}
         env:

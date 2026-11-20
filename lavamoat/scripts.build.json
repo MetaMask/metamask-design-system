@@ -1,0 +1,7 @@
+{
+  "notes": "For TypeScript and CSS builds that only read and write inside the project.",
+  "extends": "./scripts.base.json",
+  "nodeOptions": {
+    "--allow-child-process": true
+  }
+}
