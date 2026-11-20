@@ -1,6 +1,8 @@
 # SectionDivider
 
-SectionDivider is a horizontal rule built on the root [Box](../Box/Box.tsx). It stretches on the cross axis by default, uses a 1px muted **top-only** border (`border-t` and `border-muted`) so the line reads as a single hairline on a zero-height view, and applies vertical margin from the design scale.
+SectionDivider separates stacked sections with a horizontal line. Use it between groups of content in a column. For a border around a container, set `borderWidth` on [Box](../Box/Box.tsx) instead. It is not a vertical divider.
+
+It stretches to the width of its container, draws a muted 1px line, and adds space above and below.
 
 ```tsx
 import { SectionDivider } from '@metamask/design-system-react-native';
@@ -10,16 +12,16 @@ import { SectionDivider } from '@metamask/design-system-react-native';
 
 ## Props
 
-`SectionDividerProps` matches [Box](../Box/Box.types.ts) and React Native `View` props. Override defaults with any `Box` prop (for example `marginVertical={0}` or `borderWidth={0}`) or with `style` / `twClassName`.
+`SectionDividerProps` matches [Box](../Box/Box.types.ts) and React Native `View` props. Override the line with `borderWidth`, `borderColor`, and `marginVertical`, or with `style` / `twClassName`.
 
 ### Defaults
 
-| Concern         | Default                                                                                |
-| --------------- | -------------------------------------------------------------------------------------- |
-| Width           | `self-stretch` via `twClassName` (full width in typical column layouts)                |
-| Border width    | `borderWidth={1}` → `border-t` (`0`–`8` map to `border-t-0`, `border-t`, `border-t-*`) |
-| Border color    | `BoxBorderColor.BorderMuted` → `border-muted`                                          |
-| Vertical margin | `marginVertical={5}` → `my-5` (20px)                                                   |
+| Concern               | Default                      |
+| --------------------- | ---------------------------- |
+| Width                 | Full width of the container  |
+| Line thickness        | `borderWidth={1}` (1px)      |
+| Line color            | `BoxBorderColor.BorderMuted` |
+| Space above and below | `marginVertical={5}` (20px)  |
 
 ```tsx
 import {
@@ -38,6 +40,32 @@ export const SectionsExample = () => (
   </Box>
 );
 ```
+
+### `borderWidth`
+
+Thickness of the line. `0` hides it. This sets the divider line only. It does not add a border on every side the way `Box` does.
+
+Available values: `0`, `1`, `2`, `4`, `8`.
+
+| TYPE             | REQUIRED | DEFAULT |
+| ---------------- | -------- | ------- |
+| `BoxBorderWidth` | No       | `1`     |
+
+### `borderColor`
+
+Color of the line.
+
+| TYPE             | REQUIRED | DEFAULT                      |
+| ---------------- | -------- | ---------------------------- |
+| `BoxBorderColor` | No       | `BoxBorderColor.BorderMuted` |
+
+### `marginVertical`
+
+Space above and below the line, from the design spacing scale.
+
+| TYPE         | REQUIRED | DEFAULT |
+| ------------ | -------- | ------- |
+| `BoxSpacing` | No       | `5`     |
 
 ### `twClassName`
 
