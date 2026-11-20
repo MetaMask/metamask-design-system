@@ -1,16 +1,23 @@
 # Prevent the use of hex color values (`@metamask/design-tokens/color-no-hex`)
 
-This rule discourages the direct use of hexadecimal color codes in your styles, promoting the adoption of a centralized approach to color management via [design tokens](https://github.com/MetaMask/design-tokens). By enforcing the use of [design tokens](https://github.com/MetaMask/design-tokens) for colors, this rule aids in ensuring consistency, design system alignment, scalability, and ease of maintenance across your project's UI.
+This rule discourages the direct use of hexadecimal color codes in your styles, promoting the adoption of a centralized approach to color management via [design tokens](https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-tokens). By enforcing the use of [design tokens](https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-tokens) for colors, this rule aids in ensuring consistency, design system alignment, scalability, and ease of maintenance across your project's UI.
 
 ## Rule Details
 
-The `color-no-hex` rule is aimed at encouraging the use of [design tokens](https://github.com/MetaMask/design-tokens), instead of hardcoded hexadecimal color values. This practice facilitates theming, reusability, and easier updates to the color palette.
+The `color-no-hex` rule is aimed at encouraging the use of [design tokens](https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-tokens), instead of hardcoded hexadecimal color values. This practice facilitates theming, reusability, and easier updates to the color palette.
+
+Both 6-digit hex values and 8-digit hex values with an alpha channel are flagged, matching the formats used by the current [design tokens](https://github.com/MetaMask/metamask-design-system/tree/main/packages/design-tokens) (e.g. `--color-primary-muted: #4459ff1a`).
 
 Examples of **incorrect** code for this rule:
 
 ```jsx
 // In a JSX file
 <div style={{ color: '#E06470' }}>...</div>
+```
+
+```jsx
+// In a JSX file, 8-digit hex with alpha
+<div style={{ color: '#4459ff1a' }}>...</div>
 ```
 
 Examples of **correct** code for this rule:
@@ -22,7 +29,7 @@ Examples of **correct** code for this rule:
 
 ```jsx
 // Using design token CSS-in-JS variables
-<div style={{ color: theme.error.default }}>...</div>
+<div style={{ color: theme.colors.error.default }}>...</div>
 ```
 
 ## Options
