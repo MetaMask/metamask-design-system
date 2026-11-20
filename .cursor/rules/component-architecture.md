@@ -88,7 +88,6 @@ Two base scales exist in shared. Each public component aliases its own const —
 | Export                 | Component        |
 | ---------------------- | ---------------- |
 | `ButtonSize`           | Button           |
-| `ButtonHeroSize`       | ButtonHero       |
 | `ButtonSemanticSize`   | ButtonSemantic   |
 | `SelectButtonSize`     | SelectButton     |
 | `FilterButtonSize`     | FilterButton     |
