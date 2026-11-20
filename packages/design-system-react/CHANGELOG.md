@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor!: remove ButtonHero from React and React Native ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
+- feat(dsr): add SectionDivider React parity (DSYS-750) ([#1441](https://github.com/MetaMask/metamask-design-system/pull/1441))
+- fix: SelectButton LongLabel overflow on web and textProps colour on React Native ([#1714](https://github.com/MetaMask/metamask-design-system/pull/1714))
+- fix(dsr): align SectionHeader with React Native ([#1706](https://github.com/MetaMask/metamask-design-system/pull/1706))
+- fix(security): refresh rimraf and node-gyp to drop the glob 10 chain ([#1721](https://github.com/MetaMask/metamask-design-system/pull/1721))
+- chore: drop tsx, run dev scripts with Node's native type stripping ([#1707](https://github.com/MetaMask/metamask-design-system/pull/1707))
+
 ## [0.53.0]
 
 ### Added

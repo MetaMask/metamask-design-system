@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- refactor!: remove ButtonHero from React and React Native ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
+- fix: SelectButton LongLabel overflow on web and textProps colour on React Native ([#1714](https://github.com/MetaMask/metamask-design-system/pull/1714))
+- fix(design-system-react-native): make Slider worklet utilities work in the CJS build ([#1722](https://github.com/MetaMask/metamask-design-system/pull/1722))
+- fix(dsr): align SectionHeader with React Native ([#1706](https://github.com/MetaMask/metamask-design-system/pull/1706))
+- chore: drop tsx, run dev scripts with Node's native type stripping ([#1707](https://github.com/MetaMask/metamask-design-system/pull/1707))
+
 ## [0.57.0]
 
 ### Added
