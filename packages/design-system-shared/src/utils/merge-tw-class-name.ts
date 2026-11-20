@@ -17,3 +17,21 @@
  */
 export const mergeTwClassName = (base: string, extra?: string): string =>
   extra ? `${base} ${extra}` : base;
+
+/**
+ * Joins component classes with the consumer's classes in a fixed order:
+ * base, then the deprecated `twClassName`, then `className`. Later classes
+ * win, so `className` overrides both.
+ *
+ * @param base - Component-owned classes
+ * @param twClassName - Deprecated consumer classes
+ * @param className - Consumer classes, applied last
+ * @returns The merged class string
+ */
+export function resolveClassName(
+  base: string,
+  twClassName?: string,
+  className?: string,
+): string {
+  return [base, twClassName, className].filter(Boolean).join(' ');
+}

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added `resolveClassName(base, twClassName, className)` to merge component classes with consumer classes, with `className` last ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+
 ## [0.46.0]
 
 ### Changed

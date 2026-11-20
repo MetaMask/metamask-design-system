@@ -4,7 +4,7 @@ import {
   IconColor,
   IconName,
   IconSize,
-  mergeTwClassName,
+  resolveClassName,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -37,7 +37,8 @@ import type { SectionHeaderProps } from './SectionHeader.types';
  * @param sectionHeaderProps.endIconProps - Props merged into the end `Icon`
  * @param sectionHeaderProps.isInteractive - When `true`, wraps the header in a `Pressable` with reduced opacity on press
  * @param sectionHeaderProps.style - Optional style on the outer wrapper (`View` or `Pressable` style, including function form when interactive)
- * @param sectionHeaderProps.twClassName - Optional Tailwind classes on the outer row
+ * @param sectionHeaderProps.className - Optional Tailwind classes on the outer row, applied after the base classes and `twClassName`
+ * @param sectionHeaderProps.twClassName - Optional Tailwind classes on the outer row. Deprecated, use `className`
  *
  * @returns The rendered SectionHeader layout.
  */
@@ -57,6 +58,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     endIconName,
     endIconProps,
     isInteractive,
+    className,
     twClassName = '',
     style,
     ...props
@@ -94,15 +96,22 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
   const hasAccessories =
     Boolean(resolvedStartAccessory) || Boolean(resolvedEndAccessory);
 
+  const {
+    className: titleWrapperClassName,
+    twClassName: titleWrapperTwClassName,
+    ...titleWrapperRest
+  } = titleWrapperProps ?? {};
+
   const titleRow = title ? (
     <Box
       flexDirection={BoxFlexDirection.Row}
       alignItems={BoxAlignItems.Center}
       gap={1}
-      {...titleWrapperProps}
-      twClassName={mergeTwClassName(
+      {...titleWrapperRest}
+      className={resolveClassName(
         hasAccessories ? 'w-full shrink min-w-0' : '',
-        titleWrapperProps?.twClassName,
+        titleWrapperTwClassName,
+        titleWrapperClassName,
       )}
     >
       <TextOrChildren
@@ -121,7 +130,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
   let mainContent = null;
   if (titleRow) {
     mainContent = hasAccessories ? (
-      <Box twClassName="shrink min-w-0">{titleRow}</Box>
+      <Box className="min-w-0 shrink">{titleRow}</Box>
     ) : (
       titleRow
     );
@@ -159,6 +168,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
           const baseStyle = tw.style(
             'px-4 pb-2 pt-3',
             twClassName,
+            className,
             pressed && !isDisabled && 'opacity-70',
           );
           const additionalStyle =
@@ -179,7 +189,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
         {...props}
         gap={1}
         style={style}
-        twClassName={mergeTwClassName('px-4 pb-2 pt-3', twClassName)}
+        className={resolveClassName('px-4 pb-2 pt-3', twClassName, className)}
       >
         {headerRow}
         {children}
@@ -194,7 +204,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
       alignItems={BoxAlignItems.Center}
       gap={1}
       style={style}
-      twClassName={mergeTwClassName('px-4 pb-2 pt-3', twClassName)}
+      className={resolveClassName('px-4 pb-2 pt-3', twClassName, className)}
     >
       {resolvedStartAccessory}
       {mainContent}

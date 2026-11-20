@@ -42,7 +42,7 @@ Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Nati
   borderRadius={BoxBorderRadius.Lg}
   backgroundColor={BoxBackgroundColor.BackgroundAlternative}
   p={4}
-  twClassName="flex-1" // No flex-1 prop exists, so twClassName is fine
+  className="flex-1" // No flex-1 prop exists, so className is fine
 >
   <Text variant={TextVariant.BodyMd}>Content</Text>
 </Box>
@@ -96,7 +96,8 @@ Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Nati
 ### Platform-Specific Props
 
 - **React Web:** Use `className` for Tailwind utilities
-- **React Native:** Use `twClassName` for TWRNC utilities OR `useTailwind()` hook
+- **React Native:** Use `className` for TWRNC utilities OR `useTailwind()` hook
+- **React Native:** `twClassName` is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Only use it on components that don't accept `className` yet
 - **NEVER** mix inline styles with Tailwind classes
 - **NEVER** import twrnc directly (use design system preset)
 
@@ -121,18 +122,18 @@ Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Nati
 **React Native:**
 
 ```tsx
-// ❌ Wrong - Mixing StyleSheet with twClassName
+// ❌ Wrong - Mixing StyleSheet with className
 <View
   style={[{ padding: 16 }, tw`bg-default`]}
 >
   <Text>Content</Text>
 </View>
 
-// ✅ Correct - Component props + twClassName when needed
+// ✅ Correct - Component props + className when needed
 <Box
   backgroundColor={BoxBackgroundColor.BackgroundDefault}
   padding={4}
-  twClassName="flex-1"
+  className="flex-1"
 >
   <Text>Content</Text>
 </Box>
@@ -186,15 +187,44 @@ const MyComponent = () => {
 };
 ```
 
-**twClassName for Box components:**
+**className for Box components:**
 
 ```tsx
 <Box
   flexDirection={BoxFlexDirection.Row}
-  twClassName="px-4 py-4 border-b border-muted"
+  className="px-4 py-4 border-b border-muted"
 >
   <Text>Content</Text>
 </Box>
+```
+
+**Merging component classes with consumer classes:**
+
+Classes always merge in one order: the component's own classes, then the deprecated `twClassName`, then `className`. Later classes win, so `className` overrides both. Use `resolveClassName` from `@metamask/design-system-shared` instead of `className ?? twClassName`, which drops classes.
+
+```tsx
+// ❌ Wrong - drops twClassName whenever className is set
+<Box {...props} className={className ?? twClassName} />
+
+// ✅ Correct
+<Box
+  {...props}
+  className={resolveClassName('px-4 pb-2 pt-3', twClassName, className)}
+/>
+```
+
+The same applies to nested prop bags such as `textProps`:
+
+```tsx
+textProps={{
+  ...textProps,
+  twClassName: undefined,
+  className: resolveClassName(
+    'text-default',
+    textProps?.twClassName,
+    textProps?.className,
+  ),
+}}
 ```
 
 **Interactive states with Pressable:**
@@ -230,38 +260,38 @@ const twContainerClassNames = 'flex-1 bg-default p-4';
 
 **Merging tw.style() with style prop (Array Pattern):**
 
-When a component needs to apply Tailwind classes AND accept a custom `style` prop, use the array pattern for the component's own styles and forward `twClassName` as a prop:
+When a component needs to apply Tailwind classes AND accept a custom `style` prop, use the array pattern for the component's own styles and forward `className` as a prop:
 
 ```tsx
 // ❌ Wrong - Passing style directly to tw.style() causes type errors
 style={tw.style('border-l-4 border-primary-default', style)}
 
-// ❌ Wrong - Merging twClassName into style instead of forwarding as prop
+// ❌ Wrong - Merging className into style instead of forwarding as prop
 style={[
-  tw.style('border-l-4 border-primary-default', twClassName),
+  tw.style('border-l-4 border-primary-default', className),
   style,
 ]}
 
-// ✅ Correct - Own classes in style, twClassName forwarded as prop
+// ✅ Correct - Own classes in style, className forwarded as prop
 <Component
   style={[tw.style('border-l-4 border-primary-default'), style]}
-  twClassName={twClassName}
+  className={className}
 />
 
-// ✅ Also correct - twClassName forwarded via props spread
+// ✅ Also correct - className forwarded via props spread
 <Component
   style={[tw.style('border-l-4 border-primary-default'), style]}
-  {...props} // twClassName passed through to child component
+  {...props} // className passed through to child component
 />
 ```
 
 **Why this pattern:**
 
 - ✅ Type safety (`tw.style` only receives the component's own classes)
-- ✅ Clear separation (component styles in `style`, consumer overrides in `twClassName` prop)
+- ✅ Clear separation (component styles in `style`, consumer overrides in `className` prop)
 - ✅ Consistency with Box foundational pattern
 - ✅ Native-optimized style merging (React Native handles arrays)
-- ✅ `twClassName` forwarded as a prop is handled by Box internally
+- ✅ `className` forwarded as a prop is handled by Box internally
 
 **Example from BannerAlert:**
 
@@ -273,7 +303,7 @@ export const BannerAlert = ({ severity, style, ...props }) => {
   return (
     <BannerBase
       style={[tw.style(`border-l-4 ${borderColorClass}`), style]}
-      {...props} // twClassName forwarded as prop to BannerBase → Box
+      {...props} // className forwarded as prop to BannerBase → Box
     />
   );
 };
@@ -353,7 +383,7 @@ After styling changes, verify:
 - [ ] No default Tailwind colors (bg-blue-500, text-gray-700)
 - [ ] No arbitrary values (unless documented as necessary)
 - [ ] No inline styles mixed with Tailwind classes
-- [ ] Platform-specific prop used (className for web, twClassName for native)
+- [ ] `className` used on both platforms (`twClassName` only on React Native components that don't accept `className` yet)
 - [ ] Text component used for all typography, not Tailwind classes
 - [ ] React Native: useTailwind from preset, not direct twrnc import
 - [ ] ESLint passes: `yarn lint`

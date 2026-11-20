@@ -68,7 +68,7 @@ Optional node below the main content.
 
 Root [Box](../Box/Box.types.ts) props other than `flexDirection` are supported (`alignItems`, `gap`, `padding`, `testID`, `style`, etc.).
 
-### `twClassName`
+### `className`
 
 Tailwind classes merged onto the root `Box`.
 
@@ -77,12 +77,14 @@ Tailwind classes merged onto the root `Box`.
 | `string` | No       | `undefined` |
 
 ```tsx
-<BoxColumn twClassName="gap-2 p-2">Label</BoxColumn>
+<BoxColumn className="gap-2 p-2">Label</BoxColumn>
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Forwarded to the root `Box` / `View`. Prefer `twClassName` for token-based styling where possible.
+Forwarded to the root `Box` / `View`. Prefer `className` for token-based styling where possible.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

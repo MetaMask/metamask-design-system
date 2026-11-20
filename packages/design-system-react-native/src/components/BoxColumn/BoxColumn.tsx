@@ -16,7 +16,8 @@ import type { BoxColumnProps } from './BoxColumn.types';
  * @param props.textProps - Props passed to `SensitiveText` when `children` is a string.
  * @param props.topAccessory - Node rendered above `children`.
  * @param props.bottomAccessory - Node rendered below `children`.
- * @param props.twClassName - Tailwind classes on the root `Box`.
+ * @param props.className - Tailwind classes on the root `Box`, applied after `twClassName`.
+ * @param props.twClassName - Deprecated, use `className`.
  * @returns The rendered column.
  */
 export const BoxColumn = ({
@@ -24,13 +25,15 @@ export const BoxColumn = ({
   textProps,
   topAccessory,
   bottomAccessory,
+  className,
   twClassName,
   ...rest
 }: BoxColumnProps) => (
   <Box
     flexDirection={BoxFlexDirection.Column}
-    twClassName={twClassName}
     {...rest}
+    twClassName={twClassName}
+    className={className}
   >
     {topAccessory}
     <TextOrChildren textProps={textProps}>{children}</TextOrChildren>
