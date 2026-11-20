@@ -11,9 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added `SectionDivider` component for separating sections (React parity with React Native) ([#1441](https://github.com/MetaMask/metamask-design-system/pull/1441))
+- Added `SectionDivider` component for separating sections (React parity with React Native) ([#1441](https://github.com/MetaMask/metamask-design-system/pull/1441), [#1704](https://github.com/MetaMask/metamask-design-system/pull/1704))
   - A semantic `<hr />` built on `Box`: top-only 1px border (`borderWidth` of `1` by default) in `BoxBorderColor.BorderMuted` with `marginVertical` of `5` for spacing, stretching on the cross axis
-  - Accepts any `Box` prop (for example `marginVertical={0}` or `borderWidth={0}`) and standard `hr` props, overridable with `className` or `style`
+  - Accepts any `Box` prop (for example `marginVertical={0}` or `borderWidth={0}`) and standard `hr` props, overridable with `className` or `style`; `asChild` and `children` are omitted because the component always renders an `hr` ([#1704](https://github.com/MetaMask/metamask-design-system/pull/1704))
+  - `borderWidth` maps each width to a static top-border class, so Tailwind generates the `border-t-2`, `border-t-4`, and `border-t-8` rules in consumer builds instead of dropping them ([#1704](https://github.com/MetaMask/metamask-design-system/pull/1704))
 
 ### Changed
 
