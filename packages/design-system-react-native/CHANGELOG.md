@@ -9,13 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.58.0]
 
-### Uncategorized
+### Changed
 
-- refactor!: remove ButtonHero from React and React Native ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
-- fix: SelectButton LongLabel overflow on web and textProps colour on React Native ([#1714](https://github.com/MetaMask/metamask-design-system/pull/1714))
-- fix(design-system-react-native): make Slider worklet utilities work in the CJS build ([#1722](https://github.com/MetaMask/metamask-design-system/pull/1722))
-- fix(dsr): align SectionHeader with React Native ([#1706](https://github.com/MetaMask/metamask-design-system/pull/1706))
-- chore: drop tsx, run dev scripts with Node's native type stripping ([#1707](https://github.com/MetaMask/metamask-design-system/pull/1707))
+- **BREAKING:** Removed the deprecated `ButtonHero` component ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
+  - The `ButtonHero`, `ButtonHeroProps`, and `ButtonHeroSize` exports are removed
+  - Use `Button` with the primary variant (the `Button` default) instead; `Button` covers the same use case with `size`, `isFullWidth`, `isLoading`, `loadingText`, `isDisabled`, and `startIconName`/`endIconName`
+  - Unlike `ButtonHero`, `Button` follows the active theme instead of locking colors to the light theme
+  - The scoped `ButtonHeroSize` alias is removed from `@metamask/design-system-shared`; use `ButtonSize`
+  - See [Migration Guide](./MIGRATION.md#from-version-0570-to-0580)
+
+### Fixed
+
+- Fixed `ButtonBase`-based controls ignoring `textProps` color ([#1714](https://github.com/MetaMask/metamask-design-system/pull/1714))
+  - The variant text class (for example `text-default`) no longer overrides `textProps.color` or `textProps.twClassName` on the label, so `SelectButton` `textProps` overrides now apply like they already do on web
+- Fixed the `Slider` worklet utilities in the CommonJS build ([#1722](https://github.com/MetaMask/metamask-design-system/pull/1722))
+  - The published CJS build crashed at runtime and in Jest with `resolveValueToTrackPercent is not a function` since 0.56.2; consumers can now drop the metro/jest workaround
 
 ## [0.57.0]
 

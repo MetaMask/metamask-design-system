@@ -9,14 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.54.0]
 
-### Uncategorized
+### Added
 
-- refactor!: remove ButtonHero from React and React Native ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
-- feat(dsr): add SectionDivider React parity (DSYS-750) ([#1441](https://github.com/MetaMask/metamask-design-system/pull/1441))
-- fix: SelectButton LongLabel overflow on web and textProps colour on React Native ([#1714](https://github.com/MetaMask/metamask-design-system/pull/1714))
-- fix(dsr): align SectionHeader with React Native ([#1706](https://github.com/MetaMask/metamask-design-system/pull/1706))
-- fix(security): refresh rimraf and node-gyp to drop the glob 10 chain ([#1721](https://github.com/MetaMask/metamask-design-system/pull/1721))
-- chore: drop tsx, run dev scripts with Node's native type stripping ([#1707](https://github.com/MetaMask/metamask-design-system/pull/1707))
+- Added `SectionDivider` component for separating sections (React parity with React Native) ([#1441](https://github.com/MetaMask/metamask-design-system/pull/1441))
+  - A semantic `<hr />` built on `Box`: top-only 1px border (`borderWidth` of `1` by default) in `BoxBorderColor.BorderMuted` with `marginVertical` of `5` for spacing, stretching on the cross axis
+  - Accepts any `Box` prop (for example `marginVertical={0}` or `borderWidth={0}`) and standard `hr` props, overridable with `className` or `style`
+
+### Changed
+
+- **BREAKING:** Removed the deprecated `ButtonHero` component ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
+  - The `ButtonHero`, `ButtonHeroProps`, and `ButtonHeroSize` exports are removed
+  - Use `Button` with the primary variant (the `Button` default) instead
+  - See [Migration Guide](./MIGRATION.md#from-version-0530-to-0540)
+
+### Fixed
+
+- Fixed `SelectButton` label overflow on web ([#1714](https://github.com/MetaMask/metamask-design-system/pull/1714))
+  - With `textProps={{ ellipsis: false }}`, the label now stays on one line and is clipped instead of wrapping outside the fixed-height button, matching React Native
+- Aligned `SectionHeader` with React Native ([#1706](https://github.com/MetaMask/metamask-design-system/pull/1706))
+  - Pressed and hover feedback now uses 70% opacity, and `startIconName` and `endIconName` default to `IconSize.Md`
+  - Structural `flexDirection`, `alignItems`, and `gap` are applied after spread props, so they can no longer be overridden accidentally
 
 ## [0.53.0]
 

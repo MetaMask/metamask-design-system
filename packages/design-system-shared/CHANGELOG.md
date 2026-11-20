@@ -9,10 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.47.0]
 
-### Uncategorized
+### Changed
 
-- refactor!: remove ButtonHero from React and React Native ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
-- chore: drop tsx, run dev scripts with Node's native type stripping ([#1707](https://github.com/MetaMask/metamask-design-system/pull/1707))
+- **BREAKING:** Removed the `ButtonHeroSize` type alias ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
+  - `ButtonHero` is removed from `@metamask/design-system-react` and `@metamask/design-system-react-native`; use `ButtonSize` instead
+  - See [Migration Guide](./MIGRATION.md#from-version-0460-to-0470)
 
 ## [0.46.0]
 
