@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.47.0]
+
+### Changed
+
+- **BREAKING:** Removed the `ButtonHeroSize` type alias ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
+  - `ButtonHero` is removed from `@metamask/design-system-react` and `@metamask/design-system-react-native`; use `ButtonSize` instead
+  - See [Migration Guide](./MIGRATION.md#from-version-0460-to-0470)
+
 ## [0.46.0]
 
 ### Changed
@@ -454,7 +462,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.46.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.47.0...HEAD
+[0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.46.0...@metamask/design-system-shared@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.1...@metamask/design-system-shared@0.46.0
 [0.45.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.0...@metamask/design-system-shared@0.45.1
 [0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.44.0...@metamask/design-system-shared@0.45.0
