@@ -23,6 +23,22 @@ type ArrowPlacementKey = keyof typeof POPOVER_ARROW_PLACEMENT_STYLES;
 
 const CAPTURE_EVENT_LISTENER_OPTIONS = { capture: true };
 
+/**
+ * Promotes the element to the top layer so ancestors' `overflow`,
+ * `transform` and stacking contexts can't clip or cover it. `manual` keeps
+ * dismissal under the component's control instead of browser light dismiss.
+ *
+ * @param element - The popover root.
+ */
+const showInTopLayer = (element: HTMLElement) => {
+  if (typeof element.showPopover !== 'function') {
+    return;
+  }
+  if (!element.matches(':popover-open')) {
+    element.showPopover();
+  }
+};
+
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
@@ -71,6 +87,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const { refs, floatingStyles, placement, middlewareData } = useFloating({
       open: isOpen,
+      strategy: 'fixed',
       whileElementsMounted: autoUpdate,
       placement: isAuto ? 'bottom' : (position as Placement),
       elements: { reference: referenceElement ?? null },
@@ -84,6 +101,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
       const handleEscKey = (event: KeyboardEvent) => {
         if (event.key === 'Escape') {
+          // Stops a parent modal `<dialog>` from closing on the same key press.
+          event.preventDefault();
           onPressEscKey?.();
         }
       };
@@ -153,6 +172,11 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       } else if (ref) {
         ref.current = element;
       }
+      // Shown before Floating UI measures, so it positions against the
+      // viewport rather than the DOM offset parent.
+      if (element) {
+        showInTopLayer(element);
+      }
       refs.setFloating(element);
       popoverRef.current = element;
     };
@@ -165,10 +189,13 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         padding={4}
         role={role}
         ref={setPopoverRef}
+        popover="manual"
         data-popper-placement={placement}
         data-popper-reference-hidden={referenceHiddenValue}
         className={twMerge(
-          'rounded-lg shadow-md',
+          // Reset the user agent `[popover]` styles (inset, centered margin,
+          // `overflow: auto`, `CanvasText` color).
+          'inset-auto m-0 overflow-visible rounded-lg shadow-md [color:inherit]',
           referenceHidden &&
             'data-[popper-reference-hidden=true]:pointer-events-none data-[popper-reference-hidden=true]:invisible',
           className,

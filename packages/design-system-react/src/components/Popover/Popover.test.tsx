@@ -113,6 +113,78 @@ describe('Popover', () => {
     });
   });
 
+  describe('top layer', () => {
+    const prototype = HTMLElement.prototype as Partial<HTMLElement>;
+
+    afterEach(() => {
+      delete prototype.showPopover;
+    });
+
+    it('renders as a manual popover', () => {
+      render(
+        <Popover data-testid="popover" isOpen>
+          x
+        </Popover>,
+      );
+      expect(screen.getByTestId('popover')).toHaveAttribute(
+        'popover',
+        'manual',
+      );
+    });
+
+    it('positions with the fixed strategy', () => {
+      render(<Popover isOpen>x</Popover>);
+      expect(mockedUseFloating.mock.calls[0][0]?.strategy).toBe('fixed');
+    });
+
+    it('resets the user agent popover styles', () => {
+      render(
+        <Popover data-testid="popover" isOpen>
+          x
+        </Popover>,
+      );
+      expect(screen.getByTestId('popover')).toHaveClass(
+        'inset-auto',
+        'm-0',
+        'overflow-visible',
+      );
+    });
+
+    it('shows the popover in the top layer when it mounts', () => {
+      const shown: HTMLElement[] = [];
+      prototype.showPopover = function showPopover(this: HTMLElement) {
+        shown.push(this);
+      };
+      const matchesSpy = jest
+        .spyOn(HTMLElement.prototype, 'matches')
+        .mockReturnValue(false);
+      try {
+        render(
+          <Popover data-testid="popover" isOpen>
+            x
+          </Popover>,
+        );
+        expect(shown[0]).toBe(screen.getByTestId('popover'));
+      } finally {
+        matchesSpy.mockRestore();
+      }
+    });
+
+    it('does not show the popover again when it is already open', () => {
+      const showPopover = jest.fn();
+      prototype.showPopover = showPopover;
+      const matchesSpy = jest
+        .spyOn(HTMLElement.prototype, 'matches')
+        .mockReturnValue(true);
+      try {
+        render(<Popover isOpen>x</Popover>);
+        expect(showPopover).not.toHaveBeenCalled();
+      } finally {
+        matchesSpy.mockRestore();
+      }
+    });
+  });
+
   describe('role', () => {
     it('defaults to tooltip', () => {
       render(
@@ -452,6 +524,16 @@ describe('Popover', () => {
       );
       fireEvent.keyDown(document, { key: 'Escape' });
       expect(onPressEscKey).toHaveBeenCalledTimes(1);
+    });
+
+    it('prevents the default Escape action so a parent dialog stays open', () => {
+      render(
+        <Popover isOpen onPressEscKey={jest.fn()}>
+          x
+        </Popover>,
+      );
+      const notCanceled = fireEvent.keyDown(document, { key: 'Escape' });
+      expect(notCanceled).toBe(false);
     });
 
     it('ignores non-Escape keys', () => {
