@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.54.0]
+
 ### Uncategorized
 
 - refactor!: remove ButtonHero from React and React Native ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
@@ -753,7 +755,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.53.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.54.0...HEAD
+[0.54.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.53.0...@metamask/design-system-react@0.54.0
 [0.53.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.52.0...@metamask/design-system-react@0.53.0
 [0.52.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.1...@metamask/design-system-react@0.52.0
 [0.51.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.0...@metamask/design-system-react@0.51.1
