@@ -6,6 +6,30 @@ type TemplateElement = Extract<
 >['quasis'][number];
 
 /**
+ * The literal color classnames that MetaMask's Tailwind and twrnc setups
+ * expose, and that theme color classnames should be preferred over.
+ *
+ * Brand color families (`grey`, `blue`, `lime`, ...) are deliberately not
+ * included: no MetaMask Tailwind or twrnc configuration exposes them as
+ * classnames. The Tailwind v4 theme resets the color namespace with
+ * `--color-*: initial`, the twrnc preset and consumers' Tailwind configs
+ * replace `theme.colors` with semantic theme colors plus the two literal
+ * colors below, and the deprecated Tailwind v3 preset only ever extends the
+ * palette with semantic theme colors. Literal classes such as `bg-blue-500`
+ * therefore never resolve, and unknown-classname linting (e.g.
+ * `tailwindcss/no-custom-classname`) is the more accurate signal for them.
+ * `black` and `white` are the only literal colors that resolve in every
+ * setup, which makes them what this rule discourages by default.
+ *
+ * Widen the list through the `discouragedColors` option for projects that
+ * keep a larger literal palette available. The test suite derives the
+ * standalone literal colors from the brand palette in
+ * `packages/design-tokens/src/css/brand-colors.css` and asserts this list
+ * matches, so it must be updated whenever the palette changes.
+ */
+export const defaultDiscouragedColors = ['black', 'white'] as const;
+
+/**
  * Rule to encourage the use of theme color class names instead of literal color class names.
  */
 export const preferThemeColorClassnames: Rule.RuleModule = {
@@ -15,7 +39,7 @@ export const preferThemeColorClassnames: Rule.RuleModule = {
       description:
         'Encourage the use of theme color class names instead of literal color class names.',
       recommended: true,
-      url: 'https://github.com/MetaMask/eslint-plugin-design-tokens/blob/main/docs/rules/prefer-theme-color-classnames.md',
+      url: 'https://github.com/MetaMask/metamask-design-system/blob/main/packages/eslint-plugin-design-tokens/docs/rules/prefer-theme-color-classnames.md',
     },
     // Adding a schema to accept options
     schema: [
@@ -28,21 +52,7 @@ export const preferThemeColorClassnames: Rule.RuleModule = {
               type: 'string',
               minLength: 1, // This ensures that the string is not empty but does not prevent whitespace-only strings.
             },
-            default: [
-              'blue',
-              'red',
-              'gray',
-              'slateGray',
-              'green',
-              'orange',
-              'black',
-              'white',
-              'indigo',
-              'yellow',
-              'purple',
-              'pink',
-              'teal',
-            ],
+            default: [...defaultDiscouragedColors],
           },
         },
         additionalProperties: false,
@@ -55,21 +65,9 @@ export const preferThemeColorClassnames: Rule.RuleModule = {
   create(context) {
     const options = context.options[0] || {};
 
-    // Default to a list of discouraged color names if none are provided in the options.
+    // Default to the MetaMask brand palette if none are provided in the options.
     const discouragedColors: string[] = options.discouragedColors || [
-      'blue',
-      'red',
-      'gray',
-      'slateGray',
-      'green',
-      'orange',
-      'black',
-      'white',
-      'indigo',
-      'yellow',
-      'purple',
-      'pink',
-      'teal',
+      ...defaultDiscouragedColors,
     ];
 
     // Validate discouragedColors to ensure no empty or whitespace-only strings

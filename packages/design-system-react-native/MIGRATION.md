@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [`twClassName` to `className`](#twclassname-to-classname)
+- [From version 0.57.0 to 0.X.0](#from-version-0570-to-0x0)
 - [From version 0.56.0 to 0.57.0](#from-version-0560-to-0570)
 - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
 - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
@@ -103,6 +104,46 @@ Rename the prop. A `twClassName` inside `descriptionProps` and `actionButtonProp
 If both props are passed during migration, classes merge in this order: the component's own classes, then `twClassName`, then `className`. `className` wins on conflicts, and the component's own classes are never dropped.
 
 The same rename applies inside prop bags such as `textProps`, `titleWrapperProps`, and `contentWrapperProps`.
+
+### From version 0.57.0 to 0.X.0
+
+<a id="from-version-0570-to-0x0"></a>
+
+#### Removed `ButtonHero`
+
+`ButtonHero` is removed. Use `Button` with the primary variant instead. Primary is the `Button` default, so omit `variant` or pass `variant={ButtonVariant.Primary}` when you want it explicit. See [ButtonHero Component](#buttonhero-component) for the full mapping from the legacy Mobile `ButtonHero`.
+
+**What changed:**
+
+- Removed the `ButtonHero` component, `ButtonHeroProps`, and the `ButtonHeroSize` re-export
+- `Button` covers the same use case: primary styling with `size`, `isFullWidth`, `isLoading`, `loadingText`, `isDisabled`, and `startIconName`/`endIconName`
+- `ButtonHero` locked colors to the light theme; `Button` follows the active theme
+- The scoped `ButtonHeroSize` alias is removed from `@metamask/design-system-shared`; use `ButtonSize`
+
+**Migration:**
+
+```tsx
+// Before (0.57.0)
+import {
+  ButtonHero,
+  ButtonHeroSize,
+} from '@metamask/design-system-react-native';
+
+<ButtonHero size={ButtonHeroSize.Lg} onPress={handleClaim} isFullWidth>
+  Claim winnings
+</ButtonHero>;
+
+// After (0.X.0)
+import { Button, ButtonSize } from '@metamask/design-system-react-native';
+
+<Button size={ButtonSize.Lg} onPress={handleClaim} isFullWidth>
+  Claim winnings
+</Button>;
+```
+
+**Impact:**
+
+- Any import of `ButtonHero`, `ButtonHeroProps`, or `ButtonHeroSize` fails to compile
 
 ### From version 0.56.0 to 0.57.0
 
@@ -1225,7 +1266,7 @@ If your React web usage relied on uncontrolled **`Input`** behavior, move that s
 **What changed:**
 
 - **`ButtonBase`** accepts **`loadingWrapperProps`** and **`contentWrapperProps`** to customize the loading overlay wrapper (**`Box`**) and the label row (**`BoxRow`**).
-- **BREAKING:** **`ButtonBase`** no longer sets a default **`testID`** on the loading overlay wrapper. If tests or automation targeted the previous **`spinner-container`** id, pass **`loadingWrapperProps={{ testID: 'spinner-container' }}`** (or your own id) on **`ButtonBase`** or on a wrapper that forwards these props (for example, **`ButtonHero`**).
+- **BREAKING:** **`ButtonBase`** no longer sets a default **`testID`** on the loading overlay wrapper. If tests or automation targeted the previous **`spinner-container`** id, pass **`loadingWrapperProps={{ testID: 'spinner-container' }}`** (or your own id) on **`ButtonBase`** or on a wrapper that forwards these props (for example, **`Button`**).
 
 **Migration:**
 
@@ -2177,7 +2218,7 @@ Note: `ButtonFilter` inherits its size prop from `ButtonBaseProps`. Use `ButtonB
 
 ### ButtonHero Component
 
-`ButtonHero` is deprecated. Migrate the legacy Mobile `ButtonHero` (`app/component-library/components-temp/Buttons/ButtonHero`) to `Button`. Primary is the default variant, so omit `variant` or pass `variant={ButtonVariant.Primary}`.
+The design system `ButtonHero` was removed. Migrate the legacy Mobile `ButtonHero` (`app/component-library/components-temp/Buttons/ButtonHero`) directly to `Button`. Primary is the default variant, so omit `variant` or pass `variant={ButtonVariant.Primary}`. See [From version 0.57.0 to 0.X.0](#from-version-0570-to-0x0) for the removal details.
 
 #### Breaking Changes
 

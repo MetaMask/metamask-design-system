@@ -249,10 +249,17 @@ export const ButtonBase = ({
                   numberOfLines: 1,
                   ellipsizeMode: 'clip',
                   ...restTextProps,
+                  // `Text` applies `color` before class names, so variant
+                  // `textClassName` would hide `textProps.color`. Re-assert
+                  // the caller's color after that hook; `twClassName` and
+                  // `className` still come last.
                   className: resolveClassName(
                     mergeTwClassName(
-                      'shrink grow-0 flex-wrap text-center',
-                      textClassName ? textClassName(pressed) : undefined,
+                      mergeTwClassName(
+                        'shrink grow-0 flex-wrap text-center',
+                        textClassName ? textClassName(pressed) : undefined,
+                      ),
+                      restTextProps.color,
                     ),
                     labelTwClassName,
                     labelClassName,

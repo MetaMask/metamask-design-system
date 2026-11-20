@@ -332,6 +332,20 @@ describe('SelectButton', () => {
       );
     });
 
+    it('lets textProps.color override the default label color', () => {
+      const { getByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Label"
+          textProps={{ color: TextColor.TextAlternative }}
+        />,
+      );
+
+      expect(getByText('Label')).toHaveStyle(tw`text-alternative`);
+      expect(getByText('Label')).not.toHaveStyle(tw`text-default`);
+    });
+
     it('tertiary variant applies alternative color to trailing arrow icon', () => {
       const { getByTestId } = render(
         <SelectButton

@@ -335,7 +335,7 @@ import {
 
 ### `textProps`
 
-Optional props passed to **`Text`** when the label is a string. The label truncates to one line with an ellipsis by default (`ellipsis`); pass `ellipsis: false` to let it wrap, and use `className` for finer control. The label keeps `min-w-0` so it can shrink inside the row.
+Optional props passed to **`Text`** when the label is a string. The label truncates to one line with an ellipsis by default (`ellipsis`); pass `ellipsis: false` to drop the ellipsis character and clip the overflow instead. Either way the label stays on one line so it never overflows the fixed-height row. Use `className` for finer control. The label keeps `min-w-0` so it can shrink inside the row.
 
 <table>
   <thead>

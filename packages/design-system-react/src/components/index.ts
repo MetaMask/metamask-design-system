@@ -175,9 +175,6 @@ export type { BannerAlertProps } from './BannerAlert';
 export { Tag, TagSeverity } from './Tag';
 export type { TagProps } from './Tag';
 
-export { ButtonHero, ButtonHeroSize } from './ButtonHero';
-export type { ButtonHeroProps } from './ButtonHero';
-
 export { ButtonFilter } from './ButtonFilter';
 export type { ButtonFilterProps } from './ButtonFilter';
 
@@ -194,3 +191,6 @@ export {
   SelectButtonVariant,
 } from './SelectButton';
 export type { SelectButtonProps } from './SelectButton';
+
+export { SectionDivider } from './SectionDivider';
+export type { SectionDividerProps } from './SectionDivider';
