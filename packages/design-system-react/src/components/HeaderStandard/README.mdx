@@ -1,0 +1,303 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as HeaderStandardStories from './HeaderStandard.stories';
+
+# HeaderStandard
+
+`HeaderStandard` is a centered page or modal header with optional back and close actions. It composes [HeaderBase](../HeaderBase/README.mdx) and resolves shortcut props to [ButtonIcon](../ButtonIcon/README.mdx) accessories.
+
+```tsx
+import { HeaderStandard } from '@metamask/design-system-react';
+
+<HeaderStandard title="Page title" onBack={handleBack} onClose={handleClose} />;
+```
+
+<Canvas of={HeaderStandardStories.Default} />
+
+## Props
+
+### `title`
+
+Primary label in the header center. Ignored when `children` is set.
+
+When `title` is a string, it uses `TextVariant.BodyMd` and bold weight by default; use `titleProps` to override. Nodes render as-is without `titleProps`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `titleProps`
+
+Props forwarded to `Text` when `title` is a string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `subtitle`
+
+Secondary line below the title. Only when `children` is not set.
+
+When `subtitle` is a string, it uses `TextVariant.BodySm` and `TextColor.TextAlternative` by default; use `subtitleProps` to override.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderStandardStories.Subtitle} />
+
+### `subtitleProps`
+
+Props forwarded to `Text` when `subtitle` is a string.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `children`
+
+Custom center content. When provided, replaces the default title and subtitle layout.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderStandardStories.Children} />
+
+### `onBack`
+
+When set, renders a start back `ButtonIcon` (`IconName.ArrowLeft`). Prefer `backButtonProps.onClick` when both are provided. Default `ariaLabel` is `"Back"`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderStandardStories.OnBack} />
+
+### `backButtonProps`
+
+Props for the back `ButtonIcon` (excluding `iconName`). Supplying this object also shows the back button.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;ButtonIconProps, 'iconName'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `onClose`
+
+When set, appends a close `ButtonIcon` to the end actions. Prefer `closeButtonProps.onClick` when both are provided. Default `ariaLabel` is `"Close"`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={HeaderStandardStories.OnClose} />
+
+### `closeButtonProps`
+
+Props for the close `ButtonIcon` (excluding `iconName`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;ButtonIconProps, 'iconName'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `startButtonIconProps` / `endButtonIconProps`
+
+Optional `ButtonIcon` prop bags. `startButtonIconProps` wins over `onBack`. `endButtonIconProps` items render after the close button and reverse so the first item is rightmost. Explicit `startAccessory` / `endAccessory` from HeaderBase win over these helpers. Each React `ButtonIcon` requires `ariaLabel`.
+
+<Canvas of={HeaderStandardStories.BackAndClose} />
+
+<Canvas of={HeaderStandardStories.EndButtonIconProps} />
+
+### `className`
+
+Optional Tailwind classes merged onto the HeaderBase root. Default horizontal padding is `px-2`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Content guidelines
+
+- Sentence case for multi-word screen titles
+- No trailing period on titles
+
+```
+✅ "Account settings"
+❌ "Account Settings"
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+<Controls of={HeaderStandardStories.Default} />
