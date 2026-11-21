@@ -50,6 +50,14 @@ size={ButtonSize.Lg}
 - Any import of `ButtonHeroSize` fails to compile
 - The `ButtonHero` component and `ButtonHeroProps` no longer exist in the platform packages
 
+#### Removed `BoxRowPropsShared` and `BoxColumnPropsShared`
+
+`BoxRowPropsShared` and `BoxColumnPropsShared` are removed. They were the shared prop types of the deprecated `BoxRow` and `BoxColumn` components, which have been removed from `@metamask/design-system-react-native` (see its migration guide). Use `Box` and `BoxPropsShared` instead.
+
+**Impact:**
+
+- Any import of `BoxRowPropsShared` or `BoxColumnPropsShared` fails to compile
+
 ### From version 0.43.0 to 0.44.0
 
 <a id="from-version-0430-to-0440"></a>

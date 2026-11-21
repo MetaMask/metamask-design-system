@@ -80,12 +80,6 @@ export { type TitleStandardPropsShared } from './types/TitleStandard';
 // TitleSubpage types (ADR-0004)
 export { type TitleSubpagePropsShared } from './types/TitleSubpage';
 
-// BoxColumn types (ADR-0004)
-export { type BoxColumnPropsShared } from './types/BoxColumn';
-
-// BoxRow types (ADR-0004)
-export { type BoxRowPropsShared } from './types/BoxRow';
-
 // HeaderSearch types (ADR-0003 + ADR-0004)
 export {
   HeaderSearchVariant,
