@@ -1,0 +1,403 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as TitleSubpageStories from './TitleSubpage.stories';
+
+# TitleSubpage
+
+TitleSubpage lays out a required identity block (leading `titleAvatar` beside a title stack), an optional subtitle, an optional amount row, optional bottom rows, and optional inline accessories per row. Prefer `AvatarToken` at `AvatarTokenSize.Lg` (40×40) for the standard token footprint; wrap in `BadgeWrapper` when a network badge should sit outside the token bounds.
+
+```tsx
+import {
+  AvatarToken,
+  AvatarTokenSize,
+  TitleSubpage,
+} from '@metamask/design-system-react';
+
+<TitleSubpage
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarTokenSize.Lg} />}
+  title="Send"
+/>;
+```
+
+<Canvas of={TitleSubpageStories.Default} />
+<Controls />
+
+## Props
+
+### `titleAvatar`
+
+Leading visual for the identity row (required). Rendered as the first child of the identity row `Box`. Prefer `AvatarToken` at `AvatarTokenSize.Lg` for the standard 40×40 footprint.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">—</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  AvatarToken,
+  AvatarTokenSize,
+  TitleSubpage,
+} from '@metamask/design-system-react';
+
+<TitleSubpage
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarTokenSize.Lg} />}
+  title="Send"
+  amount="$4.42"
+/>;
+```
+
+### `title`
+
+Title row (required). The row renders when `title` is truthy. When `title` is a string, it uses `TextVariant.HeadingSm` and `TextColor.TextDefault` (merged with `titleProps`). Pass a `ReactNode` for custom layout.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">—</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<TitleSubpage
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarTokenSize.Lg} />}
+  title="Send"
+  amount="$4.42"
+/>;
+```
+
+<Canvas of={TitleSubpageStories.Title} />
+
+### `titleEndAccessory`
+
+Optional node to the right of `title` in the title row. Only renders when the title row is shown (truthy `title`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TitleSubpageStories.TitleEndAccessory} />
+
+### `subtitle`
+
+Optional subtitle row between the title and the amount. When `subtitle` is a string, it uses `TextVariant.BodySm`, medium weight, and `TextColor.TextAlternative` (merged with `subtitleProps`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TitleSubpageStories.Subtitle} />
+
+### `subtitleEndAccessory`
+
+Optional node to the right of `subtitle`. Only renders when the subtitle row is shown.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TitleSubpageStories.SubtitleEndAccessory} />
+
+### `amount`
+
+Optional primary amount line below the title and optional subtitle. The amount row renders when `amount` is truthy. When `amount` is a string, it uses `TextVariant.DisplayLg` (merged with `amountProps`). Pass a `SensitiveText` node when the amount needs privacy masking.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TitleSubpageStories.Amount} />
+
+### `amountEndAccessory`
+
+Optional node to the right of the amount. Only renders when the amount row is shown.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TitleSubpageStories.AmountEndAccessory} />
+
+### `bottomLabel`
+
+Optional bottom label row. When `bottomLabel` is truthy, that row is shown instead of `bottomAccessory`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TitleSubpageStories.BottomLabel} />
+
+### `bottomLabelEndAccessory`
+
+Optional node to the right of `bottomLabel`. Only appears with a truthy `bottomLabel`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TitleSubpageStories.BottomLabelEndAccessory} />
+
+### `bottomAccessory`
+
+Optional custom bottom row when `bottomLabel` is not truthy.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={TitleSubpageStories.BottomAccessory} />
+
+### `amountProps` / `titleProps` / `subtitleProps` / `bottomLabelProps`
+
+Optional props merged into the corresponding `Text` when that slot is a string. Use for `data-testid` or typography overrides.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;TextProps&gt;, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `identityRowProps` / `titleColumnProps` / `bottomLabelWrapperProps`
+
+Optional props spread onto the corresponding layout `Box` after defaults. `children` is reserved by the component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;BoxProps&gt;, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the root. Classes merge with the component defaults via `twMerge`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<TitleSubpage
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarTokenSize.Lg} />}
+  className="mt-4"
+  title="Send"
+  amount="$4.42"
+/>;
+```
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+## Content guidelines
+
+- `title`, `subtitle`, `amount`, and `bottomLabel`: sentence case, no period
