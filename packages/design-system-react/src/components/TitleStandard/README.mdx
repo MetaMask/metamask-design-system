@@ -1,0 +1,442 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as TitleStandardStories from './TitleStandard.stories';
+
+# TitleStandard
+
+TitleStandard displays a required primary title with optional rows above and below the title, optional inline accessories next to the title and bottom label, and optional bottom label or custom bottom content.
+
+```tsx
+import { TitleStandard } from '@metamask/design-system-react';
+
+<TitleStandard title="Import a wallet" />;
+```
+
+<Canvas of={TitleStandardStories.Default} />
+<Controls />
+
+## Props
+
+### `title`
+
+The primary title. The title row always renders. When `title` is a string or number, it is wrapped with heading typography (`TextVariant.HeadingLg` and `titleProps`); other `ReactNode` values render as provided.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">—</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<TitleStandard title="Import a wallet" />
+```
+
+<Canvas of={TitleStandardStories.Title} />
+
+### `titleEndAccessory`
+
+Optional node rendered to the right of the title (for example an info icon).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  TitleStandard,
+  Icon,
+  IconName,
+  IconSize,
+} from '@metamask/design-system-react';
+
+<TitleStandard
+  title="Import a wallet"
+  titleEndAccessory={<Icon name={IconName.Info} size={IconSize.Sm} />}
+/>;
+```
+
+<Canvas of={TitleStandardStories.TitleEndAccessory} />
+
+### `topAccessory`
+
+Optional row above the title (for example secondary label text or a row with icons).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  TitleStandard,
+  Text,
+  TextVariant,
+  TextColor,
+  FontWeight,
+} from '@metamask/design-system-react';
+
+<TitleStandard
+  topAccessory={
+    <Text
+      variant={TextVariant.BodySm}
+      fontWeight={FontWeight.Medium}
+      color={TextColor.TextAlternative}
+    >
+      Step 2 of 3
+    </Text>
+  }
+  title="Create your wallet password"
+/>;
+```
+
+<Canvas of={TitleStandardStories.TopAccessory} />
+
+### `bottomLabel`
+
+Optional bottom row with secondary label typography when the value is a string (`BodySm`, medium, `TextColor.TextAlternative`). If `bottomLabel` is renderable, `bottomAccessory` is not shown.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<TitleStandard
+  title="Import a wallet"
+  bottomLabel="Enter your Secret Recovery Phrase"
+/>
+```
+
+<Canvas of={TitleStandardStories.BottomLabel} />
+
+### `bottomLabelEndAccessory`
+
+Optional node rendered to the right of the bottom label. Only used when `bottomLabel` is renderable (same row as the default bottom label typography).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  TitleStandard,
+  Icon,
+  IconName,
+  IconSize,
+  IconColor,
+} from '@metamask/design-system-react';
+
+<TitleStandard
+  title="Import a wallet"
+  bottomLabel="Enter your Secret Recovery Phrase"
+  bottomLabelEndAccessory={
+    <Icon
+      name={IconName.Info}
+      size={IconSize.Sm}
+      color={IconColor.IconAlternative}
+    />
+  }
+/>;
+```
+
+<Canvas of={TitleStandardStories.BottomLabelEndAccessory} />
+
+### `bottomAccessory`
+
+Optional custom bottom row when `bottomLabel` is not renderable. Renders without default label typography; compose layout inside the node.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  TitleStandard,
+  Box,
+  BoxFlexDirection,
+  BoxAlignItems,
+  Icon,
+  IconName,
+  IconSize,
+  Text,
+  TextVariant,
+} from '@metamask/design-system-react';
+
+<TitleStandard
+  title="Secure your wallet"
+  bottomAccessory={
+    <Box
+      flexDirection={BoxFlexDirection.Row}
+      alignItems={BoxAlignItems.Center}
+      gap={1}
+    >
+      <Icon name={IconName.Warning} size={IconSize.Xs} />
+      <Text variant={TextVariant.BodySm}>
+        MetaMask support will never ask for your phrase.
+      </Text>
+    </Box>
+  }
+/>;
+```
+
+<Canvas of={TitleStandardStories.BottomAccessory} />
+
+### `titleProps`
+
+Optional props merged into the heading `Text` when `title` is a string or number. Use for `data-testid` or typography overrides.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;TextProps&gt;, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<TitleStandard
+  title="Import a wallet"
+  titleProps={{ 'data-testid': 'title-standard-title' }}
+/>
+```
+
+### `titleWrapperProps`
+
+Optional props forwarded to the title row `Box` (for example `data-testid`, layout, or `className` on the row). The row defaults to centered items and `gap={2}`; values here override those defaults. `children` is omitted from the type because this component renders `title` and `titleEndAccessory` inside the row.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;BoxProps, 'children' | 'asChild'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<TitleStandard
+  title="Import a wallet"
+  titleWrapperProps={{ 'data-testid': 'title-standard-title-row' }}
+/>
+```
+
+### `bottomLabelProps`
+
+Optional props merged into the bottom label `Text` when `bottomLabel` is a string or number.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;TextProps&gt;, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<TitleStandard
+  title="Import a wallet"
+  bottomLabel="Enter your Secret Recovery Phrase"
+  bottomLabelProps={{ 'data-testid': 'title-standard-bottom' }}
+/>
+```
+
+### `bottomLabelWrapperProps`
+
+Optional props forwarded to the bottom label row `Box` when `bottomLabel` is renderable. Same defaults and omissions as `titleWrapperProps`: `children` is controlled by `bottomLabel` and `bottomLabelEndAccessory`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;BoxProps, 'children' | 'asChild'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<TitleStandard
+  title="Import a wallet"
+  bottomLabel="Enter your Secret Recovery Phrase"
+  bottomLabelWrapperProps={{ 'data-testid': 'title-standard-bottom-label-row' }}
+/>
+```
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the root container. These classes merge with the component's default classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<TitleStandard className="mt-4" title="Import a wallet" />
+```
+
+## Content guidelines
+
+- `title` and `bottomLabel`: sentence case, no period
+- Exception: `Secret Recovery Phrase` keeps title case as an approved special term
