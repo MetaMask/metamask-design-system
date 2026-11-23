@@ -87,11 +87,12 @@ export default [
 
 > Remember that all rules from this plugin are prefixed by `"@metamask/design-tokens/"`
 
-| Name                                                                         | Description                                                                        |
-| :--------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
-| [no-deprecated-classnames](docs/rules/no-deprecated-classnames.md)           | Enforce usage of up-to-date TailwindCSS class names, disallowing deprecated ones.  |
-| [color-no-hex](docs/rules/color-no-hex.md)                                   | Prevent the use of hex color values.                                               |
-| [prefer-theme-color-classnames](docs/rules/prefer-theme-color-classnames.md) | Encourage the use of theme color class names instead of literal color class names. |
+| Name                                                                         | Description                                                                          |
+| :--------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
+| [no-deprecated-classnames](docs/rules/no-deprecated-classnames.md)           | Enforce usage of up-to-date TailwindCSS class names, disallowing deprecated ones.    |
+| [color-no-hex](docs/rules/color-no-hex.md)                                   | Prevent the use of hex color values.                                                 |
+| [prefer-theme-color-classnames](docs/rules/prefer-theme-color-classnames.md) | Encourage the use of theme color class names instead of literal color class names.   |
+| [spacing-no-raw-values](docs/rules/spacing-no-raw-values.md)                 | Disallow raw spacing values in style objects and Tailwind arbitrary spacing classes. |
 
 ## Contributing
 
