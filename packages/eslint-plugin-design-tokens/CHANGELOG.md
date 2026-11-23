@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.1]
 
-### Uncategorized
+### Fixed
 
-- fix: align eslint-plugin-design-tokens with current design tokens ([#1723](https://github.com/MetaMask/metamask-design-system/pull/1723))
-- chore: integrate eslint-plugin-design-tokens into packages/ ([#1710](https://github.com/MetaMask/metamask-design-system/pull/1710))
+- Aligned the rules with the current design tokens ([#1723](https://github.com/MetaMask/metamask-design-system/pull/1723))
+  - `prefer-theme-color-classnames` now defaults `discouragedColors` to `black` and `white`, the only literal color classnames the MetaMask Tailwind and twrnc setups expose; literal brand-family and `gray` classes (for example `bg-blue-500`, `text-gray-500`, `bg-grey-050`) are no longer flagged by default because those classnames never resolve under MetaMask setups — restore any of them through the `discouragedColors` option
+  - `color-no-hex` now reports 8-digit hex values with an alpha channel (for example `#4459ff1a`), which previously went unflagged
+  - Rule docs and links now point at the `metamask-design-system` monorepo
 
 ## [2.0.0]
 

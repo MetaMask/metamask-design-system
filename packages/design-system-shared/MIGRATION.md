@@ -5,7 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
-  - [From version 0.46.0 to 0.X.0](#from-version-0460-to-0x0)
+  - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.43.0 to 0.44.0](#from-version-0430-to-0440)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
@@ -16,9 +16,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.46.0 to 0.X.0
+### From version 0.46.0 to 0.47.0
 
-<a id="from-version-0460-to-0x0"></a>
+<a id="from-version-0460-to-0470"></a>
 
 #### Removed `ButtonHeroSize`
 
@@ -39,7 +39,7 @@ import { ButtonHeroSize } from '@metamask/design-system-shared';
 
 size={ButtonHeroSize.Lg}
 
-// After (0.X.0)
+// After (0.47.0)
 import { ButtonSize } from '@metamask/design-system-shared';
 
 size={ButtonSize.Lg}

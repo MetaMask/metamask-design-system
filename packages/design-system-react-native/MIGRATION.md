@@ -4,7 +4,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.57.0 to 0.X.0](#from-version-0570-to-0x0)
+- [From version 0.57.0 to 0.58.0](#from-version-0570-to-0580)
 - [From version 0.56.0 to 0.57.0](#from-version-0560-to-0570)
 - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
 - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
@@ -86,9 +86,9 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.57.0 to 0.X.0
+### From version 0.57.0 to 0.58.0
 
-<a id="from-version-0570-to-0x0"></a>
+<a id="from-version-0570-to-0580"></a>
 
 #### Removed `ButtonHero`
 
@@ -114,7 +114,7 @@ import {
   Claim winnings
 </ButtonHero>;
 
-// After (0.X.0)
+// After (0.58.0)
 import { Button, ButtonSize } from '@metamask/design-system-react-native';
 
 <Button size={ButtonSize.Lg} onPress={handleClaim} isFullWidth>
@@ -151,7 +151,7 @@ import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
   <Text>Bottom</Text>
 </BoxColumn>;
 
-// After (0.X.0)
+// After (0.58.0)
 import {
   Box,
   BoxAlignItems,
@@ -2252,7 +2252,7 @@ Note: `ButtonFilter` inherits its size prop from `ButtonBaseProps`. Use `ButtonB
 
 ### ButtonHero Component
 
-The design system `ButtonHero` was removed. Migrate the legacy Mobile `ButtonHero` (`app/component-library/components-temp/Buttons/ButtonHero`) directly to `Button`. Primary is the default variant, so omit `variant` or pass `variant={ButtonVariant.Primary}`. See [From version 0.57.0 to 0.X.0](#from-version-0570-to-0x0) for the removal details.
+The design system `ButtonHero` was removed. Migrate the legacy Mobile `ButtonHero` (`app/component-library/components-temp/Buttons/ButtonHero`) directly to `Button`. Primary is the default variant, so omit `variant` or pass `variant={ButtonVariant.Primary}`. See [From version 0.57.0 to 0.58.0](#from-version-0570-to-0580) for the removal details.
 
 #### Breaking Changes
 
