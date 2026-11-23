@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- fix: align eslint-plugin-design-tokens with current design tokens ([#1723](https://github.com/MetaMask/metamask-design-system/pull/1723))
+- chore: integrate eslint-plugin-design-tokens into packages/ ([#1710](https://github.com/MetaMask/metamask-design-system/pull/1710))
+
 ## [2.0.0]
 
 ### Changed
