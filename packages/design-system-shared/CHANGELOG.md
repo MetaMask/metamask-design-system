@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.47.0]
+
+### Changed
+
+- **BREAKING:** Removed `ButtonHeroSize` ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
+  - The const object and its type are removed; it aliased `ButtonBaseSize`, and `ButtonBaseSize`, `ButtonSize`, and `ButtonSemanticSize` are unchanged
+  - Use `ButtonSize` (identical values) instead
+  - See [Migration Guide](./MIGRATION.md#from-version-0460-to-0470)
+- **BREAKING:** Removed `BoxRowPropsShared` and `BoxColumnPropsShared` ([#1729](https://github.com/MetaMask/metamask-design-system/pull/1729))
+  - These shared types backed the removed React Native `BoxRow` and `BoxColumn` components
+  - Use `BoxProps` with explicit flex props instead
+  - See [Migration Guide](./MIGRATION.md#from-version-0460-to-0470)
+
 ## [0.46.0]
 
 ### Changed
@@ -454,7 +467,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Initial release** - MetaMask Design System Shared
 - Adding CAIP-10 address utilities ([#817](https://github.com/MetaMask/metamask-design-system/pull/817))
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.46.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.47.0...HEAD
+[0.47.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.46.0...@metamask/design-system-shared@0.47.0
 [0.46.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.1...@metamask/design-system-shared@0.46.0
 [0.45.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.45.0...@metamask/design-system-shared@0.45.1
 [0.45.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-shared@0.44.0...@metamask/design-system-shared@0.45.0

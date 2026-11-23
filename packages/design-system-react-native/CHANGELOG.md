@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.58.0]
+
+### Changed
+
+- **BREAKING:** Removed the deprecated `ButtonHero` component ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
+  - The `ButtonHero`, `ButtonHeroProps`, and `ButtonHeroSize` exports are removed
+  - `Button` covers the same use case: primary styling with `size`, `isFullWidth`, `isLoading`, `loadingText`, `isDisabled`, and `startIconName`/`endIconName`
+  - Unlike `ButtonHero`, `Button` follows the active theme instead of locking colors to the light theme
+  - See [Migration Guide](./MIGRATION.md#from-version-0570-to-0580)
+- **BREAKING:** Removed the deprecated `BoxRow` and `BoxColumn` components ([#1729](https://github.com/MetaMask/metamask-design-system/pull/1729))
+  - The `BoxRow`, `BoxRowProps`, `BoxColumn`, and `BoxColumnProps` exports are removed
+  - Render `Box` with explicit flex props instead (for example `flexDirection={BoxFlexDirection.Row}` with `gap`)
+  - See [Migration Guide](./MIGRATION.md#from-version-0570-to-0580)
+
+### Fixed
+
+- Fixed `ButtonBase`-based controls ignoring `textProps` color ([#1714](https://github.com/MetaMask/metamask-design-system/pull/1714))
+  - The variant text class (for example `text-default`) no longer overrides `textProps.color` or `textProps.twClassName` on the label, so `SelectButton` `textProps` overrides now apply like they already do on web
+- Fixed the `Slider` worklet utilities in the CommonJS build ([#1722](https://github.com/MetaMask/metamask-design-system/pull/1722))
+  - The published CJS build crashed at runtime and in Jest with `resolveValueToTrackPercent is not a function` since 0.56.2; consumers can now drop the metro/jest workaround
+
 ## [0.57.0]
 
 ### Added
@@ -978,7 +999,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - React Native integration with TWRNC preset support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.57.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.58.0...HEAD
+[0.58.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.57.0...@metamask/design-system-react-native@0.58.0
 [0.57.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.2...@metamask/design-system-react-native@0.57.0
 [0.56.2]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.1...@metamask/design-system-react-native@0.56.2
 [0.56.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react-native@0.56.0...@metamask/design-system-react-native@0.56.1
