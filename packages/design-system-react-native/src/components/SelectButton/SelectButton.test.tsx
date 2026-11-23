@@ -465,20 +465,20 @@ describe('SelectButton', () => {
       expect(twClassName).toHaveBeenCalled();
     });
 
-    it('merges twClassName when it is a function for tertiary variant', () => {
-      const twClassName = jest.fn(() => 'mt-5');
+    it('merges className when it is a function for tertiary variant', () => {
+      const className = jest.fn(() => 'mt-5');
       const { getByTestId } = render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           variant={SelectButtonVariant.Tertiary}
-          twClassName={twClassName}
+          className={className}
           placeholder="Label"
         />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-5`);
-      expect(twClassName).toHaveBeenCalled();
+      expect(className).toHaveBeenCalled();
     });
 
     it('merges the style prop after tailwind styles', () => {

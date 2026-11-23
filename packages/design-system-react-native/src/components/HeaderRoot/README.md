@@ -151,7 +151,7 @@ import { HeaderRoot } from '@metamask/design-system-react-native';
 
 ### `style`
 
-React Native styles for the header container. Prefer `twClassName` for token-aligned styling when possible.
+React Native styles for the header container. Prefer `className` for token-aligned styling when possible.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
@@ -171,9 +171,9 @@ Test ID for the header container `View`.
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
-### `twClassName`
+### `className`
 
-Tailwind class names merged with the component defaults (including `min-h-14`) via `twMerge`.
+Tailwind classes merged after the component defaults (including `min-h-14`).
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -182,8 +182,10 @@ Tailwind class names merged with the component defaults (including `min-h-14`) v
 ```tsx
 import { HeaderRoot } from '@metamask/design-system-react-native';
 
-<HeaderRoot title="Title" twClassName="bg-alternative" />;
+<HeaderRoot title="Title" className="bg-alternative" />;
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ## References
 

@@ -4,6 +4,7 @@ import {
   FilterButtonVariant,
   FilterButtonGroupContext,
   mergeTwClassName,
+  resolveClassName,
 } from '@metamask/design-system-shared';
 import React, { useContext } from 'react';
 import type { GestureResponderEvent } from 'react-native';
@@ -33,6 +34,7 @@ export const FilterButton = ({
   isLoading = false,
   size,
   isFullWidth,
+  className,
   twClassName = '',
   style,
   onPress,
@@ -80,14 +82,17 @@ export const FilterButton = ({
       onPress={handlePress}
       style={style}
       twClassName={twClassName}
+      className={className}
       textProps={
         effectiveIsSelected
           ? textProps
           : {
               ...textProps,
-              twClassName: mergeTwClassName(
+              twClassName: undefined,
+              className: resolveClassName(
                 TextColor.TextAlternative,
                 textProps?.twClassName,
+                textProps?.className,
               ),
             }
       }

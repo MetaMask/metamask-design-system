@@ -1,5 +1,5 @@
 // Third party dependencies.
-import { mergeTwClassName } from '@metamask/design-system-shared';
+import { resolveClassName } from '@metamask/design-system-shared';
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -22,6 +22,7 @@ export const HeaderRoot = ({
   includesTopInset = false,
   style,
   testID,
+  className,
   twClassName,
   ...viewProps
 }: HeaderRootProps) => {
@@ -56,7 +57,7 @@ export const HeaderRoot = ({
           flexDirection={BoxFlexDirection.Row}
           alignItems={BoxAlignItems.Center}
           gap={1}
-          twClassName="flex-1"
+          className="flex-1"
         >
           <TextOrChildren
             textProps={{
@@ -80,14 +81,14 @@ export const HeaderRoot = ({
       gap={4}
       paddingLeft={4}
       paddingRight={2}
-      twClassName={mergeTwClassName('min-h-14', twClassName)}
       style={[includesTopInset && { marginTop: insets.top }, style]}
       testID={testID}
       {...viewProps}
+      className={resolveClassName('min-h-14', twClassName, className)}
     >
       {renderLeftSection()}
       {endSectionContent ? (
-        <Box flexDirection={BoxFlexDirection.Row} gap={2} twClassName="ml-auto">
+        <Box flexDirection={BoxFlexDirection.Row} gap={2} className="ml-auto">
           {endSectionContent}
         </Box>
       ) : null}

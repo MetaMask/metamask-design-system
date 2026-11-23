@@ -25,9 +25,13 @@ type SectionHeaderPropsBase = SectionHeaderPropsShared & {
    */
   endIconProps?: Omit<Partial<IconProps>, 'name'>;
   /**
-   * Optional Tailwind class name to apply to the outer row.
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
 };
 
 /**

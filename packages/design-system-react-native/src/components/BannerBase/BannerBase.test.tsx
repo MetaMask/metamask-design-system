@@ -91,7 +91,7 @@ describe('BannerBase', () => {
     );
 
     expect(getByText('Action')).toBeDefined();
-    expect(UNSAFE_getByProps({ twClassName: 'self-center' })).toBeDefined();
+    expect(UNSAFE_getByProps({ className: 'self-center' })).toBeDefined();
     expect(getByTestId(closeButtonTestId)).toBeDefined();
     fireEvent.press(getByText('Action'));
     expect(onAction).toHaveBeenCalledTimes(1);

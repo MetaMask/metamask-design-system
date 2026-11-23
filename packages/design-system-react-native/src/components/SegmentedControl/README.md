@@ -142,9 +142,9 @@ const [value, setValue] = useState('a');
 </SegmentedControl>;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -163,7 +163,7 @@ import {
 const [value, setValue] = useState('a');
 
 // Add additional styles
-<SegmentedControl value={value} onChange={setValue} twClassName="mt-4">
+<SegmentedControl value={value} onChange={setValue} className="mt-4">
   <FilterButton value="a" onPress={() => {}}>
     A
   </FilterButton>
@@ -173,9 +173,11 @@ const [value, setValue] = useState('a');
 </SegmentedControl>;
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

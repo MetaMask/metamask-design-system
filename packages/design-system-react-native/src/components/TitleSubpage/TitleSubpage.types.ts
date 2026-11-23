@@ -40,7 +40,11 @@ export type TitleSubpageProps = TitleSubpagePropsShared & {
    */
   bottomLabelProps?: Omit<Partial<TextProps>, 'children'>;
   /**
-   * Optional Tailwind class name to apply to the container.
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
 } & Omit<ViewProps, 'children'>;

@@ -247,9 +247,9 @@ import { SelectButton } from '@metamask/design-system-react-native';
 <SelectButton placeholder="Loading" isLoading onPress={() => {}} />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the root row. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the root row. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -262,15 +262,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the root row. These cl
 import { SelectButton } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<SelectButton onPress={() => {}} placeholder="With margin" twClassName="mt-4" />
+<SelectButton onPress={() => {}} placeholder="With margin" className="mt-4" />
 
 // Override default styles
-<SelectButton onPress={() => {}} placeholder="Wider padding" twClassName="px-6" />
+<SelectButton onPress={() => {}} placeholder="Wider padding" className="px-6" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the root with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the root with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
