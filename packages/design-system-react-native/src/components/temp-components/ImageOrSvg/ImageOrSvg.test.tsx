@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react-native';
+import { act, render, waitFor } from '@testing-library/react-native';
 import React from 'react';
 
 import { ImageOrSvg } from './ImageOrSvg';
@@ -45,9 +45,10 @@ describe('ImageOrSvg Component', () => {
     await waitFor(() => {
       expect(getByTestId('remoteImage').type).toBe('Image');
     });
-    expect(global.fetch).toHaveBeenCalledWith(remoteSrc.uri, {
-      method: 'HEAD',
-    });
+    expect(global.fetch).toHaveBeenCalledWith(
+      remoteSrc.uri,
+      expect.objectContaining({ method: 'HEAD' }),
+    );
   });
 
   it('renders a remote image as <Image> when HEAD returns non-SVG content and no header', async () => {
@@ -76,9 +77,24 @@ describe('ImageOrSvg Component', () => {
     await waitFor(() => {
       expect(getByTestId('remoteSvg').type).toBe('SvgUri');
     });
-    expect(global.fetch).toHaveBeenCalledWith(remoteSvgSrc.uri, {
-      method: 'HEAD',
+    expect(global.fetch).toHaveBeenCalledWith(
+      remoteSvgSrc.uri,
+      expect.objectContaining({ method: 'HEAD' }),
+    );
+  });
+
+  it('renders a non-svg data URI as an image without calling HEAD', async () => {
+    const { getByTestId } = render(
+      <ImageOrSvg
+        src={{ uri: 'data:image/png;base64,aaaa' }}
+        imageProps={{ testID: 'dataPng' }}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(getByTestId('dataPng').type).toBe('Image');
     });
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 
   it('renders a remote SVG from a data URI without calling HEAD', async () => {
@@ -187,6 +203,104 @@ describe('ImageOrSvg Component', () => {
     await waitFor(() => {
       expect(getByTestId('fetchFail').type).toBe('Image');
     });
+  });
+
+  it('does not send another HEAD request when a new src object keeps the same uri', async () => {
+    const fakeResponse = { headers: { get: jest.fn(() => 'image/png') } };
+    (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
+
+    const uri = 'https://example.com/photo.png';
+    const { getByTestId, rerender } = render(
+      <ImageOrSvg src={{ uri }} imageProps={{ testID: 'remoteImage' }} />,
+    );
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+    });
+
+    await act(async () => {
+      rerender(
+        <ImageOrSvg src={{ uri }} imageProps={{ testID: 'remoteImage' }} />,
+      );
+    });
+
+    expect(getByTestId('remoteImage').type).toBe('Image');
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('ignores a HEAD response that resolves after unmount', async () => {
+    let resolveFetch: (value: {
+      headers: { get: () => string };
+    }) => void = () => undefined;
+    (global.fetch as jest.Mock).mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          resolveFetch = resolve;
+        }),
+    );
+
+    const { unmount } = render(
+      <ImageOrSvg
+        src={{ uri: 'https://example.com/logo.svg' }}
+        svgProps={{ testID: 'lateSvg' }}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+    });
+
+    unmount();
+
+    await act(async () => {
+      resolveFetch({ headers: { get: () => 'image/svg+xml' } });
+    });
+
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('aborts an in-flight HEAD request on unmount', async () => {
+    (global.fetch as jest.Mock).mockImplementation(
+      () => new Promise(() => undefined),
+    );
+
+    const { unmount } = render(
+      <ImageOrSvg
+        src={{ uri: 'https://example.com/photo.png' }}
+        imageProps={{ testID: 'remoteImage' }}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+    });
+
+    const init = (global.fetch as jest.Mock).mock.calls[0][1] as RequestInit;
+    unmount();
+
+    expect(init.signal?.aborted).toBe(true);
+  });
+
+  it('renders a remote image after src changes from a local resource', async () => {
+    const fakeResponse = { headers: { get: jest.fn(() => 'image/png') } };
+    (global.fetch as jest.Mock).mockResolvedValue(fakeResponse);
+
+    const { getByTestId, rerender } = render(
+      <ImageOrSvg src={1} imageProps={{ testID: 'localImage' }} />,
+    );
+    expect(getByTestId('localImage').props.source).toBe(1);
+
+    rerender(
+      <ImageOrSvg
+        src={{ uri: 'https://example.com/photo.png' }}
+        imageProps={{ testID: 'remoteImage' }}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(getByTestId('remoteImage').type).toBe('Image');
+    });
+    expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 
   it('renders <Image> when remote src.uri is empty', async () => {

@@ -15,6 +15,54 @@ export const ImageOrSvg = ({
   imageProps,
   svgProps,
 }: ImageOrSvgProps) => {
+  const remoteUri =
+    typeof src === 'number' || typeof src === 'function' ? undefined : src.uri;
+
+  const [isSvg, setIsSvg] = useState<boolean>(false);
+
+  const checkSvgContentType = useCallback(
+    async (uri: string, signal: AbortSignal) => {
+      try {
+        const response = await fetch(uri, { method: 'HEAD', signal });
+        // If no header is returned, fallback to an empty string.
+        const contentType = response.headers.get('Content-Type') || '';
+        return contentType.includes('image/svg+xml');
+      } catch {
+        return false;
+      }
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (!remoteUri) {
+      setIsSvg(false);
+      return undefined;
+    }
+
+    // data: URIs cannot be probed with HEAD. Other URIs, including .svg
+    // paths, still use the response content type.
+    if (remoteUri.startsWith('data:')) {
+      setIsSvg(remoteUri.toLowerCase().startsWith('data:image/svg+xml'));
+      return undefined;
+    }
+
+    let cancelled = false;
+    const controller = new AbortController();
+
+    void checkSvgContentType(remoteUri, controller.signal).then((nextIsSvg) => {
+      if (!cancelled) {
+        setIsSvg(nextIsSvg);
+      }
+      return undefined;
+    });
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [remoteUri, checkSvgContentType]);
+
   // CASE 1: local image (src is a number)
   if (typeof src === 'number') {
     return (
@@ -35,39 +83,10 @@ export const ImageOrSvg = ({
     return <LocalSvg width={width} height={height} {...svgProps} />;
   }
 
-  // CASE 3: Remote image or SVG (src is an object with a uri)
-  const [isSvg, setIsSvg] = useState<boolean>(false);
-
-  const checkSvgContentType = useCallback(async (uri: string) => {
-    try {
-      const response = await fetch(uri, { method: 'HEAD' });
-      // If no header is returned, fallback to an empty string.
-      const contentType = response.headers.get('Content-Type') || '';
-      return contentType.includes('image/svg+xml');
-    } catch {
-      return false;
-    }
-  }, []);
-
-  useEffect(() => {
-    if (src.uri) {
-      const uriLower = src.uri.toLowerCase();
-      const isLikelySvg =
-        uriLower.endsWith('.svg') || uriLower.startsWith('data:image/svg+xml');
-      if (!src.uri.startsWith('data:')) {
-        checkSvgContentType(src.uri).then(setIsSvg);
-      } else {
-        setIsSvg(isLikelySvg);
-      }
-    } else {
-      setIsSvg(false);
-    }
-  }, [src, checkSvgContentType]);
-
-  if (isSvg && typeof src === 'object' && 'uri' in src && src.uri) {
+  if (isSvg && remoteUri) {
     return (
       <SvgUri
-        uri={src.uri}
+        uri={remoteUri}
         width={width}
         height={height}
         onError={onSvgError}
