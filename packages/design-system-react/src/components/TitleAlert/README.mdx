@@ -1,0 +1,274 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as TitleAlertStories from './TitleAlert.stories';
+
+# TitleAlert
+
+TitleAlert stacks a severity-based [`IconAlert`](?path=/docs/react-components-iconalert--docs) (32px) above a centered title row, with optional description text below. Use it in **modals**, **dialogs**, or other compact surfaces when you need alert context plus a short heading (for example swap warnings).
+
+```tsx
+import { TitleAlert, IconAlertSeverity } from '@metamask/design-system-react';
+
+<TitleAlert
+  severity={IconAlertSeverity.Warning}
+  title="High price impact"
+  description="You are swapping at an unfavorable rate."
+/>;
+```
+
+<Canvas of={TitleAlertStories.Default} />
+<Controls />
+
+## Props
+
+### `severity`
+
+Sets the tone for the leading [`IconAlert`](?path=/docs/react-components-iconalert--docs) (glyph and color). Same values as `IconAlertSeverity`.
+
+Available severities:
+
+- `IconAlertSeverity.Info`
+- `IconAlertSeverity.Success`
+- `IconAlertSeverity.Warning`
+- `IconAlertSeverity.Danger`
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>IconAlertSeverity</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">—</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { TitleAlert, IconAlertSeverity } from '@metamask/design-system-react';
+
+<TitleAlert severity={IconAlertSeverity.Danger} title="Something went wrong" />;
+```
+
+<Canvas of={TitleAlertStories.Severity} />
+
+### `title`
+
+Title row content. When `title` is a string or number, it uses `TextVariant.HeadingLg` and `TextColor.TextDefault` (merged with `titleProps`). The title row renders only when `title` is renderable (`null`, `undefined`, `false`, and `''` are not).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">—</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { TitleAlert, IconAlertSeverity } from '@metamask/design-system-react';
+
+<TitleAlert severity={IconAlertSeverity.Warning} title="High price impact" />;
+```
+
+<Canvas of={TitleAlertStories.Title} />
+
+### `titleProps`
+
+Optional props merged into the title row `Text` when `title` is a string or number.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;TextProps&gt;, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { TitleAlert, IconAlertSeverity } from '@metamask/design-system-react';
+
+<TitleAlert
+  severity={IconAlertSeverity.Warning}
+  title="High price impact"
+  titleProps={{ 'data-testid': 'title-alert-title' }}
+/>;
+```
+
+### `titleWrapperProps`
+
+Optional props spread onto the title row [`Box`](?path=/docs/react-components-box--docs) (excluding `children`, which TitleAlert sets). The row defaults to centered items, `gap={1}`, centered main-axis alignment, and `self-stretch` width; layout and `className` from `titleWrapperProps` override those defaults when provided.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;BoxProps, 'children' | 'asChild'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { TitleAlert, IconAlertSeverity } from '@metamask/design-system-react';
+
+<TitleAlert
+  severity={IconAlertSeverity.Warning}
+  title="High price impact"
+  titleWrapperProps={{ 'data-testid': 'swap-title-row' }}
+/>;
+```
+
+### `description`
+
+Optional content below the title row. When `description` is a string or number, it uses `TextVariant.BodySm`, `FontWeight.Medium`, `TextColor.TextAlternative`, and centered alignment (merged with `descriptionProps`). Renders only when `description` is renderable (`null`, `undefined`, `false`, and `''` are not). Custom nodes are passed through unchanged (no default string styling).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { TitleAlert, IconAlertSeverity } from '@metamask/design-system-react';
+
+<TitleAlert
+  severity={IconAlertSeverity.Warning}
+  title="High price impact"
+  description="You are swapping at an unfavorable rate."
+/>;
+```
+
+<Canvas of={TitleAlertStories.Description} />
+
+### `descriptionProps`
+
+Optional props merged into the description `Text` when `description` is a string or number.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;Partial&lt;TextProps&gt;, 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { TitleAlert, IconAlertSeverity } from '@metamask/design-system-react';
+
+<TitleAlert
+  severity={IconAlertSeverity.Warning}
+  title="High price impact"
+  description="Supporting copy."
+  descriptionProps={{ 'data-testid': 'title-alert-description' }}
+/>;
+```
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the root container. These classes merge with the component's default classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { TitleAlert, IconAlertSeverity } from '@metamask/design-system-react';
+
+<TitleAlert
+  severity={IconAlertSeverity.Warning}
+  title="High price impact"
+  className="mt-2"
+/>;
+```
+
+## Content guidelines
+
+- `title`: sentence case, no period
+- `description`: sentence case, period if a complete sentence

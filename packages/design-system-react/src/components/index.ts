@@ -194,3 +194,6 @@ export type { SelectButtonProps } from './SelectButton';
 
 export { SectionDivider } from './SectionDivider';
 export type { SectionDividerProps } from './SectionDivider';
+
+export { TitleAlert } from './TitleAlert';
+export type { TitleAlertProps } from './TitleAlert';
