@@ -216,6 +216,152 @@ describe('Checkbox', () => {
     expect(onChange).toHaveBeenCalledWith(true);
   });
 
+  describe('checkboxContainerProps', () => {
+    it('applies consumer className over the default circular radius', () => {
+      const fn = jest.fn();
+      const { getByTestId } = render(
+        <Checkbox
+          isSelected={false}
+          onChange={fn}
+          checkboxContainerProps={{ testID: 'inner', className: 'rounded' }}
+        />,
+      );
+
+      expect(getByTestId('inner')).toHaveStyle(tw`rounded`);
+    });
+
+    it('applies consumer twClassName over the default circular radius', () => {
+      const fn = jest.fn();
+      const { getByTestId } = render(
+        <Checkbox
+          isSelected={false}
+          onChange={fn}
+          checkboxContainerProps={{ testID: 'inner', twClassName: 'rounded' }}
+        />,
+      );
+
+      expect(getByTestId('inner')).toHaveStyle(tw`rounded`);
+    });
+
+    it('applies consumer className over consumer twClassName', () => {
+      const fn = jest.fn();
+      const { getByTestId } = render(
+        <Checkbox
+          isSelected={false}
+          onChange={fn}
+          checkboxContainerProps={{
+            testID: 'inner',
+            twClassName: 'rounded',
+            className: 'rounded-none',
+          }}
+        />,
+      );
+
+      expect(getByTestId('inner')).toHaveStyle(tw`rounded-none`);
+    });
+
+    it('applies consumer style over the default circular radius', () => {
+      const fn = jest.fn();
+      const { getByTestId } = render(
+        <Checkbox
+          isSelected={false}
+          onChange={fn}
+          checkboxContainerProps={{
+            testID: 'inner',
+            style: { borderRadius: 0 },
+          }}
+        />,
+      );
+
+      expect(getByTestId('inner')).toHaveStyle({ borderRadius: 0 });
+    });
+
+    it('applies consumer style over consumer className', () => {
+      const fn = jest.fn();
+      const { getByTestId } = render(
+        <Checkbox
+          isSelected={false}
+          onChange={fn}
+          checkboxContainerProps={{
+            testID: 'inner',
+            className: 'rounded',
+            style: { borderRadius: 2 },
+          }}
+        />,
+      );
+
+      expect(getByTestId('inner')).toHaveStyle({ borderRadius: 2 });
+    });
+
+    it('applies consumer className over the pressed container styles', () => {
+      const fn = jest.fn();
+      const tree = createRenderer(
+        <Checkbox
+          checkboxContainerProps={{ testID: 'inner', className: 'rounded' }}
+          isSelected={false}
+          onChange={fn}
+        />,
+      );
+      const pressable = tree.root.findByProps({
+        accessibilityRole: 'checkbox',
+      });
+      const renderChildren = pressable.props.children as (p: {
+        pressed: boolean;
+      }) => ReactElement;
+      const pressedContainer = createRenderer(
+        renderChildren({ pressed: true }),
+      ).root.findByProps({ testID: 'inner' });
+
+      expect(pressedContainer.props.style).toStrictEqual(
+        expect.arrayContaining([expect.objectContaining(tw`rounded`)]),
+      );
+      expect(pressedContainer.props.style).toStrictEqual(
+        expect.arrayContaining([
+          expect.objectContaining(tw`border-default bg-pressed`),
+        ]),
+      );
+    });
+  });
+
+  describe('labelProps', () => {
+    it('applies consumer className over the default label margin', () => {
+      const fn = jest.fn();
+      const { getByText } = render(
+        <Checkbox
+          label="Accept"
+          isSelected={false}
+          onChange={fn}
+          labelProps={{ className: 'ml-0' }}
+        />,
+      );
+
+      expect(getByText('Accept')).toHaveStyle({ marginLeft: 0 });
+    });
+
+    it('applies consumer twClassName over the default label margin', () => {
+      const fn = jest.fn();
+      const { getByText } = render(
+        <Checkbox
+          label="Accept"
+          isSelected={false}
+          onChange={fn}
+          labelProps={{ twClassName: 'ml-0' }}
+        />,
+      );
+
+      expect(getByText('Accept')).toHaveStyle({ marginLeft: 0 });
+    });
+
+    it('keeps the default label margin when labelProps is omitted', () => {
+      const fn = jest.fn();
+      const { getByText } = render(
+        <Checkbox label="Accept" isSelected={false} onChange={fn} />,
+      );
+
+      expect(getByText('Accept')).toHaveStyle(tw`ml-3`);
+    });
+  });
+
   it('does not toggle when disabled via ref', () => {
     const ref = createRef<{ toggle: () => void }>();
     const onChange = jest.fn();
