@@ -34,6 +34,10 @@ The size (width and height) of the Maskicon.
 <Maskicon address="0x360507dfEC4Bf0c03495f91154A78C672599F308" size={48} />
 ```
 
+## Color pairs
+
+Maskicon uses a fixed palette of background and foreground color pairs. The ColorPairs story shows every combination, one row per hue, ordered from lightest to darkest background.
+
 ### `showBorder`
 
 Whether to show a border around the Maskicon.

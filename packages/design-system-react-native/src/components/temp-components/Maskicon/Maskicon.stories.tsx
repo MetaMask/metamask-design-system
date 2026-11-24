@@ -5,12 +5,24 @@ import {
 } from '@metamask/design-system-shared';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ScrollView } from 'react-native';
+import { SvgXml } from 'react-native-svg';
 
 import { Box } from '../../Box';
 import { Text, TextVariant, TextColor, FontWeight } from '../../Text';
 
 import { Maskicon } from './Maskicon';
 import type { MaskiconProps } from './Maskicon.types';
+import {
+  createMaskiconSVG,
+  getMaskiconColorFamily,
+  MASKICON_COLOR_FAMILY_NAMES,
+  MASKICON_COMPLEMENTARY_PAIRS,
+  MASKICON_NEUTRAL_PAIRS,
+  MASKICON_TONAL_PAIRS,
+  sdbmHash,
+  seedToString,
+} from './Maskicon.utilities';
+import type { MaskiconColorFamilyName } from './Maskicon.utilities';
 
 const meta: Meta<MaskiconProps> = {
   title: 'Temp Components/Maskicon',
@@ -269,5 +281,90 @@ export const Size: Story = {
       <Maskicon address={sampleAccountAddresses[3]} size={48} />
       <Maskicon address={sampleAccountAddresses[4]} size={64} />
     </Box>
+  ),
+};
+
+const ALL_MASKICON_COLOR_PAIRS = [
+  ...MASKICON_NEUTRAL_PAIRS,
+  ...MASKICON_TONAL_PAIRS,
+  ...MASKICON_COMPLEMENTARY_PAIRS,
+];
+
+function findSeedForColorPairIndex(index: number): number {
+  for (let seed = 0; seed < 100000; seed++) {
+    const hashVal = sdbmHash(seedToString(seed));
+    if (Math.abs(hashVal) % ALL_MASKICON_COLOR_PAIRS.length === index) {
+      return seed;
+    }
+  }
+  throw new Error(`No seed found for Maskicon color pair index ${index}`);
+}
+
+function hexRelativeLuminance(hex: string): number {
+  const channel = (offset: number): number => {
+    const value = Number.parseInt(hex.slice(offset, offset + 2), 16) / 255;
+    return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  };
+
+  return 0.2126 * channel(1) + 0.7152 * channel(3) + 0.0722 * channel(5);
+}
+
+function buildColorPairRow(familyName: MaskiconColorFamilyName) {
+  return ALL_MASKICON_COLOR_PAIRS.flatMap(([background, foreground], index) => {
+    if (getMaskiconColorFamily(background, foreground) !== familyName) {
+      return [];
+    }
+
+    const seed = findSeedForColorPairIndex(index);
+    return [
+      {
+        index,
+        background,
+        foreground,
+        svg: createMaskiconSVG(seed, 64),
+      },
+    ];
+  }).sort(
+    (a, b) =>
+      hexRelativeLuminance(b.background) - hexRelativeLuminance(a.background),
+  );
+}
+
+const COLOR_PAIR_ROWS = MASKICON_COLOR_FAMILY_NAMES.map((name) => ({
+  name,
+  items: buildColorPairRow(name),
+}));
+
+function ColorPairRow({
+  items,
+}: {
+  items: ReturnType<typeof buildColorPairRow>;
+}) {
+  return (
+    <ScrollView horizontal>
+      <Box
+        flexDirection={BoxFlexDirection.Row}
+        alignItems={BoxAlignItems.Start}
+        gap={4}
+      >
+        {items.map((item) => (
+          <Box key={item.index} alignItems={BoxAlignItems.Center} gap={2}>
+            <SvgXml xml={item.svg} width={64} height={64} />
+          </Box>
+        ))}
+      </Box>
+    </ScrollView>
+  );
+}
+
+export const ColorPairs: Story = {
+  render: () => (
+    <ScrollView>
+      <Box padding={4} gap={6}>
+        {COLOR_PAIR_ROWS.map((row) => (
+          <ColorPairRow key={row.name} items={row.items} />
+        ))}
+      </Box>
+    </ScrollView>
   ),
 };
