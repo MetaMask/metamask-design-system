@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.48.0]
 
-### Uncategorized
+### Added
 
-- feat: add className and deprecate twClassName ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+- Added `resolveClassName` for merging a component's own Tailwind classes with consumer classes ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+  - `resolveClassName(base, twClassName, className)` joins the three in a fixed order — the component's own classes, then the deprecated `twClassName`, then `className` — so later classes win on conflicts
+  - Components and prop bags in `@metamask/design-system-react-native` 0.59.0 use it to apply `className` alongside `twClassName`
 
 ## [0.47.0]
 

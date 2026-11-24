@@ -9,9 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.59.0]
 
-### Uncategorized
+### Added
 
-- feat: add className and deprecate twClassName ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+- Added a `className` prop for Tailwind classes to `Box`, `Text`, `ButtonBase`, the `Button` primary, secondary, and tertiary variants, `ButtonSemantic`, `FilterButton`, `SelectButton`, `BannerBase`, `Content`, `HeaderRoot`, `HeaderSearch`, `ListItem`, `SectionHeader`, `SegmentedControl`, `TabEmptyState`, `TextField`, `TitleAlert`, `TitleSubpage`, and `Toast`, plus the nested prop bags built on `Box` and `Text` (for example `textProps`, `titleWrapperProps`, and `contentWrapperProps`) ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+  - This matches the prop name used by `@metamask/design-system-react`, so the same class strings work on both platforms
+  - Classes merge in a fixed order: the component's own classes first, then `twClassName`, then `className`, so `className` wins on conflicts
+
+### Changed
+
+- Deprecated `twClassName` on the components and prop bags listed above; use `className` instead ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+  - `twClassName` keeps working and will be removed in a future major version
+  - Migration: rename `twClassName` to `className`; nothing else changes. If both are passed during migration, both apply, with `className` last
+  - See [Migration Guide](./MIGRATION.md#twclassname-to-classname)
+- `twClassName` inside `descriptionProps` and `actionButtonProps` (`TabEmptyState`), `titleWrapperProps` (`TitleAlert`), and `identityRowProps` (`TitleSubpage`) now merges with the component's own classes instead of replacing them ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+  - The component's own classes are no longer dropped when those prop bags carry `twClassName`
 
 ## [0.58.0]
 
