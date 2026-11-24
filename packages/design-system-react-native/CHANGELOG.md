@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add className and deprecate twClassName ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+
 ## [0.58.0]
 
 ### Changed
