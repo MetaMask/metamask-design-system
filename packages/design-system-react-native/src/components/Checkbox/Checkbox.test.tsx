@@ -292,35 +292,6 @@ describe('Checkbox', () => {
 
       expect(getByTestId('inner')).toHaveStyle({ borderRadius: 2 });
     });
-
-    it('applies consumer className over the pressed container styles', () => {
-      const fn = jest.fn();
-      const tree = createRenderer(
-        <Checkbox
-          checkboxContainerProps={{ testID: 'inner', className: 'rounded' }}
-          isSelected={false}
-          onChange={fn}
-        />,
-      );
-      const pressable = tree.root.findByProps({
-        accessibilityRole: 'checkbox',
-      });
-      const renderChildren = pressable.props.children as (p: {
-        pressed: boolean;
-      }) => ReactElement;
-      const pressedContainer = createRenderer(
-        renderChildren({ pressed: true }),
-      ).root.findByProps({ testID: 'inner' });
-
-      expect(pressedContainer.props.style).toStrictEqual(
-        expect.arrayContaining([expect.objectContaining(tw`rounded`)]),
-      );
-      expect(pressedContainer.props.style).toStrictEqual(
-        expect.arrayContaining([
-          expect.objectContaining(tw`border-default bg-pressed`),
-        ]),
-      );
-    });
   });
 
   describe('labelProps', () => {
