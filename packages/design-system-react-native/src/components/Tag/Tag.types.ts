@@ -31,8 +31,14 @@ export type TagProps = TagPropsShared & {
   textProps?: Partial<TextProps>;
   /**
    * Additional Tailwind classes to be applied to the Tag container.
+   *
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
   /**
    * Test identifier for selecting the component in tests.
    */

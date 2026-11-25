@@ -2,6 +2,7 @@ import {
   AvatarBaseShape,
   AvatarGroupSize,
   AvatarGroupVariant,
+  resolveClassName,
   TextColor,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
@@ -33,11 +34,17 @@ export const AvatarGroup = ({
   overflowTextProps,
   style,
   twClassName,
+  className,
   ...props
 }: AvatarGroupProps) => {
   const tw = useTailwind();
   const overflowCounter = avatarPropsArr.length - max;
   const shouldRenderOverflowCounter = overflowCounter > 0;
+  const {
+    className: overflowTextClassName,
+    twClassName: overflowTextTwClassName,
+    ...overflowTextRest
+  } = overflowTextProps ?? {};
 
   const renderAvatarList = useCallback(
     () =>
@@ -96,6 +103,7 @@ export const AvatarGroup = ({
           isReverse ? 'flex-row-reverse' : 'flex-row',
           TWCLASSMAP_AVATARGROUP_SIZE_SPACEBETWEENAVATARS[size],
           twClassName,
+          className,
         ),
         style,
       ]}
@@ -103,7 +111,6 @@ export const AvatarGroup = ({
       {renderAvatarList()}
       {shouldRenderOverflowCounter && (
         <AvatarBase
-          twClassName="bg-icon-default"
           hasBorder
           fallbackText={`+${overflowCounter}`}
           fallbackTextProps={{
@@ -116,7 +123,13 @@ export const AvatarGroup = ({
               ? AvatarBaseShape.Square
               : AvatarBaseShape.Circle
           }
-          {...overflowTextProps}
+          {...overflowTextRest}
+          twClassName={overflowTextTwClassName}
+          className={resolveClassName(
+            'bg-icon-default',
+            overflowTextTwClassName,
+            overflowTextClassName,
+          )}
         />
       )}
     </View>

@@ -26,6 +26,7 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
   onPress,
   pressableProps,
   twClassName,
+  className,
   style,
   ...props
 }) => {
@@ -71,7 +72,7 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
         <Box
           alignItems={BoxAlignItems.Center}
           justifyContent={BoxJustifyContent.Center}
-          twClassName="h-6"
+          className="h-6"
         >
           <Icon name={iconName} size={IconSize.Md} {...iconProps} />
         </Box>
@@ -88,11 +89,12 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
         pressed && !isDisabled && 'bg-pressed',
         isDisabled && 'opacity-50',
         twClassName,
+        className,
       );
 
       return style ? [baseStyle, style] : baseStyle;
     },
-    [tw, isDisabled, twClassName, style],
+    [tw, isDisabled, twClassName, className, style],
   );
 
   return (
@@ -113,11 +115,11 @@ export const ActionListItem: React.FC<ActionListItemProps> = ({
         <Box
           flexDirection={BoxFlexDirection.Row}
           alignItems={BoxAlignItems.Start}
-          twClassName="flex-1"
+          className="flex-1"
           gap={4}
         >
           {renderStartContent()}
-          <Box twClassName="flex-1">
+          <Box className="flex-1">
             {renderLabel()}
             {renderDescription()}
           </Box>

@@ -2,6 +2,7 @@ import {
   BoxAlignItems,
   BoxFlexDirection,
   FontWeight,
+  resolveClassName,
   TagSeverity,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -30,6 +31,7 @@ export const Tag: React.FC<TagProps> = ({
   endAccessory,
   textProps,
   twClassName,
+  className,
   style,
   ...props
 }) => {
@@ -51,6 +53,7 @@ export const Tag: React.FC<TagProps> = ({
           resolvedStartIconName ? 'pl-1' : 'pl-1.5',
           resolvedEndIconName ? 'pr-1' : 'pr-1.5',
           twClassName,
+          className,
         ),
         style,
       ]}
@@ -58,15 +61,19 @@ export const Tag: React.FC<TagProps> = ({
       <Box
         flexDirection={BoxFlexDirection.Row}
         alignItems={BoxAlignItems.Center}
-        twClassName="gap-0.5"
+        className="gap-0.5"
       >
         {resolvedStartIconName ? (
           <Icon
             name={resolvedStartIconName}
             color={iconColor}
             size={IconSize.Xs}
-            twClassName="shrink-0"
             {...startIconProps}
+            className={resolveClassName(
+              'shrink-0',
+              startIconProps?.twClassName,
+              startIconProps?.className,
+            )}
           />
         ) : (
           (startAccessory ?? null)
@@ -86,8 +93,12 @@ export const Tag: React.FC<TagProps> = ({
             name={resolvedEndIconName}
             color={iconColor}
             size={IconSize.Xs}
-            twClassName="shrink-0"
             {...endIconProps}
+            className={resolveClassName(
+              'shrink-0',
+              endIconProps?.twClassName,
+              endIconProps?.className,
+            )}
           />
         ) : (
           (endAccessory ?? null)

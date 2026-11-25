@@ -9,6 +9,12 @@ export type BadgeStatusProps = BadgeStatusPropsShared &
   Omit<ViewProps, 'children'> & {
     /**
      * Optional prop to add twrnc overriding classNames.
+     *
+     * @deprecated Use `className` instead.
      */
     twClassName?: string;
+    /**
+     * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+     */
+    className?: string;
   };

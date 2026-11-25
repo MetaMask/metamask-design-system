@@ -12,6 +12,7 @@ export const Icon = ({
   name,
   color = IconColor.IconDefault,
   twClassName,
+  className,
   style,
   ...props
 }: IconProps) => {
@@ -21,6 +22,7 @@ export const Icon = ({
     color,
     TWCLASSMAP_ICON_SIZE_DIMENSION[size],
     twClassName,
+    className,
   );
   const svgStyle = StyleSheet.flatten([twStyle, style]);
 

@@ -12,6 +12,10 @@ export type KeyValueColumnProps = KeyValueColumnPropsShared &
     valueTextProps?: Partial<Omit<TextProps, 'children'>>;
     /** Optional Tailwind class names applied to the outer BoxVertical. Merged with base styles. */
     twClassName?: string;
+    /**
+     * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+     */
+    className?: string;
     /** When set, renders a ButtonIcon as the key endAccessory (takes precedence over keyEndAccessory). */
     keyEndButtonIconProps?: Partial<ButtonIconProps>;
     /** When set, renders a ButtonIcon as the value endAccessory (takes precedence over valueEndAccessory). */

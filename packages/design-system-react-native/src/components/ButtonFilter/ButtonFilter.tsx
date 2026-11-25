@@ -1,3 +1,4 @@
+import { resolveClassName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 
@@ -11,7 +12,8 @@ import type { ButtonFilterProps } from './ButtonFilter.types';
  *
  * @param props - Component props.
  * @param props.isActive - Whether the filter is in the active state.
- * @param props.twClassName - Tailwind override classes for the container.
+ * @param props.twClassName - Deprecated Tailwind override classes for the container; use `className`.
+ * @param props.className - Tailwind classes for the container, applied after the component's own classes and `twClassName`.
  * @param props.textProps - Props forwarded to the internal text element.
  * @param props.style - Style overrides applied to the container.
  * @returns The rendered filter button element.
@@ -20,6 +22,7 @@ export const ButtonFilter: React.FC<ButtonFilterProps> = (props) => {
   const {
     isActive = false,
     twClassName,
+    className,
     textProps,
     style,
     ...restProps
@@ -27,18 +30,22 @@ export const ButtonFilter: React.FC<ButtonFilterProps> = (props) => {
   const tw = useTailwind();
 
   const mergedStyle = [
-    tw.style(isActive ? 'bg-icon-default' : 'bg-background-muted', twClassName),
+    tw.style(
+      isActive ? 'bg-icon-default' : 'bg-background-muted',
+      twClassName,
+      className,
+    ),
     style,
   ];
 
   const mergedTextProps = {
     ...textProps,
-    twClassName: [
+    twClassName: undefined,
+    className: resolveClassName(
       isActive ? 'text-icon-inverse' : 'text-default',
       textProps?.twClassName,
-    ]
-      .filter(Boolean)
-      .join(' '),
+      textProps?.className,
+    ),
   };
 
   return (

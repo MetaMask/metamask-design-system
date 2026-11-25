@@ -23,6 +23,7 @@ export const BadgeWrapper = ({
   positionYOffset = 0,
   customPosition,
   twClassName,
+  className,
   style,
   ...props
 }: BadgeWrapperProps) => {
@@ -53,7 +54,10 @@ export const BadgeWrapper = ({
   return (
     <View
       {...props}
-      style={[tw.style('relative flex-row self-start', twClassName), style]}
+      style={[
+        tw.style('relative flex-row self-start', twClassName, className),
+        style,
+      ]}
     >
       <View {...childrenContainerProps}>{children}</View>
       <View

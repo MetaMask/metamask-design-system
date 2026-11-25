@@ -77,6 +77,12 @@ export type HeaderBaseProps = ViewProps & {
   /**
    * Optional Tailwind class names for the header container.
    * Merged with default styles using tw.style().
+   *
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
 };

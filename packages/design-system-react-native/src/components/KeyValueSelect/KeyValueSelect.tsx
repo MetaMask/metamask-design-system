@@ -1,5 +1,5 @@
 import {
-  mergeTwClassName,
+  resolveClassName,
   SelectButtonSize,
   SelectButtonVariant,
 } from '@metamask/design-system-shared';
@@ -40,6 +40,7 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
       keyValueRowProps,
       isDisabled = false,
       twClassName,
+      className,
       style,
       accessibilityRole,
       ...pressableProps
@@ -47,13 +48,22 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
     ref,
   ) => {
     const tw = useTailwind();
-    const rootTwClassName = mergeTwClassName(ROOT_TW_CLASS_NAME, twClassName);
-    const { twClassName: keyValueRowTwClassName, ...restKeyValueRowProps } =
-      keyValueRowProps ?? {};
-    const resolvedKeyValueRowTwClassName = mergeTwClassName(
+    const rootTwClassName = resolveClassName(
+      ROOT_TW_CLASS_NAME,
+      twClassName,
+      className,
+    );
+    const {
+      twClassName: keyValueRowTwClassName,
+      className: keyValueRowClassName,
+      ...restKeyValueRowProps
+    } = keyValueRowProps ?? {};
+    const resolvedKeyValueRowTwClassName = [
       KEY_VALUE_ROW_TW_CLASS_NAME,
       keyValueRowTwClassName,
-    );
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     const getPressableStyle = ({
       pressed,
@@ -96,6 +106,7 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
         <KeyValueRow
           {...restKeyValueRowProps}
           twClassName={resolvedKeyValueRowTwClassName}
+          className={keyValueRowClassName}
           keyLabel={keyLabel}
           keyStartAccessory={keyStartAccessory}
           keyEndAccessory={keyEndAccessory}
