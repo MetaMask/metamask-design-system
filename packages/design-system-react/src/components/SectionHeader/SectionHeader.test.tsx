@@ -1,4 +1,4 @@
-import { IconName } from '@metamask/design-system-shared';
+import { BoxFlexDirection, IconName } from '@metamask/design-system-shared';
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
@@ -215,33 +215,32 @@ describe('SectionHeader', () => {
   });
 
   describe('root layout', () => {
-    it('applies gap-1 to outer row', () => {
-      const { getByTestId } = render(
-        <SectionHeader title="Section" data-testid={ROOT_TEST_ID} />,
-      );
-
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('gap-1');
-    });
-
-    it('applies default padding to outer row', () => {
-      const { getByTestId } = render(
-        <SectionHeader title="Section" data-testid={ROOT_TEST_ID} />,
-      );
-
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('px-4');
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('pb-2');
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('pt-3');
-    });
-
-    it('applies gap-1 to inner title row', () => {
+    it('keeps the outer row direction when flexDirection is passed', () => {
       const { getByTestId } = render(
         <SectionHeader
           title="Section"
-          titleWrapperProps={{ 'data-testid': TITLE_ROW_TEST_ID }}
+          data-testid={ROOT_TEST_ID}
+          flexDirection={BoxFlexDirection.Column}
         />,
       );
 
-      expect(getByTestId(TITLE_ROW_TEST_ID)).toHaveClass('gap-1');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('flex-row');
+      expect(getByTestId(ROOT_TEST_ID)).not.toHaveClass('flex-col');
+    });
+
+    it('keeps a vertical outer wrapper when children are provided and flexDirection is passed', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          data-testid={ROOT_TEST_ID}
+          flexDirection={BoxFlexDirection.Row}
+        >
+          <span>Subtitle</span>
+        </SectionHeader>,
+      );
+
+      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('flex-col');
+      expect(getByTestId(ROOT_TEST_ID)).not.toHaveClass('flex-row');
     });
 
     it('merges className into outer row styles', () => {
@@ -376,9 +375,8 @@ describe('SectionHeader', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveClass('cursor-pointer');
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('hover:opacity-80');
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('active:opacity-80');
-      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('px-4');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('hover:opacity-70');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('active:opacity-70');
     });
 
     it('fires onClick when Enter is pressed', () => {

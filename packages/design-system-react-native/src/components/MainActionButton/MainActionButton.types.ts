@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type {
   PressableProps,
   PressableStateCallbackType,
@@ -20,6 +21,11 @@ export type MainActionButtonProps = {
    * Label text rendered below the icon.
    */
   label: string;
+  /**
+   * Optional content rendered between the icon and the label.
+   * Useful for supplementary content such as a balance or a badge.
+   */
+  children?: ReactNode;
   /**
    * Optional props forwarded to the internal Icon component.
    * Useful for test IDs and accessibility metadata.

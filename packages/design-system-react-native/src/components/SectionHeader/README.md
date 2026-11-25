@@ -99,7 +99,7 @@ See the `Children` Storybook story for a title + description + trailing chevron 
 
 ### `startIconName`
 
-Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconDefault`; override with `startIconProps`.
+Optional icon name for the start of the **outer** row. When set, an `Icon` is rendered instead of `startAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconDefault`; override with `startIconProps`.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -113,7 +113,7 @@ import { SectionHeader, IconName } from '@metamask/design-system-react-native';
 
 ### `endIconName`
 
-Optional icon name for the end of the **outer** header row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Sm` and `IconColor.IconAlternative`; override with `endIconProps`. Use for trailing chevrons, disclosure arrows, and other row-level affordances (including beside titles like "How it works"). **Do not** place these icons in `titleAccessory`.
+Optional icon name for the end of the **outer** header row. When set, an `Icon` is rendered instead of `endAccessory`. The icon defaults to `IconSize.Md` and `IconColor.IconAlternative`; override with `endIconProps`. Use for trailing chevrons, disclosure arrows, and other row-level affordances (including beside titles like "How it works"). **Do not** place these icons in `titleAccessory`.
 
 | TYPE       | REQUIRED | DEFAULT     |
 | ---------- | -------- | ----------- |
@@ -138,7 +138,7 @@ import { SectionHeader, Box } from '@metamask/design-system-react-native';
 
 <SectionHeader
   title="Activity"
-  startAccessory={<Box twClassName="h-6 w-6 rounded-full bg-primary-default" />}
+  startAccessory={<Box className="h-6 w-6 rounded-full bg-primary-default" />}
 />;
 ```
 
@@ -155,7 +155,7 @@ import { SectionHeader, Box } from '@metamask/design-system-react-native';
 
 <SectionHeader
   title="Notifications"
-  endAccessory={<Box twClassName="h-6 w-6 rounded-full bg-error-default" />}
+  endAccessory={<Box className="h-6 w-6 rounded-full bg-error-default" />}
 />;
 ```
 
@@ -248,9 +248,9 @@ import { SectionHeader, IconName } from '@metamask/design-system-react-native';
 <SectionHeader title="Assets" isInteractive onPress={() => {}} />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the **outer** wrapper (row `Box` or `Pressable`). These classes will be merged with the component's default classes using `tw.style()`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the **outer** wrapper (row `Box` or `Pressable`). These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -263,15 +263,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the **outer** wrapper 
 import { SectionHeader } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<SectionHeader twClassName="mt-4" title="Assets" />
+<SectionHeader className="mt-4" title="Assets" />
 
 // Override default styles
-<SectionHeader twClassName="px-6" title="Assets" />
+<SectionHeader className="px-6" title="Assets" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values. Other wrapper props (for example `testID` and accessibility fields) are accepted on the outer row `Box` when `isInteractive` is omitted, or on the outer `Pressable` when `isInteractive` is `true`.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values. Other wrapper props (for example `testID` and accessibility fields) are accepted on the outer row `Box` when `isInteractive` is omitted, or on the outer `Pressable` when `isInteractive` is `true`.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

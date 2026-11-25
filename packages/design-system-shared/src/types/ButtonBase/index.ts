@@ -1,6 +1,5 @@
 export {
   ButtonBaseSize,
-  ButtonHeroSize,
   ButtonSemanticSize,
   ButtonSize,
   type ButtonBasePropsShared,

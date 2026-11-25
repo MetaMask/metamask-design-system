@@ -1,4 +1,4 @@
-#!yarn tsx
+#!/usr/bin/env node
 
 import execa from 'execa';
 import fs from 'fs';
@@ -44,7 +44,7 @@ ${JSON.stringify(packageMap, null, 2)}
 </details>
 `;
 
-  const messagePath = path.resolve(__dirname, '../preview-build-message.txt');
+  const messagePath = path.resolve(process.cwd(), 'preview-build-message.txt');
   await fs.promises.writeFile(messagePath, previewBuildMessage);
 }
 

@@ -43,19 +43,27 @@ export const SelectButton = forwardRef<HTMLButtonElement, SelectButtonProps>(
       variant === SelectButtonVariant.Tertiary;
     const isInteractive = !isDisabled && !isLoading;
 
+    // One-line ellipsis by default; callers override it through `textProps`.
+    const isLabelEllipsisEnabled = textProps?.ellipsis ?? true;
+
     const resolvedTextProps = {
       ...(variant === SelectButtonVariant.Tertiary
         ? { color: TextColor.TextAlternative }
         : {}),
       textAlign: TextAlign.Left,
-      // One-line ellipsis by default; callers override it through `textProps`.
-      ellipsis: true,
+      ellipsis: isLabelEllipsisEnabled,
       ...textProps,
       className: twMerge(
         'min-w-0',
         // `flex-1` sets grow and shrink. Pairing it with `grow` / `shrink`
         // makes twMerge drop one of them, so full width uses `flex-1` only.
         isFullWidth ? 'flex-1' : 'shrink grow-0',
+        // The button height is fixed (React Native keeps `numberOfLines: 1`),
+        // so a label that opted out of the ellipsis stays on one line and is
+        // clipped instead of wrapping past the button edge.
+        isLabelEllipsisEnabled
+          ? undefined
+          : 'overflow-hidden whitespace-nowrap',
         textProps?.className,
       ),
     };

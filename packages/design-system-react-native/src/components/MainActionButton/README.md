@@ -1,6 +1,6 @@
 # MainActionButton
 
-MainActionButton is a compact vertical action button that renders an icon above a single-line label.
+MainActionButton is a compact vertical action button that renders an icon above a single-line label, with an optional `children` slot between them.
 
 ```tsx
 import {
@@ -53,6 +53,20 @@ Text rendered below the icon. Use `labelProps` to pass props to the internal `Te
   label="Add"
   labelProps={{ testID: 'main-action-button-label' }}
 />
+```
+
+### `children`
+
+Optional content rendered between the icon and the label, with the same spacing the button applies between its icon and label. Use it for supplementary content such as a balance or a badge. Wrap plain strings in a `Text` component; React Native renders bare strings only inside `Text`.
+
+| TYPE        | REQUIRED | DEFAULT     |
+| ----------- | -------- | ----------- |
+| `ReactNode` | No       | `undefined` |
+
+```tsx
+<MainActionButton iconName={IconName.Receive} label="Receive">
+  <Text variant={TextVariant.BodyXs}>1.5 ETH</Text>
+</MainActionButton>
 ```
 
 ### `isDisabled`

@@ -7,7 +7,11 @@ import type { ViewProps } from 'react-native';
 export type SegmentedControlProps = SegmentedControlPropsShared &
   ViewProps & {
     /**
-     * Optional twrnc classes merged into the root container after defaults.
+     * @deprecated Use `className` instead.
      */
     twClassName?: string;
+    /**
+     * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+     */
+    className?: string;
   };

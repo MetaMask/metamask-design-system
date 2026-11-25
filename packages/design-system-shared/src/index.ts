@@ -6,7 +6,10 @@ export {
   generateIconSeed,
 } from './utils/caip-address';
 
-export { mergeTwClassName } from './utils/merge-tw-class-name';
+export {
+  mergeTwClassName,
+  resolveClassName,
+} from './utils/merge-tw-class-name';
 
 // AvatarBase types (ADR-0003 + ADR-0004)
 export {
@@ -80,12 +83,6 @@ export { type TitleStandardPropsShared } from './types/TitleStandard';
 // TitleSubpage types (ADR-0004)
 export { type TitleSubpagePropsShared } from './types/TitleSubpage';
 
-// BoxColumn types (ADR-0004)
-export { type BoxColumnPropsShared } from './types/BoxColumn';
-
-// BoxRow types (ADR-0004)
-export { type BoxRowPropsShared } from './types/BoxRow';
-
 // HeaderSearch types (ADR-0003 + ADR-0004)
 export {
   HeaderSearchVariant,
@@ -116,7 +113,6 @@ export { type ButtonFilterPropsShared } from './types/ButtonFilter';
 // ButtonBase types (ADR-0003 + ADR-0004)
 export {
   ButtonBaseSize,
-  ButtonHeroSize,
   ButtonSemanticSize,
   ButtonSize,
   type ButtonBasePropsShared,

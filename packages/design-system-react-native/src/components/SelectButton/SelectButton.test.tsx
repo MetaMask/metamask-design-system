@@ -332,6 +332,20 @@ describe('SelectButton', () => {
       );
     });
 
+    it('lets textProps.color override the default label color', () => {
+      const { getByText } = render(
+        <SelectButton
+          testID={ROOT_TEST_ID}
+          onPress={noopPress}
+          placeholder="Label"
+          textProps={{ color: TextColor.TextAlternative }}
+        />,
+      );
+
+      expect(getByText('Label')).toHaveStyle(tw`text-alternative`);
+      expect(getByText('Label')).not.toHaveStyle(tw`text-default`);
+    });
+
     it('tertiary variant applies alternative color to trailing arrow icon', () => {
       const { getByTestId } = render(
         <SelectButton
@@ -451,20 +465,20 @@ describe('SelectButton', () => {
       expect(twClassName).toHaveBeenCalled();
     });
 
-    it('merges twClassName when it is a function for tertiary variant', () => {
-      const twClassName = jest.fn(() => 'mt-5');
+    it('merges className when it is a function for tertiary variant', () => {
+      const className = jest.fn(() => 'mt-5');
       const { getByTestId } = render(
         <SelectButton
           testID={ROOT_TEST_ID}
           onPress={noopPress}
           variant={SelectButtonVariant.Tertiary}
-          twClassName={twClassName}
+          className={className}
           placeholder="Label"
         />,
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`mt-5`);
-      expect(twClassName).toHaveBeenCalled();
+      expect(className).toHaveBeenCalled();
     });
 
     it('merges the style prop after tailwind styles', () => {
