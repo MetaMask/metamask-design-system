@@ -271,9 +271,7 @@ describe('ListItem', () => {
 
       expect(root).toHaveClass('flex-col');
       expect(child.parentElement).toBe(root);
-      expect(child.previousElementSibling).toContainElement(
-        getByText('Label'),
-      );
+      expect(child.previousElementSibling).toContainElement(getByText('Label'));
     });
   });
 
