@@ -89,8 +89,8 @@ export const CheckboxContainerProps: Story = {
     <View style={{ gap: 16 }}>
       <CheckboxStory
         isSelected={false}
-        label="Square checkbox"
-        checkboxContainerProps={{ className: 'rounded-none' }}
+        label="Rounded square checkbox"
+        checkboxContainerProps={{ className: 'rounded' }}
       />
       <CheckboxStory isSelected={false} label="Circular checkbox" />
     </View>
