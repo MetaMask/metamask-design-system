@@ -124,7 +124,7 @@ export const AvatarGroup = ({
               : AvatarBaseShape.Circle
           }
           {...overflowTextRest}
-          twClassName={overflowTextTwClassName}
+          twClassName={undefined}
           className={resolveClassName(
             'bg-icon-default',
             overflowTextTwClassName,

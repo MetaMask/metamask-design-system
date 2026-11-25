@@ -69,6 +69,7 @@ export const Tag: React.FC<TagProps> = ({
             color={iconColor}
             size={IconSize.Xs}
             {...startIconProps}
+            twClassName={undefined}
             className={resolveClassName(
               'shrink-0',
               startIconProps?.twClassName,
@@ -94,6 +95,7 @@ export const Tag: React.FC<TagProps> = ({
             color={iconColor}
             size={IconSize.Xs}
             {...endIconProps}
+            twClassName={undefined}
             className={resolveClassName(
               'shrink-0',
               endIconProps?.twClassName,

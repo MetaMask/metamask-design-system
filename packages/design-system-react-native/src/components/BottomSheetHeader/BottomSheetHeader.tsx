@@ -1,4 +1,4 @@
-import { mergeTwClassName } from '@metamask/design-system-shared';
+import { resolveClassName } from '@metamask/design-system-shared';
 import React from 'react';
 
 // External dependencies.
@@ -39,8 +39,7 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   return (
     <HeaderBase
       {...props}
-      twClassName={mergeTwClassName('px-2', twClassName)}
-      className={className}
+      className={resolveClassName('px-2', twClassName, className)}
       style={style}
       startAccessory={startAccessory}
       endAccessory={endAccessory}

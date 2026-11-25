@@ -10,7 +10,11 @@ export type KeyValueColumnProps = KeyValueColumnPropsShared &
     keyTextProps?: Partial<Omit<TextProps, 'children'>>;
     /** Optional props for the value Text when value is a string. */
     valueTextProps?: Partial<Omit<TextProps, 'children'>>;
-    /** Optional Tailwind class names applied to the outer BoxVertical. Merged with base styles. */
+    /**
+     * Optional Tailwind class names applied to the outer BoxVertical. Merged with base styles.
+     *
+     * @deprecated Use `className` instead.
+     */
     twClassName?: string;
     /**
      * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.

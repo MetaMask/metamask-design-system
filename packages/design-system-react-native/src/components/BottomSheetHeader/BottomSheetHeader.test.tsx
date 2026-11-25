@@ -1,4 +1,5 @@
-import { render, fireEvent } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render, fireEvent, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { BottomSheetHeader } from './BottomSheetHeader';
@@ -162,5 +163,33 @@ describe('BottomSheetHeader', () => {
       );
       expect(getByTestId('header')).toBeOnTheScreen();
     });
+  });
+});
+
+describe('when className is provided', () => {
+  let tw: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    tw = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component defaults', () => {
+    const { getByTestId } = render(
+      <BottomSheetHeader testID="header" twClassName="px-6" className="px-4">
+        Title
+      </BottomSheetHeader>,
+    );
+
+    expect(getByTestId('header')).toHaveStyle(tw`px-4`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <BottomSheetHeader testID="header" twClassName="px-6">
+        Title
+      </BottomSheetHeader>,
+    );
+
+    expect(getByTestId('header')).toHaveStyle(tw`px-6`);
   });
 });
