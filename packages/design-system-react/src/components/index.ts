@@ -85,6 +85,9 @@ export type { ContentProps } from './Content';
 export { HeaderBase } from './HeaderBase';
 export type { HeaderBaseProps } from './HeaderBase';
 
+export { HeaderStandard } from './HeaderStandard';
+export type { HeaderStandardProps } from './HeaderStandard';
+
 export { HelpText, HelpTextSeverity } from './HelpText';
 export type { HelpTextProps } from './HelpText';
 
