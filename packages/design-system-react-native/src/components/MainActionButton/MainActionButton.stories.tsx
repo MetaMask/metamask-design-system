@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { Box } from '../Box';
 import { IconName } from '../Icon';
+import { Text, FontWeight, TextVariant } from '../Text';
 
 import { MainActionButton } from './MainActionButton';
 import type { MainActionButtonProps } from './MainActionButton.types';
@@ -112,6 +113,23 @@ export const IconNameAndLabel: Story = {
         label="Receive"
         twClassName="flex-1"
       />
+    </Box>
+  ),
+};
+
+export const Children: Story = {
+  parameters: {
+    actions: {
+      disable: true,
+    },
+  },
+  render: (args) => (
+    <Box marginTop={4} marginLeft={4} style={{ width: 85 }}>
+      <MainActionButton {...args}>
+        <Text variant={TextVariant.BodyXs} fontWeight={FontWeight.Medium}>
+          1.5 ETH
+        </Text>
+      </MainActionButton>
     </Box>
   ),
 };

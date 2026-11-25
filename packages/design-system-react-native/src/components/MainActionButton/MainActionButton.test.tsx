@@ -1,7 +1,11 @@
-import { fireEvent, render } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
+import { createRenderer } from '../../test-utils/createRenderer';
+import { Box } from '../Box';
 import { IconName } from '../Icon';
+import { Text } from '../Text';
 
 import { MainActionButton } from './MainActionButton';
 
@@ -183,5 +187,97 @@ describe('MainActionButton', () => {
     expect(style).toHaveBeenCalledWith({ pressed: true });
     expect(Array.isArray(button.props.style)).toBe(true);
     expect(button.props.style[1]).toStrictEqual({ marginTop: 8 });
+  });
+});
+
+describe('children', () => {
+  it('renders children between the icon and the label', () => {
+    // Arrange
+    const tree = createRenderer(
+      <MainActionButton
+        iconName={IconName.Add}
+        label="Send"
+        iconProps={{ testID: 'main-action-button-icon' }}
+        labelProps={{ testID: 'main-action-button-label' }}
+      >
+        <Text testID="main-action-button-children">1.5 ETH</Text>
+      </MainActionButton>,
+    );
+
+    // Act
+    const orderedTestIds = tree.root
+      .findAll((node) => typeof node.props.testID === 'string')
+      .map((node) => node.props.testID as string);
+
+    // Assert
+    const iconIndex = orderedTestIds.indexOf('main-action-button-icon');
+    const childrenIndex = orderedTestIds.indexOf('main-action-button-children');
+    const labelIndex = orderedTestIds.indexOf('main-action-button-label');
+    expect(iconIndex).toBeGreaterThanOrEqual(0);
+    expect(childrenIndex).toBeGreaterThan(iconIndex);
+    expect(labelIndex).toBeGreaterThan(childrenIndex);
+  });
+
+  it('renders children content', () => {
+    // Arrange
+    const { getByTestId } = render(
+      <MainActionButton iconName={IconName.Add} label="Send">
+        <Text testID="main-action-button-children">1.5 ETH</Text>
+      </MainActionButton>,
+    );
+
+    // Act
+    const childrenText = getByTestId('main-action-button-children');
+
+    // Assert
+    expect(childrenText).toBeOnTheScreen();
+  });
+
+  it('applies design token spacing above the children content', () => {
+    // Arrange
+    const tw = renderHook(() => useTailwind()).result.current;
+    const { getByTestId } = render(
+      <MainActionButton iconName={IconName.Add} label="Send">
+        <Text testID="main-action-button-children">1.5 ETH</Text>
+      </MainActionButton>,
+    );
+
+    // Act
+    const childrenText = getByTestId('main-action-button-children');
+    let hostWrapper = childrenText.parent;
+    while (hostWrapper && typeof hostWrapper.type !== 'string') {
+      hostWrapper = hostWrapper.parent;
+    }
+
+    // Assert
+    expect(hostWrapper).toHaveStyle(tw`mt-0.5`);
+  });
+
+  it('does not render a children container when children is omitted', () => {
+    // Arrange
+    const { UNSAFE_queryAllByType } = render(
+      <MainActionButton iconName={IconName.Add} label="Send" />,
+    );
+
+    // Act
+    const childrenWrappers = UNSAFE_queryAllByType(Box);
+
+    // Assert
+    expect(childrenWrappers).toHaveLength(0);
+  });
+
+  it('does not render a children container when children is false', () => {
+    // Arrange
+    const { UNSAFE_queryAllByType } = render(
+      <MainActionButton iconName={IconName.Add} label="Send">
+        {false}
+      </MainActionButton>,
+    );
+
+    // Act
+    const childrenWrappers = UNSAFE_queryAllByType(Box);
+
+    // Assert
+    expect(childrenWrappers).toHaveLength(0);
   });
 });
