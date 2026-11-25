@@ -213,6 +213,39 @@ describe('TitleSubpage', () => {
       expect(queryByText('$4.42')).not.toBeInTheDocument();
     });
 
+    it('masks a string amount with a valid custom amountProps.length', () => {
+      const { getByText } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Send"
+          amount="$4.42"
+          amountProps={{ isHidden: true, length: '8' }}
+        />,
+      );
+
+      expect(getByText('••••••••')).toBeInTheDocument();
+    });
+
+    it('falls back to Short and warns for an invalid amountProps.length', () => {
+      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+      const { getByText } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Send"
+          amount="$4.42"
+          amountProps={{ isHidden: true, length: 'abc' }}
+        />,
+      );
+
+      expect(getByText('••••••')).toBeInTheDocument();
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'Invalid length provided: abc. Falling back to Short.',
+      );
+
+      consoleSpy.mockRestore();
+    });
+
     it('masks a string subtitle when subtitleProps.isHidden is true', () => {
       const { getByText, queryByText } = render(
         <TitleSubpage
