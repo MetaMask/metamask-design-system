@@ -111,17 +111,6 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(
     const showSubvalue = !isOneLine && Boolean(subvalue);
     const alignItems = isMultiLine ? BoxAlignItems.Start : BoxAlignItems.Center;
 
-    if (isOneLine && description) {
-      console.warn(
-        'Content: `description` is ignored when `variant` is `ContentVariant.OneLine`.',
-      );
-    }
-    if (isOneLine && subvalue) {
-      console.warn(
-        'Content: `subvalue` is ignored when `variant` is `ContentVariant.OneLine`.',
-      );
-    }
-
     const titleRow = title ? (
       <TextRow
         className="w-full"

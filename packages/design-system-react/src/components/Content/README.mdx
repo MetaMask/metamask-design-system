@@ -645,7 +645,14 @@ When using `ListItem`, total row min-heights (48px / 72px / 88px including `py-3
 </table>
 
 ```tsx
-import { Content, ContentVariant } from '@metamask/design-system-react';
+import {
+  Content,
+  ContentVariant,
+  FontWeight,
+  Text,
+  TextColor,
+  TextVariant,
+} from '@metamask/design-system-react';
 
 <Content variant={ContentVariant.OneLine} title="Label" value="Value" />
 
@@ -654,8 +661,20 @@ import { Content, ContentVariant } from '@metamask/design-system-react';
   title="Label"
   description={
     <>
-      <Text variant={TextVariant.BodySm}>Line one</Text>
-      <Text variant={TextVariant.BodySm}>Line two</Text>
+      <Text
+        variant={TextVariant.BodySm}
+        fontWeight={FontWeight.Medium}
+        color={TextColor.TextAlternative}
+      >
+        Line one
+      </Text>
+      <Text
+        variant={TextVariant.BodySm}
+        fontWeight={FontWeight.Medium}
+        color={TextColor.TextAlternative}
+      >
+        Line two
+      </Text>
     </>
   }
 />

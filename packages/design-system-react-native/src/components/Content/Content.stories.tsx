@@ -3,8 +3,10 @@ import {
   ButtonBaseSize,
   ButtonVariant,
   ContentVariant,
+  FontWeight,
   IconName,
   IconSize,
+  TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
@@ -224,8 +226,20 @@ export const Variant: Story = {
         title="Multi line"
         description={
           <>
-            <Text variant={TextVariant.BodySm}>Secondary line</Text>
-            <Text variant={TextVariant.BodySm}>Third line</Text>
+            <Text
+              variant={TextVariant.BodySm}
+              fontWeight={FontWeight.Medium}
+              color={TextColor.TextAlternative}
+            >
+              Secondary line
+            </Text>
+            <Text
+              variant={TextVariant.BodySm}
+              fontWeight={FontWeight.Medium}
+              color={TextColor.TextAlternative}
+            >
+              Third line
+            </Text>
           </>
         }
         value="Value"
