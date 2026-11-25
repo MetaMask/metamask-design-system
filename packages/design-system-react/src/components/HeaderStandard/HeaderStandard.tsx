@@ -184,7 +184,12 @@ export const HeaderStandard = forwardRef<HTMLDivElement, HeaderStandardProps>(
         {...headerBaseProps}
         startAccessory={resolvedStartAccessory}
         endAccessory={resolvedEndAccessory}
-        className={twMerge('px-2', className)}
+        className={twMerge(
+          // Match the React Native HeaderBase root: fixed 56px height and a
+          // 16px gap between the accessories and the centered title column.
+          'h-14 gap-4 px-2',
+          className,
+        )}
       >
         {centerContent}
       </HeaderBase>

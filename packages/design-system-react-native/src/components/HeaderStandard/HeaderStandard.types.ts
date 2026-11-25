@@ -3,29 +3,19 @@ import type { HeaderStandardPropsShared } from '@metamask/design-system-shared';
 
 import type { ButtonIconProps } from '../ButtonIcon';
 import type { HeaderBaseProps } from '../HeaderBase';
-import type { TextProps } from '../Text';
+import type { HeaderStandardCenterColumnFields } from '../temp-components/HeaderStandardCenterColumn';
 
 /**
  * HeaderStandard component props.
  *
  * Extends {@link HeaderBaseProps} and {@link HeaderStandardPropsShared} with
  * React Native `Text` / `ButtonIcon` passthroughs for title, subtitle, and
- * back/close shortcuts.
+ * back/close shortcuts. `titleProps` / `subtitleProps` come from
+ * {@link HeaderStandardCenterColumnFields} so their docs have a single source.
  */
 export type HeaderStandardProps = Omit<HeaderBaseProps, 'children'> &
-  HeaderStandardPropsShared & {
-    /**
-     * Additional props to pass to the title Text component.
-     * Props are spread to the Text component and can override default values.
-     * Only applied when title is a string.
-     */
-    titleProps?: Partial<TextProps>;
-    /**
-     * Additional props to pass to the subtitle Text component.
-     * Props are spread to the Text component and can override default values.
-     * Only applied when subtitle is a string.
-     */
-    subtitleProps?: Partial<TextProps>;
+  HeaderStandardPropsShared &
+  Omit<HeaderStandardCenterColumnFields, 'title' | 'subtitle'> & {
     /**
      * Additional props to pass to the back ButtonIcon.
      * If provided, a back button will be rendered as startButtonIconProps with these props spread.

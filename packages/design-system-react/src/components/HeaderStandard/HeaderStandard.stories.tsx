@@ -1,5 +1,7 @@
 import {
+  BoxAlignItems,
   BoxBackgroundColor,
+  BoxFlexDirection,
   IconName,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -98,7 +100,10 @@ export const EndButtonIconProps: Story = {
 export const Children: Story = {
   render: () => (
     <HeaderStandard onClose={noopClick}>
-      <Box className="flex flex-col items-center">
+      <Box
+        flexDirection={BoxFlexDirection.Column}
+        alignItems={BoxAlignItems.Center}
+      >
         <Text variant={TextVariant.HeadingSm}>Custom title</Text>
         <Text variant={TextVariant.BodySm}>Subtitle text</Text>
       </Box>

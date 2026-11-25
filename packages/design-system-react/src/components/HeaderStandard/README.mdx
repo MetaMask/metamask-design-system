@@ -58,7 +58,7 @@ Props forwarded to `Text` when `title` is a string.
   <tbody>
     <tr>
       <td align="left">
-        <code>Partial&lt;TextProps&gt;</code>
+        <code>Omit&lt;Partial&lt;TextProps&gt;, 'children'&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -112,7 +112,7 @@ Props forwarded to `Text` when `subtitle` is a string.
   <tbody>
     <tr>
       <td align="left">
-        <code>Partial&lt;TextProps&gt;</code>
+        <code>Omit&lt;Partial&lt;TextProps&gt;, 'children'&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -151,7 +151,7 @@ Custom center content. When provided, replaces the default title and subtitle la
 
 ### `onBack`
 
-When set, renders a start back `ButtonIcon` (`IconName.ArrowLeft`). Prefer `backButtonProps.onClick` when both are provided. Default `ariaLabel` is `"Back"`.
+When set, renders a start back `ButtonIcon` (`IconName.ArrowLeft`). The click handler is `backButtonProps.onClick` when both are provided. Default `ariaLabel` is `"Back"`.
 
 <table>
   <thead>
@@ -203,7 +203,7 @@ Props for the back `ButtonIcon` (excluding `iconName`). Supplying this object al
 
 ### `onClose`
 
-When set, appends a close `ButtonIcon` to the end actions. Prefer `closeButtonProps.onClick` when both are provided. Default `ariaLabel` is `"Close"`.
+When set, appends a close `ButtonIcon` to the end actions. `closeButtonProps.onClick` takes precedence over `onClose` when both are set. Default `ariaLabel` is `"Close"`.
 
 <table>
   <thead>
@@ -263,7 +263,7 @@ Optional `ButtonIcon` prop bags. `startButtonIconProps` wins over `onBack`. `end
 
 ### `className`
 
-Optional Tailwind classes merged onto the HeaderBase root. Default horizontal padding is `px-2`.
+Optional Tailwind classes merged onto the HeaderBase root. Defaults match React Native: fixed height `h-14`, column gap `gap-4`, and horizontal padding `px-2`.
 
 <table>
   <thead>
@@ -285,6 +285,27 @@ Optional Tailwind classes merged onto the HeaderBase root. Default horizontal pa
     </tr>
   </tbody>
 </table>
+
+## Usage
+
+```tsx
+<HeaderStandard title="Settings" onBack={() => goBack()} />
+
+<HeaderStandard title="Modal title" onClose={() => setModalVisible(false)} />
+
+<HeaderStandard
+  title="Page title"
+  subtitle="Subtitle text"
+  onBack={handleBack}
+  onClose={handleClose}
+/>
+```
+
+## Accessibility
+
+- Set `data-testid` on the header root for integration tests.
+- Use `titleProps` / `subtitleProps` to pass `aria-label` or `data-testid` onto string titles and subtitles.
+- Back and close controls are `ButtonIcon` instances; pass a localized `ariaLabel` through `backButtonProps` and `closeButtonProps`, since the built-in defaults are the English strings `"Back"` and `"Close"`.
 
 ## Content guidelines
 

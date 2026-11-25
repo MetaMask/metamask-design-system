@@ -332,6 +332,71 @@ describe('HeaderStandard', () => {
       expect(getByRole('button', { name: 'Search' })).toBeInTheDocument();
     });
 
+    it('renders endButtonIconProps in reverse DOM order with the close button last', () => {
+      const { getAllByRole } = render(
+        <HeaderStandard
+          title="Title"
+          endButtonIconProps={[
+            {
+              iconName: IconName.Search,
+              ariaLabel: 'Search',
+              onClick: jest.fn(),
+            },
+            {
+              iconName: IconName.Star,
+              ariaLabel: 'Star',
+              onClick: jest.fn(),
+            },
+          ]}
+          onClose={jest.fn()}
+        />,
+      );
+
+      const ariaLabels = getAllByRole('button').map((button) =>
+        button.getAttribute('aria-label'),
+      );
+
+      expect(ariaLabels).toStrictEqual(['Star', 'Search', 'Close']);
+    });
+
+    it('uses a custom backButtonProps.ariaLabel over the English default', () => {
+      const onBack = jest.fn();
+      const { getByRole, queryByRole } = render(
+        <HeaderStandard
+          title="Title"
+          onBack={onBack}
+          backButtonProps={{ ariaLabel: 'Custom back label' }}
+        />,
+      );
+
+      expect(
+        getByRole('button', { name: 'Custom back label' }),
+      ).toBeInTheDocument();
+      expect(queryByRole('button', { name: 'Back' })).not.toBeInTheDocument();
+
+      fireEvent.click(getByRole('button', { name: 'Custom back label' }));
+      expect(onBack).toHaveBeenCalledTimes(1);
+    });
+
+    it('uses a custom closeButtonProps.ariaLabel over the English default', () => {
+      const onClose = jest.fn();
+      const { getByRole, queryByRole } = render(
+        <HeaderStandard
+          title="Title"
+          onClose={onClose}
+          closeButtonProps={{ ariaLabel: 'Custom close label' }}
+        />,
+      );
+
+      expect(
+        getByRole('button', { name: 'Custom close label' }),
+      ).toBeInTheDocument();
+      expect(queryByRole('button', { name: 'Close' })).not.toBeInTheDocument();
+
+      fireEvent.click(getByRole('button', { name: 'Custom close label' }));
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
     it('endAccessory takes priority over endButtonIconProps and close', () => {
       const { getByTestId, queryByRole } = render(
         <HeaderStandard
@@ -355,7 +420,7 @@ describe('HeaderStandard', () => {
   });
 
   describe('layout', () => {
-    it('applies default horizontal padding and merges className', () => {
+    it('applies default height, gap, and horizontal padding, and merges className', () => {
       const { getByTestId } = render(
         <HeaderStandard
           title="Title"
@@ -365,8 +430,26 @@ describe('HeaderStandard', () => {
       );
 
       const root = getByTestId(CONTAINER_TEST_ID);
+      expect(root).toHaveClass('h-14');
+      expect(root).toHaveClass('gap-4');
       expect(root).toHaveClass('px-2');
       expect(root).toHaveClass('border-b');
+    });
+
+    it('lets className override the default height and gap', () => {
+      const { getByTestId } = render(
+        <HeaderStandard
+          title="Title"
+          data-testid={CONTAINER_TEST_ID}
+          className="h-20 gap-2"
+        />,
+      );
+
+      const root = getByTestId(CONTAINER_TEST_ID);
+      expect(root).toHaveClass('h-20');
+      expect(root).toHaveClass('gap-2');
+      expect(root).not.toHaveClass('h-14');
+      expect(root).not.toHaveClass('gap-4');
     });
 
     it('renders start accessory wrapper when onBack is provided', () => {

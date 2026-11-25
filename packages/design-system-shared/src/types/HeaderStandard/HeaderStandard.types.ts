@@ -14,14 +14,18 @@ export type HeaderStandardPropsShared = {
   /**
    * Optional main title. Can be a string or a React node.
    * Only used when `children` is not provided.
-   * When string: platforms typically apply `TextVariant.BodyMd` + bold via `titleProps`.
+   * When string: rendered with `TextVariant.BodyMd` and `FontWeight.Bold` by
+   * default; platform `titleProps` override these.
    * When node: rendered as-is; `titleProps` are not applied to the node.
    */
   title?: ReactNode;
   /**
    * Optional subtitle below the title. Only used when `children` is not provided.
-   * When string: platforms typically apply `TextVariant.BodySm` + alternative color via `subtitleProps`.
-   * When node: rendered as-is; `subtitleProps` are not applied to the node.
+   * When string: rendered with `TextVariant.BodySm` and
+   * `TextColor.TextAlternative` by default; platform `subtitleProps` override
+   * these.
+   * When node: rendered as-is; `subtitleProps` are not applied to the node —
+   * add spacing on your root if needed.
    */
   subtitle?: ReactNode;
   /**
