@@ -1,6 +1,6 @@
 # KeyValueSelect
 
-KeyValueSelect is used to show a key on the left and a select value on the right in a pressable row. Use it for form and summary rows that open a picker or bottom sheet. Value-side props follow [KeyValueRow](../KeyValueRow/README.md) naming and map onto a secondary [SelectButton](../SelectButton/README.md). SelectButton-only options (placeholder and caret) use `selectButtonProps`. Use `keyValueRowProps` for inner KeyValueRow shell props such as `testID` or `twClassName`. For a static key/value row, use KeyValueRow. For a standalone select control, use SelectButton.
+KeyValueSelect is used to show a key on the left and a select value on the right in a pressable row. Use it for form and summary rows that open a picker or bottom sheet. Value-side props follow [KeyValueRow](../KeyValueRow/README.md) naming and map onto a secondary [SelectButton](../SelectButton/README.md). SelectButton-only options (placeholder and caret) use `selectButtonProps`. Use `keyValueRowProps` for inner KeyValueRow shell props such as `testID` or `className`. For a static key/value row, use KeyValueRow. For a standalone select control, use SelectButton.
 
 ```tsx
 import { KeyValueSelect } from '@metamask/design-system-react-native';
@@ -158,7 +158,7 @@ import {
 
 ### `keyValueRowProps`
 
-Optional props forwarded to the inner [KeyValueRow](../KeyValueRow/README.md). Use this for row shell concerns such as `testID`, `twClassName`, `style`, and accessibility `ViewProps` that should apply to the row content rather than the outer Pressable.
+Optional props forwarded to the inner [KeyValueRow](../KeyValueRow/README.md). Use this for row shell concerns such as `testID`, `className`, `style`, and accessibility `ViewProps` that should apply to the row content rather than the outer Pressable.
 
 Owned KeyValueSelect content props (`keyLabel`, value-side props, `variant`, etc.) are not available here — set those on `KeyValueSelect` directly.
 
@@ -175,7 +175,7 @@ import { KeyValueSelect } from '@metamask/design-system-react-native';
   selectButtonProps={{ placeholder: 'Select network' }}
   keyValueRowProps={{
     testID: 'network-row',
-    twClassName: 'border-b border-border-muted',
+    className: 'border-b border-border-muted',
   }}
   onPress={() => {}}
 />;
@@ -338,9 +338,9 @@ import { KeyValueSelect } from '@metamask/design-system-react-native';
 />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -358,7 +358,7 @@ import { KeyValueSelect } from '@metamask/design-system-react-native';
 <KeyValueSelect
   keyLabel="Network"
   selectButtonProps={{ placeholder: 'Select' }}
-  twClassName="mt-4"
+  className="mt-4"
   onPress={() => {}}
 />
 
@@ -366,14 +366,16 @@ import { KeyValueSelect } from '@metamask/design-system-react-native';
 <KeyValueSelect
   keyLabel="Network"
   selectButtonProps={{ placeholder: 'Select' }}
-  twClassName="bg-background-alternative"
+  className="bg-background-alternative"
   onPress={() => {}}
 />
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

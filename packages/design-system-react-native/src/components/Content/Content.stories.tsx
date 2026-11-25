@@ -43,7 +43,7 @@ const meta: Meta<ContentProps> = {
   decorators: [
     (Story) => (
       <Box
-        twClassName="w-full"
+        className="w-full"
         backgroundColor={BoxBackgroundColor.BackgroundDefault}
       >
         <Story />
@@ -125,7 +125,7 @@ export const Subvalue: Story = {
         description={undefined}
         value={undefined}
         avatar={
-          <Box twClassName="h-10 w-10 items-center justify-center rounded-full bg-primary-alternative">
+          <Box className="size-10 items-center justify-center rounded-full bg-primary-alternative">
             <Icon name={IconName.AttachMoney} size={IconSize.Sm} />
           </Box>
         }
@@ -187,11 +187,11 @@ export const SubvalueProps: Story = {
 };
 
 const listItemAvatarPlaceholder = (
-  <Box twClassName="h-12 w-12 rounded-lg bg-primary-default" />
+  <Box className="size-12 rounded-lg bg-primary-default" />
 );
 
 const contentLeadingIcon = (
-  <Box twClassName="h-6 items-center justify-center">
+  <Box className="h-6 items-center justify-center">
     <Icon name={IconName.Setting} size={IconSize.Md} />
   </Box>
 );
@@ -240,7 +240,7 @@ export const Avatar: Story = {
     <StoryWrapper>
       <Content
         {...args}
-        avatar={<Box twClassName="h-10 w-10 rounded-full bg-primary-default" />}
+        avatar={<Box className="size-10 rounded-full bg-primary-default" />}
         title="With avatar"
         value="Value"
         description={undefined}

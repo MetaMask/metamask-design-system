@@ -40,7 +40,7 @@ const meta: Meta<TextProps> = {
     children: {
       control: 'text',
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },
@@ -74,7 +74,7 @@ export const Default: Story = {
     fontFamily: FontFamily.Default,
     fontStyle: FontStyle.Normal,
     children: 'The quick orange fox jumped over the lazy dog.',
-    twClassName: '',
+    className: '',
   },
   render: (args) => <TextStory {...args} />,
 };

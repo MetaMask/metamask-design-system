@@ -10,7 +10,7 @@ const meta: Meta<BadgeNetworkProps> = {
   title: 'Components/BadgeNetwork',
   component: BadgeNetwork,
   argTypes: {
-    twClassName: {
+    className: {
       control: 'text',
     },
   },
@@ -22,7 +22,7 @@ type Story = StoryObj<BadgeNetworkProps>;
 
 export const Default: Story = {
   args: {
-    twClassName: '',
+    className: '',
   },
   render: (args) => (
     <BadgeNetwork {...args} src={SAMPLE_AVATARNETWORK_URIS[0]} />

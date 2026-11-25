@@ -69,7 +69,7 @@ export const Variant: Story = {
 
     return (
       <Box flexDirection={BoxFlexDirection.Column} gap={4}>
-        <Text twClassName="px-4" variant={TextVariant.HeadingSm}>
+        <Text className="px-4" variant={TextVariant.HeadingSm}>
           HeaderSearchVariant.Screen
         </Text>
         <HeaderSearch
@@ -83,7 +83,7 @@ export const Variant: Story = {
             placeholder: 'Search tokens, sites, URLs',
           }}
         />
-        <Text twClassName="px-4" variant={TextVariant.HeadingSm}>
+        <Text className="px-4" variant={TextVariant.HeadingSm}>
           HeaderSearchVariant.Inline
         </Text>
         <HeaderSearch

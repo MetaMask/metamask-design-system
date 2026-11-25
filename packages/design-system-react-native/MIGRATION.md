@@ -89,9 +89,11 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ### `twClassName` to `className`
 
-`twClassName` is deprecated on `Box`, `Text`, `ButtonBase`, `Button`, `ButtonSemantic`, `FilterButton`, `SelectButton`, `BannerBase`, `Content`, `HeaderRoot`, `HeaderSearch`, `ListItem`, `SectionHeader`, `SegmentedControl`, `TabEmptyState`, `TextField`, `TitleAlert`, `TitleSubpage`, and `Toast`. It keeps working until 1.0.0. Other components still use `twClassName` until they are migrated.
+`twClassName` is deprecated on every component that accepted it. `Box`, `Text`, `ButtonBase`, `Button`, `ButtonSemantic`, `FilterButton`, `SelectButton`, `BannerBase`, `Content`, `HeaderRoot`, `HeaderSearch`, `ListItem`, `SectionHeader`, `SegmentedControl`, `TabEmptyState`, `TextField`, `TitleAlert`, `TitleSubpage`, and `Toast` were migrated first. The remaining components are migrated too: `ActionListItem`, `AvatarAccount`, `AvatarBase`, `AvatarFavicon`, `AvatarGroup`, `AvatarIcon`, `AvatarNetwork`, `AvatarToken`, `BadgeCount`, `BadgeIcon`, `BadgeNetwork`, `BadgeStatus`, `BadgeWrapper`, `BottomSheet`, `BottomSheetDialog`, `BottomSheetFooter`, `BottomSheetHeader`, `BottomSheetOverlay`, `ButtonFilter`, `ButtonIcon`, `Card`, `Checkbox`, `FilterButtonGroup`, `HeaderBase`, `HeaderStandard`, `HeaderStandardAnimated`, `Icon`, `IconAlert`, `Input`, `KeyValueColumn`, `KeyValueRow`, `KeyValueSelect`, `MainActionButton`, `RadioButton`, `Skeleton`, `Slider`, `Spinner`, `Tag`, `TextArea`, `TitleHub`, `TitleStandard`, and `Toaster`. `twClassName` keeps working until 1.0.0.
 
-Rename the prop. A `twClassName` inside `descriptionProps` and `actionButtonProps` (`TabEmptyState`), `titleWrapperProps` (`TitleAlert`), and `identityRowProps` (`TitleSubpage`) now merges with the component's classes instead of replacing them:
+The same rename applies inside prop bags that forward to migrated components, such as `textProps`, `titleProps`, `labelProps`, `iconProps`, `fallbackTextProps`, `keyTextProps`, `valueTextProps`, and `startIconProps`/`endIconProps`.
+
+Rename the prop. A `twClassName` inside `descriptionProps` and `actionButtonProps` (`TabEmptyState`), `titleWrapperProps` (`TitleAlert`), `identityRowProps` (`TitleSubpage`), `labelProps` (`Checkbox`, `MainActionButton`, `RadioButton`), `startIconProps`/`endIconProps` (`Tag`), `keyValueRowProps` (`KeyValueSelect`), and `overflowTextProps` (`AvatarGroup`) now merges with the component's classes instead of replacing them:
 
 ```tsx
 // Before

@@ -18,7 +18,7 @@ const meta: Meta<TagProps> = {
   component: Tag,
   decorators: [
     (Story) => (
-      <Box twClassName="p-4">
+      <Box className="p-4">
         <Story />
       </Box>
     ),

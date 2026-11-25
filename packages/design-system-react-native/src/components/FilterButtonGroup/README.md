@@ -30,7 +30,7 @@ export const Example = () => {
 
 ## Props
 
-The props contract is **`FilterButtonGroupProps`** from **`@metamask/design-system-react-native`**. It extends **`ScrollView`** props except **`horizontal`** and **`showsHorizontalScrollIndicator`** (fixed by the component), plus optional **`twClassName`** on the scroll content row.
+The props contract is **`FilterButtonGroupProps`** from **`@metamask/design-system-react-native`**. It extends **`ScrollView`** props except **`horizontal`** and **`showsHorizontalScrollIndicator`** (fixed by the component), plus optional **`className`** on the scroll content row.
 
 ### `value`
 
@@ -107,7 +107,7 @@ export const WithGroupVariant = () => {
 };
 ```
 
-### `twClassName`
+### `className`
 
 Optional Tailwind classes merged into the scroll content row after the default horizontal layout (**`gap-1`** between children, row alignment). These classes will be merged with the default classes using `twMerge`, allowing you to:
 
@@ -129,7 +129,7 @@ export const CustomRowSpacing = () => {
   const [value, setValue] = useState('all');
 
   return (
-    <FilterButtonGroup value={value} onChange={setValue} twClassName="gap-2">
+    <FilterButtonGroup value={value} onChange={setValue} className="gap-2">
       <FilterButton value="all" onPress={() => {}}>
         All
       </FilterButton>
@@ -141,9 +141,11 @@ export const CustomRowSpacing = () => {
 };
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the **`style`** prop on the root **`ScrollView`** for viewport layout (for example width). For the inner row, prefer **`twClassName`** or **`contentContainerStyle`**.
+Use the **`style`** prop on the root **`ScrollView`** for viewport layout (for example width). For the inner row, prefer **`className`** or **`contentContainerStyle`**.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

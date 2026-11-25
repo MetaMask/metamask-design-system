@@ -396,7 +396,7 @@ const [value, setValue] = useState(50);
 
 The thumb stays fully on the track. At 0% its left edge is the track start, and at 100% its right edge is the track end. `trackInset` defaults to `0`.
 
-The root `Box` sets `accessibilityRole="adjustable"` with increment/decrement actions. Use top-level `View` props for layout and accessibility overrides (`accessibilityLabel`, `accessibilityHint`, `pointerEvents`, etc.). Keys reserved by Slider (`style`, `twClassName`, `testID`, and keys owned by the Slider API surface) are not passed through from this intersection.
+The root `Box` sets `accessibilityRole="adjustable"` with increment/decrement actions. Use top-level `View` props for layout and accessibility overrides (`accessibilityLabel`, `accessibilityHint`, `pointerEvents`, etc.). Keys reserved by Slider (`style`, `className`, `testID`, and keys owned by the Slider API surface) are not passed through from this intersection.
 
 Accessibility increment/decrement uses linear `step` on the domain value. For non-linear scales, consumers may need custom handling outside the slider for screen-reader stepping.
 
@@ -431,9 +431,9 @@ const [value, setValue] = useState(50);
 <Slider value={value} onValueChange={setValue} trackInset={8} />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -449,15 +449,17 @@ import { useState } from 'react';
 const [value, setValue] = useState(50);
 
 // Add additional styles
-<Slider value={value} onValueChange={setValue} twClassName="mt-4" />
+<Slider value={value} onValueChange={setValue} className="mt-4" />
 
 // Override default styles
-<Slider value={value} onValueChange={setValue} twClassName="mx-0" />
+<Slider value={value} onValueChange={setValue} className="mx-0" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

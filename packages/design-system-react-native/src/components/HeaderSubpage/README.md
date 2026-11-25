@@ -188,9 +188,9 @@ Gap between row shell accessories and inner content. Uses design-system spacing 
 <HeaderSubpage title="Ethereum" accessoryGap={2} onBack={goBack} />
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -205,15 +205,17 @@ Default shell classes include `h-14 px-2 py-0 justify-center` (overriding ListIt
 import { HeaderSubpage } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<HeaderSubpage title="Ethereum" twClassName="border-b border-muted" onBack={goBack} />
+<HeaderSubpage title="Ethereum" className="border-b border-muted" onBack={goBack} />
 
 // Override default styles
-<HeaderSubpage title="Ethereum" twClassName="px-4" onBack={goBack} />
+<HeaderSubpage title="Ethereum" className="px-4" onBack={goBack} />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

@@ -21,7 +21,7 @@ const meta: Meta<BottomSheetProps> = {
     keyboardAvoidingViewEnabled: { control: 'boolean' },
     onClose: { action: 'closed' },
     onOpen: { action: 'opened' },
-    twClassName: { control: 'text' },
+    className: { control: 'text' },
     style: { control: 'object' },
   },
 };
@@ -38,14 +38,14 @@ const DefaultTemplate = (args: BottomSheetProps) => {
       <Button
         variant={ButtonVariant.Primary}
         onPress={() => setIsVisible(true)}
-        twClassName="mb-4"
+        className="mb-4"
       >
         Open BottomSheet
       </Button>
       {isVisible && (
         <BottomSheet {...args} onClose={goBack}>
           <BottomSheetHeader onClose={goBack}>BottomSheet</BottomSheetHeader>
-          <Box twClassName="p-4">
+          <Box className="p-4">
             <Text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -91,7 +91,7 @@ const ImperativeControlTemplate = (args: BottomSheetProps) => {
 
   return (
     <View style={{ flex: 1, width: '100%' }}>
-      <Box twClassName="flex-row gap-2 p-4">
+      <Box className="flex-row gap-2 p-4">
         <Pressable onPress={() => sheetRef.current?.onOpenBottomSheet()}>
           <Text>Open via ref</Text>
         </Pressable>
@@ -100,7 +100,7 @@ const ImperativeControlTemplate = (args: BottomSheetProps) => {
         </Pressable>
       </Box>
       <BottomSheet ref={sheetRef} {...args}>
-        <Box twClassName="p-4">
+        <Box className="p-4">
           <Text>Controlled imperatively via ref</Text>
         </Box>
       </BottomSheet>
@@ -125,7 +125,7 @@ const ScrollableListTemplate = (args: BottomSheetProps) => {
       <Button
         variant={ButtonVariant.Primary}
         onPress={() => setIsVisible(true)}
-        twClassName="mb-4"
+        className="mb-4"
       >
         Open Scrollable BottomSheet
       </Button>
@@ -145,7 +145,7 @@ const ScrollableListTemplate = (args: BottomSheetProps) => {
             contentContainerStyle={{ paddingBottom: 24 }}
           >
             {Array.from({ length: 20 }).map((_, index) => (
-              <Box key={`bottom-sheet-item-${index}`} twClassName="px-4 py-3">
+              <Box key={`bottom-sheet-item-${index}`} className="px-4 py-3">
                 <Text>{`List item ${index + 1}`}</Text>
               </Box>
             ))}

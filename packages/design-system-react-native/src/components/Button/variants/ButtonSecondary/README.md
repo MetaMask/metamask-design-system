@@ -79,13 +79,15 @@ Name of the icon to display at the end of the button.
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
 
-### `twClassName`
+### `className`
 
 TailwindCSS class names to apply custom styling.
 
 | **Type** | **Required** | **Default** |
 | -------- | ------------ | ----------- |
 | `string` | No           | `undefined` |
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
@@ -123,7 +125,7 @@ export default App;
 
 ## Notes
 
-- `ButtonSecondary` supports TailwindCSS classes via the `twClassName` prop for custom styling.
+- `ButtonSecondary` supports TailwindCSS classes via the `className` prop for custom styling.
 - The button automatically adjusts its styles based on the `isDanger` and `isInverse` props.
 - Use the `isLoading` state to display a spinner and loading text, enhancing user feedback for asynchronous actions.
 
