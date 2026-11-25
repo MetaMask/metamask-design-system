@@ -160,6 +160,22 @@ describe('HeaderSearch', () => {
       expect(getByText('Cancel')).toBeOnTheScreen();
     });
 
+    it('allows cancelButtonProps.children to override the cancel label', () => {
+      const onPressCancelButton = jest.fn();
+
+      const { queryByText, getByText } = render(
+        <HeaderSearch
+          variant={HeaderSearchVariant.Inline}
+          onPressCancelButton={onPressCancelButton}
+          textFieldSearchProps={mockTextFieldSearchProps}
+          cancelButtonProps={{ children: 'Dismiss' }}
+        />,
+      );
+
+      expect(queryByText('Cancel')).toBeNull();
+      expect(getByText('Dismiss')).toBeOnTheScreen();
+    });
+
     it('applies testID to root container', () => {
       const onPressCancelButton = jest.fn();
 

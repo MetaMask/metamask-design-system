@@ -219,7 +219,7 @@ Called when the inline variant’s **Cancel** `Button` is clicked.
 
 ### `backButtonProps`
 
-Optional props passed to the screen variant’s `ButtonIcon`. `iconName` and `onClick` are set by the component and cannot be overridden via this object. Defaults `ariaLabel` to `"Back"`; override here for localization.
+Optional props passed to the screen variant’s `ButtonIcon`. `iconName` and `onClick` are set by the component and cannot be overridden via this object. `ariaLabel` defaults to `"Back"`; override it here for localization.
 
 <table>
   <thead>
@@ -232,7 +232,7 @@ Optional props passed to the screen variant’s `ButtonIcon`. `iconName` and `on
   <tbody>
     <tr>
       <td align="left">
-        <code>Omit&lt;ButtonIconProps, 'iconName' | 'onClick'&gt;</code>
+        <code>Omit&lt;ButtonIconProps, 'iconName' | 'onClick' | 'ariaLabel'&gt; &amp; &#123; ariaLabel?: string &#125;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -261,7 +261,7 @@ Optional props passed to the screen variant’s `ButtonIcon`. `iconName` and `on
 
 ### `cancelButtonProps`
 
-Optional props passed to the inline variant’s `Button`. `variant`, `onClick`, and `children` are controlled by the component.
+Optional props passed to the inline variant’s `Button`. `variant` and `onClick` are set by the component. `children` defaults to `"Cancel"`; override it here to provide a localized label (this also sets the button’s accessible name).
 
 <table>
   <thead>
@@ -274,7 +274,7 @@ Optional props passed to the inline variant’s `Button`. `variant`, `onClick`, 
   <tbody>
     <tr>
       <td align="left">
-        <code>Omit&lt;ButtonProps, 'variant' | 'onClick' | 'children'&gt;</code>
+        <code>Omit&lt;ButtonProps, 'variant' | 'onClick' | 'children'&gt; &amp; &#123; children?: ButtonProps['children'] &#125;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -289,6 +289,7 @@ Optional props passed to the inline variant’s `Button`. `variant`, `onClick`, 
   variant={HeaderSearchVariant.Inline}
   onClickCancelButton={() => setSearchOpen(false)}
   cancelButtonProps={{
+    children: t('cancel'),
     'data-testid': 'search-cancel',
     textProps: { className: 'font-medium' },
   }}
@@ -379,6 +380,15 @@ Other `Box` props are also forwarded to the root where applicable.
 | Inline cancel = `ButtonIcon` Close | Tertiary **Cancel** `Button` | Matches React Native MMDS |
 | `textFieldSearchProps.onChangeText` adapter | Native `onChange` / `clearButtonOnClick` | Use React `TextFieldSearch` props directly |
 | `HeaderSearchVariant` enum | Shared const object | Import from `@metamask/design-system-react` |
+
+## Accessibility
+
+`HeaderSearch` adds no landmark semantics of its own. Consumers are responsible for:
+
+- **Labels.** Provide a localized `textFieldSearchProps.inputAriaLabel` for the input. The clear button defaults `ariaLabel` to `"Clear"` and the back button defaults `ariaLabel` to `"Back"`; override them through `textFieldSearchProps.clearButtonProps.ariaLabel` and `backButtonProps.ariaLabel` for localization. The cancel button renders `"Cancel"` as visible text; override `cancelButtonProps.children` with a localized string, which also updates its accessible name.
+- **Focus management.** For the `Inline` variant, move focus into the input when search opens and return focus to the control that opened search when it is dismissed. Set `textFieldSearchProps.autoFocus` to focus the input on mount, or pass `textFieldSearchProps.inputRef` to focus the input imperatively and to restore focus in `onClickCancelButton`.
+- **Escape to dismiss.** Not built in. Wire it through `textFieldSearchProps.inputProps.onKeyDown` (for example, call the same handler as `onClickCancelButton` when `event.key === 'Escape'`).
+- **Landmarks.** When this is the page's primary search, wrap the component in a `<header>` element or a `role="search"` landmark at the page level.
 
 ## Content guidelines
 

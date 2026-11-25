@@ -115,7 +115,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
           ),
         }}
       >
-        {CANCEL_LABEL}
+        {cancelButtonProps?.children ?? CANCEL_LABEL}
       </Button>
     </Box>
   );

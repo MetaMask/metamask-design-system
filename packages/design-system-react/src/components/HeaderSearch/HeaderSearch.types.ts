@@ -18,23 +18,35 @@ type HeaderSearchTextFieldSearchProps = Omit<TextFieldSearchProps, 'style'> & {
 
 /**
  * Back ButtonIcon prop bag. `iconName` and `onClick` are controlled by
- * HeaderSearch. `ariaLabel` defaults to `"Back"` in the implementation.
+ * HeaderSearch. `ariaLabel` defaults to `"Back"` in the implementation;
+ * override it here for localization.
  */
 type HeaderSearchBackButtonProps = Omit<
   ButtonIconProps,
-  'iconName' | 'onClick'
+  'iconName' | 'onClick' | 'ariaLabel'
 > & {
+  /**
+   * Accessible label for the back button. Defaults to `"Back"` in the
+   * implementation; override here to provide a localized label.
+   */
+  ariaLabel?: string;
   [key: `data-${string}`]: string | undefined;
 };
 
 /**
- * Cancel Button prop bag. `variant`, `onClick`, and `children` are controlled
- * by HeaderSearch.
+ * Cancel Button prop bag. `variant` and `onClick` are controlled by
+ * HeaderSearch. `children` defaults to `"Cancel"` in the implementation;
+ * override it here to provide a localized label.
  */
 type HeaderSearchCancelButtonProps = Omit<
   ButtonProps,
   'variant' | 'onClick' | 'children'
 > & {
+  /**
+   * Label for the cancel button. Defaults to `"Cancel"` in the
+   * implementation; override here to provide a localized label.
+   */
+  children?: ButtonProps['children'];
   [key: `data-${string}`]: string | undefined;
 };
 
@@ -74,8 +86,9 @@ export type HeaderSearchInlineProps = HeaderSearchInlinePropsShared &
      */
     onClickCancelButton: () => void;
     /**
-     * Optional props for the cancel `Button`. `variant`, `onClick`, and
-     * `children` are controlled by HeaderSearch.
+     * Optional props for the cancel `Button`. `variant` and `onClick` are
+     * controlled by HeaderSearch. `children` defaults to `"Cancel"` and can
+     * be overridden for localization.
      */
     cancelButtonProps?: HeaderSearchCancelButtonProps;
   };

@@ -98,6 +98,21 @@ describe('HeaderSearch', () => {
       ).toBeInTheDocument();
     });
 
+    it('defaults aria-label to Back when backButtonProps omits ariaLabel', () => {
+      const onClickBackButton = jest.fn();
+
+      render(
+        <HeaderSearch
+          variant={HeaderSearchVariant.Screen}
+          onClickBackButton={onClickBackButton}
+          textFieldSearchProps={mockTextFieldSearchProps}
+          backButtonProps={{ 'data-testid': 'back-button' }}
+        />,
+      );
+
+      expect(screen.getByRole('button', { name: 'Back' })).toBeInTheDocument();
+    });
+
     it('does not allow backButtonProps to override onClick', async () => {
       const user = userEvent.setup();
       const onClickBackButton = jest.fn();
@@ -180,6 +195,22 @@ describe('HeaderSearch', () => {
       );
 
       expect(screen.getByText('Cancel')).toBeInTheDocument();
+    });
+
+    it('allows cancelButtonProps.children to override the cancel label', () => {
+      const onClickCancelButton = jest.fn();
+
+      render(
+        <HeaderSearch
+          variant={HeaderSearchVariant.Inline}
+          onClickCancelButton={onClickCancelButton}
+          textFieldSearchProps={mockTextFieldSearchProps}
+          cancelButtonProps={{ children: 'Dismiss' }}
+        />,
+      );
+
+      expect(screen.queryByText('Cancel')).not.toBeInTheDocument();
+      expect(screen.getByText('Dismiss')).toBeInTheDocument();
     });
 
     it('applies data-testid to root container', () => {

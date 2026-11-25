@@ -138,6 +138,7 @@ export const CancelButtonProps: Story = {
         variant={HeaderSearchVariant.Inline}
         onClickCancelButton={noop}
         cancelButtonProps={{
+          children: 'Dismiss',
           'data-testid': 'header-search-cancel',
         }}
         textFieldSearchProps={{
