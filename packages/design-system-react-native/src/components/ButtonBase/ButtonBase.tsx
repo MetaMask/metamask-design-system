@@ -4,6 +4,7 @@ import {
   ButtonBaseSize,
   FontWeight,
   mergeTwClassName,
+  resolveClassName,
   TextColor,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
@@ -42,6 +43,7 @@ export const ButtonBase = ({
   isDisabled,
   isFullWidth,
   twClassName,
+  className,
   textClassName,
   iconClassName,
   style,
@@ -111,20 +113,6 @@ export const ButtonBase = ({
     return state;
   }, [isDisabled, isLoading]);
 
-  // Variant styling from `textClassName` is merged into the label's
-  // `twClassName`, which `Text` applies after the `color` prop. Re-assert the
-  // caller's color after the hook so `textProps.color` overrides the variant
-  // label color, matching web.
-  const getLabelTextTwClassName = (pressed: boolean) =>
-    mergeTwClassName(
-      mergeTwClassName(
-        'shrink grow-0 flex-wrap text-center',
-        textClassName ? textClassName(pressed) : undefined,
-      ),
-      mergeTwClassName(textProps?.color ?? '', textProps?.twClassName) ||
-        undefined,
-    );
-
   return (
     <ButtonAnimated
       disabled={isDisabled || isLoading}
@@ -136,11 +124,12 @@ export const ButtonBase = ({
       accessibilityState={accessibilityState}
       accessible
       style={({ pressed }) => {
-        // Evaluate custom className if it's a function
-        const customClassName =
+        const twClasses =
           typeof twClassName === 'function'
             ? twClassName(pressed)
             : twClassName;
+        const classes =
+          typeof className === 'function' ? className(pressed) : className;
 
         // Build button container styles
         const buttonStyles = tw.style(
@@ -155,8 +144,9 @@ export const ButtonBase = ({
           isDisabled ? 'opacity-50' : 'opacity-100',
           // Width - use self-start to prevent stretching when not full width
           isFullWidth ? 'w-full' : 'self-start',
-          // Custom classes
-          customClassName,
+          // Consumer classes last, className wins over twClassName
+          twClasses,
+          classes,
         );
 
         // Merge with additional styles if provided
@@ -174,10 +164,21 @@ export const ButtonBase = ({
       {...props}
     >
       {({ pressed }) => {
-        const { twClassName: loadingWrapperTw, ...restLoadingWrapper } =
-          loadingWrapperProps ?? {};
-        const { twClassName: contentWrapperTw, ...restContentWrapper } =
-          contentWrapperProps ?? {};
+        const {
+          className: loadingClassName,
+          twClassName: loadingWrapperTw,
+          ...restLoadingWrapper
+        } = loadingWrapperProps ?? {};
+        const {
+          className: contentClassName,
+          twClassName: contentWrapperTw,
+          ...restContentWrapper
+        } = contentWrapperProps ?? {};
+        const {
+          className: labelClassName,
+          twClassName: labelTwClassName,
+          ...restTextProps
+        } = textProps ?? {};
 
         return (
           <>
@@ -185,9 +186,10 @@ export const ButtonBase = ({
             {isLoading && (
               <Box
                 {...restLoadingWrapper}
-                twClassName={mergeTwClassName(
+                className={resolveClassName(
                   'absolute inset-0 flex items-center justify-center',
                   loadingWrapperTw,
+                  loadingClassName,
                 )}
               >
                 <Spinner
@@ -217,11 +219,11 @@ export const ButtonBase = ({
               alignItems={BoxAlignItems.Center}
               gap={hasAccessories ? 1 : 0}
               {...restContentWrapper}
-              twClassName={
-                isLoading
-                  ? mergeTwClassName('opacity-0', contentWrapperTw)
-                  : contentWrapperTw
-              }
+              className={resolveClassName(
+                isLoading ? 'opacity-0' : '',
+                contentWrapperTw,
+                contentClassName,
+              )}
             >
               {finalStartIconName ? (
                 <Icon
@@ -246,8 +248,22 @@ export const ButtonBase = ({
                   color: TextColor.TextDefault,
                   numberOfLines: 1,
                   ellipsizeMode: 'clip',
-                  ...textProps,
-                  twClassName: getLabelTextTwClassName(pressed),
+                  ...restTextProps,
+                  // `Text` applies `color` before class names, so variant
+                  // `textClassName` would hide `textProps.color`. Re-assert
+                  // the caller's color after that hook; `twClassName` and
+                  // `className` still come last.
+                  className: resolveClassName(
+                    mergeTwClassName(
+                      mergeTwClassName(
+                        'shrink grow-0 flex-wrap text-center',
+                        textClassName ? textClassName(pressed) : undefined,
+                      ),
+                      restTextProps.color,
+                    ),
+                    labelTwClassName,
+                    labelClassName,
+                  ),
                 }}
               >
                 {children}

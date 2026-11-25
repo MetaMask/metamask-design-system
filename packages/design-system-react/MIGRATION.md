@@ -48,7 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
-  - [From version 0.53.0 to 0.X.0](#from-version-0530-to-0x0)
+  - [From version 0.53.0 to 0.54.0](#from-version-0530-to-0540)
   - [From version 0.51.1 to 0.52.0](#from-version-0511-to-0520)
   - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
   - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
@@ -3637,9 +3637,9 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 
 ## Version Updates
 
-### From version 0.53.0 to 0.X.0
+### From version 0.53.0 to 0.54.0
 
-<a id="from-version-0530-to-0x0"></a>
+<a id="from-version-0530-to-0540"></a>
 
 #### Removed `ButtonHero`
 
@@ -3661,7 +3661,7 @@ import { ButtonHero, ButtonHeroSize } from '@metamask/design-system-react';
   Claim rewards
 </ButtonHero>;
 
-// After (0.X.0)
+// After (0.54.0)
 import { Button, ButtonSize } from '@metamask/design-system-react';
 
 <Button size={ButtonSize.Lg} onClick={handleSubmit} isFullWidth>

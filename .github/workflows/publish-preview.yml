@@ -1,25 +1,39 @@
 name: Publish a preview build
 
 on:
-  issue_comment:
-    types: created
+  workflow_dispatch:
+    inputs:
+      pull-request:
+        description: 'Pull request number to publish a preview build for. Mutually exclusive with "branch".'
+        required: false
+        type: number
+      branch:
+        description: 'Branch in this repository to publish a preview build for. Mutually exclusive with "pull-request".'
+        required: false
+        type: string
+        default: ''
+      dry-run:
+        description: 'Perform a dry run.'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
 
 jobs:
   publish-preview:
-    name: Publish build preview
+    name: Publish preview
     permissions:
       contents: read
+      id-token: write
       pull-requests: write
-    # issue_comment runs with repository secrets. The shared workflow builds
-    # the pull request without the NPM token, then publishes sanitized
-    # artifacts in a separate job. prepare-preview-builds still rewrites
-    # in-repo imports to the preview scope before that build.
-    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '@metamaskbot publish-preview') }}
-    uses: MetaMask/github-tools/.github/workflows/publish-preview.yml@5d993ac935eff3f248d2213bb2d6922ce9cb3510 # v1
+    uses: MetaMask/github-tools/.github/workflows/publish-preview-oidc.yml@c0006fff89d70f7b1063d47cabb7ab09b3782ba3 # v1
     with:
+      pull-request: ${{ fromJSON(inputs.pull-request || '0') }}
+      branch: ${{ inputs.branch }}
+      dry-run: ${{ inputs.dry-run }}
+      environment: npm-preview
       docs-url: 'https://github.com/MetaMask/metamask-design-system/blob/main/docs/contributing.md#testing-changes-to-packages-with-preview-builds'
       # The shared rename step only adds `name@^version` resolutions, which do
       # not match this repo's `workspace:^` dependencies. Build first so that
@@ -27,5 +41,3 @@ jobs:
       # before the shared rename and its `yarn install` run.
       rename-after-install-and-build: true
       build-command: 'yarn prepare-preview-builds @metamask-previews "$(git rev-parse --short HEAD)" && yarn build'
-    secrets:
-      PUBLISH_PREVIEW_NPM_TOKEN: ${{ secrets.PUBLISH_PREVIEW_NPM_TOKEN }}

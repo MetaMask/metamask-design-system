@@ -3,6 +3,7 @@ import {
   BoxAlignItems,
   BoxFlexDirection,
   FontWeight,
+  resolveClassName,
   TextColor,
   TextVariant,
 } from '@metamask/design-system-shared';
@@ -36,7 +37,8 @@ import type { TitleSubpageProps } from './TitleSubpage.types';
  * @param props.subtitleProps - Optional props merged into subtitle row `Text` when `subtitle` is a string
  * @param props.amountProps - Optional props merged into amount `Text` when `amount` is a string
  * @param props.bottomLabelProps - Optional props merged into bottom label `Text` when `bottomLabel` is a string
- * @param props.twClassName - Optional Tailwind classes on the root container
+ * @param props.className - Optional Tailwind classes on the root container, applied after `twClassName`
+ * @param props.twClassName - Optional Tailwind classes on the root container. Deprecated, use `className`
  *
  * @returns The rendered TitleSubpage layout.
  */
@@ -58,18 +60,29 @@ export const TitleSubpage: React.FC<TitleSubpageProps> = ({
   identityRowProps,
   titleColumnProps,
   bottomLabelWrapperProps,
+  className,
   twClassName = '',
   ...props
 }) => {
+  const {
+    className: identityClassName,
+    twClassName: identityTwClassName,
+    ...identityRest
+  } = identityRowProps ?? {};
+
   return (
-    <Box twClassName={twClassName} gap={1} {...props}>
+    <Box gap={1} {...props} twClassName={twClassName} className={className}>
       {/* Identity Row */}
       <Box
         flexDirection={BoxFlexDirection.Row}
         alignItems={BoxAlignItems.Center}
         gap={4}
-        twClassName="h-14"
-        {...identityRowProps}
+        {...identityRest}
+        className={resolveClassName(
+          'h-14',
+          identityTwClassName,
+          identityClassName,
+        )}
       >
         {titleAvatar}
         {/* Title and Subtitle Column */}

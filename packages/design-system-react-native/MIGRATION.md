@@ -4,7 +4,8 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Table of Contents
 
-- [From version 0.57.0 to 0.X.0](#from-version-0570-to-0x0)
+- [`twClassName` to `className`](#twclassname-to-classname)
+- [From version 0.57.0 to 0.58.0](#from-version-0570-to-0580)
 - [From version 0.56.0 to 0.57.0](#from-version-0560-to-0570)
 - [From version 0.54.0 to 0.55.0](#from-version-0540-to-0550)
 - [From version 0.51.0 to 0.52.0](#from-version-0510-to-0520)
@@ -86,9 +87,27 @@ This guide provides detailed instructions for migrating your project from one ve
 
 ## Version Updates
 
-### From version 0.57.0 to 0.X.0
+### `twClassName` to `className`
 
-<a id="from-version-0570-to-0x0"></a>
+`twClassName` is deprecated on `Box`, `Text`, `ButtonBase`, `Button`, `ButtonSemantic`, `FilterButton`, `SelectButton`, `BannerBase`, `Content`, `HeaderRoot`, `HeaderSearch`, `ListItem`, `SectionHeader`, `SegmentedControl`, `TabEmptyState`, `TextField`, `TitleAlert`, `TitleSubpage`, and `Toast`. It keeps working until 1.0.0. Other components still use `twClassName` until they are migrated.
+
+Rename the prop. A `twClassName` inside `descriptionProps` and `actionButtonProps` (`TabEmptyState`), `titleWrapperProps` (`TitleAlert`), and `identityRowProps` (`TitleSubpage`) now merges with the component's classes instead of replacing them:
+
+```tsx
+// Before
+<Box twClassName="mt-4 flex-1" />
+
+// After
+<Box className="mt-4 flex-1" />
+```
+
+If both props are passed during migration, classes merge in this order: the component's own classes, then `twClassName`, then `className`. `className` wins on conflicts, and the component's own classes are never dropped.
+
+The same rename applies inside prop bags such as `textProps`, `titleWrapperProps`, and `contentWrapperProps`.
+
+### From version 0.57.0 to 0.58.0
+
+<a id="from-version-0570-to-0580"></a>
 
 #### Removed `ButtonHero`
 
@@ -114,7 +133,7 @@ import {
   Claim winnings
 </ButtonHero>;
 
-// After (0.X.0)
+// After (0.58.0)
 import { Button, ButtonSize } from '@metamask/design-system-react-native';
 
 <Button size={ButtonSize.Lg} onPress={handleClaim} isFullWidth>
@@ -125,6 +144,59 @@ import { Button, ButtonSize } from '@metamask/design-system-react-native';
 **Impact:**
 
 - Any import of `ButtonHero`, `ButtonHeroProps`, or `ButtonHeroSize` fails to compile
+
+#### Removed `BoxRow` and `BoxColumn`
+
+`BoxRow` and `BoxColumn` are removed. They were deprecated in 0.57.0. Use `Box` directly. See [Deprecated `BoxRow` and `BoxColumn`](#from-version-0560-to-0570) for the full before/after mapping.
+
+**What changed:**
+
+- Removed the `BoxRow`, `BoxRowProps`, `BoxColumn`, and `BoxColumnProps` exports
+- Removed `BoxRowPropsShared` and `BoxColumnPropsShared` from `@metamask/design-system-shared`
+
+**Migration:**
+
+```tsx
+// Before (0.57.0)
+import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
+
+<BoxRow gap={2}>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</BoxRow>;
+
+<BoxColumn gap={4}>
+  <Text>Top</Text>
+  <Text>Bottom</Text>
+</BoxColumn>;
+
+// After (0.58.0)
+import {
+  Box,
+  BoxAlignItems,
+  BoxFlexDirection,
+} from '@metamask/design-system-react-native';
+
+<Box
+  flexDirection={BoxFlexDirection.Row}
+  alignItems={BoxAlignItems.Center}
+  gap={2}
+>
+  <Text>Left</Text>
+  <Text>Right</Text>
+</Box>;
+
+<Box flexDirection={BoxFlexDirection.Column} gap={4}>
+  <Text>Top</Text>
+  <Text>Bottom</Text>
+</Box>;
+```
+
+`BoxRow` applied `alignItems={BoxAlignItems.Center}` and `gap={1}` by default, so set them explicitly where you relied on them. `startAccessory`, `endAccessory`, `topAccessory`, and `bottomAccessory` become sibling children, and string children must be wrapped in `Text`.
+
+**Impact:**
+
+- Any import of `BoxRow`, `BoxRowProps`, `BoxColumn`, or `BoxColumnProps` fails to compile
 
 ### From version 0.56.0 to 0.57.0
 
@@ -1246,7 +1318,7 @@ If your React web usage relied on uncontrolled **`Input`** behavior, move that s
 
 **What changed:**
 
-- **`ButtonBase`** accepts **`loadingWrapperProps`** and **`contentWrapperProps`** to customize the loading overlay wrapper (**`Box`**) and the label row (**`BoxRow`**).
+- **`ButtonBase`** accepts **`loadingWrapperProps`** and **`contentWrapperProps`** to customize the loading overlay wrapper (**`Box`**) and the label row (**`Box`**).
 - **BREAKING:** **`ButtonBase`** no longer sets a default **`testID`** on the loading overlay wrapper. If tests or automation targeted the previous **`spinner-container`** id, pass **`loadingWrapperProps={{ testID: 'spinner-container' }}`** (or your own id) on **`ButtonBase`** or on a wrapper that forwards these props (for example, **`Button`**).
 
 **Migration:**
@@ -1588,7 +1660,7 @@ import { BoxRow, BoxColumn } from '@metamask/design-system-react-native';
 **What changed:**
 
 - `KeyValueRow` no longer accepts `field` and `value` configuration objects. Use flat props: `keyLabel`, `value`, optional `variant`, start/end accessories, optional `keyTextProps` / `valueTextProps`, and optional `keyEndButtonIconProps` / `valueEndButtonIconProps`.
-- Layout is handled inside the component (`BoxRow` / `Box`). The old stub API used to compose custom rows is removed.
+- Layout is handled inside the component (`Box`). The old stub API used to compose custom rows is removed.
 - `KeyValueRowVariant` now follows the ADR-0003 / ADR-0004 const-object + string-union pattern; React Native–specific props remain on `KeyValueRowProps` in this package.
 
 **Removed from the public API:**
@@ -2199,7 +2271,7 @@ Note: `ButtonFilter` inherits its size prop from `ButtonBaseProps`. Use `ButtonB
 
 ### ButtonHero Component
 
-The design system `ButtonHero` was removed. Migrate the legacy Mobile `ButtonHero` (`app/component-library/components-temp/Buttons/ButtonHero`) directly to `Button`. Primary is the default variant, so omit `variant` or pass `variant={ButtonVariant.Primary}`. See [From version 0.57.0 to 0.X.0](#from-version-0570-to-0x0) for the removal details.
+The design system `ButtonHero` was removed. Migrate the legacy Mobile `ButtonHero` (`app/component-library/components-temp/Buttons/ButtonHero`) directly to `Button`. Primary is the default variant, so omit `variant` or pass `variant={ButtonVariant.Primary}`. See [From version 0.57.0 to 0.58.0](#from-version-0570-to-0580) for the removal details.
 
 #### Breaking Changes
 
@@ -4769,10 +4841,10 @@ import {
 
 #### Blocked Patterns
 
-These patterns have no drop-in replacement in `@metamask/design-system-react-native`. Keep the legacy import (or rebuild with `Box` / `BoxRow` + `Text`) until the caller is refactored:
+These patterns have no drop-in replacement in `@metamask/design-system-react-native`. Keep the legacy import (or rebuild with `Box` + `Text`) until the caller is refactored:
 
-- **`KeyValueRowStubs` (`Root` / `Section` / `Label`)** — the legacy module exported sub-components for bespoke layouts. The design system does **not** expose these. Rebuild custom layouts using `Box`, `BoxRow`, and `Text` from `@metamask/design-system-react-native` directly.
-- **Three-or-more-column rows** — `KeyValueRow` renders exactly a key + value row. Compositions that previously nested multiple `KeyValueSection` instances must be rebuilt as plain `BoxRow` layouts.
+- **`KeyValueRowStubs` (`Root` / `Section` / `Label`)** — the legacy module exported sub-components for bespoke layouts. The design system does **not** expose these. Rebuild custom layouts using `Box` and `Text` from `@metamask/design-system-react-native` directly.
+- **Three-or-more-column rows** — `KeyValueRow` renders exactly a key + value row. Compositions that previously nested multiple `KeyValueSection` instances must be rebuilt as plain row `Box` layouts.
 - **Using legacy `KeyValueRowLabel` standalone** — the `KeyValueLabel` default export (plus its `useTooltipModal` wiring) is not re-exported. Rebuild with `Text` + a host-owned tooltip handler, or migrate the whole row to `KeyValueRow`.
 
 A sample of mobile call sites exercising these blocked patterns (not exhaustive — grep `components-temp/KeyValueRow` in `metamask-mobile` for the current full set, as the codebase moves fast):
@@ -4790,7 +4862,7 @@ Separately, the deprecated `TooltipSizes` re-export is consumed across additiona
 - MMDS `KeyValueRow` uses flat props (`keyLabel`, `value`, `*TextProps`, `*StartAccessory`, `*EndAccessory`, `*EndButtonIconProps`) instead of nested `field` / `value` objects.
 - Row height is controlled by `variant` (`KeyValueRowVariant.Summary` / `KeyValueRowVariant.Input`), not by caller-controlled styles.
 - Tooltips render a `ButtonIcon` trigger only — the host opens the modal in `onPress`.
-- `twClassName` is supported on the outer `BoxRow` for Tailwind overrides.
+- `twClassName` is supported on the outer `Box` for Tailwind overrides.
 - `KeyValueRowStubs`, `KeyValueRowFieldIconSides`, `KeyValueRowSectionAlignments`, `TooltipSizes`, `IconSizes`, and the matching types are removed.
 
 ### ListItem Component

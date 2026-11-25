@@ -1,7 +1,7 @@
 import {
-  AvatarBaseSize,
   AvatarBaseShape,
-  mergeTwClassName,
+  AvatarBaseSize,
+  resolveClassName,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
@@ -29,6 +29,11 @@ export const AvatarBase = ({
   ...props
 }: AvatarBaseProps) => {
   const tw = useTailwind();
+  const {
+    className: fallbackClassName,
+    twClassName: fallbackTwClassName,
+    ...fallbackTextRest
+  } = fallbackTextProps ?? {};
 
   return (
     <View
@@ -53,10 +58,11 @@ export const AvatarBase = ({
           color={TextColor.TextMuted}
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
-          {...fallbackTextProps}
-          twClassName={mergeTwClassName(
+          {...fallbackTextRest}
+          className={resolveClassName(
             'uppercase',
-            fallbackTextProps?.twClassName,
+            fallbackTwClassName,
+            fallbackClassName,
           )}
         >
           {fallbackText}

@@ -16,7 +16,16 @@ export type CheckboxProps = CheckboxPropsShared & {
   /**
    * Optional props passed to the container view wrapping the checkbox icon.
    */
-  checkboxContainerProps?: Omit<Partial<ViewProps>, 'children'>;
+  checkboxContainerProps?: Omit<Partial<ViewProps>, 'children'> & {
+    /**
+     * @deprecated Use `className` instead.
+     */
+    twClassName?: string;
+    /**
+     * Optional Tailwind classes. Merged after the checkbox container's own classes and `twClassName`, so `className` wins on conflicts.
+     */
+    className?: string;
+  };
 
   /**
    * Optional props to be passed to the check Icon component.

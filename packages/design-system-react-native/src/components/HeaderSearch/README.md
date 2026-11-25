@@ -178,7 +178,7 @@ Optional props passed to the inline variant’s `Button`. `variant`, `onPress`, 
   onPressCancelButton={() => setSearchOpen(false)}
   cancelButtonProps={{
     testID: 'search-cancel',
-    textProps: { twClassName: 'font-medium' },
+    textProps: { className: 'font-medium' },
   }}
   textFieldSearchProps={{
     inputAccessibilityLabel: 'Search',
@@ -190,7 +190,7 @@ Optional props passed to the inline variant’s `Button`. `variant`, `onPress`, 
 />
 ```
 
-### `twClassName`
+### `className`
 
 Merged with the component’s built-in root row classes (`height`, `flex-row`, spacing). Document overrides here rather than Storybook controls.
 
@@ -202,7 +202,7 @@ Merged with the component’s built-in root row classes (`height`, `flex-row`, s
 <HeaderSearch
   variant={HeaderSearchVariant.Screen}
   onPressBackButton={() => navigation.goBack()}
-  twClassName="border-b border-muted"
+  className="border-b border-muted"
   textFieldSearchProps={{
     inputAccessibilityLabel: 'Search',
     value: query,
@@ -213,9 +213,11 @@ Merged with the component’s built-in root row classes (`height`, `flex-row`, s
 />
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the root container with React Native styles. For token-aligned layout, prefer `twClassName`. Use `style` with `tw.style()` from the preset when you need conditionals or dynamic values.
+Use the `style` prop to customize the root container with React Native styles. For token-aligned layout, prefer `className`. Use `style` with `tw.style()` from the preset when you need conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

@@ -1,4 +1,4 @@
-import { mergeTwClassName } from '@metamask/design-system-shared';
+import { resolveClassName } from '@metamask/design-system-shared';
 import React from 'react';
 
 import {
@@ -22,40 +22,69 @@ export const TabEmptyState = ({
   onAction,
   children,
   style,
+  className,
   twClassName = '',
   ...props
-}: TabEmptyStateProps) => (
-  <Box
-    flexDirection={BoxFlexDirection.Column}
-    alignItems={BoxAlignItems.Center}
-    justifyContent={BoxJustifyContent.Center}
-    backgroundColor={BoxBackgroundColor.BackgroundDefault}
-    gap={3}
-    twClassName={mergeTwClassName('max-w-64', twClassName)}
-    style={style}
-    {...props}
-  >
-    {icon}
-    {description && (
-      <Text
-        variant={TextVariant.BodyMd}
-        color={TextColor.TextAlternative}
-        twClassName="text-center"
-        {...descriptionProps}
-      >
-        {description}
-      </Text>
-    )}
-    {actionButtonText && onAction && (
-      <Button
-        variant={ButtonVariant.Secondary}
-        onPress={onAction}
-        twClassName="self-center"
-        {...actionButtonProps}
-      >
-        {actionButtonText}
-      </Button>
-    )}
-    {children}
-  </Box>
-);
+}: TabEmptyStateProps) => {
+  const {
+    className: descriptionClassName,
+    twClassName: descriptionTwClassName,
+    ...descriptionRest
+  } = descriptionProps ?? {};
+  const {
+    className: actionClassName,
+    twClassName: actionTwClassName,
+    ...actionRest
+  } = actionButtonProps ?? {};
+  function getActionClassName(pressed: boolean) {
+    return resolveClassName(
+      'self-center',
+      typeof actionTwClassName === 'function'
+        ? actionTwClassName(pressed)
+        : actionTwClassName,
+      typeof actionClassName === 'function'
+        ? actionClassName(pressed)
+        : actionClassName,
+    );
+  }
+
+  return (
+    <Box
+      flexDirection={BoxFlexDirection.Column}
+      alignItems={BoxAlignItems.Center}
+      justifyContent={BoxJustifyContent.Center}
+      backgroundColor={BoxBackgroundColor.BackgroundDefault}
+      gap={3}
+      className={resolveClassName('max-w-64', twClassName, className)}
+      style={style}
+      {...props}
+    >
+      {icon}
+      {description && (
+        <Text
+          variant={TextVariant.BodyMd}
+          color={TextColor.TextAlternative}
+          {...descriptionRest}
+          className={resolveClassName(
+            'text-center',
+            descriptionTwClassName,
+            descriptionClassName,
+          )}
+        >
+          {description}
+        </Text>
+      )}
+      {actionButtonText && onAction && (
+        <Button
+          variant={ButtonVariant.Secondary}
+          onPress={onAction}
+          {...actionRest}
+          className={getActionClassName}
+        >
+          {actionButtonText}
+        </Button>
+      )}
+      {children}
+    </Box>
+  );
+};

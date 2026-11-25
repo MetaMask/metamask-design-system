@@ -1,3 +1,4 @@
+import { resolveClassName } from '@metamask/design-system-shared';
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../ButtonBase';
@@ -18,14 +19,17 @@ export const ButtonSemantic = ({
   startIconProps,
   endIconProps,
   isLoading = false,
+  className,
   twClassName = '',
   style,
   ...props
 }: ButtonSemanticProps) => {
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
-      const classNameStr =
+      const twClasses =
         typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+      const classes =
+        typeof className === 'function' ? className(pressed) : className;
 
       const bgClass =
         pressed || isLoading
@@ -36,9 +40,9 @@ export const ButtonSemantic = ({
           : (TWCLASSMAP_BUTTONSEMANTIC_BG[severity] ??
             TWCLASSMAP_BUTTONSEMANTIC_BG[ButtonSemanticSeverity.Success]);
 
-      return `${bgClass} ${classNameStr}`;
+      return resolveClassName(bgClass, twClasses, classes);
     },
-    [severity, isLoading, twClassName],
+    [severity, isLoading, twClassName, className],
   );
 
   const getTextClassName = useCallback(
@@ -55,7 +59,7 @@ export const ButtonSemantic = ({
       startIconProps={startIconProps}
       endIconProps={endIconProps}
       isLoading={isLoading}
-      twClassName={getContainerClassName}
+      className={getContainerClassName}
       textClassName={getTextClassName}
       iconClassName={getTextClassName}
       style={style}

@@ -126,4 +126,26 @@ describe('TabEmptyState', () => {
 
     expect(getByTestId('custom-button')).toBeDefined();
   });
+
+  it('keeps self-center when actionButtonProps classes are functions', () => {
+    const tw = jest.fn((_pressed: boolean) => 'mt-2');
+    const className = jest.fn((_pressed: boolean) => 'mt-4');
+    const { getByTestId } = render(
+      <TabEmptyState
+        actionButtonText="Add item"
+        onAction={mockOnAction}
+        actionButtonProps={{
+          testID: 'custom-button',
+          twClassName: tw,
+          className,
+        }}
+      />,
+    );
+
+    expect(getByTestId('custom-button')).toHaveStyle({
+      alignSelf: 'center',
+      marginTop: 16,
+    });
+    expect(tw).toHaveBeenCalled();
+  });
 });

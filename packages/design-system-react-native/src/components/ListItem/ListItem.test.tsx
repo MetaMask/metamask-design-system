@@ -260,6 +260,31 @@ describe('ListItem', () => {
     });
   });
 
+  describe('when className is provided', () => {
+    it.each([false, true])(
+      'overrides default padding (isInteractive: %s)',
+      (isInteractive) => {
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive={isInteractive as true}
+            title="Label"
+            className="px-6"
+            testID={ROOT_TEST_ID}
+          />,
+        );
+
+        expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(
+          tw.style(
+            'w-full px-4 py-3',
+            'min-h-[72px]',
+            'justify-center',
+            'px-6',
+          ),
+        );
+      },
+    );
+  });
+
   describe('when children are provided', () => {
     it('renders children below Content', () => {
       const { getByText, getByTestId } = render(
