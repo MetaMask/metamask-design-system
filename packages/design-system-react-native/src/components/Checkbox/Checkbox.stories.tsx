@@ -84,6 +84,19 @@ export const Label: Story = {
   ),
 };
 
+export const CheckboxContainerProps: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <CheckboxStory
+        isSelected={false}
+        label="Rounded square checkbox"
+        checkboxContainerProps={{ className: 'rounded' }}
+      />
+      <CheckboxStory isSelected={false} label="Circular checkbox" />
+    </View>
+  ),
+};
+
 export const Ref: Story = {
   render: () => {
     const [isSelected, setIsSelected] = useState(false);

@@ -2,6 +2,7 @@ import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
 
+import { Box } from '../Box';
 import { Icon, IconColor, IconSize } from '../Icon';
 import { ButtonAnimated } from '../temp-components/ButtonAnimated';
 import { Text, FontWeight, TextColor, TextVariant } from '../Text';
@@ -11,6 +12,7 @@ import type { MainActionButtonProps } from './MainActionButton.types';
 export const MainActionButton = ({
   iconName,
   label,
+  children,
   iconProps,
   labelProps,
   onPress,
@@ -52,6 +54,9 @@ export const MainActionButton = ({
           size={IconSize.Lg}
           color={IconColor.IconAlternative}
         />
+        {children ? (
+          <Box className="mt-0.5 w-full items-center">{children}</Box>
+        ) : null}
         <Text
           {...labelProps}
           variant={TextVariant.BodySm}

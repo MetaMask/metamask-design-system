@@ -172,6 +172,7 @@ import SidePanel from './SidePanel';
 import Sms from './Sms';
 import SnapsMobile from './SnapsMobile';
 import Snaps from './Snaps';
+import Snowflake from './Snowflake';
 import SoccerBall from './SoccerBall';
 import Sparkle from './Sparkle';
 import Speed from './Speed';
@@ -380,6 +381,7 @@ export const Icons = {
   Sms,
   SnapsMobile,
   Snaps,
+  Snowflake,
   SoccerBall,
   Sparkle,
   Speed,
