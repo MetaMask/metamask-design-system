@@ -1,7 +1,7 @@
 import type { TitleSubpagePropsShared } from '@metamask/design-system-shared';
 
 import type { BoxProps } from '../Box';
-import type { TextProps } from '../Text';
+import type { SensitiveTextProps } from '../SensitiveText';
 
 /**
  * Box prop bag for TitleSubpage layout slots. Mirrors HeaderBase / SectionHeader
@@ -13,9 +13,16 @@ type TitleSubpageBoxSlotProps = Omit<BoxProps, 'children' | 'asChild'> & {
 };
 
 /**
- * Text prop bag for string slots. Allows `data-testid` through `Partial`/`Omit`.
+ * SensitiveText prop bag for string slots. Allows `data-testid` through
+ * `Partial`/`Omit`, and exposes `isHidden` / `length` so a string slot can be
+ * privacy-masked like on React Native. `asChild` is omitted: string slots
+ * render their own semantic element (the amount is a `p`), and an override
+ * would silently change that.
  */
-type TitleSubpageTextSlotProps = Omit<Partial<TextProps>, 'children'> & {
+type TitleSubpageTextSlotProps = Omit<
+  Partial<SensitiveTextProps>,
+  'children' | 'asChild'
+> & {
   [key: `data-${string}`]: string | undefined;
 };
 
@@ -23,13 +30,18 @@ type TitleSubpageTextSlotProps = Omit<Partial<TextProps>, 'children'> & {
  * TitleSubpage component props (React).
  *
  * Extends {@link TitleSubpagePropsShared} (requires `title` and `titleAvatar`)
- * with React `Box` / `Text` passthroughs and `className` / `style` via
+ * with React `Box` / `SensitiveText` passthroughs and `className` / `style` via
  * {@link BoxProps}.
  *
  * `title` is omitted from {@link BoxProps} because the DOM `title` attribute
- * conflicts with the TitleSubpage `title` ReactNode prop.
+ * conflicts with the TitleSubpage `title` ReactNode prop. `asChild` is omitted
+ * because the root renders several rows and a Radix `Slot` cannot merge onto
+ * more than one child.
  */
-export type TitleSubpageProps = Omit<BoxProps, 'children' | 'title'> &
+export type TitleSubpageProps = Omit<
+  BoxProps,
+  'children' | 'title' | 'asChild'
+> &
   TitleSubpagePropsShared & {
     /**
      * Optional props spread onto the identity row {@link Box} after defaults
@@ -47,19 +59,23 @@ export type TitleSubpageProps = Omit<BoxProps, 'children' | 'title'> &
      */
     bottomLabelWrapperProps?: TitleSubpageBoxSlotProps;
     /**
-     * Optional props merged into the amount {@link Text} when `amount` is a string.
+     * Optional props merged into the amount {@link SensitiveText} when `amount`
+     * is a string; `isHidden: true` masks it like on React Native.
      */
     amountProps?: TitleSubpageTextSlotProps;
     /**
-     * Optional props merged into the title {@link Text} when `title` is a string.
+     * Optional props merged into the title {@link SensitiveText} when `title`
+     * is a string.
      */
     titleProps?: TitleSubpageTextSlotProps;
     /**
-     * Optional props merged into the subtitle {@link Text} when `subtitle` is a string.
+     * Optional props merged into the subtitle {@link SensitiveText} when
+     * `subtitle` is a string.
      */
     subtitleProps?: TitleSubpageTextSlotProps;
     /**
-     * Optional props merged into the bottom label {@link Text} when `bottomLabel` is a string.
+     * Optional props merged into the bottom label {@link SensitiveText} when
+     * `bottomLabel` is a string.
      */
     bottomLabelProps?: TitleSubpageTextSlotProps;
   };

@@ -1,6 +1,6 @@
 import { FontWeight, TextColor } from '@metamask/design-system-shared';
 import { render } from '@testing-library/react';
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { TWCLASSMAP_TEXT_FONTWEIGHT } from '../Text/Text.constants';
 
@@ -59,6 +59,51 @@ describe('TitleSubpage', () => {
       expect(identityRow).toHaveClass('flex-row');
       expect(identityRow).toHaveClass('items-center');
       expect(identityRow).toHaveClass('h-14');
+    });
+
+    it('lets identityRowProps.className override the default h-14', () => {
+      const { getByTestId } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Section"
+          identityRowProps={{
+            'data-testid': IDENTITY_ROW_TEST_ID,
+            className: 'h-16',
+          }}
+        />,
+      );
+
+      const identityRow = getByTestId(IDENTITY_ROW_TEST_ID);
+      expect(identityRow).toHaveClass('h-16');
+      expect(identityRow).not.toHaveClass('h-14');
+      expect(identityRow).toHaveClass('flex-row');
+    });
+
+    it('forwards titleColumnProps to the title column Box', () => {
+      const { getByTestId } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Section"
+          titleColumnProps={{ 'data-testid': 'title-subpage-title-column' }}
+        />,
+      );
+
+      expect(getByTestId('title-subpage-title-column')).toBeInTheDocument();
+    });
+
+    it('forwards bottomLabelWrapperProps to the bottom label row Box', () => {
+      const { getByTestId } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Section"
+          bottomLabel="0.002 ETH"
+          bottomLabelWrapperProps={{
+            'data-testid': 'title-subpage-bottom-label-row',
+          }}
+        />,
+      );
+
+      expect(getByTestId('title-subpage-bottom-label-row')).toBeInTheDocument();
     });
 
     it('renders string amount when provided', () => {
@@ -152,6 +197,64 @@ describe('TitleSubpage', () => {
       );
 
       expect(getByTestId(AMOUNT_TEST_ID)).toBeInTheDocument();
+    });
+
+    it('masks a string amount when amountProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Send"
+          amount="$4.42"
+          amountProps={{ isHidden: true }}
+        />,
+      );
+
+      expect(getByText('••••••')).toBeInTheDocument();
+      expect(queryByText('$4.42')).not.toBeInTheDocument();
+    });
+
+    it('masks a string subtitle when subtitleProps.isHidden is true', () => {
+      const { getByText, queryByText } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Send"
+          subtitle="Account 1"
+          subtitleProps={{ isHidden: true }}
+        />,
+      );
+
+      expect(getByText('••••••')).toBeInTheDocument();
+      expect(queryByText('Account 1')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('root container', () => {
+    it('forwards ref to the root div', () => {
+      const ref = createRef<HTMLDivElement>();
+      render(
+        <TitleSubpage
+          ref={ref}
+          titleAvatar={defaultTitleAvatar}
+          title="Test"
+        />,
+      );
+
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+    });
+
+    it('applies style to the root container', () => {
+      const { getByTestId } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Test"
+          data-testid={CONTAINER_TEST_ID}
+          style={{ marginTop: '16px' }}
+        />,
+      );
+
+      expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle({
+        marginTop: '16px',
+      });
     });
   });
 
