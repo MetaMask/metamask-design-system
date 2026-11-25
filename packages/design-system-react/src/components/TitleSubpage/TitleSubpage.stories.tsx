@@ -51,27 +51,23 @@ const TodayBottomLabelEndAccessory = () => (
 );
 
 /**
- * Pill badge: dot + label (e.g. network), for `titleEndAccessory`.
- * Label uses `TextAlternative`: `WarningDefault` on the warning-muted
- * background falls below the 4.5:1 contrast minimum in the light theme.
+ * Solid pill badge with a testnet label, for `titleEndAccessory`.
+ * `WarningInverse` on the `WarningDefault` fill passes 4.5:1 in both themes
+ * (5.05:1 light, 10.14:1 dark); the amber text on the muted fill measured
+ * 4.41:1 in light.
  *
  * @returns Story-only testnet badge UI.
  */
 const TestnetBadge = () => (
   <Box
-    flexDirection={BoxFlexDirection.Row}
-    alignItems={BoxAlignItems.Center}
-    gap={1}
-    backgroundColor={BoxBackgroundColor.WarningMuted}
-    className="rounded-full px-2 py-1"
+    backgroundColor={BoxBackgroundColor.WarningDefault}
+    paddingHorizontal={2}
+    paddingVertical={1}
+    className="rounded-full"
   >
-    <Box
-      backgroundColor={BoxBackgroundColor.WarningDefault}
-      className="size-2 shrink-0 rounded-full"
-    />
     <Text
       variant={TextVariant.BodySm}
-      color={TextColor.TextAlternative}
+      color={TextColor.WarningInverse}
       fontWeight={FontWeight.Medium}
     >
       Testnet

@@ -40,22 +40,19 @@ const TodayBottomLabelEndAccessory = () => (
 );
 
 /**
- * Pill badge: dot + label (e.g. network), for `titleEndAccessory`.
+ * Solid pill badge with a testnet label, for `titleEndAccessory`.
+ * `WarningInverse` on the `WarningDefault` fill passes 4.5:1 in both themes
+ * (5.05:1 light, 10.14:1 dark); the amber text on the muted fill measured
+ * 4.41:1 in light.
  * TODO: Temporary until a Tag component exists.
  *
  * @returns Story-only testnet badge UI.
  */
 const TestnetBadge = () => (
-  <Box
-    flexDirection={BoxFlexDirection.Row}
-    alignItems={BoxAlignItems.Center}
-    gap={1}
-    twClassName="rounded-full bg-warning-muted px-2 py-1"
-  >
-    <Box twClassName="h-2 w-2 shrink-0 rounded-full bg-warning-default" />
+  <Box className="rounded-full bg-warning-default px-2 py-1">
     <Text
       variant={TextVariant.BodySm}
-      color={TextColor.WarningDefault}
+      color={TextColor.WarningInverse}
       fontWeight={FontWeight.Medium}
     >
       Testnet
