@@ -117,7 +117,7 @@ export type MyComponentProps = ComponentProps<'div'> &
 **React Native-specific extensions:**
 
 - Extend `ViewProps` or `PressableProps`
-- Add `twClassName?: string`
+- Add `className?: string` (`twClassName` is deprecated until 1.0.0 — do not add it to new components)
 
 #### index.ts Pattern
 
@@ -363,7 +363,7 @@ See @.cursor/rules/component-architecture.md **Component-Scoped Prop Const Objec
 - [ ] Platform `index.ts` files export const objects directly from shared (single location)
 - [ ] Template types replaced with shared imports
 - [ ] React: Extends `ComponentProps<'element'>`, adds `className?: string`
-- [ ] React Native: Extends `ViewProps`/`PressableProps`, adds `twClassName?: string`
+- [ ] React Native: Extends `ViewProps`/`PressableProps`, adds `className?: string` (`twClassName` is deprecated until 1.0.0)
 - [ ] Event handlers use idiomatic names (onClick/onPress from base types)
 - [ ] Import ordering correct (shared before platform)
 

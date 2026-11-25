@@ -167,13 +167,14 @@ export {
 export type ButtonProps = ComponentProps<'button'> &
   ButtonPropsShared & { className?: string };
 
-// React Native: Re-export + extend with PressableProps + twClassName
+// React Native: Re-export + extend with PressableProps + className
+// (`twClassName` is deprecated until 1.0.0; do not add it to new components)
 export {
   ButtonVariant,
   type ButtonPropsShared,
 } from '@metamask/design-system-shared';
 export type ButtonProps = ButtonPropsShared &
-  PressableProps & { twClassName?: string };
+  PressableProps & { className?: string };
 ```
 
 **See complete implementation:** @packages/design-system-shared/src/types/BadgeStatus/
@@ -191,13 +192,13 @@ Separate shared design system concerns from platform-specific implementation con
 
 **What goes where:**
 
-| Concern                 | Location | Example                                      |
-| ----------------------- | -------- | -------------------------------------------- |
-| Visual variants, states | Shared   | `variant`, `size`, `isDisabled`, `isLoading` |
-| Component structure     | Shared   | `children`, `label`, `description`           |
-| Platform interaction    | Platform | `onClick`/`onPress`, event handlers          |
-| Platform styling        | Platform | `className`/`twClassName`                    |
-| Platform base types     | Platform | `ComponentProps<'div'>`/`ViewProps`          |
+| Concern                 | Location | Example                                                               |
+| ----------------------- | -------- | --------------------------------------------------------------------- |
+| Visual variants, states | Shared   | `variant`, `size`, `isDisabled`, `isLoading`                          |
+| Component structure     | Shared   | `children`, `label`, `description`                                    |
+| Platform interaction    | Platform | `onClick`/`onPress`, event handlers                                   |
+| Platform styling        | Platform | `className` (both platforms; `twClassName` is deprecated until 1.0.0) |
+| Platform base types     | Platform | `ComponentProps<'div'>`/`ViewProps`                                   |
 
 **Event handlers:**
 
@@ -209,7 +210,7 @@ Separate shared design system concerns from platform-specific implementation con
 
 - ❌ NO className/twClassName in shared
 - ✅ React: `className?: string` (platform layer)
-- ✅ React Native: `twClassName?: string` (platform layer)
+- ✅ React Native: `className?: string` (platform layer). `twClassName` is deprecated until 1.0.0 and only kept on components that do not accept `className` yet
 
 **Prop forwarding convention:**
 
@@ -224,15 +225,15 @@ Both React (Tailwind) and React Native (TWRNC) share the same design token class
 
 **Two patterns:**
 
-| Pattern        | Example                                  | Value is…                                                    | Used as…                                             |
-| -------------- | ---------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
-| Token identity | `TextColor.TextDefault = 'text-default'` | The class string itself (same on both platforms)             | `className={color}` / `twClassName={color}` directly |
-| Semantic value | `FontWeight.Bold = 'bold'`               | Abstract identifier (platforms need different class strings) | Mapped in platform `.constants.ts`                   |
+| Pattern        | Example                                  | Value is…                                                    | Used as…                                       |
+| -------------- | ---------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------- |
+| Token identity | `TextColor.TextDefault = 'text-default'` | The class string itself (same on both platforms)             | `className={color}` directly on both platforms |
+| Semantic value | `FontWeight.Bold = 'bold'`               | Abstract identifier (platforms need different class strings) | Mapped in platform `.constants.ts`             |
 
 ### Token identity constants (`TextColor`, `BoxBackgroundColor`, `BoxBorderColor`, etc.)
 
 - Values ARE the Tailwind/TWRNC class strings — identical across both platforms
-- Used directly: `className={color}` (React) / `twClassName={color}` (React Native)
+- Used directly: `className={color}` (React and React Native; `twClassName` is deprecated until 1.0.0)
 - ✅ Values live in shared and are used as-is on both platforms
 
 ### Platform-specific const objects
@@ -354,7 +355,7 @@ Both `Input` and `Text` are _consumers_ of `TextVariant` — neither owns it. Im
 - [ ] Shared interface named `ComponentNamePropsShared` (with "Shared" suffix)
 - [ ] Platform packages re-export and extend shared types
 - [ ] React: Extends `ComponentProps<'element'>`, adds `className?: string`
-- [ ] React Native: Extends `ViewProps`/`PressableProps`, adds `twClassName?: string`
+- [ ] React Native: Extends `ViewProps`/`PressableProps`, adds `className?: string` (`twClassName` is deprecated until 1.0.0)
 - [ ] Component `index.ts` exports directly from `@metamask/design-system-shared`
 - [ ] Platform `src/types/index.ts` does NOT re-export shared types
 - [ ] NO className/twClassName in shared package
