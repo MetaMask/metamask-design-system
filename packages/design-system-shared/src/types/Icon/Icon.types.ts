@@ -222,6 +222,7 @@ export const IconName = {
   Sms: 'Sms',
   SnapsMobile: 'SnapsMobile',
   Snaps: 'Snaps',
+  Snowflake: 'Snowflake',
   SoccerBall: 'SoccerBall',
   Sparkle: 'Sparkle',
   Speed: 'Speed',

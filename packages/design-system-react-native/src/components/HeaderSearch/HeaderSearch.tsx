@@ -1,4 +1,7 @@
-import { HeaderSearchVariant } from '@metamask/design-system-shared';
+import {
+  HeaderSearchVariant,
+  resolveClassName,
+} from '@metamask/design-system-shared';
 import React from 'react';
 
 import { Box } from '../Box';
@@ -54,6 +57,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     const {
       variant: _variant,
       textFieldSearchProps,
+      className,
       twClassName,
       onPressBackButton,
       backButtonProps,
@@ -63,11 +67,11 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     return (
       <Box
         {...screenBoxProps}
-        twClassName={
-          twClassName
-            ? `${baseTwClassName} ml-1 mr-4 gap-2 ${twClassName}`
-            : `${baseTwClassName} ml-1 mr-4 gap-2`
-        }
+        className={resolveClassName(
+          `${baseTwClassName} ml-1 mr-4 gap-2`,
+          twClassName,
+          className,
+        )}
       >
         <ButtonIcon
           size={ButtonIconSize.Md}
@@ -77,11 +81,12 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         />
         <TextFieldSearch
           {...(textFieldSearchProps as TextFieldSearchProps)}
-          twClassName={
-            textFieldSearchProps.twClassName
-              ? `flex-1 ${textFieldSearchProps.twClassName}`
-              : 'flex-1'
-          }
+          twClassName={undefined}
+          className={resolveClassName(
+            'flex-1',
+            textFieldSearchProps.twClassName,
+            textFieldSearchProps.className,
+          )}
         />
       </Box>
     );
@@ -90,6 +95,7 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   const {
     variant: _variant,
     textFieldSearchProps,
+    className,
     twClassName,
     onPressCancelButton,
     cancelButtonProps,
@@ -99,19 +105,20 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
   return (
     <Box
       {...inlineBoxProps}
-      twClassName={
-        twClassName
-          ? `${baseTwClassName} ml-4 ${twClassName}`
-          : `${baseTwClassName} ml-4`
-      }
+      className={resolveClassName(
+        `${baseTwClassName} ml-4`,
+        twClassName,
+        className,
+      )}
     >
       <TextFieldSearch
         {...(textFieldSearchProps as TextFieldSearchProps)}
-        twClassName={
-          textFieldSearchProps.twClassName
-            ? `flex-1 ${textFieldSearchProps.twClassName}`
-            : 'flex-1'
-        }
+        twClassName={undefined}
+        className={resolveClassName(
+          'flex-1',
+          textFieldSearchProps.twClassName,
+          textFieldSearchProps.className,
+        )}
       />
       <Button
         {...cancelButtonProps}
@@ -119,9 +126,12 @@ export const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         onPress={onPressCancelButton}
         textProps={{
           ...cancelButtonProps?.textProps,
-          twClassName: cancelButtonProps?.textProps?.twClassName
-            ? `text-default ${cancelButtonProps.textProps.twClassName}`
-            : 'text-default',
+          twClassName: undefined,
+          className: resolveClassName(
+            'text-default',
+            cancelButtonProps?.textProps?.twClassName,
+            cancelButtonProps?.textProps?.className,
+          ),
         }}
       >
         {CANCEL_LABEL}

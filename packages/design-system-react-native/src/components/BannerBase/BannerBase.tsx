@@ -9,6 +9,7 @@ import {
   FontWeight,
   IconName,
   mergeTwClassName,
+  resolveClassName,
   TextVariant,
 } from '@metamask/design-system-shared';
 import { typography } from '@metamask/design-tokens';
@@ -78,6 +79,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
   startAccessory,
   onClose,
   closeButtonProps,
+  className,
   twClassName,
   backgroundColor = BoxBackgroundColor.BackgroundDefault,
   ...props
@@ -156,11 +158,11 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
       paddingBottom={hasActionButtonBelow ? 4 : 3}
       paddingLeft={4}
       paddingRight={shouldShowCloseButton ? 2 : 4}
-      twClassName={mergeTwClassName('rounded-xl', twClassName)}
+      className={resolveClassName('rounded-xl', twClassName, className)}
     >
       {startAccessory}
 
-      <Box twClassName="flex-1" onLayout={handleContentLayout}>
+      <Box className="flex-1" onLayout={handleContentLayout}>
         {hasTitle &&
           (isTextContent(title) ? (
             <Text
@@ -175,7 +177,7 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
           ))}
 
         {hasDescription && (
-          <Box twClassName={hasTitle ? 'mt-0.5' : undefined}>
+          <Box className={hasTitle ? 'mt-0.5' : undefined}>
             {isTextContent(description) ? (
               <Text variant={TextVariant.BodySm} {...descriptionProps}>
                 {description}
@@ -195,11 +197,11 @@ export const BannerBase: React.FC<BannerBaseProps> = ({
             children
           ))}
 
-        {hasActionButtonBelow && <Box twClassName="mt-2">{actionButton}</Box>}
+        {hasActionButtonBelow && <Box className="mt-2">{actionButton}</Box>}
       </Box>
 
       {shouldShowActionButton && isActionButtonLayoutEnd && (
-        <Box twClassName="self-center">{actionButton}</Box>
+        <Box className="self-center">{actionButton}</Box>
       )}
 
       {shouldShowCloseButton && (

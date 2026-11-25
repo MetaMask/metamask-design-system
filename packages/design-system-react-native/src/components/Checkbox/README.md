@@ -123,7 +123,7 @@ const [isSelected, setIsSelected] = useState(false);
 
 ### `labelProps`
 
-Optional props to be passed to the label's Text component.
+Optional props to be passed to the label's Text component. Consumer `className` (or the deprecated `twClassName`) overrides the default left margin between the checkbox and the label.
 
 | TYPE                 | REQUIRED | DEFAULT     |
 | -------------------- | -------- | ----------- |
@@ -144,11 +144,22 @@ const [isSelected, setIsSelected] = useState(false);
 
 ### `checkboxContainerProps`
 
-Optional props passed to the container view wrapping the checkbox icon.
+Optional props passed to the container view wrapping the checkbox icon. Accepts `className` (or the deprecated `twClassName`) to override the container's default classes — for example, a square checkbox instead of the default circular shape — plus `style` for inline overrides. Consumer classes and styles are applied after the defaults.
 
-| TYPE                 | REQUIRED | DEFAULT     |
-| -------------------- | -------- | ----------- |
-| `Partial<ViewProps>` | No       | `undefined` |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `object` | No       | `undefined` |
+
+```tsx
+const [isSelected, setIsSelected] = useState(false);
+
+<Checkbox
+  isSelected={isSelected}
+  onChange={() => setIsEnabled(!isSelected)}
+  label="Square checkbox"
+  checkboxContainerProps={{ className: 'rounded-none' }}
+/>;
+```
 
 ---
 

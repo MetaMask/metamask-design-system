@@ -441,9 +441,9 @@ Optional props spread onto the bottom label row `Box` after defaults (a row with
 | ------------------------------------- | -------- | ----------- |
 | `Omit<Partial<BoxProps>, 'children'>` | No       | `undefined` |
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -462,7 +462,7 @@ import {
 // Add additional styles
 <TitleSubpage
   titleAvatar={<AvatarToken name="ethereum" size={AvatarTokenSize.Lg} />}
-  twClassName="mt-4"
+  className="mt-4"
   title="Send"
   amount="$4.42"
 />
@@ -470,15 +470,17 @@ import {
 // Override default styles
 <TitleSubpage
   titleAvatar={<AvatarToken name="ethereum" size={AvatarTokenSize.Lg} />}
-  twClassName="px-6"
+  className="px-6"
   title="Send"
   amount="$4.42"
 />
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

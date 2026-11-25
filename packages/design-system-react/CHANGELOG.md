@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.55.0]
+
+### Added
+
+- Added the `Snowflake` icon ([#1742](https://github.com/MetaMask/metamask-design-system/pull/1742))
+
+## [0.54.0]
+
+### Added
+
+- Added `SectionDivider` component for separating stacked sections (React parity with React Native) ([#1441](https://github.com/MetaMask/metamask-design-system/pull/1441), [#1704](https://github.com/MetaMask/metamask-design-system/pull/1704))
+  - Renders a semantic `<hr />` that stretches to the container width, draws a muted 1px top border (`BoxBorderColor.BorderMuted`), and adds 20px of space above and below (`marginVertical` of `5`)
+  - Accepts any `Box` prop (for example `marginVertical={0}` or `borderColor`) plus standard `hr` attributes, overridable through `className` or `style`; `asChild` and `children` are omitted because the component always renders an `hr`
+  - `borderWidth` maps each width to a static top-border class, so Tailwind emits the `border-t`, `border-t-2`, `border-t-4`, and `border-t-8` rules in consumer builds instead of dropping them ([#1704](https://github.com/MetaMask/metamask-design-system/pull/1704))
+
+### Changed
+
+- **BREAKING:** Removed the deprecated `ButtonHero` component ([#1725](https://github.com/MetaMask/metamask-design-system/pull/1725))
+  - The `ButtonHero`, `ButtonHeroProps`, and `ButtonHeroSize` exports are removed
+  - Use `Button` with the primary variant (the `Button` default), which covers the same use cases and follows the active theme instead of locking colors to the light theme
+  - See [Migration Guide](./MIGRATION.md#from-version-0530-to-0540)
+
+### Fixed
+
+- Fixed `SelectButton` label overflow on web ([#1714](https://github.com/MetaMask/metamask-design-system/pull/1714))
+  - With `textProps={{ ellipsis: false }}`, the label stays on one line and is clipped inside the fixed-height button instead of wrapping outside it, matching React Native
+- Aligned `SectionHeader` with React Native ([#1706](https://github.com/MetaMask/metamask-design-system/pull/1706))
+  - Pressed and hover feedback now uses 70% opacity
+  - `startIconName` and `endIconName` default to `IconSize.Md`, and `startIconProps` / `endIconProps` `className` merges with `shrink-0` instead of replacing it
+  - Structural `flexDirection`, `alignItems`, and `gap` are applied after spread props, so they can no longer be overridden accidentally
+
 ## [0.53.0]
 
 ### Added
@@ -744,7 +775,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full TypeScript support with type definitions and enums
 - Tailwind CSS integration with design token support
 
-[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.53.0...HEAD
+[Unreleased]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.55.0...HEAD
+[0.55.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.54.0...@metamask/design-system-react@0.55.0
+[0.54.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.53.0...@metamask/design-system-react@0.54.0
 [0.53.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.52.0...@metamask/design-system-react@0.53.0
 [0.52.0]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.1...@metamask/design-system-react@0.52.0
 [0.51.1]: https://github.com/MetaMask/metamask-design-system/compare/@metamask/design-system-react@0.51.0...@metamask/design-system-react@0.51.1

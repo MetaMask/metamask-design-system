@@ -23,7 +23,7 @@ import type { SectionHeaderProps } from './SectionHeader.types';
  * the root is focusable and clickable. Pressed and hover feedback use 70%
  * opacity. Hover applies on web only.
  *
- * Implemented with direct `Box` / `Text` / `Icon` (no `BoxRow`).
+ * Implemented with direct `Box` / `Text` / `Icon`.
  */
 export const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
   (

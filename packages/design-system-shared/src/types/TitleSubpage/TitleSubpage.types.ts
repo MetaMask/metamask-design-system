@@ -22,7 +22,7 @@ export type TitleSubpagePropsShared = {
   title: ReactNode;
   /**
    * Leading visual for the identity row (for example an avatar). On React Native this is passed as
-   * the `startAccessory` of the identity `BoxRow` (typically size the avatar to the design-spec 40×40 slot).
+   * the leading element of the identity row (typically size the avatar to the design-spec 40×40 slot).
    */
   titleAvatar: ReactNode;
   /**

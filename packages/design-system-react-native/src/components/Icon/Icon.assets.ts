@@ -172,6 +172,7 @@ import SidePanelSVG from './assets/side-panel.svg';
 import SmsSVG from './assets/sms.svg';
 import SnapsMobileSVG from './assets/snaps-mobile.svg';
 import SnapsSVG from './assets/snaps.svg';
+import SnowflakeSVG from './assets/snowflake.svg';
 import SoccerBallSVG from './assets/soccer-ball.svg';
 import SparkleSVG from './assets/sparkle.svg';
 import SpeedSVG from './assets/speed.svg';
@@ -384,6 +385,7 @@ export const assetByIconName: AssetByIconName = {
   Sms: SmsSVG,
   SnapsMobile: SnapsMobileSVG,
   Snaps: SnapsSVG,
+  Snowflake: SnowflakeSVG,
   SoccerBall: SoccerBallSVG,
   Sparkle: SparkleSVG,
   Speed: SpeedSVG,

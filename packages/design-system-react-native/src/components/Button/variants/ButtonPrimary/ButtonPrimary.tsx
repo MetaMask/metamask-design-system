@@ -1,3 +1,4 @@
+import { resolveClassName } from '@metamask/design-system-shared';
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../../../ButtonBase';
@@ -16,26 +17,32 @@ export const ButtonPrimary = ({
   isInverse = false,
   isLoading = false,
   twClassName = '',
+  className,
   style,
   ...props
 }: ButtonPrimaryProps) => {
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
-      const classNameStr =
+      const twClasses =
         typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+      const classes =
+        typeof className === 'function' ? className(pressed) : className;
 
-      if (isInverse && isDanger) {
-        return `${pressed || isLoading ? 'bg-default-pressed' : 'bg-default'} ${classNameStr}`;
+      let backgroundClass =
+        pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default';
+      if (isDanger && !isInverse) {
+        backgroundClass =
+          pressed || isLoading
+            ? 'bg-error-default-pressed'
+            : 'bg-error-default';
+      } else if (isInverse) {
+        backgroundClass =
+          pressed || isLoading ? 'bg-default-pressed' : 'bg-default';
       }
-      if (isDanger) {
-        return `${pressed || isLoading ? 'bg-error-default-pressed' : 'bg-error-default'} ${classNameStr}`;
-      }
-      if (isInverse) {
-        return `${pressed || isLoading ? 'bg-default-pressed' : 'bg-default'} ${classNameStr}`;
-      }
-      return `${pressed || isLoading ? 'bg-icon-default-pressed' : 'bg-icon-default'} ${classNameStr}`;
+
+      return resolveClassName(backgroundClass, twClasses, classes);
     },
-    [isInverse, isDanger, isLoading, twClassName],
+    [isInverse, isDanger, isLoading, twClassName, className],
   );
 
   const getTextClassName = useCallback(
@@ -63,7 +70,7 @@ export const ButtonPrimary = ({
       startIconProps={startIconProps}
       endIconProps={endIconProps}
       isLoading={isLoading}
-      twClassName={getContainerClassName}
+      className={getContainerClassName}
       textClassName={getTextClassName}
       iconClassName={getTextClassName}
       style={style}

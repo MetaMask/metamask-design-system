@@ -4,7 +4,7 @@ import {
   BoxBorderColor,
   ButtonSize,
   IconSize,
-  mergeTwClassName,
+  resolveClassName,
   TextColor,
 } from '@metamask/design-system-shared';
 import { Theme, useTheme } from '@metamask/design-system-twrnc-preset';
@@ -60,6 +60,7 @@ export const Toast: React.FC<ToastProps> = ({
   style,
   title,
   titleProps,
+  className,
   twClassName,
   ...props
 }) => {
@@ -110,7 +111,7 @@ export const Toast: React.FC<ToastProps> = ({
       style={[isLightTheme ? lightTheme.shadows.size.md : undefined, style]}
       title={title}
       titleProps={titleProps}
-      twClassName={mergeTwClassName('rounded-2xl', twClassName)}
+      className={resolveClassName('rounded-2xl', twClassName, className)}
     />
   );
 };
