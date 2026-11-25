@@ -14,11 +14,11 @@ The props contract is **`SelectButtonProps`** from **`@metamask/design-system-re
 
 ### `placeholder`
 
-Label text when **`value`** is **`undefined`** or **`null`**. An empty string **`""`** still counts as a selected label, not a placeholder.
+Optional label text shown when **`value`** is **`undefined`** or **`null`**. When neither **`value`** nor **`placeholder`** resolves to a non-empty string, no label is rendered; give the control an **`accessibilityLabel`** so it still has an accessible name.
 
-| TYPE     | REQUIRED | DEFAULT |
-| -------- | -------- | ------- |
-| `string` | Yes      | N/A     |
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
 
 ```tsx
 import { SelectButton } from '@metamask/design-system-react-native';
@@ -28,7 +28,7 @@ import { SelectButton } from '@metamask/design-system-react-native';
 
 ### `value`
 
-Optional selected label. When set to a non-null string, it replaces **`placeholder`** in the row.
+Optional selected label. When set to a non-null string, it replaces **`placeholder`** in the row. When the resolved label is **`undefined`**, **`null`**, or an empty string **`""`**, no label is rendered.
 
 | TYPE             | REQUIRED | DEFAULT     |
 | ---------------- | -------- | ----------- |
@@ -176,7 +176,7 @@ import {
 
 ### `textProps`
 
-Optional props passed to **`Text`** when the label is a string.
+Optional props passed to **`Text`** when the label is a string. The label truncates to one line with a tail ellipsis by default (`numberOfLines: 1`, `ellipsizeMode: 'tail'`); pass `ellipsizeMode` or `numberOfLines` through `textProps` to override it.
 
 | TYPE                                   | REQUIRED | DEFAULT     |
 | -------------------------------------- | -------- | ----------- |
@@ -247,9 +247,9 @@ import { SelectButton } from '@metamask/design-system-react-native';
 <SelectButton placeholder="Loading" isLoading onPress={() => {}} />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the root row. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the root row. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -262,15 +262,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the root row. These cl
 import { SelectButton } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<SelectButton onPress={() => {}} placeholder="With margin" twClassName="mt-4" />
+<SelectButton onPress={() => {}} placeholder="With margin" className="mt-4" />
 
 // Override default styles
-<SelectButton onPress={() => {}} placeholder="Wider padding" twClassName="px-6" />
+<SelectButton onPress={() => {}} placeholder="Wider padding" className="px-6" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the root with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the root with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

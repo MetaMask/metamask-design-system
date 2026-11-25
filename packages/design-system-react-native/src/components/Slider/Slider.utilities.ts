@@ -31,11 +31,11 @@ export type SliderColorStop = {
 
 // --- Track-percent primitives (worklet) ---
 
-export function clampTrackPercent(trackPercent: number): number {
+const clampTrackPercent = (trackPercent: number): number => {
   'worklet';
 
   return Math.max(0, Math.min(100, trackPercent));
-}
+};
 
 // --- Domain ↔ track-percent mappers (worklet) ---
 
@@ -47,11 +47,11 @@ export function clampTrackPercent(trackPercent: number): number {
  * @param maximumValue - Upper bound of the domain range.
  * @returns Track percent clamped to 0–100.
  */
-export function defaultMapValueToTrackPercent(
+const defaultMapValueToTrackPercent = (
   value: number,
   minimumValue: number,
   maximumValue: number,
-): number {
+): number => {
   'worklet';
 
   const range = maximumValue - minimumValue;
@@ -61,7 +61,7 @@ export function defaultMapValueToTrackPercent(
 
   const percent = ((value - minimumValue) / range) * 100;
   return clampTrackPercent(percent);
-}
+};
 
 /**
  * Linear default: track position → stepped domain value.
@@ -72,12 +72,12 @@ export function defaultMapValueToTrackPercent(
  * @param step - Step increment for rounding.
  * @returns Stepped domain value clamped to the range.
  */
-export function defaultMapTrackPercentToValue(
+const defaultMapTrackPercentToValue = (
   trackPercent: number,
   minimumValue: number,
   maximumValue: number,
   step: number,
-): number {
+): number => {
   'worklet';
 
   const range = maximumValue - minimumValue;
@@ -89,7 +89,7 @@ export function defaultMapTrackPercentToValue(
     (clampTrackPercent(trackPercent) / 100) * range + minimumValue;
   const stepped = Math.round(rawValue / step) * step;
   return Math.max(minimumValue, Math.min(maximumValue, stepped));
-}
+};
 
 /**
  * UI-thread entry: custom `mapTrackPercentToValue` or linear default.
@@ -101,13 +101,13 @@ export function defaultMapTrackPercentToValue(
  * @param mapTrackPercentToValue - Optional custom mapper.
  * @returns Domain value for the track position.
  */
-export function resolveTrackPercentToValue(
+const resolveTrackPercentToValue = (
   trackPercent: number,
   minimumValue: number,
   maximumValue: number,
   step: number,
   mapTrackPercentToValue?: (trackPercent: number) => number,
-): number {
+): number => {
   'worklet';
 
   if (mapTrackPercentToValue) {
@@ -120,7 +120,7 @@ export function resolveTrackPercentToValue(
     maximumValue,
     step,
   );
-}
+};
 
 /**
  * UI-thread entry: custom `mapValueToTrackPercent` or linear default.
@@ -131,12 +131,12 @@ export function resolveTrackPercentToValue(
  * @param mapValueToTrackPercent - Optional custom mapper.
  * @returns Track percent for the domain value.
  */
-export function resolveValueToTrackPercent(
+const resolveValueToTrackPercent = (
   value: number,
   minimumValue: number,
   maximumValue: number,
   mapValueToTrackPercent?: (value: number) => number,
-): number {
+): number => {
   'worklet';
 
   if (mapValueToTrackPercent) {
@@ -144,7 +144,7 @@ export function resolveValueToTrackPercent(
   }
 
   return defaultMapValueToTrackPercent(value, minimumValue, maximumValue);
-}
+};
 
 // --- Track-percent ↔ pixel position (worklet) ---
 
@@ -159,10 +159,10 @@ export function resolveValueToTrackPercent(
  * @param width - Track width in pixels.
  * @returns Thumb-center offset from the track start.
  */
-export function trackPercentToPosition(
+const trackPercentToPosition = (
   trackPercent: number,
   width: number,
-): number {
+): number => {
   'worklet';
 
   if (width === 0) {
@@ -171,7 +171,7 @@ export function trackPercentToPosition(
 
   const travel = Math.max(width - THUMB_SIZE, 0);
   return THUMB_SIZE / 2 + (clampTrackPercent(trackPercent) / 100) * travel;
-}
+};
 
 /**
  * Track percent for a thumb-center pixel. Touches outside the thumb's travel
@@ -181,10 +181,7 @@ export function trackPercentToPosition(
  * @param width - Track width in pixels.
  * @returns Track percent clamped to 0–100.
  */
-export function positionToTrackPercent(
-  position: number,
-  width: number,
-): number {
+const positionToTrackPercent = (position: number, width: number): number => {
   'worklet';
 
   const travel = width - THUMB_SIZE;
@@ -195,7 +192,7 @@ export function positionToTrackPercent(
   const minCenter = THUMB_SIZE / 2;
   const center = Math.max(minCenter, Math.min(width - minCenter, position));
   return clampTrackPercent(((center - minCenter) / travel) * 100);
-}
+};
 
 /**
  * Clamps a touch X to the thumb-center travel, so a drag cannot pull the thumb
@@ -205,7 +202,7 @@ export function positionToTrackPercent(
  * @param width - Track width in pixels.
  * @returns Clamped thumb-center position.
  */
-export function clampGesturePosition(position: number, width: number): number {
+const clampGesturePosition = (position: number, width: number): number => {
   'worklet';
 
   if (width === 0) {
@@ -215,7 +212,7 @@ export function clampGesturePosition(position: number, width: number): number {
   const minCenter = THUMB_SIZE / 2;
   const maxCenter = Math.max(minCenter, width - minCenter);
   return Math.max(minCenter, Math.min(position, maxCenter));
-}
+};
 
 // --- JS-thread domain ↔ track-percent ---
 
@@ -348,10 +345,10 @@ export function buildColorStops(
  * @param stops - Sorted color stops.
  * @returns Interpolated color string.
  */
-export function interpolateMarkColor(
+const interpolateMarkColor = (
   trackPercent: number,
   stops: readonly SliderColorStop[],
-): string {
+): string => {
   'worklet';
 
   if (stops.length === 0) {
@@ -371,7 +368,7 @@ export function interpolateMarkColor(
     outputRange,
     'RGB',
   );
-}
+};
 
 /**
  * Whether any mark defines a theme color.
@@ -425,3 +422,19 @@ export function clampValueToRange(
   const clamped = Math.max(minimumValue, Math.min(maximumValue, value));
   return Math.round(clamped / step) * step;
 }
+
+// Worklets must be local `const` arrow functions exported from this block.
+// `export function` worklets are `undefined` in the CJS build once consumers run
+// the worklets Babel plugin over dist, and inline `export const` makes worklets
+// capture the module's `exports` object. Enforced by `no-restricted-syntax`.
+export {
+  clampTrackPercent,
+  defaultMapValueToTrackPercent,
+  defaultMapTrackPercentToValue,
+  resolveTrackPercentToValue,
+  resolveValueToTrackPercent,
+  trackPercentToPosition,
+  positionToTrackPercent,
+  clampGesturePosition,
+  interpolateMarkColor,
+};

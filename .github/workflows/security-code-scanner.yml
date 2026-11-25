@@ -38,7 +38,6 @@ jobs:
         '**/test*/'
         docs/
         e2e/
-        merged-packages/
         node_modules
         storybook/
         test*/

@@ -18,7 +18,6 @@ const config = createConfig([
       '**/docs/**',
       '**/coverage/**',
       '**/storybook-static/**',
-      'merged-packages/**',
       '.yarn/**',
       'scripts/create-package/package-template/**',
       /**
@@ -200,11 +199,17 @@ const config = createConfig([
     },
   },
   {
-    files: ['scripts/*.ts', 'packages/*/scripts/**/*.ts'],
+    files: ['scripts/**/*.ts', 'packages/*/scripts/**/*.ts'],
     rules: {
       // Scripts may be self-executable and thus have hashbangs.
       'n/hashbang': 'off',
+      // These files are executed directly with Node, whose ES module
+      // resolution requires explicit file extensions on relative imports.
+      // Test files and templates are transformed or copied elsewhere, so
+      // they keep the TypeScript convention of extensionless imports.
+      'import-x/extensions': ['error', 'ignorePackages', { ts: 'always' }],
     },
+    ignores: ['**/*.test.ts', '**/ComponentName/**'],
   },
   {
     files: ['**/jest.environment.js'],
@@ -227,6 +232,35 @@ const config = createConfig([
     ignores: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.d.ts'],
     rules: {
       'import-x/no-default-export': 'error',
+    },
+  },
+  // Consumers run the react-native-worklets Babel plugin over the published
+  // dist. TypeScript's CJS emit hoists `exports.x = x` for function
+  // declarations above the plugin's `var x = <worklet>` rewrite, leaving the
+  // export `undefined`; inline `export const` rewrites intra-module calls to
+  // `exports.x`, so worklets capture the whole `exports` object.
+  {
+    files: ['packages/design-system-react-native/src/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: [
+            'Program > FunctionDeclaration',
+            'Program > ExportNamedDeclaration > FunctionDeclaration',
+            'Program > ExportDefaultDeclaration > FunctionDeclaration',
+            'Program > ExportNamedDeclaration > VariableDeclaration > VariableDeclarator > ArrowFunctionExpression',
+            'Program > ExportNamedDeclaration > VariableDeclaration > VariableDeclarator > FunctionExpression',
+          ]
+            .map(
+              (fn) =>
+                `${fn} > BlockStatement > ExpressionStatement:first-child[directive='worklet']`,
+            )
+            .join(', '),
+          message:
+            'Declare top-level worklets as local `const` arrow functions and export them from an `export { ... }` block. `export function` worklets break the CJS build, and inline `export const` worklets capture the `exports` object.',
+        },
+      ],
     },
   },
   // Tailwind ESLint for React Web

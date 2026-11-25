@@ -81,7 +81,7 @@ import {
 
 ### `titleWrapperProps`
 
-Optional props spread onto the title row [`Box`](../Box/README.md) (excluding `children`, which TitleAlert sets). The row defaults to centered items, `gap={1}`, centered main-axis alignment, and `self-stretch` width; `justifyContent` and `twClassName` from `titleWrapperProps` override those defaults when provided.
+Optional props spread onto the title row [`Box`](../Box/README.md) (excluding `children`, which TitleAlert sets). The row defaults to centered items, `gap={1}`, centered main-axis alignment, and `self-stretch` width; `justifyContent` and `className` from `titleWrapperProps` override those defaults when provided.
 
 | TYPE                                  | REQUIRED | DEFAULT     |
 | ------------------------------------- | -------- | ----------- |
@@ -130,9 +130,9 @@ import {
 />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the root container. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the root container. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -151,20 +151,22 @@ import {
 <TitleAlert
   severity={IconAlertSeverity.Warning}
   title="High price impact"
-  twClassName="mt-2"
+  className="mt-2"
 />;
 
 // Override default styles
 <TitleAlert
   severity={IconAlertSeverity.Warning}
   title="High price impact"
-  twClassName="px-6"
+  className="px-6"
 />;
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the root container with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the root container with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

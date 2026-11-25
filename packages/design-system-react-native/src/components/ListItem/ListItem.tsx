@@ -3,6 +3,7 @@ import {
   BoxFlexDirection,
   ContentVariant,
   mergeTwClassName,
+  resolveClassName,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
@@ -22,6 +23,7 @@ export const ListItem: React.FC<ListItemProps> = ({
   children,
   isInteractive = false,
   twClassName,
+  className,
   style,
   startAccessory,
   endAccessory,
@@ -63,7 +65,11 @@ export const ListItem: React.FC<ListItemProps> = ({
     'w-full px-4 py-3',
     rootSizeClassName,
   );
-  const rootTwClassName = mergeTwClassName(rootBaseClassName, twClassName);
+  const rootTwClassName = resolveClassName(
+    rootBaseClassName,
+    twClassName,
+    className,
+  );
 
   const wrapperStyle = style
     ? [tw.style(rootTwClassName), style]
@@ -87,7 +93,7 @@ export const ListItem: React.FC<ListItemProps> = ({
 
   const content = (
     <Content
-      twClassName={hasRowAccessories ? 'flex-1 min-w-0' : undefined}
+      className={hasRowAccessories ? 'min-w-0 flex-1' : undefined}
       variant={variant}
       avatar={avatar}
       title={title}

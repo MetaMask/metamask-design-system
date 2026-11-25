@@ -27,6 +27,7 @@ export const TextField = forwardRef<View, TextFieldProps>(
       startAccessory,
       endAccessory,
       style,
+      className,
       twClassName,
       testID,
       ...props
@@ -83,6 +84,7 @@ export const TextField = forwardRef<View, TextFieldProps>(
             !isDisabled && !isError && !isFocused && 'border-muted',
             isDisabled && 'opacity-50',
             twClassName,
+            className,
           ),
           style,
         ]}

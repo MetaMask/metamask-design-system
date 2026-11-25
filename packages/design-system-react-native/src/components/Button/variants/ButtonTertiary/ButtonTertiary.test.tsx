@@ -53,13 +53,6 @@ describe('ButtonTertiary', () => {
     );
   }
 
-  const createDynamicClassName = () => (pressed: boolean) => {
-    if (pressed) {
-      return 'border-2 border-warning-default';
-    }
-    return 'border border-alternative';
-  };
-
   it('renders default background', () => {
     const { getByTestId } = render(
       <ButtonTertiary size={ButtonBaseSize.Lg} testID="button-tertiary">
@@ -233,15 +226,16 @@ describe('ButtonTertiary', () => {
     expect(btn).toBeDefined();
   });
 
-  it('handles function-based twClassName', () => {
-    const dynamicClassName = createDynamicClassName();
-
+  it('handles function-based twClassName and className', () => {
     const { getByTestId } = render(
-      <ButtonTertiary twClassName={dynamicClassName} testID="button-tertiary">
+      <ButtonTertiary
+        twClassName={() => 'mt-2'}
+        className={() => 'mt-4'}
+        testID="button-tertiary"
+      >
         Dynamic Class
       </ButtonTertiary>,
     );
-    const btn = getByTestId('button-tertiary');
-    expect(btn).toBeDefined();
+    expect(getByTestId('button-tertiary')).toHaveStyle(tw`mt-4`);
   });
 });

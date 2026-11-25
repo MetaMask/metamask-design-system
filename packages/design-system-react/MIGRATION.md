@@ -48,6 +48,7 @@ This guide provides detailed instructions for migrating your project from one ve
   - [TextFieldSearch Component](#textfieldsearch-component)
   - [FormTextField Component](#formtextfield-component)
 - [Version Updates](#version-updates)
+  - [From version 0.53.0 to 0.54.0](#from-version-0530-to-0540)
   - [From version 0.51.1 to 0.52.0](#from-version-0511-to-0520)
   - [From version 0.49.0 to 0.50.0](#from-version-0490-to-0500)
   - [From version 0.48.0 to 0.49.0](#from-version-0480-to-0490)
@@ -3635,6 +3636,43 @@ The new `TextFieldSearch` reuses `TextField`'s Tailwind chrome instead of the `m
 `FormTextField` uses Tailwind utilities (`flex flex-col`) on the root and design-token classes on the composed `Label`/`TextField`/`HelpText` instead of the `mm-form-text-field` SCSS module. Custom container styles should be passed via `className`; legacy `mm-form-text-field--*` classes are no longer applied.
 
 ## Version Updates
+
+### From version 0.53.0 to 0.54.0
+
+<a id="from-version-0530-to-0540"></a>
+
+#### Removed `ButtonHero`
+
+`ButtonHero` is removed. Use `Button` with the primary variant instead. Primary is the `Button` default, so omit `variant` or pass `variant={ButtonVariant.Primary}` when you want it explicit.
+
+**What changed:**
+
+- Removed the `ButtonHero` component, `ButtonHeroProps`, and the `ButtonHeroSize` re-export
+- `Button` covers the same use case: primary styling with `size`, `isFullWidth`, `isLoading`, `loadingText`, `isDisabled`, and `startIconName`/`endIconName`
+- The scoped `ButtonHeroSize` alias is removed from `@metamask/design-system-shared`; use `ButtonSize`
+
+**Migration:**
+
+```tsx
+// Before (0.53.0)
+import { ButtonHero, ButtonHeroSize } from '@metamask/design-system-react';
+
+<ButtonHero size={ButtonHeroSize.Lg} onClick={handleSubmit} isFullWidth>
+  Claim rewards
+</ButtonHero>;
+
+// After (0.54.0)
+import { Button, ButtonSize } from '@metamask/design-system-react';
+
+<Button size={ButtonSize.Lg} onClick={handleSubmit} isFullWidth>
+  Claim rewards
+</Button>;
+```
+
+**Impact:**
+
+- Any import of `ButtonHero`, `ButtonHeroProps`, or `ButtonHeroSize` fails to compile
+- `ButtonHero` locked colors to the light theme; `Button` follows the active theme
 
 ### From version 0.51.1 to 0.52.0
 

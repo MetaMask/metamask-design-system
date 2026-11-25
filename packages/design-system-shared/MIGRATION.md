@@ -5,6 +5,7 @@ This guide provides detailed instructions for migrating your project from one ve
 ## Table of Contents
 
 - [Version Updates](#version-updates)
+  - [From version 0.46.0 to 0.47.0](#from-version-0460-to-0470)
   - [From version 0.43.0 to 0.44.0](#from-version-0430-to-0440)
   - [From version 0.34.0 to 0.35.0](#from-version-0340-to-0350)
   - [From version 0.29.0 to 0.30.0](#from-version-0290-to-0300)
@@ -14,6 +15,48 @@ This guide provides detailed instructions for migrating your project from one ve
   - [From version 0.11.0 to 0.12.0](#from-version-0110-to-0120)
 
 ## Version Updates
+
+### From version 0.46.0 to 0.47.0
+
+<a id="from-version-0460-to-0470"></a>
+
+#### Removed `ButtonHeroSize`
+
+`ButtonHeroSize` is removed. It was the scoped size alias of the deprecated `ButtonHero` component, which has been removed from `@metamask/design-system-react` and `@metamask/design-system-react-native` (see their migration guides). Use `Button` with the primary variant instead.
+
+**What changed:**
+
+- Removed the `ButtonHeroSize` const object and its type (it aliased `ButtonBaseSize`)
+- `ButtonBaseSize`, `ButtonSize`, and `ButtonSemanticSize` are unchanged
+
+**Migration:**
+
+Replace `ButtonHeroSize` with `ButtonSize` (or `ButtonBaseSize` for button primitives). The values (`'sm'`, `'md'`, `'lg'`) are identical:
+
+```tsx
+// Before (0.46.0)
+import { ButtonHeroSize } from '@metamask/design-system-shared';
+
+size={ButtonHeroSize.Lg}
+
+// After (0.47.0)
+import { ButtonSize } from '@metamask/design-system-shared';
+
+size={ButtonSize.Lg}
+```
+
+**Impact:**
+
+- Any import of `ButtonHeroSize` fails to compile
+- The `ButtonHero` component and `ButtonHeroProps` no longer exist in the platform packages
+
+#### Removed `BoxRowPropsShared` and `BoxColumnPropsShared`
+
+`BoxRowPropsShared` and `BoxColumnPropsShared` are removed. They were the shared prop types of the deprecated `BoxRow` and `BoxColumn` components, which have been removed from `@metamask/design-system-react-native` (see its migration guide). Use `Box` and `BoxPropsShared` instead.
+
+**Impact:**
+
+- Any import of `BoxRowPropsShared` or `BoxColumnPropsShared` fails to compile
 
 ### From version 0.43.0 to 0.44.0
 

@@ -1,3 +1,4 @@
+import { resolveClassName } from '@metamask/design-system-shared';
 import React, { useCallback } from 'react';
 
 import { ButtonBase } from '../../../ButtonBase';
@@ -16,18 +17,19 @@ export const ButtonTertiary = ({
   isInverse = false,
   isLoading = false,
   twClassName = '',
+  className,
   style,
   ...props
 }: ButtonTertiaryProps) => {
   const getContainerClassName = useCallback(
     (pressed: boolean): string => {
-      const classNameStr =
+      const twClasses =
         typeof twClassName === 'function' ? twClassName(pressed) : twClassName;
+      const classes =
+        typeof className === 'function' ? className(pressed) : className;
 
-      const baseClasses = `
-        ${isInverse && !isDanger ? 'border-[1.5px]' : 'border-0'}
-        ${classNameStr}
-      `;
+      const baseClasses =
+        isInverse && !isDanger ? 'border-[1.5px]' : 'border-0';
 
       let backgroundClass = '';
       let borderClass = '';
@@ -59,9 +61,13 @@ export const ButtonTertiary = ({
             : 'border-transparent';
       }
 
-      return `${backgroundClass} ${borderClass} ${baseClasses}`;
+      return resolveClassName(
+        `${backgroundClass} ${borderClass} ${baseClasses}`,
+        twClasses,
+        classes,
+      );
     },
-    [isInverse, isDanger, isLoading, twClassName],
+    [isInverse, isDanger, isLoading, twClassName, className],
   );
 
   const getTextClassName = useCallback(
@@ -87,7 +93,7 @@ export const ButtonTertiary = ({
       startIconProps={startIconProps}
       endIconProps={endIconProps}
       isLoading={isLoading}
-      twClassName={getContainerClassName}
+      className={getContainerClassName}
       textClassName={getTextClassName}
       iconClassName={getTextClassName}
       style={style}

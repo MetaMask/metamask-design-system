@@ -1,6 +1,6 @@
 import {
   BadgeCountSize,
-  mergeTwClassName,
+  resolveClassName,
 } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
@@ -24,6 +24,11 @@ export const BadgeCount = ({
   ...props
 }: BadgeCountProps) => {
   const tw = useTailwind();
+  const {
+    className: textClassName,
+    twClassName: textTwClassName,
+    ...textRest
+  } = textProps ?? {};
 
   return (
     <View
@@ -41,8 +46,12 @@ export const BadgeCount = ({
         variant={MAP_BADGECOUNT_SIZE_TEXTVARIANT[size]}
         color={TextColor.ErrorInverse}
         fontWeight={FontWeight.Medium}
-        {...textProps}
-        twClassName={mergeTwClassName('leading-0', textProps?.twClassName)}
+        {...textRest}
+        className={resolveClassName(
+          'leading-0',
+          textTwClassName,
+          textClassName,
+        )}
       >
         {count > max ? `${max}+` : `${count}`}
       </Text>
