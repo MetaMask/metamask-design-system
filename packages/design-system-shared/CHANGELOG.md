@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Uncategorized
+
+- feat: add Snowflake icon ([#1742](https://github.com/MetaMask/metamask-design-system/pull/1742))
+- feat: add className and deprecate twClassName ([#1692](https://github.com/MetaMask/metamask-design-system/pull/1692))
+
 ## [0.47.0]
 
 ### Changed
