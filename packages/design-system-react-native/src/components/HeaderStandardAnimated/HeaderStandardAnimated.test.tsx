@@ -1,5 +1,6 @@
 // Third party dependencies.
-import { render } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import type { SharedValue } from 'react-native-reanimated';
 
@@ -151,5 +152,40 @@ describe('HeaderStandardAnimated', () => {
     it('is set for debugging', () => {
       expect(HeaderStandardAnimated.displayName).toBe('HeaderStandardAnimated');
     });
+  });
+});
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <HeaderStandardAnimated
+        {...defaultProps}
+        title="Title"
+        testID={CONTAINER_TEST_ID}
+        twClassName="mt-8"
+        className="mt-2"
+      />,
+    );
+
+    expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle(twClassNames`mt-2`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <HeaderStandardAnimated
+        {...defaultProps}
+        title="Title"
+        testID={CONTAINER_TEST_ID}
+        twClassName="mt-8"
+      />,
+    );
+
+    expect(getByTestId(CONTAINER_TEST_ID)).toHaveStyle(twClassNames`mt-8`);
   });
 });

@@ -176,3 +176,31 @@ describe('Tag', () => {
     });
   });
 });
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <Tag testID="tag" twClassName="mt-8" className="mt-2">
+        Content
+      </Tag>,
+    );
+
+    expect(getByTestId('tag')).toHaveStyle(twClassNames`mt-2`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <Tag testID="tag" twClassName="mt-8">
+        Content
+      </Tag>,
+    );
+
+    expect(getByTestId('tag')).toHaveStyle(twClassNames`mt-8`);
+  });
+});

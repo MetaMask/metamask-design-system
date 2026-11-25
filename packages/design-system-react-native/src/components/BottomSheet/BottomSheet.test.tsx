@@ -16,6 +16,8 @@ let capturedDialogOnClose: ((hasPendingAction?: boolean) => void) | undefined;
 let capturedDialogOnOpen: ((hasPendingAction?: boolean) => void) | undefined;
 const mockCloseDialog = jest.fn();
 const mockOpenDialog = jest.fn();
+let capturedDialogClassName: string | undefined;
+let capturedDialogTwClassName: string | undefined;
 
 jest.mock('../BottomSheetDialog', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -27,15 +29,21 @@ jest.mock('../BottomSheetDialog', () => {
           children,
           onClose,
           onOpen,
+          className,
+          twClassName,
         }: {
           children?: unknown;
           onClose?: (hasPendingAction?: boolean) => void;
           onOpen?: (hasPendingAction?: boolean) => void;
+          className?: string;
+          twClassName?: string;
         },
         ref: unknown,
       ) => {
         capturedDialogOnClose = onClose;
         capturedDialogOnOpen = onOpen;
+        capturedDialogClassName = className;
+        capturedDialogTwClassName = twClassName;
         useImperativeHandle(ref, () => ({
           onCloseDialog: (callback?: () => void) => {
             mockCloseDialog();
@@ -390,5 +398,23 @@ describe('BottomSheet', () => {
 
       expect(mockCloseDialog).toHaveBeenCalledTimes(1);
     });
+  });
+});
+
+describe('when className is provided', () => {
+  beforeEach(() => {
+    capturedDialogClassName = undefined;
+    capturedDialogTwClassName = undefined;
+  });
+
+  it('forwards className and deprecated twClassName to the dialog', () => {
+    render(
+      <BottomSheet twClassName="mt-8" className="mt-2">
+        <View />
+      </BottomSheet>,
+    );
+
+    expect(capturedDialogTwClassName).toBe('mt-8');
+    expect(capturedDialogClassName).toBe('mt-2');
   });
 });

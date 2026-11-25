@@ -2,7 +2,8 @@ import {
   BadgeWrapperPositionAnchorShape,
   BadgeWrapperPosition,
 } from '@metamask/design-system-shared';
-import { render } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { Text } from '../Text';
@@ -132,5 +133,42 @@ describe('BadgeWrapper', () => {
       width: 8,
       height: 8,
     });
+  });
+});
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <BadgeWrapper
+        badge={<Text>Badge</Text>}
+        testID="badge-wrapper"
+        twClassName="mt-8"
+        className="mt-2"
+      >
+        <Text>Anchor</Text>
+      </BadgeWrapper>,
+    );
+
+    expect(getByTestId('badge-wrapper')).toHaveStyle(twClassNames`mt-2`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <BadgeWrapper
+        badge={<Text>Badge</Text>}
+        testID="badge-wrapper"
+        twClassName="mt-8"
+      >
+        <Text>Anchor</Text>
+      </BadgeWrapper>,
+    );
+
+    expect(getByTestId('badge-wrapper')).toHaveStyle(twClassNames`mt-8`);
   });
 });

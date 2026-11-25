@@ -370,6 +370,7 @@ describe('BottomSheetDialog', () => {
       'bg-elevated1',
       'rounded-t-[32px] overflow-hidden border border-muted border-b-0',
       undefined,
+      undefined,
     );
   });
 
@@ -384,6 +385,7 @@ describe('BottomSheetDialog', () => {
       'bg-elevated1',
       'rounded-t-[32px] overflow-hidden border border-muted border-b-0',
       undefined,
+      undefined,
     );
   });
 
@@ -397,5 +399,41 @@ describe('BottomSheetDialog', () => {
     );
     expect(getByText('Android Content')).toBeDefined();
     Platform.OS = originalOS;
+  });
+});
+
+describe('when className is provided', () => {
+  it('applies className after twClassName on the sheet container', () => {
+    render(
+      <BottomSheetDialog
+        testID="bottom-sheet-dialog"
+        twClassName="mt-8"
+        className="mt-2"
+      >
+        <Text>Child</Text>
+      </BottomSheetDialog>,
+    );
+
+    expect(mockStyle).toHaveBeenCalledWith(
+      'bg-elevated1',
+      'rounded-t-[32px] overflow-hidden border border-muted border-b-0',
+      'mt-8',
+      'mt-2',
+    );
+  });
+
+  it('applies deprecated twClassName on the sheet container', () => {
+    render(
+      <BottomSheetDialog testID="bottom-sheet-dialog" twClassName="mt-8">
+        <Text>Child</Text>
+      </BottomSheetDialog>,
+    );
+
+    expect(mockStyle).toHaveBeenCalledWith(
+      'bg-elevated1',
+      'rounded-t-[32px] overflow-hidden border border-muted border-b-0',
+      'mt-8',
+      undefined,
+    );
   });
 });

@@ -2,7 +2,8 @@ import {
   AvatarGroupSize,
   AvatarGroupVariant,
 } from '@metamask/design-system-shared';
-import { render } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import type { AvatarAccountProps } from '../AvatarAccount';
@@ -236,5 +237,40 @@ describe('AvatarGroup', () => {
         />,
       ),
     ).toThrow('Invalid Avatar Variant: InvalidVariant.');
+  });
+});
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <AvatarGroup
+        variant={AvatarGroupVariant.Token}
+        avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
+        testID="avatar-group"
+        twClassName="mt-8"
+        className="mt-2"
+      />,
+    );
+
+    expect(getByTestId('avatar-group')).toHaveStyle(twClassNames`mt-2`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <AvatarGroup
+        variant={AvatarGroupVariant.Token}
+        avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
+        testID="avatar-group"
+        twClassName="mt-8"
+      />,
+    );
+
+    expect(getByTestId('avatar-group')).toHaveStyle(twClassNames`mt-8`);
   });
 });

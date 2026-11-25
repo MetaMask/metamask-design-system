@@ -1,4 +1,5 @@
-import { render, fireEvent } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { View } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
@@ -190,5 +191,42 @@ describe('AvatarFavicon Component', () => {
     const avatarBase = getByTestId('avatar-base');
     // AvatarBase style is passed as an array; our custom style should be the second element.
     expect(avatarBase.props.style[1]).toStrictEqual(customStyle);
+  });
+});
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <AvatarFavicon
+        src={{ uri: 'https://example.com/logo.png' }}
+        testID="avatar-favicon-classes"
+        twClassName="mt-8"
+        className="mt-2"
+      />,
+    );
+
+    expect(getByTestId('avatar-favicon-classes')).toHaveStyle(
+      twClassNames`mt-2`,
+    );
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <AvatarFavicon
+        src={{ uri: 'https://example.com/logo.png' }}
+        testID="avatar-favicon-classes"
+        twClassName="mt-8"
+      />,
+    );
+
+    expect(getByTestId('avatar-favicon-classes')).toHaveStyle(
+      twClassNames`mt-8`,
+    );
   });
 });

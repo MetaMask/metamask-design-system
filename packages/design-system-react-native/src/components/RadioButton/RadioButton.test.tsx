@@ -168,3 +168,27 @@ describe('RadioButton', () => {
     expect(root).toHaveStyle({ margin: 8 });
   });
 });
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <RadioButton testID="radio-root" twClassName="mt-8" className="mt-2" />,
+    );
+
+    expect(getByTestId('radio-root')).toHaveStyle(twClassNames`mt-2`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <RadioButton testID="radio-root" twClassName="mt-8" />,
+    );
+
+    expect(getByTestId('radio-root')).toHaveStyle(twClassNames`mt-8`);
+  });
+});

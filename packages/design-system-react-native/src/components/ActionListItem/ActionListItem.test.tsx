@@ -1,4 +1,5 @@
-import { fireEvent, render } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { fireEvent, render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { Icon, IconName, IconSize } from '../Icon';
@@ -311,5 +312,38 @@ describe('ActionListItem', () => {
       expect(getByText('Complex Label')).toBeDefined();
       expect(getByText('Complex Description')).toBeDefined();
     });
+  });
+});
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <ActionListItem
+        label="Label"
+        testID="action-list-item"
+        twClassName="mt-8"
+        className="mt-2"
+      />,
+    );
+
+    expect(getByTestId('action-list-item')).toHaveStyle(twClassNames`mt-2`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <ActionListItem
+        label="Label"
+        testID="action-list-item"
+        twClassName="mt-8"
+      />,
+    );
+
+    expect(getByTestId('action-list-item')).toHaveStyle(twClassNames`mt-8`);
   });
 });

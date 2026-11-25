@@ -414,3 +414,38 @@ describe('KeyValueRow', () => {
     });
   });
 });
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <KeyValueRow
+        keyLabel="K"
+        value="V"
+        testID="key-value-row"
+        twClassName="mt-8"
+        className="mt-2"
+      />,
+    );
+
+    expect(getByTestId('key-value-row')).toHaveStyle(twClassNames`mt-2`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <KeyValueRow
+        keyLabel="K"
+        value="V"
+        testID="key-value-row"
+        twClassName="mt-8"
+      />,
+    );
+
+    expect(getByTestId('key-value-row')).toHaveStyle(twClassNames`mt-8`);
+  });
+});

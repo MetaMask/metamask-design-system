@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { Animated } from 'react-native';
 
@@ -72,5 +73,29 @@ describe('Spinner', () => {
 
       expect(stop).toHaveBeenCalledTimes(1);
     });
+  });
+});
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <Spinner testID="spinner-root" twClassName="mt-8" className="mt-2" />,
+    );
+
+    expect(getByTestId('spinner-root')).toHaveStyle(twClassNames`mt-2`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <Spinner testID="spinner-root" twClassName="mt-8" />,
+    );
+
+    expect(getByTestId('spinner-root')).toHaveStyle(twClassNames`mt-8`);
   });
 });

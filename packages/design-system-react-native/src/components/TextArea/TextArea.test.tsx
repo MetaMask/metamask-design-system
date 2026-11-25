@@ -500,3 +500,32 @@ describe('TextArea', () => {
     });
   });
 });
+
+describe('when className is provided', () => {
+  let twClassNames: ReturnType<typeof useTailwind>;
+
+  beforeAll(() => {
+    twClassNames = renderHook(() => useTailwind()).result.current;
+  });
+
+  it('applies className after twClassName and component classes', () => {
+    const { getByTestId } = render(
+      <TextArea
+        value=""
+        testID="text-area-classes"
+        twClassName="mt-8"
+        className="mt-2"
+      />,
+    );
+
+    expect(getByTestId('text-area-classes')).toHaveStyle(twClassNames`mt-2`);
+  });
+
+  it('applies deprecated twClassName on its own', () => {
+    const { getByTestId } = render(
+      <TextArea value="" testID="text-area-classes" twClassName="mt-8" />,
+    );
+
+    expect(getByTestId('text-area-classes')).toHaveStyle(twClassNames`mt-8`);
+  });
+});
