@@ -20,7 +20,6 @@ import {
 ```
 
 <Canvas of={TitleSubpageStories.Default} />
-<Controls />
 
 ## Props
 
@@ -177,7 +176,7 @@ Optional node to the right of `subtitle`. Only renders when the subtitle row is 
 
 ### `amount`
 
-Optional primary amount line below the title and optional subtitle. The amount row renders when `amount` is truthy. When `amount` is a string, it uses `TextVariant.DisplayLg` (merged with `amountProps`) and renders as a `p` element: display typography without heading semantics, so the component keeps a single heading (the title). Pass a `SensitiveText` node when the amount needs privacy masking.
+Optional primary amount line below the title and optional subtitle. The amount row renders when `amount` is truthy. When `amount` is a string, it uses `TextVariant.DisplayLg` (merged with `amountProps`) and renders as a `p` element: display typography without heading semantics, so the component keeps a single heading (the title). String slots render through `SensitiveText`, so `amountProps={{ isHidden: true }}` masks the amount with bullets, matching React Native.
 
 <table>
   <thead>
@@ -312,7 +311,7 @@ Optional custom bottom row when `bottomLabel` is not truthy.
 
 ### `amountProps` / `titleProps` / `subtitleProps` / `bottomLabelProps`
 
-Optional props merged into the corresponding `Text` when that slot is a string. Use for `data-testid` or typography overrides.
+Optional props merged into the corresponding `SensitiveText` when that slot is a string. Use for `data-testid`, typography overrides, or privacy masking (`isHidden: true` shows bullets instead of the content; `length` sets how many).
 
 <table>
   <thead>
@@ -325,7 +324,7 @@ Optional props merged into the corresponding `Text` when that slot is a string. 
   <tbody>
     <tr>
       <td align="left">
-        <code>Omit&lt;Partial&lt;TextProps&gt;, 'children'&gt;</code>
+        <code>Omit&lt;Partial&lt;SensitiveTextProps&gt;, 'children' | 'asChild'&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -350,7 +349,7 @@ Optional props spread onto the corresponding layout `Box` after defaults. `child
   <tbody>
     <tr>
       <td align="left">
-        <code>Omit&lt;Partial&lt;BoxProps&gt;, 'children'&gt;</code>
+        <code>Omit&lt;Partial&lt;BoxProps&gt;, 'children' | 'asChild'&gt;</code>
       </td>
       <td align="left">No</td>
       <td align="left">
@@ -362,7 +361,7 @@ Optional props spread onto the corresponding layout `Box` after defaults. `child
 
 ### `className`
 
-Use the `className` prop to add Tailwind CSS classes to the root. Classes merge with the component defaults via `twMerge`.
+Use the `className` prop to add Tailwind CSS classes to the root `Box`. The root has no default classes of its own, so classes are applied as-is (merged with the `Box` internals via `twMerge`).
 
 <table>
   <thead>
@@ -393,6 +392,55 @@ Use the `className` prop to add Tailwind CSS classes to the root. Classes merge 
   amount="$4.42"
 />;
 ```
+
+### `style`
+
+The `style` prop should primarily be used for dynamic inline styles that cannot be achieved with `className` alone. For static styles, prefer using `className` with Tailwind classes.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>object</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Accessibility
+
+- A string `title` renders as an `h4` (`TextVariant.HeadingSm`), and the component renders no other heading: a string `amount` renders as a `p`, so heading order stays valid when the component is composed into a page. When the surrounding page needs a different title level, pass a `title` node and set the element with `asChild`:
+
+```tsx
+import { Text, TextVariant, TitleSubpage } from '@metamask/design-system-react';
+
+<TitleSubpage
+  titleAvatar={<AvatarToken name="ethereum" size={AvatarTokenSize.Lg} />}
+  title={
+    <Text variant={TextVariant.HeadingSm} asChild>
+      <h2>USD Coin</h2>
+    </Text>
+  }
+/>;
+```
+
+- String slots render through `SensitiveText`, so `titleProps`, `subtitleProps`, `amountProps`, or `bottomLabelProps` with `isHidden: true` mask the content with bullets.
+- The `*EndAccessory` icons in the story examples (for example `IconName.Info`) are decorative and hidden from assistive tech. An accessory that carries meaning needs an accessible name (for example an `aria-label` on the icon or a text label).
+
+## Component API
+
+<Controls of={TitleSubpageStories.Default} />
 
 ## References
 
