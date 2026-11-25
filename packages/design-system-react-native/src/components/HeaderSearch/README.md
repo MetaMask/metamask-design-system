@@ -166,11 +166,11 @@ Optional props passed to the screen variant’s `ButtonIcon`. `iconName` and `on
 
 ### `cancelButtonProps`
 
-Optional props passed to the inline variant’s `Button`. `variant`, `onPress`, and `children` are controlled by the component.
+Optional props passed to the inline variant’s `Button`. `variant` and `onPress` are set by the component. `children` defaults to `"Cancel"`; override it here to provide a localized label.
 
-| TYPE                                                      | REQUIRED | DEFAULT     |
-| --------------------------------------------------------- | -------- | ----------- |
-| `Omit<ButtonProps, 'variant' \| 'onPress' \| 'children'>` | No       | `undefined` |
+| TYPE                                                                                               | REQUIRED | DEFAULT     |
+| -------------------------------------------------------------------------------------------------- | -------- | ----------- |
+| `Omit<ButtonProps, 'variant' \| 'onPress' \| 'children'> & { children?: ButtonProps['children'] }` | No       | `undefined` |
 
 ```tsx
 <HeaderSearch

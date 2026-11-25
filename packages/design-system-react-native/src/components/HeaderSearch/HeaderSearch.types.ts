@@ -32,7 +32,17 @@ export type HeaderSearchScreenProps = HeaderSearchScreenPropsShared &
 export type HeaderSearchInlineProps = HeaderSearchInlinePropsShared &
   HeaderSearchBaseProps & {
     onPressCancelButton: () => void;
-    cancelButtonProps?: Omit<ButtonProps, 'variant' | 'onPress' | 'children'>;
+    /**
+     * Optional props for the cancel `Button`. `variant` and `onPress` are
+     * controlled by HeaderSearch. `children` defaults to `"Cancel"` and can
+     * be overridden for localization.
+     */
+    cancelButtonProps?: Omit<
+      ButtonProps,
+      'variant' | 'onPress' | 'children'
+    > & {
+      children?: ButtonProps['children'];
+    };
   };
 
 /**

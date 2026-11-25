@@ -194,3 +194,10 @@ export type { SelectButtonProps } from './SelectButton';
 
 export { SectionDivider } from './SectionDivider';
 export type { SectionDividerProps } from './SectionDivider';
+
+export { HeaderSearch, HeaderSearchVariant } from './HeaderSearch';
+export type {
+  HeaderSearchProps,
+  HeaderSearchScreenProps,
+  HeaderSearchInlineProps,
+} from './HeaderSearch';
