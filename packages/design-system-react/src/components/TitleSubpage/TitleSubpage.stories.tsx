@@ -52,6 +52,8 @@ const TodayBottomLabelEndAccessory = () => (
 
 /**
  * Pill badge: dot + label (e.g. network), for `titleEndAccessory`.
+ * Label uses `TextAlternative`: `WarningDefault` on the warning-muted
+ * background falls below the 4.5:1 contrast minimum in the light theme.
  *
  * @returns Story-only testnet badge UI.
  */
@@ -69,7 +71,7 @@ const TestnetBadge = () => (
     />
     <Text
       variant={TextVariant.BodySm}
-      color={TextColor.WarningDefault}
+      color={TextColor.TextAlternative}
       fontWeight={FontWeight.Medium}
     >
       Testnet
