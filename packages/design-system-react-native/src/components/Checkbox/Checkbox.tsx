@@ -1,3 +1,4 @@
+import { resolveClassName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, {
   forwardRef,
@@ -77,6 +78,12 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
     useImperativeHandle(ref, () => ({ toggle: handlePress }), [handlePress]);
 
     const tw = useTailwind();
+    const {
+      twClassName: containerTwClassName,
+      className: containerClassName,
+      style: containerStyle,
+      ...containerProps
+    } = checkboxContainerProps ?? {};
     const twContainerClassNames = tw.style(
       'flex-row items-center',
       isDisabled ? 'opacity-50' : 'opacity-100',
@@ -126,10 +133,15 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
         {({ pressed }) => (
           <>
             <AnimatedView
-              {...checkboxContainerProps}
+              {...containerProps}
               style={[
-                tw`${getCheckboxContainerStyle(pressed)} flex size-[22px] items-center justify-center rounded-full border-2`,
+                tw.style(
+                  `${getCheckboxContainerStyle(pressed)} flex size-[22px] items-center justify-center rounded-full border-2`,
+                  containerTwClassName,
+                  containerClassName,
+                ),
                 { transform: [{ scale: scaleAnim }] },
+                containerStyle,
               ]}
             >
               {/* Always render icon, opacity driven by iconAnim */}
@@ -144,7 +156,15 @@ export const Checkbox = forwardRef<{ toggle: () => void }, CheckboxProps>(
             </AnimatedView>
             {label ? (
               <TextOrChildren
-                textProps={{ ...labelProps, twClassName: 'ml-3' }}
+                textProps={{
+                  ...labelProps,
+                  twClassName: undefined,
+                  className: resolveClassName(
+                    'ml-3',
+                    labelProps?.twClassName,
+                    labelProps?.className,
+                  ),
+                }}
               >
                 {label}
               </TextOrChildren>
