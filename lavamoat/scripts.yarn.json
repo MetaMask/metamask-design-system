@@ -1,0 +1,8 @@
+{
+  "notes": "Use this one ONLY for scripts that are only creating nested Yarn processes, e.g., a composition of multiple other scripts via `yarn something && yarn something-else`. The broad read access covers the Node.js and Yarn installs (e.g. the Corepack cache) that the nested processes need to start.",
+  "extends": "./scripts.base.json",
+  "nodeOptions": {
+    "--allow-fs-read": ["/"],
+    "--allow-child-process": true
+  }
+}

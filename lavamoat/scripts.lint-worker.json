@@ -1,0 +1,10 @@
+{
+  "notes": "Same as scripts.lint.json, plus worker threads: eslint-plugin-prettier runs Prettier synchronously through a synckit worker.",
+  "extends": "./scripts.base.json",
+  "nodeOptions": {
+    "--allow-fs-read": ["/"],
+    "--allow-child-process": true,
+    "--allow-worker": true,
+    "--allow-addons": true
+  }
+}

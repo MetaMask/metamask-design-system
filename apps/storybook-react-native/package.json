@@ -80,5 +80,8 @@
   "engines": {
     "node": ">=24"
   },
-  "installConfig": {}
+  "installConfig": {},
+  "scriptsConfig": {
+    "*": "lavamoat/scripts.unsafe.json"
+  }
 }

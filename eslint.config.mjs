@@ -18,7 +18,10 @@ const config = createConfig([
       '**/docs/**',
       '**/coverage/**',
       '**/storybook-static/**',
+      '**/rn-storybook-static/**',
+      'merged-packages/**',
       '.yarn/**',
+      'lavamoat/*.js',
       'scripts/create-package/package-template/**',
       /**
        * Design System specific ignores
