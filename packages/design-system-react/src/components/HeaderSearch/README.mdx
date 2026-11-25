@@ -1,0 +1,392 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as HeaderSearchStories from './HeaderSearch.stories';
+
+# HeaderSearch
+
+HeaderSearch is a header row that combines `TextFieldSearch` with either a back icon (`Screen` variant) or a tertiary **Cancel** action (`Inline` variant). Props are a discriminated union on `variant`.
+
+```tsx
+import {
+  HeaderSearch,
+  HeaderSearchVariant,
+} from '@metamask/design-system-react';
+
+<HeaderSearch
+  variant={HeaderSearchVariant.Screen}
+  onClickBackButton={handleBack}
+  textFieldSearchProps={{
+    inputAriaLabel: 'Search',
+    value: searchText,
+    onChange: (event) => setSearchText(event.target.value),
+    clearButtonOnClick: () => setSearchText(''),
+    placeholder: 'Search',
+  }}
+/>;
+```
+
+<Canvas of={HeaderSearchStories.Default} />
+
+## When to use
+
+- Use **`Screen`** when the search field sits on its own route or full-width header and users expect a **back** control.
+- Use **`Inline`** when search is toggled **inside** an existing screen and users dismiss it with **Cancel**.
+- Prefer this component over composing `Box`, `ButtonIcon`, and `TextFieldSearch` by hand when you want consistent spacing and height.
+
+## Props
+
+The component extends root layout props from `Box` (except `children`). Required handlers depend on `variant`.
+
+### `variant`
+
+Selects layout and primary chrome: back button versus cancel button.
+
+Available values:
+
+- `HeaderSearchVariant.Screen` — `ButtonIcon` with `ArrowLeft` on the start edge.
+- `HeaderSearchVariant.Inline` — `Button` (tertiary) labeled **Cancel** on the end edge.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>HeaderSearchVariant</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import {
+  HeaderSearch,
+  HeaderSearchVariant,
+} from '@metamask/design-system-react';
+
+<HeaderSearch
+  variant={HeaderSearchVariant.Screen}
+  onClickBackButton={() => {}}
+  textFieldSearchProps={{
+    inputAriaLabel: 'Search',
+    value: '',
+    onChange: () => {},
+    clearButtonOnClick: () => {},
+    placeholder: 'Search',
+  }}
+/>;
+
+<HeaderSearch
+  variant={HeaderSearchVariant.Inline}
+  onClickCancelButton={() => {}}
+  textFieldSearchProps={{
+    inputAriaLabel: 'Search',
+    value: '',
+    onChange: () => {},
+    clearButtonOnClick: () => {},
+    placeholder: 'Search',
+  }}
+/>;
+```
+
+<Canvas of={HeaderSearchStories.Variant} />
+
+### `textFieldSearchProps`
+
+Forwarded to `TextFieldSearch` (same contract as that component, except `style` is omitted so layout stays consistent).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;TextFieldSearchProps, 'style'&gt;</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<HeaderSearch
+  variant={HeaderSearchVariant.Screen}
+  onClickBackButton={() => history.back()}
+  textFieldSearchProps={{
+    inputAriaLabel: 'Search',
+    value: query,
+    onChange: (event) => setQuery(event.target.value),
+    clearButtonOnClick: () => setQuery(''),
+    placeholder: 'Search tokens, sites, URLs',
+  }}
+/>
+```
+
+### `onClickBackButton`
+
+Called when the screen variant’s back `ButtonIcon` is clicked.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
+      <td align="left">Yes, when <code>variant</code> is <code>Screen</code></td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<HeaderSearch
+  variant={HeaderSearchVariant.Screen}
+  onClickBackButton={() => history.back()}
+  textFieldSearchProps={{
+    inputAriaLabel: 'Search',
+    value: query,
+    onChange: (event) => setQuery(event.target.value),
+    clearButtonOnClick: () => setQuery(''),
+    placeholder: 'Search',
+  }}
+/>
+```
+
+### `onClickCancelButton`
+
+Called when the inline variant’s **Cancel** `Button` is clicked.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>() =&gt; void</code>
+      </td>
+      <td align="left">Yes, when <code>variant</code> is <code>Inline</code></td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<HeaderSearch
+  variant={HeaderSearchVariant.Inline}
+  onClickCancelButton={() => setSearchOpen(false)}
+  textFieldSearchProps={{
+    inputAriaLabel: 'Search',
+    value: query,
+    onChange: (event) => setQuery(event.target.value),
+    clearButtonOnClick: () => setQuery(''),
+    placeholder: 'Search',
+  }}
+/>
+```
+
+### `backButtonProps`
+
+Optional props passed to the screen variant’s `ButtonIcon`. `iconName` and `onClick` are set by the component and cannot be overridden via this object. Defaults `ariaLabel` to `"Back"`; override here for localization.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;ButtonIconProps, 'iconName' | 'onClick'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<HeaderSearch
+  variant={HeaderSearchVariant.Screen}
+  onClickBackButton={() => history.back()}
+  backButtonProps={{ ariaLabel: 'Go back' }}
+  textFieldSearchProps={{
+    inputAriaLabel: 'Search',
+    value: query,
+    onChange: (event) => setQuery(event.target.value),
+    clearButtonOnClick: () => setQuery(''),
+    placeholder: 'Search',
+  }}
+/>
+```
+
+<Canvas of={HeaderSearchStories.BackButtonProps} />
+
+### `cancelButtonProps`
+
+Optional props passed to the inline variant’s `Button`. `variant`, `onClick`, and `children` are controlled by the component.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Omit&lt;ButtonProps, 'variant' | 'onClick' | 'children'&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<HeaderSearch
+  variant={HeaderSearchVariant.Inline}
+  onClickCancelButton={() => setSearchOpen(false)}
+  cancelButtonProps={{
+    'data-testid': 'search-cancel',
+    textProps: { className: 'font-medium' },
+  }}
+  textFieldSearchProps={{
+    inputAriaLabel: 'Search',
+    value: query,
+    onChange: (event) => setQuery(event.target.value),
+    clearButtonOnClick: () => setQuery(''),
+    placeholder: 'Search',
+  }}
+/>
+```
+
+<Canvas of={HeaderSearchStories.CancelButtonProps} />
+
+### `className`
+
+Merged with the component’s built-in root row classes (`height`, spacing). Document overrides here rather than Storybook controls.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+<HeaderSearch
+  variant={HeaderSearchVariant.Screen}
+  onClickBackButton={() => history.back()}
+  className="border-b border-muted"
+  textFieldSearchProps={{
+    inputAriaLabel: 'Search',
+    value: query,
+    onChange: (event) => setQuery(event.target.value),
+    clearButtonOnClick: () => setQuery(''),
+    placeholder: 'Search',
+  }}
+/>
+```
+
+### `style`
+
+Use the `style` prop sparingly for dynamic CSS that cannot be expressed with `className`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>React.CSSProperties</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+Other `Box` props are also forwarded to the root where applicable.
+
+## Migration from Extension
+
+| Old (Extension local) | New (MMDS React) | Notes |
+| --------------------- | ---------------- | ----- |
+| `onClickBackButton` / `onClickCancelButton` | Same | Keep web `onClick*` naming |
+| Inline cancel = `ButtonIcon` Close | Tertiary **Cancel** `Button` | Matches React Native MMDS |
+| `textFieldSearchProps.onChangeText` adapter | Native `onChange` / `clearButtonOnClick` | Use React `TextFieldSearch` props directly |
+| `HeaderSearchVariant` enum | Shared const object | Import from `@metamask/design-system-react` |
+
+## Content guidelines
+
+- `textFieldSearchProps.placeholder`: sentence case with imperative starters such as `"Search"`
+- Button labels: sentence case, no period (`Cancel`)
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
+
+<Controls />
