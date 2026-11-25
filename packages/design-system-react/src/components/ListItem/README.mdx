@@ -6,7 +6,7 @@ import * as ListItemStories from './ListItem.stories';
 
 ListItem is a padded list row for settings, asset lists, and menus. It wraps [Content](../Content/README.mdx) in a `Box` shell (`px-4 py-3`) and owns row shell accessories (`startAccessory`, `endAccessory`). For the inner row layout without padding, click handling, or shell accessories, use [Content](../Content/README.mdx) directly.
 
-The row root is transparent by default so it inherits the surface behind it. Place list items inside a parent that sets the list background (for example a `Box` or page section). Interactive rows apply a semi-transparent `active:bg-pressed` tint while pressed, which reads correctly over different parent backgrounds without per-row color setup.
+The row root is transparent by default so it inherits the surface behind it. Place list items inside a parent that sets the list background (for example a `Box` or page section). Interactive rows apply `hover:bg-hover` while hovered and a semi-transparent `active:bg-pressed` tint while pressed, which reads correctly over different parent backgrounds without per-row color setup.
 
 ```tsx
 import {
@@ -33,9 +33,9 @@ import {
 
 ListItem does not apply a default row background. Define the list surface on the parent container and keep rows transparent so press feedback stays consistent across the list.
 
-When `isInteractive` is `true`, the row applies `active:bg-pressed` while pressed—a general-purpose tint meant to layer over the parent background. In most layouts you do not need to set row background or pressed colors yourself.
+When `isInteractive` is `true`, the row applies `hover:bg-hover` while hovered and `active:bg-pressed` while pressed—general-purpose tints meant to layer over the parent background. In most layouts you do not need to set row background, hover, or pressed colors yourself.
 
-Reserve row-level backgrounds for designs that require them (for example a highlighted, warning, or disabled row). If you set a custom idle background on a row, also define how that row should look when pressed so feedback remains visible—for example with `active:` variants in `className`.
+Reserve row-level backgrounds for designs that require them (for example a highlighted, warning, or disabled row). If you set a custom idle background on a row, also define how that row should look when hovered and pressed so feedback remains visible—for example with `hover:` and `active:` variants in `className`.
 
 ```tsx
 import {
@@ -63,9 +63,11 @@ import {
 
 ### `isInteractive`
 
-When `true`, the root is focusable with `role="button"`, accepts `onClick`, and applies pressed styles. When `false` (default), the root is a static `Box`.
+When `true`, the root is focusable with `role="button"`, accepts `onClick`, and applies hover and pressed styles. When `false` (default), the root is a static `Box`.
 
-Interactive rows stay transparent at rest and apply `active:bg-pressed` while pressed. See [Background and pressed feedback](#background-and-pressed-feedback) for how this interacts with parent surfaces and custom row backgrounds.
+Interactive rows stay transparent at rest and apply `hover:bg-hover` while hovered and `active:bg-pressed` while pressed. See [Background and pressed feedback](#background-and-pressed-feedback) for how this interacts with parent surfaces and custom row backgrounds.
+
+When a row accessory is its own control—a toggle, button, or link—keep `isInteractive` off and let the accessory be the control. Nesting a focusable control inside an `isInteractive` row places focusable elements inside a `role="button"` element, which assistive technologies and accessibility checks flag as nested interactive controls.
 
 <table>
   <thead>
@@ -98,7 +100,7 @@ Interactive rows stay transparent at rest and apply `active:bg-pressed` while pr
 
 ### `onClick`
 
-Callback fired when the row is clicked or activated with Enter/Space. Intended for use with `isInteractive`.
+Callback fired when the row is clicked or activated with Enter/Space. Requires `isInteractive`; on a non-interactive row the callback is ignored.
 
 <table>
   <thead>

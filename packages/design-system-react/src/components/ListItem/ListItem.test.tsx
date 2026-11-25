@@ -1,5 +1,5 @@
 import { ContentVariant } from '@metamask/design-system-shared';
-import { fireEvent, render } from '@testing-library/react';
+import { createEvent, fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
 import { ListItem } from './ListItem';
@@ -107,7 +107,7 @@ describe('ListItem', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveAttribute('tabindex', '0');
     });
 
-    it('applies interactive pressed classes on root', () => {
+    it('applies interactive hover and pressed classes on root', () => {
       const { getByTestId } = render(
         <ListItem
           isInteractive
@@ -118,6 +118,7 @@ describe('ListItem', () => {
       );
 
       expect(getByTestId(ROOT_TEST_ID)).toHaveClass('cursor-pointer');
+      expect(getByTestId(ROOT_TEST_ID)).toHaveClass('hover:bg-hover');
       expect(getByTestId(ROOT_TEST_ID)).toHaveClass('active:bg-pressed');
       expect(getByTestId(ROOT_TEST_ID)).toHaveClass('px-4');
       expect(getByTestId(ROOT_TEST_ID)).toHaveClass('min-h-[72px]');
@@ -181,6 +182,50 @@ describe('ListItem', () => {
       });
     });
 
+    describe('when a nested control receives keys', () => {
+      it('does not activate the row when Enter is pressed on a nested button', () => {
+        const onClick = jest.fn();
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive
+            title="Label"
+            onClick={onClick}
+            endAccessory={
+              <button type="button" data-testid="nested-button">
+                Nested action
+              </button>
+            }
+            data-testid={ROOT_TEST_ID}
+          />,
+        );
+
+        fireEvent.keyDown(getByTestId('nested-button'), { key: 'Enter' });
+
+        expect(onClick).not.toHaveBeenCalled();
+      });
+
+      it('does not prevent default when Space is pressed on a nested input', () => {
+        const onClick = jest.fn();
+        const { getByTestId } = render(
+          <ListItem
+            isInteractive
+            title="Label"
+            onClick={onClick}
+            endAccessory={<input data-testid="nested-input" />}
+            data-testid={ROOT_TEST_ID}
+          />,
+        );
+
+        const spaceEvent = createEvent.keyDown(getByTestId('nested-input'), {
+          key: ' ',
+        });
+        fireEvent(getByTestId('nested-input'), spaceEvent);
+
+        expect(spaceEvent.defaultPrevented).toBe(false);
+        expect(onClick).not.toHaveBeenCalled();
+      });
+    });
+
     it('renders Content inside interactive root', () => {
       const { getByText, getByTestId } = render(
         <ListItem
@@ -216,13 +261,19 @@ describe('ListItem', () => {
   describe('when children are provided', () => {
     it('renders children below Content', () => {
       const { getByText, getByTestId } = render(
-        <ListItem title="Label">
+        <ListItem title="Label" data-testid={ROOT_TEST_ID}>
           <span data-testid="below-content">Below</span>
         </ListItem>,
       );
 
-      expect(getByText('Label')).toBeInTheDocument();
-      expect(getByTestId('below-content')).toBeInTheDocument();
+      const root = getByTestId(ROOT_TEST_ID);
+      const child = getByTestId('below-content');
+
+      expect(root).toHaveClass('flex-col');
+      expect(child.parentElement).toBe(root);
+      expect(child.previousElementSibling).toContainElement(
+        getByText('Label'),
+      );
     });
   });
 

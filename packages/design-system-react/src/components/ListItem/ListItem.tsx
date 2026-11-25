@@ -60,9 +60,9 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
       : BoxAlignItems.Center;
 
     const rootClassName = twMerge(
-      'flex w-full px-4 py-3',
+      'flex w-full flex-col px-4 py-3',
       rootSizeClassName,
-      isInteractive && 'cursor-pointer active:bg-pressed',
+      isInteractive && 'cursor-pointer hover:bg-hover active:bg-pressed',
       className,
     );
 
@@ -109,7 +109,11 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 
     const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
       onKeyDown?.(event);
-      if (!isInteractive || event.defaultPrevented) {
+      if (
+        !isInteractive ||
+        event.defaultPrevented ||
+        event.target !== event.currentTarget
+      ) {
         return;
       }
       if (event.key === 'Enter' || event.key === ' ') {
@@ -125,7 +129,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
         style={style}
         role={isInteractive ? (role ?? 'button') : role}
         tabIndex={isInteractive ? (tabIndex ?? 0) : tabIndex}
-        onClick={onClick}
+        onClick={isInteractive ? onClick : undefined}
         onKeyDown={isInteractive ? handleKeyDown : onKeyDown}
         {...props}
       >

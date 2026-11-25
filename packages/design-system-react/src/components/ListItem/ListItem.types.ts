@@ -8,7 +8,8 @@ import type { ContentProps } from '../Content/Content.types';
  * Wraps {@link Content} in a padded root (`px-4 py-3`) with optional row shell
  * accessories. When `isInteractive` is `false` (default), the root is a non-
  * interactive `Box`. When `true`, the root is a focusable, clickable `Box`
- * with `role="button"` and `active:bg-pressed` feedback.
+ * with `role="button"` and hover and pressed feedback (`hover:bg-hover`,
+ * `active:bg-pressed`).
  *
  * Root styling uses React `className` / `style` from {@link ContentProps}
  * (`Box` props). Content slot props (`title`, `avatar`, inline accessories,
