@@ -177,7 +177,7 @@ Optional node to the right of `subtitle`. Only renders when the subtitle row is 
 
 ### `amount`
 
-Optional primary amount line below the title and optional subtitle. The amount row renders when `amount` is truthy. When `amount` is a string, it uses `TextVariant.DisplayLg` (merged with `amountProps`). Pass a `SensitiveText` node when the amount needs privacy masking.
+Optional primary amount line below the title and optional subtitle. The amount row renders when `amount` is truthy. When `amount` is a string, it uses `TextVariant.DisplayLg` (merged with `amountProps`) and renders as a `p` element: display typography without heading semantics, so the component keeps a single heading (the title). Pass a `SensitiveText` node when the amount needs privacy masking.
 
 <table>
   <thead>

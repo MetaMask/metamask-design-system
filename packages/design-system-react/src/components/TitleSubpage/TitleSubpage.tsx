@@ -34,12 +34,40 @@ const renderText = (
 };
 
 /**
+ * Renders the amount row text. A string amount renders as a `p` via
+ * `Text asChild`: `TextVariant.DisplayLg` maps to an `h1` by default, and a
+ * display value is not a document heading, so the component keeps one heading
+ * (the title) and heading order stays valid when composed into a page.
+ *
+ * @param content - The amount content: string, number, or custom node.
+ * @param textProps - Optional props merged into the amount `Text`.
+ * @returns The rendered amount text, or the custom node as-is.
+ */
+const renderAmount = (
+  content: ReactNode,
+  textProps?: TextSlotProps,
+): ReactNode => {
+  if (typeof content === 'string' || typeof content === 'number') {
+    return (
+      <Text asChild variant={TextVariant.DisplayLg} {...textProps}>
+        <p>{content}</p>
+      </Text>
+    );
+  }
+  return content;
+};
+
+/**
  * Displays a required identity row (avatar + title stack) with optional
  * subtitle, amount, inline accessories, and bottom rows in a left-aligned
  * layout. Remaining `div` props are forwarded to the root `Box`.
  *
  * Implemented with direct `Box` / `Text` (no `BoxRow` / `TextOrChildren`).
  * Pass a `SensitiveText` node when a string slot needs privacy masking.
+ *
+ * The title is the component's only semantic heading (`HeadingSm` → `h4`);
+ * a string amount renders display typography in a `p` so a value never
+ * becomes a page heading.
  */
 export const TitleSubpage = forwardRef<HTMLDivElement, TitleSubpageProps>(
   (
@@ -136,13 +164,7 @@ export const TitleSubpage = forwardRef<HTMLDivElement, TitleSubpageProps>(
             alignItems={BoxAlignItems.Center}
             gap={1}
           >
-            {renderText(
-              amount,
-              {
-                variant: TextVariant.DisplayLg,
-              },
-              amountProps,
-            )}
+            {renderAmount(amount, amountProps)}
             {amountEndAccessory}
           </Box>
         ) : null}

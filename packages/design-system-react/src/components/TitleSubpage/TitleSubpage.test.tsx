@@ -86,6 +86,35 @@ describe('TitleSubpage', () => {
       expect(getByText('$4.42')).toHaveClass('text-s-display-lg');
     });
 
+    it('renders string amount as a paragraph, not a heading', () => {
+      const { getByText } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Send"
+          amount="$4.42"
+        />,
+      );
+
+      const amount = getByText('$4.42');
+      expect(amount.tagName).toBe('P');
+      expect(amount).toHaveClass('text-s-display-lg');
+    });
+
+    it('renders title as the only semantic heading', () => {
+      const { container } = render(
+        <TitleSubpage
+          titleAvatar={defaultTitleAvatar}
+          title="Send"
+          amount="$4.42"
+        />,
+      );
+
+      const headings = container.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      expect(headings).toHaveLength(1);
+      expect(headings[0]).toHaveTextContent('Send');
+      expect(headings[0]).toHaveClass('text-s-heading-sm');
+    });
+
     it('renders React node amount', () => {
       const { getByTestId } = render(
         <TitleSubpage
