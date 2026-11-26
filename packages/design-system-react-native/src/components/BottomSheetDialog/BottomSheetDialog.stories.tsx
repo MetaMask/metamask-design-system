@@ -20,12 +20,12 @@ const meta: Meta<BottomSheetDialogProps> = {
     keyboardAvoidingViewEnabled: { control: 'boolean' },
     onClose: { action: 'closed' },
     onOpen: { action: 'opened' },
-    twClassName: { control: 'text' },
+    className: { control: 'text' },
     style: { control: 'object' },
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full h-full relative bg-background-alternative">
+      <Box className="relative size-full bg-background-alternative">
         <Story />
       </Box>
     ),
@@ -41,7 +41,7 @@ export const Default: Story = {
     isInteractable: true,
     keyboardAvoidingViewEnabled: true,
     children: (
-      <Box twClassName="p-4">
+      <Box className="p-4">
         <Text>BottomSheetDialog content</Text>
       </Box>
     ),
@@ -53,7 +53,7 @@ export const IsFullscreen: Story = {
     isFullscreen: true,
     isInteractable: true,
     children: (
-      <Box twClassName="p-4 flex-1">
+      <Box className="flex-1 p-4">
         <Text>Fullscreen BottomSheetDialog content</Text>
       </Box>
     ),
@@ -64,7 +64,7 @@ export const IsInteractable: Story = {
   args: {
     isInteractable: false,
     children: (
-      <Box twClassName="p-4">
+      <Box className="p-4">
         <Text>
           Non-interactable dialog (no drag handle, no swipe to dismiss)
         </Text>
@@ -78,7 +78,7 @@ const ImperativeControlTemplate = (args: BottomSheetDialogProps) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Box twClassName="flex-row gap-2 p-4">
+      <Box className="flex-row gap-2 p-4">
         <Pressable onPress={() => dialogRef.current?.onOpenDialog()}>
           <Text>Open</Text>
         </Pressable>
@@ -87,7 +87,7 @@ const ImperativeControlTemplate = (args: BottomSheetDialogProps) => {
         </Pressable>
       </Box>
       <BottomSheetDialog ref={dialogRef} {...args}>
-        <Box twClassName="p-4">
+        <Box className="p-4">
           <Text>Dialog controlled via ref</Text>
         </Box>
       </BottomSheetDialog>

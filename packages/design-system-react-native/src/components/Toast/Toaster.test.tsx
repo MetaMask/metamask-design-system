@@ -362,6 +362,24 @@ describe('Toaster', () => {
     expect(screen.getByTestId('toast-surface')).toHaveStyle(tw.style('my-1'));
   });
 
+  it('preserves per-toast className while applying Toaster className', async () => {
+    const tw = renderHook(() => useTailwind()).result.current;
+
+    render(<Toaster ref={toasterRef} className="mx-4" />);
+    await showToastAndWait(toasterRef, {
+      testID: 'toast-surface-classes',
+      title: 'Styled toast',
+      className: 'my-2',
+    });
+
+    expect(screen.getByTestId('toast-surface-classes')).toHaveStyle(
+      tw.style('mx-4'),
+    );
+    expect(screen.getByTestId('toast-surface-classes')).toHaveStyle(
+      tw.style('my-2'),
+    );
+  });
+
   it('calls onClose and hides the toast when the close button is pressed', async () => {
     const onClose = jest.fn();
     render(<Toaster ref={toasterRef} />);

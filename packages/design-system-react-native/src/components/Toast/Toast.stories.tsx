@@ -108,7 +108,7 @@ export const Description: Story = {
 
 export const Severity: Story = {
   render: (args: ToastProps) => (
-    <Box twClassName="gap-2">
+    <Box className="gap-2">
       <Toast {...args} severity={ToastSeverity.Default} title="Default" />
       <Toast {...args} severity={ToastSeverity.Success} title="Success" />
       <Toast {...args} severity={ToastSeverity.Warning} title="Warning" />
@@ -131,8 +131,8 @@ export const StartAccessory: Story = {
 
 export const ActionButtonOnPress: Story = {
   render: () => (
-    <Box twClassName="gap-4">
-      <Box twClassName="gap-2">
+    <Box className="gap-4">
+      <Box className="gap-2">
         <Text
           color={TextColor.TextDefault}
           fontWeight={FontWeight.Regular}
@@ -148,7 +148,7 @@ export const ActionButtonOnPress: Story = {
           title="Added to watchlist"
         />
       </Box>
-      <Box twClassName="gap-2">
+      <Box className="gap-2">
         <Text
           color={TextColor.TextDefault}
           fontWeight={FontWeight.Regular}
@@ -172,9 +172,9 @@ export const ActionButtonOnPress: Story = {
 export const Spacing: Story = {
   render: () => (
     <ScrollView>
-      <Box twClassName="gap-8">
-        <Box twClassName="gap-4">
-          <Box twClassName="gap-1">
+      <Box className="gap-8">
+        <Box className="gap-4">
+          <Box className="gap-1">
             <Text
               color={TextColor.TextDefault}
               fontWeight={FontWeight.Regular}
@@ -200,8 +200,8 @@ export const Spacing: Story = {
             title="USDC deposited into Account 1"
           />
         </Box>
-        <Box twClassName="gap-4">
-          <Box twClassName="gap-1">
+        <Box className="gap-4">
+          <Box className="gap-1">
             <Text
               color={TextColor.TextDefault}
               fontWeight={FontWeight.Regular}
@@ -230,8 +230,8 @@ export const Spacing: Story = {
             title="Don't miss out"
           />
         </Box>
-        <Box twClassName="gap-4">
-          <Box twClassName="gap-1">
+        <Box className="gap-4">
+          <Box className="gap-1">
             <Text
               color={TextColor.TextDefault}
               fontWeight={FontWeight.Regular}
@@ -272,9 +272,9 @@ export const Spacing: Story = {
 
 export const IncorrectUsage: Story = {
   render: () => (
-    <Box twClassName="gap-8">
-      <Box twClassName="gap-4">
-        <Box twClassName="gap-1">
+    <Box className="gap-8">
+      <Box className="gap-4">
+        <Box className="gap-1">
           <Text
             color={TextColor.TextDefault}
             fontWeight={FontWeight.Regular}
@@ -296,8 +296,8 @@ export const IncorrectUsage: Story = {
           title="Added to watchlist"
         />
       </Box>
-      <Box twClassName="gap-4">
-        <Box twClassName="gap-1">
+      <Box className="gap-4">
+        <Box className="gap-1">
           <Text
             color={TextColor.TextDefault}
             fontWeight={FontWeight.Regular}
@@ -327,7 +327,7 @@ export const IncorrectUsage: Story = {
 export const ShowCloseButton: Story = {
   render: () => (
     <>
-      <Box twClassName="gap-2">
+      <Box className="gap-2">
         <Button
           onPress={() => {
             toast({

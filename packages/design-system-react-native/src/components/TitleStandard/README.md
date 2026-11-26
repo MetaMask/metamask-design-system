@@ -168,7 +168,7 @@ Optional props merged into the heading `Text` when `title` is a string. Use for 
 
 ### `titleWrapperProps`
 
-Optional props forwarded to the title row `Box` (for example `testID`, layout, or `twClassName` on the row). The row defaults to centered items and `gap={2}`; values here override those defaults. `children` is omitted from the type because this component renders `title` and `titleEndAccessory` inside the row.
+Optional props forwarded to the title row `Box` (for example `testID`, layout, or `className` on the row). The row defaults to centered items and `gap={2}`; values here override those defaults. `children` is omitted from the type because this component renders `title` and `titleEndAccessory` inside the row.
 
 | TYPE                                  | REQUIRED | DEFAULT     |
 | ------------------------------------- | -------- | ----------- |
@@ -213,9 +213,9 @@ Optional props forwarded to the bottom label row `Box` when `bottomLabel` is ren
 />
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `tw.style()`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -226,15 +226,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 
 ```tsx
 // Add additional styles
-<TitleStandard twClassName="mt-4" title="$4.42" />
+<TitleStandard className="mt-4" title="$4.42" />
 
 // Override default styles
-<TitleStandard twClassName="px-6" title="$4.42" />
+<TitleStandard className="px-6" title="$4.42" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values. Other `View` props (for example `testID` and accessibility fields) are also accepted on the root container.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values. Other `View` props (for example `testID` and accessibility fields) are also accepted on the root container.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

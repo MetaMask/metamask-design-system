@@ -342,4 +342,39 @@ describe('Checkbox', () => {
     ref.current?.toggle();
     expect(onChange).not.toHaveBeenCalled();
   });
+
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
+
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
+
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <Checkbox
+          testID="chk-classes"
+          isSelected={false}
+          onChange={jest.fn()}
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
+
+      expect(getByTestId('chk-classes')).toHaveStyle(twClassNames`mt-2`);
+    });
+
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <Checkbox
+          testID="chk-classes"
+          isSelected={false}
+          onChange={jest.fn()}
+          twClassName="mt-8"
+        />,
+      );
+
+      expect(getByTestId('chk-classes')).toHaveStyle(twClassNames`mt-8`);
+    });
+  });
 });

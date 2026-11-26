@@ -77,9 +77,9 @@ import { HelpText } from '@metamask/design-system-react-native';
 <HelpText>Must be at least 8 characters</HelpText>;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -92,19 +92,21 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { HelpText } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<HelpText twClassName="mt-4">
+<HelpText className="mt-4">
   Helper with margin
 </HelpText>
 
 // Override default styles
-<HelpText twClassName="text-error-default">
+<HelpText className="text-error-default">
   Override color
 </HelpText>
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

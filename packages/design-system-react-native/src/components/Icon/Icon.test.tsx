@@ -100,4 +100,27 @@ describe('Icon', () => {
       expect(textElement.props.style).toStrictEqual(expectedStyles);
     });
   });
+
+  describe('when className is provided', () => {
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <Icon
+          name={IconName.Add}
+          testID="icon"
+          twClassName="opacity-70"
+          className="opacity-40"
+        />,
+      );
+
+      expect(getByTestId('icon')).toHaveStyle({ opacity: 0.4 });
+    });
+
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <Icon name={IconName.Add} testID="icon" twClassName="opacity-70" />,
+      );
+
+      expect(getByTestId('icon')).toHaveStyle({ opacity: 0.7 });
+    });
+  });
 });

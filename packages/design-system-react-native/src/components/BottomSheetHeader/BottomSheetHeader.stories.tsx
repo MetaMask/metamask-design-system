@@ -15,13 +15,13 @@ const meta: Meta<BottomSheetHeaderProps> = {
     onClose: { action: 'onClose pressed' },
     backButtonProps: { control: 'object' },
     closeButtonProps: { control: 'object' },
-    twClassName: { control: 'text' },
+    className: { control: 'text' },
     style: { control: 'object' },
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full bg-background-default">
-        <Box twClassName="items-center py-4">
+      <Box className="w-full bg-background-default">
+        <Box className="items-center py-4">
           <Text>Content behind bottom sheet</Text>
         </Box>
         <Story />

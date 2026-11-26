@@ -11,6 +11,7 @@ export const BadgeIcon = ({
   iconName,
   iconProps,
   twClassName,
+  className,
   style,
   ...props
 }: BadgeIconProps) => {
@@ -24,6 +25,7 @@ export const BadgeIcon = ({
         tw.style(
           'h-4 w-4 bg-icon-default rounded-full items-center justify-center',
           twClassName,
+          className,
         ),
         style,
       ]}

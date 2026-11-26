@@ -1,6 +1,6 @@
 import { BadgeCountSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { render } from '@testing-library/react-native';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { Text, TextColor, FontWeight } from '../Text';
@@ -203,5 +203,34 @@ describe('BadgeCount', () => {
     expect(textElement.props.fontWeight).toStrictEqual(
       expectedTextProps.fontWeight,
     );
+  });
+
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
+
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
+
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <BadgeCount
+          count={1}
+          testID="badge-count"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
+
+      expect(getByTestId('badge-count')).toHaveStyle(twClassNames`mt-2`);
+    });
+
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <BadgeCount count={1} testID="badge-count" twClassName="mt-8" />,
+      );
+
+      expect(getByTestId('badge-count')).toHaveStyle(twClassNames`mt-8`);
+    });
   });
 });

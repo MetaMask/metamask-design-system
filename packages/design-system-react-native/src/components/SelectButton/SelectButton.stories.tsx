@@ -49,7 +49,7 @@ const meta: Meta<SelectButtonProps> = {
     value: {
       control: 'text',
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
     placeholder: {
@@ -81,7 +81,7 @@ export const Default: Story = {
     variant: SelectButtonVariant.Primary,
     endArrowDirection: SelectButtonEndArrow.Down,
     isDisabled: false,
-    twClassName: '',
+    className: '',
     onPress: noopPress,
   },
   render: (args) => (
@@ -99,11 +99,7 @@ export const Placeholder: Story = {
         alignItems={BoxAlignItems.Start}
         gap={4}
       >
-        <Box
-          flexDirection={BoxFlexDirection.Column}
-          gap={2}
-          twClassName="flex-1"
-        >
+        <Box flexDirection={BoxFlexDirection.Column} gap={2} className="flex-1">
           <Text>Placeholder only</Text>
           <SelectButton
             onPress={noopPress}
@@ -111,11 +107,7 @@ export const Placeholder: Story = {
             placeholder="Select network"
           />
         </Box>
-        <Box
-          flexDirection={BoxFlexDirection.Column}
-          gap={2}
-          twClassName="flex-1"
-        >
+        <Box flexDirection={BoxFlexDirection.Column} gap={2} className="flex-1">
           <Text>Value replaces placeholder</Text>
           <SelectButton
             onPress={noopPress}
@@ -124,11 +116,7 @@ export const Placeholder: Story = {
             value="Ethereum Mainnet"
           />
         </Box>
-        <Box
-          flexDirection={BoxFlexDirection.Column}
-          gap={2}
-          twClassName="flex-1"
-        >
+        <Box flexDirection={BoxFlexDirection.Column} gap={2} className="flex-1">
           <Text>No label, accessibilityLabel only</Text>
           <SelectButton
             onPress={noopPress}

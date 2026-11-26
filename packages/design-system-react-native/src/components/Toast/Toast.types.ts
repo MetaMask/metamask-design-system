@@ -59,6 +59,12 @@ export type ToastProps = ToastSharedProps;
 export type ToasterProps = {
   /**
    * Optional Tailwind CSS classes for the toast container.
+   *
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
 } & Omit<ViewProps, 'style'>;

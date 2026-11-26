@@ -97,7 +97,7 @@ Component styling using design tokens, Tailwind CSS (web), and TWRNC (React Nati
 
 - **React Web:** Use `className` for Tailwind utilities
 - **React Native:** Use `className` for TWRNC utilities OR `useTailwind()` hook
-- **React Native:** `twClassName` is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Only use it on components that don't accept `className` yet
+- **React Native:** `twClassName` is deprecated and will be removed in `@metamask/design-system-react-native` 1.0.0. Every component accepts `className`, so do not use `twClassName` in new code
 - **NEVER** mix inline styles with Tailwind classes
 - **NEVER** import twrnc directly (use design system preset)
 
@@ -383,7 +383,7 @@ After styling changes, verify:
 - [ ] No default Tailwind colors (bg-blue-500, text-gray-700)
 - [ ] No arbitrary values (unless documented as necessary)
 - [ ] No inline styles mixed with Tailwind classes
-- [ ] `className` used on both platforms (`twClassName` only on React Native components that don't accept `className` yet)
+- [ ] `className` used on both platforms (no new `twClassName` usage)
 - [ ] Text component used for all typography, not Tailwind classes
 - [ ] React Native: useTailwind from preset, not direct twrnc import
 - [ ] ESLint passes: `yarn lint`

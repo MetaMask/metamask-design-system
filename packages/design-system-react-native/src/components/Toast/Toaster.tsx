@@ -59,15 +59,16 @@ const getToastProps = ({
   onClose: _onClose,
   topOffset: _topOffset,
   twClassName: _twClassName,
+  className: _className,
   showCloseButton: _showCloseButton,
   ...toastProps
-}: ToastOptions): Omit<ToastProps, 'twClassName'> => toastProps;
+}: ToastOptions): Omit<ToastProps, 'twClassName' | 'className'> => toastProps;
 
 const getHiddenTranslateY = (height: number, offset: number) =>
   -(height + offset);
 
 const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
-  ({ twClassName, ...props }, ref) => {
+  ({ twClassName, className, ...props }, ref) => {
     const tw = useTailwind();
     const [toastOptions, setToastOptions] = useState<ToastOptions | undefined>(
       undefined,
@@ -366,11 +367,15 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       onClose: toastOnClose,
       showCloseButton = true,
       twClassName: toastTwClassName,
+      className: toastClassName,
     } = toastOptions;
     const toastProps = getToastProps(toastOptions);
     const { actionButtonLabel, actionButtonOnPress, ...restToastProps } =
       toastProps;
     const toastTwClassNames = [twClassName, toastTwClassName]
+      .filter(Boolean)
+      .join(' ');
+    const toastClassNames = [className, toastClassName]
       .filter(Boolean)
       .join(' ');
     const handleClose = showCloseButton
@@ -428,12 +433,14 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
               actionButtonOnPress={actionButtonOnPress}
               onClose={handleClose}
               twClassName={toastTwClassNames}
+              className={toastClassNames}
             />
           ) : (
             <Toast
               {...restToastProps}
               onClose={handleClose}
               twClassName={toastTwClassNames}
+              className={toastClassNames}
             />
           )}
         </Animated.View>

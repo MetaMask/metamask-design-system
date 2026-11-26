@@ -20,7 +20,7 @@ const meta: Meta<SpinnerProps> = {
     loadingText: {
       control: 'text',
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },
@@ -51,7 +51,7 @@ export const Default: Story = {
   args: {
     color: IconColor.IconDefault,
     loadingText: 'Loading',
-    twClassName: '',
+    className: '',
   },
   render: (args) => <SpinnerStory {...args} />,
 };

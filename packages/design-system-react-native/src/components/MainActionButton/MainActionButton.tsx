@@ -21,6 +21,7 @@ export const MainActionButton = ({
   style,
   isDisabled = false,
   twClassName = '',
+  className,
   ...props
 }: MainActionButtonProps) => {
   const tw = useTailwind();
@@ -38,6 +39,7 @@ export const MainActionButton = ({
           pressed && !isDisabled ? 'bg-muted-pressed' : 'bg-muted',
           isDisabled ? 'opacity-50' : 'opacity-100',
           twClassName,
+          className,
         ) as StyleProp<ViewStyle>;
 
         const additionalStyle =
@@ -62,7 +64,7 @@ export const MainActionButton = ({
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
           color={TextColor.TextDefault}
-          twClassName="mt-0.5 w-full text-center shrink"
+          className="mt-0.5 w-full shrink text-center"
           numberOfLines={1}
           ellipsizeMode="tail"
         >

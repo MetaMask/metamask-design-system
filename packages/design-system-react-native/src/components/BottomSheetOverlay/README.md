@@ -51,9 +51,9 @@ import { BottomSheetOverlay } from '@metamask/design-system-react-native';
 />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the overlay container. These classes will be merged with the component's default classes, allowing you to customize the overlay appearance.
+Use the `className` prop to add Tailwind CSS classes to the overlay container. These classes will be merged with the component's default classes, allowing you to customize the overlay appearance.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -63,15 +63,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the overlay container.
 import { BottomSheetOverlay } from '@metamask/design-system-react-native';
 
 // Custom background opacity
-<BottomSheetOverlay twClassName="bg-black/80" />
+<BottomSheetOverlay className="bg-black/80" />
 
 // Custom z-index
-<BottomSheetOverlay twClassName="z-50" />
+<BottomSheetOverlay className="z-50" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
 The overlay applies default styles including absolute positioning, full coverage (inset-0), and a semi-transparent background color from design tokens.
 

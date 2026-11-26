@@ -81,15 +81,15 @@ type TopTraderCardProps = {
 };
 
 const TopTraderCard: React.FC<TopTraderCardProps> = ({ address, profit }) => (
-  <Card twClassName="w-40 shrink-0 border-0 bg-section p-3 rounded-xl">
+  <Card className="w-40 shrink-0 rounded-xl border-0 bg-section p-3">
     <Box
       flexDirection={BoxFlexDirection.Row}
       alignItems={BoxAlignItems.Center}
       gap={3}
-      twClassName="mb-3"
+      className="mb-3"
     >
       <AvatarAccount address={address} size={AvatarAccountSize.Lg} />
-      <Box flexDirection={BoxFlexDirection.Column} twClassName="min-w-0 flex-1">
+      <Box flexDirection={BoxFlexDirection.Column} className="min-w-0 flex-1">
         <Text
           variant={TextVariant.BodyMd}
           fontWeight={FontWeight.Medium}
@@ -329,7 +329,7 @@ const WalletHome: React.FC = () => {
     <ScrollView style={tw`flex-1 bg-default`}>
       <Box
         backgroundColor={BoxBackgroundColor.BackgroundDefault}
-        twClassName="w-full pb-4"
+        className="w-full pb-4"
       >
         {/* Header */}
         <HeaderRoot
@@ -351,7 +351,7 @@ const WalletHome: React.FC = () => {
             },
           ]}
         >
-          <Box alignItems={BoxAlignItems.Center} twClassName="min-w-0 flex-1">
+          <Box alignItems={BoxAlignItems.Center} className="min-w-0 flex-1">
             <SelectButton
               value="Account 1 with a very long name that should be truncated"
               placeholder="Select account"
@@ -365,7 +365,7 @@ const WalletHome: React.FC = () => {
                 numberOfLines: 1,
                 ellipsizeMode: 'tail',
               }}
-              twClassName="min-w-0 max-w-full -ml-2"
+              className="-ml-2 min-w-0 max-w-full"
             />
           </Box>
         </HeaderRoot>
@@ -398,25 +398,25 @@ const WalletHome: React.FC = () => {
           <MainActionButton
             iconName={IconName.AttachMoney}
             label="Buy"
-            twClassName="flex-1"
+            className="flex-1"
             onPress={noopPress}
           />
           <MainActionButton
             iconName={IconName.SwapVertical}
             label="Swap"
-            twClassName="flex-1"
+            className="flex-1"
             onPress={noopPress}
           />
           <MainActionButton
             iconName={IconName.Send}
             label="Send"
-            twClassName="flex-1"
+            className="flex-1"
             onPress={noopPress}
           />
           <MainActionButton
             iconName={IconName.Received}
             label="Receive"
-            twClassName="flex-1"
+            className="flex-1"
             onPress={noopPress}
           />
         </Box>
@@ -578,7 +578,7 @@ const WalletHome: React.FC = () => {
           isInteractive
           onPress={noopPress}
           accessibilityLabel="View all top traders"
-          twClassName="mb-2"
+          className="mb-2"
         />
         <ScrollView
           horizontal

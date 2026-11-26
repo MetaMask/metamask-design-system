@@ -15,7 +15,7 @@ const HeaderBaseMeta = {
     (Story: React.ComponentType) => (
       <View>
         <Story />
-        <Box twClassName="p-4">
+        <Box className="p-4">
           <Text variant={TextVariant.BodyMd}>Content below header</Text>
         </Box>
       </View>
@@ -25,7 +25,7 @@ const HeaderBaseMeta = {
     children: {
       control: 'text',
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
     includesTopInset: {
@@ -44,7 +44,7 @@ export const Default = {
 
 export const TwClassName = {
   render: () => (
-    <HeaderBase twClassName="bg-info-default px-4">
+    <HeaderBase className="bg-info-default px-4">
       Header with custom styles
     </HeaderBase>
   ),
@@ -164,7 +164,7 @@ export const Children = {
         onPress: () => console.log('Back pressed'),
       }}
     >
-      <Box twClassName="items-center">
+      <Box className="items-center">
         <Text variant={TextVariant.HeadingSm}>Custom title</Text>
         <Text variant={TextVariant.BodySm}>Subtitle text</Text>
       </Box>

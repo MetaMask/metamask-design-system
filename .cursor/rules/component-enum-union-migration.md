@@ -78,7 +78,7 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
 
    - Import shared type for extension
    - **DO NOT re-export const objects** (causes coverage loss - exports belong in index.ts)
-   - Extend `ViewProps`/`PressableProps`, add `twClassName?: string`
+   - Extend `ViewProps`/`PressableProps`, add `className?: string` (`twClassName` is deprecated until 1.0.0 — do not add it to new components)
    - Import ordering: shared before react-native
 
    ```tsx
@@ -88,7 +88,7 @@ export enum BadgeStatusStatus { Active = 'active', ... } // Duplicate!
 
    export type ComponentProps = ComponentPropsShared &
      ViewProps & {
-       twClassName?: string;
+       className?: string;
      };
    ```
 
@@ -232,7 +232,7 @@ export type BadgeStatusProps = ComponentProps<'div'> &
 - [ ] Component `.types.ts` DOES NOT re-export const objects (import only)
 - [ ] Component `index.ts` exports const objects directly from shared package (single location)
 - [ ] Extends `ViewProps` or `PressableProps`
-- [ ] Adds `twClassName?: string`
+- [ ] Adds `className?: string` (`twClassName` is deprecated until 1.0.0)
 - [ ] Import ordering correct (shared before react-native)
 - [ ] Old enum removed from `src/types/index.ts`
 

@@ -27,6 +27,7 @@ export const KeyValueColumn = ({
   value: valueContent,
   valueTextProps,
   twClassName,
+  className,
   ...viewProps
 }: KeyValueColumnProps) => {
   const keyEndAccessoryNode =
@@ -60,7 +61,7 @@ export const KeyValueColumn = ({
       flexDirection={BoxFlexDirection.Row}
       alignItems={BoxAlignItems.Center}
       gap={1}
-      twClassName="w-full min-w-0"
+      className="w-full min-w-0"
     >
       {keyStartAccessory}
       <TextOrChildren
@@ -84,7 +85,7 @@ export const KeyValueColumn = ({
       flexDirection={BoxFlexDirection.Row}
       alignItems={BoxAlignItems.Center}
       gap={1}
-      twClassName="w-full min-w-0"
+      className="w-full min-w-0"
     >
       {valueStartAccessory}
       <TextOrChildren
@@ -106,8 +107,9 @@ export const KeyValueColumn = ({
   return (
     <Box
       flexDirection={BoxFlexDirection.Column}
-      twClassName={twClassName}
       {...viewProps}
+      twClassName={twClassName}
+      className={className}
     >
       {keyBox}
       {valueBox}

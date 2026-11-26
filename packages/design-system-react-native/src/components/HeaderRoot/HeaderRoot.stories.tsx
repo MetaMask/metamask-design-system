@@ -14,7 +14,7 @@ const HeaderRootMeta = {
     title: {
       control: 'text',
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },
@@ -26,7 +26,7 @@ export const Default = {
   render: (args: HeaderRootProps) => <HeaderRoot {...args} />,
   args: {
     title: 'Explore',
-    twClassName: undefined,
+    className: undefined,
   },
 };
 
@@ -34,10 +34,7 @@ export const Title = {
   render: () => (
     <HeaderRoot
       title={
-        <Text
-          variant={TextVariant.HeadingLg}
-          twClassName="text-primary-default"
-        >
+        <Text variant={TextVariant.HeadingLg} className="text-primary-default">
           Custom node title
         </Text>
       }
@@ -53,7 +50,7 @@ export const TitleAccessory = {
         <Icon
           name={IconName.Info}
           color={IconColor.IconAlternative}
-          twClassName="ml-1"
+          className="ml-1"
         />
       }
     />
@@ -82,12 +79,12 @@ export const Children = {
         flexDirection={BoxFlexDirection.Row}
         alignItems={BoxAlignItems.Center}
         gap={1}
-        twClassName="flex-1" // flex-1 ensures the text is truncated
+        className="flex-1" // flex-1 ensures the text is truncated
       >
         <Text
           ellipsizeMode="tail"
           numberOfLines={1}
-          twClassName="flex-1" // flex-1 ensures the text is truncated
+          className="flex-1" // flex-1 ensures the text is truncated
         >
           Imported Account 1 with a really long name
         </Text>

@@ -12,7 +12,7 @@ const meta: Meta<RadioButtonProps> = {
   component: RadioButton,
   decorators: [
     (Story) => (
-      <Box twClassName="p-4">
+      <Box className="p-4">
         <Story />
       </Box>
     ),
@@ -23,7 +23,7 @@ const meta: Meta<RadioButtonProps> = {
     isDisabled: { control: 'boolean' },
     isReadOnly: { control: 'boolean' },
     isDanger: { control: 'boolean' },
-    twClassName: { control: 'text' },
+    className: { control: 'text' },
   },
 };
 

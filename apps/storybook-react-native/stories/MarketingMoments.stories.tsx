@@ -39,13 +39,13 @@ const MarketingMoment = ({
   return (
     <Box
       flexDirection={BoxFlexDirection.Column}
-      twClassName="min-h-0 w-full flex-1 bg-default"
+      className="min-h-0 w-full flex-1 bg-default"
     >
       <Box
         flexDirection={BoxFlexDirection.Column}
         gap={4}
         paddingHorizontal={6}
-        twClassName="mt-12 shrink-0"
+        className="mt-12 shrink-0"
       >
         <Text
           variant={TextVariant.DisplayXl}
@@ -55,7 +55,7 @@ const MarketingMoment = ({
           // -2% letter-spacing and 110% line-height per branding agency aesthetic
           // may not work for all locales and font fallbacks
           // will need more sophisticated approach for clients
-          twClassName="text-center leading-[1.1] tracking-[-0.2]"
+          className="text-center leading-[1.1] tracking-[-0.2]"
         >
           {title}
         </Text>
@@ -63,7 +63,7 @@ const MarketingMoment = ({
           <Text
             key={paragraph}
             color={TextColor.TextAlternative}
-            twClassName="text-center"
+            className="text-center"
           >
             {paragraph}
           </Text>
@@ -74,12 +74,12 @@ const MarketingMoment = ({
         alignItems={BoxAlignItems.Center}
         justifyContent={BoxJustifyContent.Center}
         paddingHorizontal={6}
-        twClassName="min-h-0 w-full flex-1 overflow-hidden"
+        className="min-h-0 w-full flex-1 overflow-hidden"
       >
         <Box
           alignItems={BoxAlignItems.Center}
           justifyContent={BoxJustifyContent.Center}
-          twClassName="size-full max-h-60 min-h-0 overflow-hidden rounded-lg bg-muted"
+          className="size-full max-h-60 min-h-0 overflow-hidden rounded-lg bg-muted"
         >
           <Icon
             name={iconName}
@@ -94,7 +94,7 @@ const MarketingMoment = ({
         gap={2}
         paddingHorizontal={4}
         paddingBottom={8}
-        twClassName="shrink-0"
+        className="shrink-0"
       >
         <Button
           variant={ButtonVariant.Primary}

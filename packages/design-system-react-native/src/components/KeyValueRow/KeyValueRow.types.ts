@@ -14,8 +14,16 @@ export type KeyValueRowProps = KeyValueRowPropsShared &
      * Supports Text props plus `isHidden` / `length`.
      */
     valueTextProps?: Partial<Omit<SensitiveTextProps, 'children'>>;
-    /** Optional Tailwind class names applied to the outer BoxHorizontal. Merged with base styles. */
+    /**
+     * Optional Tailwind class names applied to the outer BoxHorizontal. Merged with base styles.
+     *
+     * @deprecated Use `className` instead.
+     */
     twClassName?: string;
+    /**
+     * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+     */
+    className?: string;
     /** When set, renders a ButtonIcon as the key endAccessory (takes precedence over keyEndAccessory). */
     keyEndButtonIconProps?: Partial<ButtonIconProps>;
     /** When set, renders a ButtonIcon as the value endAccessory (takes precedence over valueEndAccessory). */

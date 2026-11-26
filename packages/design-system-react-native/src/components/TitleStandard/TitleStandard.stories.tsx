@@ -26,7 +26,7 @@ const meta: Meta<TitleStandardProps> = {
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full bg-background-default p-4">
+      <Box className="w-full bg-background-default p-4">
         <Story />
       </Box>
     ),

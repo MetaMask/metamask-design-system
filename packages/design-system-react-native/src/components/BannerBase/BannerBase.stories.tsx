@@ -57,7 +57,7 @@ const meta: Meta<BannerBaseProps> = {
       control: false,
       description: 'Optional accessory rendered at the start of the banner',
     },
-    twClassName: {
+    className: {
       control: 'text',
       description: 'Optional classes for the root container',
     },

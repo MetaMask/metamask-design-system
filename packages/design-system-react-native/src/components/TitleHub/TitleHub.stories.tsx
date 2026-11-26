@@ -19,9 +19,9 @@ const TestnetBadge = () => (
     flexDirection={BoxFlexDirection.Row}
     alignItems={BoxAlignItems.Center}
     gap={1}
-    twClassName="rounded-full bg-warning-muted px-2 py-1"
+    className="rounded-full bg-warning-muted px-2 py-1"
   >
-    <Box twClassName="h-2 w-2 shrink-0 rounded-full bg-warning-default" />
+    <Box className="size-2 shrink-0 rounded-full bg-warning-default" />
     <Text
       variant={TextVariant.BodySm}
       color={TextColor.WarningDefault}
@@ -45,11 +45,11 @@ const meta: Meta<TitleHubProps> = {
     bottomLabel: {
       control: 'text',
     },
-    twClassName: { control: 'text' },
+    className: { control: 'text' },
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full bg-background-default p-4">
+      <Box className="w-full bg-background-default p-4">
         <Story />
       </Box>
     ),
@@ -65,7 +65,7 @@ export const Default: Story = {
     title: 'Perps',
     amount: '$336.21',
     bottomLabel: '$336.21 available',
-    twClassName: '',
+    className: '',
   },
   render: (args) => <TitleHub {...args} />,
 };
@@ -98,7 +98,7 @@ export const AmountEndAccessory: Story = {
 
 export const Title: Story = {
   render: () => (
-    <Box twClassName="w-full gap-4">
+    <Box className="w-full gap-4">
       <TitleHub title="Perps" />
     </Box>
   ),
@@ -113,7 +113,7 @@ export const BottomLabel: Story = {
     title: 'Perps',
     amount: '$336.21',
     bottomLabel: '$336.21 available',
-    twClassName: '',
+    className: '',
   },
 };
 

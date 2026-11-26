@@ -14,7 +14,7 @@ import Animated from 'react-native-reanimated';
 const { scrollY, onScroll, setTitleSectionHeight, titleSectionHeightSv } =
   useHeaderStandardAnimated();
 
-<Box twClassName="flex-1">
+<Box className="flex-1">
   <HeaderStandardAnimated
     scrollY={scrollY}
     titleSectionHeight={titleSectionHeightSv}

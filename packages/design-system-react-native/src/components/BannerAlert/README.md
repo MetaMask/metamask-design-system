@@ -107,9 +107,9 @@ Optional callback that renders the close icon; `closeButtonProps` customizes the
 
 See the **OnClose** story for behavior.
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the banner. These classes merge with the component’s default classes via `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the banner. These classes merge with the component’s default classes via `twMerge`, allowing you to:
 
 - Add spacing or layout helpers not part of the default banner
 - Override default colors or shadows when needed
@@ -120,7 +120,7 @@ Use the `twClassName` prop to add Tailwind CSS classes to the banner. These clas
 
 ```tsx
 <BannerAlert
-  twClassName="shadow-lg ring-1 ring-primary-100"
+  className="shadow-lg ring-1 ring-primary-100"
   title="Custom banner"
   actionButtonLabel="Action"
 >
@@ -128,9 +128,11 @@ Use the `twClassName` prop to add Tailwind CSS classes to the banner. These clas
 </BannerAlert>
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the BannerAlert with React Native styles. Prefer `twClassName` for static Tailwind needs and reserve `style` for dynamic or conditional inline values.
+Use the `style` prop to customize the BannerAlert with React Native styles. Prefer `className` for static Tailwind needs and reserve `style` for dynamic or conditional inline values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

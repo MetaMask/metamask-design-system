@@ -25,13 +25,13 @@ const meta: Meta<SkeletonProps> = {
     autoPlay: {
       control: { type: 'boolean' },
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },
   decorators: [
     (Story) => (
-      <Box twClassName="p-4">
+      <Box className="p-4">
         <Story />
       </Box>
     ),
@@ -84,7 +84,7 @@ export const HideChildren: Story = {
 };
 
 export const TwClassName: Story = {
-  render: () => <Skeleton height={32} width={300} twClassName="rounded-lg" />,
+  render: () => <Skeleton height={32} width={300} className="rounded-lg" />,
 };
 
 export const AutoPlayDisabled: Story = {

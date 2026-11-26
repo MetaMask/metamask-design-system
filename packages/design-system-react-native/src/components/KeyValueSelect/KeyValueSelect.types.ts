@@ -62,10 +62,18 @@ export type KeyValueSelectProps = Omit<
     /** SelectButton-only props (placeholder and caret controls). `placeholder` is optional; when the resolved label is empty, no label is rendered. */
     selectButtonProps: KeyValueSelectSelectButtonProps;
     /**
-     * Optional props forwarded to the inner KeyValueRow (e.g. `testID`, `twClassName`, `style`,
+     * Optional props forwarded to the inner KeyValueRow (e.g. `testID`, `twClassName`, `className`, `style`,
      * accessibility props). Owned content props are set by KeyValueSelect and are not available here.
      */
     keyValueRowProps?: KeyValueSelectKeyValueRowProps;
-    /** Optional Tailwind class names applied to the outer Pressable. */
+    /**
+     * Optional Tailwind class names applied to the outer Pressable.
+     *
+     * @deprecated Use `className` instead.
+     */
     twClassName?: string;
+    /**
+     * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+     */
+    className?: string;
   };

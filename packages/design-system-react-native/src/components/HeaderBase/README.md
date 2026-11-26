@@ -26,7 +26,7 @@ The title of the header. Pass a string for automatic Text rendering with the cor
 
 // Custom ReactNode title
 <HeaderBase>
-  <Box twClassName="items-center">
+  <Box className="items-center">
     <Text variant={TextVariant.HeadingSm}>Custom title</Text>
     <Text variant={TextVariant.BodySm}>Subtitle</Text>
   </Box>
@@ -128,21 +128,23 @@ Adds the device's safe area top inset as margin to ensure the header is visible 
 <HeaderBase includesTopInset>Page title</HeaderBase>
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes.
+Use the `className` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
 ```tsx
-<HeaderBase twClassName="bg-info-default px-4">Styled Header</HeaderBase>
+<HeaderBase className="bg-info-default px-4">Styled Header</HeaderBase>
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

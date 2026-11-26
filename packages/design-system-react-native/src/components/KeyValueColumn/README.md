@@ -35,12 +35,12 @@ import {
   KeyValueColumn,
 } from '@metamask/design-system-react-native';
 
-<Box flexDirection={BoxFlexDirection.Row} gap={4} twClassName="w-full">
-  <Box flexDirection={BoxFlexDirection.Column} gap={6} twClassName="flex-1">
+<Box flexDirection={BoxFlexDirection.Row} gap={4} className="w-full">
+  <Box flexDirection={BoxFlexDirection.Column} gap={6} className="flex-1">
     <KeyValueColumn keyLabel="24h high" value="$2,450.62" />
     <KeyValueColumn keyLabel="Market cap" value="$1.23B" />
   </Box>
-  <Box flexDirection={BoxFlexDirection.Column} gap={6} twClassName="flex-1">
+  <Box flexDirection={BoxFlexDirection.Column} gap={6} className="flex-1">
     <KeyValueColumn keyLabel="24h volume" value="$892.1M" />
     <KeyValueColumn keyLabel="Circulating supply" value="120.4M" />
   </Box>
@@ -209,9 +209,9 @@ import {
 />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -224,19 +224,21 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { KeyValueColumn } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<KeyValueColumn keyLabel="Amount" value="1 ETH" twClassName="mt-4" />
+<KeyValueColumn keyLabel="Amount" value="1 ETH" className="mt-4" />
 
 // Override default styles
 <KeyValueColumn
   keyLabel="Network"
   value="Mainnet"
-  twClassName="bg-background-alternative"
+  className="bg-background-alternative"
 />
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |
