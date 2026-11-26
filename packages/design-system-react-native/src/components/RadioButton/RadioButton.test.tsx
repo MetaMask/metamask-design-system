@@ -167,28 +167,36 @@ describe('RadioButton', () => {
     const root = getByTestId('radio-root');
     expect(root).toHaveStyle({ margin: 8 });
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <RadioButton testID="radio-root" twClassName="mt-8" className="mt-2" />,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <RadioButton testID="radio-root" twClassName="mt-8" className="mt-2" />,
+      );
 
-    expect(getByTestId('radio-root')).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByTestId('radio-root')).toHaveStyle(twClassNames`mt-2`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <RadioButton testID="radio-root" twClassName="mt-8" />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <RadioButton testID="radio-root" twClassName="mt-8" />,
+      );
 
-    expect(getByTestId('radio-root')).toHaveStyle(twClassNames`mt-8`);
+      expect(getByTestId('radio-root')).toHaveStyle(twClassNames`mt-8`);
+    });
+
+    it('keeps ml-3 on the label when labelProps has className', () => {
+      const { getByText } = render(
+        <RadioButton label="Option A" labelProps={{ className: 'mt-1' }} />,
+      );
+
+      expect(getByText('Option A')).toHaveStyle(twClassNames`ml-3 mt-1`);
+    });
   });
 });

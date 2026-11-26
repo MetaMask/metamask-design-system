@@ -210,7 +210,7 @@ Separate shared design system concerns from platform-specific implementation con
 
 - ❌ NO className/twClassName in shared
 - ✅ React: `className?: string` (platform layer)
-- ✅ React Native: `className?: string` (platform layer). `twClassName` is deprecated until 1.0.0 and only kept on components that do not accept `className` yet
+- ✅ React Native: `className?: string` (platform layer). `twClassName` is deprecated and will be removed in 1.0.0. Do not use it in new code
 
 **Prop forwarding convention:**
 

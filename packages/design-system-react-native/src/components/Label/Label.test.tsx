@@ -16,32 +16,32 @@ describe('Label', () => {
     const { getByText } = render(<Label>Sample label text</Label>);
     expect(getByText('Sample label text')).toBeDefined();
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <Label testID="label-classes" twClassName="mt-8" className="mt-2">
-        Label
-      </Label>,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <Label testID="label-classes" twClassName="mt-8" className="mt-2">
+          Label
+        </Label>,
+      );
 
-    expect(getByTestId('label-classes')).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByTestId('label-classes')).toHaveStyle(twClassNames`mt-2`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <Label testID="label-classes" twClassName="mt-8">
-        Label
-      </Label>,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <Label testID="label-classes" twClassName="mt-8">
+          Label
+        </Label>,
+      );
 
-    expect(getByTestId('label-classes')).toHaveStyle(twClassNames`mt-8`);
+      expect(getByTestId('label-classes')).toHaveStyle(twClassNames`mt-8`);
+    });
   });
 });

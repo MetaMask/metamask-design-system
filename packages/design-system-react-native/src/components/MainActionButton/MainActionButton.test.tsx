@@ -188,6 +188,45 @@ describe('MainActionButton', () => {
     expect(Array.isArray(button.props.style)).toBe(true);
     expect(button.props.style[1]).toStrictEqual({ marginTop: 8 });
   });
+
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
+
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
+
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <MainActionButton
+          iconName={IconName.Add}
+          label="Label"
+          testID="main-action-button-classes"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
+
+      expect(getByTestId('main-action-button-classes')).toHaveStyle(
+        twClassNames`mt-2`,
+      );
+    });
+
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <MainActionButton
+          iconName={IconName.Add}
+          label="Label"
+          testID="main-action-button-classes"
+          twClassName="mt-8"
+        />,
+      );
+
+      expect(getByTestId('main-action-button-classes')).toHaveStyle(
+        twClassNames`mt-8`,
+      );
+    });
+  });
 });
 
 describe('children', () => {
@@ -279,44 +318,5 @@ describe('children', () => {
 
     // Assert
     expect(childrenWrappers).toHaveLength(0);
-  });
-});
-
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
-
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
-
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <MainActionButton
-        iconName={IconName.Add}
-        label="Label"
-        testID="main-action-button-classes"
-        twClassName="mt-8"
-        className="mt-2"
-      />,
-    );
-
-    expect(getByTestId('main-action-button-classes')).toHaveStyle(
-      twClassNames`mt-2`,
-    );
-  });
-
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <MainActionButton
-        iconName={IconName.Add}
-        label="Label"
-        testID="main-action-button-classes"
-        twClassName="mt-8"
-      />,
-    );
-
-    expect(getByTestId('main-action-button-classes')).toHaveStyle(
-      twClassNames`mt-8`,
-    );
   });
 });

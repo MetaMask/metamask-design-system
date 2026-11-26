@@ -56,31 +56,31 @@ describe('IconAlert', () => {
       );
     });
   });
-});
 
-describe('when className is provided', () => {
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <IconAlert
-        severity={IconAlertSeverity.Danger}
-        testID="icon-alert-classes"
-        twClassName="opacity-70"
-        className="opacity-40"
-      />,
-    );
+  describe('when className is provided', () => {
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <IconAlert
+          severity={IconAlertSeverity.Danger}
+          testID="icon-alert-classes"
+          twClassName="opacity-70"
+          className="opacity-40"
+        />,
+      );
 
-    expect(getByTestId('icon-alert-classes')).toHaveStyle({ opacity: 0.4 });
-  });
+      expect(getByTestId('icon-alert-classes')).toHaveStyle({ opacity: 0.4 });
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <IconAlert
-        severity={IconAlertSeverity.Danger}
-        testID="icon-alert-classes"
-        twClassName="opacity-70"
-      />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <IconAlert
+          severity={IconAlertSeverity.Danger}
+          testID="icon-alert-classes"
+          twClassName="opacity-70"
+        />,
+      );
 
-    expect(getByTestId('icon-alert-classes')).toHaveStyle({ opacity: 0.7 });
+      expect(getByTestId('icon-alert-classes')).toHaveStyle({ opacity: 0.7 });
+    });
   });
 });

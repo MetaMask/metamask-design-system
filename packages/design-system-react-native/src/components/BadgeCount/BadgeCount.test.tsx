@@ -204,33 +204,33 @@ describe('BadgeCount', () => {
       expectedTextProps.fontWeight,
     );
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <BadgeCount
-        count={1}
-        testID="badge-count"
-        twClassName="mt-8"
-        className="mt-2"
-      />,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <BadgeCount
+          count={1}
+          testID="badge-count"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
 
-    expect(getByTestId('badge-count')).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByTestId('badge-count')).toHaveStyle(twClassNames`mt-2`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <BadgeCount count={1} testID="badge-count" twClassName="mt-8" />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <BadgeCount count={1} testID="badge-count" twClassName="mt-8" />,
+      );
 
-    expect(getByTestId('badge-count')).toHaveStyle(twClassNames`mt-8`);
+      expect(getByTestId('badge-count')).toHaveStyle(twClassNames`mt-8`);
+    });
   });
 });

@@ -133,41 +133,41 @@ describe('ButtonFilter', () => {
     expectBackground(button.props.style, 'bg-error-default');
     expectTextColor(label.props.style, 'text-error-default');
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByRole } = render(
-      <ButtonFilter
-        onPress={jest.fn()}
-        testID="filter-button-classes"
-        twClassName="mt-8"
-        className="mt-2"
-      >
-        All
-      </ButtonFilter>,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByRole } = render(
+        <ButtonFilter
+          onPress={jest.fn()}
+          testID="filter-button-classes"
+          twClassName="mt-8"
+          className="mt-2"
+        >
+          All
+        </ButtonFilter>,
+      );
 
-    expect(getByRole('button')).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByRole('button')).toHaveStyle(twClassNames`mt-2`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByRole } = render(
-      <ButtonFilter
-        onPress={jest.fn()}
-        testID="filter-button-classes"
-        twClassName="mt-8"
-      >
-        All
-      </ButtonFilter>,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByRole } = render(
+        <ButtonFilter
+          onPress={jest.fn()}
+          testID="filter-button-classes"
+          twClassName="mt-8"
+        >
+          All
+        </ButtonFilter>,
+      );
 
-    expect(getByRole('button')).toHaveStyle(twClassNames`mt-8`);
+      expect(getByRole('button')).toHaveStyle(twClassNames`mt-8`);
+    });
   });
 });

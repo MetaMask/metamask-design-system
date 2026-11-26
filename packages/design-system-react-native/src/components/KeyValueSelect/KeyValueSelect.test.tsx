@@ -325,41 +325,41 @@ describe('KeyValueSelect', () => {
       expect(getByTestId(ROOT_TEST_ID)).toHaveStyle({ opacity: 1 });
     });
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <KeyValueSelect
-        keyLabel="Network"
-        selectButtonProps={defaultSelectButtonProps}
-        onPress={noopPress}
-        testID={ROOT_TEST_ID}
-        twClassName="mt-8"
-        className="mt-2"
-      />,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={defaultSelectButtonProps}
+          onPress={noopPress}
+          testID={ROOT_TEST_ID}
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
 
-    expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(twClassNames`mt-2`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <KeyValueSelect
-        keyLabel="Network"
-        selectButtonProps={defaultSelectButtonProps}
-        onPress={noopPress}
-        testID={ROOT_TEST_ID}
-        twClassName="mt-8"
-      />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <KeyValueSelect
+          keyLabel="Network"
+          selectButtonProps={defaultSelectButtonProps}
+          onPress={noopPress}
+          testID={ROOT_TEST_ID}
+          twClassName="mt-8"
+        />,
+      );
 
-    expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(twClassNames`mt-8`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(twClassNames`mt-8`);
+    });
   });
 });

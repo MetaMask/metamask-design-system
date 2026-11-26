@@ -214,41 +214,41 @@ describe('AvatarNetwork Component', () => {
     // AvatarBase style is passed as an array; our custom style should be the second element.
     expect(avatarBase.props.style[1]).toStrictEqual(customStyle);
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <AvatarNetwork
-        name="Ethereum"
-        testID="avatar-network-classes"
-        twClassName="mt-8"
-        className="mt-2"
-      />,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <AvatarNetwork
+          name="Ethereum"
+          testID="avatar-network-classes"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
 
-    expect(getByTestId('avatar-network-classes')).toHaveStyle(
-      twClassNames`mt-2`,
-    );
-  });
+      expect(getByTestId('avatar-network-classes')).toHaveStyle(
+        twClassNames`mt-2`,
+      );
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <AvatarNetwork
-        name="Ethereum"
-        testID="avatar-network-classes"
-        twClassName="mt-8"
-      />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <AvatarNetwork
+          name="Ethereum"
+          testID="avatar-network-classes"
+          twClassName="mt-8"
+        />,
+      );
 
-    expect(getByTestId('avatar-network-classes')).toHaveStyle(
-      twClassNames`mt-8`,
-    );
+      expect(getByTestId('avatar-network-classes')).toHaveStyle(
+        twClassNames`mt-8`,
+      );
+    });
   });
 });

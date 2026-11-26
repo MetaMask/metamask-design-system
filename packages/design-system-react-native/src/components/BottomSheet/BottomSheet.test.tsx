@@ -399,22 +399,22 @@ describe('BottomSheet', () => {
       expect(mockCloseDialog).toHaveBeenCalledTimes(1);
     });
   });
-});
 
-describe('when className is provided', () => {
-  beforeEach(() => {
-    capturedDialogClassName = undefined;
-    capturedDialogTwClassName = undefined;
-  });
+  describe('when className is provided', () => {
+    beforeEach(() => {
+      capturedDialogClassName = undefined;
+      capturedDialogTwClassName = undefined;
+    });
 
-  it('forwards className and deprecated twClassName to the dialog', () => {
-    render(
-      <BottomSheet twClassName="mt-8" className="mt-2">
-        <View />
-      </BottomSheet>,
-    );
+    it('forwards className and deprecated twClassName to the dialog', () => {
+      render(
+        <BottomSheet twClassName="mt-8" className="mt-2">
+          <View />
+        </BottomSheet>,
+      );
 
-    expect(capturedDialogTwClassName).toBe('mt-8');
-    expect(capturedDialogClassName).toBe('mt-2');
+      expect(capturedDialogTwClassName).toBe('mt-8');
+      expect(capturedDialogClassName).toBe('mt-2');
+    });
   });
 });

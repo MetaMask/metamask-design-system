@@ -116,41 +116,41 @@ describe('AvatarAccount', () => {
     const avatarBase = getByTestId('avatar-base');
     expect(avatarBase.props.style[1]).toStrictEqual(customStyle);
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <AvatarAccount
-        address="0x1234567890abcdef1234567890abcdef12345678"
-        testID="avatar-account-classes"
-        twClassName="mt-8"
-        className="mt-2"
-      />,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <AvatarAccount
+          address="0x1234567890abcdef1234567890abcdef12345678"
+          testID="avatar-account-classes"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
 
-    expect(getByTestId('avatar-account-classes')).toHaveStyle(
-      twClassNames`mt-2`,
-    );
-  });
+      expect(getByTestId('avatar-account-classes')).toHaveStyle(
+        twClassNames`mt-2`,
+      );
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <AvatarAccount
-        address="0x1234567890abcdef1234567890abcdef12345678"
-        testID="avatar-account-classes"
-        twClassName="mt-8"
-      />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <AvatarAccount
+          address="0x1234567890abcdef1234567890abcdef12345678"
+          testID="avatar-account-classes"
+          twClassName="mt-8"
+        />,
+      );
 
-    expect(getByTestId('avatar-account-classes')).toHaveStyle(
-      twClassNames`mt-8`,
-    );
+      expect(getByTestId('avatar-account-classes')).toHaveStyle(
+        twClassNames`mt-8`,
+      );
+    });
   });
 });

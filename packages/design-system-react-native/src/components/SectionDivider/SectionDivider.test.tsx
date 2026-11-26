@@ -120,32 +120,26 @@ describe('SectionDivider', () => {
       expect(ref.current).not.toBeNull();
     });
   });
-});
 
-describe('when className is provided', () => {
-  let tw: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    it('applies className after twClassName and component defaults', () => {
+      const { getByTestId } = render(
+        <SectionDivider
+          testID={ROOT_TEST_ID}
+          twClassName="border-t-2"
+          className="border-t-0"
+        />,
+      );
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
-  });
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-t-0`);
+    });
 
-  it('applies className after twClassName and component defaults', () => {
-    const { getByTestId } = render(
-      <SectionDivider
-        testID={ROOT_TEST_ID}
-        twClassName="border-t-2"
-        className="border-t-0"
-      />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <SectionDivider testID={ROOT_TEST_ID} twClassName="border-t-2" />,
+      );
 
-    expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-t-0`);
-  });
-
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <SectionDivider testID={ROOT_TEST_ID} twClassName="border-t-2" />,
-    );
-
-    expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-t-2`);
+      expect(getByTestId(ROOT_TEST_ID)).toHaveStyle(tw`border-t-2`);
+    });
   });
 });

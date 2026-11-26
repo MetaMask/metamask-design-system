@@ -238,39 +238,54 @@ describe('AvatarGroup', () => {
       ),
     ).toThrow('Invalid Avatar Variant: InvalidVariant.');
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Token}
-        avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
-        testID="avatar-group"
-        twClassName="mt-8"
-        className="mt-2"
-      />,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Token}
+          avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
+          testID="avatar-group"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
 
-    expect(getByTestId('avatar-group')).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByTestId('avatar-group')).toHaveStyle(twClassNames`mt-2`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <AvatarGroup
-        variant={AvatarGroupVariant.Token}
-        avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
-        testID="avatar-group"
-        twClassName="mt-8"
-      />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Token}
+          avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
+          testID="avatar-group"
+          twClassName="mt-8"
+        />,
+      );
 
-    expect(getByTestId('avatar-group')).toHaveStyle(twClassNames`mt-8`);
+      expect(getByTestId('avatar-group')).toHaveStyle(twClassNames`mt-8`);
+    });
+
+    it('keeps bg-icon-default on the overflow avatar when overflowTextProps has className', () => {
+      const { getByTestId } = render(
+        <AvatarGroup
+          variant={AvatarGroupVariant.Token}
+          avatarPropsArr={SAMPLE_AVATARGROUP_AVATARTOKENPROPSARR}
+          max={2}
+          overflowTextProps={{ testID: 'overflow-avatar', className: 'mt-1' }}
+        />,
+      );
+
+      expect(getByTestId('overflow-avatar')).toHaveStyle(
+        twClassNames`bg-icon-default mt-1`,
+      );
+    });
   });
 });

@@ -130,47 +130,41 @@ describe('HelpText', () => {
 
     expect(getByTestId('help-text')).toHaveStyle(tw`mt-2`);
   });
-});
 
-describe('when className is provided', () => {
-  let tw: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    it('applies className after twClassName on the text', () => {
+      const { getByTestId } = render(
+        <HelpText testID="help-text" twClassName="mt-8" className="mt-2">
+          Helper message
+        </HelpText>,
+      );
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
-  });
+      expect(getByTestId('help-text')).toHaveStyle(tw`mt-2`);
+    });
 
-  it('applies className after twClassName on the text', () => {
-    const { getByTestId } = render(
-      <HelpText testID="help-text" twClassName="mt-8" className="mt-2">
-        Helper message
-      </HelpText>,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <HelpText testID="help-text" twClassName="mt-8">
+          Helper message
+        </HelpText>,
+      );
 
-    expect(getByTestId('help-text')).toHaveStyle(tw`mt-2`);
-  });
+      expect(getByTestId('help-text')).toHaveStyle(tw`mt-8`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <HelpText testID="help-text" twClassName="mt-8">
-        Helper message
-      </HelpText>,
-    );
+    it('applies className on the wrapper box when the icon is shown', () => {
+      const { getByTestId } = render(
+        <HelpText
+          testID="help-text-box"
+          severity={HelpTextSeverity.Danger}
+          showIcon
+          className="mt-2"
+        >
+          Helper message
+        </HelpText>,
+      );
 
-    expect(getByTestId('help-text')).toHaveStyle(tw`mt-8`);
-  });
-
-  it('applies className on the wrapper box when the icon is shown', () => {
-    const { getByTestId } = render(
-      <HelpText
-        testID="help-text-box"
-        severity={HelpTextSeverity.Danger}
-        showIcon
-        className="mt-2"
-      >
-        Helper message
-      </HelpText>,
-    );
-
-    expect(getByTestId('help-text-box')).toHaveStyle(tw`mt-2`);
+      expect(getByTestId('help-text-box')).toHaveStyle(tw`mt-2`);
+    });
   });
 });

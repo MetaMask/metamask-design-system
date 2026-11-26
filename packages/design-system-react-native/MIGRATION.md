@@ -95,7 +95,7 @@ This guide provides detailed instructions for migrating your project from one ve
 
 The same rename applies inside prop bags that forward to migrated components, such as `textProps`, `titleProps`, `labelProps`, `iconProps`, `fallbackTextProps`, `keyTextProps`, `valueTextProps`, and `startIconProps`/`endIconProps`.
 
-Rename the prop. A `twClassName` inside `descriptionProps` and `actionButtonProps` (`TabEmptyState`), `titleWrapperProps` (`TitleAlert`), `identityRowProps` (`TitleSubpage`), `labelProps` (`Checkbox`, `RadioButton`), `startIconProps`/`endIconProps` (`Tag`), `keyValueRowProps` (`KeyValueSelect`), and `overflowTextProps` (`AvatarGroup`) now merges with the component's classes instead of replacing them. (`MainActionButton` owns its label classes, so its `labelProps` omits both class props.)
+Rename the prop. A `twClassName` inside `descriptionProps` and `actionButtonProps` (`TabEmptyState`), `titleWrapperProps` (`TitleAlert`), `identityRowProps` (`TitleSubpage`), `labelProps` (`RadioButton`), `startIconProps`/`endIconProps` (`Tag`), and `overflowTextProps` (`AvatarGroup`) now merges with the component's classes instead of replacing them. (`MainActionButton` owns its label classes, so its `labelProps` omits both class props.)
 
 ```tsx
 // Before

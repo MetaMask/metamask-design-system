@@ -175,32 +175,62 @@ describe('Tag', () => {
       expect(getByText('From string')).toHaveStyle(tw`text-alternative`);
     });
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <Tag testID="tag" twClassName="mt-8" className="mt-2">
-        Content
-      </Tag>,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <Tag testID="tag" twClassName="mt-8" className="mt-2">
+          Content
+        </Tag>,
+      );
 
-    expect(getByTestId('tag')).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByTestId('tag')).toHaveStyle(twClassNames`mt-2`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <Tag testID="tag" twClassName="mt-8">
-        Content
-      </Tag>,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <Tag testID="tag" twClassName="mt-8">
+          Content
+        </Tag>,
+      );
 
-    expect(getByTestId('tag')).toHaveStyle(twClassNames`mt-8`);
+      expect(getByTestId('tag')).toHaveStyle(twClassNames`mt-8`);
+    });
+
+    it('keeps shrink-0 on the start icon when startIconProps has className', () => {
+      const { getByTestId } = render(
+        <Tag
+          startIconName={IconName.Tag}
+          startIconProps={{ testID: 'tag-start-icon', className: 'mr-1' }}
+        >
+          Content
+        </Tag>,
+      );
+
+      expect(getByTestId('tag-start-icon')).toHaveStyle(
+        twClassNames`shrink-0 mr-1`,
+      );
+    });
+
+    it('keeps shrink-0 on the end icon when endIconProps has twClassName', () => {
+      const { getByTestId } = render(
+        <Tag
+          endIconName={IconName.Tag}
+          endIconProps={{ testID: 'tag-end-icon', twClassName: 'ml-1' }}
+        >
+          Content
+        </Tag>,
+      );
+
+      expect(getByTestId('tag-end-icon')).toHaveStyle(
+        twClassNames`shrink-0 ml-1`,
+      );
+    });
   });
 });

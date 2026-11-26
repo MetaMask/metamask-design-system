@@ -126,40 +126,40 @@ describe('SensitiveText', () => {
     );
     expect(getByLabelText('balance')).toBeDefined();
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <SensitiveText
-        testID="sensitive-text-classes"
-        twClassName="mt-8"
-        className="mt-2"
-      >
-        Secret
-      </SensitiveText>,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <SensitiveText
+          testID="sensitive-text-classes"
+          twClassName="mt-8"
+          className="mt-2"
+        >
+          Secret
+        </SensitiveText>,
+      );
 
-    expect(getByTestId('sensitive-text-classes')).toHaveStyle(
-      twClassNames`mt-2`,
-    );
-  });
+      expect(getByTestId('sensitive-text-classes')).toHaveStyle(
+        twClassNames`mt-2`,
+      );
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <SensitiveText testID="sensitive-text-classes" twClassName="mt-8">
-        Secret
-      </SensitiveText>,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <SensitiveText testID="sensitive-text-classes" twClassName="mt-8">
+          Secret
+        </SensitiveText>,
+      );
 
-    expect(getByTestId('sensitive-text-classes')).toHaveStyle(
-      twClassNames`mt-8`,
-    );
+      expect(getByTestId('sensitive-text-classes')).toHaveStyle(
+        twClassNames`mt-8`,
+      );
+    });
   });
 });

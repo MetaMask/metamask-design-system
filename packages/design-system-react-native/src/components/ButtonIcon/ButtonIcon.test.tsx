@@ -208,37 +208,37 @@ describe('ButtonIcon', () => {
     fireEvent(btn, 'pressOut');
     expect(onPressOut).toHaveBeenCalledTimes(1);
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <ButtonIcon
-        iconName={IconName.Add}
-        testID="button-icon"
-        twClassName="mt-8"
-        className="mt-2"
-      />,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <ButtonIcon
+          iconName={IconName.Add}
+          testID="button-icon"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
 
-    expect(getByTestId('button-icon')).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByTestId('button-icon')).toHaveStyle(twClassNames`mt-2`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <ButtonIcon
-        iconName={IconName.Add}
-        testID="button-icon"
-        twClassName="mt-8"
-      />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <ButtonIcon
+          iconName={IconName.Add}
+          testID="button-icon"
+          twClassName="mt-8"
+        />,
+      );
 
-    expect(getByTestId('button-icon')).toHaveStyle(twClassNames`mt-8`);
+      expect(getByTestId('button-icon')).toHaveStyle(twClassNames`mt-8`);
+    });
   });
 });

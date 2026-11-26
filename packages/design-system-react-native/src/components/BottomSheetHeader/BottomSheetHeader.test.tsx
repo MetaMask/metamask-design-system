@@ -164,32 +164,32 @@ describe('BottomSheetHeader', () => {
       expect(getByTestId('header')).toBeOnTheScreen();
     });
   });
-});
 
-describe('when className is provided', () => {
-  let tw: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let tw: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      tw = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component defaults', () => {
-    const { getByTestId } = render(
-      <BottomSheetHeader testID="header" twClassName="px-6" className="px-4">
-        Title
-      </BottomSheetHeader>,
-    );
+    it('applies className after twClassName and component defaults', () => {
+      const { getByTestId } = render(
+        <BottomSheetHeader testID="header" twClassName="px-6" className="px-4">
+          Title
+        </BottomSheetHeader>,
+      );
 
-    expect(getByTestId('header')).toHaveStyle(tw`px-4`);
-  });
+      expect(getByTestId('header')).toHaveStyle(tw`px-4`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <BottomSheetHeader testID="header" twClassName="px-6">
-        Title
-      </BottomSheetHeader>,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <BottomSheetHeader testID="header" twClassName="px-6">
+          Title
+        </BottomSheetHeader>,
+      );
 
-    expect(getByTestId('header')).toHaveStyle(tw`px-6`);
+      expect(getByTestId('header')).toHaveStyle(tw`px-6`);
+    });
   });
 });

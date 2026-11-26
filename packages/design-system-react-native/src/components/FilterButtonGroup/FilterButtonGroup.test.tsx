@@ -222,64 +222,58 @@ describe('FilterButtonGroup', () => {
     expect(getByTestId('filter-b')).toHaveStyle(tw`bg-icon-default`);
     expect(getByTestId('filter-a')).toHaveStyle(tw`bg-transparent`);
   });
-});
 
-describe('when className is provided', () => {
-  let tw: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    it('applies className after twClassName in contentContainerStyle', () => {
+      const { getByTestId } = render(
+        <FilterButtonGroup
+          value="a"
+          onChange={noopPress}
+          testID={GROUP_TEST_ID}
+          twClassName="px-4"
+          className="px-6"
+        >
+          <FilterButton value="a" onPress={noopPress}>
+            A
+          </FilterButton>
+        </FilterButtonGroup>,
+      );
 
-  beforeAll(() => {
-    tw = renderHook(() => useTailwind()).result.current;
-  });
+      const scroll = getByTestId(GROUP_TEST_ID);
+      const expectedContent = tw.style(
+        'flex flex-row items-center gap-1',
+        'px-4',
+        'px-6',
+      );
 
-  it('applies className after twClassName in contentContainerStyle', () => {
-    const { getByTestId } = render(
-      <FilterButtonGroup
-        value="a"
-        onChange={noopPress}
-        testID={GROUP_TEST_ID}
-        twClassName="px-4"
-        className="px-6"
-      >
-        <FilterButton value="a" onPress={noopPress}>
-          A
-        </FilterButton>
-      </FilterButtonGroup>,
-    );
+      expect(
+        StyleSheet.flatten(scroll.props.contentContainerStyle),
+      ).toStrictEqual(StyleSheet.flatten(expectedContent));
+    });
 
-    const scroll = getByTestId(GROUP_TEST_ID);
-    const expectedContent = tw.style(
-      'flex flex-row items-center gap-1',
-      'px-4',
-      'px-6',
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <FilterButtonGroup
+          value="a"
+          onChange={noopPress}
+          testID={GROUP_TEST_ID}
+          twClassName="px-4"
+        >
+          <FilterButton value="a" onPress={noopPress}>
+            A
+          </FilterButton>
+        </FilterButtonGroup>,
+      );
 
-    expect(
-      StyleSheet.flatten(scroll.props.contentContainerStyle),
-    ).toStrictEqual(StyleSheet.flatten(expectedContent));
-  });
+      const scroll = getByTestId(GROUP_TEST_ID);
+      const expectedContent = tw.style(
+        'flex flex-row items-center gap-1',
+        'px-4',
+      );
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <FilterButtonGroup
-        value="a"
-        onChange={noopPress}
-        testID={GROUP_TEST_ID}
-        twClassName="px-4"
-      >
-        <FilterButton value="a" onPress={noopPress}>
-          A
-        </FilterButton>
-      </FilterButtonGroup>,
-    );
-
-    const scroll = getByTestId(GROUP_TEST_ID);
-    const expectedContent = tw.style(
-      'flex flex-row items-center gap-1',
-      'px-4',
-    );
-
-    expect(
-      StyleSheet.flatten(scroll.props.contentContainerStyle),
-    ).toStrictEqual(StyleSheet.flatten(expectedContent));
+      expect(
+        StyleSheet.flatten(scroll.props.contentContainerStyle),
+      ).toStrictEqual(StyleSheet.flatten(expectedContent));
+    });
   });
 });

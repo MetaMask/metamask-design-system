@@ -495,41 +495,41 @@ describe('HeaderStandard', () => {
       expect(getByTestId(CONTAINER_TEST_ID)).toBeOnTheScreen();
     });
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <HeaderStandard
-        title="Title"
-        testID="header-standard-classes"
-        twClassName="mt-8"
-        className="mt-2"
-      />,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <HeaderStandard
+          title="Title"
+          testID="header-standard-classes"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
 
-    expect(getByTestId('header-standard-classes')).toHaveStyle(
-      twClassNames`mt-2`,
-    );
-  });
+      expect(getByTestId('header-standard-classes')).toHaveStyle(
+        twClassNames`mt-2`,
+      );
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <HeaderStandard
-        title="Title"
-        testID="header-standard-classes"
-        twClassName="mt-8"
-      />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <HeaderStandard
+          title="Title"
+          testID="header-standard-classes"
+          twClassName="mt-8"
+        />,
+      );
 
-    expect(getByTestId('header-standard-classes')).toHaveStyle(
-      twClassNames`mt-8`,
-    );
+      expect(getByTestId('header-standard-classes')).toHaveStyle(
+        twClassNames`mt-8`,
+      );
+    });
   });
 });

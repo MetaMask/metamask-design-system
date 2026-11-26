@@ -134,41 +134,41 @@ describe('BadgeWrapper', () => {
       height: 8,
     });
   });
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <BadgeWrapper
-        badge={<Text>Badge</Text>}
-        testID="badge-wrapper"
-        twClassName="mt-8"
-        className="mt-2"
-      >
-        <Text>Anchor</Text>
-      </BadgeWrapper>,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <BadgeWrapper
+          badge={<Text>Badge</Text>}
+          testID="badge-wrapper"
+          twClassName="mt-8"
+          className="mt-2"
+        >
+          <Text>Anchor</Text>
+        </BadgeWrapper>,
+      );
 
-    expect(getByTestId('badge-wrapper')).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByTestId('badge-wrapper')).toHaveStyle(twClassNames`mt-2`);
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <BadgeWrapper
-        badge={<Text>Badge</Text>}
-        testID="badge-wrapper"
-        twClassName="mt-8"
-      >
-        <Text>Anchor</Text>
-      </BadgeWrapper>,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <BadgeWrapper
+          badge={<Text>Badge</Text>}
+          testID="badge-wrapper"
+          twClassName="mt-8"
+        >
+          <Text>Anchor</Text>
+        </BadgeWrapper>,
+      );
 
-    expect(getByTestId('badge-wrapper')).toHaveStyle(twClassNames`mt-8`);
+      expect(getByTestId('badge-wrapper')).toHaveStyle(twClassNames`mt-8`);
+    });
   });
 });

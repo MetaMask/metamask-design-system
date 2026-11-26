@@ -131,37 +131,41 @@ describe('AvatarIcon', () => {
       expect(icon.props.style.height).toStrictEqual(expectedStyle.height);
     },
   );
-});
 
-describe('when className is provided', () => {
-  let twClassNames: ReturnType<typeof useTailwind>;
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
 
-  beforeAll(() => {
-    twClassNames = renderHook(() => useTailwind()).result.current;
-  });
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
 
-  it('applies className after twClassName and component classes', () => {
-    const { getByTestId } = render(
-      <AvatarIcon
-        iconName={IconName.Add}
-        testID="avatar-icon-classes"
-        twClassName="mt-8"
-        className="mt-2"
-      />,
-    );
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <AvatarIcon
+          iconName={IconName.Add}
+          testID="avatar-icon-classes"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
 
-    expect(getByTestId('avatar-icon-classes')).toHaveStyle(twClassNames`mt-2`);
-  });
+      expect(getByTestId('avatar-icon-classes')).toHaveStyle(
+        twClassNames`mt-2`,
+      );
+    });
 
-  it('applies deprecated twClassName on its own', () => {
-    const { getByTestId } = render(
-      <AvatarIcon
-        iconName={IconName.Add}
-        testID="avatar-icon-classes"
-        twClassName="mt-8"
-      />,
-    );
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <AvatarIcon
+          iconName={IconName.Add}
+          testID="avatar-icon-classes"
+          twClassName="mt-8"
+        />,
+      );
 
-    expect(getByTestId('avatar-icon-classes')).toHaveStyle(twClassNames`mt-8`);
+      expect(getByTestId('avatar-icon-classes')).toHaveStyle(
+        twClassNames`mt-8`,
+      );
+    });
   });
 });

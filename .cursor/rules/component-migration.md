@@ -129,7 +129,7 @@ Use this workflow when:
 
 - Re-export all shared types
 - Extend with `ComponentProps<'element'>` (React) or `ViewProps`/`PressableProps` (React Native)
-- Add `className?: string` (React and React Native; `twClassName` is deprecated until 1.0.0 and only kept on components that do not accept `className` yet)
+- Add `className?: string` (React and React Native; `twClassName` is deprecated and will be removed in 1.0.0. Do not use it in new code)
 - Event handlers from base types (onClick/onPress)
 
 ### Phase 2.5: Implementation Patterns

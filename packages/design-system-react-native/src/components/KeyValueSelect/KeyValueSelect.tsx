@@ -58,12 +58,11 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
       className: keyValueRowClassName,
       ...restKeyValueRowProps
     } = keyValueRowProps ?? {};
-    const resolvedKeyValueRowTwClassName = [
+    const resolvedKeyValueRowClassName = resolveClassName(
       KEY_VALUE_ROW_TW_CLASS_NAME,
       keyValueRowTwClassName,
-    ]
-      .filter(Boolean)
-      .join(' ');
+      keyValueRowClassName,
+    );
 
     const getPressableStyle = ({
       pressed,
@@ -105,8 +104,7 @@ export const KeyValueSelect = forwardRef<View, KeyValueSelectProps>(
       >
         <KeyValueRow
           {...restKeyValueRowProps}
-          twClassName={resolvedKeyValueRowTwClassName}
-          className={keyValueRowClassName}
+          className={resolvedKeyValueRowClassName}
           keyLabel={keyLabel}
           keyStartAccessory={keyStartAccessory}
           keyEndAccessory={keyEndAccessory}
