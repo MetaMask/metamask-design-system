@@ -32,9 +32,6 @@ const meta: Meta<AvatarGroupProps> = {
     isReverse: {
       control: 'boolean',
     },
-    twClassName: {
-      control: 'text',
-    },
   },
 };
 
@@ -96,7 +93,6 @@ export const Default: Story = {
     size: AvatarGroupSize.Md,
     max: 4,
     isReverse: false,
-    twClassName: '',
   },
   render: (args) => <AvatarGroupStory {...args} />,
 };

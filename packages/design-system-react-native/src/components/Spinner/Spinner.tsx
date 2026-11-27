@@ -15,6 +15,7 @@ export const Spinner = ({
   loadingText,
   loadingTextProps,
   twClassName,
+  className,
   style,
   ...props
 }: SpinnerProps) => {
@@ -75,7 +76,10 @@ export const Spinner = ({
   return (
     <View
       {...props}
-      style={[tw.style('flex-row items-center gap-x-2', twClassName), style]}
+      style={[
+        tw.style('flex-row items-center gap-x-2', twClassName, className),
+        style,
+      ]}
     >
       <Animated.View style={[animatedStyle]} testID="spinner-animated-view">
         <Icon {...finalSpinnerIconProps} />

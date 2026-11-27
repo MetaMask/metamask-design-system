@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react-native';
+import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 import { View } from 'react-native';
 
@@ -209,6 +210,30 @@ describe('Skeleton', () => {
       const skeleton = getByTestId('skeleton');
 
       expect(skeleton.props.accessibilityLabel).toBe('Loading content');
+    });
+  });
+
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
+
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
+
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <Skeleton testID="skeleton" twClassName="mt-8" className="mt-2" />,
+      );
+
+      expect(getByTestId('skeleton')).toHaveStyle(twClassNames`mt-2`);
+    });
+
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <Skeleton testID="skeleton" twClassName="mt-8" />,
+      );
+
+      expect(getByTestId('skeleton')).toHaveStyle(twClassNames`mt-8`);
     });
   });
 });

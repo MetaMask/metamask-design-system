@@ -12,9 +12,6 @@ const meta: Meta<BadgeIconProps> = {
       control: 'select',
       options: IconName,
     },
-    twClassName: {
-      control: 'text',
-    },
   },
 };
 
@@ -25,6 +22,5 @@ type Story = StoryObj<BadgeIconProps>;
 export const Default: Story = {
   args: {
     iconName: IconName.Add,
-    twClassName: '',
   },
 };

@@ -14,6 +14,7 @@ export const BadgeStatus = ({
   size = BadgeStatusSize.Md,
   hasBorder = true,
   twClassName,
+  className,
   style,
   ...props
 }: BadgeStatusProps) => {
@@ -27,6 +28,7 @@ export const BadgeStatus = ({
           'self-start rounded-full',
           hasBorder && 'border-2 border-background-default',
           twClassName,
+          className,
         ),
         style,
       ]}
