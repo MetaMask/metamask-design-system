@@ -42,10 +42,10 @@ Icon rendered above the label. Use `iconProps` to pass props to the internal `Ic
 
 Text rendered below the icon. Use `labelProps` to pass props to the internal `Text` component for test IDs and accessibility metadata without overriding typography defaults.
 
-| PROP         | TYPE                                                                                            | REQUIRED | DEFAULT     |
-| ------------ | ----------------------------------------------------------------------------------------------- | -------- | ----------- |
-| `label`      | `string`                                                                                        | Yes      | `undefined` |
-| `labelProps` | `Omit<Partial<TextProps>, 'children' \| 'variant' \| 'fontWeight' \| 'color' \| 'twClassName'>` | No       | `undefined` |
+| PROP         | TYPE                                                                                          | REQUIRED | DEFAULT     |
+| ------------ | --------------------------------------------------------------------------------------------- | -------- | ----------- |
+| `label`      | `string`                                                                                      | Yes      | `undefined` |
+| `labelProps` | `Omit<Partial<TextProps>, 'children' \| 'variant' \| 'fontWeight' \| 'color' \| 'className'>` | No       | `undefined` |
 
 ```tsx
 <MainActionButton
@@ -101,13 +101,15 @@ Callback fired when a press gesture ends.
 | ------------------------------ | -------- | ----------- |
 | `PressableProps['onPressOut']` | No       | `undefined` |
 
-### `twClassName`
+### `className`
 
 Additional static Tailwind classes for the button container. For pressed-state or other interactive styling, use `style` as a callback.
 
 | TYPE     | REQUIRED | DEFAULT |
 | -------- | -------- | ------- |
 | `string` | No       | `''`    |
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 

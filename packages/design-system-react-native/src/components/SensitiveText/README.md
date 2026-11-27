@@ -10,7 +10,7 @@ import { SensitiveText } from '@metamask/design-system-react-native';
 
 ## Props
 
-This component extends all [Text](../Text/README.md) props (variant, color, fontWeight, twClassName, etc.) and adds the following:
+This component extends all [Text](../Text/README.md) props (variant, color, fontWeight, className, etc.) and adds the following:
 
 ### `isHidden`
 
@@ -68,19 +68,21 @@ The text content to display or hide.
 <SensitiveText isHidden>Sensitive information</SensitiveText>
 ```
 
-### `twClassName`
+### `className`
 
-Inherited from Text. Use the `twClassName` prop to add Tailwind CSS classes to the component.
+Inherited from Text. Use the `className` prop to add Tailwind CSS classes to the component.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
 ```tsx
-<SensitiveText twClassName="mt-4" isHidden>
+<SensitiveText className="mt-4" isHidden>
   Styled Hidden Text
 </SensitiveText>
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 

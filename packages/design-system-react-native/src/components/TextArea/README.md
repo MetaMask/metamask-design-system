@@ -168,9 +168,9 @@ import { TextArea } from '@metamask/design-system-react-native';
 <TextArea value="" testID="my-text-area" placeholder="E2E" />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the `TextInput`. These classes are merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the `TextInput`. These classes are merged with the component's default classes using `twMerge`, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -183,19 +183,21 @@ Use the `twClassName` prop to add Tailwind CSS classes to the `TextInput`. These
 import { TextArea } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<TextArea value="" twClassName="rounded-lg" placeholder="Extra rounding" />
+<TextArea value="" className="rounded-lg" placeholder="Extra rounding" />
 
 // Override default styles
 <TextArea
   value=""
-  twClassName="bg-error-default"
+  className="bg-error-default"
   placeholder="Override background"
 />
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the `TextInput` appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the `TextInput` appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

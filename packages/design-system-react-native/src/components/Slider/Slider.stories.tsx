@@ -44,7 +44,7 @@ const meta: Meta<SliderProps> = {
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full p-4">
+      <Box className="w-full p-4">
         <Story />
       </Box>
     ),

@@ -22,6 +22,25 @@ Controls the active visual state.
 | --------- | -------- | ------- |
 | `boolean` | No       | `false` |
 
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
+
+- Add new styles that don't exist in the default component
+- Override the component's default styles when needed
+
+| TYPE     | REQUIRED | DEFAULT     |
+| -------- | -------- | ----------- |
+| `string` | No       | `undefined` |
+
+```tsx
+<ButtonFilter isActive className="mt-4">
+  All
+</ButtonFilter>
+```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### Button Filter Group
 
 - `isActive=true`: `bg-icon-default` + `text-icon-inverse`

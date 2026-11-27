@@ -34,7 +34,7 @@ const meta: Meta<TextAreaProps> = {
     placeholder: {
       control: 'text',
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },

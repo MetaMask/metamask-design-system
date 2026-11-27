@@ -35,7 +35,7 @@ const meta: Meta<TextFieldProps> = {
     placeholder: {
       control: 'text',
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },

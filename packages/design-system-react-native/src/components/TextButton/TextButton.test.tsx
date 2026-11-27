@@ -62,4 +62,45 @@ describe('TextButton', () => {
     fireEvent(node, 'pressOut');
     expect(node).toHaveStyle(tw`text-primary-default`);
   });
+
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
+
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
+
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <TextButton
+          testID="text-button-classes"
+          twClassName="mt-8"
+          className="mt-2"
+          onPress={jest.fn()}
+        >
+          Link
+        </TextButton>,
+      );
+
+      expect(getByTestId('text-button-classes')).toHaveStyle(
+        twClassNames`mt-2`,
+      );
+    });
+
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <TextButton
+          testID="text-button-classes"
+          twClassName="mt-8"
+          onPress={jest.fn()}
+        >
+          Link
+        </TextButton>,
+      );
+
+      expect(getByTestId('text-button-classes')).toHaveStyle(
+        twClassNames`mt-8`,
+      );
+    });
+  });
 });
