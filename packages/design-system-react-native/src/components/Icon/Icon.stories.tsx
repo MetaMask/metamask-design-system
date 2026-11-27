@@ -23,9 +23,6 @@ const meta: Meta<IconProps> = {
       control: 'select',
       options: IconColor,
     },
-    className: {
-      control: 'text',
-    },
   },
 };
 

@@ -25,9 +25,6 @@ const meta: Meta<AvatarIconProps> = {
       control: 'select',
       options: IconName,
     },
-    className: {
-      control: 'text',
-    },
   },
 };
 
@@ -40,7 +37,6 @@ export const Default: Story = {
     size: AvatarIconSize.Md,
     severity: AvatarIconSeverity.Neutral,
     iconName: IconName.Arrow2UpRight,
-    className: '',
   },
 };
 

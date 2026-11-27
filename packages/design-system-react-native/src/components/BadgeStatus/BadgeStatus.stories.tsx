@@ -27,9 +27,6 @@ const meta: Meta<BadgeStatusProps> = {
     hasBorder: {
       control: 'boolean',
     },
-    className: {
-      control: 'text',
-    },
   },
 };
 
@@ -54,7 +51,6 @@ export const Default: Story = {
     size: BadgeStatusSize.Md,
     status: BadgeStatusStatus.Active,
     hasBorder: true,
-    className: '',
   },
   render: (args) => (
     <BadgeStatusStoryWrapper>

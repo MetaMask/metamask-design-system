@@ -19,9 +19,6 @@ const meta: Meta<AvatarAccountProps> = {
       control: 'select',
       options: AvatarAccountVariant,
     },
-    className: {
-      control: 'text',
-    },
   },
 };
 
@@ -32,7 +29,6 @@ export const Default: Story = {
   args: {
     size: AvatarAccountSize.Md,
     variant: AvatarAccountVariant.Jazzicon,
-    className: '',
   },
   render: (args) => {
     return (

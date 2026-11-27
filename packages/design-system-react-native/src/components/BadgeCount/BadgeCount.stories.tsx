@@ -30,10 +30,6 @@ const meta: Meta<BadgeCountProps> = {
       description:
         'Optional props to be passed to the Text component used by count',
     },
-    className: {
-      control: 'text',
-      description: 'Optional prop to add twrnc overriding classNames',
-    },
   },
 };
 
@@ -46,7 +42,6 @@ export const Default: Story = {
     size: BadgeCountSize.Md,
     count: 8,
     max: 99,
-    className: '',
   },
 };
 

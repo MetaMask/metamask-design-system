@@ -25,9 +25,6 @@ const meta: Meta<AvatarBaseProps> = {
     fallbackText: {
       control: 'text',
     },
-    className: {
-      control: 'text',
-    },
   },
 };
 
@@ -40,7 +37,6 @@ export const Default: Story = {
     size: AvatarBaseSize.Md,
     shape: AvatarBaseShape.Circle,
     fallbackText: '',
-    className: '',
   },
   render: (args) => (
     <AvatarBase {...args}>
