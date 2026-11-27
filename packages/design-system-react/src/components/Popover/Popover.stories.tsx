@@ -325,3 +325,84 @@ export const OnClickOutside: Story = {
     );
   },
 };
+
+export const TopLayer: Story = {
+  render: () => {
+    const [referenceElement, setReferenceElement] =
+      useState<HTMLElement | null>(null);
+    return (
+      <Box
+        borderColor={BoxBorderColor.BorderDefault}
+        borderWidth={1}
+        padding={4}
+        className="relative z-0 h-[120px] w-[320px] overflow-hidden"
+      >
+        <Button
+          variant={ButtonVariant.Primary}
+          ref={(node) => setReferenceElement(node)}
+        >
+          Reference
+        </Button>
+        <Popover
+          isOpen
+          hasArrow
+          position={PopoverPosition.BottomStart}
+          referenceElement={referenceElement}
+        >
+          <Text>This popover isn't clipped by the overflow hidden parent.</Text>
+          <Text>It renders in the top layer without a portal or z-index.</Text>
+        </Popover>
+      </Box>
+    );
+  },
+};
+
+export const InsideDialog: Story = {
+  render: () => {
+    const [dialog, setDialog] = useState<HTMLDialogElement | null>(null);
+    const [referenceElement, setReferenceElement] =
+      useState<HTMLElement | null>(null);
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <Button
+          variant={ButtonVariant.Primary}
+          onClick={() => dialog?.showModal()}
+        >
+          Open dialog
+        </Button>
+        <dialog
+          ref={setDialog}
+          onClose={() => setIsOpen(false)}
+          className="rounded-lg p-0"
+        >
+          <Box
+            backgroundColor={BoxBackgroundColor.BackgroundDefault}
+            flexDirection={BoxFlexDirection.Column}
+            gap={4}
+            padding={4}
+          >
+            <Text>Press Esc to close the popover first, then the dialog.</Text>
+            <Button
+              variant={ButtonVariant.Secondary}
+              onClick={() => setIsOpen((prev) => !prev)}
+              ref={(node) => setReferenceElement(node)}
+            >
+              Toggle popover
+            </Button>
+            <Popover
+              isOpen={isOpen}
+              referenceElement={referenceElement}
+              position={PopoverPosition.Bottom}
+              hasArrow
+              onClickOutside={() => setIsOpen(false)}
+              onPressEscKey={() => setIsOpen(false)}
+            >
+              <Text>Rendered above the modal dialog</Text>
+            </Popover>
+          </Box>
+        </dialog>
+      </>
+    );
+  },
+};
