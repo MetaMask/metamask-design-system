@@ -40,8 +40,14 @@ export type BottomSheetDialogProps = {
   onOpen?: (hasPendingAction?: boolean) => void;
   /**
    * Tailwind CSS classes for the dialog container.
+   *
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
 } & ViewProps;
 
 /**

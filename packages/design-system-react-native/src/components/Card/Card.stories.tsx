@@ -12,13 +12,12 @@ const meta: Meta<CardProps> = {
   component: Card,
   argTypes: {
     children: { control: 'text' },
-    twClassName: { control: 'text' },
     onPress: { action: 'pressed' },
   },
   decorators: [
     (Story) => (
       <Box padding={4}>
-        <Text twClassName="mb-4">Content behind card</Text>
+        <Text className="mb-4">Content behind card</Text>
         <Story />
       </Box>
     ),

@@ -168,4 +168,32 @@ describe('Card', () => {
     );
     expect(getByTestId('card').props.accessibilityLabel).toBe('My card');
   });
+
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
+
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
+
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <Card testID="card" twClassName="mt-8" className="mt-2">
+          <Text>Content</Text>
+        </Card>,
+      );
+
+      expect(getByTestId('card')).toHaveStyle(twClassNames`mt-2`);
+    });
+
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <Card testID="card" twClassName="mt-8">
+          <Text>Content</Text>
+        </Card>,
+      );
+
+      expect(getByTestId('card')).toHaveStyle(twClassNames`mt-8`);
+    });
+  });
 });

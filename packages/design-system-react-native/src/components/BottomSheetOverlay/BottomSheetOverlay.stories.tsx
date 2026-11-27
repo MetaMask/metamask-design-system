@@ -14,12 +14,11 @@ const meta: Meta<BottomSheetOverlayProps> = {
     onPress: { action: 'pressed' },
     touchableOpacityProps: { control: 'object' },
     style: { control: 'object' },
-    twClassName: { control: 'text' },
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full h-full relative">
-        <Box twClassName="absolute inset-0 justify-center items-center">
+      <Box className="relative size-full">
+        <Box className="absolute inset-0 items-center justify-center">
           <Text>Content behind overlay</Text>
         </Box>
         <Story />

@@ -14,6 +14,7 @@ export const Card: React.FC<CardProps> = ({
   children,
   isInteractive = false,
   twClassName,
+  className,
   style,
   accessibilityRole,
   ...props
@@ -28,6 +29,7 @@ export const Card: React.FC<CardProps> = ({
       const baseStyle = tw.style(
         baseClassName,
         twClassName,
+        className,
         pressed && 'bg-pressed',
       );
       const userStyle =
@@ -50,7 +52,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <View
       style={[
-        tw.style(baseClassName, twClassName),
+        tw.style(baseClassName, twClassName, className),
         style as StyleProp<ViewStyle>,
       ]}
       {...props}

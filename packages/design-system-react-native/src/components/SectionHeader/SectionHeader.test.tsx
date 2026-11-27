@@ -330,6 +330,31 @@ describe('SectionHeader', () => {
         IconName.Add,
       );
     });
+
+    it('keeps shrink-0 on icons when iconProps provide className', () => {
+      const { getByTestId } = render(
+        <SectionHeader
+          title="Section"
+          startIconName={IconName.Add}
+          startIconProps={{
+            testID: 'section-header-start-icon',
+            className: 'ml-2',
+          }}
+          endIconName={IconName.ArrowRight}
+          endIconProps={{
+            testID: 'section-header-end-icon',
+            className: 'mr-2',
+          }}
+        />,
+      );
+
+      expect(getByTestId('section-header-start-icon')).toHaveStyle(
+        tw`shrink-0`,
+      );
+      expect(getByTestId('section-header-start-icon')).toHaveStyle(tw`ml-2`);
+      expect(getByTestId('section-header-end-icon')).toHaveStyle(tw`shrink-0`);
+      expect(getByTestId('section-header-end-icon')).toHaveStyle(tw`mr-2`);
+    });
   });
 
   describe('root layout', () => {

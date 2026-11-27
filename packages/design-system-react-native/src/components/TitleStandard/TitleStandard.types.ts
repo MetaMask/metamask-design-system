@@ -8,7 +8,7 @@ import type { TextProps } from '../Text/Text.types';
 
 /**
  * TitleStandard component props (React Native).
- * Extends {@link TitleStandardPropsShared} (requires `title`) with platform `Text` passthroughs, `twClassName`, and `View` props.
+ * Extends {@link TitleStandardPropsShared} (requires `title`) with platform `Text` passthroughs, `className`, and `View` props.
  */
 export type TitleStandardProps = TitleStandardPropsShared & {
   /**
@@ -29,6 +29,12 @@ export type TitleStandardProps = TitleStandardPropsShared & {
   bottomLabelWrapperProps?: Omit<Partial<BoxProps>, 'children'>;
   /**
    * Optional Tailwind class name to apply to the container.
+   *
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
 } & Omit<ViewProps, 'children'>;

@@ -15,7 +15,7 @@ import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
 ## Props
 
-Inherits root and title props from [HeaderBase](../HeaderBase/README.md), including `testID`, `accessibilityLabel`, `style`, `twClassName`, `textProps`, and wrapper props. `BottomSheetHeader` manages its start and end accessories internally through `onBack` and `onClose`, so it does not expose `startAccessory`, `endAccessory`, `startButtonIconProps`, or `endButtonIconProps` as public props.
+Inherits root and title props from [HeaderBase](../HeaderBase/README.md), including `testID`, `accessibilityLabel`, `style`, `className`, `textProps`, and wrapper props. `BottomSheetHeader` manages its start and end accessories internally through `onBack` and `onClose`, so it does not expose `startAccessory`, `endAccessory`, `startButtonIconProps`, or `endButtonIconProps` as public props.
 
 ### `onBack`
 
@@ -111,9 +111,9 @@ import { BottomSheetHeader } from '@metamask/design-system-react-native';
 <BottomSheetHeader>Simple Title</BottomSheetHeader>;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -126,14 +126,16 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { BottomSheetHeader } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<BottomSheetHeader twClassName="pb-2">
+<BottomSheetHeader className="pb-2">
   Title with extra bottom padding
 </BottomSheetHeader>;
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

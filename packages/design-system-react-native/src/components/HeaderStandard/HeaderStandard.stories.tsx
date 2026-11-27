@@ -14,11 +14,10 @@ const meta: Meta<HeaderStandardProps> = {
   argTypes: {
     title: { control: 'text' },
     subtitle: { control: 'text' },
-    twClassName: { control: 'text' },
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full bg-background-default">
+      <Box className="w-full bg-background-default">
         <Story />
       </Box>
     ),
@@ -81,7 +80,7 @@ export const EndButtonIconProps: Story = {
 export const Children: Story = {
   render: () => (
     <HeaderStandard onClose={() => null}>
-      <Box twClassName="items-center">
+      <Box className="items-center">
         <Text variant={TextVariant.HeadingSm}>Custom title</Text>
         <Text variant={TextVariant.BodySm}>Subtitle text</Text>
       </Box>

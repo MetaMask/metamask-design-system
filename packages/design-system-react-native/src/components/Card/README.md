@@ -48,9 +48,9 @@ import { Card } from '@metamask/design-system-react-native';
 </Card>;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `tw.style()`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -63,19 +63,21 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { Card } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<Card twClassName="mt-4">
+<Card className="mt-4">
   <Text>Card with margin</Text>
 </Card>
 
 // Override default styles
-<Card twClassName="p-8 rounded-lg">
+<Card className="p-8 rounded-lg">
   <Text>Card with larger padding and border radius</Text>
 </Card>
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. When `isInteractive` is `true`, `style` may also be a function `({ pressed }) => StyleProp<ViewStyle>`.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. When `isInteractive` is `true`, `style` may also be a function `({ pressed }) => StyleProp<ViewStyle>`.
 
 | TYPE                                                                                    | REQUIRED | DEFAULT     |
 | --------------------------------------------------------------------------------------- | -------- | ----------- |

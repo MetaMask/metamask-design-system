@@ -1,4 +1,5 @@
 // Third party dependencies.
+import { resolveClassName } from '@metamask/design-system-shared';
 import React from 'react';
 
 // External dependencies.
@@ -18,13 +19,21 @@ export function HeaderStandardCenterColumn({
 }: HeaderStandardCenterColumnProps) {
   let subtitleTextProps: Omit<Partial<TextProps>, 'children'> | undefined;
   if (subtitle && typeof subtitle === 'string') {
-    const { twClassName: subtitleTwClassName, ...subtitleTextRest } =
-      subtitleProps ?? {};
+    const {
+      twClassName: subtitleTwClassName,
+      className: subtitleClassName,
+      ...subtitleTextRest
+    } = subtitleProps ?? {};
     subtitleTextProps = {
       variant: TextVariant.BodySm,
       color: TextColor.TextAlternative,
       ...subtitleTextRest,
-      twClassName: ['-mt-0.5', subtitleTwClassName].filter(Boolean).join(' '),
+      twClassName: undefined,
+      className: resolveClassName(
+        '-mt-0.5',
+        subtitleTwClassName,
+        subtitleClassName,
+      ),
     };
   }
 

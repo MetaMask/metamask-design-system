@@ -45,7 +45,7 @@ import {
 <TitleHub
   title="Send"
   titleEndAccessory={
-    <Icon name={IconName.Info} size={IconSize.Sm} twClassName="ml-2" />
+    <Icon name={IconName.Info} size={IconSize.Sm} className="ml-2" />
   }
   amount="$4.42"
 />;
@@ -85,7 +85,7 @@ import {
   title="Send"
   amount="$4.42"
   amountEndAccessory={
-    <Icon name={IconName.Info} size={IconSize.Sm} twClassName="ml-2" />
+    <Icon name={IconName.Info} size={IconSize.Sm} className="ml-2" />
   }
 />;
 ```
@@ -125,7 +125,7 @@ import {
   amount="$4.42"
   bottomLabel="0.002 ETH"
   bottomLabelEndAccessory={
-    <Icon name={IconName.Gas} size={IconSize.Xs} twClassName="ml-2" />
+    <Icon name={IconName.Gas} size={IconSize.Xs} className="ml-2" />
   }
 />;
 ```
@@ -284,9 +284,9 @@ import { TitleHub } from '@metamask/design-system-react-native';
 />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `tw.style()`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -299,15 +299,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { TitleHub } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<TitleHub twClassName="mt-4" title="Send" amount="$4.42" />
+<TitleHub className="mt-4" title="Send" amount="$4.42" />
 
 // Override default styles
-<TitleHub twClassName="px-6" title="Send" amount="$4.42" />
+<TitleHub className="px-6" title="Send" amount="$4.42" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values. Other `View` props (for example `testID` and accessibility fields) are also accepted on the root container.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values. Other `View` props (for example `testID` and accessibility fields) are also accepted on the root container.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

@@ -36,7 +36,7 @@ const meta: Meta<HeaderSubpageProps> = {
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full bg-background-default">
+      <Box className="w-full bg-background-default">
         <Story />
       </Box>
     ),

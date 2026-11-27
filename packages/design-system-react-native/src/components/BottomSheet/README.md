@@ -37,7 +37,7 @@ Content to display inside the sheet.
 ```tsx
 <BottomSheet goBack={goBack}>
   <BottomSheetHeader onClose={goBack}>Title</BottomSheetHeader>
-  <Box twClassName="p-4">
+  <Box className="p-4">
     <Text>Sheet body</Text>
   </Box>
   <BottomSheetFooter
@@ -120,19 +120,21 @@ Optional boolean to enable or disable the `KeyboardAvoidingView` that shifts the
 </BottomSheet>
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the `BottomSheetDialog` container.
+Use the `className` prop to add Tailwind CSS classes to the `BottomSheetDialog` container.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
 ```tsx
-<BottomSheet goBack={goBack} twClassName="rounded-t-xl">
+<BottomSheet goBack={goBack} className="rounded-t-xl">
   <Text>Custom styled sheet</Text>
 </BottomSheet>
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
