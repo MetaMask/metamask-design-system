@@ -10,7 +10,7 @@ import { HeaderStandard } from '@metamask/design-system-react-native';
 
 ## Props
 
-Inherits [HeaderBaseProps](../HeaderBase/README.md) (`startAccessory`, `endAccessory`, `textProps`, `testID`, `style`, `twClassName`, and other `View` props). Additional props:
+Inherits [HeaderBaseProps](../HeaderBase/README.md) (`startAccessory`, `endAccessory`, `textProps`, `testID`, `style`, `className`, and other `View` props). Additional props:
 
 ### `title`
 
@@ -82,7 +82,7 @@ Custom center content. When provided, replaces the default title and subtitle la
 
 ```tsx
 <HeaderStandard onClose={closeModal}>
-  <Box twClassName="items-center">
+  <Box className="items-center">
     <Text variant={TextVariant.HeadingSm}>Custom layout</Text>
   </Box>
 </HeaderStandard>
@@ -146,7 +146,7 @@ Props for the close `ButtonIcon` (excluding `iconName`). `onPress` takes precede
 />
 ```
 
-### `twClassName`
+### `className`
 
 Tailwind classes merged onto the root [HeaderBase](../HeaderBase/README.md) container. The component applies horizontal padding by default.
 
@@ -155,8 +155,10 @@ Tailwind classes merged onto the root [HeaderBase](../HeaderBase/README.md) cont
 | `string` | No       | `undefined` |
 
 ```tsx
-<HeaderStandard title="Page" twClassName="border-b border-muted" />
+<HeaderStandard title="Page" className="border-b border-muted" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ## Usage
 

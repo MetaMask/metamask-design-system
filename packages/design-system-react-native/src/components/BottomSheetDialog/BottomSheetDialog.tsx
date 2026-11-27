@@ -56,6 +56,7 @@ export const BottomSheetDialog = forwardRef<
       onOpen,
       style,
       twClassName,
+      className,
       ...props
     },
     ref,
@@ -255,6 +256,7 @@ export const BottomSheetDialog = forwardRef<
           'bg-elevated1',
           'rounded-t-[32px] overflow-hidden border border-muted border-b-0',
           twClassName,
+          className,
         ),
         {
           maxHeight: maxSheetHeight,
@@ -277,6 +279,7 @@ export const BottomSheetDialog = forwardRef<
         shadowLg,
         style,
         twClassName,
+        className,
       ],
     );
 

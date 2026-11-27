@@ -80,7 +80,7 @@ export const StartAccessory: Story = {
     <SectionHeader
       title="Activity"
       startAccessory={
-        <Box twClassName="h-6 w-6 shrink-0 rounded-full bg-primary-default" />
+        <Box className="size-6 shrink-0 rounded-full bg-primary-default" />
       }
     />
   ),
@@ -91,7 +91,7 @@ export const EndAccessory: Story = {
     <SectionHeader
       title="Notifications"
       endAccessory={
-        <Box twClassName="h-6 w-6 shrink-0 rounded-full bg-error-default" />
+        <Box className="size-6 shrink-0 rounded-full bg-error-default" />
       }
     />
   ),
@@ -114,7 +114,7 @@ export const TitleAccessory: Story = {
 
 export const Children: Story = {
   render: () => (
-    <Box twClassName="w-full bg-background-default">
+    <Box className="w-full bg-background-default">
       <SectionHeader title="How it works" endIconName={IconName.ArrowRight}>
         <Text variant={TextVariant.BodySm} color={TextColor.TextAlternative}>
           Add mUSD and earn up to{' '}

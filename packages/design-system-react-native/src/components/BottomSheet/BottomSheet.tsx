@@ -31,6 +31,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
       goBack,
       style,
       twClassName,
+      className,
       isInteractable = true,
       isFullscreen = false,
       keyboardAvoidingViewEnabled = true,
@@ -140,6 +141,7 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
           ref={bottomSheetDialogRef}
           isFullscreen={isFullscreen}
           twClassName={twClassName}
+          className={className}
           keyboardAvoidingViewEnabled={keyboardAvoidingViewEnabled}
         >
           {children}

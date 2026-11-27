@@ -8,6 +8,7 @@ import { BottomSheetOverlayProps } from './BottomSheetOverlay.types';
 export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
   style,
   twClassName,
+  className,
   onPress,
   touchableOpacityProps,
   ...props
@@ -27,7 +28,7 @@ export const BottomSheetOverlay: React.FC<BottomSheetOverlayProps> = ({
   return (
     <Animated.View
       style={[
-        tw.style('absolute inset-0 bg-overlay-default', twClassName),
+        tw.style('absolute inset-0 bg-overlay-default', twClassName, className),
         style,
         { opacity: opacityVal },
       ]}

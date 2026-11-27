@@ -7,8 +7,14 @@ import type { TouchableOpacityProps, ViewProps } from 'react-native';
 export type BottomSheetOverlayProps = {
   /**
    * Tailwind CSS classes for the overlay container.
+   *
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
   /**
    * Callback function triggered when the overlay is pressed.
    */
