@@ -56,6 +56,7 @@ export const Slider = ({
   mapTrackPercentToValue,
   trackInset = SLIDER_TRACK_INSET,
   twClassName,
+  className,
   style,
   ...props
 }: SliderProps) => {
@@ -175,6 +176,7 @@ export const Slider = ({
         style,
       ]}
       twClassName={twClassName}
+      className={className}
     >
       <GestureDetector gesture={gesture}>
         <Animated.View
@@ -199,7 +201,7 @@ export const Slider = ({
               <Box
                 key={`dot-${mark.step}`}
                 pointerEvents="none"
-                twClassName="absolute top-0.5 h-1 w-1 rounded-full bg-text-muted"
+                className="absolute top-0.5 size-1 rounded-full bg-text-muted"
                 style={{
                   left: getDotLeftPercent(mark.step) as ViewStyle['left'],
                   transform: [{ translateX: -2 }],

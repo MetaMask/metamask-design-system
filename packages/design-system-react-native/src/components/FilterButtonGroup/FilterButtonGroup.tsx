@@ -11,6 +11,7 @@ export const FilterButtonGroup = ({
   variant,
   children,
   twClassName,
+  className,
   style,
   contentContainerStyle,
   ...scrollRest
@@ -31,7 +32,7 @@ export const FilterButtonGroup = ({
         accessibilityRole="tablist"
         style={[tw.style('self-stretch'), style]}
         contentContainerStyle={[
-          tw.style('flex flex-row items-center gap-1', twClassName),
+          tw.style('flex flex-row items-center gap-1', twClassName, className),
           contentContainerStyle,
         ]}
       >

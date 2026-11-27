@@ -102,7 +102,7 @@ export const Variant: Story = {
 
 export const Size: Story = {
   render: () => (
-    <Box gap={4} twClassName="p-4">
+    <Box gap={4} className="p-4">
       {Object.keys(FilterButtonSize).map((sizeKey) => (
         <FilterButton
           key={sizeKey}

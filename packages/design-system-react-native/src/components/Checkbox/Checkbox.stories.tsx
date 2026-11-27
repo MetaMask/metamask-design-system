@@ -21,9 +21,6 @@ const meta: Meta<CheckboxProps> = {
     label: {
       control: 'text',
     },
-    twClassName: {
-      control: 'text',
-    },
   },
 };
 

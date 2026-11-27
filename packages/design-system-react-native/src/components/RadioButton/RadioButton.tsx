@@ -1,3 +1,4 @@
+import { resolveClassName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
@@ -47,6 +48,7 @@ export const RadioButton = ({
   touchableOpacityProps,
   radioButtonContainerProps,
   twClassName,
+  className,
   style,
   ...props
 }: RadioButtonProps) => {
@@ -60,6 +62,7 @@ export const RadioButton = ({
           'flex-row items-center',
           isDisabled ? 'opacity-50' : 'opacity-100',
           twClassName,
+          className,
         ),
         style,
       ]}
@@ -100,7 +103,17 @@ export const RadioButton = ({
           )}
         </View>
         {label ? (
-          <TextOrChildren textProps={{ ...labelProps, twClassName: 'ml-3' }}>
+          <TextOrChildren
+            textProps={{
+              ...labelProps,
+              twClassName: undefined,
+              className: resolveClassName(
+                'ml-3',
+                labelProps?.twClassName,
+                labelProps?.className,
+              ),
+            }}
+          >
             {label}
           </TextOrChildren>
         ) : null}
