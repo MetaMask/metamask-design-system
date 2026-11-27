@@ -69,12 +69,28 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     endIconName ??
     (isInteractive && !endAccessory ? IconName.ArrowRight : undefined);
 
+  const {
+    className: startIconClassName,
+    twClassName: startIconTwClassName,
+    ...startIconRest
+  } = startIconProps ?? {};
+
+  const {
+    className: endIconClassName,
+    twClassName: endIconTwClassName,
+    ...endIconRest
+  } = endIconProps ?? {};
+
   const resolvedStartAccessory = startIconName ? (
     <Icon
       size={IconSize.Md}
       color={IconColor.IconDefault}
-      className="shrink-0"
-      {...startIconProps}
+      className={resolveClassName(
+        'shrink-0',
+        startIconTwClassName,
+        startIconClassName,
+      )}
+      {...startIconRest}
       name={startIconName}
     />
   ) : (
@@ -85,8 +101,12 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     <Icon
       size={IconSize.Md}
       color={IconColor.IconAlternative}
-      className="shrink-0"
-      {...endIconProps}
+      className={resolveClassName(
+        'shrink-0',
+        endIconTwClassName,
+        endIconClassName,
+      )}
+      {...endIconRest}
       name={resolvedEndIconName}
     />
   ) : (
