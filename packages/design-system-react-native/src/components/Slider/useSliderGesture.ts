@@ -173,6 +173,11 @@ export function useSliderGesture(
         // the newer ones.
         if (incoming === lastEmittedValueRef.current) {
           ackedGenerationRef.current = lastEmittedGenerationRef.current;
+          // If gesture is complete, clear history so future values are external.
+          if (!isDraggingRef.current) {
+            lastEmittedValueRef.current = null;
+            recentCommitsRef.current = [];
+          }
         } else {
           ackedGenerationRef.current = match.generation;
         }
@@ -190,6 +195,7 @@ export function useSliderGesture(
       // Not a recent local emit — external update or parent transform.
       ackedGenerationRef.current = commitGenerationRef.current;
       lastEmittedValueRef.current = null;
+      recentCommitsRef.current = [];
       hasInflightCommits.value = false;
       return { syncPropValue: true, syncBaseline: true };
     },
@@ -328,9 +334,22 @@ export function useSliderGesture(
     }
   }, [isDisabled, onGrip]);
 
-  const setDragging = useCallback((dragging: boolean) => {
-    isDraggingRef.current = dragging;
-  }, []);
+  const setDragging = useCallback(
+    (dragging: boolean) => {
+      isDraggingRef.current = dragging;
+      // If gesture ended and prop already caught up to latest emit, clear history.
+      if (
+        !dragging &&
+        lastEmittedValueRef.current !== null &&
+        propValue.value === lastEmittedValueRef.current &&
+        ackedGenerationRef.current === lastEmittedGenerationRef.current
+      ) {
+        lastEmittedValueRef.current = null;
+        recentCommitsRef.current = [];
+      }
+    },
+    [propValue],
+  );
 
   const checkThresholdCrossing = useCallback(
     (newTrackPercent: number) => {
