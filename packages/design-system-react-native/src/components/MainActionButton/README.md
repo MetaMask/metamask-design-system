@@ -101,13 +101,15 @@ Callback fired when a press gesture ends.
 | ------------------------------ | -------- | ----------- |
 | `PressableProps['onPressOut']` | No       | `undefined` |
 
-### `twClassName`
+### `className`
 
 Additional static Tailwind classes for the button container. For pressed-state or other interactive styling, use `style` as a callback.
 
 | TYPE     | REQUIRED | DEFAULT |
 | -------- | -------- | ------- |
 | `string` | No       | `''`    |
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 

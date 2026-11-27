@@ -31,8 +31,15 @@ export type SliderProps = SliderPropsShared &
     /**
      * Optional twrnc classes merged into the root container after component defaults.
      * Use for layout spacing the Box API does not cover (e.g. `mt-4`).
+     *
+     * @deprecated Use `className` instead.
      */
     twClassName?: string;
+
+    /**
+     * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+     */
+    className?: string;
   };
 
 /**

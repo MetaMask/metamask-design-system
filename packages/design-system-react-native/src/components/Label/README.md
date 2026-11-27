@@ -40,9 +40,9 @@ import { TextVariant } from '@metamask/design-system-react-native';
 <Label>Default label (BodyMd)</Label>
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -55,15 +55,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { Label } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<Label twClassName="mb-2">Label with margin</Label>
+<Label className="mb-2">Label with margin</Label>
 
 // Override default styles
-<Label twClassName="text-error-default">Required field</Label>
+<Label className="text-error-default">Required field</Label>
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

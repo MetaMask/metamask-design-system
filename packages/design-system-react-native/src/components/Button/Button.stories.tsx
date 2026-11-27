@@ -54,7 +54,7 @@ const meta: Meta<ButtonProps> = {
     isInverse: {
       control: 'boolean',
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },

@@ -60,13 +60,15 @@ Typography variant. Defaults to `TextVariant.BodyMd` (same as [`Text`](../Text/R
 | -------- | -------- | ------- |
 | `string` | No       | `link`  |
 
-### `twClassName`
+### `className`
 
 Additional TWRNC classes merged into the label.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `suppressHighlighting`
 
@@ -78,7 +80,7 @@ When `true` (default), React Native does not apply its default text press highli
 
 ### `style`
 
-Style for the label, merged after design-token styles. Prefer `twClassName` with design tokens when possible.
+Style for the label, merged after design-token styles. Prefer `className` with design tokens when possible.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

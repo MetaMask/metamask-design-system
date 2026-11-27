@@ -96,22 +96,22 @@ export const IconNameAndLabel: Story = {
       <MainActionButton
         iconName={IconName.AttachMoney}
         label="Buy"
-        twClassName="flex-1"
+        className="flex-1"
       />
       <MainActionButton
         iconName={IconName.SwapVertical}
         label="Swap"
-        twClassName="flex-1"
+        className="flex-1"
       />
       <MainActionButton
         iconName={IconName.Send}
         label="Send"
-        twClassName="flex-1"
+        className="flex-1"
       />
       <MainActionButton
         iconName={IconName.Received}
         label="Receive"
-        twClassName="flex-1"
+        className="flex-1"
       />
     </Box>
   ),

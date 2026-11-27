@@ -123,7 +123,7 @@ Optional props passed to the label's Text component when `label` is a string.
 <RadioButton
   isChecked
   label="Custom label"
-  labelProps={{ twClassName: 'text-error-default' }}
+  labelProps={{ className: 'text-error-default' }}
   onPress={handlePress}
 />
 ```
@@ -158,23 +158,25 @@ Optional props passed to the radio button circle container View.
 
 ---
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the root container. These classes are merged with the component's default classes.
+Use the `className` prop to add Tailwind CSS classes to the root container. These classes are merged with the component's default classes.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
 ```tsx
-<RadioButton twClassName="mt-4" label="Custom spacing" onPress={handlePress} />
+<RadioButton className="mt-4" label="Custom spacing" onPress={handlePress} />
 ```
 
 ---
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the root container's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible.
+Use the `style` prop to customize the root container's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

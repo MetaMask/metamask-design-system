@@ -47,8 +47,14 @@ export type MainActionButtonProps = {
   isDisabled?: boolean;
   /**
    * Optional Tailwind classes to extend or override container styles.
+   *
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
   /**
    * Optional React Native style for the button container.
    */

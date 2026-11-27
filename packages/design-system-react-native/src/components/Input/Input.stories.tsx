@@ -38,7 +38,7 @@ const meta: Meta<InputProps> = {
     value: {
       control: 'text',
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },
