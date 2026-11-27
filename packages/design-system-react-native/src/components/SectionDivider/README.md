@@ -12,7 +12,7 @@ import { SectionDivider } from '@metamask/design-system-react-native';
 
 ## Props
 
-`SectionDividerProps` matches [Box](../Box/Box.types.ts) and React Native `View` props. Override the line with `borderWidth`, `borderColor`, and `marginVertical`, or with `style` / `twClassName`.
+`SectionDividerProps` matches [Box](../Box/Box.types.ts) and React Native `View` props. Override the line with `borderWidth`, `borderColor`, and `marginVertical`, or with `style` / `className`.
 
 ### Defaults
 
@@ -67,9 +67,9 @@ Space above and below the line, from the design spacing scale.
 | ------------ | -------- | ------- |
 | `BoxSpacing` | No       | `5`     |
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -82,15 +82,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { SectionDivider } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<SectionDivider twClassName="opacity-50" />
+<SectionDivider className="opacity-50" />
 
 // Override default styles
-<SectionDivider twClassName="self-center" />
+<SectionDivider className="self-center" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

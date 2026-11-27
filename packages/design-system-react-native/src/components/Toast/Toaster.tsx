@@ -1,4 +1,5 @@
 // Third party dependencies.
+import { resolveClassName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React, {
   forwardRef,
@@ -59,15 +60,16 @@ const getToastProps = ({
   onClose: _onClose,
   topOffset: _topOffset,
   twClassName: _twClassName,
+  className: _className,
   showCloseButton: _showCloseButton,
   ...toastProps
-}: ToastOptions): Omit<ToastProps, 'twClassName'> => toastProps;
+}: ToastOptions): Omit<ToastProps, 'twClassName' | 'className'> => toastProps;
 
 const getHiddenTranslateY = (height: number, offset: number) =>
   -(height + offset);
 
 const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
-  ({ twClassName, ...props }, ref) => {
+  ({ twClassName, className, ...props }, ref) => {
     const tw = useTailwind();
     const [toastOptions, setToastOptions] = useState<ToastOptions | undefined>(
       undefined,
@@ -366,13 +368,16 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
       onClose: toastOnClose,
       showCloseButton = true,
       twClassName: toastTwClassName,
+      className: toastClassName,
     } = toastOptions;
     const toastProps = getToastProps(toastOptions);
     const { actionButtonLabel, actionButtonOnPress, ...restToastProps } =
       toastProps;
-    const toastTwClassNames = [twClassName, toastTwClassName]
-      .filter(Boolean)
-      .join(' ');
+    const toastClassNames = resolveClassName(
+      resolveClassName(twClassName ?? '', className),
+      toastTwClassName,
+      toastClassName,
+    );
     const handleClose = showCloseButton
       ? () => {
           closeToast();
@@ -427,13 +432,13 @@ const ToasterComponent = forwardRef<ToasterRef, ToasterProps>(
               actionButtonLabel={actionButtonLabel}
               actionButtonOnPress={actionButtonOnPress}
               onClose={handleClose}
-              twClassName={toastTwClassNames}
+              className={toastClassNames}
             />
           ) : (
             <Toast
               {...restToastProps}
               onClose={handleClose}
-              twClassName={toastTwClassNames}
+              className={toastClassNames}
             />
           )}
         </Animated.View>

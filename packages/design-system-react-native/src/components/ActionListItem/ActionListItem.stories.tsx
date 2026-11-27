@@ -30,7 +30,6 @@ const meta: Meta<ActionListItemProps> = {
       control: { type: 'boolean' },
     },
     onPress: { action: 'pressed' },
-    twClassName: { control: 'text' },
   },
 };
 
@@ -80,12 +79,6 @@ export const Description: Story = {
   },
 };
 
-export const TwClassName: Story = {
-  args: {
-    twClassName: 'rounded-lg',
-  },
-};
-
 const BACKGROUND_EXAMPLES = [
   {
     label: 'Background default',
@@ -107,7 +100,7 @@ const BACKGROUND_EXAMPLES = [
 
 export const Backgrounds: Story = {
   render: (args) => (
-    <Box twClassName="gap-4">
+    <Box className="gap-4">
       {BACKGROUND_EXAMPLES.map(({ label, backgroundColor }) => (
         <Box key={label} backgroundColor={backgroundColor} padding={4}>
           <Text variant={TextVariant.BodySm}>{label}</Text>

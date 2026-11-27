@@ -15,7 +15,6 @@ const meta: Meta<TabEmptyStateProps> = {
   argTypes: {
     description: { control: 'text' },
     actionButtonText: { control: 'text' },
-    twClassName: { control: 'text' },
     onAction: { action: 'onAction' },
   },
   decorators: [

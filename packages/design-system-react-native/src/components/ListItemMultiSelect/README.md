@@ -37,7 +37,7 @@ ListItemMultiSelect extends interactive [ListItem](../ListItem/README.md) props 
 
 ### `isSelected`
 
-Whether this row is selected. When `true`, applies `bg-background-muted` on the root (merged into `twClassName`) and shows a checked trailing Checkbox. When `false`, the row uses the default background and the Checkbox is unchecked. The parent controls this value and updates it from `onPress`.
+Whether this row is selected. When `true`, applies `bg-background-muted` on the root (merged into `className`) and shows a checked trailing Checkbox. When `false`, the row uses the default background and the Checkbox is unchecked. The parent controls this value and updates it from `onPress`.
 
 | TYPE      | REQUIRED | DEFAULT     |
 | --------- | -------- | ----------- |
@@ -69,14 +69,14 @@ Callback fired when the row is pressed. Use this to toggle the row's `isSelected
 />
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
 
-When `isSelected` is `true`, `bg-background-muted` is merged with `twClassName` on the root.
+When `isSelected` is `true`, `bg-background-muted` is merged with `className` on the root.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -88,14 +88,16 @@ import { ListItemMultiSelect } from '@metamask/design-system-react-native';
 <ListItemMultiSelect
   title="USDC"
   isSelected
-  twClassName="rounded-lg"
+  className="rounded-lg"
   onPress={() => {}}
 />;
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

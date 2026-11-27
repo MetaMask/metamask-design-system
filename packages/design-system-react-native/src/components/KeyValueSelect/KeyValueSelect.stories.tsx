@@ -214,7 +214,7 @@ export const KeyValueRowProps: Story = {
       keyLabel="Network"
       value="Ethereum Mainnet"
       selectButtonProps={{ placeholder: 'Select network' }}
-      keyValueRowProps={{ twClassName: 'border-b border-border-muted' }}
+      keyValueRowProps={{ className: 'border-b border-border-muted' }}
       onPress={noopPress}
     />
   ),
