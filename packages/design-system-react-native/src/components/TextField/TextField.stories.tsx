@@ -35,9 +35,6 @@ const meta: Meta<TextFieldProps> = {
     placeholder: {
       control: 'text',
     },
-    className: {
-      control: 'text',
-    },
   },
 };
 

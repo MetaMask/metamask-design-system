@@ -34,9 +34,6 @@ const meta: Meta<TextAreaProps> = {
     placeholder: {
       control: 'text',
     },
-    className: {
-      control: 'text',
-    },
   },
 };
 

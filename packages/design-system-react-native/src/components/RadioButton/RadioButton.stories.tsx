@@ -23,7 +23,6 @@ const meta: Meta<RadioButtonProps> = {
     isDisabled: { control: 'boolean' },
     isReadOnly: { control: 'boolean' },
     isDanger: { control: 'boolean' },
-    className: { control: 'text' },
   },
 };
 

@@ -50,9 +50,6 @@ const meta: Meta<TextFieldSearchProps> = {
       description:
         'Required accessible name for the inner TextInput. It renders no text.',
     },
-    className: {
-      control: 'text',
-    },
     inputProps: {
       control: 'object',
     },

@@ -49,9 +49,6 @@ const meta: Meta<SelectButtonProps> = {
     value: {
       control: 'text',
     },
-    className: {
-      control: 'text',
-    },
     placeholder: {
       control: 'text',
       description:
@@ -81,7 +78,6 @@ export const Default: Story = {
     variant: SelectButtonVariant.Primary,
     endArrowDirection: SelectButtonEndArrow.Down,
     isDisabled: false,
-    className: '',
     onPress: noopPress,
   },
   render: (args) => (

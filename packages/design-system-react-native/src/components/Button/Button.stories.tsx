@@ -54,9 +54,6 @@ const meta: Meta<ButtonProps> = {
     isInverse: {
       control: 'boolean',
     },
-    className: {
-      control: 'text',
-    },
   },
 };
 export default meta;

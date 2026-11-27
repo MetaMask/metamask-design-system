@@ -11,7 +11,6 @@ const meta: Meta<LabelProps> = {
   component: Label,
   argTypes: {
     children: { control: 'text' },
-    className: { control: 'text' },
     style: { control: 'object' },
   },
   decorators: [
