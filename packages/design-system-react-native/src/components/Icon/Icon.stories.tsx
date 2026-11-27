@@ -23,7 +23,7 @@ const meta: Meta<IconProps> = {
       control: 'select',
       options: IconColor,
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },

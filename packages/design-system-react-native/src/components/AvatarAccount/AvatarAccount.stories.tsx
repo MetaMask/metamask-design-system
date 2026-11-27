@@ -19,7 +19,7 @@ const meta: Meta<AvatarAccountProps> = {
       control: 'select',
       options: AvatarAccountVariant,
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },
@@ -32,7 +32,7 @@ export const Default: Story = {
   args: {
     size: AvatarAccountSize.Md,
     variant: AvatarAccountVariant.Jazzicon,
-    twClassName: '',
+    className: '',
   },
   render: (args) => {
     return (

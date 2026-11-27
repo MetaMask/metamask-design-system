@@ -56,7 +56,7 @@ export const Address: Story = {
       <Box padding={4} gap={6}>
         {/* Legacy addresses section */}
         <Box>
-          <Text variant={TextVariant.HeadingMd} twClassName="mb-2">
+          <Text variant={TextVariant.HeadingMd} className="mb-2">
             Legacy Format Addresses
           </Text>
           <Box
@@ -67,7 +67,7 @@ export const Address: Story = {
             {sampleAccountAddresses.map((address) => (
               <Box key={address} alignItems={BoxAlignItems.Center} gap={2}>
                 <Maskicon address={address} size={48} />
-                <Box twClassName="max-w-[100px]">
+                <Box className="max-w-[100px]">
                   <Text
                     variant={TextVariant.BodyXs}
                     numberOfLines={1}
@@ -85,7 +85,7 @@ export const Address: Story = {
 
         {/* Different networks section */}
         <Box>
-          <Text variant={TextVariant.HeadingMd} twClassName="mb-2">
+          <Text variant={TextVariant.HeadingMd} className="mb-2">
             Different Networks
           </Text>
           <Box
@@ -143,13 +143,13 @@ export const Address: Story = {
 
         {/* CAIP-10 consistency demonstration */}
         <Box>
-          <Text variant={TextVariant.HeadingMd} twClassName="mb-2">
+          <Text variant={TextVariant.HeadingMd} className="mb-2">
             CAIP-10 Format Consistency (Same Address, Different Networks)
           </Text>
           <Text
             variant={TextVariant.BodySm}
             color={TextColor.TextAlternative}
-            twClassName="mb-3"
+            className="mb-3"
           >
             These should all generate the same icon since they represent the
             same address on different networks

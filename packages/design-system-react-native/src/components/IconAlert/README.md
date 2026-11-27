@@ -65,9 +65,9 @@ import {
 <IconAlert severity={IconAlertSeverity.Warning} size={IconSize.Lg} />
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -80,15 +80,17 @@ Use the `twClassName` prop to add Tailwind CSS classes to the component. These c
 import { IconAlert, IconAlertSeverity } from '@metamask/design-system-react-native';
 
 // Add additional styles
-<IconAlert severity={IconAlertSeverity.Info} twClassName="opacity-70" />
+<IconAlert severity={IconAlertSeverity.Info} className="opacity-70" />
 
 // Override default styles
-<IconAlert severity={IconAlertSeverity.Info} twClassName="!text-error-100" />
+<IconAlert severity={IconAlertSeverity.Info} className="!text-error-100" />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 Other `ViewProps` accepted by [`Icon`](./../Icon/README.md) (for example `testID`, `accessible`) are forwarded to the underlying icon.
 

@@ -1,6 +1,6 @@
 import { IconColor, IconName, IconSize } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
-import { render } from '@testing-library/react-native';
+import { render, renderHook } from '@testing-library/react-native';
 import React from 'react';
 
 import { Text } from '../Text';
@@ -56,5 +56,38 @@ describe('BadgeIcon', () => {
     const badgeIcon = getByTestId('badge-icon');
     expect(badgeIcon.props.style[1]).toStrictEqual(customStyle);
     expect(badgeIcon.props.accessibilityLabel).toBe('badge-icon');
+  });
+
+  describe('when className is provided', () => {
+    let twClassNames: ReturnType<typeof useTailwind>;
+
+    beforeAll(() => {
+      twClassNames = renderHook(() => useTailwind()).result.current;
+    });
+
+    it('applies className after twClassName and component classes', () => {
+      const { getByTestId } = render(
+        <BadgeIcon
+          iconName={IconName.Add}
+          testID="badge-icon"
+          twClassName="mt-8"
+          className="mt-2"
+        />,
+      );
+
+      expect(getByTestId('badge-icon')).toHaveStyle(twClassNames`mt-2`);
+    });
+
+    it('applies deprecated twClassName on its own', () => {
+      const { getByTestId } = render(
+        <BadgeIcon
+          iconName={IconName.Add}
+          testID="badge-icon"
+          twClassName="mt-8"
+        />,
+      );
+
+      expect(getByTestId('badge-icon')).toHaveStyle(twClassNames`mt-8`);
+    });
   });
 });

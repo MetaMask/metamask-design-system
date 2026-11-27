@@ -16,8 +16,14 @@ export type BadgeWrapperProps = BadgeWrapperPropsShared & {
   badgeContainerProps?: ViewProps;
   /**
    * Optional prop to add twrnc overriding classNames.
+   *
+   * @deprecated Use `className` instead.
    */
   twClassName?: string;
+  /**
+   * Optional Tailwind classes. Merged after the component's own classes and `twClassName`, so `className` wins on conflicts.
+   */
+  className?: string;
   /**
    * Optional prop to control the style.
    */

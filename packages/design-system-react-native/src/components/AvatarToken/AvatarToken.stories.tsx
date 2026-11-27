@@ -15,7 +15,7 @@ const meta: Meta<AvatarTokenProps> = {
       control: 'select',
       options: AvatarTokenSize,
     },
-    twClassName: {
+    className: {
       control: 'text',
     },
   },
@@ -28,7 +28,7 @@ type Story = StoryObj<AvatarTokenProps>;
 export const Default: Story = {
   args: {
     size: AvatarTokenSize.Md,
-    twClassName: '',
+    className: '',
   },
   render: (args) => <AvatarToken {...args} src={SAMPLE_AVATARTOKEN_URIS[0]} />,
 };
