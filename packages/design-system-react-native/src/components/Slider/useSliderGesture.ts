@@ -30,14 +30,6 @@ import {
   trackPercentToPosition,
 } from './Slider.utilities';
 
-/**
- * Cap on remembered local updates used to spot late `value` echoes.
- * Pan `onUpdate` records every intermediate position, so a fast drag can
- * produce many entries; 256 is large enough for a long scrub without
- * growing unbounded.
- */
-const RECENT_COMMIT_HISTORY_LIMIT = 256;
-
 type CommitEntry = {
   value: number;
   generation: number;
@@ -62,12 +54,11 @@ type PropReconciliation = {
  * Stale controlled self-echoes (gesture → onValueChange → parent state → value
  * prop) are suppressed with a monotonically increasing commit generation — the
  * same sequence principle as React Native TextInput's `mostRecentEventCount`,
- * kept local so the public API stays a plain `value` number. Direct commits
- * record `{ value, generation }`; incoming props that match a recent emit are
- * acknowledged and must not rewind thumb position or the haptic baseline
- * (including late echoes that arrive after a newer commit was already acked).
- * Props that do not match any recent emit are treated as external updates and
- * applied immediately.
+ * kept local so the public API stays a plain `value` number. Each gesture emit
+ * records the value and generation; incoming props that match the last emitted
+ * value while still in flight are acknowledged as echoes and must not rewind
+ * the haptic baseline. Once the echo is acknowledged, or if any other value
+ * arrives, it is treated as an external update and applied immediately.
  *
  * `mapValueToTrackPercent` / `mapTrackPercentToValue` must be worklets when provided.
  *
@@ -133,9 +124,6 @@ export function useSliderGesture(
       lastEmittedValueRef.current = domainValue;
       lastEmittedGenerationRef.current = generation;
       recentCommitsRef.current.push({ value: domainValue, generation });
-      if (recentCommitsRef.current.length > RECENT_COMMIT_HISTORY_LIMIT) {
-        recentCommitsRef.current.shift();
-      }
       hasInflightCommits.value = true;
     },
     [hasInflightCommits],
@@ -149,47 +137,42 @@ export function useSliderGesture(
    */
   const reconcilePropValue = useCallback(
     (incoming: number): PropReconciliation => {
-      const recent = recentCommitsRef.current;
-      let match: CommitEntry | undefined;
-      for (let index = recent.length - 1; index >= 0; index -= 1) {
-        if (recent[index].value === incoming) {
-          match = recent[index];
-          break;
-        }
+      // Check if this matches the last emitted value still in flight.
+      if (
+        lastEmittedValueRef.current !== null &&
+        incoming === lastEmittedValueRef.current &&
+        lastEmittedGenerationRef.current > ackedGenerationRef.current
+      ) {
+        // The parent caught up to the latest emit.
+        ackedGenerationRef.current = lastEmittedGenerationRef.current;
+        lastEmittedValueRef.current = null;
+        hasInflightCommits.value = false;
+        return { syncPropValue: true, syncBaseline: false };
       }
+
+      // Check if this value was previously emitted.
+      const match = recentCommitsRef.current.find(
+        (entry) => entry.value === incoming,
+      );
 
       if (match) {
-        // Late echo of an already-acked commit — do not write propValue or the
-        // reaction will snap the thumb backward after a fast pan.
+        // If already acknowledged, it's either a late stale echo OR an external
+        // update returning to a previous value. Either way, sync thumb position
+        // but don't rewind the haptic baseline.
         if (match.generation <= ackedGenerationRef.current) {
-          return { syncPropValue: false, syncBaseline: false };
+          return { syncPropValue: true, syncBaseline: false };
         }
-
-        // If the value we get back is the latest one we sent up through
-        // onValueChange, we treat the parent as fully caught up and stop
-        // waiting on any older updates still in flight (those often get
-        // batched away during a fast pan anyway). If it's an older value
-        // instead, we only count that one as handled and keep waiting for
-        // the newer ones.
-        if (incoming === lastEmittedValueRef.current) {
-          ackedGenerationRef.current = lastEmittedGenerationRef.current;
-        } else {
-          ackedGenerationRef.current = match.generation;
-        }
-
+        // Otherwise it's an intermediate in-flight value - acknowledge it but don't update baseline.
+        ackedGenerationRef.current = match.generation;
         hasInflightCommits.value =
           ackedGenerationRef.current < commitGenerationRef.current;
-
-        // Sync propValue only when catching up to the latest emit (correct
-        // position). Intermediate echoes must not overwrite propValue.
-        const isLatestAck =
-          ackedGenerationRef.current === lastEmittedGenerationRef.current;
-        return { syncPropValue: isLatestAck, syncBaseline: false };
+        return { syncPropValue: false, syncBaseline: false };
       }
 
-      // Not a recent local emit — external update or parent transform.
+      // Not a recent emit — external update. Clear state and apply it.
       ackedGenerationRef.current = commitGenerationRef.current;
       lastEmittedValueRef.current = null;
+      recentCommitsRef.current = [];
       hasInflightCommits.value = false;
       return { syncPropValue: true, syncBaseline: true };
     },
@@ -304,9 +287,6 @@ export function useSliderGesture(
 
   // --- JS-thread bridges (stable refs for runOnJS from worklets) ---
 
-  // Called from pan onUpdate as well as tap/end — each move is recorded on
-  // purpose so a lagged older `value` after a fast drag can still be ignored
-  // (see RECENT_COMMIT_HISTORY_LIMIT).
   const emitValueChange = useCallback(
     (nextValue: number) => {
       recordDirectCommit(nextValue);

@@ -454,4 +454,51 @@ describe('useSliderGesture', () => {
     expect(result.current.progressStyle).toBeDefined();
     expect(result.current.thumbStyle).toBeDefined();
   });
+
+  it('syncs thumb position when controlled value returns to a previously emitted value after latest is acknowledged', () => {
+    const getTrackPercentSpy = jest.spyOn(
+      sliderUtilities,
+      'getTrackPercentFromValue',
+    );
+    const marks = [
+      { step: 0, label: '0', value: 0, haptic: false },
+      { step: 30, label: '30', value: 30, haptic: false },
+      { step: 60, label: '60', value: 60, haptic: false },
+      { step: 100, label: '100', value: 100, haptic: false },
+    ];
+    const { result, rerender } = renderHook(
+      ({ value }: { value: number }) =>
+        useSliderGesture(createParams({ value, marks })),
+      { initialProps: { value: 0 } },
+    );
+
+    act(() => {
+      result.current.handleLayout({
+        nativeEvent: { layout: { width: 100 } },
+      });
+    });
+
+    act(() => {
+      result.current.handlePressStep(60);
+    });
+
+    rerender({ value: 60 });
+
+    act(() => {
+      result.current.handlePressStep(30);
+    });
+
+    rerender({ value: 30 });
+
+    getTrackPercentSpy.mockClear();
+
+    rerender({ value: 60 });
+
+    const trackPercentCalls = getTrackPercentSpy.mock.calls.filter(
+      ([nextValue]) => nextValue === 60,
+    );
+    expect(trackPercentCalls.length).toBeGreaterThan(0);
+
+    getTrackPercentSpy.mockRestore();
+  });
 });
