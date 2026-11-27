@@ -4,8 +4,8 @@ import type { IconAlertSeverity } from '../IconAlert/IconAlert.types';
 
 /**
  * TitleAlert component shared props (ADR-0004).
- * Platform-independent properties; platform packages extend with `ViewProps` / `className`,
- * `twClassName`, and platform `Text` prop passthroughs.
+ * Platform-independent properties; platform packages extend with `ViewProps` / `className`
+ * and platform `Text` prop passthroughs.
  */
 export type TitleAlertPropsShared = {
   /**
