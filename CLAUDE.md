@@ -1,5 +1,19 @@
 @AGENTS.md
 
+## Agent skills
+
+### Issue tracker
+
+Work is tracked in Consensys Jira, mainly in the DSYS project. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Triage uses the five standard agent-workflow labels. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Use one root `CONTEXT.md`. Organization ADRs live in `MetaMask/decisions`. See `docs/agents/domain.md`.
+
 ## Documentation for AI Agents
 
 Claude Code expands these `@` imports at session start. Other agents should open the matching file when the task is relevant.
