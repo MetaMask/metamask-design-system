@@ -1,0 +1,422 @@
+import { Controls, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as KeyValueRowStories from './KeyValueRow.stories';
+
+# KeyValueRow
+
+KeyValueRow shows a key (label) on the left and a value on the right with optional accessories, for summaries, forms, and lists.
+
+```tsx
+import { KeyValueRow } from '@metamask/design-system-react';
+
+<KeyValueRow keyLabel="Network" value="Ethereum Mainnet" />;
+```
+
+<Canvas of={KeyValueRowStories.Default} />
+
+## Props
+
+### `keyLabel`
+
+The key content, as a string or custom `ReactNode`. Named `keyLabel` to avoid React's reserved `key` prop. When a string, rendered with BodyMd Medium TextAlternative and ellipsis (overridable via `keyTextProps`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string | ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">—</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { KeyValueRow } from '@metamask/design-system-react';
+
+<KeyValueRow keyLabel="Amount" value="1.5 ETH" />
+```
+
+### `value`
+
+The value content, as a string or `ReactNode`. When a string, rendered with `SensitiveText` (BodyMd Medium TextDefault, ellipsis) so `valueTextProps.isHidden` can mask it.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string | ReactNode</code>
+      </td>
+      <td align="left">Yes</td>
+      <td align="left">—</td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { KeyValueRow } from '@metamask/design-system-react';
+
+<KeyValueRow keyLabel="Network" value="Ethereum Mainnet" />
+```
+
+### `variant`
+
+Row height: compact summary (40px) or taller input context (48px).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>KeyValueRowVariant</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>KeyValueRowVariant.Summary</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+- `KeyValueRowVariant.Summary` — outer row `h-10` (40px).
+- `KeyValueRowVariant.Input` — outer row `h-12` (48px).
+
+```tsx
+import {
+  KeyValueRow,
+  KeyValueRowVariant,
+} from '@metamask/design-system-react';
+
+<KeyValueRow
+  keyLabel="Label"
+  value="Value"
+  variant={KeyValueRowVariant.Input}
+/>;
+```
+
+<Canvas of={KeyValueRowStories.Variant} />
+
+### `keyStartAccessory`
+
+Optional node rendered before the key (for example an icon).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={KeyValueRowStories.KeyStartAccessory} />
+
+### `keyEndAccessory`
+
+Optional node rendered after the key. If `keyEndButtonIconProps` includes an `iconName`, that `ButtonIcon` is shown instead.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={KeyValueRowStories.KeyEndAccessory} />
+
+### `valueStartAccessory`
+
+Optional node rendered before the value.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={KeyValueRowStories.ValueStartAccessory} />
+
+### `valueEndAccessory`
+
+Optional node rendered after the value. If `valueEndButtonIconProps` includes an `iconName`, that `ButtonIcon` is shown instead.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>ReactNode</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={KeyValueRowStories.ValueEndAccessory} />
+
+### `keyEndButtonIconProps`
+
+When this object includes an `iconName`, a `ButtonIcon` is rendered as the key’s end accessory (and takes precedence over `keyEndAccessory`). Pass `ariaLabel` and typically `onClick`. Defaults: size Sm, icon color IconAlternative, `ariaLabel` `"More information"` when omitted.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;ButtonIconProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { KeyValueRow, IconName } from '@metamask/design-system-react';
+
+<KeyValueRow
+  keyLabel="Network"
+  value="Mainnet"
+  keyEndButtonIconProps={{
+    iconName: IconName.Question,
+    ariaLabel: 'Network help',
+    onClick: () => {},
+  }}
+/>;
+```
+
+<Canvas of={KeyValueRowStories.KeyEndButtonIconProps} />
+
+### `valueEndButtonIconProps`
+
+When this object includes an `iconName`, a `ButtonIcon` is rendered as the value’s end accessory (and takes precedence over `valueEndAccessory`). Pass `ariaLabel` and typically `onClick`. Defaults: size Sm, icon color IconDefault, `ariaLabel` `"Action"` when omitted.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;ButtonIconProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { KeyValueRow, IconName } from '@metamask/design-system-react';
+
+<KeyValueRow
+  keyLabel="Address"
+  value="0x1234…abcd"
+  valueEndButtonIconProps={{
+    iconName: IconName.Copy,
+    ariaLabel: 'Copy address',
+    onClick: () => {},
+  }}
+/>;
+```
+
+<Canvas of={KeyValueRowStories.ValueEndButtonIconProps} />
+
+### `keyTextProps`
+
+Optional props for `Text` when `keyLabel` is a string. Defaults: BodyMd, Medium, TextAlternative, `ellipsis: true`.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;TextProps&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={KeyValueRowStories.KeyTextProps} />
+
+### `valueTextProps`
+
+Optional props for `SensitiveText` when `value` is a string. Defaults: BodyMd, Medium, TextDefault, `ellipsis: true`. Supports `isHidden` and `length` to mask the value.
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>Partial&lt;Omit&lt;SensitiveTextProps, 'children'&gt;&gt;</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas of={KeyValueRowStories.ValueTextProps} />
+
+### `className`
+
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are merged with the component's default classes using `twMerge`.
+
+The outer row always includes `px-4` and a height class from `variant` (`h-10` or `h-12`); your classes are merged with that base. Override horizontal padding with `className` when needed (for example `px-0` or `pl-4 pr-1`).
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">TYPE</th>
+      <th align="left">REQUIRED</th>
+      <th align="left">DEFAULT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">
+        <code>string</code>
+      </td>
+      <td align="left">No</td>
+      <td align="left">
+        <code>undefined</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+```tsx
+import { KeyValueRow } from '@metamask/design-system-react';
+
+<KeyValueRow keyLabel="Amount" value="1 ETH" className="mt-4" />
+```
+
+### `style`
+
+Optional inline styles. Prefer `className` with Tailwind classes when possible.
+
+## Examples
+
+### Single-column stack
+
+<Canvas of={KeyValueRowStories.SingleColumnStack} />
+
+### Overflow
+
+<Canvas of={KeyValueRowStories.Overflow} />
+
+## Component API
+
+<Controls />
+
+## Content guidelines
+
+- `keyLabel` string: sentence case, no period
+- `value` string: sentence case, no period
+
+## References
+
+[MetaMask Design System Guides](https://www.notion.so/MetaMask-Design-System-Guides-Design-f86ecc914d6b4eb6873a122b83c12940)
