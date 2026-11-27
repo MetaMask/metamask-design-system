@@ -20,7 +20,7 @@ const TitleAlertStoryWrapper: React.FC<BoxProps> = ({ children, ...props }) => (
   <Box
     backgroundColor={BoxBackgroundColor.BackgroundDefault}
     padding={4}
-    twClassName="w-full"
+    className="w-full"
     {...props}
   >
     {children}
@@ -70,7 +70,7 @@ export const Default: Story = {
 
 export const Severity: Story = {
   render: () => (
-    <Box flexDirection={BoxFlexDirection.Column} gap={6} twClassName="w-full">
+    <Box flexDirection={BoxFlexDirection.Column} gap={6} className="w-full">
       <TitleAlert
         severity={IconAlertSeverity.Info}
         title="Informational title"

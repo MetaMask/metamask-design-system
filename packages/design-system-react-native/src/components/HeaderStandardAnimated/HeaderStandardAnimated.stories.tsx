@@ -35,7 +35,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full flex-1 bg-background-default">
+      <Box className="w-full flex-1 bg-background-default">
         <Story />
       </Box>
     ),
@@ -49,7 +49,7 @@ type Story = StoryObj<ScrollStoryArgs>;
 const SampleContent = ({ itemCount = 20 }: { itemCount?: number }) => (
   <>
     {Array.from({ length: itemCount }).map((_, index) => (
-      <Box key={index} twClassName="p-4 mb-2 bg-muted rounded-lg mx-4">
+      <Box key={index} className="mx-4 mb-2 rounded-lg bg-muted p-4">
         <Text variant={TextVariant.BodyMd}>Item {index + 1}</Text>
         <Text variant={TextVariant.BodySm}>
           This is sample content to demonstrate scrolling behavior.
@@ -64,7 +64,7 @@ function ScrollDemo(args: ScrollStoryArgs) {
     useHeaderStandardAnimated();
 
   return (
-    <Box twClassName="flex-1 bg-default">
+    <Box className="flex-1 bg-default">
       <HeaderStandardAnimated
         {...args}
         scrollY={scrollY}
@@ -88,7 +88,7 @@ function ScrollDemo(args: ScrollStoryArgs) {
               </Text>
             }
             title="ETH-PERP"
-            twClassName="px-4 pt-1 pb-3"
+            className="px-4 pb-3 pt-1"
           />
         </Box>
         <SampleContent />

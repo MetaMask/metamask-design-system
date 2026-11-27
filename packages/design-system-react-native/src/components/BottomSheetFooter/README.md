@@ -80,9 +80,9 @@ import { BottomSheetFooter, ButtonsAlignment } from '@metamask/design-system-rea
 />
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the footer container. These classes will be merged with the component's default classes, allowing you to customize the footer appearance.
+Use the `className` prop to add Tailwind CSS classes to the footer container. These classes will be merged with the component's default classes, allowing you to customize the footer appearance.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -93,14 +93,16 @@ import { BottomSheetFooter } from '@metamask/design-system-react-native';
 
 // Add additional padding
 <BottomSheetFooter
-  twClassName="px-4 py-2"
+  className="px-4 py-2"
   primaryButtonProps={{ children: 'Submit', onPress: () => {} }}
 />;
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

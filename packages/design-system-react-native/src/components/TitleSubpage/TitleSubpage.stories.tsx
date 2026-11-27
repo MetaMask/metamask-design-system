@@ -50,9 +50,9 @@ const TestnetBadge = () => (
     flexDirection={BoxFlexDirection.Row}
     alignItems={BoxAlignItems.Center}
     gap={1}
-    twClassName="rounded-full bg-warning-muted px-2 py-1"
+    className="rounded-full bg-warning-muted px-2 py-1"
   >
-    <Box twClassName="h-2 w-2 shrink-0 rounded-full bg-warning-default" />
+    <Box className="size-2 shrink-0 rounded-full bg-warning-default" />
     <Text
       variant={TextVariant.BodySm}
       color={TextColor.WarningDefault}
@@ -71,7 +71,7 @@ const meta: Meta<TitleSubpageProps> = {
     title: USDC_TITLE,
     subtitle: USDC_SUBTITLE,
     amount: USDC_AMOUNT,
-    twClassName: '',
+    className: '',
   },
   argTypes: {
     title: {
@@ -86,11 +86,11 @@ const meta: Meta<TitleSubpageProps> = {
     bottomLabel: {
       control: 'text',
     },
-    twClassName: { control: 'text' },
+    className: { control: 'text' },
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full">
+      <Box className="w-full">
         <Story />
       </Box>
     ),
@@ -135,7 +135,7 @@ export const AmountEndAccessory: Story = {
           name={IconName.Info}
           size={IconSize.Md}
           color={IconColor.IconAlternative}
-          twClassName="ml-1"
+          className="ml-1"
         />
       }
     />
@@ -179,7 +179,7 @@ export const SubtitleEndAccessory: Story = {
           name={IconName.Info}
           size={IconSize.Xs}
           color={IconColor.IconAlternative}
-          twClassName="ml-2"
+          className="ml-2"
         />
       }
     />

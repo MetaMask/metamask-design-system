@@ -18,13 +18,13 @@ const meta: Meta<BottomSheetFooterProps> = {
         type: 'select',
       },
     },
-    twClassName: { control: 'text' },
+    className: { control: 'text' },
     style: { control: 'object' },
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full p-4">
-        <Box twClassName="mb-4 items-center">
+      <Box className="w-full p-4">
+        <Box className="mb-4 items-center">
           <Text>Content above footer</Text>
         </Box>
         <Story />

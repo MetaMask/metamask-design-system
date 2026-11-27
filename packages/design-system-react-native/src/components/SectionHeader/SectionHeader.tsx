@@ -73,7 +73,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     <Icon
       size={IconSize.Md}
       color={IconColor.IconDefault}
-      twClassName="shrink-0"
+      className="shrink-0"
       {...startIconProps}
       name={startIconName}
     />
@@ -85,7 +85,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (
     <Icon
       size={IconSize.Md}
       color={IconColor.IconAlternative}
-      twClassName="shrink-0"
+      className="shrink-0"
       {...endIconProps}
       name={resolvedEndIconName}
     />

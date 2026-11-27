@@ -1,5 +1,4 @@
-// Third party dependencies.
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import { resolveClassName } from '@metamask/design-system-shared';
 import React from 'react';
 
 // External dependencies.
@@ -12,6 +11,7 @@ import type { BottomSheetHeaderProps } from './BottomSheetHeader.types';
 export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   style,
   twClassName,
+  className,
   children,
   onBack,
   backButtonProps,
@@ -19,8 +19,6 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   closeButtonProps,
   ...props
 }) => {
-  const tw = useTailwind();
-
   const startAccessory = onBack ? (
     <ButtonIcon
       iconName={IconName.ArrowLeft}
@@ -41,7 +39,8 @@ export const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({
   return (
     <HeaderBase
       {...props}
-      style={[tw.style('px-2', twClassName), style]}
+      className={resolveClassName('px-2', twClassName, className)}
+      style={style}
       startAccessory={startAccessory}
       endAccessory={endAccessory}
     >
