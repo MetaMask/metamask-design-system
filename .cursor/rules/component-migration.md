@@ -87,11 +87,11 @@ Use this workflow when:
 | Types          | Document      | Document     | Align or unify                                                                |
 | Size / variant | Document      | Document     | `ComponentNameSize` alias if values match `ButtonBaseSize` / `AvatarBaseSize` |
 | Event handlers | `onClick`     | `onPress`    | Keep both (platform)                                                          |
-| Styling        | `className`   | style object | Use className/twClassName                                                     |
+| Styling        | `className`   | style object | Use `className` on both platforms (`twClassName` is deprecated until 1.0.0)   |
 
 3. **Answer key questions:**
    - Which props are cross-platform? (variant, size, isDisabled)
-   - Which props are platform-specific? (onClick/onPress, className/twClassName)
+   - Which props are platform-specific? (onClick/onPress; styling uses `className` on both platforms now — `twClassName` is deprecated until 1.0.0)
    - Are there naming conflicts? (disabled vs isDisabled)
    - What's the unified API that serves both platforms?
 
@@ -104,7 +104,7 @@ Use this workflow when:
 
 **Accept platform differences for:**
 
-- ✅ Idiomatic patterns (`onClick`/`onPress`, `className`/`twClassName`)
+- ✅ Idiomatic patterns (`onClick`/`onPress`; `className` on both platforms — `twClassName` is deprecated until 1.0.0)
 - ✅ Platform-only features (`tooltip` web-only, `hapticFeedback` mobile-only)
 
 ### Phase 2: Shared Type Creation
@@ -129,7 +129,7 @@ Use this workflow when:
 
 - Re-export all shared types
 - Extend with `ComponentProps<'element'>` (React) or `ViewProps`/`PressableProps` (React Native)
-- Add `className?: string` (React) or `twClassName?: string` (React Native)
+- Add `className?: string` (React and React Native; `twClassName` is deprecated and will be removed in 1.0.0. Do not use it in new code)
 - Event handlers from base types (onClick/onPress)
 
 ### Phase 2.5: Implementation Patterns
@@ -225,7 +225,7 @@ yarn create-component:react-native --name ComponentName --description "Brief des
 - ✅ Replace raw elements (div/View/span/Text) with Box/Text primitives
 - ✅ Use design token enums (BoxBackgroundColor, TextVariant, etc.)
 - ✅ Follow component-first approach (Box props over className)
-- ✅ Use twClassName for React Native (not StyleSheet.create)
+- ✅ Use className for React Native (not StyleSheet.create) — `twClassName` is deprecated until 1.0.0
 
 **Styling reference:** @.cursor/rules/styling.md
 

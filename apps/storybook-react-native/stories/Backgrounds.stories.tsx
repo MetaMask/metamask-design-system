@@ -80,19 +80,19 @@ const Backgrounds: React.FC = () => {
   const tw = useTailwind();
   return (
     <ScrollView style={tw`flex-1`}>
-      <Box twClassName="w-full">
+      <Box className="w-full">
         {/* Background Default */}
         <Box
           flexDirection={BoxFlexDirection.Column}
           gap={4}
-          twClassName="rounded-2xl"
+          className="rounded-2xl"
         >
           <Text variant={TextVariant.HeadingMd}>Background Default</Text>
           <TextComponents />
           <ButtonComponents />
           {/* Background Section */}
           <Box
-            twClassName="rounded-2xl"
+            className="rounded-2xl"
             padding={4}
             backgroundColor={BoxBackgroundColor.BackgroundSection}
             flexDirection={BoxFlexDirection.Column}
@@ -104,7 +104,7 @@ const Backgrounds: React.FC = () => {
 
             {/* Background Subsection */}
             <Box
-              twClassName="rounded-2xl"
+              className="rounded-2xl"
               padding={4}
               backgroundColor={BoxBackgroundColor.BackgroundSubsection}
               flexDirection={BoxFlexDirection.Column}

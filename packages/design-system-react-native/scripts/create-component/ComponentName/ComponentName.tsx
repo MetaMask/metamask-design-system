@@ -6,14 +6,14 @@ import type { ComponentNameProps } from './ComponentName.types';
 
 export const ComponentName: React.FC<ComponentNameProps> = ({
   children,
-  twClassName,
+  className,
   style,
   ...props
 }) => {
   const tw = useTailwind();
 
   return (
-    <View style={[tw.style(twClassName), style]} {...props}>
+    <View style={[tw.style(className), style]} {...props}>
       {children}
     </View>
   );

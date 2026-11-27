@@ -25,7 +25,7 @@ describe('ComponentName', () => {
 
   it('applies the correct styles', () => {
     const { getByTestId } = render(
-      <ComponentName twClassName="bg-default" testID="component-name">
+      <ComponentName className="bg-default" testID="component-name">
         <Text>Styled Content</Text>
       </ComponentName>,
     );

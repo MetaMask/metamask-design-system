@@ -118,10 +118,10 @@ expect(button).toHaveStyle({ opacity: 0.5 });
 - **ALWAYS** wrap async interactions that trigger React state updates in `act(async () => { ... })`.
 - **ALWAYS** cover both success and failure paths for async behavior.
 
-### twClassName and Tailwind Assertions (React Native)
+### className and Tailwind Assertions (React Native)
 
-- **ALWAYS** validate `twClassName` behavior by asserting resolved style outputs, not raw class strings.
-- **ALWAYS** cover class precedence and merge behavior when `twClassName` and `style` are both provided.
+- **ALWAYS** validate `className` behavior by asserting resolved style outputs, not raw class strings. `twClassName` is deprecated until 1.0.0; while it exists, also cover its back-compat (it still works, and `className` wins on conflicts).
+- **ALWAYS** cover class precedence and merge behavior when `className` and `style` are both provided.
 - **PREFER** table-driven tests for variant matrices (`isInverse`, `isDanger`, `isLoading`, pressed).
 
 ```tsx

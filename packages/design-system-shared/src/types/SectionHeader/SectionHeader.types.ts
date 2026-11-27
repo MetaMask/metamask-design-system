@@ -5,7 +5,7 @@ import type { IconName } from '../Icon';
 /**
  * SectionHeader component shared props (ADR-0004).
  * Platform-independent properties; platform packages extend with `ViewProps`,
- * `twClassName`, and platform `Text` / `Icon` prop passthroughs.
+ * `className`, and platform `Text` / `Icon` prop passthroughs.
  */
 export type SectionHeaderPropsShared = {
   /**
