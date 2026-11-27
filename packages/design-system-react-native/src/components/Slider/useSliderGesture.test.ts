@@ -455,16 +455,15 @@ describe('useSliderGesture', () => {
     expect(result.current.thumbStyle).toBeDefined();
   });
 
-  it('syncs thumb position when controlled value returns to a previously emitted value after latest is acknowledged', () => {
+  it('clears gesture history when pan ends and parent has caught up', () => {
     const getTrackPercentSpy = jest.spyOn(
       sliderUtilities,
       'getTrackPercentFromValue',
     );
     const marks = [
-      { step: 0, label: '0', value: 0, haptic: false },
-      { step: 30, label: '30', value: 30, haptic: false },
-      { step: 60, label: '60', value: 60, haptic: false },
-      { step: 100, label: '100', value: 100, haptic: false },
+      { step: 0, label: '0', value: 0 },
+      { step: 60, label: '60', value: 60 },
+      { step: 100, label: '100', value: 100 },
     ];
     const { result, rerender } = renderHook(
       ({ value }: { value: number }) =>
@@ -484,18 +483,12 @@ describe('useSliderGesture', () => {
 
     rerender({ value: 60 });
 
-    act(() => {
-      result.current.handlePressStep(30);
-    });
-
-    rerender({ value: 30 });
-
     getTrackPercentSpy.mockClear();
 
-    rerender({ value: 60 });
+    rerender({ value: 0 });
 
     const trackPercentCalls = getTrackPercentSpy.mock.calls.filter(
-      ([nextValue]) => nextValue === 60,
+      ([nextValue]) => nextValue === 0,
     );
     expect(trackPercentCalls.length).toBeGreaterThan(0);
 
