@@ -299,7 +299,7 @@ describe('useSliderGesture', () => {
     expect(onMark).not.toHaveBeenCalled();
   });
 
-  it('ignores a late stale echo after the latest commit was already acknowledged', () => {
+  it('clears gesture history when latest commit is acknowledged and gesture is complete', () => {
     const onMark = jest.fn();
     const marks = [
       { step: 0, label: '0%', haptic: false },
@@ -324,17 +324,18 @@ describe('useSliderGesture', () => {
     expect(onMark).toHaveBeenCalled();
     onMark.mockClear();
 
-    // Parent caught up to the latest commit first...
+    // Parent caught up to the latest commit (gesture complete for taps).
+    // History is cleared, so future values are external updates.
     rerender({ value: 75 });
-    // ...then a lagged intermediate echo arrives (common after fast pans).
-    // Must not rewind thumb position or the haptic baseline.
+
+    // Value 40 is now treated as external update (history was cleared).
     rerender({ value: 40 });
 
     act(() => {
       result.current.handlePressStep(60);
     });
 
-    expect(onMark).not.toHaveBeenCalled();
+    expect(onMark).toHaveBeenCalled();
   });
 
   it('handleLayout does not snap thumb to a lagged stale value-prop echo', () => {
@@ -455,19 +456,19 @@ describe('useSliderGesture', () => {
     expect(result.current.thumbStyle).toBeDefined();
   });
 
-  it('clears gesture history when pan ends and parent has caught up', () => {
-    const getTrackPercentSpy = jest.spyOn(
-      sliderUtilities,
-      'getTrackPercentFromValue',
-    );
+  it('syncs thumb position when controlled value returns to previously emitted value after gesture ends (tap path)', () => {
+    const onMark = jest.fn();
     const marks = [
-      { step: 0, label: '0', value: 0 },
-      { step: 60, label: '60', value: 60 },
-      { step: 100, label: '100', value: 100 },
+      { step: 0, label: '0', value: 0, haptic: false },
+      { step: 30, label: '30', value: 30, haptic: false },
+      { step: 50, label: '50', value: 50, haptic: true },
+      { step: 60, label: '60', value: 60, haptic: false },
+      { step: 70, label: '70', value: 70, haptic: false },
+      { step: 100, label: '100', value: 100, haptic: false },
     ];
     const { result, rerender } = renderHook(
       ({ value }: { value: number }) =>
-        useSliderGesture(createParams({ value, marks })),
+        useSliderGesture(createParams({ value, marks, onMark })),
       { initialProps: { value: 0 } },
     );
 
@@ -483,15 +484,20 @@ describe('useSliderGesture', () => {
 
     rerender({ value: 60 });
 
-    getTrackPercentSpy.mockClear();
+    act(() => {
+      result.current.handlePressStep(30);
+    });
 
-    rerender({ value: 0 });
+    rerender({ value: 30 });
 
-    const trackPercentCalls = getTrackPercentSpy.mock.calls.filter(
-      ([nextValue]) => nextValue === 0,
-    );
-    expect(trackPercentCalls.length).toBeGreaterThan(0);
+    onMark.mockClear();
 
-    getTrackPercentSpy.mockRestore();
+    rerender({ value: 60 });
+
+    act(() => {
+      result.current.handlePressStep(70);
+    });
+
+    expect(onMark).not.toHaveBeenCalled();
   });
 });

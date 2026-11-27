@@ -173,6 +173,11 @@ export function useSliderGesture(
         // the newer ones.
         if (incoming === lastEmittedValueRef.current) {
           ackedGenerationRef.current = lastEmittedGenerationRef.current;
+          // If gesture is complete, clear history so future values are external.
+          if (!isDraggingRef.current) {
+            lastEmittedValueRef.current = null;
+            recentCommitsRef.current = [];
+          }
         } else {
           ackedGenerationRef.current = match.generation;
         }
