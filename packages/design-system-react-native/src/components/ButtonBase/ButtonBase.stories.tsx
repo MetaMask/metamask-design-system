@@ -62,7 +62,7 @@ const meta: Meta<typeof ButtonBase> = {
   },
   decorators: [
     (Story) => (
-      <Box twClassName="w-full p-4">
+      <Box className="w-full p-4">
         <Story />
       </Box>
     ),
@@ -385,10 +385,10 @@ export const LongText: Story = {
 export const FlexLayout: Story = {
   render: (args) => (
     <Box flexDirection={BoxFlexDirection.Row} gap={4}>
-      <ButtonBase {...args} twClassName="flex-1">
+      <ButtonBase {...args} className="flex-1">
         Lorem ipsum
       </ButtonBase>
-      <ButtonBase {...args} twClassName="flex-1">
+      <ButtonBase {...args} className="flex-1">
         Lorem ipsum
       </ButtonBase>
     </Box>

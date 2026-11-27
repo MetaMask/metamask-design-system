@@ -11,12 +11,11 @@ const meta: Meta<LabelProps> = {
   component: Label,
   argTypes: {
     children: { control: 'text' },
-    twClassName: { control: 'text' },
     style: { control: 'object' },
   },
   decorators: [
     (Story) => (
-      <Box twClassName="p-4">
+      <Box className="p-4">
         <Story />
       </Box>
     ),

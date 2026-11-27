@@ -28,9 +28,6 @@ const meta: Meta<ButtonIconProps> = {
       control: 'select',
       options: ButtonIconVariant,
     },
-    twClassName: {
-      control: 'text',
-    },
   },
 };
 

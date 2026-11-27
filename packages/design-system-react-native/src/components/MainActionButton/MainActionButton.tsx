@@ -1,3 +1,4 @@
+import { resolveClassName } from '@metamask/design-system-shared';
 import { useTailwind } from '@metamask/design-system-twrnc-preset';
 import React from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
@@ -21,6 +22,7 @@ export const MainActionButton = ({
   style,
   isDisabled = false,
   twClassName = '',
+  className,
   ...props
 }: MainActionButtonProps) => {
   const tw = useTailwind();
@@ -38,6 +40,7 @@ export const MainActionButton = ({
           pressed && !isDisabled ? 'bg-muted-pressed' : 'bg-muted',
           isDisabled ? 'opacity-50' : 'opacity-100',
           twClassName,
+          className,
         ) as StyleProp<ViewStyle>;
 
         const additionalStyle =
@@ -62,7 +65,10 @@ export const MainActionButton = ({
           variant={TextVariant.BodySm}
           fontWeight={FontWeight.Medium}
           color={TextColor.TextDefault}
-          twClassName="mt-0.5 w-full text-center shrink"
+          className={resolveClassName(
+            'mt-0.5 w-full shrink text-center',
+            labelProps?.className,
+          )}
           numberOfLines={1}
           ellipsizeMode="tail"
         >

@@ -123,7 +123,7 @@ const [isSelected, setIsSelected] = useState(false);
 
 ### `labelProps`
 
-Optional props to be passed to the label's Text component. Consumer `className` (or the deprecated `twClassName`) overrides the default left margin between the checkbox and the label.
+Optional props to be passed to the label's Text component. Consumer `className` (or the deprecated `className`) overrides the default left margin between the checkbox and the label.
 
 | TYPE                 | REQUIRED | DEFAULT     |
 | -------------------- | -------- | ----------- |
@@ -144,7 +144,7 @@ const [isSelected, setIsSelected] = useState(false);
 
 ### `checkboxContainerProps`
 
-Optional props passed to the container view wrapping the checkbox icon. Accepts `className` (or the deprecated `twClassName`) to override the container's default classes — for example, a square checkbox instead of the default circular shape — plus `style` for inline overrides. Consumer classes and styles are applied after the defaults.
+Optional props passed to the container view wrapping the checkbox icon. Accepts `className` (or the deprecated `className`) to override the container's default classes — for example, a square checkbox instead of the default circular shape — plus `style` for inline overrides. Consumer classes and styles are applied after the defaults.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -203,9 +203,9 @@ This can be useful in scenarios where you need to trigger the checkbox programma
 
 ---
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the checkbox container. These classes are merged with the default classes.
+Use the `className` prop to add Tailwind CSS classes to the checkbox container. These classes are merged with the default classes.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -218,11 +218,13 @@ const [isSelected, setIsSelected] = useState(false);
   isSelected={isSelected}
   onChange={() => setIsEnabled(!isSelected)}}
   label="Custom BG"
-  twClassName="bg-primary-100"
+  className="bg-primary-100"
 />;
 ```
 
 ---
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
