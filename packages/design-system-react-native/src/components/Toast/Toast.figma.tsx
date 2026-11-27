@@ -26,7 +26,7 @@ import { ToastSeverity, Toaster, toast } from '.';
 
 figma.connect(
   Toast,
-  'https://www.figma.com/design/wM7fvpmK8hr8iA4TTkL8qV/%F0%9F%A6%8A-MMDS-Components?node-id=10690%3A2640',
+  'https://www.figma.com/design/1D6tnzXqWgnUC3spaAOELN/%F0%9F%A6%8A-MMDS-Components?node-id=10690%3A2640',
   {
     props: {
       severity: figma.enum('severity', {
