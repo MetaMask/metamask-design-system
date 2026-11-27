@@ -194,3 +194,6 @@ export type { SelectButtonProps } from './SelectButton';
 
 export { SectionDivider } from './SectionDivider';
 export type { SectionDividerProps } from './SectionDivider';
+
+export { KeyValueRow, KeyValueRowVariant } from './KeyValueRow';
+export type { KeyValueRowProps } from './KeyValueRow';
