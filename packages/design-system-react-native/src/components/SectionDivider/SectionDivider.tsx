@@ -1,5 +1,7 @@
-import { BoxBorderColor } from '@metamask/design-system-shared';
-import { useTailwind } from '@metamask/design-system-twrnc-preset';
+import {
+  BoxBorderColor,
+  resolveClassName,
+} from '@metamask/design-system-shared';
 import React, { forwardRef } from 'react';
 import type { View } from 'react-native';
 
@@ -9,10 +11,17 @@ import type { SectionDividerProps } from './SectionDivider.types';
 
 export const SectionDivider = forwardRef<View, SectionDividerProps>(
   (
-    { borderWidth, borderColor, marginVertical, twClassName, style, ...props },
+    {
+      borderWidth,
+      borderColor,
+      marginVertical,
+      twClassName,
+      className,
+      style,
+      ...props
+    },
     ref,
   ) => {
-    const tw = useTailwind();
     const borderTopWidth = borderWidth ?? 1;
     let borderTopClass: string;
     if (borderTopWidth === 0) {
@@ -29,7 +38,12 @@ export const SectionDivider = forwardRef<View, SectionDividerProps>(
         ref={ref}
         borderColor={borderColor ?? BoxBorderColor.BorderMuted}
         marginVertical={marginVertical ?? 5}
-        style={[tw.style('self-stretch', borderTopClass, twClassName), style]}
+        className={resolveClassName(
+          `self-stretch ${borderTopClass}`,
+          twClassName,
+          className,
+        )}
+        style={style}
       />
     );
   },

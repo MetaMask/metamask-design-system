@@ -193,25 +193,23 @@ Optional props spread to the `Icon` component. Only applied when `iconName` is p
 />
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `tw.style()`.
+Use the `className` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `tw.style()`.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
 | `string` | No       | `undefined` |
 
 ```tsx
-<ActionListItem
-  label="Settings"
-  twClassName="rounded-lg"
-  onPress={handlePress}
-/>
+<ActionListItem label="Settings" className="rounded-lg" onPress={handlePress} />
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible. Use `style` with `tw.style()` for conditionals or dynamic values.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

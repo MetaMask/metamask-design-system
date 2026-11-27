@@ -187,21 +187,13 @@ export const SingleColumnStack: Story = {
 export const TwoColumnGrid: Story = {
   render: () => (
     <StoryWrapper>
-      <Box flexDirection={BoxFlexDirection.Row} gap={4} twClassName="w-full">
-        <Box
-          flexDirection={BoxFlexDirection.Column}
-          gap={6}
-          twClassName="flex-1"
-        >
+      <Box flexDirection={BoxFlexDirection.Row} gap={4} className="w-full">
+        <Box flexDirection={BoxFlexDirection.Column} gap={6} className="flex-1">
           <KeyValueColumn keyLabel="24h high" value="$2,450.62" />
           <KeyValueColumn keyLabel="Market cap" value="$1.23B" />
           <KeyValueColumn keyLabel="Total liquidity" value="$450.2M" />
         </Box>
-        <Box
-          flexDirection={BoxFlexDirection.Column}
-          gap={6}
-          twClassName="flex-1"
-        >
+        <Box flexDirection={BoxFlexDirection.Column} gap={6} className="flex-1">
           <KeyValueColumn keyLabel="24h volume" value="$892.1M" />
           <KeyValueColumn keyLabel="Circulating supply" value="120.4M" />
           <KeyValueColumn
@@ -225,19 +217,11 @@ const OVERFLOW_VALUE_TEXT =
 export const Overflow: Story = {
   render: () => (
     <StoryWrapper>
-      <Box flexDirection={BoxFlexDirection.Row} gap={4} twClassName="w-full">
-        <Box
-          flexDirection={BoxFlexDirection.Column}
-          gap={6}
-          twClassName="flex-1"
-        >
+      <Box flexDirection={BoxFlexDirection.Row} gap={4} className="w-full">
+        <Box flexDirection={BoxFlexDirection.Column} gap={6} className="flex-1">
           <KeyValueColumn keyLabel="Network" value={OVERFLOW_VALUE_TEXT} />
         </Box>
-        <Box
-          flexDirection={BoxFlexDirection.Column}
-          gap={6}
-          twClassName="flex-1"
-        >
+        <Box flexDirection={BoxFlexDirection.Column} gap={6} className="flex-1">
           <KeyValueColumn keyLabel="Balance" value={OVERFLOW_VALUE_TEXT} />
         </Box>
       </Box>

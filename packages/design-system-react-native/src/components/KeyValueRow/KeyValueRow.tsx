@@ -30,6 +30,7 @@ export const KeyValueRow = ({
   valueTextProps,
   variant = KeyValueRowVariant.Summary,
   twClassName,
+  className,
   style,
   ...viewProps
 }: KeyValueRowProps) => {
@@ -95,7 +96,7 @@ export const KeyValueRow = ({
       flexDirection={BoxFlexDirection.Row}
       alignItems={BoxAlignItems.Center}
       gap={1}
-      twClassName="flex-1 min-w-0 justify-end"
+      className="min-w-0 flex-1 justify-end"
     >
       {valueStartAccessory}
       <TextOrChildren
@@ -124,12 +125,13 @@ export const KeyValueRow = ({
           'px-4',
           variant === KeyValueRowVariant.Input ? 'h-12' : 'h-10',
           twClassName,
+          className,
         ),
         style,
       ]}
       {...viewProps}
     >
-      <Box twClassName="shrink-0">{keyBox}</Box>
+      <Box className="shrink-0">{keyBox}</Box>
       {valueBox}
     </Box>
   );

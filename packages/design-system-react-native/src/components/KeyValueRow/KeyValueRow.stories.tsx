@@ -20,7 +20,7 @@ const meta: Meta<KeyValueRowProps> = {
   component: KeyValueRow,
   decorators: [
     (Story) => (
-      <Box twClassName="w-full">
+      <Box className="w-full">
         <Story />
       </Box>
     ),
@@ -52,7 +52,7 @@ export const Default: Story = {
 
 export const Variant: Story = {
   render: () => (
-    <Box gap={4} twClassName="w-full">
+    <Box gap={4} className="w-full">
       {(
         Object.entries(KeyValueRowVariant) as [
           keyof typeof KeyValueRowVariant,
@@ -148,7 +148,7 @@ export const KeyTextProps: Story = {
 
 export const ValueTextProps: Story = {
   render: () => (
-    <Box gap={4} twClassName="w-full">
+    <Box gap={4} className="w-full">
       <KeyValueRow
         keyLabel="Amount"
         value="1.5 ETH"
@@ -165,7 +165,7 @@ export const ValueTextProps: Story = {
 
 export const SingleColumnStack: Story = {
   render: () => (
-    <Box flexDirection={BoxFlexDirection.Column} twClassName="w-full">
+    <Box flexDirection={BoxFlexDirection.Column} className="w-full">
       <KeyValueRow
         keyLabel="Account"
         value={

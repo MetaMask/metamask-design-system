@@ -127,6 +127,28 @@ toast({
 });
 ```
 
+### `className`
+
+Use `className` to add Tailwind CSS classes to the toast surface. These classes are applied after the component's default classes, so they can add styles or override defaults.
+
+`className` is available at two levels:
+
+- Per toast: pass `className` to `<Toast />` or in the `toast({...})` options.
+- Toaster level: pass `className` to `<Toaster />`; it applies to the toast the Toaster renders.
+
+When both levels provide classes, the Toaster-level classes come first and the per-toast classes come after, so a per-toast `className` wins on conflicts with the Toaster-level one.
+
+```tsx
+<Toaster className="mx-2" />;
+
+toast({
+  title: 'Account switched',
+  className: 'my-1',
+});
+```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ## Toast Options
 
 - `title`, `titleProps` - Main toast content and optional text props.

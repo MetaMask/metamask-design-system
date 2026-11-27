@@ -42,7 +42,6 @@ const meta: Meta<BoxProps> = {
     borderWidth: { control: 'select', options: [0, 1, 2, 4, 8] },
     borderColor: { control: 'select', options: BoxBorderColor },
     backgroundColor: { control: 'select', options: BoxBackgroundColor },
-    twClassName: { control: 'text' },
     children: { control: 'text' },
   },
 };
@@ -135,7 +134,7 @@ export const AlignItems: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="h-16"
+        className="h-16"
       >
         <Text>Start</Text>
         <Text>Aligned</Text>
@@ -149,7 +148,7 @@ export const AlignItems: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="h-16"
+        className="h-16"
       >
         <Text>Center</Text>
         <Text>Aligned</Text>
@@ -163,7 +162,7 @@ export const AlignItems: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="h-16"
+        className="h-16"
       >
         <Text>End</Text>
         <Text>Aligned</Text>
@@ -177,7 +176,7 @@ export const AlignItems: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="h-16"
+        className="h-16"
       >
         <Text>Stretch</Text>
         <Text>Aligned</Text>
@@ -191,7 +190,7 @@ export const AlignItems: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="h-16"
+        className="h-16"
       >
         <Text>Baseline</Text>
         <Text>Aligned</Text>
@@ -212,7 +211,7 @@ export const JustifyContent: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="w-80"
+        className="w-80"
       >
         <Text>Start</Text>
         <Text>Items</Text>
@@ -225,7 +224,7 @@ export const JustifyContent: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="w-80"
+        className="w-80"
       >
         <Text>Center</Text>
         <Text>Items</Text>
@@ -238,7 +237,7 @@ export const JustifyContent: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="w-80"
+        className="w-80"
       >
         <Text>End</Text>
         <Text>Items</Text>
@@ -251,7 +250,7 @@ export const JustifyContent: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="w-80"
+        className="w-80"
       >
         <Text>Between</Text>
         <Text>Items</Text>
@@ -264,7 +263,7 @@ export const JustifyContent: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="w-80"
+        className="w-80"
       >
         <Text>Around</Text>
         <Text>Items</Text>
@@ -277,7 +276,7 @@ export const JustifyContent: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="w-80"
+        className="w-80"
       >
         <Text>Evenly</Text>
         <Text>Items</Text>
@@ -298,7 +297,7 @@ export const FlexWrap: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="w-80"
+        className="w-80"
       >
         <Text>NoWrap</Text>
         <Text>Items</Text>
@@ -315,7 +314,7 @@ export const FlexWrap: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="w-80"
+        className="w-80"
       >
         <Text>Wrap</Text>
         <Text>Items</Text>
@@ -332,7 +331,7 @@ export const FlexWrap: Story = {
         backgroundColor={BoxBackgroundColor.BackgroundAlternative}
         borderColor={BoxBorderColor.BorderDefault}
         borderWidth={1}
-        twClassName="w-80"
+        className="w-80"
       >
         <Text>WrapReverse</Text>
         <Text>Items</Text>
