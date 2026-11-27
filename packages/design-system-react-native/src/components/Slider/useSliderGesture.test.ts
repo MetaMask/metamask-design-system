@@ -500,4 +500,47 @@ describe('useSliderGesture', () => {
 
     expect(onMark).not.toHaveBeenCalled();
   });
+
+  it('syncs thumb position when echo arrives after gestures complete then value returns to earlier emit', () => {
+    const onMark = jest.fn();
+    const marks = [
+      { step: 0, label: '0', value: 0, haptic: false },
+      { step: 30, label: '30', value: 30, haptic: false },
+      { step: 50, label: '50', value: 50, haptic: true },
+      { step: 60, label: '60', value: 60, haptic: false },
+      { step: 70, label: '70', value: 70, haptic: false },
+      { step: 100, label: '100', value: 100, haptic: false },
+    ];
+    const { result, rerender } = renderHook(
+      ({ value }: { value: number }) =>
+        useSliderGesture(createParams({ value, marks, onMark })),
+      { initialProps: { value: 0 } },
+    );
+
+    act(() => {
+      result.current.handleLayout({
+        nativeEvent: { layout: { width: 100 } },
+      });
+    });
+
+    act(() => {
+      result.current.handlePressStep(60);
+    });
+
+    act(() => {
+      result.current.handlePressStep(30);
+    });
+
+    rerender({ value: 30 });
+
+    onMark.mockClear();
+
+    rerender({ value: 60 });
+
+    act(() => {
+      result.current.handlePressStep(70);
+    });
+
+    expect(onMark).not.toHaveBeenCalled();
+  });
 });
