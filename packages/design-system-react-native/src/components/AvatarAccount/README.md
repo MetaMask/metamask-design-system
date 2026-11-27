@@ -114,9 +114,9 @@ Optional props to be passed to the Maskicon component when the variant is Maskic
 />
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the component. These classes will be merged with the component's default classes using `twMerge`, allowing you to:
+Use the `className` prop to add Tailwind CSS classes to the component. These classes are applied after the component's default classes, allowing you to:
 
 - Add new styles that don't exist in the default component
 - Override the component's default styles when needed
@@ -131,19 +131,21 @@ import { AvatarAccount } from '@metamask/design-system-react-native';
 // Add additional styles
 <AvatarAccount
   address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-  twClassName="border-2 border-primary-100"
+  className="border-2 border-primary-100"
 />
 
 // Override default styles
 <AvatarAccount
   address="0x9Cbf7c41B7787F6c621115010D3B044029FE2Ce8"
-  twClassName="!bg-error-100"
+  className="!bg-error-100"
 />
 ```
 
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
+
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

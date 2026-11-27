@@ -14,9 +14,6 @@ const meta: Meta<AvatarNetworkProps> = {
       control: 'select',
       options: AvatarNetworkSize,
     },
-    twClassName: {
-      control: 'text',
-    },
   },
 };
 
@@ -27,7 +24,6 @@ type Story = StoryObj<AvatarNetworkProps>;
 export const Default: Story = {
   args: {
     size: AvatarNetworkSize.Md,
-    twClassName: '',
   },
   render: (args) => (
     <AvatarNetwork {...args} src={SAMPLE_AVATARNETWORK_URIS[0]} />

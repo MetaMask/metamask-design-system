@@ -132,9 +132,9 @@ import { Skeleton } from '@metamask/design-system-react-native';
 />;
 ```
 
-### `twClassName`
+### `className`
 
-Use the `twClassName` prop to add Tailwind CSS classes to the skeleton container. These classes will be merged with the component's default classes.
+Use the `className` prop to add Tailwind CSS classes to the skeleton container. These classes will be merged with the component's default classes.
 
 | TYPE     | REQUIRED | DEFAULT     |
 | -------- | -------- | ----------- |
@@ -143,12 +143,14 @@ Use the `twClassName` prop to add Tailwind CSS classes to the skeleton container
 ```tsx
 import { Skeleton } from '@metamask/design-system-react-native';
 
-<Skeleton height={32} width={300} twClassName="rounded-lg" />;
+<Skeleton height={32} width={300} className="rounded-lg" />;
 ```
+
+> **Migrating from `twClassName`:** `twClassName` still works but is deprecated. Rename it to `className`. If both are passed, classes merge in this order: the component's own classes, then `twClassName`, then `className`, so `className` wins on conflicts.
 
 ### `style`
 
-Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `twClassName` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
+Use the `style` prop to customize the component's appearance with React Native styles. For consistent styling, prefer using `className` with Tailwind classes when possible, and use `style` for dynamic values or styles not available in Tailwind.
 
 | TYPE                   | REQUIRED | DEFAULT     |
 | ---------------------- | -------- | ----------- |

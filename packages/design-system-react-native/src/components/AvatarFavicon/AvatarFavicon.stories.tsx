@@ -14,9 +14,6 @@ const meta: Meta<AvatarFaviconProps> = {
       control: 'select',
       options: AvatarFaviconSize,
     },
-    twClassName: {
-      control: 'text',
-    },
   },
 };
 
@@ -27,7 +24,6 @@ type Story = StoryObj<AvatarFaviconProps>;
 export const Default: Story = {
   args: {
     size: AvatarFaviconSize.Md,
-    twClassName: '',
   },
   render: (args) => (
     <AvatarFavicon {...args} src={SAMPLE_AVATARFAVICON_URIS[0]} />
